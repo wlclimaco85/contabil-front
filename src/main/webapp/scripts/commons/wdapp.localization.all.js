@@ -14,6 +14,7 @@
 			  return $rootScope.$broadcast('localizeResourcesUpdated');
 			},
 			setLanguage: function(value) {
+				debugger
 			  localize.language = value.toLowerCase().split("-")[0];
 			  return localize.initLocalizedResources();
 			},
@@ -90,7 +91,8 @@
     }]);
   
 	commonLocale.controller('LangController', ['$scope', 'Localize', function($scope, Localize) {
-		$scope.lang = 'English';
+		$scope.lang = 'Portugal';
+		Localize.setLanguage('PT-BR');
 		$scope.setLang = function(lang) {
 			switch (lang) {
 			  case 'English':
@@ -99,7 +101,10 @@
 			  case 'Español':
 				Localize.setLanguage('ES-ES');
 				break;
-			  case '日本語':
+			 case 'Portugal':
+				Localize.setLanguage('PT-BR');
+				break;
+			/*  case '日本語':
 				Localize.setLanguage('JA-JP');
 				break;
 			  case '中文':
@@ -121,7 +126,7 @@
 				Localize.setLanguage('RU-RU');
 				break;
 			  case '한국어':
-				Localize.setLanguage('KO-KR');
+				Localize.setLanguage('KO-KR');*/
 			}
 			return $scope.lang = lang;
 		};
