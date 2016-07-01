@@ -14,7 +14,6 @@
 			  return $rootScope.$broadcast('localizeResourcesUpdated');
 			},
 			setLanguage: function(value) {
-				debugger
 			  localize.language = value.toLowerCase().split("-")[0];
 			  return localize.initLocalizedResources();
 			},
@@ -104,7 +103,7 @@
 			 case 'Portugal':
 				Localize.setLanguage('PT-BR');
 				break;
-			/*  case '日本語':
+			  case '日本語':
 				Localize.setLanguage('JA-JP');
 				break;
 			  case '中文':
@@ -126,7 +125,7 @@
 				Localize.setLanguage('RU-RU');
 				break;
 			  case '한국어':
-				Localize.setLanguage('KO-KR');*/
+				Localize.setLanguage('KO-KR');
 			}
 			return $scope.lang = lang;
 		};
