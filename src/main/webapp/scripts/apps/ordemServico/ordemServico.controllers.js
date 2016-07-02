@@ -1,349 +1,177 @@
-angular.module("myApp", ["ngTable"]);
 
 (function() {
-  "use strict";
+angular.module('wdApp.apps.ordemServico', ['datatables','angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+    .controller('OrdemServicoController', ordemServicoController);
 
-  angular.module("myApp").controller("dynamicDemoController", dynamicDemoController, 
-  ['$scope', 'SysMgmtData', 'toastr', 'toastrConfig',
-	function($scope, SysMgmtData, toastr, toastrConfig,dynamicDemoController) {
-	}	
-  ])
-  dynamicDemoController.$inject = ["NgTableParams"];
+function ordemServicoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalService) {
+    var vm = this;
 
-  function dynamicDemoController(NgTableParams, simpleList) {
-   // var self = this;
+    vm.message = '';
+    vm.edit = edit;
+    vm.delete = deleteRow;
+    vm.dtInstance = {};
+    vm.persons = {};
 
-	var cvm = this;		
-		var initLoad =    true; //used to ensure not calling server multiple times
-		var fetch_url =   WebDaptiveAppConfig.base_county_url +  WebDaptiveAppConfig.fetch_url;
-		var refresh_url = WebDaptiveAppConfig.base_county_url +  WebDaptiveAppConfig.refresh_url;
-		var create_url =  WebDaptiveAppConfig.base_county_url +  WebDaptiveAppConfig.create_url;
-		var update_url =  WebDaptiveAppConfig.base_county_url +  WebDaptiveAppConfig.update_url;	
-		var delete_url =  WebDaptiveAppConfig.base_county_url +  WebDaptiveAppConfig.delete_url;		
-		cvm.isActive =    false;
-		toastrConfig.closeButton = true;		
-		
-		//form model data
-		cvm.county = {
-			id: '',
-			description: ''
-		};
-		
-		//grid column defs
-		var countyColumnDefs = [
-			{headerName: "County Id", field: "id", width: 270},
-			{headerName: "County Description", field: "description", width: 450}
-		];
-		
-		//grid row select function
-		function rowSelectedFunc(event) {
-			cvm.county.id = event.node.data.id;
-			cvm.county.description = event.node.data.description;			
-		};
+    vm.dtOptions = DTOptionsBuilder.fromSource('cnae.json')
+        .withDOM('frtip')
+        .withPaginationType('full_numbers')
+        .withOption('createdRow', createdRow)
+        .withPaginationType('full_numbers')
+        .withLightColumnFilter({
+            '0' : {
+                type : 'text'
+            },
+            '1' : {
+                type : 'text'
+            },
+            '2' : {
+                type : 'text',
+            },
+            '3' : {
+                type : 'text',
+            },
+            '4' : {
+                type : 'text',
 
-		//grid options
-		cvm.countyGridOptions = {
-			columnDefs: countyColumnDefs,
-			rowSelection: 'single',
-			onRowSelected: rowSelectedFunc,
-			rowHeight: 30,			
-			headerHeight: 30,			
-			enableColResize: true
-		};
-		
-		//reusable paging datasource grid
-		function createNewDatasource(resIn) {
-			var countyDataSource = {
-				pageSize: 20, //using default paging of 20 
-				getRows: function (params) {
-					if (initLoad){
-						//console.log("getRows() initLoad=true: " + resIn);	
-						initLoad=false;
-						cvm.isActive = false;
-						var dataThisPage = resIn.counties;
-						cvm.gList =  dataThisPage;						 
-						var lastRow = (resIn) ? resIn.resultsSetInfo.totalRowsAvailable : 0;
-						params.successCallback(dataThisPage, lastRow);
-	                    
-					}
-					else{
-						//console.log('asking for ' + params.startRow + ' to ' + params.endRow);	
-						SysMgmtData.processPostPageData(fetch_url, new qat.model.pagedInquiryRequest(  params.startRow/20, true), function(res){
-							var dataThisPage = res.counties;
-							cvm.gList =  dataThisPage;							
-							var lastRow = res.resultsSetInfo.totalRowsAvailable;
-							params.successCallback(dataThisPage, lastRow);	
-						});
-					}		
-				}
-			};
-			cvm.countyGridOptions.api.setDatasource(countyDataSource);
-		};
-	
-		//initial data load
-		processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), false);
-		
-		//reusable data methods
-		//reusable processGetData (refresh,delete)
-		function processGetData(_url)
-		{
-			//console.log(_url);			
-			cvm.countyGridOptions.api.showLoadingOverlay(true);
-			SysMgmtData.processGetPageData(_url,  function(res){
-				if (res){	
-					initLoad = true;
-					createNewDatasource(res); //send Data
-				}
-				else{
-					cvm.countyGridOptions.api.hideOverlay();				
-				}				
-				
-			});				
-		};	
+            }
+        })
+        .withOption('initComplete', function (settings,json) {
 
-		//reusable processGetData (insert, update, pagedFetch)
-		function processPostData(_url, _req, _bLoading)
-		{
-			//console.log(_url);	
-			if (_bLoading){	
-				cvm.countyGridOptions.api.showLoadingOverlay(true);
-			}	
-			SysMgmtData.processPostPageData(_url, _req, function(res){
-				if (res){	
-					initLoad = true;
-					createNewDatasource(res); //send Data
-				}
-				else{
-					cvm.countyGridOptions.api.hideOverlay();				
-				}		
-			});				
-		};			
-		
-		//refresh county function
-		cvm.refreshCounties = function(refreshCount) {
-			cvm.isActive = !cvm.isActive;			
-			//clear form data
-			cvm.clearForm();		
-			var send_url = refresh_url + "?refreshInt=" + refreshCount + "&retList=true&retPaged=true";
-			processGetData(send_url);
-		};			
-		
-		//form methods
-		//reusable clear form logic
-		cvm.clearForm = function (){
-			//clear data
-			cvm.county.id = "";
-			cvm.county.description = "";	
-			//clear grid selection	
-			cvm.countyGridOptions.api.deselectAll();	
-			//set form to pristine
-			cvm.form_county.$setPristine();			
-		};
-		
-		//reusable button form logic		
-		cvm.processButtons = function(_btnType){	
-			//console.log(_btnType);		
-			if (cvm.form_county.$valid)
-			{	
-				switch (_btnType) {
-				//Add Button							
-				case 'A':
-					processPostData(create_url,  new qat.model.reqCounty( new qat.model.county(cvm.county.id, cvm.county.description),true, true), true);		
-					break;
-				//Update Button						
-				case 'U':
-					processPostData(update_url,  new qat.model.reqCounty( new qat.model.county(cvm.county.id, cvm.county.description),true, true), true);	
-					break;
-				//Delete Button	
-				case 'D':
-					var send_url = delete_url + "?countyId=" + cvm.county.id + "&retList=true&retPaged=true";
-					processGetData(send_url);
-					break;	
-				//List Button	
-				case 'L':
-					processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), true);
-					break;					
-				default: 
-					console.log('Invalid button type: ' + _btnType);					
-				};
-				//clear the form
-				cvm.clearForm();
-			}
-			else{
-				if (_btnType == 'L'){
-					processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), true);
-					//clear the form
-					cvm.clearForm();
-				}
-				else{	
-					toastr.error('County form error, please correct and resubmit.', 'Error');
-				}	
-			}		
-		};
-		
-	cvm.cols = [
-      { field: "name", title: "Name", sortable: "name", filter: { name: "text" }, show: false  },
-      { field: "age", title: "Age", sortable: "age", filter: { age: "number" }, show: true },
-      { field: "money", title: "Money", sortable: "money", filter: { money: "number" }, show: true }
-    ];
-    cvm.tableParams = new NgTableParams({}, {
-      //dataset: simpleList
-      dataset: [
-        {
-          "name": "aa",
-          "age": 55,
-          "money": "R$ 33"
-        },
-        {
-          "name": "aa",
-          "age": 55,
-          "money": "R$ 33"
-        },
-        {
-          "name": "aa",
-          "age": 55,
-          "money": "R$ 33"
-        },
-        {
-          "name": "aa",
-          "age": 55,
-          "money": "R$ 33"
-        },
-        {
-          "name": "aa",
-          "age": 55,
-          "money": "R$ 33"
-        },
-        {
-          "name": "aa",
-          "age": 55,
-          "money": "R$ 33"
-        }
-      ]
-    });
-    
-  }
-})();
-(function() {
-  "use strict";
+            $('.dt-buttons').find('.dt-button:eq(1)').before(
 
-  angular.module("myApp").run(configureDefaults);
-  configureDefaults.$inject = ["ngTableDefaults"];
+            '<select class="form-control col-sm-3 btn btn-primary dropdown-toggle" data-ng-options="t.name for t in vm.types"'+
+              'data-ng-model="vm.object.type" style="height: 32px;margin-left: 8px;margin-right: 6px;width: 200px !important;">'+
 
-  function configureDefaults(ngTableDefaults) {
-    ngTableDefaults.params.count = 5;
-    ngTableDefaults.settings.counts = [];
-  }
-})();
+                '<option><a href="#">Ações <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>'+
+                '<option><a href="#">Remover Todos <span class="badge selected badge-danger main-badge"  data-ng-show="{{showCase.countSeleted()}}"></span></a></option>'+
+               '</select>'
 
-(function() {
-  angular.module("myApp").directive("demoTrackedTable", demoTrackedTable);
-
-  demoTrackedTable.$inject = [];
-
-  function demoTrackedTable() {
-    return {
-      restrict: "A",
-      priority: -1,
-      require: "ngForm",
-      controller: demoTrackedTableController
-    };
-  }
-
-  demoTrackedTableController.$inject = ["$scope", "$parse", "$attrs", "$element"];
-
-  function demoTrackedTableController($scope, $parse, $attrs, $element) {
-    var self = this;
-    var tableForm = $element.controller("form");
-    var dirtyCellsByRow = [];
-    var invalidCellsByRow = [];
-
-    init();
-
-    ////////
-
-    function init() {
-      var setter = $parse($attrs.demoTrackedTable).assign;
-      setter($scope, self);
-      $scope.$on("$destroy", function() {
-        setter(null);
-      });
-
-      self.reset = reset;
-      self.isCellDirty = isCellDirty;
-      self.setCellDirty = setCellDirty;
-      self.setCellInvalid = setCellInvalid;
-      self.untrack = untrack;
-    }
-
-    function getCellsForRow(row, cellsByRow) {
-      return _.find(cellsByRow, function(entry) {
-        return entry.row === row;
-      })
-    }
-
-    function isCellDirty(row, cell) {
-      var rowCells = getCellsForRow(row, dirtyCellsByRow);
-      return rowCells && rowCells.cells.indexOf(cell) !== -1;
-    }
-
-    function reset() {
-      dirtyCellsByRow = [];
-      invalidCellsByRow = [];
-      setInvalid(false);
-    }
-
-    function setCellDirty(row, cell, isDirty) {
-      setCellStatus(row, cell, isDirty, dirtyCellsByRow);
-    }
-
-    function setCellInvalid(row, cell, isInvalid) {
-      setCellStatus(row, cell, isInvalid, invalidCellsByRow);
-      setInvalid(invalidCellsByRow.length > 0);
-    }
-
-    function setCellStatus(row, cell, value, cellsByRow) {
-      var rowCells = getCellsForRow(row, cellsByRow);
-      if (!rowCells && !value) {
-        return;
-      }
-
-      if (value) {
-        if (!rowCells) {
-          rowCells = {
-            row: row,
-            cells: []
-          };
-          cellsByRow.push(rowCells);
-        }
-        if (rowCells.cells.indexOf(cell) === -1) {
-          rowCells.cells.push(cell);
-        }
-      } else {
-        _.remove(rowCells.cells, function(item) {
-          return cell === item;
+            )
+        })
+        .withOption('processing', true)
+        .withOption('language',{
+            paginate : {            // Set up pagination text
+                first: "&laquo;",
+                last: "&raquo;",
+                next: "&rarr;",
+                previous: "&larr;"
+            },
+            lengthMenu: "_MENU_ records per page"
+        })
+        .withButtons([
+            {
+                extend: "colvis",
+                fileName:  "Data_Analysis",
+                exportOptions: {
+                    columns: ':visible'
+                },
+                exportData: {decodeEntities:true}
+            },
+            {
+            extend: "csvHtml5",
+                fileName:  "Data_Analysis",
+                exportOptions: {
+                    columns: ':visible'
+                },
+                exportData: {decodeEntities:true}
+            },
+            {
+                extend: "pdfHtml5",
+                fileName:  "Data_Analysis",
+                title:"Data Analysis Report",
+                exportOptions: {
+                    columns: ':visible'
+                },
+                exportData: {decodeEntities:true}
+            },
+            {
+                extend: "copy",
+                fileName:  "Data_Analysis",
+                title:"Data Analysis Report",
+                exportOptions: {
+                    columns: ':visible'
+                },
+                exportData: {decodeEntities:true}
+            },
+            {
+                extend: "print",
+                //text: 'Print current page',
+                autoPrint: true,
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: "excelHtml5",
+                filename:  "Data_Analysis",
+                title:"Data Analysis Report",
+                exportOptions: {
+                    columns: ':visible'
+                },
+                //CharSet: "utf8",
+                exportData: { decodeEntities: true }
+            },
+            {
+                text: 'Novo CFOP',
+                key: '1',
+                action: function (e, dt, node, config) {
+                   ModalService.showModal({
+            templateUrl: 'modalCnae.html',
+            controller: "CnaeController"
+        }).then(function(modal) {
+            modal.element.modal();
+            modal.close.then(function(result) {
+                $scope.message = "You said " + result;
+            });
         });
-        if (rowCells.cells.length === 0) {
-          _.remove(cellsByRow, function(item) {
-            return rowCells === item;
-          });
-        }
-      }
-    }
+                }
+            }
+        ])
 
-    function setInvalid(isInvalid) {
-      self.$invalid = isInvalid;
-      self.$valid = !isInvalid;
-    }
+    vm.dtColumns = [
+        DTColumnBuilder.newColumn('id').withTitle('ID'),
+        DTColumnBuilder.newColumn('codigo').withTitle('Codigo'),
+        DTColumnBuilder.newColumn('cnae').withTitle('CNAE'),
+        DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
+        DTColumnBuilder.newColumn('abreviado').withTitle('Abreviação'),
+        DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable().renderWith(actionsHtml)
+    ];
 
-    function untrack(row) {
-      _.remove(invalidCellsByRow, function(item) {
-        return item.row === row;
-      });
-      _.remove(dirtyCellsByRow, function(item) {
-        return item.row === row;
-      });
-      setInvalid(invalidCellsByRow.length > 0);
+
+    function edit(person) {
+       ModalService.showModal({
+            templateUrl: 'modalCnae.html',
+            controller: "CnaeController"
+        }).then(function(modal) {
+            modal.element.modal();
+            modal.close.then(function(result) {
+                $scope.message = "You said " + result;
+            });
+        });
     }
-  }
+    function deleteRow(person) {
+        ModalService.showModal({
+            templateUrl: 'cnaeDelete.html',
+            controller: "CnaeController"
+        }).then(function(modal) {
+            modal.element.modal();
+            modal.close.then(function(result) {
+                $scope.message = "You said " + result;
+            });
+        });
+    }
+    function createdRow(row, data, dataIndex) {
+        // Recompiling so we can bind Angular directive to the DT
+        $compile(angular.element(row).contents())($scope);
+    }
+    function actionsHtml(data, type, full, meta) {
+        vm.persons[data.id] = data;
+        return '<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
+            '   <i class="fa fa-edit"></i>' +
+            '</button>&nbsp;' +
+            '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
+            '   <i class="fa fa-trash-o"></i>' +
+            '</button>';
+    }
+}
 })();

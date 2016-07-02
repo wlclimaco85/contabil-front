@@ -48,7 +48,7 @@ var WebDaptiveAppConfig = {
 				'wdApp.charts.flot.controllers', 'wdApp.charts.morris.controllers', 'wdApp.charts.chartjs.controllers',
 				'wdApp.charts.other.controllers', 'wdApp.charts.echarts.controllers', 'wdApp.charts.directives', 'wdApp.authentication',
 				'wdApp.pages.controllers', 'wdApp.demodata', 'wdApp.apps.stocks', 'wdApp.apps.stocksdata',
-				'wdApp.apps.counties', 'ngTable','datatables','datatables.bootstrap', 'wdApp.apps.estado', 'wdApp.apps.procedures','wdApp.apps.sysmgmt.data','wdApp.apps.site','wdApp.apps.empresa','wdApp.apps.produtos','wdApp.apps.produtoss','wdApp.apps.produto','wdApp.apps.notaFiscal',
+				'wdApp.apps.counties', 'ngTable','datatables','datatables.bootstrap','wdApp.apps.estado', 'wdApp.apps.procedures','wdApp.apps.sysmgmt.data','wdApp.apps.site','wdApp.apps.empresa','wdApp.apps.produtos','wdApp.apps.produtoss','wdApp.apps.produto','wdApp.apps.notaFiscal',
 				'wdApp.apps.pdCompras','wdApp.apps.orcamento','wdApp.apps.ordemServico','wdApp.apps.nfEntrada','wdApp.apps.pdCompras'
 				,'wdApp.apps.cotacao','wdApp.apps.pdVendas','wdApp.apps.contasPagar','wdApp.apps.formaPg','wdApp.apps.contasReceber','wdApp.apps.banco','wdApp.apps.agencia','wdApp.apps.conta','wdApp.apps.funcionario',
 				'wdApp.apps.cliente'
@@ -63,6 +63,7 @@ var WebDaptiveAppConfig = {
 				,'wdApp.apps.unimed'
 				,'wdApp.apps.ordemProducao'
 				,'wdApp.apps.servico'
+				,'wdApp.apps.util'
 				]);
 
 	wdApp.config(['$routeProvider',
@@ -138,8 +139,8 @@ var WebDaptiveAppConfig = {
 	wdApp.run(function($rootScope, $location, localStorageService) {
 
 		$rootScope.main = {
-			brand: 'WLCMC Sistemas',
-			name: 'Washington'
+			brand: 'E-Contábil',
+			name: 'Jonh Snow'
 		};
 
 		/* Reset error when a new view is loaded */
@@ -167,7 +168,7 @@ var WebDaptiveAppConfig = {
 			delete $rootScope.authToken;
 			delete $rootScope.callingPath;
 			delete $rootScope.displayRoles;
-			$rootScope.main.name = "Washington";
+			$rootScope.main.name = "Jonh Snow";
 			localStorageService.clearAll();
 		};
 
