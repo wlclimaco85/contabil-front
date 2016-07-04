@@ -5,13 +5,14 @@ angular.module('wdApp.apps.util', ['angularModalService'])
 
 function utilControllers($scope,ModalService) {
     
-
+    $scope.empresaType  = 0 
     var vm = this;
+
 
 
     ModalService.showModal({
         templateUrl: 'dashboardDialog.html',
-        controller: "RowSelectCtrl"
+        controller: "NavController"
     }).then(function(modal) {
 
         modal.element.modal();

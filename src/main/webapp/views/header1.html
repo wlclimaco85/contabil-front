@@ -84,23 +84,13 @@
                     <li>
                         <a href="#/tasks/tasks">
                             <i class="fa fa-check"></i>
-                            <span data-i18n="Erro Emiss�o NFE"></span> <span class="badge badge-danger main-badge" data-ng-show="taskRemainingCount > 0">{{taskRemainingCount}}</span>
+                            <span data-i18n="Erro Emissao NFE"></span> <span class="badge badge-danger main-badge" data-ng-show="taskRemainingCount > 0">{{taskRemainingCount}}</span>
                         </a>
                     </li>
                 </ul>
             </li>
             <li class="dropdown langs text-normal"  uib-dropdown on-toggle="toggled(open)" data-ng-controller="LangController">
-                <a href class="dropdown-toggle active-flag" uib-dropdown-toggle>
-                    <div class="flag {{ getFlag() }}"></div>
-                </a>
-                <ul class="pull-right dropdown-menu with-arrow list-langs" role="menu">
-                    <li data-ng-show="lang !== 'Portugal' ">
-                        <a href="javascript:;" data-ng-click="setLang('English')"><div class="flag flags-american"></div> English</a></li>
-                    <li data-ng-show="lang !== 'Espa�ol' ">
-                        <a href="javascript:;" data-ng-click="setLang('Espa�ol')"><div class="flag flags-spain"></div> Espa�ol</a></li>
-                    <li data-ng-show="lang !== 'Portugal' ">
-                        <a href="javascript:;" data-ng-click="setLang('Portugal')"><div class="flag flags-portugal"></div>Portugal</a></li>
-                </ul>
+                
             </li>   
             <li class="dropdown hidden-xs" uib-dropdown on-toggle="toggled(open)">
                 <a href="javascript:;" class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-cogs"></i></a>

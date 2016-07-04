@@ -63,6 +63,7 @@ var WebDaptiveAppConfig = {
 				,'wdApp.apps.unimed'
 				,'wdApp.apps.ordemProducao'
 				,'wdApp.apps.servico'
+				,'wdApp.apps.funcionarios',
 				,'wdApp.apps.util'
 				]);
 
@@ -182,6 +183,8 @@ var WebDaptiveAppConfig = {
 
 		 //flag to let us know everything is full initialized can be referenced anywhere
 		$rootScope.initialized = true;
+		$rootScope.empresa_type = 0;
+		localStorageService.set('empresaType', 0);
 	});
 
 })();

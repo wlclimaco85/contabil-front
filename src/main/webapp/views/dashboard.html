@@ -200,8 +200,76 @@
               </div>
               <div class="modal-body">
                     <div class="alert alert-warning">
-                        <a href="#" class="close" data-dismiss="alert">&times;</a>
                         <strong>Aviso!</strong> Esta e uma versão de demostração Onde todos os dados são fixo e que serve apenas para mostrar algumas funcionalidades do sistema.
+                        <div class="row">
+                            <div class="col-sm-3" style="margin-top:18px">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" data-checklist-model="empresa.types" data-checklist-value="1" /> Venda e Revenda Mercadoria ?
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3" style="margin-top:18px">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" data-checklist-model="empresa.types" data-checklist-value="2" /> Industria ?
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3" style="margin-top:18px">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" data-checklist-model="empresa.types" data-checklist-value="3" /> Industria e Comercio ?
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3" style="margin-top:18px">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" data-checklist-model="empresa.types" data-checklist-value="4" /> Outros ?
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3" style="margin-top:18px">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" data-checklist-model="empresa.types" data-checklist-value="5" /> Clinica Medica ?
+                                        <div class"row">
+                                            <input type="checkbox" data-checklist-model="empresa.types" data-checklist-value="6" /> Visão Cliente ?
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3" style="margin-top:18px">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" data-checklist-model="empresa.types" data-checklist-value="7" /> Escritorio Advocacia ?
+                                        <div class"row">
+                                            <input type="checkbox" data-checklist-model="empresa.types" data-checklist-value="8"  /> Visão Cliente ?
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3" style="margin-top:18px">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" data-checklist-model="empresa.types" data-checklist-value="9" /> Condominio ?
+                                        <div class"row">
+                                            <input type="checkbox" data-checklist-model="empresa.types" data-checklist-value="10" /> Visão Inquilino ?
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3" style="margin-top:18px">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" data-checklist-model="empresa.types" data-checklist-value="11" /> Empregada Domestica ?
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row col-md-12 alert alert-info fade in">
                         <div id="quadriculo1" class="col-md-4">
@@ -232,7 +300,6 @@
                         </ul>
                     </div>
                     <div class="alert alert-danger fade in">
-                        <a href="#" class="close" data-dismiss="alert">&times;</a>
                         <strong>Contato!</strong> 
 
                         <ul>
@@ -244,7 +311,8 @@
                     </div>
               </div>
               <div class="modal-footer">
-                <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" ng-click="submit()" class="btn btn-primary" data-dismiss="modal">Visualizar</button>
               </div>
             </div>
           </div>

@@ -145,7 +145,7 @@ function CfopController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,Moda
         DTColumnBuilder.newColumn('id').withTitle('ID').withOption('width', '10px'),
         DTColumnBuilder.newColumn('cfop').withTitle('CFOP').withOption('width', '40px'),
         DTColumnBuilder.newColumn('natureza').withTitle('Natureza'),
-        DTColumnBuilder.newColumn('descricao').withTitle('descricao'),
+        DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
         DTColumnBuilder.newColumn('simplificado').withTitle('simplificado').notVisible(),
         DTColumnBuilder.newColumn('icms').withTitle('icms').notVisible(),
         DTColumnBuilder.newColumn('icmsReduzido').withTitle('icmsReduzido').notVisible(),
