@@ -93,13 +93,13 @@
     "Cnae": "Cnae",
     "Vendas": "Vendas",
     "Pedidos de Vendas": "Pedidos de Vendas",
-    "Orcamento": "Orçamento",
+    "orcamento": "Orçamento",
     "Nota Fiscal Saida": "Nota Fiscal Saida",
     "Ordem Servico": "Ordem Serviço",
     "Compras": "Compras",
     "Nota Fiscal Entrada": "Nota Fiscal Entrada",
     "Pedido de Compra": "Pedido de Compra",
-    "Cotacao": "Cotação",
+    "cotacao": "Cotação",
     "Financeiro": "Financeiro",
     "Contas Pagar": "Contas Pagar",
     "Contas Receber": "Contas Receber",
@@ -137,7 +137,17 @@
     "Unidade Medida": "Unidade Medida",
     "Servico": "Serviço",
     "controle de producao": "Controle de Produção",
-    "ordem de producao": "Ordem de Produção"
+    "ordem de producao": "Ordem de Produção",
+    "dados da nfe-e": "Dados da NF-e",
+    "emitente": "Emitente",
+    "destinatario": "Destinatario",
+   "produtos e servicos": "Produtos e Serviços",
+   "totais": "Totais",
+   "transporte": "Transporte",
+   "cobranca": "Cobrança",
+   "info. adic.": "Info. Adic.",
+   "export. e compras": "Export. e Compras",
+   "cana": "Cana"
 
 
 }

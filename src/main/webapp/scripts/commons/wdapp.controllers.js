@@ -76,6 +76,10 @@
 	      }
       };
 
+      $('.clinica').hide();	
+      $('.advocacia').hide();	
+      $('.condominio').hide();	
+
 		tasks = $scope.tasks = TaskStorage.get();
 		$scope.taskRemainingCount = filterFilter(tasks, {
 			completed: false

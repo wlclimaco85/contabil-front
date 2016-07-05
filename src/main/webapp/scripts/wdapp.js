@@ -85,7 +85,7 @@ var WebDaptiveAppConfig = {
 			'vendas/forms/CadOrcamento','vendas/tables/orcamento','vendas/forms/CadOrdemServico','vendas/tables/ordemServico','vendas/tables/pedidoVendas',
 			'compras/forms/CadCotacao','compras/forms/CadNfEntrada','compras/forms/CadPedCompras','compras/forms/CadAprovPedidoCompra',
 			'compras/tables/aprovarPedCompras','compras/tables/cotacao','compras/tables/nfEntrada','compras/tables/pedCompras',
-			'financeiro/tables/baixaTitulo','financeiro/tables/banco','financeiro/tables/caixa',
+			'financeiro/tables/baixaTitulo','financeiro/tables/banco','financeiro/tables/caixa','vendas/tables/notaFiscalSaida',
 			'financeiro/tables/contaCC','financeiro/tables/contasPagar','financeiro/tables/contasReceber','financeiro/tables/formaPg','financeiro/tables/agencia',
 			'funcionario/tables/folhaPonto','funcionario/tables/funcionario','funcionario/forms/CadFolhaPonto','funcionario/forms/funcionario',
 			'ordemServico/tables/ordemServico','ordemServico/forms/CadOrdemServico',
