@@ -64,6 +64,8 @@ var WebDaptiveAppConfig = {
 				,'wdApp.apps.ordemProducao'
 				,'wdApp.apps.servico'
 				,'wdApp.apps.funcionarios',
+				,'wdApp.apps.compras',
+				,'wdApp.apps.pagamentos',
 				,'wdApp.apps.util'
 				]);
 
@@ -89,10 +91,8 @@ var WebDaptiveAppConfig = {
 			'financeiro/tables/contaCC','financeiro/tables/contasPagar','financeiro/tables/contasReceber','financeiro/tables/formaPg','financeiro/tables/agencia',
 			'funcionario/tables/folhaPonto','funcionario/tables/funcionario','funcionario/forms/CadFolhaPonto','funcionario/forms/funcionario',
 			'ordemServico/tables/ordemServico','ordemServico/forms/CadOrdemServico',
-			'cliente/tables/almoxarifado','cliente/tables/cidade','cliente/tables/cliente','cliente/tables/convenio',
-			'cliente/tables/estado','cliente/tables/filial','cliente/tables/fornecedor','cliente/tables/transportador',
-			'cliente/forms/CadAlmoxarifado','cliente/forms/CadCidade','cliente/forms/CadCliente','cliente/forms/CadConvenio','cliente/forms/CadEstado',
-			'cliente/forms/CadFilial','cliente/forms/CadFornecedor','cliente/forms/CadTransportador',
+			'cadastros/tables/almoxarifado','cadastros/tables/cidade','cadastros/tables/cliente','cadastros/tables/convenio',
+			'cadastros/tables/estado','cadastros/tables/filial','cadastros/tables/fornecedor','cadastros/tables/transportador',
 			'produto/tables/categoria','produto/tables/marca','produto/tables/uniMed',
 			'produto/forms/CadCategoria','produto/forms/CadMarca','produto/forms/CadUniMed','produto/forms/CadProduto'
 			];
