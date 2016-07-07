@@ -55,7 +55,6 @@ var WebDaptiveAppConfig = {
 				,'wdApp.apps.fornecedor'
 				,'wdApp.apps.convenio'
 				,'wdApp.apps.deposito'
-				,'wdApp.apps.estados'
 				,'wdApp.apps.filial'
 				,'wdApp.apps.transportador'
 				,'wdApp.apps.categoria'
@@ -63,10 +62,13 @@ var WebDaptiveAppConfig = {
 				,'wdApp.apps.unimed'
 				,'wdApp.apps.ordemProducao'
 				,'wdApp.apps.servico'
-				,'wdApp.apps.funcionarios',
-				,'wdApp.apps.compras',
-				,'wdApp.apps.pagamentos',
+				,'wdApp.apps.funcionarios'
+				,'wdApp.apps.compras'
+				,'wdApp.apps.pagamentos'
+				,'wdApp.apps.convenio'
 				,'wdApp.apps.util'
+				,'wdApp.apps.cidade'
+				,'wdApp.apps.filial'
 				]);
 
 	wdApp.config(['$routeProvider',

@@ -1,8 +1,8 @@
 (function() {
-angular.module('wdApp.apps.estado', ['datatables','angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-.controller('EstadosController', estadosController);
+angular.module('wdApp.apps.cidade', ['datatables','angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+.controller('CidadeController', cidadeController);
 
-function estadosController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalService) {
+function cidadeController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalService) {
     var vm = this;
     vm.selected = {};
     vm.selectAll = false;
@@ -17,7 +17,7 @@ function estadosController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,M
     var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
         'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
 
-    vm.dtOptions = DTOptionsBuilder.fromSource('estado.json')
+    vm.dtOptions = DTOptionsBuilder.fromSource('cidade.json')
         .withDOM('frtip')
         .withPaginationType('full_numbers')
         .withOption('createdRow', createdRow)
@@ -122,11 +122,11 @@ function estadosController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,M
                 exportData: { decodeEntities: true }
             },
             {
-                text: 'Novo Estado',
+                text: 'Novo Cidade',
                 key: '1',
                 action: function (e, dt, node, config) {
                     ModalService.showModal({
-                        templateUrl: 'cadEstado.html',
+                        templateUrl: 'cadCidade.html',
                         controller: "ContasPagarController"
                     }).then(function(modal) {
 
@@ -148,9 +148,11 @@ function estadosController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,M
                 return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
         }).withOption('width', '10px'),
         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'), 
+        DTColumnBuilder.newColumn('codigo').withTitle('Codigo'),
+        DTColumnBuilder.newColumn('nome').withTitle('Cidade'),
+        DTColumnBuilder.newColumn('codibge').withTitle('Cod. IBGE'),
         DTColumnBuilder.newColumn('estado').withTitle('Estado'),
-        DTColumnBuilder.newColumn('abreviacao').withTitle('Abreviação'),
-        DTColumnBuilder.newColumn('pais').withTitle('Pais'),
+        DTColumnBuilder.newColumn('cep').withTitle('CEP'),
         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
         DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '140px'), 
@@ -160,7 +162,7 @@ function estadosController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,M
 
     function edit(person) {
        ModalService.showModal({
-            templateUrl: 'cadEstado.html',
+            templateUrl: 'cadCidade.html',
             controller: "ContasPagarController"
         }).then(function(modal) {
             
@@ -173,7 +175,7 @@ function estadosController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,M
     }
     function deleteRow(person) {
         ModalService.showModal({
-            templateUrl: 'formaPgDelete.html',
+            templateUrl: 'deleteCidade.html',
             controller: "ContasPagarController"
         }).then(function(modal) {
             modal.element.modal();
