@@ -122,7 +122,7 @@ function funcionarioController($scope, $compile, DTOptionsBuilder, DTColumnBuild
                 exportData: { decodeEntities: true }
             },
             {
-                text: 'Novo Forma Pagamento',
+                text: 'Novo Funcionario',
                 key: '1',
                 action: function (e, dt, node, config) {
                     ModalService.showModal({
