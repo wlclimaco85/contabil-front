@@ -182,7 +182,7 @@ function pdVendasController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,
             .renderWith(function(data, type, full, meta) {
                 vm.selected[full.id] = false;
                 return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
-        }),
+        }).withOption('width', '10px'),
         DTColumnBuilder.newColumn('id').withTitle('ID').withOption('width', '10px').notVisible(),   
         DTColumnBuilder.newColumn('cliente').withTitle('cliente').withOption('width', '150px'),
         DTColumnBuilder.newColumn('data').withTitle('data').withOption('width', '50px'),
