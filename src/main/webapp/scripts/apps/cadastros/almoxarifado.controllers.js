@@ -1,8 +1,8 @@
 (function() {
-angular.module('wdApp.apps.processo', ['datatables','angularModalService', 'datatables.buttons', 'datatables.light-columnfilter','$rootElement'])
-.controller('ProcessoController', processoController);
+angular.module('wdApp.apps.almoxarifado', ['datatables','angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+.controller('AlmoxarifadoController', almoxarifadoController);
 
-function processoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalService,$location) {
+function almoxarifadoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalService) {
     var vm = this;
     vm.selected = {};
     vm.selectAll = false;
@@ -17,7 +17,7 @@ function processoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,
     var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
         'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
 
-    vm.dtOptions = DTOptionsBuilder.fromSource('processo.json')
+    vm.dtOptions = DTOptionsBuilder.fromSource('almoxarifado.json')
         .withDOM('frtip')
         .withPaginationType('full_numbers')
         .withOption('createdRow', createdRow)
@@ -122,11 +122,11 @@ function processoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,
                 exportData: { decodeEntities: true }
             },
             {
-                text: 'Novo Processo',
+                text: 'Novo Almoxarifado',
                 key: '1',
                 action: function (e, dt, node, config) {
                     ModalService.showModal({
-                        templateUrl: 'cadProcesso.html',
+                        templateUrl: 'cadAlmoxarifado.html',
                         controller: "ContasPagarController"
                     }).then(function(modal) {
 
@@ -148,42 +148,19 @@ function processoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,
                 return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
         }).withOption('width', '10px'),
         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'), 
-        DTColumnBuilder.newColumn('assunto').withTitle('Assunto'),
-        DTColumnBuilder.newColumn('status').withTitle('Situação'),
+        DTColumnBuilder.newColumn('codigo').withTitle('Codigo'),
+        DTColumnBuilder.newColumn('nome').withTitle('Nome'),
         DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
-        DTColumnBuilder.newColumn('responsavel').withTitle('Responsavel'),
-        DTColumnBuilder.newColumn('grupoTrabalho').withTitle('Grupo Trabalho').notVisible(),
-        DTColumnBuilder.newColumn('processo').withTitle('Processo').notVisible(),
-        DTColumnBuilder.newColumn('situacao').withTitle('Situação').notVisible(),
-        DTColumnBuilder.newColumn('instancia').withTitle('Instancia').notVisible(),
-        DTColumnBuilder.newColumn('orgao').withTitle('Orgão').notVisible(),
-        DTColumnBuilder.newColumn('numCnj').withTitle('Numeração Padrão CNJ').notVisible(),
-        DTColumnBuilder.newColumn('numOut').withTitle('Numeração Outro Padrão').notVisible(),
-        DTColumnBuilder.newColumn('ageCapTrib').withTitle('Agendar captura no tribunal').notVisible(),
-        DTColumnBuilder.newColumn('observacao').withTitle('Observação').notVisible(),
-        DTColumnBuilder.newColumn('valor').withTitle('Valor').notVisible(),
-        DTColumnBuilder.newColumn('formaPg').withTitle('Forma de Pagamento').notVisible(),
-        DTColumnBuilder.newColumn('justica').withTitle('Justiça').notVisible(),
-        DTColumnBuilder.newColumn('tribunal').withTitle('Tribunal').notVisible(),
-        DTColumnBuilder.newColumn('instancia2').withTitle('Instancia').notVisible(),
-        DTColumnBuilder.newColumn('localidade').withTitle('Localidade').notVisible(),
-        DTColumnBuilder.newColumn('capPor').withTitle('Capturar Por').notVisible(),
-        DTColumnBuilder.newColumn('numProcesso').withTitle('Numero Processo').notVisible(),
-        DTColumnBuilder.newColumn('capalt').withTitle('Captura automática de andamentos').notVisible(),
-        DTColumnBuilder.newColumn(null).withTitle('Envolvidos').renderWith(function(data, type, full, meta) {
-                var sText = "";
-                	if(data.pessoa != undefined)
-                	{
-	                	for(var x = 0;x < data.pessoa.length;x++)
-	                	{
-	                		sText = sText + " "+data.pessoa[x].cliente+" "+data.pessoa[x].tipEnvolv+" "+data.pessoa[x].envolvimento + "<br> ";
-	                	}
-	                }
-
-                return '<span>'+sText+'</span>';
-            }),
+        DTColumnBuilder.newColumn('almoxFora').withTitle('Almoxarifado fora da empresa'),
+        DTColumnBuilder.newColumn('cep').withTitle('CEP').notVisible(),
+        DTColumnBuilder.newColumn('logradouro').withTitle('Logradouro').notVisible(),
+        DTColumnBuilder.newColumn('numero').withTitle('Numero').notVisible(),
+        DTColumnBuilder.newColumn('cidade').withTitle('Cidade').notVisible(),
+        DTColumnBuilder.newColumn('estado').withTitle('Estado').notVisible(),
         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
+        DTColumnBuilder.newColumn('status').withTitle('Status').notVisible(),
+        DTColumnBuilder.newColumn('produtos').withTitle('Produtos Estocados').notVisible(),
         DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '140px'), 
     ];
 
@@ -203,18 +180,6 @@ function processoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,
         });
     }
     function deleteRow(person) {
-        ModalService.showModal({
-            templateUrl: 'deleteCidade.html',
-            controller: "ContasPagarController"
-        }).then(function(modal) {
-            modal.element.modal();
-            modal.close.then(function(result) {
-                $scope.message = "You said " + result;
-            });
-        });
-    }
-
-    function view(person) {
         ModalService.showModal({
             templateUrl: 'deleteCidade.html',
             controller: "ContasPagarController"
@@ -297,10 +262,7 @@ function processoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,
     }
     function actionsHtml(data, type, full, meta) {
         vm.persons[data.id] = data;
-        return '<button class="btn btn-info" ng-click="$location.path("#/vendas/tables/pedidoVendas")">' +
-            '   <i class="glyphicon glyphicon-search"></i>' +
-            '</button>&nbsp;' +
-            '<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
+        return '<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
             '   <i class="fa fa-edit"></i>' +
             '</button>&nbsp;' +
             '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +

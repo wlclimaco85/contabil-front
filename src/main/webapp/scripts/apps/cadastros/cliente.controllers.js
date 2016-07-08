@@ -156,7 +156,7 @@ function clienteController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,M
         DTColumnBuilder.newColumn('IE').withTitle('Inscrição Estadual').notVisible(), 
         DTColumnBuilder.newColumn('IM').withTitle('Inscrição Municipal').notVisible(), 
         DTColumnBuilder.newColumn('IF').withTitle('Inscrição Suframa').notVisible(),  
-         DTColumnBuilder.newColumn('cep').withTitle('CEP').notVisible(),
+        DTColumnBuilder.newColumn('cep').withTitle('CEP').notVisible(),
         DTColumnBuilder.newColumn('logradouro').withTitle('Logradouro'),
         DTColumnBuilder.newColumn('numero').withTitle('Numero'),
         DTColumnBuilder.newColumn('cidade').withTitle('Cidade'),

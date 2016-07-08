@@ -69,6 +69,8 @@ var WebDaptiveAppConfig = {
 				,'wdApp.apps.util'
 				,'wdApp.apps.cidade'
 				,'wdApp.apps.filial'
+				,'wdApp.apps.almoxarifado'
+				,'wdApp.apps.processo'
 				]);
 
 	wdApp.config(['$routeProvider',
@@ -97,6 +99,7 @@ var WebDaptiveAppConfig = {
 			'cadastros/tables/estado','cadastros/tables/filial','cadastros/tables/fornecedor','cadastros/tables/transportador',
 			'produto/tables/categoria','produto/tables/marca','produto/tables/uniMed','produto/tables/servico',
 			'produto/forms/CadCategoria','produto/forms/CadMarca','produto/forms/CadUniMed','produto/forms/CadProduto'
+			,'advogado/tables/processo'
 			];
 
 			//geeric routeine for building route from array
