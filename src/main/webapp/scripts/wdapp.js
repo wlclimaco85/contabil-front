@@ -95,7 +95,7 @@ var WebDaptiveAppConfig = {
 			'ordemServico/tables/ordemServico','ordemServico/forms/CadOrdemServico',
 			'cadastros/tables/almoxarifado','cadastros/tables/cidade','cadastros/tables/cliente','cadastros/tables/convenio',
 			'cadastros/tables/estado','cadastros/tables/filial','cadastros/tables/fornecedor','cadastros/tables/transportador',
-			'produto/tables/categoria','produto/tables/marca','produto/tables/uniMed',
+			'produto/tables/categoria','produto/tables/marca','produto/tables/uniMed','produto/tables/servico',
 			'produto/forms/CadCategoria','produto/forms/CadMarca','produto/forms/CadUniMed','produto/forms/CadProduto'
 			];
 

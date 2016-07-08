@@ -1,47 +1,59 @@
 
 (function() {
 angular.module('wdApp.apps.ordemServico', ['datatables','angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-    .controller('OrdemServicoController', ordemServicoController);
+    .controller('OrdemServicoControllers', ordemServicoController);
+
 
 function ordemServicoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalService) {
     var vm = this;
-
+    vm.selected = {};
+    vm.selectAll = false;
+    vm.toggleAll = toggleAll;
+    vm.toggleOne = toggleOne;
     vm.message = '';
     vm.edit = edit;
     vm.delete = deleteRow;
     vm.dtInstance = {};
     vm.persons = {};
 
-    vm.dtOptions = DTOptionsBuilder.fromSource('cnae.json')
+    var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
+        'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
+
+    vm.dtOptions = DTOptionsBuilder.fromSource('ordemServico.json')
         .withDOM('frtip')
         .withPaginationType('full_numbers')
         .withOption('createdRow', createdRow)
-        .withPaginationType('full_numbers')
-        .withLightColumnFilter({
-            '0' : {
-                type : 'text'
-            },
-            '1' : {
-                type : 'text'
-            },
-            '2' : {
-                type : 'text',
-            },
-            '3' : {
-                type : 'text',
-            },
-            '4' : {
-                type : 'text',
-
+        .withOption('headerCallback', function(header) {
+            if (!vm.headerCompiled) {
+                // Use this headerCompiled field to only compile header once
+                vm.headerCompiled = true;
+                $compile(angular.element(header).contents())($scope);
             }
         })
+        .withPaginationType('full_numbers')
+        .withColumnFilter({
+            aoColumns: [{
+                type: 'number'
+            }, {
+                type: 'number',
+            }, {
+                type: 'select',
+                values: ['Entrada', 'Saida']
+            },{
+                type: 'text'
+            },{
+                type: 'text'
+            },{
+                type: 'text'
+            }]
+        })
         .withOption('initComplete', function (settings,json) {
-
+            
             $('.dt-buttons').find('.dt-button:eq(1)').before(
 
             '<select class="form-control col-sm-3 btn btn-primary dropdown-toggle" data-ng-options="t.name for t in vm.types"'+
               'data-ng-model="vm.object.type" style="height: 32px;margin-left: 8px;margin-right: 6px;width: 200px !important;">'+
-
+              
                 '<option><a href="#">Ações <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>'+
                 '<option><a href="#">Remover Todos <span class="badge selected badge-danger main-badge"  data-ng-show="{{showCase.countSeleted()}}"></span></a></option>'+
                '</select>'
@@ -56,7 +68,7 @@ function ordemServicoController($scope, $compile, DTOptionsBuilder, DTColumnBuil
                 next: "&rarr;",
                 previous: "&larr;"
             },
-            lengthMenu: "_MENU_ records per page"
+            lengthMenu: "_MENU_ records per page" 
         })
         .withButtons([
             {
@@ -112,38 +124,61 @@ function ordemServicoController($scope, $compile, DTOptionsBuilder, DTColumnBuil
                 exportData: { decodeEntities: true }
             },
             {
-                text: 'Novo CFOP',
+                text: 'Nova OS',
                 key: '1',
                 action: function (e, dt, node, config) {
-                   ModalService.showModal({
-            templateUrl: 'modalCnae.html',
-            controller: "CnaeController"
-        }).then(function(modal) {
-            modal.element.modal();
-            modal.close.then(function(result) {
-                $scope.message = "You said " + result;
-            });
-        });
+                    ModalService.showModal({
+                        templateUrl: 'cadOS.html',
+                        controller: "OrdemServicoControllers"
+                    }).then(function(modal) {
+
+                        
+                        modal.element.modal();
+                        openDialogUpdateCreate();
+                        modal.close.then(function(result) {
+                            $scope.message = "You said " + result;
+                        });
+                    });
                 }
             }
-        ])
+        ]);
 
     vm.dtColumns = [
-        DTColumnBuilder.newColumn('id').withTitle('ID'),
-        DTColumnBuilder.newColumn('codigo').withTitle('Codigo'),
-        DTColumnBuilder.newColumn('cnae').withTitle('CNAE'),
-        DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
-        DTColumnBuilder.newColumn('abreviado').withTitle('Abreviação'),
-        DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable().renderWith(actionsHtml)
+        DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
+            .renderWith(function(data, type, full, meta) {
+                vm.selected[full.id] = false;
+                return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
+        }).withOption('width', '10px'),
+        DTColumnBuilder.newColumn('id').withTitle('ID').withOption('width', '10px'),
+        DTColumnBuilder.newColumn('cliente').withTitle('Cliente'),
+        DTColumnBuilder.newColumn('tecnico').withTitle('Tecnico'),
+        DTColumnBuilder.newColumn('situacao').withTitle('Situação OS'),
+        DTColumnBuilder.newColumn('dataInicio').withTitle('Data Inicio'),
+        DTColumnBuilder.newColumn('dataGeral').withTitle('Data Geral').notVisible(),
+        DTColumnBuilder.newColumn('diasGarantia').withTitle('Dias Garantia').notVisible(),
+        DTColumnBuilder.newColumn('descricao').withTitle('Descrição prod./serv.').notVisible(),
+        DTColumnBuilder.newColumn('defeito').withTitle('Defeito').notVisible(),
+        DTColumnBuilder.newColumn('laudo').withTitle('Laudo').notVisible(),
+        DTColumnBuilder.newColumn('obs').withTitle('Observações Gerais').notVisible(),
+        DTColumnBuilder.newColumn('produto').withTitle('prod./serv.'),
+         DTColumnBuilder.newColumn('status').withTitle('Status'),
+        DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
+        DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
+        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '140px'), 
     ];
+        
 
+
+   
 
     function edit(person) {
        ModalService.showModal({
-            templateUrl: 'modalCnae.html',
-            controller: "CnaeController"
+            templateUrl: 'cadOS.html',
+            controller: "OrdemServicoControllers"
         }).then(function(modal) {
+            
             modal.element.modal();
+            openDialogUpdateCreate();
             modal.close.then(function(result) {
                 $scope.message = "You said " + result;
             });
@@ -151,14 +186,80 @@ function ordemServicoController($scope, $compile, DTOptionsBuilder, DTColumnBuil
     }
     function deleteRow(person) {
         ModalService.showModal({
-            templateUrl: 'cnaeDelete.html',
-            controller: "CnaeController"
+            templateUrl: 'cfopDelete.html',
+            controller: "OrdemServicoControllers"
         }).then(function(modal) {
             modal.element.modal();
             modal.close.then(function(result) {
                 $scope.message = "You said " + result;
             });
         });
+    }
+    function openDialogUpdateCreate()
+    {
+        bookIndex = 0;
+        $('#pdVendasForm')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+
+            'book[0].produto': notEmptyStringMinMaxRegexp,
+            'book[0].quantidade': integerNotEmptyValidation,
+            'book[0].vlUnitario': integerNotEmptyValidation,
+
+
+        }
+        })
+        // Add button click handler
+        .on('click', '.addButton', function() {
+            bookIndex++;
+            var $template = $('#bookTemplate'),
+                $clone    = $template
+                                .clone()
+                                .removeClass('hide')
+                                .removeAttr('id')
+                                .attr('data-book-index', bookIndex)
+                                .insertBefore($template);
+
+            // Update the name attributes
+            $clone
+                .find('[name="produto"]').attr('name', 'book[' + bookIndex + '].produto').end()
+                .find('[name="quantidade"]').attr('name', 'book[' + bookIndex + '].quantidade').end()
+                .find('[name="vlUnitario"]').attr('name', 'book[' + bookIndex + '].vlUnitario').end()
+                .find('[name="desconto"]').attr('name', 'book[' + bookIndex + '].desconto').end();
+
+            // Add new fields
+            // Note that we also pass the validator rules for new field as the third parameter
+            $('#pdVendasForm')
+                .formValidation('addField', 'book[' + bookIndex + '].produto',notEmptyStringMinMaxRegexp)
+                .formValidation('addField', 'book[' + bookIndex + '].quantidade',integerNotEmptyValidation)
+                .formValidation('addField', 'book[' + bookIndex + '].vlUnitario',integerNotEmptyValidation);
+        })// Remove button click handler
+        .on('click', '.removeButton', function() {
+            var $row  = $(this).parents('.form-group'),
+                index = $row.attr('data-book-index');
+
+            // Remove fields
+            $('#bookForm')
+                .formValidation('removeField', $row.find('[name="book[' + index + '].produto"]'))
+                .formValidation('removeField', $row.find('[name="book[' + index + '].quantidade"]'))
+                .formValidation('removeField', $row.find('[name="book[' + index + '].vlUnitario"]'))
+                .formValidation('removeField', $row.find('[name="book[' + index + '].desconto"]'));
+
+            // Remove element containing the fields
+            $row.remove();
+        });
+        $("select").select2({
+          placeholder: "Select a state",
+          allowClear: true
+        });
+
+
     }
     function createdRow(row, data, dataIndex) {
         // Recompiling so we can bind Angular directive to the DT
@@ -172,6 +273,25 @@ function ordemServicoController($scope, $compile, DTOptionsBuilder, DTColumnBuil
             '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
             '   <i class="fa fa-trash-o"></i>' +
             '</button>';
+    }
+
+    function toggleAll (selectAll, selectedItems) {
+        for (var id in selectedItems) {
+            if (selectedItems.hasOwnProperty(id)) {
+                selectedItems[id] = selectAll;
+            }
+        }
+    }
+    function toggleOne (selectedItems) {
+        for (var id in selectedItems) {
+            if (selectedItems.hasOwnProperty(id)) {
+                if(!selectedItems[id]) {
+                    vm.selectAll = false;
+                    return;
+                }
+            }
+        }
+        vm.selectAll = true;
     }
 }
 })();
