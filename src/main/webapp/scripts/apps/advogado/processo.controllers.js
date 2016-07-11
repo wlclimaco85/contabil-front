@@ -1,8 +1,8 @@
 (function() {
-angular.module('wdApp.apps.processo', ['datatables','angularModalService', 'datatables.buttons', 'datatables.light-columnfilter','$rootElement'])
+angular.module('wdApp.apps.processo', ['datatables','angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
 .controller('ProcessoController', processoController);
 
-function processoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalService,$location) {
+function processoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalService) {
     var vm = this;
     vm.selected = {};
     vm.selectAll = false;
@@ -297,9 +297,7 @@ function processoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,
     }
     function actionsHtml(data, type, full, meta) {
         vm.persons[data.id] = data;
-        return '<button class="btn btn-info" ng-click="$location.path("#/vendas/tables/pedidoVendas")">' +
-            '   <i class="glyphicon glyphicon-search"></i>' +
-            '</button>&nbsp;' +
+        return '<a href="#/advogado/details/processo"><i class="glyphicon glyphicon-search"></i></a>&nbsp;' +
             '<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
             '   <i class="fa fa-edit"></i>' +
             '</button>&nbsp;' +

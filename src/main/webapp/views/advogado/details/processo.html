@@ -1,0 +1,215 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="dist/css/formValidation.css"/>
+<link rel="stylesheet" href="dist/css/select2.css"/>
+<script src="dist/js/select2.min.js"></script>
+<script src="dist/js/formValidation.js"></script>
+<script src="dist/js/framework/bootstrap.js"></script>
+<style type="text/css">
+	.wash {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        }
+        .tabs-was {
+        float: left;
+        border: 1px solid #000;
+        border-bottom-width: 0;
+        margin: 3px 3px 0px 3px;
+        padding: 5px 5px 0px 5px;
+        background-color: #CCC;
+        color: ##3767B9;
+        }
+        #mainView {
+        border: 1px solid black;
+        clear: both;
+        }
+        .active {
+        background-color: #FFF;
+        color: #000;
+        }
+        * {margin: 0; padding: 0; box-sizing: border-box;}
+        .tabs-nav {padding: 20px 0 0; list-style: none;}
+        .tabs-nav li {display: inline;}
+        .tabs-nav a {
+        display:inline-block;
+        border: 1px solid #ddd;
+        border-bottom: none;
+        padding: 15px;
+        cursor: pointer;
+        border-radius: 5px 5px 0 0;
+        font-size: 14px;
+        color: #fff;
+        background: #1B3975;
+        }
+        .tabs-nav .active {
+        background: #fff;
+        color: #000;
+        border-bottom: 1px solid #fff;
+        margin-bottom: -1px;
+        }
+        .tab-content {
+        border: 1px solid #ddd;
+        padding: 20px;
+        }
+        .tab-content1 {
+        border: 1px solid #ddd;
+        padding: 20px;
+        }
+        p {
+        margin-bottom: 15px;
+        }
+	/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+	.row.content {height: 550px}
+	/* Set gray background color and 100% height */
+	.sidenav {
+	background-color: #f1f1f1;
+	height: 100%;
+	}
+	/* On small screens, set height to 'auto' for the grid */
+	@media screen and (max-width: 767px) {
+	.row.content {height: auto;}
+	}
+</style>
+<div class="container1" ng-app ng-init="tabs=4">
+	<ul class="tabs-nav">
+		<li><a ng-click="tabs=4" ng-class="{'active' : tabs==4}">Processo</a></li>
+		<li><a ng-click="tabs=5" ng-class="{'active' : tabs==5}">Arquivos Anexos</a></li>
+		<li><a ng-click="tabs=6" ng-class="{'active' : tabs==6}">Financeiro</a></li>
+		<li><a ng-click="tabs=7" ng-class="{'active' : tabs==7}">Contatos</a></li>
+	</ul>
+	<div class="tabs-container1">
+		<div class="tab-content1" ng-show="tabs == 4">
+			<div class="container-fluid">
+				<div class="row content">
+					<br>
+					<div class="col-sm-9">
+						<div class="well">
+							<h4>Dashboard</h4>
+							<p>Some text..</p>
+						</div>
+						<div class="row">
+							<div class="col-sm-3">
+								<div class="well">
+									<h4>Users</h4>
+									<p>1 Million</p>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<div class="well">
+									<h4>Pages</h4>
+									<p>100 Million</p>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<div class="well">
+									<h4>Sessions</h4>
+									<p>10 Million</p>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<div class="well">
+									<h4>Bounce</h4>
+									<p>30%</p>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="well">
+									<p>Text</p>
+									<p>Text</p>
+									<p>Text</p>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="well">
+									<p>Text</p>
+									<p>Text</p>
+									<p>Text</p>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="well">
+									<p>Text</p>
+									<p>Text</p>
+									<p>Text</p>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-8">
+								<div class="well">
+									<p>Text</p>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="well">
+									<p>Text</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3 sidenav hidden-xs">
+						<div class="form-group">
+							  <label for="comment">Observação:</label>
+							  <textarea class="form-control" rows="5" id="Observação"></textarea>
+							  <button type="submit" class="btn btn-primary">Gravar</button>
+						</div><br>
+						<div>
+							<div>
+								<p>Washington  17/07/2016 8:00</p> <br>
+								<p>Processo observação 01012 </p>
+							</div>
+							<div>
+								<p>Washington  16/07/2016 8:00</p> <br>
+								<p>Processo observação 01012 dddddsewqeqw </p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tab-content1" ng-show="tabs == 5">
+			<div role="tabpanel" class="tab-pane profile" id="profile">
+				<div class="panel-group" id="accordion">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".peso">
+								Pesos
+								</a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+							</h4>
+						</div>
+						<div id="collapseOne" class="panel-collapse collapse in peso">
+							<div class="panel-body">
+								<div class="row">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tab-content1" ng-show="tabs == 6">
+			<div role="tabpanel" class="tab-pane messages" id="messages">
+				<div class="panel-group" id="accordion">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".estoque">
+								ESTOQUE
+								</a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+							</h4>
+						</div>
+						<div id="collapseOne" class="panel-collapse collapse in estoque">
+							<div class="panel-body">
+								<div class="row">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
