@@ -69,6 +69,29 @@
 	@media screen and (max-width: 767px) {
 	.row.content {height: auto;}
 	}
+	div.show-image {
+    position: relative;
+    float:left;
+    margin:5px;
+}
+div.show-image:hover img{
+    opacity:0.5;
+}
+div.show-image:hover input {
+    display: block;
+}
+div.show-image input {
+    position:absolute;
+    display:none;
+}
+div.show-image input.update {
+    top:0;
+    left:0;
+}
+div.show-image input.delete {
+    top:0;
+    left:79%;
+}
 </style>
 <div class="container1" ng-app ng-init="tabs=4">
 	<ul class="tabs-nav">
@@ -90,8 +113,12 @@
 						<div class="row">
 							<div class="col-sm-3">
 								<div class="well">
-									<h4>Users</h4>
-									<p>1 Million</p>
+									<h2>Hover on the Image to see the Buttons</h2>
+									<div class="show-image">
+									    <img src="http://taditdash.files.wordpress.com/2014/01/tadit-dash.jpg" />
+									    <input class="update" type="button" value="Update" />
+									    <input class="delete" type="button" value="Delete" />
+									</div>
 								</div>
 							</div>
 							<div class="col-sm-3">
