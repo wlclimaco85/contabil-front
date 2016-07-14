@@ -199,7 +199,7 @@
             }),
             DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
             DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '140px'),
+            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtmlProcesso).withOption('width', '140px'),
         ];
 
 
@@ -543,6 +543,17 @@
                 '</button>';
         }
 
+         function actionsHtmlProcesso(data, type, full, meta) {
+        vm.persons[data.id] = data;
+        return '<a href="#/advogado/details/processo"><i class="glyphicon glyphicon-search"></i></a>&nbsp;' +
+            '<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
+            '   <i class="fa fa-edit"></i>' +
+            '</button>&nbsp;' +
+            '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
+            '   <i class="fa fa-trash-o"></i>' +
+            '</button>';
+    }
+
         function toggleAll(selectAll, selectedItems) {
             for (var id in selectedItems) {
                 if (selectedItems.hasOwnProperty(id)) {
@@ -598,6 +609,7 @@
                 controller: "ContasPagarController"
             }).then(function(modal) {
                 modal.element.modal();
+                openDialogUpdateCreate();
                 modal.close.then(function(result) {
                     $scope.message = "You said " + result;
                 });
