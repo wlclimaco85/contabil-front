@@ -1,124 +1,245 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="dist/css/select2.css"/>
+<link rel="stylesheet" href="dist/css/select2.css" />
 <script src="dist/js/select2.min.js"></script>
 <div ng-controller="CotacaoController as showCase">
-    <table datatable dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" class="row-border hover">	<tfoot>
-        <tr>
-            <th>ID
-            </th><th>First Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-        </th></tr>
+    <table datatable dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" class="row-border hover">
+        <tfoot>
+            <tr>
+                <th>ID
+                </th>
+                <th>First Name
+                </th>
+                <th>Last Name
+                </th>
+                <th>Last Name
+                </th>
+                <th>Last Name
+                </th>
+                <th>Last Name
+                </th>
+                <th>Last Name
+                </th>
+                <th>Last Name
+                </th>
+                <th>Last Name
+                </th>
+            </tr>
         </tfoot>
     </table>
-
     <div class="container">
-			     <script type="text/ng-template" id="modal.html">
-			         <div class="modal fade">
-			          <div class="modal-dialog">
-			            <div class="modal-content">
-			              <div class="modal-header">
-			                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-			                <h4 class="modal-title">Cadastro CFOP</h4>
-			              </div>
-			              <div class="modal-body">
-			                <form  id="empresaForm">
-	                                <div class="row">
-	                                    <div class="col-md-12">
-	                                    <div class="row">
-	                                        <div class="form-group col-sm-6">
-	                                            <label for="exampleInputEmail1">CFOP</label>
-	                                            <input type="text"  ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="CFOP">
-	                                        </div>
+        <script type="text/ng-template" id="cadCotacao.html">
+            <div class="modal fade">
+                <div class="modal-dialog" style="width : 60%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Cadastro Cotação</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="empresaForm">
+                                <div class="row">
+                                        <div class="row">
+                                            <div class="form-group col-sm-4">
+                                                <label for="exampleInputEmail1">Numero Pedido de Compra</label>
+                                                <div class="row">
+                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
+                                                        <option></option>
+                                                        <option value="4">1015</option>
+                                                        <option value="1" selected="selected">1016</option>
+                                                        <option value="5">2014</option>
+                                                        <option value="3">8745</option>
+                                                        <option value="2">9874</option>
+                                                    </select>
+                                                </div>
+                                            </div>
 
-	                                        <div class="form-group col-sm-6">
-	                                            <label for="exampleInputEmail1">Natureza</label>
-	                                            <select id="unidTributada" name="unidTributada"  ng-model="cfop.natureza" class="form-control">
-								                    <option value="01">Entrada</option>
-								                    <option value="02">Saida</option>
-								                </select>
-	                                        </div>
-	                                     </div>
-	                                     <div class="row col-sm-12">
-	                                        <div class="form-group">
-	                                            <label for="exampleInputEmail1">Descrição</label>
-	                                            <input type="text" class="form-control" ng-model="cfop.descricao" name="descricao" placeholder="Descrição">
-	                                        </div>
-	                                     </div>
-	                                     <div class="row col-sm-12">
-	                                        <div class="form-group col-sm-4">
-	                                            <label for="exampleInputEmail1">ICMS</label>
-	                                            <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="0.00">
-	                                        </div>
-	                                        <div class="form-group col-sm-4">
-	                                            <label for="exampleInputPassword1">ICMS Reduzido</label>
-	                                            <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="0.00">
-	                                        </div>
-	                                        <div class="form-group col-sm-4">
-	                                            <label for="exampleInputPassword1">Margem Agregada ST</label>
-	                                            <input type="password" class="form-control" ng-model="cfop.margemAgregadaST" name="password" placeholder="0.00">
-	                                        </div>
-	                                    </div>
-	                                    <div class="row col-sm-12">
-	                                        <div class="form-group col-sm-4">
-	                                            <label for="exampleInputPassword1">CST Principal</label>
-	                                            <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="0.00">
-	                                        </div>
-	                                        <div class="form-group col-sm-4">
-	                                            <label for="exampleInputPassword1">Classificação Fiscal</label>
-	                                            <input type="password" class="form-control" ng-model="cfop.classFiscal" name="password" placeholder="0.00">
-	                                        </div>
-	                                         <div class="form-group col-sm-4">
-	                                            <label for="exampleInputPassword1">Classificação Fiscal</label>
-	                                            <input type="password" class="form-control" ng-model="cfop.classFiscal" name="password" placeholder="0.00">
-	                                        </div>
-	                                    </div>
-	                                     <div class="row col-sm-12">
-	                                        <div class="form-group">
-	                                            <label for="exampleInputPassword1">Observação</label>
-	                                            <input type="password" class="form-control" ng-model="cfop.observacao" name="password" placeholder="Observação">
-	                                        </div>
-	                                    </div>
-	                                    </div>
-			              		</div>
-			              	</form>
-			              </div>
-			              <div class="modal-footer">
-			                <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-			                <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Gravar</button>
-			              </div>
-			            </div>
-			          </div>
-			        </div>
-			     </script>
+                                            <div class="form-group col-sm-8">
+                                                <label for="exampleInputEmail1">Responsavel Cotação</label>
+                                                <div class="row">
+                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
+                                                        <option></option>
+                                                        <option value="4">Rick Grimes</option>
+                                                        <option value="1" selected="selected">Shane Walsh</option>
+                                                        <option value="5">Lori Grimes</option>
+                                                        <option value="3">Carol Peletier</option>
+                                                        <option value="2">Morgan Jones</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row " style="margin-top : 10px"></div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Fornecedores Concorrente</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row socios">
+                                                    <div class="col-sm-8">
+                                                        <label for="exampleInputPassword1">Fornecedor</label>
+                                                        <div class="row ">
+                                                            <select name="book[0].produto" class="col-sm-12">
+                                                                <option value="0">Geometa Engenharia de Fundações Indústria e Comércio</option>
+                                                                <option value="1">Eletrocerâmica Indústria de Material Elétrico</option>
+                                                                <option value="2">Incel Indústria Nacional de Componentes Elétricos</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3" style="margin-top:18px">
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input type="checkbox" name="receiver" class="check-socio" value="1" /> Enviar Email?
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-1" style="margin-top:18px">
+                                                        <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group hide" id="bookTemplate">
+                                                    <div class="row socios">
+                                                        <div class="col-sm-8">
+                                                            <label for="exampleInputPassword1">Fornecedor</label>
+                                                            <div class="row ">
+                                                                <select name="book[0].produto" class="col-sm-12">
+                                                                    <option value="0">Geometa Engenharia de Fundações Indústria e Comércio - Dis Indus</option>
+                                                                    <option value="1">Eletrocerâmica Indústria de Material Elétrico</option>
+                                                                    <option value="2">Incel Indústria Nacional de Componentes Elétricos</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3" style="margin-top:18px">
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="receiver" class="check-socio" value="1" /> Enviar Email?
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-1" style="margin-top:18px">
+                                                            <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row " style="margin-top : 10px"></div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Produtos</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row socios">
+                                                    <div class="col-sm-9">
+                                                        <label for="exampleInputPassword1">Produto</label>
+                                                        <div class="row ">
+                                                            <select name="book[0].produto" class="col-sm-12">
+                                                                <option value="0">1010 - Coca Cola 1LT</option>
+                                                                <option value="1">1011 - Coca Cola 1.5LT</option>
+                                                                <option value="2">Cadastrar novo Produto</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1">Quantidade</label>
+                                                            <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-1" style="margin-top:18px">
+                                                        <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group hide" id="bookTemplate">
+                                                    <div class="row socios">
+                                                        <div class="col-sm-9">
+                                                            <label for="exampleInputPassword1">Produto</label>
+                                                            <div class="row ">
+                                                                <select name="produto" class="col-sm-12">
+                                                                    <option value="0">1010 - Coca Cola 1LT</option>
+                                                                    <option value="1">1011 - Coca Cola 1.5LT</option>
+                                                                    <option value="2">Cadastrar novo Produto</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputPassword1">Quantidade</label>
+                                                                <input type="text" class="form-control nome-socio" name="quantidade" placeholder="0.00" />
+                                                            </div>
+                                                        </div>
 
-			</div>
-
-			<div class="container">
-			     <script type="text/ng-template" id="cfopDelete.html">
-			         <div class="modal fade">
-			          <div class="modal-dialog">
-			            <div class="modal-content">
-			              <div class="modal-header">
-			                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-			                <h4 class="modal-title">Deletar</h4>
-			              </div>
-			              <div class="modal-body">
-			                	<p>Deseja Realmente EXCLUIR ID : 1001 </p>
-			              </div>
-			              <div class="modal-footer">
-			                <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Sim</button>
-			                <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Não</button>
-			              </div>
-			            </div>
-			          </div>
-			        </div>
-			     </script>
-
-			</div>
+                                                        <div class="col-xs-1" style="margin-top:18px">
+                                                            <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Data</label>
+                                                    <input type="text" class="form-control" ng-model="cfop.descricao" name="descricao" placeholder="Descrição">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Data Limite</label>
+                                                    <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="0.00">
+                                                </div>
+                                            </div>
+                                                <div class="col-sm-4">
+                                                    <label for="exampleInputPassword1">Preferencia</label>
+                                                    <div class="row ">
+                                                        <select name="produto" class="col-sm-12">
+                                                            <option value="0">Baixa</option>
+                                                            <option value="1">Normal</option>
+                                                            <option value="2">Alta</option>
+                                                            <option value="2">Urgente</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    	<div class="row">
+                                            <div class="form-group col-sm-12">
+                                                <label for="exampleInputPassword1">Observação</label>
+                                                <textarea class="form-control" rows="5" id="Observação"></textarea>
+                                            </div>
+                                        </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Gravar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+    </div>
+    <div class="container">
+        <script type="text/ng-template" id="cotacaoDelete.html">
+            <div class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Deletar</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Deseja Realmente EXCLUIR ID : 1001 </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Sim</button>
+                            <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Não</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+    </div>
 </div>
