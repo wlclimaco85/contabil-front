@@ -1,0 +1,716 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="dist/css/formValidation.css" />
+<link rel="stylesheet" href="dist/css/select2.css" />
+<script src="dist/js/select2.min.js"></script>
+<script src="dist/js/formValidation.js"></script>
+<script src="dist/js/framework/bootstrap.js"></script>
+<style type="text/css">
+    .wash {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .tabs-was {
+        float: left;
+        border: 1px solid #000;
+        border-bottom-width: 0;
+        margin: 3px 3px 0px 3px;
+        padding: 5px 5px 0px 5px;
+        background-color: #CCC;
+        color: ##3767B9;
+    }
+    #mainView {
+        border: 1px solid black;
+        clear: both;
+    }
+    .active {
+        background-color: #FFF;
+        color: #000;
+    }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .tabs-nav {
+        padding: 20px 0 0;
+        list-style: none;
+    }
+    .tabs-nav li {
+        display: inline;
+    }
+    .tabs-nav a {
+        display: inline-block;
+        border: 1px solid #ddd;
+        border-bottom: none;
+        padding: 15px;
+        cursor: pointer;
+        border-radius: 5px 5px 0 0;
+        font-size: 14px;
+        color: #fff;
+        background: #1B3975;
+    }
+    .tabs-nav .active {
+        background: #fff;
+        color: #000;
+        border-bottom: 1px solid #fff;
+        margin-bottom: -1px;
+    }
+    .tab-content {
+        border: 1px solid #ddd;
+        padding: 20px;
+    }
+    .tab-content1 {
+        border: 1px solid #ddd;
+        padding: 20px;
+    }
+    p {
+        margin-bottom: 15px;
+    }
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    
+    .row.content {
+        height: 550px
+    }
+    /* Set gray background color and 100% height */
+    
+    .sidenav {
+        background-color: #f1f1f1;
+        height: 100%;
+    }
+    /* On small screens, set height to 'auto' for the grid */
+    
+    @media screen and (max-width: 767px) {
+        .row.content {
+            height: auto;
+        }
+    }
+    div.show-image {
+        position: relative;
+        float: left;
+        margin: 5px;
+    }
+    div.show-image:hover img {
+        opacity: 0.5;
+    }
+    div.show-image:hover input {
+        display: block;
+    }
+    div.show-image input {
+        position: absolute;
+        display: none;
+    }
+    div.show-image input.update {
+        top: 0;
+        left: 0;
+    }
+    div.show-image input.delete {
+        top: 0;
+        left: 79%;
+    }
+    .vis {
+        height: 100px;
+        display: none;
+    }
+
+    
+</style>
+<div class="container1" ng-app ng-init="tabs=1">
+    <ul class="tabs-nav">
+        <li><a ng-click="tabs=1" ng-class="{'active' : tabs==1}">Cotação</a>
+        </li>
+        </li>
+        <li><a ng-click="tabs=2" ng-class="{'active' : tabs==2}">Contatos</a>
+        </li>
+    </ul>
+    <div class="tabs-container1">
+        <div class="tab-content1" ng-show="tabs == 1">
+            <div class="container-fluid">
+                <div class="row content">
+                    <br>
+                    <div class="col-sm-9" ng-controller="ProcessoController as pc">
+                        <div class="row col-sm-12 well">
+                            <div class="col-sm-2">
+                                <label for="exampleInputEmail1"> Status: </label>
+                            </div>
+                            <div class="col-sm-2"> <span class="label label-info">Ativo</span> </div>
+                            <div class="col-sm-2">
+                                <button class="btn btn-warning" ng-click="pc.status(10)"><i class="fa fa-edit"></i>
+                                </button>
+                            </div>
+                            <div class="col-sm-2">
+                                <button class="btn btn-warning" ng-click="pc.status(10)"><i class="fa fa-edit"></i>
+                                </button>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                        60%
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row"></div>
+                        <div class="well">
+                            <a href="javaScript:;" ng-click="toggle()">Editar Cotação</a>
+                            <div ng-show="state">
+
+                              <form id="empresaForm">
+                                <div class="row">
+                                        <div class="row">
+                                            <div class="form-group col-sm-4">
+                                                <label for="exampleInputEmail1">Numero Pedido de Compra</label>
+                                                <div class="row">
+                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
+                                                        <option></option>
+                                                        <option value="4">1015</option>
+                                                        <option value="1" selected="selected">1016</option>
+                                                        <option value="5">2014</option>
+                                                        <option value="3">8745</option>
+                                                        <option value="2">9874</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-sm-8">
+                                                <label for="exampleInputEmail1">Responsavel Cotação</label>
+                                                <div class="row">
+                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
+                                                        <option></option>
+                                                        <option value="4">Rick Grimes</option>
+                                                        <option value="1" selected="selected">Shane Walsh</option>
+                                                        <option value="5">Lori Grimes</option>
+                                                        <option value="3">Carol Peletier</option>
+                                                        <option value="2">Morgan Jones</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row " style="margin-top : 10px"></div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Produtos</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row socios">
+                                                    <div class="col-sm-9">
+                                                        <label for="exampleInputPassword1">Produto</label>
+                                                        <div class="row ">
+                                                            <select name="book[0].produto" class="col-sm-12">
+                                                                <option value="0">1010 - Coca Cola 1LT</option>
+                                                                <option value="1">1011 - Coca Cola 1.5LT</option>
+                                                                <option value="2">Cadastrar novo Produto</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1">Quantidade</label>
+                                                            <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-1" style="margin-top:18px">
+                                                        <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group hide" id="bookTemplate">
+                                                    <div class="row socios">
+                                                        <div class="col-sm-9">
+                                                            <label for="exampleInputPassword1">Produto</label>
+                                                            <div class="row ">
+                                                                <select name="produto" class="col-sm-12">
+                                                                    <option value="0">1010 - Coca Cola 1LT</option>
+                                                                    <option value="1">1011 - Coca Cola 1.5LT</option>
+                                                                    <option value="2">Cadastrar novo Produto</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputPassword1">Quantidade</label>
+                                                                <input type="text" class="form-control nome-socio" name="quantidade" placeholder="0.00" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xs-1" style="margin-top:18px">
+                                                            <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Data</label>
+                                                    <input type="text" class="form-control" ng-model="cfop.descricao" name="descricao" placeholder="Descrição">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Data Limite</label>
+                                                    <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="0.00">
+                                                </div>
+                                            </div>
+                                                <div class="col-sm-4">
+                                                    <label for="exampleInputPassword1">Preferencia</label>
+                                                    <div class="row ">
+                                                        <select name="produto" class="col-sm-12">
+                                                            <option value="0">Baixa</option>
+                                                            <option value="1">Normal</option>
+                                                            <option value="2">Alta</option>
+                                                            <option value="2">Urgente</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                </div>
+                            </form>
+                                    
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="">
+                                    <h4><a>Adicionar Empresa</a></h4>
+                                </div>
+                            </div>
+                                <div class=" col-sm-4 panel panel-default" style="margin-right:2px">
+                                    <!-- Default panel contents -->
+                                    <div class="panel-heading" style=" float: right;"><button class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Excluir Pedido Compra" ><i class="fa fa-trash-o"></i></button><button class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Enviar Email" ><i class="glyphicon glyphicon-envelope"></i></button></div>
+                                    <div class="panel-body">
+                                        <p>Geometa Engenharia de Fundações Indústria e Comércio</p>
+                                        <p>(34)99917-8877</p>
+                                        <p>econtabilsistemas@gmail.com</p>
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                            0% Aguardando Resposta
+                                          </div>
+                                        </div>
+                                    
+
+                                    <!-- Table -->
+                                    <table class="table col-sm-12">
+                                      <tr>
+                                      <th><input type="checkbox" id="allcb" name="allcb"/></th>
+    <th>Produto</th>
+    <th >Quant.</th> 
+    <th>Preço Unit</th>
+  </tr>
+  <tr>
+    <td><input type="checkbox" id="cb1" name="cb1"/></td>
+    <td>Coca Cola 2Lts</td>
+   <td data-toggle="tooltip" data-placement="left" title="Quantidade cotação 20">10</td> 
+    <td>0</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" id="cb1" name="cb2"/></td>
+    <td>Coca Cola 2.5Lts</td>
+    <td data-toggle="tooltip" data-placement="left" title="Quantidade cotação 20">10</td> 
+    <td>0</td>
+  </tr>
+                                    </table>
+                                </div>
+            </div>
+                                                          <div class=" col-sm-4 panel panel-default" style="margin-right:2px">
+                                    <!-- Default panel contents -->
+                                    <div class="panel-heading" style=" float: right;"><button class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Excluir Pedido Compra" ><i class="fa fa-trash-o"></i></button><button class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Enviar Email" ><i class="glyphicon glyphicon-envelope"></i></button></div>
+                                    <div class="panel-body">
+                                        <p>Eletrocerâmica Indústria de Material Elétrico</p>
+                                        <p>(34)98888-8877</p>
+                                        <p>econtabilsistemas@gmail.com</p>
+                                        <p>Prazo Entrega : 20 dias</p>
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                            100% Informado
+                                          </div>
+                                        </div>
+                                    
+
+                                    <!-- Table -->
+                                    <table class="table col-sm-12">
+                                      <tr><th><input type="checkbox" id="allcb" name="allcb"/></th>
+    <th>Produto</th>
+    <th>Quant.</th> 
+    <th>Preço Unit</th>
+  </tr>
+  <tr>
+    <td><input type="checkbox" id="cb1" name="cb1"/></td>
+    <td>Coca Cola 2Lts</td>
+    <th data-toggle="tooltip" data-placement="left" title="Quantidade cotação 20">10</th> 
+    <td>1.9</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" id="cb2" name="cb1"/></td>
+    <td>Coca Cola 2.5Lts</td>
+    <th data-toggle="tooltip" data-placement="left" title="Quantidade cotação 20">20</th>  
+    <td>2.1</td>
+  </tr>
+                                    </table>
+                                </div>
+            </div>
+                            
+                        </div>
+                        <div class="row well">
+                            <div class="col-sm-10"> <h4>Fechar Cotação  </h4></div><div class="col-sm-2"> <button class="btn btn-success" ng-click="pc.status(10)"><i class="glyphicon glyphicon-ok"></i>
+                                </button></div>
+                        </div>
+                        <div class="row">
+
+                        </div>
+                    </div>
+                    <div class="col-sm-3 sidenav hidden-xs">
+                        <div class="list-group">
+                            <a href="javaScript:;" class="list-group-item active">
+                                <div class="form-group">
+                                    <h4 class="list-group-item-heading">Observação:</h4>
+                                    <textarea class="form-control" rows="5" id="Observação"></textarea>
+                                    <button type="submit" class="btn btn-primary">Gravar</button>
+                                </div>
+                            </a>
+                            <a href="javaScript:;" class="list-group-item">
+                                <h4 class="list-group-item-heading">Washington  17/07/2016 8:00</h4>
+                                <p>Processo observação 01012 </p>
+                            </a>
+                            <a href="javaScript:;" class="list-group-item">
+                                <h4 class="list-group-item-heading">Washington  17/07/2016 8:00</h4>
+                                <p>Processo observação 01012 </p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="tab-content1" ng-show="tabs == 2">
+        <div ng-controller="ProcessoController as showCase">
+            <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
+        <tfoot>
+        <tr>
+            <th>ID
+            </th><th>First Name
+            </th><th>Last Name
+            </th><th>Last Name
+            </th><th>Last Name
+            </th><th>Last Name
+            </th><th>Last Name
+            </th><th>Last Name
+            </th><th>Last Name
+        </th></tr>
+        </tfoot>
+    </table>
+        </div>
+        </div>
+
+    </div>
+</div>
+<!-- alterar Status-->
+<div class="container">
+    <script type="text/ng-template" id="alterStatus.html">
+        <div class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Alterar Status</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group col-sm-12">
+                            <label for="exampleInputEmail1">Status</label>
+                            <div class="row">
+                                <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
+                                    <option></option>
+                                    <option value="4">Arquivado</option>
+                                    <option value="1" selected="selected">Ativo</option>
+                                    <option value="5">Em grau de recurso</option>
+                                    <option value="3">Encerrado</option>
+                                    <option value="2">Suspenso</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group ">
+                            <label for="exampleInputEmail1">Status</label>
+                            <textarea class="form-control" rows="5" id="Observação"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Gravar</button>
+                        <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Sair</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+</div>
+<!-- Historico-->
+<div class="container">
+    <script type="text/ng-template" id="historico.html">
+        <div class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Deletar</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Deseja Realmente EXCLUIR ID : 1001 </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+</div>
+<!-- adicionar Empresa -->
+<div class="container">
+    <script type="text/ng-template" id="addAdvogado.html">
+        <div class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Adicionar Advogado</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group col-sm-4">
+                            <label for="exampleInputEmail1">Advogado</label>
+                            <div class="row">
+                                <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
+                                    <option></option>
+                                    <option value=""></option>
+                                    <option value="1">Antonio Mauricio de Souza - Trabalhista</option>
+                                    <option value="3">Josefina andrade gutierre - Criminal</option>
+                                    <option value="4">Florentina Maria - Tributario</option>
+                                    <option value="5">Janio Aparecido - Familia</option>
+                                    <option value="8" selected="selected">Rick Grimes - Civil</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Adicionar</button>
+                        <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+</div>
+<!-- adicionar Produto-->
+<div class="container">
+    <script type="text/ng-template" id="envolvidos.html">
+        <div class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Deletar</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row socios">
+                            <div class="col-sm-5">
+                                <label for="exampleInputPassword1">Pessoa</label>
+                                <div class="row ">
+                                    <select name="book[0].produto" class="col-sm-12">
+                                        <option value="0">1010 - Coca Cola 1LT</option>
+                                        <option value="1">1011 - Coca Cola 1.5LT</option>
+                                        <option value="2">Cadastrar novo Cliente</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <label for="exampleInputPassword1">Tipo Envolvimento</label>
+                                <div class="row ">
+                                    <select name="book[0].produto" class="col-sm-12">
+                                        <option></option>
+                                        <option value="PARTE_ATIVA" selected="selected">Parte Ativa</option>
+                                        <option value="PARTE_PASSIVA">Parte Passiva</option>
+                                        <option value="TERCEIRO">Terceiro</option>
+                                        <option value="ASSISTENTE">Assistente</option>
+                                        <option value="FISCAL">Fiscal</option>
+                                        <option value="TESTEMUNHA">Testemunha</option>
+                                        <option value="VITIMA">Vítima</option>
+                                        <option value="OUTROS">Outros</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Envolvimento</label>
+                                    <div class="row ">
+                                        <select name="book[0].produto" class="col-sm-12">
+                                            <option></option>
+                                            <option value="63">Acusador</option>
+                                            <option value="2">Agravante</option>
+                                            <option value="3">Apelante</option>
+                                            <option value="1" selected="selected">Autor</option>
+                                            <option value="4">Embargante</option>
+                                            <option value="5">Excipiente</option>
+                                            <option value="6">Exequente</option>
+                                            <option value="7">Impetrante</option>
+                                            <option value="8">Impugnante</option>
+                                            <option value="9">Interpelante</option>
+                                            <option value="10">Inventariante</option>
+                                            <option value="11">Notificante</option>
+                                            <option value="12">Opoente</option>
+                                            <option value="13">Reclamante</option>
+                                            <option value="14">Reconvinte</option>
+                                            <option value="15">Recorrente</option>
+                                            <option value="61">Requerente</option>
+                                            <option value="16">Sujeito Ativo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3" style="margin-top:18px">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="receiver" class="check-socio" value="1" /> Cliente
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-1" style="margin-top:18px">
+                                <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Sim</button>
+                        <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Não</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+</div>
+
+            <div class="container">
+                 <script type="text/ng-template" id="deletar.html">
+                     <div class="modal fade">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Deletar</h4>
+                          </div>
+                          <div class="modal-body">
+                                <p>Deseja Realmente EXCLUIR ID : 1001 </p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Sim</button>
+                            <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Não</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                 </script>
+
+            </div>
+</div>
+
+
+<script>
+    $(document).ready(function() {
+
+        bookIndex = 0;
+
+        $('#empresaForm')
+            .formValidation({
+                framework: 'bootstrap',
+                icon: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+
+                    'book[0].cpf': notEmptyStringMinMaxRegexp,
+                    'book[0].nome': notEmptyStringMinMax,
+                    'book[0].cota': integerNotEmptyValidation,
+                    nome: notEmptyStringMinMax,
+                    nunFunc: integerNotEmptyValidation,
+                    razao: notEmptyStringMinMax,
+                    logradouro: notEmptyStringMinMax,
+                    cpf: notEmptyStringMinMaxRegexp,
+                    cep: notEmptyStringMinMax,
+                    cnpj: notEmptyStringMinMax,
+                    email: emailValidation,
+                    telefone: telefoneValidation,
+                    phone: telefoneValidation,
+                    cep: cepNotEmptyValidation,
+                    password: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The password is required and can\'t be empty'
+                            }
+                        }
+                    },
+                    confirmPassword: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The confirm password is required and can\'t be empty'
+                            },
+                            identical: {
+                                field: 'password',
+                                message: 'The password and its confirm are not the same'
+                            }
+                        }
+                    }
+
+                }
+            })
+            // Add button click handler
+            .on('click', '.addButton', function() {
+                bookIndex++;
+                var $template = $('#bookTemplate'),
+                    $clone = $template
+                    .clone()
+                    .removeClass('hide')
+                    .removeAttr('id')
+                    .attr('data-book-index', bookIndex)
+                    .insertBefore($template);
+
+                // Update the name attributes
+                $clone
+                    .find('[name="cpf-socio"]').attr('name', 'book[' + bookIndex + '].cpf').end()
+                    .find('[name="nome-socio"]').attr('name', 'book[' + bookIndex + '].nome').end()
+                    .find('[name="cota-socio"]').attr('name', 'book[' + bookIndex + '].cota').end();
+
+                // Add new fields
+                // Note that we also pass the validator rules for new field as the third parameter
+                $('#empresaForm')
+                    .formValidation('addField', 'book[' + bookIndex + '].cpf', notEmptyStringMinMaxRegexp)
+                    .formValidation('addField', 'book[' + bookIndex + '].nome', notEmptyStringMinMaxRegexp)
+                    .formValidation('addField', 'book[' + bookIndex + '].cota', integerNotEmptyValidation);
+            });
+        $("select").select2({
+            placeholder: "Select a state",
+            allowClear: true
+        });
+
+        function toggler(divId) {
+            $("#" + divId).toggle();
+        }
+
+        function fileSelected() {
+          var file = document.getElementById('fileToUpload').files[0];
+          if (file) {
+            var fileSize = 0;
+            if (file.size > 1024 * 1024)
+              fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+            else
+              fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
+                  
+            document.getElementById('fileName').innerHTML = 'Name: ' + file.name;
+            document.getElementById('fileSize').innerHTML = 'Size: ' + fileSize;
+            document.getElementById('fileType').innerHTML = 'Type: ' + file.type;
+          }
+        }
+    });
+</script>

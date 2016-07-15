@@ -146,7 +146,7 @@ function cotacaoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,M
                 return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
             }),
 
-        DTColumnBuilder.newColumn('id').withTitle('ID'),     
+        DTColumnBuilder.newColumn('id').withTitle('ID').withOption('width', '10px'),     
         DTColumnBuilder.newColumn('resCotacao').withTitle('Responsavel Cotação'),
          DTColumnBuilder.newColumn(null).withTitle('Empresas Concorrente').notSortable()
             .renderWith(function(data, type, full, meta) {
@@ -157,25 +157,26 @@ function cotacaoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,M
                 }
                 return sReturn;
             }),
-        DTColumnBuilder.newColumn('data').withTitle('data'),
+        DTColumnBuilder.newColumn('data').withTitle('data').notVisible(),
          DTColumnBuilder.newColumn('dataLimite').withTitle('Prazo Limite').notVisible(),
          DTColumnBuilder.newColumn(null).withTitle('Produtos').notSortable()
             .renderWith(function(data, type, full, meta) {
                 return '<a> '+ data.produtos +'</a>';
-            }),
+            }).withOption('width', '10px'), 
        // DTColumnBuilder.newColumn('qntProd').withTitle('qntProd'), <span class="label label-info">Aguardando Conferencia</span>
-        DTColumnBuilder.newColumn('valor').withTitle('valor'),
+        DTColumnBuilder.newColumn('valor').withTitle('valor').withOption('width', '50px'), 
          DTColumnBuilder.newColumn(null).withTitle('Cotação').notSortable()
             .renderWith(function(data, type, full, meta) {
                 return '<a> '+ data.pdCompra +'</a>';
-            }),
-        DTColumnBuilder.newColumn('observacao').withTitle('observacao').notVisible(),
+            }).withOption('width', '15px'), 
+        DTColumnBuilder.newColumn('observacao').withTitle('observacao').notVisible().withOption('width', '150px'), ,
         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
          DTColumnBuilder.newColumn(null).withTitle('status').notSortable()
             .renderWith(function(data, type, full, meta) {
-                return '<span class="label label-info">'+ data.status +'</span> ';
-            }),
+             //   return '<span class="label label-info">'+ data.status +'</span> ';
+               return '<div class="progress"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">100% '+data.status+'</div></div>'
+            }).withOption('width', '100px'),
         DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml)
     ];
    
@@ -291,10 +292,10 @@ function cotacaoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,M
     }
     function actionsHtml(data, type, full, meta) {
         vm.persons[data.id] = data;
-        return '<button class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Editar Pedido Compra" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
-            '   <i class="fa fa-edit"></i>' +
+        return '<a class="btn btn-info" href="#/compras/details/cotacao" data-toggle="tooltip" data-placement="left" title="Ver Detalhes">' +
+            '   <i class="glyphicon glyphicon-eye-open"></i></a>' +
             '</button>&nbsp;' +
-            '<button class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Detalhes Cotação" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
+            '<button class="btn btn-sucesso" data-toggle="tooltip" data-placement="left" title="Detalhes Cotação" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
             '   <i class="glyphicon glyphicon-search"></i>' +
             '</button>' +
             '<button class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Excluir Pedido Compra" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +

@@ -101,6 +101,7 @@ var WebDaptiveAppConfig = {
 			'produto/forms/CadCategoria','produto/forms/CadMarca','produto/forms/CadUniMed','produto/forms/CadProduto'
 			,'advogado/tables/processo'
 			,'advogado/details/processo'
+			,'compras/details/cotacao'
 			];
 
 			//geeric routeine for building route from array
