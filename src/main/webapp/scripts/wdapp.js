@@ -102,6 +102,7 @@ var WebDaptiveAppConfig = {
 			,'advogado/tables/processo'
 			,'advogado/details/processo'
 			,'compras/details/cotacao'
+			,'advogado/forms/advogadoAgenda'
 			];
 
 			//geeric routeine for building route from array
