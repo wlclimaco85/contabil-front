@@ -409,7 +409,7 @@
                         <div class="row">
                             <div class="col-sm-2">
                                 <div class="">
-                                    <h4><a>Adicionar Envolvidos</a></h4>
+                                    <h4><a ng-click="pc.envolvidos()">Adicionar Envolvidos</a></h4>
                                 </div>
                             </div>
                             <div class="col-sm-3 well" style="margin-right:2px">
@@ -546,12 +546,10 @@
                                 </div>
                             </a>
                             <a href="javaScript:;" class="list-group-item">
-                                <button class="action delete-action"><div class="label"><svg class="error-pebble-icon icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#error-pebble-icon" data-size="small"></use></svg><span class="screen-reader-text">Delete conversation with José Roberto de Oliveira Filho</span></div></button>
                                 <h4 class="list-group-item-heading">Washington  17/07/2016 8:00</h4>
                                 <p>Processo observação 01012 </p>
                             </a>
                             <a href="javaScript:;" class="list-group-item">
-                                <button class="action delete-action"><div class="label"><svg class="error-pebble-icon icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#error-pebble-icon" data-size="small"></use></svg><span class="screen-reader-text">Delete conversation with José Roberto de Oliveira Filho</span></div></button>
                                 <h4 class="list-group-item-heading">Washington  17/07/2016 8:00</h4>
                                 <p>Processo observação 01012 </p>
                             </a>
@@ -739,11 +737,10 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Deletar</h4>
+                        <h4 class="modal-title">Cadastro Envolvidos</h4>
                     </div>
                     <div class="modal-body">
                         <div class="row socios">
-                            <div class="col-sm-5">
                                 <label for="exampleInputPassword1">Pessoa</label>
                                 <div class="row ">
                                     <select name="book[0].produto" class="col-sm-12">
@@ -752,8 +749,8 @@
                                         <option value="2">Cadastrar novo Cliente</option>
                                     </select>
                                 </div>
-                            </div>
-                            <div class="col-sm-2">
+                        <div class="row">
+                            <div class="col-sm-4">
                                 <label for="exampleInputPassword1">Tipo Envolvimento</label>
                                 <div class="row ">
                                     <select name="book[0].produto" class="col-sm-12">
@@ -769,7 +766,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Envolvimento</label>
                                     <div class="row ">
@@ -797,22 +794,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3" style="margin-top:18px">
+                            <div class="col-sm-4" style="margin-top:18px">
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" name="receiver" class="check-socio" value="1" /> Cliente
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-xs-1" style="margin-top:18px">
-                                <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i>
-                                </button>
-                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Sim</button>
-                        <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Não</button>
+                        <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Gravar</button>
+                        <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Sair</button>
                     </div>
                 </div>
             </div>

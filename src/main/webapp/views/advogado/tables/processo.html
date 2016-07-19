@@ -29,7 +29,7 @@
     <div class="container">
         <script type="text/ng-template" id="cadProcesso.html">
             <div class="modal fade">
-             <div class="modal-dialog">
+             <div class="modal-dialog" style="width : 60%">
                <div class="modal-content">
                  <div class="modal-header">
                    <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -283,17 +283,19 @@
                                   </div>
                                   <div class="panel-body">
                                 <div class="row socios">
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-4">
                                         <label for="exampleInputPassword1">Pessoa</label>
                                         <div class="row ">
                                             <select name="book[0].produto" class="col-sm-12">
-                                                <option value="0">1010 - Coca Cola 1LT</option>
-                                                <option value="1">1011 - Coca Cola 1.5LT</option>
+                                                <option value="0">1010 - Rick Grimes</option>
+                                                <option value="1">1011 - Daryl Dixon</option>
+                                                <option value="1">1012 - Carl Grimes</option>
+                                                <option value="1">1013 - Glenn Rhee</option>
                                                 <option value="2">Cadastrar novo Cliente</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-3">
                                         <label for="exampleInputPassword1">Tipo Envolvimento</label>
                                         <div class="row ">
                                             <select name="book[0].produto" class="col-sm-12">
@@ -337,7 +339,7 @@
                                         </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3" style="margin-top:18px">
+                                    <div class="col-sm-2" style="margin-top:18px">
                                      <div class="checkbox">
                                          <label>
                                              <input type="checkbox" name="receiver" class="check-socio" value="1" /> Cliente
