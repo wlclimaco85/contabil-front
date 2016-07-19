@@ -101,6 +101,8 @@ var WebDaptiveAppConfig = {
 			'produto/forms/CadCategoria','produto/forms/CadMarca','produto/forms/CadUniMed','produto/forms/CadProduto'
 			,'advogado/tables/processo'
 			,'advogado/details/processo'
+						,'compras/details/cotacao'
+			,'advogado/forms/advogadoAgenda'
 			,'clinica/cadConsulta'
 			,'clinica/cadMedico'
 			,'clinica/cadPaciente'
