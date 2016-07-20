@@ -71,6 +71,18 @@ var WebDaptiveAppConfig = {
 				,'wdApp.apps.filial'
 				,'wdApp.apps.almoxarifado'
 				,'wdApp.apps.processo'
+			 	,'wdApp.apps.cadempresa'
+	            ,'wdApp.apps.site'
+	            ,'wdApp.apps.plano'
+	            ,'wdApp.apps.servico'
+	            ,'wdApp.apps.usuarios'
+	            ,'wdApp.apps.contatos'
+	            ,'wdApp.apps.historico'
+	            ,'wdApp.apps.permissoes'
+	           ,'wdApp.apps.tabelas'
+	            ,'wdApp.apps.campos'
+	            ,'wdApp.apps.tela'
+	            ,'wdApp.apps.relatorios'/**/
 				]);
 
 	wdApp.config(['$routeProvider',
@@ -101,12 +113,24 @@ var WebDaptiveAppConfig = {
 			'produto/forms/CadCategoria','produto/forms/CadMarca','produto/forms/CadUniMed','produto/forms/CadProduto'
 			,'advogado/tables/processo'
 			,'advogado/details/processo'
-						,'compras/details/cotacao'
+			,'compras/details/cotacao'
 			,'advogado/forms/advogadoAgenda'
 			,'clinica/cadConsulta'
 			,'clinica/cadMedico'
 			,'clinica/cadPaciente'
 			,'clinica/cadPlanoSaude'
+			,'gerencia/tables/empresa'
+            ,'gerencia/tables/site'
+            ,'gerencia/tables/plano'
+            ,'gerencia/tables/servico'
+            ,'gerencia/tables/usuarios'
+            ,'gerencia/tables/contatos'
+            ,'gerencia/tables/historico'
+            ,'gerencia/tables/permissoes'
+            ,'dicionario/tables/tabelas'
+            ,'dicionario/tables/campos'
+            ,'dicionario/tables/tela'
+            ,'dicionario/tables/relatorios'
 			];
 
 			//geeric routeine for building route from array

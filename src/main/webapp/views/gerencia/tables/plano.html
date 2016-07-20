@@ -1,0 +1,155 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="dist/css/select2.css" />
+<script src="dist/js/select2.min.js"></script>
+<div ng-controller="PlanosController as showCase">
+    <table datatable dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" class="row-border hover">
+        <tfoot>
+            <tr>
+                <th>ID
+                </th>
+                <th>First Name
+                </th>
+                <th>Last Name
+                </th>
+                <th>Last Name
+                </th>
+                <th>Last Name
+                </th>
+                <th>Last Name
+                </th>
+                <th>Last Name
+                </th>
+                <th>Last Name
+                </th>
+                <th>Last Name
+                </th>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="container">
+        <script type="text/ng-template" id="cadPlano.html">
+            <div class="modal fade">
+                <div class="modal-dialog" style="width : 60%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Cadastro Plano</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="empresaForm">
+                                <div class="row">
+                                        <div class="row">
+                                            <div class="form-group col-sm-4">
+                                                <label for="exampleInputEmail1">Titulo</label>
+                                                <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
+                                            </div>
+
+                                            <div class="form-group col-sm-2">
+                                                <label for="exampleInputEmail1">Valor</label>
+                                                <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
+                                            </div>
+
+                                            <div class="form-group col-sm-6">
+                                                <label for="exampleInputEmail1">Descrição</label>
+                                                <textarea class="form-control" rows="5" id="Observação"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-4">
+                                                <label for="exampleInputEmail1">Data Inicio</label>
+                                                <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
+                                            </div>
+
+                                            <div class="form-group col-sm-4">
+                                                <label for="exampleInputEmail1">Data Final</label>
+                                                <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <label for="exampleInputEmail1">Imagem</label>
+                                                <input type="file" name="fileToUpload" id="fileToUpload" onchange="fileSelected();"/>
+                                                        <div id="fileName"></div>
+                                                        <div id="fileSize"></div>
+                                                        <div id="fileType"></div>
+                                                        <input type="button" onclick="uploadFile()" value="Upload" />
+                                                        <div id="progressNumber"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row " style="margin-top : 10px"></div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Serviços</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row socios">
+                                                    <div class="col-sm-11">
+                                                        <label for="exampleInputPassword1">Serviço</label>
+                                                        <div class="row ">
+                                                            <select name="book[0].produto" class="col-sm-12">
+                                                                <option value="0">5414 - Abertura Empresa</option>
+                                                                <option value="1">5415 - Serviços Contabeis Mensal</option>
+                                                                <option value="2">5416 - Fechamento Empresa</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-1" style="margin-top:18px">
+                                                        <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group hide" id="bookTemplate">
+                                                    <div class="row socios">
+                                                        <div class="col-sm-11">
+                                                        <label for="exampleInputPassword1">Serviço</label>
+                                                        <div class="row ">
+                                                            <select name="book[0].produto" class="col-sm-12">
+                                                                <option value="0">5414 - Abertura Empresa</option>
+                                                                <option value="1">5415 - Serviços Contabeis Mensal</option>
+                                                                <option value="2">5416 - Fechamento Empresa</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                        <div class="col-xs-1" style="margin-top:18px">
+                                                            <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row " style="margin-top : 10px"></div>
+                                        
+                                       
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Gravar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+    </div>
+    <div class="container">
+        <script type="text/ng-template" id="planoDelete.html">
+            <div class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Deletar</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Deseja Realmente EXCLUIR ID : 1001 </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Sim</button>
+                            <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Não</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+    </div>
+</div>
