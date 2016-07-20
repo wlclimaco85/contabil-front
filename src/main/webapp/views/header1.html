@@ -8,19 +8,35 @@
 
     <div class="top-nav" data-ng-controller="NavController">
         <ul class="nav-left pull-right list-unstyled">
-            <li>
-            <div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
-    Empresas
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <li><a href="javascript:;">57.201.848/0001-04</a></li>
-    <li><a href="javascript:;">78.239.671/0001-05</a></li>
-    <li role="separator" class="divider"></li>
-    <li><a href="javascript:;" data-i18n="todas"></a></li>
-  </ul>
-</div>
+                        <li class="dropdown langs text-normal"  uib-dropdown on-toggle="toggled(open)">
+                <a href class="dropdown-toggle active-flag" uib-dropdown-toggle>
+                    <img src="images/images.png" alt="" class="img-circle img30_30">
+                </a>
+                <ul class="pull-right dropdown-menu with-arrow list-langs" role="menu">
+                    <li>
+                        <a href="javascript:;" data-i18n="empresa"></a></li>
+                    <li >
+                        <a href="javascript:;" data-i18n="configuracao"></a></li>
+                </ul>
+            </li>
+            <li class="dropdown langs text-normal"  uib-dropdown on-toggle="toggled(open)">
+                <a href class="dropdown-toggle active-flag" uib-dropdown-toggle>
+                    <img src="images/yellow-alert.jpg" alt="" class="img-circle img30_30">
+                </a>
+                <ul class="pull-right dropdown-menu with-arrow list-langs" role="menu">
+                    <<li>
+                        <a href="#/tasks/tasks">
+                            <i class="fa fa-check"></i>
+                            <span data-i18n="Produtos abaixo Estoque"></span> <span class="badge badge-danger main-badge" data-ng-show="taskRemainingCount > 0">{{taskRemainingCount}}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#/tasks/tasks">
+                            <i class="fa fa-check"></i>
+                            <span data-i18n="Erro Emissao NFE"></span> <span class="badge badge-danger main-badge" data-ng-show="taskRemainingCount > 0">{{taskRemainingCount}}</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="dropdown text-normal nav-profile" uib-dropdown on-toggle="toggled(open)">
                 <a href="javascript:;" class="dropdown-toggle" uib-dropdown-toggle>
@@ -58,37 +74,6 @@
                     </li>
                 </ul>
 			</li>
-
-            <li class="dropdown langs text-normal"  uib-dropdown on-toggle="toggled(open)">
-                <a href class="dropdown-toggle active-flag" uib-dropdown-toggle>
-                    <img src="images/images.png" alt="" class="img-circle img30_30">
-                </a>
-                <ul class="pull-right dropdown-menu with-arrow list-langs" role="menu">
-                    <li>
-                        <a href="javascript:;" data-i18n="empresa"></a></li>
-                    <li >
-                        <a href="javascript:;" data-i18n="configuracao"></a></li>
-                </ul>
-            </li>
-            <li class="dropdown langs text-normal"  uib-dropdown on-toggle="toggled(open)">
-                <a href class="dropdown-toggle active-flag" uib-dropdown-toggle>
-                    <img src="images/yellow-alert.jpg" alt="" class="img-circle img30_30">
-                </a>
-                <ul class="pull-right dropdown-menu with-arrow list-langs" role="menu">
-                    <<li>
-                        <a href="#/tasks/tasks">
-                            <i class="fa fa-check"></i>
-                            <span data-i18n="Produtos abaixo Estoque"></span> <span class="badge badge-danger main-badge" data-ng-show="taskRemainingCount > 0">{{taskRemainingCount}}</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#/tasks/tasks">
-                            <i class="fa fa-check"></i>
-                            <span data-i18n="Erro Emissao NFE"></span> <span class="badge badge-danger main-badge" data-ng-show="taskRemainingCount > 0">{{taskRemainingCount}}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
             <li class="dropdown langs text-normal"  uib-dropdown on-toggle="toggled(open)" data-ng-controller="LangController">
                 
             </li>   
