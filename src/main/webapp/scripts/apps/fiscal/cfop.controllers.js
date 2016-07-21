@@ -3,8 +3,8 @@
 angular.module('wdApp.apps.produtoss', ['datatables','angularModalService', 'datatables.buttons', 'datatables.light-columnfilter', 'datatables.bootstrap','datatables.columnfilter'])
     .controller('RowSelectCtrl', CfopController);
 
-function CfopController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalService) {
-    
+function CfopController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalService,CnaeFactory,$rootScope,SysMgmtData) {
+
     var vm = this;
     vm.selected = {};
     vm.selectAll = false;
@@ -16,10 +16,67 @@ function CfopController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,Moda
     vm.dtInstance = {};
     vm.persons = {};
 
+	$scope.acaoEnumValue = null;
+	$scope.acaoType = null;
+	$scope.cfop = "teste";
+	$scope.cfopTypeEnum = null;
+	$scope.cfopTypeEnumValue = null;
+	$scope.classFiscal = null;
+	$scope.createDateUTC = null;
+	$scope.createUser = null;
+	$scope.cstPrincipal = null;
+	$scope.emprId = null;
+	$scope.icms = null;
+	$scope.icmsReduzido = null;
+	$scope.id = null;
+	$scope.margemAgregadaST = null;
+	$scope.modifyDateUTC = null;
+	$scope.modifyUser = null;
+	$scope.natureza = null;
+	$scope.notes = null;
+	$scope.observacao = null;
+	$scope.parentId = null;
+	$scope.processId = null;
+	$scope.simplificado = null;
+	$scope.site = null;
+	$scope.statusList = null;
+	$scope.tabelaEnum = null;
+	$scope.tabelaEnumValue = null;
+	$scope.type = null;
+	$scope.typeValue = null;
+	$scope.userId = null;
+
+
+
     var titleHtml = '<input type="checkbox" ng-model="vm.selectAll"' +
         'ng-click="vm.toggleAll(vm.selectAll, vm.selected)">';
+//debugger
+//SysMgmtData.processPostPageData("main/api/request", {url : "fiscal/api/cfop/fetchPage/", token : $rootScope.authToken , request : new qat.model.pagedInquiryRequest(  2, true)}, function(res){
+//							console.log(res);
+//							console.log('factory')
+//	});
+    //var S = CnaeFactory.cnaeFactory("main/api/request", {url : "fiscal/api/cfop/fetchPage/", token : $rootScope.authToken , request : new qat.model.pagedInquiryRequest(  2, true)},function(data){console.log("testando")})
 
-    vm.dtOptions = DTOptionsBuilder.fromSource('cfop.json')
+    vm.dtOptions = DTOptionsBuilder.newOptions()
+            .withOption('ajax', {
+				dataSrc: function(json) {
+                    console.log(json)
+                    json['recordsTotal'] =json.cfopList.length
+                    json['recordsFiltered'] = json.cfopList.length
+                    json['draw']=1
+                    console.log(json)
+                    return json.cfopList;
+                  },
+                "contentType": "application/json; charset=utf-8",
+                "dataType": "json",
+                "url": "main/api/request",
+                "type": "POST",
+                "data": function ( d ) {
+                 //   console.log("data");
+                //    d.search = $scope.searchData || {}; //search criteria
+                    return JSON.stringify({"url" : "fiscal/api/cfop/fetchPage/", "token" : $rootScope.authToken , "request" : new qat.model.pagedInquiryRequest(  2, true)});
+                }
+            })
         .withDOM('frtip')
         .withPaginationType('full_numbers')
         .withOption('createdRow', createdRow)
@@ -41,12 +98,12 @@ function CfopController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,Moda
             }]
         })
         .withOption('initComplete', function (settings,json) {
-            
+
             $('.dt-buttons').find('.dt-button:eq(1)').before(
 
             '<select class="form-control col-sm-3 btn btn-primary dropdown-toggle" data-ng-options="t.name for t in vm.types"'+
               'data-ng-model="vm.object.type" style="height: 32px;margin-left: 8px;margin-right: 6px;width: 200px !important; " ng-change="vm.deleteRowAll(vm.selected)">'+
-              
+
                 '<option>Ações <span class="badge selected badge-danger main-badge" data-ng-show="{{vm.countSeleted()}}"</span></option>'+
                 '<option>Remover Todos <span class="badge selected badge-danger main-badge"  data-ng-show="{{vm.countSeleted()}}"></span></option>'+
                '</select>'
@@ -61,7 +118,7 @@ function CfopController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,Moda
                 next: "&rarr;",
                 previous: "&larr;"
             },
-            lengthMenu: "_MENU_ records per page" 
+            lengthMenu: "_MENU_ records per page"
         })
         .withButtons([
             {
@@ -145,7 +202,6 @@ function CfopController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,Moda
         DTColumnBuilder.newColumn('id').withTitle('ID').withOption('width', '10px'),
         DTColumnBuilder.newColumn('cfop').withTitle('CFOP').withOption('width', '40px'),
         DTColumnBuilder.newColumn('natureza').withTitle('Natureza'),
-        DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
         DTColumnBuilder.newColumn('simplificado').withTitle('simplificado').notVisible(),
         DTColumnBuilder.newColumn('icms').withTitle('icms').notVisible(),
         DTColumnBuilder.newColumn('icmsReduzido').withTitle('icmsReduzido').notVisible(),
@@ -161,16 +217,37 @@ function CfopController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,Moda
     function edit(person) {
         ModalService.showModal({
             templateUrl: 'CFOPmodal.html',
-            controller : "RowSelectCtrl"
+            controller : "CnaeController"
         }).then(function(modal) {
+			$scope.cfop = "teste3"
             modal.element.modal();
-            openDialog();
+			$scope.cfop = "teste4"
+            openDialog('update',person);
+			$scope.cfop = "teste5"
             modal.close.then(function(result) {
                 $scope.message = "You said " + result;
             });
         });
     }
     function deleteRow(person) {
+
+
+				    ModalService.showModal({
+      templateUrl: "views/fiscal/dialog/complex.html",
+      controller: "RowSelectCtrl",
+      inputs: {
+        title: "A More Complex Example"
+      }
+    }).then(function(modal) {
+      modal.element.modal();
+		$scope.cfop = "teste0005";
+
+	 // openDialog('update',person);
+      modal.close.then(function(result) {
+        $scope.complexResult  = "Name: " + result.name + ", age: " + result.age;
+      });
+    });
+	/*
         ModalService.showModal({
             templateUrl: 'cfopDelete.html',
             controller: "RowSelectCtrl"
@@ -179,11 +256,11 @@ function CfopController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,Moda
             modal.close.then(function(result) {
                 $scope.message = "You said " + result;
             });
-        });
+        });*/
     }
 
     function deleteRowAll(person) {
-        debugger
+       /*
         ModalService.showModal({
             templateUrl: 'cfopAllDelete.html',
             controller: "CfopController"
@@ -192,7 +269,8 @@ function CfopController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,Moda
             modal.close.then(function(result) {
                 $scope.message = "You said " + result;
             });
-        });
+        });*/
+
     }
     function createdRow(row, data, dataIndex) {
         // Recompiling so we can bind Angular directive to the DT
@@ -226,8 +304,48 @@ function CfopController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,Moda
         vm.selectAll = true;
     }
 
-    function openDialog() 
+    function openDialog(acao,object)
     {
+		$scope.cfop = "teste"
+		debugger
+		if(acao == 'update')
+		{
+			//debugger
+			SysMgmtData.processPostPageData("main/api/request", {url : "fiscal/api/cfop/fetchPage/", token : $rootScope.authToken , request : {"id":1}}, function(res){
+	console.log($scope.cfop)
+	console.log(res);
+	$scope.acaoEnumValue = res.cfopList[0].acaoEnumValue;
+	$scope.acaoType = res.cfopList[0].acaoType;
+	$scope.cfop = res.cfopList[0].cfop;
+	$scope.cfopTypeEnum = res.cfopList[0].cfopTypeEnum;
+	$scope.cfopTypeEnumValue = res.cfopList[0].cfopTypeEnumValue;
+	$scope.classFiscal = res.cfopList[0].classFiscal;
+	$scope.createDateUTC = res.cfopList[0].createDateUTC;
+	$scope.createUser = res.cfopList[0].createUser;
+	$scope.cstPrincipal = res.cfopList[0].cstPrincipal;
+	$scope.emprId = res.cfopList[0].emprId;
+	$scope.icms = res.cfopList[0].icms;
+	$scope.icmsReduzido = res.cfopList[0].icmsReduzido;
+	$scope.id = res.cfopList[0].id;
+	$scope.margemAgregadaST = res.cfopList[0].margemAgregadaST;
+	$scope.modifyDateUTC = res.cfopList[0].modifyDateUTC;
+	$scope.modifyUser = res.cfopList[0].modifyUser;
+	$scope.natureza = res.cfopList[0].natureza;
+	$scope.notes = res.cfopList[0].notes;
+	$scope.observacao = res.cfopList[0].observacao;
+	$scope.parentId = res.cfopList[0].parentId;
+	$scope.processId = res.cfopList[0].processId;
+	$scope.simplificado = res.cfopList[0].simplificado;
+	$scope.site = res.cfopList[0].site;
+	$scope.statusList = res.cfopList[0].statusList;
+	$scope.tabelaEnum = res.cfopList[0].tabelaEnum;
+	$scope.tabelaEnumValue = res.cfopList[0].tabelaEnumValue;
+	$scope.type = res.cfopList[0].type;
+	$scope.typeValue = res.cfopList[0].typeValue;
+	$scope.userId = res.cfopList[0].userId;
+	console.log($scope.cfop)
+				});
+		}
         bookIndex = 0;
         $('#pdVendasForm')
         .formValidation({
@@ -290,9 +408,47 @@ function CfopController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,Moda
           allowClear: true
         });
 
-
+		$scope.cfop = "teste1"
 
     }
 
 }
+})();
+
+(function() {
+
+var app = angular.module('wdApp.apps.produtoss');
+
+app.controller('ComplexController', [
+  '$scope', '$element', 'title', 'close',
+  function($scope, $element, title, close) {
+
+  $scope.name = "teste";
+  $scope.age = null;
+  $scope.title = title;
+
+  //  This close function doesn't need to use jQuery or bootstrap, because
+  //  the button has the 'data-dismiss' attribute.
+  $scope.close = function() {
+ 	  close({
+      name: $scope.name,
+      age: $scope.age
+    }, 500); // close, but give 500ms for bootstrap to animate
+  };
+
+  //  This cancel function must use the bootstrap, 'modal' function because
+  //  the doesn't have the 'data-dismiss' attribute.
+  $scope.cancel = function() {
+
+    //  Manually hide the modal.
+    $element.modal('hide');
+
+    //  Now call close, returning control to the caller.
+    close({
+      name: $scope.name,
+      age: $scope.age
+    }, 500); // close, but give 500ms for bootstrap to animate
+  };
+
+}]);
 })();
