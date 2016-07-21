@@ -51,7 +51,8 @@ var WebDaptiveAppConfig = {
 				'wdApp.apps.counties','datatables','datatables.bootstrap','wdApp.apps.estado', 'wdApp.apps.procedures','wdApp.apps.sysmgmt.data','wdApp.apps.site','wdApp.apps.empresa','wdApp.apps.produtos','wdApp.apps.produtoss','wdApp.apps.produto','wdApp.apps.notaFiscal',
 				'wdApp.apps.pdCompras','wdApp.apps.orcamento','wdApp.apps.ordemServico','wdApp.apps.nfEntrada','wdApp.apps.pdCompras'
 				,'wdApp.apps.cotacao','wdApp.apps.pdVendas','wdApp.apps.contasPagar','wdApp.apps.formaPg','wdApp.apps.contasReceber','wdApp.apps.banco','wdApp.apps.agencia','wdApp.apps.conta','wdApp.apps.funcionario',
-				'wdApp.apps.cliente'
+				'wdApp.ajaxCall'
+				,'wdApp.apps.cliente'
 				,'wdApp.apps.fornecedor'
 				,'wdApp.apps.convenio'
 				,'wdApp.apps.deposito'
