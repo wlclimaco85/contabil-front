@@ -23,7 +23,7 @@ import br.com.emmanuelneri.app.model.UtilRequest;
 @RequestMapping("/main/api")
 public class ControllerMain {
 
-	private static final String URL = "http://localhost:8080/qat-sysmgmt-controller-rest/";
+	private static final String URL = "http://prod001.mybluemix.net/";
 	private CEPService buscaCEP;
 
 
