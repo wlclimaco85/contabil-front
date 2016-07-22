@@ -361,9 +361,13 @@ $scope.cfop = {};
 				});
 		}
         bookIndex = 0;
-        $('#pdVendasForm')
+        $('#cfopForm')
         .formValidation({
             framework: 'bootstrap',
+            button: {
+                selector: '#validateButton',
+                disabled: 'disabled'
+            },
             icon: {
                 valid: 'glyphicon glyphicon-ok',
                 invalid: 'glyphicon glyphicon-remove',
