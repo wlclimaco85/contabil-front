@@ -33,34 +33,34 @@ public class BuscaURLTest {
 
 	 public static final String REST_SERVICE_URI = "http://localhost:8080/qat-sysmgmt-controller-rest";
 
-	 	@Test
-	 	public void listAllUsers(){
-	        System.out.println("Testing listAllUsers API-----------");
-
-	        RestTemplate restTemplate = new RestTemplate();
-
-	        //http://localhost:8080/qat-sysmgmt-controller-rest/site/api/fetchPage
-	        //['X-Auth-Token'] = "anonimo@aninimo.com:1464222873542:eb86a5e265cbdd54d63a03efece46935";
-
-	        HttpHeaders headers = new HttpHeaders();
-	        headers.set("Header", "value");
-	        headers.setContentType(MediaType.APPLICATION_JSON);
-	        headers.set("Other-Header", "othervalue");
-	        headers.set("X-Auth-Token", "taz@qat.com:1469125132913:959c6942a9acb2ac3bc5c6e3d935f564" );
-
-	        HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
-	        String result = restTemplate.postForObject("http://localhost:8080/qat-sysmgmt-controller-rest/fiscal/api/cfop/fetchPage/", entity, String.class,HttpMethod.GET,"{pageSize: 20, startPage: 0, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}");
-	      //  HttpEntity<String> response = restTemplate.exchange(REST_SERVICE_URI+"/site/api/fetchPage/",HttpMethod.GET, entity,List.class,null);
-	      //  List<LinkedHashMap<String, Object>> usersMap = restTemplate.getForObject(REST_SERVICE_URI+"/site/api/fetchPage/", entity,List.class,HttpMethod.GET,{"teste:teste"});
-
-	      //  if(usersMap!=null){
-	      //      for(LinkedHashMap<String, Object> map : usersMap){
-	       //         System.out.println("User : id="+map.get("id")+", Name="+map.get("name")+", Age="+map.get("age")+", Salary="+map.get("salary"));;
-	      //      }
-	       // }else{
-	            System.out.println("No user exist----------");
-	     //   }
-	    }
+//	 	@Test
+//	 	public void listAllUsers(){
+//	        System.out.println("Testing listAllUsers API-----------");
+//
+//	        RestTemplate restTemplate = new RestTemplate();
+//
+//	        //http://localhost:8080/qat-sysmgmt-controller-rest/site/api/fetchPage
+//	        //['X-Auth-Token'] = "anonimo@aninimo.com:1464222873542:eb86a5e265cbdd54d63a03efece46935";
+//
+//	        HttpHeaders headers = new HttpHeaders();
+//	        headers.set("Header", "value");
+//	        headers.setContentType(MediaType.APPLICATION_JSON);
+//	        headers.set("Other-Header", "othervalue");
+//	        headers.set("X-Auth-Token", "taz@qat.com:1469125132913:959c6942a9acb2ac3bc5c6e3d935f564" );
+//
+//	        HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
+//	        String result = restTemplate.postForObject("http://localhost:8080/qat-sysmgmt-controller-rest/fiscal/api/cfop/fetchPage/", entity, String.class,HttpMethod.GET,"{pageSize: 20, startPage: 0, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}");
+//	      //  HttpEntity<String> response = restTemplate.exchange(REST_SERVICE_URI+"/site/api/fetchPage/",HttpMethod.GET, entity,List.class,null);
+//	      //  List<LinkedHashMap<String, Object>> usersMap = restTemplate.getForObject(REST_SERVICE_URI+"/site/api/fetchPage/", entity,List.class,HttpMethod.GET,{"teste:teste"});
+//
+//	      //  if(usersMap!=null){
+//	      //      for(LinkedHashMap<String, Object> map : usersMap){
+//	       //         System.out.println("User : id="+map.get("id")+", Name="+map.get("name")+", Age="+map.get("age")+", Salary="+map.get("salary"));;
+//	      //      }
+//	       // }else{
+//	            System.out.println("No user exist----------");
+//	     //   }
+//	    }
 
 
 	 	@Test

@@ -15,36 +15,9 @@ function CfopController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,Moda
     vm.delete = deleteRow;
     vm.dtInstance = {};
     vm.persons = {};
+$scope.cfop = {};
 
-	$scope.acaoEnumValue = null;
-	$scope.acaoType = null;
-	$scope.cfop = "teste";
-	$scope.cfopTypeEnum = null;
-	$scope.cfopTypeEnumValue = null;
-	$scope.classFiscal = null;
-	$scope.createDateUTC = null;
-	$scope.createUser = null;
-	$scope.cstPrincipal = null;
-	$scope.emprId = null;
-	$scope.icms = null;
-	$scope.icmsReduzido = null;
-	$scope.id = null;
-	$scope.margemAgregadaST = null;
-	$scope.modifyDateUTC = null;
-	$scope.modifyUser = null;
-	$scope.natureza = null;
-	$scope.notes = null;
-	$scope.observacao = null;
-	$scope.parentId = null;
-	$scope.processId = null;
-	$scope.simplificado = null;
-	$scope.site = null;
-	$scope.statusList = null;
-	$scope.tabelaEnum = null;
-	$scope.tabelaEnumValue = null;
-	$scope.type = null;
-	$scope.typeValue = null;
-	$scope.userId = null;
+
 
 
 
@@ -233,17 +206,59 @@ function CfopController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,Moda
 
 
 				    ModalService.showModal({
-      templateUrl: "views/fiscal/dialog/complex.html",
-      controller: "RowSelectCtrl",
-      inputs: {
-        title: "A More Complex Example"
-      }
-    }).then(function(modal) {
-      modal.element.modal();
-		$scope.cfop = "teste0005";
+      templateUrl: "views/fiscal/dialog/DCfop.html",
+      controller: function($scope) {
 
-	 // openDialog('update',person);
+
+   // $scope.cfop = "New New York";
+   SysMgmtData.processPostPageData("main/api/request", {url : "fiscal/api/cfop/fetchPage/", token : $rootScope.authToken , request : {"id":1}}, function(res){
+    console.log($scope.cfop)
+    console.log(res);
+    $scope.cfop = {
+   acaoEnumValue : res.cfopList[0].acaoEnumValue,
+    acaoType : res.cfopList[0].acaoType,
+    cfop : res.cfopList[0].cfop,
+    cfopTypeEnum : res.cfopList[0].cfopTypeEnum,
+    cfopTypeEnumValue : res.cfopList[0].cfopTypeEnumValue,
+    classFiscal : res.cfopList[0].classFiscal,
+    createDateUTC : res.cfopList[0].createDateUTC,
+    createUser : res.cfopList[0].createUser,
+    cstPrincipal : res.cfopList[0].cstPrincipal,
+    emprId : res.cfopList[0].emprId,
+    icms : res.cfopList[0].icms,
+    icmsReduzido : res.cfopList[0].icmsReduzido,
+    id : res.cfopList[0].id,
+    margemAgregadaST : res.cfopList[0].margemAgregadaST,
+    modifyDateUTC : res.cfopList[0].modifyDateUTC,
+    modifyUser : res.cfopList[0].modifyUser,
+    natureza : res.cfopList[0].natureza,
+    notes : res.cfopList[0].notes,
+    observacao : res.cfopList[0].observacao,
+    parentId : res.cfopList[0].parentId,
+    processId : res.cfopList[0].processId,
+    simplificado : res.cfopList[0].simplificado,
+    site : res.cfopList[0].site,
+    statusList : res.cfopList[0].statusList,
+    tabelaEnum : res.cfopList[0].tabelaEnum,
+    tabelaEnumValue : res.cfopList[0].tabelaEnumValue,
+    type : res.cfopList[0].type,
+    typeValue : res.cfopList[0].typeValue,
+    userId : res.cfopList[0].userId
+    };
+    console.log($scope.cfop)
+                });
+    openDialog('update',person);
+    $scope.save = function() {
+      console.log($scope.cfop)
+  };
+  },
+  controllerAs : "futurama"
+    }).then(function(modal) {
+
+    modal.element.modal();
+	 openDialog('update',person);
       modal.close.then(function(result) {
+        debugger
         $scope.complexResult  = "Name: " + result.name + ", age: " + result.age;
       });
     });
@@ -306,8 +321,7 @@ function CfopController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,Moda
 
     function openDialog(acao,object)
     {
-		$scope.cfop = "teste"
-		debugger
+		$scope.cfop = "testesss"
 		if(acao == 'update')
 		{
 			//debugger
@@ -363,45 +377,6 @@ function CfopController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,Moda
 
 
         }
-        })
-        // Add button click handler
-        .on('click', '.addButton', function() {
-            bookIndex++;
-            var $template = $('#bookTemplate'),
-                $clone    = $template
-                                .clone()
-                                .removeClass('hide')
-                                .removeAttr('id')
-                                .attr('data-book-index', bookIndex)
-                                .insertBefore($template);
-
-            // Update the name attributes
-            $clone
-                .find('[name="produto"]').attr('name', 'book[' + bookIndex + '].produto').end()
-                .find('[name="quantidade"]').attr('name', 'book[' + bookIndex + '].quantidade').end()
-                .find('[name="vlUnitario"]').attr('name', 'book[' + bookIndex + '].vlUnitario').end()
-                .find('[name="desconto"]').attr('name', 'book[' + bookIndex + '].desconto').end();
-
-            // Add new fields
-            // Note that we also pass the validator rules for new field as the third parameter
-            $('#pdVendasForm')
-                .formValidation('addField', 'book[' + bookIndex + '].produto',notEmptyStringMinMaxRegexp)
-                .formValidation('addField', 'book[' + bookIndex + '].quantidade',integerNotEmptyValidation)
-                .formValidation('addField', 'book[' + bookIndex + '].vlUnitario',integerNotEmptyValidation);
-        })// Remove button click handler
-        .on('click', '.removeButton', function() {
-            var $row  = $(this).parents('.form-group'),
-                index = $row.attr('data-book-index');
-
-            // Remove fields
-            $('#bookForm')
-                .formValidation('removeField', $row.find('[name="book[' + index + '].produto"]'))
-                .formValidation('removeField', $row.find('[name="book[' + index + '].quantidade"]'))
-                .formValidation('removeField', $row.find('[name="book[' + index + '].vlUnitario"]'))
-                .formValidation('removeField', $row.find('[name="book[' + index + '].desconto"]'));
-
-            // Remove element containing the fields
-            $row.remove();
         });
         $("select").select2({
           placeholder: "Select a state",
