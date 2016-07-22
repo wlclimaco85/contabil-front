@@ -1,38 +1,70 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="dist/css/select2.css"/>
-<script src="dist/js/select2.min.js"></script>
-
-
-    <div class="container">
-
+  <script src="dist/js/formValidation.js"></script>
                      <div class="modal fade">
-                      <div class="modal-dialog">
+                      <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                           <div class="modal-header">
                             <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Cadastro CFOP</h4>
+                            <h4 class="modal-title">Cadastro CNAE</h4>
                           </div>
                           <div class="modal-body">
-                            <form  id="empresaForm">
-                                    <div class=" row col-md-12">
+                            <form  id="cnaeForm">
+                                    <div class="row">
                                         <div class="form-group col-sm-4">
                                             <label for="exampleInputEmail1">Codigo</label>
-                                            <input type="text"  ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Codigo">
+                                            <input type="text"  ng-model="cfop.cfop" id="codigo" class="form-control" placeholder="Codigo">
                                         </div>
 
                                         <div class="form-group col-sm-8">
                                             <label for="exampleInputEmail1">CNAE</label>
-                                            <input type="text" class="form-control" ng-model="cfop.descricao" name="descricao" placeholder="CNAE">
+                                            <input type="text" class="form-control" id="cnae" data-mask="(999) 999-9999 x9999" placeholder="(555) 111-2222">
                                         </div>
                                     </div>
-                                    <div class="row col-md-12">
-                                         <div class="row col-sm-9">
+                                    <div class="row">
+                <label for="exampleInputPassword1">Unidade tributada</label>
+                <div class="row">
+                <select id="unidTributada" name="unidTributada"  ng-model="produto.unidTributada" class="mySel col-sm-8 form-group">
+                    <option value="01">UN</option>
+                    <option value="02">PC</option>
+                    <option value="03">CX</option>
+                    <option value="04">CJ</option>
+                    <option value="05">MT</option>
+                    <option value="06">M2</option>
+                    <option value="07">M3</option>
+                    <option value="08">KG</option>
+                    <option style="background-color : #F1F4F9"><a>Adicionar Novo </a><i class="glyphicon glyphicon-plus"></i></option>
+                </select>
+            </div>
+        </div>
+        <div class="row" id="exInputMasking">
+      <div class="col-sm-6">
+        <h4>Input Masking</h4>
+        
+        <h5>Phone Number</h5>
+        <input type="text" class="form-control" data-mask="(999) 999-9999 x9999" placeholder="(555) 111-2222">
+        
+        <h5>Credit Card</h5>
+        <input type="text" class="form-control" data-mask="9999-9999-9999-9999" placeholder="0000-0000-0000-0000">
+        
+        <h5>Tax Id</h5>
+        <input type="text" class="form-control" data-mask="99-9999999" placeholder="XX-XXXXXXX">
+        
+        <h5>Date</h5>
+        <div class="form-group">
+            <div class="input-group">
+           <input type="text" class="form-control" data-mask="99/99/9999" placeholder="MM/DD/YYYY">
+           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+        </div>
+      </div>
+      </div><!--/col-->
+                                    <div class="row">
+                                         <div class="col-sm-9">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Descrição</label>
-                                                <input type="text" class="form-control" ng-model="cfop.descricao" name="descricao" placeholder="Descrição">
+                                                <input type="text" id="datepicker" class="form-control" ng-model="cfop.descricao" name="descricao" placeholder="Descrição">
                                             </div>
                                          </div>
-                                         <div class="row col-sm-3">
+                                         <div class="col-sm-3">
                                             <div class="form-group col-sm-4">
                                                 <label for="exampleInputEmail1">Abreviação</label>
                                                 <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="Abreviação">
@@ -45,12 +77,11 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Gravar</button>
+                            <button type="button" ng-click="close('Yes')" id="validateButton" class="btn btn-primary" data-dismiss="modal">Gravar</button>
                           </div>
                         </div>
                       </div>
                     </div>
 
-            </div>
+        
 
-</div>
