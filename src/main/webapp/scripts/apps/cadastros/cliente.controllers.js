@@ -126,8 +126,13 @@ function clienteController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,M
                 key: '1',
                 action: function (e, dt, node, config) {
                     ModalService.showModal({
-                        templateUrl: 'cliente.html',
-                        controller: "ContasPagarController"
+                        templateUrl: 'views/cadastro/dialog/dCliente.html',
+                        controller: function($scope) {
+
+
+
+                        },
+                        controllerAs: "futurama"
                     }).then(function(modal) {
 
                         

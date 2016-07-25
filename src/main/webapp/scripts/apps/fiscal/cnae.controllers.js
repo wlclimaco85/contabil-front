@@ -2,7 +2,7 @@
     angular.module('wdApp.apps.produtos', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('CnaeController', CnaeController);
 
-    function CnaeController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService) {
+    function CnaeController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData) {
         var vm = this;
 
         vm.message = '';
@@ -122,90 +122,15 @@
                         controller: function($scope) {
 
 
-                            var tagsData = [{
-                                id: 1,
-                                tag: 'Apple'
-                            }, {
-                                id: 2,
-                                tag: 'Banana'
-                            }, {
-                                id: 3,
-                                tag: 'Cherry'
-                            }, {
-                                id: 4,
-                                tag: 'Cantelope'
-                            }, {
-                                id: 5,
-                                tag: 'Grapefruit'
-                            }, {
-                                id: 6,
-                                tag: 'Grapes',
-                                selected: true
-                            }, {
-                                id: 7,
-                                tag: 'Lemon'
-                            }, {
-                                id: 8,
-                                tag: 'Lime'
-                            }, {
-                                id: 9,
-                                tag: 'Melon',
-                                selected: true
-                            }, {
-                                id: 10,
-                                tag: 'Orange'
-                            }, {
-                                id: 11,
-                                tag: 'Strawberry'
-                            }, {
-                                id: 11,
-                                tag: 'Watermelon'
-                            }];
-
-
-
-                            $scope.items = tagsData;
-
-
 
                         },
                         controllerAs: "futurama"
                     }).then(function(modal) {
 
-
-
-                        $.getScript('//cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.min.js');
-                        $.getScript('//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js');
-                        $.getScript('//cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js');
-                        $.getScript('//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/js/bootstrap-datetimepicker.min.js');
-                        $.getScript('//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js');
-
                         modal.element.modal();
 
-                        $(".mySel").select2({
 
-                        });
-
-                        $("#mySel2").select2({
-                            closeOnSelect: false
-                        });
-
-
-
-                        $('#datepicker').datepicker({
-                            autoclose: true,
-                        }).on("changeDate", function(e) {
-                            console.log(e.date);
-                        });
-
-                        $('.input-daterange').datepicker({
-                            autoclose: true
-                        }).on("changeDate", function(e) {
-                            console.log(e.date);
-                        });
-
-
-                        ('#cnaeForm').formValidation({
+                        ('.cnaeForm').formValidation({
                             framework: 'bootstrap',
 
                             icon: {
@@ -221,11 +146,6 @@
 
                             }
                         });
-                        $("select").select2({
-                            placeholder: "Select a state",
-                            allowClear: true
-                        });
-
 
                         modal.close.then(function(result) {
                             $scope.message = "You said " + result;
@@ -240,6 +160,8 @@
             DTColumnBuilder.newColumn('cnae').withTitle('CNAE'),
             DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
             DTColumnBuilder.newColumn('abreviado').withTitle('Abreviação'),
+            DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
+            DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
             DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable().renderWith(actionsHtml)
         ];
 
@@ -247,9 +169,69 @@
         function edit(person) {
             ModalService.showModal({
                 templateUrl: 'views/fiscal/dialog/dCnae.html',
-                controller: "CnaeController"
+                controller: function($scope) {
+
+                    $scope.cnae = {
+                        codigo: "10001",
+                        cnae: "teste",
+                        descricao:"descricao teste",
+                        abreviado: "abreviado teste",
+                        id: 1
+                    }
+/*
+                    // $scope.cfop = "New New York";
+                    SysMgmtData.processPostPageData("main/api/request", {
+                        url: "fiscal/api/cnae/fetchPage/",
+                        token: $rootScope.authToken,
+                        request: {
+                            "id": 1
+                        }
+                    }, function(res) {
+                        console.log($scope.cnae)
+                        console.log(res);
+                        $scope.cnae = {
+                            codigo: res.cnaeList[0].codigo,
+                            cnae: res.cnaeList[0].cnae,
+                            descricao: res.cnaeList[0].descricao,
+                            abreviado: res.cnaeList[0].abreviado,
+                            id: res.cnaeList[0].id,
+                            modifyDateUTC: res.cnaeList[0].modifyDateUTC,
+                            modifyUser: res.cnaeList[0].modifyUser,
+                            parentId: res.cnaeList[0].parentId,
+                            processId: res.cnaeList[0].processId,
+                            statusList: res.cnaeList[0].statusList,
+                            tabelaEnum: res.cnaeList[0].tabelaEnum,
+                            tabelaEnumValue: res.cnaeList[0].tabelaEnumValue,
+                            type: res.cnaeList[0].type,
+                            typeValue: res.cnaeList[0].typeValue,
+                            userId: res.cnaeList[0].userId
+                        };
+                        console.log($scope.cnae)
+                    });
+                    openDialog('update', person);
+                    $scope.save = function() {
+                        console.log($scope.cnae)
+                    }; */
+                },
+                controllerAs: "futurama"
             }).then(function(modal) {
                 modal.element.modal();
+
+                $('.cnaeForm')
+                .formValidation({
+                    framework: 'bootstrap',
+                    icon: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+
+                        'codigo': notEmptyStringMinMaxRegexp,
+                        'cnae': integerNotEmptyValidation,
+                    }
+                });
+
                 modal.close.then(function(result) {
                     $scope.message = "You said " + result;
                 });
