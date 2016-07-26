@@ -18,6 +18,16 @@
         color: ##3767B9;
     }
     
+
+     .selection {
+        border: 1px solid #000;
+        border-bottom-width: 0;
+        margin: 3px 3px 0px 3px;
+        padding: 5px 5px 0px 5px;
+        background-color: #CCC;
+        color: ##3767B9;
+    }
+
     #mainView {
         border: 1px solid black;
         clear: both;
@@ -378,6 +388,672 @@
                             <a href="javaScript:;" ng-click="toggle1()">Editar Configuração</a>
                             <div ng-show="state1">
 
+                                <div class="row">
+
+                                    <div id="col1" class="halfBox onLeft">
+
+
+                                        <!-- CONFIGURAÇÕES GERAIS -->
+                                        <div class="panel fullBox verticalHeaderTableList bottomSpace col-sm-6">
+                                            <h3>Configuração geral</h3>
+                                            <table class="fullBox">
+                                                <tbody>
+
+                                                    <tr>
+                                                        <td class="halfBox">CPF e CNPJ único:
+                                                            <div class="descr">
+                                                                Proíbe cadastrar mais de uma vez o mesmo CPF ou CNPJ na tela de contatos
+                                                            </div>
+                                                        </td>
+                                                        <td id="b_cpfUnico">Sim</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="halfBox">Casas decimais no preço:
+                                                            <div class="descr">
+                                                                Número máximo de casas decimais a ser usado nos preços de produtos e serviços.</div>
+                                                        </td>
+                                                        <td id="b_casasDecimais">2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="halfBox">Imprimir código personalizado:
+                                                            <div class="descr">
+                                                                Quando o produto tiver um código personalizado, o sistema imprimirá este código nas vendas, entradas e ordens de serviço no lugar do código interno.
+                                                            </div>
+                                                        </td>
+                                                        <td id="b_usarCodPersonalizado">Não</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="halfBox">Logotipo nas listagens e relatórios impressos:
+                                                            <div class="descr">
+                                                                Ao imprmimir as listagens e relatórios do sistema, será inserido o logotipo da empresa no topo da impressão.
+                                                            </div>
+                                                        </td>
+                                                        <td id="b_imprimeLogoRelLista">Não</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Ativar NFCe:
+                                                            <div class="descr">
+                                                                Permite a emissão de NFCe, através do módulo de vendas.
+                                                            </div>
+                                                        </td>
+                                                        <td id="b_nfceAtivarEmissor">Não</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dias da carta de cobrança:
+                                                            <div class="descr">
+                                                                Número de dias que será mostrado na carta de cobrança entregue ao cliente.
+                                                            </div>
+                                                        </td>
+                                                        <td id="b_diasCartaCobranca">10</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Observações do produto final na produção:
+                                                            <div class="descr">
+                                                                Mostrar as observações do cadastro do produto final dentro da ordem de produção.
+                                                            </div>
+                                                        </td>
+                                                        <td id="b_obsProdNaProducao">Não</td>
+                                                    </tr>
+                                                    <tr class="apenasV2">
+                                                        <td>Mostrar informações ao posicionar o mouse:
+                                                            <div class="descr">
+                                                                Ao colocar o mouse me cima de nomes de clientes e produtos, em partes do sistema, o sistema mostra mais detalhes sobre o respectivo cliente ou produto.
+                                                            </div>
+                                                        </td>
+                                                        <td id="b_infoOnMouse">Não</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td class="right"><a id="config_geral_editar" href="ajuda: Clique para editar as configurações gerais">Editar dados</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+                                        <div class="col-sm-6">
+
+                                            <!-- CONFIGURAÇÕES DAS VENDAS -->
+                                            <div class="panel fullBox verticalHeaderTableList bottomSpace">
+                                                <h3>Configuração das Vendas</h3>
+                                                <table class="fullBox">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="halfBox">Desconto máximo na venda:</td>
+                                                            <td id="f_maxDescontoVenda">100%</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Imprimir 2 vias?</td>
+                                                            <td id="f_vendaPrintDuasVias">Não</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Imprimir assinatura?</td>
+                                                            <td id="f_vendaPrintAssina">Não</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Imprimir resumo financeiro?</td>
+                                                            <td id="f_vendaPrintFinanc">Não</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Atualizar preço ao clonar?</td>
+                                                            <td id="f_atualizarPrecoClonagem">Não</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Bloquear vendas de produtos sem estoque?</td>
+                                                            <td id="f_bloqueiaSemEstoque">Não</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Imprimir coluna unidade?</td>
+                                                            <td id="f_vendaPrintUnidade">Não</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Adicionar despesas no cálculo do imposto?</td>
+                                                            <td id="f_addDespesasBC">Não</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Retirar Subst. Tribut. do ICMS?</td>
+                                                            <td id="f_naoCobrarICMSST">Não</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Observação padrão:</td>
+                                                            <td>
+                                                                <div id="f_vendaObsPadrao"></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td class="right"><a id="config_venda_editar" href="ajuda: Clique para editar as configurações de venda">Editar dados</a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+
+
+                                            <!-- CONFIGURAÇÕES DAS ORDENS DE SERVIÇO -->
+                                            <div class="panel fullBox verticalHeaderTableList bottomSpace">
+                                                <h3>Configuração das OS (Ordens de Serviço)</h3>
+                                                <table class="fullBox">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="halfBox">Imprimir 2 vias?</td>
+                                                            <td id="e_osPrintDuasVias">Não</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Imprimir assinatura?</td>
+                                                            <td id="e_osPrintAssina">Não</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Imprimir resumo financeiro?</td>
+                                                            <td id="e_osPrintFinanc">Não</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Imprimir detalhes na horizontal?</td>
+                                                            <td id="e_osPrintDetalhesHorizontal">Não</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Dias de garantia padrão:</td>
+                                                            <td id="e_osGarantiaPadrao">0</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Texto padrão para o campo <span class="config_osLabel4">Observações gerais</span>:</td>
+                                                            <td>
+                                                                <div id="e_osCampo4Padrao"></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td class="right"><a id="config_os_editar" href="ajuda: Clique para editar as configurações de OS">Editar dados</a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+
+
+                                            <!-- CONFIGURAÇÕES DAS ENTRADAS -->
+                                            <div class="panel fullBox verticalHeaderTableList bottomSpace">
+                                                <h3>Configurações das entradas</h3>
+                                                <table class="fullBox">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Ao inserir nota de entrada, manter o valor total fixo:</td>
+                                                            <td id="g_entradasValorTotalFixo">Sim</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Manter o preço de venda cadastrado no produto:</td>
+                                                            <td id="g_entradasManterPrecoVenda">Não</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td class="right">
+                                                                <a id="config_entradas_editar" href="ajuda: Clique para editar as configurações das entradas">Editar dados</a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+
+
+                                        <!-- CONFIGURAÇÕES DE CARNÊS -->
+                                        <div class="panel fullBox verticalHeaderTableList bottomSpace col-sm-6">
+                                            <h3>Configurações dos carnês</h3>
+                                            <table class="fullBox">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="halfBox">Ativar carnê de boletos?</td>
+                                                        <td id="h_carneBoletosAtivo">Não</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="halfBox">Ativar carnê normal?</td>
+                                                        <td id="h_carneNormalAtivo">Não</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="halfBox">Local de pagamento:</td>
+                                                        <td id="h_carneLocalPagamento"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="halfBox">Instruções 1:</td>
+                                                        <td id="h_carneInstrucoes1"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="halfBox">Instruções 2:</td>
+                                                        <td id="h_carneInstrucoes2"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="halfBox">Instruções 3:</td>
+                                                        <td id="h_carneInstrucoes3"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="halfBox">Instruções 4:</td>
+                                                        <td id="h_carneInstrucoes4"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td class="right">
+                                                            <a id="config_carnes_editar" href="ajuda: Clique para editar as configurações dos carnês">Editar dados</a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+
+                                        <!-- DIV FIM DA COLUNA 1 -->
+
+                                        <div id="col2" class="halfBox onRight col-sm-6">
+                                            <!-- CONFIGURAÇÕES CABEÇALHO -->
+                                            <div class="panel fullBox verticalHeaderTableList bottomSpace">
+                                                <h3>Configuração do cabeçalho</h3>
+                                                <table class="fullBox">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td id="c_logomarca" class="halfBox right">
+                                                                <div style="width: 200px; text-align: center">Nenhuma<br>logomarca<br>cadastrada</div>
+                                                            </td>
+                                                            <td id="c_cabecalho"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="descr" colspan="2">Este cabeçalho é utilizado em Ordens de Serviço e Pedidos de Venda</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td class="right"><a id="config_cabecalho_editar" href="ajuda: Clique para editar as configurações do cabeçalho">Editar dados</a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <!-- CONFIGURAÇÕES BOLETOS -->
+                                        <div class="panel fullBox verticalHeaderTableList bottomSpace col-sm-6">
+                                            <h3>Dados dos boletos</h3>
+                                            <div id="configBoletos_resumo" class="bottomSpace">
+                                                <table class="onCenter">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Boleto CEF</td>
+                                                            <td><span style="color: darkred;">Inativo</span></td>
+                                                            <td><a href="ajuda: Clique para editar boleto CEF" value="1" class="editarBoleto_link">Editar</a></td>
+                                                            <td><a href="ajuda: Clique para definir este banco como padrão usado pelo sistema" value="1" class="definirBoletoPadrao_link">Definir como padrão</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Boleto BB</td>
+                                                            <td><span style="color: darkred;">Inativo</span></td>
+                                                            <td><a href="ajuda: Clique para editar boleto BB" value="2" class="editarBoleto_link">Editar</a></td>
+                                                            <td><a href="ajuda: Clique para definir este banco como padrão usado pelo sistema" value="2" class="definirBoletoPadrao_link">Definir como padrão</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Boleto Bradesco</td>
+                                                            <td><span style="color: darkred;">Inativo</span></td>
+                                                            <td><a href="ajuda: Clique para editar boleto Bradesco" value="3" class="editarBoleto_link">Editar</a></td>
+                                                            <td><a href="ajuda: Clique para definir este banco como padrão usado pelo sistema" value="3" class="definirBoletoPadrao_link">Definir como padrão</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Boleto Itaú</td>
+                                                            <td><span style="color: darkred;">Inativo</span></td>
+                                                            <td><a href="ajuda: Clique para editar boleto Itaú" value="4" class="editarBoleto_link">Editar</a></td>
+                                                            <td><a href="ajuda: Clique para definir este banco como padrão usado pelo sistema" value="4" class="definirBoletoPadrao_link">Definir como padrão</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Boleto Santander</td>
+                                                            <td><span style="color: darkred;">Inativo</span></td>
+                                                            <td><a href="ajuda: Clique para editar boleto Santander" value="5" class="editarBoleto_link">Editar</a></td>
+                                                            <td><a href="ajuda: Clique para definir este banco como padrão usado pelo sistema" value="5" class="definirBoletoPadrao_link">Definir como padrão</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Boleto Sicredi</td>
+                                                            <td><span style="color: darkred;">Inativo</span></td>
+                                                            <td><a href="ajuda: Clique para editar boleto Sicredi" value="6" class="editarBoleto_link">Editar</a></td>
+                                                            <td><a href="ajuda: Clique para definir este banco como padrão usado pelo sistema" value="6" class="definirBoletoPadrao_link">Definir como padrão</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Boleto HSBC</td>
+                                                            <td><span style="color: darkred;">Inativo</span></td>
+                                                            <td><a href="ajuda: Clique para editar boleto HSBC" value="7" class="editarBoleto_link">Editar</a></td>
+                                                            <td><a href="ajuda: Clique para definir este banco como padrão usado pelo sistema" value="7" class="definirBoletoPadrao_link">Definir como padrão</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Boleto Banrisul</td>
+                                                            <td><span style="color: darkred;">Inativo</span></td>
+                                                            <td><a href="ajuda: Clique para editar boleto Banrisul" value="8" class="editarBoleto_link">Editar</a></td>
+                                                            <td><a href="ajuda: Clique para definir este banco como padrão usado pelo sistema" value="8" class="definirBoletoPadrao_link">Definir como padrão</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Boleto Bancoob</td>
+                                                            <td><span style="color: darkred;">Inativo</span></td>
+                                                            <td><a href="ajuda: Clique para editar boleto Bancoob" value="9" class="editarBoleto_link">Editar</a></td>
+                                                            <td><a href="ajuda: Clique para definir este banco como padrão usado pelo sistema" value="9" class="definirBoletoPadrao_link">Definir como padrão</a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div id="configBoletos_avisoTeste" class="descr center bottomSpace">É altamente recomendável que seja impresso <b>e pago</b> um boleto de teste. Esta é a única forma de certificar-se que os dados foram corretamente preenchidos e que o dinheiro pago pelos clientes entrará na conta.<br><br><span class="ui-icon ui-icon-print">.</span> <a href="ajuda: Clique para o sistema gerar um boleto de teste a partir das configurações do boleto padrão do sistema." id="gerarBoletoTeste_link">Clique aqui para imprimir um boleto de teste.</a></div>
+                                            <table class="fullBox">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 50%;">Imprimir observações do financeiro:</td>
+                                                        <td id="i_boletosImprimirObs">Não</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td class="right"><a id="config_boletosGeral_editar" href="ajuda: Clique para editar as configurações gerais dos boletos">Editar dados</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <!-- DADOS FISCAIS -->
+                                            <div class="panel fullBox verticalHeaderTableList bottomSpace selection">
+                                                <h3>Dados fiscais da empresa</h3>
+                                                <table class="fullBox">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Principal atividade da empresa:</td>
+                                                            <td id="d_tribAtividade">Comércio</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Regime tributário:</td>
+                                                            <td id="d_tribCRT">Simples Nacional</td>
+                                                        </tr>
+                                                        <tr class="d_aliqsPS">
+                                                            <td class="d_labelAliqBC">Alíquota do Simples</td>
+                                                            <td id="d_tribAliqBC">4,00%</td>
+                                                        </tr>
+                                                        <tr class="d_aliqsPR" style="display: none;">
+                                                            <td>Alíquota ICMS:</td>
+                                                            <td id="d_tribICMS">0,00%</td>
+                                                        </tr>
+                                                        <tr class="d_aliqsPR" style="display: none;">
+                                                            <td>Alíquota PIS:</td>
+                                                            <td id="d_tribPIS">0,00%</td>
+                                                        </tr>
+                                                        <tr class="d_aliqsPR" style="display: none;">
+                                                            <td>Alíquota COFINS:</td>
+                                                            <td id="d_tribCOFINS">0,00%</td>
+                                                        </tr>
+                                                        <tr class="d_aliqsP" style="display: none;">
+                                                            <td>Alíquota IRPJ:</td>
+                                                            <td id="d_tribIRPJ">0,00%</td>
+                                                        </tr>
+                                                        <tr class="d_aliqsP" style="display: none;">
+                                                            <td>Alíquota CSLL:</td>
+                                                            <td id="d_tribCSLL">0,00%</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td class="right"><a id="config_fiscal_editar" href="ajuda: Clique para editar os dados fiscais da sua empresa">Editar dados</a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- CONFIGTRIB -->
+                                            <div class="panel fullBox bottomSpace ">
+                                                <h3>Configuração padrão para cadastro de produtos</h3>
+                                                <div></div>
+                                                <table class="fullBox">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td id="configTribResumo" class="quadroResumo">
+                                                                <p class="bottomSpace"><b>Resumo da tributação</b></p>
+                                                                <ul>
+                                                                    <li class="bottomSpace"><strong>ICMS:</strong> Não definido <b>Origem:</b> 0 - Nacional, exceto as indicadas nos códigos de 3 a 5</li>
+                                                                    <li class="bottomSpace"><strong>IPI:</strong> Não definido <b>Classe:</b> 999 <b>Alíquota:</b> 0,00%</li>
+                                                                    <li class="bottomSpace"><strong>PIS:</strong> Não definido <b>Alíquota:</b> 0,00%</li>
+                                                                    <li class="bottomSpace"><strong>COFINS:</strong> Não definido <b>Alíquota:</b> 0,00%</li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="right">
+                                                                <a id="config_configTrib_editar" href="ajuda: Clique para editar os dados de tributação padrão no cadastro de produtos">Editar dados</a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <!-- CONFIGURAÇÕES SMTP -->
+                                            <div class="panel fullBox verticalHeaderTableList bottomSpace">
+                                                <h3>Configuração de SMTP (envio de e-mail)</h3>
+                                                <div class="fullBox" id="configSMTP_resumo">
+                                                    <table class="fullBox">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td>As configurações de SMTP não estão definidas</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="right">
+                                                    <a id="configSMTP_editar" href="ajuda: Clique para editar os dados de envio de e-mail.">Editar dados</a>
+                                                </div>
+                                            </div>
+
+
+                                            <!-- BANCO DE DADOS (DOWNLOADS) -->
+                                            <div class="panel v2 fullBox bottomSpace">
+                                                <h3>Banco de dados</h3>
+                                                <p><a href="" id="config_abrirExportarXML">Baixar XML das notas de entrada</a><br><span class="descr">Opção para baixar os XMLs das Notas Fiscais de Entrada (compra de mercadoria) em um arquivo compactado.</span></p>
+                                                <p><a href="../backup">Baixar todos os dados da empresa</a><br><span class="descr">Esta opção serve para que você obtenha uma cópia de todos os dados de sua empresa em um arquivo compactado.</span></p>
+                                                <!--
+            <p class="apenasV2"><a href="#" id="linkVoltarLayoutAntigo">Voltar ao layout antigo</a><br><span class="descr">Caso sua empresa ainda não queira utilizar o novo layout, por enquanto ainda é possível voltar ao layout antigo.</span></p>
+            -->
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <!-- CONFIGURAÇÕES SMTP -->
+                                            <div class="panel fullBox verticalHeaderTableList bottomSpace">
+                                                <h3>Alertas</h3>
+                                                <div class="fullBox" id="configSMTP_resumo">
+                                                    <table class="fullBox">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Estoque Minimo:</td>
+                                                                <td id="d_tribAtividade">Sim</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Estoque Maximo</td>
+                                                                <td id="d_tribCRT">Sim</td>
+                                                            </tr>
+                                                            <tr class="d_aliqsPS">
+                                                                <td class="d_labelAliqBC">Erro Emissão NF-e:</td>
+                                                                <td id="d_tribAliqBC">Não</td>
+                                                            </tr>
+                                                            <tr class="d_aliqsPR">
+                                                                <td>Novo Cliente:</td>
+                                                                <td id="d_tribICMS">Não</td>
+                                                            </tr>
+                                                            <tr class="d_aliqsPR">
+                                                                <td>Retirada Caixa:</td>
+                                                                <td id="d_tribPIS">Sim</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td class="right"><a id="config_fiscal_editar" href="ajuda: Clique para editar os dados fiscais da sua empresa">Editar dados</a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="right">
+                                                    <a id="configSMTP_editar" href="ajuda: Clique para editar os dados de envio de e-mail.">Editar dados</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row"></div>
+                        <div class="well">
+                            <a href="javaScript:;" ng-click="toggle2()">Editar Configuração NF-e</a>
+                            <div ng-show="state2">
+
+                                <div class="row">
+                                        <div class="col-sm-6">
+                                            <div id="dadosCertificado" class="tableList bottomSpace">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <td>Certificado Digital A1</td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Nenhum certificado enviado para o servidor ainda.</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><a href="javaScript;:" class="onRight">Enviar certificado</a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div id="dadosUsuarios" class="tableList bottomSpace invisible"></div>
+</div>
+
+                                            <div id="dadosNFSe" class="tableList bottomSpace invisible"></div>
+                             
+
+</div>
+                                            <div id="col2" class="halfBox onRight">
+
+                                                <div id="dadosNFE" class="tableList bottomSpace">
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <td colspan="2">Configurações da NFe</td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td align="right" class="halfBox">Ambiente de envio:</td>
+                                                                <td><b>Para testes</b></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="right">Série de envio:</td>
+                                                                <td>001</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="right">Anexar XML no e-mail?</td>
+                                                                <td>Não</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="right">Serviços na mesma nota?</td>
+                                                                <td>Não permitido</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="right">Preencher data/hora saída?</td>
+                                                                <td>Sim</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="right">Presença comprador:</td>
+                                                                <td>Operação presencial</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="right">Consumidor final?</td>
+                                                                <td>Sim</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="right">ICMS padrão (%):</td>
+                                                                <td>0,00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="right">IPI padrão (%):</td>
+                                                                <td>0,00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="right">PIS padrão (%):</td>
+                                                                <td>0,00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="right">COFINS padrão (%):</td>
+                                                                <td>0,00</td>
+                                                            </tr>
+                                                            <tr class="dadosTokenNFCe">
+                                                                <td align="right">Token para envio de NFCe:</td>
+                                                                <td> - null</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="right">Logomarca para o Danfe:</td>
+                                                                <td><i>{sem imagem}</i></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2"><a href="javascript:configuracoes.detalharNFE()" class="onRight">Editar dados</a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div id="dadosCFOP" class="tableList bottomSpace">
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <td colspan="2">Lista de CFOPs</td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td align="right">Total CFOPs cadastrados:</td>
+                                                                <td>25</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="right">CFOP marcado como padrão:</td>
+                                                                <td>5102 - Venda de mercadoria</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2"><a href="../cfop" class="onRight">Editar CFOPs</a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div id="dadosSMTP" class="tableList bottomSpace">
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <td colspan="2">Configurações de SMTP (envio de email)</td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td colspan="2">SMTP próprio desativado. Sistema utilizando configurações globais de envio de e-mails.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><a href="javascript:configuracoes.testarSMTP();" class="onRight">Testar configuração SMTP</a></td>
+                                                                <td><a href="javascript:configuracoes.detalharSMTP();" class="onRight">Editar dados</a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -466,7 +1142,7 @@
                             <div class="col-sm-4">
                                 <div class="well">
                                     <p>Nome : e-contábil</p>
-                                    <p>Url  : econtabil.com.br</p>
+                                    <p>Url : econtabil.com.br</p>
                                     <p>Tipo : Informativo</p>
                                     <input class="btn btn-primary update" type="button" value="Alterar" />
                                     <input class="btn btn-primary delete" type="button" value="Deletar" />
@@ -509,7 +1185,7 @@
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="">
-                                    <h4><a ng-click="pc.addParceiro()">Adicionar Parceiro</a></h4>
+                                    <h4><a ng-click="pc.addColaborador()">Adicionar Parceiro</a></h4>
                                 </div>
                             </div>
                             <div class="col-sm-4">

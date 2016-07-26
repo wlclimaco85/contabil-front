@@ -35,6 +35,10 @@
             $scope.state1 = !$scope.state1;
         };
 
+        $scope.toggle2 = function() {
+            $scope.state2 = !$scope.state2;
+        };
+
 
 
         var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
@@ -524,6 +528,10 @@
                 controllerAs: "futurama"
             }).then(function(modal) {
                 modal.element.modal();
+                $(".mySelect").select2({
+                placeholder: "Select a state",
+                allowClear: true
+            });
                 modal.close.then(function(result) {
                     $scope.message = "You said " + result;
                 });

@@ -1,0 +1,35 @@
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Adicionar Certificado</h4>
+            </div>
+            <div class="modal-body">
+                <form id="dialogCertificado" class="dialog ui-dialog-content ui-widget-content allowSubmit" enctype="multipart/form-data" style="width: auto; min-height: 36px; max-height: none; height: auto;" method="post" action="../configuracoes/ajax.php" target="uploadFormIframedialogCertificado">
+        <div id="config_certificado_com_rcpt" class="boxField" style="display: none;"><input type="hidden" id="config_certificado_com" class="" name="config_certificado_com" autocomplete="off" value="salvarDadosCertificado"></div>
+        <table>
+            <tbody>
+                <tr>
+                    <td id="config_certificado_file_rcpt" class="boxField"><label for="config_certificado_file"> <span>Localize o Certificado</span></label><input type="file" id="config_certificado_file" class="undefined ui-widget-content ui-corner-all" name="config_certificado_file" autocomplete="off"></td>
+                    <td class="halfBox descr">Utilize o campo ao lado para selecionar e enviar o certificado digital.</td>
+                </tr>
+                <tr>
+                    <td id="config_certificado_senha_rcpt" class="boxField"><label for="config_certificado_senha"> <span>Senha do Certificado Digital</span></label><input type="password" id="config_certificado_senha" class="undefined ui-widget-content ui-corner-all requiredField" name="config_certificado_senha" autocomplete="off"></td>
+                    <td class="halfBox descr">O sistema trabalha <b>apenas</b> com certificado digital modelo A1, emitido por órgão certificador válido.</td>
+                </tr>
+                <tr>
+                    <td id="config_certificado_salva_senha_rcpt"><label for="config_certificado_salva_senha"><input type="checkbox" checked="checked" id="config_certificado_salva_senha" class="undefined ui-widget-content ui-corner-all" name="config_certificado_salva_senha" autocomplete="off" value="1"> <span>Desejo salvar minha senha para não<br>precisar digitar novamente a cada emissão</span></label></td>
+                    <td class="alerta"><b>ATENÇÃO:</b> visando sempre a segurança, <b>não é possível</b>, em nenhuma circustância, recuperar o certificado a partir do sistema. Guarde uma cópia de seu certificado para futura utilização.</td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Sim</button>
+              <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Não</button>
+            </div>
+        </div>
+    </div>
+</div>

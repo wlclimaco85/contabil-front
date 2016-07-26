@@ -1,0 +1,67 @@
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Deletar</h4>
+            </div>
+            <div class="modal-body">
+                <form id="dialogNFE" class="dialog ui-dialog-content ui-widget-content allowSubmit" enctype="multipart/form-data" style="width: auto; min-height: 36px; max-height: none; height: auto;" method="post" action="../configuracoes/ajax.php" target="uploadFormIframedialogNFE">
+        <div id="config_NFE_com_rcpt" class="boxField" style="display: none;"><input type="hidden" id="config_NFE_com" class="" name="config_NFE_com" autocomplete="off" value="salvarNFE"></div>
+        <div id="config_NFE_dellogo_rcpt" class="boxField" style="display: none;"><input type="hidden" id="config_NFE_dellogo" class="" name="config_NFE_dellogo" autocomplete="off" value="0"></div>
+        <h2>Padrão de valores para novas notas:</h2>
+        <div class="descr">Estes valores são preenchidos automaticamente mas podem ser alterados durante a edição da nota.</div>
+        <table class="bottomSpace">
+            <tbody>
+                <tr>
+                    <td class="boxField" id="config_NFE_presencaComprador_rcpt"><label for="config_NFE_presencaComprador"> <span>Presença do comprador</span></label><select id="config_NFE_presencaComprador" class="undefined ui-widget-content ui-corner-all" name="config_NFE_presencaComprador" autocomplete="off"><option value="0">Não se aplica</option><option value="1">Operação presencial</option><option value="2">Operação pela internet</option><option value="3">Operação por teleatendimento</option><option value="4">NFC-e com entrega a domicílio</option><option value="9">Não presencial, outros</option></select></td>
+                    <td class="boxField" id="config_NFE_consumidorFinal_rcpt"><label for="config_NFE_consumidorFinal"><input type="checkbox" id="config_NFE_consumidorFinal" class="undefined ui-widget-content ui-corner-all" name="config_NFE_consumidorFinal" autocomplete="off" value="1"> <span>Destinado a consumidor final</span></label></td>
+                    <td class="boxField" id="config_NFE_auto_hora_rcpt"><label for="config_NFE_auto_hora"><input type="checkbox" id="config_NFE_auto_hora" class="undefined ui-widget-content ui-corner-all" name="config_NFE_auto_hora" autocomplete="off" value="1"> <span>Preencher date/hora de saída</span></label></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="boxField" id="config_NFE_imp_icms_rcpt"><label for="config_NFE_imp_icms"> <span>ICMS padrão (%)</span></label><input type="text" id="config_NFE_imp_icms" class="undefined ui-widget-content ui-corner-all" name="config_NFE_imp_icms" autocomplete="off" especialtype="money"></td>
+                    <td class="boxField" id="config_NFE_imp_ipi_rcpt"><label for="config_NFE_imp_ipi"> <span>IPI padrão (%)</span></label><input type="text" id="config_NFE_imp_ipi" class="undefined ui-widget-content ui-corner-all" name="config_NFE_imp_ipi" autocomplete="off" especialtype="money"></td>
+                    <td class="boxField" id="config_NFE_imp_pis_rcpt"><label for="config_NFE_imp_pis"> <span>PIS padrão (%)</span></label><input type="text" id="config_NFE_imp_pis" class="undefined ui-widget-content ui-corner-all" name="config_NFE_imp_pis" autocomplete="off" especialtype="money"></td>
+                    <td class="boxField" id="config_NFE_imp_cofins_rcpt"><label for="config_NFE_imp_cofins"> <span>COFINS padrão (%)</span></label><input type="text" id="config_NFE_imp_cofins" class="undefined ui-widget-content ui-corner-all" name="config_NFE_imp_cofins" autocomplete="off" especialtype="money"></td>
+                </tr>
+            </tbody>
+        </table>
+        <h2>Configurações gerais</h2>
+        <table>
+            <tbody>
+                <tr>
+                    <td class="boxField" id="config_NFE_ambiente_rcpt"><label for="config_NFE_ambiente"> <span>Ambiente de envio</span></label><select id="config_NFE_ambiente" class="undefined ui-widget-content ui-corner-all" name="config_NFE_ambiente" autocomplete="off"><option value="1">Em produção</option><option value="2">Para teste</option></select></td>
+                    <td class="boxField" id="config_NFE_emissaoServicos_rcpt"><label for="config_NFE_emissaoServicos"> <span>Serviços na mesma nota?</span></label><select id="config_NFE_emissaoServicos" class="undefined ui-widget-content ui-corner-all" name="config_NFE_emissaoServicos" autocomplete="off"><option value="0">Não permitido</option><option value="3">Permitir nota mista/conjugada</option></select></td>
+                    <td class="boxField" id="config_NFE_serie_rcpt"><label for="config_NFE_serie"> <span>Série de envio</span></label><input type="text" id="config_NFE_serie" class="undefined ui-widget-content ui-corner-all" name="config_NFE_serie" autocomplete="off" especialtype="integer"></td>
+                    <td class="boxField" id="config_NFE_anexar_xml_rcpt"><label for="config_NFE_anexar_xml"><input type="checkbox" id="config_NFE_anexar_xml" class="undefined ui-widget-content ui-corner-all" name="config_NFE_anexar_xml" autocomplete="off" value="1"> <span>Anexar XML no e-mail enviado<div class="alerta invisible mostraSeGratis" style="display: block;">Esta opção não está disponível no<br>módulo gratuito.</div></span></label></td>
+                </tr>
+                <tr>
+                    <td class="boxField invisible" id="config_NFE_idTokenNFCe_rcpt" style="display: table-cell;"><label for="config_NFE_idTokenNFCe"> <span>ID do CSC (NFCe)</span></label><input type="text" id="config_NFE_idTokenNFCe" class="undefined ui-widget-content ui-corner-all" name="config_NFE_idTokenNFCe" autocomplete="off" especialtype="integer" maxsize="6"></td>
+                    <td class="boxField invisible" id="config_NFE_tokenNFCe_rcpt" style="display: table-cell;"><label for="config_NFE_tokenNFCe"> <span>CSC para emissão NFCe</span></label><input type="text" id="config_NFE_tokenNFCe" class="undefined ui-widget-content ui-corner-all" name="config_NFE_tokenNFCe" autocomplete="off" especialtype="string" maxsize="36"></td>
+                    <td class="boxField" id="config_NFE_inf_adic_rcpt" colspan="2" rowspan="3"><label for="config_NFE_inf_adic"> <span>Informações adicionais padrão</span></label><textarea id="config_NFE_inf_adic" class="undefined ui-widget-content ui-corner-all" name="config_NFE_inf_adic" autocomplete="off"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="alinhamentoCampoImg">
+                        <div class="boxField" id="config_NFE_fileimg_rcpt"><label for="config_NFE_fileimg"> <span>Enviar nova logomarca
+          <div class="alerta invisible mostraSeGratis" style="display: block;">Esta opção não está disponível no módulo gratuito.</div>
+        </span></label></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="1">
+                        <div id="config_NFE_delimg" class="descr"></div>
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Sim</button>
+              <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Não</button>
+            </div>
+        </div>
+    </div>
+</div>
