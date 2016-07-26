@@ -9,6 +9,43 @@
                 </div>
                 <div class="modal-body">
                     <form id="empresaForm">
+                        <div class="col-sm-12">
+                                       <label for="exampleInputPassword1">Tipo de Empresa</label>
+                                        <dl class="dl-horizontal">
+                                            <dd>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="1" checked ><span>Venda e Compra e prestação de serviço </span></label>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="2" ><span>Clinica </span></label>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Escritorio Advocacia</span></label>
+
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Condominio</span></label>
+
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Escritorio Contabil</span></label>
+                                            </dd>
+                                        </dl>
+
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="exampleInputPassword1">Sua Empresa Esta Ativa?</label>
+                                        <dl class="dl-horizontal">
+                                            <dd>
+                                                <label class="ui-radio"><input name="radio1" ng-model="empresa.statusInicial" type="radio" value="1" ><span>Sim</span></label>
+                                                <label class="ui-radio"><input name="radio1" ng-model="empresa.statusInicial" type="radio" value="2" checked><span>Não</span></label>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-sm-6">
+                                       <label for="exampleInputPassword1">Selecione o regime Tributario da Empresa</label>
+                                        <dl class="dl-horizontal">
+                                            <dd>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="1" checked ><span>Simples Nacional</span></label>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="2" ><span>Lucro Real</span></label>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Lucro Presumido</span></label>
+                                            </dd>
+                                        </dl>
+
+                                    </div>
+                                </div>
                         <div class="row">
                             <div class="form-group col-sm-6">
                                 <label for="exampleInputEmail1">Nome ou Razão social</label>

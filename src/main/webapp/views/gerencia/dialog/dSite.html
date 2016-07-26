@@ -1,186 +1,179 @@
+<div class="modal fade">
+    <div class="modal-dialog" style="width : 60%">
+        <div class="modal-content">
+            <form id="empresaForm">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Cadastro Site</h4>
+                </div>
+                <div class="modal-body">
 
-    <div class="container">
-            <div class="modal fade">
-                <div class="modal-dialog" style="width : 60%">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Cadastro Site</h4>
+                    <div class="row">
+                        <div class="form-group col-sm-4">
+                            <label for="exampleInputEmail1">Nome</label>
+                            <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="Nome">
                         </div>
-                        <div class="modal-body">
-                            <form id="empresaForm">
-                                <div class="row">
-                                        <div class="row">
-                                            <div class="form-group col-sm-4">
-                                                <label for="exampleInputEmail1">Nome</label>
-                                                <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="Nome">
-                                            </div>
 
-                                            <div class="form-group col-sm-4">
-                                                <label for="exampleInputEmail1">Url</label>
-                                                <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="Url">
-                                            </div>
-                                            <div class="form-group col-sm-4">
-                                                <label for="exampleInputEmail1">Logo</label>
-                                                <input type="file" name="fileToUpload" id="fileToUpload" onchange="fileSelected();"/>
-                                                <div id="fileName"></div>
-                                                <div id="fileSize"></div>
-                                                <div id="fileType"></div>
-                                                <input type="button" onclick="uploadFile()" value="Upload" />
-                                                <div id="progressNumber"></div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-sm-6">
-                                                <label for="exampleInputEmail1">Missão</label>
-                                                <textarea class="form-control" rows="5" id="Missao"></textarea>
-                                            </div>
-
-                                            <div class="form-group col-sm-6">
-                                                <label for="exampleInputEmail1">Visão</label>
-                                                <textarea class="form-control" rows="5" id="Visao"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-sm-6">
-                                                <label for="exampleInputEmail1">Quem Somos</label>
-                                                <textarea class="form-control" rows="5" id="Missao"></textarea>
-                                            </div>
-
-                                            <div class="form-group col-sm-6">
-                                                <label for="exampleInputEmail1">Como Trabalhamos</label>
-                                                <textarea class="form-control" rows="5" id="Visao"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="row " style="margin-top : 10px"></div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h3 class="panel-title">Imagems</h3>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="row socios">
-                                                    <div class="col-sm-4">
-                                                        <label for="exampleInputPassword1">Aonde</label>
-                                                        <div class="row ">
-                                                            <select name="book[0].produto" class="col-sm-12">
-                                                                <option value="0">Missão</option>
-                                                                <option value="1">Vissão</option>
-                                                                <option value="2">Quem Somos</option>
-                                                                <option value="3">Nav</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group col-sm-7">
-                                                        <label for="exampleInputEmail1">Logo</label>
-                                                        <input type="file" name="fileToUpload" id="fileToUpload" onchange="fileSelected();"/>
-                                                        <div id="fileName"></div>
-                                                        <div id="fileSize"></div>
-                                                        <div id="fileType"></div>
-                                                        <input type="button" onclick="uploadFile()" value="Upload" />
-                                                        <div id="progressNumber"></div>
-                                                    </div>
-                                                    <div class="col-xs-1" style="margin-top:18px">
-                                                        <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group hide" id="bookTemplate">
-                                                    <div class="row socios">
-                                                        <div class="col-sm-4">
-                                                        <label for="exampleInputPassword1">Aonde</label>
-                                                        <div class="row ">
-                                                            <select name="book[0].produto" class="col-sm-12">
-                                                                <option value="0">Missão</option>
-                                                                <option value="1">Vissão</option>
-                                                                <option value="2">Quem Somos</option>
-                                                                <option value="3">Nav</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group col-sm-7">
-                                                        <label for="exampleInputEmail1">Logo</label>
-                                                        <input type="file" name="fileToUpload" id="fileToUpload" onchange="fileSelected();"/>
-                                                        <div id="fileName"></div>
-                                                        <div id="fileSize"></div>
-                                                        <div id="fileType"></div>
-                                                        <input type="button" onclick="uploadFile()" value="Upload" />
-                                                        <div id="progressNumber"></div>
-                                                    </div>
-                                                        <div class="col-xs-1" style="margin-top:18px">
-                                                            <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row " style="margin-top : 10px"></div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h3 class="panel-title">Rede Social</h3>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="row socios">
-                                                    <div class="col-sm-4">
-                                                        <label for="exampleInputPassword1">Rede Social</label>
-                                                        <div class="row ">
-                                                            <select name="book[0].produto" class="col-sm-12">
-                                                                <option value="0">Instagran</option>
-                                                                <option value="1">Twiter</option>
-                                                                <option value="2">Facebook</option>
-                                                                <option value="3">Linkedin Network</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group col-sm-7">
-                                                        <label for="exampleInputEmail1">url</label>
-                                                        <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="Nome">
-                                                    </div>
-                                                    <div class="col-xs-1" style="margin-top:18px">
-                                                        <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group hide" id="bookTemplate">
-                                                    <div class="col-sm-4">
-                                                        <label for="exampleInputPassword1">Rede Social</label>
-                                                        <div class="row ">
-                                                            <select name="book[0].produto" class="col-sm-12">
-                                                                <option value="0">Instagran</option>
-                                                                <option value="1">Twiter</option>
-                                                                <option value="2">Facebook</option>
-                                                                <option value="3">Linkedin Network</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group col-sm-7">
-                                                        <label for="exampleInputEmail1">url</label>
-                                                        <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="Nome">
-                                                    </div>
-                                                        <div class="col-xs-1" style="margin-top:18px">
-                                                            <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <div class="row " style="margin-top : 10px"></div>
-                                    	<div class="row">
-                                            <div class="form-group col-sm-12">
-                                                <label for="exampleInputPassword1">Observação</label>
-                                                <textarea class="form-control" rows="5" id="Observação"></textarea>
-                                            </div>
-                                        </div>
-                                </div>
-                            </form>
+                        <div class="form-group col-sm-4">
+                            <label for="exampleInputEmail1">Url</label>
+                            <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="Url">
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Gravar</button>
+                        <div class="form-group col-sm-4">
+                            <label for="exampleInputEmail1">Logo</label>
+                            <input type="file" name="fileToUpload" id="fileToUpload" onchange="fileSelected();" />
+                            <div id="fileName"></div>
+                            <div id="fileSize"></div>
+                            <div id="fileType"></div>
+                            <input type="button" onclick="uploadFile()" value="Upload" />
+                            <div id="progressNumber"></div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label for="exampleInputEmail1">Missão</label>
+                            <textarea class="form-control" rows="5" id="Missao"></textarea>
+                        </div>
+
+                        <div class="form-group col-sm-6">
+                            <label for="exampleInputEmail1">Visão</label>
+                            <textarea class="form-control" rows="5" id="Visao"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label for="exampleInputEmail1">Quem Somos</label>
+                            <textarea class="form-control" rows="5" id="Missao"></textarea>
+                        </div>
+
+                        <div class="form-group col-sm-6">
+                            <label for="exampleInputEmail1">Como Trabalhamos</label>
+                            <textarea class="form-control" rows="5" id="Visao"></textarea>
+                        </div>
+                    </div>
+                    <div class="row " style="margin-top : 10px"></div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Imagems</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row socios">
+                                <div class="col-sm-4">
+                                    <label for="exampleInputPassword1">Aonde</label>
+                                    <div class="row ">
+                                        <select name="book[0].produto" class="col-sm-12 mySelect">
+                                            <option value="0">Missão</option>
+                                            <option value="1">Vissão</option>
+                                            <option value="2">Quem Somos</option>
+                                            <option value="3">Nav</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-7">
+                                    <label for="exampleInputEmail1">Logo</label>
+                                    <input type="file" name="fileToUpload" id="fileToUpload" onchange="fileSelected();" />
+                                    <div id="fileName"></div>
+                                    <div id="fileSize"></div>
+                                    <div id="fileType"></div>
+                                    <input type="button" onclick="uploadFile()" value="Upload" />
+                                    <div id="progressNumber"></div>
+                                </div>
+                                <div class="col-xs-1" style="margin-top:18px">
+                                    <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i>
+                                                        </button>
+                                </div>
+                            </div>
+                            <div class="form-group hide" id="bookTemplate">
+                                <div class="row socios">
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1">Aonde</label>
+                                        <div class="row ">
+                                            <select name="book[0].produto" class="col-sm-12 mySelect">
+                                                <option value="0">Missão</option>
+                                                <option value="1">Vissão</option>
+                                                <option value="2">Quem Somos</option>
+                                                <option value="3">Nav</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-7">
+                                        <label for="exampleInputEmail1">Logo</label>
+                                        <input type="file" name="fileToUpload" id="fileToUpload" onchange="fileSelected();" />
+                                        <div id="fileName"></div>
+                                        <div id="fileSize"></div>
+                                        <div id="fileType"></div>
+                                        <input type="button" onclick="uploadFile()" value="Upload" />
+                                        <div id="progressNumber"></div>
+                                    </div>
+                                    <div class="col-xs-1" style="margin-top:18px">
+                                        <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i>
+                                                            </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row " style="margin-top : 10px"></div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Rede Social</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row socios">
+                                <div class="col-sm-4">
+                                    <label for="exampleInputPassword1">Rede Social</label>
+                                    <div class="row ">
+                                        <select name="book[0].produto" class="col-sm-12 mySelect">
+                                            <option value="0">Instagran</option>
+                                            <option value="1">Twiter</option>
+                                            <option value="2">Facebook</option>
+                                            <option value="3">Linkedin Network</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-7">
+                                    <label for="exampleInputEmail1">url</label>
+                                    <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="Nome">
+                                </div>
+                                <div class="col-xs-1" style="margin-top:18px">
+                                    <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-group hide" id="bookTemplate">
+                                <div class="col-sm-4">
+                                    <label for="exampleInputPassword1">Rede Social</label>
+                                    <div class="row ">
+                                        <select name="book[0].produto" class="col-sm-12 mySelect">
+                                            <option value="0">Instagran</option>
+                                            <option value="1">Twiter</option>
+                                            <option value="2">Facebook</option>
+                                            <option value="3">Linkedin Network</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-7">
+                                    <label for="exampleInputEmail1">url</label>
+                                    <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="Nome">
+                                </div>
+                                <div class="col-xs-1" style="margin-top:18px">
+                                    <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row " style="margin-top : 10px"></div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="exampleInputPassword1">Observação</label>
+                            <textarea class="form-control" rows="5" id="Observação"></textarea>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-      
+                <div class="modal-footer">
+                    <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Gravar</button>
+                </div>
+            </form>
+        </div>
     </div>
-    
+</div>

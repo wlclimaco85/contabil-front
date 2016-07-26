@@ -1,37 +1,60 @@
 
-<div class="container">
          <div class="modal fade">
           <div class="modal-dialog" style="width : 80%">
             <div class="modal-content">
+            <form  class="parceiroForm">
               <div class="modal-header">
                 <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Cadastro Empresa</h4>
+                <h4 class="modal-title">Cadastro Colaborador</h4>
               </div>
               <div class="modal-body">
-                <form  id="empresaForm">
-                        <div class="row">
+                
+                                <div class="col-sm-12">
+                                       <label for="exampleInputPassword1">Tipo de Pessoa</label>
+                                        <dl class="dl-horizontal">
+                                            <dd>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="pessoa" value="1" checked ><span>Fisica</span></label>
+                                                <label class="ui-radio"><input name="radio2" type="radio" ng-model="pessoa" value="2" ><span>Juridica </span></label>
+                                            </dd>
+                                        </dl>
+
+                                    </div>
                                 <div class="row">
-                               <div class="form-group col-sm-6">
-                                   <label for="exampleInputEmail1">Nome ou Razão social</label>
+                               <div class="form-group col-sm-6" ng-show="pessoa == 1">
+                                   <label for="exampleInputEmail1">Nome</label>
+                                   <input type="text"  ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Nome ou Razão social">
+                               </div>
+                               <div class="form-group col-sm-6" ng-show="pessoa == 2">
+                                   <label for="exampleInputEmail1">Razão social</label>
                                    <input type="text"  ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Nome ou Razão social">
                                </div>
             
-                               <div class="form-group col-sm-6">
+                               <div class="form-group col-sm-6" ng-show="pessoa == 2">
                                    <label for="exampleInputEmail1">Nome Fantasia</label>
                                    <input type="text"  ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Nome Fantasia">
                                </div>
                             </div>
                             <div class="row">
-                               <div class="form-group col-sm-3">
-                                   <label for="exampleInputEmail1">CPF ou CNPJ</label>
+                               <div class="form-group col-sm-3" ng-show="pessoa == 1">
+                                   <label for="exampleInputEmail1">CPF</label>
+                                   <input type="text"  ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Nº Cart. Trab">
+                               </div>
+
+                               <div class="form-group col-sm-3" ng-show="pessoa == 2">
+                                   <label for="exampleInputEmail1">CNPJ</label>
+                                   <input type="text"  ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Nº Cart. Trab">
+                               </div>
+
+                               <div class="form-group col-sm-6" ng-show="pessoa == 1">
+                                   <label for="exampleInputEmail1">Num. Identidade</label>
                                    <input type="text"  ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Nº Cart. Trab">
                                </div>
             
-                               <div class="form-group col-sm-3">
+                               <div class="form-group col-sm-3" ng-show="pessoa == 2">
                                    <label for="exampleInputEmail1">Inscr Est Subst Trib</label>
                                    <input type="text"  ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="DD/MM/AAAA">
                                </div>
-                               <div class="form-group col-sm-3">
+                               <div class="form-group col-sm-3" ng-show="pessoa == 2">
                                    <label for="exampleInputEmail1">Indicador de IE</label>
                                    <div class="row">
                                        <select id="contatos_indIE" class="col-sm-12" name="contatos_indIE" autocomplete="off">
@@ -48,11 +71,11 @@
                                </div>
                             </div>
                             <div class="row">
-                               <div class="form-group col-sm-3">
+                               <div class="form-group col-sm-3" ng-show="pessoa == 2">
                                    <label for="exampleInputEmail1">Inscrição Municipal</label>
                                          <input type="text" class="form-control col-sm-3" ng-model="cfop.descricao" name="descricao" placeholder="Entrada">
                                </div>
-                               <div class="form-group col-sm-3">
+                               <div class="form-group col-sm-3" ng-show="pessoa == 2">
                                    <label for="exampleInputEmail1">Inscrição Suframa</label>
                                          <input type="text" class="form-control col-sm-3" ng-model="cfop.descricao" name="descricao" placeholder="Entrada">
                                </div>
@@ -120,130 +143,89 @@
                                  </div>
                              </div>
                              <!-- -------------------  TELEFONE ----------------- -->
-                             <div class="row">
-            
-                                 <div class="col-sm-4" style="margin-top:25px">
-                                     <div class="btn-group">
-                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Adicionar <span class="caret"></span></button>
-                                         <ul class="dropdown-menu" role="menu">
-                                             <li><a href="javascript:;" class="addPhoneButton" data-name="phone_home">Residencial</a></li>
-                                             <li><a href="javascript:;" class="addPhoneButton" data-name="phone_office">Celular TIM</a></li>
-                                             <li><a href="javascript:;" class="addPhoneButton" data-name="phone_office">Celular OI</a></li>
-                                         </ul>
-                                     </div>
-                                 </div>
-                                 <div class="col-sm-4">
-                                     <label for="exampleInputPassword1" class="control-label" >Telefone</label>
-                                     <input type="text" class="form-control col-sm-4 gugu" name="phone" placeholder="Telefone">
-                                 </div>
-                             </div>
-                             <!-- Template for dynamic field -->
-                             <div class="row" id="template" style="display: none;">
-            
-                                 <div class="col-sm-4" style="margin-top:25px">
-                                     <button type="button" class="btn btn-link removeButton">deletar</button>
-                                 </div>
-                                 <div class="col-sm-4">
-                                 <label  for="exampleInputPassword1" class="control-label">Telefone</label>
-                                     <input id='gugu' type="text" class="form-control col-sm-4 gugu"  placeholder="Telefone">
-                                 </div>
-                             </div>
-            
-                             <!-- ------------------------------------- --><!-- ------------------------------------- -->
-            
-                             <!-- -------------------  Email Empresa ----------------- -->
-                             <div class="row">
-                                 <div class="col-sm-4">
-                                 <label for="exampleInputPassword1">Email</label>
-                                     <input type="text" class="form-control col-sm-4 input-email" name="email" placeholder="Email">
-                                 </div>
-                                 <div class="col-sm-4" style="margin-top:25px">
-                                     <div class="btn-group">
-                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Adicionar <span class="caret"></span></button>
-                                         <ul class="dropdown-menu" role="menu">
-                                             <li><a href="javascript:;" class="addEmailButton" data-name="email_princ">Principal</a></li>
-                                             <li><a href="javascript:;" class="addEmailButton" data-name="email_home">Outro</a></li>
-                                             <li><a href="javascript:;" class="addEmailButton" data-name="email_office">Trabalho</a></li>
-                                         </ul>
-                                     </div>
-                                 </div>
-                             </div>
-            
-                             <!-- Template for dynamic field -->
-                             <div class="row" id="template-email" style="display: none;">
-                                 <div class="col-sm-4">
-                                 <label for="exampleInputPassword1" class="control-label">Email</label>
-                                     <input type="email" class="form-control col-sm-4 input-email"  placeholder="Email">
-                                 </div>
-                                 <div class="col-sm-4" style="margin-top:25px">
-                                     <button type="button" class="btn btn-link removeButton">deletar</button>
-                                 </div>
-                             </div>
+                        <div class="row">
 
+                            <div class="col-sm-4">
+                                <label for="exampleInputPassword1" class="control-label">Telefone</label>
+                                <input type="text" class="form-control gugu"  name="phone" data-mask="(99) 9999-9999" placeholder="(55) 1111-2222">
+                            </div>
 
-
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                    <label for="exampleInputPassword1">Atividade Principal da Filial</label>
-                                        <div class="row">
-                                            <select id="atividade1" name="atividade1" class="col-sm-12">
-                                                <option> teste 001</option>
-                                                <option> teste 002</option>
-                                                <option> teste 003</option>
-                                                <option> teste 004</option>
-                                                <option> teste 005</option>
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                            <div class="col-sm-5">
-                                                <label for="exampleInputPassword1">Atividade Secundaria da Filial</label>
-                                                <div class="row">
-                                                    <select id="atividade1" name="atividade1" class="col-sm-12">
-                                                        <option> teste 001</option>
-                                                        <option> teste 002</option>
-                                                        <option> teste 003</option>
-                                                        <option> teste 004</option>
-                                                        <option> teste 005</option>
-
-                                                    </select>
-                                                </div>
-
-                                                <button type="button" class="btn btn-default addButton1"><i class="fa fa-plus"></i></button>
-                                            </div>
-                                        </div>
-                                    <div class="row">
-                                        <div class="form-group hide" id="bookTemplate1">
-                                            <div class="col-sm-6">
-                                            <label for="exampleInputPassword1">Outras Atividades</label>
-                                                <div class="row">
-                                                    <select id="atividade1" name="atividade1" class="col-sm-12">
-                                                        <option> teste 001</option>
-                                                        <option> teste 002</option>
-                                                        <option> teste 003</option>
-                                                        <option> teste 004</option>
-                                                        <option> teste 005</option>
-
-                                                    </select>
-                                                </div>
-
-                                            <div class="col-xs-1">
-                                                <button type="button" class="btn btn-default removeButton1"><i class="fa fa-minus"></i></button>
-                                            </div>
-                                            </div>
-                                        </div>
+                            <div class="col-sm-4" style="margin-top:25px">
+                                <div class="dropdown">
+                                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
+                                    Adicionar
+                                    <span class="caret"></span>
+                                  </button>
+                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="javascript:;" class="addPhoneButton">Residencial</a></li>
+                                    <li><a href="javascript:;" class="addPhoneButton">Celular TIM</a></li>
+                                    <li><a href="javascript:;" class="addPhoneButton">Celular OI</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="javascript:;" class="addPhoneButton">Outros</a></li>
+                                  </ul>
                                 </div>
                             </div>
-                </form>
+                           
+                        </div>
+                        <!-- Template for dynamic field -->
+                        <div class="row" id="template" style="display: none;">
+
+                            <div class="col-sm-4">
+                                <label for="exampleInputPassword1" class="control-label">Telefone</label>
+                                <input type="text" class="form-control gugu"  name="phone" data-mask="(99) 9999-9999" placeholder="(55) 1111-2222">
+                            </div>
+
+                            <div class="col-sm-4" style="margin-top:25px">
+                                <button type="button" class="btn btn-link removeButton">deletar</button>
+                            </div>
+                           
+                        </div>
+
+                        <!-- ------------------------------------- -->
+                        <!-- ------------------------------------- -->
+
+                        <!-- -------------------  Email Empresa ----------------- -->
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label for="exampleInputPassword1">Email</label>
+                                <input type="text" class="form-control col-sm-4 input-email" name="email" placeholder="Email">
+                            </div>
+                            <div class="col-sm-4" style="margin-top:25px">
+
+                                <div class="dropdown">
+                                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
+                                    Adicionar
+                                    <span class="caret"></span>
+                                  </button>
+                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="javascript:;" class="addEmailButton">Principal</a></li>
+                                    <li><a href="javascript:;" class="addEmailButton">NF-e</a></li>
+                                    <li><a href="javascript:;" class="addEmailButton">Compras</a></li>
+                                    <li><a href="javascript:;" class="addEmailButton">Vendas</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="javascript:;" class="addEmailButton">Outros</a></li>
+                                  </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Template for dynamic field -->
+                        <div class="row" id="template-email" style="display: none;">
+                            <div class="col-sm-4">
+                                <label for="exampleInputPassword1" class="control-label">Email</label>
+                                <input type="email" class="form-control col-sm-4 input-email" placeholder="Email">
+                            </div>
+                            <div class="col-sm-4" style="margin-top:25px">
+                                <button type="button" class="btn btn-link removeButton">deletar</button>
+                            </div>
+                        </div>
+                
               </div>
               <div class="modal-footer">
                 <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Gravar</button>
+                <button type="submit" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Gravar</button>
               </div>
+              </form>
             </div>
           </div>
         </div>
-
-</div>
