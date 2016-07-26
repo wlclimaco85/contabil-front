@@ -21,7 +21,7 @@
 	//CountyMaintenanceRequest Object
 	qat.model.reqCounty = function(_oCounty, _bList, _bPagedList)
 	{
-		this.county = _oCounty;
+		this.cfop = _oCounty;
 		this.returnList = _bList;
 		this.returnListPaged = _bPagedList;
 	};

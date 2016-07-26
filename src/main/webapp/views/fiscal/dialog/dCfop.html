@@ -2,79 +2,77 @@
 <div class="modal fade">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
+    <form  class="cfopForm">
       <div class="modal-header">
         <button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">{{title}}</h4>
       </div>
       <div class="modal-body">
-		<form  id="cfopForm">
+
 	                                <div class="row">
 	                                    <div class="col-md-12">
 	                                    <div class="row">
 	                                        <div class="form-group col-sm-6">
-	                                            <label for="exampleInputEmail1">CFOP</label>
-	                                            <input type="text"  ng-model="cfop.cfop" class="form-control" placeholder="CFOP">
+	                                            <label for="exampleInputEmail1">CFOP <span style="color:red" >*</span></label>
+	                                            <input type="text" id="cfop" name="firstName" ng-model="cfop.cfop" class="form-control" placeholder="CFOP">
 	                                        </div>
 
 	                                        <div class="form-group col-sm-6">
 	                                            <label for="exampleInputEmail1">Tipo</label>
 	                                            <div class="row">
-		                                            <select id="unidTributada" name="unidTributada"  ng-model="fop.cfopTypeEnum" class="col-sm-12">
-									                    <option value="01">Entrada</option>
-									                    <option value="02">Saida</option>
+		                                            <select  name="unidTributada" style="height: 33px;"  ng-model="cfop.cfopTypeEnumValue" class=" type col-sm-12">
+									                    <option value="1">Entrada</option>
+									                    <option value="2">Saida</option>
 									                </select>
 									            </div>
 	                                        </div>
 	                                     </div>
 	                                     <div class="row col-sm-12">
 	                                        <div class="form-group">
-	                                            <label for="exampleInputEmail1">Descrição</label>
-	                                            <input type="text" class="form-control" ng-model="fop.natureza" name="descricao" placeholder="Descrição">
+	                                            <label for="exampleInputEmail1">Descrição <span style="color:red" >*</span></label>
+	                                            <input type="text" id="descricao" name="lastName" class="form-control" ng-model="cfop.natureza"  placeholder="Descrição">
 	                                        </div>
 	                                     </div>
 	                                     <div class="row col-sm-12">
 	                                        <div class="form-group col-sm-4">
 	                                            <label for="exampleInputEmail1">ICMS</label>
-	                                            <input type="email" id='email' class="form-control" ng-model="fop.icms" name="ICMS" placeholder="0.00">
+	                                            <input type="text" id='email' class="form-control" ng-model="cfop.icms" name="ICMS" placeholder="0.00">
 	                                        </div>
 	                                        <div class="form-group col-sm-4">
 	                                            <label for="exampleInputPassword1">ICMS Reduzido</label>
-	                                            <input type="password" class="form-control" ng-model="fop.icmsReduzido" name="Reduzido" placeholder="0.00">
+	                                            <input type="text" class="form-control" ng-model="cfop.icmsReduzido" name="Reduzido" placeholder="0.00">
 	                                        </div>
 	                                        <div class="form-group col-sm-4">
 	                                            <label for="exampleInputPassword1">Margem Agregada ST</label>
-	                                            <input type="password" class="form-control" ng-model="margemAgregadaST" name="Agregada" placeholder="0.00">
+	                                            <input type="text" class="form-control" ng-model="cfop.margemAgregadaST" name="Agregada" placeholder="0.00">
 	                                        </div>
 	                                    </div>
 	                                    <div class="row col-sm-12">
 	                                        <div class="form-group col-sm-4">
 	                                            <label for="exampleInputPassword1">CST Principal</label>
-	                                            <input type="password" class="form-control" ng-model="icmsReduzido" name="Principal" placeholder="0.00">
+	                                            <input type="text" class="form-control" ng-model="cfop.icmsReduzido" name="Principal" placeholder="0.00">
 	                                        </div>
 	                                        <div class="form-group col-sm-4">
 	                                            <label for="exampleInputPassword1">Classificação Fiscal</label>
-	                                            <input type="password" class="form-control" ng-model="classFiscal" name="Classificacao" placeholder="0.00">
-	                                        </div>
-	                                         <div class="form-group col-sm-4">
-	                                            <label for="exampleInputPassword1">Classificação Fiscal</label>
-	                                            <input type="password" class="form-control" ng-model="classFiscal" name="Fiscal" placeholder="0.00">
+	                                            <input type="text" class="form-control" ng-model="cfop.classFiscal" name="Classificacao" placeholder="0.00">
 	                                        </div>
 	                                    </div>
 	                                     <div class="row col-sm-12">
 	                                        <div class="form-group">
 	                                            <label for="exampleInputPassword1">Observação</label>
-	                                            <input type="password" class="form-control" ng-model="observacao" name="Observacao" placeholder="Observação">
+	                                            <input type="text" class="form-control" ng-model="cfop.observacao" name="Observacao" placeholder="Observação">
 	                                        </div>
 	                                    </div>
 	                                    </div>
 			              		</div>
-			              	</form>
+
 
       </div>
       <div class="modal-footer">
-        <button type="button" ng-click="save()" id="validateButton" class="btn btn-primary" data-dismiss="modal">OK</button>
+        <button type="submit"  ng-click="save()" class="btn btn-primary">Salvar</button>
         <button type="button" ng-click="cancel()" class="btn">Cancel</button>
       </div>
+</form>
     </div>
   </div>
 </div>

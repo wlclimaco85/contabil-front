@@ -13,7 +13,7 @@
 	qat.model.county = function(_countyId, _countyDesc)
 	{
 		this.id = _countyId;
-		this.description = _countyDesc;
+		this.cfop = _countyDesc;
 	};
 
 	//Procedure Object

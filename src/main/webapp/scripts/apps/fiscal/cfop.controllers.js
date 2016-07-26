@@ -156,7 +156,7 @@
                 key: '1',
                 action: function(e, dt, node, config) {
                     ModalService.showModal({
-                        templateUrl: 'CFOPmodal.html',
+                        templateUrl: 'views/fiscal/dialog/dCfop.html',
                         controller: "RowSelectCtrl"
                     }).then(function(modal) {
 
@@ -199,6 +199,8 @@
                 controller: function($scope) {
 
 
+
+                 console.log(person);
                     // $scope.cfop = "New New York";
                     SysMgmtData.processPostPageData("main/api/request", {
                         url: "fiscal/api/cfop/fetchPage/",
@@ -242,16 +244,66 @@
                         };
                         console.log($scope.cfop)
                     });
-                    openDialog('update', person);
                     $scope.save = function() {
+                        debugger
                         console.log($scope.cfop)
+                        $('#cfopForm').formValidation('resetForm', true);
+                        vm.processButtons('U',$scope.cfop);
                     };
+                    $(document).ready(function() {
+
+            });
                 },
                 controllerAs: "futurama"
             }).then(function(modal) {
 
                 modal.element.modal();
-                openDialog('update', person);
+
+
+
+
+    $('.cfopForm')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                firstName: {
+               //     row: 'col-sm-6',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo Requerido'
+                        }
+                    }
+                },
+                lastName: {
+                 //   row: 'col-sm-12',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo Requerido'
+                        }
+                    }
+                }
+            }
+
+        });
+        /*.on('success.form.fv', function(e) {
+        // Prevent default form submission
+        e.preventDefault();
+            debugger
+            vm.processButtons('U');
+
+
+        });
+*/
+        $(".type").select2({
+                placeholder: "Select a state",
+                allowClear: true
+            });
+
                 modal.close.then(function(result) {
                     $scope.complexResult = "Name: " + result.name + ", age: " + result.age;
                 });
@@ -268,20 +320,6 @@
                      $scope.message = "You said " + result;
                  });
              });
-        }
-
-        function deleteRowAll(person) {
-            /*
-             ModalService.showModal({
-                 templateUrl: 'cfopAllDelete.html',
-                 controller: "CfopController"
-             }).then(function(modal) {
-                 modal.element.modal();
-                 modal.close.then(function(result) {
-                     $scope.message = "You said " + result;
-                 });
-             });*/
-
         }
 
         function createdRow(row, data, dataIndex) {
@@ -319,81 +357,65 @@
             vm.selectAll = true;
         }
 
-        function openDialog(acao, object) {
-            $scope.cfop = "testesss"
-            if (acao == 'update') {
-                //debugger
-                SysMgmtData.processPostPageData("main/api/request", {
-                    url: "fiscal/api/cfop/fetchPage/",
-                    token: $rootScope.authToken,
-                    request: {
-                        "id": 1
-                    }
-                }, function(res) {
-                    console.log($scope.cfop)
-                    console.log(res);
-                    $scope.acaoEnumValue = res.cfopList[0].acaoEnumValue;
-                    $scope.acaoType = res.cfopList[0].acaoType;
-                    $scope.cfop = res.cfopList[0].cfop;
-                    $scope.cfopTypeEnum = res.cfopList[0].cfopTypeEnum;
-                    $scope.cfopTypeEnumValue = res.cfopList[0].cfopTypeEnumValue;
-                    $scope.classFiscal = res.cfopList[0].classFiscal;
-                    $scope.createDateUTC = res.cfopList[0].createDateUTC;
-                    $scope.createUser = res.cfopList[0].createUser;
-                    $scope.cstPrincipal = res.cfopList[0].cstPrincipal;
-                    $scope.emprId = res.cfopList[0].emprId;
-                    $scope.icms = res.cfopList[0].icms;
-                    $scope.icmsReduzido = res.cfopList[0].icmsReduzido;
-                    $scope.id = res.cfopList[0].id;
-                    $scope.margemAgregadaST = res.cfopList[0].margemAgregadaST;
-                    $scope.modifyDateUTC = res.cfopList[0].modifyDateUTC;
-                    $scope.modifyUser = res.cfopList[0].modifyUser;
-                    $scope.natureza = res.cfopList[0].natureza;
-                    $scope.notes = res.cfopList[0].notes;
-                    $scope.observacao = res.cfopList[0].observacao;
-                    $scope.parentId = res.cfopList[0].parentId;
-                    $scope.processId = res.cfopList[0].processId;
-                    $scope.simplificado = res.cfopList[0].simplificado;
-                    $scope.site = res.cfopList[0].site;
-                    $scope.statusList = res.cfopList[0].statusList;
-                    $scope.tabelaEnum = res.cfopList[0].tabelaEnum;
-                    $scope.tabelaEnumValue = res.cfopList[0].tabelaEnumValue;
-                    $scope.type = res.cfopList[0].type;
-                    $scope.typeValue = res.cfopList[0].typeValue;
-                    $scope.userId = res.cfopList[0].userId;
-                    console.log($scope.cfop)
-                });
+        //reusable processGetData (insert, update, pagedFetch)
+        function processPostData(_url, _req, _bLoading)
+        {
+            //console.log(_url);
+            if (_bLoading){
+                vm.countyGridOptions.api.showLoadingOverlay(true);
             }
-            bookIndex = 0;
-            $('#cfopForm')
-                .formValidation({
-                    framework: 'bootstrap',
-                    button: {
-                        selector: '#validateButton',
-                        disabled: 'disabled'
-                    },
-                    icon: {
-                        valid: 'glyphicon glyphicon-ok',
-                        invalid: 'glyphicon glyphicon-remove',
-                        validating: 'glyphicon glyphicon-refresh'
-                    },
-                    fields: {
-
-                        'book[0].produto': notEmptyStringMinMaxRegexp,
-                        'book[0].quantidade': integerNotEmptyValidation,
-                        'book[0].vlUnitario': integerNotEmptyValidation,
-
-
-                    }
-                });
-            $("select").select2({
-                placeholder: "Select a state",
-                allowClear: true
+            SysMgmtData.processPostPageData(_url, _req, function(res){
+                if (res){
+                    initLoad = true;
+                    createNewDatasource(res); //send Data
+                }
+                else{
+                    alert('error')
+                }
             });
+        };
 
-            $scope.cfop = "teste1"
 
-        }
+        //reusable button form logic
+        vm.processButtons = function(_btnType,oObject){
+            //console.log(_btnType);
+debugger
+                switch (_btnType) {
+                //Add Button
+                case 'A':
+                    processPostData(create_url,  new qat.model.reqCounty( new qat.model.county(cvm.county.id, cvm.county.description),true, true), true);
+                    break;
+                //Update Button
+                case 'U':
+                    SysMgmtData.processPostPageData("main/api/cfop",{
+                    url: "fiscal/api/cfop/update/",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqCounty( new qat.model.county(10, 'teste'),true, true)
+                   // {
+                      //  "cfop": oObject
+                   //   cfop : {"id":"10"}
+                   // }
+                }, function(res) {
+                    debugger
+                    console.log(res)
+                });
+                    break;
+                //Delete Button
+                case 'D':
+                    var send_url = delete_url + "?countyId=" + cvm.county.id + "&retList=true&retPaged=true";
+                    processGetData(send_url);
+                    break;
+                //List Button
+                case 'L':
+                    processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), true);
+                    break;
+                default:
+                    console.log('Invalid button type: ' + _btnType);
+                };
+                //clear the form
+                cvm.clearForm();
+
+        };
 
     }
 })();
