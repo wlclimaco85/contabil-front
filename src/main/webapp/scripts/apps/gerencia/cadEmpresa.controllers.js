@@ -17,15 +17,24 @@
         vm.persons = {};
 
         vm.alterStatus = alterStatus;
-        vm.historico = historico;
-        vm.addAdvogado = addAdvogado;
-        vm.envolvidos = envolvidos;
-        vm.desdobramento = desdobramento;
+        vm.addSocios = addSocios;
+        vm.addCnae = addCnae;
+        vm.addPlano = addPlano;
+        vm.addSite = addSite;
+        vm.addColaborador = addColaborador;
+        vm.addPlanoContas = addPlanoContas;
+        vm.addFilial = addFilial;
+
 
 
         $scope.toggle = function() {
             $scope.state = !$scope.state;
         };
+
+        $scope.toggle1 = function() {
+            $scope.state1 = !$scope.state1;
+        };
+
 
 
         var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
@@ -408,15 +417,16 @@
             }
         }
 
-        function status() {
-            debugger
-
-        }
 
         function alterStatus() {
             ModalService.showModal({
-                templateUrl: 'alterStatus.html',
-                controller: "ContasPagarController"
+                templateUrl: 'views/util/dialog/dAlterStatus.html',
+                controller: function($scope) {
+
+
+
+                },
+                controllerAs: "futurama"
             }).then(function(modal) {
                 modal.element.modal();
                 modal.close.then(function(result) {
@@ -425,34 +435,75 @@
             });
         }
 
-        function historico() {
+        function addSocios() {
             ModalService.showModal({
-                templateUrl: 'historico.html',
-                controller: "ContasPagarController"
+                templateUrl: 'views/gerencia/dialog/dSocios.html',
+                controller: function($scope) {
+
+                },
+                controllerAs: "futurama"
             }).then(function(modal) {
                 modal.element.modal();
+
+                     
+            
                 modal.close.then(function(result) {
                     $scope.message = "You said " + result;
                 });
             });
         }
 
-        function addAdvogado() {
+        function addCnae() {
             ModalService.showModal({
-                templateUrl: 'addAdvogado.html',
-                controller: "ContasPagarController"
+                templateUrl: 'views/gerencia/dialog/dCnae.html',
+                controller: function($scope) {
+
+
+
+                },
+                controllerAs: "futurama"
             }).then(function(modal) {
                 modal.element.modal();
+
+                $(".selectd").select2({
+                    placeholder: "Select a state"
+                });
                 modal.close.then(function(result) {
                     $scope.message = "You said " + result;
                 });
             });
         }
 
-        function envolvidos() {
+        $scope.today = function() {
+            return $scope.dt = new Date();
+          };
+          $scope.today();
+          $scope.clear = function() {
+            return $scope.dt = null;
+          };
+          $scope.open = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            return $scope.opened = true;
+          };
+          $scope.dateOptions = {
+            'year-format': "'yy'",
+            'starting-day': 0
+          };
+          $scope.formats = ['MMMM-dd-yyyy','MM/dd/yyyy', 'yyyy/MM/dd'];
+          return $scope.format = $scope.formats[1];
+
+
+
+        function addPlano() {
             ModalService.showModal({
-                templateUrl: 'envolvidos.html',
-                controller: "ContasPagarController"
+                templateUrl: 'views/gerencia/dialog/dPlano.html',
+                controller: function($scope) {
+
+
+
+                },
+                controllerAs: "futurama"
             }).then(function(modal) {
                 modal.element.modal();
                 openDialogUpdateCreate();
@@ -462,10 +513,66 @@
             });
         }
 
-        function desdobramento() {
+        function addSite() {
             ModalService.showModal({
-                templateUrl: 'desdobramento.html',
-                controller: "ContasPagarController"
+                templateUrl: 'views/gerencia/dialog/dSite.html',
+                controller: function($scope) {
+
+
+
+                },
+                controllerAs: "futurama"
+            }).then(function(modal) {
+                modal.element.modal();
+                modal.close.then(function(result) {
+                    $scope.message = "You said " + result;
+                });
+            });
+        }
+
+        function addColaborador() {
+            ModalService.showModal({
+                templateUrl: 'views/gerencia/dialog/dParceiro.html',
+                controller: function($scope) {
+
+
+
+                },
+                controllerAs: "futurama"
+            }).then(function(modal) {
+                modal.element.modal();
+                modal.close.then(function(result) {
+                    $scope.message = "You said " + result;
+                });
+            });
+        }
+
+        function addPlanoContas() {
+            ModalService.showModal({
+                templateUrl: 'views/gerencia/dialog/dPlanoContas.html',
+                controller: function($scope) {
+
+
+
+                },
+                controllerAs: "futurama"
+            }).then(function(modal) {
+                modal.element.modal();
+                modal.close.then(function(result) {
+                    $scope.message = "You said " + result;
+                });
+            });
+        }
+
+        function addFilial() {
+            ModalService.showModal({
+                templateUrl: 'views/cadastros/dialog/dFilial.html',
+                controller: function($scope) {
+
+
+
+                },
+                controllerAs: "futurama"
             }).then(function(modal) {
                 modal.element.modal();
                 modal.close.then(function(result) {

@@ -1,15 +1,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="dist/css/formValidation.css" />
-<link rel="stylesheet" href="dist/css/select2.css" />
 <script src="dist/js/select2.min.js"></script>
-<script src="dist/js/formValidation.js"></script>
-<script src="dist/js/framework/bootstrap.js"></script>
 <style type="text/css">
     .wash {
         list-style: none;
         padding: 0;
         margin: 0;
     }
+    
     .tabs-was {
         float: left;
         border: 1px solid #000;
@@ -19,26 +17,32 @@
         background-color: #CCC;
         color: ##3767B9;
     }
+    
     #mainView {
         border: 1px solid black;
         clear: both;
     }
+    
     .active {
         background-color: #FFF;
         color: #000;
     }
+    
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
+    
     .tabs-nav {
         padding: 20px 0 0;
         list-style: none;
     }
+    
     .tabs-nav li {
         display: inline;
     }
+    
     .tabs-nav a {
         display: inline-block;
         border: 1px solid #ddd;
@@ -50,20 +54,24 @@
         color: #fff;
         background: #1B3975;
     }
+    
     .tabs-nav .active {
         background: #fff;
         color: #000;
         border-bottom: 1px solid #fff;
         margin-bottom: -1px;
     }
+    
     .tab-content {
         border: 1px solid #ddd;
         padding: 20px;
     }
+    
     .tab-content1 {
         border: 1px solid #ddd;
         padding: 20px;
     }
+    
     p {
         margin-bottom: 15px;
     }
@@ -85,37 +93,42 @@
             height: auto;
         }
     }
+    
     div.show-image {
         position: relative;
         float: left;
         margin: 5px;
     }
+    
     div.show-image:hover img {
         opacity: 0.5;
     }
+    
     div.show-image:hover input {
         display: block;
     }
+    
     div.show-image input {
         position: absolute;
         display: none;
     }
+    
     div.show-image input.update {
         top: 0;
         left: 0;
     }
+    
     div.show-image input.delete {
         top: 0;
         left: 79%;
     }
+    
     .vis {
         height: 100px;
         display: none;
     }
-
-    
 </style>
-<div class="container1" ng-app ng-init="tabs=4">
+<div class="container1" ng-app ng-init="tabs=1">
     <ul class="tabs-nav">
         <li><a ng-click="tabs=1" ng-class="{'active' : tabs==1}">Empresa</a>
         </li>
@@ -123,9 +136,9 @@
         </li>
         <li><a ng-click="tabs=3" ng-class="{'active' : tabs==3}">Arquivos Anexos</a>
         </li>
-        <li><a ng-click="tabs=4" ng-class="{'active' : tabs==4}">Contas Pagar</a>
+        <li><a ng-click="tabs=4" ng-class="{'active' : tabs==4}">Conta Pagar</a>
         </li>
-        <li><a ng-click="tabs=5" ng-class="{'active' : tabs==5}">Contas Receber</a>
+        <li><a ng-click="tabs=5" ng-class="{'active' : tabs==5}">Conta Receber</a>
         </li>
         <li><a ng-click="tabs=6" ng-class="{'active' : tabs==6}">Produtos</a>
         </li>
@@ -135,13 +148,15 @@
         </li>
         <li><a ng-click="tabs=9" ng-class="{'active' : tabs==9}">Contatos</a>
         </li>
+        <li><a ng-click="tabs=9" ng-class="{'active' : tabs==9}">Historico</a>
+        </li>
     </ul>
     <div class="tabs-container1">
-        <div class="tab-content1" ng-show="tabs == 4">
+        <div class="tab-content1" ng-show="tabs == 1">
             <div class="container-fluid">
                 <div class="row content">
                     <br>
-                    <div class="col-sm-9" ng-controller="ProcessoController as pc">
+                    <div class="col-sm-9" ng-controller="CadEmpresaController as pc">
                         <div class="row col-sm-12 well">
                             <div class="col-sm-2">
                                 <label for="exampleInputEmail1"> Status: </label>
@@ -166,250 +181,194 @@
                         <div class="well">
                             <a href="javaScript:;" ng-click="toggle()">Editar Empresa</a>
                             <div ng-show="state">
-                                <div>
-                                    <form id="empresaForm">
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        <label for="exampleInputEmail1">Nome ou Razão social</label>
+                                        <input type="text" ng-model="empresa.razao" name="razao" class="form-control" placeholder="Nome ou Razão social">
+                                    </div>
+
+                                    <div class="form-group col-sm-6">
+                                        <label for="exampleInputEmail1">Nome Fantasia</label>
+                                        <input type="text" ng-model="empresa.fantasia" name="fantasia" class="form-control" placeholder="Nome Fantasia">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-3">
+                                        <label for="exampleInputEmail1">CNPJ</label>
+                                        <input type="text" ng-model="empresa.cnpj" name="cnpj" class="form-control" placeholder="Nº Cart. Trab">
+                                    </div>
+
+                                    <div class="form-group col-sm-3">
+                                        <label for="exampleInputEmail1">Inscr Est Subst Trib</label>
+                                        <input type="text" ng-model="empresa.incrEstSub" name="inscrEstSub" class="form-control" placeholder="Inscr Est Subst Trib">
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label for="exampleInputEmail1">Indicador de IE</label>
                                         <div class="row">
-                                            <div class="form-group col-sm-6">
-                                                <label for="exampleInputEmail1">Assunto</label>
-                                                <input type="text" ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="CFOP">
-                                            </div>
-                                            <div class="form-group col-sm-6">
-                                                <label for="exampleInputEmail1">Status</label>
-                                                <div class="row">
-                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                        <option></option>
-                                                        <option value="4">Arquivado</option>
-                                                        <option value="1" selected="selected">Ativo</option>
-                                                        <option value="5">Em grau de recurso</option>
-                                                        <option value="3">Encerrado</option>
-                                                        <option value="2">Suspenso</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                            <select id="contatos_indIE" ng-model="empresa.indIE" class="select col-sm-12" name="indIE" autocomplete="off">
+                                             <option value="0"></option>
+                                             <option value="1">Contribuinte ICMS</option>
+                                             <option value="2">Isento de cadastro</option>
+                                             <option value="9">Não contribuinte</option>
+                                        </select>
                                         </div>
-                                        <div class="row col-sm-12">
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label for="exampleInputEmail1">Inscrição Estadual</label>
+                                        <input type="text" class="form-control" ng-model="empresa.incrEst" name="incrEst" placeholder="Inscrição Estadual">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-3">
+                                        <label for="exampleInputEmail1">Inscrição Municipal</label>
+                                        <input type="text" class="form-control col-sm-3" ng-model="empresa.incrMun" name="incrMun" placeholder="Inscrição Municipal">
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label for="exampleInputEmail1">Inscrição Suframa</label>
+                                        <input type="text" class="form-control col-sm-3" ng-model="empresa.suframa" name="suframa" placeholder="Inscrição Suframa">
+                                    </div>
+
+                                    <div class="form-group col-sm-3">
+                                        <label for="exampleInputEmail1">Nome do responsável</label>
+                                        <input type="text" class="form-control col-sm-3" ng-model="empresa.responsavel" name="responsavel" placeholder="Nome do responsável">
+                                    </div>
+
+                                    <div class="form-group col-sm-3">
+                                        <label for="exampleInputEmail1">Data nascimento</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" data-mask="99/99/9999" placeholder="MM/DD/YYYY">
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="exampleInputPassword1">CEP</label>
+                                        <div class="input-group">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Descrição</label>
-                                                <input type="text" class="form-control" ng-model="cfop.descricao" name="descricao" placeholder="Descrição">
+                                                <input type="text" class="form-control" name="cep" ng-model="empresa.enderecos[0].cep">
                                             </div>
+                                            <span class="input-group-btn">
+            
+                                             <button class="btn btn-default" type="button" ng-click="cc.buscaRCep('38082243')"><i class="glyphicon glyphicon-search"> </i></button>
+                                         </span>
                                         </div>
-                                        <div class="row col-sm-12">
-                                            <div class="form-group col-sm-4">
-                                                <label for="exampleInputEmail1">Responsáveis</label>
-                                                <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="Responsáveis">
-                                            </div>
-                                            <div class="form-group col-sm-4">
-                                                <label for="exampleInputPassword1">Grupos de trabalho</label>
-                                                <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="Grupos de trabalho">
-                                            </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Logradouro</label>
+                                            <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="empresa.enderecos[0].logradouro" placeholder="Logradouro">
                                         </div>
-                                        <div class="panel-group" id="accordion">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
-                                                        Dados do processo
-                                                        </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapseOne" class="panel-collapse collapse in collapseFour">
-                                                    <div class="panel-body">
-                                                        <div class="row">
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputPassword1">Processo</label>
-                                                                <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="0.00">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group col-sm-4">
-                                                            <label for="exampleInputEmail1">Situação</label>
-                                                            <div class="row">
-                                                                <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                    <option></option>
-                                                                    <option value="2">Conselho Nacional de Justiça</option>
-                                                                    <option value="8" selected="selected">Justiça dos Estados e do Distrito Federal e Territórios</option>
-                                                                    <option value="5">Justiça do Trabalho</option>
-                                                                    <option value="6">Justiça Eleitoral</option>
-                                                                    <option value="4">Justiça Federal</option>
-                                                                    <option value="7">Justiça Militar da União</option>
-                                                                    <option value="9">Justiça Militar Estadual</option>
-                                                                    <option value="3">Superior Tribunal de Justiça</option>
-                                                                    <option value="1">Supremo Tribunal Federal</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group col-sm-4">
-                                                            <label for="exampleInputEmail1">Instância</label>
-                                                            <div class="row">
-                                                                <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                    <option></option>
-                                                                    <option value="PRIMEIRA_INSTANCIA" selected="selected">1ª Instância</option>
-                                                                    <option value="SEGUNDA_INSTANCIA">2ª Instância</option>
-                                                                    <option value="TERCEIRA_INSTANCIA">3ª Instância</option>
-                                                                    <option value="QUARTA_INSTANCIA">4ª Instância</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group col-sm-4">
-                                                            <label for="exampleInputPassword1">Órgão</label>
-                                                            <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="0.00">
-                                                        </div>
-                                                        <div class="form-group col-sm-4">
-                                                            <label for="exampleInputPassword1">Numeração Padrão CNJ</label>
-                                                            <input type="password" class="form-control" ng-model="cfop.classFiscal" name="password" placeholder="0.00">
-                                                        </div>
-                                                        <div class="form-group col-sm-4">
-                                                            <label for="exampleInputPassword1">Numeração Outro Padrão</label>
-                                                            <input type="password" class="form-control" ng-model="cfop.classFiscal" name="password" placeholder="0.00">
-                                                        </div>
-                                                        <div class="col-sm-3" style="margin-top:18px">
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="receiver" class="check-socio" value="1" /> Agendar captura no tribunal
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row col-sm-12">
-                                                <div class="form-group col-sm-4">
-                                                    <label for="exampleInputPassword1">Distribuído</label>
-                                                    <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="0.00">
-                                                </div>
-                                                <div class="form-group col-sm-4">
-                                                    <label for="exampleInputPassword1">Valor da ação</label>
-                                                    <input type="password" class="form-control" ng-model="cfop.classFiscal" name="password" placeholder="0.00">
-                                                </div>
-                                            </div>
-                                            <div class="row col-sm-12">
-                                                <div class="form-group">
-                                                    <label for="exampleInputPassword1">Observação</label>
-                                                    <input type="password" class="form-control" ng-model="cfop.observacao" name="password" placeholder="Observação">
-                                                </div>
-                                            </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Numero</label>
+                                            <input type="text" class="form-control col-sm-4" name="numero" ng-model="empresa.enderecos[0].numero" placeholder="Numero">
                                         </div>
-                                        <div class="panel-group" id="accordion">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
-                                                        PARÂMETROS DA CAPTURA
-                                                        </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapseOne" class="panel-collapse collapse in collapseFour">
-                                                    <div class="panel-body">
-                                                        <div class="row">
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputEmail1">Justiça</label>
-                                                                <div class="row">
-                                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                        <option></option>
-                                                                        <option value=""></option>
-                                                                        <option value="1">Supremo Tribunal Federal</option>
-                                                                        <option value="3">Superior Tribunal de Justiça</option>
-                                                                        <option value="4">Justiça Federal</option>
-                                                                        <option value="5">Justiça do Trabalho</option>
-                                                                        <option value="8" selected="selected">Justica dos Estados e do Distrito Federal e Territórios</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputEmail1">Tribunal</label>
-                                                                <div class="row">
-                                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                        <option value="" selected="selected"></option>
-                                                                        <option value="5">Tribunal de Justiça do Acre</option>
-                                                                        <option value="7">Tribunal de Justiça de Alagoas</option>
-                                                                        <option value="8">Tribunal de Justiça do Amazonas</option>
-                                                                        <option value="11">Tribunal de Justiça da Bahia</option>
-                                                                        <option value="16">Tribunal de Justiça do Ceará</option>
-                                                                        <option value="53">Tribunal de Justiça do Distrito Federal e dos Territórios - DF</option>
-                                                                        <option value="19">Tribunal de Justiça do Espírito Santo</option>
-                                                                        <option value="20">Tribunal de Justiça de Goiás</option>
-                                                                        <option value="22">Tribunal de Justiça do Maranhão</option>
-                                                                        <option value="29">Tribunal de Justiça de Mato Grosso</option>
-                                                                        <option value="26">Tribunal de Justiça de Mato Grosso do Sul</option>
-                                                                        <option value="24">Tribunal de Justiça de Minas Gerais</option>
-                                                                        <option value="34">Tribunal de Justiça do Paraná</option>
-                                                                        <option value="51">Tribunal de Justiça do Pará - PA</option>
-                                                                        <option value="33">Tribunal de Justiça do Piauí</option>
-                                                                        <option value="40">Tribunal de Justiça do Rio Grande do Norte</option>
-                                                                        <option value="43">Tribunal de Justiça de Rio Grande do Sul</option>
-                                                                        <option value="37">Tribunal de Justiça do Rio de Janeiro</option>
-                                                                        <option value="42">Tribunal de Justiça de Rondônia</option>
-                                                                        <option value="45">Tribunal de Justiça de Santa Catarina</option>
-                                                                        <option value="4">Tribunal de Justiça de São Paulo</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputEmail1">Instância</label>
-                                                                <div class="row">
-                                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                        <option></option>
-                                                                        <option value="PRIMEIRA_INSTANCIA" selected="selected">1ª Instância</option>
-                                                                        <option value="SEGUNDA_INSTANCIA">2ª Instância</option>
-                                                                        <option value="TERCEIRA_INSTANCIA">3ª Instância</option>
-                                                                        <option value="QUARTA_INSTANCIA">4ª Instância</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputEmail1">Localidade</label>
-                                                                <div class="row">
-                                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                        <option></option>
-                                                                        <option value="PRIMEIRA_INSTANCIA" selected="selected">1ª Instância</option>
-                                                                        <option value="SEGUNDA_INSTANCIA">2ª Instância</option>
-                                                                        <option value="TERCEIRA_INSTANCIA">3ª Instância</option>
-                                                                        <option value="QUARTA_INSTANCIA">4ª Instância</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputEmail1">Capturar por</label>
-                                                                <div class="row">
-                                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                        <option></option>
-                                                                        <option value="PRIMEIRA_INSTANCIA" selected="selected">1ª Instância</option>
-                                                                        <option value="SEGUNDA_INSTANCIA">2ª Instância</option>
-                                                                        <option value="TERCEIRA_INSTANCIA">3ª Instância</option>
-                                                                        <option value="QUARTA_INSTANCIA">4ª Instância</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row col-sm-4">
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputPassword1">Número do Processo</label>
-                                                                    <input type="password" class="form-control" ng-model="cfop.observacao" name="password" placeholder="Número do Processo">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputEmail1">Captura automática de andamentos</label>
-                                                                <div class="row">
-                                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                        <option value="NAO_CAPTURAR">Não capturar</option>
-                                                                        <option value="DIARIA">Diária</option>
-                                                                        <option value="SEMANAL">Semanal</option>
-                                                                        <option value="MENSAL">Mensal</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1">Complemento</label>
+                                        <input type="text" class="form-control col-sm-8" name="complemento" ng-model="empresa.enderecos[0].complemento" placeholder="Complemento">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label for="exampleInputPassword1">Bairro</label>
+                                        <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].bairro" placeholder="Bairro">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label for="exampleInputPassword1">Estado</label>
+                                        <input type="text" class="form-control col-sm-8" ng-model="empresa.enderecos[0].estado.abreviacao" placeholder="Estado">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label for="exampleInputPassword1">Municipio</label>
+                                        <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].cidade.nome" placeholder="Municipio">
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <label for="exampleInputPassword1">Codigo IBGE</label>
+                                        <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].codIbge" placeholder="Codigo IBGE">
+                                    </div>
+                                </div>
+                                <!-- -------------------  TELEFONE ----------------- -->
+                                <div class="row">
+
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1" class="control-label">Telefone</label>
+                                        <input type="text" class="form-control gugu" name="phone" data-mask="(99) 9999-9999" placeholder="(55) 1111-2222">
+                                    </div>
+
+                                    <div class="col-sm-4" style="margin-top:25px">
+                                        <div class="dropdown">
+                                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
+                                    Adicionar
+                                    <span class="caret"></span>
+                                  </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li><a href="javascript:;" class="addPhoneButton">Residencial</a></li>
+                                                <li><a href="javascript:;" class="addPhoneButton">Celular TIM</a></li>
+                                                <li><a href="javascript:;" class="addPhoneButton">Celular OI</a></li>
+                                                <li role="separator" class="divider"></li>
+                                                <li><a href="javascript:;" class="addPhoneButton">Outros</a></li>
+                                            </ul>
                                         </div>
-                                        <div class="row " style="margin-top : 10px"></div>
-                                        <div class="row ">
-                                            <div class="col-sm-10"> </div>
-                                            <div class="col-sm-2">
-                                                <button type="submit" class="btn btn-primary">Gravar</button>
-                                            </div>
+                                    </div>
+
+                                </div>
+                                <!-- Template for dynamic field -->
+                                <div class="row" id="template" style="display: none;">
+
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1" class="control-label">Telefone</label>
+                                        <input type="text" class="form-control gugu" name="phone" data-mask="(99) 9999-9999" placeholder="(55) 1111-2222">
+                                    </div>
+
+                                    <div class="col-sm-4" style="margin-top:25px">
+                                        <button type="button" class="btn btn-link removeButton">deletar</button>
+                                    </div>
+
+                                </div>
+
+                                <!-- ------------------------------------- -->
+                                <!-- ------------------------------------- -->
+
+                                <!-- -------------------  Email Empresa ----------------- -->
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1">Email</label>
+                                        <input type="text" class="form-control col-sm-4 input-email" name="email" placeholder="Email">
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:25px">
+
+                                        <div class="dropdown">
+                                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
+                                    Adicionar
+                                    <span class="caret"></span>
+                                  </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li><a href="javascript:;" class="addEmailButton">Principal</a></li>
+                                                <li><a href="javascript:;" class="addEmailButton">NF-e</a></li>
+                                                <li><a href="javascript:;" class="addEmailButton">Compras</a></li>
+                                                <li><a href="javascript:;" class="addEmailButton">Vendas</a></li>
+                                                <li role="separator" class="divider"></li>
+                                                <li><a href="javascript:;" class="addEmailButton">Outros</a></li>
+                                            </ul>
                                         </div>
+                                    </div>
+                                </div>
+
+                                <!-- Template for dynamic field -->
+                                <div class="row" id="template-email" style="display: none;">
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1" class="control-label">Email</label>
+                                        <input type="email" class="form-control col-sm-4 input-email" placeholder="Email">
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:25px">
+                                        <button type="button" class="btn btn-link removeButton">deletar</button>
+                                    </div>
                                 </div>
                             </div>
                             </form>
@@ -418,267 +377,24 @@
                         <div class="well">
                             <a href="javaScript:;" ng-click="toggle1()">Editar Configuração</a>
                             <div ng-show="state1">
-                                <div>
-                                    <form id="empresaForm">
-                                        <div class="row">
-                                            <div class="form-group col-sm-6">
-                                                <label for="exampleInputEmail1">Assunto</label>
-                                                <input type="text" ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="CFOP">
-                                            </div>
-                                            <div class="form-group col-sm-6">
-                                                <label for="exampleInputEmail1">Status</label>
-                                                <div class="row">
-                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                        <option></option>
-                                                        <option value="4">Arquivado</option>
-                                                        <option value="1" selected="selected">Ativo</option>
-                                                        <option value="5">Em grau de recurso</option>
-                                                        <option value="3">Encerrado</option>
-                                                        <option value="2">Suspenso</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row col-sm-12">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Descrição</label>
-                                                <input type="text" class="form-control" ng-model="cfop.descricao" name="descricao" placeholder="Descrição">
-                                            </div>
-                                        </div>
-                                        <div class="row col-sm-12">
-                                            <div class="form-group col-sm-4">
-                                                <label for="exampleInputEmail1">Responsáveis</label>
-                                                <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="Responsáveis">
-                                            </div>
-                                            <div class="form-group col-sm-4">
-                                                <label for="exampleInputPassword1">Grupos de trabalho</label>
-                                                <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="Grupos de trabalho">
-                                            </div>
-                                        </div>
-                                        <div class="panel-group" id="accordion">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
-                                                        Dados do processo
-                                                        </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapseOne" class="panel-collapse collapse in collapseFour">
-                                                    <div class="panel-body">
-                                                        <div class="row">
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputPassword1">Processo</label>
-                                                                <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="0.00">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group col-sm-4">
-                                                            <label for="exampleInputEmail1">Situação</label>
-                                                            <div class="row">
-                                                                <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                    <option></option>
-                                                                    <option value="2">Conselho Nacional de Justiça</option>
-                                                                    <option value="8" selected="selected">Justiça dos Estados e do Distrito Federal e Territórios</option>
-                                                                    <option value="5">Justiça do Trabalho</option>
-                                                                    <option value="6">Justiça Eleitoral</option>
-                                                                    <option value="4">Justiça Federal</option>
-                                                                    <option value="7">Justiça Militar da União</option>
-                                                                    <option value="9">Justiça Militar Estadual</option>
-                                                                    <option value="3">Superior Tribunal de Justiça</option>
-                                                                    <option value="1">Supremo Tribunal Federal</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group col-sm-4">
-                                                            <label for="exampleInputEmail1">Instância</label>
-                                                            <div class="row">
-                                                                <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                    <option></option>
-                                                                    <option value="PRIMEIRA_INSTANCIA" selected="selected">1ª Instância</option>
-                                                                    <option value="SEGUNDA_INSTANCIA">2ª Instância</option>
-                                                                    <option value="TERCEIRA_INSTANCIA">3ª Instância</option>
-                                                                    <option value="QUARTA_INSTANCIA">4ª Instância</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group col-sm-4">
-                                                            <label for="exampleInputPassword1">Órgão</label>
-                                                            <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="0.00">
-                                                        </div>
-                                                        <div class="form-group col-sm-4">
-                                                            <label for="exampleInputPassword1">Numeração Padrão CNJ</label>
-                                                            <input type="password" class="form-control" ng-model="cfop.classFiscal" name="password" placeholder="0.00">
-                                                        </div>
-                                                        <div class="form-group col-sm-4">
-                                                            <label for="exampleInputPassword1">Numeração Outro Padrão</label>
-                                                            <input type="password" class="form-control" ng-model="cfop.classFiscal" name="password" placeholder="0.00">
-                                                        </div>
-                                                        <div class="col-sm-3" style="margin-top:18px">
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="receiver" class="check-socio" value="1" /> Agendar captura no tribunal
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row col-sm-12">
-                                                <div class="form-group col-sm-4">
-                                                    <label for="exampleInputPassword1">Distribuído</label>
-                                                    <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="0.00">
-                                                </div>
-                                                <div class="form-group col-sm-4">
-                                                    <label for="exampleInputPassword1">Valor da ação</label>
-                                                    <input type="password" class="form-control" ng-model="cfop.classFiscal" name="password" placeholder="0.00">
-                                                </div>
-                                            </div>
-                                            <div class="row col-sm-12">
-                                                <div class="form-group">
-                                                    <label for="exampleInputPassword1">Observação</label>
-                                                    <input type="password" class="form-control" ng-model="cfop.observacao" name="password" placeholder="Observação">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel-group" id="accordion">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
-                                                        PARÂMETROS DA CAPTURA
-                                                        </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapseOne" class="panel-collapse collapse in collapseFour">
-                                                    <div class="panel-body">
-                                                        <div class="row">
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputEmail1">Justiça</label>
-                                                                <div class="row">
-                                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                        <option></option>
-                                                                        <option value=""></option>
-                                                                        <option value="1">Supremo Tribunal Federal</option>
-                                                                        <option value="3">Superior Tribunal de Justiça</option>
-                                                                        <option value="4">Justiça Federal</option>
-                                                                        <option value="5">Justiça do Trabalho</option>
-                                                                        <option value="8" selected="selected">Justica dos Estados e do Distrito Federal e Territórios</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputEmail1">Tribunal</label>
-                                                                <div class="row">
-                                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                        <option value="" selected="selected"></option>
-                                                                        <option value="5">Tribunal de Justiça do Acre</option>
-                                                                        <option value="7">Tribunal de Justiça de Alagoas</option>
-                                                                        <option value="8">Tribunal de Justiça do Amazonas</option>
-                                                                        <option value="11">Tribunal de Justiça da Bahia</option>
-                                                                        <option value="16">Tribunal de Justiça do Ceará</option>
-                                                                        <option value="53">Tribunal de Justiça do Distrito Federal e dos Territórios - DF</option>
-                                                                        <option value="19">Tribunal de Justiça do Espírito Santo</option>
-                                                                        <option value="20">Tribunal de Justiça de Goiás</option>
-                                                                        <option value="22">Tribunal de Justiça do Maranhão</option>
-                                                                        <option value="29">Tribunal de Justiça de Mato Grosso</option>
-                                                                        <option value="26">Tribunal de Justiça de Mato Grosso do Sul</option>
-                                                                        <option value="24">Tribunal de Justiça de Minas Gerais</option>
-                                                                        <option value="34">Tribunal de Justiça do Paraná</option>
-                                                                        <option value="51">Tribunal de Justiça do Pará - PA</option>
-                                                                        <option value="33">Tribunal de Justiça do Piauí</option>
-                                                                        <option value="40">Tribunal de Justiça do Rio Grande do Norte</option>
-                                                                        <option value="43">Tribunal de Justiça de Rio Grande do Sul</option>
-                                                                        <option value="37">Tribunal de Justiça do Rio de Janeiro</option>
-                                                                        <option value="42">Tribunal de Justiça de Rondônia</option>
-                                                                        <option value="45">Tribunal de Justiça de Santa Catarina</option>
-                                                                        <option value="4">Tribunal de Justiça de São Paulo</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputEmail1">Instância</label>
-                                                                <div class="row">
-                                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                        <option></option>
-                                                                        <option value="PRIMEIRA_INSTANCIA" selected="selected">1ª Instância</option>
-                                                                        <option value="SEGUNDA_INSTANCIA">2ª Instância</option>
-                                                                        <option value="TERCEIRA_INSTANCIA">3ª Instância</option>
-                                                                        <option value="QUARTA_INSTANCIA">4ª Instância</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputEmail1">Localidade</label>
-                                                                <div class="row">
-                                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                        <option></option>
-                                                                        <option value="PRIMEIRA_INSTANCIA" selected="selected">1ª Instância</option>
-                                                                        <option value="SEGUNDA_INSTANCIA">2ª Instância</option>
-                                                                        <option value="TERCEIRA_INSTANCIA">3ª Instância</option>
-                                                                        <option value="QUARTA_INSTANCIA">4ª Instância</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputEmail1">Capturar por</label>
-                                                                <div class="row">
-                                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                        <option></option>
-                                                                        <option value="PRIMEIRA_INSTANCIA" selected="selected">1ª Instância</option>
-                                                                        <option value="SEGUNDA_INSTANCIA">2ª Instância</option>
-                                                                        <option value="TERCEIRA_INSTANCIA">3ª Instância</option>
-                                                                        <option value="QUARTA_INSTANCIA">4ª Instância</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row col-sm-4">
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputPassword1">Número do Processo</label>
-                                                                    <input type="password" class="form-control" ng-model="cfop.observacao" name="password" placeholder="Número do Processo">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputEmail1">Captura automática de andamentos</label>
-                                                                <div class="row">
-                                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                        <option value="NAO_CAPTURAR">Não capturar</option>
-                                                                        <option value="DIARIA">Diária</option>
-                                                                        <option value="SEMANAL">Semanal</option>
-                                                                        <option value="MENSAL">Mensal</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row " style="margin-top : 10px"></div>
-                                        <div class="row ">
-                                            <div class="col-sm-10"> </div>
-                                            <div class="col-sm-2">
-                                                <button type="submit" class="btn btn-primary">Gravar</button>
-                                            </div>
-                                        </div>
-                                </div>
+
                             </div>
-                            </form>
                         </div>
                         <div class="row">
                             <div class="col-sm-2">
                                 <div class="">
-                                    <h4><a ng-click="pc.envolvidos()">Adicionar Socios</a></h4>
+                                    <h4><a ng-click="pc.addSocios()">Adicionar Socios</a></h4>
                                 </div>
                             </div>
                             <div class="col-sm-3 well" style="margin-right:2px">
                                 <div class="show-image">
                                     <div>
                                         <p>Nome : Washington Luis</p>
-                                        <p>Tipo Envolvimento : Parte Ativa</p>
-                                        <p>Envolvimento : Acusador</p>
-                                        <p>Cliente : Sim</p>
+                                        <p>Porcentagem : 50%</p>
+                                        <p>valor Prolabore : R$1000,00</p>
+                                        <p>Administrador : Sim</p>
+                                        <p>Email : liviaMiziara@econtabil.com.br</p>
+                                        <p>Telefone : (34) 99999-8888</p>
                                     </div>
                                     <input class="btn btn-primary update" type="button" value="Alterar" />
                                     <input class="btn btn-primary delete" type="button" value="Deletar" />
@@ -687,22 +403,12 @@
                             <div class="col-sm-3 well">
                                 <div class="show-image">
                                     <div>
-                                        <p>Nome : Washington Luis</p>
-                                        <p>Tipo Envolvimento : Parte Ativa</p>
-                                        <p>Envolvimento : Acusador</p>
-                                        <p>Cliente : Sim</p>
-                                    </div>
-                                    <input class="btn btn-primary update" type="button" value="Alterar" />
-                                    <input class="btn btn-primary delete" type="button" value="Deletar" />
-                                </div>
-                            </div>
-                            <div class="col-sm-3 well">
-                                <div class="show-image">
-                                    <div>
-                                        <p>Nome : Washington Luis</p>
-                                        <p>Tipo Envolvimento : Parte Ativa</p>
-                                        <p>Envolvimento : Acusador</p>
-                                        <p>Cliente : Sim</p>
+                                        <p>Nome : Silvio Luis</p>
+                                        <p>Porcentagem : 50%</p>
+                                        <p>valor Prolabore : R$1000,00</p>
+                                        <p>Administrador : Não</p>
+                                        <p>Email : liviaMiziara@econtabil.com.br</p>
+                                        <p>Telefone : (34) 99999-8888</p>
                                     </div>
                                     <input class="btn btn-primary update" type="button" value="Alterar" />
                                     <input class="btn btn-primary delete" type="button" value="Deletar" />
@@ -712,96 +418,109 @@
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="">
-                                    <h4><a>Adicionar Filial</a></h4>
+                                    <h4><a ng-click="pc.addCnae()">Adicionar Cnae</a></h4>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="well">
-                                    <p>Nome : Livia Miziara</p>
-                                    <p>OAB : 54145.65</p>
-                                    <p>Email : liviaMiziara@econtabil.com.br</p>
-                                    <p>Telefone : (34) 99999-8888</p>
+                                    <p>Codigo : 01.11-2</p>
+                                    <p>Cnae : Cultivo de cereais para grãos</p>
+                                    <input class="btn btn-primary update" type="button" value="Alterar" />
+                                    <input class="btn btn-primary delete" type="button" value="Deletar" />
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="well">
-                                    <p>Nome : Livia Miziara</p>
-                                    <p>OAB : 54145.65</p>
-                                    <p>Email : liviaMiziara@econtabil.com.br</p>
-                                    <p>Telefone : (34) 99999-8888</p>
+                                    <p>Codigo : 01.12-0</p>
+                                    <p>Cnae : Cultivo de algodão herbáceo</p>
+                                    <input class="btn btn-primary update" type="button" value="Alterar" />
+                                    <input class="btn btn-primary delete" type="button" value="Deletar" />
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="">
-                                    <h4><a>Adicionar Plano de Contas</a></h4>
+                                    <h4><a ng-click="pc.addFilial()">Adicionar Filial</a></h4>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="well">
-                                    <p>Nome : Livia Miziara</p>
-                                    <p>OAB : 54145.65</p>
-                                    <p>Email : liviaMiziara@econtabil.com.br</p>
+                                    <p>Cnpj : 72.939.978/0001-24</p>
+                                    <p>End. : R: Maria Conceição Silva nº 686</p>
+                                    <p>Cidade : Uberaba MG</p>
+                                    <p>Email : notaFiscal0001@econtabil.com.br</p>
                                     <p>Telefone : (34) 99999-8888</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="well">
-                                    <p>Nome : Livia Miziara</p>
-                                    <p>OAB : 54145.65</p>
-                                    <p>Email : liviaMiziara@econtabil.com.br</p>
-                                    <p>Telefone : (34) 99999-8888</p>
+                                    <p>Responsavel : João Antonio</p>
+                                    <input class="btn btn-primary update" type="button" value="Alterar" />
+                                    <input class="btn btn-primary delete" type="button" value="Deletar" />
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="">
-                                    <h4><a>Adicionar Plano</a></h4>
+                                    <h4><a ng-click="pc.addSite()">Adicionar Site</a></h4>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="well">
-                                    <p>Nome : Livia Miziara</p>
-                                    <p>OAB : 54145.65</p>
-                                    <p>Email : liviaMiziara@econtabil.com.br</p>
-                                    <p>Telefone : (34) 99999-8888</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="well">
-                                    <p>Nome : Livia Miziara</p>
-                                    <p>OAB : 54145.65</p>
-                                    <p>Email : liviaMiziara@econtabil.com.br</p>
-                                    <p>Telefone : (34) 99999-8888</p>
+                                    <p>Nome : e-contábil</p>
+                                    <p>Url  : econtabil.com.br</p>
+                                    <p>Tipo : Informativo</p>
+                                    <input class="btn btn-primary update" type="button" value="Alterar" />
+                                    <input class="btn btn-primary delete" type="button" value="Deletar" />
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="">
-                                    <h4><a>Adicionar Parceiro</a></h4>
+                                    <h4><a ng-click="pc.addPlanoContas()">Adicionar Plano de Contas</a></h4>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="well">
-                                    <p>Nome : Livia Miziara</p>
-                                    <p>OAB : 54145.65</p>
-                                    <p>Email : liviaMiziara@econtabil.com.br</p>
-                                    <p>Telefone : (34) 99999-8888</p>
+                                    <p>Nome : Plano de Contas 0001</p>
+                                    <input class="btn btn-primary update" type="button" value="Alterar" />
+                                    <input class="btn btn-primary delete" type="button" value="Deletar" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="">
+                                    <h4><a ng-click="pc.addPlano()">Adicionar Plano</a></h4>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="well">
-                                    <p>Nome : Livia Miziara</p>
-                                    <p>OAB : 54145.65</p>
+                                    <p>Nome : Plano Economico</p>
+                                    <p>Valor : R$ 99,99 <sup>mês</sup></p>
+                                    <p>Contrato : <a>10541</a></p>
+                                    <p>Data Inicio : 17/08/2016</p>
+                                    <p>Data Final : 17/08/2017</p>
+                                    <input class="btn btn-primary update" type="button" value="Renovar" />
+                                    <input class="btn btn-primary delete" type="button" value="Alterar" />
+                                    <input class="btn btn-primary delete" type="button" value="Deletar" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="">
+                                    <h4><a ng-click="pc.addParceiro()">Adicionar Parceiro</a></h4>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="well">
+                                    <p>Nome : Damião Junior</p>
+                                    <p>CRC : 54145.65</p>
                                     <p>Email : liviaMiziara@econtabil.com.br</p>
                                     <p>Telefone : (34) 99999-8888</p>
                                 </div>
                             </div>
                         </div>
-
 
                     </div>
                     <div class="col-sm-3 sidenav hidden-xs">
@@ -826,35 +545,47 @@
                 </div>
             </div>
         </div>
-        <div class="tab-content1" ng-show="tabs == 5">
-        <div ng-controller="ProcessoController as showCase">
-            <table datatable dt-options="showCase.dtOptionsArquivo" dt-columns="showCase.dtColumnsArquivo" class="row-border hover">
-        <tfoot>
-        <tr>
-            <th>ID
-            </th><th>First Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-        </th></tr>
-        </tfoot>
-    </table>
+        <div class="tab-content1" ng-show="tabs == 2">
+            <div ng-controller="ProcessoController as showCase">
+                <table datatable dt-options="showCase.dtOptionsArquivo" dt-columns="showCase.dtColumnsArquivo" class="row-border hover">
+                    <tfoot>
+                        <tr>
+                            <th>ID
+                            </th>
+                            <th>First Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
-        </div>
-        <div class="tab-content1" ng-show="tabs == 6">
+        <div class="tab-content1" ng-show="tabs == 2">
             <div ng-controller="ContasReceberController as showCase">
                 <table datatable dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" class="row-border hover">
                     <tfoot>
-                    <tr>
-                        <th>ID
-                        </th><th>First Name
-                        </th><th>Last Name
-                        </th><th>
-                        <select id="financeiro_cod_tipoDoc" name="financeiro_cod_tipoDoc">
+                        <tr>
+                            <th>ID
+                            </th>
+                            <th>First Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>
+                                <select id="financeiro_cod_tipoDoc" name="financeiro_cod_tipoDoc">
                             <option value="0"></option>
                             <option value="1">Dinheiro</option>
                             <option value="2">Cheque</option>
@@ -871,700 +602,256 @@
                             <option value="13">Vale Combustível</option>
                             <option value="14">Sem documento</option>
                         </select>
-                        </th><th>Last Name
-                        </th><th>Last Name
-                        </th><th>Last Name
-                        </th><th>Last Name
-                        </th><th>Last Name
-                    </th></tr>
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                        </tr>
                     </tfoot>
                 </table>
             </div>
         </div>
-                <div class="tab-content1" ng-show="tabs == 7">
-        <div ng-controller="ProcessoController as showCase">
-            <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
-        <tfoot>
-        <tr>
-            <th>ID
-            </th><th>First Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-        </th></tr>
-        </tfoot>
-    </table>
+        <div class="tab-content1" ng-show="tabs == 3">
+            <div ng-controller="ProcessoController as showCase">
+                <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
+                    <tfoot>
+                        <tr>
+                            <th>ID
+                            </th>
+                            <th>First Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
+
+        <div class="tab-content1" ng-show="tabs == 4">
+            <div ng-controller="ProcessoController as showCase">
+                <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
+                    <tfoot>
+                        <tr>
+                            <th>ID
+                            </th>
+                            <th>First Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="tab-content1" ng-show="tabs == 5">
+            <div ng-controller="ProcessoController as showCase">
+                <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
+                    <tfoot>
+                        <tr>
+                            <th>ID
+                            </th>
+                            <th>First Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <div class="tab-content1" ng-show="tabs == 6">
+            <div ng-controller="ProcessoController as showCase">
+                <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
+                    <tfoot>
+                        <tr>
+                            <th>ID
+                            </th>
+                            <th>First Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <div class="tab-content1" ng-show="tabs == 7">
+            <div ng-controller="ProcessoController as showCase">
+                <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
+                    <tfoot>
+                        <tr>
+                            <th>ID
+                            </th>
+                            <th>First Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <div class="tab-content1" ng-show="tabs == 8">
+            <div ng-controller="ProcessoController as showCase">
+                <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
+                    <tfoot>
+                        <tr>
+                            <th>ID
+                            </th>
+                            <th>First Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <div class="tab-content1" ng-show="tabs == 9">
+            <div ng-controller="ProcessoController as showCase">
+                <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
+                    <tfoot>
+                        <tr>
+                            <th>ID
+                            </th>
+                            <th>First Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <div class="tab-content1" ng-show="tabs == 10">
+            <div ng-controller="ProcessoController as showCase">
+                <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
+                    <tfoot>
+                        <tr>
+                            <th>ID
+                            </th>
+                            <th>First Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                            <th>Last Name
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
 
     </div>
-</div>
-<!-- alterar Status-->
-<div class="container">
-    <script type="text/ng-template" id="alterStatus.html">
-        <div class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Alterar Status</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group col-sm-12">
-                            <label for="exampleInputEmail1">Status</label>
-                            <div class="row">
-                                <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                    <option></option>
-                                    <option value="4">Arquivado</option>
-                                    <option value="1" selected="selected">Ativo</option>
-                                    <option value="5">Em grau de recurso</option>
-                                    <option value="3">Encerrado</option>
-                                    <option value="2">Suspenso</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row form-group ">
-                            <label for="exampleInputEmail1">Status</label>
-                            <textarea class="form-control" rows="5" id="Observação"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Gravar</button>
-                        <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Sair</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </script>
-</div>
-<!-- Historico-->
-<div class="container">
-    <script type="text/ng-template" id="historico.html">
-        <div class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Deletar</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Deseja Realmente EXCLUIR ID : 1001 </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Fechar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </script>
-</div>
-<!-- adicionar advogado -->
-<div class="container">
-    <script type="text/ng-template" id="addAdvogado.html">
-        <div class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Adicionar Advogado</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group col-sm-4">
-                            <label for="exampleInputEmail1">Advogado</label>
-                            <div class="row">
-                                <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                    <option></option>
-                                    <option value=""></option>
-                                    <option value="1">Antonio Mauricio de Souza - Trabalhista</option>
-                                    <option value="3">Josefina andrade gutierre - Criminal</option>
-                                    <option value="4">Florentina Maria - Tributario</option>
-                                    <option value="5">Janio Aparecido - Familia</option>
-                                    <option value="8" selected="selected">Rick Grimes - Civil</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Adicionar</button>
-                        <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </script>
-</div>
-<!-- adicionar Envolvidos-->
-<div class="container">
-    <script type="text/ng-template" id="envolvidos.html">
-        <div class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Cadastro Envolvidos</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row socios">
-                                <label for="exampleInputPassword1">Pessoa</label>
-                                <div class="row ">
-                                    <select name="book[0].produto" class="col-sm-12">
-                                        <option value="0">1010 - Coca Cola 1LT</option>
-                                        <option value="1">1011 - Coca Cola 1.5LT</option>
-                                        <option value="2">Cadastrar novo Cliente</option>
-                                    </select>
-                                </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label for="exampleInputPassword1">Tipo Envolvimento</label>
-                                <div class="row ">
-                                    <select name="book[0].produto" class="col-sm-12">
-                                        <option></option>
-                                        <option value="PARTE_ATIVA" selected="selected">Parte Ativa</option>
-                                        <option value="PARTE_PASSIVA">Parte Passiva</option>
-                                        <option value="TERCEIRO">Terceiro</option>
-                                        <option value="ASSISTENTE">Assistente</option>
-                                        <option value="FISCAL">Fiscal</option>
-                                        <option value="TESTEMUNHA">Testemunha</option>
-                                        <option value="VITIMA">Vítima</option>
-                                        <option value="OUTROS">Outros</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Envolvimento</label>
-                                    <div class="row ">
-                                        <select name="book[0].produto" class="col-sm-12">
-                                            <option></option>
-                                            <option value="63">Acusador</option>
-                                            <option value="2">Agravante</option>
-                                            <option value="3">Apelante</option>
-                                            <option value="1" selected="selected">Autor</option>
-                                            <option value="4">Embargante</option>
-                                            <option value="5">Excipiente</option>
-                                            <option value="6">Exequente</option>
-                                            <option value="7">Impetrante</option>
-                                            <option value="8">Impugnante</option>
-                                            <option value="9">Interpelante</option>
-                                            <option value="10">Inventariante</option>
-                                            <option value="11">Notificante</option>
-                                            <option value="12">Opoente</option>
-                                            <option value="13">Reclamante</option>
-                                            <option value="14">Reconvinte</option>
-                                            <option value="15">Recorrente</option>
-                                            <option value="61">Requerente</option>
-                                            <option value="16">Sujeito Ativo</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4" style="margin-top:18px">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="receiver" class="check-socio" value="1" /> Cliente
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Gravar</button>
-                        <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Sair</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </script>
-</div>
-<!-- adicionar Desdobramento-->
-<div class="container">
-    <script type="text/ng-template" id="desdobramento.html">
-        <div class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Deletar</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row col-sm-12">
-                            <div class="form-group col-sm-4">
-                                <label for="exampleInputPassword1">Data</label>
-                                <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="0.00">
-                            </div>
-                            <div class="form-group col-sm-4">
-                                <label for="exampleInputPassword1">Numero</label>
-                                <input type="password" class="form-control" ng-model="cfop.classFiscal" name="password" placeholder="0.00">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label for="exampleInputPassword1">Tipo Envolvimento</label>
-                                <div class="row ">
-                                    <select name="book[0].produto" class="col-sm-12">
-                                        <option></option>
-                                        <option value="PARTE_ATIVA" selected="selected">Parte Ativa</option>
-                                        <option value="PARTE_PASSIVA">Parte Passiva</option>
-                                        <option value="TERCEIRO">Terceiro</option>
-                                        <option value="ASSISTENTE">Assistente</option>
-                                        <option value="FISCAL">Fiscal</option>
-                                        <option value="TESTEMUNHA">Testemunha</option>
-                                        <option value="VITIMA">Vítima</option>
-                                        <option value="OUTROS">Outros</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Envolvimento</label>
-                                    <div class="row ">
-                                        <select name="book[0].produto" class="col-sm-12">
-                                            <option></option>
-                                            <option value="63">Acusador</option>
-                                            <option value="2">Agravante</option>
-                                            <option value="3">Apelante</option>
-                                            <option value="1" selected="selected">Autor</option>
-                                            <option value="4">Embargante</option>
-                                            <option value="5">Excipiente</option>
-                                            <option value="6">Exequente</option>
-                                            <option value="7">Impetrante</option>
-                                            <option value="8">Impugnante</option>
-                                            <option value="9">Interpelante</option>
-                                            <option value="10">Inventariante</option>
-                                            <option value="11">Notificante</option>
-                                            <option value="12">Opoente</option>
-                                            <option value="13">Reclamante</option>
-                                            <option value="14">Reconvinte</option>
-                                            <option value="15">Recorrente</option>
-                                            <option value="61">Requerente</option>
-                                            <option value="16">Sujeito Ativo</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <h4 class="list-group-item-heading">Nota</h4>
-                            <textarea class="form-control" rows="5" id="Observação"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Sim</button>
-                        <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Não</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </script>
-</div>
-
-
-  <div class="container">
-                 <script type="text/ng-template" id="contasReceber.html">
-                     <div class="modal fade">
-                      <div class="modal-dialog" style="width : 70%">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Cadastro Contas Receber</h4>
-                          </div>
-                          <div class="modal-body">
-                            <form  id="empresaForm">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <label for="exampleInputPassword1">Cliente</label>
-                                                <div class="row ">
-                                                    <select id="financeiro_cod_tipoDoc" class="col-sm-12" name="financeiro_cod_tipoDoc">
-                                                        <option value="1">1001 - Tyrion Lannister</option>
-                                                        <option value="2">1002 - Jaime Lannister</option>
-                                                        <option value="3">1003 - Cersei Lannister</option>
-                                                        <option value="4">1004 - Daenerys Targaryen</option>
-                                                        <option value="5">1005 - Jon Snow</option>
-                                                        <option value="6">1006 - Jorah Mormont</option>
-                                                        <option value="7">1007 - Sansa Stark</option>
-                                                        <option value="8">1008 - Arya Stark</option>
-                                                        <option value="9">1009 - Theon Greyjoy/Fedor</option>
-                                                        <option value="10">1010 - Brandon "Bran" Stark</option>
-                                                        <option value="11">1011 - Sandor Clegane</option>
-                                                        <option value="12">1012 - Joffrey Baratheon</option>
-                                                        <option value="13">1013 - Robb Stark</option>
-                                                        <option value="14">1014 - Khal Drogo</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-sm-6">
-                                                <label for="exampleInputEmail1">Descrição</label>
-                                                <input type="text"  ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Descrição">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-
-                                            <div class="form-group col-sm-3">
-                                                <label for="exampleInputPassword1">Tipo de documento</label>
-                                                <div class="row ">
-                                                <select id="financeiro_cod_tipoDoc" class="col-sm-12" name="financeiro_cod_tipoDoc">
-                                                    <option value="0"></option>
-                                                    <option value="1">Dinheiro</option>
-                                                    <option value="2">Cheque</option>
-                                                    <option value="3">Boleto</option>
-                                                    <option value="4">Cartão Crédito</option>
-                                                    <option value="5">Cartão Débito</option>
-                                                    <option value="6">Duplicata</option>
-                                                    <option value="7">Carnê</option>
-                                                    <option value="8">Transf. Eletrônica</option>
-                                                    <option value="9">Crédito Loja</option>
-                                                    <option value="10">Vale Alimentação</option>
-                                                    <option value="11">Vale Refeição</option>
-                                                    <option value="12">Vale Presente</option>
-                                                    <option value="13">Vale Combustível</option>
-                                                    <option value="14">Sem documento</option>
-                                                </select>
-                                            </div>
-                                            </div>
-
-                                            <div class="form-group col-sm-3">
-                                                <label for="exampleInputEmail1">Data do lançamento</label>
-                                                <input type="text"  ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Data do lançamento">
-                                            </div>
-                                            <div class="form-group col-sm-6">
-                                                <label for="exampleInputEmail1">Observações</label>
-                                                <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="Observações">
-                                            </div>
-                                            
-                                         </div>
-                                         <div class="row col-sm-12">
-                                            <div class="form-group col-sm-4">
-                                                <label for="exampleInputPassword1">Nro. do documento</label>
-                                                <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="Nro. do documento">
-                                            </div>
-                                            <div class="form-group col-sm-4">
-                                                <label for="exampleInputPassword1">Valor cobrado</label>
-                                                <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="Valor cobrado">
-                                            </div>
-                                            <div class="row col-sm-4">
-                                                <div class="form-group">
-                                                <label for="exampleInputEmail1">Data de vencimento</label>
-                                                <input type="text" class="form-control" ng-model="cfop.descricao" name="descricao" placeholder="Data de vencimento">
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                        <div class="row col-sm-12">
-                                            
-                                            <div class="form-group col-sm-4">
-                                                <label for="exampleInputPassword1">Conta de origem</label>
-                                                <div class="row ">
-                                                    <select id="financeiro_cod_tipoDoc" class="col-sm-12" name="financeiro_cod_tipoDoc">
-                                                        <option value="0"></option>
-                                                        <option value="1">Caixa Interno</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                             <div class="form-group col-sm-4">
-                                                <label for="exampleInputPassword1">Cadastrar mais de uma vez</label>
-                                                <div class="row ">
-                                                    <select id="financeiro_cadXVezes" class="col-sm-12" name="financeiro_cadXVezes" autocomplete="off">
-                                                        <option value="1" selected="selected">Apenas uma vez</option>
-                                                        <option value="2">2 vezes ao todo</option>
-                                                        <option value="3">3 vezes ao todo</option>
-                                                        <option value="4">4 vezes ao todo</option>
-                                                        <option value="5">5 vezes ao todo</option>
-                                                        <option value="6">6 vezes ao todo</option>
-                                                        <option value="7">7 vezes ao todo</option>
-                                                        <option value="8">8 vezes ao todo</option>
-                                                        <option value="9">9 vezes ao todo</option>
-                                                        <option value="10">10 vezes ao todo</option>
-                                                        <option value="11">11 vezes ao todo</option>
-                                                        <option value="12">12 vezes ao todo</option>
-                                                        <option value="13">13 vezes ao todo</option>
-                                                        <option value="14">14 vezes ao todo</option>
-                                                        <option value="15">15 vezes ao todo</option>
-                                                        <option value="16">16 vezes ao todo</option>
-                                                        <option value="17">17 vezes ao todo</option>
-                                                        <option value="18">18 vezes ao todo</option>
-                                                        <option value="19">19 vezes ao todo</option>
-                                                        <option value="20">20 vezes ao todo</option>
-                                                        <option value="21">21 vezes ao todo</option>
-                                                        <option value="22">22 vezes ao todo</option>
-                                                        <option value="23">23 vezes ao todo</option>
-                                                        <option value="24">24 vezes ao todo</option>
-                                                        <option value="25">25 vezes ao todo</option>
-                                                        <option value="26">26 vezes ao todo</option>
-                                                        <option value="27">27 vezes ao todo</option>
-                                                        <option value="28">28 vezes ao todo</option>
-                                                        <option value="29">29 vezes ao todo</option>
-                                                        <option value="30">30 vezes ao todo</option>
-                                                        <option value="31">31 vezes ao todo</option>
-                                                        <option value="32">32 vezes ao todo</option>
-                                                        <option value="33">33 vezes ao todo</option>
-                                                        <option value="34">34 vezes ao todo</option>
-                                                        <option value="35">35 vezes ao todo</option>
-                                                        <option value="36">36 vezes ao todo</option>
-                                                        <option value="37">37 vezes ao todo</option>
-                                                        <option value="38">38 vezes ao todo</option>
-                                                        <option value="39">39 vezes ao todo</option>
-                                                        <option value="40">40 vezes ao todo</option>
-                                                        <option value="41">41 vezes ao todo</option>
-                                                        <option value="42">42 vezes ao todo</option>
-                                                        <option value="43">43 vezes ao todo</option>
-                                                        <option value="44">44 vezes ao todo</option>
-                                                        <option value="45">45 vezes ao todo</option>
-                                                        <option value="46">46 vezes ao todo</option>
-                                                        <option value="47">47 vezes ao todo</option>
-                                                        <option value="48">48 vezes ao todo</option>
-                                                        <option value="49">49 vezes ao todo</option>
-                                                        <option value="50">50 vezes ao todo</option>
-                                                        <option value="51">51 vezes ao todo</option>
-                                                        <option value="52">52 vezes ao todo</option>
-                                                        <option value="53">53 vezes ao todo</option>
-                                                        <option value="54">54 vezes ao todo</option>
-                                                        <option value="55">55 vezes ao todo</option>
-                                                        <option value="56">56 vezes ao todo</option>
-                                                        <option value="57">57 vezes ao todo</option>
-                                                        <option value="58">58 vezes ao todo</option>
-                                                        <option value="59">59 vezes ao todo</option>
-                                                        <option value="60">60 vezes ao todo</option>
-                                                        <option value="61">61 vezes ao todo</option>
-                                                        <option value="62">62 vezes ao todo</option>
-                                                        <option value="63">63 vezes ao todo</option>
-                                                        <option value="64">64 vezes ao todo</option>
-                                                        <option value="65">65 vezes ao todo</option>
-                                                        <option value="66">66 vezes ao todo</option>
-                                                        <option value="67">67 vezes ao todo</option>
-                                                        <option value="68">68 vezes ao todo</option>
-                                                        <option value="69">69 vezes ao todo</option>
-                                                        <option value="70">70 vezes ao todo</option>
-                                                        <option value="71">71 vezes ao todo</option>
-                                                        <option value="72">72 vezes ao todo</option>
-                                                        <option value="73">73 vezes ao todo</option>
-                                                        <option value="74">74 vezes ao todo</option>
-                                                        <option value="75">75 vezes ao todo</option>
-                                                        <option value="76">76 vezes ao todo</option>
-                                                        <option value="77">77 vezes ao todo</option>
-                                                        <option value="78">78 vezes ao todo</option>
-                                                        <option value="79">79 vezes ao todo</option>
-                                                        <option value="80">80 vezes ao todo</option>
-                                                        <option value="81">81 vezes ao todo</option>
-                                                        <option value="82">82 vezes ao todo</option>
-                                                        <option value="83">83 vezes ao todo</option>
-                                                        <option value="84">84 vezes ao todo</option>
-                                                        <option value="85">85 vezes ao todo</option>
-                                                        <option value="86">86 vezes ao todo</option>
-                                                        <option value="87">87 vezes ao todo</option>
-                                                        <option value="88">88 vezes ao todo</option>
-                                                        <option value="89">89 vezes ao todo</option>
-                                                        <option value="90">90 vezes ao todo</option>
-                                                        <option value="91">91 vezes ao todo</option>
-                                                        <option value="92">92 vezes ao todo</option>
-                                                        <option value="93">93 vezes ao todo</option>
-                                                        <option value="94">94 vezes ao todo</option>
-                                                        <option value="95">95 vezes ao todo</option>
-                                                        <option value="96">96 vezes ao todo</option>
-                                                        <option value="97">97 vezes ao todo</option>
-                                                        <option value="98">98 vezes ao todo</option>
-                                                        <option value="99">99 vezes ao todo</option>
-                                                        <option value="100">100 vezes ao todo</option>
-                                                        <option value="101">101 vezes ao todo</option>
-                                                        <option value="102">102 vezes ao todo</option>
-                                                        <option value="103">103 vezes ao todo</option>
-                                                        <option value="104">104 vezes ao todo</option>
-                                                        <option value="105">105 vezes ao todo</option>
-                                                        <option value="106">106 vezes ao todo</option>
-                                                        <option value="107">107 vezes ao todo</option>
-                                                        <option value="108">108 vezes ao todo</option>
-                                                        <option value="109">109 vezes ao todo</option>
-                                                        <option value="110">110 vezes ao todo</option>
-                                                        <option value="111">111 vezes ao todo</option>
-                                                        <option value="112">112 vezes ao todo</option>
-                                                        <option value="113">113 vezes ao todo</option>
-                                                        <option value="114">114 vezes ao todo</option>
-                                                        <option value="115">115 vezes ao todo</option>
-                                                        <option value="116">116 vezes ao todo</option>
-                                                        <option value="117">117 vezes ao todo</option>
-                                                        <option value="118">118 vezes ao todo</option>
-                                                        <option value="119">119 vezes ao todo</option>
-                                                        <option value="120">120 vezes ao todo</option>
-                                                        <option value="121">121 vezes ao todo</option>
-                                                        <option value="122">122 vezes ao todo</option>
-                                                        <option value="123">123 vezes ao todo</option>
-                                                        <option value="124">124 vezes ao todo</option>
-                                                        <option value="125">125 vezes ao todo</option>
-                                                        <option value="126">126 vezes ao todo</option>
-                                                        <option value="127">127 vezes ao todo</option>
-                                                        <option value="128">128 vezes ao todo</option>
-                                                        <option value="129">129 vezes ao todo</option>
-                                                        <option value="130">130 vezes ao todo</option>
-                                                        <option value="131">131 vezes ao todo</option>
-                                                        <option value="132">132 vezes ao todo</option>
-                                                        <option value="133">133 vezes ao todo</option>
-                                                        <option value="134">134 vezes ao todo</option>
-                                                        <option value="135">135 vezes ao todo</option>
-                                                        <option value="136">136 vezes ao todo</option>
-                                                        <option value="137">137 vezes ao todo</option>
-                                                        <option value="138">138 vezes ao todo</option>
-                                                        <option value="139">139 vezes ao todo</option>
-                                                        <option value="140">140 vezes ao todo</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-sm-4">
-                                                <label for="exampleInputPassword1">Repetir no seguinte intervalo</label>
-                                                <div class="row">
-                                                    <select id="financeiro_repetirIntervalo" class="col-sm-12" name="financeiro_repetirIntervalo" autocomplete="off">
-                                                        <option value="0">Sem intervalo</option>
-                                                        <option value="1">Dias</option>
-                                                        <option value="2">Semanas</option>
-                                                        <option value="3" >Quinzenas</option>
-                                                        <option value="4" selected="selected">Meses</option>
-                                                        <option value="5">Bimestres</option>
-                                                        <option value="6">Trimestres</option>
-                                                        <option value="7">Semestres</option>
-                                                        <option value="8">Anos</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            </div>
-                                            <div class="row">
-                                            <div class="form-group col-sm-6">
-                                                <label for="exampleInputPassword1">Valor do pagamento</label>
-                                                <input type="password" ng-disabled="true" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="R$0,00">
-                                            </div>
-                                            <div class="form-group col-sm-6">
-                                                <label for="exampleInputPassword1">Data do pagamento</label>
-                                                 <input type="password" ng-disabled="true" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="R$0,00">
-                                            </div>
-                                            </div>   
-                                                                  
-                            </form>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Gravar</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                 </script>
-
-            </div>
-
-            <div class="container">
-                 <script type="text/ng-template" id="baixarCR.html">
-                     <div class="modal fade">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Baixar Contas Receber</h4>
-                          </div>
-                          <div class="modal-body">
-                                <div class="row ">
-                                    <div class="form-group col-sm-4">
-                                        <label for="exampleInputPassword1">Tipo de documento</label>
-                                        <div class="row ">
-                                        <select id="financeiro_cod_tipoDoc" ng-disabled="true" class="col-sm-12" name="financeiro_cod_tipoDoc">
-                                            <option value="0"></option>
-                                            <option value="1">Dinheiro</option>
-                                            <option value="2">Cheque</option>
-                                            <option value="3" selected="selected" >Boleto</option>
-                                            <option value="4">Cartão Crédito</option>
-                                            <option value="5">Cartão Débito</option>
-                                            <option value="6">Duplicata</option>
-                                            <option value="7">Carnê</option>
-                                            <option value="8">Transf. Eletrônica</option>
-                                            <option value="9">Crédito Loja</option>
-                                            <option value="10">Vale Alimentação</option>
-                                            <option value="11">Vale Refeição</option>
-                                            <option value="12">Vale Presente</option>
-                                            <option value="13">Vale Combustível</option>
-                                            <option value="14">Sem documento</option>
-                                        </select>
-                                    </div>
-                                    </div>
-                                    <div class="form-group col-sm-4">
-                                        <label for="exampleInputPassword1">Valor cobrado</label>
-                                        <input type="password" ng-disabled="true" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="Valor cobrado">
-                                    </div>
-                                    <div class="row col-sm-4">
-                                        <div class="form-group">
-                                        <label for="exampleInputEmail1">Data de vencimento</label>
-                                        <input type="text" ng-disabled="true" class="form-control" ng-model="cfop.descricao" name="descricao" placeholder="Data de vencimento">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row ">
-                                    <div class="form-group col-sm-4">
-                                        <label for="exampleInputPassword1">Conta de origem</label>
-                                        <div class="row ">
-                                            <select id="financeiro_cod_tipoDoc" class="col-sm-12" name="financeiro_cod_tipoDoc">
-                                                <option value="0"></option>
-                                                <option value="1">Caixa Interno</option>
-                                                <option value="2">Banco Conta001</option>
-                                                <option value="3">Banco Conta002</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-4">
-                                        <label for="exampleInputPassword1">Valor do PAGO</label>
-                                        <input type="password"  class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="R$0,00">
-                                    </div>
-                                    <div class="form-group col-sm-4">
-                                        <label for="exampleInputPassword1">Valor JUROS</label>
-                                         <input type="password"  class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="R$0,00">
-                                    </div>
-                                </div>
-                                <div class="row ">
-                                    <div class="form-group col-sm-4">
-                                        <label for="exampleInputPassword1">Valor MULTA</label>
-                                        <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="R$0,00">
-                                    </div>
-                                
-                                    <div class="form-group col-sm-4">
-                                        <label for="exampleInputPassword1">Valor SEGURO</label>
-                                         <input type="password"  class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="R$0,00">
-                                    </div>
-                                    <div class="form-group col-sm-4">
-                                        <label for="exampleInputPassword1">OUTRO Valor</label>
-                                         <input type="password"  class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="R$0,00">
-                                    </div>
-                                </div>      
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Baixar</button>
-                            <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                 </script>
-
-            </div>
-            <div class="container">
-                 <script type="text/ng-template" id="deletar.html">
-                     <div class="modal fade">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Deletar</h4>
-                          </div>
-                          <div class="modal-body">
-                                <p>Deseja Realmente EXCLUIR ID : 1001 </p>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Sim</button>
-                            <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Não</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                 </script>
-
-            </div>
 </div>
 
 
@@ -1652,18 +939,18 @@
         }
 
         function fileSelected() {
-          var file = document.getElementById('fileToUpload').files[0];
-          if (file) {
-            var fileSize = 0;
-            if (file.size > 1024 * 1024)
-              fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
-            else
-              fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
-                  
-            document.getElementById('fileName').innerHTML = 'Name: ' + file.name;
-            document.getElementById('fileSize').innerHTML = 'Size: ' + fileSize;
-            document.getElementById('fileType').innerHTML = 'Type: ' + file.type;
-          }
+            var file = document.getElementById('fileToUpload').files[0];
+            if (file) {
+                var fileSize = 0;
+                if (file.size > 1024 * 1024)
+                    fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+                else
+                    fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
+
+                document.getElementById('fileName').innerHTML = 'Name: ' + file.name;
+                document.getElementById('fileSize').innerHTML = 'Size: ' + fileSize;
+                document.getElementById('fileType').innerHTML = 'Type: ' + file.type;
+            }
         }
     });
 </script>
