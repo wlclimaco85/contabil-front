@@ -380,7 +380,7 @@
 
         function actionsHtml(data, type, full, meta) {
             vm.persons[data.id] = data;
-            return '<a href="#/empresa/details/empresa" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i></a>&nbsp;' +
+            return '<a href="#/gerencia/details/empresa" class="btn btn-info"><i class="glyphicon glyphicon-search"></i></a>&nbsp;' +
             '<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
             '   <i class="fa fa-edit"></i>' +
             '</button>&nbsp;' +

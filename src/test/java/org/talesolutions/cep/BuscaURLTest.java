@@ -23,6 +23,8 @@ import com.ctc.wstx.dtd.TokenModel;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.qat.samples.sysmgmt.cfop.model.Cfop;
+import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 
 import br.com.emmanuelneri.app.model.ModelToken;
 import br.com.emmanuelneri.app.model.User;
@@ -31,36 +33,81 @@ import br.com.emmanuelneri.app.model.User;
 public class BuscaURLTest {
 
 
-	 public static final String REST_SERVICE_URI = "http://localhost:8080/qat-sysmgmt-controller-rest";
+	 public static final String REST_SERVICE_URI = "http://localhost:8080/qat-sysmgmt-controller-rest/";
 
-//	 	@Test
-//	 	public void listAllUsers(){
-//	        System.out.println("Testing listAllUsers API-----------");
-//
-//	        RestTemplate restTemplate = new RestTemplate();
-//
-//	        //http://localhost:8080/qat-sysmgmt-controller-rest/site/api/fetchPage
-//	        //['X-Auth-Token'] = "anonimo@aninimo.com:1464222873542:eb86a5e265cbdd54d63a03efece46935";
-//
-//	        HttpHeaders headers = new HttpHeaders();
-//	        headers.set("Header", "value");
-//	        headers.setContentType(MediaType.APPLICATION_JSON);
-//	        headers.set("Other-Header", "othervalue");
-//	        headers.set("X-Auth-Token", "taz@qat.com:1469125132913:959c6942a9acb2ac3bc5c6e3d935f564" );
-//
-//	        HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
-//	        String result = restTemplate.postForObject("http://localhost:8080/qat-sysmgmt-controller-rest/fiscal/api/cfop/fetchPage/", entity, String.class,HttpMethod.GET,"{pageSize: 20, startPage: 0, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}");
-//	      //  HttpEntity<String> response = restTemplate.exchange(REST_SERVICE_URI+"/site/api/fetchPage/",HttpMethod.GET, entity,List.class,null);
-//	      //  List<LinkedHashMap<String, Object>> usersMap = restTemplate.getForObject(REST_SERVICE_URI+"/site/api/fetchPage/", entity,List.class,HttpMethod.GET,{"teste:teste"});
-//
-//	      //  if(usersMap!=null){
-//	      //      for(LinkedHashMap<String, Object> map : usersMap){
-//	       //         System.out.println("User : id="+map.get("id")+", Name="+map.get("name")+", Age="+map.get("age")+", Salary="+map.get("salary"));;
-//	      //      }
-//	       // }else{
-//	            System.out.println("No user exist----------");
-//	     //   }
-//	    }
+	 	@Test
+	 	public void listAllUsers() throws JsonParseException, JsonMappingException, IOException{
+	        System.out.println("Testing listAllUsers API-----------");
+
+	        RestTemplate restTemplate = new RestTemplate();
+
+	        //http://localhost:8080/qat-sysmgmt-controller-rest/site/api/fetchPage
+	        //['X-Auth-Token'] = "anonimo@aninimo.com:1464222873542:eb86a5e265cbdd54d63a03efece46935";
+
+	        HttpHeaders headers = new HttpHeaders();
+	        headers.set("Header", "value");
+	        headers.setContentType(MediaType.APPLICATION_JSON);
+	        headers.set("Other-Header", "othervalue");
+	        headers.set("username", "taz@qat.com" );
+
+			Map<String, String> params = new HashMap<String, String>();
+		    params.put("username", "taz@qat.com");
+		    params.put("password", "taz@qat.com");
+		   // HTTPClient<HashMap<String,Object>> http = new HTTPClient<>();
+		 // GET TGT
+		    RestTemplate rest = new RestTemplate();
+		    rest.setMessageConverters(Arrays.asList(new StringHttpMessageConverter(), new FormHttpMessageConverter()));
+		    MultiValueMap<String, String> paramss = new LinkedMultiValueMap<String, String>();
+		    paramss.set("username", "taz@qat.com");
+		    paramss.set("password", "devil");
+		    URI tgtUrl = rest.postForLocation(REST_SERVICE_URI + "auth/api/authenticate", paramss, Collections.emptyMap());
+		    System.out.println("[" + tgtUrl + "]");
+
+		 //   TokenModel tgtUrls = rest.postForLocation("http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate", paramss, Collections.emptyMap(),  TokenModel.class);
+		    System.out.println("[" + tgtUrl + "]");
+
+
+		    ResponseEntity<String> st = rest.postForEntity(REST_SERVICE_URI+"auth/api/authenticate", paramss, String.class);
+		    System.out.println("[" + st.getBody() + "]");
+		    System.out.println("[" + st + "]");
+		    String tk = st.getBody();
+		    Class<? extends String> mt = tk.getClass();
+		    System.out.println("[" + mt + "]");
+		  // Gson gson = new Gson();
+		   // MyObject = gson.fromJson(decodedString , MyObjectClass.class);
+		   // Class<? extends TokenModel> c = st.getBody().getClass();
+		    ObjectMapper mapper = new ObjectMapper();
+		    ModelToken obj = mapper.readValue(st.getBody(), ModelToken.class);
+
+		    System.out.println("[" + obj.getToken() + "]");
+
+	        headers = new HttpHeaders();
+	        headers.set("Header", "value");
+	        headers.setContentType(MediaType.APPLICATION_JSON);
+	        headers.set("Other-Header", "othervalue");
+	        headers.set("X-Auth-Token", obj.getToken() );
+
+	        HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
+	        String result = restTemplate.postForObject(REST_SERVICE_URI+"fiscal/api/cfop/fetchPage/", entity, String.class,HttpMethod.POST,"{pageSize: 20, startPage: 0, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}");
+
+	        System.out.println("No user exist----------" + result);
+
+	        Cfop cfop = new Cfop();
+
+	        cfop.setCfop("teste");
+	        cfop.setId(64);
+	        cfop.setNatureza("testando");
+	        cfop.setObservacao("Observação 123");
+
+	        Cfop result1 = restTemplate.postForObject(REST_SERVICE_URI+"fiscal/api/cfop/update/", entity, Cfop.class,HttpMethod.POST,cfop);
+
+
+	        System.out.println("No cfop exist----------" + result1);
+
+	   //     Cfop result2 = restTemplate.postForObject("http://localhost:8080/springmvc-angularjs/main/api/request/", entity, Cfop.class,HttpMethod.GET,"{url: fiscal/api/cfop/fetchPage/ request:{id: 1},token:taz@qat.com:1469376000856:ba8ccfe3315b42cc85e66deda0618493url:fiscal/api/cfop/fetchPage/}");
+
+	 //       System.out.println("No cfop exist----------" + result2);
+	    }
 
 
 	 	@Test
@@ -88,14 +135,14 @@ public class BuscaURLTest {
 		    MultiValueMap<String, String> paramss = new LinkedMultiValueMap<String, String>();
 		    paramss.set("username", "taz@qat.com");
 		    paramss.set("password", "devil");
-		    URI tgtUrl = rest.postForLocation("http://prod001.mybluemix.net/auth/api/authenticate", paramss, Collections.emptyMap());
+		    URI tgtUrl = rest.postForLocation(REST_SERVICE_URI + "auth/api/authenticate", paramss, Collections.emptyMap());
 		    System.out.println("[" + tgtUrl + "]");
 
 		 //   TokenModel tgtUrls = rest.postForLocation("http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate", paramss, Collections.emptyMap(),  TokenModel.class);
 		    System.out.println("[" + tgtUrl + "]");
 
 
-		    ResponseEntity<String> st = rest.postForEntity("http://prod001.mybluemix.net/auth/api/authenticate", paramss, String.class);
+		    ResponseEntity<String> st = rest.postForEntity(REST_SERVICE_URI + "auth/api/authenticate", paramss, String.class);
 		    System.out.println("[" + st.getBody() + "]");
 		    System.out.println("[" + st + "]");
 		    String tk = st.getBody();

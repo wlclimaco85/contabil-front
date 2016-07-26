@@ -27,6 +27,10 @@
             $scope.state = !$scope.state;
         };
 
+        $scope.toggle1 = function() {
+            $scope.state1 = !$scope.state1;
+        };
+
 
         var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
             'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';

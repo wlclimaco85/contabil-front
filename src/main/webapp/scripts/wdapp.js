@@ -132,6 +132,7 @@ var WebDaptiveAppConfig = {
             ,'dicionario/tables/campos'
             ,'dicionario/tables/tela'
             ,'dicionario/tables/relatorios'
+            ,'gerencia/details/empresa'
 			];
 
 			//geeric routeine for building route from array
