@@ -379,18 +379,18 @@
         //reusable button form logic
         vm.processButtons = function(_btnType,oObject){
             //console.log(_btnType);
-debugger
+
                 switch (_btnType) {
                 //Add Button
                 case 'A':
-                    processPostData(create_url,  new qat.model.reqCounty( new qat.model.county(cvm.county.id, cvm.county.description),true, true), true);
+                    processPostData(create_url,  new qat.model.reqCounty( new qat.model.county(10, 'teste'),true, true), true);
                     break;
                 //Update Button
                 case 'U':
                     SysMgmtData.processPostPageData("main/api/cfop",{
                     url: "fiscal/api/cfop/update/",
                     token: $rootScope.authToken,
-                    request: new qat.model.reqCounty( new qat.model.county(10, 'teste'),true, true)
+                    request: new qat.model.reqCounty( oObject,true, true)
                    // {
                       //  "cfop": oObject
                    //   cfop : {"id":"10"}
@@ -402,7 +402,7 @@ debugger
                     break;
                 //Delete Button
                 case 'D':
-                    var send_url = delete_url + "?countyId=" + cvm.county.id + "&retList=true&retPaged=true";
+                    var send_url = delete_url + "?countyId=" + 1 + "&retList=true&retPaged=true";
                     processGetData(send_url);
                     break;
                 //List Button

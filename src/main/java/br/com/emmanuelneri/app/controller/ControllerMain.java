@@ -15,8 +15,12 @@ import org.talesolutions.cep.CEP;
 import org.talesolutions.cep.CEPService;
 import org.talesolutions.cep.CEPServiceFactory;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.samples.sysmgmt.cfop.model.Cfop;
+import com.qat.samples.sysmgmt.cfop.model.request.CfopMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.response.CfopResponse;
 
 import br.com.emmanuelneri.app.model.ModelToken;
 import br.com.emmanuelneri.app.model.UtilRequest;
@@ -92,8 +96,8 @@ public class ControllerMain {
             return result;
     }
 	@ResponseBody
-    @RequestMapping(value = "/cfop", method = RequestMethod.POST)
-    public String listarCFOP(@RequestBody UtilRequest request) {
+    @RequestMapping(value = "/cfop", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    public String listarCFOP(@RequestBody UtilRequest request) throws JsonProcessingException {
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -103,24 +107,42 @@ public class ControllerMain {
         headers.set("Other-Header", "othervalue");
         headers.set("X-Auth-Token", request.getToken() );
 
-        System.out.println("[" + request.getRequest() + "]");
-	    System.out.println("[" + request + "]");
-	    Object tk = request.getRequest();
-	    Class<? extends Object> mt = tk.getClass();
-	    System.out.println("[" + mt + "]");
+//        System.out.println("[" + request.getRequest() + "]");
+//	    System.out.println("[" + request + "]");
+//	    Object tk = request.getRequest();
+//	    Class<? extends Object> mt = tk.getClass();
+//	    System.out.println("[" + mt + "]");
+	    ObjectMapper mapper = new ObjectMapper();
+//
+	  //Convert object to JSON string and pretty print
+		String jsonInString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(request.getRequest());
+		System.out.println(jsonInString);
+//
+//	    Cfop cfop = new Cfop();
+//
+//        cfop.setCfop("teste");
+//        cfop.setId(64);
+//        cfop.setNatureza("testando");
+//        cfop.setObservacao("Observação 123");
+//
+//        CfopMaintenanceRequest requess = new CfopMaintenanceRequest();
+//        requess.setCfop(cfop);
 
-	    Cfop cfop = new Cfop();
 
-        cfop.setCfop("teste");
-        cfop.setId(64);
-        cfop.setNatureza("testando");
-        cfop.setObservacao("Observação 123");
+      //Convert object to JSON string
+      //  String requestJson = "{\"cfop\":"+jsonInString+"}";
+        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
 
-        HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
-        String result = restTemplate.postForObject(URL + request.getUrl(), entity, String.class,HttpMethod.POST,cfop);
+        CfopResponse result = restTemplate.postForObject( URL + request.getUrl(),entitys,  CfopResponse.class);
+//        HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
+//        String result = restTemplate.postForObject(URL + "fiscal/api/cfop/insert/", entity, String.class,HttpMethod.GET,requess);
+//
+//        CfopMaintenanceRequest resulta = restTemplate.postForObject(URL + "fiscal/api/cfop/insert/", entity, CfopMaintenanceRequest.class,HttpMethod.GET,requess);
+//        System.out.println("No user exist----------"+resulta);
+
         System.out.println("No user exist----------");
 
-            return result;
+            return mapper.writeValueAsString(result);
     }
 
 
