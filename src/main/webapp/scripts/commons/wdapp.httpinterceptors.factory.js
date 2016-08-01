@@ -33,11 +33,7 @@
 				/* Registers auth token interceptor, auth token is either passed by header or by query parameter
 				 * as soon as there is an authenticated user only for sysmgmt api calls*/
 				'request': function(config) {
-				//	debugger
-					//gambiarra
-					if(config.url == 'http://localhost:8080/qat-sysmgmt-controller-rest/site/api/fetchPage'){
-						config.headers['X-Auth-Token'] = "anonimo@aninimo.com:1464222873542:eb86a5e265cbdd54d63a03efece46935";
-					}
+
 					var isRestCall = config.url.indexOf(WebDaptiveAppConfig.restAuthBase) != -1;
 					if (isRestCall && angular.isDefined($rootScope.authToken)) {
 						var authToken = $rootScope.authToken;

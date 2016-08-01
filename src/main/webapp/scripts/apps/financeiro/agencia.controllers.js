@@ -18,7 +18,30 @@ function agenciaController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,M
     var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
         'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
 
-    vm.dtOptions = DTOptionsBuilder.fromSource('FormaPag.json')
+    vm.dtOptions = DTOptionsBuilder.newOptions()
+            .withOption('ajax', {
+                dataSrc: function(json) {
+                    console.log(json)
+                    json['recordsTotal'] = json.agenciaList.length
+                    json['recordsFiltered'] = json.agenciaList.length
+                    json['draw'] = 1
+                    console.log(json)
+                    return json.agenciaList;
+                },
+                "contentType": "application/json; charset=utf-8",
+                "dataType": "json",
+                "url": "main/api/request",
+                "type": "POST",
+                "data": function(d) {
+                    //   console.log("data");
+                    //    d.search = $scope.searchData || {}; //search criteria
+                    return JSON.stringify({
+                        "url": "financeiro/api/agencia/fetchPage/",
+                        "token": $rootScope.authToken,
+                        "request": new qat.model.pagedInquiryRequest(2, true)
+                    });
+                }
+            })
         .withDOM('frtip')
         .withPaginationType('full_numbers')
         .withOption('createdRow', createdRow)
