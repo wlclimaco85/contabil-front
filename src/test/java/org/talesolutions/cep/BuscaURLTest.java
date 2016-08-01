@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.ws.rs.core.Response.StatusType;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.http.HttpEntity;
@@ -41,14 +43,10 @@ public class BuscaURLTest {
 
 	 	@Test
 	 	public void listAllUsers() throws JsonParseException, JsonMappingException, IOException{
-	        System.out.println("Testing listAllUsers API-----------");
-
+	        
 	        Integer count =0;
-	        Integer id =999993;
+	        Integer id = 10001;
 	        RestTemplate restTemplate = new RestTemplate();
-
-	        //http://localhost:8080/qat-sysmgmt-controller-rest/site/api/fetchPage
-	        //['X-Auth-Token'] = "anonimo@aninimo.com:1464222873542:eb86a5e265cbdd54d63a03efece46935";
 
 	        HttpHeaders headers = new HttpHeaders();
 	        headers.set("Header", "value");
@@ -59,8 +57,7 @@ public class BuscaURLTest {
 			Map<String, String> params = new HashMap<String, String>();
 		    params.put("username", "taz@qat.com");
 		    params.put("password", "taz@qat.com");
-		   // HTTPClient<HashMap<String,Object>> http = new HTTPClient<>();
-		 // GET TGT
+
 		    RestTemplate rest = new RestTemplate();
 		    rest.setMessageConverters(Arrays.asList(new StringHttpMessageConverter(), new FormHttpMessageConverter()));
 		    MultiValueMap<String, String> paramss = new LinkedMultiValueMap<String, String>();
@@ -79,9 +76,6 @@ public class BuscaURLTest {
 		    String tk = st.getBody();
 		    Class<? extends String> mt = tk.getClass();
 		    System.out.println("[" + mt + "]");
-		  // Gson gson = new Gson();
-		   // MyObject = gson.fromJson(decodedString , MyObjectClass.class);
-		   // Class<? extends TokenModel> c = st.getBody().getClass();
 		    ObjectMapper mapper = new ObjectMapper();
 		    ModelToken obj = mapper.readValue(st.getBody(), ModelToken.class);
 
@@ -169,6 +163,10 @@ public class BuscaURLTest {
 			cfop.setModifyDateUTC((new Date()).getTime());
 			cfop.setModifyUser("rod");
 			cfop.setModelAction(PersistenceActionEnum.UPDATE);
+			
+			jsonInString = mapper.writeValueAsString(cfop);
+	        requestJson = "{\"cfop\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
 
 	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/cfop/update/",entitys,  CfopResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
@@ -197,7 +195,25 @@ public class BuscaURLTest {
 
 	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/cfop/delete/",entitys,  CfopResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
-	        Assert.assertEquals(result.getCfopList().size(), count.intValue());
+	        
+	        //===========
+//	        cfopRequest = new CfopInquiryRequest();
+//	        cfopRequest.setId(id);
+//	        jsonInString = mapper.writeValueAsString(cfopRequest);
+//			System.out.println(jsonInString);
+//			entitys = new HttpEntity<String>(jsonInString,headers);
+//			result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/cfop/fetchPage/",entitys,  CfopResponse.class);
+//	        Assert.assertEquals(result.isOperationSuccess(), true);
+//	        Assert.assertEquals(result.getCfopList().size(), 1);
+//	        Assert.assertEquals(result.getCfopList().get(0).getStatusList().get(result.getCfopList().get(0).getStatusList().size() - 1).getStatus(),Statust );
+	      //=========== fetch ================================================================
+			System.out.println("==================================FetchALL==============================================");
+			jsonInString = mapper.writeValueAsString(new CfopInquiryRequest());
+			System.out.println(jsonInString);
+			entitys = new HttpEntity<String>(jsonInString,headers);
+			result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/cfop/fetchPage/",entitys,  CfopResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        Assert.assertTrue(result.getCfopList().size() == (count+ 1));
 
 
 	    }
