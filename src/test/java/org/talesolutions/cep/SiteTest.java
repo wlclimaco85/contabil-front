@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,37 +23,38 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qat.framework.model.BaseModel.PersistenceActionEnum;
-import com.qat.samples.sysmgmt.cfop.model.Cfop;
-import com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest;
-import com.qat.samples.sysmgmt.cnae.model.Cnae;
-import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
-import com.qat.samples.sysmgmt.cnae.model.response.CnaeResponse;
-import com.qat.samples.sysmgmt.fiscal.model.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
-import com.qat.samples.sysmgmt.fiscal.model.response.RegimeResponse;
-import com.qat.samples.sysmgmt.produto.model.response.CfopResponse;
+import com.qat.samples.sysmgmt.contabilidade.model.Plano;
+import com.qat.samples.sysmgmt.contabilidade.response.PlanoByServicoResponse;
+import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
+import com.qat.samples.sysmgmt.contato.model.response.ContatoResponse;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.response.OrdemServicoResponse;
+import com.qat.samples.sysmgmt.produto.model.Servico;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.response.PlanoResponse;
+import com.qat.samples.sysmgmt.produto.model.response.ServicoResponse;
+import com.qat.samples.sysmgmt.site.model.request.SiteInquiryRequest;
+import com.qat.samples.sysmgmt.site.model.response.ContatoItensResponse;
+import com.qat.samples.sysmgmt.site.model.response.OrdemServicoItensResponse;
+import com.qat.samples.sysmgmt.site.model.response.ServicoAndPlanoResponse;
+import com.qat.samples.sysmgmt.site.model.response.SiteResponse;
+import com.qat.samples.sysmgmt.util.model.TabelaEnum;
+import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
 import br.com.emmanuelneri.app.model.ModelToken;
 
-public class FiscalTest {
+public class SiteTest {
 
 	public static final String REST_SERVICE_URI = "http://localhost:8080/qat-sysmgmt-controller-rest/";
 
-	// public static final String REST_SERVICE_URI =
-	// "http://prod001.mybluemix.net/auth/api/authenticate/";
-
-	// create by system gera-java version 1.0.0 31/07/2016 20:36 : 27//
 
 
-	// create by system gera-java version 1.0.0 31/07/2016 21:29 : 16//
-
-
-
-	// create by system gera-java version 1.0.0 31/07/2016 21:34 : 57//
+	// create by system gera-java version 1.0.0 02/08/2016 12:4 : 0//
 
 	@Test
-	public void listAllRegime() throws JsonParseException, JsonMappingException, IOException{
-	 
+	public void listAllServico() throws JsonParseException, JsonMappingException, IOException{
+
 	    Integer count =0;
 	    Integer id =10000;
 	    RestTemplate restTemplate = new RestTemplate();
@@ -100,48 +100,36 @@ public class FiscalTest {
 	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
 	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
 
-	 Regime objeto = new Regime();
-	objeto.setId(id); 
-	objeto.setNome("'nome_1' - INSERT"); 
-	objeto.setDescricao("'descricao_2' - INSERT"); 
-	objeto.setModelAction(PersistenceActionEnum.INSERT);
 
 
 	//=========== fetch ================================================================
 	        System.out.println("==================================FetchALL==============================================");
-	        String jsonInString = mapper.writeValueAsString(new RegimeInquiryRequest());
+	        String jsonInString = mapper.writeValueAsString(new ServicoInquiryRequest());
 	        System.out.println(jsonInString);
 	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
-	        RegimeResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/regime/fetchPage/",entitys,  RegimeResponse.class);
+	        ServicoResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/servico/fetchPage/",entitys,  ServicoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
-	        count = result.getRegimeList().size();
+	        count = result.getServicoList().size();
 
 
 	      //=========== Insert ================================================================
 	        System.out.println("==================================INSERT==============================================");
-	        jsonInString = mapper.writeValueAsString(objeto);
+	        jsonInString = mapper.writeValueAsString(Objects.insertServico(id,TabelaEnum.SERVICO,PersistenceActionEnum.INSERT));
 	        System.out.println(jsonInString);
-	        String requestJson = "{\"regime\":"+jsonInString+"}";
+	        String requestJson = "{\"servico\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/regime/insert/",entitys,  RegimeResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/servico/insert/",entitys,  ServicoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
 	      //=========== Update ================================================================
 	        System.out.println("==================================UPDATE==============================================");
 
-	 objeto = new Regime();
-	objeto.setId(id); 
-	objeto.setNome("'nome_1' - UPDATE"); 
-	objeto.setDescricao("'descricao_2' - UPDATE"); 
-	objeto.setModelAction(PersistenceActionEnum.UPDATE);
-	        
-	        objeto.setModifyDateUTC((new Date()).getTime());
-	        objeto.setModifyUser("rod");
-	        jsonInString = mapper.writeValueAsString(objeto);
-	        requestJson = "{\"regime\":"+jsonInString+"}";
+
+	        jsonInString = mapper.writeValueAsString(Objects.insertServico(id,TabelaEnum.SERVICO,PersistenceActionEnum.UPDATE));
+	        requestJson = "{\"servico\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/regime/update/",entitys,  RegimeResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/servico/update/",entitys,  ServicoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -149,29 +137,29 @@ public class FiscalTest {
 	        System.out.println("==================================FetchID==============================================");
 
 
-	        RegimeInquiryRequest request001 = new RegimeInquiryRequest();
+	        ServicoInquiryRequest request001 = new ServicoInquiryRequest();
 	        request001.setId(id);
 	        jsonInString = mapper.writeValueAsString(request001);
 	        System.out.println(jsonInString);
 	        entitys = new HttpEntity<String>(jsonInString,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/regime/fetchPage/",entitys,  RegimeResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/servico/fetchPage/",entitys,  ServicoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
-	        Assert.assertEquals(result.getRegimeList().size(), 1);
+	        Assert.assertEquals(result.getServicoList().size(), 1);
 
 
-	Assert.assertEquals(result.getRegimeList().get(0).getNome(),"'nome_1' - UPDATE"); 
-	Assert.assertEquals(result.getRegimeList().get(0).getDescricao(),"'descricao_2' - UPDATE"); 
+	Assert.assertEquals(result.getServicoList().get(0).getNome(),"nome_1 - UPDATE");
+	Assert.assertEquals(result.getServicoList().get(0).getDescricao(),"descricao_2 - UPDATE");
+
 
 
 	        //=======================
 	        System.out.println("==================================DELETE==============================================");
-	        objeto.setModelAction(PersistenceActionEnum.DELETE);
-	        jsonInString = mapper.writeValueAsString(objeto);
-	        requestJson = "{\"regime\":"+jsonInString+"}";
+	        jsonInString = mapper.writeValueAsString(Objects.insertServico(id,TabelaEnum.SERVICO,PersistenceActionEnum.DELETE));
+	        requestJson = "{\"servico\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/regime/delete/",entitys,  RegimeResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/servico/delete/",entitys,  ServicoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
-	        Assert.assertEquals(result.getRegimeList().size(), count.intValue());
+	        Assert.assertEquals(result.getServicoList().size(), count.intValue());
 
 
 	    }
@@ -179,169 +167,13 @@ public class FiscalTest {
 
 
 
-	@Test
-	public void listAllCfop() throws JsonParseException, JsonMappingException, IOException {
-
-		Integer count = 0;
-		Integer id = 999990;
-		RestTemplate restTemplate = new RestTemplate();
-
-		HttpHeaders headers = new HttpHeaders();
-		headers.set("Header", "value");
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.set("Other-Header", "othervalue");
-		headers.set("username", "taz@qat.com");
-
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("username", "taz@qat.com");
-		params.put("password", "taz@qat.com");
-
-		RestTemplate rest = new RestTemplate();
-		rest.setMessageConverters(Arrays.asList(new StringHttpMessageConverter(), new FormHttpMessageConverter()));
-		MultiValueMap<String, String> paramss = new LinkedMultiValueMap<String, String>();
-		paramss.set("username", "taz@qat.com");
-		paramss.set("password", "devil");
-		URI tgtUrl = rest.postForLocation(REST_SERVICE_URI + "auth/api/authenticate", paramss, Collections.emptyMap());
-		System.out.println("[" + tgtUrl + "]");
-
-		System.out.println("[" + tgtUrl + "]");
-
-		ResponseEntity<String> st = rest.postForEntity(REST_SERVICE_URI + "auth/api/authenticate", paramss,
-				String.class);
-		System.out.println("[" + st.getBody() + "]");
-		System.out.println("[" + st + "]");
-		String tk = st.getBody();
-		Class<? extends String> mt = tk.getClass();
-		System.out.println("[" + mt + "]");
-		ObjectMapper mapper = new ObjectMapper();
-		ModelToken obj = mapper.readValue(st.getBody(), ModelToken.class);
-
-		System.out.println("[" + obj.getToken() + "]");
-
-		headers = new HttpHeaders();
-		headers.set("Header", "value");
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.set("Other-Header", "othervalue");
-		headers.set("X-Auth-Token", obj.getToken());
-		String a = "request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
-		HttpEntity<String> entity = new HttpEntity<String>("{}", headers);
-
-		Cfop objeto = new Cfop();
-		objeto.setId(id);
-		objeto.setCfop("'cfop_1' - INSERT");
-		objeto.setNatureza("'natureza_2' - INSERT");
-		objeto.setSimplificado("'simplificado_3' - INSERT");
-		objeto.setCfopTypeEnumValue(1);
-		objeto.setIcms(10.00);
-		objeto.setIcmsReduzido(10.00);
-		objeto.setMargemAgregadaST(10.00);
-		objeto.setCstPrincipal(10.00);
-		objeto.setClassFiscal(10.00);
-		objeto.setObservacao("'observacao_10' - INSERT");
-		objeto.setModelAction(PersistenceActionEnum.INSERT);
-
-		// =========== fetch
-		// ================================================================
-		System.out.println("==================================FetchALL==============================================");
-		String jsonInString = mapper.writeValueAsString(new CfopInquiryRequest());
-		System.out.println(jsonInString);
-		HttpEntity<String> entitys = new HttpEntity<String>(jsonInString, headers);
-		CfopResponse result = restTemplate.postForObject(REST_SERVICE_URI + "fiscal/api/cfop/fetchPage/", entitys,
-				CfopResponse.class);
-		Assert.assertEquals(result.isOperationSuccess(), true);
-		count = result.getCfopList().size();
-
-		// =========== Insert
-		// ================================================================
-		System.out.println("==================================INSERT==============================================");
-		jsonInString = mapper.writeValueAsString(objeto);
-		System.out.println(jsonInString);
-		String requestJson = "{\"cfop\":" + jsonInString + "}";
-		entitys = new HttpEntity<String>(requestJson, headers);
-		result = restTemplate.postForObject(REST_SERVICE_URI + "fiscal/api/cfop/insert/", entitys, CfopResponse.class);
-		Assert.assertEquals(result.isOperationSuccess(), true);
-
-		// =========== Update
-		// ================================================================
-		System.out.println("==================================UPDATE==============================================");
-		objeto.setObservacao("OBSERVACAO - UPDATE");
-		objeto.setModelAction(PersistenceActionEnum.UPDATE);
-		objeto.setModifyDateUTC((new Date()).getTime());
-		objeto.setModifyUser("rod");
-		objeto.setModelAction(PersistenceActionEnum.UPDATE);
-		jsonInString = mapper.writeValueAsString(objeto);
-		requestJson = "{\"cfop\":" + jsonInString + "}";
-		entitys = new HttpEntity<String>(requestJson, headers);
-		result = restTemplate.postForObject(REST_SERVICE_URI + "fiscal/api/cfop/update/", entitys, CfopResponse.class);
-		Assert.assertEquals(result.isOperationSuccess(), true);
-
-		// =========== FetchbyID
-		// ================================================================
-		System.out.println("==================================FetchID==============================================");
-
-		objeto = new Cfop();
-		objeto.setId(id);
-		objeto.setCfop("'cfop_1' - UPDATE");
-		objeto.setNatureza("'natureza_2' - UPDATE");
-		objeto.setSimplificado("'simplificado_3' - UPDATE");
-		objeto.setCfopTypeEnumValue(2);
-		objeto.setIcms(10.00);
-		objeto.setIcmsReduzido(10.00);
-		objeto.setMargemAgregadaST(10.00);
-		objeto.setCstPrincipal(10.00);
-		objeto.setClassFiscal(10.00);
-		objeto.setObservacao("'observacao_10' - UPDATE");
-		objeto.setModelAction(PersistenceActionEnum.UPDATE);
-
-		jsonInString = mapper.writeValueAsString(objeto);
-		requestJson = "{\"cfop\":" + jsonInString + "}";
-		entitys = new HttpEntity<String>(requestJson, headers);
-
-		result = restTemplate.postForObject(REST_SERVICE_URI + "fiscal/api/cfop/update/", entitys, CfopResponse.class);
-		Assert.assertEquals(result.isOperationSuccess(), true);
-
-		CfopInquiryRequest request001 = new CfopInquiryRequest();
-		request001.setId(id);
-		jsonInString = mapper.writeValueAsString(request001);
-		System.out.println(jsonInString);
-		entitys = new HttpEntity<String>(jsonInString, headers);
-		result = restTemplate.postForObject(REST_SERVICE_URI + "fiscal/api/cfop/fetchPage/", entitys, CfopResponse.class);
-		Assert.assertEquals(result.isOperationSuccess(), true);
-		Assert.assertEquals(result.getCfopList().size(), 1);
-
-		objeto.setId(id);
-		objeto.setCfop("'cfop_1' - UPDATE");
-		objeto.setNatureza("'natureza_2' - UPDATE");
-		objeto.setSimplificado("'simplificado_3' - UPDATE");
-		objeto.setCfopTypeEnumValue(2);
-		objeto.setIcms(10.00);
-		objeto.setIcmsReduzido(10.00);
-		objeto.setMargemAgregadaST(10.00);
-		objeto.setCstPrincipal(10.00);
-		objeto.setClassFiscal(10.00);
-		objeto.setObservacao("'observacao_10' - UPDATE");
-
-		// =======================
-		System.out.println("==================================DELETE==============================================");
-		objeto.setModelAction(PersistenceActionEnum.DELETE);
-		jsonInString = mapper.writeValueAsString(objeto);
-		requestJson = "{\"cfop\":" + jsonInString + "}";
-		entitys = new HttpEntity<String>(requestJson, headers);
-		result = restTemplate.postForObject(REST_SERVICE_URI + "fiscal/api/cfop/delete/", entitys, CfopResponse.class);
-		Assert.assertEquals(result.isOperationSuccess(), true);
-		Assert.assertEquals(result.getCfopList().size(), count.intValue());
-
-	}
-	
-
-
-	// create by system gera-java version 1.0.0 31/07/2016 21:5 : 55//
+	// create by system gera-java version 1.0.0 02/08/2016 12:4 : 0//
 
 	@Test
-	public void listAllCnae() throws JsonParseException, JsonMappingException, IOException{
-	 
+	public void listAllPlanoByServico() throws JsonParseException, JsonMappingException, IOException{
+
 	    Integer count =0;
-	    Integer id =999990;
+	    Integer id =10000;
 	    RestTemplate restTemplate = new RestTemplate();
 
 	    HttpHeaders headers = new HttpHeaders();
@@ -385,94 +217,61 @@ public class FiscalTest {
 	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
 	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
 
-	 Cnae objeto = new Cnae();
-	objeto.setId(id); 
-	objeto.setCodigo("'codigo_1' - INSERT"); 
-	objeto.setCnae("'cnae_2' - INSERT"); 
-	objeto.setDescricao("'descricao_3' - INSERT"); 
-	objeto.setAbreviado("'abreviado_4' - INSERT"); 
-	objeto.setModelAction(PersistenceActionEnum.INSERT);
 
 
 	//=========== fetch ================================================================
 	        System.out.println("==================================FetchALL==============================================");
-	        String jsonInString = mapper.writeValueAsString(new CnaeInquiryRequest());
+	        String jsonInString = mapper.writeValueAsString(new PagedInquiryRequest());
 	        System.out.println(jsonInString);
 	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
-	        CnaeResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/cnae/fetchPage/",entitys,  CnaeResponse.class);
+	        PlanoByServicoResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/planobyservico/fetchPage/",entitys,  PlanoByServicoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
-	        count = result.getCnaeList().size();
+	        count = result.getPlanoByServicoList().size();
 
 
 	      //=========== Insert ================================================================
 	        System.out.println("==================================INSERT==============================================");
-	        jsonInString = mapper.writeValueAsString(objeto);
+	        jsonInString = mapper.writeValueAsString(Objects.insertPlanoByServico(id,TabelaEnum.PLANO,PersistenceActionEnum.INSERT));
 	        System.out.println(jsonInString);
-	        String requestJson = "{\"cnae\":"+jsonInString+"}";
+	        String requestJson = "{\"planobyservico\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/cnae/insert/",entitys,  CnaeResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/planobyservico/insert/",entitys,  PlanoByServicoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
 	      //=========== Update ================================================================
 	        System.out.println("==================================UPDATE==============================================");
-	        objeto.setDescricao("OBSERVACAO - UPDATE");
-	        objeto.setModelAction(PersistenceActionEnum.UPDATE);
-	        objeto.setModifyDateUTC((new Date()).getTime());
-	        objeto.setModifyUser("rod");
-	        objeto.setModelAction(PersistenceActionEnum.UPDATE);
-	        jsonInString = mapper.writeValueAsString(objeto);
-	        requestJson = "{\"cnae\":"+jsonInString+"}";
+
+
+	        jsonInString = mapper.writeValueAsString(Objects.insertPlanoByServico(id,TabelaEnum.PLANO,PersistenceActionEnum.UPDATE));
+	        requestJson = "{\"planobyservico\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/cnae/update/",entitys,  CnaeResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/planobyservico/update/",entitys,  PlanoByServicoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
 	       //===========  FetchbyID  ================================================================
 	        System.out.println("==================================FetchID==============================================");
 
-	 objeto = new Cnae();
-	objeto.setId(id); 
-	objeto.setCodigo("'codigo_1' - UPDATE"); 
-	objeto.setCnae("'cnae_2' - UPDATE"); 
-	objeto.setDescricao("'descricao_3' - UPDATE"); 
-	objeto.setAbreviado("'abreviado_4' - UPDATE"); 
-	objeto.setModelAction(PersistenceActionEnum.UPDATE);
-	        
 
-	        jsonInString = mapper.writeValueAsString(objeto);
-	        requestJson = "{\"cnae\":"+jsonInString+"}";
-	        entitys = new HttpEntity<String>(requestJson,headers);
-
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "cnae/api/update/",entitys,  CnaeResponse.class);
-	        Assert.assertEquals(result.isOperationSuccess(), true);
-
-	        CnaeInquiryRequest request001 = new CnaeInquiryRequest();
+	        PagedInquiryRequest request001 = new PagedInquiryRequest();
 	        request001.setId(id);
 	        jsonInString = mapper.writeValueAsString(request001);
 	        System.out.println(jsonInString);
 	        entitys = new HttpEntity<String>(jsonInString,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "cnae/api/fetchPage/",entitys,  CnaeResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/planobyservico/fetchPage/",entitys,  PlanoByServicoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
-	        Assert.assertEquals(result.getCnaeList().size(), 1);
-
-
-	objeto.setId(id); 
-	objeto.setCodigo("'codigo_1' - UPDATE"); 
-	objeto.setCnae("'cnae_2' - UPDATE"); 
-	objeto.setDescricao("'descricao_3' - UPDATE"); 
-	objeto.setAbreviado("'abreviado_4' - UPDATE"); 
+	        Assert.assertEquals(result.getPlanoByServicoList().size(), 1);
 
 
 	        //=======================
 	        System.out.println("==================================DELETE==============================================");
-	        objeto.setModelAction(PersistenceActionEnum.DELETE);
-	        jsonInString = mapper.writeValueAsString(objeto);
-	        requestJson = "{\"cnae\":"+jsonInString+"}";
+	        jsonInString = mapper.writeValueAsString(Objects.insertPlanoByServico(id,TabelaEnum.PLANO,PersistenceActionEnum.DELETE));
+	        requestJson = "{\"planobyservico\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/cnae/delete/",entitys,  CnaeResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/planobyservico/delete/",entitys,  PlanoByServicoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
-	        Assert.assertEquals(result.getCnaeList().size(), count.intValue());
+	        Assert.assertEquals(result.getPlanoByServicoList().size(), count.intValue());
 
 
 	    }
@@ -480,4 +279,831 @@ public class FiscalTest {
 
 
 
+	// create by system gera-java version 1.0.0 02/08/2016 12:4 : 0//
+
+	@Test
+	public void listAllSite() throws JsonParseException, JsonMappingException, IOException{
+
+	    Integer count =0;
+	    Integer id =10000;
+	    RestTemplate restTemplate = new RestTemplate();
+
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.set("Header", "value");
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    headers.set("Other-Header", "othervalue");
+	    headers.set("username", "taz@qat.com" );
+
+	    Map<String, String> params = new HashMap<String, String>();
+	    params.put("username", "taz@qat.com");
+	    params.put("password", "taz@qat.com");
+
+	    RestTemplate rest = new RestTemplate();
+	    rest.setMessageConverters(Arrays.asList(new StringHttpMessageConverter(), new FormHttpMessageConverter()));
+	    MultiValueMap<String, String> paramss = new LinkedMultiValueMap<String, String>();
+	    paramss.set("username", "taz@qat.com");
+	    paramss.set("password", "devil");
+	    URI tgtUrl = rest.postForLocation(REST_SERVICE_URI + "auth/api/authenticate", paramss, Collections.emptyMap());
+	    System.out.println("[" + tgtUrl + "]");
+
+
+	    System.out.println("[" + tgtUrl + "]");
+
+
+	    ResponseEntity<String> st = rest.postForEntity(REST_SERVICE_URI + "auth/api/authenticate", paramss, String.class);
+	    System.out.println("[" + st.getBody() + "]");
+	    System.out.println("[" + st + "]");
+	    String tk = st.getBody();
+	    Class<? extends String> mt = tk.getClass();
+	    System.out.println("[" + mt + "]");
+	    ObjectMapper mapper = new ObjectMapper();
+	    ModelToken obj = mapper.readValue(st.getBody(), ModelToken.class);
+
+	    System.out.println("[" + obj.getToken() + "]");
+
+	    headers = new HttpHeaders();
+	    headers.set("Header", "value");
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    headers.set("Other-Header", "othervalue");
+	    headers.set("X-Auth-Token", obj.getToken() );
+	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
+
+
+
+	//=========== fetch ================================================================
+	        System.out.println("==================================FetchALL==============================================");
+	        String jsonInString = mapper.writeValueAsString(new SiteInquiryRequest());
+	        System.out.println(jsonInString);
+	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
+	        SiteResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/site/fetchPage/",entitys,  SiteResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        count = result.getSites().size();
+
+
+	      //=========== Insert ================================================================
+	        System.out.println("==================================INSERT==============================================");
+	        jsonInString = mapper.writeValueAsString(Objects.insertSite(id,TabelaEnum.SITE,PersistenceActionEnum.INSERT));
+	        System.out.println(jsonInString);
+	        String requestJson = "{\"site\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/site/insert/",entitys,  SiteResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+
+
+	      //=========== Update ================================================================
+	        System.out.println("==================================UPDATE==============================================");
+
+
+	        jsonInString = mapper.writeValueAsString(Objects.insertSite(id,TabelaEnum.SITE,PersistenceActionEnum.UPDATE));
+	        requestJson = "{\"site\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/site/update/",entitys,  SiteResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+
+
+	       //===========  FetchbyID  ================================================================
+	        System.out.println("==================================FetchID==============================================");
+
+
+	        SiteInquiryRequest request001 = new SiteInquiryRequest();
+	        request001.setId(id);
+	        jsonInString = mapper.writeValueAsString(request001);
+	        System.out.println(jsonInString);
+	        entitys = new HttpEntity<String>(jsonInString,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/site/fetchPage/",entitys,  SiteResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        Assert.assertEquals(result.getSites().size(), 1);
+
+
+	Assert.assertEquals(result.getSites().get(0).getNome(),"nome_1 - UPDATE");
+	Assert.assertEquals(result.getSites().get(0).getUrl(),"url_2 - UPDATE");
+	Assert.assertEquals(result.getSites().get(0).getQuemSomos(),"quemSomos_3 - UPDATE");
+	Assert.assertEquals(result.getSites().get(0).getMissao(),"missao_4 - UPDATE");
+//	Assert.assertEquals(result.getSites.get(0).getVisao(),"visao_5 - UPDATE");
+//	Assert.assertEquals(result.getSites.get(0).getTitulo(),"titulo_6 - UPDATE");
+//	Assert.assertEquals(result.getSites.get(0).getLogo(),"logo_7 - UPDATE");
+
+
+
+	        //=======================
+	        System.out.println("==================================DELETE==============================================");
+	        jsonInString = mapper.writeValueAsString(Objects.insertSite(id,TabelaEnum.SITE,PersistenceActionEnum.DELETE));
+	        requestJson = "{\"site\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/site/delete/",entitys,  SiteResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        Assert.assertEquals(result.getSites().size(), count.intValue());
+
+
+	    }
+
+
+
+
+	// create by system gera-java version 1.0.0 02/08/2016 12:4 : 0//
+
+	@Test
+	public void listAllContato() throws JsonParseException, JsonMappingException, IOException{
+
+	    Integer count =0;
+	    Integer id =10000;
+	    RestTemplate restTemplate = new RestTemplate();
+
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.set("Header", "value");
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    headers.set("Other-Header", "othervalue");
+	    headers.set("username", "taz@qat.com" );
+
+	    Map<String, String> params = new HashMap<String, String>();
+	    params.put("username", "taz@qat.com");
+	    params.put("password", "taz@qat.com");
+
+	    RestTemplate rest = new RestTemplate();
+	    rest.setMessageConverters(Arrays.asList(new StringHttpMessageConverter(), new FormHttpMessageConverter()));
+	    MultiValueMap<String, String> paramss = new LinkedMultiValueMap<String, String>();
+	    paramss.set("username", "taz@qat.com");
+	    paramss.set("password", "devil");
+	    URI tgtUrl = rest.postForLocation(REST_SERVICE_URI + "auth/api/authenticate", paramss, Collections.emptyMap());
+	    System.out.println("[" + tgtUrl + "]");
+
+
+	    System.out.println("[" + tgtUrl + "]");
+
+
+	    ResponseEntity<String> st = rest.postForEntity(REST_SERVICE_URI + "auth/api/authenticate", paramss, String.class);
+	    System.out.println("[" + st.getBody() + "]");
+	    System.out.println("[" + st + "]");
+	    String tk = st.getBody();
+	    Class<? extends String> mt = tk.getClass();
+	    System.out.println("[" + mt + "]");
+	    ObjectMapper mapper = new ObjectMapper();
+	    ModelToken obj = mapper.readValue(st.getBody(), ModelToken.class);
+
+	    System.out.println("[" + obj.getToken() + "]");
+
+	    headers = new HttpHeaders();
+	    headers.set("Header", "value");
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    headers.set("Other-Header", "othervalue");
+	    headers.set("X-Auth-Token", obj.getToken() );
+	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
+
+
+
+	//=========== fetch ================================================================
+	        System.out.println("==================================FetchALL==============================================");
+	        String jsonInString = mapper.writeValueAsString(new ContatoInquiryRequest());
+	        System.out.println(jsonInString);
+	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
+	        ContatoResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/contato/fetchPage/",entitys,  ContatoResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        count = result.getContatoList().size();
+
+
+	      //=========== Insert ================================================================
+	        System.out.println("==================================INSERT==============================================");
+	        jsonInString = mapper.writeValueAsString(Objects.insertContato(id,TabelaEnum.CONTATO,PersistenceActionEnum.INSERT));
+	        System.out.println(jsonInString);
+	        String requestJson = "{\"contato\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/contato/insert/",entitys,  ContatoResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+
+
+	      //=========== Update ================================================================
+	        System.out.println("==================================UPDATE==============================================");
+
+
+	        jsonInString = mapper.writeValueAsString(Objects.insertContato(id,TabelaEnum.CONTATO,PersistenceActionEnum.UPDATE));
+	        requestJson = "{\"contato\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/contato/update/",entitys,  ContatoResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+
+
+	       //===========  FetchbyID  ================================================================
+	        System.out.println("==================================FetchID==============================================");
+
+
+	        ContatoInquiryRequest request001 = new ContatoInquiryRequest();
+	        request001.setId(id);
+	        jsonInString = mapper.writeValueAsString(request001);
+	        System.out.println(jsonInString);
+	        entitys = new HttpEntity<String>(jsonInString,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/contato/fetchPage/",entitys,  ContatoResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        Assert.assertEquals(result.getContatoList().size(), 1);
+
+	        //=======================
+	        System.out.println("==================================DELETE==============================================");
+	        jsonInString = mapper.writeValueAsString(Objects.insertContato(id,TabelaEnum.CONTATO,PersistenceActionEnum.DELETE));
+	        requestJson = "{\"contato\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/contato/delete/",entitys,  ContatoResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        Assert.assertEquals(result.getContatoList().size(), count.intValue());
+
+
+	    }
+
+
+
+
+	// create by system gera-java version 1.0.0 02/08/2016 12:4 : 0//
+
+	@Test
+	public void listAllContatoItens() throws JsonParseException, JsonMappingException, IOException{
+
+	    Integer count =0;
+	    Integer id =10000;
+	    RestTemplate restTemplate = new RestTemplate();
+
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.set("Header", "value");
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    headers.set("Other-Header", "othervalue");
+	    headers.set("username", "taz@qat.com" );
+
+	    Map<String, String> params = new HashMap<String, String>();
+	    params.put("username", "taz@qat.com");
+	    params.put("password", "taz@qat.com");
+
+	    RestTemplate rest = new RestTemplate();
+	    rest.setMessageConverters(Arrays.asList(new StringHttpMessageConverter(), new FormHttpMessageConverter()));
+	    MultiValueMap<String, String> paramss = new LinkedMultiValueMap<String, String>();
+	    paramss.set("username", "taz@qat.com");
+	    paramss.set("password", "devil");
+	    URI tgtUrl = rest.postForLocation(REST_SERVICE_URI + "auth/api/authenticate", paramss, Collections.emptyMap());
+	    System.out.println("[" + tgtUrl + "]");
+
+
+	    System.out.println("[" + tgtUrl + "]");
+
+
+	    ResponseEntity<String> st = rest.postForEntity(REST_SERVICE_URI + "auth/api/authenticate", paramss, String.class);
+	    System.out.println("[" + st.getBody() + "]");
+	    System.out.println("[" + st + "]");
+	    String tk = st.getBody();
+	    Class<? extends String> mt = tk.getClass();
+	    System.out.println("[" + mt + "]");
+	    ObjectMapper mapper = new ObjectMapper();
+	    ModelToken obj = mapper.readValue(st.getBody(), ModelToken.class);
+
+	    System.out.println("[" + obj.getToken() + "]");
+
+	    headers = new HttpHeaders();
+	    headers.set("Header", "value");
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    headers.set("Other-Header", "othervalue");
+	    headers.set("X-Auth-Token", obj.getToken() );
+	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
+
+
+
+	//=========== fetch ================================================================
+	        System.out.println("==================================FetchALL==============================================");
+	        String jsonInString = mapper.writeValueAsString(new PagedInquiryRequest());
+	        System.out.println(jsonInString);
+	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
+	        ContatoItensResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/contatoitens/fetchPage/",entitys,  ContatoItensResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        count = result.getContatoItenList().size();
+
+
+	      //=========== Insert ================================================================
+	        System.out.println("==================================INSERT==============================================");
+	        jsonInString = mapper.writeValueAsString(Objects.insertContatoItens(id,TabelaEnum.CONTATOITENS,PersistenceActionEnum.INSERT));
+	        System.out.println(jsonInString);
+	        String requestJson = "{\"contatoitens\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/contatoitens/insert/",entitys,  ContatoItensResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+
+
+	      //=========== Update ================================================================
+	        System.out.println("==================================UPDATE==============================================");
+
+
+	        jsonInString = mapper.writeValueAsString(Objects.insertContatoItens(id,TabelaEnum.CONTATOITENS,PersistenceActionEnum.UPDATE));
+	        requestJson = "{\"contatoitens\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/contatoitens/update/",entitys,  ContatoItensResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+
+
+	       //===========  FetchbyID  ================================================================
+	        System.out.println("==================================FetchID==============================================");
+
+
+	        PagedInquiryRequest request001 = new PagedInquiryRequest();
+	        request001.setId(id);
+	        jsonInString = mapper.writeValueAsString(request001);
+	        System.out.println(jsonInString);
+	        entitys = new HttpEntity<String>(jsonInString,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/contatoitens/fetchPage/",entitys,  ContatoItensResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        Assert.assertEquals(result.getContatoItenList().size(), 1);
+
+
+//	Assert.assertEquals(result.getContatoItensList().get(0).getDataAlt(),(new Long());
+//	Assert.assertEquals(result.getContatoItensList().get(0).getTexto(),""texto_2" - UPDATE");
+//	Assert.assertEquals(result.getContatoItensList().get(0).getTitulo(),""titulo_3" - UPDATE");
+//	Assert.assertEquals(result.getContatoItensList().get(0).getContatoStatus(),(1004);
+//	Assert.assertEquals(result.getContatoItensList().get(0).getVisto(),(true);
+
+
+	        //=======================
+	        System.out.println("==================================DELETE==============================================");
+	        jsonInString = mapper.writeValueAsString(Objects.insertContatoItens(id,TabelaEnum.CONTATOITENS,PersistenceActionEnum.DELETE));
+	        requestJson = "{\"contatoitens\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/contatoitens/delete/",entitys,  ContatoItensResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        Assert.assertEquals(result.getContatoItenList().size(), count.intValue());
+
+
+	    }
+
+
+
+
+	// create by system gera-java version 1.0.0 02/08/2016 12:4 : 0//
+
+	@Test
+	public void listAllOrdemServico() throws JsonParseException, JsonMappingException, IOException{
+
+	    Integer count =0;
+	    Integer id =10000;
+	    RestTemplate restTemplate = new RestTemplate();
+
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.set("Header", "value");
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    headers.set("Other-Header", "othervalue");
+	    headers.set("username", "taz@qat.com" );
+
+	    Map<String, String> params = new HashMap<String, String>();
+	    params.put("username", "taz@qat.com");
+	    params.put("password", "taz@qat.com");
+
+	    RestTemplate rest = new RestTemplate();
+	    rest.setMessageConverters(Arrays.asList(new StringHttpMessageConverter(), new FormHttpMessageConverter()));
+	    MultiValueMap<String, String> paramss = new LinkedMultiValueMap<String, String>();
+	    paramss.set("username", "taz@qat.com");
+	    paramss.set("password", "devil");
+	    URI tgtUrl = rest.postForLocation(REST_SERVICE_URI + "auth/api/authenticate", paramss, Collections.emptyMap());
+	    System.out.println("[" + tgtUrl + "]");
+
+
+	    System.out.println("[" + tgtUrl + "]");
+
+
+	    ResponseEntity<String> st = rest.postForEntity(REST_SERVICE_URI + "auth/api/authenticate", paramss, String.class);
+	    System.out.println("[" + st.getBody() + "]");
+	    System.out.println("[" + st + "]");
+	    String tk = st.getBody();
+	    Class<? extends String> mt = tk.getClass();
+	    System.out.println("[" + mt + "]");
+	    ObjectMapper mapper = new ObjectMapper();
+	    ModelToken obj = mapper.readValue(st.getBody(), ModelToken.class);
+
+	    System.out.println("[" + obj.getToken() + "]");
+
+	    headers = new HttpHeaders();
+	    headers.set("Header", "value");
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    headers.set("Other-Header", "othervalue");
+	    headers.set("X-Auth-Token", obj.getToken() );
+	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
+
+
+
+	//=========== fetch ================================================================
+	        System.out.println("==================================FetchALL==============================================");
+	        String jsonInString = mapper.writeValueAsString(new OrdemServicoInquiryRequest());
+	        System.out.println(jsonInString);
+	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
+	        OrdemServicoResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/ordemservico/fetchPage/",entitys,  OrdemServicoResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        count = result.getOrdemServicoList().size();
+
+
+	      //=========== Insert ================================================================
+	        System.out.println("==================================INSERT==============================================");
+	        jsonInString = mapper.writeValueAsString(Objects.insertOrdemServico(id,TabelaEnum.ORDEMSERVICO,PersistenceActionEnum.INSERT));
+	        System.out.println(jsonInString);
+	        String requestJson = "{\"ordemservico\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/ordemservico/insert/",entitys,  OrdemServicoResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+
+
+	      //=========== Update ================================================================
+	        System.out.println("==================================UPDATE==============================================");
+
+
+	        jsonInString = mapper.writeValueAsString(Objects.insertOrdemServico(id,TabelaEnum.ORDEMSERVICO,PersistenceActionEnum.UPDATE));
+	        requestJson = "{\"ordemservico\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/ordemservico/update/",entitys,  OrdemServicoResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+
+
+	       //===========  FetchbyID  ================================================================
+	        System.out.println("==================================FetchID==============================================");
+
+
+	        OrdemServicoInquiryRequest request001 = new OrdemServicoInquiryRequest();
+	        request001.setId(id);
+	        jsonInString = mapper.writeValueAsString(request001);
+	        System.out.println(jsonInString);
+	        entitys = new HttpEntity<String>(jsonInString,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/ordemservico/fetchPage/",entitys,  OrdemServicoResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        Assert.assertEquals(result.getOrdemServicoList().size(), 1);
+
+
+//	Assert.assertEquals(result.getOrdemServicoList().get(0).getUserId(),""userId_1" - UPDATE");
+//	Assert.assertEquals(result.getOrdemServicoList().get(0).getNome(),""nome_2" - UPDATE");
+//	Assert.assertEquals(result.getOrdemServicoList().get(0).getData(),(new Long());
+//	Assert.assertEquals(result.getOrdemServicoList().get(0).getAssunto(),""assunto_4" - UPDATE");
+//	Assert.assertEquals(result.getOrdemServicoList().get(0).getStatusValue(),(1005);
+//	objeto.setOrdemServicoItensList(new ArrayList<List<OrdemServicoItens>> ())
+//	objeto.get().add(new List<OrdemServicoItens>());
+
+
+	        //=======================
+	        System.out.println("==================================DELETE==============================================");
+	        jsonInString = mapper.writeValueAsString(Objects.insertOrdemServico(id,TabelaEnum.ORDEMSERVICO,PersistenceActionEnum.DELETE));
+	        requestJson = "{\"ordemservico\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/ordemservico/delete/",entitys,  OrdemServicoResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        Assert.assertEquals(result.getOrdemServicoList().size(), count.intValue());
+
+
+	    }
+
+
+
+
+	// create by system gera-java version 1.0.0 02/08/2016 12:4 : 0//
+
+	@Test
+	public void listAllOrdemServicoItens() throws JsonParseException, JsonMappingException, IOException{
+
+	    Integer count =0;
+	    Integer id =10000;
+	    RestTemplate restTemplate = new RestTemplate();
+
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.set("Header", "value");
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    headers.set("Other-Header", "othervalue");
+	    headers.set("username", "taz@qat.com" );
+
+	    Map<String, String> params = new HashMap<String, String>();
+	    params.put("username", "taz@qat.com");
+	    params.put("password", "taz@qat.com");
+
+	    RestTemplate rest = new RestTemplate();
+	    rest.setMessageConverters(Arrays.asList(new StringHttpMessageConverter(), new FormHttpMessageConverter()));
+	    MultiValueMap<String, String> paramss = new LinkedMultiValueMap<String, String>();
+	    paramss.set("username", "taz@qat.com");
+	    paramss.set("password", "devil");
+	    URI tgtUrl = rest.postForLocation(REST_SERVICE_URI + "auth/api/authenticate", paramss, Collections.emptyMap());
+	    System.out.println("[" + tgtUrl + "]");
+
+
+	    System.out.println("[" + tgtUrl + "]");
+
+
+	    ResponseEntity<String> st = rest.postForEntity(REST_SERVICE_URI + "auth/api/authenticate", paramss, String.class);
+	    System.out.println("[" + st.getBody() + "]");
+	    System.out.println("[" + st + "]");
+	    String tk = st.getBody();
+	    Class<? extends String> mt = tk.getClass();
+	    System.out.println("[" + mt + "]");
+	    ObjectMapper mapper = new ObjectMapper();
+	    ModelToken obj = mapper.readValue(st.getBody(), ModelToken.class);
+
+	    System.out.println("[" + obj.getToken() + "]");
+
+	    headers = new HttpHeaders();
+	    headers.set("Header", "value");
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    headers.set("Other-Header", "othervalue");
+	    headers.set("X-Auth-Token", obj.getToken() );
+	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
+
+
+
+	//=========== fetch ================================================================
+	        System.out.println("==================================FetchALL==============================================");
+	        String jsonInString = mapper.writeValueAsString(new PagedInquiryRequest());
+	        System.out.println(jsonInString);
+	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
+	        OrdemServicoItensResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/ordemservicoitens/fetchPage/",entitys,  OrdemServicoItensResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        count = result.getOrdemServicoItenss().size();
+
+
+	      //=========== Insert ================================================================
+	        System.out.println("==================================INSERT==============================================");
+	        jsonInString = mapper.writeValueAsString(Objects.insertOrdemServicoItens(id,TabelaEnum.ORDEMSERVICOITENS,PersistenceActionEnum.INSERT));
+	        System.out.println(jsonInString);
+	        String requestJson = "{\"ordemservicoitens\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/ordemservicoitens/insert/",entitys,  OrdemServicoItensResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+
+
+	      //=========== Update ================================================================
+	        System.out.println("==================================UPDATE==============================================");
+
+
+	        jsonInString = mapper.writeValueAsString(Objects.insertOrdemServicoItens(id,TabelaEnum.ORDEMSERVICOITENS,PersistenceActionEnum.UPDATE));
+	        requestJson = "{\"ordemservicoitens\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/ordemservicoitens/update/",entitys,  OrdemServicoItensResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+
+
+	       //===========  FetchbyID  ================================================================
+	        System.out.println("==================================FetchID==============================================");
+
+
+	        PagedInquiryRequest request001 = new PagedInquiryRequest();
+	        request001.setId(id);
+	        jsonInString = mapper.writeValueAsString(request001);
+	        System.out.println(jsonInString);
+	        entitys = new HttpEntity<String>(jsonInString,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/ordemservicoitens/fetchPage/",entitys,  OrdemServicoItensResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        Assert.assertEquals(result.getOrdemServicoItenss().size(), 1);
+
+
+	        //=======================
+	        System.out.println("==================================DELETE==============================================");
+	        jsonInString = mapper.writeValueAsString(Objects.insertOrdemServicoItens(id,TabelaEnum.ORDEMSERVICOITENS,PersistenceActionEnum.DELETE));
+	        requestJson = "{\"ordemservicoitens\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/ordemservicoitens/delete/",entitys,  OrdemServicoItensResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        Assert.assertEquals(result.getOrdemServicoItenss().size(), count.intValue());
+
+
+	    }
+
+
+
+
+	// create by system gera-java version 1.0.0 02/08/2016 12:4 : 0//
+
+	@Test
+	public void listAllPlano() throws JsonParseException, JsonMappingException, IOException{
+
+	    Integer count =0;
+	    Integer id =10000;
+	    RestTemplate restTemplate = new RestTemplate();
+
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.set("Header", "value");
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    headers.set("Other-Header", "othervalue");
+	    headers.set("username", "taz@qat.com" );
+
+	    Map<String, String> params = new HashMap<String, String>();
+	    params.put("username", "taz@qat.com");
+	    params.put("password", "taz@qat.com");
+
+	    RestTemplate rest = new RestTemplate();
+	    rest.setMessageConverters(Arrays.asList(new StringHttpMessageConverter(), new FormHttpMessageConverter()));
+	    MultiValueMap<String, String> paramss = new LinkedMultiValueMap<String, String>();
+	    paramss.set("username", "taz@qat.com");
+	    paramss.set("password", "devil");
+	    URI tgtUrl = rest.postForLocation(REST_SERVICE_URI + "auth/api/authenticate", paramss, Collections.emptyMap());
+	    System.out.println("[" + tgtUrl + "]");
+
+
+	    System.out.println("[" + tgtUrl + "]");
+
+
+	    ResponseEntity<String> st = rest.postForEntity(REST_SERVICE_URI + "auth/api/authenticate", paramss, String.class);
+	    System.out.println("[" + st.getBody() + "]");
+	    System.out.println("[" + st + "]");
+	    String tk = st.getBody();
+	    Class<? extends String> mt = tk.getClass();
+	    System.out.println("[" + mt + "]");
+	    ObjectMapper mapper = new ObjectMapper();
+	    ModelToken obj = mapper.readValue(st.getBody(), ModelToken.class);
+
+	    System.out.println("[" + obj.getToken() + "]");
+
+	    headers = new HttpHeaders();
+	    headers.set("Header", "value");
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    headers.set("Other-Header", "othervalue");
+	    headers.set("X-Auth-Token", obj.getToken() );
+	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
+
+
+
+	//=========== fetch ================================================================
+	        System.out.println("==================================FetchALL==============================================");
+	        String jsonInString = mapper.writeValueAsString(new PlanoInquiryRequest());
+	        System.out.println(jsonInString);
+	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
+	        PlanoResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/plano/fetchPage/",entitys,  PlanoResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        count = result.getPlanoList().size();
+
+
+	      //=========== Insert ================================================================
+	        System.out.println("==================================INSERT==============================================");
+	        jsonInString = mapper.writeValueAsString(Objects.insertPlano(id,TabelaEnum.PLANO,PersistenceActionEnum.INSERT));
+	        System.out.println(jsonInString);
+	        String requestJson = "{\"plano\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/plano/insert/",entitys,  PlanoResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+
+
+	      //=========== Update ================================================================
+	        System.out.println("==================================UPDATE==============================================");
+
+
+	        jsonInString = mapper.writeValueAsString(Objects.insertPlano(id,TabelaEnum.PLANO,PersistenceActionEnum.UPDATE));
+	        requestJson = "{\"plano\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/plano/update/",entitys,  PlanoResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+
+
+	       //===========  FetchbyID  ================================================================
+	        System.out.println("==================================FetchID==============================================");
+
+
+	        PlanoInquiryRequest request001 = new PlanoInquiryRequest();
+	        request001.setId(id);
+	        jsonInString = mapper.writeValueAsString(request001);
+	        System.out.println(jsonInString);
+	        entitys = new HttpEntity<String>(jsonInString,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/plano/fetchPage/",entitys,  PlanoResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        Assert.assertEquals(result.getPlanoList().size(), 1);
+
+
+//	Assert.assertEquals(result.getPlanoList().get(0).getDataInicio(),(new Long());
+//	Assert.assertEquals(result.getPlanoList().get(0).getDataFinal(),(new Long());
+//	Assert.assertEquals(result.getPlanoList().get(0).getNumeroContrato(),(1003);
+//	Assert.assertEquals(result.getPlanoList().get(0).getDescricao(),""descricao_4" - UPDATE");
+//	Assert.assertEquals(result.getPlanoList().get(0).getTitulo(),""titulo_5" - UPDATE");
+//	Assert.assertEquals(result.getPlanoList().get(0).getCor(),""cor_6" - UPDATE");
+//	objeto.setPrecoList(new ArrayList<List<Preco>> ())
+//	objeto.get().add(new List<Preco>());
+//	objeto.setServicoList(new ArrayList<List<PlanoByServico>> ())
+//	objeto.get().add(new List<PlanoByServico>());
+
+
+	        //=======================
+	        System.out.println("==================================DELETE==============================================");
+	        jsonInString = mapper.writeValueAsString(Objects.insertPlano(id,TabelaEnum.PLANO,PersistenceActionEnum.DELETE));
+	        requestJson = "{\"plano\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/plano/delete/",entitys,  PlanoResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        Assert.assertEquals(result.getPlanoList().size(), count.intValue());
+
+
+	    }
+
+
+
+
+	// create by system gera-java version 1.0.0 02/08/2016 12:4 : 0//
+
+	@Test
+	public void listAllServicoAndPlano() throws JsonParseException, JsonMappingException, IOException{
+
+	    Integer count =0;
+	    Integer id =10000;
+	    RestTemplate restTemplate = new RestTemplate();
+
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.set("Header", "value");
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    headers.set("Other-Header", "othervalue");
+	    headers.set("username", "taz@qat.com" );
+
+	    Map<String, String> params = new HashMap<String, String>();
+	    params.put("username", "taz@qat.com");
+	    params.put("password", "taz@qat.com");
+
+	    RestTemplate rest = new RestTemplate();
+	    rest.setMessageConverters(Arrays.asList(new StringHttpMessageConverter(), new FormHttpMessageConverter()));
+	    MultiValueMap<String, String> paramss = new LinkedMultiValueMap<String, String>();
+	    paramss.set("username", "taz@qat.com");
+	    paramss.set("password", "devil");
+	    URI tgtUrl = rest.postForLocation(REST_SERVICE_URI + "auth/api/authenticate", paramss, Collections.emptyMap());
+	    System.out.println("[" + tgtUrl + "]");
+
+
+	    System.out.println("[" + tgtUrl + "]");
+
+
+	    ResponseEntity<String> st = rest.postForEntity(REST_SERVICE_URI + "auth/api/authenticate", paramss, String.class);
+	    System.out.println("[" + st.getBody() + "]");
+	    System.out.println("[" + st + "]");
+	    String tk = st.getBody();
+	    Class<? extends String> mt = tk.getClass();
+	    System.out.println("[" + mt + "]");
+	    ObjectMapper mapper = new ObjectMapper();
+	    ModelToken obj = mapper.readValue(st.getBody(), ModelToken.class);
+
+	    System.out.println("[" + obj.getToken() + "]");
+
+	    headers = new HttpHeaders();
+	    headers.set("Header", "value");
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    headers.set("Other-Header", "othervalue");
+	    headers.set("X-Auth-Token", obj.getToken() );
+	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
+
+
+
+	//=========== fetch ================================================================
+	        System.out.println("==================================FetchALL==============================================");
+	        String jsonInString = mapper.writeValueAsString(new PagedInquiryRequest());
+	        System.out.println(jsonInString);
+	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
+	        ServicoAndPlanoResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/servicoandplano/fetchPage/",entitys,  ServicoAndPlanoResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        count = result.getContatoItenList().size();
+
+
+	      //=========== Insert ================================================================
+	        System.out.println("==================================INSERT==============================================");
+	        jsonInString = mapper.writeValueAsString(Objects.insertServicoAndPlano(id,TabelaEnum.SERVICO,PersistenceActionEnum.INSERT));
+	        System.out.println(jsonInString);
+	        String requestJson = "{\"servicoandplano\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/servicoandplano/insert/",entitys,  ServicoAndPlanoResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+
+
+	      //=========== Update ================================================================
+	        System.out.println("==================================UPDATE==============================================");
+
+
+	        jsonInString = mapper.writeValueAsString(Objects.insertServicoAndPlano(id,TabelaEnum.SERVICO,PersistenceActionEnum.UPDATE));
+	        requestJson = "{\"servicoandplano\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/servicoandplano/update/",entitys,  ServicoAndPlanoResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+
+
+	       //===========  FetchbyID  ================================================================
+	        System.out.println("==================================FetchID==============================================");
+
+
+	        PagedInquiryRequest request001 = new PagedInquiryRequest();
+	        request001.setId(id);
+	        jsonInString = mapper.writeValueAsString(request001);
+	        System.out.println(jsonInString);
+	        entitys = new HttpEntity<String>(jsonInString,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/servicoandplano/fetchPage/",entitys,  ServicoAndPlanoResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        Assert.assertEquals(result.getContatoItenList().size(), 1);
+
+//
+//	Assert.assertEquals(result.getServicoAndPlanoList().get(0).getDataInicio(),(new Long());
+//	Assert.assertEquals(result.getServicoAndPlanoList().get(0).getValor(),(10.00);
+//	Assert.assertEquals(result.getServicoAndPlanoList().get(0).getServicoPlanoEnumValue(),(1003);
+//	Assert.assertEquals(result.getServicoAndPlanoList().get(0).getServicoList(),(new Servico());
+//	Assert.assertEquals(result.getServicoAndPlanoList().get(0).getPlanoList(),(new Plano());
+
+
+	        //=======================
+	        System.out.println("==================================DELETE==============================================");
+	        jsonInString = mapper.writeValueAsString(Objects.insertServicoAndPlano(id,TabelaEnum.SERVICO,PersistenceActionEnum.DELETE));
+	        requestJson = "{\"servicoandplano\":"+jsonInString+"}";
+	        entitys = new HttpEntity<String>(requestJson,headers);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/servicoandplano/delete/",entitys,  ServicoAndPlanoResponse.class);
+	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        Assert.assertEquals(result.getContatoItenList().size(), count.intValue());
+
+
+	    }
+
+
+	//=====================================TESTE===========================================================
 }

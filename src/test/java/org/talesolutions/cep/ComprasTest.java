@@ -43,7 +43,7 @@ public class ComprasTest {
 
 	@Test
 	public void listAllNotaFiscalEntrada() throws JsonParseException, JsonMappingException, IOException{
-	 
+
 	    Integer count =0;
 	    Integer id =10000;
 	    RestTemplate restTemplate = new RestTemplate();
@@ -86,7 +86,7 @@ public class ComprasTest {
 	    headers.setContentType(MediaType.APPLICATION_JSON);
 	    headers.set("Other-Header", "othervalue");
 	    headers.set("X-Auth-Token", obj.getToken() );
-	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:compras/api/cfop/fetchPage/";
 	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
 
 
@@ -96,7 +96,7 @@ public class ComprasTest {
 	        String jsonInString = mapper.writeValueAsString(new NotaFiscalInquiryRequest());
 	        System.out.println(jsonInString);
 	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
-	        NotaFiscalEntradaResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/notafiscalentrada/fetchPage/",entitys,  NotaFiscalEntradaResponse.class);
+	        NotaFiscalEntradaResponse result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/notacomprasentrada/fetchPage/",entitys,  NotaFiscalEntradaResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        count = result.getNotaFiscalList().size();
 
@@ -105,20 +105,20 @@ public class ComprasTest {
 	        System.out.println("==================================INSERT==============================================");
 	        jsonInString = mapper.writeValueAsString(Objects.insertNotaFiscalEntrada(id,TabelaEnum.NOTAFISCAL,PersistenceActionEnum.INSERT));
 	        System.out.println(jsonInString);
-	        String requestJson = "{\"notafiscalentrada\":"+jsonInString+"}";
+	        String requestJson = "{\"notacomprasentrada\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/notafiscalentrada/insert/",entitys,  NotaFiscalEntradaResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/notacomprasentrada/insert/",entitys,  NotaFiscalEntradaResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
 	      //=========== Update ================================================================
 	        System.out.println("==================================UPDATE==============================================");
 
-	        
+
 	        jsonInString = mapper.writeValueAsString(Objects.insertNotaFiscalEntrada(id,TabelaEnum.NOTAFISCAL,PersistenceActionEnum.UPDATE));
-	        requestJson = "{\"notafiscalentrada\":"+jsonInString+"}";
+	        requestJson = "{\"notacomprasentrada\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/notafiscalentrada/update/",entitys,  NotaFiscalEntradaResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/notacomprasentrada/update/",entitys,  NotaFiscalEntradaResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -131,7 +131,7 @@ public class ComprasTest {
 	        jsonInString = mapper.writeValueAsString(request001);
 	        System.out.println(jsonInString);
 	        entitys = new HttpEntity<String>(jsonInString,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/notafiscalentrada/fetchPage/",entitys,  NotaFiscalEntradaResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/notacomprasentrada/fetchPage/",entitys,  NotaFiscalEntradaResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getNotaFiscalList().size(), 1);
 
@@ -141,9 +141,9 @@ public class ComprasTest {
 	        //=======================
 	        System.out.println("==================================DELETE==============================================");
 	        jsonInString = mapper.writeValueAsString(Objects.insertNotaFiscalEntrada(id,TabelaEnum.NOTAFISCAL,PersistenceActionEnum.DELETE));
-	        requestJson = "{\"notafiscalentrada\":"+jsonInString+"}";
+	        requestJson = "{\"notacomprasentrada\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/notafiscalentrada/delete/",entitys,  NotaFiscalEntradaResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/notacomprasentrada/delete/",entitys,  NotaFiscalEntradaResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getNotaFiscalList().size(), count.intValue());
 
@@ -157,7 +157,7 @@ public class ComprasTest {
 
 	@Test
 	public void listAllPedidoCompras() throws JsonParseException, JsonMappingException, IOException{
-	 
+
 	    Integer count =0;
 	    Integer id =10000;
 	    RestTemplate restTemplate = new RestTemplate();
@@ -200,7 +200,7 @@ public class ComprasTest {
 	    headers.setContentType(MediaType.APPLICATION_JSON);
 	    headers.set("Other-Header", "othervalue");
 	    headers.set("X-Auth-Token", obj.getToken() );
-	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:compras/api/cfop/fetchPage/";
 	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
 
 
@@ -210,7 +210,7 @@ public class ComprasTest {
 	        String jsonInString = mapper.writeValueAsString(new PedidoComprasInquiryRequest());
 	        System.out.println(jsonInString);
 	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
-	        PedidoComprasResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/pedidocompras/fetchPage/",entitys,  PedidoComprasResponse.class);
+	        PedidoComprasResponse result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/pedidocompras/fetchPage/",entitys,  PedidoComprasResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        count = result.getPedidoComprasList().size();
 
@@ -221,18 +221,18 @@ public class ComprasTest {
 	        System.out.println(jsonInString);
 	        String requestJson = "{\"pedidocompras\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/pedidocompras/insert/",entitys,  PedidoComprasResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/pedidocompras/insert/",entitys,  PedidoComprasResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
 	      //=========== Update ================================================================
 	        System.out.println("==================================UPDATE==============================================");
 
-	        
+
 	        jsonInString = mapper.writeValueAsString(Objects.insertPedidoCompras(id,TabelaEnum.PEDIDOCOMPRAS,PersistenceActionEnum.UPDATE));
 	        requestJson = "{\"pedidocompras\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/pedidocompras/update/",entitys,  PedidoComprasResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/pedidocompras/update/",entitys,  PedidoComprasResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -245,7 +245,7 @@ public class ComprasTest {
 	        jsonInString = mapper.writeValueAsString(request001);
 	        System.out.println(jsonInString);
 	        entitys = new HttpEntity<String>(jsonInString,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/pedidocompras/fetchPage/",entitys,  PedidoComprasResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/pedidocompras/fetchPage/",entitys,  PedidoComprasResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getPedidoComprasList().size(), 1);
 
@@ -257,7 +257,7 @@ public class ComprasTest {
 	        jsonInString = mapper.writeValueAsString(Objects.insertPedidoCompras(id,TabelaEnum.PEDIDOCOMPRAS,PersistenceActionEnum.DELETE));
 	        requestJson = "{\"pedidocompras\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/pedidocompras/delete/",entitys,  PedidoComprasResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/pedidocompras/delete/",entitys,  PedidoComprasResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getPedidoComprasList().size(), count.intValue());
 
@@ -271,7 +271,7 @@ public class ComprasTest {
 
 	@Test
 	public void listAllCotacao() throws JsonParseException, JsonMappingException, IOException{
-	 
+
 	    Integer count =0;
 	    Integer id =10000;
 	    RestTemplate restTemplate = new RestTemplate();
@@ -314,7 +314,7 @@ public class ComprasTest {
 	    headers.setContentType(MediaType.APPLICATION_JSON);
 	    headers.set("Other-Header", "othervalue");
 	    headers.set("X-Auth-Token", obj.getToken() );
-	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:compras/api/cfop/fetchPage/";
 	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
 
 
@@ -324,7 +324,7 @@ public class ComprasTest {
 	        String jsonInString = mapper.writeValueAsString(new CotacaoInquiryRequest());
 	        System.out.println(jsonInString);
 	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
-	        CotacaoResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/cotacao/fetchPage/",entitys,  CotacaoResponse.class);
+	        CotacaoResponse result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/cotacao/fetchPage/",entitys,  CotacaoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        count = result.getCotacaoList().size();
 
@@ -335,18 +335,18 @@ public class ComprasTest {
 	        System.out.println(jsonInString);
 	        String requestJson = "{\"cotacao\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/cotacao/insert/",entitys,  CotacaoResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/cotacao/insert/",entitys,  CotacaoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
 	      //=========== Update ================================================================
 	        System.out.println("==================================UPDATE==============================================");
 
-	        
+
 	        jsonInString = mapper.writeValueAsString(Objects.insertCotacao(id,TabelaEnum.COTACAO,PersistenceActionEnum.UPDATE));
 	        requestJson = "{\"cotacao\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/cotacao/update/",entitys,  CotacaoResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/cotacao/update/",entitys,  CotacaoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -359,7 +359,7 @@ public class ComprasTest {
 	        jsonInString = mapper.writeValueAsString(request001);
 	        System.out.println(jsonInString);
 	        entitys = new HttpEntity<String>(jsonInString,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/cotacao/fetchPage/",entitys,  CotacaoResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/cotacao/fetchPage/",entitys,  CotacaoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getCotacaoList().size(), 1);
 
@@ -371,7 +371,7 @@ public class ComprasTest {
 	        jsonInString = mapper.writeValueAsString(Objects.insertCotacao(id,TabelaEnum.COTACAO,PersistenceActionEnum.DELETE));
 	        requestJson = "{\"cotacao\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/cotacao/delete/",entitys,  CotacaoResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/cotacao/delete/",entitys,  CotacaoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getCotacaoList().size(), count.intValue());
 

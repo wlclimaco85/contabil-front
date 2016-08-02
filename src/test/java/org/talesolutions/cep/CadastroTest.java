@@ -46,7 +46,7 @@ public class CadastroTest {
 
 	@Test
 	public void listAllConvenio() throws JsonParseException, JsonMappingException, IOException{
-	 
+
 	    Integer count =0;
 	    Integer id =10000;
 	    RestTemplate restTemplate = new RestTemplate();
@@ -89,7 +89,7 @@ public class CadastroTest {
 	    headers.setContentType(MediaType.APPLICATION_JSON);
 	    headers.set("Other-Header", "othervalue");
 	    headers.set("X-Auth-Token", obj.getToken() );
-	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:cadastros/api/cfop/fetchPage/";
 	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
 
 
@@ -99,7 +99,7 @@ public class CadastroTest {
 	        String jsonInString = mapper.writeValueAsString(new ConvenioInquiryRequest());
 	        System.out.println(jsonInString);
 	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
-	        ConvenioResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/convenio/fetchPage/",entitys,  ConvenioResponse.class);
+	        ConvenioResponse result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/convenio/fetchPage/",entitys,  ConvenioResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        count = result.getConvenioList().size();
 
@@ -110,18 +110,18 @@ public class CadastroTest {
 	        System.out.println(jsonInString);
 	        String requestJson = "{\"convenio\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/convenio/insert/",entitys,  ConvenioResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/convenio/insert/",entitys,  ConvenioResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
 	      //=========== Update ================================================================
 	        System.out.println("==================================UPDATE==============================================");
 
-	        
+
 	        jsonInString = mapper.writeValueAsString(Objects.insertConvenio(id,TabelaEnum.CONVENIO,PersistenceActionEnum.UPDATE));
 	        requestJson = "{\"convenio\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/convenio/update/",entitys,  ConvenioResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/convenio/update/",entitys,  ConvenioResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -134,7 +134,7 @@ public class CadastroTest {
 	        jsonInString = mapper.writeValueAsString(request001);
 	        System.out.println(jsonInString);
 	        entitys = new HttpEntity<String>(jsonInString,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/convenio/fetchPage/",entitys,  ConvenioResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/convenio/fetchPage/",entitys,  ConvenioResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getConvenioList().size(), 1);
 
@@ -146,7 +146,7 @@ public class CadastroTest {
 	        jsonInString = mapper.writeValueAsString(Objects.insertConvenio(id,TabelaEnum.CONVENIO,PersistenceActionEnum.DELETE));
 	        requestJson = "{\"convenio\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/convenio/delete/",entitys,  ConvenioResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/convenio/delete/",entitys,  ConvenioResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getConvenioList().size(), count.intValue());
 
@@ -160,7 +160,7 @@ public class CadastroTest {
 
 	@Test
 	public void listAllCidade() throws JsonParseException, JsonMappingException, IOException{
-	 
+
 	    Integer count =0;
 	    Integer id =10000;
 	    RestTemplate restTemplate = new RestTemplate();
@@ -203,7 +203,7 @@ public class CadastroTest {
 	    headers.setContentType(MediaType.APPLICATION_JSON);
 	    headers.set("Other-Header", "othervalue");
 	    headers.set("X-Auth-Token", obj.getToken() );
-	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:cadastros/api/cfop/fetchPage/";
 	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
 
 
@@ -213,7 +213,7 @@ public class CadastroTest {
 	        String jsonInString = mapper.writeValueAsString(new CidadeInquiryRequest());
 	        System.out.println(jsonInString);
 	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
-	        CidadeResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/cidade/fetchPage/",entitys,  CidadeResponse.class);
+	        CidadeResponse result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/cidade/fetchPage/",entitys,  CidadeResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        count = result.getCidadeList().size();
 
@@ -224,18 +224,18 @@ public class CadastroTest {
 	        System.out.println(jsonInString);
 	        String requestJson = "{\"cidade\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/cidade/insert/",entitys,  CidadeResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/cidade/insert/",entitys,  CidadeResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
 	      //=========== Update ================================================================
 	        System.out.println("==================================UPDATE==============================================");
 
-	        
+
 	        jsonInString = mapper.writeValueAsString(Objects.insertCidade(id,TabelaEnum.CIDADE,PersistenceActionEnum.UPDATE));
 	        requestJson = "{\"cidade\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/cidade/update/",entitys,  CidadeResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/cidade/update/",entitys,  CidadeResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -248,16 +248,16 @@ public class CadastroTest {
 	        jsonInString = mapper.writeValueAsString(request001);
 	        System.out.println(jsonInString);
 	        entitys = new HttpEntity<String>(jsonInString,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/cidade/fetchPage/",entitys,  CidadeResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/cidade/fetchPage/",entitys,  CidadeResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getCidadeList().size(), 1);
 
 
-	Assert.assertEquals(result.getCidadeList().get(0).getCodigo(),"codigo_1 - UPDATE"); 
-	Assert.assertEquals(result.getCidadeList().get(0).getNome(),"nome_2 - UPDATE"); 
-	Assert.assertEquals(result.getCidadeList().get(0).getCdIBGE(),"cdIBGE_3 - UPDATE"); 
-	Assert.assertEquals(result.getCidadeList().get(0).getCep(),"cep_4 - UPDATE"); 
-//	Assert.assertEquals(result.getCidadeList().get(0).getEstado(),(new Estado()); 
+	Assert.assertEquals(result.getCidadeList().get(0).getCodigo(),"codigo_1 - UPDATE");
+	Assert.assertEquals(result.getCidadeList().get(0).getNome(),"nome_2 - UPDATE");
+	Assert.assertEquals(result.getCidadeList().get(0).getCdIBGE(),"cdIBGE_3 - UPDATE");
+	Assert.assertEquals(result.getCidadeList().get(0).getCep(),"cep_4 - UPDATE");
+//	Assert.assertEquals(result.getCidadeList().get(0).getEstado(),(new Estado());
 
 
 	        //=======================
@@ -265,7 +265,7 @@ public class CadastroTest {
 	        jsonInString = mapper.writeValueAsString(Objects.insertCidade(id,TabelaEnum.CIDADE,PersistenceActionEnum.DELETE));
 	        requestJson = "{\"cidade\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/cidade/delete/",entitys,  CidadeResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/cidade/delete/",entitys,  CidadeResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getCidadeList().size(), count.intValue());
 
@@ -279,7 +279,7 @@ public class CadastroTest {
 
 	@Test
 	public void listAllEstado() throws JsonParseException, JsonMappingException, IOException{
-	 
+
 	    Integer count =0;
 	    Integer id =10000;
 	    RestTemplate restTemplate = new RestTemplate();
@@ -322,7 +322,7 @@ public class CadastroTest {
 	    headers.setContentType(MediaType.APPLICATION_JSON);
 	    headers.set("Other-Header", "othervalue");
 	    headers.set("X-Auth-Token", obj.getToken() );
-	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:cadastros/api/cfop/fetchPage/";
 	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
 
 
@@ -332,7 +332,7 @@ public class CadastroTest {
 	        String jsonInString = mapper.writeValueAsString(new EstadoInquiryRequest());
 	        System.out.println(jsonInString);
 	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
-	        EstadoResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/estado/fetchPage/",entitys,  EstadoResponse.class);
+	        EstadoResponse result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/estado/fetchPage/",entitys,  EstadoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        count = result.getEstadoList().size();
 
@@ -343,18 +343,18 @@ public class CadastroTest {
 	        System.out.println(jsonInString);
 	        String requestJson = "{\"estado\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/estado/insert/",entitys,  EstadoResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/estado/insert/",entitys,  EstadoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
 	      //=========== Update ================================================================
 	        System.out.println("==================================UPDATE==============================================");
 
-	        
+
 	        jsonInString = mapper.writeValueAsString(Objects.insertEstado(id,TabelaEnum.ESTADO,PersistenceActionEnum.UPDATE));
 	        requestJson = "{\"estado\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/estado/update/",entitys,  EstadoResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/estado/update/",entitys,  EstadoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -367,13 +367,13 @@ public class CadastroTest {
 	        jsonInString = mapper.writeValueAsString(request001);
 	        System.out.println(jsonInString);
 	        entitys = new HttpEntity<String>(jsonInString,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/estado/fetchPage/",entitys,  EstadoResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/estado/fetchPage/",entitys,  EstadoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getEstadoList().size(), 1);
 
 
-	Assert.assertEquals(result.getEstadoList().get(0).getNome(),"nome_1 - UPDATE"); 
-	Assert.assertEquals(result.getEstadoList().get(0).getAbreviacao(),"abreviacao_2 - UPDATE"); 
+	Assert.assertEquals(result.getEstadoList().get(0).getNome(),"nome_1 - UPDATE");
+	Assert.assertEquals(result.getEstadoList().get(0).getAbreviacao(),"abreviacao_2 - UPDATE");
 
 
 	        //=======================
@@ -381,7 +381,7 @@ public class CadastroTest {
 	        jsonInString = mapper.writeValueAsString(Objects.insertEstado(id,TabelaEnum.ESTADO,PersistenceActionEnum.DELETE));
 	        requestJson = "{\"estado\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/estado/delete/",entitys,  EstadoResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/estado/delete/",entitys,  EstadoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getEstadoList().size(), count.intValue());
 
@@ -395,7 +395,7 @@ public class CadastroTest {
 //
 //	@Test
 //	public void listAllTarefa() throws JsonParseException, JsonMappingException, IOException{
-//	 
+//
 //	    Integer count =0;
 //	    Integer id =10000;
 //	    RestTemplate restTemplate = new RestTemplate();
@@ -438,7 +438,7 @@ public class CadastroTest {
 //	    headers.setContentType(MediaType.APPLICATION_JSON);
 //	    headers.set("Other-Header", "othervalue");
 //	    headers.set("X-Auth-Token", obj.getToken() );
-//	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+//	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:cadastros/api/cfop/fetchPage/";
 //	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
 //
 //
@@ -448,7 +448,7 @@ public class CadastroTest {
 //	        String jsonInString = mapper.writeValueAsString(new TarefaInquiryRequest());
 //	        System.out.println(jsonInString);
 //	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
-//	        TarefaResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/tarefa/fetchPage/",entitys,  TarefaResponse.class);
+//	        TarefaResponse result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/tarefa/fetchPage/",entitys,  TarefaResponse.class);
 //	        Assert.assertEquals(result.isOperationSuccess(), true);
 //	        count = result.getTarefaList().size();
 //
@@ -459,18 +459,18 @@ public class CadastroTest {
 //	        System.out.println(jsonInString);
 //	        String requestJson = "{\"tarefa\":"+jsonInString+"}";
 //	        entitys = new HttpEntity<String>(requestJson,headers);
-//	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/tarefa/insert/",entitys,  TarefaResponse.class);
+//	        result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/tarefa/insert/",entitys,  TarefaResponse.class);
 //	        Assert.assertEquals(result.isOperationSuccess(), true);
 //
 //
 //	      //=========== Update ================================================================
 //	        System.out.println("==================================UPDATE==============================================");
 //
-//	        
+//
 //	        jsonInString = mapper.writeValueAsString(Objects.insertTarefa(id,TabelaEnum.TAREFA,PersistenceActionEnum.UPDATE));
 //	        requestJson = "{\"tarefa\":"+jsonInString+"}";
 //	        entitys = new HttpEntity<String>(requestJson,headers);
-//	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/tarefa/update/",entitys,  TarefaResponse.class);
+//	        result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/tarefa/update/",entitys,  TarefaResponse.class);
 //	        Assert.assertEquals(result.isOperationSuccess(), true);
 //
 //
@@ -483,13 +483,13 @@ public class CadastroTest {
 //	        jsonInString = mapper.writeValueAsString(request001);
 //	        System.out.println(jsonInString);
 //	        entitys = new HttpEntity<String>(jsonInString,headers);
-//	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/tarefa/fetchPage/",entitys,  TarefaResponse.class);
+//	        result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/tarefa/fetchPage/",entitys,  TarefaResponse.class);
 //	        Assert.assertEquals(result.isOperationSuccess(), true);
 //	        Assert.assertEquals(result.getTarefaList().size(), 1);
 //
 //
-//	Assert.assertEquals(result.getTarefaList().get(0).getNome(),""nome_1" - UPDATE"); 
-//	Assert.assertEquals(result.getTarefaList().get(0).getDescricao(),""descricao_2" - UPDATE"); 
+//	Assert.assertEquals(result.getTarefaList().get(0).getNome(),""nome_1" - UPDATE");
+//	Assert.assertEquals(result.getTarefaList().get(0).getDescricao(),""descricao_2" - UPDATE");
 //
 //
 //	        //=======================
@@ -497,7 +497,7 @@ public class CadastroTest {
 //	        jsonInString = mapper.writeValueAsString(Objects.insertTarefa(id,TabelaEnum.TAREFA,PersistenceActionEnum.DELETE));
 //	        requestJson = "{\"tarefa\":"+jsonInString+"}";
 //	        entitys = new HttpEntity<String>(requestJson,headers);
-//	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/tarefa/delete/",entitys,  TarefaResponse.class);
+//	        result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/tarefa/delete/",entitys,  TarefaResponse.class);
 //	        Assert.assertEquals(result.isOperationSuccess(), true);
 //	        Assert.assertEquals(result.getTarefaList().size(), count.intValue());
 //
