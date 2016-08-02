@@ -48,7 +48,7 @@ public class ClinicaTest {
 
 	@Test
 	public void listAllConsulta() throws JsonParseException, JsonMappingException, IOException{
-	 
+
 	    Integer count =0;
 	    Integer id =10000;
 	    RestTemplate restTemplate = new RestTemplate();
@@ -91,7 +91,7 @@ public class ClinicaTest {
 	    headers.setContentType(MediaType.APPLICATION_JSON);
 	    headers.set("Other-Header", "othervalue");
 	    headers.set("X-Auth-Token", obj.getToken() );
-	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:clinica/api/cfop/fetchPage/";
 	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
 
 
@@ -101,7 +101,7 @@ public class ClinicaTest {
 	        String jsonInString = mapper.writeValueAsString(new ConsultaInquiryRequest());
 	        System.out.println(jsonInString);
 	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
-	        ConsultaResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/consulta/fetchPage/",entitys,  ConsultaResponse.class);
+	        ConsultaResponse result = restTemplate.postForObject( REST_SERVICE_URI + "clinica/api/consulta/fetchPage/",entitys,  ConsultaResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        count = result.getConsultaList().size();
 
@@ -112,18 +112,18 @@ public class ClinicaTest {
 	        System.out.println(jsonInString);
 	        String requestJson = "{\"consulta\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/consulta/insert/",entitys,  ConsultaResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "clinica/api/consulta/insert/",entitys,  ConsultaResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
 	      //=========== Update ================================================================
 	        System.out.println("==================================UPDATE==============================================");
 
-	        
+
 	        jsonInString = mapper.writeValueAsString(Objects.insertConsulta(id,TabelaEnum.CONSULTA,PersistenceActionEnum.UPDATE));
 	        requestJson = "{\"consulta\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/consulta/update/",entitys,  ConsultaResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "clinica/api/consulta/update/",entitys,  ConsultaResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -136,17 +136,17 @@ public class ClinicaTest {
 	        jsonInString = mapper.writeValueAsString(request001);
 	        System.out.println(jsonInString);
 	        entitys = new HttpEntity<String>(jsonInString,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/consulta/fetchPage/",entitys,  ConsultaResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "clinica/api/consulta/fetchPage/",entitys,  ConsultaResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getConsultaList().size(), 1);
 
 
-	//Assert.assertEquals(result.getConsultaList().get(0).getDataConsulta(),((new Date()).getTime())); 
-//	Assert.assertEquals(result.getConsultaList().get(0).getValor(),10.00); 
-//	Assert.assertEquals(result.getConsultaList().get(0).getDataMarcacao(),((new Date()).getTime())); 
-//	Assert.assertEquals(result.getConsultaList().get(0).getMedico(),(new Medico()); 
-//	Assert.assertEquals(result.getConsultaList().get(0).getPaciente(),(new Paciente()); 
-//	Assert.assertEquals(result.getConsultaList().get(0).getPlanoSaude(),(new PlanoSaude()); 
+	//Assert.assertEquals(result.getConsultaList().get(0).getDataConsulta(),((new Date()).getTime()));
+//	Assert.assertEquals(result.getConsultaList().get(0).getValor(),10.00);
+//	Assert.assertEquals(result.getConsultaList().get(0).getDataMarcacao(),((new Date()).getTime()));
+//	Assert.assertEquals(result.getConsultaList().get(0).getMedico(),(new Medico());
+//	Assert.assertEquals(result.getConsultaList().get(0).getPaciente(),(new Paciente());
+//	Assert.assertEquals(result.getConsultaList().get(0).getPlanoSaude(),(new PlanoSaude());
 
 
 
@@ -155,7 +155,7 @@ public class ClinicaTest {
 	        jsonInString = mapper.writeValueAsString(Objects.insertConsulta(id,TabelaEnum.CONSULTA,PersistenceActionEnum.DELETE));
 	        requestJson = "{\"consulta\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/consulta/delete/",entitys,  ConsultaResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "clinica/api/consulta/delete/",entitys,  ConsultaResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getConsultaList().size(), count.intValue());
 
@@ -169,7 +169,7 @@ public class ClinicaTest {
 
 	@Test
 	public void listAllExame() throws JsonParseException, JsonMappingException, IOException{
-	 
+
 	    Integer count =0;
 	    Integer id =10000;
 	    RestTemplate restTemplate = new RestTemplate();
@@ -212,7 +212,7 @@ public class ClinicaTest {
 	    headers.setContentType(MediaType.APPLICATION_JSON);
 	    headers.set("Other-Header", "othervalue");
 	    headers.set("X-Auth-Token", obj.getToken() );
-	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:clinica/api/cfop/fetchPage/";
 	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
 
 
@@ -222,7 +222,7 @@ public class ClinicaTest {
 	        String jsonInString = mapper.writeValueAsString(new ExameInquiryRequest());
 	        System.out.println(jsonInString);
 	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
-	        ExameResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/exame/fetchPage/",entitys,  ExameResponse.class);
+	        ExameResponse result = restTemplate.postForObject( REST_SERVICE_URI + "/clinica/api/exame/fetchPage/",entitys,  ExameResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        count = result.getExameList().size();
 
@@ -233,18 +233,18 @@ public class ClinicaTest {
 	        System.out.println(jsonInString);
 	        String requestJson = "{\"exame\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/exame/insert/",entitys,  ExameResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "clinica/api/exame/insert/",entitys,  ExameResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
 	      //=========== Update ================================================================
 	        System.out.println("==================================UPDATE==============================================");
 
-	        
+
 	        jsonInString = mapper.writeValueAsString(Objects.insertExame(id,TabelaEnum.EXAME,PersistenceActionEnum.UPDATE));
 	        requestJson = "{\"exame\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/exame/update/",entitys,  ExameResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "clinica/api/exame/update/",entitys,  ExameResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -257,7 +257,7 @@ public class ClinicaTest {
 	        jsonInString = mapper.writeValueAsString(request001);
 	        System.out.println(jsonInString);
 	        entitys = new HttpEntity<String>(jsonInString,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/exame/fetchPage/",entitys,  ExameResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "clinica/api/exame/fetchPage/",entitys,  ExameResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getExameList().size(), 1);
 
@@ -269,7 +269,7 @@ public class ClinicaTest {
 	        jsonInString = mapper.writeValueAsString(Objects.insertExame(id,TabelaEnum.EXAME,PersistenceActionEnum.DELETE));
 	        requestJson = "{\"exame\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/exame/delete/",entitys,  ExameResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "clinica/api/exame/delete/",entitys,  ExameResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getExameList().size(), count.intValue());
 
@@ -277,5 +277,5 @@ public class ClinicaTest {
 	    }
 
 
-	
+
 }
