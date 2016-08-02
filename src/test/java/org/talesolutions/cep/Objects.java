@@ -91,12 +91,14 @@ import com.qat.samples.sysmgmt.pessoa.model.Transportador;
 import com.qat.samples.sysmgmt.produto.model.Custo;
 import com.qat.samples.sysmgmt.produto.model.CustoItens;
 import com.qat.samples.sysmgmt.produto.model.Estoque;
+import com.qat.samples.sysmgmt.produto.model.EstoqueTypeEnum;
 import com.qat.samples.sysmgmt.produto.model.Grupo;
 import com.qat.samples.sysmgmt.produto.model.Marca;
 import com.qat.samples.sysmgmt.produto.model.MarcaProduto;
 import com.qat.samples.sysmgmt.produto.model.Porcao;
 import com.qat.samples.sysmgmt.produto.model.PorcaoItens;
 import com.qat.samples.sysmgmt.produto.model.Preco;
+import com.qat.samples.sysmgmt.produto.model.PrecoTypeEnum;
 import com.qat.samples.sysmgmt.produto.model.Produto;
 import com.qat.samples.sysmgmt.produto.model.ProdutoParent;
 import com.qat.samples.sysmgmt.produto.model.Rentabilidade;
@@ -108,6 +110,8 @@ import com.qat.samples.sysmgmt.site.model.ServicoAndPlano;
 import com.qat.samples.sysmgmt.site.model.Site;
 import com.qat.samples.sysmgmt.util.model.Cidade;
 import com.qat.samples.sysmgmt.util.model.Documento;
+import com.qat.samples.sysmgmt.util.model.DoisValorTypeEnum;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.Note;
@@ -1925,8 +1929,8 @@ public class Objects {
 		servicoandplano.setDataInicio(a.getTime());
 		servicoandplano.setValor(new Double(10.00));
 		servicoandplano.setServicoPlanoEnumValue(1003);
-		servicoandplano.setServicoList(1004);
-		servicoandplano.setPlanoList(1005);
+		servicoandplano.setServicoList(insertServico(id, TabelaEnum.PLANO, action));
+		servicoandplano.setPlanoList(insertPlano(id, TabelaEnum.PLANO, action));
 		servicoandplano.setTabelaEnum(tabela);
 		servicoandplano.setParentId(id);
 		servicoandplano.setEmprId(EMPID);
@@ -1975,7 +1979,7 @@ public class Objects {
 		return orcamento;
 	}
 
-	public static OrdemServico insertOrdemServico(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+	public static OrdemServico insertOrdemServicoss(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		OrdemServico ordemservico = new OrdemServico();
 		Date a = new Date();
 		ordemservico.setId(id);
@@ -1984,8 +1988,8 @@ public class Objects {
 		ordemservico.setData(a.getTime());
 		ordemservico.setAssunto("assunto_4 - " + action.toString());
 		ordemservico.setStatusValue(1005);
-		ordemservico.setOrdemServicoItensList(new ArrayList<OrdemServicoItensList>());
-		ordemservico.getOrdemServicoItensList().add(insertOrdemServicoItensList(id, TabelaEnum.ORDEMSERVICO, action));
+		//ordemservico.setOrdemServicoItensList(new ArrayList<OrdemServicoItensList>());
+		//ordemservico.getOrdemServicoItensList().add(insertOrdemServicoItensList(id, TabelaEnum.ORDEMSERVICO, action));
 		ordemservico.setTabelaEnum(tabela);
 		ordemservico.setParentId(id);
 		ordemservico.setEmprId(EMPID);
@@ -2005,16 +2009,16 @@ public class Objects {
 		Endereco endereco = new Endereco();
 		Date a = new Date();
 		endereco.setId(id);
-		endereco.setCodIbge(1001);
+		endereco.setCodIbge("555555");
 		endereco.setLogradouro("logradouro_2 - " + action.toString());
 		endereco.setBairro("bairro_3 - " + action.toString());
 		endereco.setNumero("numero_4 - " + action.toString());
 		endereco.setEnderecoTypeValue(1005);
 		endereco.setCep("cep_6 - " + action.toString());
-		endereco.setLatitude("latitude_7 - " + action.toString());
-		endereco.setLongitude("longitude_8 - " + action.toString());
+		endereco.setLatitude(new Double(10.10));
+		endereco.setLongitude(new Double(10.10));
 		endereco.setComplemento("complemento_9 - " + action.toString());
-		endereco.setCidade(1010);
+		endereco.setCidade(insertCidade(id, TabelaEnum.PLANO, action));
 		endereco.setTabelaEnum(tabela);
 		endereco.setParentId(id);
 		endereco.setEmprId(EMPID);
@@ -2135,33 +2139,33 @@ public class Objects {
 	}
 
 
-	public static HistoricoUtil insertHistoricoUtil(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
-		HistoricoUtil historicoutil = new HistoricoUtil();
-		Date a = new Date();
-		historicoutil.setId(id);
-		historicoutil.setDataMovimento(a.getTime());
-		historicoutil.setHistoricoUtilType(1002);
-		historicoutil.setQuantidade(1003);
-		historicoutil.setTabelaEnumValue(1004);
-		historicoutil.setTabelaEnum(tabela);
-		historicoutil.setParentId(id);
-		historicoutil.setEmprId(EMPID);
-		historicoutil.setModifyDateUTC(a.getTime());
-		historicoutil.setCreateDateUTC(a.getTime());
-		historicoutil.setCreateUser("system");
-		historicoutil.setModifyUser("system");
-		historicoutil.setProcessId(1);
-		historicoutil.setModelAction(action);
-
-		return historicoutil;
-	}
+//	public static HistoricoUtil insertHistoricoUtil(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+//		HistoricoUtil historicoutil = new HistoricoUtil();
+//		Date a = new Date();
+//		historicoutil.setId(id);
+//		historicoutil.setDataMovimento(a.getTime());
+//		historicoutil.setHistoricoUtilType(1002);
+//		historicoutil.setQuantidade(1003);
+//		historicoutil.setTabelaEnumValue(1004);
+//		historicoutil.setTabelaEnum(tabela);
+//		historicoutil.setParentId(id);
+//		historicoutil.setEmprId(EMPID);
+//		historicoutil.setModifyDateUTC(a.getTime());
+//		historicoutil.setCreateDateUTC(a.getTime());
+//		historicoutil.setCreateUser("system");
+//		historicoutil.setModifyUser("system");
+//		historicoutil.setProcessId(1);
+//		historicoutil.setModelAction(action);
+//
+//		return historicoutil;
+//	}
 
 	public static Historico insertHistorico(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Historico historico = new Historico();
 		Date a = new Date();
 		historico.setId(id);
 		historico.setData(a.getTime());
-		historico.setUserId(1002);
+		historico.setUserId("User");
 		historico.setAcaoEnumValue(1003);
 		historico.setTabelaEnum(tabela);
 		historico.setParentId(id);
@@ -2220,8 +2224,8 @@ public class Objects {
 		Date a = new Date();
 		socio.setId(id);
 		socio.setNome("nome_1 - " + action.toString());
-		socio.setCota(new Double(10.00));
-		socio.setPorcentagem(new Double(10.00));
+		socio.setCota("10.00");
+		socio.setPorcentagem("10.00");
 		socio.setTabelaEnum(tabela);
 		socio.setParentId(id);
 		socio.setEmprId(EMPID);
@@ -2245,8 +2249,8 @@ public class Objects {
 		ordemservico.setData(a.getTime());
 		ordemservico.setAssunto("assunto_4 - " + action.toString());
 		ordemservico.setStatusValue(1005);
-		ordemservico.setOrdemServicoItensList(new ArrayList<OrdemServicoItensList>());
-		ordemservico.getOrdemServicoItensList().add(insertOrdemServicoItensList(id, TabelaEnum.ORDEMSERVICO, action));
+		ordemservico.setOrdemServicoItensList(new ArrayList<OrdemServicoItens>());
+		ordemservico.getOrdemServicoItensList().add(insertOrdemServicoItens(id, TabelaEnum.ORDEMSERVICO, action));
 		ordemservico.setTabelaEnum(tabela);
 		ordemservico.setParentId(id);
 		ordemservico.setEmprId(EMPID);
@@ -2260,31 +2264,29 @@ public class Objects {
 		return ordemservico;
 	}
 
-	public static OrdemServicoType insertOrdemServicoType(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
-		OrdemServicoType ordemservicotype = new OrdemServicoType();
-		Date a = new Date();
-		ordemservicotype.setId(id);
-		ordemservicotype.setTabelaEnum(tabela);
-		ordemservicotype.setParentId(id);
-		ordemservicotype.setEmprId(EMPID);
-		ordemservicotype.setModifyDateUTC(a.getTime());
-		ordemservicotype.setCreateDateUTC(a.getTime());
-		ordemservicotype.setCreateUser("system");
-		ordemservicotype.setModifyUser("system");
-		ordemservicotype.setProcessId(1);
-		ordemservicotype.setModelAction(action);
-
-		return ordemservicotype;
-	}
+//	public static OrdemServicoType insertOrdemServicoType(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+//		OrdemServicoType ordemservicotype = new OrdemServicoType();
+//		Date a = new Date();
+//		ordemservicotype.setId(id);
+//		ordemservicotype.setTabelaEnum(tabela);
+//		ordemservicotype.setParentId(id);
+//		ordemservicotype.setEmprId(EMPID);
+//		ordemservicotype.setModifyDateUTC(a.getTime());
+//		ordemservicotype.setCreateDateUTC(a.getTime());
+//		ordemservicotype.setCreateUser("system");
+//		ordemservicotype.setModifyUser("system");
+//		ordemservicotype.setProcessId(1);
+//		ordemservicotype.setModelAction(action);
+//
+//		return ordemservicotype;
+//	}
 
 	public static OrdemServicoStatus insertOrdemServicoStatus(Integer id, TabelaEnum tabela,
 			PersistenceActionEnum action) {
 		OrdemServicoStatus ordemservicostatus = new OrdemServicoStatus();
 		Date a = new Date();
 		ordemservicostatus.setId(id);
-		ordemservicostatus.setNome(1001);
-		ordemservicostatus.setCota(1002);
-		ordemservicostatus.setPorcentagem(1003);
+		ordemservicostatus.setNome("Nome");
 		ordemservicostatus.setTabelaEnum(tabela);
 		ordemservicostatus.setParentId(id);
 		ordemservicostatus.setEmprId(EMPID);
@@ -2345,15 +2347,15 @@ public class Objects {
 		Tributacao tributacao = new Tributacao();
 		Date a = new Date();
 		tributacao.setId(id);
-		tributacao.setCstId(1001);
+		//tributacao.setCstId(new Cst());
 		tributacao.setIcms(new Double(10.00));
 		tributacao.setSt(new Double(10.00));
 		tributacao.setMva(new Double(10.00));
-		tributacao.setCsosnId(1005);
+	//	tributacao.setCsosnId(1005);
 		tributacao.setIpi(new Double(10.00));
 		tributacao.setIat(new Double(10.00));
 		tributacao.setIppt(new Double(10.00));
-		tributacao.setIncidencia(1009);
+	//	tributacao.setIncidencia(1009);
 		tributacao.setTabelaEnum(tabela);
 		tributacao.setParentId(id);
 		tributacao.setEmprId(EMPID);
@@ -2374,7 +2376,7 @@ public class Objects {
 		agencia.setNome("nome_1 - " + action.toString());
 		agencia.setGerente("gerente_2 - " + action.toString());
 		agencia.setResponsavelConta("responsavelConta_3 - " + action.toString());
-		agencia.setNumeroAgencia("numeroAgencia_4 - " + action.toString());
+		//agencia.setNumeroAgencia("numeroAgencia_4 - " + action.toString());
 		agencia.setParentId(1005);
 		agencia.setEnderecos(new ArrayList<Endereco>());
 		agencia.getEnderecos().add(insertEndereco(id, TabelaEnum.AGENCIA, action));
@@ -2382,8 +2384,8 @@ public class Objects {
 		agencia.getEmails().add(insertEmail(id, TabelaEnum.AGENCIA, action));
 		agencia.setTelefones(new ArrayList<Telefone>());
 		agencia.getTelefones().add(insertTelefone(id, TabelaEnum.AGENCIA, action));
-		agencia.setContaList(new ArrayList<ContaList>());
-		agencia.getContaList().add(insertContaList(id, TabelaEnum.AGENCIA, action));
+	//	agencia.setContaList(new ArrayList<Conta>());
+	//	agencia.getContaList().add(insertConta(id, TabelaEnum.AGENCIA, action));
 		agencia.setTabelaEnum(tabela);
 		agencia.setParentId(id);
 		agencia.setEmprId(EMPID);
@@ -2437,8 +2439,8 @@ public class Objects {
 		Date a = new Date();
 		custo.setId(id);
 		custo.setValor(new Double(10.00));
-		custo.setCusto(new ArrayList<Custo>());
-		custo.getCusto().add(insertCusto(id, TabelaEnum.CUSTO, action));
+		custo.setCustoItens(new ArrayList<CustoItens>());
+		custo.getCustoItens().add(insertCustoItens(id, TabelaEnum.CUSTO, action));
 		custo.setTabelaEnum(tabela);
 		custo.setParentId(id);
 		custo.setEmprId(EMPID);
@@ -2457,7 +2459,7 @@ public class Objects {
 		Estoque estoque = new Estoque();
 		Date a = new Date();
 		estoque.setId(id);
-		estoque.setEstoqueTypeEnum(1001);
+		estoque.setEstoqueTypeEnum(EstoqueTypeEnum.ATUAL);
 		estoque.setUltimoMov(a.getTime());
 		estoque.setQuant(new Double(10.00));
 		estoque.setTabelaEnum(tabela);
@@ -2499,7 +2501,7 @@ public class Objects {
 		Date a = new Date();
 		preco.setId(id);
 		preco.setDataMarcacao(a.getTime());
-		preco.setPrecoTypeEnum(1002);
+		preco.setPrecoTypeEnum(PrecoTypeEnum.COMPRA);
 		preco.setValor(new Double(10.00));
 		preco.setDataProInicial(a.getTime());
 		preco.setDataProFinal(a.getTime());
@@ -2517,13 +2519,13 @@ public class Objects {
 	}
 
 
-	public static DoisValor insertDoisValor(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
-		DoisValor doisvalor = new DoisValor();
+	public static DoisValores insertDoisValor(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+		DoisValores doisvalor = new DoisValores();
 		Date a = new Date();
 		doisvalor.setId(id);
 		doisvalor.setNome("nome_1 - " + action.toString());
 		doisvalor.setDescricao("descricao_2 - " + action.toString());
-		doisvalor.setDoisValorType(1003);
+		doisvalor.setDoisValorTypeEnum(DoisValorTypeEnum.COMPRAS);
 		doisvalor.setTabelaEnum(tabela);
 		doisvalor.setParentId(id);
 		doisvalor.setEmprId(EMPID);
@@ -2542,16 +2544,16 @@ public class Objects {
 		Configuracao configuracao = new Configuracao();
 		Date a = new Date();
 		configuracao.setId(id);
-		configuracao.setConfGeral(1001);
-		configuracao.setConfNFe(1002);
-		configuracao.setConfFiscal(1003);
-		configuracao.setConfProd(1004);
-		configuracao.setConfVendas(1005);
-		configuracao.setConfCMTP(1006);
-		configuracao.setConfEntrada(1007);
-		configuracao.setConfCarne(1008);
-		configuracao.setBoletoList(new ArrayList<BoletoList>());
-		configuracao.getBoletoList().add(insertBoletoList(id, TabelaEnum.CONFIGURACAO, action));
+		configuracao.setConfGeral(insertConfigGeral(id, TabelaEnum.CONFIGURACAO, action));
+		configuracao.setConfNFe(insertConfiguracaoNFe(id, TabelaEnum.CONFIGURACAO, action));
+		configuracao.setConfFiscal(insertConfigFiscal(id, TabelaEnum.CONFIGURACAO, action));
+		configuracao.setConfProd(insertConfigProduto(id, TabelaEnum.CONFIGURACAO, action));
+		configuracao.setConfVendas(insertConfigVendas(id, TabelaEnum.CONFIGURACAO, action));
+		configuracao.setConfCMTP(insertConfigSMTP(id, TabelaEnum.CONFIGURACAO, action));
+		configuracao.setConfEntrada(insertConfigEntrada(id, TabelaEnum.CONFIGURACAO, action));
+		configuracao.setConfCarne(insertConfigCarne(id, TabelaEnum.CONFIGURACAO, action));
+		configuracao.setBoletoList(new ArrayList<Boleto>());
+		configuracao.getBoletoList().add(insertBoleto(id, TabelaEnum.CONFIGURACAO, action));
 		configuracao.setTabelaEnum(tabela);
 		configuracao.setParentId(id);
 		configuracao.setEmprId(EMPID);
@@ -2570,11 +2572,11 @@ public class Objects {
 		Date a = new Date();
 		boleto.setId(id);
 		boleto.setAtivarBolOnLine(1001);
-		boleto.setTipoBoleto(1002);
+		boleto.setTipoBoleto(insertDoisValor(id, TabelaEnum.BOLETO, action));
 		boleto.setAgencia(1003);
 		boleto.setCedente(1004);
 		boleto.setJuros(new Double(10.00));
-		boleto.setTipoCalcMora(1006);
+		boleto.setTipoCalcMora(insertDoisValor(id, TabelaEnum.BOLETO, action));
 		boleto.setMora(new Double(10.00));
 		boleto.setInstrucoes("instrucoes_8 - " + action.toString());
 		boleto.setDemonstrativo("demonstrativo_9 - " + action.toString());
@@ -2634,8 +2636,8 @@ public class Objects {
 		ConfigFiscal configfiscal = new ConfigFiscal();
 		Date a = new Date();
 		configfiscal.setId(id);
-		configfiscal.setPrincAtividade(1001);
-		configfiscal.setRegime(1002);
+		configfiscal.setPrincAtividade(insertDoisValor(id, TabelaEnum.CONFIGFISCAL, action));
+		configfiscal.setRegime(insertRegime(id, TabelaEnum.BOLETO, action));
 		configfiscal.setAliqSimples(new Double(10.00));
 		configfiscal.setTabelaEnum(tabela);
 		configfiscal.setParentId(id);
@@ -2700,36 +2702,36 @@ public class Objects {
 		ConfigProduto configproduto = new ConfigProduto();
 		Date a = new Date();
 		configproduto.setId(id);
-		configproduto.setCfop(1001);
-		configproduto.setIcmsSitTrib(1002);
-		configproduto.setIcmsOrigem(1003);
-		configproduto.setIcmsModalidadeBC(1004);
+		configproduto.setCfop(insertCfop(id, TabelaEnum.BOLETO, action));
+		configproduto.setIcmsSitTrib(insertDoisValor(id, TabelaEnum.BOLETO, action));
+		configproduto.setIcmsOrigem(insertDoisValor(id, TabelaEnum.BOLETO, action));
+		configproduto.setIcmsModalidadeBC(insertDoisValor(id, TabelaEnum.BOLETO, action));
 		configproduto.setIcmsRedBaseCalc(new Double(10.00));
 		configproduto.setIcmsAliq(new Double(10.00));
-		configproduto.setIcmsMotDesoneracao(1007);
-		configproduto.setIcmsModBCST(1008);
+		configproduto.setIcmsMotDesoneracao(insertDoisValor(id, TabelaEnum.BOLETO, action));
+		configproduto.setIcmsModBCST(insertDoisValor(id, TabelaEnum.BOLETO, action));
 		configproduto.setIcmsMargValAdic(new Double(10.00));
 		configproduto.setIcmsRedBaseCalcST(new Double(10.00));
 		configproduto.setIcmsPrecoUnitPautaST(new Double(10.00));
 		configproduto.setIcmsAliqST(new Double(10.00));
-		configproduto.setIpiSitTrib(1013);
+		configproduto.setIpiSitTrib(insertDoisValor(id, TabelaEnum.BOLETO, action));
 		configproduto.setIpiClasCigarroBebida(new Double(10.00));
 		configproduto.setIpiCNPJProd("ipiCNPJProd_15 - " + action.toString());
 		configproduto.setIpiCodSeloCont("ipiCodSeloCont_16 - " + action.toString());
 		configproduto.setIpiQtdSelo(new Double(10.00));
 		configproduto.setIpiCodEnquad(1018);
-		configproduto.setIpiTipCalc(1019);
+		configproduto.setIpiTipCalc(insertDoisValor(id, TabelaEnum.BOLETO, action));
 		configproduto.setIpiAliq(new Double(10.00));
-		configproduto.setPisSitTrib(1021);
+		configproduto.setPisSitTrib(insertDoisValor(id, TabelaEnum.BOLETO, action));
 		configproduto.setPisAliq(new Double(10.00));
 		configproduto.setPisValUnidtrib(new Double(10.00));
-		configproduto.setPistipoCalcSubstTrib(1024);
+		configproduto.setPistipoCalcSubstTrib(insertDoisValor(id, TabelaEnum.BOLETO, action));
 		configproduto.setPisAliqST(new Double(10.00));
 		configproduto.setPisValorAliqST(new Double(10.00));
-		configproduto.setCofinsSubstTrib(1027);
+		configproduto.setCofinsSubstTrib(insertDoisValor(id, TabelaEnum.BOLETO, action));
 		configproduto.setCofinsAliq(new Double(10.00));
 		configproduto.setCofinsValorAliq(new Double(10.00));
-		configproduto.setCofinsTipoCalcSubstTrib(1030);
+		configproduto.setCofinsTipoCalcSubstTrib(insertDoisValor(id, TabelaEnum.BOLETO, action));
 		configproduto.setCofinsAliqST(new Double(10.00));
 		configproduto.setCofinsValorAliqST(new Double(10.00));
 		configproduto.setTabelaEnum(tabela);
@@ -2754,7 +2756,7 @@ public class Objects {
 		configsmtp.setEndEmail("endEmail_3 - " + action.toString());
 		configsmtp.setUsuario("usuario_4 - " + action.toString());
 		configsmtp.setSenha("senha_5 - " + action.toString());
-		configsmtp.setSeguranca(1006);
+		configsmtp.setSeguranca(insertDoisValor(id, TabelaEnum.BOLETO, action));
 		configsmtp.setTabelaEnum(tabela);
 		configsmtp.setParentId(id);
 		configsmtp.setEmprId(EMPID);
@@ -2772,25 +2774,25 @@ public class Objects {
 		ConfiguracaoNFe configuracaonfe = new ConfiguracaoNFe();
 		Date a = new Date();
 		configuracaonfe.setId(id);
-		configuracaonfe.setPresCompr(1001);
+		configuracaonfe.setPresCompr(insertDoisValor(id, TabelaEnum.BOLETO, action));
 		configuracaonfe.setDestConsFinal(1002);
 		configuracaonfe.setPreencherDataHora(1003);
 		configuracaonfe.setIcmsPadrao(new Double(10.00));
 		configuracaonfe.setIpiPadrao(new Double(10.00));
 		configuracaonfe.setPisPadrao(new Double(10.00));
 		configuracaonfe.setCofinsPadrao(new Double(10.00));
-		configuracaonfe.setAmbienteEnvio(1008);
-		configuracaonfe.setServMsmNota(new Double(10.00));
+		configuracaonfe.setAmbienteEnvio(insertDoisValor(id, TabelaEnum.BOLETO, action));
+		configuracaonfe.setServMsmNota(insertDoisValor(id, TabelaEnum.BOLETO, action));
 		configuracaonfe.setSerieEnvio("serieEnvio_10 - " + action.toString());
 		configuracaonfe.setAnexarXmlEmail(1011);
 		configuracaonfe.setIdCSC("idCSC_12 - " + action.toString());
-		configuracaonfe.setCSC("cSC_13 - " + action.toString());
+		configuracaonfe.setcSC("cSC_13 - " + action.toString());
 		configuracaonfe.setInformacaoAdd("informacaoAdd_14 - " + action.toString());
 		configuracaonfe.setCertificado("certificado_15 - " + action.toString());
 		configuracaonfe.setSenha("senha_16 - " + action.toString());
 		configuracaonfe.setSalvarSenha(1017);
-		configuracaonfe.setCfopPadrao(1018);
-		configuracaonfe.setConfSMTP(1019);
+		configuracaonfe.setCfopPadrao(insertCfop(id, TabelaEnum.BOLETO, action));
+		configuracaonfe.setConfSMTP(insertConfigSMTP(id, TabelaEnum.BOLETO, action));
 		configuracaonfe.setTabelaEnum(tabela);
 		configuracaonfe.setParentId(id);
 		configuracaonfe.setEmprId(EMPID);
@@ -2836,8 +2838,8 @@ public class Objects {
 		Rentabilidade rentabilidade = new Rentabilidade();
 		Date a = new Date();
 		rentabilidade.setId(id);
-		rentabilidade.setRentabilidadeList(new ArrayList<RentabilidadeList>());
-		rentabilidade.getRentabilidadeList().add(insertRentabilidadeList(id, TabelaEnum.RENTABILIDADE, action));
+	//	rentabilidade.setRentabilidadeList(new ArrayList<RentabilidadeList>());
+	//	rentabilidade.getRentabilidadeList().add(insertRentabilidadeList(id, TabelaEnum.RENTABILIDADE, action));
 		rentabilidade.setTabelaEnum(tabela);
 		rentabilidade.setParentId(id);
 		rentabilidade.setEmprId(EMPID);
@@ -2894,22 +2896,22 @@ public class Objects {
 
 	public static Interface insertInterface(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 	     {
-	         Interface interface = new Interface();
+	         Interface interfaces = new Interface();
 	         Date a = new Date();
-	         interface.setId(id);
-	         interface.setNome( "nome_1 - " + action.toString());
-	         interface.setLocal( "local_2 - " + action.toString());
-	         interface.setTabelaEnum(tabela);
-	         interface.setParentId(id);
-	         interface.setEmprId(EMPID);
-	         interface.setModifyDateUTC(a.getTime());
-	         interface.setCreateDateUTC(a.getTime());
-	         interface.setCreateUser("system");
-	         interface.setModifyUser("system");
-	         interface.setProcessId(1);
-	         interface.setModelAction(action);
+	         interfaces.setId(id);
+	         interfaces.setNome( "nome_1 - " + action.toString());
+	         interfaces.setLocal( "local_2 - " + action.toString());
+	         interfaces.setTabelaEnum(tabela);
+	         interfaces.setParentId(id);
+	         interfaces.setEmprId(EMPID);
+	         interfaces.setModifyDateUTC(a.getTime());
+	         interfaces.setCreateDateUTC(a.getTime());
+	         interfaces.setCreateUser("system");
+	         interfaces.setModifyUser("system");
+	         interfaces.setProcessId(1);
+	         interfaces.setModelAction(action);
 
-	         return interface;
+	         return interfaces;
 	     }
 
 	public static Field insertField(Integer id, TabelaEnum tabela, PersistenceActionEnum action)
@@ -2919,11 +2921,11 @@ public class Objects {
 		field.setId(id);
 		field.setTamanho(1001);
 		field.setTipo("tipo_2 - " + action.toString());
-		field.setRequerid(1003);
-		field.setPrimaryKey(1004);
-		field.setForenkey(1005);
-		field.setModel(1006);
-		field.setXml(1007);
+		field.setRequerid(Boolean.TRUE);
+		field.setPrimaryKey(Boolean.TRUE);
+		field.setForenkey(Boolean.TRUE);
+		field.setModel(Boolean.TRUE);
+		field.setXml(Boolean.TRUE);
 		field.setTabelaEnum(tabela);
 		field.setParentId(id);
 		field.setEmprId(EMPID);
