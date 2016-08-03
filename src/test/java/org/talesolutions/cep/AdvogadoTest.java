@@ -87,7 +87,7 @@ public class AdvogadoTest {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.set("Other-Header", "othervalue");
 		headers.set("X-Auth-Token", obj.getToken());
-		String a = "request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+		String a = "request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:advocacia/api/cfop/fetchPage/";
 		HttpEntity<String> entity = new HttpEntity<String>("{}", headers);
 
 		// =========== fetch
@@ -96,7 +96,7 @@ public class AdvogadoTest {
 		String jsonInString = mapper.writeValueAsString(new AudienciaInquiryRequest());
 		System.out.println(jsonInString);
 		HttpEntity<String> entitys = new HttpEntity<String>(jsonInString, headers);
-		AudienciaResponse result = restTemplate.postForObject(REST_SERVICE_URI + "fiscal/api/audiencia/fetchPage/",
+		AudienciaResponse result = restTemplate.postForObject(REST_SERVICE_URI + "advocacia/api/audiencia/fetchPage/",
 				entitys, AudienciaResponse.class);
 		Assert.assertEquals(result.isOperationSuccess(), true);
 		count = result.getAudienciaList().size();
@@ -109,7 +109,7 @@ public class AdvogadoTest {
 		System.out.println(jsonInString);
 		String requestJson = "{\"audiencia\":" + jsonInString + "}";
 		entitys = new HttpEntity<String>(requestJson, headers);
-		result = restTemplate.postForObject(REST_SERVICE_URI + "fiscal/api/audiencia/insert/", entitys,
+		result = restTemplate.postForObject(REST_SERVICE_URI + "advocacia/api/audiencia/insert/", entitys,
 				AudienciaResponse.class);
 		Assert.assertEquals(result.isOperationSuccess(), true);
 
@@ -121,7 +121,7 @@ public class AdvogadoTest {
 				.writeValueAsString(Objects.insertAudiencia(id, TabelaEnum.AUDIENCIA, PersistenceActionEnum.UPDATE));
 		requestJson = "{\"audiencia\":" + jsonInString + "}";
 		entitys = new HttpEntity<String>(requestJson, headers);
-		result = restTemplate.postForObject(REST_SERVICE_URI + "fiscal/api/audiencia/update/", entitys,
+		result = restTemplate.postForObject(REST_SERVICE_URI + "advocacia/api/audiencia/update/", entitys,
 				AudienciaResponse.class);
 		Assert.assertEquals(result.isOperationSuccess(), true);
 
@@ -134,7 +134,7 @@ public class AdvogadoTest {
 		jsonInString = mapper.writeValueAsString(request001);
 		System.out.println(jsonInString);
 		entitys = new HttpEntity<String>(jsonInString, headers);
-		result = restTemplate.postForObject(REST_SERVICE_URI + "fiscal/api/audiencia/fetchPage/", entitys,
+		result = restTemplate.postForObject(REST_SERVICE_URI + "advocacia/api/audiencia/fetchPage/", entitys,
 				AudienciaResponse.class);
 		Assert.assertEquals(result.isOperationSuccess(), true);
 		Assert.assertEquals(result.getAudienciaList().size(), 1);
@@ -149,7 +149,7 @@ public class AdvogadoTest {
 				.writeValueAsString(Objects.insertAudiencia(id, TabelaEnum.AUDIENCIA, PersistenceActionEnum.DELETE));
 		requestJson = "{\"audiencia\":" + jsonInString + "}";
 		entitys = new HttpEntity<String>(requestJson, headers);
-		result = restTemplate.postForObject(REST_SERVICE_URI + "fiscal/api/audiencia/delete/", entitys,
+		result = restTemplate.postForObject(REST_SERVICE_URI + "advocacia/api/audiencia/delete/", entitys,
 				AudienciaResponse.class);
 		Assert.assertEquals(result.isOperationSuccess(), true);
 		Assert.assertEquals(result.getAudienciaList().size(), count.intValue());
@@ -202,7 +202,7 @@ public class AdvogadoTest {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.set("Other-Header", "othervalue");
 		headers.set("X-Auth-Token", obj.getToken());
-		String a = "request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+		String a = "request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:advocacia/api/cfop/fetchPage/";
 		HttpEntity<String> entity = new HttpEntity<String>("{}", headers);
 
 		// =========== fetch
@@ -211,7 +211,7 @@ public class AdvogadoTest {
 		String jsonInString = mapper.writeValueAsString(new ProcessoInquiryRequest());
 		System.out.println(jsonInString);
 		HttpEntity<String> entitys = new HttpEntity<String>(jsonInString, headers);
-		ProcessoResponse result = restTemplate.postForObject(REST_SERVICE_URI + "fiscal/api/processo/fetchPage/",
+		ProcessoResponse result = restTemplate.postForObject(REST_SERVICE_URI + "advocacia/api/processo/fetchPage/",
 				entitys, ProcessoResponse.class);
 		Assert.assertEquals(result.isOperationSuccess(), true);
 		count = result.getProcessoList().size();
@@ -224,7 +224,7 @@ public class AdvogadoTest {
 		System.out.println(jsonInString);
 		String requestJson = "{\"processo\":" + jsonInString + "}";
 		entitys = new HttpEntity<String>(requestJson, headers);
-		result = restTemplate.postForObject(REST_SERVICE_URI + "fiscal/api/processo/insert/", entitys,
+		result = restTemplate.postForObject(REST_SERVICE_URI + "advocacia/api/processo/insert/", entitys,
 				ProcessoResponse.class);
 		Assert.assertEquals(result.isOperationSuccess(), true);
 
@@ -236,7 +236,7 @@ public class AdvogadoTest {
 				.writeValueAsString(Objects.insertProcesso(id, TabelaEnum.PROCESSO, PersistenceActionEnum.UPDATE));
 		requestJson = "{\"processo\":" + jsonInString + "}";
 		entitys = new HttpEntity<String>(requestJson, headers);
-		result = restTemplate.postForObject(REST_SERVICE_URI + "fiscal/api/processo/update/", entitys,
+		result = restTemplate.postForObject(REST_SERVICE_URI + "advocacia/api/processo/update/", entitys,
 				ProcessoResponse.class);
 		Assert.assertEquals(result.isOperationSuccess(), true);
 
@@ -249,7 +249,7 @@ public class AdvogadoTest {
 		jsonInString = mapper.writeValueAsString(request001);
 		System.out.println(jsonInString);
 		entitys = new HttpEntity<String>(jsonInString, headers);
-		result = restTemplate.postForObject(REST_SERVICE_URI + "fiscal/api/processo/fetchPage/", entitys,
+		result = restTemplate.postForObject(REST_SERVICE_URI + "advocacia/api/processo/fetchPage/", entitys,
 				ProcessoResponse.class);
 		Assert.assertEquals(result.isOperationSuccess(), true);
 		Assert.assertEquals(result.getProcessoList().size(), 1);
@@ -263,7 +263,7 @@ public class AdvogadoTest {
 				.writeValueAsString(Objects.insertProcesso(id, TabelaEnum.PROCESSO, PersistenceActionEnum.DELETE));
 		requestJson = "{\"processo\":" + jsonInString + "}";
 		entitys = new HttpEntity<String>(requestJson, headers);
-		result = restTemplate.postForObject(REST_SERVICE_URI + "fiscal/api/processo/delete/", entitys,
+		result = restTemplate.postForObject(REST_SERVICE_URI + "advocacia/api/processo/delete/", entitys,
 				ProcessoResponse.class);
 		Assert.assertEquals(result.isOperationSuccess(), true);
 		Assert.assertEquals(result.getProcessoList().size(), count.intValue());

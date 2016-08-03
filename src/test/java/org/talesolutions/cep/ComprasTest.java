@@ -96,7 +96,7 @@ public class ComprasTest {
 	        String jsonInString = mapper.writeValueAsString(new NotaFiscalInquiryRequest());
 	        System.out.println(jsonInString);
 	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
-	        NotaFiscalEntradaResponse result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/notacomprasentrada/fetchPage/",entitys,  NotaFiscalEntradaResponse.class);
+	        NotaFiscalEntradaResponse result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/notaFiscal/fetchPage/",entitys,  NotaFiscalEntradaResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        count = result.getNotaFiscalList().size();
 
@@ -105,9 +105,9 @@ public class ComprasTest {
 	        System.out.println("==================================INSERT==============================================");
 	        jsonInString = mapper.writeValueAsString(Objects.insertNotaFiscalEntrada(id,TabelaEnum.NOTAFISCAL,PersistenceActionEnum.INSERT));
 	        System.out.println(jsonInString);
-	        String requestJson = "{\"notacomprasentrada\":"+jsonInString+"}";
+	        String requestJson = "{\"notaFiscal\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/notacomprasentrada/insert/",entitys,  NotaFiscalEntradaResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/notaFiscal/insert/",entitys,  NotaFiscalEntradaResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -116,9 +116,9 @@ public class ComprasTest {
 
 
 	        jsonInString = mapper.writeValueAsString(Objects.insertNotaFiscalEntrada(id,TabelaEnum.NOTAFISCAL,PersistenceActionEnum.UPDATE));
-	        requestJson = "{\"notacomprasentrada\":"+jsonInString+"}";
+	        requestJson = "{\"notaFiscal\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/notacomprasentrada/update/",entitys,  NotaFiscalEntradaResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/notaFiscal/update/",entitys,  NotaFiscalEntradaResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -131,7 +131,7 @@ public class ComprasTest {
 	        jsonInString = mapper.writeValueAsString(request001);
 	        System.out.println(jsonInString);
 	        entitys = new HttpEntity<String>(jsonInString,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/notacomprasentrada/fetchPage/",entitys,  NotaFiscalEntradaResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/notaFiscal/fetchPage/",entitys,  NotaFiscalEntradaResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getNotaFiscalList().size(), 1);
 
@@ -141,9 +141,9 @@ public class ComprasTest {
 	        //=======================
 	        System.out.println("==================================DELETE==============================================");
 	        jsonInString = mapper.writeValueAsString(Objects.insertNotaFiscalEntrada(id,TabelaEnum.NOTAFISCAL,PersistenceActionEnum.DELETE));
-	        requestJson = "{\"notacomprasentrada\":"+jsonInString+"}";
+	        requestJson = "{\"notaFiscal\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/notacomprasentrada/delete/",entitys,  NotaFiscalEntradaResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/notaFiscal/delete/",entitys,  NotaFiscalEntradaResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getNotaFiscalList().size(), count.intValue());
 
@@ -210,7 +210,7 @@ public class ComprasTest {
 	        String jsonInString = mapper.writeValueAsString(new PedidoComprasInquiryRequest());
 	        System.out.println(jsonInString);
 	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
-	        PedidoComprasResponse result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/pedidocompras/fetchPage/",entitys,  PedidoComprasResponse.class);
+	        PedidoComprasResponse result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/pedidoCompras/fetchPage/",entitys,  PedidoComprasResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        count = result.getPedidoComprasList().size();
 
@@ -219,9 +219,9 @@ public class ComprasTest {
 	        System.out.println("==================================INSERT==============================================");
 	        jsonInString = mapper.writeValueAsString(Objects.insertPedidoCompras(id,TabelaEnum.PEDIDOCOMPRAS,PersistenceActionEnum.INSERT));
 	        System.out.println(jsonInString);
-	        String requestJson = "{\"pedidocompras\":"+jsonInString+"}";
+	        String requestJson = "{\"pedidoCompras\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/pedidocompras/insert/",entitys,  PedidoComprasResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/pedidoCompras/insert/",entitys,  PedidoComprasResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -230,9 +230,9 @@ public class ComprasTest {
 
 
 	        jsonInString = mapper.writeValueAsString(Objects.insertPedidoCompras(id,TabelaEnum.PEDIDOCOMPRAS,PersistenceActionEnum.UPDATE));
-	        requestJson = "{\"pedidocompras\":"+jsonInString+"}";
+	        requestJson = "{\"pedidoCompras\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/pedidocompras/update/",entitys,  PedidoComprasResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/pedidoCompras/update/",entitys,  PedidoComprasResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -245,7 +245,7 @@ public class ComprasTest {
 	        jsonInString = mapper.writeValueAsString(request001);
 	        System.out.println(jsonInString);
 	        entitys = new HttpEntity<String>(jsonInString,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/pedidocompras/fetchPage/",entitys,  PedidoComprasResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/pedidoCompras/fetchPage/",entitys,  PedidoComprasResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getPedidoComprasList().size(), 1);
 
@@ -255,9 +255,9 @@ public class ComprasTest {
 	        //=======================
 	        System.out.println("==================================DELETE==============================================");
 	        jsonInString = mapper.writeValueAsString(Objects.insertPedidoCompras(id,TabelaEnum.PEDIDOCOMPRAS,PersistenceActionEnum.DELETE));
-	        requestJson = "{\"pedidocompras\":"+jsonInString+"}";
+	        requestJson = "{\"pedidoCompras\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/pedidocompras/delete/",entitys,  PedidoComprasResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "compras/api/pedidoCompras/delete/",entitys,  PedidoComprasResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getPedidoComprasList().size(), count.intValue());
 
