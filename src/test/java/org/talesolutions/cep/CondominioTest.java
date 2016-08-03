@@ -81,7 +81,7 @@ public class CondominioTest {
 	    headers.setContentType(MediaType.APPLICATION_JSON);
 	    headers.set("Other-Header", "othervalue");
 	    headers.set("X-Auth-Token", obj.getToken() );
-	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:condominio/api/cfop/fetchPage/";
 	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
 
 
@@ -91,7 +91,7 @@ public class CondominioTest {
 	        String jsonInString = mapper.writeValueAsString(new AvisoInquiryRequest());
 	        System.out.println(jsonInString);
 	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
-	        AvisoResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/avisos/fetchPage/",entitys,  AvisoResponse.class);
+	        AvisoResponse result = restTemplate.postForObject( REST_SERVICE_URI + "condominio/api/avisos/fetchPage/",entitys,  AvisoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        count = result.getAvisoList().size();
 
@@ -102,7 +102,7 @@ public class CondominioTest {
 	        System.out.println(jsonInString);
 	        String requestJson = "{\"avisos\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/avisos/insert/",entitys,  AvisoResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "condominio/api/avisos/insert/",entitys,  AvisoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -113,7 +113,7 @@ public class CondominioTest {
 	        jsonInString = mapper.writeValueAsString(Objects.insertAvisos(id,TabelaEnum.AVISO,PersistenceActionEnum.UPDATE));
 	        requestJson = "{\"avisos\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/avisos/update/",entitys,  AvisoResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "condominio/api/avisos/update/",entitys,  AvisoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -126,7 +126,7 @@ public class CondominioTest {
 	        jsonInString = mapper.writeValueAsString(request001);
 	        System.out.println(jsonInString);
 	        entitys = new HttpEntity<String>(jsonInString,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/avisos/fetchPage/",entitys,  AvisoResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "condominio/api/avisos/fetchPage/",entitys,  AvisoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getAvisoList().size(), 1);
 
@@ -138,7 +138,7 @@ public class CondominioTest {
 	        jsonInString = mapper.writeValueAsString(Objects.insertAvisos(id,TabelaEnum.AVISO,PersistenceActionEnum.DELETE));
 	        requestJson = "{\"avisos\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/avisos/delete/",entitys,  AvisoResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "condominio/api/avisos/delete/",entitys,  AvisoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getAvisoList().size(), count.intValue());
 

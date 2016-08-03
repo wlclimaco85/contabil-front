@@ -86,7 +86,7 @@ public class DpTest {
 	    headers.setContentType(MediaType.APPLICATION_JSON);
 	    headers.set("Other-Header", "othervalue");
 	    headers.set("X-Auth-Token", obj.getToken() );
-	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:dp/api/cfop/fetchPage/";
 	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
 
 
@@ -96,7 +96,7 @@ public class DpTest {
 	        String jsonInString = mapper.writeValueAsString(new EventoInquiryRequest());
 	        System.out.println(jsonInString);
 	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
-	        EventoResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/eventos/fetchPage/",entitys,  EventoResponse.class);
+	        EventoResponse result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/eventos/fetchPage/",entitys,  EventoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        count = result.getEventosList().size();
 
@@ -107,7 +107,7 @@ public class DpTest {
 	        System.out.println(jsonInString);
 	        String requestJson = "{\"eventos\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/eventos/insert/",entitys,  EventoResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/eventos/insert/",entitys,  EventoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -118,7 +118,7 @@ public class DpTest {
 	        jsonInString = mapper.writeValueAsString(Objects.insertEventos(id,TabelaEnum.EVENTOS,PersistenceActionEnum.UPDATE));
 	        requestJson = "{\"eventos\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/eventos/update/",entitys,  EventoResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/eventos/update/",entitys,  EventoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -131,7 +131,7 @@ public class DpTest {
 	        jsonInString = mapper.writeValueAsString(request001);
 	        System.out.println(jsonInString);
 	        entitys = new HttpEntity<String>(jsonInString,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/eventos/fetchPage/",entitys,  EventoResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/eventos/fetchPage/",entitys,  EventoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getEventosList().size(), 1);
 
@@ -143,7 +143,7 @@ public class DpTest {
 	        jsonInString = mapper.writeValueAsString(Objects.insertEventos(id,TabelaEnum.EVENTOS,PersistenceActionEnum.DELETE));
 	        requestJson = "{\"eventos\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/eventos/delete/",entitys,  EventoResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/eventos/delete/",entitys,  EventoResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getEventosList().size(), count.intValue());
 
@@ -200,7 +200,7 @@ public class DpTest {
 	    headers.setContentType(MediaType.APPLICATION_JSON);
 	    headers.set("Other-Header", "othervalue");
 	    headers.set("X-Auth-Token", obj.getToken() );
-	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:dp/api/cfop/fetchPage/";
 	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
 
 
@@ -210,7 +210,7 @@ public class DpTest {
 	        String jsonInString = mapper.writeValueAsString(new BeneficiosInquiryRequest());
 	        System.out.println(jsonInString);
 	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
-	        BeneficiosResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/beneficios/fetchPage/",entitys,  BeneficiosResponse.class);
+	        BeneficiosResponse result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/beneficios/fetchPage/",entitys,  BeneficiosResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        count = result.getBeneficiosList().size();
 
@@ -221,7 +221,7 @@ public class DpTest {
 	        System.out.println(jsonInString);
 	        String requestJson = "{\"beneficios\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/beneficios/insert/",entitys,  BeneficiosResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/beneficios/insert/",entitys,  BeneficiosResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -232,7 +232,7 @@ public class DpTest {
 	        jsonInString = mapper.writeValueAsString(Objects.insertBeneficios(id,TabelaEnum.BENEFICIOS,PersistenceActionEnum.UPDATE));
 	        requestJson = "{\"beneficios\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/beneficios/update/",entitys,  BeneficiosResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/beneficios/update/",entitys,  BeneficiosResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -245,7 +245,7 @@ public class DpTest {
 	        jsonInString = mapper.writeValueAsString(request001);
 	        System.out.println(jsonInString);
 	        entitys = new HttpEntity<String>(jsonInString,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/beneficios/fetchPage/",entitys,  BeneficiosResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/beneficios/fetchPage/",entitys,  BeneficiosResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getBeneficiosList().size(), 1);
 
@@ -257,7 +257,7 @@ public class DpTest {
 	        jsonInString = mapper.writeValueAsString(Objects.insertBeneficios(id,TabelaEnum.BENEFICIOS,PersistenceActionEnum.DELETE));
 	        requestJson = "{\"beneficios\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/beneficios/delete/",entitys,  BeneficiosResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/beneficios/delete/",entitys,  BeneficiosResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getBeneficiosList().size(), count.intValue());
 
@@ -314,7 +314,7 @@ public class DpTest {
 	    headers.setContentType(MediaType.APPLICATION_JSON);
 	    headers.set("Other-Header", "othervalue");
 	    headers.set("X-Auth-Token", obj.getToken() );
-	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
+	    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:dp/api/cfop/fetchPage/";
 	    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
 
 
@@ -324,7 +324,7 @@ public class DpTest {
 	        String jsonInString = mapper.writeValueAsString(new HoraFuncInquiryRequest());
 	        System.out.println(jsonInString);
 	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
-	        HorarioFuncResponse result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/horafunc/fetchPage/",entitys,  HorarioFuncResponse.class);
+	        HorarioFuncResponse result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/horafunc/fetchPage/",entitys,  HorarioFuncResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        count = result.getHorarioFuncList().size();
 
@@ -335,7 +335,7 @@ public class DpTest {
 	        System.out.println(jsonInString);
 	        String requestJson = "{\"horafunc\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/horafunc/insert/",entitys,  HorarioFuncResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/horafunc/insert/",entitys,  HorarioFuncResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -346,7 +346,7 @@ public class DpTest {
 	        jsonInString = mapper.writeValueAsString(Objects.insertHoraFunc(id,TabelaEnum.HORAFUNC,PersistenceActionEnum.UPDATE));
 	        requestJson = "{\"horafunc\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/horafunc/update/",entitys,  HorarioFuncResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/horafunc/update/",entitys,  HorarioFuncResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 
@@ -359,7 +359,7 @@ public class DpTest {
 	        jsonInString = mapper.writeValueAsString(request001);
 	        System.out.println(jsonInString);
 	        entitys = new HttpEntity<String>(jsonInString,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/horafunc/fetchPage/",entitys,  HorarioFuncResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/horafunc/fetchPage/",entitys,  HorarioFuncResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getHorarioFuncList().size(), 1);
 
@@ -371,7 +371,7 @@ public class DpTest {
 	        jsonInString = mapper.writeValueAsString(Objects.insertHoraFunc(id,TabelaEnum.HORAFUNC,PersistenceActionEnum.DELETE));
 	        requestJson = "{\"horafunc\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/horafunc/delete/",entitys,  HorarioFuncResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/horafunc/delete/",entitys,  HorarioFuncResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getHorarioFuncList().size(), count.intValue());
 
