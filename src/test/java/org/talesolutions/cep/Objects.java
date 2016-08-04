@@ -813,7 +813,6 @@ public class Objects {
 		empresa.setNome("nome_1 - " + action.toString());
 		empresa.setEntidadeId(1002);
 		empresa.setNumFunc(1003);
-		empresa.setEntidadeEnumValue(1005);
 		empresa.setRegime(insertRegime(id, TabelaEnum.EMPRESA, action));
 		empresa.setDocumentos(new ArrayList<Documento>());
 		empresa.getDocumentos().add(insertDocumento(id, TabelaEnum.EMPRESA, action));
@@ -851,7 +850,6 @@ public class Objects {
 		filial.setNome("nome_1 - " + action.toString());
 		filial.setEntidadeId(1002);
 		filial.setNumFunc(1003);
-		filial.setEntidadeEnumValue(1005);
 		filial.setRegime(insertRegime(id, TabelaEnum.FILIAL, action));
 		filial.setDocumentos(new ArrayList<Documento>());
 		filial.getDocumentos().add(insertDocumento(id, TabelaEnum.FILIAL, action));
@@ -888,7 +886,6 @@ public class Objects {
 		deposito.setNome("nome_1 - " + action.toString());
 		deposito.setEntidadeId(1002);
 		deposito.setNumFunc(1003);
-		deposito.setEntidadeEnumValue(1005);
 		deposito.setRegime(insertRegime(id, TabelaEnum.DEPOSITO, action));
 		deposito.setDocumentos(new ArrayList<Documento>());
 		deposito.getDocumentos().add(insertDocumento(id, TabelaEnum.DEPOSITO, action));
@@ -950,7 +947,6 @@ public class Objects {
 		advocacia.setNome("nome_1 - " + action.toString());
 		advocacia.setEntidadeId(1002);
 		advocacia.setNumFunc(1003);
-		advocacia.setEntidadeEnumValue(1005);
 		advocacia.setRegime(insertRegime(id, TabelaEnum.ADVOCACIA, action));
 		advocacia.setDocumentos(new ArrayList<Documento>());
 		advocacia.getDocumentos().add(insertDocumento(id, TabelaEnum.ADVOCACIA, action));
@@ -987,7 +983,6 @@ public class Objects {
 		clinica.setNome("nome_1 - " + action.toString());
 		clinica.setEntidadeId(1002);
 		clinica.setNumFunc(1003);
-		clinica.setEntidadeEnumValue(1005);
 		clinica.setRegime(insertRegime(id, TabelaEnum.CLINICA, action));
 		clinica.setDocumentos(new ArrayList<Documento>());
 		clinica.getDocumentos().add(insertDocumento(id, TabelaEnum.CLINICA, action));
@@ -1024,7 +1019,6 @@ public class Objects {
 		condominio.setNome("nome_1 - " + action.toString());
 		condominio.setEntidadeId(1002);
 		condominio.setNumFunc(1003);
-		condominio.setEntidadeEnumValue(1005);
 		condominio.setRegime(insertRegime(id, TabelaEnum.CONDOMINIO, action));
 		condominio.setDocumentos(new ArrayList<Documento>());
 		condominio.getDocumentos().add(insertDocumento(id, TabelaEnum.CONDOMINIO, action));
