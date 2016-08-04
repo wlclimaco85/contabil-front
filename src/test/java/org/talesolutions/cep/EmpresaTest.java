@@ -29,6 +29,7 @@ import com.qat.samples.sysmgmt.clinica.model.request.ClinicaInquiryRequest;
 import com.qat.samples.sysmgmt.clinica.model.response.ClinicaResponse;
 import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
 import com.qat.samples.sysmgmt.condominio.model.response.CondominioResponse;
+import com.qat.samples.sysmgmt.entidade.model.criteria.FilialCriteria;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
@@ -187,7 +188,7 @@ public class EmpresaTest {
 	public void listAllFilial() throws JsonParseException, JsonMappingException, IOException{
 
 	    Integer count =0;
-	    Integer id =9990;
+	    Integer id =9991;
 	    RestTemplate restTemplate = new RestTemplate();
 
 	    HttpHeaders headers = new HttpHeaders();
@@ -269,7 +270,9 @@ public class EmpresaTest {
 
 
 	        FilialInquiryRequest request001 = new FilialInquiryRequest();
-	        request001.setId(id);
+	        FilialCriteria criteria = new FilialCriteria();
+	        criteria.setId(id);
+	        request001.setCriteria(criteria);
 	        jsonInString = mapper.writeValueAsString(request001);
 	        System.out.println(jsonInString);
 	        entitys = new HttpEntity<String>(jsonInString,headers);
