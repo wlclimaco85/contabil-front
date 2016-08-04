@@ -33,6 +33,7 @@ import com.qat.samples.sysmgmt.fiscal.model.Regime;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.response.RegimeResponse;
 import com.qat.samples.sysmgmt.produto.model.response.CfopResponse;
+import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 
 import br.com.emmanuelneri.app.model.ModelToken;
 
@@ -183,7 +184,7 @@ public class FiscalTest {
 	public void listAllCfop() throws JsonParseException, JsonMappingException, IOException {
 
 		Integer count = 0;
-		Integer id = 999990;
+		Integer id = 1001;
 		RestTemplate restTemplate = new RestTemplate();
 
 		HttpHeaders headers = new HttpHeaders();
@@ -226,20 +227,6 @@ public class FiscalTest {
 		String a = "request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";
 		HttpEntity<String> entity = new HttpEntity<String>("{}", headers);
 
-		Cfop objeto = new Cfop();
-		objeto.setId(id);
-		objeto.setCfop("'cfop_1' - INSERT");
-		objeto.setNatureza("'natureza_2' - INSERT");
-		objeto.setSimplificado("'simplificado_3' - INSERT");
-		objeto.setCfopTypeEnumValue(1);
-		objeto.setIcms(10.00);
-		objeto.setIcmsReduzido(10.00);
-		objeto.setMargemAgregadaST(10.00);
-		objeto.setCstPrincipal(10.00);
-		objeto.setClassFiscal(10.00);
-		objeto.setObservacao("'observacao_10' - INSERT");
-		objeto.setModelAction(PersistenceActionEnum.INSERT);
-
 		// =========== fetch
 		// ================================================================
 		System.out.println("==================================FetchALL==============================================");
@@ -254,7 +241,7 @@ public class FiscalTest {
 		// =========== Insert
 		// ================================================================
 		System.out.println("==================================INSERT==============================================");
-		jsonInString = mapper.writeValueAsString(objeto);
+		jsonInString = mapper.writeValueAsString(Objects.insertCfop(id, TabelaEnum.CFOP, PersistenceActionEnum.INSERT));
 		System.out.println(jsonInString);
 		String requestJson = "{\"cfop\":" + jsonInString + "}";
 		entitys = new HttpEntity<String>(requestJson, headers);
@@ -264,12 +251,8 @@ public class FiscalTest {
 		// =========== Update
 		// ================================================================
 		System.out.println("==================================UPDATE==============================================");
-		objeto.setObservacao("OBSERVACAO - UPDATE");
-		objeto.setModelAction(PersistenceActionEnum.UPDATE);
-		objeto.setModifyDateUTC((new Date()).getTime());
-		objeto.setModifyUser("rod");
-		objeto.setModelAction(PersistenceActionEnum.UPDATE);
-		jsonInString = mapper.writeValueAsString(objeto);
+
+		jsonInString = mapper.writeValueAsString(Objects.insertCfop(id, TabelaEnum.CFOP, PersistenceActionEnum.UPDATE));
 		requestJson = "{\"cfop\":" + jsonInString + "}";
 		entitys = new HttpEntity<String>(requestJson, headers);
 		result = restTemplate.postForObject(REST_SERVICE_URI + "fiscal/api/cfop/update/", entitys, CfopResponse.class);
@@ -279,21 +262,7 @@ public class FiscalTest {
 		// ================================================================
 		System.out.println("==================================FetchID==============================================");
 
-		objeto = new Cfop();
-		objeto.setId(id);
-		objeto.setCfop("'cfop_1' - UPDATE");
-		objeto.setNatureza("'natureza_2' - UPDATE");
-		objeto.setSimplificado("'simplificado_3' - UPDATE");
-		objeto.setCfopTypeEnumValue(2);
-		objeto.setIcms(10.00);
-		objeto.setIcmsReduzido(10.00);
-		objeto.setMargemAgregadaST(10.00);
-		objeto.setCstPrincipal(10.00);
-		objeto.setClassFiscal(10.00);
-		objeto.setObservacao("'observacao_10' - UPDATE");
-		objeto.setModelAction(PersistenceActionEnum.UPDATE);
-
-		jsonInString = mapper.writeValueAsString(objeto);
+		jsonInString = mapper.writeValueAsString(Objects.insertCfop(id, TabelaEnum.CFOP, PersistenceActionEnum.UPDATE));
 		requestJson = "{\"cfop\":" + jsonInString + "}";
 		entitys = new HttpEntity<String>(requestJson, headers);
 
@@ -309,27 +278,22 @@ public class FiscalTest {
 		Assert.assertEquals(result.isOperationSuccess(), true);
 		Assert.assertEquals(result.getCfopList().size(), 1);
 
-		objeto.setId(id);
-		objeto.setCfop("'cfop_1' - UPDATE");
-		objeto.setNatureza("'natureza_2' - UPDATE");
-		objeto.setSimplificado("'simplificado_3' - UPDATE");
-		objeto.setCfopTypeEnumValue(2);
-		objeto.setIcms(10.00);
-		objeto.setIcmsReduzido(10.00);
-		objeto.setMargemAgregadaST(10.00);
-		objeto.setCstPrincipal(10.00);
-		objeto.setClassFiscal(10.00);
-		objeto.setObservacao("'observacao_10' - UPDATE");
-
 		// =======================
 		System.out.println("==================================DELETE==============================================");
-		objeto.setModelAction(PersistenceActionEnum.DELETE);
-		jsonInString = mapper.writeValueAsString(objeto);
+		jsonInString = mapper.writeValueAsString(Objects.insertCfop(id, TabelaEnum.CFOP, PersistenceActionEnum.DELETE));
 		requestJson = "{\"cfop\":" + jsonInString + "}";
 		entitys = new HttpEntity<String>(requestJson, headers);
 		result = restTemplate.postForObject(REST_SERVICE_URI + "fiscal/api/cfop/delete/", entitys, CfopResponse.class);
 		Assert.assertEquals(result.isOperationSuccess(), true);
-		Assert.assertEquals(result.getCfopList().size(), count.intValue());
+		
+		//=====================
+		request001 = new CfopInquiryRequest();
+		jsonInString = mapper.writeValueAsString(request001);
+		System.out.println(jsonInString);
+		entitys = new HttpEntity<String>(jsonInString, headers);
+		result = restTemplate.postForObject(REST_SERVICE_URI + "fiscal/api/cfop/fetchPage/", entitys, CfopResponse.class);
+		Assert.assertEquals(result.isOperationSuccess(), true);
+		Assert.assertEquals(new Long(result.getCfopList().size()), new Long(count));
 
 	}
 	
@@ -341,7 +305,7 @@ public class FiscalTest {
 	public void listAllCnae() throws JsonParseException, JsonMappingException, IOException{
 	 
 	    Integer count =0;
-	    Integer id =999990;
+	    Integer id =1002;
 	    RestTemplate restTemplate = new RestTemplate();
 
 	    HttpHeaders headers = new HttpHeaders();
@@ -440,11 +404,11 @@ public class FiscalTest {
 	objeto.setModelAction(PersistenceActionEnum.UPDATE);
 	        
 
-	        jsonInString = mapper.writeValueAsString(objeto);
+	        jsonInString = mapper.writeValueAsString(Objects.insertCnae(id, TabelaEnum.CNAE, PersistenceActionEnum.UPDATE));
 	        requestJson = "{\"cnae\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
 
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "cnae/api/update/",entitys,  CnaeResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/cnae/update/",entitys,  CnaeResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 
 	        CnaeInquiryRequest request001 = new CnaeInquiryRequest();
@@ -452,7 +416,7 @@ public class FiscalTest {
 	        jsonInString = mapper.writeValueAsString(request001);
 	        System.out.println(jsonInString);
 	        entitys = new HttpEntity<String>(jsonInString,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "cnae/api/fetchPage/",entitys,  CnaeResponse.class);
+	        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/cnae/fetchPage/",entitys,  CnaeResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	        Assert.assertEquals(result.getCnaeList().size(), 1);
 

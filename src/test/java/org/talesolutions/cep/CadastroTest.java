@@ -162,7 +162,7 @@ public class CadastroTest {
 	public void listAllCidade() throws JsonParseException, JsonMappingException, IOException{
 
 	    Integer count =0;
-	    Integer id =10000;
+	    Integer id =1001;
 	    RestTemplate restTemplate = new RestTemplate();
 
 	    HttpHeaders headers = new HttpHeaders();

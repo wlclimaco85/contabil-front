@@ -18,6 +18,8 @@ import org.talesolutions.cep.CEPServiceFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qat.framework.model.BaseModel.PersistenceActionEnum;
+import com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.response.AudienciaResponse;
 import com.qat.samples.sysmgmt.cfop.model.Cfop;
 import com.qat.samples.sysmgmt.cfop.model.request.CfopMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.CfopResponse;
@@ -47,26 +49,29 @@ public class ControllerMain {
     public String listar(@RequestBody UtilRequest request) {
 
         RestTemplate restTemplate = new RestTemplate();
-
+        String result ="";
         HttpHeaders headers = new HttpHeaders();
         headers.set("Header", "value");
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("Other-Header", "othervalue");
         headers.set("X-Auth-Token", request.getToken() );
+        
+        ObjectMapper mapper = new ObjectMapper();
+        //HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
+        String jsonInString = null;
+		try {
+			jsonInString = mapper.writeValueAsString(request.getRequest());
+		
+        HttpEntity<String> entity = new HttpEntity<String>(jsonInString, headers);
+        result = restTemplate.postForObject(URL + request.getUrl(), entity, String.class,HttpMethod.GET);
 
-        HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
-        String result = restTemplate.postForObject(URL + request.getUrl(), entity, String.class,HttpMethod.GET,request.getRequest());
-      //  HttpEntity<String> response = restTemplate.exchange(REST_SERVICE_URI+"/site/api/fetchPage/",HttpMethod.GET, entity,List.class,null);
-      //  List<LinkedHashMap<String, Object>> usersMap = restTemplate.getForObject(REST_SERVICE_URI+"/site/api/fetchPage/", entity,List.class,HttpMethod.GET,{"teste:teste"});
-
-      //  if(usersMap!=null){
-      //      for(LinkedHashMap<String, Object> map : usersMap){
-       //         System.out.println("User : id="+map.get("id")+", Name="+map.get("name")+", Age="+map.get("age")+", Salary="+map.get("salary"));;
-      //      }
-       // }else{
-            System.out.println("No user exist----------");
-     //   }
-            return result;
+        
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+		return result;
     }
 
 	@ResponseBody
