@@ -18,7 +18,16 @@
         </th></tr>
         </tfoot>
     </table>
-<form action="/controllerFileUploadVelocity/downloadFile" method="post" enctype="multipart/form-data"> <input type="file" name="Arquivo" id="Arquivo"><br> <input type="submit" value="Enviar"> <input type="reset" value="Apagar"> </form>
+<form action="main/api/saveFiles/" method="post" enctype="multipart/form-data"> <input type="file" name="Arquivo" id="Arquivo"><br> <input type="submit" value="Enviar"> <input type="reset" value="Apagar"> </form>
 
-    <a href="/controllerFileUploadVelocity/downloadFile.$file.getName()"> download	</a>
+    <a href="controllerFileUploadVelocity/downloadFile/"> download	</a>
 </div>
+
+<div>
+		<form method="POST" enctype="multipart/form-data" action="upload/">
+			<table>
+				<tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
+				<tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+			</table>
+		</form>
+	</div>

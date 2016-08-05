@@ -1,176 +1,1150 @@
 <!DOCTYPE html>
-
-
 <html>
-<head>
-  <!-- Site made with Mobirise Website Builder v2.11.1, https://mobirise.com -->
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Mobirise v2.11.1, mobirise.com">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon">
-  <meta name="description" content="">
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700,400&amp;subset=cyrillic,latin,greek,vietnamese">
-  <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="dist/css/formValidation.css" />
+<link rel="stylesheet" href="dist/css/select2.css" />
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css" />
+<link href="thirdparty/twitter-bootstrap-wizard-master/prettify.css" rel="stylesheet">
+<link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload.css">
+<link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload-ui.css">
+<!-- CSS adjustments for browsers with JavaScript disabled -->
+<noscript><link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload-noscript.css"></noscript>
+<noscript><link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload-ui-noscript.css"></noscript>
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700,400&amp;subset=cyrillic,latin,greek,vietnamese">
-  <link rel="stylesheet" href="assets/mobirise/css/style.css">
-  <link rel="stylesheet" href="assets/mobirise-slider/style.css">
-  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
-          <link rel="stylesheet" href="thirdparty/font-awesome/css/font-awesome.min.css">
-        <!-- end Needs images -->
+<!-- The Templates plugin is included to render the upload/download listings -->
 
-        <link rel="stylesheet" href="thirdparty/angular-toastr/angular-toastr.min.css"></link>
-        <link rel="stylesheet" href="thirdparty/angular-ag/ag-grid.css"></link>
-        <link rel="stylesheet" href="thirdparty/angular-ag/theme-fresh.css"></link>
-        <link rel="stylesheet" href="thirdparty/angular-chartjs/angular-chart.min.css">
-        <link rel="stylesheet" href="thirdparty/angular/angular-csp.css">
-  <link rel="stylesheet" href="styles/wd_main.css">
-  	<link rel="stylesheet" href="thirdparty/angular-datatables-master/dist/plugins/bootstrap/datatables.bootstrap.css">
-		<link rel="stylesheet" href="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.css">
+<!-- The main application script
+    <script src="thirdparty/jQuery-File-Upload-master/js/main.js"></script>-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700,400&amp;subset=cyrillic,latin,greek,vietnamese">
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/mobirise/css/style.css">
+<link rel="stylesheet" href="assets/mobirise-slider/style.css">
+<link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
 
+<style>
+    .mbr-plan__number1: {
+        font-size: 40px!Important;
+    }
+</style>
+</head>
 
-
-
-
-	</head>
-	<div class="loader" ng-hide="initialized">
-		Loading...
-	</div>
-    <body data-ng-app="wdApp"
-          id="wdApp"
-          class="wdApp"
-          data-off-canvas-nav
-          data-ng-controller="WDAppController"
-          data-ng-class=" {'layout-boxed': admin.layout === 'boxed' } ">
+<body data-ng-app="wdApp" id="wdApp" class="wdApp" data-off-canvas-nav data-ng-controller="WDAppController" data-ng-class=" {'layout-boxed': admin.layout === 'boxed' } ">
 
 
-    <!--        <section  data-ng-include=" 'views/header1.html'"
-                 id="dashboard-header"
-                 class="header-container "
-                 data-ng-class=" {'header-fixed': admin.fixedHeader} "></section>
+    <div class='container' data-ng-controller="EmpresaController as cc">
+        <section class="mbr-navbar mbr-navbar--freeze mbr-navbar--absolute mbr-navbar--transparent mbr-navbar--sticky mbr-navbar--auto-collapse" id="ext_menu-3">
+            <div class="mbr-navbar__section mbr-section">
+                <div class="mbr-section__container container">
+                    <div class="mbr-navbar__container">
+                        <div class="mbr-navbar__column mbr-navbar__column--s mbr-navbar__brand">
+                            <span class="mbr-navbar__brand-link mbr-brand mbr-brand--inline">
+                        <span class="mbr-brand__logo"><a href="https://mobirise.com"><img src="assets/images/logo.png" class="mbr-navbar__brand-img mbr-brand__img" alt="Mobirise"></a></span>
+                            <span class="mbr-brand__name"><a class="mbr-brand__name text-white" href="https://mobirise.com">MOBIRISE</a></span>
+                            </span>
+                        </div>
+                        <div class="mbr-navbar__hamburger mbr-hamburger"><span class="mbr-hamburger__line"></span></div>
+                        <div class="mbr-navbar__column mbr-navbar__menu">
+                            <nav class="mbr-navbar__menu-box mbr-navbar__menu-box--inline-right">
+                                <div class="mbr-navbar__column">
+                                    <ul class="mbr-navbar__items mbr-navbar__items--right float-left mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-decorator mbr-buttons--active">
+                                        <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="https://mobirise.com">HOME</a></li>
+                                        <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="index4.html">ABOUT</a></li>
+                                        <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="login.html">CONTACT</a></li>
+                                    </ul>
+                                    <ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-inverse mbr-buttons--active">
+                                        <li class="mbr-navbar__item"><a class="mbr-buttons__btn btn btn-danger" href="https://mobirise.com">DOWNLOAD</a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section style="margin-top : 100px" id="wizard" style="background : white">
+            <div id="rootwizard">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="container">
+                            <ul>
+                                <li><a href=".tab1" data-toggle="tab">Informações do Usuario</a></li>
+                                <li><a href=".tab2" data-toggle="tab">Informações da Empresa</a></li>
+                                <li><a href=".tab3" data-toggle="tab">Informações de Socios</a></li>
+                                <li><a href=".tab4" data-toggle="tab">Informações Plano Serviçoes</a></li>
+                                <li><a href=".tab5" data-toggle="tab">Contrato Social</a></li>
+                                <li><a href=".tab6" data-toggle="tab">Pagamento</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="bar" class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;background : red"></div>
+                </div>
+                <form ng-submit="submit()" id="empresaForm">
+                    <div class="tab-content">
+                        <div class="tab-pane tab1" id="tab1">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-8 col-md-offset-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Nome Completo</label>
+                                            <input type="text" ng-model="empresa.usuarios[0].nome" name="nome" class="form-control" placeholder="Nome Completo">
+                                            <span>{{empresa.usuarios[0].nome}}</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">CPF</label>
+                                            <input type="text" id="cpf" class="form-control" name="cpf" ng-model="empresa.usuarios[0].cpf.numero" placeholder="CPF">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Telefone</label>
+                                            <input type="text" class="form-control" ng-model="empresa.usuarios[0].telefone" name="telefone" placeholder="Telefone">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Email</label>
+                                            <input type="email" id='email' class="form-control" ng-model="empresa.usuarios[0].email" name="email" placeholder="Email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Senha</label>
+                                            <input type="password" class="form-control" ng-model="empresa.usuarios[0].senha" name="password" placeholder="Senha">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Confirmar Senha</label>
+                                            <input type="password" class="form-control" ng-model="senha" name="confirmPassword" placeholder="Confirmar Senha">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane tab2" id="tab2">
+                            <div class="panel-body">
+                                <div class="col-sm-12">
+                                    <label for="exampleInputPassword1">Tipo de Empresa</label>
+                                    <dl class="dl-horizontal">
+                                        <dd>
+                                            <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="1" checked ><span>Venda e Compra e prstação de serviço </span></label>
+                                            <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="2" ><span>Clinica </span></label>
+                                            <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Escritorio Advocacia</span></label>
 
-        <div class="main-container" id="teste">
-            <aside data-ng-include=" 'views/nav2.html' "
-                   id="dashboard-nav"
-                   class="nav-container"
-                   data-ng-class=" {'nav-fixed': admin.fixedSidebar, 'nav-vertical': admin.menu === 'vertical', 'nav-horizontal': admin.menu === 'horizontal'}">
-            </aside>
+                                            <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Condominio</span></label>
 
-            <section data-ng-view data-ng-cloak id="content" class="content-container animate-fade-up"></section>
-        </div>
-	-->
- <div data-ng-controller="SiteController as cc">
-          <section data-ng-include=" 'views/header.html' "
-                 id="header"
-                 class="header-container"
-                 data-ng-class=" {'header-fixed': admin.fixedHeader} "></section>
+                                            <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Escritorio Contabil</span></label>
+                                        </dd>
+                                    </dl>
+
+                                </div>
+                                <div class="row">
+                                    <div class="input-group">
+                                        <div class="col-sm-8">
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Digite seu CNPJ</label>
+                                                <input type="text" class="form-control col-sm-8" name="cnpj" ng-model="empresa.documentos[0].numero" placeholder="CNPJ">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Informe o Numero de Funcionarios</label>
+                                                <input type="text" class="form-control col-sm-4" name="numFunc" ng-model="empresa.numFunc" placeholder="Numero de Funcionarios">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Informe a Razão Social</label>
+                                            <input type="text" class="form-control col-sm-8" name="razao" ng-model="empresa.nome" placeholder="Razão Social">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="exampleInputPassword1">Sua Empresa Esta Ativa?</label>
+                                        <dl class="dl-horizontal">
+                                            <dd>
+                                                <label class="ui-radio"><input name="radio1" ng-model="empresa.statusInicial" type="radio" value="1" ><span>Sim</span></label>
+                                                <label class="ui-radio"><input name="radio1" ng-model="empresa.statusInicial" type="radio" value="2" checked><span>Não</span></label>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="exampleInputPassword1">Selecione o regime Tributario da Empresa</label>
+                                        <dl class="dl-horizontal">
+                                            <dd>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="1" checked ><span>Simples Nacional</span></label>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="2" ><span>Lucro Real</span></label>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Lucro Presumido</span></label>
+                                            </dd>
+                                        </dl>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="exampleInputPassword1">CEP</label>
+                                        <div class="input-group">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="cep" ng-model="empresa.enderecos[0].cep">
+                                            </div>
+                                            <span class="input-group-btn">
+
+                                                <button class="btn btn-default" type="button" ng-click="cc.buscaRCep('38082243')"><i class="glyphicon glyphicon-search"> </i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Logradouro</label>
+                                            <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="empresa.enderecos[0].logradouro" placeholder="Logradouro">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Numero</label>
+                                            <input type="text" class="form-control col-sm-4" name="numero" ng-model="empresa.enderecos[0].numero" placeholder="Numero">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="exampleInputPassword1">Complemento</label>
+                                        <input type="text" class="form-control col-sm-8" name="complemento" ng-model="empresa.enderecos[0].complemento" placeholder="Complemento">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="exampleInputPassword1">Bairro</label>
+                                        <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].bairro" placeholder="Bairro">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1">Estado</label>
+                                        <input type="text" class="form-control col-sm-8" ng-model="empresa.enderecos[0].estado.abreviacao" placeholder="Estado">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1">Municipio</label>
+                                        <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].cidade.nome" placeholder="Municipio">
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1">Codigo IBGE</label>
+                                        <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].codIbge" placeholder="Codigo IBGE">
+                                    </div>
+                                </div>
+
+                                <!-- -------------------  TELEFONE ----------------- -->
+                                <div class="row">
+
+                                    <div class="col-sm-4" style="margin-top:25px">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Adicionar <span class="caret"></span></button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="javascript:;" class="addPhoneButton" data-name="phone_home">Compras</a></li>
+                                                <li><a href="javascript:;" class="addPhoneButton" data-name="phone_office">Vendas</a></li>
+                                                <li><a href="javascript:;" class="addPhoneButton" data-name="phone_office">SAC</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1" class="control-label">Telefone</label>
+                                        <input type="text" class="form-control col-sm-4 gugu" name="phone" placeholder="Telefone">
+                                    </div>
+                                </div>
+                                <!-- Template for dynamic field -->
+                                <div class="row" id="template" style="display: none;">
+
+                                    <div class="col-sm-4" style="margin-top:25px">
+                                        <button type="button" class="btn btn-link removeButton">deletar</button>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1" class="control-label">Telefone</label>
+                                        <input id='gugu' type="text" class="form-control col-sm-4 gugu" placeholder="Telefone">
+                                    </div>
+                                </div>
+
+                                <!-- ------------------------------------- -->
+                                <!-- ------------------------------------- -->
+
+                                <!-- -------------------  Email Empresa ----------------- -->
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1">Email</label>
+                                        <input type="text" class="form-control col-sm-4 input-email" name="email" placeholder="Email">
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:25px">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Adicionar <span class="caret"></span></button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="javascript:;" class="addEmailButton" data-name="email_princ">Principal</a></li>
+                                                <li><a href="javascript:;" class="addEmailButton" data-name="email_home">Compras</a></li>
+                                                <li><a href="javascript:;" class="addEmailButton" data-name="email_office">Vendas</a></li>
+                                                <li><a href="javascript:;" class="addEmailButton" data-name="email_nfe">NFE</a></li>
+                                                <li><a href="javascript:;" class="addEmailButton" data-name="email_sac">SAC</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Template for dynamic field -->
+                                <div class="row" id="template-email" style="display: none;">
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1" class="control-label">Email</label>
+                                        <input type="email" class="form-control col-sm-4 input-email" placeholder="Email">
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:25px">
+                                        <button type="button" class="btn btn-link removeButton">deletar</button>
+                                    </div>
+                                </div>
+
+                                <!-- ------------------------------------- -->
+                                <!-- ------------------------------------- -->
 
 
-        <section data-ng-view data-ng-cloak id="content" class="content-container animate-fade-up teste"></section>
-
-        <section data-ng-include=" 'views/footer.html' "
-                 id="footer"
-                 class="footer-container "
-                 data-ng-class=" {'footer-fixed': admin.fixedHeader} "></section>
 
 
-		  </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="exampleInputPassword1">Atividade Principal da Empresa</label>
+                                        <select id="atividade1" name="atividade1" class="form-control">
+                                            <option> teste 001</option>
+                                            <option> teste 002</option>
+                                            <option> teste 003</option>
+                                            <option> teste 004</option>
+                                            <option> teste 005</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <label for="exampleInputPassword1">Atividade Secundaria da Empresa</label>
+                                        <select id="mySel" name="cnae" class="form-control">
+                                                    <option> teste 001</option>
+                                                    <option> teste 002</option>
+                                                    <option> teste 003</option>
+                                                    <option> teste 004</option>
+                                                    <option> teste 005</option>
+
+                                                </select>
+
+                                        <button type="button" class="btn btn-default addButton1"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group hide" id="bookTemplate1">
+                                        <div class="col-sm-6">
+                                            <label for="exampleInputPassword1">Outras Atividades</label>
+                                            <select id="mySel" class="form-control">
+                                                    <option> teste 001</option>
+                                                    <option> teste 002</option>
+                                                    <option> teste 003</option>
+                                                    <option> teste 004</option>
+                                                    <option> teste 005</option>
+
+                                                </select>
+
+                                            <div class="col-xs-1">
+                                                <button type="button" class="btn btn-default removeButton1"><i class="fa fa-minus"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane tab3" id="tab3">
+                            <div class="row socios">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">CPF Socio</label>
+                                        <input type="text" class="form-control cpf-socio" name="book[0].cpf" placeholder="CPF Socio" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Nome Socio</label>
+                                        <input type="text" class="form-control nome-socio" name="book[0].nome" placeholder="Nome Socio" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Porcentagem</label>
+                                        <input type="text" class="form-control cota-socio" name="book[0].cota" placeholder="%" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:18px">
+                                    <div class="checkbox">
+                                        <label>
+                                                <input type="checkbox" name="receiver" class="check-socio" value="1" /> Socio Administrador ?
+                                            </label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-1" style="margin-top:18px">
+                                    <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-group hide" id="bookTemplate">
+                                <div class="row socios">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">CPF Socio</label>
+                                            <input type="text" class="form-control cpf-socio" name="cpf-socio" placeholder="CPF Socio" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Nome Socio</label>
+                                            <input type="text" class="form-control nome-socio" name="nome-socio" placeholder="Nome Socio" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Porcentagem</label>
+                                            <input type="text" class="form-control cota-socio" name="cota-socio" placeholder="%" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3" style="margin-top:18px">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="receiver" class="check-socio" value="1" /> Socio Administrador ?
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-1" style="margin-top:18px">
+                                        <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane tab4 col-sm-12" id="tab4" data-ng-controller="SiteController as cc">
+                            <div class="col-sm-8">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href=".collapseThree">1 - Planos</a>
+                                    </h4>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse collapseThree">
+                                        <div class="panel-body">
+                                            <section class="mbr-section mbr-section--relative mbr-section--fixed-size " id="pricing-table1-11" style="background-color: rgb(240, 240, 240);">
+                                                <div class="mbr-section__container mbr-section__container--std-top-padding  container" style="padding-top: 93px; margin-bottom: 0px;width:100%">
+                                                    <div class="row">
+                                                        <div class="mbr-plan col-xs-12 mbr-plan--first col-md-3 col-sm-6" ng-repeat="plano in cc.site.planoList">
+                                                            <div class="mbr-plan__box planos">
+                                                                <div class="plano-id hide">{{plano.id}}</div>
+                                                                <div class="plano-type hide">1</div>
+                                                                <div class="mbr-plan__header">
+                                                                    <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
+                                                                        <h3 class="mbr-header__text">{{plano.titulo}}</h3>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mbr-plan__number">
+                                                                    <div class="mbr-number mbr-number--price">
+                                                                        <div class="mbr-number__num">
+                                                                            <div class="{{plano.id}} hide id"></div>
+                                                                            <div class="hide type plano"></div>
+                                                                            <div class="mbr-number__group">
+                                                                                <sup class="mbr-number__left">$</sup><span class="mbr-number__value mbr-plan__number1 valor">{{plano.precoList[0].valor || 0}}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="mbr-number__caption">Mensal</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mbr-plan__details">
+                                                                    <ul ng-repeat="servico in plano.servicoList">
+                                                                        <li><strong>{{servico.servico.nome}}</strong> {{servico.servico.descricao}}</li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="mbr-plan__buttons">
+                                                                    <div class="mbr-buttons mbr-buttons--center">
+                                                                        <label>Contratar - <input type='checkbox' class="plano" ng-init='checkStatus=false' ng-model='checkStatus' ng-click='doIfChecked(checkStatus)'></label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href=".collapseFour">2 - Serviços</a>
+                                    </h4>
+                                    </div>
+                                    <div id="collapseFour" class="panel-collapse collapse collapseFour">
+                                        <div class="panel-body">
+                                            <section class="mbr-section mbr-section--relative mbr-section--fixed-size planos" id="pricing-table1-11" style="background-color: rgb(240, 240, 240);">
+                                                <div class="mbr-section__container mbr-section__container--std-top-padding container" style="padding-top: 93px; margin-bottom: 0px;">
+                                                    <div class="row">
+                                                        <div class="mbr-plan col-xs-8 mbr-plan--first col-md-3 col-sm-6" ng-repeat="servico in cc.site.servicoList">
+                                                            <div class="plano-id hide">{{servico.id}}</div>
+                                                            <div class="plano-type hide">2</div>
+                                                            <div class="mbr-plan__box">
+                                                                <div class="mbr-plan__header">
+                                                                    <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
+                                                                        <h3 class="mbr-header__text">{{servico.nome}}</h3>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mbr-plan__number">
+                                                                    <div class="{{servico.id}} hide id"></div>
+                                                                    <div class="hide type servico"></div>
+                                                                    <div class="mbr-number mbr-number--price">
+                                                                        <div class="mbr-number__num">
+                                                                            <div class="mbr-number__group">
+                                                                                <sup class="mbr-number__left">$</sup><span class="mbr-number__value mbr-plan__number1 valor" style="font-size:40%">{{servico.precoList[0].valor || 0}}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="mbr-number__caption">Mensal</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mbr-plan__details">
+                                                                    <ul>
+                                                                        <li><strong>{{servico.servico.descricao}}</strong></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="mbr-plan__buttons">
+                                                                    <div class="mbr-buttons mbr-buttons--center">
+                                                                        <label>Contratar - <input type='checkbox' class="plano" ng-init='checkStatus=false' ng-model='checkStatus' ng-click='doIfChecked(checkStatus,10,nome)'></label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href=".collapseten" style="font-size:24px">Total</a>
+                                    </h4>
+                                </div>
+
+                                <div class="panel-body">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Plano</th>
+                                                <th>Valor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id='table-plano'>
+
+                                        </tbody>
+                                    </table>
+                                </div>
 
 
-        <!-- thirdparty libraries-->
 
-        <script src="thirdparty/jquery/jquery-2.2.2.min.js"></script>
+                            </div>
+                        </div>
+                        <div class="tab-pane tab5" id="tab5">
 
-        <script src="thirdparty/angular/angular.min.js"></script>
-        <script src="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.js"></script>
-        <script src="thirdparty/angular-route/angular-route.min.js"></script>
-        <script src="thirdparty/angular-animate/angular-animate.min.js"></script>
-        <script src="thirdparty/angular-bootstrap/ui-bootstrap-tpls-1.2.5.min.js"></script>
-        <script src="thirdparty/angular-textangular/textAngular-rangy.min.js"></script>
-        <script src="thirdparty/angular-textangular/textAngular-sanitize.min.js"></script>
-        <script src="thirdparty/angular-textangular/textAngular.min.js"></script>
-        <script src="thirdparty/angular-ui-tree/angular-ui-tree.min.js"></script>
-        <script src="thirdparty/angular-ngmaps/ng-map.min.js"></script>
-        <script src="thirdparty/angular-ng-tags-input/ng-tags-input.min.js"></script>
-    		<script src="thirdparty/angular-loading/loading-bar.min.js"></script>
-    		<script src="thirdparty/angular-ngmaps/ng-map.min.js"></script>
-    		<script src="thirdparty/angular-ag/ag-grid.js"></script>
-    		<script src="thirdparty/angular-toastr/angular-toastr.tpls.min.js"></script>
-    		<script src="thirdparty/angular-local-storage/angular-local-storage.min.js"></script>
-    		<script src="thirdparty/angular-base64/angular-base64.min.js"></script>
-        <script src="thirdparty/jquery-spinner/jquery.spinner.min.js"></script>
-        <script src="thirdparty/seiyria-bootstrap-slider/bootstrap-slider.min.js"></script>
-        <script src="thirdparty/jquery-steps/jquery.steps.min.js"></script>
-        <script src="thirdparty/bootstrap-file-input/bootstrap.file-input.js"></script>
-        <script src="thirdparty/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-        <script src="thirdparty/raphael/raphael-min.js"></script>
-        <script src="thirdparty/morrisjs/morris.js"></script>
-        <script src="thirdparty/jquery-sparkline/jquery.sparkline.min.js"></script>
-        <script src="thirdparty/flot/jquery.flot.js"></script>
-        <script src="thirdparty/flot/jquery.flot.resize.js"></script>
-        <script src="thirdparty/flot/jquery.flot.pie.js"></script>
-        <script src="thirdparty/flot/jquery.flot.orderBars.js"></script>
-        <script src="thirdparty/flot/jquery.flot.stack.js"></script>
-        <script src="thirdparty/flot-tooltip/jquery.flot.tooltip.min.js"></script>
-        <script src="thirdparty/flot/jquery.flot.time.js"></script>
-        <script src="thirdparty/flot/jquery.flot.animator.min.js"></script>
-        <script src="thirdparty/jquery-easy-pie-chart/angular.easypiechart.min.js"></script>
-        <script src="thirdparty/angular-chartjs/Chart.min.js"></script>
-        <script src="thirdparty/angular-chartjs/angular-chart.min.js"></script>
-        <script src="thirdparty/angular-echarts/echarts-all.js"></script>
-        <script src="thirdparty/angular-echarts/ngecharts.js"></script>
-
-        <script src="https://maps.googleapis.com/maps/api/js"></script>
-        <script src="assets/smooth-scroll/SmoothScroll.js"></script>
-        <script src="assets/bootstrap-carousel-swipe/bootstrap-carousel-swipe.js"></script>
-        <script src="assets/mobirise/js/script.js"></script>
-        <!--webdaptive -->
-
-        <script src="thirdparty/angular-datatables-master/ng-table.js"></script>
-        <script src="thirdparty/angular-datatables-master/ng-table-export.src.js"></script>
-
-        <!-- datatables -->
-		<script src="thirdparty/angular-datatables-master/dist/angular-datatables.min.js"></script>
-
-
-        <script src="scripts/wdapp.js"></script>
-        <script src="scripts/commons/wdapp.controllers.js"></script>
-        <script src="scripts/commons/wdapp.directives.js"></script>
-        <script src="scripts/commons/wdapp.localization.all.js"></script>
-        <script src="scripts/commons/wdapp.demodata.factory.js"></script>
-        <script src="scripts/commons/wdapp.authentication.factory.js"></script>
-        <script src="scripts/commons/wdapp.httpinterceptors.factory.js"></script>
-
-        <script src="scripts/models/domain.objects.js"></script>
-        <script src="scripts/models/request.objects.js"></script>
-        <script src="scripts/models/validation.objects.js"></script>
-        <script src="scripts/ui/ui.controllers.js"></script>
-        <script src="scripts/forms/forms.directives.js"></script>
-        <script src="scripts/forms/forms.controllers.js"></script>
-        <script src="scripts/tables/tables.controllers.js"></script>
-        <script src="scripts/tasks/tasks.all.js"></script>
-		    <script src="scripts/charts/charts.chartjs.controllers.js"></script>
-        <script src="scripts/charts/charts.flot.controllers.js"></script>
-        <script src="scripts/charts/charts.morris.controllers.js"></script>
-        <script src="scripts/charts/charts.other.controllers.js"></script>
-		    <script src="scripts/charts/charts.echarts.controllers.js"></script>
-        <script src="scripts/charts/charts.directives.js"></script>
-        <script src="scripts/pages/pages.controllers.js"></script>
-        <script src="scripts/apps/stocks.controllers.js"></script>
-        <script src="scripts/apps/stocks.factory.js"></script>
-        <script src="scripts/apps/counties.controllers.js"></script>
-        <script src="scripts/apps/procedures.controllers.js"></script>
-        <script src="scripts/apps/sysmgmt.data.factory.js"></script>
-        <script src="scripts/apps/site.controllers.js"></script>
-        <script src="scripts/apps/empresa.controllers.js"></script>
-        <script src="scripts/apps/estado/estado.controllers.js"></script>
+                        </div>
+                        <div class="tab-pane" id="tab6">
+                            6
+                        </div>
+                        <ul class="pager wizard">
+                            <li class="previous first" style="display:none;"><a href="javascript:;">First</a></li>
+                            <li class="previous"><a href="javascript:;">Previous</a></li>
+                            <li class="next last" style="display:none;"><a href="javascript:;">Last</a></li>
+                            <li class="next"><a href="javascript:;">Next</a></li>
+                            <li class="hide save-empresa"><input type="submit" id="submit" value="Submit" ng-click="cc.submit()" /></li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
 
 
 
+        </section>
+
+
+        <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="contacts3-14" style="background-color: rgb(60, 60, 60);">
+
+            <div class="mbr-section__container container">
+                <div class="mbr-contacts mbr-contacts--wysiwyg row" style="padding-top: 45px; padding-bottom: 45px;">
+                    <div class="col-sm-8">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="mbr-contacts__text"><strong>ADDRESS</strong><br> 1234 Street Name<br> City, AA 99999<br><br>
+                                    <strong>CONTACTS</strong><br> Email: support@mobirise.com<br> Phone: +1 (0) 000 0000 001<br> Fax: +1 (0) 000 0000 002</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mbr-contacts__text"><strong>LINKS</strong></p>
+                                <ul class="mbr-contacts__list">
+                                    <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/">Website builder</a></li>
+                                    <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/mobirise-free-win.zip">Download for Windows</a></li>
+                                    <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/mobirise-free-mac.zip">Download for Mac</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mbr-contacts__column col-sm-4">
+
+                        <form action="https://mobirise.com/" method="post">
+
+
+                            <div class="form-group">
+                                <input type="email" class="form-control input-sm input-inverse" name="email" required="" placeholder="Email*">
+                            </div>
+
+                            <div class="form-group">
+                                <textarea class="form-control input-sm input-inverse" name="message" rows="4" placeholder="Message"></textarea>
+                            </div>
+                            <div class="mbr-buttons mbr-buttons--right btn-inverse"><button type="submit" class="mbr-buttons__btn btn btn-danger">CONTACT US</button></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="contacts2-13" style="background-color: rgb(60, 60, 60);">
+
+            <div class="mbr-section__container container">
+                <div class="mbr-contacts mbr-contacts--wysiwyg row" style="padding-top: 45px; padding-bottom: 45px;">
+                    <div class="col-sm-6">
+                        <figure class="mbr-figure mbr-figure--wysiwyg mbr-figure--full-width mbr-figure--no-bg">
+                            <div class="mbr-figure__map mbr-figure__map--short mbr-google-map">
+                                <p class="mbr-google-map__marker" data-coordinates="40.748384,-73.9854792"></p>
+                            </div>
+                        </figure>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-5 col-sm-offset-1">
+                                <p class="mbr-contacts__text"><strong>ADDRESS</strong><br> 1234 Street Name<br> City, AA 99999<br><br>
+                                    <strong>CONTACTS</strong><br> Email: support@mobirise.com<br> Phone: +1 (0) 000 0000 001<br> Fax: +1 (0) 000 0000 002</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mbr-contacts__text"><strong>LINKS</strong></p>
+                                <ul class="mbr-contacts__list">
+                                    <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/">Website builder</a></li>
+                                    <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/mobirise-free-win.zip">Download for Windows</a></li>
+                                    <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/mobirise-free-mac.zip">Download for Mac</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="http://maps.googleapis.com/maps/api/js?v=3&libraries=visualization"></script>
+
+    <script type="text/javascript" src="https://app.4clinics.software/skin/home/app_theme/js/jquery.js"></script>
+    <script src="thirdparty/jquery-ui-1.12.0/jquery-ui.min.js"></script>
+    <script src="thirdparty/angular-datatables/vendor/datatables/media/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="thirdparty/angular/angular.min.js"></script>
+    <!--<script src="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.js"></script> -->
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.6/select2-bootstrap.min.css" />
+
+    <link rel="stylesheet" href='http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2-bootstrap.css' />
+    <link rel="stylesheet" href='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css' />
+    <link rel="stylesheet" href='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css' />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script src="thirdparty/angular-route/angular-route.min.js"></script>
+    <script src="thirdparty/angular-animate/angular-animate.min.js"></script>
+    <script src="thirdparty/angular-bootstrap/ui-bootstrap-tpls-2.0.0.min.js"></script>
+    <script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
+    <script src="thirdparty/angular-textangular/textAngular-rangy.min.js"></script>
+    <script src="thirdparty/angular-textangular/textAngular-sanitize.min.js"></script>
+    <script src="thirdparty/angular-textangular/textAngular.min.js"></script>
+    <script src="thirdparty/angular-ui-tree/angular-ui-tree.min.js"></script>
+    <script src="thirdparty/angular-ngmaps/ng-map.min.js"></script>
+    <script src="thirdparty/angular-ng-tags-input/ng-tags-input.min.js"></script>
+    <script src="thirdparty/angular-loading/loading-bar.min.js"></script>
+    <script src="thirdparty/angular-ngmaps/ng-map.min.js"></script>
+    <script src="thirdparty/angular-ag/ag-grid.js"></script>
+    <script src="thirdparty/angular-toastr/angular-toastr.tpls.min.js"></script>
+    <script src="thirdparty/angular-local-storage/angular-local-storage.min.js"></script>
+    <script src="thirdparty/angular-base64/angular-base64.min.js"></script>
+    <script src="thirdparty/jquery-spinner/jquery.spinner.min.js"></script>
+    <script src="thirdparty/seiyria-bootstrap-slider/bootstrap-slider.min.js"></script>
+    <script src="thirdparty/jquery-steps/jquery.steps.min.js"></script>
+    <script src="thirdparty/bootstrap-file-input/bootstrap.file-input.js"></script>
+    <script src="thirdparty/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="thirdparty/raphael/raphael-min.js"></script>
+    <script src="thirdparty/morrisjs/morris.js"></script>
+    <script src="thirdparty/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="thirdparty/flot/jquery.flot.js"></script>
+    <script src="thirdparty/flot/jquery.flot.resize.js"></script>
+    <script src="thirdparty/flot/jquery.flot.pie.js"></script>
+    <script src="thirdparty/flot/jquery.flot.orderBars.js"></script>
+    <script src="thirdparty/flot/jquery.flot.stack.js"></script>
+    <script src="thirdparty/flot-tooltip/jquery.flot.tooltip.min.js"></script>
+    <script src="thirdparty/flot/jquery.flot.time.js"></script>
+    <script src="thirdparty/flot/jquery.flot.animator.min.js"></script>
+    <script src="thirdparty/jquery-easy-pie-chart/angular.easypiechart.min.js"></script>
+    <script src="thirdparty/angular-chartjs/Chart.min.js"></script>
+    <script src="thirdparty/angular-chartjs/angular-chart.min.js"></script>
+    <script src="thirdparty/angular-echarts/echarts-all.js"></script>
+    <script src="thirdparty/angular-echarts/ngecharts.js"></script>
 
 
 
-    </body>
+
+    <!-- datatables -->
+    <script src="thirdparty/angular-datatables/vendor/angular-highlightjs/angular-highlightjs.min.js"></script>
+    <script src="thirdparty/angular-resource/angular-resource.min.js"></script>
+    <script src="thirdparty/angular-datatables/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-colreorder/js/dataTables.colReorder.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-responsive/js/dataTables.responsive.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-scroller/js/dataTables.scroller.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-columnfilter/js/dataTables.columnFilter.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-light-columnfilter/dist/dataTables.lightColumnFilter.min.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-fixedcolumns/js/dataTables.fixedColumns.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-fixedheader/js/dataTables.fixedHeader.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/dataTables.buttons.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.colVis.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.flash.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.html5.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.print.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-select/js/dataTables.select.js"></script>
+
+    <script src="thirdparty/angular-datatables-master/vendor/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/angular-translate/angular-translate.min.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/angular-datatables.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/angular-datatables.util.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/angular-datatables.options.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/angular-datatables.instances.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/angular-datatables.factory.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/angular-datatables.renderer.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/angular-datatables.directive.js"></script>
+    <!-- bootstrap
+    <script src="thirdparty/bootstrap-4.0.0-alpha.2/dist/js/bootstrap.js"></script>
+    <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js" integrity="sha384-XXXXXXXX" crossorigin="anonymous"></script>-->
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.options.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.colvis.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.tabletools.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/colvis/angular-datatables.colvis.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/colreorder/angular-datatables.colreorder.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/tabletools/angular-datatables.tabletools.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/scroller/angular-datatables.scroller.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/light-columnfilter/angular-datatables.light-columnfilter.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/fixedheader/angular-datatables.fixedheader.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/buttons/angular-datatables.buttons.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/select/angular-datatables.select.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js"></script>
+
+
+    <script src="thirdparty/angular-datatables-master/demo/usages.js"></script>
+
+    <script src="thirdparty/angular-checkbox/checklist-model.js"></script>
+
+    <script src="dist/js/formValidation.js"></script>
+    <script src="dist/js/framework/bootstrap.js"></script>
+
+
+    <!--webdaptive -->
+    <script src="scripts/wdapp.js"></script>
+
+    <script src="scripts/commons/wdapp.controllers.js"></script>
+    <script src="scripts/commons/wdapp.directives.js"></script>
+    <script src="scripts/commons/wdapp.localization.all.js"></script>
+    <script src="scripts/commons/wdapp.demodata.factory.js"></script>
+    <script src="scripts/commons/wdapp.authentication.factory.js"></script>
+    <script src="scripts/commons/wdapp.httpinterceptors.factory.js"></script>
+    <script src="scripts/factory/wdapp.commons.factory.js"></script>
+    <script src="scripts/models/domain.objects.js"></script>
+    <script src="scripts/models/request.objects.js"></script>
+
+    <script src="scripts/ui/ui.controllers.js"></script>
+    <script src="scripts/forms/forms.directives.js"></script>
+    <script src="scripts/forms/forms.controllers.js"></script>
+    <script src="scripts/tables/tables.controllers.js"></script>
+    <script src="scripts/tasks/tasks.all.js"></script>
+    <script src="scripts/charts/charts.chartjs.controllers.js"></script>
+    <script src="scripts/charts/charts.flot.controllers.js"></script>
+    <script src="scripts/charts/charts.morris.controllers.js"></script>
+    <script src="scripts/charts/charts.other.controllers.js"></script>
+    <script src="scripts/charts/charts.echarts.controllers.js"></script>
+    <script src="scripts/charts/charts.directives.js"></script>
+    <script src="scripts/apps/util/util.controllers.js"></script>
+    <script src="scripts/pages/pages.controllers.js"></script>
+    <script src="scripts/apps/stocks.controllers.js"></script>
+    <script src="scripts/apps/stocks.factory.js"></script>
+    <script src="scripts/apps/counties.controllers.js"></script>
+    <script src="scripts/models/validation.objects.js"></script>
+    <script src="scripts/apps/procedures.controllers.js"></script>
+    <script src="scripts/apps/sysmgmt.data.factory.js"></script>
+    <script src="scripts/apps/site.controllers.js"></script>
+    <script src="scripts/apps/empresa.controllers.js"></script>
+    <script src="scripts/apps/produto/produto.controllers.js"></script>
+    <script src="scripts/apps/notafiscal/notafiscal.controllers.js"></script>
+    <script src="scripts/apps/fiscal/cfop.controllers.js"></script>
+    <script src="scripts/apps/fiscal/cnae.controllers.js"></script>
+    <script src="scripts/apps/vendas/pdVendas.controllers.js"></script>
+    <script src="scripts/apps/vendas/orcamento.controllers.js"></script>
+    <script src="scripts/apps/ordemServico/ordemServico.controllers.js"></script>
+    <script src="scripts/apps/compras/nfEntrada.controllers.js"></script>
+    <script src="scripts/apps/compras/pdCompras.controllers.js"></script>
+    <script src="scripts/apps/compras/cotacao.controllers.js"></script>
+    <script src="scripts/apps/financeiro/contasPagar.controllers.js"></script>
+    <script src="scripts/apps/financeiro/contasReceber.controllers.js"></script>
+    <script src="scripts/apps/financeiro/formaPg.controllers.js"></script>
+    <script src="scripts/apps/financeiro/banco.controllers.js"></script>
+    <script src="scripts/apps/financeiro/agencia.controllers.js"></script>
+    <script src="scripts/apps/financeiro/conta.controllers.js"></script>
+    <script src="scripts/apps/Dp/funcionario.controllers.js"></script>
+    <script src="scripts/apps/cadastros/cliente.controllers.js"></script>
+    <script src="scripts/apps/cadastros/fornecedor.controllers.js"></script>
+    <script src="scripts/apps/cadastros/transportador.controllers.js"></script>
+    <script src="scripts/apps/cadastros/convenio.controllers.js"></script>
+    <script src="scripts/apps/cadastros/deposito.controllers.js"></script>
+    <script src="scripts/apps/cadastros/estado.controllers.js"></script>
+    <script src="scripts/apps/cadastros/filial.controllers.js"></script>
+    <script src="scripts/apps/produto/categoria.controllers.js"></script>
+    <script src="scripts/apps/produto/unimed.controllers.js"></script>
+    <script src="scripts/apps/produto/marca.controllers.js"></script>
+    <script src="scripts/apps/produto/servico.controllers.js"></script>
+    <script src="scripts/apps/controleProducao/ordemProducao.controllers.js"></script>
+    <script src="scripts/apps/cadastros/convenio.controllers.js"></script>
+    <script src="scripts/apps/cadastros/cidade.controllers.js"></script>
+    <script src="scripts/apps/cadastros/filial.controllers.js"></script>
+    <script src="scripts/apps/cadastros/almoxarifado.controllers.js"></script>
+    <script src="scripts/apps/advogado/processo.controllers.js"></script>
+
+    <script src="scripts/apps/gerencia/cadEmpresa.controllers.js"></script>
+    <script src="scripts/apps/gerencia/site.controllers.js"></script>
+    <script src="scripts/apps/gerencia/plano.controllers.js"></script>
+    <script src="scripts/apps/gerencia/servicos.controllers.js"></script>
+    <script src="scripts/apps/gerencia/usuarios.controllers.js"></script>
+    <script src="scripts/apps/gerencia/contatos.controllers.js"></script>
+    <script src="scripts/apps/gerencia/historico.controllers.js"></script>
+
+
+    <script src="scripts/apps/dicionario/campos.controllers.js"></script>
+    <script src="scripts/apps/dicionario/relatorios.controllers.js"></script>
+    <script src="scripts/apps/dicionario/tabelas.controllers.js"></script>
+    <script src="scripts/apps/dicionario/tela.controllers.js"></script>
+
+    <script src="scripts/apps/gerencia/permissoes.controllers.js"></script>
+
+
+    <script src="dist/js/select2.min.js"></script>
+    <script src="dist/js/formValidation.js"></script>
+    <script src="dist/js/framework/bootstrap.js"></script>
+    <script src="thirdparty/twitter-bootstrap-wizard-master/jquery.bootstrap.wizard.js"></script>
+    <script src="thirdparty/twitter-bootstrap-wizard-master/prettify.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="assets/smooth-scroll/SmoothScroll.js"></script>
+    <script src="assets/bootstrap-carousel-swipe/bootstrap-carousel-swipe.js"></script>
+
+    <script src="assets/mobirise/js/script.js"></script>
+
+
+
+
+    <!---->
+
+    <script>
+        $(document).ready(function() {
+
+            bookIndex = 0;
+
+            $('#empresaForm')
+                .formValidation({
+                    framework: 'bootstrap',
+                    icon: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+
+                        'book[0].cpf': notEmptyStringMinMaxRegexp,
+                        'book[0].nome': notEmptyStringMinMax,
+                        'book[0].cota': integerNotEmptyValidation,
+                        nome: notEmptyStringMinMax,
+                        nunFunc: integerNotEmptyValidation,
+                        razao: notEmptyStringMinMax,
+                        logradouro: notEmptyStringMinMax,
+                        cpf: notEmptyStringMinMaxRegexp,
+                        cep: notEmptyStringMinMax,
+                        cnpj: notEmptyStringMinMax,
+                        email: emailValidation,
+                        telefone: telefoneValidation,
+                        phone: telefoneValidation,
+                        cep: cepNotEmptyValidation,
+                        password: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'The password is required and can\'t be empty'
+                                }
+                            }
+                        },
+                        confirmPassword: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'The confirm password is required and can\'t be empty'
+                                },
+                                identical: {
+                                    field: 'password',
+                                    message: 'The password and its confirm are not the same'
+                                }
+                            }
+                        }
+
+                    }
+                })
+                // Add button click handler
+                .on('click', '.addButton', function() {
+                    bookIndex++;
+                    var $template = $('#bookTemplate'),
+                        $clone = $template
+                        .clone()
+                        .removeClass('hide')
+                        .removeAttr('id')
+                        .attr('data-book-index', bookIndex)
+                        .insertBefore($template);
+
+                    // Update the name attributes
+                    $clone
+                        .find('[name="cpf-socio"]').attr('name', 'book[' + bookIndex + '].cpf').end()
+                        .find('[name="nome-socio"]').attr('name', 'book[' + bookIndex + '].nome').end()
+                        .find('[name="cota-socio"]').attr('name', 'book[' + bookIndex + '].cota').end();
+
+                    // Add new fields
+                    // Note that we also pass the validator rules for new field as the third parameter
+                    $('#empresaForm')
+                        .formValidation('addField', 'book[' + bookIndex + '].cpf', notEmptyStringMinMaxRegexp)
+                        .formValidation('addField', 'book[' + bookIndex + '].nome', notEmptyStringMinMaxRegexp)
+                        .formValidation('addField', 'book[' + bookIndex + '].cota', integerNotEmptyValidation);
+                });
+            $("select").select2({
+                placeholder: "Select a state",
+                allowClear: true
+            });
+
+            $('#rootwizard').bootstrapWizard({
+                onNext: function(tab, navigation, index) {
+                    /*  if(index==2) {
+                            // Make sure we entered the name
+                            if(!$('#name').val()) {
+                                alert('You must enter your name');
+                                $('#name').focus();
+                                return false;
+                            }
+                        }
+
+                        // Set the name for the next tab
+                        $('#tab3').html('Hello, ' + $('#name').val());
+                    */
+                },
+                onTabShow: function(tab, navigation, index) {
+
+                    var $total = navigation.find('li').length;
+                    var $current = index + 1;
+                    var $percent = ($current / $total) * 100;
+                    $('#rootwizard .progress-bar').css({
+                        width: $percent + '%'
+                    });
+                    if ($percent == 100) {
+                        $('.save-empresa').removeClass('hide');
+                    } else {
+                        $('.save-empresa').addClass('hide');
+                    }
+                },
+                onNext: function(tab, navigation, index) {
+                    var numTabs = $('#installationForm').find('.tab-pane').length,
+                        isValidTab = validateTab(index - 1);
+                    if (!isValidTab) {
+                        return false;
+                    }
+
+                    if (index === numTabs) {
+                        alert('agora');
+                        // We are at the last tab
+
+                        // Uncomment the following line to submit the form using the defaultSubmit() method
+                        // $('#installationForm').formValidation('defaultSubmit');
+
+                        // For testing purpose
+                        $('#completeModal').modal();
+                    }
+
+                    return true;
+                }
+            });
+            window.prettyPrint && prettyPrint();
+
+            //============================= Telefone
+            $('.addPhoneButton').on('click', function() {
+
+                var $that = $(this),
+                    $template = $('#template'),
+                    $newRow = $template.clone().removeAttr('id').insertBefore($template).show();
+
+                $that.parent().addClass('disabled');
+
+                // Set the label and field name
+                var fieldName = $that.attr('data-name');
+                $newRow
+                    .find('.control-label')
+                    .html($that.html())
+                    .end()
+                    .find('input')
+                    .attr('name', fieldName)
+                    .end()
+                    .on('click', '.removeButton', function() {
+                        // Remove field when clicking the Remove button
+                        $('#contactForm').formValidation('removeField', fieldName);
+
+                        // Enable the Add button
+                        $that.parent().removeClass('disabled');
+
+                        // Remove element
+                        $newRow.remove();
+                    });
+
+                // Add new field
+                $('#empresaForm').formValidation('addField', fieldName, {
+                    message: 'The phone number is not valid',
+                    validators: {
+                        digits: {
+                            message: 'The value can contain only digits'
+                        }
+                    }
+                });
+            });
+            //============================= Telefone fim
+
+            //============================= Email
+            $('.addEmailButton').on('click', function() {
+                var $that = $(this),
+                    $template = $('#template-email'),
+                    $newRow = $template.clone().removeAttr('id').insertBefore($template).show();
+
+                $that.parent().addClass('disabled');
+
+                // Set the label and field name
+                var fieldName = $that.attr('data-name');
+                $newRow
+                    .find('.control-label')
+                    .html($that.html())
+                    .end()
+                    .find('input')
+                    .attr('name', fieldName)
+                    .end()
+                    .on('click', '.removeButton', function() {
+                        // Remove field when clicking the Remove button
+                        $('#contactForm').formValidation('removeField', fieldName);
+
+                        // Enable the Add button
+                        $that.parent().removeClass('disabled');
+
+                        // Remove element
+                        $newRow.remove();
+                    });
+
+                // Add new field
+                $('#empresaForm').formValidation('addField', fieldName, {
+                    message: 'The phone number is not valid',
+                    validators: {
+                        digits: {
+                            message: 'The value can contain only digits'
+                        }
+                    }
+                });
+            });
+            //============================= Email fim
+            function validateTab(index) {
+                var fv = $('#empresaForm').data('formValidation'), // FormValidation instance
+                    // The current tab
+                    $tab = $('#empresaForm').find('.tab-pane').eq(index);
+
+                // Validate the container
+                fv.validateContainer($tab);
+
+                var isValidStep = fv.isValidContainer($tab);
+                if (isValidStep === false || isValidStep === null) {
+                    // Do not jump to the target tab
+                    return false;
+                }
+
+                return true;
+            }
+
+            //Tab 1
+            $('#empresaForm').find('[name="nome"]').val('099.099.099.099');
+            $('#empresaForm').find('[name="cpf"]').val('099.099.099.099');
+            $('#empresaForm').find('[name="telefone"]').val('34988406670');
+            $('#empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
+            $('#empresaForm').find('[name="password"]').val('099.099.099.099');
+            $('#empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
+
+            //Tab 2
+            $('#empresaForm').find('[name="cnpj"]').val('099.099.099.099');
+            $('#empresaForm').find('[name="numfunc"]').val('8');
+            $('#empresaForm').find('[name="razao"]').val('34988406670');
+            $('#empresaForm').find('[name="cep"]').val('38082243');
+            $('#empresaForm').find('[name="numero"]').val('686');
+            $('#empresaForm').find('[name="complemento"]').val('complemento');
+            $('#empresaForm').find('[name="logradouro"]').val('logradouro');
+            $('#empresaForm').find('[name="book[0].nome"]').val('joao das coves');
+            $('#empresaForm').find('[name="book[0].cpf"]').val('05790167659');
+            $('#empresaForm').find('[name="book[0].cpf"]').val('10');
+
+        });
+        //prencher form
+        /*
+        //Tab 1
+        $('#empresaForm').find('[name="nome"]').val('099.099.099.099');
+        $('#empresaForm').find('[name="cpf"]').val('099.099.099.099');
+        $('#empresaForm').find('[name="telefone"]').val('34988406670');
+        $('#empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
+        $('#empresaForm').find('[name="password"]').val('099.099.099.099');
+        $('#empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
+
+        //Tab 2
+        $('#empresaForm').find('[name="cnpj"]').val('099.099.099.099');
+        $('#empresaForm').find('[name="nunfunc"]').val('8');
+        $('#empresaForm').find('[name="razao"]').val('34988406670');
+        $('#empresaForm').find('[name="cep"]').val('38082243');
+        $('#empresaForm').find('[name="numero"]').val('686');
+        $('#empresaForm').find('[name="complemento"]').val('complemento');
+
+        //Tab 3
+        $('#empresaForm').find('[name="nome"]').val('099.099.099.099');
+        $('#empresaForm').find('[name="cpf"]').val('099.099.099.099');
+        $('#empresaForm').find('[name="telefone"]').val('34988406670');
+        $('#empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
+        $('#empresaForm').find('[name="password"]').val('099.099.099.099');
+        $('#empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
+        */
+    </script>
+</body>
+
 </html>

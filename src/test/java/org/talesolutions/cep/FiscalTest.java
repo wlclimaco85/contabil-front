@@ -305,7 +305,7 @@ public class FiscalTest {
 	public void listAllCnae() throws JsonParseException, JsonMappingException, IOException{
 
 	    Integer count =0;
-	    Integer id =1002;
+	    Integer id =103;
 	    RestTemplate restTemplate = new RestTemplate();
 
 	    HttpHeaders headers = new HttpHeaders();
