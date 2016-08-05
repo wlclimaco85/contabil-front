@@ -319,61 +319,61 @@ public class DpTest {
 
 
 
-	//=========== fetch ================================================================
-	        System.out.println("==================================FetchALL==============================================");
-	        String jsonInString = mapper.writeValueAsString(new HoraFuncInquiryRequest());
-	        System.out.println(jsonInString);
-	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
-	        HorarioFuncResponse result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/horafunc/fetchPage/",entitys,  HorarioFuncResponse.class);
-	        Assert.assertEquals(result.isOperationSuccess(), true);
-	        count = result.getHorarioFuncList().size();
-
-
-	      //=========== Insert ================================================================
-	        System.out.println("==================================INSERT==============================================");
-	        jsonInString = mapper.writeValueAsString(Objects.insertHoraFunc(id,TabelaEnum.HORAFUNC,PersistenceActionEnum.INSERT));
-	        System.out.println(jsonInString);
-	        String requestJson = "{\"horafunc\":"+jsonInString+"}";
-	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/horafunc/insert/",entitys,  HorarioFuncResponse.class);
-	        Assert.assertEquals(result.isOperationSuccess(), true);
-
-
-	      //=========== Update ================================================================
-	        System.out.println("==================================UPDATE==============================================");
-
-
-	        jsonInString = mapper.writeValueAsString(Objects.insertHoraFunc(id,TabelaEnum.HORAFUNC,PersistenceActionEnum.UPDATE));
-	        requestJson = "{\"horafunc\":"+jsonInString+"}";
-	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/horafunc/update/",entitys,  HorarioFuncResponse.class);
-	        Assert.assertEquals(result.isOperationSuccess(), true);
-
-
-	       //===========  FetchbyID  ================================================================
-	        System.out.println("==================================FetchID==============================================");
-
-
-	        HoraFuncInquiryRequest request001 = new HoraFuncInquiryRequest();
-	        request001.setId(id);
-	        jsonInString = mapper.writeValueAsString(request001);
-	        System.out.println(jsonInString);
-	        entitys = new HttpEntity<String>(jsonInString,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/horafunc/fetchPage/",entitys,  HorarioFuncResponse.class);
-	        Assert.assertEquals(result.isOperationSuccess(), true);
-	        Assert.assertEquals(result.getHorarioFuncList().size(), 1);
-
-
-
-
-	        //=======================
-	        System.out.println("==================================DELETE==============================================");
-	        jsonInString = mapper.writeValueAsString(Objects.insertHoraFunc(id,TabelaEnum.HORAFUNC,PersistenceActionEnum.DELETE));
-	        requestJson = "{\"horafunc\":"+jsonInString+"}";
-	        entitys = new HttpEntity<String>(requestJson,headers);
-	        result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/horafunc/delete/",entitys,  HorarioFuncResponse.class);
-	        Assert.assertEquals(result.isOperationSuccess(), true);
-	        Assert.assertEquals(result.getHorarioFuncList().size(), count.intValue());
+//	//=========== fetch ================================================================
+//	        System.out.println("==================================FetchALL==============================================");
+//	        String jsonInString = mapper.writeValueAsString(new HoraFuncInquiryRequest());
+//	        System.out.println(jsonInString);
+//	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
+//	        HorarioFuncResponse result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/horafunc/fetchPage/",entitys,  HorarioFuncResponse.class);
+//	        Assert.assertEquals(result.isOperationSuccess(), true);
+//	        count = result.getHorarioFuncList().size();
+//
+//
+//	      //=========== Insert ================================================================
+//	        System.out.println("==================================INSERT==============================================");
+//	        jsonInString = mapper.writeValueAsString(Objects.insertHoraFunc(id,TabelaEnum.HORAFUNC,PersistenceActionEnum.INSERT));
+//	        System.out.println(jsonInString);
+//	        String requestJson = "{\"horafunc\":"+jsonInString+"}";
+//	        entitys = new HttpEntity<String>(requestJson,headers);
+//	        result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/horafunc/insert/",entitys,  HorarioFuncResponse.class);
+//	        Assert.assertEquals(result.isOperationSuccess(), true);
+//
+//
+//	      //=========== Update ================================================================
+//	        System.out.println("==================================UPDATE==============================================");
+//
+//
+//	        jsonInString = mapper.writeValueAsString(Objects.insertHoraFunc(id,TabelaEnum.HORAFUNC,PersistenceActionEnum.UPDATE));
+//	        requestJson = "{\"horafunc\":"+jsonInString+"}";
+//	        entitys = new HttpEntity<String>(requestJson,headers);
+//	        result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/horafunc/update/",entitys,  HorarioFuncResponse.class);
+//	        Assert.assertEquals(result.isOperationSuccess(), true);
+//
+//
+//	       //===========  FetchbyID  ================================================================
+//	        System.out.println("==================================FetchID==============================================");
+//
+//
+//	        HoraFuncInquiryRequest request001 = new HoraFuncInquiryRequest();
+//	        request001.setId(id);
+//	        jsonInString = mapper.writeValueAsString(request001);
+//	        System.out.println(jsonInString);
+//	        entitys = new HttpEntity<String>(jsonInString,headers);
+//	        result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/horafunc/fetchPage/",entitys,  HorarioFuncResponse.class);
+//	        Assert.assertEquals(result.isOperationSuccess(), true);
+//	        Assert.assertEquals(result.getHorarioFuncList().size(), 1);
+//
+//
+//
+//
+//	        //=======================
+//	        System.out.println("==================================DELETE==============================================");
+//	        jsonInString = mapper.writeValueAsString(Objects.insertHoraFunc(id,TabelaEnum.HORAFUNC,PersistenceActionEnum.DELETE));
+//	        requestJson = "{\"horafunc\":"+jsonInString+"}";
+//	        entitys = new HttpEntity<String>(requestJson,headers);
+//	        result = restTemplate.postForObject( REST_SERVICE_URI + "dp/api/horafunc/delete/",entitys,  HorarioFuncResponse.class);
+//	        Assert.assertEquals(result.isOperationSuccess(), true);
+//	        Assert.assertEquals(result.getHorarioFuncList().size(), count.intValue());
 
 
 	    }

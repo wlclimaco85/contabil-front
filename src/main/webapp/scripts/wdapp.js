@@ -74,6 +74,7 @@ var WebDaptiveAppConfig = {
 				,'wdApp.apps.processo'
 			 	,'wdApp.apps.cadempresa'
 	            ,'wdApp.apps.site'
+	            ,'wdApp.apps.sites'
 	            ,'wdApp.apps.plano'
 	            ,'wdApp.apps.servico'
 	            ,'wdApp.apps.usuarios'
@@ -153,7 +154,7 @@ var WebDaptiveAppConfig = {
 
 			//routes not automatically built specified here
 			return $routeProvider.when('/', {
-				redirectTo: '/dashboard'
+				templateUrl: 'views/login/login.html'
 			}).when('/404', {
 				templateUrl: 'views/pages/404.html'
 			}).otherwise({

@@ -1,5 +1,5 @@
 (function() {
-  angular.module('wdApp.apps.site', []).controller('SiteController',
+  angular.module('wdApp.apps.sites', []).controller('SiteController',
    ['$scope', '$rootScope', 'SysMgmtData', 'toastr', 'toastrConfig','$location','$http', '$q',
      function($scope, $rootScope, SysMgmtData, toastr, toastrConfig,location ,$http, $q) {
 		var pvm = this;
@@ -27,7 +27,11 @@
          // console.log(commonControllers.login());
 
 
-          SysMgmtData.processPostPageData(fetch_url, new qat.model.siteInquiryRequest( 100/20, true, "http://localhost:8080/webSite/"), function(res){
+         // SysMgmtData.processPostPageData(fetch_url, new qat.model.siteInquiryRequest( 100/20, true, "http://localhost:8080/webSite/")
+
+          SysMgmtData.processPostPageData("main/api/anonimo",{
+                    url: "site/api/fetchPage/",
+                    request: new qat.model.siteInquiryRequest( 100/20, true, "http://localhost:8080/webSite/")}, function(res){
                console.log(res)
                pvm.site = new qat.model.Site(res.sites[0]);
           });
