@@ -1,4 +1,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="utf-8">
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+ <script src="thirdparty/upload/jquery.ui.widget.js"></script>
+
+<script src="thirdparty/upload/jquery.iframe-transport.js"></script>
+<script src="thirdparty/upload/jquery.fileupload.js"></script>
 <link rel="stylesheet" href="dist/css/select2.css"/>
 <script src="dist/js/select2.min.js"></script>
 <div data-ng-controller="RowSelectCtrl as vm">
@@ -18,16 +25,97 @@
         </th></tr>
         </tfoot>
     </table>
-<form action="main/api/saveFiles/" method="post" enctype="multipart/form-data"> <input type="file" name="Arquivo" id="Arquivo"><br> <input type="submit" value="Enviar"> <input type="reset" value="Apagar"> </form>
 
-    <a href="controllerFileUploadVelocity/downloadFile/"> download	</a>
+	</div>
+
+
+
+
+
+
+ <style>
+ 	#dropzone {
+    background: #ccccc;
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-weight: bold;
+}
+#dropzone.in {
+    width: 600px;
+    height: 200px;
+    line-height: 200px;
+    font-size: larger;
+}
+#dropzone.hover {
+    background: lawngreen;
+}
+#dropzone.fade {
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    opacity: 1;
+}
+
+ </style>
+
+
+<h1>Spring MVC - jQuery File Upload</h1>
+<div style="width:500px;padding:20px">
+
+    <input id="fileupload" type="file" name="files[]" data-url="rest/main/api/upload" multiple>
+
+    <div id="dropzone">Drop files here</div>
+
+    <div id="progress">
+        <div style="width: 0%;"></div>
+    </div>
+
+    <table id="uploaded-files">
+        <tr>
+            <th>File Name</th>
+            <th>File Size</th>
+            <th>File Type</th>
+            <th>Download</th>
+        </tr>
+    </table>
+
 </div>
 
-<div>
-		<form method="POST" enctype="multipart/form-data" action="upload/">
-			<table>
-				<tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
-				<tr><td></td><td><input type="submit" value="Upload" /></td></tr>
-			</table>
-		</form>
-	</div>
+<script>
+ $(document).ready(function() {
+	$(function () {
+    $('#fileupload').fileupload({
+        dataType: 'json',
+
+        done: function (e, data) {
+            $("tr:has(td)").remove();
+            $.each(data.result, function (index, file) {
+
+                $("#uploaded-files").append(
+                        $('<tr/>')
+                        .append($('<td/>').text(file.fileName))
+                        .append($('<td/>').text(file.fileSize))
+                        .append($('<td/>').text(file.fileType))
+                        .append($('<td/>').html("<a href='rest/main/api/get/"+index+"'>Click</a>"))
+                        )//end $("#uploaded-files").append()
+            });
+        },
+
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .bar').css(
+                'width',
+                progress + '%'
+            );
+        },
+
+        dropZone: $('#dropzone')
+    });
+});
+});
+
+</script>
