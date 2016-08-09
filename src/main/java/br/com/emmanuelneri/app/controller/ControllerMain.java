@@ -116,8 +116,8 @@ public class ControllerMain {
 		 RestTemplate rest = new RestTemplate();
 		    rest.setMessageConverters(Arrays.asList(new StringHttpMessageConverter(), new FormHttpMessageConverter()));
 		    MultiValueMap<String, String> paramss = new LinkedMultiValueMap<String, String>();
-		    paramss.set("username", "taz@qat.com");
-		    paramss.set("password", "devil");
+		    paramss.set("username", "anonimo@aninimo.com");
+		    paramss.set("password", "anonimo");
 		    ResponseEntity<String> st = rest.postForEntity(URL + "auth/api/authenticate", paramss, String.class);
 		    String tk = st.getBody();
 		    Class<? extends String> mt = tk.getClass();
