@@ -6,7 +6,7 @@
 		var initLoad = true; //used to ensure not calling server multiple times
 		var fetch_url =    WebDaptiveAppConfig.base_empresa_url +"/empresa"+  WebDaptiveAppConfig.fetch_url;
 		var refresh_url =  WebDaptiveAppConfig.base_empresa_url +"/empresa"+   WebDaptiveAppConfig.refresh_url;
-		var create_url =   WebDaptiveAppConfig.base_empresa_url +"/empresa"+   WebDaptiveAppConfig.create_url;
+		var create_url =   "entidade/api/empresa"+   WebDaptiveAppConfig.create_url;
 		var update_url =   WebDaptiveAppConfig.base_empresa_url +"/empresa"+   WebDaptiveAppConfig.update_url;
 		var delete_url =   WebDaptiveAppConfig.base_empresa_url +"/empresa"+   WebDaptiveAppConfig.delete_url;
 		pvm.isActive = false;
@@ -136,7 +136,14 @@
             console.log($scope.empresa)
             fnMontaObjeto();
             console.log($scope.empresa)
-            processPostData(create_url, new qat.model.reqEmpr($scope.empresa ,true, true), true);
+           // processPostData(create_url, new qat.model.reqEmpr($scope.empresa ,true, true), true);
+
+			SysMgmtData.processPostPageData("main/api/anonimo",{
+                    url: create_url,
+                    request: new qat.model.reqEmpr($scope.empresa ,true, true)}, function(res){
+               console.log(res)
+               pvm.site = new qat.model.Site(res.sites[0]);
+			});
           };
         $scope.doIfChecked = function(_ckecked,_value,_nome) {
 
