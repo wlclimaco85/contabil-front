@@ -72,7 +72,7 @@
       $scope.submit = function() {
 	      if($scope.empresaType == 1)
 	      {
-	      		$('.fiscal').hide();	
+	      		$('.fiscal').hide();
 	      }
       };
 
@@ -82,25 +82,39 @@
 			completed: false
 		}).length;
 
-		
+
 		return $scope.empresaType;
     }]);
 
 	commonControllers.controller('DashboardController', ['$scope', function($scope) {
-		
+
 	}]);
 
-	commonControllers.controller('LoginController', ['$scope', '$rootScope', '$location', 'localStorageService','WDAuthentication',
-		function($scope, $rootScope, $location, localStorageService, WDAuthentication) {
+	commonControllers.controller('LoginController', ['$scope', '$rootScope', '$location', 'localStorageService','WDAuthentication', 'SysMgmtData', 'toastr',
+		function($scope, $rootScope, $location, localStorageService, WDAuthentication,SysMgmtData, toastr) {
 
 			$scope.login = function() {
 				WDAuthentication.processLogin(WebDaptiveAppConfig.authenticationURL, $.param({username: $scope.username, password: $scope.password}), function(authenticationResult) {
+
 					var authToken = authenticationResult.token;
 					if (authToken !== undefined){
 						$rootScope.authToken = authToken;
 						localStorageService.set('authToken', authToken);
 						var currentUser = {user: authenticationResult.name, roles: authenticationResult.roles};
 						$rootScope.user = currentUser;
+
+						SysMgmtData.processPostPageData("main/api/request",{
+		                    url: "entidade/api/empresa/fetchPage",
+							token : authToken,
+		                    request: new qat.model.empresaInquiryRequest( 100/20, true,currentUser.user,null,null)}, function(res){
+								if(res.operationSuccess == true)
+								{
+									localStorageService.set('empresa', res.empresaList[0]);
+									$rootScope.empresa = res.empresaList[0];
+								}
+					          });
+
+
 						$rootScope.main.name = authenticationResult.name;
 						localStorageService.set('currentUser', $rootScope.user);
 						var tempRole = "";

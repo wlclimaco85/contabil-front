@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>E-Contábil</title>
     <meta name="description" content="">
@@ -16,29 +16,29 @@
 
     <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/font-awesome-animation/dist/font-awesome-animation.min.css">
-     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700,400&amp;subset=cyrillic,latin,greek,vietnamese">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700,400&amp;subset=cyrillic,latin,greek,vietnamese">
     <link rel="stylesheet" href="thirdparty/jquery-ui-1.12.0/jquery-ui.min.js">
 
 
-    <link rel="stylesheet" href="dist/css/formValidation.css"/>
-    <link rel="stylesheet" href="dist/css/select2.css"/>
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css"/>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="dist/css/formValidation.css" />
+    <link rel="stylesheet" href="dist/css/select2.css" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
 
-        <!-- Needs images, font...  -->
-        <link rel="stylesheet" href="thirdparty/font-awesome/css/font-awesome.min.css">
-        <!-- end Needs images -->
-        <link rel="stylesheet" href="thirdparty/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="thirdparty/angular-toastr/angular-toastr.min.css"></link>
-        <link rel="stylesheet" href="thirdparty/angular-ag/ag-grid.css"></link>
-        <link rel="stylesheet" href="thirdparty/angular-ag/theme-fresh.css"></link>
-        <link rel="stylesheet" href="thirdparty/angular-chartjs/angular-chart.min.css">
-        <link rel="stylesheet" href="thirdparty/angular/angular-csp.css">
-        <link rel="stylesheet" href="styles/wd_main.css">
+    <!-- Needs images, font...  -->
+    <link rel="stylesheet" href="thirdparty/font-awesome/css/font-awesome.min.css">
+    <!-- end Needs images -->
+    <link rel="stylesheet" href="thirdparty/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="thirdparty/angular-toastr/angular-toastr.min.css"></link>
+    <link rel="stylesheet" href="thirdparty/angular-ag/ag-grid.css"></link>
+    <link rel="stylesheet" href="thirdparty/angular-ag/theme-fresh.css"></link>
+    <link rel="stylesheet" href="thirdparty/angular-chartjs/angular-chart.min.css">
+    <link rel="stylesheet" href="thirdparty/angular/angular-csp.css">
+    <link rel="stylesheet" href="styles/wd_main.css">
 
 
     <link rel="stylesheet" href="assets/mobirise/css/style.css">
@@ -70,579 +70,592 @@
 </head>
 
 <body data-ng-app="wdApp" id="wdApp" class="wdApp" data-off-canvas-nav data-ng-controller="WDAppController" data-ng-class=" {'layout-boxed': admin.layout === 'boxed' } ">
- <div data-ng-controller="SiteController as cc">
-    <section class="mbr-navbar mbr-navbar--freeze mbr-navbar--absolute mbr-navbar--transparent mbr-navbar--sticky mbr-navbar--auto-collapse" id="ext_menu-3">
-	    <div class="mbr-navbar__section mbr-section">
-	        <div class="mbr-section__container container">
-	            <div class="mbr-navbar__container">
-	                <div class="mbr-navbar__column mbr-navbar__column--s mbr-navbar__brand">
-	                    <span class="mbr-navbar__brand-link mbr-brand mbr-brand--inline">
+    <div data-ng-controller="SiteController as cc">
+        <section class="mbr-navbar mbr-navbar--freeze mbr-navbar--absolute mbr-navbar--transparent mbr-navbar--sticky mbr-navbar--auto-collapse" id="ext_menu-3">
+            <div class="mbr-navbar__section mbr-section">
+                <div class="mbr-section__container container">
+                    <div class="mbr-navbar__container">
+                        <div class="mbr-navbar__column mbr-navbar__column--s mbr-navbar__brand">
+                            <span class="mbr-navbar__brand-link mbr-brand mbr-brand--inline">
 	                        <span class="mbr-brand__logo"><a href="https://mobirise.com"><img src="assets/images/logo.png" class="mbr-navbar__brand-img mbr-brand__img" alt="Mobirise"></a></span>
-	                        <span class="mbr-brand__name"><a class="mbr-brand__name text-white" href={{cc.site.url}}>{{cc.site.nome}}</a></span>
-	                    </span>
-	                </div>
-	                <div class="mbr-navbar__hamburger mbr-hamburger"><span class="mbr-hamburger__line"></span></div>
-	    <div class="mbr-navbar__column mbr-navbar__menu">
-	        <nav class="mbr-navbar__menu-box mbr-navbar__menu-box--inline-right">
-	            <div class="mbr-navbar__column">
-	                <ul class="mbr-navbar__items mbr-navbar__items--right float-left mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-decorator mbr-buttons--active">
-	                	<li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="#" data-nav-section="sobre">Sobre a {{cc.site.nome}}</a></li>
-	                	<li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="#" data-nav-section="services">Planos</a></li>
-	                	<li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="#" data-nav-section="services">Contato</a></li>
+                            <span class="mbr-brand__name"><a class="mbr-brand__name text-white" href={{cc.site.url}}>{{cc.site.nome}}</a></span>
+                            </span>
+                        </div>
+                        <div class="mbr-navbar__hamburger mbr-hamburger"><span class="mbr-hamburger__line"></span></div>
+                        <div class="mbr-navbar__column mbr-navbar__menu">
+                            <nav class="mbr-navbar__menu-box mbr-navbar__menu-box--inline-right">
+                                <div class="mbr-navbar__column">
+                                    <ul class="mbr-navbar__items mbr-navbar__items--right float-left mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-decorator mbr-buttons--active">
+                                        <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="#" data-nav-section="sobre">Sobre a {{cc.site.nome}}</a></li>
+                                        <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="#" data-nav-section="services">Planos</a></li>
+                                        <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="#" data-nav-section="services">Contato</a></li>
 
-	                </ul>
-	                <ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-inverse mbr-buttons--active"><li class="mbr-navbar__item"><a class="mbr-buttons__btn btn btn-danger" href="index4.html">Abrir Empresa</a></li></ul>
-	                <ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-inverse mbr-buttons--active"><li class="mbr-navbar__item"><a class="mbr-buttons__btn btn btn-danger" href="index4.html">Migrar Empresa</a></li></ul>
-	                <ul class="mbr-navbar__items mbr-navbar__items--right float-left mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-decorator mbr-buttons--active"><li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="login.html" data-nav-section="services">Login</a></li></ul>
-	            </div>
-	        </nav>
-	    </div>
-	            </div>
-	        </div>
-	    </div>
-	</section>
-
-
-	<section class="engine"><a rel="external" href="https://mobirise.com">easy free website builder</a></section><section class="mbr-slider mbr-section mbr-section--no-padding carousel slide" data-ride="carousel" data-wrap="true" data-interval="5000" id="slider-15" style="background-color: rgb(255, 255, 255);">
-    <div class="mbr-section__container">
-        <div>
-            <ol class="carousel-indicators">
-                <li data-app-prevent-settings="" data-target="#slider-15" class="active" data-slide-to="0"></li><li data-app-prevent-settings="" data-target="#slider-15" data-slide-to="1"></li><li data-app-prevent-settings="" data-target="#slider-15" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <div class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--bg-adapted item dark center mbr-section--full-height active" style="background-image: url(assets/images/slide1.jpg);">
-                    <div class="mbr-box__magnet mbr-box__magnet--center-right mbr-box__magnet--sm-padding mbr-after-navbar">
-
-                        <div class=" container">
-
-                            <div class="row">
-                                <div class=" col-md-6 col-md-offset-5">
-
-                                <div class="mbr-hero">
-                                    <h1 class="mbr-hero__text">Slide 1</h1>
-
-                                    <p class="mbr-hero__subtext">Develop fully responsive, mobile-optimized websites that look amazing on any devices and browsers. Preview how your website will appear on phones, tablets and desktops directly in the visual editor.</p>
+                                    </ul>
+                                    <ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-inverse mbr-buttons--active">
+                                        <li class="mbr-navbar__item"><a class="mbr-buttons__btn btn btn-danger" href="index4.html">Abrir Empresa</a></li>
+                                    </ul>
+                                    <ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-inverse mbr-buttons--active">
+                                        <li class="mbr-navbar__item"><a class="mbr-buttons__btn btn btn-danger" href="index4.html">Migrar Empresa</a></li>
+                                    </ul>
+                                    <ul class="mbr-navbar__items mbr-navbar__items--right float-left mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-decorator mbr-buttons--active">
+                                        <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="login.html" data-nav-section="services">Login</a></li>
+                                    </ul>
                                 </div>
-                                <div class="mbr-buttons btn-inverse mbr-buttons--left mbr-buttons--right"><a class="mbr-buttons__btn btn btn-lg btn-danger" href="https://mobirise.com">FOR WINDOWS</a> <a class="mbr-buttons__btn btn btn-lg btn-default" href="https://mobirise.com">FOR MAC</a></div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="engine"><a rel="external" href="https://mobirise.com">easy free website builder</a></section>
+        <section class="mbr-slider mbr-section mbr-section--no-padding carousel slide" data-ride="carousel" data-wrap="true" data-interval="5000" id="slider-15" style="background-color: rgb(255, 255, 255);">
+            <div class="mbr-section__container">
+                <div>
+                    <ol class="carousel-indicators">
+                        <li data-app-prevent-settings="" data-target="#slider-15" class="active" data-slide-to="0"></li>
+                        <li data-app-prevent-settings="" data-target="#slider-15" data-slide-to="1"></li>
+                        <li data-app-prevent-settings="" data-target="#slider-15" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        <div class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--bg-adapted item dark center mbr-section--full-height active" style="background-image: url(assets/images/slide1.jpg);">
+                            <div class="mbr-box__magnet mbr-box__magnet--center-right mbr-box__magnet--sm-padding mbr-after-navbar">
+
+                                <div class=" container">
+
+                                    <div class="row">
+                                        <div class=" col-md-6 col-md-offset-5">
+
+                                            <div class="mbr-hero">
+                                                <h1 class="mbr-hero__text">Slide 1</h1>
+
+                                                <p class="mbr-hero__subtext">Develop fully responsive, mobile-optimized websites that look amazing on any devices and browsers. Preview how your website will appear on phones, tablets and desktops directly in the visual editor.</p>
+                                            </div>
+                                            <div class="mbr-buttons btn-inverse mbr-buttons--left mbr-buttons--right"><a class="mbr-buttons__btn btn btn-lg btn-danger" href="https://mobirise.com">FOR WINDOWS</a> <a class="mbr-buttons__btn btn btn-lg btn-default" href="https://mobirise.com">FOR MAC</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--bg-adapted item dark center mbr-section--full-height" style="background-image: url(assets/images/slide2.jpg);">
+                            <div class="mbr-box__magnet mbr-box__magnet--center-left mbr-box__magnet--sm-padding mbr-after-navbar">
+
+                                <div class=" container">
+
+                                    <div class="row">
+                                        <div class=" col-md-6 col-md-offset-1">
+
+                                            <div class="mbr-hero">
+                                                <h1 class="mbr-hero__text">Slide 2</h1>
+
+                                                <p class="mbr-hero__subtext">Mobirise is based on Bootstrap 3 - most powerful mobile first framework. Use any bootstrap themes with no extra work.</p>
+                                            </div>
+                                            <div class="mbr-buttons btn-inverse mbr-buttons--left"><a class="mbr-buttons__btn btn btn-lg btn-danger" href="https://mobirise.com">FOR WINDOWS</a> <a class="mbr-buttons__btn btn btn-lg btn-default" href="https://mobirise.com">FOR MAC</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--bg-adapted item dark center mbr-section--full-height" style="background-image: url(assets/images/slide3.jpg);">
+                            <div class="mbr-box__magnet mbr-box__magnet--center-center mbr-box__magnet--sm-padding mbr-after-navbar">
+
+                                <div class=" container">
+
+                                    <div class="row">
+                                        <div class=" col-md-8 col-md-offset-2">
+
+                                            <div class="mbr-hero">
+                                                <h1 class="mbr-hero__text">Slide 3</h1>
+
+                                                <p class="mbr-hero__subtext">Choose from the large selection of latest pre-made blocks - jumbotrons, hero images, parallax scrolling, video backgrounds, hamburger menu, sticky header and more.</p>
+                                            </div>
+                                            <div class="mbr-buttons btn-inverse mbr-buttons--center"><a class="mbr-buttons__btn btn btn-lg btn-danger" href="https://mobirise.com">FOR WINDOWS</a> <a class="mbr-buttons__btn btn btn-lg btn-default" href="https://mobirise.com">FOR MAC</a></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div><div class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--bg-adapted item dark center mbr-section--full-height" style="background-image: url(assets/images/slide2.jpg);">
-                    <div class="mbr-box__magnet mbr-box__magnet--center-left mbr-box__magnet--sm-padding mbr-after-navbar">
 
-                        <div class=" container">
+                    <a data-app-prevent-settings="" class="left carousel-control" role="button" data-slide="prev" href="#slider-15">
+                        <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a data-app-prevent-settings="" class="right carousel-control" role="button" data-slide="next" href="#slider-15">
+                        <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </section>
 
-                            <div class="row">
-                                <div class=" col-md-6 col-md-offset-1">
+        <div id="fh5co-our-services" data-section="sobre">
+            <div class="container">
+                <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="sobre" data-section="" style="background-color: rgb(255, 255, 255);">
 
-                                <div class="mbr-hero">
-                                    <h1 class="mbr-hero__text">Slide 2</h1>
 
-                                    <p class="mbr-hero__subtext">Mobirise is based on Bootstrap 3 - most powerful mobile first framework. Use any bootstrap themes with no extra work.</p>
+                    <div class="mbr-section__container container mbr-section__container--std-top-padding" style="padding-top: 93px;">
+                        <div class="mbr-section__row row">
+                            <div class="mbr-section__col col-xs-12 col-md-3 col-sm-6">
+                                <div class="mbr-section__container mbr-section__container--center mbr-section__container--middle">
+                                    <figure class="mbr-figure"><img src="assets/images/bootstrap.png" class="mbr-figure__img"></figure>
                                 </div>
-                                <div class="mbr-buttons btn-inverse mbr-buttons--left"><a class="mbr-buttons__btn btn btn-lg btn-danger" href="https://mobirise.com">FOR WINDOWS</a> <a class="mbr-buttons__btn btn btn-lg btn-default" href="https://mobirise.com">FOR MAC</a></div>
+                                <div class="mbr-section__container mbr-section__container--middle">
+                                    <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
+                                        <h3 class="mbr-header__text">Missão</h3>
+                                    </div>
+                                </div>
+                                <div class="mbr-section__container mbr-section__container--middle">
+                                    <div class="mbr-article mbr-article--wysiwyg">
+                                        <p>{{cc.site.missao}}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="mbr-section__col col-xs-12 col-md-3 col-sm-6">
+                                <div class="mbr-section__container mbr-section__container--center mbr-section__container--middle">
+                                    <figure class="mbr-figure"><img src="assets/images/responsive.png" class="mbr-figure__img"></figure>
+                                </div>
+                                <div class="mbr-section__container mbr-section__container--middle">
+                                    <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
+                                        <h3 class="mbr-header__text">Visão</h3>
+                                    </div>
+                                </div>
+                                <div class="mbr-section__container mbr-section__container--middle">
+                                    <div class="mbr-article mbr-article--wysiwyg">
+                                        <p>{{cc.site.visao}}</p>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="clearfix visible-sm-block"></div>
+                            <div class="mbr-section__col col-xs-12 col-md-3 col-sm-6">
+                                <div class="mbr-section__container mbr-section__container--center mbr-section__container--middle">
+                                    <figure class="mbr-figure"><img src="assets/images/google-fonts.png" class="mbr-figure__img"></figure>
+                                </div>
+                                <div class="mbr-section__container mbr-section__container--middle">
+                                    <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
+                                        <h3 class="mbr-header__text">Equipe</h3>
+                                    </div>
+                                </div>
+                                <div class="mbr-section__container mbr-section__container--middle">
+                                    <div class="mbr-article mbr-article--wysiwyg">
+                                        <p>Google has a highly exhaustive list of fonts compiled into its web font platform and Mobirise makes it easy for you to use them on your website easily and freely.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="mbr-section__col col-xs-12 col-md-3 col-sm-6">
+                                <div class="mbr-section__container mbr-section__container--center mbr-section__container--middle">
+                                    <figure class="mbr-figure"><img src="assets/images/unlimited-websites.png" class="mbr-figure__img"></figure>
+                                </div>
+                                <div class="mbr-section__container mbr-section__container--middle">
+                                    <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
+                                        <h3 class="mbr-header__text">Como Trabalhamos</h3>
+                                    </div>
+                                </div>
+                                <div class="mbr-section__container mbr-section__container--middle">
+                                    <div class="mbr-article mbr-article--wysiwyg">
+                                        <p>Mobirise gives you the freedom to develop as many websites as you like given the fact that it is a desktop app.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
                         </div>
                     </div>
-                </div><div class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--bg-adapted item dark center mbr-section--full-height" style="background-image: url(assets/images/slide3.jpg);">
-                    <div class="mbr-box__magnet mbr-box__magnet--center-center mbr-box__magnet--sm-padding mbr-after-navbar">
+                </section>
+            </div>
+        </div>
 
-                        <div class=" container">
+        <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="content4-8" style="background-color: rgb(255, 255, 255);">
 
-                            <div class="row">
-                                <div class=" col-md-8 col-md-offset-2">
+            <div class="mbr-section__container container mbr-section__container--std-top-padding" style="padding-top: 93px;">
 
-                                <div class="mbr-hero">
-                                    <h1 class="mbr-hero__text">Slide 3</h1>
+                <div class="mbr-section__row row" ng-repeat="servico in cc.site.servicoList">
+                    <div class="mbr-section__col col-xs-12 col-lg-2-4 col-md-4 col-sm-6">
 
-                                    <p class="mbr-hero__subtext">Choose from the large selection of latest pre-made blocks - jumbotrons, hero images, parallax scrolling, video backgrounds, hamburger menu, sticky header and more.</p>
-                                </div>
-                                <div class="mbr-buttons btn-inverse mbr-buttons--center"><a class="mbr-buttons__btn btn btn-lg btn-danger" href="https://mobirise.com">FOR WINDOWS</a> <a class="mbr-buttons__btn btn btn-lg btn-default" href="https://mobirise.com">FOR MAC</a></div>
-                                </div>
+                        <div class="mbr-section__container mbr-section__container--middle">
+                            <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
+                                <h3 class="mbr-header__text">{{servico.nome}}</h3>
                             </div>
                         </div>
+                        <div class="mbr-section__container mbr-section__container--last" style="padding-bottom: 93px;">
+                            <div class="mbr-article mbr-article--wysiwyg">
+                                <p>{{servico.descricao}}</p>
+                            </div>
+                        </div>
+
                     </div>
+                    <div class="clearfix visible-sm-block"></div>
                 </div>
             </div>
+        </section>
 
-            <a data-app-prevent-settings="" class="left carousel-control" role="button" data-slide="prev" href="#slider-15">
-                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a data-app-prevent-settings="" class="right carousel-control" role="button" data-slide="next" href="#slider-15">
-                <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </div>
-</section>
+        <section class="mbr-section mbr-section--relative" id="msg-box4-23" style="background-color: rgb(184, 49, 47);">
 
-	<div id="fh5co-our-services" data-section="sobre">
-		<div class="container">
-	<section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="sobre" data-section="" style="background-color: rgb(255, 255, 255);">
+            <div class="mbr-section__container mbr-section__container--isolated container" style="padding-top: 93px; padding-bottom: 93px;">
+                <div class="row">
+                    <div class="mbr-box mbr-box--fixed mbr-box--adapted">
+                        <div class="mbr-box__magnet mbr-box__magnet--top-right mbr-section__left col-sm-6">
+                            <figure class="mbr-figure mbr-figure--adapted mbr-figure--caption-inside-bottom mbr-figure--full-width"><img src="assets/images/iphone.png" class="mbr-figure__img"></figure>
+                        </div>
+                        <div class="mbr-box__magnet mbr-class-mbr-box__magnet--center-left col-sm-6 mbr-section__right">
+                            <div class="mbr-section__container mbr-section__container--middle">
+                                <div class="mbr-header mbr-header--auto-align mbr-header--wysiwyg">
+                                    <h3 class="mbr-header__text">Comece agora com contabilidade online</h3>
 
-
-    <div class="mbr-section__container container mbr-section__container--std-top-padding" style="padding-top: 93px;">
-        <div class="mbr-section__row row">
-            <div class="mbr-section__col col-xs-12 col-md-3 col-sm-6">
-                <div class="mbr-section__container mbr-section__container--center mbr-section__container--middle">
-                    <figure class="mbr-figure"><img src="assets/images/bootstrap.png" class="mbr-figure__img"></figure>
-                </div>
-                <div class="mbr-section__container mbr-section__container--middle">
-                    <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
-                        <h3 class="mbr-header__text">Missão</h3>
-                    </div>
-                </div>
-                <div class="mbr-section__container mbr-section__container--middle">
-                    <div class="mbr-article mbr-article--wysiwyg">
-                        <p>{{cc.site.missao}}</p>
-                    </div>
-                </div>
-
-            </div>
-            <div class="mbr-section__col col-xs-12 col-md-3 col-sm-6">
-                <div class="mbr-section__container mbr-section__container--center mbr-section__container--middle">
-                    <figure class="mbr-figure"><img src="assets/images/responsive.png" class="mbr-figure__img"></figure>
-                </div>
-                <div class="mbr-section__container mbr-section__container--middle">
-                    <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
-                        <h3 class="mbr-header__text">Visão</h3>
-                    </div>
-                </div>
-                <div class="mbr-section__container mbr-section__container--middle">
-                    <div class="mbr-article mbr-article--wysiwyg">
-                        <p>{{cc.site.visao}}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix visible-sm-block"></div>
-            <div class="mbr-section__col col-xs-12 col-md-3 col-sm-6">
-                <div class="mbr-section__container mbr-section__container--center mbr-section__container--middle">
-                    <figure class="mbr-figure"><img src="assets/images/google-fonts.png" class="mbr-figure__img"></figure>
-                </div>
-                <div class="mbr-section__container mbr-section__container--middle">
-                    <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
-                        <h3 class="mbr-header__text">Equipe</h3>
-                    </div>
-                </div>
-                <div class="mbr-section__container mbr-section__container--middle">
-                    <div class="mbr-article mbr-article--wysiwyg">
-                        <p>Google has a highly exhaustive list of fonts compiled into its web font platform and Mobirise makes it easy for you to use them on your website easily and freely.</p>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="mbr-section__col col-xs-12 col-md-3 col-sm-6">
-                <div class="mbr-section__container mbr-section__container--center mbr-section__container--middle">
-                    <figure class="mbr-figure"><img src="assets/images/unlimited-websites.png" class="mbr-figure__img"></figure>
-                </div>
-                <div class="mbr-section__container mbr-section__container--middle">
-                    <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
-                        <h3 class="mbr-header__text">Como Trabalhamos</h3>
-                    </div>
-                </div>
-                <div class="mbr-section__container mbr-section__container--middle">
-                    <div class="mbr-article mbr-article--wysiwyg">
-                        <p>Mobirise gives you the freedom to develop as many websites as you like given the fact that it is a desktop app.</p>
-                    </div>
-                </div>
-
-            </div>
+                                </div>
+                            </div>
+                            <div class="mbr-section__container mbr-section__container--middle">
+                                <div class="mbr-article mbr-article--auto-align mbr-article--wysiwyg">
+                                    <form action="https://mobirise.com/" method="post">
 
 
+                                        <div class="form-group">
+                                            <input type="email" class="form-control input-sm input-inverse" name="email" required="" placeholder="Nome Completo*">
+                                        </div>
 
-        </div>
-    </div>
-</section>
-</div>
-    </div>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control input-sm input-inverse" name="telefone" required="" placeholder="CPF">
+                                        </div>
 
-<section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="content4-8" style="background-color: rgb(255, 255, 255);">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control input-sm input-inverse" name="telefone" required="" placeholder="Telefone">
+                                        </div>
 
-    <div class="mbr-section__container container mbr-section__container--std-top-padding" style="padding-top: 93px;">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control input-sm input-inverse" name="telefone" required="" placeholder="Email">
+                                        </div>
 
-        <div class="mbr-section__row row" ng-repeat="servico in cc.site.servicoList">
-            <div class="mbr-section__col col-xs-12 col-lg-2-4 col-md-4 col-sm-6">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control input-sm input-inverse" name="telefone" required="" placeholder="Defina sua Senha">
+                                        </div>
+                                        <div class="mbr-buttons mbr-buttons--right btn-inverse"><button type="submit" class="mbr-buttons__btn btn btn-danger">Iniciar Migração de Empresa</button></div>
+                                    </form>
 
-                <div class="mbr-section__container mbr-section__container--middle">
-                    <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
-                        <h3 class="mbr-header__text">{{servico.nome}}</h3>
-                    </div>
-                </div>
-                <div class="mbr-section__container mbr-section__container--last" style="padding-bottom: 93px;">
-                    <div class="mbr-article mbr-article--wysiwyg">
-                        <p>{{servico.descricao}}</p>
-                    </div>
-                </div>
-
-            </div>
-            <div class="clearfix visible-sm-block"></div>
-        </div>
-    </div>
-</section>
-
-<section class="mbr-section mbr-section--relative" id="msg-box4-23" style="background-color: rgb(184, 49, 47);">
-
-    <div class="mbr-section__container mbr-section__container--isolated container" style="padding-top: 93px; padding-bottom: 93px;">
-        <div class="row">
-            <div class="mbr-box mbr-box--fixed mbr-box--adapted">
-                <div class="mbr-box__magnet mbr-box__magnet--top-right mbr-section__left col-sm-6">
-                    <figure class="mbr-figure mbr-figure--adapted mbr-figure--caption-inside-bottom mbr-figure--full-width"><img src="assets/images/iphone.png" class="mbr-figure__img"></figure>
-                </div>
-                <div class="mbr-box__magnet mbr-class-mbr-box__magnet--center-left col-sm-6 mbr-section__right">
-                    <div class="mbr-section__container mbr-section__container--middle">
-                        <div class="mbr-header mbr-header--auto-align mbr-header--wysiwyg">
-                            <h3 class="mbr-header__text">Comece agora com contabilidade online</h3>
+                                </div>
+                            </div>
 
                         </div>
+
                     </div>
-                    <div class="mbr-section__container mbr-section__container--middle">
-                        <div class="mbr-article mbr-article--auto-align mbr-article--wysiwyg">
-                        <form action="https://mobirise.com/" method="post">
-
-
-                    <div class="form-group">
-                        <input type="email" class="form-control input-sm input-inverse" name="email" required="" placeholder="Nome Completo*">
-                    </div>
-
-                    <div class="form-group">
-                        <input type="email" class="form-control input-sm input-inverse" name="telefone" required="" placeholder="CPF">
-                    </div>
-
-                    <div class="form-group">
-                        <input type="email" class="form-control input-sm input-inverse" name="telefone" required="" placeholder="Telefone">
-                    </div>
-
-                    <div class="form-group">
-                        <input type="email" class="form-control input-sm input-inverse" name="telefone" required="" placeholder="Email">
-                    </div>
-
-                    <div class="form-group">
-                        <input type="email" class="form-control input-sm input-inverse" name="telefone" required="" placeholder="Defina sua Senha">
-                    </div>
-                    <div class="mbr-buttons mbr-buttons--right btn-inverse"><button type="submit" class="mbr-buttons__btn btn btn-danger">Iniciar Migração de Empresa</button></div>
-                </form>
-
-                        </div>
-                    </div>
-
                 </div>
-
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
-<section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="msg-box3-17" style="background-color: rgb(255, 255, 255);">
+        <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="msg-box3-17" style="background-color: rgb(255, 255, 255);">
 
-    <div class="mbr-section__container container mbr-section__container--first" style="padding-top: 93px;">
-        <div class="mbr-header mbr-header--wysiwyg row">
-            <div class="col-sm-8 col-sm-offset-2">
-                <h3 class="mbr-header__text">Quem Somos</h3>
+            <div class="mbr-section__container container mbr-section__container--first" style="padding-top: 93px;">
+                <div class="mbr-header mbr-header--wysiwyg row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <h3 class="mbr-header__text">Quem Somos</h3>
 
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="mbr-section__container container mbr-section__container--middle">
-        <div class="row">
-            <div class="mbr-article mbr-article--wysiwyg col-sm-8 col-sm-offset-2"><p>
-            	{{cc.site.quemSomos}}
-            </p></div>
-        </div>
-    </div>
-  <!--  <div class="mbr-section__container container mbr-section__container--last" style="padding-bottom: 93px;">
+            <div class="mbr-section__container container mbr-section__container--middle">
+                <div class="row">
+                    <div class="mbr-article mbr-article--wysiwyg col-sm-8 col-sm-offset-2">
+                        <p>
+                            {{cc.site.quemSomos}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--  <div class="mbr-section__container container mbr-section__container--last" style="padding-bottom: 93px;">
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
                 <div class="mbr-buttons mbr-buttons--center"><a class="mbr-buttons__btn btn btn-lg btn-default" href="https://mobirise.com">SEE ALL TEMPLATES</a></div>
             </div>
         </div>
     </div>-->
-</section>
-<section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="pricing-table1-11" style="background-color: rgb(240, 240, 240);">
+        </section>
+        <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="pricing-table1-11" style="background-color: rgb(240, 240, 240);">
 
-    <div class="mbr-section__container mbr-section__container--std-top-padding container" style="padding-top: 93px; margin-bottom: 0px;">
-        <div class="row" >
-            <div class="mbr-plan col-xs-12 mbr-plan--first col-md-3 col-sm-6" ng-repeat="plano in cc.site.planoList">
-                <div class="mbr-plan__box">
-                    <div class="mbr-plan__header">
-                        <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
-                            <h3 class="mbr-header__text">{{plano.titulo}}</h3>
-                        </div>
-                    </div>
-                    <div class="mbr-plan__number">
-                        <div class="mbr-number mbr-number--price">
-                            <div class="mbr-number__num">
-                                <div class="mbr-number__group">
-                                    <sup class="mbr-number__left">$</sup><span class="mbr-number__value">{{plano.precoList[0].valor || 0}}</span>
+            <div class="mbr-section__container mbr-section__container--std-top-padding container" style="padding-top: 93px; margin-bottom: 0px;">
+                <div class="row">
+                    <div class="mbr-plan col-xs-12 mbr-plan--first col-md-3 col-sm-6" ng-repeat="plano in cc.site.planoList">
+                        <div class="mbr-plan__box">
+                            <div class="mbr-plan__header">
+                                <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
+                                    <h3 class="mbr-header__text">{{plano.titulo}}</h3>
                                 </div>
                             </div>
-                            <div class="mbr-number__caption">Mensal</div>
+                            <div class="mbr-plan__number">
+                                <div class="mbr-number mbr-number--price">
+                                    <div class="mbr-number__num">
+                                        <div class="mbr-number__group">
+                                            <sup class="mbr-number__left">$</sup><span class="mbr-number__value">{{plano.precoList[0].valor || 0}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="mbr-number__caption">Mensal</div>
+                                </div>
+                            </div>
+                            <div class="mbr-plan__details">
+                                <ul ng-repeat="servico in plano.servicoList">
+                                    <li><strong>{{servico.servico.nome}}</strong> {{servico.servico.descricao}}</li>
+                                </ul>
+                            </div>
+                            <div class="mbr-plan__buttons">
+                                <div class="mbr-buttons mbr-buttons--center"><a href="https://mobirise.com" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">Contratar</a></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="mbr-plan__details">
-                    	<ul ng-repeat="servico in plano.servicoList">
-                    		<li><strong>{{servico.servico.nome}}</strong> {{servico.servico.descricao}}</li>
-                    	</ul>
-                    </div>
-                    <div class="mbr-plan__buttons">
-                        <div class="mbr-buttons mbr-buttons--center"><a href="https://mobirise.com" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">Contratar</a></div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="msg-box3-17" style="background-color: rgb(255, 255, 255);">
+
+            <div class="mbr-section__container container mbr-section__container--first" style="padding-top: 93px;">
+                <div class="mbr-header mbr-header--wysiwyg row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <h3 class="mbr-header__text">MODERN STYLES</h3>
+
+                    </div>
+                </div>
+            </div>
+            <div class="mbr-section__container container mbr-section__container--middle">
+                <div class="row">
+                    <div class="mbr-article mbr-article--wysiwyg col-sm-8 col-sm-offset-2">
+                        <p>Mobirise has provided for website developers a growing library of modern blocks which can be used either partially or in full for every website developed through the builder.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mbr-section__container container mbr-section__container--last" style="padding-bottom: 93px;">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <div class="mbr-buttons mbr-buttons--center"><a class="mbr-buttons__btn btn btn-lg btn-default" href="https://mobirise.com">SEE ALL TEMPLATES</a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="pricing-table1-11" style="background-color: rgb(240, 240, 240);">
+
+            <div class="mbr-section__container mbr-section__container--std-top-padding container" style="padding-top: 93px; margin-bottom: 0px;">
+                <div class="row">
+                    <div class="mbr-plan col-xs-12 mbr-plan--first col-md-3 col-sm-6">
+                        <div class="mbr-plan__box">
+                            <div class="mbr-plan__header">
+                                <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
+                                    <h3 class="mbr-header__text">STANDARD</h3>
+                                </div>
+                            </div>
+                            <div class="mbr-plan__number">
+                                <div class="mbr-number mbr-number--price">
+                                    <div class="mbr-number__num">
+                                        <div class="mbr-number__group">
+                                            <sup class="mbr-number__left">$</sup><span class="mbr-number__value">0</span>
+                                        </div>
+                                    </div>
+                                    <div class="mbr-number__caption">per month</div>
+                                </div>
+                            </div>
+                            <div class="mbr-plan__details">
+                                <ul>
+                                    <li><strong>32 GB</strong> Storage</li>
+                                    <li><strong>Unlimited</strong> Users</li>
+                                    <li><strong>15 GB</strong> Bandwidth</li>
+                                </ul>
+                            </div>
+                            <div class="mbr-plan__buttons">
+                                <div class="mbr-buttons mbr-buttons--center"><a href="https://mobirise.com" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">DEMO LINK</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mbr-plan col-xs-12 mbr-plan--success col-md-3 col-sm-6">
+                        <div class="mbr-plan__box">
+                            <div class="mbr-plan__header">
+                                <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
+                                    <h3 class="mbr-header__text">BUSINESS</h3>
+                                </div>
+                            </div>
+                            <div class="mbr-plan__number">
+                                <div class="mbr-number mbr-number--price">
+                                    <div class="mbr-number__num">
+                                        <div class="mbr-number__group">
+                                            <sup class="mbr-number__left">$</sup><span class="mbr-number__value">0</span>
+                                        </div>
+                                    </div>
+                                    <div class="mbr-number__caption">per month</div>
+                                </div>
+                            </div>
+                            <div class="mbr-plan__details">
+                                <ul>
+                                    <li><strong>80 GB</strong> Storage</li>
+                                    <li><strong>Unlimited</strong> Users</li>
+                                    <li><strong>20 GB</strong> Bandwidth</li>
+                                </ul>
+                            </div>
+                            <div class="mbr-plan__buttons">
+                                <div class="mbr-buttons mbr-buttons--center"><a href="https://mobirise.com" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">DEMO LINK</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mbr-plan col-xs-12 mbr-plan--danger mbr-plan--favorite col-md-3 col-sm-6">
+                        <div class="mbr-plan__box">
+                            <div class="mbr-plan__header">
+                                <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
+                                    <h3 class="mbr-header__text">PREMIUM</h3>
+                                </div>
+                            </div>
+                            <div class="mbr-plan__number">
+                                <div class="mbr-number mbr-number--price">
+                                    <div class="mbr-number__num">
+                                        <div class="mbr-number__group">
+                                            <sup class="mbr-number__left">$</sup><span class="mbr-number__value">0</span>
+                                        </div>
+                                    </div>
+                                    <div class="mbr-number__caption">per month</div>
+                                </div>
+                            </div>
+                            <div class="mbr-plan__details">
+                                <ul>
+                                    <li><strong>100 GB</strong> Storage</li>
+                                    <li><strong>Unlimited</strong> Users</li>
+                                    <li><strong>50 GB</strong> Bandwidth</li>
+                                </ul>
+                            </div>
+                            <div class="mbr-plan__buttons">
+                                <div class="mbr-buttons mbr-buttons--center"><a href="https://mobirise.com" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">DEMO LINK</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mbr-plan col-xs-12 mbr-plan--warning mbr-plan--last col-md-3 col-sm-6">
+                        <div class="mbr-plan__box">
+                            <div class="mbr-plan__header">
+                                <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
+                                    <h3 class="mbr-header__text">ULTIMATE</h3>
+                                </div>
+                            </div>
+                            <div class="mbr-plan__number">
+                                <div class="mbr-number mbr-number--price">
+                                    <div class="mbr-number__num">
+                                        <div class="mbr-number__group">
+                                            <sup class="mbr-number__left">$</sup><span class="mbr-number__value">0</span>
+                                        </div>
+                                    </div>
+                                    <div class="mbr-number__caption">per month</div>
+                                </div>
+                            </div>
+                            <div class="mbr-plan__details">
+                                <ul>
+                                    <li><strong>Unlimited</strong> Storage</li>
+                                    <li><strong>Unlimited</strong> Users</li>
+                                    <li><strong>1 TB</strong> Bandwidth</li>
+                                </ul>
+                            </div>
+                            <div class="mbr-plan__buttons">
+                                <div class="mbr-buttons mbr-buttons--center"><a href="https://mobirise.com" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">DEMO LINK</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="msg-box3-16" style="background-color: rgb(255, 255, 255);">
+
+            <div class="mbr-section__container container mbr-section__container--first" style="padding-top: 93px;">
+                <div class="mbr-header mbr-header--wysiwyg row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <h3 class="mbr-header__text">MODERN STYLES</h3>
+
+                    </div>
+                </div>
+            </div>
+            <div class="mbr-section__container container mbr-section__container--middle">
+                <div class="row">
+                    <div class="mbr-article mbr-article--wysiwyg col-sm-8 col-sm-offset-2">
+                        <p>Mobirise has provided for website developers a growing library of modern blocks which can be used either partially or in full for every website developed through the builder.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mbr-section__container container mbr-section__container--last" style="padding-bottom: 93px;">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <div class="mbr-buttons mbr-buttons--center"><a class="mbr-buttons__btn btn btn-lg btn-default" href="https://mobirise.com">SEE ALL TEMPLATES</a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="contacts3-14" style="background-color: rgb(60, 60, 60);">
+
+            <div class="mbr-section__container container">
+                <div class="mbr-contacts mbr-contacts--wysiwyg row" style="padding-top: 45px; padding-bottom: 45px;">
+                    <div class="col-sm-8">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="mbr-contacts__text"><strong>ADDRESS</strong><br> 1234 Street Name<br> City, AA 99999<br><br>
+                                    <strong>CONTACTS</strong><br> Email: support@mobirise.com<br> Phone: +1 (0) 000 0000 001<br> Fax: +1 (0) 000 0000 002</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mbr-contacts__text"><strong>LINKS</strong></p>
+                                <ul class="mbr-contacts__list">
+                                    <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/">Website builder</a></li>
+                                    <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/mobirise-free-win.zip">Download for Windows</a></li>
+                                    <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/mobirise-free-mac.zip">Download for Mac</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mbr-contacts__column col-sm-4">
+
+                        <form action="https://mobirise.com/" method="post">
+
+
+                            <div class="form-group">
+                                <input type="email" class="form-control input-sm input-inverse" name="email" required="" placeholder="Email*">
+                            </div>
+
+                            <div class="form-group">
+                                <textarea class="form-control input-sm input-inverse" name="message" rows="4" placeholder="Message"></textarea>
+                            </div>
+                            <div class="mbr-buttons mbr-buttons--right btn-inverse"><button type="submit" class="mbr-buttons__btn btn btn-danger">CONTACT US</button></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="contacts2-13" style="background-color: rgb(60, 60, 60);">
+
+            <div class="mbr-section__container container">
+                <div class="mbr-contacts mbr-contacts--wysiwyg row" style="padding-top: 45px; padding-bottom: 45px;">
+                    <div class="col-sm-6">
+                        <figure class="mbr-figure mbr-figure--wysiwyg mbr-figure--full-width mbr-figure--no-bg">
+                            <div class="mbr-figure__map mbr-figure__map--short mbr-google-map">
+                                <p class="mbr-google-map__marker" data-coordinates="40.748384,-73.9854792"></p>
+                            </div>
+                        </figure>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-5 col-sm-offset-1">
+                                <p class="mbr-contacts__text"><strong>ADDRESS</strong><br> 1234 Street Name<br> City, AA 99999<br><br>
+                                    <strong>CONTACTS</strong><br> Email: support@mobirise.com<br> Phone: +1 (0) 000 0000 001<br> Fax: +1 (0) 000 0000 002</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mbr-contacts__text"><strong>LINKS</strong></p>
+                                <ul class="mbr-contacts__list">
+                                    <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/">Website builder</a></li>
+                                    <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/mobirise-free-win.zip">Download for Windows</a></li>
+                                    <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/mobirise-free-mac.zip">Download for Mac</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-</section>
-
-    <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="msg-box3-17" style="background-color: rgb(255, 255, 255);">
-
-        <div class="mbr-section__container container mbr-section__container--first" style="padding-top: 93px;">
-            <div class="mbr-header mbr-header--wysiwyg row">
-                <div class="col-sm-8 col-sm-offset-2">
-                    <h3 class="mbr-header__text">MODERN STYLES</h3>
-
-                </div>
-            </div>
-        </div>
-        <div class="mbr-section__container container mbr-section__container--middle">
-            <div class="row">
-                <div class="mbr-article mbr-article--wysiwyg col-sm-8 col-sm-offset-2">
-                    <p>Mobirise has provided for website developers a growing library of modern blocks which can be used either partially or in full for every website developed through the builder.</p>
-                </div>
-            </div>
-        </div>
-        <div class="mbr-section__container container mbr-section__container--last" style="padding-bottom: 93px;">
-            <div class="row">
-                <div class="col-sm-8 col-sm-offset-2">
-                    <div class="mbr-buttons mbr-buttons--center"><a class="mbr-buttons__btn btn btn-lg btn-default" href="https://mobirise.com">SEE ALL TEMPLATES</a></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="pricing-table1-11" style="background-color: rgb(240, 240, 240);">
-
-        <div class="mbr-section__container mbr-section__container--std-top-padding container" style="padding-top: 93px; margin-bottom: 0px;">
-            <div class="row">
-                <div class="mbr-plan col-xs-12 mbr-plan--first col-md-3 col-sm-6">
-                    <div class="mbr-plan__box">
-                        <div class="mbr-plan__header">
-                            <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
-                                <h3 class="mbr-header__text">STANDARD</h3>
-                            </div>
-                        </div>
-                        <div class="mbr-plan__number">
-                            <div class="mbr-number mbr-number--price">
-                                <div class="mbr-number__num">
-                                    <div class="mbr-number__group">
-                                        <sup class="mbr-number__left">$</sup><span class="mbr-number__value">0</span>
-                                    </div>
-                                </div>
-                                <div class="mbr-number__caption">per month</div>
-                            </div>
-                        </div>
-                        <div class="mbr-plan__details">
-                            <ul>
-                                <li><strong>32 GB</strong> Storage</li>
-                                <li><strong>Unlimited</strong> Users</li>
-                                <li><strong>15 GB</strong> Bandwidth</li>
-                            </ul>
-                        </div>
-                        <div class="mbr-plan__buttons">
-                            <div class="mbr-buttons mbr-buttons--center"><a href="https://mobirise.com" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">DEMO LINK</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mbr-plan col-xs-12 mbr-plan--success col-md-3 col-sm-6">
-                    <div class="mbr-plan__box">
-                        <div class="mbr-plan__header">
-                            <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
-                                <h3 class="mbr-header__text">BUSINESS</h3>
-                            </div>
-                        </div>
-                        <div class="mbr-plan__number">
-                            <div class="mbr-number mbr-number--price">
-                                <div class="mbr-number__num">
-                                    <div class="mbr-number__group">
-                                        <sup class="mbr-number__left">$</sup><span class="mbr-number__value">0</span>
-                                    </div>
-                                </div>
-                                <div class="mbr-number__caption">per month</div>
-                            </div>
-                        </div>
-                        <div class="mbr-plan__details">
-                            <ul>
-                                <li><strong>80 GB</strong> Storage</li>
-                                <li><strong>Unlimited</strong> Users</li>
-                                <li><strong>20 GB</strong> Bandwidth</li>
-                            </ul>
-                        </div>
-                        <div class="mbr-plan__buttons">
-                            <div class="mbr-buttons mbr-buttons--center"><a href="https://mobirise.com" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">DEMO LINK</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mbr-plan col-xs-12 mbr-plan--danger mbr-plan--favorite col-md-3 col-sm-6">
-                    <div class="mbr-plan__box">
-                        <div class="mbr-plan__header">
-                            <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
-                                <h3 class="mbr-header__text">PREMIUM</h3>
-                            </div>
-                        </div>
-                        <div class="mbr-plan__number">
-                            <div class="mbr-number mbr-number--price">
-                                <div class="mbr-number__num">
-                                    <div class="mbr-number__group">
-                                        <sup class="mbr-number__left">$</sup><span class="mbr-number__value">0</span>
-                                    </div>
-                                </div>
-                                <div class="mbr-number__caption">per month</div>
-                            </div>
-                        </div>
-                        <div class="mbr-plan__details">
-                            <ul>
-                                <li><strong>100 GB</strong> Storage</li>
-                                <li><strong>Unlimited</strong> Users</li>
-                                <li><strong>50 GB</strong> Bandwidth</li>
-                            </ul>
-                        </div>
-                        <div class="mbr-plan__buttons">
-                            <div class="mbr-buttons mbr-buttons--center"><a href="https://mobirise.com" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">DEMO LINK</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mbr-plan col-xs-12 mbr-plan--warning mbr-plan--last col-md-3 col-sm-6">
-                    <div class="mbr-plan__box">
-                        <div class="mbr-plan__header">
-                            <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
-                                <h3 class="mbr-header__text">ULTIMATE</h3>
-                            </div>
-                        </div>
-                        <div class="mbr-plan__number">
-                            <div class="mbr-number mbr-number--price">
-                                <div class="mbr-number__num">
-                                    <div class="mbr-number__group">
-                                        <sup class="mbr-number__left">$</sup><span class="mbr-number__value">0</span>
-                                    </div>
-                                </div>
-                                <div class="mbr-number__caption">per month</div>
-                            </div>
-                        </div>
-                        <div class="mbr-plan__details">
-                            <ul>
-                                <li><strong>Unlimited</strong> Storage</li>
-                                <li><strong>Unlimited</strong> Users</li>
-                                <li><strong>1 TB</strong> Bandwidth</li>
-                            </ul>
-                        </div>
-                        <div class="mbr-plan__buttons">
-                            <div class="mbr-buttons mbr-buttons--center"><a href="https://mobirise.com" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">DEMO LINK</a></div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="msg-box3-16" style="background-color: rgb(255, 255, 255);">
-
-        <div class="mbr-section__container container mbr-section__container--first" style="padding-top: 93px;">
-            <div class="mbr-header mbr-header--wysiwyg row">
-                <div class="col-sm-8 col-sm-offset-2">
-                    <h3 class="mbr-header__text">MODERN STYLES</h3>
-
-                </div>
-            </div>
-        </div>
-        <div class="mbr-section__container container mbr-section__container--middle">
-            <div class="row">
-                <div class="mbr-article mbr-article--wysiwyg col-sm-8 col-sm-offset-2">
-                    <p>Mobirise has provided for website developers a growing library of modern blocks which can be used either partially or in full for every website developed through the builder.</p>
-                </div>
-            </div>
-        </div>
-        <div class="mbr-section__container container mbr-section__container--last" style="padding-bottom: 93px;">
-            <div class="row">
-                <div class="col-sm-8 col-sm-offset-2">
-                    <div class="mbr-buttons mbr-buttons--center"><a class="mbr-buttons__btn btn btn-lg btn-default" href="https://mobirise.com">SEE ALL TEMPLATES</a></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="contacts3-14" style="background-color: rgb(60, 60, 60);">
-
-        <div class="mbr-section__container container">
-            <div class="mbr-contacts mbr-contacts--wysiwyg row" style="padding-top: 45px; padding-bottom: 45px;">
-                <div class="col-sm-8">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <p class="mbr-contacts__text"><strong>ADDRESS</strong><br> 1234 Street Name<br> City, AA 99999<br><br>
-                                <strong>CONTACTS</strong><br> Email: support@mobirise.com<br> Phone: +1 (0) 000 0000 001<br> Fax: +1 (0) 000 0000 002</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <p class="mbr-contacts__text"><strong>LINKS</strong></p>
-                            <ul class="mbr-contacts__list">
-                                <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/">Website builder</a></li>
-                                <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/mobirise-free-win.zip">Download for Windows</a></li>
-                                <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/mobirise-free-mac.zip">Download for Mac</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="mbr-contacts__column col-sm-4">
-
-                    <form action="https://mobirise.com/" method="post">
-
-
-                        <div class="form-group">
-                            <input type="email" class="form-control input-sm input-inverse" name="email" required="" placeholder="Email*">
-                        </div>
-
-                        <div class="form-group">
-                            <textarea class="form-control input-sm input-inverse" name="message" rows="4" placeholder="Message"></textarea>
-                        </div>
-                        <div class="mbr-buttons mbr-buttons--right btn-inverse"><button type="submit" class="mbr-buttons__btn btn btn-danger">CONTACT US</button></div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="contacts2-13" style="background-color: rgb(60, 60, 60);">
-
-        <div class="mbr-section__container container">
-            <div class="mbr-contacts mbr-contacts--wysiwyg row" style="padding-top: 45px; padding-bottom: 45px;">
-                <div class="col-sm-6">
-                    <figure class="mbr-figure mbr-figure--wysiwyg mbr-figure--full-width mbr-figure--no-bg">
-                        <div class="mbr-figure__map mbr-figure__map--short mbr-google-map">
-                            <p class="mbr-google-map__marker" data-coordinates="40.748384,-73.9854792"></p>
-                        </div>
-                    </figure>
-                </div>
-                <div class="col-sm-6">
-                    <div class="row">
-                        <div class="col-sm-5 col-sm-offset-1">
-                            <p class="mbr-contacts__text"><strong>ADDRESS</strong><br> 1234 Street Name<br> City, AA 99999<br><br>
-                                <strong>CONTACTS</strong><br> Email: support@mobirise.com<br> Phone: +1 (0) 000 0000 001<br> Fax: +1 (0) 000 0000 002</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <p class="mbr-contacts__text"><strong>LINKS</strong></p>
-                            <ul class="mbr-contacts__list">
-                                <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/">Website builder</a></li>
-                                <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/mobirise-free-win.zip">Download for Windows</a></li>
-                                <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/mobirise-free-mac.zip">Download for Mac</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
     <!--
   <script src="assets/web/assets/jquery/jquery.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
