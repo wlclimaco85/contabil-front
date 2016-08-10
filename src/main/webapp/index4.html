@@ -1,16 +1,84 @@
 <!DOCTYPE html>
 <html>
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="dist/css/formValidation.css" />
-<link rel="stylesheet" href="dist/css/select2.css" />
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css" />
-<link href="thirdparty/twitter-bootstrap-wizard-master/prettify.css" rel="stylesheet">
-<link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload.css">
-<link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload-ui.css">
-<!-- CSS adjustments for browsers with JavaScript disabled -->
-<noscript><link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload-noscript.css"></noscript>
-<noscript><link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload-ui-noscript.css"></noscript>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>E-Contábil</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/font-awesome-animation/dist/font-awesome-animation.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="thirdparty/jquery-ui-1.12.0/jquery-ui.min.js">
+
+    <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/datatables/media/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/datatables-colreorder/css/dataTables.colReorder.css">
+    <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/datatables-colvis/css/dataTables.colVis.css">
+    <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/datatables-tabletools/css/dataTables.tableTools.css">
+    <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/datatables-responsive/css/dataTables.responsive.css">
+    <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/datatables-scroller/css/dataTables.scroller.css">
+    <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/datatables-fixedcolumns/css/dataTables.fixedColumns.css">
+    <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/datatables-fixedheader/css/fixedHeader.dataTables.css">
+    <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/datatables-buttons/css/buttons.dataTables.css">
+    <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/datatables-select/css/select.dataTables.css">
+    <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/backtotop/backtotop.min.css">
+    <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/highlightjs/styles/github.css">
+    <link rel="stylesheet" href="thirdparty/angular-datatables-master/dist/plugins/bootstrap/datatables.bootstrap.min.css">
+    <link rel="stylesheet" href="thirdparty/angular-datatables-master/styles/main.css">
+    <link rel="stylesheet" href="thirdparty/angular-datatables-master/dist/css/angular-datatables.css">
+    <link rel="stylesheet" href="dist/css/formValidation.css"/>
+    <link rel="stylesheet" href="dist/css/select2.css"/>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css"/>
+<!--<!doctype html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>WebDaptive - Angular</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+         Place favicon.ico in the root directory -->
+
+
+        <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+ <link rel="stylesheet" href="thirdparty/angular-datatables-master/dist/plugins/bootstrap/datatables.bootstrap.min.css">
+        <!--<link rel="stylesheet" href="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.css"> -->
+        <link rel="stylesheet" href="thirdparty/angular-datatables/vendor/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="thirdparty/angular-datatables/vendor/font-awesome-animation/dist/font-awesome-animation.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,300,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="thirdparty/angular-datatables/vendor/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="thirdparty/angular-datatables/vendor/datatables/media/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="thirdparty/angular-datatables/vendor/datatables-colreorder/css/dataTables.colReorder.css">
+        <link rel="stylesheet" href="thirdparty/angular-datatables/vendor/datatables-colvis/css/dataTables.colVis.css">
+        <link rel="stylesheet" href="thirdparty/angular-datatables/vendor/datatables-tabletools/css/dataTables.tableTools.css">
+        <link rel="stylesheet" href="thirdparty/angular-datatables/vendor/datatables-responsive/css/dataTables.responsive.css">
+        <link rel="stylesheet" href="thirdparty/angular-datatables/vendor/datatables-scroller/css/dataTables.scroller.css">
+        <link rel="stylesheet" href="thirdparty/angular-datatables/vendor/datatables-fixedcolumns/css/dataTables.fixedColumns.css">
+        <link rel="stylesheet" href="thirdparty/angular-datatables/vendor/datatables-fixedheader/css/fixedHeader.dataTables.css">
+        <link rel="stylesheet" href="thirdparty/angular-datatables/vendor/datatables-buttons/css/buttons.dataTables.css">
+        <link rel="stylesheet" href="thirdparty/angular-datatables/vendor/datatables-select/css/select.dataTables.css">
+        <link rel="stylesheet" href="thirdparty/angular-datatables/vendor/backtotop/backtotop.min.css">
+        <link rel="stylesheet" href="thirdparty/angular-datatables/vendor/highlightjs/styles/github.css">
+        <link rel="stylesheet" href="thirdparty/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css">
+        <link rel="stylesheet" href="thirdparty/angular-datatables/styles/main.css">
+        <link rel="stylesheet" href="thirdparty/angular-datatables/dist/css/angular-datatables.css">
+        <!-- Needs images, font...  -->
+        <link rel="stylesheet" href="thirdparty/font-awesome/css/font-awesome.min.css">
+        <!-- end Needs images -->
+        <link rel="stylesheet" href="thirdparty/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="thirdparty/angular-toastr/angular-toastr.min.css"></link>
+        <link rel="stylesheet" href="thirdparty/angular-ag/ag-grid.css"></link>
+        <link rel="stylesheet" href="thirdparty/angular-ag/theme-fresh.css"></link>
+        <link rel="stylesheet" href="thirdparty/angular-chartjs/angular-chart.min.css">
+        <link rel="stylesheet" href="thirdparty/angular/angular-csp.css">
+        <link rel="stylesheet" href="styles/wd_main.css">
 
 <!-- The Templates plugin is included to render the upload/download listings -->
 

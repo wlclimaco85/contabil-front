@@ -142,7 +142,12 @@
                     url: create_url,
                     request: new qat.model.reqEmpr($scope.empresa ,true, true)}, function(res){
                console.log(res)
-               pvm.site = new qat.model.Site(res.sites[0]);
+               debugger
+               if(res.operationSuccess == true)
+               {
+                   window.location.assign("index5.html")
+               }
+               
 			});
           };
         $scope.doIfChecked = function(_ckecked,_value,_nome) {
@@ -224,7 +229,7 @@
                     count = count + 1;
                 }
             });
-            $scope.empresa.planosServicos = bb;
+            $scope.empresa.planoByEmpresaList = bb;
 
             console.log($scope.empresa);
         }
@@ -276,7 +281,7 @@
             servicoAndPlano  = {
                valor : _valor,
                dataInicio : (new Date()).getTime(),
-               servicoPlanoEnumValue : _type,
+               planoId : {id : _id},
                parentId       : 0,
                emprId         : 0,
                processId      : 0,
@@ -289,14 +294,14 @@
 
             }
 
-            if(_type == 1)
-            {
-               servicoAndPlano.planoList = {id :_id};
-            }
-            else
-            {
-                servicoAndPlano.servicoList = {id :_id};
-            }
+          //  if(_type == 1)
+          //  {
+          //     servicoAndPlano.planoList = {id :_id};
+          //  }
+          //  else
+          //  {
+            //    servicoAndPlano.servicoList = {id :_id};
+           // }
 
             return servicoAndPlano;
         }
