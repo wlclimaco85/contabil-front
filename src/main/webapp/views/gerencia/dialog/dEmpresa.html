@@ -1,4 +1,3 @@
-
 <div class="modal fade">
     <div class="modal-dialog" style="width : 80%">
         <div class="modal-content">
@@ -8,297 +7,1184 @@
                     <h4 class="modal-title">Cadastro Empresa</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="empresaForm">
-                        <div class="col-sm-12">
-                                       <label for="exampleInputPassword1">Tipo de Empresa</label>
-                                        <dl class="dl-horizontal">
-                                            <dd>
-                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="1" checked ><span>Venda e Compra e prestaÃ§Ã£o de serviÃ§o </span></label>
-                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="2" ><span>Clinica </span></label>
-                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Escritorio Advocacia</span></label>
+                <div class="container1" ng-app ng-init="tabs=4">
+                            <ul class="tabs-nav">
+                                <li><a ng-click="tabs=4" ng-class="{'active' : tabs==4}">Dados Empresa</a></li>
+                                <li><a ng-click="tabs=5" ng-class="{'active' : tabs==5}">Plano/Serviço</a></li>
+                                <li><a ng-click="tabs=6" ng-class="{'active' : tabs==6}">Arquivos</a></li>
+                                <li><a ng-click="tabs=7" ng-class="{'active' : tabs==7}">Configuração</a></li>
+                            </ul>
+                            <div class="tabs-container1">
+                                <div class="tab-content1" ng-show="tabs == 4">
+                                <div class="col-sm-12">
+                                            <label for="exampleInputPassword1">Tipo de Empresa</label>
+                                            <dl class="dl-horizontal">
+                                                <dd>
+                                                    <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="1" checked ><span>Venda e Compra e prestação de serviço </span></label>
+                                                    <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="2" ><span>Clinica </span></label>
+                                                    <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Escritorio Advocacia</span></label>
 
-                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Condominio</span></label>
+                                                    <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Condominio</span></label>
 
-                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Escritorio Contabil</span></label>
-                                            </dd>
-                                        </dl>
+                                                    <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Escritorio Contabil</span></label>
+                                                </dd>
+                                            </dl>
 
-                                    </div>
-                                    <div class="row">
-                                    <div class="col-sm-6">
-                                        <label for="exampleInputPassword1">Sua Empresa Esta Ativa?</label>
-                                        <dl class="dl-horizontal">
-                                            <dd>
-                                                <label class="ui-radio"><input name="radio1" ng-model="empresa.statusInicial" type="radio" value="1" ><span>Sim</span></label>
-                                                <label class="ui-radio"><input name="radio1" ng-model="empresa.statusInicial" type="radio" value="2" checked><span>NÃ£o</span></label>
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                    <div class="col-sm-6">
-                                       <label for="exampleInputPassword1">Selecione o regime Tributario da Empresa</label>
-                                        <dl class="dl-horizontal">
-                                            <dd>
-                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="1" checked ><span>Simples Nacional</span></label>
-                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="2" ><span>Lucro Real</span></label>
-                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Lucro Presumido</span></label>
-                                            </dd>
-                                        </dl>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label for="exampleInputPassword1">Sua Empresa Esta Ativa?</label>
+                                                <dl class="dl-horizontal">
+                                                    <dd>
+                                                        <label class="ui-radio"><input name="radio1" ng-model="empresa.statusInicial" type="radio" value="1" ><span>Sim</span></label>
+                                                        <label class="ui-radio"><input name="radio1" ng-model="empresa.statusInicial" type="radio" value="2" checked><span>Não</span></label>
+                                                    </dd>
+                                                </dl>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="exampleInputPassword1">Selecione o regime Tributario da Empresa</label>
+                                                <dl class="dl-horizontal">
+                                                    <dd>
+                                                        <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="1" checked ><span>Simples Nacional</span></label>
+                                                        <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="2" ><span>Lucro Real</span></label>
+                                                        <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Lucro Presumido</span></label>
+                                                    </dd>
+                                                </dl>
 
-                                    </div>
-                                </div>
-                        <div class="row">
-                            <div class="form-group col-sm-6">
-                                <label for="exampleInputEmail1">Nome ou RazÃ£o social</label>
-                                <input type="text" ng-model="empresa.razao" name="razao" class="form-control" placeholder="Nome ou RazÃ£o social">
-                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                <label for="exampleInputEmail1">Nome ou Razão social</label>
+                                                <input type="text" ng-model="empresa.razao" name="razao" class="form-control" placeholder="Nome ou Razão social">
+                                            </div>
 
-                            <div class="form-group col-sm-6">
-                                <label for="exampleInputEmail1">Nome Fantasia</label>
-                                <input type="text" ng-model="empresa.fantasia" name="fantasia" class="form-control" placeholder="Nome Fantasia">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-sm-3">
-                                <label for="exampleInputEmail1">CNPJ</label>
-                                <input type="text" ng-model="empresa.cnpj" name="cnpj" class="form-control" placeholder="NÂº Cart. Trab">
-                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="exampleInputEmail1">Nome Fantasia</label>
+                                                <input type="text" ng-model="empresa.fantasia" name="fantasia" class="form-control" placeholder="Nome Fantasia">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-3">
+                                                <label for="exampleInputEmail1">CNPJ</label>
+                                                <input type="text" ng-model="empresa.cnpj" name="cnpj" class="form-control" placeholder="Nº Cart. Trab">
+                                            </div>
 
-                            <div class="form-group col-sm-3">
-                                <label for="exampleInputEmail1">Inscr Est Subst Trib</label>
-                                <input type="text" ng-model="empresa.incrEstSub" name="inscrEstSub" class="form-control" placeholder="Inscr Est Subst Trib">
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label for="exampleInputEmail1">Indicador de IE</label>
-                                <div class="row">
-                                    <select id="contatos_indIE" ng-model="empresa.indIE" class="select col-sm-12" name="indIE" autocomplete="off">
+                                            <div class="form-group col-sm-3">
+                                                <label for="exampleInputEmail1">Inscr Est Subst Trib</label>
+                                                <input type="text" ng-model="empresa.incrEstSub" name="inscrEstSub" class="form-control" placeholder="Inscr Est Subst Trib">
+                                            </div>
+                                            <div class="form-group col-sm-3">
+                                                <label for="exampleInputEmail1">Indicador de IE</label>
+                                                <div class="row">
+                                                    <select id="contatos_indIE" ng-model="empresa.indIE" class="select col-sm-12" name="indIE" autocomplete="off">
                                              <option value="0"></option>
                                              <option value="1">Contribuinte ICMS</option>
                                              <option value="2">Isento de cadastro</option>
-                                             <option value="9">NÃ£o contribuinte</option>
+                                             <option value="9">Não contribuinte</option>
                                         </select>
-                                </div>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label for="exampleInputEmail1">InscriÃ§Ã£o Estadual</label>
-                                <input type="text" class="form-control" ng-model="empresa.incrEst" name="incrEst" placeholder="InscriÃ§Ã£o Estadual">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-sm-3">
-                                <label for="exampleInputEmail1">InscriÃ§Ã£o Municipal</label>
-                                <input type="text" class="form-control col-sm-3" ng-model="empresa.incrMun" name="incrMun" placeholder="InscriÃ§Ã£o Municipal">
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label for="exampleInputEmail1">InscriÃ§Ã£o Suframa</label>
-                                <input type="text" class="form-control col-sm-3" ng-model="empresa.suframa" name="suframa" placeholder="InscriÃ§Ã£o Suframa">
-                            </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-3">
+                                                <label for="exampleInputEmail1">Inscrição Estadual</label>
+                                                <input type="text" class="form-control" ng-model="empresa.incrEst" name="incrEst" placeholder="Inscrição Estadual">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-3">
+                                                <label for="exampleInputEmail1">Inscrição Municipal</label>
+                                                <input type="text" class="form-control col-sm-3" ng-model="empresa.incrMun" name="incrMun" placeholder="Inscrição Municipal">
+                                            </div>
+                                            <div class="form-group col-sm-3">
+                                                <label for="exampleInputEmail1">Inscrição Suframa</label>
+                                                <input type="text" class="form-control col-sm-3" ng-model="empresa.suframa" name="suframa" placeholder="Inscrição Suframa">
+                                            </div>
 
-                            <div class="form-group col-sm-3">
-                                <label for="exampleInputEmail1">Nome do responsÃ¡vel</label>
-                                <input type="text" class="form-control col-sm-3" ng-model="empresa.responsavel" name="responsavel" placeholder="Nome do responsÃ¡vel">
-                            </div>
+                                            <div class="form-group col-sm-3">
+                                                <label for="exampleInputEmail1">Nome do responsável</label>
+                                                <input type="text" class="form-control col-sm-3" ng-model="empresa.responsavel" name="responsavel" placeholder="Nome do responsável">
+                                            </div>
 
-                            <div class="form-group col-sm-3">
-                                <label for="exampleInputEmail1">Data nascimento</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" data-mask="99/99/9999" placeholder="MM/DD/YYYY">
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                    </div>
-                            </div>
-                        </div>
+                                            <div class="form-group col-sm-3">
+                                                <label for="exampleInputEmail1">Data nascimento</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" data-mask="99/99/9999" placeholder="MM/DD/YYYY">
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label for="exampleInputPassword1">CEP</label>
-                                <div class="input-group">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="cep" ng-model="empresa.enderecos[0].cep">
-                                    </div>
-                                    <span class="input-group-btn">
-            
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label for="exampleInputPassword1">CEP</label>
+                                                <div class="input-group">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="cep" ng-model="empresa.enderecos[0].cep">
+                                                    </div>
+                                                    <span class="input-group-btn">
+
                                              <button class="btn btn-default" type="button" ng-click="cc.buscaRCep('38082243')"><i class="glyphicon glyphicon-search"> </i></button>
                                          </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-9">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Logradouro</label>
-                                    <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="empresa.enderecos[0].logradouro" placeholder="Logradouro">
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Numero</label>
-                                    <input type="text" class="form-control col-sm-4" name="numero" ng-model="empresa.enderecos[0].numero" placeholder="Numero">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label for="exampleInputPassword1">Complemento</label>
-                                <input type="text" class="form-control col-sm-8" name="complemento" ng-model="empresa.enderecos[0].complemento" placeholder="Complemento">
-                            </div>
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">Bairro</label>
-                                <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].bairro" placeholder="Bairro">
-                            </div>
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">Estado</label>
-                                <input type="text" class="form-control col-sm-8" ng-model="empresa.enderecos[0].estado.abreviacao" placeholder="Estado">
-                            </div>
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">Municipio</label>
-                                <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].cidade.nome" placeholder="Municipio">
-                            </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1">Logradouro</label>
+                                                    <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="empresa.enderecos[0].logradouro" placeholder="Logradouro">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1">Numero</label>
+                                                    <input type="text" class="form-control col-sm-4" name="numero" ng-model="empresa.enderecos[0].numero" placeholder="Numero">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label for="exampleInputPassword1">Complemento</label>
+                                                <input type="text" class="form-control col-sm-8" name="complemento" ng-model="empresa.enderecos[0].complemento" placeholder="Complemento">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label for="exampleInputPassword1">Bairro</label>
+                                                <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].bairro" placeholder="Bairro">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label for="exampleInputPassword1">Estado</label>
+                                                <input type="text" class="form-control col-sm-8" ng-model="empresa.enderecos[0].estado.abreviacao" placeholder="Estado">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label for="exampleInputPassword1">Municipio</label>
+                                                <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].cidade.nome" placeholder="Municipio">
+                                            </div>
 
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">Codigo IBGE</label>
-                                <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].codIbge" placeholder="Codigo IBGE">
-                            </div>
-                        </div>
-                        <!-- -------------------  TELEFONE ----------------- -->
-                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label for="exampleInputPassword1">Codigo IBGE</label>
+                                                <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].codIbge" placeholder="Codigo IBGE">
+                                            </div>
+                                        </div>
+                                        <!-- -------------------  TELEFONE ----------------- -->
+                                        <div class="row">
 
-                            <div class="col-sm-4">
-                                <label for="exampleInputPassword1" class="control-label">Telefone</label>
-                                <input type="text" class="form-control gugu"  name="phone" data-mask="(99) 9999-9999" placeholder="(55) 1111-2222">
-                            </div>
+                                            <div class="col-sm-4">
+                                                <label for="exampleInputPassword1" class="control-label">Telefone</label>
+                                                <input type="text" class="form-control gugu" name="phone" data-mask="(99) 9999-9999" placeholder="(55) 1111-2222">
+                                            </div>
 
-                            <div class="col-sm-4" style="margin-top:25px">
-                                <div class="dropdown">
-                                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
+                                            <div class="col-sm-4" style="margin-top:25px">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
                                     Adicionar
                                     <span class="caret"></span>
                                   </button>
-                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li><a href="javascript:;" class="addPhoneButton">Residencial</a></li>
-                                    <li><a href="javascript:;" class="addPhoneButton">Celular TIM</a></li>
-                                    <li><a href="javascript:;" class="addPhoneButton">Celular OI</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="javascript:;" class="addPhoneButton">Outros</a></li>
-                                  </ul>
-                                </div>
-                            </div>
-                           
-                        </div>
-                        <!-- Template for dynamic field -->
-                        <div class="row" id="template" style="display: none;">
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                        <li><a href="javascript:;" class="addPhoneButton">Residencial</a></li>
+                                                        <li><a href="javascript:;" class="addPhoneButton">Celular TIM</a></li>
+                                                        <li><a href="javascript:;" class="addPhoneButton">Celular OI</a></li>
+                                                        <li role="separator" class="divider"></li>
+                                                        <li><a href="javascript:;" class="addPhoneButton">Outros</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
 
-                            <div class="col-sm-4">
-                                <label for="exampleInputPassword1" class="control-label">Telefone</label>
-                                <input type="text" class="form-control gugu"  name="phone" data-mask="(99) 9999-9999" placeholder="(55) 1111-2222">
-                            </div>
+                                        </div>
+                                        <!-- Template for dynamic field -->
+                                        <div class="row" id="template" style="display: none;">
 
-                            <div class="col-sm-4" style="margin-top:25px">
-                                <button type="button" class="btn btn-link removeButton">deletar</button>
-                            </div>
-                           
-                        </div>
+                                            <div class="col-sm-4">
+                                                <label for="exampleInputPassword1" class="control-label">Telefone</label>
+                                                <input type="text" class="form-control gugu" name="phone" data-mask="(99) 9999-9999" placeholder="(55) 1111-2222">
+                                            </div>
 
-                        <!-- ------------------------------------- -->
-                        <!-- ------------------------------------- -->
+                                            <div class="col-sm-4" style="margin-top:25px">
+                                                <button type="button" class="btn btn-link removeButton">deletar</button>
+                                            </div>
 
-                        <!-- -------------------  Email Empresa ----------------- -->
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label for="exampleInputPassword1">Email</label>
-                                <input type="text" class="form-control col-sm-4 input-email" name="email" placeholder="Email">
-                            </div>
-                            <div class="col-sm-4" style="margin-top:25px">
+                                        </div>
 
-                                <div class="dropdown">
-                                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
+                                        <!-- ------------------------------------- -->
+                                        <!-- ------------------------------------- -->
+
+                                        <!-- -------------------  Email Empresa ----------------- -->
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label for="exampleInputPassword1">Email</label>
+                                                <input type="text" class="form-control col-sm-4 input-email" name="email" placeholder="Email">
+                                            </div>
+                                            <div class="col-sm-4" style="margin-top:25px">
+
+                                                <div class="dropdown">
+                                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
                                     Adicionar
                                     <span class="caret"></span>
                                   </button>
-                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li><a href="javascript:;" class="addEmailButton">Principal</a></li>
-                                    <li><a href="javascript:;" class="addEmailButton">NF-e</a></li>
-                                    <li><a href="javascript:;" class="addEmailButton">Compras</a></li>
-                                    <li><a href="javascript:;" class="addEmailButton">Vendas</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="javascript:;" class="addEmailButton">Outros</a></li>
-                                  </ul>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                        <li><a href="javascript:;" class="addEmailButton">Principal</a></li>
+                                                        <li><a href="javascript:;" class="addEmailButton">NF-e</a></li>
+                                                        <li><a href="javascript:;" class="addEmailButton">Compras</a></li>
+                                                        <li><a href="javascript:;" class="addEmailButton">Vendas</a></li>
+                                                        <li role="separator" class="divider"></li>
+                                                        <li><a href="javascript:;" class="addEmailButton">Outros</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Template for dynamic field -->
+                                        <div class="row" id="template-email" style="display: none;">
+                                            <div class="col-sm-4">
+                                                <label for="exampleInputPassword1" class="control-label">Email</label>
+                                                <input type="email" class="form-control col-sm-4 input-email" placeholder="Email">
+                                            </div>
+                                            <div class="col-sm-4" style="margin-top:25px">
+                                                <button type="button" class="btn btn-link removeButton">deletar</button>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label for="exampleInputPassword1">Atividade Principal da Filial</label>
+                                                <div class="row">
+                                                    <select id="atividade1" name="atividade1" class="select col-sm-12">
+                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <label for="exampleInputPassword1">Atividade Secundaria da Filial</label>
+                                                <div class="row">
+                                                    <select id="atividade2" name="atividade2" class="select col-sm-12">
+                                    </select>
+
+
+
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-default addButton1"><i class="fa fa-plus"></i></button>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group hide" id="bookTemplate1">
+                                                <div class="col-sm-6">
+                                                    <label for="exampleInputPassword1">Outras Atividades</label>
+                                                    <div class="row">
+                                                        <select id="atividade3" name="atividade3" class="col-sm-10">
+
+                                                    </select>
+                                                    </div>
+
+                                                    <div class="col-xs-1">
+                                                        <button type="button" class="btn btn-default removeButton1"><i class="fa fa-minus"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                                <div class="tab-content1" ng-show="tabs == 5">
 
-                        <!-- Template for dynamic field -->
-                        <div class="row" id="template-email" style="display: none;">
-                            <div class="col-sm-4">
-                                <label for="exampleInputPassword1" class="control-label">Email</label>
-                                <input type="email" class="form-control col-sm-4 input-email" placeholder="Email">
-                            </div>
-                            <div class="col-sm-4" style="margin-top:25px">
-                                <button type="button" class="btn btn-link removeButton">deletar</button>
-                            </div>
-                        </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">Plano</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row socios">
+                                                <div class="col-sm-5">
+                                                    <label for="exampleInputPassword1">Plano</label>
+                                                    <div class="row ">
+                                                        <select name="book[0].produto" class="col-sm-12">
+                                                <option value="0">1010 - Coca Cola 1LT</option>
+                                                <option value="1">1011 - Coca Cola 1.5LT</option>
+                                                <option value="2">Cadastrar novo Produto</option>
+                                            </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Valor</label>
+                                                        <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="R$0,00" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Desconto</label>
+                                                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-1" style="margin-top:18px">
+                                                    <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="form-group hide" id="bookTemplate">
+                                                <div class="row socios">
+                                                    <div class="col-sm-5">
+                                                        <label for="exampleInputPassword1">Plano</label>
+                                                        <div class="row ">
+                                                            <select name="book[0].produto" class="col-sm-12">
+                                                <option value="0">1010 - Coca Cola 1LT</option>
+                                                <option value="1">1011 - Coca Cola 1.5LT</option>
+                                                <option value="2">Cadastrar novo Produto</option>
+                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1">Valor</label>
+                                                            <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="R$0,00" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1">Desconto</label>
+                                                            <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-1" style="margin-top:18px">
+                                                        <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row " style="margin-top : 10px"></div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">Serviço</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row socios">
+                                                <div class="col-sm-5">
+                                                    <label for="exampleInputPassword1">Serviço</label>
+                                                    <div class="row ">
+                                                        <select name="book[0].produto" class="col-sm-12">
+                                                <option value="0">1010 - Coca Cola 1LT</option>
+                                                <option value="1">1011 - Coca Cola 1.5LT</option>
+                                                <option value="2">Cadastrar novo Produto</option>
+                                            </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Valor</label>
+                                                        <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="R$0,00" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Desconto</label>
+                                                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-1" style="margin-top:18px">
+                                                    <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="form-group hide" id="bookTemplate">
+                                                <div class="row socios">
+                                                    <div class="col-sm-5">
+                                                        <label for="exampleInputPassword1">Plano</label>
+                                                        <div class="row ">
+                                                            <select name="book[0].produto" class="col-sm-12">
+                                                <option value="0">1010 - Coca Cola 1LT</option>
+                                                <option value="1">1011 - Coca Cola 1.5LT</option>
+                                                <option value="2">Cadastrar novo Produto</option>
+                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1">Valor</label>
+                                                            <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="R$0,00" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1">Desconto</label>
+                                                            <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-1" style="margin-top:18px">
+                                                        <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-content1" ng-show="tabs == 6">
+                                <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">Anexar Arquivo</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <h4>Multi Language Inputs</h4>
+                                            <!--<form enctype="multipart/form-data"> -->
+                                            <label>French Input</label>
+                                            <input id="file-fr" name="file-fr[]" type="file" multiple>
+                                            <hr style="border: 2px dotted">
+                                            <label>Spanish Input</label>
+                                            <input id="file-es" name="file-es[]" type="file" multiple>
+                                            <!--</form> -->
 
 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-content1" ng-show="tabs == 7">
+
+                                <!-- CONFIGURAÇÕES GERAIS -->
+                                    <div class="panel fullBox verticalHeaderTableList bottomSpace col-sm-6">
+                                        <h3>Configuração geral</h3>
+                                        <table class="fullBox">
+                                            <tbody>
+
+                                                <tr>
+                                                    <td class="halfBox" data-toggle="tooltip" data-placement="right" title="Proíbe cadastrar mais de uma vez o mesmo CPF ou CNPJ na tela de contatos">CPF e CNPJ unico:
+                                                        <div class="descr">
+                                                            <!--Proíbe cadastrar mais de uma vez o mesmo CPF ou CNPJ na tela de contatos-->
+
+                                                        </div>
+                                                    </td>
+                                                    <td id="b_cpfUnico"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="halfBox" data-toggle="tooltip" data-placement="right" title=" Número máximo de casas decimais a ser usado nos preços de produtos e serviços.">Casas decimais no preço:
+                                                        <div class="descr">
+                                                           </div>
+                                                    </td>
+                                                    <td id="b_casasDecimais">
+                                                        <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
+                                                    </div>
+                                                </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="halfBox">Imprimir código personalizado:
+                                                        <div class="descr">
+                                                            Quando o produto tiver um código personalizado, o sistema imprimirá este código nas vendas, entradas e ordens de serviço no lugar do código interno.
+                                                        </div>
+                                                    </td>
+                                                    <td id="b_usarCodPersonalizado">Não</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="halfBox">Logotipo nas listagens e relatórios impressos:
+                                                        <div class="descr">
+                                                            Ao imprmimir as listagens e relatórios do sistema, será inserido o logotipo da empresa no topo da impressão.
+                                                        </div>
+                                                    </td>
+                                                    <td id="b_imprimeLogoRelLista">Não</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ativar NFCe:
+                                                        <div class="descr">
+                                                            Permite a emissão de NFCe, através do módulo de vendas.
+                                                        </div>
+                                                    </td>
+                                                    <td id="b_nfceAtivarEmissor">Não</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dias da carta de cobrança:
+                                                        <div class="descr">
+                                                            Número de dias que será mostrado na carta de cobrança entregue ao cliente.
+                                                        </div>
+                                                    </td>
+                                                    <td id="b_diasCartaCobranca">10</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Observações do produto final na produção:
+                                                        <div class="descr">
+                                                            Mostrar as observações do cadastro do produto final dentro da ordem de produção.
+                                                        </div>
+                                                    </td>
+                                                    <td id="b_obsProdNaProducao">Não</td>
+                                                </tr>
+                                                <tr class="apenasV2">
+                                                    <td>Mostrar informações ao posicionar o mouse:
+                                                        <div class="descr">
+                                                            Ao colocar o mouse me cima de nomes de clientes e produtos, em partes do sistema, o sistema mostra mais detalhes sobre o respectivo cliente ou produto.
+                                                        </div>
+                                                    </td>
+                                                    <td id="b_infoOnMouse">Não</td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td class="right"><a id="config_geral_editar" href="ajuda: Clique para editar as configurações gerais">Editar dados</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                    <div class="col-sm-6">
+
+                                        <!-- CONFIGURAÇÕES DAS VENDAS -->
+                                        <div class="panel fullBox verticalHeaderTableList bottomSpace">
+                                            <h3>Configuração das Vendas</h3>
+                                            <table class="fullBox">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="halfBox">Desconto máximo na venda:</td>
+                                                        <td id="f_maxDescontoVenda">100%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Imprimir 2 vias?</td>
+                                                        <td id="f_vendaPrintDuasVias">Não</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Imprimir assinatura?</td>
+                                                        <td id="f_vendaPrintAssina">Não</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Imprimir resumo financeiro?</td>
+                                                        <td id="f_vendaPrintFinanc">Não</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Atualizar preço ao clonar?</td>
+                                                        <td id="f_atualizarPrecoClonagem">Não</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Bloquear vendas de produtos sem estoque?</td>
+                                                        <td id="f_bloqueiaSemEstoque">Não</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Imprimir coluna unidade?</td>
+                                                        <td id="f_vendaPrintUnidade">Não</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Adicionar despesas no cálculo do imposto?</td>
+                                                        <td id="f_addDespesasBC">Não</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Retirar Subst. Tribut. do ICMS?</td>
+                                                        <td id="f_naoCobrarICMSST">Não</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Observação padrão:</td>
+                                                        <td>
+                                                            <div id="f_vendaObsPadrao"></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td class="right"><a id="config_venda_editar" href="ajuda: Clique para editar as configurações de venda">Editar dados</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+
+                                        <!-- CONFIGURAÇÕES DAS ORDENS DE SERVIÇO -->
+                                        <div class="panel fullBox verticalHeaderTableList bottomSpace">
+                                            <h3>Configuração das OS (Ordens de Serviço)</h3>
+                                            <table class="fullBox">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="halfBox">Imprimir 2 vias?</td>
+                                                        <td id="e_osPrintDuasVias">Não</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Imprimir assinatura?</td>
+                                                        <td id="e_osPrintAssina">Não</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Imprimir resumo financeiro?</td>
+                                                        <td id="e_osPrintFinanc">Não</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Imprimir detalhes na horizontal?</td>
+                                                        <td id="e_osPrintDetalhesHorizontal">Não</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dias de garantia padrão:</td>
+                                                        <td id="e_osGarantiaPadrao">0</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Texto padrão para o campo <span class="config_osLabel4">Observações gerais</span>:</td>
+                                                        <td>
+                                                            <div id="e_osCampo4Padrao"></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td class="right"><a id="config_os_editar" href="ajuda: Clique para editar as configurações de OS">Editar dados</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+
+                                        <!-- CONFIGURAÇÕES DAS ENTRADAS -->
+                                        <div class="panel fullBox verticalHeaderTableList bottomSpace">
+                                            <h3>Configurações das entradas</h3>
+                                            <table class="fullBox">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Ao inserir nota de entrada, manter o valor total fixo:</td>
+                                                        <td id="g_entradasValorTotalFixo">Sim</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Manter o preço de venda cadastrado no produto:</td>
+                                                        <td id="g_entradasManterPrecoVenda">Não</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td class="right">
+                                                            <a id="config_entradas_editar" href="ajuda: Clique para editar as configurações das entradas">Editar dados</a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                             
+                                <div class="row">
+
+
+
+                                    <!-- CONFIGURAÇÕES DE CARNÊS -->
+                                    <div class="panel fullBox verticalHeaderTableList bottomSpace col-sm-6">
+                                        <h3>Configurações dos carnês</h3>
+                                        <table class="fullBox">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="halfBox">Ativar carnê de boletos?</td>
+                                                    <td id="h_carneBoletosAtivo">Não</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="halfBox">Ativar carnê normal?</td>
+                                                    <td id="h_carneNormalAtivo">Não</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="halfBox">Local de pagamento:</td>
+                                                    <td id="h_carneLocalPagamento"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="halfBox">Instruções 1:</td>
+                                                    <td id="h_carneInstrucoes1"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="halfBox">Instruções 2:</td>
+                                                    <td id="h_carneInstrucoes2"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="halfBox">Instruções 3:</td>
+                                                    <td id="h_carneInstrucoes3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="halfBox">Instruções 4:</td>
+                                                    <td id="h_carneInstrucoes4"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td class="right">
+                                                        <a id="config_carnes_editar" href="ajuda: Clique para editar as configurações dos carnês">Editar dados</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+
+                                    <!-- DIV FIM DA COLUNA 1 -->
+
+                                    <div id="col2" class="halfBox onRight col-sm-6">
+                                        <!-- CONFIGURAÇÕES CABEÇALHO -->
+                                        <div class="panel fullBox verticalHeaderTableList bottomSpace">
+                                            <h3>Configuração do cabeçalho</h3>
+                                            <table class="fullBox">
+                                                <tbody>
+                                                    <tr>
+                                                        <td id="c_logomarca" class="halfBox right">
+                                                            <div style="width: 200px; text-align: center">Nenhuma<br>logomarca<br>cadastrada</div>
+                                                        </td>
+                                                        <td id="c_cabecalho"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="descr" colspan="2">Este cabeçalho é utilizado em Ordens de Serviço e Pedidos de Venda</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td class="right"><a id="config_cabecalho_editar" href="ajuda: Clique para editar as configurações do cabeçalho">Editar dados</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <!-- CONFIGURAÇÕES BOLETOS -->
+                                    <div class="panel fullBox verticalHeaderTableList bottomSpace col-sm-6">
+                                        <h3>Dados dos boletos</h3>
+                                        <div id="configBoletos_resumo" class="bottomSpace">
+                                            <table class="onCenter">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Boleto CEF</td>
+                                                        <td><span style="color: darkred;">Inativo</span></td>
+                                                        <td><a href="ajuda: Clique para editar boleto CEF" value="1" class="editarBoleto_link">Editar</a></td>
+                                                        <td><a href="ajuda: Clique para definir este banco como padrão usado pelo sistema" value="1" class="definirBoletoPadrao_link">Definir como padrão</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Boleto BB</td>
+                                                        <td><span style="color: darkred;">Inativo</span></td>
+                                                        <td><a href="ajuda: Clique para editar boleto BB" value="2" class="editarBoleto_link">Editar</a></td>
+                                                        <td><a href="ajuda: Clique para definir este banco como padrão usado pelo sistema" value="2" class="definirBoletoPadrao_link">Definir como padrão</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Boleto Bradesco</td>
+                                                        <td><span style="color: darkred;">Inativo</span></td>
+                                                        <td><a href="ajuda: Clique para editar boleto Bradesco" value="3" class="editarBoleto_link">Editar</a></td>
+                                                        <td><a href="ajuda: Clique para definir este banco como padrão usado pelo sistema" value="3" class="definirBoletoPadrao_link">Definir como padrão</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Boleto Itaú</td>
+                                                        <td><span style="color: darkred;">Inativo</span></td>
+                                                        <td><a href="ajuda: Clique para editar boleto Itaú" value="4" class="editarBoleto_link">Editar</a></td>
+                                                        <td><a href="ajuda: Clique para definir este banco como padrão usado pelo sistema" value="4" class="definirBoletoPadrao_link">Definir como padrão</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Boleto Santander</td>
+                                                        <td><span style="color: darkred;">Inativo</span></td>
+                                                        <td><a href="ajuda: Clique para editar boleto Santander" value="5" class="editarBoleto_link">Editar</a></td>
+                                                        <td><a href="ajuda: Clique para definir este banco como padrão usado pelo sistema" value="5" class="definirBoletoPadrao_link">Definir como padrão</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Boleto Sicredi</td>
+                                                        <td><span style="color: darkred;">Inativo</span></td>
+                                                        <td><a href="ajuda: Clique para editar boleto Sicredi" value="6" class="editarBoleto_link">Editar</a></td>
+                                                        <td><a href="ajuda: Clique para definir este banco como padrão usado pelo sistema" value="6" class="definirBoletoPadrao_link">Definir como padrão</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Boleto HSBC</td>
+                                                        <td><span style="color: darkred;">Inativo</span></td>
+                                                        <td><a href="ajuda: Clique para editar boleto HSBC" value="7" class="editarBoleto_link">Editar</a></td>
+                                                        <td><a href="ajuda: Clique para definir este banco como padrão usado pelo sistema" value="7" class="definirBoletoPadrao_link">Definir como padrão</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Boleto Banrisul</td>
+                                                        <td><span style="color: darkred;">Inativo</span></td>
+                                                        <td><a href="ajuda: Clique para editar boleto Banrisul" value="8" class="editarBoleto_link">Editar</a></td>
+                                                        <td><a href="ajuda: Clique para definir este banco como padrão usado pelo sistema" value="8" class="definirBoletoPadrao_link">Definir como padrão</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Boleto Bancoob</td>
+                                                        <td><span style="color: darkred;">Inativo</span></td>
+                                                        <td><a href="ajuda: Clique para editar boleto Bancoob" value="9" class="editarBoleto_link">Editar</a></td>
+                                                        <td><a href="ajuda: Clique para definir este banco como padrão usado pelo sistema" value="9" class="definirBoletoPadrao_link">Definir como padrão</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div id="configBoletos_avisoTeste" class="descr center bottomSpace">É altamente recomendável que seja impresso <b>e pago</b> um boleto de teste. Esta é a única forma de certificar-se que os dados foram corretamente preenchidos e que o dinheiro pago pelos clientes entrará na conta.<br><br><span class="ui-icon ui-icon-print">.</span> <a href="ajuda: Clique para o sistema gerar um boleto de teste a partir das configurações do boleto padrão do sistema." id="gerarBoletoTeste_link">Clique aqui para imprimir um boleto de teste.</a></div>
+                                        <table class="fullBox">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 50%;">Imprimir observações do financeiro:</td>
+                                                    <td id="i_boletosImprimirObs">Não</td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td class="right"><a id="config_boletosGeral_editar" href="ajuda: Clique para editar as configurações gerais dos boletos">Editar dados</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <!-- DADOS FISCAIS -->
+                                        <div class="panel fullBox verticalHeaderTableList bottomSpace selection">
+                                            <h3>Dados fiscais da empresa</h3>
+                                            <table class="fullBox">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Principal atividade da empresa:</td>
+                                                        <td id="d_tribAtividade">Comércio</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Regime tributário:</td>
+                                                        <td id="d_tribCRT">Simples Nacional</td>
+                                                    </tr>
+                                                    <tr class="d_aliqsPS">
+                                                        <td class="d_labelAliqBC">Alíquota do Simples</td>
+                                                        <td id="d_tribAliqBC">4,00%</td>
+                                                    </tr>
+                                                    <tr class="d_aliqsPR" style="display: none;">
+                                                        <td>Alíquota ICMS:</td>
+                                                        <td id="d_tribICMS">0,00%</td>
+                                                    </tr>
+                                                    <tr class="d_aliqsPR" style="display: none;">
+                                                        <td>Alíquota PIS:</td>
+                                                        <td id="d_tribPIS">0,00%</td>
+                                                    </tr>
+                                                    <tr class="d_aliqsPR" style="display: none;">
+                                                        <td>Alíquota COFINS:</td>
+                                                        <td id="d_tribCOFINS">0,00%</td>
+                                                    </tr>
+                                                    <tr class="d_aliqsP" style="display: none;">
+                                                        <td>Alíquota IRPJ:</td>
+                                                        <td id="d_tribIRPJ">0,00%</td>
+                                                    </tr>
+                                                    <tr class="d_aliqsP" style="display: none;">
+                                                        <td>Alíquota CSLL:</td>
+                                                        <td id="d_tribCSLL">0,00%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td class="right"><a id="config_fiscal_editar" href="ajuda: Clique para editar os dados fiscais da sua empresa">Editar dados</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- CONFIGTRIB -->
+                                        <div class="panel fullBox bottomSpace ">
+                                            <h3>Configuração padrão para cadastro de produtos</h3>
+                                            <div></div>
+                                            <table class="fullBox">
+                                                <tbody>
+                                                    <tr>
+                                                        <td id="configTribResumo" class="quadroResumo">
+                                                            <p class="bottomSpace"><b>Resumo da tributação</b></p>
+                                                            <ul>
+                                                                <li class="bottomSpace"><strong>ICMS:</strong> Não definido <b>Origem:</b> 0 - Nacional, exceto as indicadas nos códigos de 3 a 5</li>
+                                                                <li class="bottomSpace"><strong>IPI:</strong> Não definido <b>Classe:</b> 999 <b>Alíquota:</b> 0,00%</li>
+                                                                <li class="bottomSpace"><strong>PIS:</strong> Não definido <b>Alíquota:</b> 0,00%</li>
+                                                                <li class="bottomSpace"><strong>COFINS:</strong> Não definido <b>Alíquota:</b> 0,00%</li>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="right">
+                                                            <a id="config_configTrib_editar" href="ajuda: Clique para editar os dados de tributação padrão no cadastro de produtos">Editar dados</a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <!-- CONFIGURAÇÕES SMTP -->
+                                        <div class="panel fullBox verticalHeaderTableList bottomSpace">
+                                            <h3>Configuração de SMTP (envio de e-mail)</h3>
+                                            <div class="fullBox" id="configSMTP_resumo">
+                                                <table class="fullBox">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td>As configurações de SMTP não estão definidas</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="right">
+                                                <a id="configSMTP_editar" href="ajuda: Clique para editar os dados de envio de e-mail.">Editar dados</a>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- BANCO DE DADOS (DOWNLOADS) -->
+                                        <div class="panel v2 fullBox bottomSpace">
+                                            <h3>Banco de dados</h3>
+                                            <p><a href="" id="config_abrirExportarXML">Baixar XML das notas de entrada</a><br><span class="descr">Opção para baixar os XMLs das Notas Fiscais de Entrada (compra de mercadoria) em um arquivo compactado.</span></p>
+                                            <p><a href="../backup">Baixar todos os dados da empresa</a><br><span class="descr">Esta opção serve para que você obtenha uma cópia de todos os dados de sua empresa em um arquivo compactado.</span></p>
+                                            <!--
+            <p class="apenasV2"><a href="#" id="linkVoltarLayoutAntigo">Voltar ao layout antigo</a><br><span class="descr">Caso sua empresa ainda não queira utilizar o novo layout, por enquanto ainda é possível voltar ao layout antigo.</span></p>
+            -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <!-- CONFIGURAÇÕES SMTP -->
+                                        <div class="panel fullBox verticalHeaderTableList bottomSpace">
+                                            <h3>Alertas</h3>
+                                            <div class="fullBox" id="configSMTP_resumo">
+                                                <table class="fullBox">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Estoque Minimo:</td>
+                                                            <td id="d_tribAtividade">Sim</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Estoque Maximo</td>
+                                                            <td id="d_tribCRT">Sim</td>
+                                                        </tr>
+                                                        <tr class="d_aliqsPS">
+                                                            <td class="d_labelAliqBC">Erro Emissão NF-e:</td>
+                                                            <td id="d_tribAliqBC">Não</td>
+                                                        </tr>
+                                                        <tr class="d_aliqsPR">
+                                                            <td>Novo Cliente:</td>
+                                                            <td id="d_tribICMS">Não</td>
+                                                        </tr>
+                                                        <tr class="d_aliqsPR">
+                                                            <td>Retirada Caixa:</td>
+                                                            <td id="d_tribPIS">Sim</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td class="right"><a id="config_fiscal_editar" href="ajuda: Clique para editar os dados fiscais da sua empresa">Editar dados</a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="right">
+                                                <a id="configSMTP_editar" href="ajuda: Clique para editar os dados de envio de e-mail.">Editar dados</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            
+
+                    
+               
+                <div class="row">
+                    <a href="javaScript:;" ng-click="toggle2()">Editar Configuração NF-e</a>
+                    <div ng-show="state2">
 
                         <div class="row">
                             <div class="col-sm-6">
-                                <label for="exampleInputPassword1">Atividade Principal da Filial</label>
-                                <div class="row">
-                                    <select id="atividade1" name="atividade1" class="select col-sm-12">
-                                                <option> teste 001</option>
-                                                <option> teste 002</option>
-                                                <option> teste 003</option>
-                                                <option> teste 004</option>
-                                                <option> teste 005</option>
-
-                                            </select>
+                                <div id="dadosCertificado" class="tableList bottomSpace">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <td>Certificado Digital A1</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Nenhum certificado enviado para o servidor ainda.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="javaScript;:" class="onRight">Enviar certificado</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
+
+                                <div id="dadosUsuarios" class="tableList bottomSpace invisible"></div>
+                            </div>
+
+                            <div id="dadosNFSe" class="tableList bottomSpace invisible"></div>
+
+
+                        </div>
+                        <div id="col2" class="halfBox onRight">
+
+                            <div id="dadosNFE" class="tableList bottomSpace">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td colspan="2">Configurações da NFe</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td align="right" class="halfBox">Ambiente de envio:</td>
+                                            <td><b>Para testes</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">Série de envio:</td>
+                                            <td>001</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">Anexar XML no e-mail?</td>
+                                            <td>Não</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">Serviços na mesma nota?</td>
+                                            <td>Não permitido</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">Preencher data/hora saída?</td>
+                                            <td>Sim</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">Presença comprador:</td>
+                                            <td>Operação presencial</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">Consumidor final?</td>
+                                            <td>Sim</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">ICMS padrão (%):</td>
+                                            <td>0,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">IPI padrão (%):</td>
+                                            <td>0,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">PIS padrão (%):</td>
+                                            <td>0,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">COFINS padrão (%):</td>
+                                            <td>0,00</td>
+                                        </tr>
+                                        <tr class="dadosTokenNFCe">
+                                            <td align="right">Token para envio de NFCe:</td>
+                                            <td> - null</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">Logomarca para o Danfe:</td>
+                                            <td><i>{sem imagem}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><a href="javascript:configuracoes.detalharNFE()" class="onRight">Editar dados</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <label for="exampleInputPassword1">Atividade Secundaria da Filial</label>
-                                <div class="row">
-                                    <select id="atividade1" name="atividade1" class="select col-sm-12">
-                                                        <option> teste 001</option>
-                                                        <option> teste 002</option>
-                                                        <option> teste 003</option>
-                                                        <option> teste 004</option>
-                                                        <option> teste 005</option>
-
-                                                    </select>
-                                
-
-                                <button type="button" class="btn btn-default addButton1"><i class="fa fa-plus"></i></button>
-                                </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div id="dadosCFOP" class="tableList bottomSpace">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td colspan="2">Lista de CFOPs</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td align="right">Total CFOPs cadastrados:</td>
+                                            <td>25</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">CFOP marcado como padrão:</td>
+                                            <td>5102 - Venda de mercadoria</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><a href="../cfop" class="onRight">Editar CFOPs</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group hide" id="bookTemplate1">
-                                <div class="col-sm-6">
-                                    <label for="exampleInputPassword1">Outras Atividades</label>
-                                    <div class="row">
-                                        <select id="atividade1" name="atividade1" class="col-sm-12">
-                                                        <option> teste 001</option>
-                                                        <option> teste 002</option>
-                                                        <option> teste 003</option>
-                                                        <option> teste 004</option>
-                                                        <option> teste 005</option>
-
-                                                    </select>
-                                    </div>
-
-                                    <div class="col-xs-1">
-                                        <button type="button" class="btn btn-default removeButton1"><i class="fa fa-minus"></i></button>
-                                    </div>
-                                </div>
+                        <div class="col-sm-6">
+                            <div id="dadosSMTP" class="tableList bottomSpace">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td colspan="2">Configurações de SMTP (envio de email)</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="2">SMTP próprio desativado. Sistema utilizando configurações globais de envio de e-mails.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="javascript:configuracoes.testarSMTP();" class="onRight">Testar configuração SMTP</a></td>
+                                            <td><a href="javascript:configuracoes.detalharSMTP();" class="onRight">Editar dados</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
+</div>
+                                </div>
+                            </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Gravar</button>
                 </div>
+
+            </form>
         </div>
-        </form>
     </div>
 </div>
+
+<script>
+    $('#file-fr').fileinput({
+        language: 'fr',
+        uploadUrl: '#',
+        allowedFileExtensions: ['jpg', 'png', 'gif'],
+    });
+    $('#file-es').fileinput({
+        language: 'es',
+        uploadUrl: '#',
+        allowedFileExtensions: ['jpg', 'png', 'gif'],
+    });
+    $("#file-0").fileinput({
+        'allowedFileExtensions': ['jpg', 'png', 'gif'],
+    });
+    $("#file-1").fileinput({
+        uploadUrl: '#', // you must set a valid URL here else you will get an error
+        allowedFileExtensions: ['jpg', 'png', 'gif'],
+        overwriteInitial: false,
+        maxFileSize: 1000,
+        maxFilesNum: 10,
+        //allowedFileTypes: ['image', 'video', 'flash'],
+        slugCallback: function(filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        }
+    });
+    /*
+    $(".file").on('fileselect', function(event, n, l) {
+        alert('File Selected. Name: ' + l + ', Num: ' + n);
+    });
+    */
+    $("#file-3").fileinput({
+        showUpload: false,
+        showCaption: false,
+        browseClass: "btn btn-primary btn-lg",
+        fileType: "any",
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>"
+    });
+    $("#file-4").fileinput({
+        uploadExtraData: {
+            kvId: '10'
+        }
+    });
+    $(".btn-warning").on('click', function() {
+        if ($('#file-4').attr('disabled')) {
+            $('#file-4').fileinput('enable');
+        } else {
+            $('#file-4').fileinput('disable');
+        }
+    });
+    $(".btn-info").on('click', function() {
+        $('#file-4').fileinput('refresh', {
+            previewClass: 'bg-info'
+        });
+    });
+    /*
+    $('#file-4').on('fileselectnone', function() {
+        alert('Huh! You selected no files.');
+    });
+    $('#file-4').on('filebrowse', function() {
+        alert('File browse clicked for #file-4');
+    });
+    */
+    $(document).ready(function() {
+
+
+        $("#test-upload").fileinput({
+            'showPreview': false,
+            'allowedFileExtensions': ['jpg', 'png', 'gif'],
+            'elErrorContainer': '#errorBlock'
+        });
+    });
+</script>

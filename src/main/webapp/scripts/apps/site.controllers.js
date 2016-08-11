@@ -17,8 +17,7 @@
 			id: '',
 			description: ''
 		};
-          $('#dashboard-header').hide();
-          $('#header').hide();
+
 		 pvm.team = 'test'// $scope.$location.search().keyword
 	//	 cvm.team =  $scope.$location.url(); new qat.model.county
 

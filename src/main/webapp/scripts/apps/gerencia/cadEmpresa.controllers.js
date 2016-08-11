@@ -2,7 +2,7 @@
     angular.module('wdApp.apps.cadempresa', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('CadEmpresaController', cadEmpresaController);
 
-    function cadEmpresaController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService) {
+    function cadEmpresaController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData) {
         var vm = this;
         vm.selected = {};
         vm.selectAll = false;
@@ -44,7 +44,30 @@
         var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
             'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
 
-        vm.dtOptions = DTOptionsBuilder.fromSource('filial.json')
+       vm.dtOptions = DTOptionsBuilder.newOptions()
+            .withOption('ajax', {
+                dataSrc: function(json) {
+                    console.log(json)
+                    json['recordsTotal'] = json.empresaList.length
+                    json['recordsFiltered'] = json.empresaList.length
+                    json['draw'] = 1
+                    console.log(json)
+                    return json.empresaList;
+                },
+                "contentType": "application/json; charset=utf-8",
+                "dataType": "json",
+                "url": "main/api/request",
+                "type": "POST",
+                "data": function(d) {
+                    //   console.log("data");
+                    //    d.search = $scope.searchData || {}; //search criteria
+                    return JSON.stringify({
+                        "url": "entidade/api/empresa/fetchPage",
+                        "token": $rootScope.authToken,
+                        "request": new qat.model.empresaInquiryRequest(0, true,null,null,null)
+                    });
+                }
+            })
             .withDOM('frtip')
             .withPaginationType('full_numbers')
             .withOption('createdRow', createdRow)
@@ -158,8 +181,46 @@
                 action: function(e, dt, node, config) {
                     ModalService.showModal({
                         templateUrl: 'views/gerencia/dialog/dEmpresa.html',
-                        controller: function($scope) {
+                        controller: function($scope,$rootScope, SysMgmtData) {
 
+							//fetch all cnae
+							SysMgmtData.processPostPageData("main/api/request",{
+										url: "fiscal/api/cnae/fetchPage",
+										token : $rootScope.authToken,
+										request: new qat.model.siteInquiryRequest( 100/20, true, null)}, function(res){
+								   console.log(res)
+								   var cnaes = "";
+								   debugger
+								   if(res.operationSuccess == true)
+								   {
+									   for(var x = 0 ;x < res.cnaeList.length;x++)
+									   {
+										   cnaes = cnaes + "<option value='"+res.cnaeList[x].id+"'> "+res.cnaeList[x].cnae+"</option>";
+									   }
+										$('#atividade1').append(cnaes);
+										$('#atividade2').append(cnaes);
+										$('#atividade3').append(cnaes);
+								   }
+
+								  /// pvm.site = new qat.model.Site(res.sites[0]);
+							  });
+							 // fetch Regime
+							 SysMgmtData.processPostPageData("main/api/request",{
+										url: "fiscal/api/regime/fetchPage",
+										 token : $rootScope.authToken,
+										request: new qat.model.siteInquiryRequest( 100/20, true,null)}, function(res){
+								   console.log(res)
+								   debugger
+								   //pvm.site = new qat.model.Site(res.sites[0]);
+							  });
+							  //fetch Empresa Type
+							 /* SysMgmtData.processPostPageData("main/api/anonimo",{
+										url: "site/api/fetchPage",
+										request: new qat.model.siteInquiryRequest( 100/20, true, "http://localhost:8080/webSite/")}, function(res){
+								   console.log(res)
+								   debugger
+								   //pvm.site = new qat.model.Site(res.sites[0]);
+							  });*/
 
 
                         },
@@ -185,28 +246,227 @@
             DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
             DTColumnBuilder.newColumn('razao').withTitle('Nome ou Razão social'),
             DTColumnBuilder.newColumn('nome').withTitle('Nome Fantasia'),
-            DTColumnBuilder.newColumn('cnpj').withTitle('CPF ou CNPJ'),
+            DTColumnBuilder.newColumn(null).withTitle('CPF ou CNPJ').renderWith(function(data, type, full, meta) {
+                var sDocumento = "";
+				if(data.documentos.length > 0)
+				{
+					for(var x = 0;x < data.documentos.length;x++)
+					{
+						if(data.documentos[x].documentoType == "CNPJ" || data.documentos[x].documentoType == "CPF")
+						{
+							sDocumento = sDocumento = data.documentos[x].numero
+						}
+					}
+				}
+                return '<p>'+sDocumento+'</p>';
+            }),
             DTColumnBuilder.newColumn('numFunc').withTitle('Numero Funcionarios').notVisible(),
-            DTColumnBuilder.newColumn('IES').withTitle('Inscr Est Subst Trib').notVisible(),
-            DTColumnBuilder.newColumn('IIE').withTitle('Indicador de IE').notVisible(),
-            DTColumnBuilder.newColumn('IE').withTitle('Inscrição Estadual').notVisible(),
-            DTColumnBuilder.newColumn('IM').withTitle('Inscrição Municipal').notVisible(),
-            DTColumnBuilder.newColumn('IF').withTitle('Inscrição Suframa').notVisible(),
-            DTColumnBuilder.newColumn('cep').withTitle('CEP').notVisible(),
-            DTColumnBuilder.newColumn('logradouro').withTitle('Logradouro'),
-            DTColumnBuilder.newColumn('numero').withTitle('Numero'),
-            DTColumnBuilder.newColumn('cidade').withTitle('Cidade'),
-            DTColumnBuilder.newColumn('estado').withTitle('Estado').notVisible(),
-            DTColumnBuilder.newColumn('pais').withTitle('Pais').notVisible(),
-            DTColumnBuilder.newColumn('telefone').withTitle('Telefone'),
-            DTColumnBuilder.newColumn('email').withTitle('Email').notVisible(),
-            DTColumnBuilder.newColumn('cnae').withTitle('Ativ. Filial'),
-            DTColumnBuilder.newColumn('dataCadastro').withTitle('Data Cadastro').notVisible(),
-            DTColumnBuilder.newColumn('obs').withTitle('Observação').notVisible(),
+            DTColumnBuilder.newColumn(null).withTitle('Inscr Est Subst Trib').renderWith(function(data, type, full, meta) {
+                var sDocumento = "";
+				if(data.documentos.length > 0)
+				{
+					for(var x = 0;x < data.documentos.length;x++)
+					{
+						if(data.documentos[x].documentoType == "IES")
+						{
+							sDocumento = sDocumento = data.documentos[x].numero
+						}
+					}
+				}
+                return '<p>'+sDocumento+'</p>';
+            }).notVisible(),
+            DTColumnBuilder.newColumn(null).withTitle('Indicador de IE').renderWith(function(data, type, full, meta) {
+                var sDocumento = "";
+				if(data.documentos.length > 0)
+				{
+					for(var x = 0;x < data.documentos.length;x++)
+					{
+						if(data.documentos[x].documentoType == "IIE")
+						{
+							sDocumento = sDocumento = data.documentos[x].numero
+						}
+					}
+				}
+                return '<p>'+sDocumento+'</p>';
+            }).notVisible(),
+            DTColumnBuilder.newColumn(null).withTitle('Inscrição Estadual').renderWith(function(data, type, full, meta) {
+                var sDocumento = "";
+				if(data.documentos.length > 0)
+				{
+					for(var x = 0;x < data.documentos.length;x++)
+					{
+						if(data.documentos[x].documentoType == "IE")
+						{
+							sDocumento = sDocumento = data.documentos[x].numero
+						}
+					}
+				}
+                return '<p>'+sDocumento+'</p>';
+            }).notVisible(),
+            DTColumnBuilder.newColumn(null).withTitle('Inscrição Municipal').renderWith(function(data, type, full, meta) {
+                var sDocumento = "";
+				if(data.documentos.length > 0)
+				{
+					for(var x = 0;x < data.documentos.length;x++)
+					{
+						if(data.documentos[x].documentoType == "IM")
+						{
+							sDocumento = sDocumento = data.documentos[x].numero
+						}
+					}
+				}
+                return '<p>'+sDocumento+'</p>';
+            }).notVisible(),
+            DTColumnBuilder.newColumn(null).withTitle('Inscrição Suframa').renderWith(function(data, type, full, meta) {
+                var sDocumento = "";
+				if(data.documentos.length > 0)
+				{
+					for(var x = 0;x < data.documentos.length;x++)
+					{
+						if(data.documentos[x].documentoType == "IF")
+						{
+							sDocumento = sDocumento = data.documentos[x].numero
+						}
+					}
+				}
+                return '<p>'+sDocumento+'</p>';
+            }).notVisible(),
+            DTColumnBuilder.newColumn(null).withTitle('CEP').renderWith(function(data, type, full, meta) {
+                var sDocumento = "";
+				if(data.enderecos.length > 0)
+				{
+					for(var x = 0;x < data.enderecos.length;x++)
+					{
+						sDocumento = sDocumento = data.enderecos[x].cep
+					}
+				}
+                return '<p>'+sDocumento+'</p>';
+            }).notVisible(),
+            DTColumnBuilder.newColumn(null).withTitle('Logradouro').renderWith(function(data, type, full, meta) {
+                var sDocumento = "";
+				if(data.enderecos.length > 0)
+				{
+					for(var x = 0;x < data.enderecos.length;x++)
+					{
+						sDocumento = sDocumento = data.enderecos[x].logradouro
+					}
+				}
+                return '<p>'+sDocumento+'</p>';
+            }),
+            DTColumnBuilder.newColumn(null).withTitle('Numero').renderWith(function(data, type, full, meta) {
+                var sDocumento = "";
+				if(data.enderecos.length > 0)
+				{
+					for(var x = 0;x < data.enderecos.length;x++)
+					{
+						sDocumento = sDocumento = data.enderecos[x].numero
+					}
+				}
+                return '<p>'+sDocumento+'</p>';
+            }),
+            DTColumnBuilder.newColumn(null).withTitle('Cidade').renderWith(function(data, type, full, meta) {
+                var sDocumento = "";
+				if(data.enderecos.length > 0)
+				{
+					for(var x = 0;x < data.enderecos.length;x++)
+					{
+						if(data.enderecos[x].cidade != undefined || data.enderecos[x].cidade != null)
+						{
+							sDocumento = sDocumento = data.enderecos[x].cidade.nome
+						}
+					}
+				}
+                return '<p>'+sDocumento+'</p>';
+            }),
+            DTColumnBuilder.newColumn(null).withTitle('Estado').notVisible().renderWith(function(data, type, full, meta) {
+                var sDocumento = "";
+				if(data.enderecos.length > 0)
+				{
+					for(var x = 0;x < data.enderecos.length;x++)
+					{
+						if(data.enderecos[x].estado != undefined || data.enderecos[x].estado != null)
+						{
+							sDocumento = sDocumento = data.enderecos[x].estado.abreviacao
+						}
+					}
+				}
+                return '<p>'+sDocumento+'</p>';
+            }),
+            DTColumnBuilder.newColumn(null).withTitle('Pais').notVisible().renderWith(function(data, type, full, meta) {
+                var sDocumento = "";
+				if(data.enderecos.length > 0)
+				{
+					for(var x = 0;x < data.enderecos.length;x++)
+					{
+						sDocumento = sDocumento = data.enderecos[x].pais
+					}
+				}
+                return '<p>'+sDocumento+'</p>';
+            }),
+            DTColumnBuilder.newColumn(null).withTitle('Telefone').renderWith(function(data, type, full, meta) {
+                var sDocumento = "";
+				if(data.telefones.length > 0)
+				{
+					for(var x = 0;x < data.telefones.length;x++)
+					{
+							sDocumento = sDocumento = data.telefones[x].numero
+					}
+				}
+                return '<p>'+sDocumento+'</p>';
+            }),
+            DTColumnBuilder.newColumn(null).withTitle('Email').notVisible().renderWith(function(data, type, full, meta) {
+                var sDocumento = "";
+				if(data.emails.length > 0)
+				{
+					for(var x = 0;x < data.emails.length;x++)
+					{
+						sDocumento = sDocumento = data.emails[x].email
+					}
+				}
+                return '<p>'+sDocumento+'</p>';
+            }),
+            DTColumnBuilder.newColumn(null).withTitle('Ativ. Filial').renderWith(function(data, type, full, meta) {
+                var sDocumento = "";
+				if(data.cnaes.length > 0)
+				{
+					for(var x = 0;x < data.cnaes.length;x++)
+					{
+						if(data.cnaes[x].idCnae != "" || data.cnaes[x].idCnae != undefined)
+						{
+							sDocumento = sDocumento = data.cnaes[x].idCnae.codigo
+						}
+					}
+				}
+                return '<p>'+sDocumento+'</p>';
+            }),
+            DTColumnBuilder.newColumn(null).withTitle('Data Cadastro').renderWith(function(data, type, full, meta) {
+                var sDocumento = "";
+
+				if(data.createDateUTC != "" || data.createDateUTC != undefined)
+				{
+					sDocumento = sDocumento = new Date(data.createDateUTC);
+				}
+
+                return '<p>'+sDocumento+'</p>';
+            }).notVisible(),
+            DTColumnBuilder.newColumn(null).withTitle('Observação').notVisible().renderWith(function(data, type, full, meta) {
+                var sDocumento = "";
+				if(data.notes.length > 0)
+				{
+					for(var x = 0;x < data.notes.length;x++)
+					{
+							sDocumento = sDocumento = data.notes[x].noteText
+
+					}
+				}
+                return '<p>'+sDocumento+'</p>';
+            }),
             DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
             DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
             DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '140px'),
         ];
+
+
 
 
         function edit(person) {
@@ -449,8 +709,8 @@
             }).then(function(modal) {
                 modal.element.modal();
 
-                     
-            
+
+
                 modal.close.then(function(result) {
                     $scope.message = "You said " + result;
                 });
@@ -602,7 +862,6 @@
         }
 
         function toggle() {
-            debugger
             $scope.state = !$scope.state;
         };
     }

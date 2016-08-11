@@ -55,6 +55,20 @@
 		this.maxPreQueryCount = 0;
 	};
 
+	//empresaInquryRequest
+	qat.model.empresaInquiryRequest = function ( _iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
+	{
+		this.pageSize = 20;
+		this.userId = _userId;
+		this.id = _id;
+		this.emprId = _emprId;
+		this.permissaoTypeEnumValue = _permissaoType;
+		this.startPage = _iStartPage;
+		this.sortExpressions = null;
+		this.preQueryCount = _bCount;
+		this.maxPreQueryCount = 0;
+	};
+
 	//PageData Object
 	qat.model.pageData = function(_pageSize, _startPage, _bRowsAvailable, _totalRows)
 	{
