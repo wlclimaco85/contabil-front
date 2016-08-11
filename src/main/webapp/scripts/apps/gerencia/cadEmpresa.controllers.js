@@ -27,6 +27,7 @@
 
 
 
+
         $scope.toggle = function() {
             $scope.state = !$scope.state;
         };
@@ -183,8 +184,108 @@
                         templateUrl: 'views/gerencia/dialog/dEmpresa.html',
                         controller: function($scope,$rootScope, SysMgmtData) {
 
+
+
+                            $scope.empresa ={
+
+          nome                : '',
+          razao               : '',
+          entidadeId          : 0,
+          numFunc             : null,
+          statusInicial       : null,
+          entidadeEnumValue   : 1,
+          regime              : {
+             id : 0,
+             modelAction    : "NONE",
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime(),
+          },
+          documentos          : [{
+                       documentoTypeEnumValue : 1,
+                       numero : 0,
+                       tableEnumValue : 1,
+                       modelAction    : "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    }],
+          enderecos           : [{
+                       codIbge : 0,
+                       logradouro : '',
+                       bairro : '',
+                       numero : '',
+                       enderecoTypeValue : 0,
+                       cep : '',
+                       latitude : '',
+                       longitude : '',
+                       complemento : '',
+                       cidade : {nome : ""},
+                       estado : {abreviacao : ""},
+                       parentId       : 0,
+                       emprId         : 0,
+                       processId      : 0,
+                       tableEnumValue : 0,
+                       modelAction    :  "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    }],
+
+
+          parentId            : 0,
+          emprId              : 0,
+          processId           : 0,
+          tableEnumValue      : 1,
+          modelAction         : 'INSERT',
+          createUser          : "System",
+          createDateUTC       : (new Date()).getTime(),
+          modifyUser          : "System",
+          modifyDateUTC       : (new Date()).getTime(),
+          usuarios            :[{
+                 nome : '',
+                 cpf : {
+                       id : 0,
+                       documentoTypeEnumValue : 0,
+                       numero : 0,
+                       tableEnumValue : 2,
+                       modelAction    : "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    },
+                 email : '',
+                 telefone : '',
+                 senha : '',
+                 pergunta : '',
+                 role : '',
+                 language : '',
+                 ultAcesso : (new Date()).getTime(),
+                 parentId       : 0,
+                 emprId         : 0,
+                 processId      : 0,
+                 tableEnumValue : 0,
+
+                 modelAction    : 'INSERT',
+                 createUser     : "System",
+                 createDateUTC  : (new Date()).getTime(),
+                 modifyUser     : "System",
+                 modifyDateUTC  : (new Date()).getTime()
+
+                    }]
+
+        }
+
+
 							//fetch all cnae
-							SysMgmtData.processPostPageData("main/api/request",{
+						/*	SysMgmtData.processPostPageData("main/api/request",{
 										url: "fiscal/api/cnae/fetchPage",
 										token : $rootScope.authToken,
 										request: new qat.model.siteInquiryRequest( 100/20, true, null)}, function(res){
@@ -223,13 +324,21 @@
 							  });*/
 
 
+
+                              $scope.submit = function() {
+debugger
+            var fv   = $('.cadEmpresaForm').data('formValidation');
+            console.log($scope.empresa)
+            cadEmpresaForm
+
+          };
+
+
                         },
                         controllerAs: "futurama"
                     }).then(function(modal) {
 
-
                         modal.element.modal();
-                        openDialogUpdateCreate();
                         modal.close.then(function(result) {
                             $scope.message = "You said " + result;
                         });
@@ -511,7 +620,7 @@
 
             bookIndex = 0;
 
-            $('.empresaForm')
+            $('.cadEmpresaForm')
                 .formValidation({
                     framework: 'bootstrap',
                     icon: {
@@ -587,7 +696,7 @@
                     });
 
                 // Add new field
-                $('.empresaForm').formValidation('addField', fieldName, {
+                $('.cadEmpresaForm').formValidation('addField', fieldName, {
                     message: 'The phone number is not valid',
                     validators: {
                         digits: {
@@ -617,7 +726,7 @@
                     .end()
                     .on('click', '.removeButton', function() {
                         // Remove field when clicking the Remove button
-                        $('.empresaForm').formValidation('removeField', fieldName);
+                        $('.cadEmpresaForm').formValidation('removeField', fieldName);
 
                         // Enable the Add button
                         $that.parent().removeClass('disabled');
@@ -627,7 +736,7 @@
                     });
 
                 // Add new field
-                $('.empresaForm').formValidation('addField', fieldName, {
+                $('.cadEmpresaForm').formValidation('addField', fieldName, {
                     message: 'The phone number is not valid',
                     validators: {
                         digits: {

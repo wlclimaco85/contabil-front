@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-sm-6">
+        <label for="exampleInputPassword1">CEP</label>
+        <div class="input-group">
+            <div class="form-group">
+                <input type="text" class="form-control" name="cep" ng-model="enderecos[0].cep">
+            </div>
+            <span class="input-group-btn">
+
+             <button class="btn btn-default" type="button" ng-click="cc.buscaRCep('38082243')"><i class="glyphicon glyphicon-search"> </i></button>
+         </span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Logradouro</label>
+            <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="enderecos[0].logradouro" placeholder="Logradouro">
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Numero</label>
+            <input type="text" class="form-control col-sm-4" name="numero" ng-model="enderecos[0].numero" placeholder="Numero">
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Lat.</label>
+            <input type="text" class="form-control col-sm-4" name="latitude" ng-model="enderecos[0].latitude" placeholder="Latitude">
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Lon.</label>
+            <input type="text" class="form-control col-sm-4" name="longitude" ng-model="enderecos[0].longitude" placeholder="Longitude">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2">
+        <label for="exampleInputPassword1">Complemento</label>
+        <input type="text" class="form-control col-sm-8" name="complemento" ng-model="enderecos[0].complemento" placeholder="Complemento">
+    </div>
+    <div class="col-sm-2">
+        <label for="exampleInputPassword1">Bairro</label>
+        <input type="text" class="form-control col-sm-4" ng-model="enderecos[0].bairro" placeholder="Bairro">
+    </div>
+    <div class="col-sm-2">
+        <label for="exampleInputPassword1">Estado</label>
+        <input type="text" class="form-control col-sm-8" ng-model="enderecos[0].estado.abreviacao" placeholder="Estado">
+    </div>
+    <div class="col-sm-2">
+        <label for="exampleInputPassword1">Municipio</label>
+        <input type="text" class="form-control col-sm-4" ng-model="enderecos[0].cidade.nome" placeholder="Municipio">
+    </div>
+
+    <div class="col-sm-2">
+        <label for="exampleInputPassword1">Codigo IBGE</label>
+        <input type="text" class="form-control col-sm-4" ng-model="enderecos[0].codIbge" placeholder="Codigo IBGE">
+    </div>
+    <div class="col-sm-2">
+        <label for="exampleInputPassword1">Pais</label>
+        <input type="text" class="form-control col-sm-4" ng-model="enderecos[0].pais" placeholder="Codigo IBGE">
+    </div>
+</div>
