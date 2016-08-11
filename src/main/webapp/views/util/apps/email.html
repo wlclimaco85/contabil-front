@@ -1,0 +1,83 @@
+<!-- ------------------------------------- -->
+<!-- ------------------------------------- -->
+
+<!-- -------------------  Email Empresa ----------------- -->
+<div class="row">
+    <div class="col-sm-4">
+        <label for="exampleInputPassword1">Email</label>
+        <input type="text" class="form-control col-sm-4 input-email" name="email" placeholder="Email">
+    </div>
+    <div class="col-sm-4" style="margin-top:25px">
+
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
+    Adicionar
+    <span class="caret"></span>
+  </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="javascript:;" class="addEmailButton">Principal</a></li>
+                <li><a href="javascript:;" class="addEmailButton">NF-e</a></li>
+                <li><a href="javascript:;" class="addEmailButton">Compras</a></li>
+                <li><a href="javascript:;" class="addEmailButton">Vendas</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="javascript:;" class="addEmailButton">Outros</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Template for dynamic field -->
+<div class="row" id="template-email" style="display: none;">
+    <div class="col-sm-4">
+        <label for="exampleInputPassword1" class="control-label">Email</label>
+        <input type="email" class="form-control col-sm-4 input-email" placeholder="Email">
+    </div>
+    <div class="col-sm-4" style="margin-top:25px">
+        <button type="button" class="btn btn-link removeButton">deletar</button>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+
+//============================= Email
+        $('.addEmailButton').on('click', function() {
+            var $that     = $(this),
+                $template = $('#template-email'),
+                $newRow   = $template.clone().removeAttr('id').insertBefore($template).show();
+
+            $that.parent().addClass('disabled');
+
+            // Set the label and field name
+            var fieldName = $that.attr('data-name');
+            $newRow
+                .find('.control-label')
+                    .html($that.html())
+                    .end()
+                .find('input')
+                    .attr('name', fieldName)
+                    .end()
+                .on('click', '.removeButton', function() {
+                    // Remove field when clicking the Remove button
+                    $('#contactForm').formValidation('removeField', fieldName);
+
+                    // Enable the Add button
+                    $that.parent().removeClass('disabled');
+
+                    // Remove element
+                    $newRow.remove();
+                });
+
+            // Add new field
+            $('#empresaForm').formValidation('addField', fieldName, {
+                message: 'The phone number is not valid',
+                validators: {
+                    digits: {
+                        message: 'The value can contain only digits'
+                    }
+                }
+            });
+        });
+        //============================= Email fim
+            });
+    </script>

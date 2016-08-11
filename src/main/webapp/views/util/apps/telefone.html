@@ -1,0 +1,82 @@
+<!-- -------------------  TELEFONE ----------------- -->
+<div class="row">
+
+    <div class="col-sm-4">
+        <label for="exampleInputPassword1" class="control-label">Telefone</label>
+        <input type="text" class="form-control gugu" name="phone" data-mask="(99) 9999-9999" placeholder="(55) 1111-2222">
+    </div>
+
+    <div class="col-sm-4" style="margin-top:25px">
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
+    Adicionar
+    <span class="caret"></span>
+  </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="javascript:;" class="addPhoneButton">Residencial</a></li>
+                <li><a href="javascript:;" class="addPhoneButton">Celular TIM</a></li>
+                <li><a href="javascript:;" class="addPhoneButton">Celular OI</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="javascript:;" class="addPhoneButton">Outros</a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<!-- Template for dynamic field -->
+<div class="row" id="template" style="display: none;">
+
+    <div class="col-sm-4">
+        <label for="exampleInputPassword1" class="control-label">Telefone</label>
+        <input type="text" class="form-control gugu" name="phone" data-mask="(99) 9999-9999" placeholder="(55) 1111-2222">
+    </div>
+
+    <div class="col-sm-4" style="margin-top:25px">
+        <button type="button" class="btn btn-link removeButton">deletar</button>
+    </div>
+
+</div>
+<script>
+    $(document).ready(function() {
+
+         $('.addPhoneButton').on('click', function() {
+
+            var $that     = $(this),
+            $template = $('#template'),
+            $newRow   = $template.clone().removeAttr('id').insertBefore($template).show();
+
+            $that.parent().addClass('disabled');
+
+            // Set the label and field name
+            var fieldName = $that.attr('data-name');
+            $newRow
+                .find('.control-label')
+                    .html($that.html())
+                    .end()
+                .find('input')
+                    .attr('name', fieldName)
+                    .end()
+                .on('click', '.removeButton', function() {
+                    // Remove field when clicking the Remove button
+                    $('#contactForm').formValidation('removeField', fieldName);
+
+                    // Enable the Add button
+                    $that.parent().removeClass('disabled');
+
+                    // Remove element
+                    $newRow.remove();
+                });
+
+            // Add new field
+            $('#empresaForm').formValidation('addField', fieldName, {
+                message: 'The phone number is not valid',
+                validators: {
+                    digits: {
+                        message: 'The value can contain only digits'
+                    }
+                }
+            });
+        });
+         
+    });
+    </script>
