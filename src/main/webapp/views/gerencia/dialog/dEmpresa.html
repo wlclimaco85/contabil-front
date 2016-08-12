@@ -1,13 +1,5 @@
-<div class="modal fade">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <form ng-submit="submit()" class="cadEmpresaForm" id="cadEmpresaForm">
 
-                <div class="modal-header">
-                    <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Cadastro Empresa</h4>
-                </div>
-                <div class="modal-body">
+<div ng-controller="CadEmpresaController as showCase">
                     <div class="container1" ng-app ng-init="tabs=4">
                         <ul class="tabs-nav">
                             <li><a ng-click="tabs=4" ng-class="{'active' : tabs==4}">Dados Empresa</a></li>
@@ -18,6 +10,8 @@
                         <div class="tabs-container1">
                             <div class="tab-content1" ng-show="tabs == 4">
                                 <!-- Cadastro Empresa -->
+                                <div class="form-group col-sm-5">
+                                <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
                                 <div ng-include="'views/empresa/apps/cadEmpresa.html'"></div>
 
                                 <!-- email -->
@@ -186,15 +180,13 @@
                             </div>
                         </div>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" ng-click="submit()" id="validateButton" class="btn btn-primary" data-dismiss="modal">Gravar</button>
-                    </div>
-            </form>
-            </div>
-        </div>
-    </div>
+
+
+                        
+                        <button type="submit" ng-click="submit()" id="validateButton" class="btn btn-primary">Gravar</button>
+              
+       
+</div>
 
 
     <script>
@@ -262,6 +254,13 @@
         $(document).ready(function() {
 
 
+
+
+            $(".select").select2({
+              placeholder: "Select a state",
+              allowClear: true
+            });
+
             $("#test-upload").fileinput({
                 'showPreview': false,
                 'allowedFileExtensions': ['jpg', 'png', 'gif'],
@@ -314,20 +313,38 @@
                     }
                 })
 
-$('.cadEmpresaForm:eq(1)').find('[name="fantasia"]').val('wlclimaco software');
+$('[name="tipoEmpr"]:eq(0)').prop( "checked", true );
+$('[name="status"]:eq(0)').prop( "checked", true );
+$('[name="regime"]:eq(0)').prop( "checked", true );
+$('[name="fantasia"]').val('wlclimaco software');
+$('[name="razao"]').val('wlclimaco software');
+$('[name="nunfunc"]').val('10');
+$('[name="cnpj"]').val('099.099.099.099');
+$('[name="IEST"]').val('099.099.099.099');
+$('[name="IIE"]').val('1');
+$('[name="incrEst"]').val('099.099.099.099');
+$('[name="incrMun"]').val('099.099.099.099');
+$('[name="suframa"]').val('099.099.099.099');
+$('[name="responsavel"]').val('Washington');
+$('[name="abertura"]').val('20/05/1985');
 
+$('[name="cep"]').val('38082243');
+$('[name="logradouro"]').val('logradouro');
+$('[name="numero"]').val('686');
+$('[name="latitude"]').val('380454');
+$('[name="longitude"]').val('875651');
+$('[name="complemento"]').val('complemento');
+$('[name="bairro"]').val('bairro');
+$('[name="estado"]').val('estado');
+$('[name="cidade"]').val('cidade');
+$('[name="ibge"]').val('ibge');
+$('[name="pais"]').val('pais');
 
-//Tab 2
-$('.cadEmpresaForm:eq(1)').find('[name="cnpj"]').val('099.099.099.099');
-$('.cadEmpresaForm:eq(1)').find('[name="numfunc"]').val('8');
-$('.cadEmpresaForm:eq(1)').find('[name="razao"]').val('34988406670');
-$('.cadEmpresaForm:eq(1)').find('[name="cep"]').val('38082243');
-$('.cadEmpresaForm:eq(1)').find('[name="numero"]').val('686');
-$('.cadEmpresaForm:eq(1)').find('[name="complemento"]').val('complemento');
-$('.cadEmpresaForm:eq(1)').find('[name="logradouro"]').val('logradouro');
-$('.cadEmpresaForm:eq(1)').find('[name="book[0].nome"]').val('joao das coves');
-$('.cadEmpresaForm:eq(1)').find('[name="book[0].cpf"]').val('05790167659');
-$('.cadEmpresaForm:eq(1)').find('[name="book[0].cpf"]').val('10');
+$('[name="phone"]').val('348888888888');
+$('[name="phones"]').val('34999999999');
+
+$('[name="email"]').val('wlclimaco@gmail.com');
+$('[name="atividade2"]').val('1');
 
         });
     </script>

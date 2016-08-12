@@ -206,6 +206,50 @@ qat.model.Plano = function(_oObjet)
      this.modifyDateUTC  = (new Date()).getTime();
 }
 
+qat.model.fnTelefones =function(numero,id,type)
+        {
+
+            telefones = {
+               id : id,
+               typeValue : 0,
+               ddd : '',
+               numero : numero,
+               telefoneTypeEnumValue : type,
+               parentId       : 0,
+               emprId         : 0,
+               processId      : 0,
+               tableEnumValue : 0,
+               modelAction    : 0,
+               createUser     : "System",
+               createDateUTC  : (new Date()).getTime(),
+               modifyUser     : "System",
+               modifyDateUTC  : (new Date()).getTime()
+            }
+
+            return telefones;
+        }
+
+  qat.model.fnEmails =function(email,id,type)
+        {
+            emails  = {
+               id : id,
+               typeValue : 0,
+               email : email,
+               emailTypeEnumValue : type,
+               parentId       : 0,
+               emprId         : 0,
+               processId      : 0,
+               tableEnumValue : 0,
+               modelAction    : "NONE",
+               createUser     : "System",
+               createDateUTC  : (new Date()).getTime(),
+               modifyUser     : "System",
+               modifyDateUTC  : (new Date()).getTime()
+
+            }
+            return emails;
+        }
+
 //Empresa
 /** create by system gera-java version 1.0.0 01/06/2016 14:44 : 36*/
 

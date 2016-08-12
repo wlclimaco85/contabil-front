@@ -26,6 +26,75 @@
         vm.addFilial = addFilial;
 
 
+        $scope.empresa = {
+            documentos          : [{
+                       documentoTypeEnumValue : 1,
+                       numero : 0,
+                       tableEnumValue : 1,
+                       modelAction    : "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    },
+                    {
+                       documentoTypeEnumValue : 2,
+                       numero : 0,
+                       tableEnumValue : 1,
+                       modelAction    : "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    },
+                    {
+                       documentoTypeEnumValue : 3,
+                       numero : 0,
+                       tableEnumValue : 1,
+                       modelAction    : "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    },
+                    {
+                       documentoTypeEnumValue : 4,
+                       numero : 0,
+                       tableEnumValue : 1,
+                       modelAction    : "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    },
+                    {
+                       documentoTypeEnumValue : 5,
+                       numero : 0,
+                       tableEnumValue : 1,
+                       modelAction    : "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    },
+                    {
+                       documentoTypeEnumValue : 6,
+                       numero : 0,
+                       tableEnumValue : 1,
+                       modelAction    : "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    }]
+        };
+        $scope.enderecos = {};
 
 
         $scope.toggle = function() {
@@ -180,170 +249,8 @@
                 text: 'Novo Empresa',
                 key: '1',
                 action: function(e, dt, node, config) {
-                    ModalService.showModal({
-                        templateUrl: 'views/gerencia/dialog/dEmpresa.html',
-                        controller: function($scope,$rootScope, SysMgmtData) {
 
-
-
-                            $scope.empresa ={
-
-          nome                : '',
-          razao               : '',
-          entidadeId          : 0,
-          numFunc             : null,
-          statusInicial       : null,
-          entidadeEnumValue   : 1,
-          regime              : {
-             id : 0,
-             modelAction    : "NONE",
-             createUser     : "System",
-             createDateUTC  : (new Date()).getTime(),
-             modifyUser     : "System",
-             modifyDateUTC  : (new Date()).getTime(),
-          },
-          documentos          : [{
-                       documentoTypeEnumValue : 1,
-                       numero : 0,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    }],
-          enderecos           : [{
-                       codIbge : 0,
-                       logradouro : '',
-                       bairro : '',
-                       numero : '',
-                       enderecoTypeValue : 0,
-                       cep : '',
-                       latitude : '',
-                       longitude : '',
-                       complemento : '',
-                       cidade : {nome : ""},
-                       estado : {abreviacao : ""},
-                       parentId       : 0,
-                       emprId         : 0,
-                       processId      : 0,
-                       tableEnumValue : 0,
-                       modelAction    :  "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    }],
-
-
-          parentId            : 0,
-          emprId              : 0,
-          processId           : 0,
-          tableEnumValue      : 1,
-          modelAction         : 'INSERT',
-          createUser          : "System",
-          createDateUTC       : (new Date()).getTime(),
-          modifyUser          : "System",
-          modifyDateUTC       : (new Date()).getTime(),
-          usuarios            :[{
-                 nome : '',
-                 cpf : {
-                       id : 0,
-                       documentoTypeEnumValue : 0,
-                       numero : 0,
-                       tableEnumValue : 2,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                 email : '',
-                 telefone : '',
-                 senha : '',
-                 pergunta : '',
-                 role : '',
-                 language : '',
-                 ultAcesso : (new Date()).getTime(),
-                 parentId       : 0,
-                 emprId         : 0,
-                 processId      : 0,
-                 tableEnumValue : 0,
-
-                 modelAction    : 'INSERT',
-                 createUser     : "System",
-                 createDateUTC  : (new Date()).getTime(),
-                 modifyUser     : "System",
-                 modifyDateUTC  : (new Date()).getTime()
-
-                    }]
-
-        }
-
-
-							//fetch all cnae
-						/*	SysMgmtData.processPostPageData("main/api/request",{
-										url: "fiscal/api/cnae/fetchPage",
-										token : $rootScope.authToken,
-										request: new qat.model.siteInquiryRequest( 100/20, true, null)}, function(res){
-								   console.log(res)
-								   var cnaes = "";
-								   debugger
-								   if(res.operationSuccess == true)
-								   {
-									   for(var x = 0 ;x < res.cnaeList.length;x++)
-									   {
-										   cnaes = cnaes + "<option value='"+res.cnaeList[x].id+"'> "+res.cnaeList[x].cnae+"</option>";
-									   }
-										$('#atividade1').append(cnaes);
-										$('#atividade2').append(cnaes);
-										$('#atividade3').append(cnaes);
-								   }
-
-								  /// pvm.site = new qat.model.Site(res.sites[0]);
-							  });
-							 // fetch Regime
-							 SysMgmtData.processPostPageData("main/api/request",{
-										url: "fiscal/api/regime/fetchPage",
-										 token : $rootScope.authToken,
-										request: new qat.model.siteInquiryRequest( 100/20, true,null)}, function(res){
-								   console.log(res)
-								   debugger
-								   //pvm.site = new qat.model.Site(res.sites[0]);
-							  });
-							  //fetch Empresa Type
-							 /* SysMgmtData.processPostPageData("main/api/anonimo",{
-										url: "site/api/fetchPage",
-										request: new qat.model.siteInquiryRequest( 100/20, true, "http://localhost:8080/webSite/")}, function(res){
-								   console.log(res)
-								   debugger
-								   //pvm.site = new qat.model.Site(res.sites[0]);
-							  });*/
-
-
-
-                              $scope.submit = function() {
-debugger
-            var fv   = $('.cadEmpresaForm').data('formValidation');
-            console.log($scope.empresa)
-            cadEmpresaForm
-
-          };
-
-
-                        },
-                        controllerAs: "futurama"
-                    }).then(function(modal) {
-
-                        modal.element.modal();
-                        modal.close.then(function(result) {
-                            $scope.message = "You said " + result;
-                        });
-                    });
-                }
+}
             }]);
 
         vm.dtColumns = [
@@ -575,8 +482,54 @@ debugger
             DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '140px'),
         ];
 
+$scope.submit = function() {
+    debugger
+    console.log($scope.empresa);
+    console.log($scope.enderecos);
+    fnMontaObjeto();
+    debugger
+    console.log($scope.empresa)
 
+    SysMgmtData.processPostPageData("main/api/anonimo",{
+            url: "entidade/api/empresa"+   WebDaptiveAppConfig.create_url,
+            request: new qat.model.reqEmpr($scope.empresa ,true, true)}, function(res){
+       console.log(res)
+       debugger
+       if(res.operationSuccess == true)
+       {
+           $('#dialogs').hide();
+       }
+       
+    });
+}
 
+fnMontaObjeto = function(){
+            console.log($scope.empresa);
+         //   $scope.empresa.enderecos = $scope.enderecos
+            var count = 0;
+            var bb = [];
+
+            $('.gugu').each(function() {
+                if($(this).val() != "")
+                {
+                    bb.push(qat.model.fnTelefones($(this).val(),count,1));
+                    count = count + 1;
+                }
+            });
+            $scope.empresa.telefones = bb;
+
+            // email
+            count = 0;
+            bb = [];
+            $('.input-email').each(function() {
+                if($(this).val() != "")
+                {
+                    bb.push(qat.model.fnEmails($(this).val(),count,1));
+                    count = count + 1;
+                }
+            });
+            $scope.empresa.emails = bb;
+        }
 
         function edit(person) {
             ModalService.showModal({
