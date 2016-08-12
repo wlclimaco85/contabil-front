@@ -2,7 +2,7 @@
     angular.module('wdApp.apps.cadempresa', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('CadEmpresaController', cadEmpresaController);
 
-    function cadEmpresaController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData) {
+    function cadEmpresaController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData,fEmpresa) {
         var vm = this;
         vm.selected = {};
         vm.selectAll = false;
@@ -27,6 +27,13 @@
 
 
         $scope.empresa = {
+            enderecos : [{
+                       modelAction    : "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+            }],
             documentos          : [{
                        documentoTypeEnumValue : 1,
                        numero : 0,
@@ -94,7 +101,7 @@
 
                     }]
         };
-        $scope.enderecos = {};
+        $scope.enderecos = [];
 
 
         $scope.toggle = function() {
@@ -486,7 +493,8 @@ $scope.submit = function() {
     debugger
     console.log($scope.empresa);
     console.log($scope.enderecos);
-    fnMontaObjeto();
+    fEmpresa.fnMontaObjeto($scope.empresa,$scope.enderecos,"INSERT")
+ //   fnMontaObjeto();
     debugger
     console.log($scope.empresa)
 
@@ -499,20 +507,20 @@ $scope.submit = function() {
        {
            $('#dialogs').hide();
        }
-       
+
     });
 }
 
-fnMontaObjeto = function(){
+fnMontaObjeto = function(action){
             console.log($scope.empresa);
-         //   $scope.empresa.enderecos = $scope.enderecos
+            $scope.empresa.enderecos[0] = qat.model.fnEndereco($scope.enderecos[0],"INSERT",$rootScope.user.user);
             var count = 0;
             var bb = [];
 
             $('.gugu').each(function() {
                 if($(this).val() != "")
                 {
-                    bb.push(qat.model.fnTelefones($(this).val(),count,1));
+                    bb.push(qat.model.fnTelefones($(this).val(),count,1,"INSERT"));
                     count = count + 1;
                 }
             });
@@ -524,11 +532,24 @@ fnMontaObjeto = function(){
             $('.input-email').each(function() {
                 if($(this).val() != "")
                 {
-                    bb.push(qat.model.fnEmails($(this).val(),count,1));
+                    bb.push(qat.model.fnEmails($(this).val(),count,1,"INSERT"));
                     count = count + 1;
                 }
             });
             $scope.empresa.emails = bb;
+
+
+            // cnae
+            count = 0;
+            bb = [];
+            $('.cnaeList').each(function() {
+                if($(this).val() != "")
+                {
+                    bb.push(qat.model.fnCnaeEmpresa({idCnae : qat.model.fnCnae({id :$(this).val(),modelAction :"NONE"})}));
+                    count = count + 1;
+                }
+            });
+            $scope.empresa.cnaes = bb;
         }
 
         function edit(person) {
