@@ -206,7 +206,32 @@ qat.model.Plano = function(_oObjet)
      this.modifyDateUTC  = (new Date()).getTime();
 }
 
-qat.model.fnTelefones =function(numero,id,type)
+qat.model.fnCnae = function(_oObjet){
+    return idCnae = {
+
+                           id : _oObjet.id,
+                           modelAction    : _oObjet.modelAction,
+                           createUser     : "System",
+                           createDateUTC  : (new Date()).getTime(),
+                           modifyUser     : "System",
+                           modifyDateUTC  : (new Date()).getTime(),
+
+                       }
+
+}
+qat.model.fnCnaeEmpresa = function(_oObjet)
+        {
+            return     cnaes    = {
+                       idCnae : _oObjet.idCnae,
+                       modelAction    : "NONE",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+                    }
+        }
+
+qat.model.fnTelefones =function(numero,id,type,modelAction)
         {
 
             telefones = {
@@ -220,6 +245,7 @@ qat.model.fnTelefones =function(numero,id,type)
                processId      : 0,
                tableEnumValue : 0,
                modelAction    : 0,
+               modelAction    : modelAction,
                createUser     : "System",
                createDateUTC  : (new Date()).getTime(),
                modifyUser     : "System",
@@ -229,7 +255,7 @@ qat.model.fnTelefones =function(numero,id,type)
             return telefones;
         }
 
-  qat.model.fnEmails =function(email,id,type)
+  qat.model.fnEmails =function(email,id,type,modelAction)
         {
             emails  = {
                id : id,
@@ -240,7 +266,7 @@ qat.model.fnTelefones =function(numero,id,type)
                emprId         : 0,
                processId      : 0,
                tableEnumValue : 0,
-               modelAction    : "NONE",
+               modelAction    : modelAction,
                createUser     : "System",
                createDateUTC  : (new Date()).getTime(),
                modifyUser     : "System",
@@ -249,6 +275,33 @@ qat.model.fnTelefones =function(numero,id,type)
             }
             return emails;
         }
+
+        //Endereco Object
+qat.model.fnEndereco = function(_oObjet,modelAction,user)
+{
+
+    return { id : _oObjet.id,
+     codIbge : _oObjet.codIbge,
+     logradouro : _oObjet.logradouro,
+     bairro : _oObjet.bairro,
+     numero : _oObjet.numero,
+     enderecoTypeValue : _oObjet.enderecoTypeValue,
+     cep : _oObjet.cep,
+     latitude : _oObjet.latitude,
+     longitude : _oObjet.longitude,
+     complemento : _oObjet.complemento,
+     cidade : _oObjet.cidade,
+     parentId       : _oObjet.parentId,
+     emprId         : _oObjet.emprId,
+     processId      : _oObjet.processId,
+     tableEnumValue : _oObjet.tableEnumValue,
+     modelAction    : modelAction,
+     createUser     : user,
+     createDateUTC  : (new Date()).getTime(),
+     modifyUser     : user,
+     modifyDateUTC  : (new Date()).getTime()
+     }
+}
 
 //Empresa
 /** create by system gera-java version 1.0.0 01/06/2016 14:44 : 36*/
@@ -484,30 +537,7 @@ qat.model.Condominio = function(_oObjet)
 
 /** create by system gera-java version 1.0.0 01/06/2016 15:1 : 45*/
 
-//Endereco Object
-qat.model.Endereco = function(_oObjet)
-{
-     this.id = _oObjet.id;
-     this.codIbge = _oObjet.codIbge;
-     this.logradouro = _oObjet.logradouro;
-     this.bairro = _oObjet.bairro;
-     this.numero = _oObjet.numero;
-     this.enderecoTypeValue = _oObjet.enderecoTypeValue;
-     this.cep = _oObjet.cep;
-     this.latitude = _oObjet.latitude;
-     this.longitude = _oObjet.longitude;
-     this.complemento = _oObjet.complemento;
-     this.cidade = _oObjet.cidade;
-     this.parentId       = _oObjet.parentId;
-     this.emprId         = _oObjet.emprId;
-     this.processId      = _oObjet.processId;
-     this.tableEnumValue = _oObjet.tableEnumValue;
-     this.modelAction    = _oObjet.modelAction;
-     this.createUser     = $rootScope.user;
-     this.createDateUTC  = (new Date()).getTime();
-     this.modifyUser     = $rootScope.user;
-     this.modifyDateUTC  = (new Date()).getTime();
-}
+
 
 /** create by system gera-java version 1.0.0 01/06/2016 15:2 : 48*/
 
