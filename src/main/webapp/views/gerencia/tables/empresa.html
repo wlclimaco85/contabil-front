@@ -1,18 +1,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="dist/css/select2.css" />
+<link rel='stylesheet' href='thirdparty/fullcalendar-2.9.0/lib/cupertino/jquery-ui.min.css' />
+<script src="dist/js/select2.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
 
-<!-- (Optional) Latest compiled and minified JavaScript translation files -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js"></script>
-
-<link rel="stylesheet" href="dist/css/select2.css"/>
 <link href="thirdparty/bootstrap-fileinput-master/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
 <script src="dist/js/select2.min.js"></script>
 
 <script src="thirdparty/bootstrap-fileinput-master/js/fileinput.js" type="text/javascript"></script>
+
 <style type="text/css">
     .wash {
         list-style: none;
@@ -64,7 +61,323 @@
         p {
         margin-bottom: 15px;
         }
+
+        .ui-dialog-osx {
+        -moz-border-radius: 0 0 8px 8px;
+        -webkit-border-radius: 0 0 8px 8px;
+        border-radius: 0 0 8px 8px;
+        border-width: 0 8px 8px 8px;
+    }
 </style>
+
 <div ng-controller="CadEmpresaController as showCase">
+<button id="opener">Open Dialog</button>
+<button type="submit" ng-click="submit()" id="validateButton" class="btn btn-primary">Gravar</button>
     <table datatable dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" class="row-border hover"></table>
+
+
+<div id="dialogs" title="Important information" style="display : none">
+                    <div class="container1" ng-app ng-init="tabs=4">
+                        <ul class="tabs-nav">
+                            <li><a ng-click="tabs=4" ng-class="{'active' : tabs==4}">Dados Empresa</a></li>
+                            <li><a ng-click="tabs=5" ng-class="{'active' : tabs==5}">Plano/Serviço</a></li>
+                            <li><a ng-click="tabs=6" ng-class="{'active' : tabs==6}">Arquivos</a></li>
+                            <li><a ng-click="tabs=7" ng-class="{'active' : tabs==7}">Configuração</a></li>
+                        </ul>
+                        <div class="tabs-container1">
+                            <div class="tab-content1" ng-show="tabs == 4">
+                                <!-- Cadastro Empresa -->
+
+                                <div ng-include="'views/empresa/apps/cadEmpresa.html'"></div>
+
+                                <!-- email -->
+                                <div ng-include="'views/util/apps/endereco.html'"></div>
+
+                                <!-- telefone -->
+                                <div ng-include="'views/util/apps/telefone.html'"></div>
+
+
+                                <!-- email -->
+                                <div ng-include="'views/util/apps/email.html'"></div>
+
+
+                                <!-- Cnae -->
+                                <div ng-include="'views/util/apps/cnae.html'"></div>
+                            </div>
+                            <div class="tab-content1" ng-show="tabs == 5">
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Plano</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row socios">
+                                            <div class="col-sm-5">
+                                                <label for="exampleInputPassword1">Plano</label>
+                                                <div class="row ">
+                                                    <select id="plano" name="book[0].plano" class=" select col-sm-12">
+                                                </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1">Valor</label>
+                                                    <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="R$0,00" />
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1">Desconto</label>
+                                                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" />
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-1" style="margin-top:18px">
+                                                <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group hide" id="bookTemplate">
+                                            <div class="row socios">
+                                                <div class="col-sm-5">
+                                                    <label for="exampleInputPassword1">Plano</label>
+                                                    <div class="row ">
+                                                        <select id="book[0].plano" name="book[0].produto" class="col-sm-12">
+
+                                                            </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Valor</label>
+                                                        <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="R$0,00" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Desconto</label>
+                                                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-1" style="margin-top:18px">
+                                                    <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row " style="margin-top : 10px"></div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Serviço</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row socios">
+                                            <div class="col-sm-5">
+                                                <label for="exampleInputPassword1">Serviço</label>
+                                                <div class="row ">
+                                                    <select name="book[0].produto" class="col-sm-12">
+                                                <option value="0">1010 - Coca Cola 1LT</option>
+                                                <option value="1">1011 - Coca Cola 1.5LT</option>
+                                                <option value="2">Cadastrar novo Produto</option>
+                                            </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1">Valor</label>
+                                                    <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="R$0,00" />
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1">Desconto</label>
+                                                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" />
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-1" style="margin-top:18px">
+                                                <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group hide" id="bookTemplate">
+                                            <div class="row socios">
+                                                <div class="col-sm-5">
+                                                    <label for="exampleInputPassword1">Plano</label>
+                                                    <div class="row ">
+                                                        <select name="book[0].produto" class="col-sm-12">
+                                                <option value="0">1010 - Coca Cola 1LT</option>
+                                                <option value="1">1011 - Coca Cola 1.5LT</option>
+                                                <option value="2">Cadastrar novo Produto</option>
+                                            </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Valor</label>
+                                                        <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="R$0,00" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Desconto</label>
+                                                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-1" style="margin-top:18px">
+                                                    <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-content1" ng-show="tabs == 6">
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Anexar Arquivo</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <h4>Multi Language Inputs</h4>
+                                        <!--<form enctype="multipart/form-data"> -->
+                                        <label>French Input</label>
+                                        <input id="file-fr" name="file-fr[]" type="file" multiple>
+                                        <hr style="border: 2px dotted">
+                                        <label>Spanish Input</label>
+                                        <input id="file-es" name="file-es[]" type="file" multiple>
+                                        <!--</form> -->
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-content1" ng-show="tabs == 7">
+
+                                <div ng-include="'views/empresa/apps/configuracaoEmpresa.html'"></div>
+                            </div>
+                        </div>
+
+
+
+                        
+                        <button type="submit" ng-click="submit()" id="validateButton" class="btn btn-primary">Gravar</button>
+              
+       
 </div>
+ </div>
+</div>
+<script>
+        $('#file-fr').fileinput({
+            language: 'fr',
+            uploadUrl: '#',
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+        });
+        $('#file-es').fileinput({
+            language: 'es',
+            uploadUrl: '#',
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+        });
+        $("#file-0").fileinput({
+            'allowedFileExtensions': ['jpg', 'png', 'gif'],
+        });
+        $("#file-1").fileinput({
+            uploadUrl: '#', // you must set a valid URL here else you will get an error
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+            overwriteInitial: false,
+            maxFileSize: 1000,
+            maxFilesNum: 10,
+            //allowedFileTypes: ['image', 'video', 'flash'],
+            slugCallback: function(filename) {
+                return filename.replace('(', '_').replace(']', '_');
+            }
+        });
+        /*
+        $(".file").on('fileselect', function(event, n, l) {
+            alert('File Selected. Name: ' + l + ', Num: ' + n);
+        });
+        */
+        $("#file-3").fileinput({
+            showUpload: false,
+            showCaption: false,
+            browseClass: "btn btn-primary btn-lg",
+            fileType: "any",
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>"
+        });
+        $("#file-4").fileinput({
+            uploadExtraData: {
+                kvId: '10'
+            }
+        });
+        $(".btn-warning").on('click', function() {
+            if ($('#file-4').attr('disabled')) {
+                $('#file-4').fileinput('enable');
+            } else {
+                $('#file-4').fileinput('disable');
+            }
+        });
+        $(".btn-info").on('click', function() {
+            $('#file-4').fileinput('refresh', {
+                previewClass: 'bg-info'
+            });
+        });
+	$(document).ready(function() {
+
+
+            $( "#opener" ).click(function() {
+             /*   $( "#dialog").dialog({
+                    open: function(event, ui) {
+                           $('.content').load('views/empresa/apps/cadEmpresa.html');
+                    }
+                }).dialog("open");
+
+*/
+                $("#dialogs").dialog({
+
+                    modal: true,
+                    draggable: true,
+                    resizable: true,
+                    //   position: ['center', 'center'],
+                    show: 'blind',
+                    hide: 'blind',
+                    width: 800,
+                    dialogClass: 'ui-dialog-osx',
+                    open: function( event, ui ) {
+                    	
+                    	$('[name="tipoEmpr"]:eq(0)').prop( "checked", true );
+$('[name="status"]:eq(0)').prop( "checked", true );
+$('[name="regime"]:eq(0)').prop( "checked", true );
+$('[name="fantasia"]').val('wlclimaco software');
+$('[name="razao"]').val('wlclimaco software');
+$('[name="nunfunc"]').val('10');
+$('[name="cnpj"]').val('099.099.099.099');
+$('[name="IEST"]').val('099.099.099.099');
+$('[name="IIE"]').val('1');
+$('[name="incrEst"]').val('099.099.099.099');
+$('[name="incrMun"]').val('099.099.099.099');
+$('[name="suframa"]').val('099.099.099.099');
+$('[name="responsavel"]').val('Washington');
+$('[name="abertura"]').val('20/05/1985');
+
+$('[name="cep"]').val('38082243');
+$('[name="logradouro"]').val('logradouro');
+$('[name="numero"]').val('686');
+$('[name="latitude"]').val('380454');
+$('[name="longitude"]').val('875651');
+$('[name="complemento"]').val('complemento');
+$('[name="bairro"]').val('bairro');
+$('[name="estado"]').val('estado');
+$('[name="cidade"]').val('cidade');
+$('[name="ibge"]').val('ibge');
+$('[name="pais"]').val('pais');
+
+$('[name="phone"]').val('348888888888');
+$('[name="phones"]').val('34999999999');
+
+$('[name="email"]').val('wlclimaco@gmail.com');
+$('[name="atividade2"]').val('1');
+                    }
+                });
+            });
+
+            
+	});
+</script>

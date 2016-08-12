@@ -2,11 +2,11 @@
     <label for="exampleInputPassword1">Tipo de Empresa</label>
     <dl class="dl-horizontal">
         <dd>
-            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.empresaTypeEnum" value="1" checked ><span>Venda Compra e prest. de servi√ßo</span></label>
-            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.empresaTypeEnum" value="2" ><span>Clinica </span></label>
-            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.empresaTypeEnum" value="3" ><span>Escritorio Advocacia</span></label>
-            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.empresaTypeEnum" value="3" ><span>Condominio</span></label>
-            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.empresaTypeEnum" value="3" ><span>Escritorio Contabil</span></label>
+            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.entidadeEnumValue" value="1" checked ><span>Venda Compra e prest. de serviÁo</span></label>
+            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.entidadeEnumValue" value="2" ><span>Clinica </span></label>
+            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.entidadeEnumValue" value="3" ><span>Escritorio Advocacia</span></label>
+            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.entidadeEnumValue" value="3" ><span>Condominio</span></label>
+            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.entidadeEnumValue" value="3" ><span>Escritorio Contabil</span></label>
         </dd>
     </dl>
 
@@ -16,8 +16,8 @@
         <label for="exampleInputPassword1">Sua Empresa Esta Ativa?</label>
         <dl class="dl-horizontal">
             <dd>
-                <label class="ui-radio"><input name="status" ng-model="empresa.statusInicial" type="radio" value="1" ><span>Sim</span></label>
-                <label class="ui-radio"><input name="status" ng-model="empresa.statusInicial" type="radio" value="2" checked><span>N√£o</span></label>
+                <label class="ui-radio"><input name="statusEmpresa" ng-model="empresa.statusInicial" type="radio" value="1" ><span>Sim</span></label>
+                <label class="ui-radio"><input name="statusEmpresa" ng-model="empresa.statusInicial" type="radio" value="2" checked><span>N„o</span></label>
             </dd>
         </dl>
     </div>
@@ -35,8 +35,8 @@
 </div>
 <div class="row">
     <div class="form-group col-sm-5">
-        <label for="exampleInputEmail1">Nome ou Raz√£o social</label>
-        <input type="text" ng-model="empresa.razao" name="razao" class="form-control" placeholder="Nome ou Raz√£o social">
+        <label for="exampleInputEmail1">Nome ou Raz„o social</label>
+        <input type="text" ng-model="empresa.razao" name="razao" class="form-control" placeholder="Nome ou Raz„o social">
     </div>
 
     <div class="form-group col-sm-5">
@@ -45,61 +45,61 @@
     </div>
     <div class="form-group col-sm-2">
         <label for="exampleInputEmail1">Num. Funcionario</label>
-        <input type="text" ng-model="empresa.nunfunc" name="nunfunc" class="form-control" placeholder="Nome Fantasia">
+        <input type="text" ng-model="empresa.numFunc" name="nunfunc" class="form-control" placeholder="Num. Funcionarios">
     </div>
 </div>
 <div class="row">
     <div class="form-group col-sm-3">
         <label for="exampleInputEmail1">CNPJ</label>
-        <input type="text" ng-model="empresa.documentos[0].numero" name="cnpj" class="form-control" placeholder="N¬∫ Cart. Trab">
-        <input type="text" ng-model="empresa.documentos[0].documentoTypeEnumValue" name="cnpj" value="1" class="form-control hide" placeholder="N¬∫ Cart. Trab">
+        <input type="text" ng-model="empresa.documentos[0].numero" name="cnpj" class="form-control" placeholder="N∫ Cart. Trab">
+        <input type="text" ng-model="empresa.documentos[0].documentoTypeEnumValue" name="cnpjs" value="1" class="form-control hide" placeholder="N∫ Cart. Trab">
     </div>
 
     <div class="form-group col-sm-3">
         <label for="exampleInputEmail1">Inscr Est Subst Trib</label>
         <input type="text" ng-model="empresa.documentos[1].numero" name="IEST" class="form-control" placeholder="Inscr Est Subst Trib">
-        <input type="text" ng-model="empresa.documentos[1].documentoTypeEnumValue" name="IEST2" value="2" class="form-control hide" placeholder="N¬∫ Cart. Trab">
+        <input type="text" ng-model="empresa.documentos[1].documentoTypeEnumValue" name="IEST2" value="2" class="form-control hide" placeholder="N∫ Cart. Trab">
     </div>
     <div class="form-group col-sm-3">
         <label for="exampleInputEmail1">Indicador de IE</label>
-        <input type="text" ng-model="empresa.documentos[2].documentoTypeEnumValue" name="cnpj" value="3" class="form-control hide" placeholder="N¬∫ Cart. Trab">
+        <input type="text" ng-model="empresa.documentos[2].documentoTypeEnumValue" name="IEs" value="3" class="form-control hide" placeholder="N∫ Cart. Trab">
         <div class="row">
-            <select id="contatos_indIE" ng-model="empresa.documentos[2].numero" class="select col-sm-12" name="indIE" autocomplete="off">
+            <select id="contatos_indIE" ng-model="empresa.documentos[2].numero" class="select col-sm-12" name="IIE">
              <option value="0"></option>
              <option value="1">Contribuinte ICMS</option>
              <option value="2">Isento de cadastro</option>
-             <option value="9">N√£o contribuinte</option>
+             <option value="9">N„o contribuinte</option>
         </select>
         </div>
     </div>
     <div class="form-group col-sm-3">
-        <label for="exampleInputEmail1">Inscri√ß√£o Estadual</label>
-        <input type="text" ng-model="empresa.documentos[3].numero" name="incrEst" class="form-control" placeholder="Inscri√ß√£o Estadual">
+        <label for="exampleInputEmail1">InscriÁ„o Estadual</label>
+        <input type="text" ng-model="empresa.documentos[3].numero" name="incrEst" class="form-control" placeholder="InscriÁ„o Estadual">
         <input type="text" ng-model="empresa.documentos[3].documentoTypeEnumValue" name="incrEst2" value="3" class="form-control hide">
     </div>
 </div>
 <div class="row">
     <div class="form-group col-sm-3">
-        <label for="exampleInputEmail1">Inscri√ß√£o Municipal</label>
-        <input type="text" ng-model="empresa.documentos[4].numero" name="incrMun" class="form-control" placeholder="Inscri√ß√£o Municipal">
+        <label for="exampleInputEmail1">InscriÁ„o Municipal</label>
+        <input type="text" ng-model="empresa.documentos[4].numero" name="incrMun" class="form-control" placeholder="InscriÁ„o Municipal">
         <input type="text" ng-model="empresa.documentos[4].documentoTypeEnumValue" name="incrMun2" value="4" class="form-control hide">
 
     </div>
     <div class="form-group col-sm-3">
-        <label for="exampleInputEmail1">Inscri√ß√£o Suframa</label>
-        <input type="text" ng-model="empresa.documentos[5].numero" name="suframa" class="form-control" placeholder="Inscri√ß√£o Estadual">
+        <label for="exampleInputEmail1">InscriÁ„o Suframa</label>
+        <input type="text" ng-model="empresa.documentos[5].numero" name="suframa" class="form-control" placeholder="InscriÁ„o Estadual">
         <input type="text" ng-model="empresa.documentos[5].documentoTypeEnumValue" name="suframa2" value="5" class="form-control hide">
     </div>
 
     <div class="form-group col-sm-3">
-        <label for="exampleInputEmail1">Nome do respons√°vel</label>
-        <input type="text" class="form-control col-sm-3" ng-model="empresa.responsavel" name="responsavel" placeholder="Nome do respons√°vel">
+        <label for="exampleInputEmail1">Nome do respons·vel</label>
+        <input type="text" class="form-control col-sm-3" ng-model="empresa.responsavel" name="responsavel" placeholder="Nome do respons·vel">
     </div>
 
     <div class="form-group col-sm-3">
         <label for="exampleInputEmail1">Data Abertura</label>
         <div class="input-group">
-            <input type="text" class="form-control" ng-model="empresa.cadastro" data-mask="99/99/9999" placeholder="MM/DD/YYYY">
+            <input type="text" class="form-control" name="abertura" ng-model="empresa.dtAbertura" data-mask="99/99/9999" placeholder="MM/DD/YYYY">
             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
     </div>

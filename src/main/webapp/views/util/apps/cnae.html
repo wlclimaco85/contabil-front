@@ -1,5 +1,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta charset="utf-8">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
 
 <!-- ------------------------------------- -->
 <!-- ------------------------------------- -->
@@ -8,7 +12,9 @@
 <div class="row">
     <div class="col-sm-4">
         <label for="exampleInputPassword1">Atividade Primaria</label>
-        <select id="atividade2" name="atividade2" class="select col-sm-12"></select>
+        <select  name="atividade2"  class="select1 cnaeList col-sm-12">
+            <option></option>
+        </select>
     </div>
     <div class="col-sm-4" style="margin-top:5px">
 
@@ -32,7 +38,7 @@
 <div class="row" id="template-cnae" style="display: none;">
     <div class="col-sm-4">
         <label for="exampleInputPassword1" class="control-label">Cnae</label>
-        <select id="atividade2"  class="select col-sm-12"></select>
+        <select   class="select2 cnaeList col-sm-12"><option></option></select>
     </div>
     <div class="col-sm-4" style="margin-top:15px">
         <button type="button" class="btn btn-link removeButton2">deletar</button>
@@ -42,15 +48,14 @@
 <script>
     $(document).ready(function() {
 
-         $(".select").select2({
-          placeholder: "Select a state",
-          allowClear: true
-        });
+
 
         $('.addEmailButton2').on('click', function() {
+
             var $that     = $(this),
                 $template = $('#template-cnae'),
                 $newRow   = $template.clone().removeAttr('id').insertBefore($template).show();
+                 $(".select").select2("destroy");
 
             $that.parent().addClass('disabled');
 
@@ -63,6 +68,8 @@
                 .find('input')
                     .attr('name', fieldName)
                     .end()
+
+
                 .on('click', '.removeButton2', function() {
                     // Remove field when clicking the Remove button
                     $('#empresaForm').formValidation('removeField', fieldName);
@@ -83,27 +90,52 @@
                     }
                 }
             });
+
+            $newRow.find('select').select2({
+              placeholder: "Select a state",
+              allowClear: true
+            })
+
+
+
         });
 
-        //ajax call cnaes
+        
+
         $.ajax({
-      url: 'http://api.joind.in/v2.1/talks/10889',
-      data: {
-         format: 'json'
-      },
-      error: function() {
-         $('#info').html('<p>An error has occurred</p>');
-      },
-      dataType: 'jsonp',
-      success: function(data) {
-         var $title = $('<h1>').text(data.talks[0].talk_title);
-         var $description = $('<p>').text(data.talks[0].talk_description);
-         $('#info')
-            .append($title)
-            .append($description);
-      },
-      type: 'GET'
-   });
+           url: 'main/api/anonimo',
+           headers: { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json' 
+            },
+           data: JSON.stringify({
+                                        url: "fiscal/api/cnae/fetchPage",
+                                        request: new qat.model.siteInquiryRequest( 100/20, true, null)}),
+           error: function() {
+
+              $('#info').html('<p>An error has occurred</p>');
+           },
+           dataType: 'json',
+           success: function(res) {
+              var cnaes = "";
+                                 
+                                   if(res.operationSuccess == true)
+                                   {
+                                       for(var x = 0 ;x < res.cnaeList.length;x++)
+                                       {
+                                           cnaes = cnaes + "<option value='"+res.cnaeList[x].id+"'> "+res.cnaeList[x].cnae+"</option>";
+                                       }
+                                        $('.cnaeList').append(cnaes);
+
+                                        $(".select1").select2({
+                                              placeholder: "Select a state",
+                                              allowClear: true
+                                            });
+                                   }
+           },
+           type: 'POST'
+        });
+
 
             });
     </script>
