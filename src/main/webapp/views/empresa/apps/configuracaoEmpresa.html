@@ -1,751 +1,713 @@
- <!-- CONFIGURAÇÕES GERAIS -->
-                            <div class="row">
-                                <div class="col-sm-5 tabs-was">
-                                    <h3>Configuração geral</h3>
-                                    <table class="fullBox">
-                                        <tbody>
-
-                                            <tr>
-                                                <td class="halfBox" data-toggle="tooltip" data-placement="right" title="Proíbe cadastrar mais de uma vez o mesmo CPF ou CNPJ na tela de contatos">CPF e CNPJ unico:
-                                                </td>
-                                                <td id="b_cpfUnico"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="halfBox" data-toggle="tooltip" data-placement="right" title=" Número máximo de casas decimais a ser usado nos preços de produtos e serviços.">Casas decimais no preço:
-                                                </td>
-                                                <td id="b_casasDecimais">
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="halfBox" data-toggle="tooltip" data-placement="right" title="Quando o produto tiver um código personalizado, o sistema imprimirá este código nas vendas, entradas e ordens de serviço no lugar do código interno.">Imprimir código personalizado:
-                                                </td>
-                                                <td id="b_cpfUnico"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="halfBox" data-toggle="tooltip" data-placement="right" title="Ao imprmimir as listagens e relatórios do sistema, será inserido o logotipo da empresa no topo da impressão.">Logotipo nas listagens e relatórios impressos:
-                                                </td>
-                                                <td id="b_cpfUnico"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td data-toggle="tooltip" data-placement="right" title="Permite a emissão de NFCe, através do módulo de vendas.">Ativar NFCe:
-                                                </td>
-                                                <td id="b_cpfUnico"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td data-toggle="tooltip" data-placement="right" title="Número de dias que será mostrado na carta de cobrança entregue ao cliente.">Dias da carta de cobrança:
-                                                </td>
-                                                <td id="b_casasDecimais">
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td data-toggle="tooltip" data-placement="right" title="Mostrar as observações do cadastro do produto final dentro da ordem de produção.">Observações do produto final na produção:
-                                                </td>
-                                                <td id="b_cpfUnico"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                            </tr>
-                                            <tr class="apenasV2">
-                                                <td data-toggle="tooltip" data-placement="right" title="Ao colocar o mouse me cima de nomes de clientes e produtos, em partes do sistema, o sistema mostra mais detalhes sobre o respectivo cliente ou produto.">Mostrar informações ao posicionar o mouse:
-                                                </td>
-                                                <td id="b_cpfUnico"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-
-                                <div class="col-sm-5 tabs-was">
-
-                                    <!-- CONFIGURAÇÕES DAS VENDAS -->
-                                    <div class="panel fullBox verticalHeaderTableList bottomSpace">
-                                        <h3>Configuração das Vendas</h3>
-                                        <table class="fullBox">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="halfBox">Desconto máximo na venda:</td>
-                                                    <td id="f_maxDescontoVenda">
-                                                        <div class="col-sm-12">
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Imprimir 2 vias?</td>
-                                                    <td id="f_vendaPrintDuasVias"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Imprimir assinatura?</td>
-                                                    <td id="f_vendaPrintAssina"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Imprimir resumo financeiro?</td>
-                                                    <td id="f_vendaPrintFinanc"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Atualizar preço ao clonar?</td>
-                                                    <td id="f_atualizarPrecoClonagem"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Bloquear vendas de produtos sem estoque?</td>
-                                                    <td id="f_bloqueiaSemEstoque"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Imprimir coluna unidade?</td>
-                                                    <td id="f_vendaPrintUnidade"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Adicionar despesas no cálculo do imposto?</td>
-                                                    <td id="f_addDespesasBC"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Retirar Subst. Tribut. do ICMS?</td>
-                                                    <td id="f_naoCobrarICMSST"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Observação padrão:</td>
-                                                    <td>
-                                                        <input type="checkbox" name="receiver" class="check-socio" value="1" />
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="row">
-
-                            <!-- DIV FIM DA COLUNA 1 -->
-
-                            <div id="col2" class="col-sm-5 tabs-was">
-                                <!-- CONFIGURAÇÕES CABEÇALHO -->
-                                <div class="panel fullBox verticalHeaderTableList bottomSpace">
-                                    <h3>Configuração do cabeçalho</h3>
-                                    <table class="fullBox">
-                                        <tbody>
-                                            <tr>
-                                                <td id="c_logomarca" class="halfBox right" data-toggle="tooltip" data-placement="right" title="Este cabeçalho é utilizado em Ordens de Serviço e Pedidos de Venda">
-
-                                                </td>
-                                                <td id="c_cabecalho"><input id="file-fr" name="file-fr[]" type="file" multiple></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-
-                            <div class="col-sm-5 tabs-was">
-                                <!-- CONFIGURAÇÕES DAS ENTRADAS -->
-                                <div class="panel fullBox verticalHeaderTableList bottomSpace">
-                                    <h3>Configurações das entradas</h3>
-                                    <table class="fullBox">
-                                        <tbody>
-                                            <tr>
-                                                <td>Ao inserir nota de entrada, manter o valor total fixo:</td>
-                                                <td id="g_entradasValorTotalFixo"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Manter o preço de venda cadastrado no produto:</td>
-                                                <td id="g_entradasManterPrecoVenda"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-</div>
-                            </div>
-
-                            <div class="row">
-
-                          <div class="col-sm-5 tabs-was">
-                                <!-- CONFIGURAÇÕES DAS ORDENS DE SERVIÇO -->
-                                <div class="panel fullBox verticalHeaderTableList bottomSpace">
-                                    <h3>Configuração das OS (Ordens de Serviço)</h3>
-                                    <table class="fullBox">
-                                        <tbody>
-                                            <tr>
-                                                <td class="halfBox">Imprimir 2 vias?</td>
-                                                <td id="e_osPrintDuasViass"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Imprimir assinatura?</td>
-                                                <td id="e_osPrintAssinas"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Imprimir resumo financeiro?</td>
-                                                <td id="e_osPrintFinancs"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Imprimir detalhes na horizontal?</td>
-                                                <td id="e_osPrintDetalhesHorizontal"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Dias de garantia padrão:</td>
-                                                <td id="e_osGarantiaPadrao">
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Texto padrão para o campo <span class="config_osLabel4">Observações gerais</span>:</td>
-                                                <td>
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-
-                                <!-- CONFIGURAÇÕES DE CARNÊS -->
-                                <div class="col-sm-5 tabs-was">
-                                    <h3>Configurações dos carnês</h3>
-                                    <table class="fullBox">
-                                        <tbody>
-                                            <tr>
-                                                <td class="halfBox">Ativar carnê de boletos?</td>
-                                                <td id="h_carneBoletosAtivo"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="halfBox">Ativar carnê normal?</td>
-                                                <td id="h_carneNormalAtivo"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="halfBox">Local de pagamento:</td>
-                                                <td id="h_carneLocalPagamento">
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="halfBox">Instruções 1:</td>
-                                                <td id="h_carneInstrucoes1">
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="halfBox">Instruções 2:</td>
-                                                <td id="h_carneInstrucoes2">
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="halfBox">Instruções 3:</td>
-                                                <td id="h_carneInstrucoes3">
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="halfBox">Instruções 4:</td>
-                                                <td id="h_carneInstrucoes4">
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-
-
-
-                            </div>
-                            <div class="row">
-
-                                <!-- CONFIGURAÇÕES BOLETOS -->
-
-                                <div class="col-sm-5 tabs-was">
-                                    <!-- DADOS FISCAIS -->
-                                    <div class="panel fullBox verticalHeaderTableList bottomSpace selection">
-                                        <h3>Dados fiscais da empresa</h3>
-                                        <table class="fullBox">
-                                            <tbody>
-                                                <tr>
-                                                    <td>Principal atividade da empresa:</td>
-                                                    <td>
-                                                        <select class="selectpicker">
-                                                              <option>Mustard</option>
-                                                              <option>Ketchup</option>
-                                                              <option>Relish</option>
-                                                            </select>
-                                                    </td>
-                                                </tr>
-                                                <tr class="d_aliqsPS">
-                                                    <td class="d_labelAliqBC">Alíquota do Simples</td>
-                                                    <td id="d_tribAliqBC">
-                                                        <div class="col-sm-12">
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr class="d_aliqsPR">
-                                                    <td>Alíquota ICMS:</td>
-                                                    <td id="d_tribICMS">
-                                                        <div class="col-sm-12">
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr class="d_aliqsPR">
-                                                    <td>Alíquota PIS:</td>
-                                                    <td id="d_tribPIS">
-                                                        <div class="col-sm-12">
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr class="d_aliqsPR">
-                                                    <td>Alíquota COFINS:</td>
-                                                    <td id="d_tribCOFINS">
-                                                        <div class="col-sm-12">
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr class="d_aliqsP">
-                                                    <td>Alíquota IRPJ:</td>
-                                                    <td id="d_tribIRPJ">
-                                                        <div class="col-sm-12">
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr class="d_aliqsP">
-                                                    <td>Alíquota CSLL:</td>
-                                                    <td id="d_tribCSLL">
-                                                        <div class="col-sm-12">
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                 <div class="col-sm-5 tabs-was">
-                                   <div class="panel fullBox verticalHeaderTableList bottomSpace selection">
-                                            <h3>Configurações da NFe</h3>
-                                            <table>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="d_aliqsP">Ambiente de envio:</td>
-                                                        <td>
-                                                            <select class="selectpicker">
-                                                                  <option>Homologação</option>
-                                                                  <option>Produção</option>
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="d_aliqsP">Série de envio:</td>
-                                                        <td>
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="d_aliqsP">Anexar XML no e-mail?</td>
-                                                        <td><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="d_aliqsP">Serviços na mesma nota?</td>
-                                                        <td><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="d_aliqsP">Preencher data/hora saída?</td>
-                                                        <td><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="d_aliqsP">Presença comprador:</td>
-                                                        <td>
-                                                            <select class="selectpicker">
-                                                              <option>Presencial</option>
-                                                              <option>Produção</option>
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="d_aliqsP">Consumidor final?</td>
-                                                        <td><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="d_aliqsP">ICMS padrão (%):</td>
-                                                        <td>
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="d_aliqsP">IPI padrão (%):</td>
-                                                        <td>
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="d_aliqsP">PIS padrão (%):</td>
-                                                        <td>
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="d_aliqsP" >COFINS padrão (%):</td>
-                                                        <td>
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="dadosTokenNFCe">
-                                                        <td >Token para envio de NFCe:</td>
-                                                        <td id="c_cabecalho"><input id="file-fr" name="file-fr[]" type="file" multiple></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td >Logomarca para o Danfe:</td>
-                                                        <td id="c_cabecalho"><input id="file-fr" name="file-fr[]" type="file" multiple></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-
-                                </div>
-
-
-                            </div>
-
-
-
-
-
-                            <div class="row">
-
-                                <div class="col-sm-5 tabs-was">
-                                    <!-- CONFIGURAÇÕES SMTP -->
-                                    <div class="panel fullBox verticalHeaderTableList bottomSpace">
-                                        <h3>Alertas</h3>
-                                        <div class="fullBox" id="configSMTP_resumo">
-                                            <table class="fullBox">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Estoque Minimo:</td>
-                                                        <td id="d_tribAtividade"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Estoque Maximo</td>
-                                                        <td id="d_tribCRT"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                    </tr>
-                                                    <tr class="d_aliqsPS">
-                                                        <td class="d_labelAliqBC">Erro Emissão NF-e:</td>
-                                                        <td id="d_tribAliqBC"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                    </tr>
-                                                    <tr class="d_aliqsPR">
-                                                        <td>Novo Cliente:</td>
-                                                        <td id="d_tribICMS"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                    </tr>
-                                                    <tr class="d_aliqsPR">
-                                                        <td>Retirada Caixa:</td>
-                                                        <td id="d_tribPIS"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-5 tabs-was">
-                                    <div id="dadosCertificado" class="tableList bottomSpace">
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <td>Certificado Digital A1</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <td id="c_cabecalho"><input id="file-fr" name="file-fr[]" type="file" multiple></td>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Senha:</td>
-                                                    <td id="d_tribAtividade">
-                                                        <div class="col-sm-12">
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <div id="dadosUsuarios" class="tableList bottomSpace invisible"></div>
-                                </div>
-
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-5 tabs-was">
-                                    <div id="dadosCFOP" class="tableList bottomSpace">
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <td colspan="2">Lista de CFOPs</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td >Total CFOPs cadastrados:</td>
-                                                    <td>25</td>
-                                                </tr>
-                                                <tr>
-                                                    <td >CFOP marcado como padrão:</td>
-                                                    <td><select name="book[0].produto" class="select col-sm-12">
-                                                <option value="0">1010 - Coca Cola 1LT</option>
-                                                <option value="1">1011 - Coca Cola 1.5LT</option>
-                                                <option value="2">Cadastrar novo Produto</option>
-                                            </select></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="col-sm-5 tabs-was">
-                                    <div id="dadosSMTP" class="tableList bottomSpace">
-
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <td colspan="2">Configurações de SMTP (envio de email)</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                    <tr>
-                                                        <td>Ativar SMTP</td>
-                                                        <td id="d_tribAtividade"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Servidor SMTP</td>
-                                                        <td id="d_tribCRT">
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="d_aliqsPS">
-                                                        <td class="d_labelAliqBC">Porta (caso necessário)</td>
-                                                        <td id="d_tribAliqBC">
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="d_aliqsPR">
-                                                        <td>Endereço de e-mail:</td>
-                                                        <td id="d_tribICMS">
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="d_aliqsPR">
-                                                        <td>Usuário (do email):</td>
-                                                        <td id="d_tribPIS">
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="d_aliqsPR">
-                                                        <td>Senha do email:</td>
-                                                        <td id="d_tribPIS">
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="d_aliqsPR">
-                                                        <td>Repita a senha:</td>
-                                                        <td id="d_tribPIS">
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="d_aliqsPR">
-                                                        <td>Segurança:</td>
-                                                        <td id="d_tribPIS">
-                                                             <select class="selectpicker">
-                                                                  <option>Automatico</option>
-                                                                  <option>SSL</option>
-                                                                  <option>TLS</option>
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            <tbody>
-                                                <tr>
-                                                    <td><a href="javascript:configuracoes.testarSMTP();" class="onRight">Testar configuração SMTP</a></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-sm-5 tabs-was">
-                                    <div id="dadosSMTP" class="tableList bottomSpace">
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <td colspan="2">Sistema</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                    <tr>
-                                                        <td>Parceiro</td>
-                                                        <td id="d_tribAtividade"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>System</td>
-                                                        <td id="d_tribAtividade"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Escritorio Contábil</td>
-                                                        <td id="d_tribAtividade"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>Empresa Pai</td>
-                                                        <td id="d_tribCRT">
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            <tbody>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="col-sm-5 tabs-was">
-                                    <div id="dadosSMTP" class="tableList bottomSpace">
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <td colspan="2">Cosmos Bluesoft </td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                    <tr>
-                                                        <td>Ativar consulta Cosmos Bluesoft</td>
-                                                        <td id="d_tribAtividade"><input type="checkbox" name="receiver" class="check-socio" value="1" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Url</td>
-                                                        <td id="d_tribCRT">
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Token</td>
-                                                        <td id="d_tribCRT">
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            <tbody>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                </div>
+<!-- CONFIGURAÇÕES GERAIS -->
+<div class="row">
+    <div class="col-sm-5 tabs-was">
+        <h3>Configuração geral</h3>
+        <table class="fullBox">
+            <tbody>
+                <tr>
+                    <td class="halfBox" data-toggle="tooltip" data-placement="right" title="Proíbe cadastrar mais de uma vez o mesmo CPF ou CNPJ na tela de contatos">CPF e CNPJ unico:</td>
+                    <td id="b_cpfUnico"><input type="checkbox" ng-model="configuracao.confGeral.cnpjCPFUnico" name="receiver" class="check-socio" value="1" /></td>
+                </tr>
+                <tr>
+                    <td class="halfBox" data-toggle="tooltip" data-placement="right" title=" Número máximo de casas decimais a ser usado nos preços de produtos e serviços.">Casas decimais no preço:</td>
+                    <td id="b_casasDecimais">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control cota-socio" ng-model="configuracao.confGeral.casasDecimais" name="book[0].vlUnitario" placeholder="0" />
                             </div>
                         </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="halfBox" data-toggle="tooltip" data-placement="right" title="Quando o produto tiver um código personalizado, o sistema imprimirá este código nas vendas, entradas e ordens de serviço no lugar do código interno.">Imprimir código personalizado:</td>
+                    <td id="b_cpfUnico"><input type="checkbox" ng-model="configuracao.confGeral.impCodPersonalizado" name="receiver" class="check-socio" value="1" /></td>
+                </tr>
+                <tr>
+                    <td class="halfBox" data-toggle="tooltip" data-placement="right" title="Ao imprmimir as listagens e relatórios do sistema, será inserido o logotipo da empresa no topo da impressão.">Logotipo nas listagens e relatórios impressos:</td>
+                    <td id="b_cpfUnico"><input type="checkbox" ng-model="configuracao.confGeral.logListRelImp" name="receiver" class="check-socio" value="1" /></td>
+                </tr>
+                <tr>
+                    <td data-toggle="tooltip" data-placement="right" title="Permite a emissão de NFCe, através do módulo de vendas.">Ativar NFCe:</td>
+                    <td id="b_cpfUnico"><input type="checkbox" ng-model="configuracao.confGeral.ativNFCe" name="receiver" class="check-socio" value="1" /></td>
+                </tr>
+                <tr>
+                    <td data-toggle="tooltip" data-placement="right" title="Número de dias que será mostrado na carta de cobrança entregue ao cliente.">Dias da carta de cobrança:</td>
+                    <td id="b_casasDecimais">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control cota-socio" ng-model="configuracao.confGeral.diasCartaCobr" name="book[0].vlUnitario" placeholder="0" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td data-toggle="tooltip" data-placement="right" title="Mostrar as observações do cadastro do produto final dentro da ordem de produção.">Observações do produto final na produção:</td>
+                    <td id="b_cpfUnico"><input type="checkbox" ng-model="configuracao.confGeral.obsProdFinProd" name="receiver" class="check-socio" value="1" /></td>
+                </tr>
+                <tr class="apenasV2">
+                    <td data-toggle="tooltip" data-placement="right" title="Ao colocar o mouse me cima de nomes de clientes e produtos, em partes do sistema, o sistema mostra mais detalhes sobre o respectivo cliente ou produto.">Mostrar informações ao posicionar o mouse:</td>
+                    <td id="b_cpfUnico"><input type="checkbox" ng-model="configuracao.confGeral.infPosicionarMouse" name="receiver" class="check-socio" value="1" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm-5 tabs-was">
+        <!-- CONFIGURAÇÕES DAS VENDAS -->
+        <div class="panel fullBox verticalHeaderTableList bottomSpace">
+            <h3>Configuração das Vendas</h3>
+            <table class="fullBox">
+                <tbody>
+                    <tr>
+                        <td class="halfBox">Desconto máximo na venda:</td>
+                        <td id="f_maxDescontoVenda">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control cota-socio" ng-model="configuracao.confVendas.descontoMaxVenda"  name="book[0].vlUnitario" placeholder="0" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Imprimir 2 vias?</td>
+                        <td id="f_vendaPrintDuasVias"><input type="checkbox" ng-model="configuracao.confVendas.imprSegVia"  name="receiver" class="check-socio" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td>Imprimir assinatura?</td>
+                        <td id="f_vendaPrintAssina"><input type="checkbox" ng-model="configuracao.confVendas.imprAssinatura"  name="receiver" class="check-socio" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td>Imprimir resumo financeiro?</td>
+                        <td id="f_vendaPrintFinanc"><input type="checkbox" ng-model="configuracao.confVendas.imprResumoFinanc"  name="receiver" class="check-socio" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td>Atualizar preço ao clonar?</td>
+                        <td id="f_atualizarPrecoClonagem"><input type="checkbox" ng-model="configuracao.confVendas.atuaPrecoClonar"  name="receiver" class="check-socio" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td>Bloquear vendas de produtos sem estoque?</td>
+                        <td id="f_bloqueiaSemEstoque"><input type="checkbox" ng-model="configuracao.confVendas.bloquearvendProdSemEstoq"  name="receiver" class="check-socio" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td>Imprimir coluna unidade?</td>
+                        <td id="f_vendaPrintUnidade"><input type="checkbox" ng-model="configuracao.confVendas.imprColUnidade"  name="receiver" class="check-socio" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td>Adicionar despesas no cálculo do imposto?</td>
+                        <td id="f_addDespesasBC"><input type="checkbox" ng-model="configuracao.confVendas.addDespCalcImposto"  name="receiver" class="check-socio" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td>Retirar Subst. Tribut. do ICMS?</td>
+                        <td id="f_naoCobrarICMSST"><input type="checkbox" ng-model="configuracao.confVendas.retSubstTribICMS"  name="receiver" class="check-socio" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td>Observação padrão:</td>
+                        <td>
+                            <input type="checkbox" name="receiver" ng-model="configuracao.confVendas.observacao"  class="check-socio" value="1" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <!-- DIV FIM DA COLUNA 1 -->
+    <div id="col2" class="col-sm-5 tabs-was">
+        <!-- CONFIGURAÇÕES CABEÇALHO -->
+        <div class="panel fullBox verticalHeaderTableList bottomSpace">
+            <h3>Configuração do cabeçalho</h3>
+            <table class="fullBox">
+                <tbody>
+                    <tr>
+                        <td id="c_logomarca" class="halfBox right" data-toggle="tooltip" data-placement="right" title="Este cabeçalho é utilizado em Ordens de Serviço e Pedidos de Venda">
+                        </td>
+                        <td id="c_cabecalho"><input id="file-fr"  ng-model="configuracao.confCabecalho" name="file-fr[]" type="file" multiple></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-sm-5 tabs-was">
+        <!-- CONFIGURAÇÕES DAS ENTRADAS -->
+        <div class="panel fullBox verticalHeaderTableList bottomSpace">
+            <h3>Configurações das entradas</h3>
+            <table class="fullBox">
+                <tbody>
+                    <tr>
+                        <td>Ao inserir nota de entrada, manter o valor total fixo:</td>
+                        <td id="g_entradasValorTotalFixo"><input type="checkbox" ng-model="configuracao.confEntrada.valorTotalFixo" name="receiver" class="check-socio" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td>Manter o preço de venda cadastrado no produto:</td>
+                        <td id="g_entradasManterPrecoVenda"><input type="checkbox" ng-model="configuracao.confEntrada.manterPrecoVendaProd" name="receiver" class="check-socio" value="1" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-5 tabs-was">
+        <!-- CONFIGURAÇÕES DAS ORDENS DE SERVIÇO -->
+        <div class="panel fullBox verticalHeaderTableList bottomSpace">
+            <h3>Configuração das OS (Ordens de Serviço)</h3>
+            <table class="fullBox">
+                <tbody>
+                    <tr>
+                        <td class="halfBox">Imprimir 2 vias?</td>
+                        <td id="e_osPrintDuasViass"><input type="checkbox" ng-model="configuracao.configOS.impr2Via" name="receiver" class="check-socio" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td>Imprimir assinatura?</td>
+                        <td id="e_osPrintAssinas"><input type="checkbox" ng-model="configuracao.configOS.imprAss" name="receiver" class="check-socio" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td>Imprimir resumo financeiro?</td>
+                        <td id="e_osPrintFinancs"><input type="checkbox" ng-model="configuracao.configOS.imprResumo" name="receiver" class="check-socio" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td>Imprimir detalhes na horizontal?</td>
+                        <td id="e_osPrintDetalhesHorizontal"><input  ng-model="configuracao.configOS.imprDetHorz" type="checkbox" name="receiver" class="check-socio" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td>Dias de garantia padrão:</td>
+                        <td id="e_osGarantiaPadrao">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control cota-socio" ng-model="configuracao.configOS.diasGarantia" name="book[0].vlUnitario" placeholder="0" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Texto padrão para o campo <span class="config_osLabel4">Observações gerais</span>:</td>
+                        <td>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" ng-model="configuracao.configOS.observ" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="0" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- CONFIGURAÇÕES DE CARNÊS -->
+    <div class="col-sm-5 tabs-was">
+        <h3>Configurações dos carnês</h3>
+        <table class="fullBox">
+            <tbody>
+                <tr>
+                    <td class="halfBox">Ativar carnê de boletos?</td>
+                    <td id="h_carneBoletosAtivo"><input type="checkbox" ng-model="configuracao.confCarne.carneBotelo" name="receiver" class="check-socio" value="1" /></td>
+                </tr>
+                <tr>
+                    <td class="halfBox">Ativar carnê normal?</td>
+                    <td id="h_carneNormalAtivo"><input type="checkbox"  ng-model="configuracao.confCarne.carneNormal" name="receiver" class="check-socio" value="1" /></td>
+                </tr>
+                <tr>
+                    <td class="halfBox">Local de pagamento:</td>
+                    <td id="h_carneLocalPagamento">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control cota-socio" ng-model="configuracao.confCarne.localPag" name="book[0].vlUnitario" placeholder="0" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="halfBox">Instruções 1:</td>
+                    <td id="h_carneInstrucoes1">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control cota-socio" ng-model="configuracao.confCarne.instr1" name="book[0].vlUnitario" placeholder="0" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="halfBox">Instruções 2:</td>
+                    <td id="h_carneInstrucoes2">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control cota-socio " ng-model="configuracao.confCarne.instr2" name="book[0].vlUnitario" placeholder="0" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="halfBox">Instruções 3:</td>
+                    <td id="h_carneInstrucoes3">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control cota-socio" ng-model="configuracao.confCarne.instr3" name="book[0].vlUnitario" placeholder="0" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="halfBox">Instruções 4:</td>
+                    <td id="h_carneInstrucoes4">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control cota-socio" ng-model="configuracao.confCarne.instr4" name="book[0].vlUnitario" placeholder="0" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <!-- CONFIGURAÇÕES BOLETOS -->
+    <div class="col-sm-5 tabs-was">
+        <!-- DADOS FISCAIS -->
+        <div class="panel fullBox verticalHeaderTableList bottomSpace selection">
+            <h3>Dados fiscais da empresa</h3>
+            <table class="fullBox">
+                <tbody>
+                    <tr>
+                        <td>Principal atividade da empresa:</td>
+                        <td>
+                            <select ng-model="configuracao.confFiscal.princAtividade.id" class="selectpicker">
+                                <option value="1">Mustard</option>
+                                <option value="2">Ketchup</option>
+                                <option value="3">Relish</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="d_aliqsPS">
+                        <td class="d_labelAliqBC">Alíquota do Simples</td>
+                        <td id="d_tribAliqBC">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control cota-socio" ng-model="configuracao.confFiscal.aliqSimples" name="book[0].vlUnitario" placeholder="0" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="d_aliqsPR">
+                        <td>Alíquota ICMS:</td>
+                        <td id="d_tribICMS">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control cota-socio" ng-model="configuracao.confFiscal.aliqICMS" name="book[0].vlUnitario" placeholder="0" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="d_aliqsPR">
+                        <td>Alíquota PIS:</td>
+                        <td id="d_tribPIS">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control cota-socio" ng-model="configuracao.confFiscal.aliqPIS" name="book[0].vlUnitario" placeholder="0" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="d_aliqsPR">
+                        <td>Alíquota COFINS:</td>
+                        <td id="d_tribCOFINS">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control cota-socio" ng-model="configuracao.confFiscal.aliqCONFINS" name="book[0].vlUnitario" placeholder="0" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="d_aliqsP">
+                        <td>Alíquota IRPJ:</td>
+                        <td id="d_tribIRPJ">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control cota-socio" ng-model="configuracao.confFiscal.aliqIRPJ" name="book[0].vlUnitario" placeholder="0" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="d_aliqsP">
+                        <td>Alíquota CSLL:</td>
+                        <td id="d_tribCSLL">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control cota-socio" ng-model="configuracao.confFiscal.aliqCLSS" name="book[0].vlUnitario" placeholder="0" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-sm-5 tabs-was">
+        <div class="panel fullBox verticalHeaderTableList bottomSpace selection">
+            <h3>Configurações da NFe</h3>
+            <table>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="d_aliqsP">Ambiente de envio:</td>
+                        <td>
+                            <select class="selectpicker" ng-model="configuracao.confNFe.ambienteEnvio">
+                                <option value="1002">Homologação</option>
+                                <option value="1003">Produção</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="d_aliqsP">Série de envio:</td>
+                        <td>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control cota-socio" ng-model="configuracao.confNFe.serieEnvio" name="book[0].vlUnitario" placeholder="0" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="d_aliqsP">Anexar XML no e-mail?</td>
+                        <td><input type="checkbox" name="receiver" class="check-socio" ng-model="configuracao.confNFe.anexarXmlEmail" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td class="d_aliqsP">Serviços na mesma nota?</td>
+                        <td><input type="checkbox" name="receiver" class="check-socio" ng-model="configuracao.confNFe.servMsmNota" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td class="d_aliqsP">Preencher data/hora saída?</td>
+                        <td><input type="checkbox" name="receiver" class="check-socio" ng-model="configuracao.confNFe.preencherDataHora" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td class="d_aliqsP">Presença comprador:</td>
+                        <td>
+                            <select class="selectpicker" ng-model="configuracao.confNFe.presCompr">
+                                <option>Presencial</option>
+                                <option>Produção</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="d_aliqsP">Consumidor final?</td>
+                        <td><input type="checkbox" name="receiver" ng-model="configuracao.confNFe.destConsFinal" class="check-socio" value="1" /></td>
+                    </tr>
+                    <tr>
+                        <td class="d_aliqsP">ICMS padrão (%):</td>
+                        <td>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control cota-socio" ng-model="configuracao.confNFe.icmsPadrao" name="book[0].vlUnitario" placeholder="0" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="d_aliqsP">IPI padrão (%):</td>
+                        <td>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control cota-socio"  ng-model="configuracao.confNFe.ipiPadrao" name="book[0].vlUnitario" placeholder="0" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="d_aliqsP">PIS padrão (%):</td>
+                        <td>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control cota-socio" ng-model="configuracao.confNFe.pisPadrao" name="book[0].vlUnitario" placeholder="0" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="d_aliqsP" >COFINS padrão (%):</td>
+                        <td>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control cota-socio" ng-model="configuracao.confNFe.cofinsPadrao" name="book[0].vlUnitario" placeholder="0" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="dadosTokenNFCe">
+                        <td >Token para envio de NFCe:</td>
+                        <td id="c_cabecalho"><input id="file-fr" name="file-fr[]" ng-model="configuracao.confNFe.tokenNFCe" type="file" multiple></td>
+                    </tr>
+                    <tr>
+                        <td >Logomarca para o Danfe:</td>
+                        <td id="c_cabecalho"><input id="file-fr" name="file-fr[]" ng-model="configuracao.confNFe.logoDanfe" type="file" multiple></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5 tabs-was">
+            <!-- CONFIGURAÇÕES SMTP -->
+            <div class="panel fullBox verticalHeaderTableList bottomSpace">
+                <h3>Alertas</h3>
+                <div class="fullBox" id="configSMTP_resumo">
+                    <table class="fullBox">
+                        <tbody>
+                            <tr>
+                                <td>Estoque Minimo:</td>
+                                <td id="d_tribAtividade"><input type="checkbox" ng-model="configuracao.confAlertas.estoqMin"  name="receiver" class="check-socio" value="1" /></td>
+                            </tr>
+                            <tr>
+                                <td>Estoque Maximo</td>
+                                <td id="d_tribCRT"><input type="checkbox" name="receiver" ng-model="configuracao.confAlertas.estoqMax" class="check-socio" value="1" /></td>
+                            </tr>
+                            <tr class="d_aliqsPS">
+                                <td class="d_labelAliqBC">Erro Emissão NF-e:</td>
+                                <td id="d_tribAliqBC"><input type="checkbox" name="receiver" ng-model="configuracao.confAlertas.erroNFe" class="check-socio" value="1" /></td>
+                            </tr>
+                            <tr class="d_aliqsPR">
+                                <td>Novo Cliente:</td>
+                                <td id="d_tribICMS"><input type="checkbox" name="receiver" ng-model="configuracao.confAlertas.nvCliente" class="check-socio" value="1" /></td>
+                            </tr>
+                            <tr class="d_aliqsPR">
+                                <td>Retirada Caixa:</td>
+                                <td id="d_tribPIS"><input type="checkbox" name="receiver" ng-model="configuracao.confAlertas.retCaixa" class="check-socio" value="1" /></td>
+                            </tr>
+                            <tr class="d_aliqsPR">
+                                <td>Pedico Compra:</td>
+                                <td id="d_tribPIS"><input type="checkbox" name="receiver" ng-model="configuracao.confAlertas.pdCompra" class="check-socio" value="1" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-5 tabs-was">
+            <div id="dadosCertificado" class="tableList bottomSpace">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Certificado Digital A1</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                            <td id="c_cabecalho"><input id="file-fr" ng-model="configuracao.confNFe.certificado" name="file-fr[]" type="file" multiple></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Senha:</td>
+                            <td id="d_tribAtividade">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control cota-socio" ng-model="configuracao.confNFe.senha" name="book[0].vlUnitario" placeholder="0" />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="dadosUsuarios" class="tableList bottomSpace invisible"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5 tabs-was">
+            <div id="dadosCFOP" class="tableList bottomSpace">
+                <table>
+                    <thead>
+                        <tr>
+                            <td colspan="2">Lista de CFOPs</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td >Total CFOPs cadastrados:</td>
+                            <td>25</td>
+                        </tr>
+                        <tr>
+                            <td >CFOP marcado como padrão:</td>
+                            <td>
+                                <select ng-model="configuracao.confNFe.cfopPadrao.id" name="book[0].produto" class="select col-sm-12">
+                                    <option value="0">1010 - Coca Cola 1LT</option>
+                                    <option value="1">1011 - Coca Cola 1.5LT</option>
+                                    <option value="2">Cadastrar novo Produto</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-5 tabs-was">
+            <div id="dadosSMTP" class="tableList bottomSpace">
+                <table>
+                    <thead>
+                        <tr>
+                            <td colspan="2">Configurações de SMTP (envio de email)</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ativar SMTP</td>
+                            <td id="d_tribAtividade"><input ng-model="configuracao.confSMTP.ativSMTP" type="checkbox" name="receiver" class="check-socio" value="1" /></td>
+                        </tr>
+                        <tr>
+                            <td>Servidor SMTP</td>
+                            <td id="d_tribCRT">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control cota-socio" ng-model="configuracao.confSMTP.servSMTP" name="book[0].vlUnitario" placeholder="0" />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="d_aliqsPS">
+                            <td class="d_labelAliqBC">Porta (caso necessário)</td>
+                            <td id="d_tribAliqBC">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control cota-socio" ng-model="configuracao.confSMTP.porta" name="book[0].vlUnitario" placeholder="0" />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="d_aliqsPR">
+                            <td>Endereço de e-mail:</td>
+                            <td id="d_tribICMS">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control cota-socio" ng-model="configuracao.confSMTP.endEmail" name="book[0].vlUnitario" placeholder="0" />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="d_aliqsPR">
+                            <td>Usuário (do email):</td>
+                            <td id="d_tribPIS">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control cota-socio" ng-model="configuracao.confSMTP.usuario" name="book[0].vlUnitario" placeholder="0" />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="d_aliqsPR">
+                            <td>Senha do email:</td>
+                            <td id="d_tribPIS">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control cota-socio" ng-model="configuracao.confSMTP.senha" name="book[0].vlUnitario" placeholder="0" />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="d_aliqsPR">
+                            <td>Repita a senha:</td>
+                            <td id="d_tribPIS">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control cota-socio"  name="book[0].vlUnitario" placeholder="0" />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="d_aliqsPR">
+                            <td>Segurança:</td>
+                            <td id="d_tribPIS">
+                                <select class="selectpicker" ng-model="configuracao.confSMTP.seguranca.id">
+                                    <option value="102">Automatico</option>
+                                    <option value="103">SSL</option>
+                                    <option value="104">TLS</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td><a href="javascript:configuracoes.testarSMTP();" class="onRight">Testar configuração SMTP</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5 tabs-was">
+                <div id="dadosSMTP" class="tableList bottomSpace">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td colspan="2">Sistema</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Parceiro</td>
+                                <td id="d_tribAtividade"><input ng-model="empresa.permissaoTypeEnumValue" type="radio" name="receiver" class="check-socio" value="2" /></td>
+                            </tr>
+                            <tr>
+                                <td>System</td>
+                                <td id="d_tribAtividade"><input type="radio" ng-model="empresa.permissaoTypeEnumValue" name="receiver" class="check-socio" value="1" /></td>
+                            </tr>
+                            <tr>
+                                <td>Escritorio Contábil</td>
+                                <td id="d_tribAtividade"><input type="radio" ng-model="empresa.permissaoTypeEnumValue" name="receiver" class="check-socio" value="3" /></td>
+                            </tr>
+                            <tr>
+                                <td>Empresa Pai</td>
+                                <td id="d_tribCRT">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control  cota-socio" ng-model="empresa.emprId" name="book[0].vlUnitario" placeholder="0" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-5 tabs-was">
+                <div id="dadosSMTP" class="tableList bottomSpace">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td colspan="2">Cosmos Bluesoft </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ativar consulta Cosmos Bluesoft</td>
+                                <td id="d_tribAtividade"><input type="checkbox" ng-model="configuracao.confBlueSoft.ativBlue" name="receiver" class="check-socio" value="1" /></td>
+                            </tr>
+                            <tr>
+                                <td>Url</td>
+                                <td id="d_tribCRT">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control cota-socio" ng-model="configuracao.confBlueSoft.url" name="book[0].vlUnitario" placeholder="0" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Token</td>
+                                <td id="d_tribCRT">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control cota-socio" ng-model="configuracao.confBlueSoft.token" name="book[0].vlUnitario" placeholder="0" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
