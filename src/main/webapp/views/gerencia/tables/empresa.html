@@ -1,4 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset=utf-8">
 <link rel="stylesheet" href="dist/css/select2.css" />
 <link rel='stylesheet' href='thirdparty/fullcalendar-2.9.0/lib/cupertino/jquery-ui.min.css' />
 <link href="thirdparty/bootstrap-fileinput-master/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
@@ -107,57 +108,10 @@
                                         <h3 class="panel-title">Plano</h3>
                                     </div>
                                     <div class="panel-body">
-                                        <div class="row socios">
-                                            <div class="col-sm-5">
-                                                <label for="exampleInputPassword1">Plano</label>
-                                                <div class="row ">
-                                                    <select id="plano" name="book[0].plano" class=" select col-sm-12">
-                                                </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <div class="form-group">
-                                                    <label for="exampleInputPassword1">Valor</label>
-                                                    <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="R$0,00" />
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <div class="form-group">
-                                                    <label for="exampleInputPassword1">Desconto</label>
-                                                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" />
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-1" style="margin-top:18px">
-                                                <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="form-group hide" id="bookTemplate">
-                                            <div class="row socios">
-                                                <div class="col-sm-5">
-                                                    <label for="exampleInputPassword1">Plano</label>
-                                                    <div class="row ">
-                                                        <select id="book[0].plano" name="book[0].produto" class="col-sm-12">
 
-                                                            </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Valor</label>
-                                                        <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="R$0,00" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Desconto</label>
-                                                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-1" style="margin-top:18px">
-                                                    <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <!-- site -->
+                                        <div ng-include="'views/util/apps/site.html'"></div>
+                                        
                                     </div>
                                 </div>
 
@@ -167,62 +121,18 @@
                                         <h3 class="panel-title">Serviço</h3>
                                     </div>
                                     <div class="panel-body">
-                                        <div class="row socios">
-                                            <div class="col-sm-5">
-                                                <label for="exampleInputPassword1">Serviço</label>
-                                                <div class="row ">
-                                                    <select name="book[0].produto" class="col-sm-12">
-                                                <option value="0">1010 - Coca Cola 1LT</option>
-                                                <option value="1">1011 - Coca Cola 1.5LT</option>
-                                                <option value="2">Cadastrar novo Produto</option>
-                                            </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <div class="form-group">
-                                                    <label for="exampleInputPassword1">Valor</label>
-                                                    <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="R$0,00" />
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <div class="form-group">
-                                                    <label for="exampleInputPassword1">Desconto</label>
-                                                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" />
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-1" style="margin-top:18px">
-                                                <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="form-group hide" id="bookTemplate">
-                                            <div class="row socios">
-                                                <div class="col-sm-5">
-                                                    <label for="exampleInputPassword1">Plano</label>
-                                                    <div class="row ">
-                                                        <select name="book[0].produto" class="col-sm-12">
-                                                <option value="0">1010 - Coca Cola 1LT</option>
-                                                <option value="1">1011 - Coca Cola 1.5LT</option>
-                                                <option value="2">Cadastrar novo Produto</option>
-                                            </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Valor</label>
-                                                        <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="R$0,00" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Desconto</label>
-                                                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-1" style="margin-top:18px">
-                                                    <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <!-- servico -->
+                                        <div ng-include="'views/util/apps/servico.html'"></div>
+                                    </div>
+                                </div>
+                                <div class="row " style="margin-top : 10px"></div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Usuarios</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <!-- servico -->
+                                        <div ng-include="'views/usuario/apps/usuario.html'"></div>
                                     </div>
                                 </div>
                             </div>

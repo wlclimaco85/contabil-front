@@ -1,0 +1,115 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<form ng-submit="submit()" id="planosForm">
+    <div class="row planos">
+      <div class="col-sm-5">
+          <label for="exampleInputPassword1">Plano</label>
+          <div class="row ">
+              <select id="plano" name="book[0].plano" class="plano select col-sm-12">
+          </select>
+          </div>
+      </div>
+      <div class="col-sm-2">
+          <div class="form-group">
+              <label for="exampleInputPassword1">Valor</label>
+              <input type="text" class="form-control plano-valor" name="book[0].vlUnitario" placeholder="R$0,00" />
+          </div>
+      </div>
+      <div class="col-sm-2">
+          <div class="form-group">
+              <label for="exampleInputPassword1">Desconto</label>
+              <input type="text" class="form-control plano-desc" name="book[0].desconto" placeholder="R$0,00" />
+          </div>
+      </div>
+      <div class="col-xs-1" style="margin-top:18px">
+          <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+      </div>
+  </div>
+    <div class="form-group hide" id="PlanoTemplate">
+      <div class="row planos">
+          <div class="col-sm-5">
+              <label for="exampleInputPassword1">Plano</label>
+              <div class="row ">
+                  <select id="book[0].plano" name="book[0].plano" class="plano select col-sm-12">
+
+                      </select>
+              </div>
+          </div>
+          <div class="col-sm-2">
+              <div class="form-group">
+                  <label for="exampleInputPassword1">Valor</label>
+                  <input type="text" class="form-control plano-valor" name="book[0].vlUnitario" placeholder="R$0,00" />
+              </div>
+          </div>
+          <div class="col-sm-2">
+              <div class="form-group">
+                  <label for="exampleInputPassword1">Desconto</label>
+                  <input type="text" class="form-control plano-desc" name="book[0].desconto" placeholder="R$0,00" />
+              </div>
+          </div>
+          <div class="col-xs-1" style="margin-top:18px">
+              <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+          </div>
+      </div>
+  </div>
+</form>
+<script>
+    $(document).ready(function() {
+        $('#planosForm')
+            .formValidation({
+                framework: 'bootstrap',
+                icon: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+
+                    'book[0].plano': notEmptyStringMinMaxRegexp,
+                    'book[0].valor': notEmptyStringMinMax
+
+                }
+            }).on('click', '.addButton-plano', function() {
+                bookIndex++;
+                var $template = $('#PlanoTemplate'),
+                    $clone = $template
+                    .clone()
+                    .removeClass('hide')
+                    .removeAttr('id')
+                    .attr('data-book-index', bookIndex)
+                    .insertBefore($template);
+
+                // Update the name attributes
+                $clone
+                    .find('[name="plano"]').attr('name', 'book[' + bookIndex + '].cpf').end()
+                    .find('[name="plano-valor"]').attr('name', 'book[' + bookIndex + '].nome').end()
+                    .find('[name="plano-desc"]').attr('name', 'book[' + bookIndex + '].cota').end();
+
+                // Add new fields
+                // Note that we also pass the validator rules for new field as the third parameter
+                $('#planoForm')
+                    .formValidation('addField', 'book[' + bookIndex + '].plano', notEmptyStringMinMaxRegexp)
+                    .formValidation('addField', 'book[' + bookIndex + '].valor', notEmptyStringMinMaxRegexp);
+            });
+
+            var callback = function(res){
+                var planos = "";
+                                 
+               if(res.operationSuccess == true)
+               {
+                   for(var x = 0 ;x < res.planoList.length;x++)
+                   {
+                       planos = planos + "<option value='"+res.planoList[x].id+"'> "+res.planoList[x].plano+"</option>";
+                   }
+                    $('.plano').append(planos);
+
+                    $(".select1").select2({
+                          placeholder: "Select a state",
+                          allowClear: true
+                        });
+               }
+
+            }
+
+            qat.model.select.util("url",true,new qat.model.siteInquiryRequest( 100/20, true, localStorage.getItem("empresa").id,callback);
+    });
+</script>

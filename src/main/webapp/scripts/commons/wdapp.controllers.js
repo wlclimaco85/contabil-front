@@ -111,6 +111,7 @@
 								{
 									localStorageService.set('empresa', res.empresaList[0]);
 									$rootScope.empresa = res.empresaList[0];
+									localStorage.setItem("empresa", res.empresaList[0]);
 								}
 					          });
 
@@ -123,6 +124,7 @@
 						}
 						$rootScope.displayRoles = tempRole;
 						localStorageService.set('displayRoles', $rootScope.displayRoles);
+
 						if ($rootScope.callingPath !== undefined){
 							if ($rootScope.callingPath === '/pages/signin'){
 								$rootScope.callingPath = "/principal";
