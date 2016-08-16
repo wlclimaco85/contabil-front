@@ -1,0 +1,106 @@
+<form ng-submit="submit()" id="sociosForm">
+    <div class="row socios">
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="exampleInputPassword1">CPF Socio</label>
+                <input type="text" class="form-control cpf-socio" name="book[0].cpf" placeholder="CPF Socio" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Nome Socio</label>
+                <input type="text" class="form-control nome-socio" name="book[0].nome" placeholder="Nome Socio" />
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Porcentagem</label>
+                <input type="text" class="form-control cota-socio" name="book[0].cota" placeholder="%" />
+            </div>
+        </div>
+        <div class="col-sm-3" style="margin-top:18px">
+            <div class="checkbox">
+                <label>
+                <input type="checkbox" name="receiver" class="check-socio" value="1" /> Socio Administrador ?
+            </label>
+            </div>
+        </div>
+        <div class="col-xs-1" style="margin-top:18px">
+            <button type="button" class="btn btn-default addButton-socios"><i class="fa fa-plus"></i></button>
+        </div>
+    </div>
+    <div class="form-group hide" id="bookTemplate">
+        <div class="row socios">
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">CPF Socio</label>
+                    <input type="text" class="form-control cpf-socio" name="cpf-socio" placeholder="CPF Socio" />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Nome Socio</label>
+                    <input type="text" class="form-control nome-socio" name="nome-socio" placeholder="Nome Socio" />
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Porcentagem</label>
+                    <input type="text" class="form-control cota-socio" name="cota-socio" placeholder="%" />
+                </div>
+            </div>
+            <div class="col-sm-3" style="margin-top:18px">
+                <div class="checkbox">
+                    <label>
+                    <input type="checkbox" name="receiver" class="check-socio" value="1" /> Socio Administrador ?
+                </label>
+                </div>
+            </div>
+            <div class="col-xs-1" style="margin-top:18px">
+                <button type="button" class="btn btn-default removeButton-socios"><i class="fa fa-minus"></i></button>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    $(document).ready(function() {
+        $('#sociosForm')
+            .formValidation({
+                framework: 'bootstrap',
+                icon: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+
+                    'book[0].cpf': notEmptyStringMinMaxRegexp,
+                    'book[0].nome': notEmptyStringMinMax,
+                    'book[0].cota': integerNotEmptyValidation
+
+                }
+            }).on('click', '.addButton-socios', function() {
+                bookIndex++;
+                var $template = $('#bookTemplate'),
+                    $clone = $template
+                    .clone()
+                    .removeClass('hide')
+                    .removeAttr('id')
+                    .attr('data-book-index', bookIndex)
+                    .insertBefore($template);
+
+                // Update the name attributes
+                $clone
+                    .find('[name="cpf-socio"]').attr('name', 'book[' + bookIndex + '].cpf').end()
+                    .find('[name="nome-socio"]').attr('name', 'book[' + bookIndex + '].nome').end()
+                    .find('[name="cota-socio"]').attr('name', 'book[' + bookIndex + '].cota').end();
+
+                // Add new fields
+                // Note that we also pass the validator rules for new field as the third parameter
+                $('#sociosForm')
+                    .formValidation('addField', 'book[' + bookIndex + '].cpf', notEmptyStringMinMaxRegexp)
+                    .formValidation('addField', 'book[' + bookIndex + '].nome', notEmptyStringMinMaxRegexp)
+                    .formValidation('addField', 'book[' + bookIndex + '].cota', integerNotEmptyValidation);
+            });
+    });
+</script>

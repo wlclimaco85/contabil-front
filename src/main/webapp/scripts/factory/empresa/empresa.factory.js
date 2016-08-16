@@ -46,6 +46,57 @@
             });
             empresa.cnaes = bb;
 
+             // socios
+            count = 0;
+            bb = [];
+            $('.socios').each(function() {
+                if($(this).find('.nome-socio').val() !="")
+                {
+                    bb.push(fnSocios($(this).find('.nome-socio').val(),$(this).find('.cpf-socio').val(),$(this).find('.cota-socio').val(),$(this).find('.check-socio').is(":checked")));
+                    count = count + 1;
+                }
+            });
+            $scope.empresa.socios = bb;
+
+            //plano
+            count = 0;
+            bb = [];
+            $('.planos').each(function()
+            {
+                if($(this).find('.plano').is(":checked") == true)
+                {
+                    bb.push(fnServicoAndPlano(parseFloat(parseFloat($(this).find('.valor').text()).toFixed(2)),$(this).find('.plano-id').text(),$(this).find('.plano-type').text()));
+                    count = count + 1;
+                }
+            });
+            $scope.empresa.planoByEmpresaList = bb;
+
+            //Servico
+            count = 0;
+            bb = [];
+            $('.planos').each(function()
+            {
+                if($(this).find('.Servico').is(":checked") == true)
+                {
+                    bb.push(fnServicoAndPlano(parseFloat(parseFloat($(this).find('.valor').text()).toFixed(2)),$(this).find('.plano-id').text(),$(this).find('.plano-type').text()));
+                    count = count + 1;
+                }
+            });
+            $scope.empresa.planoByEmpresaList = bb;
+
+            //Usuario
+            count = 0;
+            bb = [];
+            $('.usuario').each(function()
+            {
+                if($(this).find('.Servico').is(":checked") == true)
+                {
+                    bb.push(fnServicoAndPlano(parseFloat(parseFloat($(this).find('.valor').text()).toFixed(2)),$(this).find('.plano-id').text(),$(this).find('.plano-type').text()));
+                    count = count + 1;
+                }
+            });
+            $scope.empresa.usuarioList = bb;
+
             return empresa;
         }
 

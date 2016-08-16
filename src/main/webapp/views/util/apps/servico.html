@@ -1,0 +1,116 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<form ng-submit="submit()" id="servicosForm">
+    <div class="row servicos">
+      <div class="col-sm-5">
+          <label for="exampleInputPassword1">Servico</label>
+          <div class="row ">
+              <select id="servico" name="book[0].servico" class="servico select col-sm-12">
+          </select>
+          </div>
+      </div>
+      <div class="col-sm-2">
+          <div class="form-group">
+              <label for="exampleInputPassword1">Valor</label>
+              <input type="text" class="form-control servico-valor" name="book[0].vlUnitario" placeholder="R$0,00" />
+          </div>
+      </div>
+      <div class="col-sm-2">
+          <div class="form-group">
+              <label for="exampleInputPassword1">Desconto</label>
+              <input type="text" class="form-control servico-desc" name="book[0].desconto" placeholder="R$0,00" />
+          </div>
+      </div>
+      <div class="col-xs-1" style="margin-top:18px">
+          <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+      </div>
+  </div>
+    <div class="form-group hide" id="ServicoTemplate">
+      <div class="row servicos">
+          <div class="col-sm-5">
+              <label for="exampleInputPassword1">Servico</label>
+              <div class="row ">
+                  <select id="book[0].servico" name="book[0].servico" class="servico select col-sm-12">
+
+                      </select>
+              </div>
+          </div>
+          <div class="col-sm-2">
+              <div class="form-group">
+                  <label for="exampleInputPassword1">Valor</label>
+                  <input type="text" class="form-control servico-valor" name="book[0].vlUnitario" placeholder="R$0,00" />
+              </div>
+          </div>
+          <div class="col-sm-2">
+              <div class="form-group">
+                  <label for="exampleInputPassword1">Desconto</label>
+                  <input type="text" class="form-control servico-desc" name="book[0].desconto" placeholder="R$0,00" />
+              </div>
+          </div>
+          <div class="col-xs-1" style="margin-top:18px">
+              <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+          </div>
+      </div>
+  </div>
+</form>
+<script>
+    $(document).ready(function() {
+        $('#servicosForm')
+            .formValidation({
+                framework: 'bootstrap',
+                icon: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+
+                    'book[0].servico': notEmptyStringMinMaxRegexp,
+                    'book[0].valor': notEmptyStringMinMax
+
+                }
+            }).on('click', '.addButton-servico', function() {
+                bookIndex++;
+                var $template = $('#ServicoTemplate'),
+                    $clone = $template
+                    .clone()
+                    .removeClass('hide')
+                    .removeAttr('id')
+                    .attr('data-book-index', bookIndex)
+                    .insertBefore($template);
+
+                // Update the name attributes
+                $clone
+                    .find('[name="servico"]').attr('name', 'book[' + bookIndex + '].cpf').end()
+                    .find('[name="servico-valor"]').attr('name', 'book[' + bookIndex + '].nome').end()
+                    .find('[name="servico-desc"]').attr('name', 'book[' + bookIndex + '].cota').end();
+
+                // Add new fields
+                // Note that we also pass the validator rules for new field as the third parameter
+                $('#servicoForm')
+                    .formValidation('addField', 'book[' + bookIndex + '].servico', notEmptyStringMinMaxRegexp)
+                    .formValidation('addField', 'book[' + bookIndex + '].valor', notEmptyStringMinMaxRegexp);
+            });
+
+
+           var callback = function(res){
+                var servicos = "";
+                                 
+               if(res.operationSuccess == true)
+               {
+                   for(var x = 0 ;x < res.servicoList.length;x++)
+                   {
+                       servicos = servicos + "<option value='"+res.servicoList[x].id+"'> "+res.servicoList[x].servico+"</option>";
+                   }
+                    $('.servico').append(servicos);
+
+                    $(".select1").select2({
+                          placeholder: "Select a state",
+                          allowClear: true
+                        });
+               }
+
+            }
+
+            qat.model.select.util("url",true,new qat.model.siteInquiryRequest( 100/20, true, localStorage.getItem("empresa").id,callback);
+    });
+</script>
