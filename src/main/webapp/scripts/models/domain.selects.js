@@ -1,12 +1,4 @@
-	/**
-	 * Initialize the main namespaces and constants.
-	 */
-	var qat = {
-	    model: {
-	        select: {}
-	    }
 
-	};
 
 
 	//County Object
@@ -32,23 +24,13 @@
 
 	                if (res.operationSuccess == true) {
 	                    if (callback != null){
-	                        for (var x = 0; x < res.cnaeList.length; x++) {
-	                            cnaes = cnaes + "<option value='" + res.cnaeList[x].id + "'> " + res.cnaeList[x].cnae + "</option>";
-	                        }
-		                    $('.cnaeList').append(cnaes);
 
-		                    $(".select1").select2({
-		                        placeholder: "Select a state",
-		                        allowClear: true
-		                    });
 		                } else{
 		                    callback();
 		            	}
 	            	}
-	            }
+
 	        },
 	        type: 'POST'
 	    });
-
-	return cnaes;
 	};
