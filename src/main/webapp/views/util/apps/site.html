@@ -93,7 +93,7 @@
 
             var callback = function(res){
                 var planos = "";
-                                 
+
                if(res.operationSuccess == true)
                {
                    for(var x = 0 ;x < res.planoList.length;x++)
@@ -110,6 +110,6 @@
 
             }
 
-            qat.model.select.util("url",true,new qat.model.siteInquiryRequest( 100/20, true, localStorage.getItem("empresa").id,callback);
+            qat.model.select.util("url",true,new qat.model.siteInquiryRequest( 100/20, true), localStorage.getItem("empresa").id,callback);
     });
 </script>

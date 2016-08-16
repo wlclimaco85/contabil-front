@@ -111,7 +111,7 @@
 								{
 									localStorageService.set('empresa', res.empresaList[0]);
 									$rootScope.empresa = res.empresaList[0];
-									localStorage.setItem("empresa", res.empresaList[0]);
+									localStorage.setItem("empresa", JSON.stringify(res.empresaList[0]));
 								}
 					          });
 
