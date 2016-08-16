@@ -152,6 +152,78 @@ public class ControllerMain {
     }
 
 	@ResponseBody
+    @RequestMapping(value = "/anonimoFile", method = RequestMethod.POST)
+    public String anonimoFile(@RequestBody UtilRequest request ,MultipartHttpServletRequest requestFile, HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException {
+
+
+		///fffffffffffff
+		 RestTemplate rest = new RestTemplate();
+		    rest.setMessageConverters(Arrays.asList(new StringHttpMessageConverter(), new FormHttpMessageConverter()));
+		    MultiValueMap<String, String> paramss = new LinkedMultiValueMap<String, String>();
+		    paramss.set("username", "anonimo@aninimo.com");
+		    paramss.set("password", "anonimo");
+		    ResponseEntity<String> st = rest.postForEntity(URL + "auth/api/authenticate", paramss, String.class);
+		    String tk = st.getBody();
+		    Class<? extends String> mt = tk.getClass();
+		    System.out.println("[" + mt + "]");
+		    ObjectMapper mapper = new ObjectMapper();
+		    ModelToken obj = mapper.readValue(st.getBody(), ModelToken.class);
+
+
+		    //==================================
+
+		  //0. notice, we have used MultipartHttpServletRequest
+
+		       //1. get the files from the request object
+		       Iterator<String> itr =  requestFile.getFileNames();
+
+		       MultipartFile mpf = requestFile.getFile(itr.next());
+		       System.out.println(mpf.getOriginalFilename() +" uploaded!");
+
+		       try {
+		                  //just temporary save file info into ufile
+		          ufile.length = mpf.getBytes().length;
+		          ufile.bytes= mpf.getBytes();
+		          ufile.type = mpf.getContentType();
+		          ufile.name = mpf.getOriginalFilename();
+		          response.setContentType(ufile.type);
+		          response.setContentLength(ufile.length);
+		          FileCopyUtils.copy(ufile.bytes, response.getOutputStream());
+
+		      } catch (IOException e) {
+		          // TODO Auto-generated catch block
+		          e.printStackTrace();
+		      }
+
+		    //====================================
+
+        RestTemplate restTemplate = new RestTemplate();
+        String result ="";
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Header", "value");
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Other-Header", "othervalue");
+        headers.set("X-Auth-Token", obj.getToken() );
+
+        mapper = new ObjectMapper();
+        //HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
+        String jsonInString = null;
+		try {
+			jsonInString = mapper.writeValueAsString(request.getRequest());
+
+        HttpEntity<String> entity = new HttpEntity<String>(jsonInString, headers);
+        result = restTemplate.postForObject(URL + request.getUrl(), entity, String.class,HttpMethod.GET);
+
+
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		}
+		return result;
+    }
+
+	@ResponseBody
     @RequestMapping(value = "/requests", method = RequestMethod.POST)
     public String listard(@RequestBody UtilRequest request) {
 
@@ -346,6 +418,9 @@ public class ControllerMain {
           ufile.bytes= mpf.getBytes();
           ufile.type = mpf.getContentType();
           ufile.name = mpf.getOriginalFilename();
+          response.setContentType(ufile.type);
+          response.setContentLength(ufile.length);
+          FileCopyUtils.copy(ufile.bytes, response.getOutputStream());
 
       } catch (IOException e) {
           // TODO Auto-generated catch block
