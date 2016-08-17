@@ -256,8 +256,43 @@
                 text: 'Novo Empresa',
                 key: '1',
                 action: function(e, dt, node, config) {
+                   
+                    $("#dialogs").dialog({
 
-}
+                        modal: true,
+                        draggable: true,
+                        resizable: true,
+                        //   position: ['center', 'center'],
+                        show: 'blind',
+                        hide: 'blind',
+                        width: 800,
+                        dialogClass: 'ui-dialog-osx',
+                        open: function( event, ui ) {
+                            //$("#dialogs").load('#/views/empresa/dialog/dEmpresa')
+                        }
+                    });
+                  /*
+                   var $dialog = $('#dialogs')
+                    .load('views/empresa/dialog/dEmpresa.html')
+                    .dialog({
+                        autoOpen: false,
+                        title: 'teste',
+                        width: 500,
+                        height: 300
+                    });
+
+                    $dialog.dialog('open');
+                
+
+                    $("#dialogs").load('views/empresa/dialog/dEmpresa.html').dialog({
+                      title:   "cccc",
+                      width: 800,
+                      dialogClass: 'ui-dialog-osx',
+                      close: function() {  },
+                      modal: true,
+                      open : function() {  } // this should work...
+                    })*/
+                }
             }]);
 
         vm.dtColumns = [
@@ -488,6 +523,9 @@
             DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
             DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '140px'),
         ];
+
+
+
 
 $scope.submit = function() {
     debugger

@@ -103,7 +103,7 @@
                    }
                     $('.servico').append(servicos);
 
-                    $(".select1").select2({
+                    $(".servico").select2({
                           placeholder: "Select a state",
                           allowClear: true
                         });
@@ -111,6 +111,29 @@
 
             }
 
-            qat.model.select.util("url",true,new qat.model.siteInquiryRequest( 100/20, true, localStorage.getItem("empresa").id,callback);
+           var callback = function(res){
+                var servicos = "";
+                var preco = 0;
+
+               if(res.operationSuccess == true)
+               {
+                   for(var x = 0 ;x < res.servicoList.length;x++)
+                   {
+                        if(res.servicoList[x].precoList != undefined){
+                          preco = res.servicoList[x].precoList[res.servicoList[x].precoList.length -1].valor
+                        }
+                       planos = planos + "<option value='"+res.servicoList[x].id+"'> "+res.servicoList[x].descricao+" <sup> "+ preco+"</sup></option>";
+                   }
+                    $('.servicos').append(servicos);
+
+                    $(".servico").select2({
+                          placeholder: "Select a state",
+                          allowClear: true
+                        });
+               }
+
+            }
+
+            qat.model.select.util("site/api/servico/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callback);
     });
 </script>
