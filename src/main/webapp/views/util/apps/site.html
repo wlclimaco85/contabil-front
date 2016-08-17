@@ -1,17 +1,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <form ng-submit="submit()" id="planosForm">
     <div class="row planos">
-      <div class="col-sm-5">
+      <div class="col-sm-8">
           <label for="exampleInputPassword1">Plano</label>
           <div class="row ">
-              <select id="plano" name="book[0].plano" class="plano select col-sm-12">
+              <select id="plano" name="book[0].plano" class="plano select10 col-sm-12">
           </select>
-          </div>
-      </div>
-      <div class="col-sm-2">
-          <div class="form-group">
-              <label for="exampleInputPassword1">Valor</label>
-              <input type="text" class="form-control plano-valor" name="book[0].vlUnitario" placeholder="R$0,00" />
           </div>
       </div>
       <div class="col-sm-2">
@@ -21,23 +15,17 @@
           </div>
       </div>
       <div class="col-xs-1" style="margin-top:18px">
-          <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+          <button type="button" class="btn btn-default addButton-plano"><i class="fa fa-plus"></i></button>
       </div>
   </div>
     <div class="form-group hide" id="PlanoTemplate">
       <div class="row planos">
-          <div class="col-sm-5">
+          <div class="col-sm-8">
               <label for="exampleInputPassword1">Plano</label>
               <div class="row ">
                   <select id="book[0].plano" name="book[0].plano" class="plano select col-sm-12">
 
                       </select>
-              </div>
-          </div>
-          <div class="col-sm-2">
-              <div class="form-group">
-                  <label for="exampleInputPassword1">Valor</label>
-                  <input type="text" class="form-control plano-valor" name="book[0].vlUnitario" placeholder="R$0,00" />
               </div>
           </div>
           <div class="col-sm-2">
@@ -93,26 +81,32 @@
 
             var callback = function(res){
                 var planos = "";
-                var preco = "";
+                var preco = 0;
 
                if(res.operationSuccess == true)
                {
                    for(var x = 0 ;x < res.planoList.length;x++)
                    {
-                        if(es.planoList[x].precoList != undefined){
+                        if(res.planoList[x].precoList != undefined){
                           preco = res.planoList[x].precoList[res.planoList[x].precoList.length -1].valor
                         }
-                       planos = planos + "<option value='"+res.planoList[x].id+"'> "+res.planoList[x].descricao+" <sup> "+ preco || 0+"</sup></option>";
+                       planos = planos + "<option value='"+res.planoList[x].id+"'> "+res.planoList[x].descricao+" <sup> "+ preco+"</sup></option>";
                    }
+                    planos = planos + "<option class='options'> Cadastrar Novo Plano </option>";
+
                     $('.plano').append(planos);
 
-                    $(".select1").select2({
+                    $(".select").select2({
                           placeholder: "Select a state",
                           allowClear: true
                         });
                }
 
             }
+            $(".select10").select2({
+                placeholder: "Select a state",
+                allowClear: true
+            });
 
             qat.model.select.util("site/api/plano/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callback);
     });
