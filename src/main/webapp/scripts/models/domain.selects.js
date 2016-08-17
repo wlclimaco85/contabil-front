@@ -5,7 +5,7 @@
 	qat.model.select.util = function(url,async, request, callback) {
 	    var cnaes = "";
 	    $.ajax({
-	            url: 'main/api/anonimo',
+	            url: 'main/api/request',
 	            async: async,
 	            headers: {
 	                'Accept': 'application/json',
@@ -13,6 +13,7 @@
 	            },
 	            data: JSON.stringify({
 	                url: url,
+	                token : localStorage.getItem("wdAppLS.authToken").replace(/^"(.*)"$/, '$1'),
 	                request: request
 	            }),
 	            error: function() {
@@ -23,10 +24,10 @@
 	            success: function(res) {
 
 	                if (res.operationSuccess == true) {
-	                    if (callback != null){
+	                    if (callback == null){
 
 		                } else{
-		                    callback();
+		                    callback(res);
 		            	}
 	            	}
 
