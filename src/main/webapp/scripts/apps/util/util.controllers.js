@@ -7,7 +7,7 @@ function utilControllers($scope,ModalService,SysMgmtData) {
     
     $scope.empresaType  = 0 
     var vm = this;
-
+/*
 
 
     ModalService.showModal({
@@ -20,7 +20,7 @@ function utilControllers($scope,ModalService,SysMgmtData) {
             $scope.message = "You said " + result;
         });
     });
-
+*/
 
     vm.buscaRCep = function(cepValue) {
 debugger

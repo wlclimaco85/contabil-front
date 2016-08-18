@@ -4,7 +4,7 @@
       <div class="col-sm-8">
           <label for="exampleInputPassword1">Plano</label>
           <div class="row ">
-              <select id="plano" name="book[0].plano" class="plano select10 col-sm-12">
+              <select id="plano" name="book[0].plano" class="planoList select10 col-sm-12">
           </select>
           </div>
       </div>
@@ -23,7 +23,7 @@
           <div class="col-sm-8">
               <label for="exampleInputPassword1">Plano</label>
               <div class="row ">
-                  <select id="book[0].plano" name="book[0].plano" class="plano select col-sm-12">
+                  <select id="book[0].plano" name="book[0].plano" class="planoList select5 col-sm-12">
 
                       </select>
               </div>
@@ -42,6 +42,7 @@
 </form>
 <script>
     $(document).ready(function() {
+      var bookIndex = 0;
         $('#planosForm')
             .formValidation({
                 framework: 'bootstrap',
@@ -77,7 +78,21 @@
                 $('#planoForm')
                     .formValidation('addField', 'book[' + bookIndex + '].plano', notEmptyStringMinMaxRegexp)
                     .formValidation('addField', 'book[' + bookIndex + '].valor', notEmptyStringMinMaxRegexp);
-            });
+
+                  $clone.find('select').select2({
+                    placeholder: "Select a state",
+                    allowClear: true
+                  })
+            }).on('click', '.removeButton2', function() {
+                    // Remove field when clicking the Remove button
+                    $('#planoForm').formValidation('removeField', $template);
+
+                    // Enable the Add button
+                    $that.parent().removeClass('disabled');
+
+                    // Remove element
+                    $clone.remove();
+                });
 
             var callback = function(res){
                 var planos = "";
@@ -87,26 +102,23 @@
                {
                    for(var x = 0 ;x < res.planoList.length;x++)
                    {
-                        if(res.planoList[x].precoList != undefined){
+                        if(res.planoList[x].precoList.length > 0){
                           preco = res.planoList[x].precoList[res.planoList[x].precoList.length -1].valor
                         }
                        planos = planos + "<option value='"+res.planoList[x].id+"'> "+res.planoList[x].descricao+" <sup> "+ preco+"</sup></option>";
                    }
                     planos = planos + "<option class='options'> Cadastrar Novo Plano </option>";
 
-                    $('.plano').append(planos);
+                    $('.planoList').append(planos);
 
-                    $(".select").select2({
+                    $(".select10").select2({
                           placeholder: "Select a state",
                           allowClear: true
                         });
                }
 
             }
-            $(".select10").select2({
-                placeholder: "Select a state",
-                allowClear: true
-            });
+
 
             qat.model.select.util("site/api/plano/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callback);
     });
