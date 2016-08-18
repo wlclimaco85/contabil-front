@@ -1,3 +1,4 @@
+
 <div class="modal fade">
     <div class="modal-dialog" style="width : 60%">
         <div class="modal-content">
@@ -11,43 +12,41 @@
                     <div class="row">
                         <div class="form-group col-sm-4">
                             <label for="exampleInputEmail1">Nome</label>
-                            <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="Nome">
+                            <input type="text" class="form-control" ng-model="site.nome"  placeholder="Nome">
                         </div>
 
                         <div class="form-group col-sm-4">
                             <label for="exampleInputEmail1">Url</label>
-                            <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="Url">
+                            <input type="text"  class="form-control" ng-model="site.url"  placeholder="Url">
                         </div>
                         <div class="form-group col-sm-4">
                             <label for="exampleInputEmail1">Logo</label>
-                            <input type="file" name="fileToUpload" id="fileToUpload" onchange="fileSelected();" />
-                            <div id="fileName"></div>
-                            <div id="fileSize"></div>
-                            <div id="fileType"></div>
-                            <input type="button" onclick="uploadFile()" value="Upload" />
-                            <div id="progressNumber"></div>
+                            <h4>Multi Language Inputs</h4>
+                                        <!--<form enctype="multipart/form-data"> -->
+                                        <label>French Input</label>
+                                        <input id="file-fr" name="file-fr[]" type="file" data-url="rest/main/api/upload" multiple>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-6">
-                            <label for="exampleInputEmail1">Miss√£o</label>
-                            <textarea class="form-control" rows="5" id="Missao"></textarea>
+                            <label for="exampleInputEmail1">Miss„o</label>
+                            <textarea class="form-control" ng-model="site.missao" rows="5" ></textarea>
                         </div>
 
                         <div class="form-group col-sm-6">
-                            <label for="exampleInputEmail1">Vis√£o</label>
-                            <textarea class="form-control" rows="5" id="Visao"></textarea>
+                            <label for="exampleInputEmail1">Vis„o</label>
+                            <textarea class="form-control" ng-model="site.visao" rows="5" ></textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-6">
                             <label for="exampleInputEmail1">Quem Somos</label>
-                            <textarea class="form-control" rows="5" id="Missao"></textarea>
+                            <textarea class="form-control" ng-model="site.quemSomos" rows="5" ></textarea>
                         </div>
 
                         <div class="form-group col-sm-6">
                             <label for="exampleInputEmail1">Como Trabalhamos</label>
-                            <textarea class="form-control" rows="5" id="Visao"></textarea>
+                            <textarea class="form-control" ng-model="site.comoTrabalhamos" rows="5" ></textarea>
                         </div>
                     </div>
                     <div class="row " style="margin-top : 10px"></div>
@@ -61,8 +60,8 @@
                                     <label for="exampleInputPassword1">Aonde</label>
                                     <div class="row ">
                                         <select name="book[0].produto" class="col-sm-12 mySelect">
-                                            <option value="0">Miss√£o</option>
-                                            <option value="1">Viss√£o</option>
+                                            <option value="0">Miss„o</option>
+                                            <option value="1">Viss„o</option>
                                             <option value="2">Quem Somos</option>
                                             <option value="3">Nav</option>
                                         </select>
@@ -70,16 +69,13 @@
                                 </div>
                                 <div class="form-group col-sm-7">
                                     <label for="exampleInputEmail1">Logo</label>
-                                    <input type="file" name="fileToUpload" id="fileToUpload" onchange="fileSelected();" />
-                                    <div id="fileName"></div>
-                                    <div id="fileSize"></div>
-                                    <div id="fileType"></div>
-                                    <input type="button" onclick="uploadFile()" value="Upload" />
-                                    <div id="progressNumber"></div>
+                                    <input id="file-fr" name="file-fr[]" type="file" multiple>
                                 </div>
                                 <div class="col-xs-1" style="margin-top:18px">
-                                    <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i>
-                                                        </button>
+                                    h4>Multi Language Inputs</h4>
+                                        <!--<form enctype="multipart/form-data"> -->
+                                        <label>French Input</label>
+                                        <input id="file-fr" name="file-fr[]" type="file" data-url="rest/main/api/upload" multiple>
                                 </div>
                             </div>
                             <div class="form-group hide" id="bookTemplate">
@@ -88,8 +84,8 @@
                                         <label for="exampleInputPassword1">Aonde</label>
                                         <div class="row ">
                                             <select name="book[0].produto" class="col-sm-12 mySelect">
-                                                <option value="0">Miss√£o</option>
-                                                <option value="1">Viss√£o</option>
+                                                <option value="0">Miss„o</option>
+                                                <option value="1">Viss„o</option>
                                                 <option value="2">Quem Somos</option>
                                                 <option value="3">Nav</option>
                                             </select>
@@ -163,15 +159,15 @@
                     <div class="row " style="margin-top : 10px"></div>
                     <div class="row">
                         <div class="form-group col-sm-12">
-                            <label for="exampleInputPassword1">Observa√ß√£o</label>
-                            <textarea class="form-control" rows="5" id="Observa√ß√£o"></textarea>
+                            <label for="exampleInputPassword1">ObservaÁ„o</label>
+                            <textarea class="form-control" rows="5" ng-model="site.titulo" id="ObservaÁ„o"></textarea>
                         </div>
                     </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Gravar</button>
+                    <button type="button" ng-click="savessss()" class="btn btn-primary" data-dismiss="modal">Gravar</button>
                 </div>
             </form>
         </div>

@@ -26,6 +26,8 @@
     </div>
     <div class="form-group hide" id="bookTemplate">
         <div class="row usuarios">
+        <nr>
+        <br>
             <div class="col-sm-6">
               <label for="exampleInputEmail1">Nome Completo</label>
               <input type="text"   name="usuario[0].nome" class="form-control" placeholder="Nome Completo">
@@ -50,6 +52,7 @@
 </form>
 <script>
     $(document).ready(function() {
+      var bookIndex = 0;
         $('#usuariosForm')
             .formValidation({
                 framework: 'bootstrap',

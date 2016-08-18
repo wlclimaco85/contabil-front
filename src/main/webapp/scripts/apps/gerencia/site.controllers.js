@@ -2,7 +2,7 @@
     angular.module('wdApp.apps.site', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('SitesController', siteController);
 
-    function siteController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService) {
+    function siteController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData) {
         var vm = this;
         vm.selected = {};
         vm.selectAll = false;
@@ -31,7 +31,30 @@
         var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
             'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
 
-        vm.dtOptions = DTOptionsBuilder.fromSource('site.json')
+        vm.dtOptions = DTOptionsBuilder.newOptions()
+            .withOption('ajax', {
+                dataSrc: function(json) {
+                    console.log(json)
+                    json['recordsTotal'] = json.sites.length
+                    json['recordsFiltered'] = json.sites.length
+                    json['draw'] = 1
+                    console.log(json)
+                    return json.sites;
+                },
+                "contentType": "application/json; charset=utf-8",
+                "dataType": "json",
+                "url": "main/api/request",
+                "type": "POST",
+                "data": function(d) {
+                    //   console.log("data");
+                    //    d.search = $scope.searchData || {}; //search criteria
+                    return JSON.stringify({
+                        "url": "site/api/fetchPage",
+                        "token": $rootScope.authToken,
+                        "request": new qat.model.empresaInquiryRequest(0, true,null,null,null)
+                    });
+                }
+            })
             .withDOM('frtip')
             .withPaginationType('full_numbers')
             .withOption('createdRow', createdRow)
@@ -144,8 +167,8 @@
                 key: '1',
                 action: function(e, dt, node, config) {
                     ModalService.showModal({
-                        templateUrl: 'cadSite.html',
-                        controller: "SitesController"
+                        templateUrl: 'views/gerencia/dialog/dSite.html',
+                        controller: "ExampleController"
                     }).then(function(modal) {
 
 
@@ -264,7 +287,7 @@
         function view(person) {
             ModalService.showModal({
                 templateUrl: 'deleteCidade.html',
-                controller: "ContasPagarController"
+                controller: "ExampleController"
             }).then(function(modal) {
                 modal.element.modal();
                 modal.close.then(function(result) {
@@ -457,3 +480,53 @@
         };
     }
 })();
+
+(function() {
+    angular.module('wdApp.apps.sitess',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('ExampleController', function($rootScope,$scope,fModels,SysMgmtData) {
+
+            var vm = this;
+
+        $scope.site = {};
+
+        $scope.savessss = function() {
+                        debugger
+                        var oObject = fModels.amont($scope.site);
+                        console.log($scope.site);
+                        SysMgmtData.processPostPageData("main/api/request",{
+                            url: "site/api/insert/",
+                            token: $rootScope.authToken,
+                            request: new qat.model.reqSite( oObject,true, true)
+                           // {
+                              //  "cfop": oObject
+                           //   cfop : {"id":"10"}
+                           // }
+                        }, function(res) {
+                            debugger
+                            console.log(res)
+                        });
+                       // $('#cfopForm').formValidation('resetForm', true);
+                       // vm.processButtons('U',$scope.cfop);
+                    };
+            
+});
+})();
+
+/*
+(function() {
+    angular.module('wdApp.apps.sitess',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('SiteUpdateController', function($scope) {
+
+            var vm = this;
+
+        $scope.site = {};
+
+        $scope.savessss = function() {
+                        debugger
+                        console.log($scope.site)
+                       // $('#cfopForm').formValidation('resetForm', true);
+                       // vm.processButtons('U',$scope.cfop);
+                    };
+            
+});
+})();*/
