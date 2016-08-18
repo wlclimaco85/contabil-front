@@ -429,3 +429,55 @@
         };
     }
 })();
+
+
+
+(function() {
+    angular.module('wdApp.apps.plano.insert',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('PlanoInsertController', function($rootScope,$scope,fModels,SysMgmtData) {
+
+            var vm = this;
+
+        $scope.site = {};
+
+        $scope.savessss = function() {
+ 
+                        var oObject = fModels.amont($scope.site);
+                        console.log($scope.site);
+                        SysMgmtData.processPostPageData("main/api/request",{
+                            url: "site/api/insert/",
+                            token: $rootScope.authToken,
+                            request: new qat.model.reqSite( oObject,true, true)
+                           // {
+                              //  "cfop": oObject
+                           //   cfop : {"id":"10"}
+                           // }
+                        }, function(res) {
+                            debugger
+                            console.log(res)
+                        });
+                       // $('#cfopForm').formValidation('resetForm', true);
+                       // vm.processButtons('U',$scope.cfop);
+                    };
+            
+});
+})();
+
+
+(function() {
+    angular.module('wdApp.apps.plano.update',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('PlanoUpdateController', function($scope) {
+
+            var vm = this;
+
+        $scope.site = {};
+
+        $scope.savessss = function() {
+                        debugger
+                        console.log($scope.site)
+                       // $('#cfopForm').formValidation('resetForm', true);
+                       // vm.processButtons('U',$scope.cfop);
+                    };
+            
+});
+})();

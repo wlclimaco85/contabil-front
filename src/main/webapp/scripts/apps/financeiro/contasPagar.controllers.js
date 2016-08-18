@@ -2,7 +2,7 @@
 angular.module('wdApp.apps.contasPagar', ['datatables','angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
 .controller('ContasPagarController', contasPagarController);
 
-function contasPagarController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalService) {
+function contasPagarController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalService,Datatablessss) {
     var vm = this;
     vm.selected = {};
     vm.selectAll = false;
@@ -18,7 +18,7 @@ function contasPagarController($scope, $compile, DTOptionsBuilder, DTColumnBuild
     var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
         'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
 
-    vm.dtOptions = DTOptionsBuilder.fromSource('contasPagar.json')
+    oOptions = DTOptionsBuilder.fromSource('contasPagar.json')
         .withDOM('frtip')
         .withPaginationType('full_numbers')
         .withOption('createdRow', createdRow)
@@ -141,7 +141,7 @@ function contasPagarController($scope, $compile, DTOptionsBuilder, DTColumnBuild
                 }
             }
         ]);
-    vm.dtColumns = [
+    aColumns = [
         DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
             .renderWith(function(data, type, full, meta) {
                 vm.selected[full.id] = false;
@@ -181,6 +181,15 @@ function contasPagarController($scope, $compile, DTOptionsBuilder, DTColumnBuild
         DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '140px'), 
     ];
 
+    function rCallback(nRow, aData){
+      // console.log('row');
+    }
+
+    function recompile(row, data, dataIndex) {
+       $compile(angular.element(row).contents())($scope);
+   }
+
+    Datatablessss.getTable('getfinanceiro', this, rCallback, null, recompile,oOptions,aColumns);
    
 
     function edit(person) {

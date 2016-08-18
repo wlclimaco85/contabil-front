@@ -86,7 +86,10 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.tela'
 	            ,'wdApp.apps.relatorios'/**/
 	             ,'wdApp.models'
-	             ,'wdApp.apps.sitess'
+	             ,'wdApp.apps.site.update'
+	             ,'wdApp.apps.site.insert'
+	             ,'wdApp.apps.plano.insert'
+	             ,'wdApp.apps.plano.update'
 				]);
 
 	wdApp.config(['$routeProvider',

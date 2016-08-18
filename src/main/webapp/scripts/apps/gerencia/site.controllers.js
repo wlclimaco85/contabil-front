@@ -31,7 +31,8 @@
         var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
             'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
 
-        vm.dtOptions = DTOptionsBuilder.newOptions()
+        vm.dtOptions = fSite.fnFillTableSite();
+        /*DTOptionsBuilder.newOptions()
             .withOption('ajax', {
                 dataSrc: function(json) {
                     console.log(json)
@@ -181,7 +182,7 @@
                 }
             }]);
 
-
+*/
             vm.dtColumns = [
             DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
             .renderWith(function(data, type, full, meta) {
@@ -482,7 +483,7 @@
 })();
 
 (function() {
-    angular.module('wdApp.apps.sitess',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+    angular.module('wdApp.apps.site.insert',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('ExampleController', function($rootScope,$scope,fModels,SysMgmtData) {
 
             var vm = this;
@@ -490,7 +491,7 @@
         $scope.site = {};
 
         $scope.savessss = function() {
-                        debugger
+ 
                         var oObject = fModels.amont($scope.site);
                         console.log($scope.site);
                         SysMgmtData.processPostPageData("main/api/request",{
@@ -512,9 +513,9 @@
 });
 })();
 
-/*
+
 (function() {
-    angular.module('wdApp.apps.sitess',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+    angular.module('wdApp.apps.site.update',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('SiteUpdateController', function($scope) {
 
             var vm = this;
@@ -529,4 +530,4 @@
                     };
             
 });
-})();*/
+})();
