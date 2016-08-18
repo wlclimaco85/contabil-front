@@ -13,82 +13,57 @@
                                         <div class="row">
                                             <div class="form-group col-sm-4">
                                                 <label for="exampleInputEmail1">Titulo</label>
-                                                <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
+                                                <input type="text" class="form-control nome-socio" ng-model="plano.titulo"  placeholder="0.00" />
                                             </div>
 
                                             <div class="form-group col-sm-2">
                                                 <label for="exampleInputEmail1">Valor</label>
-                                                <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
+                                                <input type="text" class="form-control nome-socio"  ng-model="plano.valor"  placeholder="0.00" />
                                             </div>
 
                                             <div class="form-group col-sm-6">
                                                 <label for="exampleInputEmail1">Descrição</label>
-                                                <textarea class="form-control" rows="5" id="Observação"></textarea>
+                                                <textarea class="form-control"  ng-model="plano.descricao"  rows="5" id="Observação"></textarea>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="form-group col-sm-4">
+                                            <div class="form-group col-sm-3">
                                                 <label for="exampleInputEmail1">Data Inicio</label>
-                                                <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
+                                                <input type="text" class="form-control nome-socio"  ng-model="plano.dtInicio"  placeholder="0.00" />
+                                            </div>
+
+                                            <div class="form-group col-sm-3">
+                                                <label for="exampleInputEmail1">Data Final</label>
+                                                <input type="text" class="form-control nome-socio"  ng-model="plano.dtFinal"  placeholder="0.00" />
+                                            </div>
+
+                                            <div class="form-group col-sm-3">
+                                                <label for="exampleInputEmail1">Cor</label>
+                                                <input type="text" class="form-control nome-socio"  ng-model="plano.cor"  placeholder="0.00" />
                                             </div>
 
                                             <div class="form-group col-sm-4">
-                                                <label for="exampleInputEmail1">Data Final</label>
-                                                <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
-                                            </div>
-                                            <div class="form-group col-sm-4">
-                                                <label for="exampleInputEmail1">Imagem</label>
-                                                <input type="file" name="fileToUpload" id="fileToUpload" onchange="fileSelected();"/>
-                                                        <div id="fileName"></div>
-                                                        <div id="fileSize"></div>
-                                                        <div id="fileType"></div>
-                                                        <input type="button" onclick="uploadFile()" value="Upload" />
-                                                        <div id="progressNumber"></div>
+                                                <div class="panel-body">
+                                        <h4>Multi Language Inputs</h4>
+                                        <!--<form enctype="multipart/form-data"> -->
+                                        <label>French Input</label>
+                                        <input id="file-fr" name="file-fr[]" type="file" data-url="rest/main/api/upload" multiple>
+                                        <!--</form> -->
+
+
+                                    </div>
                                             </div>
                                         </div>
                                         <div class="row " style="margin-top : 10px"></div>
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
-                                                <h3 class="panel-title">Serviços</h3>
+                                                <h3 class="panel-title">Serviço</h3>
                                             </div>
                                             <div class="panel-body">
-                                                <div class="row socios">
-                                                    <div class="col-sm-11">
-                                                        <label for="exampleInputPassword1">Serviço</label>
-                                                        <div class="row ">
-                                                            <select name="book[0].produto" class="col-sm-12">
-                                                                <option value="0">5414 - Abertura Empresa</option>
-                                                                <option value="1">5415 - Serviços Contabeis Mensal</option>
-                                                                <option value="2">5416 - Fechamento Empresa</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-1" style="margin-top:18px">
-                                                        <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group hide" id="bookTemplate">
-                                                    <div class="row socios">
-                                                        <div class="col-sm-11">
-                                                        <label for="exampleInputPassword1">Serviço</label>
-                                                        <div class="row ">
-                                                            <select name="book[0].produto" class="col-sm-12">
-                                                                <option value="0">5414 - Abertura Empresa</option>
-                                                                <option value="1">5415 - Serviços Contabeis Mensal</option>
-                                                                <option value="2">5416 - Fechamento Empresa</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                        <div class="col-xs-1" style="margin-top:18px">
-                                                            <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <!-- servico -->
+                                                <div ng-include="'views/util/apps/servico.html'"></div>
                                             </div>
                                         </div>
-                                        <div class="row " style="margin-top : 10px"></div>
                                         
                                        
                                 </div>
