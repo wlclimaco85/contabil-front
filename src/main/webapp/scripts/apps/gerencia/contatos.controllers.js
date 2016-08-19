@@ -1,8 +1,8 @@
-(function() {
+ (function() {
     angular.module('wdApp.apps.contatos', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('ContatosController', contatosController);
 
-    function contatosController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService) {
+    function contatosController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData) {
         var vm = this;
         vm.selected = {};
         vm.selectAll = false;
@@ -16,7 +16,7 @@
         vm.dtInstance = {};
         vm.persons = {};
 
-        vm.responder = responder;
+        vm.alterStatus = alterStatus;
         vm.historico = historico;
         vm.addAdvogado = addAdvogado;
         vm.envolvidos = envolvidos;
@@ -31,7 +31,30 @@
         var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
             'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
 
-        vm.dtOptions = DTOptionsBuilder.fromSource('contato.json')
+        vm.dtOptions = DTOptionsBuilder.newOptions()
+            .withOption('ajax', {
+                dataSrc: function(json) {
+                    console.log(json)
+                    json['recordsTotal'] = json.contatoList.length
+                    json['recordsFiltered'] = json.contatoList.length
+                    json['draw'] = 1
+                    console.log(json)
+                    return json.contatoList;
+                },
+                "contentType": "application/json; charset=utf-8",
+                "dataType": "json",
+                "url": "main/api/request",
+                "type": "POST",
+                "data": function(d) {
+                    //   console.log("data");
+                    //    d.search = $scope.searchData || {}; //search criteria
+                    return JSON.stringify({
+                        "url": "site/api/contato/fetchPage",
+                        "token": $rootScope.authToken,
+                        "request": new qat.model.pagedInquiryRequest(2, true)
+                    });
+                }
+            })
             .withDOM('frtip')
             .withPaginationType('full_numbers')
             .withOption('createdRow', createdRow)
@@ -140,12 +163,12 @@
                 }
 
             }, {
-                text: 'Novo Contato',
+                text: 'Novo Plano',
                 key: '1',
                 action: function(e, dt, node, config) {
                     ModalService.showModal({
-                        templateUrl: 'cadContato.html',
-                        controller: "ContatosController"
+                        templateUrl: 'views/gerencia/dialog/dPlano.html',
+                        controller: "PlanoInsertController"
                     }).then(function(modal) {
 
 
@@ -158,7 +181,8 @@
                 }
             }]);
 
-            vm.dtColumns = [
+
+        vm.dtColumns = [
             DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
             .renderWith(function(data, type, full, meta) {
                 vm.selected[full.id] = false;
@@ -179,8 +203,8 @@
 
         function edit(person) {
             ModalService.showModal({
-            templateUrl: 'cadContato.html',
-            controller: "ContatosController"
+                templateUrl: 'cadPlano.html',
+                controller: "PlanosController"
             }).then(function(modal) {
 
                 modal.element.modal();
@@ -193,8 +217,8 @@
 
         function deleteRow(person) {
             ModalService.showModal({
-                templateUrl: 'deleteCidade.html',
-                controller: "ContasPagarController"
+                templateUrl: 'deletePlano.html',
+                controller: "PlanoController"
             }).then(function(modal) {
                 modal.element.modal();
                 modal.close.then(function(result) {
@@ -286,18 +310,26 @@
             $compile(angular.element(row).contents())($scope);
         }
 
-         function actionsHtmlProcesso(data, type, full, meta) {
-        vm.persons[data.id] = data;
-        return '<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
-            '   <i class="fa fa-edit"></i>' +
-            '</button>&nbsp;' +
-            '<button class="btn btn-info" ng-click="showCase.responder(showCase.persons[' + data.id + '])">' +
-            '   <i class="glyphicon glyphicon-send"></i>' +
-            '</button>&nbsp;' +
-            '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
-            '   <i class="fa fa-trash-o"></i>' +
-            '</button>';
-    }
+        function actionsHtml(data, type, full, meta) {
+            vm.persons[data.id] = data;
+            return '<button class="btn btn-info" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
+                '   <i class="glyphicon glyphicon-save"></i>' +
+                '</button>&nbsp;' +
+                '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
+                '   <i class="fa fa-trash-o"></i>' +
+                '</button>';
+        }
+
+        function actionsHtmlProcesso(data, type, full, meta) {
+            vm.persons[data.id] = data;
+            return '<a href="#/advogado/details/processo" class="btn btn-info" ><i class="glyphicon glyphicon-search"></i></a>&nbsp;' +
+                '<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
+                '   <i class="fa fa-edit"></i>' +
+                '</button>&nbsp;' +
+                '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
+                '   <i class="fa fa-trash-o"></i>' +
+                '</button>';
+        }
 
         function toggleAll(selectAll, selectedItems) {
             for (var id in selectedItems) {
@@ -312,10 +344,10 @@
 
         }
 
-        function responder() {
+        function alterStatus() {
             ModalService.showModal({
-                templateUrl: 'responder.html',
-                controller: "ContatoController"
+                templateUrl: 'alterStatus.html',
+                controller: "ContasPagarController"
             }).then(function(modal) {
                 modal.element.modal();
                 modal.close.then(function(result) {
@@ -390,4 +422,89 @@
             $scope.state = !$scope.state;
         };
     }
+})();
+
+
+
+(function() {
+    angular.module('wdApp.apps.contato.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('PlanoInsertController', function($rootScope, $scope, fModels, SysMgmtData) {
+
+            var vm = this;
+
+            $scope.contato = {};
+
+            $scope.today = function() {
+                return $scope.dt = new Date();
+            };
+            $scope.today();
+            $scope.clear = function() {
+                return $scope.dt = null;
+            };
+            $scope.open = function($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+                return $scope.opened = true;
+            };
+            $scope.dateOptions = {
+                'year-format': "'yy'",
+                'starting-day': 0
+            };
+            $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
+            $scope.format = $scope.formats[1];
+
+            $scope.savessssS = function() {
+
+                var oObject = fModels.amont($scope.contato,"INSERT");
+                oObject.dataInicio = (new Date()).getTime();
+                oObject.dataFinal = (new Date()).getTime();
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "site/api/contato/insert/",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqPlano(oObject, true, true)
+                        // {
+                        //  "cfop": oObject
+                        //   cfop : {"id":"10"}
+                        // }
+                }, function(res) {
+                   
+                    console.log(res)
+                });
+                // $('#cfopForm').formValidation('resetForm', true);
+                // vm.processButtons('U',$scope.cfop);
+            };
+
+        });
+})();
+
+
+(function() {
+    angular.module('wdApp.apps.contato.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('PlanoUpdateController', function($rootScope, $scope, fModels, SysMgmtData) {
+
+            var vm = this;
+
+            $scope.contato = {};
+
+            $scope.contato = $rootScope.contato;
+       console.log($rootScope.contato)
+        $scope.savessss = function() {
+
+                        var oObject = fModels.amont($scope.contato,'UPDATE');
+                        console.log($scope.contato);
+                        SysMgmtData.processPostPageData("main/api/request",{
+                            url: "site/api/contato/update/",
+                            token: $rootScope.authToken,
+                            request: new qat.model.reqSite( oObject,true, true)
+                           // {
+                              //  "cfop": oObject
+                           //   cfop : {"id":"10"}
+                           // }
+                        }, function(res) {
+                            debugger
+                            console.log(res)
+                        });
+                    };
+
+        });
 })();

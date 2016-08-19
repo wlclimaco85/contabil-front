@@ -205,7 +205,7 @@
             }),
             DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
             DTColumnBuilder.newColumn('titulo').withTitle('Titulo'),
-            DTColumnBuilder.newColumn(null).withTitle('Preco').renderWith(function(data, type, full, meta) {
+            DTColumnBuilder.newColumn(null).withTitle('Preço').renderWith(function(data, type, full, meta) {
 
                 if (data.precoList.length > 0)
                     return '<span>' + data.precoList[0].valor + '</span>';
@@ -529,16 +529,29 @@
     angular.module('wdApp.apps.plano.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('PlanoUpdateController', function($rootScope, $scope, fModels, SysMgmtData) {
 
-            var vm = this;
+             var vm = this;
 
-            $scope.site = {};
+            $scope.plano = {};
 
-            $scope.savessss = function() {
-                debugger
-                console.log($scope.site)
-                    // $('#cfopForm').formValidation('resetForm', true);
-                    // vm.processButtons('U',$scope.cfop);
-            };
+            $scope.contato = $rootScope.plano;
+       console.log($rootScope.plano)
+        $scope.savessss = function() {
+
+                        var oObject = fModels.amont($scope.plano,'UPDATE');
+                        console.log($scope.plano);
+                        SysMgmtData.processPostPageData("main/api/request",{
+                            url: "site/api/plano/update/",
+                            token: $rootScope.authToken,
+                            request: new qat.model.reqPlano( oObject,true, true)
+                           // {
+                              //  "cfop": oObject
+                           //   cfop : {"id":"10"}
+                           // }
+                        }, function(res) {
+                            debugger
+                            console.log(res)
+                        });
+                    };
 
         });
 })();

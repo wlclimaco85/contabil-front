@@ -1,8 +1,8 @@
-(function() {
+ (function() {
     angular.module('wdApp.apps.servico', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('ServicosController', servicosController);
 
-    function servicosController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService) {
+    function servicosController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData) {
         var vm = this;
         vm.selected = {};
         vm.selectAll = false;
@@ -31,20 +31,36 @@
         var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
             'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
 
-        vm.dtOptions = DTOptionsBuilder.fromSource('processo.json')
+        vm.dtOptions = DTOptionsBuilder.newOptions()
+            .withOption('ajax', {
+                dataSrc: function(json) {
+                    console.log(json)
+                    json['recordsTotal'] = json.servicoList.length
+                    json['recordsFiltered'] = json.servicoList.length
+                    json['draw'] = 1
+                    console.log(json)
+                    return json.servicoList;
+                },
+                "contentType": "application/json; charset=utf-8",
+                "dataType": "json",
+                "url": "main/api/request",
+                "type": "POST",
+                "data": function(d) {
+                    //   console.log("data");
+                    //    d.search = $scope.searchData || {}; //search criteria
+                    return JSON.stringify({
+                        "url": "site/api/servico/fetchPage",
+                        "token": $rootScope.authToken,
+                        "request": new qat.model.pagedInquiryRequest(2, true)
+                    });
+                }
+            })
             .withDOM('frtip')
             .withPaginationType('full_numbers')
             .withOption('createdRow', createdRow)
-            .withOption('headerCallback', function(header) {
-                if (!vm.headerCompiled) {
-                    // Use this headerCompiled field to only compile header once
-                    vm.headerCompiled = true;
-                    $compile(angular.element(header).contents())($scope);
-                }
-            })
             .withPaginationType('full_numbers')
             .withColumnFilter({
-                aoColumns: [{
+                aoColumns: [null, {
                     type: 'number'
                 }, {
                     type: 'number',
@@ -64,10 +80,10 @@
                 $('.dt-buttons').find('.dt-button:eq(1)').before(
 
                     '<select class="form-control col-sm-3 btn btn-primary dropdown-toggle" data-ng-options="t.name for t in vm.types"' +
-                    'data-ng-model="vm.object.type" style="height: 32px;margin-left: 8px;margin-right: 6px;width: 200px !important;">' +
+                    'data-ng-model="vm.object.type" style="height: 32px;margin-left: 8px;margin-right: 6px;width: 200px !important; " ng-change="vm.deleteRowAll(vm.selected)">' +
 
-                    '<option><a href="#">Ações <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>' +
-                    '<option><a href="#">Remover Todos <span class="badge selected badge-danger main-badge"  data-ng-show="{{showCase.countSeleted()}}"></span></a></option>' +
+                    '<option>Ações <span class="badge selected badge-danger main-badge" data-ng-show="{{vm.countSeleted()}}"</span></option>' +
+                    '<option>Remover Todos <span class="badge selected badge-danger main-badge"  data-ng-show="{{vm.countSeleted()}}"></span></option>' +
                     '</select>'
 
                 )
@@ -138,14 +154,13 @@
                 exportData: {
                     decodeEntities: true
                 }
-
             }, {
-                text: 'Novo Processo',
+                text: 'Novo Serviço',
                 key: '1',
                 action: function(e, dt, node, config) {
                     ModalService.showModal({
-                        templateUrl: 'cadProcesso.html',
-                        controller: "ContasPagarController"
+                        templateUrl: 'views/gerencia/dialog/dServico.html',
+                        controller: "ServicoInsertController"
                     }).then(function(modal) {
 
 
@@ -156,8 +171,8 @@
                         });
                     });
                 }
-            }]);
-
+            }])
+        
             vm.dtColumns = [
             DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
             .renderWith(function(data, type, full, meta) {
@@ -165,37 +180,25 @@
                 return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
             }).withOption('width', '10px'),
             DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
-            DTColumnBuilder.newColumn('assunto').withTitle('Assunto'),
-            DTColumnBuilder.newColumn('status').withTitle('Situação'),
+            DTColumnBuilder.newColumn('nome').withTitle('Nome'),
             DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
-            DTColumnBuilder.newColumn('responsavel').withTitle('Responsavel'),
-            DTColumnBuilder.newColumn('grupoTrabalho').withTitle('Grupo Trabalho').notVisible(),
-            DTColumnBuilder.newColumn('processo').withTitle('Processo').notVisible(),
-            DTColumnBuilder.newColumn('situacao').withTitle('Situação').notVisible(),
-            DTColumnBuilder.newColumn('instancia').withTitle('Instancia').notVisible(),
-            DTColumnBuilder.newColumn('orgao').withTitle('Orgão').notVisible(),
-            DTColumnBuilder.newColumn('numCnj').withTitle('Numeração Padrão CNJ').notVisible(),
-            DTColumnBuilder.newColumn('numOut').withTitle('Numeração Outro Padrão').notVisible(),
-            DTColumnBuilder.newColumn('ageCapTrib').withTitle('Agendar captura no tribunal').notVisible(),
-            DTColumnBuilder.newColumn('observacao').withTitle('Observação').notVisible(),
-            DTColumnBuilder.newColumn('valor').withTitle('Valor').notVisible(),
-            DTColumnBuilder.newColumn('formaPg').withTitle('Forma de Pagamento').notVisible(),
-            DTColumnBuilder.newColumn('justica').withTitle('Justiça').notVisible(),
-            DTColumnBuilder.newColumn('tribunal').withTitle('Tribunal').notVisible(),
-            DTColumnBuilder.newColumn('instancia2').withTitle('Instancia').notVisible(),
-            DTColumnBuilder.newColumn('localidade').withTitle('Localidade').notVisible(),
-            DTColumnBuilder.newColumn('capPor').withTitle('Capturar Por').notVisible(),
-            DTColumnBuilder.newColumn('numProcesso').withTitle('Numero Processo').notVisible(),
-            DTColumnBuilder.newColumn('capalt').withTitle('Captura automática de andamentos').notVisible(),
-            DTColumnBuilder.newColumn(null).withTitle('Envolvidos').renderWith(function(data, type, full, meta) {
+            
+            DTColumnBuilder.newColumn(null).withTitle('Status').renderWith(function(data, type, full, meta) {
                 var sText = "";
-                if (data.pessoa != undefined) {
-                    for (var x = 0; x < data.pessoa.length; x++) {
-                        sText = sText + " " + data.pessoa[x].cliente + " " + data.pessoa[x].tipEnvolv + " " + data.pessoa[x].envolvimento + "<br> ";
-                    }
+                if (data.statusList.length > 0) {
+                   // for (var x = 0; x < data.statusList.length; x++) {
+                        sText = sText + " " + data.statusList[data.statusList.length -1].status  + "<br> ";
+                   // }
                 }
 
                 return '<span>' + sText + '</span>';
+            }).notVisible(),
+             DTColumnBuilder.newColumn(null).withTitle('Preco').renderWith(function(data, type, full, meta) {
+
+                if (data.precoList.length > 0)
+                    return '<span>' + data.precoList[data.precoList.length-1].valor + '</span>';
+                else
+                    return '<span> 0,00</span>';
             }),
             DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
             DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
@@ -207,227 +210,11 @@
 
 
 
-        //Contato
-        vm.dtOptionsContato = DTOptionsBuilder.fromSource('contatoProcesso.json')
-            .withDOM('frtip')
-            .withPaginationType('full_numbers')
-            .withOption('createdRow', createdRow)
-            .withOption('headerCallback', function(header) {
-                if (!vm.headerCompiled) {
-                    // Use this headerCompiled field to only compile header once
-                    vm.headerCompiled = true;
-                    $compile(angular.element(header).contents())($scope);
-                }
-            })
-            .withPaginationType('full_numbers')
-            .withColumnFilter({
-                aoColumns: [{
-                    type: 'number'
-                }, {
-                    type: 'number',
-                }, {
-                    type: 'select',
-                    values: ['Entrada', 'Saida']
-                }, {
-                    type: 'text'
-                }, {
-                    type: 'text'
-                }, {
-                    type: 'text'
-                }]
-            })
-            .withOption('initComplete', function(settings, json) {
-
-                $('.dt-buttons').find('.dt-button:eq(1)').before(
-
-                    '<select class="form-control col-sm-3 btn btn-primary dropdown-toggle" data-ng-options="t.name for t in vm.types"' +
-                    'data-ng-model="vm.object.type" style="height: 32px;margin-left: 8px;margin-right: 6px;width: 200px !important;">' +
-
-                    '<option><a href="#">Ações <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>' +
-                    '<option><a href="#">Remover Todos <span class="badge selected badge-danger main-badge"  data-ng-show="{{showCase.countSeleted()}}"></span></a></option>' +
-                    '</select>'
-
-                )
-            })
-            .withOption('processing', true)
-            .withOption('language', {
-                paginate: { // Set up pagination text
-                    first: "&laquo;",
-                    last: "&raquo;",
-                    next: "&rarr;",
-                    previous: "&larr;"
-                },
-                lengthMenu: "_MENU_ records per page"
-            })
-            .withButtons([{
-                extend: "print",
-                //text: 'Print current page',
-                autoPrint: true,
-                exportOptions: {
-                    columns: ':visible'
-                }
-            }, {
-                extend: "excelHtml5",
-                filename: "Data_Analysis",
-                title: "Data Analysis Report",
-                exportOptions: {
-                    columns: ':visible'
-                },
-                //CharSet: "utf8",
-                exportData: {
-                    decodeEntities: true
-                }
-            },{
-                text: 'Incluir Novo Arquivo',
-                key: '1',
-                action: function(e, dt, node, config) {
-                    ModalService.showModal({
-                        templateUrl: 'cadProcesso.html',
-                        controller: "ContasPagarController"
-                    }).then(function(modal) {
-
-
-                        modal.element.modal();
-                        openDialogUpdateCreate();
-                        modal.close.then(function(result) {
-                            $scope.message = "You said " + result;
-                        });
-                    });
-                }
-            }]);
-
-        vm.dtColumnsContato = [
-            DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
-            .renderWith(function(data, type, full, meta) {
-                vm.selected[full.id] = false;
-                return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
-            }).withOption('width', '10px'),
-            DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
-            DTColumnBuilder.newColumn('contato').withTitle('Contato'),
-            DTColumnBuilder.newColumn('motivo').withTitle('Motivo Contato'),
-            DTColumnBuilder.newColumn('tipo').withTitle('Tipo Contato'),
-            DTColumnBuilder.newColumn('contatado').withTitle('Contatado'),
-            DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
-            DTColumnBuilder.newColumn('data').withTitle('Data'),
-            DTColumnBuilder.newColumn('responsavel').withTitle('Contatado Por'),
-            DTColumnBuilder.newColumn('protocolo').withTitle('Nº Protocolo'),
-            DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
-            DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '140px'),
-        ];
-
-
-        //arquivo
-        vm.dtOptionsArquivo = DTOptionsBuilder.fromSource('arquivoProcesso.json')
-            .withDOM('frtip')
-            .withPaginationType('full_numbers')
-            .withOption('createdRow', createdRow)
-            .withOption('headerCallback', function(header) {
-                if (!vm.headerCompiled) {
-                    // Use this headerCompiled field to only compile header once
-                    vm.headerCompiled = true;
-                    $compile(angular.element(header).contents())($scope);
-                }
-            })
-            .withPaginationType('full_numbers')
-            .withColumnFilter({
-                aoColumns: [{
-                    type: 'number'
-                }, {
-                    type: 'number',
-                }, {
-                    type: 'select',
-                    values: ['Entrada', 'Saida']
-                }, {
-                    type: 'text'
-                }, {
-                    type: 'text'
-                }, {
-                    type: 'text'
-                }]
-            })
-            .withOption('initComplete', function(settings, json) {
-
-                $('.dt-buttons').find('.dt-button:eq(1)').before(
-
-                    '<select class="form-control col-sm-3 btn btn-primary dropdown-toggle" data-ng-options="t.name for t in vm.types"' +
-                    'data-ng-model="vm.object.type" style="height: 32px;margin-left: 8px;margin-right: 6px;width: 200px !important;">' +
-
-                    '<option><a href="#">Ações <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>' +
-                    '<option><a href="#">Remover Todos <span class="badge selected badge-danger main-badge"  data-ng-show="{{showCase.countSeleted()}}"></span></a></option>' +
-                    '</select>'
-
-                )
-            })
-            .withOption('processing', true)
-            .withOption('language', {
-                paginate: { // Set up pagination text
-                    first: "&laquo;",
-                    last: "&raquo;",
-                    next: "&rarr;",
-                    previous: "&larr;"
-                },
-                lengthMenu: "_MENU_ records per page"
-            })
-            .withButtons([{
-                extend: "print",
-                //text: 'Print current page',
-                autoPrint: true,
-                exportOptions: {
-                    columns: ':visible'
-                }
-            }, {
-                extend: "excelHtml5",
-                filename: "Data_Analysis",
-                title: "Data Analysis Report",
-                exportOptions: {
-                    columns: ':visible'
-                },
-                //CharSet: "utf8",
-                exportData: {
-                    decodeEntities: true
-                }
-            },{
-                text: 'Incluir Novo Arquivo',
-                key: '1',
-                action: function(e, dt, node, config) {
-                    ModalService.showModal({
-                        templateUrl: 'cadProcesso.html',
-                        controller: "ContasPagarController"
-                    }).then(function(modal) {
-
-
-                        modal.element.modal();
-                        openDialogUpdateCreate();
-                        modal.close.then(function(result) {
-                            $scope.message = "You said " + result;
-                        });
-                    });
-                }
-            }]);
-
-        vm.dtColumnsArquivo = [
-            DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
-            .renderWith(function(data, type, full, meta) {
-                vm.selected[full.id] = false;
-                return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
-            }).withOption('width', '10px'),
-            DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
-            DTColumnBuilder.newColumn('nome').withTitle('Nome'),
-            DTColumnBuilder.newColumn('tamanho').withTitle('Situação'),
-            DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
-            DTColumnBuilder.newColumn('data').withTitle('Data'),
-            DTColumnBuilder.newColumn('responsavel').withTitle('Anexado Por'),
-            DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
-            DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '140px'),
-        ];
-
-
         function edit(person) {
+            $rootScope.servico = person;
             ModalService.showModal({
-                templateUrl: 'almoxarifadoDelete.html',
-                controller: "ContasPagarController"
+                templateUrl: 'views/gerencia/dialog/dSite.html',
+                controller: "SiteUpdateController"
             }).then(function(modal) {
 
                 modal.element.modal();
@@ -453,7 +240,7 @@
         function view(person) {
             ModalService.showModal({
                 templateUrl: 'deleteCidade.html',
-                controller: "ContasPagarController"
+                controller: "ExampleController"
             }).then(function(modal) {
                 modal.element.modal();
                 modal.close.then(function(result) {
@@ -545,7 +332,7 @@
 
          function actionsHtmlProcesso(data, type, full, meta) {
         vm.persons[data.id] = data;
-        return '<a href="#/advogado/details/processo"><i class="glyphicon glyphicon-search"></i></a>&nbsp;' +
+        return '<a class="btn btn-info" href="#/advogado/details/processo"><i class="glyphicon glyphicon-search"></i></a>&nbsp;' +
             '<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
             '   <i class="fa fa-edit"></i>' +
             '</button>&nbsp;' +
@@ -645,4 +432,65 @@
             $scope.state = !$scope.state;
         };
     }
+})();
+
+(function() {
+    angular.module('wdApp.apps.servico.insert',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('ServicoInsertController', function($rootScope,$scope,fModels,SysMgmtData) {
+
+            var vm = this;
+
+        $scope.servico = {};
+
+        $scope.savessss = function() {
+ 
+                        var oObject = fModels.amont($scope.servico,'INSERT');
+                        console.log($scope.servico);
+                        SysMgmtData.processPostPageData("main/api/request",{
+                            url: "site/api/servico/insert/",
+                            token: $rootScope.authToken,
+                            request: new qat.model.reqSite( oObject,true, true)
+                           // {
+                              //  "cfop": oObject
+                           //   cfop : {"id":"10"}
+                           // }
+                        }, function(res) {
+
+                            console.log(res)
+                        });
+                       // $('#cfopForm').formValidation('resetForm', true);
+                       // vm.processButtons('U',$scope.cfop);
+                    };
+            
+});
+})();
+
+
+(function() {
+    angular.module('wdApp.apps.servico.update',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('ServicoUpdateController', function($scope,$rootScope,fModels,SysMgmtData) {
+
+            var vm = this;
+
+        $scope.servico = $rootScope.servico;
+       console.log($rootScope.servico)
+        $scope.savessss = function() {
+
+                        var oObject = fModels.amont($scope.servico,'UPDATE');
+                        console.log($scope.servico);
+                        SysMgmtData.processPostPageData("main/api/request",{
+                            url: "site/api/servico/update/",
+                            token: $rootScope.authToken,
+                            request: new qat.model.reqSite( oObject,true, true)
+                           // {
+                              //  "cfop": oObject
+                           //   cfop : {"id":"10"}
+                           // }
+                        }, function(res) {
+                            debugger
+                            console.log(res)
+                        });
+                    };
+            
+});
 })();
