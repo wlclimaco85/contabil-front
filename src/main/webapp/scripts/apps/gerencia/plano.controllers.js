@@ -2,7 +2,7 @@
     angular.module('wdApp.apps.plano', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('PlanosController', planoController);
 
-    function planoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService) {
+    function planoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData) {
         var vm = this;
         vm.selected = {};
         vm.selectAll = false;
@@ -31,7 +31,30 @@
         var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
             'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
 
-        vm.dtOptions = DTOptionsBuilder.fromSource('plano.json')
+        vm.dtOptions = DTOptionsBuilder.newOptions()
+            .withOption('ajax', {
+                dataSrc: function(json) {
+                    console.log(json)
+                    json['recordsTotal'] = json.planoList.length
+                    json['recordsFiltered'] = json.planoList.length
+                    json['draw'] = 1
+                    console.log(json)
+                    return json.planoList;
+                },
+                "contentType": "application/json; charset=utf-8",
+                "dataType": "json",
+                "url": "main/api/request",
+                "type": "POST",
+                "data": function(d) {
+                    //   console.log("data");
+                    //    d.search = $scope.searchData || {}; //search criteria
+                    return JSON.stringify({
+                        "url": "site/api/plano/fetchPage",
+                        "token": $rootScope.authToken,
+                        "request": new qat.model.pagedInquiryRequest(2, true)
+                    });
+                }
+            })
             .withDOM('frtip')
             .withPaginationType('full_numbers')
             .withOption('createdRow', createdRow)
@@ -144,8 +167,8 @@
                 key: '1',
                 action: function(e, dt, node, config) {
                     ModalService.showModal({
-                        templateUrl: 'cadPlano.html',
-                        controller: "PlanosController"
+                        templateUrl: 'views/gerencia/dialog/dPlano.html',
+                        controller: "PlanoInsertController"
                     }).then(function(modal) {
 
 
@@ -159,41 +182,56 @@
             }]);
 
 
-            vm.dtColumns = [
+        vm.dtColumns = [
             DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
             .renderWith(function(data, type, full, meta) {
                 vm.selected[full.id] = false;
                 return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
             }).withOption('width', '10px'),
             DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
-            DTColumnBuilder.newColumn('dataInicio').withTitle('Data Inicio'),
-            DTColumnBuilder.newColumn('dataFinal').withTitle('Data Final'),
+            DTColumnBuilder.newColumn(null).withTitle('Data Inicio').renderWith(function(data, type, full, meta) {
+
+                if (data.dataInicio != undefined)
+                    return '<span>' + new Date(data.dataInicio) + '</span>';
+                else
+                    return '<span> </span>';
+            }),
+            DTColumnBuilder.newColumn(null).withTitle('Data Final').renderWith(function(data, type, full, meta) {
+
+                if (data.dataFinal != undefined)
+                    return '<span>' + new Date(data.dataFinal) + '</span>';
+                else
+                    return '<span> </span>';
+            }),
             DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
             DTColumnBuilder.newColumn('titulo').withTitle('Titulo'),
             DTColumnBuilder.newColumn(null).withTitle('Preco').renderWith(function(data, type, full, meta) {
-                return '<span>' + data.preco[0].valor + '</span>';
+
+                if (data.precoList.length > 0)
+                    return '<span>' + data.precoList[0].valor + '</span>';
+                else
+                    return '<span> 0,00</span>';
             }),
             DTColumnBuilder.newColumn(null).withTitle('Serviços').renderWith(function(data, type, full, meta) {
                 var sText = "";
-                if (data.servicos != undefined) {
-                    for (var x = 0; x < data.servicos.length; x++) {
-                        sText = sText + " " + data.servicos[x].nome + "<br> ";
+                if (data.servicoList.length > 0) {
+                    for (var x = 0; x < data.servicoList.length; x++) {
+                        sText = sText + " " + data.servicoList[x].nome + "<br> ";
                     }
                 }
 
                 return '<span>' + sText + '</span>';
             }),
-            DTColumnBuilder.newColumn(null).withTitle('Imagen').renderWith(function(data, type, full, meta) {
+            DTColumnBuilder.newColumn(null).withTitle('Status').renderWith(function(data, type, full, meta) {
                 var sText = "";
-                if (data.imagens != undefined) {
-                    for (var x = 0; x < data.imagens.length; x++) {
-                        sText = sText + " " + data.imagens[x].nome + "<br> ";
-                    }
+                if (data.statusList.length > 0) {
+                    // for (var x = 0; x < data.statusList.length; x++) {
+                    sText = sText + " " + data.statusList[data.statusList.length - 1].status + "<br> ";
+                    // }
                 }
 
                 return '<span>' + sText + '</span>';
-            }),
-            DTColumnBuilder.newColumn('status').withTitle('Status').notVisible(),
+            }).notVisible(),
             DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
             DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
             DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtmlProcesso).withOption('width', '140px'),
@@ -202,15 +240,10 @@
 
 
 
-
-
-        
-
-
         function edit(person) {
             ModalService.showModal({
                 templateUrl: 'cadPlano.html',
-                        controller: "PlanosController"
+                controller: "PlanosController"
             }).then(function(modal) {
 
                 modal.element.modal();
@@ -326,16 +359,16 @@
                 '</button>';
         }
 
-         function actionsHtmlProcesso(data, type, full, meta) {
-        vm.persons[data.id] = data;
-        return '<a href="#/advogado/details/processo" class="btn btn-info" ><i class="glyphicon glyphicon-search"></i></a>&nbsp;' +
-            '<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
-            '   <i class="fa fa-edit"></i>' +
-            '</button>&nbsp;' +
-            '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
-            '   <i class="fa fa-trash-o"></i>' +
-            '</button>';
-    }
+        function actionsHtmlProcesso(data, type, full, meta) {
+            vm.persons[data.id] = data;
+            return '<a href="#/advogado/details/processo" class="btn btn-info" ><i class="glyphicon glyphicon-search"></i></a>&nbsp;' +
+                '<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
+                '   <i class="fa fa-edit"></i>' +
+                '</button>&nbsp;' +
+                '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
+                '   <i class="fa fa-trash-o"></i>' +
+                '</button>';
+        }
 
         function toggleAll(selectAll, selectedItems) {
             for (var id in selectedItems) {
@@ -433,51 +466,79 @@
 
 
 (function() {
-    angular.module('wdApp.apps.plano.insert',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('PlanoInsertController', function($rootScope,$scope,fModels,SysMgmtData) {
+    angular.module('wdApp.apps.plano.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('PlanoInsertController', function($rootScope, $scope, fModels, SysMgmtData) {
 
             var vm = this;
 
-        $scope.site = {};
+            $scope.plano = {};
 
-        $scope.savessss = function() {
- 
-                        var oObject = fModels.amont($scope.site);
-                        console.log($scope.site);
-                        SysMgmtData.processPostPageData("main/api/request",{
-                            url: "site/api/insert/",
-                            token: $rootScope.authToken,
-                            request: new qat.model.reqSite( oObject,true, true)
-                           // {
-                              //  "cfop": oObject
-                           //   cfop : {"id":"10"}
-                           // }
-                        }, function(res) {
-                            debugger
-                            console.log(res)
-                        });
-                       // $('#cfopForm').formValidation('resetForm', true);
-                       // vm.processButtons('U',$scope.cfop);
-                    };
-            
-});
+            $scope.today = function() {
+                return $scope.dt = new Date();
+            };
+            $scope.today();
+            $scope.clear = function() {
+                return $scope.dt = null;
+            };
+            $scope.open = function($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+                return $scope.opened = true;
+            };
+            $scope.dateOptions = {
+                'year-format': "'yy'",
+                'starting-day': 0
+            };
+            $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
+            $scope.format = $scope.formats[1];
+
+            $scope.savessssS = function() {
+                bb = [];
+                $('.servicoList:visible').each(function() {
+                    if ($(this).val() != "") {
+                        bb.push(qat.model.fnPlanoByServico($(this).val(),  "INSERT"));
+                        
+                    }
+                });
+                $scope.plano.servicoList = bb;
+
+                var oObject = fModels.amont($scope.plano,"INSERT");
+                oObject.dataInicio = (new Date()).getTime();
+                oObject.dataFinal = (new Date()).getTime();
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "site/api/plano/insert/",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqPlano(oObject, true, true)
+                        // {
+                        //  "cfop": oObject
+                        //   cfop : {"id":"10"}
+                        // }
+                }, function(res) {
+                   
+                    console.log(res)
+                });
+                // $('#cfopForm').formValidation('resetForm', true);
+                // vm.processButtons('U',$scope.cfop);
+            };
+
+        });
 })();
 
 
 (function() {
-    angular.module('wdApp.apps.plano.update',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('PlanoUpdateController', function($scope) {
+    angular.module('wdApp.apps.plano.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('PlanoUpdateController', function($rootScope, $scope, fModels, SysMgmtData) {
 
             var vm = this;
 
-        $scope.site = {};
+            $scope.site = {};
 
-        $scope.savessss = function() {
-                        debugger
-                        console.log($scope.site)
-                       // $('#cfopForm').formValidation('resetForm', true);
-                       // vm.processButtons('U',$scope.cfop);
-                    };
-            
-});
+            $scope.savessss = function() {
+                debugger
+                console.log($scope.site)
+                    // $('#cfopForm').formValidation('resetForm', true);
+                    // vm.processButtons('U',$scope.cfop);
+            };
+
+        });
 })();
