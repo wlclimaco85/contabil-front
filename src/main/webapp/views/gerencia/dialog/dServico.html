@@ -1,41 +1,45 @@
 
-    <div class="container">
             <div class="modal fade">
                 <div class="modal-dialog" style="width : 60%">
-                    <form id="servicoForm">
+
                     <div class="modal-content">
+                     <form class="servicoForm">
                         <div class="modal-header">
                             <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Cadastro ServiÃ§o</h4>
+                            <h4 class="modal-title">Cadastro Serviço</h4>
                         </div>
                         <div class="modal-body">
-                            
-                                <div class="col-sm-4">
+
+                                <div class="row">
+                                <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Nome</label>
-                                        <input type="text" class="form-control" ng-model="cfop.nome" name="nome" placeholder="Nome">
+                                        <input type="text" class="form-control" ng-model="servico.nome" name="nome" placeholder="Nome">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Valor</label>
-                                        <input type="text"  class="form-control" ng-model="servico.preco[0].valor" name="valor" placeholder="0.00">
+                                        <input type="text"  class="form-control" ng-model="valor" name="valor" placeholder="0.00">
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
+                                </div>
+                                <div class="row">
+                                <div class="col-sm-12">
                                     <label for="exampleInputPassword1">Descricao</label>
                                     <textarea class="form-control" ng-model="servico.descricao" rows="5" name="descricao" ></textarea>
                                 </div>
-                                     
-                            
+                                </div>
+
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                             <button type="submit" ng-click="savessss()" class="btn btn-primary" data-dismiss="modal">Gravar</button>
                 </div>
+                </form>
                         </div>
+
                     </div>
-                    </form>
+
                 </div>
-            </div>
-    </div>

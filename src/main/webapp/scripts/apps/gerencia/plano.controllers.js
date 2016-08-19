@@ -241,6 +241,7 @@
 
 
         function edit(person) {
+            $rootScope.plano = person;
             ModalService.showModal({
                 templateUrl: 'cadPlano.html',
                 controller: "PlanosController"
@@ -497,7 +498,7 @@
                 $('.servicoList:visible').each(function() {
                     if ($(this).val() != "") {
                         bb.push(qat.model.fnPlanoByServico($(this).val(),  "INSERT"));
-                        
+
                     }
                 });
                 $scope.plano.servicoList = bb;
@@ -514,7 +515,7 @@
                         //   cfop : {"id":"10"}
                         // }
                 }, function(res) {
-                   
+
                     console.log(res)
                 });
                 // $('#cfopForm').formValidation('resetForm', true);

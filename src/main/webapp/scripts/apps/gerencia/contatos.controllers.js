@@ -167,8 +167,8 @@
                 key: '1',
                 action: function(e, dt, node, config) {
                     ModalService.showModal({
-                        templateUrl: 'views/gerencia/dialog/dPlano.html',
-                        controller: "PlanoInsertController"
+                        templateUrl: 'views/gerencia/dialog/dContatos.html',
+                        controller: "ContatoInsertController"
                     }).then(function(modal) {
 
 
@@ -202,9 +202,10 @@
 
 
         function edit(person) {
+            $rootScope.contato = person;
             ModalService.showModal({
-                templateUrl: 'cadPlano.html',
-                controller: "PlanosController"
+                templateUrl: 'views/gerencia/dialog/dContatos.html',
+                controller: "ContatoUpdateController"
             }).then(function(modal) {
 
                 modal.element.modal();
@@ -241,7 +242,7 @@
 
         function openDialogUpdateCreate() {
             bookIndex = 0;
-            $('#pdVendasForm')
+            $('.contatoForm')
                 .formValidation({
                     framework: 'bootstrap',
                     icon: {
@@ -251,58 +252,13 @@
                     },
                     fields: {
 
-                        'book[0].produto': notEmptyStringMinMaxRegexp,
-                        'book[0].quantidade': integerNotEmptyValidation,
-                        'book[0].vlUnitario': integerNotEmptyValidation,
+                        'nome': notEmptyStringMinMaxRegexp,
+                        'email': integerNotEmptyValidation,
+                        'texto': integerNotEmptyValidation,
 
 
                     }
-                })
-                // Add button click handler
-                .on('click', '.addButton', function() {
-                    bookIndex++;
-                    var $template = $('#bookTemplate'),
-                        $clone = $template
-                        .clone()
-                        .removeClass('hide')
-                        .removeAttr('id')
-                        .attr('data-book-index', bookIndex)
-                        .insertBefore($template);
-
-                    // Update the name attributes
-                    $clone
-                        .find('[name="produto"]').attr('name', 'book[' + bookIndex + '].produto').end()
-                        .find('[name="quantidade"]').attr('name', 'book[' + bookIndex + '].quantidade').end()
-                        .find('[name="vlUnitario"]').attr('name', 'book[' + bookIndex + '].vlUnitario').end()
-                        .find('[name="desconto"]').attr('name', 'book[' + bookIndex + '].desconto').end();
-
-                    // Add new fields
-                    // Note that we also pass the validator rules for new field as the third parameter
-                    $('#pdVendasForm')
-                        .formValidation('addField', 'book[' + bookIndex + '].produto', notEmptyStringMinMaxRegexp)
-                        .formValidation('addField', 'book[' + bookIndex + '].quantidade', integerNotEmptyValidation)
-                        .formValidation('addField', 'book[' + bookIndex + '].vlUnitario', integerNotEmptyValidation);
-                }) // Remove button click handler
-                .on('click', '.removeButton', function() {
-                    var $row = $(this).parents('.form-group'),
-                        index = $row.attr('data-book-index');
-
-                    // Remove fields
-                    $('#bookForm')
-                        .formValidation('removeField', $row.find('[name="book[' + index + '].produto"]'))
-                        .formValidation('removeField', $row.find('[name="book[' + index + '].quantidade"]'))
-                        .formValidation('removeField', $row.find('[name="book[' + index + '].vlUnitario"]'))
-                        .formValidation('removeField', $row.find('[name="book[' + index + '].desconto"]'));
-
-                    // Remove element containing the fields
-                    $row.remove();
                 });
-            $("select").select2({
-                placeholder: "Select a state",
-                allowClear: true
-            });
-
-
         }
 
         function createdRow(row, data, dataIndex) {
@@ -428,7 +384,7 @@
 
 (function() {
     angular.module('wdApp.apps.contato.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('PlanoInsertController', function($rootScope, $scope, fModels, SysMgmtData) {
+        .controller('ContatoInsertController', function($rootScope, $scope, fModels, SysMgmtData) {
 
             var vm = this;
 
@@ -453,21 +409,21 @@
             $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
             $scope.format = $scope.formats[1];
 
-            $scope.savessssS = function() {
-
+            $scope.saveContato = function() {
+debugger
                 var oObject = fModels.amont($scope.contato,"INSERT");
                 oObject.dataInicio = (new Date()).getTime();
                 oObject.dataFinal = (new Date()).getTime();
                 SysMgmtData.processPostPageData("main/api/request", {
                     url: "site/api/contato/insert/",
                     token: $rootScope.authToken,
-                    request: new qat.model.reqPlano(oObject, true, true)
+                    request: new qat.model.reqContato(oObject, true, true)
                         // {
                         //  "cfop": oObject
                         //   cfop : {"id":"10"}
                         // }
                 }, function(res) {
-                   
+
                     console.log(res)
                 });
                 // $('#cfopForm').formValidation('resetForm', true);
@@ -480,7 +436,7 @@
 
 (function() {
     angular.module('wdApp.apps.contato.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('PlanoUpdateController', function($rootScope, $scope, fModels, SysMgmtData) {
+        .controller('ContatoUpdateController', function($rootScope, $scope, fModels, SysMgmtData) {
 
             var vm = this;
 
@@ -488,14 +444,14 @@
 
             $scope.contato = $rootScope.contato;
        console.log($rootScope.contato)
-        $scope.savessss = function() {
+        $scope.saveContato = function() {
 
                         var oObject = fModels.amont($scope.contato,'UPDATE');
                         console.log($scope.contato);
                         SysMgmtData.processPostPageData("main/api/request",{
                             url: "site/api/contato/update/",
                             token: $rootScope.authToken,
-                            request: new qat.model.reqSite( oObject,true, true)
+                            request: new qat.model.reqContato( oObject,true, true)
                            // {
                               //  "cfop": oObject
                            //   cfop : {"id":"10"}

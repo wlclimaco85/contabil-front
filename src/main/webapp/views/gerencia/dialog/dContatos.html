@@ -2,14 +2,12 @@
             <div class="modal fade">
                 <div class="modal-dialog" style="width : 60%">
                     <div class="modal-content">
-                    <form id="empresaForm">
+                    <form class="contatoForm">
                         <div class="modal-header">
                             <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title">Cadastro Contato</h4>
                         </div>
                         <div class="modal-body">
-                            
-                                <div class="row">
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group">
@@ -40,19 +38,18 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row " style="margin-top : 10px"></div>                             
+                                        <div class="row " style="margin-top : 10px"></div>
                                     	<div class="row">
                                             <div class="form-group col-sm-12">
                                                 <label for="exampleInputPassword1">Texto</label>
                                                 <textarea class="form-control" ng-model="contato.texto" rows="5" name="texto" ></textarea>
                                             </div>
                                         </div>
-                                </div>
-                          
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <button type="submit"  ng-click="savessss()" class="btn btn-primary">Gravar</button>
+                            <button type="submit"  ng-click="saveContato()" class="btn btn-primary">Gravar</button>
                         </div>
                         </form>
                     </div>
