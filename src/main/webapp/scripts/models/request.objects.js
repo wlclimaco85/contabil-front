@@ -34,6 +34,13 @@
 		this.returnListPaged = _bPagedList;
 	};
 
+	qat.model.reqPlano = function(_oCounty, _bList, _bPagedList)
+	{
+		this.plano = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
+
 	//ProcedureMaintenanceRequest
 	qat.model.reqProc = function ( _oProc, _bList, _bPagedList)
 	{

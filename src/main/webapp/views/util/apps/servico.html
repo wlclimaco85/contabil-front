@@ -4,14 +4,8 @@
       <div class="col-sm-5">
           <label for="exampleInputPassword1">Servico</label>
           <div class="row ">
-              <select id="servico" name="book[0].servico" class="servico select col-sm-12">
+              <select id="servico" name="book[0].servico" class="servicoList select15 col-sm-12">
           </select>
-          </div>
-      </div>
-      <div class="col-sm-2">
-          <div class="form-group">
-              <label for="exampleInputPassword1">Valor</label>
-              <input type="text" class="form-control servico-valor" name="book[0].vlUnitario" placeholder="R$0,00" />
           </div>
       </div>
       <div class="col-sm-2">
@@ -29,15 +23,9 @@
           <div class="col-sm-5">
               <label for="exampleInputPassword1">Servico</label>
               <div class="row ">
-                  <select id="book[0].servico" name="book[0].servico" class="servico select col-sm-12">
+                  <select id="book[0].servico" name="book[0].servico" class="servicoList select20 col-sm-12">
 
                       </select>
-              </div>
-          </div>
-          <div class="col-sm-2">
-              <div class="form-group">
-                  <label for="exampleInputPassword1">Valor</label>
-                  <input type="text" class="form-control servico-valor" name="book[0].vlUnitario" placeholder="R$0,00" />
               </div>
           </div>
           <div class="col-sm-2">
@@ -51,6 +39,7 @@
           </div>
       </div>
   </div>
+
 </form>
 <script>
     $(document).ready(function() {
@@ -90,7 +79,20 @@
                 $('#servicoForm')
                     .formValidation('addField', 'book[' + bookIndex + '].servico', notEmptyStringMinMaxRegexp)
                     .formValidation('addField', 'book[' + bookIndex + '].valor', notEmptyStringMinMaxRegexp);
-            });
+            $clone.find('select').select2({
+                    placeholder: "Select a state",
+                    allowClear: true
+                  })
+            }).on('click', '.removeButton2', function() {
+                    // Remove field when clicking the Remove button
+                    $('#planoForm').formValidation('removeField', $template);
+
+                    // Enable the Add button
+                    $that.parent().removeClass('disabled');
+
+                    // Remove element
+                    $clone.remove();
+                });
 
 
 
@@ -100,20 +102,23 @@
 
                if(res.operationSuccess == true)
                {
+                   if(res.servicoList.length > 0)
+                   {
                    for(var x = 0 ;x < res.servicoList.length;x++)
                    {
-                        if(res.servicoList[x].precoList.length > 0){
+                        if(res.servicoList[x].precoList != undefined && res.servicoList[x].precoList.length > 0){
                           preco = res.servicoList[x].precoList[res.servicoList[x].precoList.length -1].valor
                         }
-                       planos = planos + "<option value='"+res.servicoList[x].id+"'> "+res.servicoList[x].descricao+" <sup> "+ preco+"</sup></option>";
+                       servicos = servicos + "<option value='"+res.servicoList[x].id+"'> "+res.servicoList[x].descricao+" <sup> "+ preco+"</sup></option>";
                    }
-                    $('.servicos').append(servicos);
+                    $('.servicoList').append(servicos);
 
-                    $(".servico").select2({
+                    $(".select15").select2({
                           placeholder: "Select a state",
                           allowClear: true
                         });
                }
+             }
 
             }
 

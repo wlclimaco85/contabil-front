@@ -278,6 +278,25 @@ qat.model.fnTelefones =function(numero,id,type,modelAction)
             return emails;
         }
 
+
+
+  qat.model.fnPlanoByServico=function(_id,_modelAction)
+        {
+            emails  = {
+               typeValue : 0,
+               servico : {id : _id},
+               emprId         : JSON.parse(localStorage.getItem('empresa')).id,
+               tableEnumValue : 53,
+               modelAction    : _modelAction,
+               createUser     : "System",
+               createDateUTC  : (new Date()).getTime(),
+               modifyUser     : "System",
+               modifyDateUTC  : (new Date()).getTime()
+
+            }
+            return emails;
+        }
+
         //Endereco Object
 qat.model.fnEndereco = function(_oObjet,modelAction,user)
 {

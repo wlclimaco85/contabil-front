@@ -31,7 +31,147 @@
         var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
             'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
 
-        vm.dtOptions = fSite.fnFillTableSite();
+        vm.dtOptions = DTOptionsBuilder.newOptions()
+            .withOption('ajax', {
+                dataSrc: function(json) {
+                    console.log(json)
+                    json['recordsTotal'] = json.sites.length
+                    json['recordsFiltered'] = json.sites.length
+                    json['draw'] = 1
+                    console.log(json)
+                    return json.sites;
+                },
+                "contentType": "application/json; charset=utf-8",
+                "dataType": "json",
+                "url": "main/api/request",
+                "type": "POST",
+                "data": function(d) {
+                    //   console.log("data");
+                    //    d.search = $scope.searchData || {}; //search criteria
+                    return JSON.stringify({
+                        "url": "site/api/fetchPage",
+                        "token": $rootScope.authToken,
+                        "request": new qat.model.pagedInquiryRequest(2, true)
+                    });
+                }
+            })
+            .withDOM('frtip')
+            .withPaginationType('full_numbers')
+            .withOption('createdRow', createdRow)
+            .withPaginationType('full_numbers')
+            .withColumnFilter({
+                aoColumns: [null, {
+                    type: 'number'
+                }, {
+                    type: 'number',
+                }, {
+                    type: 'select',
+                    values: ['Entrada', 'Saida']
+                }, {
+                    type: 'text'
+                }, {
+                    type: 'text'
+                }, {
+                    type: 'text'
+                }]
+            })
+            .withOption('initComplete', function(settings, json) {
+
+                $('.dt-buttons').find('.dt-button:eq(1)').before(
+
+                    '<select class="form-control col-sm-3 btn btn-primary dropdown-toggle" data-ng-options="t.name for t in vm.types"' +
+                    'data-ng-model="vm.object.type" style="height: 32px;margin-left: 8px;margin-right: 6px;width: 200px !important; " ng-change="vm.deleteRowAll(vm.selected)">' +
+
+                    '<option>Ações <span class="badge selected badge-danger main-badge" data-ng-show="{{vm.countSeleted()}}"</span></option>' +
+                    '<option>Remover Todos <span class="badge selected badge-danger main-badge"  data-ng-show="{{vm.countSeleted()}}"></span></option>' +
+                    '</select>'
+
+                )
+            })
+            .withOption('processing', true)
+            .withOption('language', {
+                paginate: { // Set up pagination text
+                    first: "&laquo;",
+                    last: "&raquo;",
+                    next: "&rarr;",
+                    previous: "&larr;"
+                },
+                lengthMenu: "_MENU_ records per page"
+            })
+            .withButtons([{
+                extend: "colvis",
+                fileName: "Data_Analysis",
+                exportOptions: {
+                    columns: ':visible'
+                },
+                exportData: {
+                    decodeEntities: true
+                }
+            }, {
+                extend: "csvHtml5",
+                fileName: "Data_Analysis",
+                exportOptions: {
+                    columns: ':visible'
+                },
+                exportData: {
+                    decodeEntities: true
+                }
+            }, {
+                extend: "pdfHtml5",
+                fileName: "Data_Analysis",
+                title: "Data Analysis Report",
+                exportOptions: {
+                    columns: ':visible'
+                },
+                exportData: {
+                    decodeEntities: true
+                }
+            }, {
+                extend: "copy",
+                fileName: "Data_Analysis",
+                title: "Data Analysis Report",
+                exportOptions: {
+                    columns: ':visible'
+                },
+                exportData: {
+                    decodeEntities: true
+                }
+            }, {
+                extend: "print",
+                //text: 'Print current page',
+                autoPrint: true,
+                exportOptions: {
+                    columns: ':visible'
+                }
+            }, {
+                extend: "excelHtml5",
+                filename: "Data_Analysis",
+                title: "Data Analysis Report",
+                exportOptions: {
+                    columns: ':visible'
+                },
+                //CharSet: "utf8",
+                exportData: {
+                    decodeEntities: true
+                }
+            }, {
+                text: 'Novo Site',
+                key: '1',
+                action: function(e, dt, node, config) {
+                    ModalService.showModal({
+                        templateUrl: 'views/gerencia/dialog/dSite.html',
+                        controller: "ExampleController"
+                    }).then(function(modal) {
+
+
+                        modal.element.modal();
+                        openDialogUpdateCreate();
+                        modal.close.then(function(result) {
+                            $scope.message = "You said " + result;
+                        });
+                    });
+                }
+            }])
         /*DTOptionsBuilder.newOptions()
             .withOption('ajax', {
                 dataSrc: function(json) {
@@ -200,7 +340,7 @@
             DTColumnBuilder.newColumn('emprId').withTitle('Empresa').notVisible(),
             DTColumnBuilder.newColumn(null).withTitle('Redes Social').renderWith(function(data, type, full, meta) {
                 var sText = "";
-                if (data.redesSocial != undefined) {
+                if (data.redesSocial.length > 0) {
                     for (var x = 0; x < data.redesSocial.length; x++) {
                         sText = sText + " " + data.redesSocial[x].nome  + "<br> ";
                     }
@@ -210,45 +350,54 @@
             }),
             DTColumnBuilder.newColumn(null).withTitle('Equipe').renderWith(function(data, type, full, meta) {
                 var sText = "";
-                if (data.equipe != undefined) {
+                if (data.equipe.length > 0) {
                     for (var x = 0; x < data.equipe.length; x++) {
                         sText = sText + " " + data.equipe[x].nome  + "<br> ";
                     }
                 }
 
                 return '<span>' + sText + '</span>';
-            }),
+            }).notVisible(),
             DTColumnBuilder.newColumn(null).withTitle('Serviços').renderWith(function(data, type, full, meta) {
                 var sText = "";
-                if (data.servicoList != undefined) {
+                if (data.servicoList.length > 0) {
                     for (var x = 0; x < data.servicoList.length; x++) {
                         sText = sText + " " + data.servicoList[x].nome  + "<br> ";
                     }
                 }
 
                 return '<span>' + sText + '</span>';
-            }),
+            }).notVisible(),
             DTColumnBuilder.newColumn(null).withTitle('Planos').renderWith(function(data, type, full, meta) {
                 var sText = "";
-                if (data.planoList != undefined) {
+                if (data.planoList.length > 0) {
                     for (var x = 0; x < data.planoList.length; x++) {
                         sText = sText + " " + data.planoList[x].descricao  + "<br> ";
                     }
                 }
 
                 return '<span>' + sText + '</span>';
-            }),
+            }).notVisible(),
             DTColumnBuilder.newColumn(null).withTitle('Imagens').renderWith(function(data, type, full, meta) {
                 var sText = "";
-                if (data.imagens != undefined) {
+                if (data.imagens.length > 0) {
                     for (var x = 0; x < data.imagens.length; x++) {
                         sText = sText + " " + data.imagens[x].nome  + "<br> ";
                     }
                 }
 
                 return '<span>' + sText + '</span>';
-            }),
-            DTColumnBuilder.newColumn('status').withTitle('Status').notVisible(),
+            }).notVisible(),
+            DTColumnBuilder.newColumn(null).withTitle('Status').renderWith(function(data, type, full, meta) {
+                var sText = "";
+                if (data.statusList.length > 0) {
+                   // for (var x = 0; x < data.statusList.length; x++) {
+                        sText = sText + " " + data.statusList[data.statusList.length -1].status  + "<br> ";
+                   // }
+                }
+
+                return '<span>' + sText + '</span>';
+            }).notVisible(),
             DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
             DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
             DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtmlProcesso).withOption('width', '140px'),
@@ -260,9 +409,10 @@
 
 
         function edit(person) {
+            $rootScope.site = person;
             ModalService.showModal({
-                templateUrl: 'cadSite.html',
-                controller: "SitesController"
+                templateUrl: 'views/gerencia/dialog/dSite.html',
+                controller: "SiteUpdateController"
             }).then(function(modal) {
 
                 modal.element.modal();
@@ -380,7 +530,7 @@
 
          function actionsHtmlProcesso(data, type, full, meta) {
         vm.persons[data.id] = data;
-        return '<a href="#/advogado/details/processo"><i class="glyphicon glyphicon-search"></i></a>&nbsp;' +
+        return '<a class="btn btn-info" href="#/advogado/details/processo"><i class="glyphicon glyphicon-search"></i></a>&nbsp;' +
             '<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
             '   <i class="fa fa-edit"></i>' +
             '</button>&nbsp;' +
@@ -492,7 +642,7 @@
 
         $scope.savessss = function() {
  
-                        var oObject = fModels.amont($scope.site);
+                        var oObject = fModels.amont($scope.site,'INSERT');
                         console.log($scope.site);
                         SysMgmtData.processPostPageData("main/api/request",{
                             url: "site/api/insert/",
@@ -503,7 +653,7 @@
                            //   cfop : {"id":"10"}
                            // }
                         }, function(res) {
-                            debugger
+
                             console.log(res)
                         });
                        // $('#cfopForm').formValidation('resetForm', true);
@@ -516,17 +666,28 @@
 
 (function() {
     angular.module('wdApp.apps.site.update',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('SiteUpdateController', function($scope) {
+        .controller('SiteUpdateController', function($scope,$rootScope,fModels,SysMgmtData) {
 
             var vm = this;
 
-        $scope.site = {};
-
+        $scope.site = $rootScope.site;
+       console.log($rootScope.site)
         $scope.savessss = function() {
-                        debugger
-                        console.log($scope.site)
-                       // $('#cfopForm').formValidation('resetForm', true);
-                       // vm.processButtons('U',$scope.cfop);
+
+                        var oObject = fModels.amont($scope.site,'UPDATE');
+                        console.log($scope.site);
+                        SysMgmtData.processPostPageData("main/api/request",{
+                            url: "site/api/update/",
+                            token: $rootScope.authToken,
+                            request: new qat.model.reqSite( oObject,true, true)
+                           // {
+                              //  "cfop": oObject
+                           //   cfop : {"id":"10"}
+                           // }
+                        }, function(res) {
+                            debugger
+                            console.log(res)
+                        });
                     };
             
 });
