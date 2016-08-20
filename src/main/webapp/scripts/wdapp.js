@@ -92,6 +92,8 @@ var WebDaptiveAppConfig = {
 	             ,'wdApp.apps.plano.update'
 	             ,'wdApp.apps.servico.insert'
 	             ,'wdApp.apps.servico.update'
+	             ,'wdApp.apps.contato.insert'
+	             ,'wdApp.apps.contato.update'
 				]);
 
 	wdApp.config(['$routeProvider',

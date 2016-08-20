@@ -641,7 +641,7 @@
         $scope.site = {};
 
         $scope.savessss = function() {
- 
+
                         var oObject = fModels.amont($scope.site,'INSERT');
                         console.log($scope.site);
                         SysMgmtData.processPostPageData("main/api/request",{
@@ -659,7 +659,7 @@
                        // $('#cfopForm').formValidation('resetForm', true);
                        // vm.processButtons('U',$scope.cfop);
                     };
-            
+
 });
 })();
 
@@ -689,6 +689,6 @@
                             console.log(res)
                         });
                     };
-            
+
 });
 })();

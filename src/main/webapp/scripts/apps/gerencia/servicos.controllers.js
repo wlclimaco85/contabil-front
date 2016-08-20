@@ -172,7 +172,7 @@
                     });
                 }
             }])
-        
+
             vm.dtColumns = [
             DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
             .renderWith(function(data, type, full, meta) {
@@ -182,10 +182,10 @@
             DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
             DTColumnBuilder.newColumn('nome').withTitle('Nome'),
             DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
-            
+
             DTColumnBuilder.newColumn(null).withTitle('Status').renderWith(function(data, type, full, meta) {
                 var sText = "";
-                if (data.statusList.length > 0) {
+                if (data.statusList != undefined && data.statusList.length > 0) {
                    // for (var x = 0; x < data.statusList.length; x++) {
                         sText = sText + " " + data.statusList[data.statusList.length -1].status  + "<br> ";
                    // }
@@ -195,7 +195,7 @@
             }).notVisible(),
              DTColumnBuilder.newColumn(null).withTitle('Preco').renderWith(function(data, type, full, meta) {
 
-                if (data.precoList.length > 0)
+                if (data.statusList != undefined && data.precoList.length > 0)
                     return '<span>' + data.precoList[data.precoList.length-1].valor + '</span>';
                 else
                     return '<span> 0,00</span>';
@@ -251,7 +251,7 @@
 
         function openDialogUpdateCreate() {
             bookIndex = 0;
-            $('#pdVendasForm')
+            $('.servicoForm')
                 .formValidation({
                     framework: 'bootstrap',
                     icon: {
@@ -261,56 +261,11 @@
                     },
                     fields: {
 
-                        'book[0].produto': notEmptyStringMinMaxRegexp,
-                        'book[0].quantidade': integerNotEmptyValidation,
-                        'book[0].vlUnitario': integerNotEmptyValidation,
-
+                        'nome': notEmptyStringMinMaxRegexp,
+                        'valor': integerNotEmptyValidation,
 
                     }
-                })
-                // Add button click handler
-                .on('click', '.addButton', function() {
-                    bookIndex++;
-                    var $template = $('#bookTemplate'),
-                        $clone = $template
-                        .clone()
-                        .removeClass('hide')
-                        .removeAttr('id')
-                        .attr('data-book-index', bookIndex)
-                        .insertBefore($template);
-
-                    // Update the name attributes
-                    $clone
-                        .find('[name="produto"]').attr('name', 'book[' + bookIndex + '].produto').end()
-                        .find('[name="quantidade"]').attr('name', 'book[' + bookIndex + '].quantidade').end()
-                        .find('[name="vlUnitario"]').attr('name', 'book[' + bookIndex + '].vlUnitario').end()
-                        .find('[name="desconto"]').attr('name', 'book[' + bookIndex + '].desconto').end();
-
-                    // Add new fields
-                    // Note that we also pass the validator rules for new field as the third parameter
-                    $('#pdVendasForm')
-                        .formValidation('addField', 'book[' + bookIndex + '].produto', notEmptyStringMinMaxRegexp)
-                        .formValidation('addField', 'book[' + bookIndex + '].quantidade', integerNotEmptyValidation)
-                        .formValidation('addField', 'book[' + bookIndex + '].vlUnitario', integerNotEmptyValidation);
-                }) // Remove button click handler
-                .on('click', '.removeButton', function() {
-                    var $row = $(this).parents('.form-group'),
-                        index = $row.attr('data-book-index');
-
-                    // Remove fields
-                    $('#bookForm')
-                        .formValidation('removeField', $row.find('[name="book[' + index + '].produto"]'))
-                        .formValidation('removeField', $row.find('[name="book[' + index + '].quantidade"]'))
-                        .formValidation('removeField', $row.find('[name="book[' + index + '].vlUnitario"]'))
-                        .formValidation('removeField', $row.find('[name="book[' + index + '].desconto"]'));
-
-                    // Remove element containing the fields
-                    $row.remove();
                 });
-            $("select").select2({
-                placeholder: "Select a state",
-                allowClear: true
-            });
 
 
         }
@@ -441,15 +396,17 @@
             var vm = this;
 
         $scope.servico = {};
-
+        $scope.valor = 0;
         $scope.savessss = function() {
- 
+ debugger
                         var oObject = fModels.amont($scope.servico,'INSERT');
+                        oObject.preco = [];
+                        oObject.preco.push({ valor : parseFloat($scope.valor)});
                         console.log($scope.servico);
                         SysMgmtData.processPostPageData("main/api/request",{
                             url: "site/api/servico/insert/",
                             token: $rootScope.authToken,
-                            request: new qat.model.reqSite( oObject,true, true)
+                            request: new qat.model.reqServico( oObject,true, true)
                            // {
                               //  "cfop": oObject
                            //   cfop : {"id":"10"}
@@ -461,7 +418,7 @@
                        // $('#cfopForm').formValidation('resetForm', true);
                        // vm.processButtons('U',$scope.cfop);
                     };
-            
+
 });
 })();
 
@@ -481,7 +438,7 @@
                         SysMgmtData.processPostPageData("main/api/request",{
                             url: "site/api/servico/update/",
                             token: $rootScope.authToken,
-                            request: new qat.model.reqSite( oObject,true, true)
+                            request: new qat.model.reqServico( oObject,true, true)
                            // {
                               //  "cfop": oObject
                            //   cfop : {"id":"10"}
@@ -491,6 +448,6 @@
                             console.log(res)
                         });
                     };
-            
+
 });
 })();
