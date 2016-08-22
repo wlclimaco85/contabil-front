@@ -3,6 +3,8 @@
         .controller('CadEmpresaController', cadEmpresaController);
 
     function cadEmpresaController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData,fEmpresa) {
+       
+    
         var vm = this;
         vm.selected = {};
         vm.selectAll = false;

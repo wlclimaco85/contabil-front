@@ -8,7 +8,7 @@
   // var _scope = {};
   return {
 
-      getTable: function(endpoint, vm, rCallback, cCallback, recompile,oOption,oColluns){
+      getTable: function(url,dataSrc,request, vm, rCallback, cCallback, recompile,oOption,oColluns){
 
         var _this = this;
         console.log(recompile);
@@ -18,14 +18,7 @@
         // debugger;
         // _scope = scope;
          vm.dtOptions.withOption('ajax', {
-                dataSrc: function(json) {
-                    console.log(json)
-                    json['recordsTotal'] = json.sites.length
-                    json['recordsFiltered'] = json.sites.length
-                    json['draw'] = 1
-                    console.log(json)
-                    return json.sites;
-                },
+                dataSrc: dataSrc,
                 "contentType": "application/json; charset=utf-8",
                 "dataType": "json",
                 "url": "main/api/request",
@@ -34,9 +27,9 @@
                     //   console.log("data");
                     //    d.search = $scope.searchData || {}; //search criteria
                     return JSON.stringify({
-                        "url": "site/api/fetchPage",
+                        "url": url,
                         "token": $rootScope.authToken,
-                        "request": new qat.model.empresaInquiryRequest(0, true,null,null,null)
+                        "request": request
                     });
                 }
             })
