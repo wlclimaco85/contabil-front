@@ -2,6 +2,7 @@
 'use strict';
 	var commonAuth = angular.module('wdApp.ajaxCall.pessoa', []);
 
+	commonAuth.factory('fPessoa', ['$rootScope','fModels','SysMgmtData' ,function($rootScope,fModels,SysMgmtData){
 		var factory = {};
 
 	factory.fnMontaObjeto = function(empresa,enderecos,telefone,email,action,url,callBack){
@@ -45,9 +46,11 @@
                 });
         }
 
+	factory.fnDelete = function() {
 			//..
 		}
 
+	factory.fnOpenView = function() {
 			//..
 		}
 
