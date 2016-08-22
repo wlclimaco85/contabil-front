@@ -1,6 +1,6 @@
 (function() {
 'use strict';
-	var commonAuth = angular.module('wdApp.ajaxCallEmpresa', []);
+	var commonAuth = angular.module('wdApp.ajaxCall.empresa', []);
 
 	commonAuth.factory('fEmpresa', ['$rootScope', function($rootScope){
 		var factory = {};
