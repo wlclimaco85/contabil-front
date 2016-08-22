@@ -348,6 +348,53 @@
 		                            </div>
 		                        </div>
 		                    </div>
+		                    <div class="row">
+		                    	<div class="col-sm-3 ">
+                                        <label for="exampleInputPassword1">>Modalidade BC</label>
+                                        <div class="row ">
+                                       <span class="ui-select">
+                                            <select ng-model="contato.motivoValue">
+                                                <option value="0">0 - Nacional, exceto as indicadas nos códigos de 3 a 5</option>
+												<option value="1">1 - Estrangeira - Importação direta, exceto a indicada no código 6</option>
+												<option value="2">2 - Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7</option>
+												<option value="3">3 - Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40%</option>
+												<option value="4">4 - Nacional, produção em conformidade com processos básicos que tratam as legisl. dos Ajustes</option>
+												<option value="5">5 - Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%</option>
+												<option value="6">6 - Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX</option>
+												<option value="7">7 - Estrangeira - Adquirida mercado interno, sem similar nacional, constante em lista da CAMEX</option>
+                                            </select>
+                                        </span>
+                                     </div>
+                                            
+                                </div>
+	
+		                        <div class="col-sm-3 ">
+		                            <div class="form-group">
+		                                <label for="exampleInputPassword1">Redução base calc. (%)</label>
+		                                <input type="text" class="form-control col-sm-8 " ng-model="produto.classeCigarrosBebidas" name="classeCigarrosBebidas"  placeholder="Classe cigarros e bebidas">
+		                            </div>
+		                        </div>
+		                        <div class="col-sm-3 ">
+		                            <div class="form-group">
+		                                <label for="exampleInputPassword1">Alíq. do ICMS (%)</label>
+		                                <input type="text" class="form-control col-sm-8 " ng-model="produto.classeCigarrosBebidas" name="classeCigarrosBebidas"  placeholder="Classe cigarros e bebidas">
+		                            </div>
+		                        </div>
+		                        <div class="col-sm-3 ">
+		                            <div class="form-group">
+                                        <label for="exampleInputPassword1">Motivo desoneração</label>
+                                        <div class="row ">
+                                       <span class="ui-select">
+                                            <select ng-model="contato.motivoValue">
+                                                <option value="0" selected="selected">- Não desejo usar -</option>
+												<option value="3">3: Produtor agropecuário</option>
+												<option value="9">9: Outros</option>
+												<option value="12">12: Órgão de fomento e desenvolv. agropecuário</option>
+                                            </select>
+                                        </span>
+                                     </div>                             
+		                        </div>
+		                    </div>
 		                </div>
 		            </div>
 		        </div>

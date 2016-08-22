@@ -1,14 +1,21 @@
 (function() {
 'use strict';
-	var commonAuth = angular.module('wdApp.ajaxCall', []);
+	var commonAuth = angular.module('wdApp.ajaxCalls', ['angularModalService']);
 
-	commonAuth.factory('CnaeFactory', ['$http', function($http){
+	commonAuth.factory('dialogFactory', ['ModalService', function(ModalService){
 		return{
-				cnaeFactory: function(_url, _req, _callback){
-					var res = $http.post(_url, _req, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}});
-					res.then(function(response) {
-						_callback(response.data );						
-					})
+				//County Object
+				dialog : function(_url,_controller, _callback) {
+				    ModalService.showModal({
+			            templateUrl: _url,
+			            controller: _controller
+			        }).then(function(modal) {
+			            modal.element.modal();
+			            _callback();
+			            modal.close.then(function(result) {
+			                $scope.message = "You said " + result;
+			            });
+			        });
 				}
 			};
 	}]);

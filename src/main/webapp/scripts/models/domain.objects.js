@@ -3,7 +3,8 @@
 	 */
 	var qat = {
 		model 	: {
-               select: {}
+               select: {},
+               dialog: {}
           },
 		base 	: {
 			model : {}
