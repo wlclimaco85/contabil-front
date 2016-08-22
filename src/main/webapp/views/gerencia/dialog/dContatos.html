@@ -9,12 +9,30 @@
                         </div>
                         <div class="modal-body">
                                         <div class="row">
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-8">
                                                 <div class="form-group">
                                                     <label for="exampleInputPassword1">Nome</label>
                                                     <input type="text" class="form-control nome-socio"  ng-model="contato.nome" name="nome" placeholder="Nome" />
                                                 </div>
                                             </div>
+                                            <div class="col-sm-4">
+                                                    <label for="exampleInputPassword1">Motivo</label>
+                                                    <div class="row ">
+                                                   <span class="ui-select">
+                                                        <select ng-model="contato.motivoValue">
+                                                            <option value="1">Cobrança</option>
+                                                            <option value="2">Vendas</option>
+                                                            <option value="3">Informações</option>
+                                                            <option value="4">Promoções</option>
+                                                            <option value="5">Sistema</option>
+                                                            <option value="6">Parcerias</option>
+                                                            <option value="7">Outras</option>
+                                                        </select>
+                                                    </span>
+                                                 </div>
+                                                        
+                                            </div>
+                                            
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-6">

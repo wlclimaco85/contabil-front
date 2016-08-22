@@ -194,7 +194,17 @@
             DTColumnBuilder.newColumn('texto').withTitle('Texto'),
             DTColumnBuilder.newColumn('telefone').withTitle('Telefone'),
             DTColumnBuilder.newColumn('email').withTitle('Email'),
-            DTColumnBuilder.newColumn('status').withTitle('Status'),
+            DTColumnBuilder.newColumn('motivo').withTitle('Motivo'),
+            DTColumnBuilder.newColumn(null).withTitle('Status').renderWith(function(data, type, full, meta) {
+                var sText = "";
+                if (data.statusList != undefined && data.statusList.length > 0) {
+                   // for (var x = 0; x < data.statusList.length; x++) {
+                        sText = sText + " " + data.statusList[data.statusList.length -1].status  + "<br> ";
+                   // }
+                }
+
+                return '<span>' + sText + '</span>';
+            }).notVisible(),
             DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
             DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
             DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtmlProcesso).withOption('width', '140px'),
@@ -410,10 +420,8 @@
             $scope.format = $scope.formats[1];
 
             $scope.saveContato = function() {
-debugger
                 var oObject = fModels.amont($scope.contato,"INSERT");
-                oObject.dataInicio = (new Date()).getTime();
-                oObject.dataFinal = (new Date()).getTime();
+                oObject.dataContato = (new Date()).getTime();
                 SysMgmtData.processPostPageData("main/api/request", {
                     url: "site/api/contato/insert/",
                     token: $rootScope.authToken,

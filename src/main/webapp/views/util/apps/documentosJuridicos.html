@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="form-group col-sm-5">
+        <label for="exampleInputEmail1">Razão social</label>
+        <input type="text" ng-model="empresa.razao" name="razao" class="form-control" placeholder="Nome ou Razão social">
+    </div>
+
+    <div class="form-group col-sm-5">
+        <label for="exampleInputEmail1">Nome Fantasia</label>
+        <input type="text" ng-model="empresa.nome" name="fantasia" class="form-control" placeholder="Nome Fantasia">
+    </div>
+    
+</div>
+<div class="row">
+    <div class="form-group col-sm-4">
+        <label for="exampleInputEmail1">CNPJ</label>
+        <input type="text" ng-model="empresa.documentos[0].numero" name="cnpj" class="form-control" placeholder="Nº Cart. Trab">
+        <input type="text" ng-model="empresa.documentos[0].documentoTypeEnumValue" name="cnpjs" value="1" class="form-control hide" placeholder="Nº Cart. Trab">
+    </div>
+
+    <div class="form-group col-sm-4">
+        <label for="exampleInputEmail1">Inscr Est Subst Trib</label>
+        <input type="text" ng-model="empresa.documentos[1].numero" name="IEST" class="form-control" placeholder="Inscr Est Subst Trib">
+        <input type="text" ng-model="empresa.documentos[1].documentoTypeEnumValue" name="IEST2" value="2" class="form-control hide" placeholder="Nº Cart. Trab">
+    </div>
+    <div class="form-group col-sm-4">
+        <label for="exampleInputEmail1">Indicador de IE</label>
+        <input type="text" ng-model="empresa.documentos[2].documentoTypeEnumValue" name="IEs" value="3" class="form-control hide" placeholder="Nº Cart. Trab">
+        <div class="row">
+            <span class="ui-select">
+                <select ng-model="contato.motivoValue" ng-model="empresa.documentos[2].numero">
+                    <option value="0"></option>
+                    <option value="1">Contribuinte ICMS</option>
+                    <option value="2">Isento de cadastro</option>
+                    <option value="9">Não contribuinte</option>
+                </select>
+            </span>
+        </div>
+    </div>
+    <div class="row">
+    <div class="form-group col-sm-3">
+        <label for="exampleInputEmail1">Inscrição Estadual</label>
+        <input type="text" ng-model="empresa.documentos[3].numero" name="incrEst" class="form-control" placeholder="Inscrição Estadual">
+        <input type="text" ng-model="empresa.documentos[3].documentoTypeEnumValue" name="incrEst2" value="3" class="form-control hide">
+    </div>
+
+
+    <div class="form-group col-sm-3">
+        <label for="exampleInputEmail1">Inscrição Municipal</label>
+        <input type="text" ng-model="empresa.documentos[4].numero" name="incrMun" class="form-control" placeholder="Inscrição Municipal">
+        <input type="text" ng-model="empresa.documentos[4].documentoTypeEnumValue" name="incrMun2" value="4" class="form-control hide">
+
+    </div>
+    <div class="form-group col-sm-3">
+        <label for="exampleInputEmail1">Inscrição Suframa</label>
+        <input type="text" ng-model="empresa.documentos[5].numero" name="suframa" class="form-control" placeholder="Inscrição Estadual">
+        <input type="text" ng-model="empresa.documentos[5].documentoTypeEnumValue" name="suframa2" value="5" class="form-control hide">
+    </div>
+    <div class="form-group col-sm-3">
+        <label for="exampleInputEmail1">Data Abertura</label>
+       
+        <div class="input-group ui-datepicker">
+            <input type="text" ng-model="plano.dtInicio"
+                   class="form-control"
+                   uib-datepicker-popup="{{format}}"
+                   ng-model="dt"
+                   is-open="opened"
+                   datepicker-options="dateOptions" 
+                   close-text="Close">
+            <span class="input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></span>
+        </div>
+    </div>
+</div>
