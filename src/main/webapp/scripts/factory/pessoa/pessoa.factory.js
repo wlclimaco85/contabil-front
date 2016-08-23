@@ -5,10 +5,12 @@
 	commonAuth.factory('fPessoa', ['$rootScope','fModels','SysMgmtData' ,function($rootScope,fModels,SysMgmtData){
 		var factory = {};
 
-	factory.fnMontaObjeto = function(empresa,enderecos,telefone,email,action,url,callBack){
+	factory.fnMontaObjeto = function(empresa,enderecos,action,url,callBack){
 
+         //   debugger
             console.log(empresa);
-            empresa.enderecos[0] = fModels.amont(qat.model.fnEndereco(enderecos[0],action,$rootScope.user.user),action);
+            empresa.enderecos =[];
+            empresa.enderecos.push(fModels.amont(qat.model.fnEndereco(enderecos[0],action,$rootScope.user.user),action));
             var count = 0;
             var bb = [];
 
@@ -35,7 +37,7 @@
             empresa.emails = bb;
 
 
-            var oObject = fModels.amont($scope.empresa,action);
+            var oObject = fModels.amont(empresa,action);
 
                 SysMgmtData.processPostPageData("main/api/request", {
                     url: url,
