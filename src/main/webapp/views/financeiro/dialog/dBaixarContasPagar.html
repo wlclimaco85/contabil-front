@@ -1,4 +1,4 @@
-<div class="container">
+
                      <div class="modal fade">
                       <div class="modal-dialog">
                         <div class="modal-content">
@@ -11,23 +11,25 @@
                                     <div class="form-group col-sm-4">
                                         <label for="exampleInputPassword1">Tipo de documento</label>
                                         <div class="row ">
-                                        <select id="financeiro_cod_tipoDoc" ng-disabled="true" class="col-sm-12" name="financeiro_cod_tipoDoc">
-                                            <option value="0"></option>
-                                            <option value="1">Dinheiro</option>
-                                            <option value="2">Cheque</option>
-                                            <option value="3" selected="selected" >Boleto</option>
-                                            <option value="4">Cartão Crédito</option>
-                                            <option value="5">Cartão Débito</option>
-                                            <option value="6">Duplicata</option>
-                                            <option value="7">Carnê</option>
-                                            <option value="8">Transf. Eletrônica</option>
-                                            <option value="9">Crédito Loja</option>
-                                            <option value="10">Vale Alimentação</option>
-                                            <option value="11">Vale Refeição</option>
-                                            <option value="12">Vale Presente</option>
-                                            <option value="13">Vale Combustível</option>
-                                            <option value="14">Sem documento</option>
-                                        </select>
+                                        <span class="ui-select">
+                                            <select id="financeiro_cod_tipoDoc" ng-disabled="true" ng-model="baixa.icmsReduzido" class="col-sm-12" name="financeiro_cod_tipoDoc">
+                                                <option value="0"></option>
+                                                <option value="1">Dinheiro</option>
+                                                <option value="2">Cheque</option>
+                                                <option value="3" selected="selected" >Boleto</option>
+                                                <option value="4">Cartão Crédito</option>
+                                                <option value="5">Cartão Débito</option>
+                                                <option value="6">Duplicata</option>
+                                                <option value="7">Carnê</option>
+                                                <option value="8">Transf. Eletrônica</option>
+                                                <option value="9">Crédito Loja</option>
+                                                <option value="10">Vale Alimentação</option>
+                                                <option value="11">Vale Refeição</option>
+                                                <option value="12">Vale Presente</option>
+                                                <option value="13">Vale Combustível</option>
+                                                <option value="14">Sem documento</option>
+                                            </select>
+                                        </span>
                                     </div>
                                     </div>
                                     <div class="form-group col-sm-4">
@@ -85,4 +87,4 @@
                         </div>
                       </div>
                     </div>
-            </div>
+           

@@ -203,11 +203,12 @@
         Datatablessss.getTable('/pessoa/api/cliente/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, oOptions, aColumns);
 
         function edit(person) {
-            $rootScope.Cliente = person;
+            $rootScope.cliente = person;
             dialogFactory.dialog('views/cadastros/dialog/dCliente.html',"ClienteUpdateController",openDialogUpdateCreate);
         }
 
         function deleteRow(person) {
+           $rootScope.cliente = person; 
            dialogFactory.dialog('views/cadastros/dialog/dCliente.html',"ClienteDeleteController",openDialogUpdateCreate);
         } 
 
@@ -376,7 +377,7 @@
             }
             $scope.saveCliente = function() {
                 debugger
-                fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos, 'INSERT', "site/api/Cliente/insert/", fnCallBack);
+                fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos, 'INSERT', "site/api/cliente/insert/", fnCallBack);
             };
         });
 })();
@@ -384,11 +385,11 @@
     angular.module('wdApp.apps.cliente.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('ClienteUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
             var vm = this;
-            $scope.Cliente = {};
-            $scope.Cliente = $rootScope.Cliente;
-            console.log($rootScope.Cliente)
+            $scope.cliente = {};
+            $scope.cliente = $rootScope.cliente;
+            console.log($rootScope.cliente)
             $scope.saveCliente = function() {
-                fPessoa.fnMontaObjeto($scope.Cliente, $scope.endereco, 'UPDATE', "site/api/Cliente/update/", fnCallBack);
+                fPessoa.fnMontaObjeto($scope.cliente, $scope.endereco, 'UPDATE', "site/api/cliente/update/", fnCallBack);
             }
         });
 })();
@@ -396,11 +397,11 @@
     angular.module('wdApp.apps.cliente.delete', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('ClienteDeleteController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
             var vm = this;
-            $scope.Cliente = {};
-            $scope.Cliente = $rootScope.Cliente;
-            console.log($rootScope.Cliente)
+            $scope.cliente = {};
+            $scope.cliente = $rootScope.cliente;
+            console.log($rootScope.cliente)
             $scope.saveCliente = function() {
-                fPessoa.fnDelete($scope.Cliente, "site/api/Cliente/update/", function(){console.log('ddda   aqui')});
+                fPessoa.fnDelete($scope.cliente, "site/api/cliente/update/", function(){console.log('ddda   aqui')});
             }
         });
 })();
@@ -408,11 +409,11 @@
     angular.module('wdApp.apps.cliente.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('ClienteViewController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
             var vm = this;
-            $scope.Cliente = {};
-            $scope.Cliente = $rootScope.Cliente;
-            console.log($rootScope.Cliente)
+            $scope.cliente = {};
+            $scope.cliente = $rootScope.cliente;
+            console.log($rootScope.cliente)
             $scope.saveCliente = function() {
-                fPessoa.fnOpenView($scope.Cliente,"site/api/Cliente/update/", function(){console.log('aqui')});
+                fPessoa.fnOpenView($scope.cliente,"site/api/cliente/update/", function(){console.log('aqui')});
             }
         });
 })();
