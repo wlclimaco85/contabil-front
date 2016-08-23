@@ -299,10 +299,10 @@ qat.model.fnTelefones =function(numero,id,type,modelAction)
         }
 
         //Endereco Object
-qat.model.fnEndereco = function(_oObjet,modelAction,user)
+qat.model.fnEndereco = function(_oObjet,_modelAction,_user)
 {
 
-    return { id : _oObjet.id,
+    var a= { id : _oObjet.id,
      codIbge : _oObjet.codIbge,
      logradouro : _oObjet.logradouro,
      bairro : _oObjet.bairro,
@@ -317,12 +317,14 @@ qat.model.fnEndereco = function(_oObjet,modelAction,user)
      emprId         : _oObjet.emprId,
      processId      : _oObjet.processId,
      tableEnumValue : _oObjet.tableEnumValue,
-     modelAction    : modelAction,
-     createUser     : user,
+     modelAction    : _modelAction,
+     createUser     : _user,
      createDateUTC  : (new Date()).getTime(),
-     modifyUser     : user,
+     modifyUser     : _user,
      modifyDateUTC  : (new Date()).getTime()
      }
+
+     return a;
 }
 
 //Empresa

@@ -23,30 +23,29 @@ function utilControllers($scope,ModalService,SysMgmtData) {
 */
 
     vm.buscaRCep = function(cepValue) {
-debugger
         var formatedCep;
             //formatedCep = cepValue.replace(/\D/g, '');
             var formatedCep = cepValue.replace(/\D/g, '');
-            var viaCepUrl = "main/api/buscaCep" + formatedCep + "/json/";
-        SysMgmtData.processPostPageData("main/api/anonimo",{
-            url: viaCepUrl,
+            var viaCepUrl = "main/api/fetchCep"
+        SysMgmtData.processPostPageData(viaCepUrl ,{"cep":"38082243"},
             function(res){
-                debugger
-                var raw;
-                //debugger
-                raw = res.data;
-                console.log(raw)
-                $scope.enderecos[0].cep = raw.cep;
-                $scope.enderecos[0].bairro = raw.bairro;
-                $scope.enderecos[0].complemento = raw.complemento;
-                $scope.enderecos[0].codIbge = raw.ibge;
-                $scope.enderecos[0].cidade.nome = raw.localidade;
-                $scope.enderecos[0].logradouro = raw.logradouro;
-                $scope.enderecos[0].estado.abreviacao = raw.uf;
+                if(res != undefined && res != '')
+                {
+                    var raw;
+                    //debugger
+                    raw = res.data;
+                   // $scope.enderecos[0].cep = raw.cep;
+                    $scope.enderecos[0].bairro = raw.bairro;
+                    $scope.enderecos[0].complemento = raw.complemento;
+                    $scope.enderecos[0].codIbge = raw.ibge;
+                    $scope.enderecos[0].cidade.nome = raw.localidade;
+                    $scope.enderecos[0].logradouro = raw.logradouro;
+                    $scope.enderecos[0].estado.abreviacao = raw.uf;
+                }
 
             }
 
-        });
+        );
 
     }
 

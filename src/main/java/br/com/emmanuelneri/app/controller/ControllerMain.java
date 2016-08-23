@@ -49,6 +49,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qat.samples.sysmgmt.produto.model.response.CfopResponse;
 
+import br.com.emmanuelneri.app.model.BuscaCep;
 import br.com.emmanuelneri.app.model.ModelToken;
 import br.com.emmanuelneri.app.model.UploadedFile;
 import br.com.emmanuelneri.app.model.UtilRequest;
@@ -74,9 +75,9 @@ public class ControllerMain {
 
 	@RequestMapping(value = "/fetchCep", method = RequestMethod.POST)
 	@ResponseBody
-	public CEP fetchCep(@RequestBody String cep) {
+	public String fetchCep(@RequestBody BuscaCep cep) {
 		buscaCEP = CEPServiceFactory.getCEPService();
-		return buscaCEP.obtemPorNumeroCEP(cep);
+		return (buscaCEP.obtemPorNumeroCEP(cep.getCep())).toString();
 	}
 
 	@ResponseBody

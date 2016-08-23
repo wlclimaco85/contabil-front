@@ -14,10 +14,7 @@
         vm.delete = deleteRow;
         vm.dtInstance = {};
         vm.persons = {};
-        vm.alterStatus = alterStatus;
-        vm.historico = historico;
-        vm.addAdvogado = addAdvogado;
-        vm.envolvidos = envolvidos;
+        
         $scope.cliente = {
             tipoPessoa: 2
         };
