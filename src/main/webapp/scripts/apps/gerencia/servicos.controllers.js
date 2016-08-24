@@ -1,5 +1,5 @@
  (function() {
-    angular.module('wdApp.apps.servico', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+    angular.module('wdApp.apps.servicos', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('ServicosController', servicosController);
 
     function servicosController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData) {
@@ -390,8 +390,8 @@
 })();
 
 (function() {
-    angular.module('wdApp.apps.servico.insert',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('ServicoInsertController', function($rootScope,$scope,fModels,SysMgmtData) {
+    angular.module('wdApp.apps.servicos.insert',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('ServicosInsertController', function($rootScope,$scope,fModels,SysMgmtData) {
 
             var vm = this;
 
@@ -406,7 +406,7 @@
                         SysMgmtData.processPostPageData("main/api/request",{
                             url: "site/api/servico/insert/",
                             token: $rootScope.authToken,
-                            request: new qat.model.reqServico( oObject,true, true)
+                            request: new qat.model.reqServicos( oObject,true, true)
                            // {
                               //  "cfop": oObject
                            //   cfop : {"id":"10"}
@@ -424,21 +424,21 @@
 
 
 (function() {
-    angular.module('wdApp.apps.servico.update',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('ServicoUpdateController', function($scope,$rootScope,fModels,SysMgmtData) {
+    angular.module('wdApp.apps.servicos.update',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('ServicosUpdateController', function($scope,$rootScope,fModels,SysMgmtData) {
 
             var vm = this;
 
-        $scope.servico = $rootScope.servico;
-       console.log($rootScope.servico)
+        $scope.servicos = $rootScope.servicos;
+       console.log($rootScope.servicos)
         $scope.savessss = function() {
 
-                        var oObject = fModels.amont($scope.servico,'UPDATE');
-                        console.log($scope.servico);
+                        var oObject = fModels.amont($scope.servicos,'UPDATE');
+                        console.log($scope.servicos);
                         SysMgmtData.processPostPageData("main/api/request",{
-                            url: "site/api/servico/update/",
+                            url: "site/api/servicos/update/",
                             token: $rootScope.authToken,
-                            request: new qat.model.reqServico( oObject,true, true)
+                            request: new qat.model.reqServicos( oObject,true, true)
                            // {
                               //  "cfop": oObject
                            //   cfop : {"id":"10"}
@@ -450,4 +450,29 @@
                     };
 
 });
+})();
+
+(function() {
+    angular.module('wdApp.apps.servicos.delete', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('ServicosDeleteController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+            var vm = this;
+            $scope.servico = {};
+            $scope.servico = $rootScope.servico;
+            console.log($rootScope.servico)
+            $scope.saveServico = function() {
+                fPessoa.fnDelete($scope.servico, "produto/api/servico/update/", function(){console.log('ddda   aqui')});
+            }
+        });
+})();
+(function() {
+    angular.module('wdApp.apps.servicos.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('ServicosViewController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+            var vm = this;
+            $scope.servico = {};
+            $scope.servico = $rootScope.servico;
+            console.log($rootScope.servico)
+            $scope.saveServico = function() {
+                fPessoa.fnOpenView($scope.servico,"produto/api/servico/update/", function(){console.log('aqui')});
+            }
+        });
 })();

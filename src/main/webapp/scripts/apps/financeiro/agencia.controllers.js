@@ -251,99 +251,8 @@
         .controller('AgenciaInsertController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
             var vm = this;
 
-            $scope.empresa = {
-            documentos          : [{
-                       documentoTypeEnumValue : 1,
-                       numero : 0,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 2,
-                       numero : 0,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 3,
-                       numero : 0,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 4,
-                       numero : 0,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 5,
-                       numero : 0,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 6,
-                       numero : 0,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 7,
-                       numero : 0,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 8,
-                       numero : 0,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    }]
-        };
-
-        $scope.enderecos = [];
-
+            $scope.agencia = {}
+            
             $scope.today = function() {
                 return $scope.dt = new Date();
             };
@@ -368,7 +277,7 @@
             }
             $scope.saveAgencia = function() {
                 debugger
-                fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos, 'INSERT', "site/api/agencia/insert/", fnCallBack);
+                fPessoa.fnMontaObjeto($scope.agencia, null, 'INSERT', "site/api/agencia/insert/", fnCallBack);
             };
         });
 })();
@@ -380,7 +289,7 @@
             $scope.agencia = $rootScope.agencia;
             console.log($rootScope.agencia)
             $scope.saveAgencia = function() {
-                fPessoa.fnMontaObjeto($scope.agencia, $scope.endereco, 'UPDATE', "site/api/agencia/update/", fnCallBack);
+                fPessoa.fnMontaObjeto($scope.agencia, null, 'UPDATE', "site/api/agencia/update/", fnCallBack);
             }
         });
 })();

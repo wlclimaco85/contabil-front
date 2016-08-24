@@ -48,9 +48,9 @@ var WebDaptiveAppConfig = {
 				'wdApp.charts.flot.controllers', 'wdApp.charts.morris.controllers', 'wdApp.charts.chartjs.controllers',
 				'wdApp.charts.other.controllers', 'wdApp.charts.echarts.controllers', 'wdApp.charts.directives', 'wdApp.authentication',
 				'wdApp.pages.controllers', 'wdApp.demodata', 'wdApp.apps.stocks', 'wdApp.apps.stocksdata',
-				'wdApp.apps.counties','datatables','datatables.bootstrap','wdApp.apps.estado', 'wdApp.apps.procedures','wdApp.apps.sysmgmt.data','wdApp.apps.site','wdApp.apps.empresa','wdApp.apps.produtos','wdApp.apps.produtoss','wdApp.apps.produto','wdApp.apps.notaFiscal',
+				'wdApp.apps.counties','datatables','datatables.bootstrap', 'wdApp.apps.procedures','wdApp.apps.sysmgmt.data','wdApp.apps.site','wdApp.apps.empresa','wdApp.apps.produtos','wdApp.apps.produtoss','wdApp.apps.produto','wdApp.apps.notaFiscal',
 				'wdApp.apps.pdCompras','wdApp.apps.orcamento','wdApp.apps.ordemServico','wdApp.apps.nfEntrada','wdApp.apps.pdCompras'
-				,'wdApp.apps.cotacao','wdApp.apps.pdVendas','wdApp.apps.contasPagar','wdApp.apps.formaPg','wdApp.apps.contasReceber','wdApp.apps.banco','wdApp.apps.agencia','wdApp.apps.conta','wdApp.apps.funcionario',
+				,'wdApp.apps.cotacao','wdApp.apps.pdVendas','wdApp.apps.contasPagar','wdApp.apps.formaPg','wdApp.apps.contasReceber','wdApp.apps.conta','wdApp.apps.funcionario',
 				'wdApp.ajaxCall'
 				,'wdApp.apps.cliente'
 				,'wdApp.apps.cliente.insert'
@@ -70,11 +70,10 @@ var WebDaptiveAppConfig = {
 				,'wdApp.apps.transportador.update'
 	            ,'wdApp.apps.transportador.delete'
 	            ,'wdApp.apps.transportador.view'
-				,'wdApp.apps.categoria'
-				,'wdApp.apps.marca'
-				,'wdApp.apps.unimed'
+				
+
 				,'wdApp.apps.ordemProducao'
-				,'wdApp.apps.servico'
+				
 				,'wdApp.apps.funcionarios'
 				,'wdApp.apps.compras'
 				,'wdApp.apps.pagamentos'
@@ -88,7 +87,7 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.site'
 	            ,'wdApp.apps.sites'
 	            ,'wdApp.apps.plano'
-	            ,'wdApp.apps.servico'
+	            
 	            ,'wdApp.apps.usuarios'
 	            ,'wdApp.apps.contatos'
 	            ,'wdApp.apps.historico'
@@ -102,8 +101,20 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.site.insert'
 	            ,'wdApp.apps.plano.insert'
 	            ,'wdApp.apps.plano.update'
+
+	            ,'wdApp.apps.servico'
 	            ,'wdApp.apps.servico.insert'
 	            ,'wdApp.apps.servico.update'
+	            ,'wdApp.apps.servico.delete'
+	            ,'wdApp.apps.servico.view'
+
+	            ,'wdApp.apps.servicos'
+	            ,'wdApp.apps.servicos.insert'
+	            ,'wdApp.apps.servicos.update'
+	            ,'wdApp.apps.servicos.delete'
+	            ,'wdApp.apps.servicos.view'
+
+
 	            ,'wdApp.apps.contato.insert'
 	            ,'wdApp.apps.contato.update'
 	            ,'wdApp.ajaxCall.empresa'
@@ -114,27 +125,77 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.produto.delete'
 	            ,'wdApp.apps.produto.view'
 	            ,'wdApp.ajaxCall.produto'
+
+	            ,'wdApp.apps.agencia'
 	            ,'wdApp.apps.agencia.insert'
 				,'wdApp.apps.agencia.update'
 	            ,'wdApp.apps.agencia.delete'
 	            ,'wdApp.apps.agencia.view'
+
 	            ,'wdApp.apps.almoxarifado.insert'
 				,'wdApp.apps.almoxarifado.update'
 	            ,'wdApp.apps.almoxarifado.delete'
 	            ,'wdApp.apps.almoxarifado.view'
+
 	            ,'wdApp.apps.cidade.insert'
 				,'wdApp.apps.cidade.update'
 	            ,'wdApp.apps.cidade.delete'
 	            ,'wdApp.apps.cidade.view'
+
 	            ,'wdApp.apps.convenio.insert'
 				,'wdApp.apps.convenio.update'
 	            ,'wdApp.apps.convenio.delete'
 	            ,'wdApp.apps.convenio.view'
+
 	            ,'wdApp.ajaxCalls.initPage'
+
 	            ,'wdApp.apps.pedidoVenda.insert'
 				,'wdApp.apps.pedidoVenda.update'
 	            ,'wdApp.apps.pedidoVenda.delete'
 	            ,'wdApp.apps.pedidoVenda.view'
+
+	            ,'wdApp.apps.categoria'
+	            ,'wdApp.apps.categoria.insert'
+				,'wdApp.apps.categoria.update'
+	            ,'wdApp.apps.categoria.delete'
+	            ,'wdApp.apps.categoria.view'
+
+	            ,'wdApp.apps.marca'
+	            ,'wdApp.apps.marca.insert'
+				,'wdApp.apps.marca.update'
+	            ,'wdApp.apps.marca.delete'
+	            ,'wdApp.apps.marca.view'
+
+	            ,'wdApp.apps.uniMed'
+	            ,'wdApp.apps.uniMed.insert'
+				,'wdApp.apps.uniMed.update'
+	            ,'wdApp.apps.uniMed.delete'
+	            ,'wdApp.apps.uniMed.view'
+
+	            
+	            ,'wdApp.apps.usuarios'
+				,'wdApp.apps.usuarios.insert'
+	            ,'wdApp.apps.usuarios.update'
+	            ,'wdApp.apps.usuarios.delete'
+	            ,'wdApp.apps.usuarios.view'
+
+	            ,'wdApp.apps.usuario'
+				,'wdApp.apps.usuario.insert'
+	            ,'wdApp.apps.usuario.update'
+	            ,'wdApp.apps.usuario.delete'
+	            ,'wdApp.apps.usuario.view'
+
+	            ,'wdApp.apps.banco'
+	            ,'wdApp.apps.banco.insert'
+	            ,'wdApp.apps.banco.update'
+	            ,'wdApp.apps.banco.delete'
+	            ,'wdApp.apps.banco.view'
+
+	            ,'wdApp.apps.estado'
+	            ,'wdApp.apps.estado.insert'
+	            ,'wdApp.apps.estado.update'
+	            ,'wdApp.apps.estado.delete'
+	            ,'wdApp.apps.estado.view'
 
 				]);
 
