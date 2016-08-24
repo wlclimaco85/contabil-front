@@ -179,11 +179,7 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.usuarios.delete'
 	            ,'wdApp.apps.usuarios.view'
 
-	            ,'wdApp.apps.usuario'
-				,'wdApp.apps.usuario.insert'
-	            ,'wdApp.apps.usuario.update'
-	            ,'wdApp.apps.usuario.delete'
-	            ,'wdApp.apps.usuario.view'
+
 
 	            ,'wdApp.apps.banco'
 	            ,'wdApp.apps.banco.insert'
