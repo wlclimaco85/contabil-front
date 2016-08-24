@@ -83,7 +83,7 @@ public class SendMail {
 			throw new RuntimeException(e);
 		}
 
-		return true
+		return true;
 
 	}
 	

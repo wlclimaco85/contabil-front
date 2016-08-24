@@ -263,7 +263,6 @@
             $scope.empresa = {
             documentos          : [{
                        documentoTypeEnumValue : 1,
-                       numero : 0,
                        tableEnumValue : 1,
                        modelAction    : "INSERT",
                        createUser     : "System",
@@ -274,7 +273,6 @@
                     },
                     {
                        documentoTypeEnumValue : 2,
-                       numero : 0,
                        tableEnumValue : 1,
                        modelAction    : "INSERT",
                        createUser     : "System",
@@ -285,7 +283,6 @@
                     },
                     {
                        documentoTypeEnumValue : 3,
-                       numero : 0,
                        tableEnumValue : 1,
                        modelAction    : "INSERT",
                        createUser     : "System",
@@ -296,7 +293,6 @@
                     },
                     {
                        documentoTypeEnumValue : 4,
-                       numero : 0,
                        tableEnumValue : 1,
                        modelAction    : "INSERT",
                        createUser     : "System",
@@ -307,7 +303,6 @@
                     },
                     {
                        documentoTypeEnumValue : 5,
-                       numero : 0,
                        tableEnumValue : 1,
                        modelAction    : "INSERT",
                        createUser     : "System",
@@ -318,7 +313,6 @@
                     },
                     {
                        documentoTypeEnumValue : 6,
-                       numero : 0,
                        tableEnumValue : 1,
                        modelAction    : "INSERT",
                        createUser     : "System",
@@ -329,7 +323,6 @@
                     },
                     {
                        documentoTypeEnumValue : 7,
-                       numero : 0,
                        tableEnumValue : 1,
                        modelAction    : "INSERT",
                        createUser     : "System",
@@ -340,7 +333,6 @@
                     },
                     {
                        documentoTypeEnumValue : 8,
-                       numero : 0,
                        tableEnumValue : 1,
                        modelAction    : "INSERT",
                        createUser     : "System",
@@ -377,7 +369,7 @@
             }
             $scope.saveCliente = function() {
                 debugger
-                fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos, 'INSERT', "site/api/cliente/insert/", fnCallBack);
+                fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos, 'INSERT', "pessoa/api/cliente/insert", fnCallBack);
             };
         });
 })();
@@ -389,7 +381,7 @@
             $scope.cliente = $rootScope.cliente;
             console.log($rootScope.cliente)
             $scope.saveCliente = function() {
-                fPessoa.fnMontaObjeto($scope.cliente, $scope.endereco, 'UPDATE', "site/api/cliente/update/", fnCallBack);
+                fPessoa.fnMontaObjeto($scope.cliente, $scope.endereco, 'UPDATE', "pessoa/api/cliente/update/", fnCallBack);
             }
         });
 })();
@@ -401,7 +393,7 @@
             $scope.cliente = $rootScope.cliente;
             console.log($rootScope.cliente)
             $scope.saveCliente = function() {
-                fPessoa.fnDelete($scope.cliente, "site/api/cliente/update/", function(){console.log('ddda   aqui')});
+                fPessoa.fnDelete($scope.cliente, "pessoa/api/cliente/update/", function(){console.log('ddda   aqui')});
             }
         });
 })();
@@ -413,7 +405,7 @@
             $scope.cliente = $rootScope.cliente;
             console.log($rootScope.cliente)
             $scope.saveCliente = function() {
-                fPessoa.fnOpenView($scope.cliente,"site/api/cliente/update/", function(){console.log('aqui')});
+                fPessoa.fnOpenView($scope.cliente,"pessoa/api/cliente/update/", function(){console.log('aqui')});
             }
         });
 })();

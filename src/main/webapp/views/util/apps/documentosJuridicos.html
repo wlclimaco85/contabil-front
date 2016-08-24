@@ -1,59 +1,59 @@
 <div class="row">
     <div class="form-group col-sm-5">
-        <label for="exampleInputEmail1">Raz√£o social</label>
-        <input type="text" ng-model="empresa.razao" name="razao" class="form-control" placeholder="Nome ou Raz√£o social">
+        <label for="exampleInputEmail1">Raz„o social</label>
+        <input type="text" ng-model="empresa.nome" name="razao" class="form-control" placeholder="Nome ou Raz„o social">
     </div>
 
     <div class="form-group col-sm-5">
         <label for="exampleInputEmail1">Nome Fantasia</label>
-        <input type="text" ng-model="empresa.nome" name="fantasia" class="form-control" placeholder="Nome Fantasia">
+        <input type="text" ng-model="empresa.nomeFantasia" name="fantasia" class="form-control" placeholder="Nome Fantasia">
     </div>
     
 </div>
 <div class="row">
     <div class="form-group col-sm-4">
         <label for="exampleInputEmail1">CNPJ</label>
-        <input type="text" ng-model="empresa.documentos[0].numero" name="cnpj" class="form-control" placeholder="N¬∫ Cart. Trab">
-        <input type="text" ng-model="empresa.documentos[0].documentoTypeEnumValue" name="cnpjs" value="1" class="form-control hide" placeholder="N¬∫ Cart. Trab">
+        <input type="text" ng-model="empresa.documentos[0].numero" name="cnpj" class="form-control" placeholder="N∫ Cart. Trab">
+        <input type="text" ng-model="empresa.documentos[0].documentoTypeEnumValue" name="cnpjs" value="1" class="form-control hide" placeholder="N∫ Cart. Trab">
     </div>
 
     <div class="form-group col-sm-4">
         <label for="exampleInputEmail1">Inscr Est Subst Trib</label>
         <input type="text" ng-model="empresa.documentos[1].numero" name="IEST" class="form-control" placeholder="Inscr Est Subst Trib">
-        <input type="text" ng-model="empresa.documentos[1].documentoTypeEnumValue" name="IEST2" value="2" class="form-control hide" placeholder="N¬∫ Cart. Trab">
+        <input type="text" ng-model="empresa.documentos[1].documentoTypeEnumValue" name="IEST2" value="2" class="form-control hide" placeholder="N∫ Cart. Trab">
     </div>
     <div class="form-group col-sm-4">
         <label for="exampleInputEmail1">Indicador de IE</label>
-        <input type="text" ng-model="empresa.documentos[2].documentoTypeEnumValue" name="IEs" value="3" class="form-control hide" placeholder="N¬∫ Cart. Trab">
+        <input type="text" name="IEs" value="3" class="form-control hide" placeholder="N∫ Cart. Trab">
         <div class="row">
             <span class="ui-select">
-                <select ng-model="contato.motivoValue" ng-model="empresa.documentos[2].numero">
+                <select ng-model="contato.motivoValue" >
                     <option value="0"></option>
                     <option value="1">Contribuinte ICMS</option>
                     <option value="2">Isento de cadastro</option>
-                    <option value="9">N√£o contribuinte</option>
+                    <option value="9">N„o contribuinte</option>
                 </select>
             </span>
         </div>
     </div>
     <div class="row">
     <div class="form-group col-sm-3">
-        <label for="exampleInputEmail1">Inscri√ß√£o Estadual</label>
-        <input type="text" ng-model="empresa.documentos[3].numero" name="incrEst" class="form-control" placeholder="Inscri√ß√£o Estadual">
-        <input type="text" ng-model="empresa.documentos[3].documentoTypeEnumValue" name="incrEst2" value="3" class="form-control hide">
+        <label for="exampleInputEmail1">InscriÁ„o Estadual</label>
+        <input type="text" ng-model="empresa.documentos[2].numero" name="incrEst" class="form-control" placeholder="InscriÁ„o Estadual">
+        <input type="text" ng-model="empresa.documentos[2].documentoTypeEnumValue" name="incrEst2" value="3" class="form-control hide">
     </div>
 
 
     <div class="form-group col-sm-3">
-        <label for="exampleInputEmail1">Inscri√ß√£o Municipal</label>
-        <input type="text" ng-model="empresa.documentos[4].numero" name="incrMun" class="form-control" placeholder="Inscri√ß√£o Municipal">
-        <input type="text" ng-model="empresa.documentos[4].documentoTypeEnumValue" name="incrMun2" value="4" class="form-control hide">
+        <label for="exampleInputEmail1">InscriÁ„o Municipal</label>
+        <input type="text" ng-model="empresa.documentos[3].numero" name="incrMun" class="form-control" placeholder="InscriÁ„o Municipal">
+        <input type="text" ng-model="empresa.documentos[3].documentoTypeEnumValue" name="incrMun2" value="4" class="form-control hide">
 
     </div>
     <div class="form-group col-sm-3">
-        <label for="exampleInputEmail1">Inscri√ß√£o Suframa</label>
-        <input type="text" ng-model="empresa.documentos[5].numero" name="suframa" class="form-control" placeholder="Inscri√ß√£o Estadual">
-        <input type="text" ng-model="empresa.documentos[5].documentoTypeEnumValue" name="suframa2" value="5" class="form-control hide">
+        <label for="exampleInputEmail1">InscriÁ„o Suframa</label>
+        <input type="text" ng-model="empresa.documentos[4].numero" name="suframa" class="form-control" placeholder="InscriÁ„o Estadual">
+        <input type="text" ng-model="empresa.documentos[4].documentoTypeEnumValue" name="suframa2" value="5" class="form-control hide">
     </div>
     <div class="form-group col-sm-3">
         <label for="exampleInputEmail1">Data Abertura</label>
