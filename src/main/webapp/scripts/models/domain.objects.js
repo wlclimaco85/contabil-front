@@ -258,12 +258,15 @@ qat.model.fnTelefones =function(numero,id,type,modelAction)
             return telefones;
         }
 
-  qat.model.fnEmails =function(email,id,type,modelAction)
+  qat.model.fnEmails =function(_email,_id,type,modelAction)
         {
+          if(_id == "" || _id == " "){
+            _id = null;
+          }
             emails  = {
-               id : id,
+               id : _id,
                typeValue : 0,
-               email : email,
+               email : _email,
                emailTypeEnumValue : type,
                parentId       : 0,
                emprId         : 0,

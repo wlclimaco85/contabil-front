@@ -2,9 +2,11 @@
 <!-- ------------------------------------- -->
 
 <!-- -------------------  Email Empresa ----------------- -->
-<div class="row">
+<div class="row emails">
     <div class="col-sm-4">
         <label for="exampleInputPassword1">Email</label>
+        <input type="text" class="form-control col-sm-4 hide input-id" name="id" placeholder="Email">
+        <input type="text" class="form-control col-sm-4 hide input-type" name="type" value="1" placeholder="Email">
         <input type="text" class="form-control col-sm-4 input-email" name="email" placeholder="Email">
     </div>
     <div class="col-sm-4" style="margin-top:25px">
@@ -27,9 +29,9 @@
 </div>
 
 <!-- Template for dynamic field -->
-<div class="row" id="template-email" style="display: none;">
+<div class="row emails" id="template-email" style="display: none;">
     <div class="col-sm-4">
-        <label for="exampleInputPassword1" class="control-label">Email</label>
+        <label for="exampleInputPassword1" class="control-label input-type">Email</label>
         <input type="email" class="form-control col-sm-4 input-email" placeholder="Email">
     </div>
     <div class="col-sm-4" style="margin-top:25px">

@@ -8,7 +8,20 @@
 	factory.fnMontaObjeto = function(empresa,enderecos,action,url,callBack){
 
          //   debugger
-            console.log(empresa);
+         var  ggg = []
+         var  ggg = empresa.documentos
+         empresa.documentos = [];
+          var  count = ggg.length
+            for (var a = 0 ; a < count ;a++)
+            {
+                if(ggg[a] == undefined || ggg[a].numero == undefined )
+                {
+                    delete ggg[a]
+                }else{
+                    empresa.documentos.push(ggg[a])
+                }
+            } 
+
             empresa.enderecos =[];
             empresa.enderecos.push(fModels.amont(qat.model.fnEndereco(enderecos[0],action,$rootScope.user.user),action));
             var count = 0;
@@ -17,7 +30,7 @@
             $('.gugu').each(function() {
                 if($(this).val() != "")
                 {
-                    bb.push(fModels.amont(qat.model.fnTelefones($(this).val(),count,1,action),action));
+                    bb.push(fModels.amont(qat.model.fnTelefones($(this).val(),null,1,action),action));
                     count = count + 1;
                 }
             });
@@ -26,10 +39,10 @@
             // email
             count = 0;
             bb = [];
-            $('.input-email').each(function() {
-                if($(this).val() != "")
+            $('.emails:visible').each(function() {
+                if($(this).find('.input-email').val() != "")
                 {
-                    bb.push(fModels.amont(qat.model.fnEmails($(this).val(),count,1,action),action));
+                    bb.push(fModels.amont(qat.model.fnEmails($(this).find('.input-email').val(),$(this).find('.input-id').val(),1,action),action));
                     count = count + 1;
                 }
             });
