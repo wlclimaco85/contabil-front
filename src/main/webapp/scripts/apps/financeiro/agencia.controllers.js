@@ -21,7 +21,7 @@
 
         var openDialogUpdateCreate = function () {
             bookIndex = 0;
-            $('.AgenciaForm')
+            $('.agenciaForm')
                 .formValidation({
                     framework: 'bootstrap',
                     icon: {
@@ -30,9 +30,8 @@
                         validating: 'glyphicon glyphicon-refresh'
                     },
                     fields: {
-                        'nome': notEmptyStringMinMaxRegexp,
-                        'email': integerNotEmptyValidation,
-                        'texto': integerNotEmptyValidation,
+                        'banco': notEmptyStringMinMaxRegexp,
+                        'numero': notEmptyStringMinMaxRegexp,
                     }
                 });
         }
