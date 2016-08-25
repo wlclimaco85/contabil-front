@@ -1,0 +1,80 @@
+<form ng-submit="submit()" id="contaForm">
+    <div class="row numeroConta">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Numero Conta</label>
+                <input type="text" class="form-control cpf-socio" name="book[0].cpf" placeholder="Numero Conta" />
+            </div>
+        </div>
+        
+        <div class="col-sm-4" style="margin-top:18px">
+            <div class="checkbox">
+                <label>
+                <input type="checkbox" name="receiver" class="check-socio" value="1" /> Conta Ativa?
+            </label>
+            </div>
+        </div>
+        <div class="col-xs-1" style="margin-top:18px">
+            <button type="button" class="btn btn-default addButton-socios"><i class="fa fa-plus"></i></button>
+        </div>
+    </div>
+    <div class="form-group hide" id="bookTemplate">
+        <div class="row socios">
+            <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Numero Conta</label>
+                <input type="text" class="form-control cpf-socio" name="book[0].cpf" placeholder="Numero Conta" />
+            </div>
+        </div>
+        
+        <div class="col-sm-4" style="margin-top:18px">
+            <div class="checkbox">
+                <label>
+                <input type="checkbox" name="receiver" class="check-socio" value="1" /> Conta Ativa?
+            </label>
+            </div>
+        </div>
+            <div class="col-xs-1" style="margin-top:18px">
+                <button type="button" class="btn btn-default removeButton-socios"><i class="fa fa-minus"></i></button>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    $(document).ready(function() {
+        $('#contaForm')
+            .formValidation({
+                framework: 'bootstrap',
+                icon: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+
+                    'book[0].cpf': notEmptyStringMinMaxRegexp,
+
+
+                }
+            }).on('click', '.addButton-socios', function() {
+                bookIndex++;
+                var $template = $('#bookTemplate'),
+                    $clone = $template
+                    .clone()
+                    .removeClass('hide')
+                    .removeAttr('id')
+                    .attr('data-book-index', bookIndex)
+                    .insertBefore($template);
+
+                // Update the name attributes
+                $clone
+                    .find('[name="cpf-socio"]').attr('name', 'book[' + bookIndex + '].cpf').end()
+
+                // Add new fields
+                // Note that we also pass the validator rules for new field as the third parameter
+                $('#contaForm')
+                    .formValidation('addField', 'book[' + bookIndex + '].cpf', notEmptyStringMinMaxRegexp)
+
+            });
+    });
+</script>

@@ -1,336 +1,411 @@
 (function() {
-angular.module('wdApp.apps.contasPagar', ['datatables','angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-.controller('ContasPagarController', contasPagarController);
+    angular.module('wdApp.apps.contasPagar', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('ContasPagarController', contasPagarController);
 
-function contasPagarController($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalService,Datatablessss) {
-    var vm = this;
-    vm.selected = {};
-    vm.selectAll = false;
-    vm.toggleAll = toggleAll;
-    vm.toggleOne = toggleOne;
-    vm.message = '';
-    vm.edit = edit;
-    vm.baixar = baixar;
-    vm.delete = deleteRow;
-    vm.dtInstance = {};
-    vm.persons = {};
+    function contasPagarController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory) {
+        var vm = this;
+        vm.selected = {};
+        vm.selectAll = false;
+        vm.toggleAll = toggleAll;
+        vm.toggleOne = toggleOne;
+        vm.status = status;
+        vm.message = '';
+        vm.edit = edit;
+        vm.delete = deleteRow;
+        vm.dtInstance = {};
+        vm.persons = {};
+        
+        $scope.contasPagar = {
+            tipoPessoa: 2
+        };
 
-    var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
-        'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
+        var openDialogUpdateCreate = function () {
+            bookIndex = 0;
+            $('.ContasPagarForm')
+                .formValidation({
+                    framework: 'bootstrap',
+                    icon: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        'nome': notEmptyStringMinMaxRegexp,
+                        'email': integerNotEmptyValidation,
+                        'texto': integerNotEmptyValidation,
+                    }
+                });
+        }
 
-    oOptions = DTOptionsBuilder.fromSource('contasPagar.json')
-        .withDOM('frtip')
-        .withPaginationType('full_numbers')
-        .withOption('createdRow', createdRow)
-        .withOption('headerCallback', function(header) {
-            if (!vm.headerCompiled) {
-                // Use this headerCompiled field to only compile header once
-                vm.headerCompiled = true;
-                $compile(angular.element(header).contents())($scope);
-            }
-        })
-        .withPaginationType('full_numbers')
-        .withColumnFilter({
-            aoColumns: [{
-                type: 'number'
-            }, {
-                type: 'number',
-            }, {
-                type: 'select',
-                values: ['Entrada', 'Saida']
-            },{
-                type: 'text'
-            },{
-                type: 'text'
-            },{
-                type: 'text'
-            }]
-        })
-        .withOption('initComplete', function (settings,json) {
-            
-            $('.dt-buttons').find('.dt-button:eq(1)').before(
-
-            '<select class="form-control col-sm-3 btn btn-primary dropdown-toggle" data-ng-options="t.name for t in vm.types"'+
-              'data-ng-model="vm.object.type" style="height: 32px;margin-left: 8px;margin-right: 6px;width: 200px !important;">'+
-              
-                '<option><a href="#">Ações <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>'+
-                '<option><a href="#">Remover Todos <span class="badge selected badge-danger main-badge"  data-ng-show="{{showCase.countSeleted()}}"></span></a></option>'+
-               '</select>'
-
-            )
-        })
-        .withOption('processing', true)
-        .withOption('language',{
-            paginate : {            // Set up pagination text
-                first: "&laquo;",
-                last: "&raquo;",
-                next: "&rarr;",
-                previous: "&larr;"
-            },
-            lengthMenu: "_MENU_ records per page" 
-        })
-        .withButtons([
-            {
+        $scope.toggle = function() {
+            $scope.state = !$scope.state;
+        };
+        var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
+            'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
+        var oOptions = DTOptionsBuilder.newOptions()
+            .withDOM('frtip')
+            .withPaginationType('full_numbers')
+            .withOption('createdRow', createdRow)
+            .withOption('headerCallback', function(header) {
+                if (!vm.headerCompiled) {
+                    // Use this headerCompiled field to only compile header once
+                    vm.headerCompiled = true;
+                    $compile(angular.element(header).contents())($scope);
+                }
+            })
+            .withPaginationType('full_numbers')
+            .withColumnFilter({
+                aoColumns: [{
+                    type: 'number'
+                }, {
+                    type: 'number',
+                }, {
+                    type: 'select',
+                    values: ['Entrada', 'Saida']
+                }, {
+                    type: 'text'
+                }, {
+                    type: 'text'
+                }, {
+                    type: 'text'
+                }]
+            })
+            .withOption('initComplete', function(settings, json) {
+                $('.dt-buttons').find('.dt-button:eq(1)').before(
+                    '<select class="form-control col-sm-3 btn btn-primary dropdown-toggle" data-ng-options="t.name for t in vm.types"' +
+                    'data-ng-model="vm.object.type" style="height: 32px;margin-left: 8px;margin-right: 6px;width: 200px !important;">' +
+                    '<option><a href="#">Ações <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>' +
+                    '<option><a href="#">Remover Todos <span class="badge selected badge-danger main-badge"  data-ng-show="{{showCase.countSeleted()}}"></span></a></option>' +
+                    '</select>'
+                )
+            })
+            .withOption('processing', true)
+            .withOption('language', {
+                paginate: { // Set up pagination text
+                    first: "&laquo;",
+                    last: "&raquo;",
+                    next: "&rarr;",
+                    previous: "&larr;"
+                },
+                lengthMenu: "_MENU_ records per page"
+            })
+            .withButtons([{
                 extend: "colvis",
-                fileName:  "Data_Analysis",
+                fileName: "Data_Analysis",
                 exportOptions: {
                     columns: ':visible'
                 },
-                exportData: {decodeEntities:true}
-            },
-            {
-            extend: "csvHtml5",
-                fileName:  "Data_Analysis",
+                exportData: {
+                    decodeEntities: true
+                }
+            }, {
+                extend: "csvHtml5",
+                fileName: "Data_Analysis",
                 exportOptions: {
                     columns: ':visible'
                 },
-                exportData: {decodeEntities:true}
-            },
-            {
+                exportData: {
+                    decodeEntities: true
+                }
+            }, {
                 extend: "pdfHtml5",
-                fileName:  "Data_Analysis",
-                title:"Data Analysis Report",
+                fileName: "Data_Analysis",
+                title: "Data Analysis Report",
                 exportOptions: {
                     columns: ':visible'
                 },
-                exportData: {decodeEntities:true}
-            },
-            {
+                exportData: {
+                    decodeEntities: true
+                }
+            }, {
                 extend: "copy",
-                fileName:  "Data_Analysis",
-                title:"Data Analysis Report",
+                fileName: "Data_Analysis",
+                title: "Data Analysis Report",
                 exportOptions: {
                     columns: ':visible'
                 },
-                exportData: {decodeEntities:true}
-            },
-            {
+                exportData: {
+                    decodeEntities: true
+                }
+            }, {
                 extend: "print",
                 //text: 'Print current page',
                 autoPrint: true,
                 exportOptions: {
                     columns: ':visible'
                 }
-            },
-            {
+            }, {
                 extend: "excelHtml5",
-                filename:  "Data_Analysis",
-                title:"Data Analysis Report",
+                filename: "Data_Analysis",
+                title: "Data Analysis Report",
                 exportOptions: {
                     columns: ':visible'
                 },
                 //CharSet: "utf8",
-                exportData: { decodeEntities: true }
-            },
-            {
-                text: 'Novo Contas Pagar',
-                key: '1',
-                action: function (e, dt, node, config) {
-                    ModalService.showModal({
-                        templateUrl: 'contasPagar.html',
-                        controller: "ContasPagarController"
-                    }).then(function(modal) {
-
-                        
-                        modal.element.modal();
-                        openDialogUpdateCreate();
-                        modal.close.then(function(result) {
-                            $scope.message = "You said " + result;
-                        });
-                    });
+                exportData: {
+                    decodeEntities: true
                 }
-            }
-        ]);
-    aColumns = [
-        DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
+            }, {
+                text: 'Novo Plano',
+                key: '1',
+                action: function(e, dt, node, config) {
+
+                    dialogFactory.dialog('views/cadastros/dialog/dContasPagar.html',"ContasPagarInsertController",openDialogUpdateCreate);
+                   
+                }
+            }]);
+        var aColumns = [
+            DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
             .renderWith(function(data, type, full, meta) {
                 vm.selected[full.id] = false;
                 return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
-        }).withOption('width', '10px'),
-        DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'), 
-        DTColumnBuilder.newColumn('nunDoc').withTitle('nunDoc'),
-        DTColumnBuilder.newColumn('parcela').withTitle('Parcela').notVisible(),    
-        DTColumnBuilder.newColumn('fornecedor').withTitle('Fornecedor'),
-        DTColumnBuilder.newColumn('descricao').withTitle('Descrição').notVisible(),
-        DTColumnBuilder.newColumn('tipoDoc').withTitle('Tipo Documento').notVisible(),
-        DTColumnBuilder.newColumn('dataLanc').withTitle('Data Lançamento').notVisible(),
-        DTColumnBuilder.newColumn('dataVenc').withTitle('Data Vencimento'),
-        DTColumnBuilder.newColumn('valorCob').withTitle('valorCob'),
-         DTColumnBuilder.newColumn(null).withTitle('Pagamentos')
-            .renderWith(function(data, type, full, meta) {
-            	var sReturn = "";
-                if(data.pagamento != undefined)
-                {
-                    if(data.pagamento.length > 0){
-                        for(var x = 0;x<data.pagamento.length;x++)
-                        {
-                            sReturn = sReturn + "<a> R$"+data.pagamento[x].valorPago +" "+ data.pagamento[x].dataPag +"  </a><br>";
-                        }
-                    }     
-                }
-            	
-            	return sReturn;
-                
-            }).withOption('width', '130px'), 
+            }).withOption('width', '10px'),
+            DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
+            DTColumnBuilder.newColumn('razao').withTitle('Nome ou Razão social'),
+            DTColumnBuilder.newColumn('nome').withTitle('Nome Fantasia'),
+            DTColumnBuilder.newColumn('cnpj').withTitle('CPF ou CNPJ'),
+            DTColumnBuilder.newColumn('IES').withTitle('Inscr Est Subst Trib').notVisible(),
+            DTColumnBuilder.newColumn('IIE').withTitle('Indicador de IE').notVisible(),
+            DTColumnBuilder.newColumn('IE').withTitle('Inscrição Estadual').notVisible(),
+            DTColumnBuilder.newColumn('IM').withTitle('Inscrição Municipal').notVisible(),
+            DTColumnBuilder.newColumn('IF').withTitle('Inscrição Suframa').notVisible(),
+            DTColumnBuilder.newColumn('cep').withTitle('CEP').notVisible(),
+            DTColumnBuilder.newColumn('logradouro').withTitle('Logradouro'),
+            DTColumnBuilder.newColumn('numero').withTitle('Numero'),
+            DTColumnBuilder.newColumn('cidade').withTitle('Cidade'),
+            DTColumnBuilder.newColumn('estado').withTitle('Estado').notVisible(),
+            DTColumnBuilder.newColumn('pais').withTitle('Pais').notVisible(),
+            DTColumnBuilder.newColumn('telefone').withTitle('Telefone'),
+            DTColumnBuilder.newColumn('email').withTitle('Email').notVisible(),
+            DTColumnBuilder.newColumn('dtNasc').withTitle('Data Nascimento').notVisible(),
+            DTColumnBuilder.newColumn('dataCadastro').withTitle('Data Cadastro').notVisible(),
+            DTColumnBuilder.newColumn('obs').withTitle('Observação').notVisible(),
+            DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
+            DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
+            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '140px'),
+        ];
 
-        DTColumnBuilder.newColumn('contaOrigem').withTitle('contaOrigem').notVisible(),
-        DTColumnBuilder.newColumn('obs').withTitle('observacao').notVisible(),
-        DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
-        DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-        DTColumnBuilder.newColumn('status').withTitle('status'),
-        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '140px'), 
-    ];
-
-    function rCallback(nRow, aData){
-      // console.log('row');
-    }
-
-    function recompile(row, data, dataIndex) {
-       $compile(angular.element(row).contents())($scope);
-   }
-
-    Datatablessss.getTable('getfinanceiro', this, rCallback, null, recompile,oOptions,aColumns);
-   
-
-    function edit(person) {
-       ModalService.showModal({
-            templateUrl: 'contasPagar.html',
-            controller: "ContasPagarController"
-        }).then(function(modal) {
-            
-            modal.element.modal();
-            openDialogUpdateCreate();
-            modal.close.then(function(result) {
-                $scope.message = "You said " + result;
-            });
-        });
-    }
-    function deleteRow(person) {
-        ModalService.showModal({
-            templateUrl: 'contasPagar.html',
-            controller: "ContasPagarController"
-        }).then(function(modal) {
-            modal.element.modal();
-            modal.close.then(function(result) {
-                $scope.message = "You said " + result;
-            });
-        });
-    }
-    function baixar(person) {
-        ModalService.showModal({
-            templateUrl: 'baixar.html',
-            controller: "ContasPagarController"
-        }).then(function(modal) {
-            modal.element.modal();
-            $("select").select2({
-              placeholder: "Select a state",
-              allowClear: true
-            });
-            modal.close.then(function(result) {
-                $scope.message = "You said " + result;
-            });
-        });
-    }
-    function openDialogUpdateCreate()
-    {
-        bookIndex = 0;
-        $('#pdVendasForm')
-        .formValidation({
-            framework: 'bootstrap',
-            icon: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-
-            'book[0].produto': notEmptyStringMinMaxRegexp,
-            'book[0].quantidade': integerNotEmptyValidation,
-            'book[0].vlUnitario': integerNotEmptyValidation,
-
-
+        function rCallback(nRow, aData) {
+            // console.log('row');
         }
-        })
-        // Add button click handler
-        .on('click', '.addButton', function() {
-            bookIndex++;
-            var $template = $('#bookTemplate'),
-                $clone    = $template
-                                .clone()
-                                .removeClass('hide')
-                                .removeAttr('id')
-                                .attr('data-book-index', bookIndex)
-                                .insertBefore($template);
 
-            // Update the name attributes
-            $clone
-                .find('[name="produto"]').attr('name', 'book[' + bookIndex + '].produto').end()
-                .find('[name="quantidade"]').attr('name', 'book[' + bookIndex + '].quantidade').end()
-                .find('[name="vlUnitario"]').attr('name', 'book[' + bookIndex + '].vlUnitario').end()
-                .find('[name="desconto"]').attr('name', 'book[' + bookIndex + '].desconto').end();
-
-            // Add new fields
-            // Note that we also pass the validator rules for new field as the third parameter
-            $('#pdVendasForm')
-                .formValidation('addField', 'book[' + bookIndex + '].produto',notEmptyStringMinMaxRegexp)
-                .formValidation('addField', 'book[' + bookIndex + '].quantidade',integerNotEmptyValidation)
-                .formValidation('addField', 'book[' + bookIndex + '].vlUnitario',integerNotEmptyValidation);
-        })// Remove button click handler
-        .on('click', '.removeButton', function() {
-            var $row  = $(this).parents('.form-group'),
-                index = $row.attr('data-book-index');
-
-            // Remove fields
-            $('#bookForm')
-                .formValidation('removeField', $row.find('[name="book[' + index + '].produto"]'))
-                .formValidation('removeField', $row.find('[name="book[' + index + '].quantidade"]'))
-                .formValidation('removeField', $row.find('[name="book[' + index + '].vlUnitario"]'))
-                .formValidation('removeField', $row.find('[name="book[' + index + '].desconto"]'));
-
-            // Remove element containing the fields
-            $row.remove();
-        });
-        $("select").select2({
-          placeholder: "Select a state",
-          allowClear: true
-        });
-
-
-    }
-    function createdRow(row, data, dataIndex) {
-        // Recompiling so we can bind Angular directive to the DT
-        $compile(angular.element(row).contents())($scope);
-    }
-    function actionsHtml(data, type, full, meta) {
-        vm.persons[data.id] = data;
-        return '<button class="btn btn-info" ng-click="showCase.baixar(showCase.persons[' + data.id + '])">' +
-            '   <i class="glyphicon glyphicon-floppy-save"></i>' +
-            '</button>&nbsp;' +
-            '<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
-            '   <i class="fa fa-edit"></i>' +
-            '</button>&nbsp;' +
-            '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
-            '   <i class="fa fa-trash-o"></i>' +
-            '</button>';
-    }
-
-    function toggleAll (selectAll, selectedItems) {
-        for (var id in selectedItems) {
-            if (selectedItems.hasOwnProperty(id)) {
-                selectedItems[id] = selectAll;
-            }
+        function recompile(row, data, dataIndex) {
+            $compile(angular.element(row).contents())($scope);
         }
-    }
-    function toggleOne (selectedItems) {
-        for (var id in selectedItems) {
-            if (selectedItems.hasOwnProperty(id)) {
-                if(!selectedItems[id]) {
-                    vm.selectAll = false;
-                    return;
+        var fnDataSRC = function(json) {
+            console.log(json)
+            json['recordsTotal'] = json.contasPagarList.length
+            json['recordsFiltered'] = json.contasPagarList.length
+            json['draw'] = 1
+            console.log(json)
+            return json.contasPagarList;
+        }
+        Datatablessss.getTable('/pessoa/api/contasPagar/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, oOptions, aColumns);
+
+        function edit(person) {
+            $rootScope.contasPagar = person;
+            dialogFactory.dialog('views/cadastros/dialog/dContasPagar.html',"ContasPagarUpdateController",openDialogUpdateCreate);
+        }
+
+        function deleteRow(person) {
+           $rootScope.contasPagar = person; 
+           dialogFactory.dialog('views/cadastros/dialog/dContasPagar.html',"ContasPagarDeleteController",openDialogUpdateCreate);
+        } 
+
+        function createdRow(row, data, dataIndex) {
+            // Recompiling so we can bind Angular directive to the DT
+            $compile(angular.element(row).contents())($scope);
+        }
+
+        function actionsHtml(data, type, full, meta) {
+            vm.persons[data.id] = data;
+            return '<button class="btn btn-info" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
+                '   <i class="glyphicon glyphicon-save"></i>' +
+                '</button>&nbsp;' +
+                '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
+                '   <i class="fa fa-trash-o"></i>' +
+                '</button>';
+        }
+
+        function toggleAll(selectAll, selectedItems) {
+            for (var id in selectedItems) {
+                if (selectedItems.hasOwnProperty(id)) {
+                    selectedItems[id] = selectAll;
                 }
             }
         }
-        vm.selectAll = true;
+
+        function status() {
+        }
+
+        function toggleOne(selectedItems) {
+            for (var id in selectedItems) {
+                if (selectedItems.hasOwnProperty(id)) {
+                    if (!selectedItems[id]) {
+                        vm.selectAll = false;
+                        return;
+                    }
+                }
+            }
+            vm.selectAll = true;
+        }
+
+        function toggle() {
+            $scope.state = !$scope.state;
+        };
     }
-}
+})();
+(function() {
+    angular.module('wdApp.apps.contasPagar.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('ContasPagarInsertController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+            var vm = this;
+
+            $scope.empresa = {
+            documentos          : [{
+                       documentoTypeEnumValue : 1,
+                       tableEnumValue : 1,
+                       modelAction    : "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    },
+                    {
+                       documentoTypeEnumValue : 2,
+                       tableEnumValue : 1,
+                       modelAction    : "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    },
+                    {
+                       documentoTypeEnumValue : 3,
+                       tableEnumValue : 1,
+                       modelAction    : "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    },
+                    {
+                       documentoTypeEnumValue : 4,
+                       tableEnumValue : 1,
+                       modelAction    : "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    },
+                    {
+                       documentoTypeEnumValue : 5,
+                       tableEnumValue : 1,
+                       modelAction    : "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    },
+                    {
+                       documentoTypeEnumValue : 6,
+                       tableEnumValue : 1,
+                       modelAction    : "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    },
+                    {
+                       documentoTypeEnumValue : 7,
+                       tableEnumValue : 1,
+                       modelAction    : "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    },
+                    {
+                       documentoTypeEnumValue : 8,
+                       tableEnumValue : 1,
+                       modelAction    : "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    }]
+        };
+
+        $scope.enderecos = [];
+
+            $scope.today = function() {
+                return $scope.dt = new Date();
+            };
+            $scope.today();
+            $scope.clear = function() {
+                return $scope.dt = null;
+            };
+            $scope.open = function($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+                return $scope.opened = true;
+            };
+            $scope.dateOptions = {
+                'year-format': "'yy'",
+                'starting-day': 0
+            };
+            $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
+            $scope.format = $scope.formats[1];
+            var fnCallBack = function(oResponse) {
+                debugger
+                console.log(oResponse)
+            }
+            $scope.saveContasPagar = function() {
+                debugger
+                fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos, 'INSERT', "pessoa/api/contasPagar/insert", fnCallBack);
+            };
+        });
+})();
+(function() {
+    angular.module('wdApp.apps.contasPagar.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('ContasPagarUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+            var vm = this;
+            $scope.contasPagar = {};
+            $scope.contasPagar = $rootScope.contasPagar;
+            console.log($rootScope.contasPagar)
+            $scope.saveContasPagar = function() {
+                fPessoa.fnMontaObjeto($scope.contasPagar, $scope.endereco, 'UPDATE', "pessoa/api/contasPagar/update/", fnCallBack);
+            }
+        });
+})();
+(function() {
+    angular.module('wdApp.apps.contasPagar.delete', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('ContasPagarDeleteController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+            var vm = this;
+            $scope.contasPagar = {};
+            $scope.contasPagar = $rootScope.contasPagar;
+            console.log($rootScope.contasPagar)
+            $scope.saveContasPagar = function() {
+                fPessoa.fnDelete($scope.contasPagar, "pessoa/api/contasPagar/update/", function(){console.log('ddda   aqui')});
+            }
+        });
+})();
+(function() {
+    angular.module('wdApp.apps.contasPagar.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('ContasPagarViewController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+            var vm = this;
+            $scope.contasPagar = {};
+            $scope.contasPagar = $rootScope.contasPagar;
+            console.log($rootScope.contasPagar)
+            $scope.saveContasPagar = function() {
+                fPessoa.fnOpenView($scope.contasPagar,"pessoa/api/contasPagar/update/", function(){console.log('aqui')});
+            }
+        });
 })();
