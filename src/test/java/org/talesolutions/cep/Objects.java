@@ -1054,7 +1054,7 @@ public class Objects {
 		contaspagar.setNumero("numero_1 - " + action.toString());
 		contaspagar.setDataEmissao(a.getTime());
 		contaspagar.setDataVencimento(a.getTime());
-		contaspagar.setDocId(1004);
+		contaspagar.setDocId("45dddd787");
 		contaspagar.setValor(new Double(10.00));
 		contaspagar.setObservacao("observacao_6 - " + action.toString());
 		contaspagar.setFinanceiroEnumValue(1007);
@@ -1080,7 +1080,7 @@ public class Objects {
 		titulo.setNumero("numero_1 - " + action.toString());
 		titulo.setDataEmissao(a.getTime());
 		titulo.setDataVencimento(a.getTime());
-		titulo.setDocId(1004);
+		titulo.setDocId("45dddd787");
 		titulo.setValor(new Double(10.00));
 		titulo.setObservacao("observacao_6 - " + action.toString());
 		titulo.setFinanceiroEnumValue(1007);
@@ -1150,7 +1150,7 @@ public class Objects {
 		contasreceber.setNumero("numero_1 - " + action.toString());
 		contasreceber.setDataEmissao(a.getTime());
 		contasreceber.setDataVencimento(a.getTime());
-		contasreceber.setDocId(1004);
+		contasreceber.setDocId("45dddd787");
 		contasreceber.setValor(new Double(10.00));
 		contasreceber.setObservacao("observacao_6 - " + action.toString());
 		contasreceber.setFinanceiroEnumValue(1007);

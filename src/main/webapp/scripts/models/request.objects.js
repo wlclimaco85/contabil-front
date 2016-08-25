@@ -48,6 +48,27 @@
 		this.returnListPaged = _bPagedList;
 	};
 
+	qat.model.reqBanco = function(_oCounty, _bList, _bPagedList)
+	{
+		this.banco = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
+
+	qat.model.reqContasPagar = function(_oCounty, _bList, _bPagedList)
+	{
+		this.financeiro = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
+
+	qat.model.reqContasReceber = function(_oCounty, _bList, _bPagedList)
+	{
+		this.financeiro = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
+
 	qat.model.reqAgencia = function(_oCounty, _bList, _bPagedList)
 	{
 		this.agencia = _oCounty;
