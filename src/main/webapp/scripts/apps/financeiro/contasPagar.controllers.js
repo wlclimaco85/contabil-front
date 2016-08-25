@@ -14,9 +14,8 @@
         vm.delete = deleteRow;
         vm.dtInstance = {};
         vm.persons = {};
-        
+
         $scope.contasPagar = {
-            tipoPessoa: 2
         };
 
         var openDialogUpdateCreate = function () {
@@ -150,8 +149,8 @@
                 key: '1',
                 action: function(e, dt, node, config) {
 
-                    dialogFactory.dialog('views/cadastros/dialog/dContasPagar.html',"ContasPagarInsertController",openDialogUpdateCreate);
-                   
+                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",openDialogUpdateCreate);
+
                 }
             }]);
         var aColumns = [
@@ -200,17 +199,17 @@
             console.log(json)
             return json.contasPagarList;
         }
-        Datatablessss.getTable('/pessoa/api/contasPagar/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, oOptions, aColumns);
+        Datatablessss.getTable('/financeiro/api/contasPagar/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, oOptions, aColumns);
 
         function edit(person) {
             $rootScope.contasPagar = person;
-            dialogFactory.dialog('views/cadastros/dialog/dContasPagar.html',"ContasPagarUpdateController",openDialogUpdateCreate);
+            dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarUpdateController",openDialogUpdateCreate);
         }
 
         function deleteRow(person) {
-           $rootScope.contasPagar = person; 
-           dialogFactory.dialog('views/cadastros/dialog/dContasPagar.html',"ContasPagarDeleteController",openDialogUpdateCreate);
-        } 
+           $rootScope.contasPagar = person;
+           dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarDeleteController",openDialogUpdateCreate);
+        }
 
         function createdRow(row, data, dataIndex) {
             // Recompiling so we can bind Angular directive to the DT
@@ -257,91 +256,11 @@
 })();
 (function() {
     angular.module('wdApp.apps.contasPagar.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('ContasPagarInsertController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        .controller('ContasPagarInsertController', function($rootScope, $scope, fModels, SysMgmtData) {
             var vm = this;
 
-            $scope.empresa = {
-            documentos          : [{
-                       documentoTypeEnumValue : 1,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 2,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 3,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 4,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 5,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 6,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 7,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 8,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    }]
-        };
+            $scope.titulo = {
+            }
 
         $scope.enderecos = [];
 
@@ -369,43 +288,75 @@
             }
             $scope.saveContasPagar = function() {
                 debugger
-                fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos, 'INSERT', "pessoa/api/contasPagar/insert", fnCallBack);
+                var oObject = fModels.amont($scope.contasPagar,"INSERT");
+
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "financeiro/api/contasPagar/insert",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqContasPagar(oObject, true, true)
+                }, function(res) {
+                    callBack(res);
+                });
             };
         });
 })();
 (function() {
     angular.module('wdApp.apps.contasPagar.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('ContasPagarUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        .controller('ContasPagarUpdateController', function($rootScope, $scope, fModels, SysMgmtData) {
             var vm = this;
             $scope.contasPagar = {};
             $scope.contasPagar = $rootScope.contasPagar;
             console.log($rootScope.contasPagar)
             $scope.saveContasPagar = function() {
-                fPessoa.fnMontaObjeto($scope.contasPagar, $scope.endereco, 'UPDATE', "pessoa/api/contasPagar/update/", fnCallBack);
+                var oObject = fModels.amont($scope.contasPagar,"INSERT");
+
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "financeiro/api/contasPagar/insert",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqContasPagar(oObject, true, true)
+                }, function(res) {
+                    callBack(res);
+                });
             }
         });
 })();
 (function() {
     angular.module('wdApp.apps.contasPagar.delete', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('ContasPagarDeleteController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        .controller('ContasPagarDeleteController', function($rootScope, $scope, fModels, SysMgmtData) {
             var vm = this;
             $scope.contasPagar = {};
             $scope.contasPagar = $rootScope.contasPagar;
             console.log($rootScope.contasPagar)
             $scope.saveContasPagar = function() {
-                fPessoa.fnDelete($scope.contasPagar, "pessoa/api/contasPagar/update/", function(){console.log('ddda   aqui')});
+                var oObject = fModels.amont($scope.contasPagar,"INSERT");
+
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "financeiro/api/contasPagar/insert",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqContasPagar(oObject, true, true)
+                }, function(res) {
+                    callBack(res);
+                });
             }
         });
 })();
 (function() {
     angular.module('wdApp.apps.contasPagar.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('ContasPagarViewController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        .controller('ContasPagarViewController', function($rootScope, $scope, fModels, SysMgmtData) {
             var vm = this;
             $scope.contasPagar = {};
             $scope.contasPagar = $rootScope.contasPagar;
             console.log($rootScope.contasPagar)
             $scope.saveContasPagar = function() {
-                fPessoa.fnOpenView($scope.contasPagar,"pessoa/api/contasPagar/update/", function(){console.log('aqui')});
+                var oObject = fModels.amont($scope.contasPagar,"INSERT");
+
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "financeiro/api/contasPagar/insert",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqContasPagar(oObject, true, true)
+                }, function(res) {
+                    callBack(res);
+                });
             }
         });
 })();

@@ -14,7 +14,7 @@
         vm.delete = deleteRow;
         vm.dtInstance = {};
         vm.persons = {};
-        
+
         $scope.banco = {
             tipoPessoa: 2
         };
@@ -31,8 +31,6 @@
                     },
                     fields: {
                         'nome': notEmptyStringMinMaxRegexp,
-                        'email': integerNotEmptyValidation,
-                        'texto': integerNotEmptyValidation,
                     }
                 });
         }
@@ -54,31 +52,6 @@
                 }
             })
             .withPaginationType('full_numbers')
-            .withColumnFilter({
-                aoColumns: [{
-                    type: 'number'
-                }, {
-                    type: 'number',
-                }, {
-                    type: 'select',
-                    values: ['Entrada', 'Saida']
-                }, {
-                    type: 'text'
-                }, {
-                    type: 'text'
-                }, {
-                    type: 'text'
-                }]
-            })
-            .withOption('initComplete', function(settings, json) {
-                $('.dt-buttons').find('.dt-button:eq(1)').before(
-                    '<select class="form-control col-sm-3 btn btn-primary dropdown-toggle" data-ng-options="t.name for t in vm.types"' +
-                    'data-ng-model="vm.object.type" style="height: 32px;margin-left: 8px;margin-right: 6px;width: 200px !important;">' +
-                    '<option><a href="#">Ações <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>' +
-                    '<option><a href="#">Remover Todos <span class="badge selected badge-danger main-badge"  data-ng-show="{{showCase.countSeleted()}}"></span></a></option>' +
-                    '</select>'
-                )
-            })
             .withOption('processing', true)
             .withOption('language', {
                 paginate: { // Set up pagination text
@@ -146,25 +119,19 @@
                     decodeEntities: true
                 }
             }, {
-                text: 'Novo Plano',
+                text: 'Novo Banco',
                 key: '1',
                 action: function(e, dt, node, config) {
 
-                    dialogFactory.dialog('views/cadastros/dialog/dBanco.html',"BancoInsertController",openDialogUpdateCreate);
-                   
+                    dialogFactory.dialog('views/financeiro/dialog/dBanco.html',"BancoInsertController",openDialogUpdateCreate);
+
                 }
             }]);
         var aColumns = [
-        DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
-            .renderWith(function(data, type, full, meta) {
-                vm.selected[full.id] = false;
-                return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
-        }),
-        DTColumnBuilder.newColumn('id').withTitle('ID').withOption('width', '10px').notVisible(),
-        DTColumnBuilder.newColumn('banco').withTitle('Banco'), 
-        DTColumnBuilder.newColumn('fabricante').withTitle('Fabricante'), 
-        DTColumnBuilder.newColumn('sac').withTitle('SAC'),
-        DTColumnBuilder.newColumn('email').withTitle('Email'), 
+        DTColumnBuilder.newColumn('id').withTitle('ID').withOption('width', '10px'),
+        DTColumnBuilder.newColumn('nome').withTitle('Banco'),
+        DTColumnBuilder.newColumn('site').withTitle('Site'),
+        DTColumnBuilder.newColumn('descricao').withTitle('Descricao'),
         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
         DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '100px')
@@ -185,17 +152,17 @@
             console.log(json)
             return json.bancoList;
         }
-        Datatablessss.getTable('/empresa/api/banco/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, oOptions, aColumns);
+        Datatablessss.getTable('/financeiro/api/banco/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, oOptions, aColumns);
 
         function edit(person) {
             $rootScope.banco = person;
-            dialogFactory.dialog('views/cadastros/dialog/dBanco.html',"BancoUpdateController",openDialogUpdateCreate);
+            dialogFactory.dialog('views/financeiro/dialog/dBanco.html',"BancoUpdateController",openDialogUpdateCreate);
         }
 
         function deleteRow(person) {
-           $rootScope.banco = person; 
-           dialogFactory.dialog('views/cadastros/dialog/dBanco.html',"BancoDeleteController",openDialogUpdateCreate);
-        } 
+           $rootScope.banco = person;
+           dialogFactory.dialog('views/financeiro/dialog/dBanco.html',"BancoDeleteController",openDialogUpdateCreate);
+        }
 
         function createdRow(row, data, dataIndex) {
             // Recompiling so we can bind Angular directive to the DT
@@ -269,8 +236,17 @@
                 console.log(oResponse)
             }
             $scope.saveBanco = function() {
-                debugger
-                fPessoa.fnMontaObjeto($scope.banco, null, 'INSERT', "empresa/api/banco/insert", fnCallBack);
+
+                var oObject = fModels.amont($scope.banco,"INSERT");
+
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "financeiro/api/banco/insert",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqBanco(oObject, true, true)
+                }, function(res) {
+                    callBack(res);
+                });
+
             };
         });
 })();
@@ -280,9 +256,18 @@
             var vm = this;
             $scope.banco = {};
             $scope.banco = $rootScope.banco;
-            console.log($rootScope.banco)
+
             $scope.saveBanco = function() {
-                fPessoa.fnMontaObjeto($scope.banco, $scope.endereco, 'UPDATE', "empresa/api/banco/update/", fnCallBack);
+                var oObject = fModels.amont($scope.banco,"INSERT");
+
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "financeiro/api/banco/update",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqBanco(oObject, true, true)
+                }, function(res) {
+                    callBack(res);
+                });
+
             }
         });
 })();
@@ -292,9 +277,18 @@
             var vm = this;
             $scope.banco = {};
             $scope.banco = $rootScope.banco;
-            console.log($rootScope.banco)
+
             $scope.saveBanco = function() {
-                fPessoa.fnDelete($scope.banco, "empresa/api/banco/update/", function(){console.log('ddda   aqui')});
+                var oObject = fModels.amont($scope.banco,"INSERT");
+
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "financeiro/api/banco/insert",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqBanco(oObject, true, true)
+                }, function(res) {
+                    callBack(res);
+                });
+
             }
         });
 })();

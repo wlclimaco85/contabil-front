@@ -50,7 +50,7 @@ var WebDaptiveAppConfig = {
 				'wdApp.pages.controllers', 'wdApp.demodata', 'wdApp.apps.stocks', 'wdApp.apps.stocksdata',
 				'wdApp.apps.counties','datatables','datatables.bootstrap', 'wdApp.apps.procedures','wdApp.apps.sysmgmt.data','wdApp.apps.site','wdApp.apps.empresa','wdApp.apps.produtos','wdApp.apps.produtoss','wdApp.apps.produto','wdApp.apps.notaFiscal',
 				'wdApp.apps.pdCompras','wdApp.apps.orcamento','wdApp.apps.ordemServico','wdApp.apps.nfEntrada','wdApp.apps.pdCompras'
-				,'wdApp.apps.cotacao','wdApp.apps.pdVendas','wdApp.apps.formaPg','wdApp.apps.contasReceber','wdApp.apps.conta','wdApp.apps.funcionario',
+				,'wdApp.apps.cotacao','wdApp.apps.pdVendas','wdApp.apps.conta','wdApp.apps.funcionario',
 				'wdApp.ajaxCall'
 				,'wdApp.apps.cliente'
 				,'wdApp.apps.cliente.insert'
@@ -70,10 +70,10 @@ var WebDaptiveAppConfig = {
 				,'wdApp.apps.transportador.update'
 	            ,'wdApp.apps.transportador.delete'
 	            ,'wdApp.apps.transportador.view'
-				
+
 
 				,'wdApp.apps.ordemProducao'
-				
+
 				,'wdApp.apps.funcionarios'
 				,'wdApp.apps.compras'
 				,'wdApp.apps.pagamentos'
@@ -87,7 +87,7 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.site'
 	            ,'wdApp.apps.sites'
 	            ,'wdApp.apps.plano'
-	            
+
 	            ,'wdApp.apps.usuarios'
 	            ,'wdApp.apps.contatos'
 	            ,'wdApp.apps.historico'
@@ -172,7 +172,7 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.uniMed.delete'
 	            ,'wdApp.apps.uniMed.view'
 
-	            
+
 	            ,'wdApp.apps.usuarios'
 				,'wdApp.apps.usuarios.insert'
 	            ,'wdApp.apps.usuarios.update'
@@ -198,6 +198,20 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.contasPagar.update'
 	            ,'wdApp.apps.contasPagar.delete'
 	            ,'wdApp.apps.contasPagar.view'
+
+
+	            ,'wdApp.apps.formaPg',
+	            ,'wdApp.apps.formaPg.insert'
+	            ,'wdApp.apps.formaPg.update'
+	            ,'wdApp.apps.formaPg.delete'
+	            ,'wdApp.apps.formaPg.view'
+
+
+	            ,'wdApp.apps.contasReceber'
+	            ,'wdApp.apps.contasReceber.insert'
+	            ,'wdApp.apps.contasReceber.update'
+	            ,'wdApp.apps.contasReceber.delete'
+	            ,'wdApp.apps.contasReceber.view'
 
 				]);
 
