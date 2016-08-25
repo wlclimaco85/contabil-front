@@ -192,7 +192,7 @@
             console.log(json)
             return json.agenciaList;
         }
-        Datatablessss.getTable('/pessoa/api/agencia/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, oOptions, aColumns);
+        Datatablessss.getTable('/financeiro/api/agencia/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, oOptions, aColumns);
 
         function edit(person) {
             $rootScope.Agencia = person;
@@ -276,8 +276,18 @@
                 console.log(oResponse)
             }
             $scope.saveAgencia = function() {
-                debugger
-                fPessoa.fnMontaObjeto($scope.agencia, null, 'INSERT', "site/api/agencia/insert/", fnCallBack);
+                
+
+                var oObject = fModels.amont($scope.agencia,"INSERT");
+
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "financeiro/api/agencia/insert/",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqAgencia(oObject, true, true)
+                }, function(res) {
+                    callBack(res);
+                });
+              //  fPessoa.fnMontaObjeto($scope.agencia, null, 'INSERT', "financeiro/api/agencia/insert/", fnCallBack);
             };
         });
 })();

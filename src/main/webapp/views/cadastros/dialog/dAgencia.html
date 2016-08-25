@@ -18,13 +18,13 @@
 					                </select>
                                 </div>
                                 <div class="form-group col-sm-3">
-                                    <label for="exampleInputEmail1">NÂº Agencia</label>
+                                    <label for="exampleInputEmail1">Nº Agencia</label>
                                     <input type="text"  ng-model="agencia.numero" name="cfop" class="form-control" placeholder="CFOP">
                                 </div>
                                 <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Nome Gerente</label>
-                                    <input type="text" class="form-control" ng-model="agencia.gerente" name="descricao" placeholder="DescriÃ§Ã£o">
+                                    <input type="text" class="form-control" ng-model="agencia.gerente" name="descricao" placeholder="Descrição">
                                 </div>
                               </div> 
                              </div>
@@ -32,12 +32,26 @@
                              
                                 <div class="col-sm-12">
                                   <div class="form-group">
-                                      <label for="exampleInputPassword1">ObservaÃ§Ã£o</label>
+                                      <label for="exampleInputPassword1">Observação</label>
                                       <textarea class="form-control" ng-model="agencia.observacao" rows="5" ></textarea>
                                   </div>
                               </div>
                             
                             </div>
+
+                           <!-- Endereco -->
+                        <div ng-include="'views/util/apps/numeroConta.html'"></div>
+
+                            <!-- Endereco -->
+                        <div ng-include="'views/util/apps/endereco.html'"></div>
+
+                        <!-- -------------------  TELEFONE ----------------- -->
+
+                        <div ng-include="'views/util/apps/telefone.html'"></div>
+
+                        <!-- -------------------  Email Empresa ----------------- -->
+
+                        <div ng-include="'views/util/apps/email.html'"></div>
               	
               </div>
               <div class="modal-footer">

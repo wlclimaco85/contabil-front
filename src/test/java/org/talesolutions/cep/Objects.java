@@ -1238,7 +1238,6 @@ public class Objects {
 		ContaCorrente contacorrente = new ContaCorrente();
 		Date a = new Date();
 		contacorrente.setId(id);
-		contacorrente.setAgencia(insertAgencia(id, TabelaEnum.CONTACORRENTE, action));
 		contacorrente.setSaldo(new Double(10.00));
 		contacorrente.setNumeroConta("numeroConta_3 - " + action.toString());
 		contacorrente.setNossoNumero("nossoNumero_4 - " + action.toString());
