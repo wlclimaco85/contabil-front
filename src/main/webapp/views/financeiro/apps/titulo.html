@@ -1,0 +1,79 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="row">
+    <div class="form-group col-sm-6">
+        <label for="exampleInputEmail1">Descrição</label>
+        <input type="text" ng-model="titulo.descricao" name="descricao" class="form-control" placeholder="Descrição">
+    </div>
+    <div class="form-group col-sm-3">
+        <label for="exampleInputPassword1">Tipo de documento</label>
+        <div class="row ">
+            <select id="financeiro_cod_tipoDoc" ng-model="titulo.tipoDocEnumValue" class="col-sm-12" name="financeiro_cod_tipoDoc">
+                <option value="0"></option>
+                <option value="1">Dinheiro</option>
+                <option value="2">Cheque</option>
+                <option value="3">Boleto</option>
+                <option value="4">Cartão Crédito</option>
+                <option value="5">Cartão Débito</option>
+                <option value="6">Duplicata</option>
+                <option value="7">Carnê</option>
+                <option value="8">Transf. Eletrônica</option>
+                <option value="9">Crédito Loja</option>
+                <option value="10">Vale Alimentação</option>
+                <option value="11">Vale Refeição</option>
+                <option value="12">Vale Presente</option>
+                <option value="13">Vale Combustível</option>
+                <option value="14">Sem documento</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <label for="fileToUpload">Anexar Documento</label>
+        <input type="file" name="fileToUpload" id="fileToUpload" onchange="fileSelected();" />
+        <div id="fileName"></div>
+        <div id="fileSize"></div>
+        <div id="fileType"></div>
+        <input type="button" onclick="uploadFile()" value="Upload" />
+        <div id="progressNumber"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-sm-3">
+        <label for="exampleInputEmail1">Data Emissão</label>
+        <input type="text" ng-model="titulo.dataEmissao" name="dataEmissao" class="form-control" placeholder="Data do Emissão">
+    </div>
+
+    <div class="form-group col-sm-3">
+        <label for="exampleInputPassword1">Valor cobrado</label>
+        <input type="text" class="form-control" ng-model="titulo.valor" name="valor" placeholder="Valor cobrado">
+    </div>
+    <div class="row col-sm-3">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Data de vencimento</label>
+            <input type="text" class="form-control" ng-model="titulo.dataVencimento" name="descricao" placeholder="Data de vencimento">
+        </div>
+    </div>
+
+    <div class="form-group col-sm-3">
+        <label for="exampleInputPassword1">Nro. do documento</label>
+        <input type="text" class="form-control" ng-model="titulo.docId" name="docId" placeholder="Nro. do documento">
+    </div>
+    
+</div>
+<div class="row hide">
+    <div class="form-group col-sm-6">
+        <label for="exampleInputPassword1">Valor do pagamento</label>
+        <input type="text" ng-disabled="true" class="form-control" ng-model="titulo.valorPago" name="password" placeholder="R$0,00">
+    </div>
+    <div class="form-group col-sm-6">
+        <label for="exampleInputPassword1">Data do pagamento</label>
+        <input type="text" ng-disabled="true" class="form-control" ng-model="titulo.dataPagamento" name="password" placeholder="R$0,00">
+    </div>
+</div>
+<div class="row col-sm-12">
+    <div class="form-group col-sm-6">
+        <label for="exampleInputEmail1">Observações</label>
+        <textarea class="form-control" ng-model="titulo.observacao" rows="5" ></textarea>
+    </div>
+</div>

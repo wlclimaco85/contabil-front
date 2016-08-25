@@ -1,3 +1,10 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
 <div ng-controller="UtilController as cc">
 <div class="row">
     <div class="col-sm-6">
@@ -50,11 +57,17 @@
     </div>
     <div class="col-sm-2">
         <label for="exampleInputPassword1">Estado</label>
-        <input type="text" class="form-control col-sm-8" name="estado" ng-model="enderecos[0].estado.abreviacao" placeholder="Estado">
+            <div class="row ">
+                <select name="estado" ng-model="enderecos[0].estado.abreviacao" class=" form-group col-sm-12 select-estado estado">
+                </select>
+             </div>
     </div>
     <div class="col-sm-2">
         <label for="exampleInputPassword1">Municipio</label>
-        <input type="text" class="form-control col-sm-4" name="cidade" ng-model="enderecos[0].cidade.nome" placeholder="Municipio">
+        <div class="row ">
+                <select name="cidade" ng-model="enderecos[0].cidade.id" class=" form-group col-sm-12 cidade select-cidade">
+                </select>
+             </div>
     </div>
 
     <div class="col-sm-2">
@@ -67,3 +80,58 @@
     </div>
 </div>
 </div>
+<script>
+    $(document).ready(function() {
+
+        var callbackEstado = function(res){
+                var planos = "";
+
+               if(res.operationSuccess == true)
+               {
+                   for(var x = 0 ;x < res.estadoList.length;x++)
+                   {
+                       planos = planos + "<option value='"+res.estadoList[x].id+"'> "+res.estadoList[x].abreviacao+" </option>";
+                   }
+                    planos = planos + "<option class='options'> Cadastrar Novo ESTADO </option>";
+
+                    $('.estado').append(planos);
+
+                    $(".select-estado").select2({
+                          placeholder: "Selecione o ESTADO",
+                          allowClear: true
+                        });
+               }
+
+            }
+
+
+            qat.model.select.util("cadastros/api/estado/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackEstado);
+
+
+            var callbackCidade = function(res){
+                var planos = "";
+
+               if(res.operationSuccess == true)
+               {
+                   for(var x = 0 ;x < res.cidadeList.length;x++)
+                   {
+
+                       planos = planos + "<option value='"+res.cidadeList[x].id+"'> "+res.cidadeList[x].nome+" </option>";
+                   }
+                    planos = planos + "<option class='options'> Cadastrar Nova Cidade </option>";
+
+                    $('.cidade').append(planos);
+
+                    $(".select-cidade").select2({
+                          placeholder: "Selecione a Cidade",
+                          allowClear: true
+                        });
+               }
+
+            }
+
+
+            qat.model.select.util("cadastros/api/cidade/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackCidade);
+
+    });
+</script>
