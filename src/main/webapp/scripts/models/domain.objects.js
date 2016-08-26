@@ -258,6 +258,37 @@ qat.model.fnTelefones =function(numero,id,type,modelAction)
             return telefones;
         }
 
+
+qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
+        {
+          var ststus = 0
+          if(_statusConta == true)
+          {
+              ststus = 1;
+          }
+          if(_id == 0 || _id == undefined || _id == "")
+            _id = null
+
+            telefones = {
+               id : _id,
+               numeroConta : _numero,
+               statusConta : ststus,
+               saldo : _saldo,
+               parentId       : 0,
+               emprId         : 0,
+               processId      : 0,
+               tableEnumValue : 0,
+               modelAction    : 0,
+               modelAction    : modelAction,
+               createUser     : "System",
+               createDateUTC  : (new Date()).getTime(),
+               modifyUser     : "System",
+               modifyDateUTC  : (new Date()).getTime()
+            }
+
+            return telefones;
+        }
+
   qat.model.fnEmails =function(_email,_id,type,modelAction)
         {
           if(_id == "" || _id == " "){

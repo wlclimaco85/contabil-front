@@ -30,7 +30,7 @@
                         validating: 'glyphicon glyphicon-refresh'
                     },
                     fields: {
-                        'banco': notEmptyStringMinMaxRegexp,
+                        'banco': notEmpty,
                         'numero': notEmptyStringMinMaxRegexp,
                     }
                 });
@@ -251,6 +251,7 @@
             var vm = this;
 
             $scope.agencia = {}
+            $scope.enderecos = {}
             
             $scope.today = function() {
                 return $scope.dt = new Date();
@@ -276,15 +277,25 @@
             }
             $scope.saveAgencia = function() {
                 
-
-                var oObject = fModels.amont($scope.agencia,"INSERT");
-
+                var oObject = fModels.amont(fPessoa.fnMontObject($scope.agencia,$scope.enderecos,"INSERT"),"INSERT");
+//var oObject = fModels.amont($scope.agencia,"INSERT");
+var bb = [];
+                $('.numeroConta:visible').each(function() {
+                if($(this).length > 0)
+                {
+                    //.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
+                    bb.push(fModels.amont(qat.model.fnContaCC($(this).find('.numero').val(),$(this).find('.id').val(),$(this).find('.check-socio').prop('checked'),$(this).find('.saldo').val(),"INSERT"),"INSERT"));
+                }
+            });
+            oObject.numeroConta = bb;
+console.log(oObject);
                 SysMgmtData.processPostPageData("main/api/request", {
                     url: "financeiro/api/agencia/insert/",
                     token: $rootScope.authToken,
                     request: new qat.model.reqAgencia(oObject, true, true)
                 }, function(res) {
-                    callBack(res);
+                    debugger
+                    fnCallBack(res);
                 });
               //  fPessoa.fnMontaObjeto($scope.agencia, null, 'INSERT', "financeiro/api/agencia/insert/", fnCallBack);
             };

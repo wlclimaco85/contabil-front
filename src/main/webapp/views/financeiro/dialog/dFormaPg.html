@@ -1,25 +1,24 @@
-    <div class="container">
                <div class="modal fade">
-                <div class="modal-dialog">
+                <div class="modal-dialog" style="width : 50%">
                   <div class="modal-content">
+                   <form  class="formaPgForm">
                     <div class="modal-header">
                       <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
                       <h4 class="modal-title">Cadastro Forma Pagamento</h4>
                     </div>
                     <div class="modal-body">
                       <form  id="empresaForm">
-                                  <div class="row">
-                                      <div class="col-md-12">
                                       <div class="row">
-                                          <div class="form-group col-sm-4">
-                                              <label for="exampleInputEmail1">Nome</label>
-                                              <input type="text"  ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Nome">
+                                          <div class="form-group col-sm-12">
+                                              <label for="exampleInputEmail1">Descrição</label>
+                                              <input type="text"  ng-model="formaPg.descricao" name="cfop" class="form-control" placeholder="Descrição">
                                           </div>
-
-                                          <div class="form-group col-sm-4">
-                                              <label for="exampleInputEmail1">Parcelamento mÃ¡x.</label>
+                                          </div>
+                                          <div class="row col-sm-12">
+                                          <div class="col-sm-4">
+                                              <label for="exampleInputEmail1">Parcelamento máx.</label>
                                               <div class="row">
-                                                  <select id="formasPgto_parcMaximo" class="col-sm-12" name="formasPgto_parcMaximo">
+                                                  <select id="formasPgto_parcMaximo" class="col-sm-12" ng-model="formaPg.parcelamentoMax">
                                                       <option value="0">Somente a vista</option>
                                                       <option value="1">1 vez</option>
                                                       <option value="2">2 vezes</option>
@@ -168,7 +167,7 @@
                                           <div class="form-group col-sm-4">
                                               <label for="exampleInputEmail1">Parcelas sem juros</label>
                                               <div class="row">
-                                                  <select id="formasPgto_parcMaximo" class="col-sm-12" name="formasPgto_parcMaximo">
+                                                  <select id="formasPgto_parcMaximo" class="col-sm-12" ng-model="formaPg.parcelamentoSemJuros">
                                                       <option value="0">Somente a vista</option>
                                                       <option value="1">1 vez</option>
                                                       <option value="2">2 vezes</option>
@@ -316,78 +315,85 @@
                                           </div>
                                        </div>
                                        <div class="row col-sm-12">
-                                          <div class="form-group col-sm-2">
+                                          <div class="form-group col-sm-4">
                                               <label for="exampleInputEmail1">Juros (%)</label>
-                                              <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="0.00">
+                                              <input type="email" id='email' class="form-control" ng-model="formaPg.juros" name="email" placeholder="0.00">
                                           </div>
-                                          <div class="form-group col-sm-2">
+                                          <div class="form-group col-sm-4">
                                               <label for="exampleInputPassword1">Taxa fixa ($)</label>
-                                              <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="0.00">
+                                              <input type="text" class="form-control" ng-model="formaPg.taxaFixa" name="text" placeholder="0.00">
                                           </div>
-                                          <div class="form-group col-sm-3">
+                                          <div class="form-group col-sm-4">
                                               <label for="exampleInputPassword1">Desconto a vista (%)</label>
-                                              <input type="password" class="form-control" ng-model="cfop.margemAgregadaST" name="password" placeholder="0.00">
+                                              <input type="text" class="form-control" ng-model="formaPg.descAvista" name="text" placeholder="0.00">
                                           </div>
-                                          <div class="form-group col-sm-2">
-                                              <label for="exampleInputPassword1">Conta de destino padrÃ£o</label>
+                                        </div>
+                                        <div class="row col-sm-12">
+                                          <div class="form-group col-sm-6">
+                                              <label for="exampleInputPassword1">Conta de destino padrão</label>
                                               <div class="row">
-                                                  <select id="formasPgto_cod_disponiveis" class="col-sm-12" name="formasPgto_cod_disponiveis" autocomplete="off">
+                                                  <select id="formasPgto_cod_disponiveis" class="col-sm-12" g-model="formaPg.conta.id">
                                                       <option value="0"></option>
                                                       <option value="1">Caixa interno</option>
                                                       <option value="1">Banco interno</option>
                                                   </select>
                                               </div>
                                           </div>
-                                          <div class="form-group col-sm-3">
-                                              <label for="exampleInputPassword1">Tipo de documento padrÃ£o</label>
+                                          <div class="form-group col-sm-6">
+                                              <label for="exampleInputPassword1">Tipo de documento padrão</label>
                                               <div class="row">
-                                                  <select id="formasPgto_cod_tiposDoc" class="col-sm-12" name="formasPgto_cod_tiposDoc" autocomplete="off">
+                                                  <select id="formasPgto_cod_tiposDoc" class="col-sm-12" ng-model="formaPg.tipoDoc.id">
                                                       <option value="0"></option>
                                                       <option value="1">Dinheiro</option>
                                                       <option value="2">Cheque</option>
                                                       <option value="3">Boleto</option>
-                                                      <option value="4">CartÃ£o CrÃ©dito</option>
-                                                      <option value="5">CartÃ£o DÃ©bito</option>
+                                                      <option value="4">Cartão Crédito</option>
+                                                      <option value="5">Cartão Débito</option>
                                                       <option value="6">Duplicata</option>
-                                                      <option value="7">CarnÃª</option>
-                                                      <option value="8">Transf. EletrÃ´nica</option>
-                                                      <option value="9">CrÃ©dito Loja</option>
-                                                      <option value="10">Vale AlimentaÃ§Ã£o</option>
-                                                      <option value="11">Vale RefeiÃ§Ã£o</option>
+                                                      <option value="7">Carnê</option>
+                                                      <option value="8">Transf. Eletrônica</option>
+                                                      <option value="9">Crédito Loja</option>
+                                                      <option value="10">Vale Alimentação</option>
+                                                      <option value="11">Vale Refeição</option>
                                                       <option value="12">Vale Presente</option>
-                                                      <option value="13">Vale CombustÃ­vel</option>
+                                                      <option value="13">Vale Combustível</option>
                                                       <option value="14">Sem documento</option>
                                                   </select>
                                               </div>
                                           </div>
                                       </div>
                                       <div class="row col-sm-12">
-                                          <div class="form-group col-sm-4">
-                                              <label for="exampleInputPassword1">Intervalo padrÃ£o entre as parcelas</label>
-                                              <input type="password" class="form-control col-sm-6" ng-model="cfop.icmsReduzido" name="password" placeholder="1">
+                                          <div class="form-group col-sm-6">
+                                              <label for="exampleInputPassword1">Intervalo padrão entre as parcelas</label>
+                                              <input type="text" class="form-control" ng-model="formaPg.qntIntervalo" name="text" placeholder="1">
+                                          </div>
+                                              <div class="form-group col-sm-6">
+                                              <label for="exampleInputPassword1">Tipo de documento padrão</label>
                                               <div class="row">
-                                                  <select id="formasPgto_intervaloT" class="col-sm-6" name="formasPgto_intervaloT" autocomplete="off">
+                                                  <select id="formasPgto_intervaloT" class="col-sm-6" ng-model="formaPg.intervalo">
                                                       <option value="D">dia</option>
-                                                      <option value="M">mÃªs</option>
+                                                      <option value="M">mês</option>
                                                   </select>
                                               </div>
+                                              </div>
+                                          
                                           </div>
-                                          <div class="form-group col-sm-8">
-                                              <label for="exampleInputPassword1">ObservaÃ§Ãµes</label>
-                                              <input type="password" class="form-control" ng-model="cfop.classFiscal" name="password" placeholder="0.00">
+                                          <div class="row col-sm-12">
+                                          <div class="form-group col-sm-12">
+                                              <label for="exampleInputPassword1">Observações</label>
+                                              <input type="text" class="form-control" ng-model="formaPg.observacao" name="text" placeholder="0.00">
                                           </div>
                                           
                                       </div>
-                                  </div>
-                        </div>
-                      </form>
+
+                      
                     </div>
                     <div class="modal-footer">
                       <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                      <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Gravar</button>
+                      <button type="submit" ng-click="saveFormaPg()" class="btn btn-primary">Gravar</button>
                     </div>
+</form>
                   </div>
                 </div>
               </div>
 
-      </div>
