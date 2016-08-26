@@ -137,6 +137,16 @@
 		this.maxPreQueryCount = 0;
 	};
 
+	qat.model.estadoInquiryRequest = function ( _iStartPage, _bCount,_emprId)
+	{
+		this.pageSize = 20;
+		this.estadoId =  _emprId;
+		this.startPage = _iStartPage;
+		this.sortExpressions = null;
+		this.preQueryCount = _bCount;
+		this.maxPreQueryCount = 0;
+	};
+
 	//empresaInquryRequest
 	qat.model.empresaInquiryRequest = function ( _iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
 	{

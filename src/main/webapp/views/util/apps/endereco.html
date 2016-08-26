@@ -85,27 +85,38 @@
 
         var callbackEstado = function(res){
                 var planos = "";
-
+debugger
                if(res.operationSuccess == true)
                {
+                debugger
                    for(var x = 0 ;x < res.estadoList.length;x++)
                    {
                        planos = planos + "<option value='"+res.estadoList[x].id+"'> "+res.estadoList[x].abreviacao+" </option>";
                    }
-                    planos = planos + "<option class='options'> Cadastrar Novo ESTADO </option>";
+                    planos = planos + "<option class='options' style='background-color : rebeccapurple'> Cadastrar Novo ESTADO </option>";
 
+                    $('.estado').empty();
                     $('.estado').append(planos);
 
                     $(".select-estado").select2({
                           placeholder: "Selecione o ESTADO",
                           allowClear: true
                         });
+
+
                }
 
             }
 
 
-            qat.model.select.util("cadastros/api/estado/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackEstado);
+debugger
+
+            $('.select-estado').on("select2-selecting", function(e) {
+               console.log($(this).val())
+                qat.model.select.util("cadastros/api/estado/fetchPage",true,new qat.model.estadoInquiryRequest( 100/20, true,$(this).val),callbackEstado);
+            });
+
+
 
 
             var callbackCidade = function(res){
@@ -113,6 +124,7 @@
 
                if(res.operationSuccess == true)
                {
+                debugger
                    for(var x = 0 ;x < res.cidadeList.length;x++)
                    {
 
@@ -131,7 +143,7 @@
             }
 
 
-            qat.model.select.util("cadastros/api/cidade/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackCidade);
+
 
     });
 </script>
