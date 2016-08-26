@@ -14,7 +14,7 @@
         vm.delete = deleteRow;
         vm.dtInstance = {};
         vm.persons = {};
-        
+
         $scope.cidade = {
             tipoPessoa: 2
         };
@@ -151,7 +151,7 @@
                 action: function(e, dt, node, config) {
 
                     dialogFactory.dialog('views/cadastros/dialog/dCidade.html',"CidadeInsertController",openDialogUpdateCreate);
-                   
+
                 }
             }]);
         var aColumns = [
@@ -200,7 +200,7 @@
             console.log(json)
             return json.cidadeList;
         }
-        Datatablessss.getTable('/pessoa/api/cidade/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, oOptions, aColumns);
+        Datatablessss.getTable('/cadastros/api/cidade/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, oOptions, aColumns);
 
         function edit(person) {
             $rootScope.Cidade = person;
@@ -209,7 +209,7 @@
 
         function deleteRow(person) {
            dialogFactory.dialog('views/cadastros/dialog/dCidade.html',"CidadeDeleteController",openDialogUpdateCreate);
-        } 
+        }
 
         function createdRow(row, data, dataIndex) {
             // Recompiling so we can bind Angular directive to the DT

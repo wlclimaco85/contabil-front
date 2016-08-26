@@ -1,0 +1,49 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+<div class="row">
+  	 <div class="form-group col-sm-12">
+          <label for="exampleInputEmail1">Fornecedor</label>
+          <div class="row">
+          <select id="unidTributada" name="banco"  ng-model="agencia.banco.id" class=" col-sm-12 form-control banco select-banco">
+                    </select>
+          </div>
+
+      </div>
+
+  </div>
+
+
+  <script>
+    $(document).ready(function() {
+
+        var callbackBanco = function(res){
+                var planos = "";
+debugger
+               if(res.operationSuccess == true)
+               {
+                debugger
+                   for(var x = 0 ;x < res.fornecedorList.length;x++)
+                   {
+                       planos = planos + "<option value='"+res.fornecedorList[x].id+"'> "+res.fornecedorList[x].nome+" </option>";
+                   }
+                    planos = planos + "<option class='options' style='background-color : rebeccapurple'> Cadastrar Novo BANCO </option>";
+
+                    $('.banco').append(planos);
+
+                    $(".select-banco").select2({
+                          placeholder: "Selecione o BANCO",
+                          allowClear: true
+                        });
+               }
+
+            }
+debugger
+
+            qat.model.select.util("pessoa/api/fornecedor/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackBanco);
+
+    });
+</script>

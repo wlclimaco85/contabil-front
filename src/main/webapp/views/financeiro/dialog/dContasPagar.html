@@ -7,18 +7,9 @@
                             <h4 class="modal-title">Cadastro Contas Pagar</h4>
                           </div>
                           <div class="modal-body">
-                            
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <label for="exampleInputPassword1">Fornecedor</label>
-                                                <div class="row ">
-                                                    <select ng-model="titulo.fornecedor.id" class="col-sm-12" name="fornecedor">
-                                                        
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
+
+                                        <div ng-include="'views/financeiro/apps/fornecedor.html'"></div>
+
                                         <!-- -------------------  titulo ----------------- -->
 
                                         <div ng-include="'views/financeiro/apps/titulo.html'"></div>
@@ -187,8 +178,8 @@
                                                             </select>
                 </div>
             </div>
-         </div>                                                         
-                            
+         </div>
+
                           </div>
                           <div class="modal-footer">
                             <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
