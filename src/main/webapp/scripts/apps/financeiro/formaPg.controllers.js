@@ -260,90 +260,7 @@
         .controller('FormaPgInsertController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
             var vm = this;
 
-            $scope.empresa = {
-            documentos          : [{
-                       documentoTypeEnumValue : 1,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 2,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 3,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 4,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 5,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 6,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 7,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 8,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    }]
-        };
-
-        $scope.enderecos = [];
+            $scope.formaPg = {};
 
             $scope.today = function() {
                 return $scope.dt = new Date();
@@ -363,13 +280,19 @@
             };
             $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
             $scope.format = $scope.formats[1];
-            var fnCallBack = function(oResponse) {
-                debugger
-                console.log(oResponse)
-            }
+
             $scope.saveFormaPg = function() {
                 debugger
-                fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos, 'INSERT', "financeiro/api/formaPg/insert", fnCallBack);
+                var oObject = fModels.amont($scope.formaPg,"INSERT");
+
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "financeiro/api/formaPg/insert",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqCliente(oObject, true, true)
+                }, function(res) {
+                    debugger
+                });
+                
             };
         });
 })();

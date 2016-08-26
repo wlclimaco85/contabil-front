@@ -1,23 +1,25 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <form ng-submit="submit()" id="contaForm">
+    <div>
     <div class="row numeroConta">
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="exampleInputPassword1">Numero Conta</label>
-                <input type="text" class="form-control cpf-socio" name="book[0].numeroCC" placeholder="Numero Conta" />
+                <input type="text" class="form-control numero" name="book[0].numeroCC" placeholder="Numero Conta" />
+                <input type="text" class="form-control id hide" name="book[0].numeroCC" placeholder="Numero Conta" />
             </div>
         </div>
         <div class="col-sm-3">
             <div class="form-group">
                 <label for="exampleInputPassword1">Saldo</label>
-                <input type="text" class="form-control cpf-socio" name="book[0].saldo" placeholder="Saldo" />
+                <input type="text" class="form-control saldo" name="book[0].saldo" placeholder="Saldo" />
             </div>
         </div>
         
         <div class="col-sm-4" style="margin-top:18px">
             <div class="checkbox">
                 <label>
-                <input type="checkbox" name="receiver" class="check-socio" value="1" /> Conta Ativa?
+                <input type="checkbox" name="receiver" class="check-socio" /> Conta Ativa?
             </label>
             </div>
         </div>
@@ -25,7 +27,7 @@
             <button type="button" class="btn btn-default addButton-socios"><i class="fa fa-plus"></i></button>
         </div>
     </div>
-    <div class="form-group hide" id="bookTemplate">
+    <div class="form-group hide numeroConta" id="bookTemplate">
         <div class="row socios">
             <div class="col-sm-4">
             <div class="form-group">
@@ -37,6 +39,13 @@
             <div class="form-group">
                 <label for="exampleInputPassword1">Saldo</label>
                 <input type="text" class="form-control cpf-socio" name="book[0].saldo" placeholder="Saldo" />
+            </div>
+        </div>
+        <div class="col-sm-4" style="margin-top:18px">
+            <div class="checkbox">
+                <label>
+                <input type="checkbox" name="receiver" class="check-socio" value="1" /> Conta Ativa?
+            </label>
             </div>
         </div>
             <div class="col-xs-1" style="margin-top:18px">

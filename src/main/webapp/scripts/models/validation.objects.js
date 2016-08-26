@@ -50,9 +50,7 @@ var notEmptyValid = {
             
             message: 'O valor informado não e valido',
             validators: {
-                notEmpty: notEmptyValid,
-                stringLength: stringMinMax,
-                regexp: notCaracterSpecial
+                notEmpty: notEmptyValid
             }
         },
         integerNotEmptyValidation = {

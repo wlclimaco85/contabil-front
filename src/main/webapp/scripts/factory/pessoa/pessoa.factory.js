@@ -1,76 +1,176 @@
-(function() {
-'use strict';
-	var commonAuth = angular.module('wdApp.ajaxCall.pessoa', []);
+	//FetchAllRequest Object
+	qat.model.fetchAllRequest = function()
+	{
 
-	commonAuth.factory('fPessoa', ['$rootScope','fModels','SysMgmtData' ,function($rootScope,fModels,SysMgmtData){
-		var factory = {};
+	};
 
-	factory.fnMontaObjeto = function(empresa,enderecos,action,url,callBack){
+	//FetchByIdRequest Object
+	qat.model.fetchByIdRequest = function( _iInt)
+	{
+		this.fetchId = _iInt;
+	};
 
-         //   debugger
-         var  ggg = []
-         var  ggg = empresa.documentos
-         empresa.documentos = [];
-          var  count = ggg.length
-            for (var a = 0 ; a < count ;a++)
-            {
-                if(ggg[a] == undefined || ggg[a].numero == undefined )
-                {
-                    delete ggg[a]
-                }else{
-                    empresa.documentos.push(ggg[a])
-                }
-            } 
+	//RefreshRequest Object
+	qat.model.refreshRequest = function( _iInt, _bList, _bPagedList)
+	{
+		this.refreshInt = _iInt;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
 
-            empresa.enderecos =[];
-            empresa.enderecos.push(fModels.amont(qat.model.fnEndereco(enderecos[0],action,$rootScope.user.user),action));
-            var count = 0;
-            var bb = [];
+	//CountyMaintenanceRequest Object
+	qat.model.reqCounty = function(_oCounty, _bList, _bPagedList)
+	{
+		this.cfop = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
 
-            $('.gugu').each(function() {
-                if($(this).val() != "")
-                {
-                    bb.push(fModels.amont(qat.model.fnTelefones($(this).val(),null,1,action),action));
-                    count = count + 1;
-                }
-            });
-            empresa.telefones = bb;
+		//CountyMaintenanceRequest Object
+	qat.model.reqSite = function(_oCounty, _bList, _bPagedList)
+	{
+		this.site = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
 
-            // email
-            count = 0;
-            bb = [];
-            $('.emails:visible').each(function() {
-                if($(this).find('.input-email').val() != "")
-                {
-                    bb.push(fModels.amont(qat.model.fnEmails($(this).find('.input-email').val(),$(this).find('.input-id').val(),1,action),action));
-                    count = count + 1;
-                }
-            });
+	qat.model.reqPlano = function(_oCounty, _bList, _bPagedList)
+	{
+		this.plano = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
 
-            empresa.emails = bb;
+	qat.model.reqCliente = function(_oCounty, _bList, _bPagedList)
+	{
+		this.cliente = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
 
+	qat.model.reqFormaPg = function(_oCounty, _bList, _bPagedList)
+	{
+		this.financeiro = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
 
-            var oObject = fModels.amont(empresa,action);
+	qat.model.reqBanco = function(_oCounty, _bList, _bPagedList)
+	{
+		this.banco = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
 
-                SysMgmtData.processPostPageData("main/api/request", {
-                    url: url,
-                    token: $rootScope.authToken,
-                    request: new qat.model.reqCliente(oObject, true, true)
-                }, function(res) {
-                    callBack(res);
-                });
-        }
+	qat.model.reqContasPagar = function(_oCounty, _bList, _bPagedList)
+	{
+		this.financeiro = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
 
-	factory.fnDelete = function() {
-			//..
-		}
+	qat.model.reqContasReceber = function(_oCounty, _bList, _bPagedList)
+	{
+		this.financeiro = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
 
-	factory.fnOpenView = function() {
-			//..
-		}
+	qat.model.reqAgencia = function(_oCounty, _bList, _bPagedList)
+	{
+		this.agencia = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
 
-	return factory;
-	}]);
-})();
+	qat.model.reqContato = function(_oCounty, _bList, _bPagedList)
+	{
+		this.contato = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
 
+	qat.model.reqServico = function(_oCounty, _bList, _bPagedList)
+	{
+		this.servico = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
+
+	//ProcedureMaintenanceRequest
+	qat.model.reqProc = function ( _oProc, _bList, _bPagedList)
+	{
+		this.procedure = _oProc;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
+
+	//PagedInquryRequest
+	qat.model.pagedInquiryRequest = function ( _iStartPage, _bCount)
+	{
+		this.pageSize = 20;
+		this.startPage = _iStartPage;
+		this.sortExpressions = null;
+		this.preQueryCount = _bCount;
+		this.maxPreQueryCount = 0;
+	};
+
+	//siteInquryRequest
+	qat.model.siteInquiryRequest = function ( _iStartPage, _bCount,_url)
+	{
+		this.pageSize = 20;
+		this.url = _url
+		this.startPage = _iStartPage;
+		this.sortExpressions = null;
+		this.preQueryCount = _bCount;
+		this.maxPreQueryCount = 0;
+	};
+
+	//siteInquryRequest
+	qat.model.planoInquiryRequest = function ( _iStartPage, _bCount,_emprId)
+	{
+		this.pageSize = 20;
+		this.emprId =  _emprId;
+		this.startPage = _iStartPage;
+		this.sortExpressions = null;
+		this.preQueryCount = _bCount;
+		this.maxPreQueryCount = 0;
+	};
+
+	//empresaInquryRequest
+	qat.model.empresaInquiryRequest = function ( _iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
+	{
+		this.pageSize = 20;
+		this.userId = _userId;
+		this.id = _id;
+		this.emprId = _emprId;
+		this.permissaoTypeEnumValue = _permissaoType;
+		this.startPage = _iStartPage;
+		this.sortExpressions = null;
+		this.preQueryCount = _bCount;
+		this.maxPreQueryCount = 0;
+	};
+
+	//PageData Object
+	qat.model.pageData = function(_pageSize, _startPage, _bRowsAvailable, _totalRows)
+	{
+	 	this.pageSize =  _pageSize;
+	 	this.startPage =  _startPage;
+	 	this.moreRowsAvailable =  _bRowsAvailable;
+	 	this.totalRowsAvailable = _totalRows;
+	};
+
+	//=========================
+	qat.model.siteCriteria = function ( _url,_nome){
+		this.nome =  _nome;
+	 	this.url =  _url;
+	}
+
+		//ProcedureMaintenanceRequest
+	qat.model.reqEmpr = function ( _oEmpr, _bList, _bPagedList)
+	{
+		this.empresa = _oEmpr;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
 
