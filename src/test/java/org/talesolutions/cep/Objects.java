@@ -604,7 +604,7 @@ public class Objects {
 	public static Estado insertEstado(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Estado estado = new Estado();
 		Date a = new Date();
-		estado.setId(id);
+
 		estado.setNome("nome_1 - " + action.toString());
 		estado.setAbreviacao("abreviacao_2 - " + action.toString());
 		estado.setTabelaEnum(tabela);

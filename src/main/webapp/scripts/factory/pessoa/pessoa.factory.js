@@ -20,7 +20,7 @@
                 }else{
                     empresa.documentos.push(ggg[a])
                 }
-            }
+            } 
 
             empresa.enderecos =[];
             empresa.enderecos.push(fModels.amont(qat.model.fnEndereco(enderecos[0],action,$rootScope.user.user),action));
@@ -68,6 +68,37 @@
 	factory.fnOpenView = function() {
 			//..
 		}
+
+    factory.fnMontObject = function(_object,enderecos,action) {
+            _object.enderecos =[];
+            _object.enderecos.push(fModels.amont(qat.model.fnEndereco(enderecos[0],action,$rootScope.user.user),action));
+            var count = 0;
+            var bb = [];
+
+            $('.gugu').each(function() {
+                if($(this).val() != "")
+                {
+                    bb.push(fModels.amont(qat.model.fnTelefones($(this).val(),null,1,action),action));
+                    count = count + 1;
+                }
+            });
+            _object.telefones = bb;
+
+            // email
+            count = 0;
+            bb = [];
+            $('.emails:visible').each(function() {
+                if($(this).find('.input-email').val() != "")
+                {
+                    bb.push(fModels.amont(qat.model.fnEmails($(this).find('.input-email').val(),$(this).find('.input-id').val(),1,action),action));
+                    count = count + 1;
+                }
+            });
+
+            _object.emails = bb;
+
+            return _object;
+        }
 
 	return factory;
 	}]);
