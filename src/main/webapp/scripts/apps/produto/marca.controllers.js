@@ -150,7 +150,7 @@
                 key: '1',
                 action: function(e, dt, node, config) {
 
-                    dialogFactory.dialog('views/cadastros/dialog/dMarca.html',"MarcaInsertController",openDialogUpdateCreate);
+                    dialogFactory.dialog('views/produto/dialog/dMarca.html',"MarcaInsertController",openDialogUpdateCreate);
                    
                 }
             }]);
@@ -159,7 +159,7 @@
             .renderWith(function(data, type, full, meta) {
                 vm.selected[full.id] = false;
                 return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
-        }),
+        }).withOption('width', '10px'),
         DTColumnBuilder.newColumn('id').withTitle('ID').withOption('width', '10px').notVisible(),
         DTColumnBuilder.newColumn('marca').withTitle('Marca'), 
         DTColumnBuilder.newColumn('fabricante').withTitle('Fabricante'), 
@@ -245,6 +245,10 @@
         .controller('MarcaInsertController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
             var vm = this;
             $scope.marca={};
+            $scope.marca.emailList = [];
+            $scope.marca.telefoneList = [];
+            $scope.sac={};
+            $scope.email={};
 
             $scope.today = function() {
                 return $scope.dt = new Date();
@@ -269,8 +273,20 @@
                 console.log(oResponse)
             }
             $scope.saveMarca = function() {
-                debugger
-                fPessoa.fnMontaObjeto($scope.marca, $scope.enderecos, 'INSERT', "produto/api/marca/insert", fnCallBack);
+                
+
+                $scope.marca.emailList.push(fModels.amont(qat.model.fnEmails($scope.email.email,$scope.email.id,1,'INSERT'),'INSERT'))
+                $scope.marca.telefoneList.push(fModels.amont(qat.model.fnTelefones($scope.sac.numero,$scope.sac.id,1,'INSERT'),'INSERT'))
+
+                var oObject = fModels.amont( $scope.marca,'INSERT');
+                
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "produto/api/marca/insert",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqMarca(oObject, true, true)
+                }, function(res) {
+                    fnCallBack(res);
+                });
             };
         });
 })();

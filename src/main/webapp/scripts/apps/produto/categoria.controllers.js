@@ -150,7 +150,7 @@
                 key: '1',
                 action: function(e, dt, node, config) {
 
-                    dialogFactory.dialog('views/cadastros/dialog/dCategoria.html',"CategoriaInsertController",openDialogUpdateCreate);
+                    dialogFactory.dialog('views/produto/dialog/dCategoria.html',"CategoriaInsertController",openDialogUpdateCreate);
                    
                 }
             }]);
@@ -187,12 +187,12 @@
 
         function edit(person) {
             $rootScope.categoria = person;
-            dialogFactory.dialog('views/cadastros/dialog/dCategoria.html',"CategoriaUpdateController",openDialogUpdateCreate);
+            dialogFactory.dialog('views/produto/dialog/dCategoria.html',"CategoriaUpdateController",openDialogUpdateCreate);
         }
 
         function deleteRow(person) {
            $rootScope.categoria = person; 
-           dialogFactory.dialog('views/cadastros/dialog/dCategoria.html',"CategoriaDeleteController",openDialogUpdateCreate);
+           dialogFactory.dialog('views/produto/dialog/dCategoria.html',"CategoriaDeleteController",openDialogUpdateCreate);
         } 
 
         function createdRow(row, data, dataIndex) {
@@ -243,88 +243,7 @@
         .controller('CategoriaInsertController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
             var vm = this;
 
-            $scope.empresa = {
-            documentos          : [{
-                       documentoTypeEnumValue : 1,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 2,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 3,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 4,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 5,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 6,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 7,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    },
-                    {
-                       documentoTypeEnumValue : 8,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-
-                    }]
-        };
+            $scope.categoria = {};
 
         $scope.enderecos = [];
 
@@ -352,7 +271,16 @@
             }
             $scope.saveCategoria = function() {
                 debugger
-                fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos, 'INSERT', "produto/api/categoria/insert", fnCallBack);
+                
+                var oObject = fModels.amont( $scope.categoria,'INSERT');
+                
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "produto/api/categoria/insert",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqMarca(oObject, true, true)
+                }, function(res) {
+                    fnCallBack(res);
+                });
             };
         });
 })();
