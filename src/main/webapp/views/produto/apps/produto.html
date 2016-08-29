@@ -1,108 +1,320 @@
-<div class="page page-table" data-ng-controller="demoController as cc"  >
-	<div class="row">
-		<div class="col-md-6">
-			<div class="panel panel-default">
-				<div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Counties Table </strong>&nbsp;<a href="javascript:;"  ng-show="hasRole('ROLE_DOMAIN_ADMINS')" data-ng-click="cc.refreshCounties(86)"><i class="fa fa-refresh" ng-class="{'fa-spin': cc.isActive}" ></i></a></div>
-				<div class="panel-body" style="text-align:center;">
-					<div ng-app="wdApp.apps.counties" class="container-fluid">
+<style>
+.form-control {
+    outline: 0;
+    border-color: #ECECEC;
+    border-style: solid;
+    border-width: 1px;
+    width: 95%;
+    background-color: #ffffff;
+    padding: 6px;
+    border-radius: 2px;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
 
-  <div class="row">
-    <div class="col-md-6" ng-controller="demoController as demo">
-      <h3>ngTable directive</h3>
-      <div class="brn-group pull-right">
-        <button class="btn btn-default" ng-if="demo.isEditing" ng-click="demo.cancelChanges()">
-          <span class="glyphicon glyphicon-remove"></span>
-        </button>
-        <button class="btn btn-primary" ng-if="!demo.isEditing" ng-click="demo.isEditing = true">
-          <span class="glyphicon glyphicon-pencil"></span>
-        </button>
-        <button class="btn btn-primary" ng-if="demo.isEditing" ng-disabled="!demo.hasChanges() || demo.tableTracker.$invalid" ng-click="demo.saveChanges()">
-          <span class="glyphicon glyphicon-ok"></span>
-        </button>
-        <button class="btn btn-default" ng-click="demo.add()">
-          <span class="glyphicon glyphicon-plus"></span>
-        </button>
-      </div>
-      <table ng-table="demo.tableParams" class="table table-bordered table-hover table-condensed editable-table" ng-form="demo.tableForm" disable-filter="demo.isAdding" demo-tracked-table="demo.tableTracker">
-        <colgroup>
-          <col width="70%" />
-          <col width="12%" />
-          <col width="13%" />
-          <col width="5%" />
-        </colgroup>
-        <tr ng-repeat="row in $data" ng-form="rowForm" demo-tracked-table-row="row">
-          <td title="'Name'" filter="{name: 'text'}" sortable="'name'" ng-switch="demo.isEditing" ng-class="name.$dirty ? 'bg-warning' : ''" ng-form="name" demo-tracked-table-cell>
-            <span ng-switch-default class="editable-text">{{row.name}}</span>
-            <div class="controls" ng-class="name.$invalid && name.$dirty ? 'has-error' : ''" ng-switch-when="true">
-              <input type="text" name="name" ng-model="row.name" class="editable-input form-control input-sm" required />
-            </div>
-          </td>
-          <td title="'Age'" filter="{age: 'number'}" sortable="'age'" ng-switch="demo.isEditing" ng-class="age.$dirty ? 'bg-warning' : ''" ng-form="age" demo-tracked-table-cell>
-            <span ng-switch-default class="editable-text">{{row.age}}</span>
-            <div class="controls" ng-class="age.$invalid && age.$dirty ? 'has-error' : ''" ng-switch-when="true">
-              <input type="number" name="age" ng-model="row.age" class="editable-input form-control input-sm" required/>
-            </div>
-          </td>
-          <td title="'Money'" filter="{money: 'number'}" sortable="'money'" ng-switch="demo.isEditing" ng-class="money.$dirty ? 'bg-warning' : ''" ng-form="money" demo-tracked-table-cell>
-            <span ng-switch-default class="editable-text">{{row.money}}</span>
-            <div class="controls" ng-class="money.$invalid && money.$dirty ? 'has-error' : ''" ng-switch-when="true">
-              <input type="number" name="money" ng-model="row.money" class="editable-input form-control input-sm" required/>
-            </div>
-          </td>
-          <td>
+.angucomplete-holder {
+    position: relative;
+}
 
-            <button class="btn btn-danger btn-sm" ng-click="demo.del(row)" ng-disabled="!demo.isEditing"><span class="glyphicon glyphicon-trash"></span></button>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-6" >
-			<div class="panel panel-default">
-				<div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> County Maintenance </strong></div>
-				<div class="panel-body">
-					<form name="cc.form_county" class="form-validation">
-                        <fieldset>
-							<div class="callout callout-warning">
-								<div class="form-group">
-									<label for="cid" class="col-sm-2">Id</label>
-									<div class="col-sm-10">
-										<input type="number" name="cid" class="form-control input-primary" required data-min=1 data-max=9999 data-ng-model="cc.county.id">
-									</div>
-								</div>
-								<div class="space"></div>
-								<div class="form-group">
-									<label for="cdesc" class="col-sm-2">Description</label>
-									<div class="col-sm-10">
-										<input type="text" name="cdesc" class="form-control input-info" required  data-ng-minlength=1 data-ng-maxlength=50 data-ng-model="cc.county.description">
-									</div>
-									<div class="space"></div>
-									<p>
-										<button type="button" ng-click="cc.processButtons('A')"  class="btn btn-success">Add</button>
-										<button type="button" ng-click="cc.processButtons('U')"  class="btn btn-info">Update</button>
-										<button type="button" ng-click="cc.processButtons('D')"  class="btn btn-warning">Delete</button>
-										<button type="button" ng-click="cc.processButtons('L')"  class="btn btn-success">List</button>
-										<button type="button" ng-click="cc.clearForm()" class="btn btn-danger">Clear</button>
-									</p>
-								</div>
-							</div>
-                        </fieldset>
-					</form>
-				</div>
-			</div>
-		</div>
-        <div class="col-md-6">
-            <section class="panel panel-default">
-                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> JSON County Grid Output</strong></div>
-                <div class="panel-body">
+.angucomplete-dropdown {
+    border-color: #ececec;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    width: 250px;
+    padding: 6px;
+    cursor: pointer;
+    z-index: 9999;
+    position: absolute;
+    /*top: 32px;
+    left: 0px;
+    */
+    margin-top: -6px;
+    background-color: #ffffff;
+}
 
+.angucomplete-searching {
+    color: #acacac;
+    font-size: 14px;
+}
+
+.angucomplete-description {
+    font-size: 14px;
+}
+
+.angucomplete-row {
+    padding: 5px;
+    color: #000000;
+    margin-bottom: 4px;
+
+}
+
+.angucomplete-selected-row, .angucomplete-row:hover {
+    background-color: lightblue;
+    color: #ffffff;
+}
+
+.angucomplete-image-holder {
+    padding-top: 2px;
+    float: left;
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+.angucomplete-image {
+    height: 34px;
+    width: 34px;
+    border-radius: 50%;
+    border-color: #ececec;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.angucomplete-image-default {
+    /* Add your own default image here
+     background-image: url('/assets/default.png');
+    */
+    background-position: center;
+    background-size: contain;
+    height: 34px;
+    width: 34px;
+}
+
+</style>
+
+<div class="row">
+        <div class="hide">
+            <div class="form-group">
+                <label for="exampleInputPassword1"></label>
+                <input type="text" class="form-control col-sm-8 hide" ng-model="produto.id" name="id"  placeholder="id">
+            </div>
         </div>
-	</div>
-	<div data-ui-footer></div>
-</div>
-<div class="col-md-12 text-center" ng-hide="authToken"><h3>Unauthorized</h3><div data-ui-footer></div></div>
-    </script>
+
+        <div class="col-sm-8 ">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Produto</label>
+                  <div class="padded-row">
+                  <angucomplete id="ex1" placeholder="Search countries" pause="100" ng-model="produto.nome" selectedobject="selectedCountry" localdata="countries" searchfields="name" titlefield="name" minlength="1" inputclass="form-control form-control-small" matchclass="highlight" />
+                  </div>
+                </div>
+                <div class="" ng-show="selectedCountry">
+            </div>
+        </div>
+        <div class="col-sm-4 ">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Código personalizado</label>
+                <input type="text" class="form-control " ng-model="produto.codigo" name="codigo"  placeholder="Código Interno">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3 ">
+            <div class="form-group">
+                <label for="exampleInputPassword1">NCM</label>
+                <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
+            </div>
+        </div>
+        <div class="col-sm-3 ">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Código de barras (EAN):</label>
+                <input type="text" class="form-control  " ng-model="produto.cdBarras" name="cdBarras"  placeholder="cdBarras">
+            </div>
+        </div>
+        <div class="col-sm-2 ">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Data Cadastro</label>
+                <input type="text" class="form-control  " ng-model="produto.dataCadastro" name="dataCadastro"  placeholder="Data Cadastro">
+            </div>
+        </div>
+        <div class="col-sm-2 ">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Exceção tab IPI</label>
+                <input type="text" class="form-control  " ng-model="produto.excecaoIPI" name="excecaoIPI"  placeholder="Exceção IPI">
+            </div>
+        </div>
+        <div class="col-sm-2 ">
+            <div class="form-group">
+                <label for="exampleInputPassword1">CEST</label>
+                <input type="text" class="form-control col-sm-8 " ng-model="produto.cEST" name="cEST"  placeholder="CEST">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 ">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Inform. adicionais para a NFe</label>
+                <input type="text" class="form-control col-sm-8 " ng-model="produto.informAdicionaisParaNFe" name="informAdicionaisParaNFe"  placeholder="Informações Adicionais Para NFe">
+            </div>
+        </div>
+        <div class="col-sm-6 ">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Anotações internas</label>
+                <input type="text" class="form-control col-sm-8 " ng-model="produto.anotainternas" name="anotainternas"  placeholder="Anotaçoes Internas">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-sm-4 ">
+                <label for="exampleInputPassword1">Unidade tributada</label>
+                <div class="row">
+                <select id="unidTributada" name="unidTributada"  ng-model="produto.unidTributada" class="uniMedList select col-sm-12">
+                    <option value="01">UN</option>
+                    <option value="02">PC</option>
+                    <option value="03">CX</option>
+                    <option value="04">CJ</option>
+                    <option value="05">MT</option>
+                    <option value="06">M2</option>
+                    <option value="07">M3</option>
+                    <option value="08">KG</option>
+                    <option style="background-color : #F1F4F9"><a>Adicionar Novo </a><i class="glyphicon glyphicon-plus"></i></option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-4 ">
+                <label for="exampleInputPassword1">Categoria</label>
+                <div class="row">
+                <select id="atividade1" name="atividade1" ng-model="produto.categoria" class="categoriaList select col-sm-12">
+                    <option value="01">Agronegócios</option>
+                    <option value="02">Adubo Orgânico</option>
+                    <option value="03">Agricultura</option>
+                    <option value="04">Agroindústria</option>
+                    <option value="05">Agrotóxicos</option>
+                    <option value="06">Equipamentos Agrícolas</option>
+                    <option value="07">Equipamentos de Irrigação</option>
+                    <option value="08">Fazendas</option>
+                    <option value="09">Fertilizantes</option>
+                    <option value="10">Floriculturas</option>
+                    <option value="11">Frigoríficos e Abatedouros</option>
+                    <option value="12">Gado Bovino de Corte</option>
+                    <option value="13">Gado Leiteiro</option>
+                    <option value="14">Gestão Rural</option>
+                    <option value="15">Insumos Agrícolas</option>
+                    <option value="16">Laticínios e Hortifruti</option>
+                    <option value="17">Meio Ambiente</option>
+                    <option value="18">Nutrição Animal</option>
+                    <option value="19">Pecuárias Diversas</option>
+                    <option value="20">Plantas e Mudas</option>
+                    <option value="21">Produtos Orgânicos</option>
+                    <option value="22">Sementes</option>
+                    <option value="23">Tecnologia em Agronegócios</option>
+                    <option value="24">Alimentos e Bebidas</option>
+                    <option value="25">Alimentos Industrializados</option>
+                    <option value="26">Alimentos Naturais</option>
+                    <option value="27">Bares e Lanchonetes</option>
+                    <option value="28">Bebidas Diversas</option>
+                    <option value="29">Bebidas não Alcoólicas</option>
+                    <option value="30">Buffet e Eventos</option>
+                    <option value="31">Cesta Básica</option>
+                    <option value="32">Cesta de Natal</option>
+                    <option value="33">Comércio de Alimentos</option>
+                    <option value="34">Doces e Chocolates</option>
+                    <option value="35">Outras Bebidas</option>
+                    <option value="36">Outros Alimentos</option>
+                    <option value="37">Pizzarias</option>
+                    <option value="38">Receitas de Alimentos</option>
+                    <option value="39">Restaurantes</option>
+                    <option value="40">Suplemento Alimentar</option>
+                    <option value="41">Vinhos</option>
+                    <option value="42">Vitaminas</option>
+                    <option value="43">Automação</option>
+                    <option value="44">Automação Comercial</option>
+                    <option value="45">Automação Industrial</option>
+                    <option value="46">Automação Residencial</option>
+                    <option value="47">Balanças Comerciais</option>
+                    <option value="48">Bobina de Papel pdv</option>
+                    <option value="49">Caixa Registradora</option>
+                    <option value="50">Equipamentos para Automação</option>
+                    <option style="background-color : #F1F4F9"><a>Adicionar Novo </a><i class="glyphicon glyphicon-plus"></i></option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-4 ">
+                <label for="exampleInputPassword1">Marca</label>
+                <div class="row">
+                <select id="atividade1" name="atividade1" class="col-sm-12 select marcaList">
+                    <option value="01">AlfaParfMilano SAC 0800 0212652</option>
+                    <option value="02">Alta Moda SAC 0800 0212652</option>
+                    <option value="03">Alterna www.alternahaircare.com</option>
+                    <option value="04">Arcancil Paris SAC 0800 9709877</option>
+                    <option value="05">Avène SAC 0800 7021037</option>
+                    <option value="06">Avon SAC 0800 7082866</option>
+                    <option value="07">Bare Minerals www.bareminerals.com</option>
+                    <option value="08">BCBG Maxazria sac@elizabetharden.com</option>
+                    <option style="background-color : #F1F4F9"><a>Adicionar Novo </a><i class="glyphicon glyphicon-plus"></i></option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+
+<script>
+    $(document).ready(function() {
+        
+            var callback = function(res){
+                var planos = "";
+
+               if(res.operationSuccess == true)
+               {
+                   for(var x = 0 ;x < res.uniMedList.length;x++)
+                   {
+                       planos = planos + "<option value='"+res.uniMedList[x].id+"'> "+res.uniMedList[x].descricao+" </option>";
+                   }
+
+                    $('.uniMedList').append(planos);
+
+                    
+               }
+
+            }
+
+
+            qat.model.select.util("produto/api/unimed/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callback);
+
+
+             var callbackCategoria = function(res){
+                var planos = "";
+
+               if(res.operationSuccess == true)
+               {
+                   for(var x = 0 ;x < res.categoriaList.length;x++)
+                   {
+                       planos = planos + "<option value='"+res.categoriaList[x].id+"'> "+res.categoriaList[x].descricao+" </option>";
+                   }
+
+                    $('.categoriaList').append(planos);
+
+               }
+
+            }
+
+
+            qat.model.select.util("produto/api/categoria/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackCategoria);
+
+             var callbackMarca = function(res){
+                var planos = "";
+                var preco = 0;
+
+               if(res.operationSuccess == true)
+               {
+                   for(var x = 0 ;x < res.marcaList.length;x++)
+                   {
+                       planos = planos + "<option value='"+res.marcaList[x].id+"'> "+res.marcaList[x].descricao+" </option>";
+                   }
+  
+                    $('.marcaList').append(planos);
+
+               }
+
+            }
+
+
+            qat.model.select.util("produto/api/marca/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackMarca);
+
+            $(".select").select2({
+                          placeholder: "Select a state",
+                          allowClear: true
+                        });
+    });
+</script>

@@ -40,7 +40,7 @@ var WebDaptiveAppConfig = {
 (function() {
   'use strict';
 		var wdApp = angular.module('wdApp',
-				['ngRoute', 'ngAnimate', 'ui.bootstrap', 'easypiechart', 'textAngular',
+				['ngRoute', 'ngAnimate', 'ngSanitize',  'ui.bootstrap', 'easypiechart', 'textAngular',
 				'ui.tree', 'ngMap', 'ngTagsInput', 'toastr', 'angular-loading-bar', 'chart.js', 'ngecharts',
 				'agGrid', 'base64', 'LocalStorageModule', 'wdApp.controllers', 'wdApp.directives', 'wdApp.httpint',
 				'wdApp.localization', 'wdApp.ui.controllers', 'wdApp.forms.controllers',
@@ -212,6 +212,8 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.contasReceber.update'
 	            ,'wdApp.apps.contasReceber.delete'
 	            ,'wdApp.apps.contasReceber.view'
+
+
 
 				]);
 
