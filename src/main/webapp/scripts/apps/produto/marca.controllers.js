@@ -30,9 +30,9 @@
                         validating: 'glyphicon glyphicon-refresh'
                     },
                     fields: {
-                        'nome': notEmptyStringMinMaxRegexp,
+                        'marca': notEmptyStringMinMaxRegexp,
+                        'fabricante': integerNotEmptyValidation,
                         'email': integerNotEmptyValidation,
-                        'texto': integerNotEmptyValidation,
                     }
                 });
         }
@@ -292,25 +292,47 @@
 })();
 (function() {
     angular.module('wdApp.apps.marca.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('MarcaUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        .controller('MarcaUpdateController', function($rootScope, $scope, fModels, SysMgmtData) {
             var vm = this;
             $scope.marca = {};
             $scope.marca = $rootScope.marca;
             console.log($rootScope.marca)
             $scope.saveMarca = function() {
-                fPessoa.fnMontaObjeto($scope.marca, $scope.endereco, 'UPDATE', "produto/api/marca/update/", fnCallBack);
+                $scope.marca.emailList.push(fModels.amont(qat.model.fnEmails($scope.email.email,$scope.email.id,1,'UPDATE'),'UPDATE'))
+                $scope.marca.telefoneList.push(fModels.amont(qat.model.fnTelefones($scope.sac.numero,$scope.sac.id,1,'UPDATE'),'UPDATE'))
+
+                var oObject = fModels.amont( $scope.marca,'UPDATE');
+                
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "produto/api/marca/update",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqMarca(oObject, true, true)
+                }, function(res) {
+                    
+                });
             }
         });
 })();
 (function() {
     angular.module('wdApp.apps.marca.delete', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('MarcaDeleteController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        .controller('MarcaDeleteController', function($rootScope, $scope, fModels, SysMgmtData) {
             var vm = this;
             $scope.marca = {};
             $scope.marca = $rootScope.marca;
             console.log($rootScope.marca)
             $scope.saveMarca = function() {
-                fPessoa.fnDelete($scope.marca, "produto/api/marca/update/", function(){console.log('ddda   aqui')});
+                $scope.marca.emailList.push(fModels.amont(qat.model.fnEmails($scope.email.email,$scope.email.id,1,'DELETE'),'DELETE'))
+                $scope.marca.telefoneList.push(fModels.amont(qat.model.fnTelefones($scope.sac.numero,$scope.sac.id,1,'DELETE'),'DELETE'))
+
+                var oObject = fModels.amont( $scope.marca,'DELETE');
+                
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "produto/api/marca/insert",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqMarca(oObject, true, true)
+                }, function(res) {
+                    
+                });
             }
         });
 })();

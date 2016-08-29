@@ -30,10 +30,7 @@
                         validating: 'glyphicon glyphicon-refresh'
                     },
                     fields: {
-                        'nome': notEmptyStringMinMaxRegexp,
-                        'email': integerNotEmptyValidation,
-                        'texto': integerNotEmptyValidation,
-                    }
+                        'nome': notEmptyStringMinMaxRegexp                    }
                 });
         }
 
@@ -69,15 +66,6 @@
                 }, {
                     type: 'text'
                 }]
-            })
-            .withOption('initComplete', function(settings, json) {
-                $('.dt-buttons').find('.dt-button:eq(1)').before(
-                    '<select class="form-control col-sm-3 btn btn-primary dropdown-toggle" data-ng-options="t.name for t in vm.types"' +
-                    'data-ng-model="vm.object.type" style="height: 32px;margin-left: 8px;margin-right: 6px;width: 200px !important;">' +
-                    '<option><a href="#">Ações <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>' +
-                    '<option><a href="#">Remover Todos <span class="badge selected badge-danger main-badge"  data-ng-show="{{showCase.countSeleted()}}"></span></a></option>' +
-                    '</select>'
-                )
             })
             .withOption('processing', true)
             .withOption('language', {
@@ -155,11 +143,6 @@
                 }
             }]);
         var aColumns = [
-        DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
-            .renderWith(function(data, type, full, meta) {
-                vm.selected[full.id] = false;
-                return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
-        }),
         DTColumnBuilder.newColumn('id').withTitle('ID').withOption('width', '10px').notVisible(),
         DTColumnBuilder.newColumn('nome').withTitle('Nome da categoria'), 
         DTColumnBuilder.newColumn('margem').withTitle('Margem de lucro (%)'), 
@@ -245,8 +228,6 @@
 
             $scope.categoria = {};
 
-        $scope.enderecos = [];
-
             $scope.today = function() {
                 return $scope.dt = new Date();
             };
@@ -270,10 +251,8 @@
                 console.log(oResponse)
             }
             $scope.saveCategoria = function() {
-                debugger
-                
-                var oObject = fModels.amont( $scope.categoria,'INSERT');
-                
+
+                var oObject = fModels.amont( $scope.categoria,'INSERT');  
                 SysMgmtData.processPostPageData("main/api/request", {
                     url: "produto/api/categoria/insert",
                     token: $rootScope.authToken,
@@ -286,25 +265,39 @@
 })();
 (function() {
     angular.module('wdApp.apps.categoria.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('CategoriaUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        .controller('CategoriaUpdateController', function($rootScope, $scope, fModels, SysMgmtData) {
             var vm = this;
             $scope.categoria = {};
             $scope.categoria = $rootScope.categoria;
             console.log($rootScope.categoria)
             $scope.saveCategoria = function() {
-                fPessoa.fnMontaObjeto($scope.categoria, $scope.endereco, 'UPDATE', "produto/api/categoria/update/", fnCallBack);
+                var oObject = fModels.amont( $scope.categoria,'UPDATE');  
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "produto/api/categoria/update",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqMarca(oObject, true, true)
+                }, function(res) {
+                    fnCallBack(res);
+                });
             }
         });
 })();
 (function() {
     angular.module('wdApp.apps.categoria.delete', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('CategoriaDeleteController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        .controller('CategoriaDeleteController', function($rootScope, $scope, fModels, SysMgmtData) {
             var vm = this;
             $scope.categoria = {};
             $scope.categoria = $rootScope.categoria;
             console.log($rootScope.categoria)
             $scope.saveCategoria = function() {
-                fPessoa.fnDelete($scope.categoria, "produto/api/categoria/update/", function(){console.log('ddda   aqui')});
+                var oObject = fModels.amont( $scope.categoria,'UPDATE');  
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "produto/api/categoria/delete",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqMarca(oObject, true, true)
+                }, function(res) {
+                    fnCallBack(res);
+                });
             }
         });
 })();
