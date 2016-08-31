@@ -5,42 +5,19 @@
 	commonAuth.factory('fProduto', ['$rootScope','fModels','SysMgmtData' ,function($rootScope,fModels,SysMgmtData){
 		var factory = {};
 
-	factory.fnMontaObjeto = function(empresa,enderecos,telefone,email,action,url,callBack){
+	factory.fnMontaObjeto = function(produto,tributacao,produtoEmpresa,action,url,callBack){
 
-            console.log(empresa);
-            empresa.enderecos[0] = fModels.amont(qat.model.fnEndereco(enderecos[0],action,$rootScope.user.user),action);
-            var count = 0;
-            var bb = [];
+            produtoEmpresa.produto = fModels.amont(qat.model.fnProduto(produto,action,$rootScope.user.user),action);
 
-            $('.gugu').each(function() {
-                if($(this).val() != "")
-                {
-                    bb.push(fModels.amont(qat.model.fnTelefones($(this).val(),count,1,action),action));
-                    count = count + 1;
-                }
-            });
-            empresa.telefones = bb;
-
-            // email
-            count = 0;
-            bb = [];
-            $('.input-email').each(function() {
-                if($(this).val() != "")
-                {
-                    bb.push(fModels.amont(qat.model.fnEmails($(this).val(),count,1,action),action));
-                    count = count + 1;
-                }
-            });
-
-            empresa.emails = bb;
+            produtoEmpresa.tributacao = fModels.amont(qat.model.fnTributacao(tributacao,action,$rootScope.user.user),action);
 
 
-            var oObject = fModels.amont($scope.empresa,action);
+            var oObject = fModels.amont(produtoEmpresa,action);
 
                 SysMgmtData.processPostPageData("main/api/request", {
                     url: url,
                     token: $rootScope.authToken,
-                    request: new qat.model.reqCliente(oObject, true, true)
+                    request: new qat.model.reqProduto(oObject, true, true)
                 }, function(res) {
                     callBack(res);
                 });
