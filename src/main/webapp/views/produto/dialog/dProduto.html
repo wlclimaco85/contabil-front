@@ -10,7 +10,7 @@
                 <div class="container1" ng-app ng-init="tabs=4">
                     <ul class="tabs-nav">
                         <li><a ng-click="tabs=4" ng-class="{'active' : tabs==4}">Detalhes</a></li>
-                        <li><a ng-click="tabs=5" ng-class="{'active' : tabs==5}">Tributação</a></li>
+                        <li><a ng-click="tabs=5" ng-class="{'active' : tabs==5}">Tributa��o</a></li>
                         <li><a ng-click="tabs=6" ng-class="{'active' : tabs==6}">Estoque/Custo</a></li>
                     </ul>
                     <div class="tabs-container1">
@@ -33,14 +33,14 @@
                                                 <div class="row">
                                                     <div class="col-sm-4 ">
                                                         <div class="form-group">
-                                                            <label for="exampleInputPassword1">Peso unitário líquido (kg)</label>
-                                                            <input type="text" class="form-control col-sm-8 " ng-model="produto.pesoliquido" name="pesoLiquido"  placeholder="Peso unitário líquido (kg)">
+                                                            <label for="exampleInputPassword1">Peso unit�rio l�quido (kg)</label>
+                                                            <input type="text" class="form-control col-sm-8 " ng-model="produto.pesoliquido" name="pesoLiquido"  placeholder="Peso unit�rio l�quido (kg)">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4 ">
                                                         <div class="form-group">
-                                                            <label for="exampleInputPassword1">Peso unitário bruto (kg)</label>
-                                                            <input type="text" class="form-control col-sm-8 " ng-model="produto.pesobruto" name="pesobruto"  placeholder="Peso unitário bruto (kg)">
+                                                            <label for="exampleInputPassword1">Peso unit�rio bruto (kg)</label>
+                                                            <input type="text" class="form-control col-sm-8 " ng-model="produto.pesobruto" name="pesobruto"  placeholder="Peso unit�rio bruto (kg)">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -48,29 +48,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel-group" id="accordion">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".cfop">
-                                                CFOP
-                                                </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseOne" class="panel-collapse collapse in cfop">
-                                            <div class="panel-body">
-                                                <div class="row">
-                                                    <div class="col-sm-6 ">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputPassword1">CFOP padrão para NFe</label>
-                                                            <input type="text" class="form-control col-sm-8 " ng-model="produto.cFOPPadraoNFe" name="cFOPPadraoNFe"  placeholder="CFOP padrão para NFe">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 <div ng-include="'views/produto/apps/tributacao.html'"></div>
                             </div>
                             </div>
@@ -117,7 +95,7 @@
                                                 <div class="panel-heading">
                                                     <h4 class="panel-title">
                                                         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".preco">
-                                                        Preços
+                                                        Pre�os
                                                         </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
                                                     </h4>
                                                 </div>
@@ -132,13 +110,13 @@
                                                             </div>
                                                             <div class="col-sm-3 ">
                                                                 <div class="form-group">
-                                                                    <label for="exampleInputPassword1">Preço de custo</label>
-                                                                    <input type="text" class="form-control col-sm-8 " ng-model="produto.precoCusto" name="precoCusto"  placeholder="Preço de custo">
+                                                                    <label for="exampleInputPassword1">Pre�o de custo</label>
+                                                                    <input type="text" class="form-control col-sm-8 " ng-model="produto.precoCusto" name="precoCusto"  placeholder="Pre�o de custo">
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-3 ">
                                                                 <div class="form-group">
-                                                                    <label for="exampleInputPassword1">Preço de venda</label>
+                                                                    <label for="exampleInputPassword1">Pre�o de venda</label>
                                                                     <input type="text" class="form-control col-sm-8 " ng-model="produto.precoVenda" name="precoVenda"  placeholder="modoUso">
                                                                 </div>
                                                             </div>
@@ -156,7 +134,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Gravar</button>
+                <button type="submit"  ng-click="saveProduto()" class="btn btn-primary">Gravar</button>
             </div>
         </div>
     </div>

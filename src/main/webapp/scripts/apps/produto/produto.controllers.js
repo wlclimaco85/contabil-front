@@ -221,7 +221,7 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
             console.log(json)
             return json.produtoList;
         }
-        Datatablessss.getTable('/produto/api/produto/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, oOptions, aColumns);
+        Datatablessss.getTable('/produto/api/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, oOptions, aColumns);
 
         function edit(person) {
             $rootScope.produto = person;
@@ -280,7 +280,10 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
         .controller('ProdutoInsertController', function($rootScope, $scope, fModels, SysMgmtData, fProduto,$templateCache, $http) {
             var vm = this;
 
-             
+
+        $scope.produto = {};
+        $scope.tributacao = {};
+        $scope.produtoEmpresa = {};
              
         $scope.people = [
             {firstName: "Daryl", surname: "Rowland", twitter: "@darylrowland", pic: "img/daryl.jpeg"},
@@ -561,7 +564,7 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
             }
             $scope.saveProduto = function() {
                 debugger
-                fProduto.fnMontaObjeto($scope.empresa, $scope.enderecos, 'INSERT', "site/api/produto/insert/", fnCallBack);
+                fProduto.fnMontaObjeto($scope.produto, $scope.tributacao,$scope.produtoEmpresa, 'INSERT', "site/api/insert/", fnCallBack);
             };
         });
 })();
