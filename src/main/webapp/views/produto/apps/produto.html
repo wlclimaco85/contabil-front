@@ -102,8 +102,8 @@
         </div>
         <div class="col-sm-4 ">
             <div class="form-group">
-                <label for="exampleInputPassword1">Código personalizado</label>
-                <input type="text" class="form-control " ng-model="produto.codigo" name="codigo"  placeholder="Código Interno">
+                <label for="exampleInputPassword1">C�digo personalizado</label>
+                <input type="text" class="form-control " ng-model="produto.codigo" name="codigo"  placeholder="C�digo Interno">
             </div>
         </div>
     </div>
@@ -116,7 +116,7 @@
         </div>
         <div class="col-sm-3 ">
             <div class="form-group">
-                <label for="exampleInputPassword1">Código de barras (EAN):</label>
+                <label for="exampleInputPassword1">C�digo de barras (EAN):</label>
                 <input type="text" class="form-control  " ng-model="produto.cdBarras" name="cdBarras"  placeholder="cdBarras">
             </div>
         </div>
@@ -128,8 +128,8 @@
         </div>
         <div class="col-sm-2 ">
             <div class="form-group">
-                <label for="exampleInputPassword1">Exceção tab IPI</label>
-                <input type="text" class="form-control  " ng-model="produto.excTabIPI" name="excecaoIPI"  placeholder="Exceção IPI">
+                <label for="exampleInputPassword1">Exce��o tab IPI</label>
+                <input type="text" class="form-control  " ng-model="produto.excTabIPI" name="excecaoIPI"  placeholder="Exce��o IPI">
             </div>
         </div>
         <div class="col-sm-2 ">
@@ -143,13 +143,13 @@
         <div class="col-sm-6 ">
             <div class="form-group">
                 <label for="exampleInputPassword1">Inform. adicionais para a NFe</label>
-                <input type="text" class="form-control col-sm-8 " ng-model="produto.InfaddNFe" name="informAdicionaisParaNFe"  placeholder="Informações Adicionais Para NFe">
+                <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produto.InfaddNFe" name="informAdicionaisParaNFe"  placeholder="Informa��es Adicionais Para NFe"></textarea>
             </div>
         </div>
         <div class="col-sm-6 ">
             <div class="form-group">
-                <label for="exampleInputPassword1">Anotações internas</label>
-                <input type="text" class="form-control col-sm-8 " ng-model="produto.AnotInt" name="anotainternas"  placeholder="Anotaçoes Internas">
+                <label for="exampleInputPassword1">Anota��es internas</label>
+                <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produto.AnotInt" name="anotainternas"  placeholder="Anota�oes Internas"></textarea>
             </div>
         </div>
     </div>
@@ -158,90 +158,23 @@
         <div class="col-sm-4 ">
                 <label for="exampleInputPassword1">Unidade tributada</label>
                 <div class="row">
-                <select id="unidTributada" name="unidTributada"  ng-model="produto.unidTributada" class="uniMedList select col-sm-12">
-                    <option value="01">UN</option>
-                    <option value="02">PC</option>
-                    <option value="03">CX</option>
-                    <option value="04">CJ</option>
-                    <option value="05">MT</option>
-                    <option value="06">M2</option>
-                    <option value="07">M3</option>
-                    <option value="08">KG</option>
-                    <option style="background-color : #F1F4F9"><a>Adicionar Novo </a><i class="glyphicon glyphicon-plus"></i></option>
+                <select id="unidTributada" name="unidTributada"  ng-model="produto.unidTributada.id" class="uniMedList selectUniMed col-sm-12">
                 </select>
             </div>
         </div>
         <div class="col-sm-4 ">
                 <label for="exampleInputPassword1">Categoria</label>
                 <div class="row">
-                <select id="atividade1" name="atividade1" ng-model="produto.categoria" class="categoriaList select col-sm-12">
-                    <option value="01">Agronegócios</option>
-                    <option value="02">Adubo Orgânico</option>
-                    <option value="03">Agricultura</option>
-                    <option value="04">Agroindústria</option>
-                    <option value="05">Agrotóxicos</option>
-                    <option value="06">Equipamentos Agrícolas</option>
-                    <option value="07">Equipamentos de Irrigação</option>
-                    <option value="08">Fazendas</option>
-                    <option value="09">Fertilizantes</option>
-                    <option value="10">Floriculturas</option>
-                    <option value="11">Frigoríficos e Abatedouros</option>
-                    <option value="12">Gado Bovino de Corte</option>
-                    <option value="13">Gado Leiteiro</option>
-                    <option value="14">Gestão Rural</option>
-                    <option value="15">Insumos Agrícolas</option>
-                    <option value="16">Laticínios e Hortifruti</option>
-                    <option value="17">Meio Ambiente</option>
-                    <option value="18">Nutrição Animal</option>
-                    <option value="19">Pecuárias Diversas</option>
-                    <option value="20">Plantas e Mudas</option>
-                    <option value="21">Produtos Orgânicos</option>
-                    <option value="22">Sementes</option>
-                    <option value="23">Tecnologia em Agronegócios</option>
-                    <option value="24">Alimentos e Bebidas</option>
-                    <option value="25">Alimentos Industrializados</option>
-                    <option value="26">Alimentos Naturais</option>
-                    <option value="27">Bares e Lanchonetes</option>
-                    <option value="28">Bebidas Diversas</option>
-                    <option value="29">Bebidas não Alcoólicas</option>
-                    <option value="30">Buffet e Eventos</option>
-                    <option value="31">Cesta Básica</option>
-                    <option value="32">Cesta de Natal</option>
-                    <option value="33">Comércio de Alimentos</option>
-                    <option value="34">Doces e Chocolates</option>
-                    <option value="35">Outras Bebidas</option>
-                    <option value="36">Outros Alimentos</option>
-                    <option value="37">Pizzarias</option>
-                    <option value="38">Receitas de Alimentos</option>
-                    <option value="39">Restaurantes</option>
-                    <option value="40">Suplemento Alimentar</option>
-                    <option value="41">Vinhos</option>
-                    <option value="42">Vitaminas</option>
-                    <option value="43">Automação</option>
-                    <option value="44">Automação Comercial</option>
-                    <option value="45">Automação Industrial</option>
-                    <option value="46">Automação Residencial</option>
-                    <option value="47">Balanças Comerciais</option>
-                    <option value="48">Bobina de Papel pdv</option>
-                    <option value="49">Caixa Registradora</option>
-                    <option value="50">Equipamentos para Automação</option>
-                    <option style="background-color : #F1F4F9"><a>Adicionar Novo </a><i class="glyphicon glyphicon-plus"></i></option>
-                </select>
-            </div>
+                    <select id="atividade1" name="atividade1" ng-model="produto.categoria.id" class="categoriaList selectCategoria col-sm-12">
+                        
+                    </select>
+                </div>
         </div>
         <div class="col-sm-4 ">
                 <label for="exampleInputPassword1">Marca</label>
                 <div class="row">
-                <select id="atividade1" name="atividade1" class="col-sm-12 select marcaList">
-                    <option value="01">AlfaParfMilano SAC 0800 0212652</option>
-                    <option value="02">Alta Moda SAC 0800 0212652</option>
-                    <option value="03">Alterna www.alternahaircare.com</option>
-                    <option value="04">Arcancil Paris SAC 0800 9709877</option>
-                    <option value="05">Avène SAC 0800 7021037</option>
-                    <option value="06">Avon SAC 0800 7082866</option>
-                    <option value="07">Bare Minerals www.bareminerals.com</option>
-                    <option value="08">BCBG Maxazria sac@elizabetharden.com</option>
-                    <option style="background-color : #F1F4F9"><a>Adicionar Novo </a><i class="glyphicon glyphicon-plus"></i></option>
+                <select id="atividade1" name="atividade1" ng-model="produto.marca.id" class="col-sm-12 selectMarca marcaList">
+                    
                 </select>
             </div>
         </div>
@@ -254,15 +187,18 @@
         
             var callback = function(res){
                 var planos = "";
-
                if(res.operationSuccess == true)
                {
-                   for(var x = 0 ;x < res.uniMedList.length;x++)
+                   for(var x = 0 ;x < res.unimedList.length;x++)
                    {
-                       planos = planos + "<option value='"+res.uniMedList[x].id+"'> "+res.uniMedList[x].descricao+" </option>";
+                       planos = planos + "<option value='"+res.unimedList[x].id+"'> "+res.unimedList[x].sigla+" </option>";
                    }
 
                     $('.uniMedList').append(planos);
+                    $(".selectUniMed").select2({
+                      placeholder: "Select a state",
+                      allowClear: true
+                    });
 
                     
                }
@@ -273,24 +209,27 @@
             qat.model.select.util("produto/api/unimed/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callback);
 
 
-             var callbackCategoria = function(res){
+             var fnCallbackCategoria = function(res){
                 var planos = "";
-
                if(res.operationSuccess == true)
                {
                    for(var x = 0 ;x < res.categoriaList.length;x++)
                    {
-                       planos = planos + "<option value='"+res.categoriaList[x].id+"'> "+res.categoriaList[x].descricao+" </option>";
+                       planos = planos + "<option value='"+res.categoriaList[x].id+"'> "+res.categoriaList[x].categoria+" </option>";
                    }
 
                     $('.categoriaList').append(planos);
+                    $(".selectCategoria").select2({
+                      placeholder: "Select a state",
+                      allowClear: true
+                    });
 
                }
 
             }
 
 
-            qat.model.select.util("produto/api/categoria/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackCategoria);
+            qat.model.select.util("produto/api/categoria/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackCategoria);
 
              var callbackMarca = function(res){
                 var planos = "";
@@ -300,10 +239,14 @@
                {
                    for(var x = 0 ;x < res.marcaList.length;x++)
                    {
-                       planos = planos + "<option value='"+res.marcaList[x].id+"'> "+res.marcaList[x].descricao+" </option>";
+                       planos = planos + "<option value='"+res.marcaList[x].id+"'> "+res.marcaList[x].marca+" </option>";
                    }
   
                     $('.marcaList').append(planos);
+                    $(".selectMarca").select2({
+                      placeholder: "Select a state",
+                      allowClear: true
+                    });
 
                }
 
@@ -313,8 +256,8 @@
             qat.model.select.util("produto/api/marca/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackMarca);
 
             $(".select").select2({
-                          placeholder: "Select a state",
-                          allowClear: true
-                        });
+              placeholder: "Select a state",
+              allowClear: true
+            });
     });
 </script>

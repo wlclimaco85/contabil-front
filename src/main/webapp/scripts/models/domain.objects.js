@@ -361,7 +361,7 @@ qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
     }
       tributacao  = {
         id             : _id,
-        prodId         : _tributacao.prodId;
+        prodId         : _tributacao.prodId,
         cFOPPadraoNFe  : qat.model.fnCfop(_tributacao.cFOPPadraoNFe,_modelAction,_userId),
         iCMS           : qat.model.fnICMS(_tributacao.iCMS,_modelAction,_userId),
         pIS            : qat.model.fnPIS(_tributacao.pIS,_modelAction,_userId),
