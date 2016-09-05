@@ -206,12 +206,19 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.formaPg.delete'
 	            ,'wdApp.apps.formaPg.view'
 
+	            ,'wdApp.apps.nfSaida'
+	            ,'wdApp.apps.nfSaida.insert'
+	            ,'wdApp.apps.nfSaida.update'
+	            ,'wdApp.apps.nfSaida.delete'
+	            ,'wdApp.apps.nfSaida.view'
 
 	            ,'wdApp.apps.contasReceber'
 	            ,'wdApp.apps.contasReceber.insert'
 	            ,'wdApp.apps.contasReceber.update'
 	            ,'wdApp.apps.contasReceber.delete'
 	            ,'wdApp.apps.contasReceber.view'
+
+
 
 
 
