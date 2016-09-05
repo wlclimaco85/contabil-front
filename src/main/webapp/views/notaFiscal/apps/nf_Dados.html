@@ -1,0 +1,128 @@
+           <form id="form_NFe" class="dialog inputForm ui-dialog-content ui-widget-content" style="width: auto; min-height: 36px; max-height: none; height: auto;" dialoginputdatachanged="true">
+    <div class="boxVerLog"></div>
+    <div id="codigo_rcpt" class="boxField" style="display: none;"><input type="hidden" id="codigo" class="" name="codigo" autocomplete="off" value="0"></div>
+    <div id="meuICMSpadrao_rcpt" class="boxField" style="display: none;"><input type="hidden" id="meuICMSpadrao" class="" name="meuICMSpadrao" autocomplete="off"></div>
+    <div id="meuIPIpadrao_rcpt" class="boxField" style="display: none;"><input type="hidden" id="meuIPIpadrao" class="" name="meuIPIpadrao" autocomplete="off"></div>
+    <div id="meuPISpadrao_rcpt" class="boxField" style="display: none;"><input type="hidden" id="meuPISpadrao" class="" name="meuPISpadrao" autocomplete="off"></div>
+    <div id="meuCOFINSpadrao_rcpt" class="boxField" style="display: none;"><input type="hidden" id="meuCOFINSpadrao" class="" name="meuCOFINSpadrao" autocomplete="off"></div>
+    <div id="meuQuantProds_rcpt" class="boxField" style="display: none;"><input type="hidden" id="meuQuantProds" class="" name="meuQuantProds" autocomplete="off" value=""></div>
+    <div id="meuQuantServs_rcpt" class="boxField" style="display: none;"><input type="hidden" id="meuQuantServs" class="" name="meuQuantServs" autocomplete="off" value=""></div>
+    <div id="Bmod_rcpt" class="boxField" style="display: none;"><input type="hidden" id="Bmod" class="" name="Bmod" autocomplete="off" value="55"></div>
+    <div id="IBPTFonte_rcpt" class="boxField" style="display: none;"><input type="hidden" id="IBPTFonte" class="" name="IBPTFonte" autocomplete="off" value=""></div>
+    <div id="IBPTChave_rcpt" class="boxField" style="display: none;"><input type="hidden" id="IBPTChave" class="" name="IBPTChave" autocomplete="off" value=""></div>
+
+    <div id="quadroEnvio" class="quadroComunicacao bottomSpace" style="display: none;"></div>
+
+    <div id="quadroErros" class="quadroComunicacao bottomSpace" style="display: none;"></div>
+
+    <div id="quadroSituSefaz" class="quadroComunicacao bottomSpace" style="display: none;"></div>
+
+    <div id="quadroCartaCorrecao" class="quadroComunicacao bottomSpace" style="display: none;"></div>
+
+    <div id="quadroAvisoSVCDentroNota"></div>
+
+    <h2 class="bottomSpace">
+        Dados que geralmente não mudam
+        <a href="ajuda: Clique para editar os dados básicos" id="link_editarDadosBasicos" class="linkBox">Editar</a>
+    </h2>
+    <div id="dadosBasicos" class="bottomSpace">
+        <table>
+            <tbody>
+                <tr>
+                    <td><label>CNPJ:</label></td>
+                    <td><label>Razão Social:</label>wlclimaco2021</td>
+                    <td><label>Nome fantasia:</label></td>
+                    <td><label>Inscr. Est.:</label></td>
+                    <td><label>Inscr. Mun.:</label></td>
+                    <td><label>CNAE:</label></td>
+                </tr>
+                <tr>
+                    <td><label>Telefone:</label>4545654</td>
+                    <td><label>Endereço:</label>, </td>
+                    <td><label>Bairro:</label></td>
+                    <td><label>Cidade/UF:</label>null/MG</td>
+                    <td><label>Local fato gerador:</label>null</td>
+                    <td><label>CEP:</label></td>
+                </tr>
+                <tr>
+                    <td><label>CRT:</label>undefined</td>
+                    <td><label>Modelo nota:</label>55</td>
+                    <td><label>Série nota:</label>
+                        <div id="valorSerieDadosBasicos">001</div>
+                    </td>
+                    <td><label>Ambiente envio:</label><span class="ambienteTeste" title="As notas enviadas em ambiente de testes não tem validade jurídica e servem para o aprendizado sobre os processos de criação, envio e armazenamento das notas.">Testes</span></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Dados gerais</h2>
+    <table class="bottomSpace">
+        <tbody>
+            <tr>
+                <td class="boxField" id="BnNF_rcpt"><label for="BnNF"> <span>Número da NFe (<a href="ajuda: Clique para definir manualmente o número desta nota." id="link_mudarNumeroNFe">mudar</a>)</span></label><input type="text" id="BnNF" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="BnNF" autocomplete="off"></td>
+                <td class="boxField" id="BnatOp_rcpt" colspan="2"><label for="BnatOp"> <span>Natureza da operação</span></label><select id="BnatOp" class="undefined ui-widget-content ui-corner-all" name="BnatOp" autocomplete="off"><option value="1102">1102 - Compra para comercialização</option><option value="1202">1202 - Devolução de venda de mercadoria</option><option value="1913">1913 - Retorno de remessa p/ demonstr.</option><option value="1915">1915 - Retorno de remessa p/ conserto</option><option value="2102">2102 - Compra para comercialização</option><option value="2202">2202 - Devolução de venda de mercadoria</option><option value="2913">2913 - Retorno de remessa p/ demonstr.</option><option value="2915">2915 - Retorno de remessa p/ conserto</option><option value="3102">3102 - Compra (do exterior) para comercialização</option><option value="5102" selected="selected">5102 - Venda de mercadoria</option><option value="5202">5202 - Devolução de compra</option><option value="5551">5551 - Venda de bem do ativo imobilizado.</option><option value="5908">5908 - Remessa por comodato</option><option value="5912">5912 - Remessa p/ demonstração</option><option value="5915">5915 - Remessa p/ conserto</option><option value="5922">5922 - Venda para entrega futura</option><option value="5949">5949 - Outra saída de mercadoria</option><option value="6102">6102 - Venda de mercadoria</option><option value="6202">6202 - Devolução de compra</option><option value="6551">6551 - Venda de bem do ativo imobilizado.</option><option value="6908">6908 - Remessa por comodato</option><option value="6912">6912 - Remessa p/ demonstração</option><option value="6915">6915 - Remessa p/ conserto</option><option value="6922">6922 - Venda para entrega futura</option><option value="6949">6949 - Outra saída de mercadoria</option><option value="9996">999 - Estorno de NFe não cancelada no prazo legal</option><option value="9997">Complemento de tributo (p/ NFe complementar)</option><option value="9998">Complemento de quantidade (p/ NFe complementar)</option><option value="9999">Complemento de valor (p/ NFe complementar)</option></select></td>
+                <td class="boxField NFCeHide" id="BindFinal_rcpt"><label for="BindFinal"><input type="checkbox" id="BindFinal" class="destDados ui-widget-content ui-corner-all" name="BindFinal" autocomplete="off" value="1"> <span>Destinado a consumidor final</span></label></td>
+            </tr>
+            <tr>
+                <td class="boxField NFCeHide" id="BtpNF_rcpt"><label for="BtpNF"> <span>Tipo de operação</span></label><select id="BtpNF" class="undefined ui-widget-content ui-corner-all" name="BtpNF" autocomplete="off"><option value="0">Entrada</option><option value="1" selected="selected">Saída</option></select></td>
+                <td class="boxField NFCeHide" id="BfinNFe_rcpt"><label for="BfinNFe"> <span>Finalidade da emissão</span></label><select id="BfinNFe" class="undefined ui-widget-content ui-corner-all" name="BfinNFe" autocomplete="off"><option value="1">Normal</option><option value="2">Complementar</option><option value="3">De ajuste</option><option value="4">Devolução de mercadoria</option></select></td>
+                <td class="boxField NFCeHide" id="BidDest_rcpt"><label for="BidDest"> <span>Destino da operação</span></label><select id="BidDest" class="undefined ui-widget-content ui-corner-all" name="BidDest" autocomplete="off"><option value="0"></option><option value="1">Operação interna</option><option value="2">Operação interestadual</option><option value="3">Operação com exterior</option></select></td>
+                <td class="boxField NFCeHide" id="meuRefNF_rcpt"><label for="meuRefNF"><input type="checkbox" id="meuRefNF" class="undefined ui-widget-content ui-corner-all" name="meuRefNF" autocomplete="off" value="1"> <span>Possui NF referenciada</span></label></td>
+            </tr>
+            <tr>
+                <td class="boxField NFCeHide" id="meuDataEmi_rcpt"><label for="meuDataEmi"> <span>Data emissão NF</span></label><input type="text" id="meuDataEmi" class="undefined ui-widget-content ui-corner-all hasDatepicker requiredField" name="meuDataEmi" autocomplete="off" especialtype="date" maxlength="10"></td>
+                <td class="boxField NFCeHide" id="meuHoraEmi_rcpt"><label for="meuHoraEmi"> <span>Hora emissão NF (<a href="ajuda: Clique para preencher com a hora atual." class="link_horaAtual" value="meuHoraEmi">atual</a>)</span></label><input type="text" id="meuHoraEmi" class="undefined ui-widget-content ui-corner-all requiredField" name="meuHoraEmi" autocomplete="off" especialtype="string"></td>
+                <td class="boxField NFCeHide" id="meuDataSai_rcpt"><label for="meuDataSai"> <span>Data saída/entrada</span></label><input type="text" id="meuDataSai" class="undefined ui-widget-content ui-corner-all hasDatepicker" name="meuDataSai" autocomplete="off" especialtype="date" maxlength="10"></td>
+                <td class="boxField NFCeHide" id="meuHoraSai_rcpt"><label for="meuHoraSai"> <span>Hora saída/entrada (<a href="ajuda: Clique para preencher com a hora atual." class="link_horaAtual" value="meuHoraSai">atual</a>)</span></label><input type="text" id="meuHoraSai" class="undefined ui-widget-content ui-corner-all" name="meuHoraSai" autocomplete="off" especialtype="string"></td>
+            </tr>
+            <tr>
+                <td class="boxField" id="BindPag_rcpt"><label for="BindPag"> <span>Forma de pagamento</span></label><select id="BindPag" class="undefined ui-widget-content ui-corner-all" name="BindPag" autocomplete="off"><option value="0">A vista</option><option value="1">A prazo</option><option value="2">Outros</option></select></td>
+                <td class="boxField" id="BindPres_rcpt"><label for="BindPres"> <span>Presença do comprador</span></label><select id="BindPres" class="undefined ui-widget-content ui-corner-all" name="BindPres" autocomplete="off"><option value="0">Não se aplica</option><option value="1">Operação presencial</option><option value="2">Operação pela internet</option><option value="3">Operação por teleatendimento</option><option value="4">NFC-e com entrega a domicílio</option><option value="9">Não presencial, outros</option></select></td>
+                <td class="boxField" id="CIEST_rcpt"><label for="CIEST"> <span>Ins. Est. Subst. Trib.</span></label><input type="text" id="CIEST" class="destDados ui-widget-content ui-corner-all" name="CIEST" autocomplete="off" especialtype="string" minsize="2" maxsize="14"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="quadroReferenciadas" class="invisible bottomSpace NFCeHide" style="display: none;">
+        <h2>Dados da Nota Fiscal referenciada</h2>
+        <div class="alerta">Esta informação será automaticamente impressa nas Informações Complementares, no DANFE.</div>
+        <table>
+            <tbody>
+                <tr>
+                    <td class="boxField" id="meuTipoNotaRef_rcpt"><label for="meuTipoNotaRef"> <span>Tipo de nota a ser referenciada</span></label><select id="meuTipoNotaRef" class="undefined ui-widget-content ui-corner-all" name="meuTipoNotaRef" autocomplete="off"><option value="1">NF eletrônica</option><option value="2">NF impressa</option><option value="3">NF produtor rural</option><option value="4">CTe</option><option value="5">Cupom Fiscal</option></select></td>
+                    <td class="boxField" id="BrefNFe_rcpt"><label for="BrefNFe"> <span>Chave de acesso da NFe</span></label><input type="text" id="BrefNFe" class="requiredField ui-widget-content ui-corner-all" name="BrefNFe" autocomplete="off" especialtype="integer" exactsize="44"></td>
+                    <td class="boxField" id="BrefCTe_rcpt"><label for="BrefCTe"> <span>Chave de acesso do CT-e</span></label><input type="text" id="BrefCTe" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefCTe" autocomplete="off" especialtype="integer" exactsize="44"></td>
+                </tr>
+            </tbody>
+        </table>
+        <table id="quadroRefNF" class="invisible">
+            <tbody>
+                <tr>
+                    <td class="boxField" id="BrefcUF_rcpt"><label for="BrefcUF"> <span>UF emitente da nota ref.</span></label><select id="BrefcUF" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefcUF" autocomplete="off"><option value=""></option><option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option><option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option><option value="MT">MT</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option><option value="PI">PI</option><option value="PR">PR</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RO">RO</option><option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option><option value="SE">SE</option><option value="SP">SP</option><option value="TO">TO</option></select></td>
+                    <td class="boxField" id="BrefAAMM_rcpt"><label for="BrefAAMM"> <span>Ano e mês da emissão (AAMM)</span></label><input type="text" id="BrefAAMM" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefAAMM" autocomplete="off" especialtype="integer" exactsize="4"></td>
+                    <td class="boxField" id="BrefCNPJ_rcpt"><label for="BrefCNPJ"> <span>CNPJ / CPF do emitente</span></label><input type="text" id="BrefCNPJ" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefCNPJ" autocomplete="off" especialtype="cpfcnpj"></td>
+                    <td class="boxField" id="BrefIE_rcpt"><label for="BrefIE"> <span>Inscr. Est. do emitente</span></label><input type="text" id="BrefIE" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefIE" autocomplete="off" especialtype="string" minsize="2" maxsize="14"></td>
+                </tr>
+                <tr>
+                    <td class="boxField" id="Brefmod_rcpt"><label for="Brefmod"> <span>Modelo da nota fiscal</span></label><select id="Brefmod" class="undefined ui-widget-content ui-corner-all requiredField" name="Brefmod" autocomplete="off"><option value="01">NF avulsa</option><option value="04">NF produtor rural</option></select></td>
+                    <td class="boxField" id="Brefserie_rcpt"><label for="Brefserie"> <span>Série da nota fiscal</span></label><input type="text" id="Brefserie" class="undefined ui-widget-content ui-corner-all requiredField" name="Brefserie" autocomplete="off" especialtype="integer" maxsize="3"></td>
+                    <td class="boxField" id="BrefnNF_rcpt"><label for="BrefnNF"> <span>Número da nota fiscal</span></label><input type="text" id="BrefnNF" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefnNF" autocomplete="off" especialtype="integer" maxsize="9"></td>
+                </tr>
+            </tbody>
+        </table>
+        <table id="quadroRefCF" class="invisible">
+            <tbody>
+                <tr>
+                    <td class="boxField" id="BrefCFmod_rcpt"><label for="BrefCFmod"> <span>Modelo do Cupom Fiscal</span></label><select id="BrefCFmod" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefCFmod" autocomplete="off"><option value="2B">Máquina registradora</option><option value="2C">Cupom Fiscal PDV</option><option value="2D">Cupom Fiscal ECF</option></select></td>
+                    <td class="boxField" id="BrefnECF_rcpt"><label for="BrefnECF"> <span>Número sequencial do ECF</span></label><input type="text" id="BrefnECF" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefnECF" autocomplete="off" especialtype="integer" exactsize="3"></td>
+                    <td class="boxField" id="BrefnCOO_rcpt"><label for="BrefnCOO"> <span>Núm. Contador Ordem de Operação - COO</span></label><input type="text" id="BrefnCOO" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefnCOO" autocomplete="off" especialtype="integer" exactsize="6"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    
+</form>
