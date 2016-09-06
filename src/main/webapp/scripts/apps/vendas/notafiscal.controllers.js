@@ -633,10 +633,31 @@
 })();
 
 (function() {
-    angular.module('wdApp.apps.nfSaida.insert',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+    angular.module('wdApp.apps.nfSaida.insert',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter','inputactions'])
         .controller('NfSaidaInsertController', function($rootScope,$scope,fModels,SysMgmtData) {
 
             var vm = this;
+            $scope.slotDisplayName = "teste00";
+
+
+            $scope.updateSlotName = function(updatedModel){
+debugger
+           /*     var tgbMaintenanceRequest = {
+                    tgbId: vm.towerSelected,
+                    slotName: updatedModel.slotDisplayName,
+                    slotId: updatedModel.slotChannelId
+                };
+
+                $http({
+                    headers: {'Content-Type': 'application/json; charset=utf-8'},
+                    url: "bandplan/updateslotname",
+                    method: "POST",
+                    data: JSON.stringify(tgbMaintenanceRequest)
+                }).then(function(oResponse){
+
+                    submitTower($scope.filterForm);
+                });*/
+            }
 
         $scope.nfSaida = {};
 

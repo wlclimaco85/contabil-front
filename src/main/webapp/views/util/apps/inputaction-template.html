@@ -1,0 +1,42 @@
+
+<!--
+        View Mode
+-->
+<p ng-show="isViewMode && !isEditMode" ng-mouseover="onOverViewMode();" style="padding-left: 0 !important;">
+    {{value}}
+</p>
+
+
+<!--
+        Control Mode
+-->
+<div class="input-group" ng-show="isControlMode" ng-mouseleave="disableControl();enableViewMode();" ng-click="disableControl();disableViewMode();enableEditMode();">
+    <input type="text" class="form-control" ng-model="value">
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="button">
+            <i class="glyphicon glyphicon-pencil"></i>
+        </button>
+    </span>
+</div>
+
+
+
+<!--
+        Edit Mode
+-->
+<div ng-if="isEditMode">
+    <div class="col-xs-12 col-md-12 col-lg-12" style="padding-left: 0 !important;">
+        <input class="form-control" ng-model="newValue" style="width: 100%;">
+    </div>
+
+    <div class="col-xs-12 col-md-12 col-lg-12">
+        <div class="btn-group btn-xs pull-right" role="group" style="padding: 1px 0px !important; position: absolute !important; right: 15px !important;">
+            <button type="button" class="btn btn-default btn-xs" ng-click="performAction(newValue);">
+                <i class="glyphicon glyphicon-ok"></i>
+            </button>
+            <button type="button" class="btn btn-default btn-xs" ng-click="disableEditMode();enableViewMode();">
+                <i class="glyphicon glyphicon-remove"></i>
+            </button>
+        </div>
+    </div>
+</div>

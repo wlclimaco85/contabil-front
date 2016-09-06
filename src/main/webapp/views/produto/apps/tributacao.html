@@ -40,7 +40,7 @@
 		                        <div class="col-sm-5 ">
 		                                <label for="exampleInputPassword1">ICMS - Situação Tributária</label>
 		                                <div class="row">
-		                                <select  ng-model="tributacao.icms.sitTributaria"  class="col-sm-12 select">
+		                                <select  ng-model="tributacao.icms.sitTributaria.id"  class="col-sm-12 select">
 		                                    <option value="00">00: Tributada integralmente</option>
 		                                    <option value="10">10: Tributada com cobr. por subst. trib.</option>
 		                                    <option value="20">20: Com redução de base de cálculo</option>
@@ -71,7 +71,7 @@
 		                        <div class="col-sm-5 ">
 		                                <label for="exampleInputPassword1">ICMS - Origem</label>
 		                                <div class="row">
-		                                <select  ng-model="tributacao.icms.origem"   class="select col-sm-12">
+		                                <select  ng-model="tributacao.icms.origem.id"   class="select col-sm-12">
 		                                    <option value="0">0 - Nacional, exceto as indicadas nos códigos de 3 a 5</option>
 		                                    <option value="1">1 - Estrangeira - Importação direta, exceto a indicada no código 6</option>
 		                                    <option value="2">2 - Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7</option>
@@ -89,7 +89,7 @@
                                         <label for="exampleInputPassword1">Modalidade BC</label>
                                         <div class="row ">
                                        <span class="ui-select">
-                                            <select ng-model="tributacao.icms.modalidadeBC">
+                                            <select ng-model="tributacao.icms.modalidadeBC.id">
                                                 <option value="0">0 - Nacional, exceto as indicadas nos códigos de 3 a 5</option>
 												<option value="1">1 - Estrangeira - Importação direta, exceto a indicada no código 6</option>
 												<option value="2">2 - Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7</option>
@@ -120,16 +120,16 @@
 		                            <div class="form-group">
                                         <label for="exampleInputPassword1">Motivo desoneração</label>
                                         <div class="row ">
-                                       <span class="ui-select">
-                                            <select ng-model="tributacao.icms.motDesoneracao">
-                                                <option value="0" selected="selected">- Não desejo usar -</option>
-												<option value="3">3: Produtor agropecuário</option>
-												<option value="9">9: Outros</option>
-												<option value="12">12: Órgão de fomento e desenvolv. agropecuário</option>
-                                            </select>
-                                        </span>
-                                     </div>                             
-		                        </div>
+	                                       <span class="ui-select">
+	                                            <select ng-model="tributacao.icms.motDesoneracao.id">
+	                                                <option value="0" selected="selected">- Não desejo usar -</option>
+													<option value="3">3: Produtor agropecuário</option>
+													<option value="9">9: Outros</option>
+													<option value="12">12: Órgão de fomento e desenvolv. agropecuário</option>
+	                                            </select>
+	                                        </span>
+	                                     </div>                             
+		                        	</div>
 		                    </div>
 		                </div>
 		            </div>
@@ -150,7 +150,7 @@
 		                        <div class="col-sm-5 ">
 		                                <label for="exampleInputPassword1">IPI - Situação tributária</label>
 		                                <div class="row">
-		                                <select id="configTrib_OCST" ng-model="tributacao.ipi.sitTributaria" name="configTrib_OCST" class="col-sm-12 select">
+		                                <select id="configTrib_OCST" ng-model="tributacao.ipi.sitTributaria.id" name="configTrib_OCST" class="col-sm-12 select">
 		                                    <option value="-1">- Não usar -</option>
 		                                    <option value="00">00: Entrada com recuperação de crédito</option>
 		                                    <option value="01">01: Entrada tributada com alíquota zero</option>
@@ -206,7 +206,7 @@
 		                        <div class="col-sm-4 ">
 		                            <div class="form-group">
 		                                <label for="exampleInputPassword1">Tipo de cálculo</label>
-		                                <select id="configTrib_OTipoCalc" ng-model="tributacao.ipi.tipoCalculo" name="configTrib_OTipoCalc" class="form-control disabled">
+		                                <select id="configTrib_OTipoCalc" ng-model="tributacao.ipi.tipoCalculo.id" name="configTrib_OTipoCalc" class="form-control disabled">
 		                                    <option value="1">Porcentagem</option>
 		                                    <option value="2">Em valor</option>
 		                                </select>
@@ -238,7 +238,7 @@
 		                        <div class="col-sm-8 ">
 		                                <label for="exampleInputPassword1">PIS - Situação tributária</label>
 		                                <div class="row">
-		                                <select id="configTrib_QCST" ng-model="tributacao.pis.pISSituaTributaria" name="configTrib_QCST" class="col-sm-12 select">
+		                                <select id="configTrib_QCST" ng-model="tributacao.pis.pISSituaTributaria.id" name="configTrib_QCST" class="col-sm-12 select">
 		                                    <option value="01">01: Operação tributável (BC = Operação alíq. normal (cumul./não cumul.)</option>
 		                                    <option value="02">02: Operação tributável (BC = valor da operação (alíquota diferenciada)</option>
 		                                    <option value="03">03: Operação tributável (BC = quant. x alíq. por unidade de produto)</option>
@@ -286,7 +286,7 @@
 		                                <label for="exampleInputPassword1">Tipo de cálculo Subst. Trib.</label>
 		                                <div class="row">
 		                                <span class="ui-select">
-		                                <select id="configTrib_RTipoCalc" class="col-sm-12" ng-model="tributacao.pis.tipocalculoSubstTrib" name="tipocalculoSubstTrib" autocomplete="off">
+		                                <select id="configTrib_RTipoCalc" class="col-sm-12" ng-model="tributacao.pis.tipocalculoSubstTrib.id" name="tipocalculoSubstTrib" autocomplete="off">
 		                                    <option value="0">- Não usar -</option>
 		                                    <option value="1">Porcentagem</option>
 		                                    <option value="2">Em valor</option>
@@ -320,7 +320,7 @@
 		                            <div class="form-group col-sm-8">
 		                                <label for="exampleInputPassword1">COFINS - Situação Tributária</label>
 		                                <div class="row">
-		                                <select id="configTrib_SCST" ng-model="tributacao.cofins.sitTributaria" class="col-sm-12 select" name="sitTributaria">
+		                                <select id="configTrib_SCST" ng-model="tributacao.cofins.sitTributaria.id" class="col-sm-12 select" name="sitTributaria">
 		                                    <option value="01">01: Operação tributável (BC = Operação alíq. normal (cumul./não cumul.)</option>
 		                                    <option value="02">02: Operação tributável (BC = valor da operação (alíquota diferenciada)</option>
 		                                    <option value="03">03: Operação tributável (BC = quant. x alíq. por unidade de produto)</option>
@@ -368,7 +368,7 @@
 		                                <label for="exampleInputPassword1">Tipo de cálculo Subst. Trib.</label>
 		                                <div class="row">
 		                                <span class="ui-select col-sm-12">
-		                                <select id="configTrib_RTipoCalc" ng-model="tributacao.cofins.tipoCalculoSubstTrib" class="col-sm-12" name="tipoCalculoSubstTrib" autocomplete="off">
+		                                <select id="configTrib_RTipoCalc" ng-model="tributacao.cofins.tipoCalculoSubstTrib.id" class="col-sm-12" name="tipoCalculoSubstTrib" autocomplete="off">
 		                                    <option value="0">- Não usar -</option>
 		                                    <option value="1">Porcentagem</option>
 		                                    <option value="2">Em valor</option>
