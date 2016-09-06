@@ -222,6 +222,7 @@ var WebDaptiveAppConfig = {
 
 
 
+
 				]);
 
 	wdApp.config(['$routeProvider',

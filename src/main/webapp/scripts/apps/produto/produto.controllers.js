@@ -276,7 +276,7 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
     }
 })();
 (function() {
-    angular.module('wdApp.apps.produto.insert', ['angucomplete'])
+    angular.module('wdApp.apps.produto.insert', ['angucomplete','inputactions'])
         .controller('ProdutoInsertController', function($rootScope, $scope, fModels, SysMgmtData, fProduto,$templateCache, $http) {
             var vm = this;
 
@@ -284,6 +284,7 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
         $scope.produto = {};
         $scope.tributacao = {};
         $scope.produtoEmpresa = {};
+
 
         $scope.produto.produto = "Coca Cola";
         $scope.produto.nCM = "ncm";
@@ -612,6 +613,30 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
             {name: 'Zambia', code: 'ZM'},
             {name: 'Zimbabwe', code: 'ZW'}
         ];
+
+
+            $scope.updateSlotName = function(updatedModel){
+debugger
+               /* var tgbMaintenanceRequest = {
+                    tgbId: vm.towerSelected,
+                    slotName: updatedModel.slotDisplayName,
+                    slotId: updatedModel.slotChannelId
+                };
+
+                $http({
+                    headers: {'Content-Type': 'application/json; charset=utf-8'},
+                    url: "bandplan/updateslotname",
+                    method: "POST",
+                    data: JSON.stringify(tgbMaintenanceRequest)
+                }).then(function(oResponse){
+
+                    submitTower($scope.filterForm);
+                });*/
+            }
+
+
+
+
 
             $scope.today = function() {
                 return $scope.dt = new Date();
