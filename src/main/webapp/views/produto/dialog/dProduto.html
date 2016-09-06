@@ -34,13 +34,13 @@
                                                     <div class="col-sm-4 ">
                                                         <div class="form-group">
                                                             <label for="exampleInputPassword1">Peso unitário líquido (kg)</label>
-                                                            <input type="text" class="form-control col-sm-8 " ng-model="produto.pesoliquido" name="pesoLiquido"  placeholder="Peso unitário líquido (kg)">
+                                                            <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.pesoliquido" name="pesoLiquido"  placeholder="Peso unitário líquido (kg)">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4 ">
                                                         <div class="form-group">
                                                             <label for="exampleInputPassword1">Peso unitário bruto (kg)</label>
-                                                            <input type="text" class="form-control col-sm-8 " ng-model="produto.pesobruto" name="pesobruto"  placeholder="Peso unitário bruto (kg)">
+                                                            <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.pesobruto" name="pesobruto"  placeholder="Peso unitário bruto (kg)">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -69,19 +69,19 @@
                                                         <div class="col-sm-3 ">
                                                             <div class="form-group">
                                                                 <label for="exampleInputPassword1">Estoque Minimo</label>
-                                                                <input type="text" class="form-control col-sm-8 " ng-model="produto.estMinimo" name="estMinimo"  placeholder="Estoque Minimo">
+                                                                <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.estoqueList[1].quant"  name="estMinimo"  placeholder="Estoque Minimo">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-3 ">
                                                             <div class="form-group">
                                                                 <label for="exampleInputPassword1">Estoque Atual</label>
-                                                                <input type="text" class="form-control col-sm-8 " ng-model="produto.estAtual" name="estAtual"  placeholder="Estoque Atual">
+                                                                <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.estoqueList[0].quant" name="estAtual"  placeholder="Estoque Atual">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-3 ">
                                                             <div class="form-group">
                                                                 <label for="exampleInputPassword1">Estoque Maximo</label>
-                                                                <input type="text" class="form-control col-sm-8 " ng-model="produto.estMaximo" name="estMaximo"  placeholder="Estoque Maximo">
+                                                                <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.estoqueList[2].quant" name="estMaximo"  placeholder="Estoque Maximo">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -105,19 +105,19 @@
                                                             <div class="col-sm-3 ">
                                                                 <div class="form-group">
                                                                     <label for="exampleInputPassword1">Margem de lucro</label>
-                                                                    <input type="text" class="form-control col-sm-8 " ng-model="produto.margemLucro" name="margemLucro"  placeholder="Margem de lucro">
+                                                                    <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.margemLucro" name="margemLucro"  placeholder="Margem de lucro">
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-3 ">
                                                                 <div class="form-group">
                                                                     <label for="exampleInputPassword1">Preço de custo</label>
-                                                                    <input type="text" class="form-control col-sm-8 " ng-model="produto.precoCusto" name="precoCusto"  placeholder="Preço de custo">
+                                                                    <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.custoList[0].valor" name="precoCusto"  placeholder="Preço de custo">
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-3 ">
                                                                 <div class="form-group">
                                                                     <label for="exampleInputPassword1">Preço de venda</label>
-                                                                    <input type="text" class="form-control col-sm-8 " ng-model="produto.precoVenda" name="precoVenda"  placeholder="modoUso">
+                                                                    <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.precoList[0].valor" name="precoVenda"  placeholder="modoUso">
                                                                 </div>
                                                             </div>
                                                         </div>

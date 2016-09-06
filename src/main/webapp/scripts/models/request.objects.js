@@ -41,6 +41,13 @@
 		this.returnListPaged = _bPagedList;
 	};
 
+	qat.model.reqProduto  = function(_oCounty, _bList, _bPagedList)
+	{
+		this.produtoEmpresa = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
+
 	qat.model.reqCliente = function(_oCounty, _bList, _bPagedList)
 	{
 		this.cliente = _oCounty;

@@ -342,7 +342,7 @@ qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
         processId      : 0,
         tableEnumValue : 0,
         userId         : _userId,
-        modelAction    : modelAction,
+        modelAction    : _modelAction,
         createUser     : _userId,
         createDateUTC  : (new Date()).getTime(),
         modifyUser     : _userId,
@@ -359,20 +359,21 @@ qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
     if(_tributacao.id == "" || _tributacao.id == " "){
       _id = null;
     }
+  //  debugger
       tributacao  = {
         id             : _id,
         prodId         : _tributacao.prodId,
-        cFOPPadraoNFe  : qat.model.fnCfop(_tributacao.cFOPPadraoNFe,_modelAction,_userId),
-        iCMS           : qat.model.fnICMS(_tributacao.iCMS,_modelAction,_userId),
-        pIS            : qat.model.fnPIS(_tributacao.pIS,_modelAction,_userId),
-        cOFINS         : qat.model.fnCOFINS(_tributacao.cOFINS,_modelAction,_userId),
-        iPI            : qat.model.fnIPI(_tributacao.iPI,_modelAction,_userId),
+        cfop           : qat.model.fnCfop(_tributacao.cfop,_modelAction,_userId),
+       icms           : qat.model.fnICMS(_tributacao.icms,_modelAction,_userId),
+        pis            : qat.model.fnPIS(_tributacao.pis,_modelAction,_userId),
+        cofins         : qat.model.fnCOFINS(_tributacao.cofins,_modelAction,_userId),
+        ipi            : qat.model.fnIPI(_tributacao.ipi,_modelAction,_userId),
         parentId       : 0,
         emprId         : JSON.parse(localStorage.getItem('empresa')).id,
         processId      : 0,
         tableEnumValue : 0,
         userId         : _userId,
-        modelAction    : modelAction,
+        modelAction    : _modelAction,
         createUser     : _userId,
         createDateUTC  : (new Date()).getTime(),
         modifyUser     : _userId,
@@ -385,7 +386,8 @@ qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
 
   qat.model.fnCfop = function(_cfop,_modelAction,_userId)
   {
-      cfop  = {
+      var cfop  = {
+         id               : _cfop.id,
          cfop             : _cfop.cfop,
          natureza         : _cfop.natureza,
          simplificado     : _cfop.simplificado,
@@ -411,70 +413,67 @@ qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
 
   qat.model.fnICMS = function(_cfop,_modelAction,_userId)
   {
-      cfop  = {
+      _cfop.emprId         = JSON.parse(localStorage.getItem('empresa')).id,
+         _cfop.tableEnumValue = 53,
+         _cfop.userId         = _userId,
+         _cfop.modelAction    = _modelAction,
+         _cfop.createUser     = _userId,
+         _cfop.createDateUTC  = (new Date()).getTime(),
+         _cfop.modifyUser     = _userId,
+         _cfop.modifyDateUTC  = (new Date()).getTime()
 
-         emprId         : JSON.parse(localStorage.getItem('empresa')).id,
-         tableEnumValue : 53,
-         userId         : _userId,
-         modelAction    : _modelAction,
-         createUser     : _userId,
-         createDateUTC  : (new Date()).getTime(),
-         modifyUser     : _userId,
-         modifyDateUTC  : (new Date()).getTime()
 
-      }
-      return cfop;
+      return _cfop;
   }
 
   qat.model.fnPIS = function(_cfop,_modelAction,_userId)
   {
-      cfop  = {
 
-         emprId         : JSON.parse(localStorage.getItem('empresa')).id,
-         tableEnumValue : 53,
-         userId         : _userId,
-         modelAction    : _modelAction,
-         createUser     : _userId,
-         createDateUTC  : (new Date()).getTime(),
-         modifyUser     : _userId,
-         modifyDateUTC  : (new Date()).getTime()
 
-      }
-      return cfop;
+         _cfop.emprId         = JSON.parse(localStorage.getItem('empresa')).id,
+         _cfop.tableEnumValue = 53,
+         _cfop.userId         = _userId,
+         _cfop.modelAction    = _modelAction,
+         _cfop.createUser     = _userId,
+         _cfop.createDateUTC  = (new Date()).getTime(),
+         _cfop.modifyUser     = _userId,
+         _cfop.modifyDateUTC  = (new Date()).getTime()
+
+
+      return _cfop;
   }
 
   qat.model.fnCOFINS = function(_cfop,_modelAction,_userId)
   {
-      cfop  = {
 
-         emprId         : JSON.parse(localStorage.getItem('empresa')).id,
-         tableEnumValue : 53,
-         userId         : _userId,
-         modelAction    : _modelAction,
-         createUser     : _userId,
-         createDateUTC  : (new Date()).getTime(),
-         modifyUser     : _userId,
-         modifyDateUTC  : (new Date()).getTime()
 
-      }
-      return cfop;
+         _cfop.emprId         = JSON.parse(localStorage.getItem('empresa')).id,
+         _cfop.tableEnumValue = 53,
+         _cfop.userId         = _userId,
+         _cfop.modelAction    = _modelAction,
+         _cfop.createUser     = _userId,
+         _cfop.createDateUTC  = (new Date()).getTime(),
+         _cfop.modifyUser     = _userId,
+         _cfop.modifyDateUTC  = (new Date()).getTime()
+
+  
+      return _cfop;
   }
 
   qat.model.fnIPI = function(_cfop,_modelAction,_userId)
   {
-      cfop  = {
 
-         emprId         : JSON.parse(localStorage.getItem('empresa')).id,
-         tableEnumValue : 53,
-         userId         : _userId,
-         modelAction    : _modelAction,
-         createUser     : _userId,
-         createDateUTC  : (new Date()).getTime(),
-         modifyUser     : _userId,
-         modifyDateUTC  : (new Date()).getTime()
+         _cfop.emprId         = JSON.parse(localStorage.getItem('empresa')).id,
+         _cfop.tableEnumValue = 53,
+         _cfop.userId         = _userId,
+         _cfop.modelAction    = _modelAction,
+         _cfop.createUser     = _userId,
+         _cfop.createDateUTC  = (new Date()).getTime(),
+         _cfop.modifyUser     = _userId,
+         _cfop.modifyDateUTC  = (new Date()).getTime()
 
-      }
-      return cfop;
+
+      return _cfop;
   }
 
 

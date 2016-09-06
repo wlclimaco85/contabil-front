@@ -7,7 +7,7 @@
 
 	factory.fnMontaObjeto = function(produto,tributacao,produtoEmpresa,action,url,callBack){
 
-            produtoEmpresa.produto = fModels.amont(qat.model.fnProduto(produto,action,$rootScope.user.user),action);
+            produtoEmpresa.prodId = fModels.amont(qat.model.fnProduto(produto,action,$rootScope.user.user),action);
 
             produtoEmpresa.tributacao = fModels.amont(qat.model.fnTributacao(tributacao,action,$rootScope.user.user),action);
 
