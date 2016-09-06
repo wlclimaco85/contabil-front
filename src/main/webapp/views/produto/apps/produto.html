@@ -94,7 +94,7 @@
             <div class="form-group">
                 <label for="exampleInputPassword1">Produto</label>
                   <div class="padded-row">
-                  <angucomplete id="ex1" placeholder="Search countries" pause="100" ng-model="produto.nome" selectedobject="selectedCountry" localdata="countries" searchfields="name" titlefield="name" minlength="1" inputclass="form-control form-control-small" matchclass="highlight" />
+                  <angucomplete id="ex1" placeholder="Search countries" pause="100" ng-model="produto.produto" selectedobject="selectedCountry" localdata="countries" searchfields="name" titlefield="name" minlength="1" inputclass="form-control form-control-small" matchclass="highlight" />
                   </div>
                 </div>
                 <div class="" ng-show="selectedCountry">
@@ -103,7 +103,7 @@
         <div class="col-sm-4 ">
             <div class="form-group">
                 <label for="exampleInputPassword1">Código personalizado</label>
-                <input type="text" class="form-control " ng-model="produto.codigo" name="codigo"  placeholder="Código Interno">
+                <input type="text" class="form-control " ng-model="produtoEmpresa.codigo" name="codigo"  placeholder="Código Interno">
             </div>
         </div>
     </div>
@@ -123,7 +123,7 @@
         <div class="col-sm-2 ">
             <div class="form-group">
                 <label for="exampleInputPassword1">Data Cadastro</label>
-                <input type="text" class="form-control  " ng-model="produto.dataCreate" name="dataCadastro"  placeholder="Data Cadastro">
+                <input type="text" class="form-control  " ng-model="produtoEmpresa.dataCreate" name="dataCadastro"  placeholder="Data Cadastro">
             </div>
         </div>
         <div class="col-sm-2 ">
@@ -143,13 +143,13 @@
         <div class="col-sm-6 ">
             <div class="form-group">
                 <label for="exampleInputPassword1">Inform. adicionais para a NFe</label>
-                <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produto.InfaddNFe" name="informAdicionaisParaNFe"  placeholder="Informações Adicionais Para NFe"></textarea>
+                <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.informAdicionaisParaNFe" name="informAdicionaisParaNFe"  placeholder="Informações Adicionais Para NFe"></textarea>
             </div>
         </div>
         <div class="col-sm-6 ">
             <div class="form-group">
                 <label for="exampleInputPassword1">Anotações internas</label>
-                <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produto.AnotInt" name="anotainternas"  placeholder="Anotaçoes Internas"></textarea>
+                <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.anotainternas" name="anotainternas"  placeholder="Anotaçoes Internas"></textarea>
             </div>
         </div>
     </div>
@@ -158,14 +158,14 @@
         <div class="col-sm-4 ">
                 <label for="exampleInputPassword1">Unidade tributada</label>
                 <div class="row">
-                <select id="unidTributada" name="unidTributada"  ng-model="produto.unidTributada.id" class="uniMedList selectUniMed col-sm-12">
+                <select id="unidTributada" name="unidTributada"  ng-model="produtoEmpresa.unidTributada.id" class="uniMedList selectUniMed col-sm-12">
                 </select>
             </div>
         </div>
         <div class="col-sm-4 ">
                 <label for="exampleInputPassword1">Categoria</label>
                 <div class="row">
-                    <select id="atividade1" name="atividade1" ng-model="produto.categoria.id" class="categoriaList selectCategoria col-sm-12">
+                    <select id="atividade1" name="atividade1" ng-model="produtoEmpresa.categoria.id" class="categoriaList selectCategoria col-sm-12">
                         
                     </select>
                 </div>
@@ -173,7 +173,7 @@
         <div class="col-sm-4 ">
                 <label for="exampleInputPassword1">Marca</label>
                 <div class="row">
-                <select id="atividade1" name="atividade1" ng-model="produto.marca.id" class="col-sm-12 selectMarca marcaList">
+                <select id="atividade1" name="atividade1" ng-model="produtoEmpresa.marca.id" class="col-sm-12 selectMarca marcaList">
                     
                 </select>
             </div>

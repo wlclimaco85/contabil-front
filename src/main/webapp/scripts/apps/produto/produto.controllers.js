@@ -284,6 +284,82 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
         $scope.produto = {};
         $scope.tributacao = {};
         $scope.produtoEmpresa = {};
+
+        $scope.produto.produto = "Coca Cola";
+        $scope.produto.nCM = "ncm";
+        $scope.produto.cdBarras = "cd barras";
+        $scope.produto.excTabIPI = "excecaoIPI";
+        $scope.produto.cEST = "cEST";
+
+        $scope.produtoEmpresa.dataCreate =  (new Date()).getTime();
+        $scope.produtoEmpresa.InfaddNFe = "informAdicionaisParaNFe";
+        $scope.produtoEmpresa.AnotInt = "anotainternas";
+        $scope.produtoEmpresa.unidTributada = {};
+        $scope.produtoEmpresa.unidTributada.id = 1;
+        $scope.produtoEmpresa.categoria = {};
+        $scope.produtoEmpresa.categoria.id = 1;
+        $scope.produtoEmpresa.marca = {};
+        $scope.produtoEmpresa.marca.id = 1;
+        $scope.produtoEmpresa.codigo = "0004575"
+        $scope.produtoEmpresa.pesoliquido = "1.96"
+        $scope.produtoEmpresa.pesobruto = "0.09"
+        $scope.produtoEmpresa.margemLucro = "5"
+        $scope.produtoEmpresa.custoList = [{valor : 0}];
+        $scope.produtoEmpresa.custoList[0].valor = 1.99
+        $scope.produtoEmpresa.precoList = [{valor : 0}];
+        $scope.produtoEmpresa.precoList[0].valor = 2.39
+        $scope.produtoEmpresa.estoqueList = [
+            {
+                estoqueTypeEnumValue : 1,
+                 quant : 0,
+                 ultimoMov : (new Date()).getTime()
+            },
+            {
+                estoqueTypeEnumValue : 4,
+                 quant : 0,
+                 ultimoMov : (new Date()).getTime()
+            },
+            {
+                estoqueTypeEnumValue : 3,
+                 quant : 0,
+                 ultimoMov : (new Date()).getTime()
+            }
+        ];
+
+
+        //
+        $scope.tributacao.cfop = {}
+        $scope.tributacao.cfop.id = 1
+        $scope.tributacao.icms = {};
+        $scope.tributacao.icms.sitTributaria = "10";
+        $scope.tributacao.icms.origem = "5";
+        $scope.tributacao.icms.modalidadeBC = "3";
+        $scope.tributacao.icms.redBase = 1.99;
+        $scope.tributacao.icms.aliqICMS = 0.99;
+        $scope.tributacao.icms.motDesoneracao = "3";
+
+        $scope.tributacao.ipi ={};
+        $scope.tributacao.ipi.sitTributaria = "53";
+        $scope.tributacao.ipi.classeCigarrosBebidas = "504";
+        $scope.tributacao.ipi.cNPJProdutor = "55555555555/0001";
+        $scope.tributacao.ipi.codControleIPI = "00054";
+        $scope.tributacao.ipi.qtdSeloIPI = "4444";
+        $scope.tributacao.ipi.codEnquadramento = "900";
+        $scope.tributacao.ipi.tipoCalculo = "1";
+        $scope.tributacao.ipi.aliquotaIPI = "10";
+
+        $scope.tributacao.pis = {}
+        $scope.tributacao.pis.pISSituaTributaria = "72";
+        $scope.tributacao.pis.valorUnidtribPIS = "4454";
+        $scope.tributacao.pis.tipocalculoSubstTrib = "2";
+        $scope.tributacao.pis.valorTribPISST = "1.99";
+
+        $scope.tributacao.cofins = {}
+        $scope.tributacao.cofins.sitTributaria = "63";
+        $scope.tributacao.cofins.valorTribCOFINS = "0.99";
+        $scope.tributacao.cofins.tipoCalculoSubstTrib = "2";
+        $scope.tributacao.cofins.aliquotaCOFINSST = "0.01";
+                                
              
         $scope.people = [
             {firstName: "Daryl", surname: "Rowland", twitter: "@darylrowland", pic: "img/daryl.jpeg"},
@@ -537,9 +613,6 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
             {name: 'Zimbabwe', code: 'ZW'}
         ];
 
-
-            $scope.produto={};
-
             $scope.today = function() {
                 return $scope.dt = new Date();
             };
@@ -564,7 +637,7 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
             }
             $scope.saveProduto = function() {
                 debugger
-                fProduto.fnMontaObjeto($scope.produto, $scope.tributacao,$scope.produtoEmpresa, 'INSERT', "site/api/insert/", fnCallBack);
+                fProduto.fnMontaObjeto($scope.produto, $scope.tributacao,$scope.produtoEmpresa, 'INSERT', "produto/api/produtoParent/insert/", fnCallBack);
             };
         });
 })();
