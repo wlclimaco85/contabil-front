@@ -633,15 +633,32 @@
 })();
 
 (function() {
-    angular.module('wdApp.apps.nfSaida.insert',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter','inputactions'])
-        .controller('NfSaidaInsertController', function($rootScope,$scope,fModels,SysMgmtData) {
+    angular.module('wdApp.apps.nfSaida.insert',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter','angucomplete','inputactions'])
+        .controller('NfSaidaInsertController', function($rootScope,$scope,fModels,SysMgmtData,fProduto) {
 
             var vm = this;
             $scope.slotDisplayName = "teste00";
+            $scope.clientes = [];
+
+ $scope.people = [
+            {firstName: "Daryl", surname: "Rowland", twitter: "@darylrowland", pic: "img/daryl.jpeg"},
+            {firstName: "Alan", surname: "Partridge", twitter: "@alangpartridge", pic: "img/alanp.jpg"},
+            {firstName: "Annie", surname: "Rowland", twitter: "@anklesannie", pic: "img/annie.jpg"}
+        ];
+
+        SysMgmtData.processPostPageData("main/api/request", {
+            url: 'pessoa/api/cliente/fetchPage',
+            token: $rootScope.authToken,
+            request: new qat.model.PagedInquiryRequest(10)
+        }, function(res) {
+        //    debugger
+            $scope.clientes = res.clienteList;
+        });
+
 
 
             $scope.updateSlotName = function(updatedModel){
-debugger
+//debugger
            /*     var tgbMaintenanceRequest = {
                     tgbId: vm.towerSelected,
                     slotName: updatedModel.slotDisplayName,
@@ -659,6 +676,7 @@ debugger
                 });*/
             }
 
+        fProduto.fnSelectProduto();
         $scope.nfSaida = {};
 
         $scope.savessss = function() {

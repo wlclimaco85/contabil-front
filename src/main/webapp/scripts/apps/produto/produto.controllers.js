@@ -215,13 +215,13 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
         }
         var fnDataSRC = function(json) {
             console.log(json)
-            json['recordsTotal'] = json.produtoList.length
-            json['recordsFiltered'] = json.produtoList.length
+            json['recordsTotal'] = json.produtoParentList.length
+            json['recordsFiltered'] = json.produtoParentList.length
             json['draw'] = 1
             console.log(json)
-            return json.produtoList;
+            return json.produtoParentList;
         }
-        Datatablessss.getTable('/produto/api/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, oOptions, aColumns);
+        Datatablessss.getTable('/produto/api/produtoParent/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, oOptions, aColumns);
 
         function edit(person) {
             $rootScope.produto = person;
@@ -332,33 +332,44 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
         $scope.tributacao.cfop = {}
         $scope.tributacao.cfop.id = 1
         $scope.tributacao.icms = {};
-        $scope.tributacao.icms.sitTributaria = "10";
-        $scope.tributacao.icms.origem = "5";
-        $scope.tributacao.icms.modalidadeBC = "3";
+        $scope.tributacao.icms.sitTributaria = {}
+        $scope.tributacao.icms.sitTributaria.id = 1;
+        $scope.tributacao.icms.origem = {};
+        $scope.tributacao.icms.origem.id = 5;
+        $scope.tributacao.icms.modalidadeBC = {};
+        $scope.tributacao.icms.modalidadeBC.id = 3;
         $scope.tributacao.icms.redBase = 1.99;
         $scope.tributacao.icms.aliqICMS = 0.99;
-        $scope.tributacao.icms.motDesoneracao = "3";
+        $scope.tributacao.icms.motDesoneracao = {};
+        $scope.tributacao.icms.motDesoneracao.id = 3;
 
         $scope.tributacao.ipi ={};
-        $scope.tributacao.ipi.sitTributaria = "53";
+        $scope.tributacao.ipi.sitTributaria ={};
+        $scope.tributacao.ipi.sitTributaria.id = "53";
         $scope.tributacao.ipi.classeCigarrosBebidas = "504";
         $scope.tributacao.ipi.cNPJProdutor = "55555555555/0001";
         $scope.tributacao.ipi.codControleIPI = "00054";
         $scope.tributacao.ipi.qtdSeloIPI = "4444";
-        $scope.tributacao.ipi.codEnquadramento = "900";
-        $scope.tributacao.ipi.tipoCalculo = "1";
-        $scope.tributacao.ipi.aliquotaIPI = "10";
+        $scope.tributacao.ipi.codEnquadramento = {}
+        $scope.tributacao.ipi.codEnquadramento.id = 900;
+        $scope.tributacao.ipi.tipoCalculo = {}
+        $scope.tributacao.ipi.tipoCalculo.id = 1;
+        $scope.tributacao.ipi.aliquotaIPI = 1.99;
 
         $scope.tributacao.pis = {}
-        $scope.tributacao.pis.pISSituaTributaria = "72";
+        $scope.tributacao.pis.pISSituaTributaria = {}
+        $scope.tributacao.pis.pISSituaTributaria.id = 72;
         $scope.tributacao.pis.valorUnidtribPIS = "4454";
-        $scope.tributacao.pis.tipocalculoSubstTrib = "2";
+        $scope.tributacao.pis.tipocalculoSubstTrib = {};
+        $scope.tributacao.pis.tipocalculoSubstTrib.id = 2;
         $scope.tributacao.pis.valorTribPISST = "1.99";
 
         $scope.tributacao.cofins = {}
-        $scope.tributacao.cofins.sitTributaria = "63";
+        $scope.tributacao.cofins.sitTributaria = {}
+        $scope.tributacao.cofins.sitTributaria.id = 63;
         $scope.tributacao.cofins.valorTribCOFINS = "0.99";
-        $scope.tributacao.cofins.tipoCalculoSubstTrib = "2";
+        $scope.tributacao.cofins.tipoCalculoSubstTrib ={};
+        $scope.tributacao.cofins.tipoCalculoSubstTrib.id = 2;
         $scope.tributacao.cofins.aliquotaCOFINSST = "0.01";
                                 
              
