@@ -11,7 +11,6 @@
                 	<div class="container" ng-app ng-init="tab=1">
                     <ul class="tabs-nav">
                       <li><a ng-click="tab=1" ng-class="{'active' : tab==1}"  data-i18n="dados da nfe-e"></a></li>
-                      <li><a ng-click="tab=2" ng-class="{'active' : tab==2}" data-i18n="emitente"></a></li>
                       <li><a ng-click="tab=3" ng-class="{'active' : tab==3}" data-i18n="destinatario"></a></li>
                       <li><a ng-click="tab=4" ng-class="{'active' : tab==4}" data-i18n="produtos e servicos"></a></li>
                       <li><a ng-click="tab=5" ng-class="{'active' : tab==5}" data-i18n="totais"></a></li>
@@ -25,11 +24,8 @@
                       <div class="tab-content" ng-show="tab == 1">
                         <div ng-include="'views/notaFiscal/apps/nf_Dados.html'"></div>
                       </div>
-                      <div class="tab-content" ng-show="tab == 2">
-                        <div ng-include="'views/notaFiscal/apps/nf_emitente.html'"></div>
-                      </div>
                       <div class="tab-content" ng-show="tab == 3">
-                      <div ng-include="'views/notaFiscal/apps/nf_remetente.html'"></div>
+                      <div ng-include="'views/notaFiscal/apps/nf_Remetente.html'"></div>
                       </div>
                       <div class="tab-content" ng-show="tab == 4">
                         <div ng-include="'views/notaFiscal/apps/nf_Produto.html'"></div>

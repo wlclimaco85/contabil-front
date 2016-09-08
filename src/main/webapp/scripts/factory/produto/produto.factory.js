@@ -31,8 +31,34 @@
 			//..
 		}
 
-    factory.fnInitProduto = function() {
-            //..
+    factory.fnSelectProduto = function() {
+        
+        var callbackProduto = function(res){
+                var planos = "";
+
+               if(res.operationSuccess == true)
+               {
+
+                   for(var x = 0 ;x < res.produtoParentList.length;x++)
+                   {
+                       planos = planos + "<option value='"+res.produtoParentList[x].id+"'> "+ res.produtoParentList[x].prodId.ncm + " " + res.produtoParentList[x].prodId.produto +" </option>";
+                   }
+        debugger            
+
+                    $('.produto').empty();
+                    $('.produto').append(planos);
+
+                    $(".selectProduto").select2({
+                          placeholder: "Selecione o ESTADO",
+                          allowClear: true
+                        });
+
+
+               }
+
+            }
+
+qat.model.select.util("produto/api/produtoParent/fetchPage",true,new  qat.model.PagedInquiryRequest(10),callbackProduto);
     }
 
 	return factory;

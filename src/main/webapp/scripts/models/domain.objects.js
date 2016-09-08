@@ -364,7 +364,7 @@ qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
         id             : _id,
         prodId         : _tributacao.prodId,
         cfop           : qat.model.fnCfop(_tributacao.cfop,_modelAction,_userId),
-       icms           : qat.model.fnICMS(_tributacao.icms,_modelAction,_userId),
+        icms           : qat.model.fnICMS(_tributacao.icms,_modelAction,_userId),
         pis            : qat.model.fnPIS(_tributacao.pis,_modelAction,_userId),
         cofins         : qat.model.fnCOFINS(_tributacao.cofins,_modelAction,_userId),
         ipi            : qat.model.fnIPI(_tributacao.ipi,_modelAction,_userId),
@@ -380,6 +380,7 @@ qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
         modifyDateUTC  : (new Date()).getTime()
 
       }
+      debugger
       return tributacao;
   }
 
@@ -413,7 +414,7 @@ qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
 
   qat.model.fnICMS = function(_cfop,_modelAction,_userId)
   {
-      _cfop.emprId         = JSON.parse(localStorage.getItem('empresa')).id,
+         _cfop.emprId         = JSON.parse(localStorage.getItem('empresa')).id,
          _cfop.tableEnumValue = 53,
          _cfop.userId         = _userId,
          _cfop.modelAction    = _modelAction,

@@ -85,10 +85,10 @@
 
         var callbackEstado = function(res){
                 var planos = "";
-debugger
+
                if(res.operationSuccess == true)
                {
-                debugger
+
                    for(var x = 0 ;x < res.estadoList.length;x++)
                    {
                        planos = planos + "<option value='"+res.estadoList[x].id+"'> "+res.estadoList[x].abreviacao+" </option>";
@@ -109,7 +109,6 @@ debugger
             }
 
 
-debugger
 
             $('.select-estado').on("select2-selecting", function(e) {
                console.log($(this).val())
@@ -124,7 +123,7 @@ debugger
 
                if(res.operationSuccess == true)
                {
-                debugger
+
                    for(var x = 0 ;x < res.cidadeList.length;x++)
                    {
 

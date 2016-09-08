@@ -10,6 +10,12 @@
 		this.fetchId = _iInt;
 	};
 
+	//FetchByIdRequest Object
+	qat.model.PagedInquiryRequest = function( _iEmprId)
+	{
+		this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	};
+
 	//RefreshRequest Object
 	qat.model.refreshRequest = function( _iInt, _bList, _bPagedList)
 	{
@@ -167,7 +173,7 @@
 		this.pageSize = 20;
 		this.userId = _userId;
 		this.id = _id;
-		this.emprId = _emprId;
+		this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
 		this.permissaoTypeEnumValue = _permissaoType;
 		this.startPage = _iStartPage;
 		this.sortExpressions = null;
