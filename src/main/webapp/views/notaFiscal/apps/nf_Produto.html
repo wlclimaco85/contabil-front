@@ -1,79 +1,119 @@
 <div class="row " style="margin-top : 10px"></div>
-                                <div class="panel panel-default">
-								  <div class="panel-heading">
-								    <h3 class="panel-title">Produtos</h3>
-								  </div>
-								  <div class="panel-body">
-	                            <div class="row socios">
-                                    <div class="col-sm-5">
-                                        <label for="exampleInputPassword1">Produto</label>
-                                        <div class="row ">
-	                                        <select name="book[0].produto" class="col-sm-12 selectProduto produto">
-											</select>
-										</div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Quantidade</label>
-                                            <input type="text" class="form-control nome-socio"  name="book[0].quantidade" placeholder="0.00" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Valor Unitario</label>
-                                            <input type="text" class="form-control cota-socio"  name="book[0].vlUnitario" placeholder="R$0,00" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Desconto</label>
-                                            <input type="text" class="form-control cota-socio"  name="book[0].desconto" placeholder="R$0,00" />
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-1" style="margin-top:18px">
-                                        <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
-                                    </div>
-                            </div>
-                                <div class="form-group hide" id="bookTemplate">
-                                    <div class="row socios">
-	                                    <div class="col-sm-5">
-	                                        <label for="exampleInputPassword1">Produto</label>
-	                                        <div class="row ">
-		                                        <select name="produto" class="col-sm-12 selectProduto produto">
-												</select>
-											</div>
-	                                    </div>
-	                                    <div class="col-sm-2">
-	                                        <div class="form-group">
-	                                            <label for="exampleInputPassword1">Quantidade</label>
-	                                            <input type="text" class="form-control nome-socio"  name="quantidade" placeholder="0.00" />
-	                                        </div>
-	                                    </div>
-	                                    <div class="col-sm-2">
-	                                        <div class="form-group">
-	                                            <label for="exampleInputPassword1">Valor Unitario</label>
-	                                            <input type="text" class="form-control cota-socio"  name="vlUnitario" placeholder="R$0,00" />
-	                                        </div>
-	                                    </div>
-	                                    <div class="col-sm-2">
-	                                        <div class="form-group">
-	                                            <label for="exampleInputPassword1">Desconto</label>
-	                                            <input type="text" class="form-control cota-socio"  name="desconto" placeholder="R$0,00" />
-	                                        </div>
-	                                    </div>
-	                                    <div class="col-xs-1" style="margin-top:18px">
-	                                        <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
-	                                    </div>
-                                	</div>
-                            	</div>
-                            	</div>
-										</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Produtos</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row socios">
+            <div class="col-sm-5">
+                <label for="exampleInputPassword1">Produto</label>
+                <div class="row ">
+                    <select name="book[0].produto" class="col-sm-12 selectProduto produto"></select>
+                    <span class="input-group-btn">
+	        	<button class="btn btn-default" type="button"><i class="glyphicon glyphicon-question-sign"></i></button>
+	        </span>
+                </div>
+            </div>
+            <div class="col-sm-1">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">CFOP</label>
+                    <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
 
+                </div>
+            </div>
+            <div class="col-sm-1">
+                <div class="form-group">
+
+                    <label for="exampleInputPassword1">Quant.</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
+                        <span class="input-group-addon">,00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+
+                    <label for="exampleInputPassword1">Valor Unitario</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="R$0,00" />
+                        <span class="input-group-addon">,00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Total prod.</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" />
+                        <span class="input-group-addon">,00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1" style="margin-top:18px">
+                <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+            </div>
+        </div>
+        <div class="form-group hide" id="bookTemplate">
+            <div class="row socios">
+                <div class="col-sm-5">
+                    <label for="exampleInputPassword1">Produto</label>
+                    <div class="row ">
+                        <select name="produto" class="col-sm-12 selectProduto produto">
+				</select>
+                        <span class="input-group-btn">
+	        	<button class="btn btn-default" type="button"><i class="glyphicon glyphicon-question-sign"></i></button>
+	        </span>
+                    </div>
+                </div>
+                <div class="col-sm-1">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">CFOP</label>
+                        <input type="text" class="form-control nome-socio" name="quantidade" placeholder="0.00" />
+                    </div>
+                </div>
+                <div class="col-sm-1">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Quant.</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control nome-socio" name="quantidade" placeholder="0.00" />
+                            <span class="input-group-addon">,00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Valor Unitario</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="vlUnitario" placeholder="R$0,00" />
+                            <span class="input-group-addon">,00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Total prod.</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="desconto" placeholder="R$0,00" />
+                            <span class="input-group-addon">,00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-1" style="margin-top:18px">
+                    <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript">
-$(document).ready(function() {	
-	
-
- });	
+    $(document).ready(function() {
+    });
 </script>
-

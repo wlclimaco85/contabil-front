@@ -1,512 +1,340 @@
-           <form id="form_NFe" class="dialog inputForm ui-dialog-content ui-widget-content" style="width: auto; min-height: 36px; max-height: none; height: auto;" dialoginputdatachanged="true">
-    <div class="boxVerLog"></div>
-    <div id="codigo_rcpt" class="boxField" style="display: none;"><input type="hidden" id="codigo" class="" name="codigo" autocomplete="off" value="0"></div>
-    <div id="meuICMSpadrao_rcpt" class="boxField" style="display: none;"><input type="hidden" id="meuICMSpadrao" class="" name="meuICMSpadrao" autocomplete="off"></div>
-    <div id="meuIPIpadrao_rcpt" class="boxField" style="display: none;"><input type="hidden" id="meuIPIpadrao" class="" name="meuIPIpadrao" autocomplete="off"></div>
-    <div id="meuPISpadrao_rcpt" class="boxField" style="display: none;"><input type="hidden" id="meuPISpadrao" class="" name="meuPISpadrao" autocomplete="off"></div>
-    <div id="meuCOFINSpadrao_rcpt" class="boxField" style="display: none;"><input type="hidden" id="meuCOFINSpadrao" class="" name="meuCOFINSpadrao" autocomplete="off"></div>
-    <div id="meuQuantProds_rcpt" class="boxField" style="display: none;"><input type="hidden" id="meuQuantProds" class="" name="meuQuantProds" autocomplete="off" value=""></div>
-    <div id="meuQuantServs_rcpt" class="boxField" style="display: none;"><input type="hidden" id="meuQuantServs" class="" name="meuQuantServs" autocomplete="off" value=""></div>
-    <div id="Bmod_rcpt" class="boxField" style="display: none;"><input type="hidden" id="Bmod" class="" name="Bmod" autocomplete="off" value="55"></div>
-    <div id="IBPTFonte_rcpt" class="boxField" style="display: none;"><input type="hidden" id="IBPTFonte" class="" name="IBPTFonte" autocomplete="off" value=""></div>
-    <div id="IBPTChave_rcpt" class="boxField" style="display: none;"><input type="hidden" id="IBPTChave" class="" name="IBPTChave" autocomplete="off" value=""></div>
+<h2>Totalizadores <span class="descr">(estes valores não podem ser alterados manualmente)</span></h2>
+<div class="row">
 
-    <div id="quadroEnvio" class="quadroComunicacao bottomSpace" style="display: none;"></div>
-
-    <div id="quadroErros" class="quadroComunicacao bottomSpace" style="display: none;"></div>
-
-    <div id="quadroSituSefaz" class="quadroComunicacao bottomSpace" style="display: none;"></div>
-
-    <div id="quadroCartaCorrecao" class="quadroComunicacao bottomSpace" style="display: none;"></div>
-
-    <div id="quadroAvisoSVCDentroNota"></div>
-
-    <h2 class="bottomSpace">
-        Dados que geralmente não mudam
-        <a href="ajuda: Clique para editar os dados básicos" id="link_editarDadosBasicos" class="linkBox">Editar</a>
-    </h2>
-    <div id="dadosBasicos" class="bottomSpace">
-        <table>
-            <tbody>
-                <tr>
-                    <td><label>CNPJ:</label></td>
-                    <td><label>Razão Social:</label>wlclimaco2021</td>
-                    <td><label>Nome fantasia:</label></td>
-                    <td><label>Inscr. Est.:</label></td>
-                    <td><label>Inscr. Mun.:</label></td>
-                    <td><label>CNAE:</label></td>
-                </tr>
-                <tr>
-                    <td><label>Telefone:</label>4545654</td>
-                    <td><label>Endereço:</label>, </td>
-                    <td><label>Bairro:</label></td>
-                    <td><label>Cidade/UF:</label>null/MG</td>
-                    <td><label>Local fato gerador:</label>null</td>
-                    <td><label>CEP:</label></td>
-                </tr>
-                <tr>
-                    <td><label>CRT:</label>undefined</td>
-                    <td><label>Modelo nota:</label>55</td>
-                    <td><label>Série nota:</label>
-                        <div id="valorSerieDadosBasicos">001</div>
-                    </td>
-                    <td><label>Ambiente envio:</label><span class="ambienteTeste" title="As notas enviadas em ambiente de testes não tem validade jurídica e servem para o aprendizado sobre os processos de criação, envio e armazenamento das notas.">Testes</span></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+        <span class="input-group-addon">.00</span>
     </div>
-
-    <h2>Dados gerais</h2>
-    <table class="bottomSpace">
-        <tbody>
-            <tr>
-                <td class="boxField" id="BnNF_rcpt"><label for="BnNF"> <span>Número da NFe (<a href="ajuda: Clique para definir manualmente o número desta nota." id="link_mudarNumeroNFe">mudar</a>)</span></label><input type="text" id="BnNF" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="BnNF" autocomplete="off"></td>
-                <td class="boxField" id="BnatOp_rcpt" colspan="2"><label for="BnatOp"> <span>Natureza da operação</span></label><select id="BnatOp" class="undefined ui-widget-content ui-corner-all" name="BnatOp" autocomplete="off"><option value="1102">1102 - Compra para comercialização</option><option value="1202">1202 - Devolução de venda de mercadoria</option><option value="1913">1913 - Retorno de remessa p/ demonstr.</option><option value="1915">1915 - Retorno de remessa p/ conserto</option><option value="2102">2102 - Compra para comercialização</option><option value="2202">2202 - Devolução de venda de mercadoria</option><option value="2913">2913 - Retorno de remessa p/ demonstr.</option><option value="2915">2915 - Retorno de remessa p/ conserto</option><option value="3102">3102 - Compra (do exterior) para comercialização</option><option value="5102" selected="selected">5102 - Venda de mercadoria</option><option value="5202">5202 - Devolução de compra</option><option value="5551">5551 - Venda de bem do ativo imobilizado.</option><option value="5908">5908 - Remessa por comodato</option><option value="5912">5912 - Remessa p/ demonstração</option><option value="5915">5915 - Remessa p/ conserto</option><option value="5922">5922 - Venda para entrega futura</option><option value="5949">5949 - Outra saída de mercadoria</option><option value="6102">6102 - Venda de mercadoria</option><option value="6202">6202 - Devolução de compra</option><option value="6551">6551 - Venda de bem do ativo imobilizado.</option><option value="6908">6908 - Remessa por comodato</option><option value="6912">6912 - Remessa p/ demonstração</option><option value="6915">6915 - Remessa p/ conserto</option><option value="6922">6922 - Venda para entrega futura</option><option value="6949">6949 - Outra saída de mercadoria</option><option value="9996">999 - Estorno de NFe não cancelada no prazo legal</option><option value="9997">Complemento de tributo (p/ NFe complementar)</option><option value="9998">Complemento de quantidade (p/ NFe complementar)</option><option value="9999">Complemento de valor (p/ NFe complementar)</option></select></td>
-                <td class="boxField NFCeHide" id="BindFinal_rcpt"><label for="BindFinal"><input type="checkbox" id="BindFinal" class="destDados ui-widget-content ui-corner-all" name="BindFinal" autocomplete="off" value="1"> <span>Destinado a consumidor final</span></label></td>
-            </tr>
-            <tr>
-                <td class="boxField NFCeHide" id="BtpNF_rcpt"><label for="BtpNF"> <span>Tipo de operação</span></label><select id="BtpNF" class="undefined ui-widget-content ui-corner-all" name="BtpNF" autocomplete="off"><option value="0">Entrada</option><option value="1" selected="selected">Saída</option></select></td>
-                <td class="boxField NFCeHide" id="BfinNFe_rcpt"><label for="BfinNFe"> <span>Finalidade da emissão</span></label><select id="BfinNFe" class="undefined ui-widget-content ui-corner-all" name="BfinNFe" autocomplete="off"><option value="1">Normal</option><option value="2">Complementar</option><option value="3">De ajuste</option><option value="4">Devolução de mercadoria</option></select></td>
-                <td class="boxField NFCeHide" id="BidDest_rcpt"><label for="BidDest"> <span>Destino da operação</span></label><select id="BidDest" class="undefined ui-widget-content ui-corner-all" name="BidDest" autocomplete="off"><option value="0"></option><option value="1">Operação interna</option><option value="2">Operação interestadual</option><option value="3">Operação com exterior</option></select></td>
-                <td class="boxField NFCeHide" id="meuRefNF_rcpt"><label for="meuRefNF"><input type="checkbox" id="meuRefNF" class="undefined ui-widget-content ui-corner-all" name="meuRefNF" autocomplete="off" value="1"> <span>Possui NF referenciada</span></label></td>
-            </tr>
-            <tr>
-                <td class="boxField NFCeHide" id="meuDataEmi_rcpt"><label for="meuDataEmi"> <span>Data emissão NF</span></label><input type="text" id="meuDataEmi" class="undefined ui-widget-content ui-corner-all hasDatepicker requiredField" name="meuDataEmi" autocomplete="off" especialtype="date" maxlength="10"></td>
-                <td class="boxField NFCeHide" id="meuHoraEmi_rcpt"><label for="meuHoraEmi"> <span>Hora emissão NF (<a href="ajuda: Clique para preencher com a hora atual." class="link_horaAtual" value="meuHoraEmi">atual</a>)</span></label><input type="text" id="meuHoraEmi" class="undefined ui-widget-content ui-corner-all requiredField" name="meuHoraEmi" autocomplete="off" especialtype="string"></td>
-                <td class="boxField NFCeHide" id="meuDataSai_rcpt"><label for="meuDataSai"> <span>Data saída/entrada</span></label><input type="text" id="meuDataSai" class="undefined ui-widget-content ui-corner-all hasDatepicker" name="meuDataSai" autocomplete="off" especialtype="date" maxlength="10"></td>
-                <td class="boxField NFCeHide" id="meuHoraSai_rcpt"><label for="meuHoraSai"> <span>Hora saída/entrada (<a href="ajuda: Clique para preencher com a hora atual." class="link_horaAtual" value="meuHoraSai">atual</a>)</span></label><input type="text" id="meuHoraSai" class="undefined ui-widget-content ui-corner-all" name="meuHoraSai" autocomplete="off" especialtype="string"></td>
-            </tr>
-            <tr>
-                <td class="boxField" id="BindPag_rcpt"><label for="BindPag"> <span>Forma de pagamento</span></label><select id="BindPag" class="undefined ui-widget-content ui-corner-all" name="BindPag" autocomplete="off"><option value="0">A vista</option><option value="1">A prazo</option><option value="2">Outros</option></select></td>
-                <td class="boxField" id="BindPres_rcpt"><label for="BindPres"> <span>Presença do comprador</span></label><select id="BindPres" class="undefined ui-widget-content ui-corner-all" name="BindPres" autocomplete="off"><option value="0">Não se aplica</option><option value="1">Operação presencial</option><option value="2">Operação pela internet</option><option value="3">Operação por teleatendimento</option><option value="4">NFC-e com entrega a domicílio</option><option value="9">Não presencial, outros</option></select></td>
-                <td class="boxField" id="CIEST_rcpt"><label for="CIEST"> <span>Ins. Est. Subst. Trib.</span></label><input type="text" id="CIEST" class="destDados ui-widget-content ui-corner-all" name="CIEST" autocomplete="off" especialtype="string" minsize="2" maxsize="14"></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div id="quadroReferenciadas" class="invisible bottomSpace NFCeHide" style="display: none;">
-        <h2>Dados da Nota Fiscal referenciada</h2>
-        <div class="alerta">Esta informação será automaticamente impressa nas Informações Complementares, no DANFE.</div>
-        <table>
-            <tbody>
-                <tr>
-                    <td class="boxField" id="meuTipoNotaRef_rcpt"><label for="meuTipoNotaRef"> <span>Tipo de nota a ser referenciada</span></label><select id="meuTipoNotaRef" class="undefined ui-widget-content ui-corner-all" name="meuTipoNotaRef" autocomplete="off"><option value="1">NF eletrônica</option><option value="2">NF impressa</option><option value="3">NF produtor rural</option><option value="4">CTe</option><option value="5">Cupom Fiscal</option></select></td>
-                    <td class="boxField" id="BrefNFe_rcpt"><label for="BrefNFe"> <span>Chave de acesso da NFe</span></label><input type="text" id="BrefNFe" class="requiredField ui-widget-content ui-corner-all" name="BrefNFe" autocomplete="off" especialtype="integer" exactsize="44"></td>
-                    <td class="boxField" id="BrefCTe_rcpt"><label for="BrefCTe"> <span>Chave de acesso do CT-e</span></label><input type="text" id="BrefCTe" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefCTe" autocomplete="off" especialtype="integer" exactsize="44"></td>
-                </tr>
-            </tbody>
-        </table>
-        <table id="quadroRefNF" class="invisible">
-            <tbody>
-                <tr>
-                    <td class="boxField" id="BrefcUF_rcpt"><label for="BrefcUF"> <span>UF emitente da nota ref.</span></label><select id="BrefcUF" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefcUF" autocomplete="off"><option value=""></option><option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option><option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option><option value="MT">MT</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option><option value="PI">PI</option><option value="PR">PR</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RO">RO</option><option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option><option value="SE">SE</option><option value="SP">SP</option><option value="TO">TO</option></select></td>
-                    <td class="boxField" id="BrefAAMM_rcpt"><label for="BrefAAMM"> <span>Ano e mês da emissão (AAMM)</span></label><input type="text" id="BrefAAMM" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefAAMM" autocomplete="off" especialtype="integer" exactsize="4"></td>
-                    <td class="boxField" id="BrefCNPJ_rcpt"><label for="BrefCNPJ"> <span>CNPJ / CPF do emitente</span></label><input type="text" id="BrefCNPJ" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefCNPJ" autocomplete="off" especialtype="cpfcnpj"></td>
-                    <td class="boxField" id="BrefIE_rcpt"><label for="BrefIE"> <span>Inscr. Est. do emitente</span></label><input type="text" id="BrefIE" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefIE" autocomplete="off" especialtype="string" minsize="2" maxsize="14"></td>
-                </tr>
-                <tr>
-                    <td class="boxField" id="Brefmod_rcpt"><label for="Brefmod"> <span>Modelo da nota fiscal</span></label><select id="Brefmod" class="undefined ui-widget-content ui-corner-all requiredField" name="Brefmod" autocomplete="off"><option value="01">NF avulsa</option><option value="04">NF produtor rural</option></select></td>
-                    <td class="boxField" id="Brefserie_rcpt"><label for="Brefserie"> <span>Série da nota fiscal</span></label><input type="text" id="Brefserie" class="undefined ui-widget-content ui-corner-all requiredField" name="Brefserie" autocomplete="off" especialtype="integer" maxsize="3"></td>
-                    <td class="boxField" id="BrefnNF_rcpt"><label for="BrefnNF"> <span>Número da nota fiscal</span></label><input type="text" id="BrefnNF" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefnNF" autocomplete="off" especialtype="integer" maxsize="9"></td>
-                </tr>
-            </tbody>
-        </table>
-        <table id="quadroRefCF" class="invisible">
-            <tbody>
-                <tr>
-                    <td class="boxField" id="BrefCFmod_rcpt"><label for="BrefCFmod"> <span>Modelo do Cupom Fiscal</span></label><select id="BrefCFmod" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefCFmod" autocomplete="off"><option value="2B">Máquina registradora</option><option value="2C">Cupom Fiscal PDV</option><option value="2D">Cupom Fiscal ECF</option></select></td>
-                    <td class="boxField" id="BrefnECF_rcpt"><label for="BrefnECF"> <span>Número sequencial do ECF</span></label><input type="text" id="BrefnECF" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefnECF" autocomplete="off" especialtype="integer" exactsize="3"></td>
-                    <td class="boxField" id="BrefnCOO_rcpt"><label for="BrefnCOO"> <span>Núm. Contador Ordem de Operação - COO</span></label><input type="text" id="BrefnCOO" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefnCOO" autocomplete="off" especialtype="integer" exactsize="6"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <h2>Dados do destinatário</h2>
-    <span id="meuInformarDestinatarioNFCe_rcpt" class="NFCeShow" style="display: none;"><label for="meuInformarDestinatarioNFCe"><input type="checkbox" id="meuInformarDestinatarioNFCe" class="undefined ui-widget-content ui-corner-all" name="meuInformarDestinatarioNFCe" autocomplete="off" value="1"> <span>Informar destinatário</span></label>
-    </span>
-    <table class="5cols bottomSpace">
-        <tbody>
-            <tr>
-                <td class="boxField NFCeHide" id="ExNome_rcpt"><label for="ExNome"> <span class="labelIconClick" onclick="acLabelClick('ExNome');"><span class="ui-icon ui-icon-search"></span>Listar 50</span><span>Razão/Nome dest.</span></label><input type="hidden" name="meuCodDest" id="meuCodDest"><input type="text" id="ExNome" class="destDados ui-widget-content ui-corner-all requiredField ui-autocomplete-input" name="ExNome" autocomplete="off" minsize="2" maxsize="60" hiddenid="meuCodDest" allowzero="true"></td>
-                <td class="boxField NFCeHide" id="ECNPJ_rcpt"><label for="ECNPJ"> <span>CNPJ/CPF destinatário</span></label><input type="text" id="ECNPJ" class="destDados ui-widget-content ui-corner-all" name="ECNPJ" autocomplete="off" especialtype="cpfcnpj"></td>
-                <td class="boxField NFCeHide" id="Efone_rcpt"><label for="Efone"> <span>Telefone</span></label><input type="text" id="Efone" class="destDados ui-widget-content ui-corner-all" name="Efone" autocomplete="off" especialtype="integer" minsize="6" maxsize="14"></td>
-                <td class="boxField NFCeHide" id="Eemail_rcpt"><label for="Eemail"> <span>E-mail</span></label><input type="text" id="Eemail" class="destDados ui-widget-content ui-corner-all" name="Eemail" autocomplete="off" especialtype="email" maxsize="60"></td>
-                <td class="boxField NFCeHide" id="EISUF_rcpt"><label for="EISUF"> <span>Inscr. Suframa</span></label><input type="text" id="EISUF" class="destDados ui-widget-content ui-corner-all" name="EISUF" autocomplete="off" especialtype="string" exactsize="8,9"></td>
-            </tr>
-            <tr>
-                <td class="NFCeHide" colspan="5" id="meuInformarEndDestNFCe_rcpt" style="display: none;"><label for="meuInformarEndDestNFCe"><input type="checkbox" id="meuInformarEndDestNFCe" class="undefined ui-widget-content ui-corner-all" name="meuInformarEndDestNFCe" autocomplete="off" value="1"> <span>Informar endereço do destinatário</span></label></td>
-            </tr>
-            <tr>
-                <td class="boxField NFCeHide" id="ExLgr_rcpt"><label for="ExLgr"> <span>Logradouro</span></label><input type="text" id="ExLgr" class="destDados ui-widget-content ui-corner-all requiredField" name="ExLgr" autocomplete="off" especialtype="string" minsize="2" maxsize="60"></td>
-                <td class="boxField NFCeHide" id="Enro_rcpt"><label for="Enro"> <span>Número</span></label><input type="text" id="Enro" class="destDados ui-widget-content ui-corner-all requiredField" name="Enro" autocomplete="off" especialtype="string" maxsize="60"></td>
-                <td class="boxField NFCeHide" id="ExCpl_rcpt"><label for="ExCpl"> <span>Complemento</span></label><input type="text" id="ExCpl" class="destDados ui-widget-content ui-corner-all" name="ExCpl" autocomplete="off" especialtype="string" maxsize="60"></td>
-                <td class="boxField NFCeHide" id="ExBairro_rcpt"><label for="ExBairro"> <span>Bairro</span></label><input type="text" id="ExBairro" class="destDados ui-widget-content ui-corner-all requiredField" name="ExBairro" autocomplete="off" especialtype="string" minsize="2" maxsize="60"></td>
-                <td class="boxField NFCeHide" id="ECEP_rcpt"><label for="ECEP"> <span>CEP</span></label><input type="text" id="ECEP" class="destDados ui-widget-content ui-corner-all" name="ECEP" autocomplete="off" especialtype="integer" exactsize="8"></td>
-            </tr>
-            <tr>
-                <td class="boxField NFCeHide" id="EUF_rcpt"><label for="EUF"> <span>Estado</span></label><select id="EUF" class="destDados ui-widget-content ui-corner-all" name="EUF" autocomplete="off"><option value=""></option><option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option><option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option><option value="MT">MT</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option><option value="PI">PI</option><option value="PR">PR</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RO">RO</option><option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option><option value="SE">SE</option><option value="SP">SP</option><option value="TO">TO</option><option value="EX">EX</option></select></td>
-                <td class="boxField NFCeHide" id="EcMun_rcpt"><label for="EcMun"> <span>Município</span></label><select id="EcMun" class="destDados ui-widget-content ui-corner-all requiredField" name="EcMun" autocomplete="off"><option value="0">- Selecione o estado -</option></select></td>
-                <td class="boxField NFCeHide" id="EindIEDest_rcpt"><label for="EindIEDest"> <span>Indicador de IE</span></label><select id="EindIEDest" class="destDados ui-widget-content ui-corner-all requiredField" name="EindIEDest" autocomplete="off"><option value="1">Contribuinte ICMS</option><option value="2">Isento de cadastro</option><option value="9">Não contribuinte</option></select></td>
-                <td class="boxField NFCeHide" id="EIE_rcpt"><label for="EIE"> <span>Inscr. Estadual</span></label><input type="text" id="EIE" class="destDados ui-widget-content ui-corner-all" name="EIE" autocomplete="off" especialtype="integer" minsize="2" maxsize="14"></td>
-                <td class="boxField NFCeHide" id="EIM_rcpt"><label for="EIM"> <span>Inscr. Municipal</span></label><input type="text" id="EIM" class="destDados ui-widget-content ui-corner-all" name="EIM" autocomplete="off" especialtype="string" minsize="1" maxsize="15"></td>
-            </tr>
-            <tr>
-                <td class="boxField NFCeHide" id="impexp_rcpt" style="display: none;"><label for="impexp"> <span>Importação ou Exportação</span></label><select id="impexp" class="undefined ui-widget-content ui-corner-all" name="impexp" autocomplete="off"><option value="1" selected="selected">Importação</option><option value="2">Exportação</option><option value="3">Estrangeiro no brasil</option></select></td>
-                <td class="boxField NFCeHide" id="EcPais_rcpt" colspan="2" style="display: none;"><label for="EcPais"> <span>País</span></label><select id="EcPais" class="destDados ui-widget-content ui-corner-all requiredField" name="EcPais" autocomplete="off"></select></td>
-                <td class="boxField NFCeHide" id="EidEstrangeiro_rcpt" colspan="2" style="display: none;"><label for="EidEstrangeiro"> <span>Núm. do documento (passaporte ou outro)</span></label><input type="text" id="EidEstrangeiro" class="destDados ui-widget-content ui-corner-all" name="EidEstrangeiro" autocomplete="off" especialtype="string" minsize="5" maxsize="20"></td>
-            </tr>
-            <tr>
-                <td id="meuEndEntrega_rcpt" class="NFCeHide" colspan="2" style=""><label for="meuEndEntrega"><input type="checkbox" id="meuEndEntrega" class="undefined ui-widget-content ui-corner-all" name="meuEndEntrega" autocomplete="off"> <span>Endereço de entrega diferente</span></label></td>
-                <td colspan="3" id="avisoCodInternoDest" class="alerta right NFCeHide"></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div id="quadroEntrega" class="NFCeHide" style="display: block;">
-        <h2>Endereço de entrega diferente</h2>
-        <div class="alerta">Esta informação será automaticamente impressa nas Informações Complementares, no DANFE.</div>
-        <table class="bottomSpace">
-            <tbody>
-                <tr>
-                    <td class="boxField" id="GCNPJ_rcpt"><label for="GCNPJ"> <span>CNPJ/CPF entrega</span></label><input type="text" id="GCNPJ" class="destDados ui-widget-content ui-corner-all" name="GCNPJ" autocomplete="off" especialtype="cpfcnpj"></td>
-                    <td class="boxField" id="GxLgr_rcpt"><label for="GxLgr"> <span>Logradouro entrega</span></label><input type="text" id="GxLgr" class="destDados ui-widget-content ui-corner-all requiredField" name="GxLgr" autocomplete="off" especialtype="string" minsize="2" maxsize="60"></td>
-                    <td class="boxField" id="Gnro_rcpt"><label for="Gnro"> <span>Número entrega</span></label><input type="text" id="Gnro" class="destDados ui-widget-content ui-corner-all requiredField" name="Gnro" autocomplete="off" especialtype="string" maxsize="60"></td>
-                    <td class="boxField" id="GxCpl_rcpt"><label for="GxCpl"> <span>Complemento</span></label><input type="text" id="GxCpl" class="destDados ui-widget-content ui-corner-all" name="GxCpl" autocomplete="off" especialtype="string" maxsize="60"></td>
-                </tr>
-                <tr>
-                    <td class="boxField" id="GxBairro_rcpt"><label for="GxBairro"> <span>Bairro entrega</span></label><input type="text" id="GxBairro" class="destDados ui-widget-content ui-corner-all requiredField" name="GxBairro" autocomplete="off" especialtype="string" minsize="2" maxsize="60"></td>
-                    <td class="boxField" id="GUF_rcpt"><label for="GUF"> <span>UF entrega</span></label><select id="GUF" class="destDados ui-widget-content ui-corner-all requiredField" name="GUF" autocomplete="off"><option value=""></option><option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option><option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option><option value="MT">MT</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option><option value="PI">PI</option><option value="PR">PR</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RO">RO</option><option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option><option value="SE">SE</option><option value="SP">SP</option><option value="TO">TO</option></select></td>
-                    <td class="boxField" id="GcMun_rcpt"><label for="GcMun"> <span>Município</span></label><select id="GcMun" class="destDados ui-widget-content ui-corner-all requiredField" name="GcMun" autocomplete="off"><option value="0">- Selecione o estado -</option></select></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div id="quadroImportacao" class="NFCeHide" style="display: none;">
-        <h2>Dados para nota de IMPORTAÇÃO</h2>
-        <table class="bottomSpace">
-            <tbody>
-                <tr>
-                    <td class="boxField" id="InDI_rcpt"><label for="InDI"> <span>Número da D.I.</span></label><input type="text" id="InDI" class="undefined ui-widget-content ui-corner-all requiredField" name="InDI" autocomplete="off" especialtype="integer" maxsize="12"></td>
-                    <td class="boxField" id="IdDI_rcpt"><label for="IdDI"> <span>Data da D.I.</span></label><input type="text" id="IdDI" class="undefined ui-widget-content ui-corner-all hasDatepicker requiredField" name="IdDI" autocomplete="off" especialtype="date" maxlength="10"></td>
-                    <td class="boxField" id="IxLocDesemb_rcpt"><label for="IxLocDesemb"> <span>Local de desembaraço</span></label><input type="text" id="IxLocDesemb" class="undefined ui-widget-content ui-corner-all requiredField" name="IxLocDesemb" autocomplete="off" especialtype="string" maxsize="60"></td>
-                    <td class="boxField" id="IUFDesemb_rcpt"><label for="IUFDesemb"> <span>UF de desembaraço</span></label><select id="IUFDesemb" class="undefined ui-widget-content ui-corner-all requiredField" name="IUFDesemb" autocomplete="off"><option value=""></option><option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option><option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option><option value="MT">MT</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option><option value="PI">PI</option><option value="PR">PR</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RO">RO</option><option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option><option value="SE">SE</option><option value="SP">SP</option><option value="TO">TO</option></select></td>
-                    <td class="boxField" id="IdDesemb_rcpt"><label for="IdDesemb"> <span>Data de desembaraço</span></label><input type="text" id="IdDesemb" class="undefined ui-widget-content ui-corner-all hasDatepicker requiredField" name="IdDesemb" autocomplete="off" especialtype="date" maxlength="10"></td>
-                </tr>
-                <tr>
-                    <td class="boxField" id="ItpViaTransp_rcpt"><label for="ItpViaTransp"> <span>Via de transporte</span></label><select id="ItpViaTransp" class="undefined ui-widget-content ui-corner-all requiredField" name="ItpViaTransp" autocomplete="off"><option value="1">Marítima</option><option value="2">Fluvial</option><option value="3">Lacustre</option><option value="4">Aérea</option><option value="5">Postal</option><option value="6">Ferroviária</option><option value="7">Rodoviária</option><option value="8">Conduto / Rede Transmissão</option><option value="9">Meios Próprios</option><option value="10">Entrada / Saída ficta</option></select></td>
-                    <td class="boxField" id="ItpIntermedio_rcpt"><label for="ItpIntermedio"> <span>Forma de importação</span></label><select id="ItpIntermedio" class="undefined ui-widget-content ui-corner-all requiredField" name="ItpIntermedio" autocomplete="off"><option value="1">Por conta própria</option><option value="2">Por conta e ordem</option><option value="3">Por encomenda</option></select></td>
-                    <td class="boxField" id="ICNPJ_rcpt" style="display: none;"><label for="ICNPJ"> <span>CNPJ do adquirente</span></label><input type="text" id="ICNPJ" class="undefined ui-widget-content ui-corner-all requiredField" name="ICNPJ" autocomplete="off" especialtype="cnpj"></td>
-                    <td class="boxField" id="IUFTerceiro_rcpt" style="display: none;"><label for="IUFTerceiro"> <span>UF do adquirente</span></label><select id="IUFTerceiro" class="undefined ui-widget-content ui-corner-all requiredField" name="IUFTerceiro" autocomplete="off"><option value=""></option><option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option><option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option><option value="MT">MT</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option><option value="PI">PI</option><option value="PR">PR</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RO">RO</option><option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option><option value="SE">SE</option><option value="SP">SP</option><option value="TO">TO</option></select></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div id="quadroExportacao" class="NFCeHide" style="display: none;">
-        <h2>Dados para nota de EXPORTAÇÃO</h2>
-        <table class="bottomSpace">
-            <tbody>
-                <tr>
-                    <td class="boxField" id="ZAUFSaidaPais_rcpt"><label for="ZAUFSaidaPais"> <span>UF de embarque</span></label><select id="ZAUFSaidaPais" class="undefined ui-widget-content ui-corner-all" name="ZAUFSaidaPais" autocomplete="off"><option value=""></option><option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option><option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option><option value="MT">MT</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option><option value="PI">PI</option><option value="PR">PR</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RO">RO</option><option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option><option value="SE">SE</option><option value="SP">SP</option><option value="TO">TO</option></select></td>
-                    <td class="boxField" id="ZAxLocExporta_rcpt"><label for="ZAxLocExporta"> <span>Nome local de embarque</span></label><input type="text" id="ZAxLocExporta" class="undefined ui-widget-content ui-corner-all" name="ZAxLocExporta" autocomplete="off" especialtype="string" maxsize="60"></td>
-                    <td class="boxField" id="ZAxLocDespacho_rcpt"><label for="ZAxLocDespacho"> <span>Descrição local de despacho</span></label><input type="text" id="ZAxLocDespacho" class="undefined ui-widget-content ui-corner-all" name="ZAxLocDespacho" autocomplete="off" especialtype="string" maxsize="60"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <h2>Lista de produtos
-        <a href="ajuda: Clique para adicionar um produto ou serviço" id="link_inserirProduto" class="linkBox">Inserir item</a>
-    </h2>
-    <table>
-        <tbody>
-            <tr>
-                <td id="meuAutoCalc_rcpt"><label for="meuAutoCalc"><input type="checkbox" id="meuAutoCalc" class="undefined ui-widget-content ui-corner-all" name="meuAutoCalc" autocomplete="off" value="1"> <span>Não efetuar cálculos automático</span></label></td>
-                <td id="meuIPInoICMS_rcpt" class="NFCeHide"><label for="meuIPInoICMS"><input type="checkbox" id="meuIPInoICMS" class="undefined ui-widget-content ui-corner-all" name="meuIPInoICMS" autocomplete="off" value="1"> <span>Somar valor do IPI na Base de Cálculo do ICMS</span></label></td>
-                <td id="meuSemTribAprox_rcpt" class="NFCeHide onRight"><label for="meuSemTribAprox"><input type="checkbox" id="meuSemTribAprox" class="undefined ui-widget-content ui-corner-all" name="meuSemTribAprox" autocomplete="off" value="1"> <span>Não informar tributos da Lei da Transparência</span></label></td>
-            </tr>
-        </tbody>
-    </table>
-    <div id="lista_produtos" class="bottomSpace tableList">
-        <table>
-            <thead>
-                <tr>
-                    <td class="colunaAlertaProdNFe" style="display: none;"></td>
-                    <td>Cód</td>
-                    <td>Nome do item</td>
-                    <td>CFOP</td>
-                    <td>Quant</td>
-                    <td>$ unit.</td>
-                    <td>Total prod</td>
-                    <td></td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="10"><i>Nenhum produto preenchido</i></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div id="quadroLinksAjusteEmLote" class="bottomSpace" style="display: none;">
-        <h2>Operações em lote</h2>
-        <table>
-            <tbody>
-                <tr>
-                    <td>
-                        <a href="ajuda: Clique para abrir a tela de edição dos dados gerais dos produtos" id="link_ajusteEmLoteDadosGerais" class="linkBox">
-            Dados gerais dos produtos
-          </a>
-                    </td>
-                    <td>
-                        <a href="ajuda: Clique para abrir a tela de edição dos dados gerais dos produtos" id="link_ajusteEmLoteCalculos" class="linkBox">
-            Valores e cálculos dos produtos
-          </a>
-                    </td>
-                    <td class="emLoteLinkAdicoes" style="display: none;">
-                        <a href="ajuda: Clique para editar os valores das adições dos produtos importados" id="link_editaAdicoes" class="linkBox">
-            Editar números da Adição de Importação
-          </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <h2>Informações de serviços</h2>
-    <div id="meuISSQN_rcpt"><label for="meuISSQN"><input type="checkbox" id="meuISSQN" class="undefined ui-widget-content ui-corner-all" name="meuISSQN" autocomplete="off" value="1"> <span>Informar dados de serviços</span></label></div>
-    <div class="bottomSpace">
-        <div id="quadroISSQN" style="display: none;">
-            <table>
-                <tbody>
-                    <tr>
-                        <td class="boxField" id="WUcRegTrib_rcpt"><label for="WUcRegTrib"> <span>Regime de Tributação</span></label><select id="WUcRegTrib" class="undefined ui-widget-content ui-corner-all" name="WUcRegTrib" autocomplete="off"><option value="0">- Selecione o CRT -</option><option value="1">Microempresa municipal</option><option value="2">Estimativa</option><option value="3">Sociedade de profissionais</option><option value="4">Cooperativa</option><option value="5">Microempresário individual (MEI)</option><option value="6">Microempr. ou empr.peq.porte (ME/EPP)</option></select></td>
-                        <td class="boxField" id="WUdCompet_rcpt"><label for="WUdCompet"> <span>Data da prestação</span></label><input type="text" id="WUdCompet" class="undefined ui-widget-content ui-corner-all hasDatepicker" name="WUdCompet" autocomplete="off" especialtype="date" maxlength="10"></td>
-                        <td class="boxField" id="WUvISSRet_rcpt"><label for="WUvISSRet"> <span>Total retenção ISS</span></label><input type="text" id="WUvISSRet" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WUvISSRet" autocomplete="off" style=""></td>
-                        <td class="boxField" id="WUvOutro_rcpt"><label for="WUvOutro"> <span>Outras retenções</span></label><input type="text" id="WUvOutro" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WUvOutro" autocomplete="off" style=""></td>
-                        <td class="boxField" id="WUvDescIncond_rcpt"><label for="WUvDescIncond"> <span>Desconto incondicionado</span></label><input type="text" id="WUvDescIncond" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WUvDescIncond" autocomplete="off" style=""></td>
-                        <td class="boxField" id="WUvDescCond_rcpt"><label for="WUvDescCond"> <span>Desconto condicionado</span></label><input type="text" id="WUvDescCond" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WUvDescCond" autocomplete="off" style=""></td>
-                    </tr>
-                    <tr>
-                        <td class="boxField" id="WUvServ_rcpt"><label for="WUvServ"> <span>Total dos serviços</span></label><input type="text" id="WUvServ" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WUvServ" autocomplete="off" style=""></td>
-                        <td class="boxField" id="WUvDeducao_rcpt"><label for="WUvDeducao"> <span>Dedução para redução da BC</span></label><input type="text" id="WUvDeducao" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WUvDeducao" autocomplete="off" style=""></td>
-                        <td class="boxField" id="WUvBC_rcpt"><label for="WUvBC"> <span>Base de cálculo Serv</span></label><input type="text" id="WUvBC" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WUvBC" autocomplete="off" style=""></td>
-                        <td class="boxField" id="WUvISS_rcpt"><label for="WUvISS"> <span>Total de ISS Serv</span></label><input type="text" id="WUvISS" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WUvISS" autocomplete="off" style=""></td>
-                        <td class="boxField" id="WUvPIS_rcpt"><label for="WUvPIS"> <span>Total de PIS Serv</span></label><input type="text" id="WUvPIS" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WUvPIS" autocomplete="off" style=""></td>
-                        <td class="boxField" id="WUvCOFINS_rcpt"><label for="WUvCOFINS"> <span>Total de COFINS Serv</span></label><input type="text" id="WUvCOFINS" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WUvCOFINS" autocomplete="off" style=""></td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="col-sm-2">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Total BC ICMS</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
         </div>
     </div>
-
-    <h2>Totalizadores <span class="descr">(estes valores não podem ser alterados manualmente)</span></h2>
-    <table class="bottomSpace">
-        <tbody>
-            <tr>
-                <td class="boxField" id="WvBC_rcpt"><label for="WvBC"> <span>Total BC ICMS</span></label><input type="text" id="WvBC" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WvBC" autocomplete="off" style=""></td>
-                <td class="boxField" id="WvICMS_rcpt"><label for="WvICMS"> <span>Total ICMS</span></label><input type="text" id="WvICMS" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WvICMS" autocomplete="off" style=""></td>
-                <td class="boxField" id="WvBCST_rcpt"><label for="WvBCST"> <span>Total BC ICMS ST</span></label><input type="text" id="WvBCST" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WvBCST" autocomplete="off" style=""></td>
-                <td class="boxField" id="WvST_rcpt"><label for="WvST"> <span>Total ICMS ST</span></label><input type="text" id="WvST" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WvST" autocomplete="off" style=""></td>
-                <td class="boxField" id="WvProd_rcpt"><label for="WvProd"> <span>Total bruto dos produtos</span></label><input type="text" id="WvProd" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WvProd" autocomplete="off" style=""></td>
-            </tr>
-            <tr>
-                <td class="boxField" id="WvICMSDeson_rcpt"><label for="WvICMSDeson"> <span>Total ICMS desonerado</span></label><input type="text" id="WvICMSDeson" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WvICMSDeson" autocomplete="off" style=""></td>
-                <td class="boxField" id="WvFrete_rcpt"><label for="WvFrete"> <span>Total de frete</span></label><input type="text" id="WvFrete" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WvFrete" autocomplete="off" style=""></td>
-                <td class="boxField" id="WvSeg_rcpt"><label for="WvSeg"> <span>Total de seguro</span></label><input type="text" id="WvSeg" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WvSeg" autocomplete="off" style=""></td>
-                <td class="boxField" id="WvDesc_rcpt"><label for="WvDesc"> <span>Total de desconto</span></label><input type="text" id="WvDesc" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WvDesc" autocomplete="off" style=""></td>
-                <td class="boxField" id="WvIPI_rcpt"><label for="WvIPI"> <span>Total de IPI</span></label><input type="text" id="WvIPI" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WvIPI" autocomplete="off" style=""></td>
-            </tr>
-            <tr>
-                <td class="boxField" id="WvPIS_rcpt"><label for="WvPIS"> <span>Total de PIS</span></label><input type="text" id="WvPIS" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WvPIS" autocomplete="off" style=""></td>
-                <td class="boxField" id="WvPISST_rcpt"><label for="WvPISST"> <span>Total de PIS ST</span></label><input type="text" id="WvPISST" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WvPISST" autocomplete="off" style=""></td>
-                <td class="boxField" id="WvCOFINS_rcpt"><label for="WvCOFINS"> <span>Total de COFINS</span></label><input type="text" id="WvCOFINS" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WvCOFINS" autocomplete="off" style=""></td>
-                <td class="boxField" id="WvCOFINSST_rcpt"><label for="WvCOFINSST"> <span>Total de COFINS ST</span></label><input type="text" id="WvCOFINSST" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WvCOFINSST" autocomplete="off" style=""></td>
-                <td class="boxField" id="WvII_rcpt"><label for="WvII"> <span>Total de II</span></label><input type="text" id="WvII" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WvII" autocomplete="off" style=""></td>
-            </tr>
-            <tr>
-                <td class="boxField" id="WvFCPUFDest_rcpt"><label for="WvFCPUFDest"> <span>Total do FCP</span></label><input type="text" id="WvFCPUFDest" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WvFCPUFDest" autocomplete="off" style=""></td>
-                <td class="boxField" id="WvICMSUFRemet_rcpt"><label for="WvICMSUFRemet"> <span>ICMS UF remet.</span></label><input type="text" id="WvICMSUFRemet" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WvICMSUFRemet" autocomplete="off" style=""></td>
-                <td class="boxField" id="WvICMSUFDest_rcpt"><label for="WvICMSUFDest"> <span>ICMS UF destino</span></label><input type="text" id="WvICMSUFDest" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WvICMSUFDest" autocomplete="off" style=""></td>
-                <td class="boxField" id="WvOutro_rcpt"><label for="WvOutro"> <span>Total Outras Despesas</span></label><input type="text" id="WvOutro" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WvOutro" autocomplete="off" style=""></td>
-                <td class="boxField" id="WvNF_rcpt"><label for="WvNF"> <span><b>TOTAL DA NF</b></span></label><input type="text" id="WvNF" readonly="readonly" tabindex="-1" class="readonlyField undefined ui-widget-content ui-corner-all" name="WvNF" autocomplete="off" style=""></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div id="meuRetencoes_rcpt"><label for="meuRetencoes"><input type="checkbox" id="meuRetencoes" class="undefined ui-widget-content ui-corner-all" name="meuRetencoes" autocomplete="off" value="1"> <span>Informar retenções de impostos</span></label></div>
-    <div id="quadroRetencoes" class="bottomSpace NFCeHide" style="display: block;">
-        <h2>Retenções de impostos</h2>
-        <table>
-            <tbody>
-                <tr>
-                    <td class="boxField" id="WvRetPIS_rcpt"><label for="WvRetPIS"> <span>Valor retido PIS</span></label><input type="text" id="WvRetPIS" class="undefined ui-widget-content ui-corner-all" name="WvRetPIS" autocomplete="off" especialtype="money"></td>
-                    <td class="boxField" id="WvRetCOFINS_rcpt"><label for="WvRetCOFINS"> <span>Valor retido COFINS</span></label><input type="text" id="WvRetCOFINS" class="undefined ui-widget-content ui-corner-all" name="WvRetCOFINS" autocomplete="off" especialtype="money"></td>
-                    <td class="boxField" id="WvRetCSLL_rcpt"><label for="WvRetCSLL"> <span>Valor retido CSLL</span></label><input type="text" id="WvRetCSLL" class="undefined ui-widget-content ui-corner-all" name="WvRetCSLL" autocomplete="off" especialtype="money"></td>
-                    <td class="boxField" id="WvBCIRRF_rcpt"><label for="WvBCIRRF"> <span>BC retido IRRF</span></label><input type="text" id="WvBCIRRF" class="undefined ui-widget-content ui-corner-all" name="WvBCIRRF" autocomplete="off" especialtype="money"></td>
-                </tr>
-                <tr>
-                    <td class="boxField" id="WvIRRF_rcpt"><label for="WvIRRF"> <span>Valor retido IRRF</span></label><input type="text" id="WvIRRF" class="undefined ui-widget-content ui-corner-all" name="WvIRRF" autocomplete="off" especialtype="money"></td>
-                    <td class="boxField" id="WvBCRetPrev_rcpt"><label for="WvBCRetPrev"> <span>BC retido previdência</span></label><input type="text" id="WvBCRetPrev" class="undefined ui-widget-content ui-corner-all" name="WvBCRetPrev" autocomplete="off" especialtype="money"></td>
-                    <td class="boxField" id="WvRetPrev_rcpt"><label for="WvRetPrev"> <span>Valor retido previdência</span></label><input type="text" id="WvRetPrev" class="undefined ui-widget-content ui-corner-all" name="WvRetPrev" autocomplete="off" especialtype="money"></td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="col-sm-2">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Total ICMS</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
+        </div>
     </div>
+    <div class="col-sm-2">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Total BC ICMS ST</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Total ICMS ST</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Total bruto dos produtos</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Total ICMS desonerado</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Total de frete</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Total de seguro</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Total de desconto</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Total de IPI</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Total de PIS</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Total de PIS ST</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Total de COFINS</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Total de COFINS ST</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Total de II</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Total do FCP</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="form-group">
+            <label for="exampleInputPassword1">ICMS UF remet.</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="form-group">
+            <label for="exampleInputPassword1">ICMS UF destino</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Total Outras Despesas</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label for="exampleInputPassword1">TOTAL DA NF</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div id="meuRetencoes_rcpt"><label for="meuRetencoes"><input type="checkbox" id="meuRetencoes" class="undefined ui-widget-content ui-corner-all" name="meuRetencoes" autocomplete="off" value="1"> 
+    <span>Informar retenções de impostos</span></label>
+
+    <h2>Retenções de impostos</h2>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Valor retido PIS</label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon">,00</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Valor retido COFINS</label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon">,00</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Valor retido CSLL</label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon">,00</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">BC retido IRRF</label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon">,00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Valor retido IRRF</label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon">,00</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">BC retido previdência</label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon">,00</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Valor retido previdência</label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon">,00</span>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="quadroTribAprox" class="bottomSpace">
         <h2>Lei da Transparência</h2>
         <div class="descr">Esta lei mostra ao cliente a quantidade de impostos que ele está pagando para o governo ao adquirir a mercadoria. (<a href="ajuda: Clique para saber mais sobre a Lei da Transparência" id="link_infoTribAprox">saiba mais</a>)</div>
-        <table>
-            <tbody>
-                <tr>
-                    <td class="boxField" id="meuTribFed_rcpt"><label for="meuTribFed"> <span>Impostos federais</span></label><input type="text" id="meuTribFed" class="undefined ui-widget-content ui-corner-all readonlyField" name="meuTribFed" autocomplete="off" especialtype="money" readonly="readonly"></td>
-                    <td class="boxField" id="meuTribEst_rcpt"><label for="meuTribEst"> <span>Impostos estaduais</span></label><input type="text" id="meuTribEst" class="undefined ui-widget-content ui-corner-all readonlyField" name="meuTribEst" autocomplete="off" especialtype="money" readonly="readonly"></td>
-                    <td class="boxField" id="meuTribMun_rcpt"><label for="meuTribMun"> <span>Impostos municipais</span></label><input type="text" id="meuTribMun" class="undefined ui-widget-content ui-corner-all readonlyField" name="meuTribMun" autocomplete="off" especialtype="money" readonly="readonly"></td>
-                    <td class="boxField" id="WvTotTrib_rcpt"><label for="WvTotTrib"> <span>Total aproximado</span></label><input type="text" id="WvTotTrib" class="undefined ui-widget-content ui-corner-all readonlyField" name="WvTotTrib" autocomplete="off" especialtype="money" readonly="readonly"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 
-    <div id="quadroFormasPgto" class="bottomSpace NFCeShow" style="display: none;">
-        <h2>Formas de pagamento</h2>
-        <table id="boxFormasPgto"></table>
-        <a href="ajuda:Clique aqui para adicionar mais uma linha de forma " id="link_addFormaPgto" class="linkBox">Adicionar forma pgto</a>
-    </div>
-
-    <div id="quadroTransporte" class="bottomSpace NFCeHide">
-        <h2>Dados do transporte</h2>
-        <table>
-            <tbody>
-                <tr>
-                    <td class="boxField" id="XmodFrete_rcpt"><label for="XmodFrete"> <span>Modalidade do frete</span></label><select id="XmodFrete" class="undefined ui-widget-content ui-corner-all" name="XmodFrete" autocomplete="off"><option value="0">0 - Emitente</option><option value="1">1 - Destinatário</option><option value="2">2 - Terceiros</option><option value="9">9 - Sem frete</option></select></td>
-                    <td class="boxField" id="XxNome_rcpt"><label for="XxNome"> <span class="labelIconClick" onclick="acLabelClick('XxNome');"><span class="ui-icon ui-icon-search"></span>Listar 50</span><span>Nome transportador</span></label><input type="text" id="XxNome" class="undefined ui-widget-content ui-corner-all ui-autocomplete-input" name="XxNome" autocomplete="off" minsize="2" maxsize="60"></td>
-                    <td class="boxField" id="XCNPJ_rcpt"><label for="XCNPJ"> <span>CNPJ/CPF transport.</span></label><input type="text" id="XCNPJ" class="undefined ui-widget-content ui-corner-all" name="XCNPJ" autocomplete="off" especialtype="cpfcnpj"></td>
-                    <td class="boxField" id="XIE_rcpt"><label for="XIE"> <span>Inscr. Est. transp.</span></label><input type="text" id="XIE" class="undefined ui-widget-content ui-corner-all" name="XIE" autocomplete="off" especialtype="string" minsize="2" maxsize="14"></td>
-                    <td class="boxField" id="XxEnder_rcpt"><label for="XxEnder"> <span>Endereço completo</span></label><input type="text" id="XxEnder" class="undefined ui-widget-content ui-corner-all" name="XxEnder" autocomplete="off" especialtype="string" maxsize="60"></td>
-                </tr>
-                <tr>
-                    <td class="boxField" id="XUF_rcpt"><label for="XUF"> <span>UF transportador</span></label><select id="XUF" class="undefined ui-widget-content ui-corner-all" name="XUF" autocomplete="off"><option value=""></option><option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option><option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option><option value="MT">MT</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option><option value="PI">PI</option><option value="PR">PR</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RO">RO</option><option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option><option value="SE">SE</option><option value="SP">SP</option><option value="TO">TO</option></select></td>
-                    <td class="boxField" id="XxMun_rcpt"><label for="XxMun"> <span>Município transp.</span></label><input type="text" id="XxMun" class="undefined ui-widget-content ui-corner-all" name="XxMun" autocomplete="off" especialtype="string" maxsize="60"></td>
-                    <td class="boxField" id="Xplaca_rcpt"><label for="Xplaca"> <span>Placa veículo</span></label><input type="text" id="Xplaca" class="undefined ui-widget-content ui-corner-all" name="Xplaca" autocomplete="off" especialtype="string" minsize="6" maxsize="7"></td>
-                    <td class="boxField" id="XvUF_rcpt"><label for="XvUF"> <span>UF veículo</span></label><select id="XvUF" class="undefined ui-widget-content ui-corner-all" name="XvUF" autocomplete="off"><option value=""></option><option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option><option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option><option value="MT">MT</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option><option value="PI">PI</option><option value="PR">PR</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RO">RO</option><option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option><option value="SE">SE</option><option value="SP">SP</option><option value="TO">TO</option></select></td>
-                    <td class="boxField" id="XRNTC_rcpt"><label for="XRNTC"> <span>Reg. Nac. Trans. Carga</span></label><input type="text" id="XRNTC" class="undefined ui-widget-content ui-corner-all" name="XRNTC" autocomplete="off" especialtype="string" maxsize="20"></td>
-                </tr>
-                <tr>
-                    <td class="boxField" id="Xvagao_rcpt"><label for="Xvagao"> <span>Identificação vagão</span></label><input type="text" id="Xvagao" class="undefined ui-widget-content ui-corner-all" name="Xvagao" autocomplete="off" especialtype="string" maxsize="20"></td>
-                    <td class="boxField" id="Xbalsa_rcpt"><label for="Xbalsa"> <span>Identificação balsa</span></label><input type="text" id="Xbalsa" class="undefined ui-widget-content ui-corner-all" name="Xbalsa" autocomplete="off" especialtype="string" maxsize="20"></td>
-                    <td class="boxField" id="meuRetTrans_rcpt" colspan="3"><label for="meuRetTrans"><input type="checkbox" id="meuRetTrans" class="undefined ui-widget-content ui-corner-all" name="meuRetTrans" autocomplete="off" value="1"> <span>Informar retenções de ICMS de transporte</span></label></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div id="quadroRetTrans" class="bottomSpace NFCeHide" style="display: none;">
-        <h2>Retenção ICMS transporte</h2>
-        <table>
-            <tbody>
-                <tr>
-                    <td class="boxField" id="XvServ_rcpt"><label for="XvServ"> <span>Valor do serviço</span></label><input type="text" id="XvServ" class="undefined ui-widget-content ui-corner-all requiredField" name="XvServ" autocomplete="off" especialtype="money"></td>
-                    <td class="boxField" id="XvBCRet_rcpt"><label for="XvBCRet"> <span>BC retenção ICMS</span></label><input type="text" id="XvBCRet" class="undefined ui-widget-content ui-corner-all requiredField" name="XvBCRet" autocomplete="off" especialtype="money"></td>
-                    <td class="boxField" id="XpICMSRet_rcpt"><label for="XpICMSRet"> <span>Alíq. da retenção</span></label><input type="text" id="XpICMSRet" class="undefined ui-widget-content ui-corner-all requiredField" name="XpICMSRet" autocomplete="off" especialtype="money" maxsize="8"></td>
-                    <td class="boxField" id="XvICMSRet_rcpt"><label for="XvICMSRet"> <span>Valor ICMS retido</span></label><input type="text" id="XvICMSRet" class="undefined ui-widget-content ui-corner-all requiredField" name="XvICMSRet" autocomplete="off" especialtype="money"></td>
-                    <td class="boxField" id="XCFOP_rcpt"><label for="XCFOP"> <span>CFOP transp</span></label><select id="XCFOP" class="undefined ui-widget-content ui-corner-all requiredField" name="XCFOP" autocomplete="off"><option value="5351">5351</option><option value="5352">5352</option><option value="5353">5353</option><option value="5354">5354</option><option value="5355">5355</option><option value="5356">5356</option><option value="5357">5357</option><option value="5359">5359</option><option value="5360">5360</option><option value="5931">5931</option><option value="5932">5932</option><option value="6351">6351</option><option value="6352">6352</option><option value="6353">6353</option><option value="6354">6354</option><option value="6355">6355</option><option value="6356">6356</option><option value="6357">6357</option><option value="6359">6359</option><option value="6360">6360</option><option value="6931">6931</option><option value="6932">6932</option><option value="7358">7358</option></select></td>
-                    <td class="boxField" id="XUFFG_rcpt"><label for="XUFFG"> <span>UF do ICMS</span></label><select id="XUFFG" class="undefined ui-widget-content ui-corner-all requiredField" name="XUFFG" autocomplete="off"><option value=""></option><option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option><option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option><option value="MT">MT</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option><option value="PI">PI</option><option value="PR">PR</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RO">RO</option><option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option><option value="SE">SE</option><option value="SP">SP</option><option value="TO">TO</option></select></td>
-                    <td class="boxField" id="XcMunFG_rcpt"><label for="XcMunFG"> <span>Município do ICMS</span></label><select id="XcMunFG" class="undefined ui-widget-content ui-corner-all requiredField" name="XcMunFG" autocomplete="off"><option value="0">- Selecione o estado -</option></select></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="bottomSpace NFCeHide">
-        <h2>Volumes transportados</h2>
-        <table>
-            <tbody>
-                <tr>
-                    <td class="boxField" id="XqVol_rcpt"><label for="XqVol"> <span>Quantidade de vol.</span></label><input type="text" id="XqVol" class="undefined ui-widget-content ui-corner-all" name="XqVol" autocomplete="off" especialtype="integer" maxsize="15"></td>
-                    <td class="boxField" id="Xesp_rcpt"><label for="Xesp"> <span>Espécie dos vol.</span></label><input type="text" id="Xesp" class="undefined ui-widget-content ui-corner-all" name="Xesp" autocomplete="off" especialtype="string" maxsize="60"></td>
-                    <td class="boxField" id="Xmarca_rcpt"><label for="Xmarca"> <span>Marca dos volumes</span></label><input type="text" id="Xmarca" class="undefined ui-widget-content ui-corner-all" name="Xmarca" autocomplete="off" especialtype="string" maxsize="60"></td>
-                    <td class="boxField" id="XnVol_rcpt"><label for="XnVol"> <span>Numeração dos vol.</span></label><input type="text" id="XnVol" class="undefined ui-widget-content ui-corner-all" name="XnVol" autocomplete="off" especialtype="string" maxsize="60"></td>
-                    <td class="boxField" id="XpesoL_rcpt"><label for="XpesoL"> <span>Peso líquido</span></label><input type="text" id="XpesoL" class="undefined ui-widget-content ui-corner-all" name="XpesoL" autocomplete="off" especialtype="money" maxsize="15"></td>
-                    <td class="boxField" id="XpesoB_rcpt"><label for="XpesoB"> <span>Peso bruto</span></label><input type="text" id="XpesoB" class="undefined ui-widget-content ui-corner-all" name="XpesoB" autocomplete="off" especialtype="money" maxsize="15"></td>
-                    <td class="boxField" id="Xlacres_rcpt"><label for="Xlacres"> <span>Números dos lacres</span></label><input type="text" id="Xlacres" class="undefined ui-widget-content ui-corner-all" name="Xlacres" autocomplete="off" especialtype="string"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="bottomSpace NFCeHide">
-        <h2 class="bottomSpace">
-            Faturas e duplicatas
-            <a href="ajuda: Clique para editar as duplicatas" id="link_editarDuplicatas" class="linkBox">Editar duplicatas</a>
-        </h2>
-        <div id="lista_duplicatas" class="tableList fullBox bottomSpace">
-            <table>
-                <thead>
-                    <tr>
-                        <td>Núm</td>
-                        <td>Venc</td>
-                        <td>Valor</td>
-                        <td>Núm</td>
-                        <td>Venc</td>
-                        <td>Valor</td>
-                        <td>Núm</td>
-                        <td>Venc</td>
-                        <td>Valor</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colspan="9"><i>Nenhuma duplicata preenchida</i></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Impostos federais</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                        <span class="input-group-addon">,00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Impostos estaduais</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                        <span class="input-group-addon">,00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Impostos municipais</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                        <span class="input-group-addon">,00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Total aproximado</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                        <span class="input-group-addon">,00</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <table>
-            <tbody>
-                <tr>
-                    <td class="boxField" id="YnFat_rcpt"><label for="YnFat"> <span>Número da fatura</span></label><input type="text" id="YnFat" class="undefined ui-widget-content ui-corner-all" name="YnFat" autocomplete="off" especialtype="integer"></td>
-                    <td class="boxField" id="YvOrig_rcpt"><label for="YvOrig"> <span>Valor original fat.</span></label><input type="text" id="YvOrig" class="undefined ui-widget-content ui-corner-all" name="YvOrig" autocomplete="off" especialtype="money"></td>
-                    <td class="boxField" id="YvDesc_rcpt"><label for="YvDesc"> <span>Valor desconto</span></label><input type="text" id="YvDesc" class="undefined ui-widget-content ui-corner-all" name="YvDesc" autocomplete="off" especialtype="money"></td>
-                    <td class="boxField" id="YvLiq_rcpt"><label for="YvLiq"> <span>Valor líquido fat.</span></label><input type="text" id="YvLiq" class="undefined ui-widget-content ui-corner-all" name="YvLiq" autocomplete="off" especialtype="money"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="bottomSpace">
-        <h2>Outras informações</h2>
-        <table class="bottomSpace">
-            <tbody>
-                <tr>
-                    <td class="boxField halfBox" id="ZinfCpl_rcpt" style="vertical-align: top;"><label for="ZinfCpl"> <span>Informações complementares</span></label><textarea id="ZinfCpl" class="autoSize ui-widget-content ui-corner-all" name="ZinfCpl" autocomplete="off" maxsize="5000" style="height: 53px;"></textarea></td>
-                    <td class="boxField halfBox" id="ZinfAdFisco_rcpt" style="vertical-align: top;"><label for="ZinfAdFisco"> <span>Informações para o Fisco</span></label><textarea id="ZinfAdFisco" class="autoSize ui-widget-content ui-corner-all" name="ZinfAdFisco" autocomplete="off" maxsize="2000" style="height: 53px;"></textarea></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="bottomSpace NFCeHide">
-        <h2>Informações de compras</h2>
-        <div id="meuCompras_rcpt"><label for="meuCompras"><input type="checkbox" id="meuCompras" class="undefined ui-widget-content ui-corner-all" name="meuCompras" autocomplete="off" value="1"> <span>Informar dados de compras</span></label></div>
-        <div id="quadroCompras" style="display: block;">
-            <table>
-                <tbody>
-                    <tr>
-                        <td class="boxField" id="ZBxNEmp_rcpt"><label for="ZBxNEmp"> <span>Nota de Empenho</span></label><input type="text" id="ZBxNEmp" class="undefined ui-widget-content ui-corner-all" name="ZBxNEmp" autocomplete="off" especialtype="string" maxsize="22"></td>
-                        <td class="boxField" id="ZBxPed_rcpt"><label for="ZBxPed"> <span>Pedido</span></label><input type="text" id="ZBxPed" class="undefined ui-widget-content ui-corner-all" name="ZBxPed" autocomplete="off" especialtype="string" maxsize="60"></td>
-                        <td class="boxField" id="ZBxCont_rcpt"><label for="ZBxCont"> <span>Contrato</span></label><input type="text" id="ZBxCont" class="undefined ui-widget-content ui-corner-all" name="ZBxCont" autocomplete="off" especialtype="string" maxsize="60"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</form>
-</form>
-</form>
