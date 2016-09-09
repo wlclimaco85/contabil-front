@@ -1,39 +1,121 @@
+<div class="row">
+
+    <div class="col-sm-8">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Forma Pagamento <sup> Cadastrar </sup></label>
+
+            <div class="row ">
+                <div class="input-group">
+                    <span class="input-group-addon fa fa-list-ol"></span>
+                    <span class="ui-select">
+                <select ng-model="tributacao.icms.motDesoneracao.id">
+                    <option value="0">0 - Emitente</option>
+                    <option value="1">1 - Destinatário</option>
+                    <option value="2">2 - Terceiros</option>
+                    <option value="9">9 - Sem frete</option>
+                </select>
+            </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="bottomSpace NFCeHide">
     <h2 class="bottomSpace">
         Faturas e duplicatas
         <a href="ajuda: Clique para editar as duplicatas" id="link_editarDuplicatas" class="linkBox">Editar duplicatas</a>
     </h2>
-    <div id="lista_duplicatas" class="tableList fullBox bottomSpace">
-        <table>
-            <thead>
-                <tr>
-                    <td>Núm</td>
-                    <td>Venc</td>
-                    <td>Valor</td>
-                    <td>Núm</td>
-                    <td>Venc</td>
-                    <td>Valor</td>
-                    <td>Núm</td>
-                    <td>Venc</td>
-                    <td>Valor</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="9"><i>Nenhuma duplicata preenchida</i></td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="row socios">
+        <div class="col-sm-3">
+            <label for="exampleInputPassword1">Núm. Fatura</label>
+            <div class="input-group">
+                <span class="input-group-addon">Nº</span>
+                <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Valor original fat.</label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
+                    <span class="input-group-addon">,00</span>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+
+                <label for="exampleInputPassword1">Valor desconto</label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
+                    <span class="input-group-addon">,00</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+
+                <label for="exampleInputPassword1">Valor líquido fat.</label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="R$0,00" />
+                    <span class="input-group-addon">,00</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-1" style="margin-top:18px">
+            <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+        </div>
     </div>
-    <table>
-        <tbody>
-            <tr>
-                <td class="boxField" id="YnFat_rcpt"><label for="YnFat"> <span>Número da fatura</span></label><input type="text" id="YnFat" class="undefined ui-widget-content ui-corner-all" name="YnFat" autocomplete="off" especialtype="integer"></td>
-                <td class="boxField" id="YvOrig_rcpt"><label for="YvOrig"> <span>Valor original fat.</span></label><input type="text" id="YvOrig" class="undefined ui-widget-content ui-corner-all" name="YvOrig" autocomplete="off" especialtype="money"></td>
-                <td class="boxField" id="YvDesc_rcpt"><label for="YvDesc"> <span>Valor desconto</span></label><input type="text" id="YvDesc" class="undefined ui-widget-content ui-corner-all" name="YvDesc" autocomplete="off" especialtype="money"></td>
-                <td class="boxField" id="YvLiq_rcpt"><label for="YvLiq"> <span>Valor líquido fat.</span></label><input type="text" id="YvLiq" class="undefined ui-widget-content ui-corner-all" name="YvLiq" autocomplete="off" especialtype="money"></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="form-group hide" id="bookTemplate">
+        <div class="row socios">
+            <div class="col-sm-3">
+                <label for="exampleInputPassword1">Núm. Fatura</label>
+                <div class="input-group">
+                    <span class="input-group-addon">Nº</span>
+                    <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Valor original fat.</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
+                        <span class="input-group-addon">,00</span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+
+                    <label for="exampleInputPassword1">Valor desconto</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
+                        <span class="input-group-addon">,00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+
+                    <label for="exampleInputPassword1">Valor líquido fat.</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="R$0,00" />
+                        <span class="input-group-addon">,00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1" style="margin-top:18px">
+                <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+            </div>
+        </div>
+    </div>
 </div>
