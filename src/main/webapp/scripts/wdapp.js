@@ -50,7 +50,7 @@ var WebDaptiveAppConfig = {
 				'wdApp.pages.controllers', 'wdApp.demodata', 'wdApp.apps.stocks', 'wdApp.apps.stocksdata',
 				'wdApp.apps.counties','datatables','datatables.bootstrap', 'wdApp.apps.procedures','wdApp.apps.sysmgmt.data','wdApp.apps.site','wdApp.apps.empresa','wdApp.apps.produtos','wdApp.apps.produtoss','wdApp.apps.produto','wdApp.apps.notaFiscal',
 				'wdApp.apps.pdCompras','wdApp.apps.orcamento','wdApp.apps.ordemServico','wdApp.apps.nfEntrada','wdApp.apps.pdCompras'
-				,'wdApp.apps.cotacao','wdApp.apps.pdVendas','wdApp.apps.conta','wdApp.apps.funcionario',
+				,'wdApp.apps.cotacao','wdApp.apps.pdVendas','wdApp.apps.funcionario',
 				'wdApp.ajaxCall'
 				,'wdApp.apps.cliente'
 				,'wdApp.apps.cliente.insert'
@@ -217,6 +217,12 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.contasReceber.update'
 	            ,'wdApp.apps.contasReceber.delete'
 	            ,'wdApp.apps.contasReceber.view'
+
+	            ,'wdApp.apps.conta'
+	            ,'wdApp.apps.conta.insert'
+	            ,'wdApp.apps.conta.update'
+	            ,'wdApp.apps.conta.delete'
+	            ,'wdApp.apps.conta.view'
 
 
 
