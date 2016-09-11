@@ -355,6 +355,7 @@ var WebDaptiveAppConfig = {
 			$rootScope.main.name = "Jonh Snow";
 			localStorageService.clearAll();
 		};
+		
 
 		/* Try getting valid user from localStorage */
 		if (localStorageService.get('authToken') !==  null){
