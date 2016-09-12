@@ -14,7 +14,7 @@
 	qat.model.PagedInquiryRequest = function( _iEmprId)
 	{
 		var _emprId = null;
-		debugger
+
 	    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
 	      _emprId = null;
 	    }else{
@@ -71,7 +71,6 @@
 
 	qat.model.reqFormaPg = function(_oCounty, _bList, _bPagedList)
 	{
-		debugger
 		this.formaPg = _oCounty;
 		this.returnList = _bList;
 		this.returnListPaged = _bPagedList;
@@ -196,8 +195,6 @@
 		this.preQueryCount = _bCount;
 		this.maxPreQueryCount = 0;
 	};
-
-	reqFormaPg
 
 	//PageData Object
 	qat.model.pageData = function(_pageSize, _startPage, _bRowsAvailable, _totalRows)
