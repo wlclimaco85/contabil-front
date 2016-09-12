@@ -1,8 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
 <div class="row">
   	 <div class="form-group col-sm-3">
@@ -37,12 +34,11 @@
   <script>
     $(document).ready(function() {
 
-        var callbackBanco = function(res){
+        var fnCallbackBanco = function(res){
                 var planos = "";
-debugger
+
                if(res.operationSuccess == true)
                {
-                debugger
                    for(var x = 0 ;x < res.bancoList.length;x++)
                    {
                        planos = planos + "<option value='"+res.bancoList[x].id+"'> "+res.bancoList[x].nome+" </option>";
@@ -55,13 +51,11 @@ debugger
                           placeholder: "Selecione o BANCO",
                           allowClear: true
                         });
-               }
+        
 
             }
             }
-debugger
-
-            qat.model.select.util("financeiro/api/banco/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackBanco);
+            qat.model.select.util("financeiro/api/banco/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackBanco);
 
     });
 </script>

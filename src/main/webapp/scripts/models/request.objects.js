@@ -69,6 +69,14 @@
 		this.returnListPaged = _bPagedList;
 	};
 
+	qat.model.reqFormaPg = function(_oCounty, _bList, _bPagedList)
+	{
+		debugger
+		this.formaPg = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
+
 	qat.model.reqMarca = function(_oCounty, _bList, _bPagedList)
 	{
 		this.marca = _oCounty;
@@ -76,12 +84,6 @@
 		this.returnListPaged = _bPagedList;
 	};
 
-	qat.model.reqFormaPg = function(_oCounty, _bList, _bPagedList)
-	{
-		this.financeiro = _oCounty;
-		this.returnList = _bList;
-		this.returnListPaged = _bPagedList;
-	};
 
 	qat.model.reqBanco = function(_oCounty, _bList, _bPagedList)
 	{
@@ -194,6 +196,8 @@
 		this.preQueryCount = _bCount;
 		this.maxPreQueryCount = 0;
 	};
+
+	reqFormaPg
 
 	//PageData Object
 	qat.model.pageData = function(_pageSize, _startPage, _bRowsAvailable, _totalRows)
