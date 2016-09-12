@@ -638,6 +638,7 @@
 
             var vm = this;
             $scope.slotDisplayName = "teste00";
+            
             $scope.clientes = [];
 /*
 

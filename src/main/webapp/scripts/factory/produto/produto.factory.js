@@ -43,7 +43,6 @@
                    {
                        planos = planos + "<option value='"+res.produtoParentList[x].id+"'> "+ res.produtoParentList[x].prodId.ncm + " " + res.produtoParentList[x].prodId.produto +" </option>";
                    }
-        debugger            
 
                     $('.produto').empty();
                     $('.produto').append(planos);

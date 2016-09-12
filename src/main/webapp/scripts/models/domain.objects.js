@@ -362,7 +362,7 @@ qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
 
   qat.model.fnTributacao =function(_tributacao,_modelAction,_userId)
   {
-    var _id=null
+    var _id = null;
     if(_tributacao.id == "" || _tributacao.id == " "){
       _id = null;
     }
