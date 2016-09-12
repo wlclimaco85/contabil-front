@@ -21,7 +21,7 @@
 
         var openDialogUpdateCreate = function () {
             bookIndex = 0;
-            $('.FormaPgForm')
+            $('.formaPgForm')
                 .formValidation({
                     framework: 'bootstrap',
                     icon: {
@@ -30,9 +30,12 @@
                         validating: 'glyphicon glyphicon-refresh'
                     },
                     fields: {
-                        'nome': notEmptyStringMinMaxRegexp,
-                        'email': integerNotEmptyValidation,
-                        'texto': integerNotEmptyValidation,
+                        'descricao': notEmptyStringMinMaxRegexp,
+                        'parcMaximo': integerNotEmptyValidation,
+                        'parSemJuros': integerNotEmptyValidation,
+                        'juros': integerNotEmptyValidation,
+                        'intervParcelas': integerNotEmptyValidation,
+                        'intervaloT': integerNotEmptyValidation,
                     }
                 });
         }
@@ -261,6 +264,11 @@
             var vm = this;
 
             $scope.formaPg = {};
+            $scope.formaPg.conta = {};
+            $scope.formaPg.conta.id = 0;
+
+            $scope.formaPg.tipoDoc = {};
+            $scope.formaPg.tipoDoc.id = 0;
 
             $scope.today = function() {
                 return $scope.dt = new Date();
@@ -282,13 +290,17 @@
             $scope.format = $scope.formats[1];
 
             $scope.saveFormaPg = function() {
-                debugger
+
+                var oObject = fModels.amont($scope.formaPg.conta,"INSERT");
+                $scope.formaPg.conta = oObject;
+                var oObject = fModels.amont($scope.formaPg.tipoDoc,"INSERT");
+                $scope.formaPg.tipoDoc = oObject;
                 var oObject = fModels.amont($scope.formaPg,"INSERT");
 
                 SysMgmtData.processPostPageData("main/api/request", {
                     url: "financeiro/api/formaPg/insert",
                     token: $rootScope.authToken,
-                    request: new qat.model.reqCliente(oObject, true, true)
+                    request: new qat.model.reqFormaPg(oObject, true, true)
                 }, function(res) {
                     debugger
                 });
