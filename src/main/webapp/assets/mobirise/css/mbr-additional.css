@@ -53,13 +53,13 @@
   color: #ffffff;
 }
 .mbr-navbar__section {
-  background: #000!important;
+  background: #1B3975!important;
 }
 body {
   background: #FFF!important;
 }
-.navbar li {
-  background: #FFF!important;
-  color : #000;
+.nav > li > a {
+  background: #3399FF!important;
+  color : #FFF;
   font-size: 12px;
 }
