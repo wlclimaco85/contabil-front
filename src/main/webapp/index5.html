@@ -71,42 +71,8 @@
 
 <body data-ng-app="wdApp" id="wdApp" class="wdApp" data-off-canvas-nav data-ng-controller="WDAppController" data-ng-class=" {'layout-boxed': admin.layout === 'boxed' } ">
     <div data-ng-controller="SiteController as cc">
-        <section class="mbr-navbar mbr-navbar--freeze mbr-navbar--absolute mbr-navbar--transparent mbr-navbar--sticky mbr-navbar--auto-collapse" id="ext_menu-3">
-            <div class="mbr-navbar__section mbr-section">
-                <div class="mbr-section__container container">
-                    <div class="mbr-navbar__container">
-                        <div class="mbr-navbar__column mbr-navbar__column--s mbr-navbar__brand">
-                            <span class="mbr-navbar__brand-link mbr-brand mbr-brand--inline">
-	                        <span class="mbr-brand__logo"><a href="https://mobirise.com"><img src="assets/images/logo.png" class="mbr-navbar__brand-img mbr-brand__img" alt="Mobirise"></a></span>
-                            <span class="mbr-brand__name"><a class="mbr-brand__name text-white" href={{cc.site.url}}>{{cc.site.nome}}</a></span>
-                            </span>
-                        </div>
-                        <div class="mbr-navbar__hamburger mbr-hamburger"><span class="mbr-hamburger__line"></span></div>
-                        <div class="mbr-navbar__column mbr-navbar__menu">
-                            <nav class="mbr-navbar__menu-box mbr-navbar__menu-box--inline-right">
-                                <div class="mbr-navbar__column">
-                                    <ul class="mbr-navbar__items mbr-navbar__items--right float-left mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-decorator mbr-buttons--active">
-                                        <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="#" data-nav-section="sobre">Sobre a {{cc.site.nome}}</a></li>
-                                        <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="#" data-nav-section="services">Planos</a></li>
-                                        <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="#" data-nav-section="services">Contato</a></li>
-
-                                    </ul>
-                                    <ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-inverse mbr-buttons--active">
-                                        <li class="mbr-navbar__item"><a class="mbr-buttons__btn btn btn-danger" href="index4.html">Abrir Empresa</a></li>
-                                    </ul>
-                                    <ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-inverse mbr-buttons--active">
-                                        <li class="mbr-navbar__item"><a class="mbr-buttons__btn btn btn-danger" href="index4.html">Migrar Empresa</a></li>
-                                    </ul>
-                                    <ul class="mbr-navbar__items mbr-navbar__items--right float-left mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-decorator mbr-buttons--active">
-                                        <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="login.html" data-nav-section="services">Login</a></li>
-                                    </ul>
-                                </div>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
+        <div ng-include="'views/site/apps/header.html'"></div>
 
 
         <section class="engine"><a rel="external" href="https://mobirise.com">easy free website builder</a></section>
@@ -586,75 +552,7 @@
             </div>
         </section>
 
-        <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="contacts3-14" style="background-color: rgb(60, 60, 60);">
-
-            <div class="mbr-section__container container">
-                <div class="mbr-contacts mbr-contacts--wysiwyg row" style="padding-top: 45px; padding-bottom: 45px;">
-                    <div class="col-sm-8">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <p class="mbr-contacts__text"><strong>ADDRESS</strong><br> 1234 Street Name<br> City, AA 99999<br><br>
-                                    <strong>CONTACTS</strong><br> Email: support@mobirise.com<br> Phone: +1 (0) 000 0000 001<br> Fax: +1 (0) 000 0000 002</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <p class="mbr-contacts__text"><strong>LINKS</strong></p>
-                                <ul class="mbr-contacts__list">
-                                    <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/">Website builder</a></li>
-                                    <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/mobirise-free-win.zip">Download for Windows</a></li>
-                                    <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/mobirise-free-mac.zip">Download for Mac</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mbr-contacts__column col-sm-4">
-
-                        <form action="https://mobirise.com/" method="post">
-
-
-                            <div class="form-group">
-                                <input type="email" class="form-control input-sm input-inverse" name="email" required="" placeholder="Email*">
-                            </div>
-
-                            <div class="form-group">
-                                <textarea class="form-control input-sm input-inverse" name="message" rows="4" placeholder="Message"></textarea>
-                            </div>
-                            <div class="mbr-buttons mbr-buttons--right btn-inverse"><button type="submit" class="mbr-buttons__btn btn btn-danger">CONTACT US</button></div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="contacts2-13" style="background-color: rgb(60, 60, 60);">
-
-            <div class="mbr-section__container container">
-                <div class="mbr-contacts mbr-contacts--wysiwyg row" style="padding-top: 45px; padding-bottom: 45px;">
-                    <div class="col-sm-6">
-                        <figure class="mbr-figure mbr-figure--wysiwyg mbr-figure--full-width mbr-figure--no-bg">
-                            <div class="mbr-figure__map mbr-figure__map--short mbr-google-map">
-                                <p class="mbr-google-map__marker" data-coordinates="40.748384,-73.9854792"></p>
-                            </div>
-                        </figure>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="row">
-                            <div class="col-sm-5 col-sm-offset-1">
-                                <p class="mbr-contacts__text"><strong>ADDRESS</strong><br> 1234 Street Name<br> City, AA 99999<br><br>
-                                    <strong>CONTACTS</strong><br> Email: support@mobirise.com<br> Phone: +1 (0) 000 0000 001<br> Fax: +1 (0) 000 0000 002</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <p class="mbr-contacts__text"><strong>LINKS</strong></p>
-                                <ul class="mbr-contacts__list">
-                                    <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/">Website builder</a></li>
-                                    <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/mobirise-free-win.zip">Download for Windows</a></li>
-                                    <li><a class="mbr-contacts__link text-gray" href="https://mobirise.com/mobirise-free-mac.zip">Download for Mac</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div ng-include="'views/site/apps/footer.html'"></div>
     </div>
     <!--
   <script src="assets/web/assets/jquery/jquery.min.js"></script>
@@ -667,235 +565,245 @@
 
 
 
-    <!-- thirdparty libraries-->
-    <!-- thirdparty libraries-->
-    <script src="http://maps.googleapis.com/maps/api/js?v=3&libraries=visualization"></script>
+         <!-- thirdparty libraries-->
+        <!-- thirdparty libraries-->
+        <script src="http://maps.googleapis.com/maps/api/js?v=3&libraries=visualization"></script>
 
-    <script type="text/javascript" src="https://app.4clinics.software/skin/home/app_theme/js/jquery.js"></script>
-    <script src="thirdparty/jquery-ui-1.12.0/jquery-ui.min.js"></script>
-    <script src="thirdparty/angular-datatables/vendor/datatables/media/js/jquery.dataTables.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <script type="text/javascript" src="https://app.4clinics.software/skin/home/app_theme/js/jquery.js"></script>
+        <script src="thirdparty/jquery-ui-1.12.0/jquery-ui.min.js"></script>
+        <script src="thirdparty/angular-datatables/vendor/datatables/media/js/jquery.dataTables.js"></script>
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="thirdparty/angular/angular.min.js"></script>
-    <!--<script src="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.js"></script> -->
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script src="thirdparty/angular/angular.min.js"></script>
+        <!--<script src="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.js"></script> -->
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.6/select2-bootstrap.min.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.6/select2-bootstrap.min.css"/>
 
-    <link rel="stylesheet" href='http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2-bootstrap.css' />
-    <link rel="stylesheet" href='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css' />
-    <link rel="stylesheet" href='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css' />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-    <script src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+        <link rel="stylesheet" href='http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2-bootstrap.css'/>
+<link rel="stylesheet" href='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css'/>
+<link rel="stylesheet" href='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css'/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
-    <script src="thirdparty/angular-route/angular-route.min.js"></script>
-    <script src="thirdparty/angular-animate/angular-animate.min.js"></script>
-    <script src="thirdparty/angular-bootstrap/ui-bootstrap-tpls-2.0.0.min.js"></script>
-    <script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
-    <script src="thirdparty/angular-textangular/textAngular-rangy.min.js"></script>
-    <script src="thirdparty/angular-textangular/textAngular-sanitize.min.js"></script>
-    <script src="thirdparty/angular-textangular/textAngular.min.js"></script>
-    <script src="thirdparty/angular-ui-tree/angular-ui-tree.min.js"></script>
-    <script src="thirdparty/angular-ngmaps/ng-map.min.js"></script>
-    <script src="thirdparty/angular-ng-tags-input/ng-tags-input.min.js"></script>
-    <script src="thirdparty/angular-loading/loading-bar.min.js"></script>
-    <script src="thirdparty/angular-ngmaps/ng-map.min.js"></script>
-    <script src="thirdparty/angular-ag/ag-grid.js"></script>
-    <script src="thirdparty/angular-toastr/angular-toastr.tpls.min.js"></script>
-    <script src="thirdparty/angular-local-storage/angular-local-storage.min.js"></script>
-    <script src="thirdparty/angular-base64/angular-base64.min.js"></script>
-    <script src="thirdparty/jquery-spinner/jquery.spinner.min.js"></script>
-    <script src="thirdparty/seiyria-bootstrap-slider/bootstrap-slider.min.js"></script>
-    <script src="thirdparty/jquery-steps/jquery.steps.min.js"></script>
-    <script src="thirdparty/bootstrap-file-input/bootstrap.file-input.js"></script>
-    <script src="thirdparty/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="thirdparty/raphael/raphael-min.js"></script>
-    <script src="thirdparty/morrisjs/morris.js"></script>
-    <script src="thirdparty/jquery-sparkline/jquery.sparkline.min.js"></script>
-    <script src="thirdparty/flot/jquery.flot.js"></script>
-    <script src="thirdparty/flot/jquery.flot.resize.js"></script>
-    <script src="thirdparty/flot/jquery.flot.pie.js"></script>
-    <script src="thirdparty/flot/jquery.flot.orderBars.js"></script>
-    <script src="thirdparty/flot/jquery.flot.stack.js"></script>
-    <script src="thirdparty/flot-tooltip/jquery.flot.tooltip.min.js"></script>
-    <script src="thirdparty/flot/jquery.flot.time.js"></script>
-    <script src="thirdparty/flot/jquery.flot.animator.min.js"></script>
-    <script src="thirdparty/jquery-easy-pie-chart/angular.easypiechart.min.js"></script>
-    <script src="thirdparty/angular-chartjs/Chart.min.js"></script>
-    <script src="thirdparty/angular-chartjs/angular-chart.min.js"></script>
-    <script src="thirdparty/angular-echarts/echarts-all.js"></script>
-    <script src="thirdparty/angular-echarts/ngecharts.js"></script>
-
-
+        <script src="thirdparty/angular-route/angular-route.min.js"></script>
+        <script src="thirdparty/angular-animate/angular-animate.min.js"></script>
+        <script src="thirdparty/angular-bootstrap/ui-bootstrap-tpls-2.0.0.min.js"></script>
+        <script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
+        <script src="thirdparty/angular-textangular/textAngular-rangy.min.js"></script>
+        <script src="thirdparty/angular-textangular/textAngular-sanitize.min.js"></script>
+        <script src="thirdparty/angular-textangular/textAngular.min.js"></script>
+        <script src="thirdparty/angular-ui-tree/angular-ui-tree.min.js"></script>
+        <script src="thirdparty/angular-ngmaps/ng-map.min.js"></script>
+        <script src="thirdparty/angular-ng-tags-input/ng-tags-input.min.js"></script>
+        <script src="thirdparty/angular-loading/loading-bar.min.js"></script>
+        <script src="thirdparty/angular-ngmaps/ng-map.min.js"></script>
+        <script src="thirdparty/angular-ag/ag-grid.js"></script>
+        <script src="thirdparty/angular-toastr/angular-toastr.tpls.min.js"></script>
+        <script src="thirdparty/angular-local-storage/angular-local-storage.min.js"></script>
+        <script src="thirdparty/angular-base64/angular-base64.min.js"></script>
+        <script src="thirdparty/jquery-spinner/jquery.spinner.min.js"></script>
+        <script src="thirdparty/seiyria-bootstrap-slider/bootstrap-slider.min.js"></script>
+        <script src="thirdparty/jquery-steps/jquery.steps.min.js"></script>
+        <script src="thirdparty/bootstrap-file-input/bootstrap.file-input.js"></script>
+        <script src="thirdparty/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="thirdparty/raphael/raphael-min.js"></script>
+        <script src="thirdparty/morrisjs/morris.js"></script>
+        <script src="thirdparty/jquery-sparkline/jquery.sparkline.min.js"></script>
+        <script src="thirdparty/flot/jquery.flot.js"></script>
+        <script src="thirdparty/flot/jquery.flot.resize.js"></script>
+        <script src="thirdparty/flot/jquery.flot.pie.js"></script>
+        <script src="thirdparty/flot/jquery.flot.orderBars.js"></script>
+        <script src="thirdparty/flot/jquery.flot.stack.js"></script>
+        <script src="thirdparty/flot-tooltip/jquery.flot.tooltip.min.js"></script>
+        <script src="thirdparty/flot/jquery.flot.time.js"></script>
+        <script src="thirdparty/flot/jquery.flot.animator.min.js"></script>
+        <script src="thirdparty/jquery-easy-pie-chart/angular.easypiechart.min.js"></script>
+        <script src="thirdparty/angular-chartjs/Chart.min.js"></script>
+        <script src="thirdparty/angular-chartjs/angular-chart.min.js"></script>
+        <script src="thirdparty/angular-echarts/echarts-all.js"></script>
+        <script src="thirdparty/angular-echarts/ngecharts.js"></script>
 
 
-    <!-- datatables -->
-    <script src="thirdparty/angular-datatables/vendor/angular-highlightjs/angular-highlightjs.min.js"></script>
-    <script src="thirdparty/angular-resource/angular-resource.min.js"></script>
-    <script src="thirdparty/angular-datatables/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
-
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-colreorder/js/dataTables.colReorder.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-colvis/js/dataTables.colVis.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-responsive/js/dataTables.responsive.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-scroller/js/dataTables.scroller.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-columnfilter/js/dataTables.columnFilter.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-light-columnfilter/dist/dataTables.lightColumnFilter.min.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-fixedcolumns/js/dataTables.fixedColumns.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-fixedheader/js/dataTables.fixedHeader.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/dataTables.buttons.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.colVis.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.flash.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.html5.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.print.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-select/js/dataTables.select.js"></script>
-
-    <script src="thirdparty/angular-datatables-master/vendor/angular-bootstrap/ui-bootstrap.min.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/angular-translate/angular-translate.min.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/angular-datatables.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/angular-datatables.util.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/angular-datatables.options.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/angular-datatables.instances.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/angular-datatables.factory.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/angular-datatables.renderer.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/angular-datatables.directive.js"></script>
-    <!-- bootstrap
-    <script src="thirdparty/bootstrap-4.0.0-alpha.2/dist/js/bootstrap.js"></script>
-    <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js" integrity="sha384-XXXXXXXX" crossorigin="anonymous"></script>-->
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.options.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.colvis.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.tabletools.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/colvis/angular-datatables.colvis.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/colreorder/angular-datatables.colreorder.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/tabletools/angular-datatables.tabletools.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/scroller/angular-datatables.scroller.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/light-columnfilter/angular-datatables.light-columnfilter.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/fixedheader/angular-datatables.fixedheader.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/buttons/angular-datatables.buttons.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/select/angular-datatables.select.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js"></script>
 
 
-    <script src="thirdparty/angular-datatables-master/demo/usages.js"></script>
+        <!-- datatables -->
+        <script src="thirdparty/angular-datatables/vendor/angular-highlightjs/angular-highlightjs.min.js"></script>
+        <script src="thirdparty/angular-resource/angular-resource.min.js"></script>
+        <script src="thirdparty/angular-datatables/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
 
-    <script src="thirdparty/angular-checkbox/checklist-model.js"></script>
+        <script src="thirdparty/angular-datatables-master/vendor/datatables-colreorder/js/dataTables.colReorder.js"></script>
+        <script src="thirdparty/angular-datatables-master/vendor/datatables-colvis/js/dataTables.colVis.js"></script>
+        <script src="thirdparty/angular-datatables-master/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
+        <script src="thirdparty/angular-datatables-master/vendor/datatables-responsive/js/dataTables.responsive.js"></script>
+        <script src="thirdparty/angular-datatables-master/vendor/datatables-scroller/js/dataTables.scroller.js"></script>
+        <script src="thirdparty/angular-datatables-master/vendor/datatables-columnfilter/js/dataTables.columnFilter.js"></script>
+        <script src="thirdparty/angular-datatables-master/vendor/datatables-light-columnfilter/dist/dataTables.lightColumnFilter.min.js"></script>
+        <script src="thirdparty/angular-datatables-master/vendor/datatables-fixedcolumns/js/dataTables.fixedColumns.js"></script>
+        <script src="thirdparty/angular-datatables-master/vendor/datatables-fixedheader/js/dataTables.fixedHeader.js"></script>
+        <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/dataTables.buttons.js"></script>
+        <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.colVis.js"></script>
+        <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.flash.js"></script>
+        <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.html5.js"></script>
+        <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.print.js"></script>
+        <script src="thirdparty/angular-datatables-master/vendor/datatables-select/js/dataTables.select.js"></script>
+
+        <script src="thirdparty/angular-datatables-master/vendor/angular-bootstrap/ui-bootstrap.min.js"></script>
+        <script src="thirdparty/angular-datatables-master/vendor/angular-translate/angular-translate.min.js"></script>
+        <script src="thirdparty/angular-datatables-master/src/angular-datatables.js"></script>
+        <script src="thirdparty/angular-datatables-master/src/angular-datatables.util.js"></script>
+        <script src="thirdparty/angular-datatables-master/src/angular-datatables.options.js"></script>
+        <script src="thirdparty/angular-datatables-master/src/angular-datatables.instances.js"></script>
+        <script src="thirdparty/angular-datatables-master/src/angular-datatables.factory.js"></script>
+        <script src="thirdparty/angular-datatables-master/src/angular-datatables.renderer.js"></script>
+        <script src="thirdparty/angular-datatables-master/src/angular-datatables.directive.js"></script>
+        <!-- bootstrap
+        <script src="thirdparty/bootstrap-4.0.0-alpha.2/dist/js/bootstrap.js"></script>
+        <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js" integrity="sha384-XXXXXXXX" crossorigin="anonymous"></script>-->
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+        <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.options.js"></script>
+        <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.colvis.js"></script>
+        <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.tabletools.js"></script>
+        <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
+        <script src="thirdparty/angular-datatables-master/src/plugins/colvis/angular-datatables.colvis.js"></script>
+        <script src="thirdparty/angular-datatables-master/src/plugins/colreorder/angular-datatables.colreorder.js"></script>
+        <script src="thirdparty/angular-datatables-master/src/plugins/tabletools/angular-datatables.tabletools.js"></script>
+        <script src="thirdparty/angular-datatables-master/src/plugins/scroller/angular-datatables.scroller.js"></script>
+        <script src="thirdparty/angular-datatables-master/src/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
+        <script src="thirdparty/angular-datatables-master/src/plugins/light-columnfilter/angular-datatables.light-columnfilter.js"></script>
+        <script src="thirdparty/angular-datatables-master/src/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
+        <script src="thirdparty/angular-datatables-master/src/plugins/fixedheader/angular-datatables.fixedheader.js"></script>
+        <script src="thirdparty/angular-datatables-master/src/plugins/buttons/angular-datatables.buttons.js"></script>
+        <script src="thirdparty/angular-datatables-master/src/plugins/select/angular-datatables.select.js"></script>
+        <script src="thirdparty/angular-datatables-master/vendor/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js"></script>
+
+
+        <script src="thirdparty/angular-datatables-master/demo/usages.js"></script>
+
+        <script src="thirdparty/angular-checkbox/checklist-model.js"></script>
 
     <script src="dist/js/formValidation.js"></script>
     <script src="dist/js/framework/bootstrap.js"></script>
-
-
-    <!--webdaptive -->
-    <script src="scripts/wdapp.js"></script>
-
-    <script src="scripts/commons/wdapp.controllers.js"></script>
-    <script src="scripts/commons/wdapp.directives.js"></script>
-    <script src="scripts/commons/wdapp.localization.all.js"></script>
-    <script src="scripts/commons/wdapp.demodata.factory.js"></script>
-    <script src="scripts/commons/wdapp.authentication.factory.js"></script>
-    <script src="scripts/commons/wdapp.httpinterceptors.factory.js"></script>
-    <script src="scripts/factory/wdapp.commons.factory.js"></script>
-    <script src="scripts/models/domain.objects.js"></script>
-    <script src="scripts/models/request.objects.js"></script>
-
-    <script src="scripts/ui/ui.controllers.js"></script>
-    <script src="scripts/forms/forms.directives.js"></script>
-    <script src="scripts/forms/forms.controllers.js"></script>
-    <script src="scripts/tables/tables.controllers.js"></script>
-    <script src="scripts/tasks/tasks.all.js"></script>
-    <script src="scripts/charts/charts.chartjs.controllers.js"></script>
-    <script src="scripts/charts/charts.flot.controllers.js"></script>
-    <script src="scripts/charts/charts.morris.controllers.js"></script>
-    <script src="scripts/charts/charts.other.controllers.js"></script>
-    <script src="scripts/charts/charts.echarts.controllers.js"></script>
-    <script src="scripts/charts/charts.directives.js"></script>
-    <script src="scripts/apps/util/util.controllers.js"></script>
-    <script src="scripts/pages/pages.controllers.js"></script>
-    <script src="scripts/apps/stocks.controllers.js"></script>
-    <script src="scripts/apps/stocks.factory.js"></script>
-    <script src="scripts/apps/counties.controllers.js"></script>
-    <script src="scripts/models/validation.objects.js"></script>
-    <script src="scripts/apps/procedures.controllers.js"></script>
-    <script src="scripts/apps/sysmgmt.data.factory.js"></script>
-    <script src="scripts/apps/site.controllers.js"></script>
-    <script src="scripts/apps/empresa.controllers.js"></script>
-    <script src="scripts/apps/produto/produto.controllers.js"></script>
-    <script src="scripts/apps/notafiscal/notafiscal.controllers.js"></script>
-    <script src="scripts/apps/fiscal/cfop.controllers.js"></script>
-    <script src="scripts/apps/fiscal/cnae.controllers.js"></script>
-    <script src="scripts/apps/vendas/pdVendas.controllers.js"></script>
-    <script src="scripts/apps/vendas/orcamento.controllers.js"></script>
-    <script src="scripts/apps/ordemServico/ordemServico.controllers.js"></script>
-    <script src="scripts/apps/compras/nfEntrada.controllers.js"></script>
-    <script src="scripts/apps/compras/pdCompras.controllers.js"></script>
-    <script src="scripts/apps/compras/cotacao.controllers.js"></script>
-    <script src="scripts/apps/financeiro/contasPagar.controllers.js"></script>
-    <script src="scripts/apps/financeiro/contasReceber.controllers.js"></script>
-    <script src="scripts/apps/financeiro/formaPg.controllers.js"></script>
-    <script src="scripts/apps/financeiro/banco.controllers.js"></script>
-    <script src="scripts/apps/financeiro/agencia.controllers.js"></script>
-    <script src="scripts/apps/financeiro/conta.controllers.js"></script>
-    <script src="scripts/apps/Dp/funcionario.controllers.js"></script>
-    <script src="scripts/apps/cadastros/cliente.controllers.js"></script>
-    <script src="scripts/apps/cadastros/fornecedor.controllers.js"></script>
-    <script src="scripts/apps/cadastros/transportador.controllers.js"></script>
-    <script src="scripts/apps/cadastros/convenio.controllers.js"></script>
-    <script src="scripts/apps/cadastros/deposito.controllers.js"></script>
-    <script src="scripts/apps/cadastros/estado.controllers.js"></script>
-    <script src="scripts/apps/cadastros/filial.controllers.js"></script>
-    <script src="scripts/apps/produto/categoria.controllers.js"></script>
-    <script src="scripts/apps/produto/unimed.controllers.js"></script>
-    <script src="scripts/apps/produto/marca.controllers.js"></script>
-    <script src="scripts/apps/produto/servico.controllers.js"></script>
-    <script src="scripts/apps/controleProducao/ordemProducao.controllers.js"></script>
-    <script src="scripts/apps/cadastros/convenio.controllers.js"></script>
-    <script src="scripts/apps/cadastros/cidade.controllers.js"></script>
-    <script src="scripts/apps/cadastros/filial.controllers.js"></script>
-    <script src="scripts/apps/cadastros/almoxarifado.controllers.js"></script>
-    <script src="scripts/apps/advogado/processo.controllers.js"></script>
-
-    <script src="scripts/apps/gerencia/cadEmpresa.controllers.js"></script>
-    <script src="scripts/apps/gerencia/site.controllers.js"></script>
-    <script src="scripts/apps/gerencia/plano.controllers.js"></script>
-    <script src="scripts/apps/gerencia/servicos.controllers.js"></script>
-    <script src="scripts/apps/gerencia/usuarios.controllers.js"></script>
-    <script src="scripts/apps/gerencia/contatos.controllers.js"></script>
-    <script src="scripts/apps/gerencia/historico.controllers.js"></script>
-
-
-    <script src="scripts/apps/dicionario/campos.controllers.js"></script>
-    <script src="scripts/apps/dicionario/relatorios.controllers.js"></script>
-    <script src="scripts/apps/dicionario/tabelas.controllers.js"></script>
-    <script src="scripts/apps/dicionario/tela.controllers.js"></script>
-
-    <script src="scripts/apps/gerencia/permissoes.controllers.js"></script>
-
-
     <script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script src="assets/smooth-scroll/SmoothScroll.js"></script>
-    <script src="assets/bootstrap-carousel-swipe/bootstrap-carousel-swipe.js"></script>
-
-    <script src="assets/mobirise/js/script.js"></script>
 
 
+        <!--webdaptive -->
+        <script src="scripts/wdapp.js"></script>
+
+        <script src="scripts/commons/wdapp.controllers.js"></script>
+        <script src="scripts/commons/wdapp.directives.js"></script>
+        <script src="scripts/commons/wdapp.localization.all.js"></script>
+        <script src="scripts/commons/wdapp.demodata.factory.js"></script>
+        <script src="scripts/commons/wdapp.authentication.factory.js"></script>
+        <script src="scripts/commons/wdapp.httpinterceptors.factory.js"></script>
+        <script src="scripts/factory/wdapp.commons.factory.js"></script>
+        <script src="scripts/models/domain.objects.js"></script>
+        <script src="scripts/models/request.objects.js"></script>
+        <script src="scripts/models/domain.selects.js"></script>
+
+        <script src="scripts/ui/ui.controllers.js"></script>
+        <script src="scripts/forms/forms.directives.js"></script>
+        <script src="scripts/forms/forms.controllers.js"></script>
+        <script src="scripts/tables/tables.controllers.js"></script>
+        <script src="scripts/tasks/tasks.all.js"></script>
+        <script src="scripts/charts/charts.chartjs.controllers.js"></script>
+        <script src="scripts/charts/charts.flot.controllers.js"></script>
+        <script src="scripts/charts/charts.morris.controllers.js"></script>
+        <script src="scripts/charts/charts.other.controllers.js"></script>
+        <script src="scripts/charts/charts.echarts.controllers.js"></script>
+        <script src="scripts/charts/charts.directives.js"></script>
+        <script src="scripts/apps/util/util.controllers.js"></script>
+        <script src="scripts/pages/pages.controllers.js"></script>
+        <script src="scripts/apps/stocks.controllers.js"></script>
+        <script src="scripts/apps/stocks.factory.js"></script>
+        <script src="scripts/apps/counties.controllers.js"></script>
+        <script src="scripts/models/validation.objects.js"></script>
+        <script src="scripts/apps/procedures.controllers.js"></script>
+        <script src="scripts/apps/sysmgmt.data.factory.js"></script>
+        <script src="scripts/apps/site.controllers.js"></script>
+        <script src="scripts/apps/empresa.controllers.js"></script>
+        <script src="scripts/apps/produto/produto.controllers.js"></script>
+        <script src="scripts/apps/notafiscal/notafiscal.controllers.js"></script>
+
+        <script src="scripts/apps/fiscal/cfop.controllers.js"></script>
+        <script src="scripts/apps/fiscal/cnae.controllers.js"></script>
+        <script src="scripts/apps/vendas/pdVendas.controllers.js"></script>
+        <script src="scripts/apps/vendas/notafiscal.controllers.js"></script>
+        <script src="scripts/apps/vendas/orcamento.controllers.js"></script>
+        <script src="scripts/apps/ordemServico/ordemServico.controllers.js"></script>
+        <script src="scripts/apps/compras/nfEntrada.controllers.js"></script>
+        <script src="scripts/apps/compras/pdCompras.controllers.js"></script>
+        <script src="scripts/apps/compras/cotacao.controllers.js"></script>
+        <script src="scripts/apps/financeiro/contasPagar.controllers.js"></script>
+        <script src="scripts/apps/financeiro/contasReceber.controllers.js"></script>
+        <script src="scripts/apps/financeiro/formaPg.controllers.js"></script>
+        <script src="scripts/apps/financeiro/banco.controllers.js"></script>
+        <script src="scripts/apps/financeiro/agencia.controllers.js"></script>
+        <script src="scripts/apps/financeiro/conta.controllers.js"></script>
+        <script src="scripts/apps/Dp/funcionario.controllers.js"></script>
+        <script src="scripts/apps/cadastros/cliente.controllers.js"></script>
+        <script src="scripts/apps/cadastros/fornecedor.controllers.js"></script>
+        <script src="scripts/apps/cadastros/transportador.controllers.js"></script>
+        <script src="scripts/apps/cadastros/convenio.controllers.js"></script>
+        <script src="scripts/apps/cadastros/deposito.controllers.js"></script>
+        <script src="scripts/apps/cadastros/estado.controllers.js"></script>
+        <script src="scripts/apps/cadastros/filial.controllers.js"></script>
+        <script src="scripts/apps/produto/categoria.controllers.js"></script>
+        <script src="scripts/apps/produto/unimed.controllers.js"></script>
+        <script src="scripts/apps/produto/marca.controllers.js"></script>
+        <script src="scripts/apps/produto/servico.controllers.js"></script>
+        <script src="scripts/apps/controleProducao/ordemProducao.controllers.js"></script>
+        <script src="scripts/apps/cadastros/convenio.controllers.js"></script>
+        <script src="scripts/apps/cadastros/cidade.controllers.js"></script>
+        <script src="scripts/apps/cadastros/filial.controllers.js"></script>
+        <script src="scripts/apps/cadastros/almoxarifado.controllers.js"></script>
+        <script src="scripts/apps/advogado/processo.controllers.js"></script>
+
+        <script src="scripts/apps/gerencia/cadEmpresa.controllers.js"></script>
+        <script src="scripts/apps/gerencia/site.controllers.js"></script>
+        <script src="scripts/apps/gerencia/plano.controllers.js"></script>
+        <script src="scripts/apps/gerencia/servicos.controllers.js"></script>
+        <script src="scripts/apps/gerencia/usuarios.controllers.js"></script>
+        <script src="scripts/apps/gerencia/contatos.controllers.js"></script>
+        <script src="scripts/apps/gerencia/historico.controllers.js"></script>
+
+
+        <script src="scripts/apps/dicionario/campos.controllers.js"></script>
+        <script src="scripts/apps/dicionario/relatorios.controllers.js"></script>
+        <script src="scripts/apps/dicionario/tabelas.controllers.js"></script>
+        <script src="scripts/apps/dicionario/tela.controllers.js"></script>
+
+        <script src="scripts/apps/gerencia/permissoes.controllers.js"></script>
+
+        <script src="scripts/factory/empresa/empresa.factory.js"></script>
+        <script src="scripts/factory/site/site.factory.js"></script>
+        <script src="scripts/factory/pessoa/pessoa.factory.js"></script>
+        <script src="scripts/factory/produto/produto.factory.js"></script>
+        <script src="scripts/factory/wdapp.datatables.factory.js"></script>
+        <script src="scripts/factory/wdapp.initPage.factory.js"></script>
+        <script src="scripts/models/domain.factory.js"></script>
+        <script src="scripts/util/ngAutocomplete.js"></script>
+        <script src="scripts/directive/inputaction.directive.js"></script>
 
 
 
-    <!---->
 
 
-</body>
+
+
+
+         <!---->
+
+
+    </body>
 
 </html>
