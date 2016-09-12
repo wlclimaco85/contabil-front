@@ -21,7 +21,15 @@
 	      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
 	    }
 		this.emprId = _emprId;
-		
+
+	};
+
+	//RefreshRequest Object
+	qat.model.refreshRequest = function( _iInt, _bList, _bPagedList)
+	{
+		this.refreshInt = _iInt;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
 	};
 
 	//RefreshRequest Object
