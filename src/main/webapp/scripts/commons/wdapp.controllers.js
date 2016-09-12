@@ -115,6 +115,19 @@
 					          });
 
 
+						SysMgmtData.processPostPageData("main/api/request",{
+		                    url: "entidade/api/transaction/fetch",
+							token : authToken,
+							request: new qat.model.transactionInquiryRequest(new  qat.model.transaction(authToken, currentUser.user), 100/20, true,currentUser.user,null,null)}, function(res){
+		                    	debugger
+								if(res.operationSuccess == true)
+								{
+									localStorageService.set('transaction', res.transactionList[0].id);
+									localStorage.setItem("transaction", JSON.stringify(res.empresaList[0]).id);
+								}
+					          });
+
+
 						$rootScope.main.name = authenticationResult.name;
 						localStorageService.set('currentUser', $rootScope.user);
 						var tempRole = "";

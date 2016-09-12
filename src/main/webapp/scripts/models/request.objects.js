@@ -21,7 +21,15 @@
 	      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
 	    }
 		this.emprId = _emprId;
-		
+
+	};
+
+	//RefreshRequest Object
+	qat.model.refreshRequest = function( _iInt, _bList, _bPagedList)
+	{
+		this.refreshInt = _iInt;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
 	};
 
 	//RefreshRequest Object
@@ -185,6 +193,21 @@
 	    }else{
 	      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
 	    }
+		this.pageSize = 20;
+		this.userId = _userId;
+		this.id = _id;
+		this.emprId = _emprId;
+		this.permissaoTypeEnumValue = _permissaoType;
+		this.startPage = _iStartPage;
+		this.sortExpressions = null;
+		this.preQueryCount = _bCount;
+		this.maxPreQueryCount = 0;
+	};
+
+	//empresaInquryRequest
+	qat.model.transactionInquiryRequest = function ( _transaction ,_iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
+	{
+		this.transaction = _transaction;
 		this.pageSize = 20;
 		this.userId = _userId;
 		this.id = _id;
