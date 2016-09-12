@@ -1,14 +1,12 @@
+<div id="quadroTransporte" class="bottomSpace NFCeHide">
+    <h2>Dados do transporte</h2>
 
-    <div id="quadroTransporte" class="bottomSpace NFCeHide">
-        <h2>Dados do transporte</h2>
+    <div class="row">
 
-
-<div class="row">
-
-    <div class="form-group">
-        <label for="exampleInputPassword1">Modalidade do frete</label>
-        <div class="row ">
-           <span class="ui-select">
+        <div class="col-sm-4">
+            <label for="exampleInputPassword1">Modalidade do frete</label>
+            <div class="row ">
+                <span class="ui-select">
                 <select ng-model="tributacao.icms.motDesoneracao.id">
                     <option value="0">0 - Emitente</option>
                     <option value="1">1 - Destinatário</option>
@@ -16,132 +14,268 @@
                     <option value="9">9 - Sem frete</option>
                 </select>
             </span>
-         </div>                             
-    </div>
-    <div class="col-sm-5">
-                <label for="exampleInputPassword1">Nome transportador</label>
-                <div class="row ">
-                    <select name="book[0].produto" class="col-sm-12 selectProduto produto"></select>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <label for="exampleInputPassword1">Nome transportador</label>
+            <div class="row ">
+                <div class="input-group">
+                    <select name="book[0].produto"  class="col-sm-12 selectProduto produto"></select>
                     <span class="input-group-btn">
-                <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-question-sign"></i></button>
-            </span>
+                    <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-question-sign"></i></button>
+                </span>
                 </div>
             </div>
-    <div class="col-sm-2">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total BC ICMS</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
         </div>
     </div>
-    <div class="col-sm-2">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total ICMS</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">CNPJ/CPF transport.</label>
+                <div class="input-group">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-2">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total BC ICMS ST</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Inscr. Est. transp.</label>
+                <div class="input-group">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total ICMS ST</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Placa veículo</label>
+                <div class="input-group">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total bruto dos produtos</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-</div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">UF veículo</label>
 
-
-        <table>
-            <tbody>
-                <tr>
-                    <td class="boxField" id="XmodFrete_rcpt"><label for="XmodFrete"> <span>Modalidade do frete</span></label><select id="XmodFrete" class="undefined ui-widget-content ui-corner-all" name="XmodFrete" autocomplete="off">
+                <div class="row ">
+                    <div class="input-group">
+                        <span class="input-group-addon fa fa-list-ol"></span>
+                        <span class="ui-select">
+                <select ng-model="tributacao.icms.motDesoneracao.id">
                     <option value="0">0 - Emitente</option>
                     <option value="1">1 - Destinatário</option>
                     <option value="2">2 - Terceiros</option>
                     <option value="9">9 - Sem frete</option>
-                    </select></td>
-                    <td class="boxField" id="XxNome_rcpt"><label for="XxNome"> <span class="labelIconClick" onclick="acLabelClick('XxNome');"><span class="ui-icon ui-icon-search"></span>Listar 50</span><span>Nome transportador</span></label><input type="text" id="XxNome" class="undefined ui-widget-content ui-corner-all ui-autocomplete-input" name="XxNome" autocomplete="off" minsize="2" maxsize="60"></td>
-                    <td class="boxField" id="XCNPJ_rcpt"><label for="XCNPJ"> <span>CNPJ/CPF transport.</span></label><input type="text" id="XCNPJ" class="undefined ui-widget-content ui-corner-all" name="XCNPJ" autocomplete="off" especialtype="cpfcnpj"></td>
-                    <td class="boxField" id="XIE_rcpt"><label for="XIE"> <span>Inscr. Est. transp.</span></label><input type="text" id="XIE" class="undefined ui-widget-content ui-corner-all" name="XIE" autocomplete="off" especialtype="string" minsize="2" maxsize="14"></td>
-                    <td class="boxField" id="XxEnder_rcpt"><label for="XxEnder"> <span>Endereço completo</span></label><input type="text" id="XxEnder" class="undefined ui-widget-content ui-corner-all" name="XxEnder" autocomplete="off" especialtype="string" maxsize="60"></td>
-                </tr>
-                <tr>
-                    <td class="boxField" id="XUF_rcpt"><label for="XUF"> <span>UF transportador</span></label><select id="XUF" class="undefined ui-widget-content ui-corner-all" name="XUF" autocomplete="off"><option value=""></option><option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option><option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option><option value="MT">MT</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option><option value="PI">PI</option><option value="PR">PR</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RO">RO</option><option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option><option value="SE">SE</option><option value="SP">SP</option><option value="TO">TO</option></select></td>
-                    <td class="boxField" id="XxMun_rcpt"><label for="XxMun"> <span>Município transp.</span></label><input type="text" id="XxMun" class="undefined ui-widget-content ui-corner-all" name="XxMun" autocomplete="off" especialtype="string" maxsize="60"></td>
-                    <td class="boxField" id="Xplaca_rcpt"><label for="Xplaca"> <span>Placa veículo</span></label><input type="text" id="Xplaca" class="undefined ui-widget-content ui-corner-all" name="Xplaca" autocomplete="off" especialtype="string" minsize="6" maxsize="7"></td>
-                    <td class="boxField" id="XvUF_rcpt"><label for="XvUF"> <span>UF veículo</span></label><select id="XvUF" class="undefined ui-widget-content ui-corner-all" name="XvUF" autocomplete="off"><option value=""></option><option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option><option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option><option value="MT">MT</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option><option value="PI">PI</option><option value="PR">PR</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RO">RO</option><option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option><option value="SE">SE</option><option value="SP">SP</option><option value="TO">TO</option></select></td>
-                    <td class="boxField" id="XRNTC_rcpt"><label for="XRNTC"> <span>Reg. Nac. Trans. Carga</span></label><input type="text" id="XRNTC" class="undefined ui-widget-content ui-corner-all" name="XRNTC" autocomplete="off" especialtype="string" maxsize="20"></td>
-                </tr>
-                <tr>
-                    <td class="boxField" id="Xvagao_rcpt"><label for="Xvagao"> <span>Identificação vagão</span></label><input type="text" id="Xvagao" class="undefined ui-widget-content ui-corner-all" name="Xvagao" autocomplete="off" especialtype="string" maxsize="20"></td>
-                    <td class="boxField" id="Xbalsa_rcpt"><label for="Xbalsa"> <span>Identificação balsa</span></label><input type="text" id="Xbalsa" class="undefined ui-widget-content ui-corner-all" name="Xbalsa" autocomplete="off" especialtype="string" maxsize="20"></td>
-                    <td class="boxField" id="meuRetTrans_rcpt" colspan="3"><label for="meuRetTrans"><input type="checkbox" id="meuRetTrans" class="undefined ui-widget-content ui-corner-all" name="meuRetTrans" autocomplete="off" value="1"> <span>Informar retenções de ICMS de transporte</span></label></td>
-                </tr>
-            </tbody>
-        </table>
+                </select>
+            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div id="quadroRetTrans" class="bottomSpace NFCeHide" style="display: none;">
-        <h2>Retenção ICMS transporte</h2>
-        <table>
-            <tbody>
-                <tr>
-                    <td class="boxField" id="XvServ_rcpt"><label for="XvServ"> <span>Valor do serviço</span></label><input type="text" id="XvServ" class="undefined ui-widget-content ui-corner-all requiredField" name="XvServ" autocomplete="off" especialtype="money"></td>
-                    <td class="boxField" id="XvBCRet_rcpt"><label for="XvBCRet"> <span>BC retenção ICMS</span></label><input type="text" id="XvBCRet" class="undefined ui-widget-content ui-corner-all requiredField" name="XvBCRet" autocomplete="off" especialtype="money"></td>
-                    <td class="boxField" id="XpICMSRet_rcpt"><label for="XpICMSRet"> <span>Alíq. da retenção</span></label><input type="text" id="XpICMSRet" class="undefined ui-widget-content ui-corner-all requiredField" name="XpICMSRet" autocomplete="off" especialtype="money" maxsize="8"></td>
-                    <td class="boxField" id="XvICMSRet_rcpt"><label for="XvICMSRet"> <span>Valor ICMS retido</span></label><input type="text" id="XvICMSRet" class="undefined ui-widget-content ui-corner-all requiredField" name="XvICMSRet" autocomplete="off" especialtype="money"></td>
-                    <td class="boxField" id="XCFOP_rcpt"><label for="XCFOP"> <span>CFOP transp</span></label><select id="XCFOP" class="undefined ui-widget-content ui-corner-all requiredField" name="XCFOP" autocomplete="off"><option value="5351">5351</option><option value="5352">5352</option><option value="5353">5353</option><option value="5354">5354</option><option value="5355">5355</option><option value="5356">5356</option><option value="5357">5357</option><option value="5359">5359</option><option value="5360">5360</option><option value="5931">5931</option><option value="5932">5932</option><option value="6351">6351</option><option value="6352">6352</option><option value="6353">6353</option><option value="6354">6354</option><option value="6355">6355</option><option value="6356">6356</option><option value="6357">6357</option><option value="6359">6359</option><option value="6360">6360</option><option value="6931">6931</option><option value="6932">6932</option><option value="7358">7358</option></select></td>
-                    <td class="boxField" id="XUFFG_rcpt"><label for="XUFFG"> <span>UF do ICMS</span></label><select id="XUFFG" class="undefined ui-widget-content ui-corner-all requiredField" name="XUFFG" autocomplete="off"><option value=""></option><option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option><option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option><option value="MT">MT</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option><option value="PI">PI</option><option value="PR">PR</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RO">RO</option><option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option><option value="SE">SE</option><option value="SP">SP</option><option value="TO">TO</option></select></td>
-                    <td class="boxField" id="XcMunFG_rcpt"><label for="XcMunFG"> <span>Município do ICMS</span></label><select id="XcMunFG" class="undefined ui-widget-content ui-corner-all requiredField" name="XcMunFG" autocomplete="off"><option value="0">- Selecione o estado -</option></select></td>
-                </tr>
-            </tbody>
-        </table>
+    <!-- Endereco -->
+    <div ng-include="'views/util/apps/endereco.html'"></div>
+
+    <!--          TELEFONE  -->
+
+    <div ng-include="'views/util/apps/telefone.html'"></div>
+
+    <!--          Email Empresa  -->
+
+    <div ng-include="'views/util/apps/email.html'"></div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Reg. Nac. Trans. Carga</label>
+                <div class="input-group">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Identificação vagão</label>
+                <div class="input-group">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Identificação balsa</label>
+                <div class="input-group">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="bottomSpace NFCeHide">
-        <h2>Volumes transportados</h2>
-        <table>
-            <tbody>
-                <tr>
-                    <td class="boxField" id="XqVol_rcpt"><label for="XqVol"> <span>Quantidade de vol.</span></label><input type="text" id="XqVol" class="undefined ui-widget-content ui-corner-all" name="XqVol" autocomplete="off" especialtype="integer" maxsize="15"></td>
-                    <td class="boxField" id="Xesp_rcpt"><label for="Xesp"> <span>Espécie dos vol.</span></label><input type="text" id="Xesp" class="undefined ui-widget-content ui-corner-all" name="Xesp" autocomplete="off" especialtype="string" maxsize="60"></td>
-                    <td class="boxField" id="Xmarca_rcpt"><label for="Xmarca"> <span>Marca dos volumes</span></label><input type="text" id="Xmarca" class="undefined ui-widget-content ui-corner-all" name="Xmarca" autocomplete="off" especialtype="string" maxsize="60"></td>
-                    <td class="boxField" id="XnVol_rcpt"><label for="XnVol"> <span>Numeração dos vol.</span></label><input type="text" id="XnVol" class="undefined ui-widget-content ui-corner-all" name="XnVol" autocomplete="off" especialtype="string" maxsize="60"></td>
-                    <td class="boxField" id="XpesoL_rcpt"><label for="XpesoL"> <span>Peso líquido</span></label><input type="text" id="XpesoL" class="undefined ui-widget-content ui-corner-all" name="XpesoL" autocomplete="off" especialtype="money" maxsize="15"></td>
-                    <td class="boxField" id="XpesoB_rcpt"><label for="XpesoB"> <span>Peso bruto</span></label><input type="text" id="XpesoB" class="undefined ui-widget-content ui-corner-all" name="XpesoB" autocomplete="off" especialtype="money" maxsize="15"></td>
-                    <td class="boxField" id="Xlacres_rcpt"><label for="Xlacres"> <span>Números dos lacres</span></label><input type="text" id="Xlacres" class="undefined ui-widget-content ui-corner-all" name="Xlacres" autocomplete="off" especialtype="string"></td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="col-sm-12">
+
+            <label for="BindFinal"><input type="checkbox" id="BindFinal" class="destDados ui-widget-content ui-corner-all" name="BindFinal" autocomplete="off" value="1"> <span>Informar retenções de ICMS de transporte</span></label>
+        </div>
     </div>
 
-   
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Valor do serviço</label>
+                <div class="input-group">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="exampleInputPassword1">BC retenção ICMS</label>
+                <div class="input-group">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Alíq. da retenção</label>
+                <div class="input-group">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="exampleInputPassword1">CFOP transp</label>
+
+                <div class="row ">
+                    <div class="input-group">
+                        <span class="input-group-addon fa fa-list-ol"></span>
+                        <span class="ui-select">
+                <select ng-model="tributacao.icms.motDesoneracao.id">
+                    <option value="0">0 - Emitente</option>
+                    <option value="1">1 - Destinatário</option>
+                    <option value="2">2 - Terceiros</option>
+                    <option value="9">9 - Sem frete</option>
+                </select>
+            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="exampleInputPassword1">UF do ICMS</label>
+
+                <div class="row ">
+                    <div class="input-group">
+                        <span class="input-group-addon fa fa-list-ol"></span>
+                        <span class="ui-select">
+                <select ng-model="tributacao.icms.motDesoneracao.id">
+                    <option value="0">0 - Emitente</option>
+                    <option value="1">1 - Destinatário</option>
+                    <option value="2">2 - Terceiros</option>
+                    <option value="9">9 - Sem frete</option>
+                </select>
+            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Município do ICMS</label>
+                <div class="input-group">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Quantidade de vol.</label>
+                <div class="input-group">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Espécie dos vol.</label>
+                <div class="input-group">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Marca dos volumes</label>
+                <div class="input-group">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Numeração dos vol.</label>
+                <div class="input-group">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Peso líquido</label>
+                <div class="input-group">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Peso bruto</label>
+                <div class="input-group">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Números dos lacres</label>
+                <div class="input-group">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>

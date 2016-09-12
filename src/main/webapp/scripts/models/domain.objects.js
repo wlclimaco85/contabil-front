@@ -316,9 +316,16 @@ qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
 
   qat.model.fnProduto =function(_produto,_modelAction,_userId)
   {
-    var _id=null
-    if(_produto.id == "" || _produto.id == " "){
+    debugger
+    var _id=null;
+    if(_produto.id != "" || _produto.id == " "){
       _id = null;
+    }
+    var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
     }
       produto  = {
         id             : _id,
@@ -338,7 +345,7 @@ qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
         InfaddNFe      : _produto.InfaddNFe,
         AnotInt        : _produto.AnotInt,
         parentId       : 0,
-        emprId         : JSON.parse(localStorage.getItem('empresa')).id,
+        emprId         : _emprId,
         processId      : 0,
         tableEnumValue : 0,
         userId         : _userId,
@@ -355,9 +362,15 @@ qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
 
   qat.model.fnTributacao =function(_tributacao,_modelAction,_userId)
   {
-    var _id=null
+    var _id = null;
     if(_tributacao.id == "" || _tributacao.id == " "){
       _id = null;
+    }
+    var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
     }
   //  debugger
       tributacao  = {
@@ -369,7 +382,7 @@ qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
         cofins         : qat.model.fnCOFINS(_tributacao.cofins,_modelAction,_userId),
         ipi            : qat.model.fnIPI(_tributacao.ipi,_modelAction,_userId),
         parentId       : 0,
-        emprId         : JSON.parse(localStorage.getItem('empresa')).id,
+        emprId         : _emprId,
         processId      : 0,
         tableEnumValue : 0,
         userId         : _userId,
@@ -387,6 +400,12 @@ qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
 
   qat.model.fnCfop = function(_cfop,_modelAction,_userId)
   {
+    var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
       var cfop  = {
          id               : _cfop.id,
          cfop             : _cfop.cfop,
@@ -399,7 +418,7 @@ qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
          cstPrincipal     : _cfop.cstPrincipal,
          classFiscal      : _cfop.classFiscal,
          observacao       : _cfop.observacao,
-         emprId           : JSON.parse(localStorage.getItem('empresa')).id,
+         emprId           : _emprId,
          tableEnumValue   : 53,
          userId           : _userId,
          modelAction      : _modelAction,
@@ -414,7 +433,13 @@ qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
 
   qat.model.fnICMS = function(_cfop,_modelAction,_userId)
   {
-         _cfop.emprId         = JSON.parse(localStorage.getItem('empresa')).id,
+    var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
+         _cfop.emprId         = _emprId,
          _cfop.tableEnumValue = 53,
          _cfop.userId         = _userId,
          _cfop.modelAction    = _modelAction,
@@ -429,9 +454,15 @@ qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
 
   qat.model.fnPIS = function(_cfop,_modelAction,_userId)
   {
+    var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
 
 
-         _cfop.emprId         = JSON.parse(localStorage.getItem('empresa')).id,
+         _cfop.emprId         = _emprId,
          _cfop.tableEnumValue = 53,
          _cfop.userId         = _userId,
          _cfop.modelAction    = _modelAction,
@@ -447,8 +478,14 @@ qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
   qat.model.fnCOFINS = function(_cfop,_modelAction,_userId)
   {
 
+var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
 
-         _cfop.emprId         = JSON.parse(localStorage.getItem('empresa')).id,
+         _cfop.emprId         = _emprId,
          _cfop.tableEnumValue = 53,
          _cfop.userId         = _userId,
          _cfop.modelAction    = _modelAction,
@@ -464,7 +501,14 @@ qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
   qat.model.fnIPI = function(_cfop,_modelAction,_userId)
   {
 
-         _cfop.emprId         = JSON.parse(localStorage.getItem('empresa')).id,
+    var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
+
+         _cfop.emprId         = _emprId,
          _cfop.tableEnumValue = 53,
          _cfop.userId         = _userId,
          _cfop.modelAction    = _modelAction,
@@ -481,10 +525,16 @@ qat.model.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
 
   qat.model.fnPlanoByServico=function(_id,_modelAction)
         {
+          var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
             emails  = {
                typeValue : 0,
                servico : {id : _id},
-               emprId         : JSON.parse(localStorage.getItem('empresa')).id,
+               emprId         : _emprId,
                tableEnumValue : 53,
                modelAction    : _modelAction,
                createUser     : "System",

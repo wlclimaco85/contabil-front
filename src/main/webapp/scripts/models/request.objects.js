@@ -13,7 +13,15 @@
 	//FetchByIdRequest Object
 	qat.model.PagedInquiryRequest = function( _iEmprId)
 	{
-		this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+		var _emprId = null;
+		debugger
+	    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+	      _emprId = null;
+	    }else{
+	      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	    }
+		this.emprId = _emprId;
+		
 	};
 
 	//RefreshRequest Object
@@ -172,10 +180,16 @@
 	//empresaInquryRequest
 	qat.model.empresaInquiryRequest = function ( _iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
 	{
+		var _emprId = null;
+	    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+	      _emprId = null;
+	    }else{
+	      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	    }
 		this.pageSize = 20;
 		this.userId = _userId;
 		this.id = _id;
-		this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+		this.emprId = _emprId;
 		this.permissaoTypeEnumValue = _permissaoType;
 		this.startPage = _iStartPage;
 		this.sortExpressions = null;
