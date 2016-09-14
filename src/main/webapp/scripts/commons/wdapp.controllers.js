@@ -123,7 +123,7 @@
 								if(res.operationSuccess == true)
 								{
 									localStorageService.set('transaction', res.transactionList[0].id);
-									localStorage.setItem("transaction", JSON.stringify(res.empresaList[0]).id);
+									localStorage.setItem("transaction", JSON.stringify(res.transactionList[0]).id);
 								}
 					          });
 

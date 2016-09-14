@@ -241,4 +241,20 @@
 		this.returnList = _bList;
 		this.returnListPaged = _bPagedList;
 	};
+	
+	//empresaInquryRequest
+ 	qat.model.transactionInquiryRequest = function ( _transaction ,_iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
+ 	{
+ 		this.transaction = _transaction;
+ 		this.pageSize = 20;
+ 		this.userId = _userId;
+ 		this.id = _id;
+ 		this.emprId = _emprId;
+ 		this.permissaoTypeEnumValue = _permissaoType;
+ 		this.startPage = _iStartPage;
+ 		this.sortExpressions = null;
+ 		this.preQueryCount = _bCount;
+ 		this.maxPreQueryCount = 0;
+ 	};
+
 
