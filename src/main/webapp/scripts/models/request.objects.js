@@ -207,7 +207,7 @@
 	//empresaInquryRequest
 	qat.model.transactionInquiryRequest = function ( _transaction ,_iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
 	{
-		this.transaction = _transaction;
+		//this.transaction = _transaction;
 		this.pageSize = 20;
 		this.userId = _userId;
 		this.id = _id;

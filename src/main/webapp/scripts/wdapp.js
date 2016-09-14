@@ -361,7 +361,10 @@ var WebDaptiveAppConfig = {
 		if (localStorageService.get('authToken') !==  null){
 			$rootScope.authToken = localStorageService.get('authToken');
 			$rootScope.user = localStorageService.get('currentUser');
-			$rootScope.main.name = 	$rootScope.user.user;
+			if($rootScope.user != undefined)
+				$rootScope.main.name = 	$rootScope.user.user;
+			else
+				$rootScope.main.name = "Anonimo";
 			$rootScope.displayRoles = localStorageService.get('displayRoles');
 		}
 

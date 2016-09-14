@@ -321,7 +321,7 @@ public class DicionarioTest {
 	        HttpEntity<String> entitys = new HttpEntity<String>(jsonInString,headers);
 	        FieldResponse result = restTemplate.postForObject( REST_SERVICE_URI + "dicionario/api/field/fetchPage/",entitys,  FieldResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
-	        count = result.getFieldList().size();
+	  //      count = result.getFieldList().size();
 
 
 	      //=========== Insert ================================================================

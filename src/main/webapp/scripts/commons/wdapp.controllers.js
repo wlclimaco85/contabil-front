@@ -118,7 +118,7 @@
 						SysMgmtData.processPostPageData("main/api/request",{
 		                    url: "entidade/api/transaction/fetch",
 							token : authToken,
-							request: new qat.model.transactionInquiryRequest(new  qat.model.transaction(authToken, currentUser.user), 100/20, true,currentUser.user,null,null)}, function(res){
+							request: new qat.model.transactionInquiryRequest(new  qat.model.transaction(currentUser.user,authToken), 100/20, true,currentUser.user,null,null)}, function(res){
 		                    	debugger
 								if(res.operationSuccess == true)
 								{
