@@ -29,8 +29,6 @@
 		this.version = _version;
 	};
 
-
-
 	/** create by system gera-java version 1.0.0 19/05/2016 15:9 : 2*/
 
 //Servico Object
@@ -235,19 +233,6 @@ qat.model.fnCnaeEmpresa = function(_oObjet)
                        modifyDateUTC  : (new Date()).getTime(),
                     }
         }
-
-//Procedure Object
-qat.model.transaction = function(_toquen, _userId)
-{
-	return {
-		id = null;
-		token = _toquen;
-		inicioSession = (new Date()).getTime();
-		userId = _userId;
-	}
-
-};
-
 
 qat.model.fnTelefones =function(numero,id,type,modelAction)
         {
@@ -509,7 +494,7 @@ var _emprId = null;
          _cfop.modifyUser     = _userId,
          _cfop.modifyDateUTC  = (new Date()).getTime()
 
-
+  
       return _cfop;
   }
 
