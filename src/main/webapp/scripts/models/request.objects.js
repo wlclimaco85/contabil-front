@@ -56,6 +56,13 @@
 		this.returnListPaged = _bPagedList;
 	};
 
+	qat.model.reqRoles = function(_oCounty, _bList, _bPagedList)
+	{
+		this.role = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
+
 	qat.model.reqPlano = function(_oCounty, _bList, _bPagedList)
 	{
 		this.plano = _oCounty;
@@ -241,7 +248,7 @@
 		this.returnList = _bList;
 		this.returnListPaged = _bPagedList;
 	};
-	
+
 	//empresaInquryRequest
  	qat.model.transactionInquiryRequest = function ( _transaction ,_iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
  	{

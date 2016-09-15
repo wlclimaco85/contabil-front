@@ -14,7 +14,7 @@
         vm.delete = deleteRow;
         vm.dtInstance = {};
         vm.persons = {};
-        
+
         $scope.roles = {
             tipoPessoa: 2
         };
@@ -149,8 +149,8 @@
                 key: '1',
                 action: function(e, dt, node, config) {
 
-                    dialogFactory.dialog('views/cadastros/dialog/dRoles.html',"RolesInsertController",openDialogUpdateCreate);
-                   
+                    dialogFactory.dialog('views/entidade/dialog/dRoles.html',"RolesInsertController",openDialogUpdateCreate);
+
                 }
             }]);
         var aColumns =  [
@@ -159,10 +159,10 @@
                 vm.selected[full.id] = false;
                 return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
         }).withOption('width', '10px'),
-        DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'), 
+        DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
         DTColumnBuilder.newColumn('banco').withTitle('Banco'),
         DTColumnBuilder.newColumn('numRoles').withTitle('Nº Roles'),
-        DTColumnBuilder.newColumn('cep').withTitle('Cep'),    
+        DTColumnBuilder.newColumn('cep').withTitle('Cep'),
         DTColumnBuilder.newColumn('logradouro').withTitle('Logradouro'),
         DTColumnBuilder.newColumn('numero').withTitle('Numero'),
         DTColumnBuilder.newColumn('cidade').withTitle('Cidade'),
@@ -173,7 +173,7 @@
         DTColumnBuilder.newColumn('obs').withTitle('Observações').notVisible(),
         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '140px'), 
+        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '140px'),
     ];
 
         function rCallback(nRow, aData) {
@@ -185,22 +185,22 @@
         }
         var fnDataSRC = function(json) {
             console.log(json)
-            json['recordsTotal'] = json.rolesList.length
-            json['recordsFiltered'] = json.rolesList.length
+            json['recordsTotal'] = json.roleList.length
+            json['recordsFiltered'] = json.roleList.length
             json['draw'] = 1
             console.log(json)
-            return json.rolesList;
+            return json.roleList;
         }
-        Datatablessss.getTable('/financeiro/api/roles/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, oOptions, aColumns);
+        Datatablessss.getTable('entidade/api/role/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, oOptions, aColumns);
 
         function edit(person) {
             $rootScope.Roles = person;
-            dialogFactory.dialog('views/cadastros/dialog/dRoles.html',"RolesUpdateController",openDialogUpdateCreate);
+            dialogFactory.dialog('views/entidade/dialog/dRoles.html',"RolesUpdateController",openDialogUpdateCreate);
         }
 
         function deleteRow(person) {
-           dialogFactory.dialog('views/cadastros/dialog/dRoles.html',"RolesDeleteController",openDialogUpdateCreate);
-        } 
+           dialogFactory.dialog('views/entidade/dialog/dRoles.html',"RolesDeleteController",openDialogUpdateCreate);
+        }
 
         function createdRow(row, data, dataIndex) {
             // Recompiling so we can bind Angular directive to the DT
@@ -251,46 +251,17 @@
             var vm = this;
 
             $scope.roles = {}
-            $scope.enderecos = {}
-            
-            $scope.today = function() {
-                return $scope.dt = new Date();
-            };
-            $scope.today();
-            $scope.clear = function() {
-                return $scope.dt = null;
-            };
-            $scope.open = function($event) {
-                $event.preventDefault();
-                $event.stopPropagation();
-                return $scope.opened = true;
-            };
-            $scope.dateOptions = {
-                'year-format': "'yy'",
-                'starting-day': 0
-            };
-            $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
-            $scope.format = $scope.formats[1];
+
             var fnCallBack = function(oResponse) {
                 debugger
                 console.log(oResponse)
             }
             $scope.saveRoles = function() {
-                
-                var oObject = fModels.amont(fPessoa.fnMontObject($scope.roles,$scope.enderecos,"INSERT"),"INSERT");
-//var oObject = fModels.amont($scope.roles,"INSERT");
-var bb = [];
-                $('.numeroConta:visible').each(function() {
-                if($(this).length > 0)
-                {
-                    //.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
-                    bb.push(fModels.amont(qat.model.fnContaCC($(this).find('.numero').val(),$(this).find('.id').val(),$(this).find('.check-socio').prop('checked'),$(this).find('.saldo').val(),"INSERT"),"INSERT"));
-                }
-            });
-            oObject.numeroConta = bb;
-console.log(oObject);
+
+                var oObject = fModels.amont($scope.roles,"INSERT");
+
                 SysMgmtData.processPostPageData("main/api/request", {
-                    url: "financeiro/api/roles/insert/",
+                    url: "entidade/api/role/insert/",
                     token: $rootScope.authToken,
                     request: new qat.model.reqRoles(oObject, true, true)
                 }, function(res) {
