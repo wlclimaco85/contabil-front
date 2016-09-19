@@ -6,7 +6,7 @@
         data-collapse-nav
         data-highlight-active>
         <li><a href="#/dashboard"> <i class="fa fa-dashboard"></i><span data-i18n="pagina inicial"></span> </a></li>
-        <li class="Advocacia">
+        <li class="Advocacia" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA')">
             <a href="#/mail"><i class="fa fa-envelope-o"></i><span data-i18n="Advocacia"></span></a>
             <ul>
                 <li><a href="#/advogado/tables/processo"><i class="fa fa-caret-right"></i><span data-i18n="Processo"></span></a></li>
@@ -66,7 +66,7 @@
                       data-ng-show="taskRemainingCount > 0">{{taskRemainingCount}}</span>
             </a>
         </li>
-        <li class="clinica">
+        <li class="clinica" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_DOMAIN_USERS') || hasRole('ROLE_PACIENTE')">
             <a href="#/mail"><i class="fa fa-envelope-o"></i><span data-i18n="Clinica"></span></a>
             <ul>
                 <li><a href="#/clinica/cadConsulta"><i class="fa fa-caret-right"></i><span data-i18n="Consulta"></span></a></li>
@@ -75,7 +75,7 @@
                 <li><a href="#/clinica/cadPlanoSaude"><i class="fa fa-caret-right"></i><span data-i18n="Plano de Saude"></span></a></li>
             </ul>
         </li>
-        <li class="condominio">
+        <li class="condominio" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_DOMAIN_USERS') || hasRole('ROLE_CONDOMINIO')">
             <a href="#/mail"><i class="fa fa-envelope-o"></i><span data-i18n="Condominio"></span></a>
             <ul>
                 <li><a href="#/condominio/tables/avisos"><i class="fa fa-caret-right"></i><span data-i18n="Avisos"></span></a></li>
@@ -134,7 +134,7 @@
             </ul>
         </li>
         <li>
-            <a href="#/apps"><i class="fa fa-wrench"></i><span data-i18n="Dicionario"></span></a>
+            <a href="#/apps"><i class="fa fa-wrench"></i><span data-i18n="Dicionario" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_DOMAIN_USERS') || hasRole('ROLE_SISTEM')"></span></a>
             <ul>
                 <li><a href="#/dicionario/tables/tabelas"><i class="fa fa-caret-right"></i><span data-i18n="Tabelas"></span></a></li>
                 <li><a href="#/dicionario/tables/campos"><i class="fa fa-caret-right"></i><span data-i18n="Campos"></span></a></li>
