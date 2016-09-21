@@ -1,0 +1,60 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
+<!-- ------------------------------------- -->
+<!-- ------------------------------------- -->
+
+<!-- -------------------  Email Empresa ----------------- -->
+<div class="row">
+    <div class="col-sm-12">
+        <label for="exampleInputPassword1">Forma de Pagamento</label>
+        <select  name="atividade2"  class="select1 cnaeList col-sm-12">
+            <option></option>
+        </select>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function() {
+
+        $.ajax({
+           url: 'main/api/anonimo',
+           headers: { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json' 
+            },
+           data: JSON.stringify({
+                                        url: "financeiro/api/formaPg/fetchPage",
+                                        request: new qat.model.siteInquiryRequest( 100/20, true, null)}),
+           error: function() {
+
+              $('#info').html('<p>An error has occurred</p>');
+           },
+           dataType: 'json',
+           success: function(res) {
+              var cnaes = "";                  
+               if(res.operationSuccess == true)
+               {
+                   for(var x = 0 ;x < res.formaPgList.length;x++)
+                   {
+                       cnaes = cnaes + "<option value='"+res.formaPgList[x].id+"'> "+res.formaPgList[x].cnae+"</option>";
+                   }
+                    $('.cnaeList').append(cnaes);
+
+                    $(".select1").select2({
+                          placeholder: "Select a state",
+                          allowClear: true
+                        });
+               }
+           },
+           type: 'POST'
+        });
+
+
+            });
+    </script>
