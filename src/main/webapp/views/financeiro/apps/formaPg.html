@@ -353,23 +353,9 @@
         <div class="form-group col-sm-6">
             <label for="exampleInputPassword1">Tipo de documento padrão</label>
             <div class="row">
-                <select id="formasPgto_cod_tiposDoc" class="col-sm-12 select" ng-model="formaPg.tipoDoc.id">
-                  <option value="0"></option>
-                  <option value="1">Dinheiro</option>
-                  <option value="2">Cheque</option>
-                  <option value="3">Boleto</option>
-                  <option value="4">Cartão Crédito</option>
-                  <option value="5">Cartão Débito</option>
-                  <option value="6">Duplicata</option>
-                  <option value="7">Carnê</option>
-                  <option value="8">Transf. Eletrônica</option>
-                  <option value="9">Crédito Loja</option>
-                  <option value="10">Vale Alimentação</option>
-                  <option value="11">Vale Refeição</option>
-                  <option value="12">Vale Presente</option>
-                  <option value="13">Vale Combustível</option>
-                  <option value="14">Sem documento</option>
-              </select>
+                <select id="formasPgto_cod_tiposDoc" class="col-sm-12 select formasPgto_cod_tiposDoc" ng-model="formaPg.tipoDoc.id">
+
+                </select>
             </div>
         </div>
     </div>
@@ -399,8 +385,31 @@
     <script>
         $(document).ready(function() {
 
-            $(".select").select2({
-            });
+
+            var callbackBanco = function(res){
+                var planos = "";
+
+               if(res.operationSuccess == true)
+               {
+
+                   for(var x = 0 ;x < res.doisValoresList.length;x++)
+                   {
+                       planos = planos + "<option value='"+res.doisValoresList[x].value+"'> "+res.doisValoresList[x].nome+" </option>";
+                   }
+
+                    $('.formasPgto_cod_tiposDoc').append(planos);
+
+                    $(".select").select2({
+                          placeholder: "Selecione o BANCO",
+                          allowClear: true
+                        });
+               }
+
+            }
+
+            qat.model.select.util("entidade/api/doisValores/fetchPage",true,new qat.model.doisValoresInquiryRequest(1, 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackBanco);
+
+
 
         });
     </script>

@@ -150,7 +150,7 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
                 action: function(e, dt, node, config) {
 
                     dialogFactory.dialog('views/produto/dialog/dProduto.html',"ProdutoInsertController",openDialogUpdateCreate);
-                   
+
                 }
             }]);
         var aColumns = [
@@ -160,8 +160,8 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
                 return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
         }).withOption('width', '10px'),
         DTColumnBuilder.newColumn('id').withTitle('ID').withOption('width', '10px').notVisible(),
-        DTColumnBuilder.newColumn('codigo').withTitle('Codigo').withOption('width', '30px'), 
-        DTColumnBuilder.newColumn('produto').withTitle('Nome Produto').withOption('width', '100px'), 
+        DTColumnBuilder.newColumn('codigo').withTitle('Codigo').withOption('width', '30px'),
+        DTColumnBuilder.newColumn('produto').withTitle('Nome Produto').withOption('width', '100px'),
         DTColumnBuilder.newColumn('nCM').withTitle('NCM'),
         DTColumnBuilder.newColumn('codbarra').withTitle('Cod Barra'),
         DTColumnBuilder.newColumn('dataCadastro').withTitle('Data Cadastro').notVisible(),
@@ -195,7 +195,7 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
         DTColumnBuilder.newColumn('valorTribCOFINS').withTitle('valorTribCOFINS').notVisible(),
         DTColumnBuilder.newColumn('tipoCalculoSubstTrib').withTitle('tipoCalculoSubstTrib').notVisible(),
         DTColumnBuilder.newColumn('aliquotaCOFINSST').withTitle('aliquotaCOFINSST').notVisible(),
-        DTColumnBuilder.newColumn('estMinimo').withTitle('estMinimo').notVisible(),       
+        DTColumnBuilder.newColumn('estMinimo').withTitle('estMinimo').notVisible(),
         DTColumnBuilder.newColumn('estMaximo').withTitle('estMaximo').notVisible(),
         DTColumnBuilder.newColumn('margemLucro').withTitle('margemLucro').notVisible(),
         DTColumnBuilder.newColumn('precoVenda').withTitle('precoVenda'),
@@ -230,7 +230,7 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
 
         function deleteRow(person) {
            dialogFactory.dialog('views/produto/dialog/dProduto.html',"ProdutoDeleteController",openDialogUpdateCreate);
-        } 
+        }
 
         function createdRow(row, data, dataIndex) {
             // Recompiling so we can bind Angular directive to the DT
@@ -371,8 +371,8 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
         $scope.tributacao.cofins.tipoCalculoSubstTrib ={};
         $scope.tributacao.cofins.tipoCalculoSubstTrib.id = 2;
         $scope.tributacao.cofins.aliquotaCOFINSST = "0.01";
-                                
-             
+
+
         $scope.people = [
             {firstName: "Daryl", surname: "Rowland", twitter: "@darylrowland", pic: "img/daryl.jpeg"},
             {firstName: "Alan", surname: "Partridge", twitter: "@alangpartridge", pic: "img/alanp.jpg"},
@@ -711,5 +711,105 @@ debugger
             $scope.saveProduto = function() {
                 fProduto.fnOpenView($scope.produto,"site/api/produto/update/", function(){console.log('aqui')});
             }
+        });
+})();
+(function() {
+    angular.module('wdApp.apps.produto.select', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('ProdutoSelectController', function($rootScope, $scope, fModels, SysMgmtData, fProduto) {
+            var vm = this;
+
+            $scope.produtosSelect = "";
+            $scope.produto = {};
+
+
+
+        $scope.forms = [{id : 0,
+               produto : "",
+               ddd : 'form1',
+               quantidade : 0,
+               telefoneTypeEnumValue : 0,
+               parentId       : 0,
+               emprId         : 0,
+               processId      : 0,
+               tableEnumValue : 0,
+               modelAction    : "INSERT",
+               createUser     : "System",
+               createDateUTC  : (new Date()).getTime(),
+               modifyUser     : "System",
+               modifyDateUTC  : (new Date()).getTime()}];
+        $scope.count = 0;
+
+        $scope.createForm = function(type){
+            debugger
+            $scope.forms.push({id : 0,
+               produto : "",
+               ddd : 'form2',
+               quantidade : 0,
+               telefoneTypeEnumValue : 0,
+               parentId       : 0,
+               emprId         : 0,
+               processId      : 0,
+               tableEnumValue : 0,
+               modelAction    : "INSERT",
+               createUser     : "System",
+               createDateUTC  : (new Date()).getTime(),
+               modifyUser     : "System",
+               modifyDateUTC  : (new Date()).getTime()});
+
+            $(".produto").select2("destroy");
+
+
+            $(".produto").select2({
+              placeholder: "Selecione o BANCO",
+              allowClear: true
+            });
+        };
+
+        $scope.changeProd = function (form){
+            debugger
+            console.log(form);
+
+            for(var x = 0; $scope.produtos.length > x ;x++){
+                if($scope.produtos[x].id == form.produto)
+                {
+                    form.quantidade = 100;
+                }
+            }
+        }
+
+
+        var callbackBanco = function(res){
+                var planos = "";
+
+               if(res.operationSuccess == true)
+               {
+
+                   $scope.produtos = res.produtoParentList;
+
+                   $(".produto").select2({
+                      placeholder: "Selecione o BANCO",
+                      allowClear: true
+                    });
+              /*     for(var x = 0 ;x < res.produtoParentList.length;x++)
+                   {
+                       $scope.produtosSelect = $scope.produtosSelect + "<option value='"+res.produtoParentList[x].id+"'> "+res.produtoParentList[x].codigo+" "+res.produtoParentList[x].prodId.ncm+" "+res.produtoParentList[x].prodId.produto+"  </option>";
+                   }
+
+                    $('.selectProduto').append($scope.produtosSelect);
+
+                    $(".produto").select2({
+                          placeholder: "Selecione o BANCO",
+                          allowClear: true
+                        });*/
+               }
+
+            }
+
+            qat.model.select.util("produto/api/produtoParent/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackBanco);
+
+        $scope.deleteForm = function(formScope){
+debugger
+            delete $scope.forms(formScope);
+        }
         });
 })();

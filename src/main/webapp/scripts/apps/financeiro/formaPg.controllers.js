@@ -149,7 +149,7 @@
                     decodeEntities: true
                 }
             }, {
-                text: 'Novo Plano',
+                text: 'Novo Forma de Pagamento',
                 key: '1',
                 action: function(e, dt, node, config) {
 
@@ -164,28 +164,29 @@
                 return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
             }).withOption('width', '10px'),
             DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
-            DTColumnBuilder.newColumn('razao').withTitle('Nome ou Razão social'),
-            DTColumnBuilder.newColumn('nome').withTitle('Nome Fantasia'),
-            DTColumnBuilder.newColumn('cnpj').withTitle('CPF ou CNPJ'),
-            DTColumnBuilder.newColumn('IES').withTitle('Inscr Est Subst Trib').notVisible(),
-            DTColumnBuilder.newColumn('IIE').withTitle('Indicador de IE').notVisible(),
-            DTColumnBuilder.newColumn('IE').withTitle('Inscrição Estadual').notVisible(),
-            DTColumnBuilder.newColumn('IM').withTitle('Inscrição Municipal').notVisible(),
-            DTColumnBuilder.newColumn('IF').withTitle('Inscrição Suframa').notVisible(),
-            DTColumnBuilder.newColumn('cep').withTitle('CEP').notVisible(),
-            DTColumnBuilder.newColumn('logradouro').withTitle('Logradouro'),
-            DTColumnBuilder.newColumn('numero').withTitle('Numero'),
-            DTColumnBuilder.newColumn('cidade').withTitle('Cidade'),
-            DTColumnBuilder.newColumn('estado').withTitle('Estado').notVisible(),
-            DTColumnBuilder.newColumn('pais').withTitle('Pais').notVisible(),
-            DTColumnBuilder.newColumn('telefone').withTitle('Telefone'),
-            DTColumnBuilder.newColumn('email').withTitle('Email').notVisible(),
-            DTColumnBuilder.newColumn('dtNasc').withTitle('Data Nascimento').notVisible(),
-            DTColumnBuilder.newColumn('dataCadastro').withTitle('Data Cadastro').notVisible(),
-            DTColumnBuilder.newColumn('obs').withTitle('Observação').notVisible(),
+            DTColumnBuilder.newColumn('descricao').withTitle('Descricao'),
+            DTColumnBuilder.newColumn('diasPg').withTitle('Dias Pagamento'),
+            DTColumnBuilder.newColumn('parcelamentoMax').withTitle('Parcelamento Max'),
+            DTColumnBuilder.newColumn(null).withTitle('Tipo Doc.').renderWith(function(data, type, full, meta) {
+                var sDocumento = "";
+                if(data.tipoDoc.length > 0)
+                {
+                    return '<p>'+data.tipoDoc.nome+'</p>';
+                }
+                return '<p>'+sDocumento+'</p>';
+            }),
+            DTColumnBuilder.newColumn('parcelamentoSemJuros').withTitle('Parcelamento Sem Juros').notVisible(),
+            DTColumnBuilder.newColumn('juros').withTitle('Juros').notVisible(),
+            DTColumnBuilder.newColumn('taxaFixa').withTitle('Taxa Fixa').notVisible(),
+            DTColumnBuilder.newColumn('descAvista').withTitle('Desconto Avista').notVisible(),
+            DTColumnBuilder.newColumn('qntIntervalo').withTitle('Tempo Intervalo').notVisible(),
+            DTColumnBuilder.newColumn('intervalo').withTitle('Intervalo').notVisible(),
+            DTColumnBuilder.newColumn('entrada').withTitle('Entrada'),
+            DTColumnBuilder.newColumn('observacao').withTitle('Observação').notVisible(),
             DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
             DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
             DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '140px'),
+
         ];
 
         function rCallback(nRow, aData) {
@@ -304,7 +305,7 @@
                 }, function(res) {
                     debugger
                 });
-                
+
             };
         });
 })();

@@ -12,7 +12,7 @@
 <div class="row">
     <div class="col-sm-12">
         <label for="exampleInputPassword1">Endereco de Entrega</label>
-        <select  name="atividade2"  class="select1 cnaeList col-sm-12">
+        <select  name="atividade2"  class="select2 enderecoList col-sm-12">
             <option></option>
         </select>
     </div>
@@ -22,39 +22,28 @@
 <script>
     $(document).ready(function() {
 
-        $.ajax({
-           url: 'main/api/anonimo',
-           headers: { 
-            'Accept': 'application/json',
-            'Content-Type': 'application/json' 
-            },
-           data: JSON.stringify({
-                                        url: "empresa/api/endereco/fetchPage",
-                                        request: new qat.model.siteInquiryRequest( 100/20, true, null)}),
-           error: function() {
-
-              $('#info').html('<p>An error has occurred</p>');
-           },
-           dataType: 'json',
-           success: function(res) {
-              var cnaes = "";                  
+             var fnCallbackEndereco = function(res){
+                var planos = "";
+                debugger
                if(res.operationSuccess == true)
                {
+                debugger
+
                    for(var x = 0 ;x < res.enderecoList.length;x++)
                    {
-                       cnaes = cnaes + "<option value='"+res.enderecoList[x].id+"'> "+res.enderecoList[x].cnae+"</option>";
+                       planos = planos + "<option value='"+res.enderecoList[x].id+"'> "+res.enderecoList[x].cep+" "+res.enderecoList[x].logradouro+" "+res.enderecoList[x].numero+" "+res.enderecoList[x].bairro+" "+res.enderecoList[x].cidade+" </option>";
                    }
-                    $('.cnaeList').append(cnaes);
 
-                    $(".select1").select2({
-                          placeholder: "Select a state",
+                    $('.enderecoList').append(planos);
+
+                    $(".select2").select2({
+                          placeholder: "Selecione o BANCO",
                           allowClear: true
                         });
                }
-           },
-           type: 'POST'
-        });
 
+            }
+            qat.model.select.util("entidade/api/endereco/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackEndereco);
 
             });
     </script>

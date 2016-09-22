@@ -124,6 +124,7 @@ var WebDaptiveAppConfig = {
 				,'wdApp.apps.produto.update'
 	            ,'wdApp.apps.produto.delete'
 	            ,'wdApp.apps.produto.view'
+	            ,'wdApp.apps.produto.select'
 	            ,'wdApp.ajaxCall.produto'
 
 	            ,'wdApp.apps.agencia'
@@ -223,43 +224,43 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.conta.update'
 	            ,'wdApp.apps.conta.delete'
 	            ,'wdApp.apps.conta.view'
-	            
+
 	            ,'wdApp.apps.field'
 	            ,'wdApp.apps.field.insert'
 	            ,'wdApp.apps.field.update'
 	            ,'wdApp.apps.field.delete'
 	            ,'wdApp.apps.field.view'
-	            
+
 	            ,'wdApp.apps.help'
 	            ,'wdApp.apps.help.insert'
 	            ,'wdApp.apps.help.update'
 	            ,'wdApp.apps.help.delete'
 	            ,'wdApp.apps.help.view'
-	            
+
 	            ,'wdApp.apps.menu'
 	            ,'wdApp.apps.menu.insert'
 	            ,'wdApp.apps.menu.update'
 	            ,'wdApp.apps.menu.delete'
 	            ,'wdApp.apps.menu.view'
-	            
+
 	            ,'wdApp.apps.pagina'
 	            ,'wdApp.apps.pagina.insert'
 	            ,'wdApp.apps.pagina.update'
 	            ,'wdApp.apps.pagina.delete'
 	            ,'wdApp.apps.pagina.view'
-	            
+
 	            ,'wdApp.apps.validacao'
 	            ,'wdApp.apps.validacao.insert'
 	            ,'wdApp.apps.validacao.update'
 	            ,'wdApp.apps.validacao.delete'
 	            ,'wdApp.apps.validacao.view'
-	            
+
 	            ,'wdApp.apps.roles'
 	            ,'wdApp.apps.roles.insert'
 	            ,'wdApp.apps.roles.update'
 	            ,'wdApp.apps.roles.delete'
 	            ,'wdApp.apps.roles.view'
-	     
+
 
 				]);
 
@@ -387,7 +388,7 @@ var WebDaptiveAppConfig = {
 			$rootScope.main.name = "Jonh Snow";
 			localStorageService.clearAll();
 		};
-		
+
 
 		/* Try getting valid user from localStorage */
 		if (localStorageService.get('authToken') !==  null){
