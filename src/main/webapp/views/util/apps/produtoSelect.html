@@ -4,7 +4,7 @@
 }
 </style>
 <div class="row " style="margin-top : 10px"></div>
-<div class="panel panel-default" ng-controller="ProdutoSelectController">
+<div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Produtos</h3>
     </div>
@@ -20,8 +20,8 @@
                 <div class="col-sm-4">
                     <label for="exampleInputPassword1">Produto</label>
                     <div class="row ">
-                        <select name="produto" class="col-sm-12 selectProduto produto" ng-model="form.produto">
-                            <option ng-repeat="option in produtos" value="{{option.id}}" >{{option.codigo}} {{option.prodId.ncm}} {{option.prodId.produto}}</option>
+                        <select name="produto" class="col-sm-12 selectProduto produto" ng-model="form.notaFiscalSaidaItens.produto">
+                            <option ng-repeat="option in produtos" value="{{option}}" >{{option.codigo}} {{option.prodId.ncm}} {{option.prodId.produto}}</option>
 
                         </select>
 
@@ -33,7 +33,7 @@
                         <label for="exampleInputPassword1">Quant.</label>
                         <div class="input-group">
                             <span class="input-group-addon">$</span>
-                            <input type="text" class="form-control nome-socio" ng-model="form.quantidade" name="quantidade" placeholder="" />
+                            <input type="text" class="form-control cota-socio" ng-model="form.notaFiscalSaidaItens.qnt" name="vlUnitario" placeholder="" />
                             <span class="input-group-addon">,00</span>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                         <label for="exampleInputPassword1">Valor Unitario</label>
                         <div class="input-group">
                             <span class="input-group-addon">$</span>
-                            <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="" />
+                            <input type="text" class="form-control cota-socio" ng-model="form.notaFiscalSaidaItens.vrUnitario" name="vlUnitario" placeholder="" />
                             <span class="input-group-addon">,00</span>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                         <label for="exampleInputPassword1">Total prod.</label>
                         <div class="input-group">
                             <span class="input-group-addon">$</span>
-                            <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="" />
+                            <input type="text" class="form-control cota-socio" ng-model="form.notaFiscalSaidaItens.vrDesconto" name="desconto" placeholder="" />
                             <span class="input-group-addon">,00</span>
                         </div>
                     </div>
@@ -97,6 +97,10 @@
         }
         });
 
+        $("#XmodFrete").select2({
+          placeholder: "Selecione o BANCO",
+          allowClear: true
+        });
 
 
     });

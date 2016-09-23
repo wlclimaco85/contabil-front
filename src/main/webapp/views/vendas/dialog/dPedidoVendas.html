@@ -14,7 +14,7 @@
 	                                        <div class="col-sm-3">
 	                                            <label for="exampleInputEmail1">Tipo Frete</label>
 	                                            <div class="row ">
-		                                            <select id="XmodFrete" name="unidTributada" class=" form-group col-sm-12"  ng-model="cfop.natureza">
+		                                            <select id="XmodFrete" name="unidTributada" class=" form-group col-sm-12"  ng-model="notaFiscalSaida.frete.tipo">
 														<option value="0">0 - Emitente</option>
 														<option value="1">1 - Destinatário</option>
 														<option value="2">2 - Terceiros</option>
@@ -24,15 +24,15 @@
 	                                        </div>
 	                                        <div class="form-group col-sm-2">
 	                                            <label for="exampleInputPassword1">Valor Frete</label>
-	                                            <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="0.00">
+	                                            <input type="text" class="form-control" ng-model="notaFiscalSaida.frete.vrFrete" name="password" placeholder="0.00">
 	                                        </div>
 	                                        <div class="form-group col-sm-2">
 	                                            <label for="exampleInputPassword1">Desconto</label>
-	                                            <input type="password" class="form-control" ng-model="cfop.margemAgregadaST" name="password" placeholder="0.00">
+	                                            <input type="text" class="form-control" ng-model="notaFiscalSaida.frete.vrDesconto" name="password" placeholder="0.00">
 	                                        </div>
 	                                        <div class="form-group col-sm-2">
 	                                            <label for="exampleInputPassword1">Valor Total</label>
-	                                            <input type="password" class="form-control" ng-model="cfop.margemAgregadaST" name="password" placeholder="0.00">
+	                                            <input type="text" class="form-control" value="{{notaFiscalSaida.frete.vrFrete + notaFiscalSaida.frete.vrDesconto}}" name="password" placeholder="0.00">
 	                                        </div>
 	                                    </div>
 	                                     <div class="row">
@@ -46,7 +46,7 @@
 			              </div>
 			              <div class="modal-footer">
 			                <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-			                <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Gravar</button>
+			                <button type="submit"  ng-click="savePedidoVenda()" class="btn btn-primary">Gravar</button>
 			              </div>
 			            </div>
 			          </div>

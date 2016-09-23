@@ -12,8 +12,9 @@
 <div class="row">
     <div class="col-sm-12">
         <label for="exampleInputPassword1">Endereco de Entrega</label>
-        <select  name="atividade2"  class="select2 enderecoList col-sm-12">
-            <option></option>
+        <select  name="atividade2" ng-model="notaFiscalSaida.frete.endereco" class="select2 enderecoList col-sm-12">
+           <option ng-repeat="option in enderecos" value="{{option}}" >{{option.cep}} {{option.logradouro}} {{option.numero}} {{option.bairro}} {{option.cidade.nome}}</option>
+
         </select>
     </div>
 </div>
@@ -22,25 +23,7 @@
 <script>
     $(document).ready(function() {
 
-             var fnCallbackEndereco = function(res){
-                var planos = "";
-                debugger
-               if(res.operationSuccess == true)
-               {
-                debugger
-                   for(var x = 0 ;x < res.enderecoList.length;x++)
-                   {
-                       planos = planos + "<option value='"+res.enderecoList[x].id+"'> "+res.enderecoList[x].cep+" "+res.enderecoList[x].logradouro+" "+res.enderecoList[x].numero+" "+res.enderecoList[x].bairro+" "+res.enderecoList[x].cidade+" </option>";
-                   }
-                    $('.enderecoList').append(planos);
 
-                    $(".select2").select2({
-                          placeholder: "Selecione o BANCO",
-                          allowClear: true
-                        });
-               }
-            }
-            qat.model.select.util("entidade/api/endereco/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackEndereco);
 
             });
     </script>

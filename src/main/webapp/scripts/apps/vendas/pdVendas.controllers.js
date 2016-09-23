@@ -14,7 +14,7 @@
         vm.delete = deleteRow;
         vm.dtInstance = {};
         vm.persons = {};
-        
+
         $scope.pedidoVenda = {
             tipoPessoa: 2
         };
@@ -151,7 +151,7 @@
                 action: function(e, dt, node, config) {
 
                     dialogFactory.dialog('views/vendas/dialog/dPedidoVendas.html',"PedidoVendaInsertController",openDialogUpdateCreate);
-                   
+
                 }
             }]);
         var aColumns = [
@@ -160,7 +160,7 @@
                 vm.selected[full.id] = false;
                 return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
         }).withOption('width', '10px'),
-        DTColumnBuilder.newColumn('id').withTitle('ID').withOption('width', '10px').notVisible(),   
+        DTColumnBuilder.newColumn('id').withTitle('ID').withOption('width', '10px').notVisible(),
         DTColumnBuilder.newColumn('cliente').withTitle('cliente').withOption('width', '150px'),
         DTColumnBuilder.newColumn('data').withTitle('data').withOption('width', '50px'),
          DTColumnBuilder.newColumn(null).withTitle('qntProd').notSortable().withOption('width', '10px')
@@ -199,9 +199,9 @@
         }
 
         function deleteRow(person) {
-           $rootScope.pedidoVenda = person; 
+           $rootScope.pedidoVenda = person;
            dialogFactory.dialog('views/vendas/dialog/dPedidoVendas.html',"PedidoVendasDeleteController",openDialogUpdateCreate);
-        } 
+        }
 
         function createdRow(row, data, dataIndex) {
             // Recompiling so we can bind Angular directive to the DT
@@ -251,98 +251,126 @@
         .controller('PedidoVendaInsertController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
             var vm = this;
 
-            $scope.empresa = {
-            documentos          : [{
-                       documentoTypeEnumValue : 1,
-                       numero : 0,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
+            $scope.notaFiscalSaida = {
+                frete : {endereco :{}},
+                notaFiscalItens :[],
+                formaPagList :[],
+                cliente :{}
 
-                    },
-                    {
-                       documentoTypeEnumValue : 2,
-                       numero : 0,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
+            };
+            $scope.cliente = {};
+            $scope.formaPg = {};
+            $scope.endereco = {};
+            $scope.enderecos = {};
 
-                    },
-                    {
-                       documentoTypeEnumValue : 3,
-                       numero : 0,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
 
-                    },
-                    {
-                       documentoTypeEnumValue : 4,
-                       numero : 0,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
+            $scope.produtosSelect = "";
+            $scope.produto = {};
 
-                    },
-                    {
-                       documentoTypeEnumValue : 5,
-                       numero : 0,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
 
-                    },
-                    {
-                       documentoTypeEnumValue : 6,
-                       numero : 0,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
 
-                    },
-                    {
-                       documentoTypeEnumValue : 7,
-                       numero : 0,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
+        $scope.forms = [{id : 0,
+               produto : "",
+               ddd : 'form1',
+               notaFiscalSaidaItens : {}}];
+        $scope.count = 0;
 
-                    },
-                    {
-                       documentoTypeEnumValue : 8,
-                       numero : 0,
-                       tableEnumValue : 1,
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
+        $scope.createForm = function(type){
+            debugger
+            $scope.forms.push({id : 0,
+               produto : "",
+               ddd : 'form2',
+               notaFiscalSaidaItens : {}});
 
-                    }]
+            $(".produto").select2("destroy");
+
+
+            $(".produto").select2({
+              placeholder: "Selecione o BANCO",
+              allowClear: true
+            });
         };
 
-        $scope.enderecos = [];
+        $scope.changeProd = function (form){
+            debugger
+            console.log(form);
+
+            for(var x = 0; $scope.produtos.length > x ;x++){
+                if($scope.produtos[x].id == form.produto)
+                {
+                    form.quantidade = 100;
+                }
+            }
+        }
+
+
+        var callbackBanco = function(res){
+                var planos = "";
+
+               if(res.operationSuccess == true)
+               {
+
+                   $scope.produtos = res.produtoParentList;
+
+                   $(".produto").select2({
+                      placeholder: "Selecione o BANCO",
+                      allowClear: true
+                    });
+              /*     for(var x = 0 ;x < res.produtoParentList.length;x++)
+                   {
+                       $scope.produtosSelect = $scope.produtosSelect + "<option value='"+res.produtoParentList[x].id+"'> "+res.produtoParentList[x].codigo+" "+res.produtoParentList[x].prodId.ncm+" "+res.produtoParentList[x].prodId.produto+"  </option>";
+                   }
+
+                    $('.selectProduto').append($scope.produtosSelect);
+
+                    $(".produto").select2({
+                          placeholder: "Selecione o BANCO",
+                          allowClear: true
+                        });*/
+               }
+
+            }
+
+            qat.model.select.util("produto/api/produtoParent/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackBanco);
+
+
+
+
+            var fnCallbackEndereco = function(res){
+                var planos = "";
+                debugger
+               if(res.operationSuccess == true)
+               {
+                /*
+                debugger
+                   for(var x = 0 ;x < res.enderecoList.length;x++)
+                   {
+                       planos = planos + "<option value='"+ res.enderecoList[x] +"'> "+res.enderecoList[x].cep+" "+res.enderecoList[x].logradouro+" "+res.enderecoList[x].numero+" "+res.enderecoList[x].bairro+" "+res.enderecoList[x].cidade+" </option>";
+                   }
+                    $('.enderecoList').append(planos);
+
+                    $(".select2").select2({
+                          placeholder: "Selecione o BANCO",
+                          allowClear: true
+                        }); */
+
+                        $scope.enderecos = res.enderecoList;
+
+                   $(".select2").select2({
+                      placeholder: "Selecione o BANCO",
+                      allowClear: true
+                    });
+               }
+            }
+            debugger
+            qat.model.select.util("entidade/api/endereco/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackEndereco);
+
+        $scope.deleteForm = function(formScope){
+
+
+            delete $scope.forms(formScope);
+        }
+
 
             $scope.today = function() {
                 return $scope.dt = new Date();
@@ -368,7 +396,28 @@
             }
             $scope.savePedidoVenda = function() {
                 debugger
-                fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos, 'INSERT', "site/api/pedidoVenda/insert/", fnCallBack);
+
+                for(var x = 0 ; x<$scope.forms.length;x++){
+                    $scope.forms[x].notaFiscalSaidaItens.produto =  fModels.amont(JSON.parse($scope.forms[x].notaFiscalSaidaItens.produto))
+                    $scope.notaFiscalSaida.notaFiscalItens.push($scope.forms[x].notaFiscalSaidaItens)
+                }
+
+                $scope.notaFiscalSaida.formaPagList.push(fModels.amont($scope.formaPg,'INSERT'));
+                $scope.notaFiscalSaida.cliente = fModels.amont($scope.cliente);
+                $scope.notaFiscalSaida.frete.endereco = fModels.amont(JSON.parse($scope.notaFiscalSaida.frete.endereco));
+
+
+                var oObject = fModels.amont($scope.notaFiscalSaida,"INSERT");
+
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "vendas/api/nfSaidas/insert",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqNFSAIDA(oObject, true, true)
+                }, function(res) {
+                    callBack(res);
+                });
+
+               // fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos, 'INSERT', "site/api/pedidoVenda/insert/", fnCallBack);
             };
         });
 })();
