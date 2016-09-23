@@ -400,7 +400,6 @@ var WebDaptiveAppConfig = {
 				$rootScope.main.name = "Anonimo";
 			$rootScope.displayRoles = localStorageService.get('displayRoles');
 		}
-
 		 //flag to let us know everything is full initialized can be referenced anywhere
 		$rootScope.initialized = true;
 		$rootScope.empresa_type = 0;

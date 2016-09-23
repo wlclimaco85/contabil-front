@@ -274,6 +274,7 @@
  		this.sortExpressions = null;
  		this.preQueryCount = _bCount;
  		this.maxPreQueryCount = 0;
+
  	};
 
 

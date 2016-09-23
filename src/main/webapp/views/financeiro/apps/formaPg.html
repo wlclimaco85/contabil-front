@@ -391,7 +391,6 @@
 
                if(res.operationSuccess == true)
                {
-
                    for(var x = 0 ;x < res.doisValoresList.length;x++)
                    {
                        planos = planos + "<option value='"+res.doisValoresList[x].value+"'> "+res.doisValoresList[x].nome+" </option>";
@@ -404,7 +403,6 @@
                           allowClear: true
                         });
                }
-
             }
 
             qat.model.select.util("entidade/api/doisValores/fetchPage",true,new qat.model.doisValoresInquiryRequest(1, 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackBanco);

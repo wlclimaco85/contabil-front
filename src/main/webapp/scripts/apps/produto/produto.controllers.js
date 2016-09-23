@@ -808,7 +808,8 @@ debugger
             qat.model.select.util("produto/api/produtoParent/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackBanco);
 
         $scope.deleteForm = function(formScope){
-debugger
+
+
             delete $scope.forms(formScope);
         }
         });
