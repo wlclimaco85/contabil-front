@@ -143,6 +143,12 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.cidade.delete'
 	            ,'wdApp.apps.cidade.view'
 
+	            ,'wdApp.apps.newEmpresa'
+	            ,'wdApp.apps.newEmpresa.insert'
+				,'wdApp.apps.newEmpresa.update'
+	            ,'wdApp.apps.newEmpresa.delete'
+	            ,'wdApp.apps.newEmpresa.view'
+
 	            ,'wdApp.apps.convenio.insert'
 				,'wdApp.apps.convenio.update'
 	            ,'wdApp.apps.convenio.delete'

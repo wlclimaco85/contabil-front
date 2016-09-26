@@ -108,11 +108,11 @@
 
             }
 
-
+            qat.model.select.util("cadastros/api/estado/fetchPage",true,new qat.model.estadoInquiryRequest( 100/20, true,$(this).val),callbackEstado);
 
             $('.select-estado').on("select2-selecting", function(e) {
                console.log($(this).val())
-                qat.model.select.util("cadastros/api/estado/fetchPage",true,new qat.model.estadoInquiryRequest( 100/20, true,$(this).val),callbackEstado);
+                qat.model.select.util("cadastros/api/cidade/fetchPage",true,new qat.model.estadoInquiryRequest( 100/20, true,$(this).val),callbackCidade);
             });
 
 

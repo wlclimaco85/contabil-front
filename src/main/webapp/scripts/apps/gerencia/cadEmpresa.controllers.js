@@ -3,8 +3,8 @@
         .controller('CadEmpresaController', cadEmpresaController);
 
     function cadEmpresaController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData,fEmpresa) {
-       
-    
+
+
         var vm = this;
         vm.selected = {};
         vm.selectAll = false;
@@ -258,44 +258,20 @@
                 text: 'Novo Empresa',
                 key: '1',
                 action: function(e, dt, node, config) {
-                   
-                    $("#dialogs").dialog({
+                    ModalService.showModal({
+                        templateUrl: 'views/empresa/dialog/dEmpresa.html',
+                        controller: "NewEmpresaInsertController"
+                    }).then(function(modal) {
 
-                        modal: true,
-                        draggable: true,
-                        resizable: true,
-                        //   position: ['center', 'center'],
-                        show: 'blind',
-                        hide: 'blind',
-                        width: 800,
-                        dialogClass: 'ui-dialog-osx',
-                        open: function( event, ui ) {
-                            //$("#dialogs").load('#/views/empresa/dialog/dEmpresa')
-                        }
+
+                        modal.element.modal();
+                        openDialogUpdateCreate();
+                        modal.close.then(function(result) {
+                            $scope.message = "You said " + result;
+                        });
                     });
-                  /*
-                   var $dialog = $('#dialogs')
-                    .load('views/empresa/dialog/dEmpresa.html')
-                    .dialog({
-                        autoOpen: false,
-                        title: 'teste',
-                        width: 500,
-                        height: 300
-                    });
-
-                    $dialog.dialog('open');
-                
-
-                    $("#dialogs").load('views/empresa/dialog/dEmpresa.html').dialog({
-                      title:   "cccc",
-                      width: 800,
-                      dialogClass: 'ui-dialog-osx',
-                      close: function() {  },
-                      modal: true,
-                      open : function() {  } // this should work...
-                    })*/
                 }
-            }]);
+            }])
 
         vm.dtColumns = [
             DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()

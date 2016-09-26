@@ -8,6 +8,7 @@
 	factory.fnMontaObjeto = function(empresa,enderecos,action){
 
             console.log(empresa);
+            debugger
             empresa.enderecos[0] = qat.model.fnEndereco(enderecos[0],"INSERT",$rootScope.user.user);
             var count = 0;
             var bb = [];
@@ -56,7 +57,7 @@
                     count = count + 1;
                 }
             });
-            $scope.empresa.socios = bb;
+            empresa.socios = bb;
 
             //plano
             count = 0;
@@ -69,7 +70,7 @@
                     count = count + 1;
                 }
             });
-            $scope.empresa.planoByEmpresaList = bb;
+            empresa.planoByEmpresaList = bb;
 
             //Servico
             count = 0;
@@ -82,7 +83,7 @@
                     count = count + 1;
                 }
             });
-            $scope.empresa.planoByEmpresaList = bb;
+            empresa.planoByEmpresaList = bb;
 
             //Usuario
             count = 0;
@@ -95,7 +96,7 @@
                     count = count + 1;
                 }
             });
-            $scope.empresa.usuarioList = bb;
+            empresa.usuarioList = bb;
 
             return empresa;
         }
