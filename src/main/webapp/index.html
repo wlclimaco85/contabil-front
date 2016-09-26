@@ -1,355 +1,1255 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html lang="en">
+
 <head>
-	<meta charset="utf-8"/>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>E-Contábil</title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width">
-	<link rel="icon" type="image/png" href="favicon.png">
 
-	<link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/font-awesome-animation/dist/font-awesome-animation.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,300,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="thirdparty/jquery-ui-1.12.0/jquery-ui.min.css">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-	<link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/bootstrap/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/datatables/media/css/jquery.dataTables.min.css">
-	<link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/datatables-colreorder/css/dataTables.colReorder.css">
-	<link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/datatables-colvis/css/dataTables.colVis.css">
-	<link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/datatables-tabletools/css/dataTables.tableTools.css">
-	<link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/datatables-responsive/css/dataTables.responsive.css">
-	<link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/datatables-scroller/css/dataTables.scroller.css">
-	<link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/datatables-fixedcolumns/css/dataTables.fixedColumns.css">
-	<link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/datatables-fixedheader/css/fixedHeader.dataTables.css">
-	<link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/datatables-buttons/css/buttons.dataTables.css">
-	<link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/datatables-select/css/select.dataTables.css">
-    <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/backtotop/backtotop.min.css">
-    <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/highlightjs/styles/github.css">
-    <link rel="stylesheet" href="thirdparty/angular-datatables-master/dist/plugins/bootstrap/datatables.bootstrap.min.css">
-    <link rel="stylesheet" href="thirdparty/angular-datatables-master/styles/main.css">
-    <link rel="stylesheet" href="thirdparty/angular-datatables-master/dist/css/angular-datatables.css">
+    <title>E-Contábil</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap Css -->
+    <link href="views/template-assets/bootstrap-assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Angular -->
+
+    <link rel="stylesheet" href="thirdparty/angular-toastr/angular-toastr.min.css"></link>
+    <link rel="stylesheet" href="thirdparty/angular-ag/ag-grid.css"></link>
+    <link rel="stylesheet" href="thirdparty/angular-ag/theme-fresh.css"></link>
+    <link rel="stylesheet" href="thirdparty/angular/angular-csp.css">
+
+    <!-- Style -->
+    <link href="views/template-assets/plugins/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="views/template-assets/plugins/owl-carousel/owl.theme.css" rel="stylesheet">
+    <link href="views/template-assets/plugins/owl-carousel/owl.transitions.css" rel="stylesheet">
+    <link href="views/template-assets/plugins/Lightbox/dist/css/lightbox.css" rel="stylesheet">
+    <link href="views/template-assets/plugins/Icons/et-line-font/style.css" rel="stylesheet">
+    <link href="views/template-assets/plugins/animate.css/animate.css" rel="stylesheet">
+
+
+
+
+
+
+
+
     <link rel="stylesheet" href="dist/css/formValidation.css"/>
     <link rel="stylesheet" href="dist/css/select2.css"/>
-    <link rel="stylesheet" href="thirdparty/aaPrincipal/css/select2_3_4_8.css">
-<!--<!doctype html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-        <title>WebDaptive - Angular</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-         Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css"/>
+    <link href="thirdparty/twitter-bootstrap-wizard-master/prettify.css" rel="stylesheet">
+    <link href="thirdparty/twitter-bootstrap-wizard-master/prettify.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="thirdparty/bootstrap-fileinput-master/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
 
-
-        <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="thirdparty/aaPrincipal/css/Bootstrap_v3_3_6.css">
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <!-- Optional theme -->
-<link rel="stylesheet" href="thirdparty/aaPrincipal/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
- <link rel="stylesheet" href="thirdparty/angular-datatables-master/dist/plugins/bootstrap/datatables.bootstrap.min.css">
-		<!--<link rel="stylesheet" href="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.css"> -->
-		<link rel="stylesheet" href="thirdparty/angular-datatables/vendor/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="thirdparty/angular-datatables/vendor/font-awesome-animation/dist/font-awesome-animation.min.css">
-	    <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,300,700' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="thirdparty/angular-datatables/vendor/bootstrap/dist/css/bootstrap.min.css">
-		<link rel="stylesheet" href="thirdparty/angular-datatables/vendor/datatables/media/css/jquery.dataTables.min.css">
-		<link rel="stylesheet" href="thirdparty/angular-datatables/vendor/datatables-colreorder/css/dataTables.colReorder.css">
-		<link rel="stylesheet" href="thirdparty/angular-datatables/vendor/datatables-colvis/css/dataTables.colVis.css">
-		<link rel="stylesheet" href="thirdparty/angular-datatables/vendor/datatables-tabletools/css/dataTables.tableTools.css">
-		<link rel="stylesheet" href="thirdparty/angular-datatables/vendor/datatables-responsive/css/dataTables.responsive.css">
-		<link rel="stylesheet" href="thirdparty/angular-datatables/vendor/datatables-scroller/css/dataTables.scroller.css">
-		<link rel="stylesheet" href="thirdparty/angular-datatables/vendor/datatables-fixedcolumns/css/dataTables.fixedColumns.css">
-		<link rel="stylesheet" href="thirdparty/angular-datatables/vendor/datatables-fixedheader/css/fixedHeader.dataTables.css">
-		<link rel="stylesheet" href="thirdparty/angular-datatables/vendor/datatables-buttons/css/buttons.dataTables.css">
-		<link rel="stylesheet" href="thirdparty/angular-datatables/vendor/datatables-select/css/select.dataTables.css">
-	    <link rel="stylesheet" href="thirdparty/angular-datatables/vendor/backtotop/backtotop.min.css">
-	    <link rel="stylesheet" href="thirdparty/angular-datatables/vendor/highlightjs/styles/github.css">
-	    <link rel="stylesheet" href="thirdparty/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css">
-	    <link rel="stylesheet" href="thirdparty/angular-datatables/styles/main.css">
-	    <link rel="stylesheet" href="thirdparty/angular-datatables/dist/css/angular-datatables.css">
-        <!-- Needs images, font...  -->
-        <link rel="stylesheet" href="thirdparty/font-awesome/css/font-awesome.min.css">
-        <!-- end Needs images -->
-        <link rel="stylesheet" href="thirdparty/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="thirdparty/angular-toastr/angular-toastr.min.css"></link>
-		<link rel="stylesheet" href="thirdparty/angular-ag/ag-grid.css"></link>
-		<link rel="stylesheet" href="thirdparty/angular-ag/theme-fresh.css"></link>
-		<link rel="stylesheet" href="thirdparty/angular-chartjs/angular-chart.min.css">
-		<link rel="stylesheet" href="thirdparty/angular/angular-csp.css">
-	    <link rel="stylesheet" href="styles/wd_main.css">
+<link href="views/template-assets/css/main.css" rel="stylesheet">
+        <style type="text/css">
+
+  .ui-radio {
+  position: relative;
+  margin: 0 20px 10px 20px;
+  font-size: 14px;
+  line-height: 20px;
+  height: 20px;
+}
+.ui-radio:hover {
+  cursor: pointer;
+}
+.ui-radio input[type="radio"] {
+  display: none;
+}
+.ui-radio input[type="radio"] + span {
+  padding-left: 10px;
+  font-weight: normal;
+}
+.ui-radio input[type="radio"] + span:before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  position: absolute;
+  left: -20px;
+  top: 0;
+  background: white;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+}
+.ui-radio input[type="radio"]:disabled + span:before {
+  opacity: .65;
+  border: 1px solid #ccc;
+  cursor: no-drop;
+}
+.ui-radio input[type="radio"]:checked + span:after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  top: 6px;
+  left: -14px;
+  background-color: #00475b;
+  border-radius: 50%;
+  display: block;
+}
+.ui-radio input[type="radio"]:disabled:checked + span:after {
+  opacity: .65;
+  cursor: no-drop;
+  background-color: #ccc;
+}
+.ui-checkbox {
+  position: relative;
+  margin: 0 20px 10px 20px;
+}
+.ui-checkbox:hover {
+  cursor: pointer;
+}
+.ui-checkbox input[type="checkbox"] {
+  display: none;
+}
+.ui-checkbox input[type="checkbox"] + span {
+  font-weight: normal;
+}
+.ui-checkbox input[type="checkbox"] + span:before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  margin-left: -20px;
+  background-color: transparent;
+  border-radius: 2px;
+  border: 1px solid #ccc;
+}
+.ui-checkbox input[type="checkbox"]:disabled + span:before {
+  opacity: .65;
+  border: 1px solid #ccc;
+  cursor: no-drop;
+}
+.ui-checkbox input[type="checkbox"]:checked + span:before {
+  background-color: #00475b;
+  border: 1px solid #00475b;
+}
+.ui-checkbox input[type="checkbox"]:checked + span:after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  top: 7px;
+  left: -15px;
+  background: url("../images/checkmark.png") no-repeat center center;
+  background-size: 14px 14px;
+  display: block;
+}
+.ui-checkbox input[type="checkbox"]:disabled:checked + span:before {
+  opacity: .65;
+  background-color: #ccc;
+  border: 1px solid #ccc;
+}
+.ui-checkbox input[type="checkbox"]:disabled:checked + span:after {
+  opacity: .65;
+  cursor: no-drop;
+  background: url("../images/checkmark.png") no-repeat center center;
+}
 
 
-
-
-    </head>
-	<div class="loader" ng-hide="initialized">
-		Carregando...
-	</div>
-       <body data-ng-app="wdApp"
-          id="wdApp"
-          class="wdApp"
-          data-off-canvas-nav
-          data-ng-controller="WDAppController"
-          data-ng-class=" {'layout-boxed': admin.layout === 'boxed' } ">
-        <section data-ng-include=" 'views/header1.html' "
-                 id="header"
-                 class="header-container "
-                 data-ng-class=" {'header-fixed': admin.fixedHeader} "></section>
-
-        <div class="main-container">
-            <aside data-ng-include=" 'views/nav3.html' "
-                   id="nav-container"
-                   class="nav-container"
-                   data-ng-class=" {'nav-fixed': admin.fixedSidebar, 'nav-vertical': admin.menu === 'vertical', 'nav-horizontal': admin.menu === 'horizontal'}">
-            </aside>
-
-            <section data-ng-view data-ng-cloak id="content" class="content-container animate-fade-up ">
-
-            </section>
-        </div>
-
-
-        <!-- thirdparty libraries-->
-        <!-- thirdparty libraries-->
-		<script src="http://maps.googleapis.com/maps/api/js?v=3&libraries=visualization"></script>
-
-        <script type="text/javascript" src="https://app.4clinics.software/skin/home/app_theme/js/jquery.js"></script>
-        <script src="thirdparty/jquery-ui-1.12.0/jquery-ui.min.js"></script>
-        <script src="thirdparty/angular-datatables/vendor/datatables/media/js/jquery.dataTables.js"></script>
-        		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-        <script src="thirdparty/angular/angular.min.js"></script>
-		<!--<script src="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.js"></script> -->
-
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.6/select2-bootstrap.min.css"/>
-
-        <link rel="stylesheet" href='http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2-bootstrap.css'/>
-		<link rel="stylesheet" href='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css'/>
-		<link rel="stylesheet" href='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css'/>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-		<script src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js'></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-
-        <script src="thirdparty/angular-route/angular-route.min.js"></script>
-        <script src="thirdparty/angular-animate/angular-animate.min.js"></script>
-        <script src="thirdparty/angular-bootstrap/ui-bootstrap-tpls-2.0.0.min.js"></script>
-        <script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
-        <script src="thirdparty/angular-textangular/textAngular-rangy.min.js"></script>
-        <script src="thirdparty/angular-textangular/textAngular-sanitize.min.js"></script>
-        <script src="thirdparty/angular-textangular/textAngular.min.js"></script>
-        <script src="thirdparty/angular-ui-tree/angular-ui-tree.min.js"></script>
-        <script src="thirdparty/angular-ngmaps/ng-map.min.js"></script>
-        <script src="thirdparty/angular-ng-tags-input/ng-tags-input.min.js"></script>
-		<script src="thirdparty/angular-loading/loading-bar.min.js"></script>
-		<script src="thirdparty/angular-ngmaps/ng-map.min.js"></script>
-		<script src="thirdparty/angular-ag/ag-grid.js"></script>
-		<script src="thirdparty/angular-toastr/angular-toastr.tpls.min.js"></script>
-		<script src="thirdparty/angular-local-storage/angular-local-storage.min.js"></script>
-		<script src="thirdparty/angular-base64/angular-base64.min.js"></script>
-        <script src="thirdparty/jquery-spinner/jquery.spinner.min.js"></script>
-        <script src="thirdparty/seiyria-bootstrap-slider/bootstrap-slider.min.js"></script>
-        <script src="thirdparty/jquery-steps/jquery.steps.min.js"></script>
-        <script src="thirdparty/bootstrap-file-input/bootstrap.file-input.js"></script>
-        <script src="thirdparty/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-        <script src="thirdparty/raphael/raphael-min.js"></script>
-        <script src="thirdparty/morrisjs/morris.js"></script>
-        <script src="thirdparty/jquery-sparkline/jquery.sparkline.min.js"></script>
-        <script src="thirdparty/flot/jquery.flot.js"></script>
-        <script src="thirdparty/flot/jquery.flot.resize.js"></script>
-        <script src="thirdparty/flot/jquery.flot.pie.js"></script>
-        <script src="thirdparty/flot/jquery.flot.orderBars.js"></script>
-        <script src="thirdparty/flot/jquery.flot.stack.js"></script>
-        <script src="thirdparty/flot-tooltip/jquery.flot.tooltip.min.js"></script>
-        <script src="thirdparty/flot/jquery.flot.time.js"></script>
-        <script src="thirdparty/flot/jquery.flot.animator.min.js"></script>
-        <script src="thirdparty/jquery-easy-pie-chart/angular.easypiechart.min.js"></script>
-        <script src="thirdparty/angular-chartjs/Chart.min.js"></script>
-        <script src="thirdparty/angular-chartjs/angular-chart.min.js"></script>
-        <script src="thirdparty/angular-echarts/echarts-all.js"></script>
-        <script src="thirdparty/angular-echarts/ngecharts.js"></script>
+.navbar-default {
+    background-color: #000000;
+}
+        </style>
 
 
 
+    <script src="thirdparty/AngularJS-Tutorial-master/node_modules/angular/angular.js"></script>
+    <script src="thirdparty/AngularJS-Tutorial-master/node_modules/angular-animate/angular-animate.js"></script>
+    <script src="thirdparty/angular-route/angular-route.min.js"></script>
+    <script src="thirdparty/angular-animate/angular-animate.min.js"></script>
+    <script src="thirdparty/angular-bootstrap/ui-bootstrap-tpls-2.0.0.min.js"></script>
+    <script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
+    <script src="thirdparty/angular-textangular/textAngular-rangy.min.js"></script>
+    <script src="thirdparty/angular-textangular/textAngular-sanitize.min.js"></script>
+    <script src="thirdparty/angular-textangular/textAngular.min.js"></script>
+    <script src="thirdparty/angular-ui-tree/angular-ui-tree.min.js"></script>
+    <script src="thirdparty/angular-ngmaps/ng-map.min.js"></script>
+    <script src="thirdparty/angular-ng-tags-input/ng-tags-input.min.js"></script>
+    <script src="thirdparty/angular-loading/loading-bar.min.js"></script>
+    <script src="thirdparty/angular-ngmaps/ng-map.min.js"></script>
+    <script src="thirdparty/angular-ag/ag-grid.js"></script>
+    <script src="thirdparty/angular-toastr/angular-toastr.tpls.min.js"></script>
+    <script src="thirdparty/angular-local-storage/angular-local-storage.min.js"></script>
+    <script src="thirdparty/angular-base64/angular-base64.min.js"></script>
+    <script src="thirdparty/raphael/raphael-min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="thirdparty/jquery-ui-1.12.0/jquery-ui.min.js"></script>
 
-        <!-- datatables -->
-	    <script src="thirdparty/angular-datatables/vendor/angular-highlightjs/angular-highlightjs.min.js"></script>
-	    <script src="thirdparty/angular-resource/angular-resource.min.js"></script>
-	    <script src="thirdparty/angular-datatables/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-	    <script src="thirdparty/angular-datatables-master/vendor/datatables-colreorder/js/dataTables.colReorder.js"></script>
-		<script src="thirdparty/angular-datatables-master/vendor/datatables-colvis/js/dataTables.colVis.js"></script>
-		<script src="thirdparty/angular-datatables-master/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
-	    <script src="thirdparty/angular-datatables-master/vendor/datatables-responsive/js/dataTables.responsive.js"></script>
-	    <script src="thirdparty/angular-datatables-master/vendor/datatables-scroller/js/dataTables.scroller.js"></script>
-	    <script src="thirdparty/angular-datatables-master/vendor/datatables-columnfilter/js/dataTables.columnFilter.js"></script>
-	    <script src="thirdparty/angular-datatables-master/vendor/datatables-light-columnfilter/dist/dataTables.lightColumnFilter.min.js"></script>
-	    <script src="thirdparty/angular-datatables-master/vendor/datatables-fixedcolumns/js/dataTables.fixedColumns.js"></script>
-	    <script src="thirdparty/angular-datatables-master/vendor/datatables-fixedheader/js/dataTables.fixedHeader.js"></script>
-	    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/dataTables.buttons.js"></script>
-	    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.colVis.js"></script>
-	    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.flash.js"></script>
-	    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.html5.js"></script>
-	    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.print.js"></script>
-	    <script src="thirdparty/angular-datatables-master/vendor/datatables-select/js/dataTables.select.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
-		<script src="thirdparty/angular-datatables-master/vendor/angular-bootstrap/ui-bootstrap.min.js"></script>
-	    <script src="thirdparty/angular-datatables-master/vendor/angular-translate/angular-translate.min.js"></script>
-	    <script src="thirdparty/angular-datatables-master/src/angular-datatables.js"></script>
-	    <script src="thirdparty/angular-datatables-master/src/angular-datatables.util.js"></script>
-	    <script src="thirdparty/angular-datatables-master/src/angular-datatables.options.js"></script>
-	    <script src="thirdparty/angular-datatables-master/src/angular-datatables.instances.js"></script>
-	    <script src="thirdparty/angular-datatables-master/src/angular-datatables.factory.js"></script>
-	    <script src="thirdparty/angular-datatables-master/src/angular-datatables.renderer.js"></script>
-	    <script src="thirdparty/angular-datatables-master/src/angular-datatables.directive.js"></script>
-	    <!-- bootstrap
-		<script src="thirdparty/bootstrap-4.0.0-alpha.2/dist/js/bootstrap.js"></script>
-		<script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js" integrity="sha384-XXXXXXXX" crossorigin="anonymous"></script>-->
-
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-	    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.options.js"></script>
-	    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.colvis.js"></script>
-	    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.tabletools.js"></script>
-	    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
-	    <script src="thirdparty/angular-datatables-master/src/plugins/colvis/angular-datatables.colvis.js"></script>
-	    <script src="thirdparty/angular-datatables-master/src/plugins/colreorder/angular-datatables.colreorder.js"></script>
-	    <script src="thirdparty/angular-datatables-master/src/plugins/tabletools/angular-datatables.tabletools.js"></script>
-	    <script src="thirdparty/angular-datatables-master/src/plugins/scroller/angular-datatables.scroller.js"></script>
-	    <script src="thirdparty/angular-datatables-master/src/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
-	    <script src="thirdparty/angular-datatables-master/src/plugins/light-columnfilter/angular-datatables.light-columnfilter.js"></script>
-	    <script src="thirdparty/angular-datatables-master/src/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
-	    <script src="thirdparty/angular-datatables-master/src/plugins/fixedheader/angular-datatables.fixedheader.js"></script>
-	    <script src="thirdparty/angular-datatables-master/src/plugins/buttons/angular-datatables.buttons.js"></script>
-	    <script src="thirdparty/angular-datatables-master/src/plugins/select/angular-datatables.select.js"></script>
-	    <script src="thirdparty/angular-datatables-master/vendor/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="views/template-assets/bootstrap-assets/js/bootstrap.min.js"></script>
+    <script src="views/template-assets/js/custom.js"></script>
+    <!-- JS PLUGINS -->
+    <script src="views/template-assets/plugins/owl-carousel/owl.carousel.min.js"></script>
+    <script src="views/template-assets/js/jquery.easing.min.js"></script>
+    <script src="views/template-assets/plugins/waypoints/jquery.waypoints.min.js"></script>
+    <script src="views/template-assets/plugins/countTo/jquery.countTo.js"></script>
+    <script src="views/template-assets/plugins/inviews/jquery.inview.min.js"></script>
+    <script src="views/template-assets/plugins/Lightbox/dist/js/lightbox.min.js"></script>
+    <script src="views/template-assets/plugins/WOW/dist/wow.min.js"></script>
+    <!-- GOOGLE MAP -->
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
 
 
-		<script src="thirdparty/angular-datatables-master/demo/usages.js"></script>
-
-		<script src="thirdparty/angular-checkbox/checklist-model.js"></script>
-
+    <script src="dist/js/select2.min.js"></script>
     <script src="dist/js/formValidation.js"></script>
     <script src="dist/js/framework/bootstrap.js"></script>
+    <script src="thirdparty/twitter-bootstrap-wizard-master/jquery.bootstrap.wizard.js"></script>
+    <script src="thirdparty/twitter-bootstrap-wizard-master/prettify.js"></script>
+    <script src="thirdparty/bootstrap-fileinput-master/js/fileinput.js" type="text/javascript"></script>
 
 
-        <!--webdaptive -->
-        <script src="scripts/wdapp.js"></script>
 
-        <script src="scripts/commons/wdapp.controllers.js"></script>
-        <script src="scripts/commons/wdapp.directives.js"></script>
-        <script src="scripts/commons/wdapp.localization.all.js"></script>
-        <script src="scripts/commons/wdapp.demodata.factory.js"></script>
-        <script src="scripts/commons/wdapp.authentication.factory.js"></script>
-        <script src="scripts/commons/wdapp.httpinterceptors.factory.js"></script>
-        <script src="scripts/factory/wdapp.commons.factory.js"></script>
-        <script src="scripts/models/domain.objects.js"></script>
-        <script src="scripts/models/request.objects.js"></script>
-        <script src="scripts/models/domain.selects.js"></script>
-
-        <script src="scripts/ui/ui.controllers.js"></script>
-        <script src="scripts/forms/forms.directives.js"></script>
-        <script src="scripts/forms/forms.controllers.js"></script>
-        <script src="scripts/tables/tables.controllers.js"></script>
-        <script src="scripts/tasks/tasks.all.js"></script>
-		<script src="scripts/charts/charts.chartjs.controllers.js"></script>
-        <script src="scripts/charts/charts.flot.controllers.js"></script>
-        <script src="scripts/charts/charts.morris.controllers.js"></script>
-        <script src="scripts/charts/charts.other.controllers.js"></script>
-		<script src="scripts/charts/charts.echarts.controllers.js"></script>
-        <script src="scripts/charts/charts.directives.js"></script>
-        <script src="scripts/apps/util/util.controllers.js"></script>
-        <script src="scripts/pages/pages.controllers.js"></script>
-        <script src="scripts/apps/stocks.controllers.js"></script>
-        <script src="scripts/apps/stocks.factory.js"></script>
-        <script src="scripts/apps/counties.controllers.js"></script>
-    	<script src="scripts/models/validation.objects.js"></script>
-        <script src="scripts/apps/procedures.controllers.js"></script>
-        <script src="scripts/apps/sysmgmt.data.factory.js"></script>
-        <script src="scripts/apps/site.controllers.js"></script>
-        <script src="scripts/apps/empresa.controllers.js"></script>
-        <script src="scripts/apps/produto/produto.controllers.js"></script>
-        <script src="scripts/apps/notafiscal/notafiscal.controllers.js"></script>
-
-    	<script src="scripts/apps/fiscal/cfop.controllers.js"></script>
-        <script src="scripts/apps/fiscal/cnae.controllers.js"></script>
-        <script src="scripts/apps/vendas/pdVendas.controllers.js"></script>
-        <script src="scripts/apps/vendas/notafiscal.controllers.js"></script>
-        <script src="scripts/apps/vendas/orcamento.controllers.js"></script>
-        <script src="scripts/apps/ordemServico/ordemServico.controllers.js"></script>
-        <script src="scripts/apps/compras/nfEntrada.controllers.js"></script>
-        <script src="scripts/apps/compras/pdCompras.controllers.js"></script>
-        <script src="scripts/apps/compras/cotacao.controllers.js"></script>
-        <script src="scripts/apps/financeiro/contasPagar.controllers.js"></script>
-        <script src="scripts/apps/financeiro/contasReceber.controllers.js"></script>
-        <script src="scripts/apps/financeiro/formaPg.controllers.js"></script>
-        <script src="scripts/apps/financeiro/banco.controllers.js"></script>
-        <script src="scripts/apps/financeiro/agencia.controllers.js"></script>
-        <script src="scripts/apps/financeiro/conta.controllers.js"></script>
-        <script src="scripts/apps/Dp/funcionario.controllers.js"></script>
-        <script src="scripts/apps/cadastros/cliente.controllers.js"></script>
-        <script src="scripts/apps/cadastros/fornecedor.controllers.js"></script>
-        <script src="scripts/apps/cadastros/transportador.controllers.js"></script>
-        <script src="scripts/apps/cadastros/convenio.controllers.js"></script>
-        <script src="scripts/apps/cadastros/deposito.controllers.js"></script>
-        <script src="scripts/apps/cadastros/estado.controllers.js"></script>
-        <script src="scripts/apps/cadastros/filial.controllers.js"></script>
-        <script src="scripts/apps/produto/categoria.controllers.js"></script>
-        <script src="scripts/apps/produto/unimed.controllers.js"></script>
-        <script src="scripts/apps/produto/marca.controllers.js"></script>
-        <script src="scripts/apps/produto/servico.controllers.js"></script>
-        <script src="scripts/apps/controleProducao/ordemProducao.controllers.js"></script>
-        <script src="scripts/apps/cadastros/convenio.controllers.js"></script>
-        <script src="scripts/apps/cadastros/cidade.controllers.js"></script>
-        <script src="scripts/apps/cadastros/filial.controllers.js"></script>
-        <script src="scripts/apps/cadastros/almoxarifado.controllers.js"></script>
-        <script src="scripts/apps/advogado/processo.controllers.js"></script>
-
-        <script src="scripts/apps/gerencia/cadEmpresa.controllers.js"></script>
-        <script src="scripts/apps/gerencia/site.controllers.js"></script>
-        <script src="scripts/apps/gerencia/plano.controllers.js"></script>
-        <script src="scripts/apps/gerencia/servicos.controllers.js"></script>
-        <script src="scripts/apps/gerencia/usuarios.controllers.js"></script>
-        <script src="scripts/apps/gerencia/contatos.controllers.js"></script>
-        <script src="scripts/apps/gerencia/historico.controllers.js"></script>
+    <script src="thirdparty/AngularJS-Tutorial-master/node_modules/angular-aria/angular-aria.js"></script>
+    <script src="thirdparty/AngularJS-Tutorial-master/node_modules/angular-material/angular-material.js"></script>
+    <script src="thirdparty/AngularJS-Tutorial-master/scripts/app.js"></script>
+    <script src="thirdparty/AngularJS-Tutorial-master/components/classifieds.ctr.js"></script>
 
 
-        <script src="scripts/apps/dicionario/field.controllers.js"></script>
-        <script src="scripts/apps/dicionario/help.controllers.js"></script>
-        <script src="scripts/apps/dicionario/menu.controllers.js"></script>
-        <script src="scripts/apps/dicionario/pagina.controllers.js"></script>
-        <script src="scripts/apps/dicionario/validacao.controllers.js"></script>
-        <script src="scripts/apps/gerencia/roles.controllers.js"></script>
+    <!-- The Templates plugin is included to render the upload/download listings -->
 
-        <script src="scripts/apps/gerencia/permissoes.controllers.js"></script>
-
-        <script src="scripts/apps/util/telefone.controllers.js"></script>
-
-        <script src="scripts/factory/empresa/empresa.factory.js"></script>
-        <script src="scripts/factory/site/site.factory.js"></script>
-        <script src="scripts/factory/pessoa/pessoa.factory.js"></script>
-        <script src="scripts/factory/produto/produto.factory.js"></script>
-        <script src="scripts/factory/wdapp.datatables.factory.js"></script>
-        <script src="scripts/factory/wdapp.initPage.factory.js"></script>
-        <script src="scripts/models/domain.factory.js"></script>
-        <script src="scripts/util/ngAutocomplete.js"></script>
-        <script src="scripts/directive/inputaction.directive.js"></script>
-        <script src="scripts/apps/entidade/empresa.controllers.js"></script>
-
-         <!---->
+    <!-- The main application script
+    <script src="thirdparty/jQuery-File-Upload-master/js/main.js"></script>-->
 
 
-    </body>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body ng-app="ngClassifieds" ng-controller="classifiedsCtrl">
+    <!-- Preloader
+    ============================================= -->
+    <div class="preloader"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></div>
+    <!-- Header
+    ============================================= -->
+    <section class="main-header">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><img src="views/template-assets/img/logo/logo.png" class="img-responsive" alt="logo"></a>
+                </div>
+                <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
+                    <div class="col-md-12 col-xs-12 nav-wrap">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#owl-hero" class="page-scroll">E-Contábil</a></li>
+                            <li><a href="#services" class="page-scroll">Serviços</a></li>
+                            <li><a href="#portfolio" class="page-scroll">Planos</a></li>
+                            <li><a href="#contact" class="page-scroll">Contato</a></li>
+                            <li><a href="#wizard" class="page-scroll">Migrar Empresa</a></li>
+                            <li><a href="/springmvc-angularjs/index2.html#/pages/signin" class="page-scroll">Aréa Usuario</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div id="owl-hero" class="owl-carousel owl-theme">
+            <div class="item" style="background-image: url(views/template-assets/img/sliders/Slide.jpg)">
+                <div class="caption">
+                    <h6>Sistema simples e eficiente para você ganhar tempo</h6>
+                    <h2>O <span>E-Contábil</span> é um sistema de gestão que irá facilitar o dia a dia da sua empresa</h2>
+                    <a class="btn btn-transparent" href="#">Learn More</a><a class="btn btn-light" href="#">Experimente <span>Grátis</span></a>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(views/template-assets/img/sliders/Slide2.jpg)">
+                <div class="caption">
+                    <h6>O SISTEMA DE GESTÃO FÁCIL E ONLINE</h6>
+                    <h1>Financeiro,
+Vendas,
+Nota Fiscal Eletrônica,
+Controle de Estoque</h1>
+                    <a class="btn btn-transparent" href="#">Learn More</a><a class="btn btn-light" href="#">Experimente <span>Grátis</span></a>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(views/template-assets/img/sliders/Slide3.jpg)">
+                <div class="caption">
+                    <h6>Você Escritorio Contábil e Contador <span>Seja nosso Parceiro</span></h6>
+                    <h2>Não Sera preciso de outro sistema no E-Contábil tem tudo que voce precisa para fechar a contabilidade de qualquer empresa</h2>
+                    <a class="btn btn-transparent" href="#">Cadastre-se Agora</a><a class="btn btn-light" href="#">Experimente <span>Grátis</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Welcome
+    ============================================= -->
+    <section id="welcome">
+        <div class="container">
+            <h2>Bem Vindo ao <span>E-Contábil</span></h2>
+            <hr class="sep">
+            <p>Simples. Da maneira que você precisa para gerenciar a sua micro e pequena empresa.</p>
+            <img class="img-responsive center-block wow fadeInUp" data-wow-delay=".3s" src="views/template-assets/img/welcome/logo.png" alt="logo">
+        </div>
+    </section>
+
+    <!-- Services
+    ============================================= -->
+    <section id="services">
+        <div class="container">
+            <h2>Serviços</h2>
+            <hr class="light-sep">
+            <div class="services-box">
+                <div class="row wow fadeInUp" data-wow-delay=".3s">
+                    <div class="col-md-4">
+                        <div class="media-left"><span class="icon-lightbulb"></span></div>
+                        <div class="media-body">
+                            <h3>OnLine</h3>
+                            <p>O E-Contábil é um sistema totalmente online, não precisa instalação, funciona diretamente no seu navegador e em qualquer sistema operacional. Também em celulares e tablets. Basta ter acesso a internet.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="media-left"><span class="icon-mobile"></span></div>
+                        <div class="media-body">
+                            <h3>Fácil</h3>
+                            <p>Com o E-Contábil você e sua equipe poderão começar a usar o sistema hoje mesmo, sem dificuldades. Mesmo assim, se tiver dúvidas, estamos prontos para atendê-lo.</p>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="media-left"><span class="icon-compass"></span></div>
+                        <div class="media-body">
+                            <h3>Acessivel</h3>
+                            <p>O E-Contábil é um software barato. Toda a infra-estrutura de servidores e sistema é mantida por nós e, dessa maneira, você não terá surpresas com o custo de sistema.</p>
+                        </div>
+
+                    </div>
+                </div>
+                    <div class="row wow fadeInUp" data-wow-delay=".6s">
+                        <div class="col-md-4">
+                            <div class="media-left"><span class="icon-adjustments"></span></div>
+                            <div class="media-body">
+                                <h3>Entenda onde está seu dinheiro</h3>
+                                <p>Concilie seus lançamentos financeiros e saiba exatamente pra onde foi e de onde vem o seu dinheiro. A conciliação apresenta uma sugestão entre os lançamentos vindos do banco e os cadastrados no E-Contábil e ainda permite opções como cadastrar um novo lançamento ou adicionar uma transferência.</p>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="media-left"><span class="icon-tools"></span></div>
+                            <div class="media-body">
+                                <h3>Comece seu dia com as informações essenciais</h3>
+                                <p>A Visão Geral traz dados importantes como vendas, fluxo de caixa diário e saldos bancários. Nessa tela você organiza o que é prioridade, ou seja, pode ordenar as informações como quiser.</p>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="media-left"><span class="icon-wallet"></span></div>
+                            <div class="media-body">
+                                <h3>Emissão de nota fiscal eletrônica integrada</h3>
+                                <p>Com o emissor de nota fiscal online do E-Contábil você economiza tempo e trabalho, pois nosso sistema de emissão de NF-e é totalmente integrado com o processo de vendas. Você nunca mais vai precisar informar duas vezes os dados de um pedido. Envie notas fiscais eletrônicas e Danfe (documento auxiliar de nota fiscal eletrônica) para seus clientes por e-mail.</p>
+                            </div>
+
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio
+    ============================================= -->
+    <section id="portfolio">
+        <div class="container-fluid">
+            <h2>Venha ser nosso parceiro</h2>
+            <hr class="sep">
+            <p>Se indicar para mais de 10 empresa o sistema e gratis </p>
+            <p>•    Folha de Pagamento •    SPPED; •    Sintegra; •    NF-e; •    Dap; •    Controle de estoque;</p>
+            <div class="row">
+
+ <div class="center">
+                <h2>Tabelas de Preço</h2>
+            </div>
+            <div class="pricing-area text-center">
+                <div class="row">
+                    <div class="col-sm-4 plan price-one wow fadeInDown">
+                        <ul>
+                            <li class="heading-one">
+                                <h1>Simples</h1>
+                                <span>R$ 49,99</span>
+                            </li>
+                            <li>Controle de Estoque</li>
+                            <li>Financeiro</li>
+                            <li>NF-e</li>
+                            <li>2 Acessos (Login)</li>
+                            <li></li>
+                            <li></li>
+                            <li class="plan-action">
+                                <a href="" class="btn btn-primary">Assinar</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-4 plan price-two wow fadeInDown">
+                        <ul>
+                            <li class="heading-two">
+                                <h1>Básico</h1>
+                                <span>R$ 69,99</span>
+                            </li>
+                            <li>Controle de Estoque</li>
+                            <li>Financeiro</li>
+                            <li>NF-e</li>
+                            <li>Tesouraria</li>
+                            <li>Controle de Produção</li>
+                            <li>5 Acessos (Login)</li>
+                            <li class="plan-action">
+                                <a href="" class="btn btn-primary">Assinar</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-4 plan price-three wow fadeInDown">
+                        <img src="images/ribon_one.png">
+                        <ul>
+                            <li class="heading-three">
+                                <h1>Premio</h1>
+                                <span>R$ 99,99</span>
+                            </li>
+                            <li>Controle de Estoque</li>
+                            <li>Financeiro</li>
+                            <li>NF-e</li>
+                            <li>Tesouraria</li>
+                            <li>Controle de Produção</li>
+                            <li>Departamento Pessoal</li>
+                            <li>Compras</li>
+                            <li>Acessos (Login) Ilimitado</li>
+                            <li class="plan-action">
+                                <a href="" class="btn btn-primary">Assinar</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-6 col-md-4 plan price-four wow fadeInDown">
+                        <ul>
+                            <li class="heading-four">
+                                <h2>Clinica Medica</h2>
+                                <span>R$ 59,99</span>
+                            </li>
+                            <li>Controle de Estoque</li>
+                            <li>Financeiro</li>
+                            <li>NF-e</li>
+                            <li>Agenda</li>
+                            <li>Compras</li>
+                            <li>Prontuario Eletronico</li>
+
+                            <li class="plan-action">
+                                <a href="" class="btn btn-primary">Assinar</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-6 col-md-4 plan price-five wow fadeInDown">
+                        <ul>
+                            <li class="heading-five">
+                                <h2>Escritorio Advocacia</h2>
+                                <span>R$ 59,99</span>
+                            </li>
+                            <li>Controle de Estoque</li>
+                            <li>Financeiro</li>
+                            <li>NF-e</li>
+                            <li>Agenda</li>
+                            <li>Compras</li>
+                            <li>Gestão de Processos</li>
+                            <li class="plan-action">
+                                <a href="" class="btn btn-primary">Assinar</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-6 col-md-4 plan price-six wow fadeInDown">
+                         <img src="images/ribon_two.png">
+                        <ul>
+                            <li class="heading-six">
+                                <h2>Condominio</h2>
+                                <span>R$ 79,99</span>
+                            </li>
+                            <li>Controle de Estoque</li>
+                            <li>Financeiro</li>
+                            <li>Avisos,Atas de reunião</li>
+                            <li>Agenda de reunião Condominio (envio Email)</li>
+                            <li>Compras</li>
+                            <li>Prestação de Contas</li>
+                            <li>Moral Avisos</li>
+                            <li class="plan-action">
+                                <a href="" class="btn btn-primary">Assinar</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div><!--/pricing-area -->
+
+            </div>
+
+        </div>
+    </section>
+    <!-- Work Process
+    ============================================= -->
+    <section id="work-process">
+        <div class="container">
+            <h2>O que o E-Contábil faz para mudar sua vida!</h2>
+            <hr class="sep">
+            <p>What Happen In The Background</p>
+            <div class="row wow fadeInUp" data-wow-delay=".3s">
+                <div class="col-lg-3">
+                    <span class="icon-chat"></span>
+                    <h4>Sistema ERP</h4>
+                    <p>Integração dos processos de gestão em sua micro ou pequena empresa, das finanças às vendas, com cadastro de clientes, estoque e relatórios</p>
+                </div>
+                <div class="col-lg-3">
+                    <span class="icon-circle-compass"></span>
+                    <h4>Financeiro</h4>
+                    <p>Contas a pagar e a receber com integração bancária em seu controle financeiro. Contas em dia é saúde financeira para seus negócios</p>
+                </div>
+                <div class="col-lg-3">
+                    <span class="icon-browser"></span>
+                    <h4>Produto</h4>
+                    <p>Controle de propostas e vendas integrado a emissão de NF-e e boleto. Compras e estoque integrado ao cadastro de clientes e fornecedores</p>
+                </div>
+                <div class="col-lg-3">
+                    <span class="icon-global"></span>
+                    <h4>Compras</h4>
+                    <p>Controle de cotação onde o sistema envia email para os fornecedores a relação de produtos a ser cotado com um link para o fornecedor lança os seu preços</p>
+                </div>
+            </div>
+            <div class="row wow fadeInUp" data-wow-delay=".3s">
+                <div class="col-lg-3">
+                    <span class="icon-chat"></span>
+                    <h4>Sistema para Escritorio de advocacia</h4>
+                    <p>Integração dos processos de gestão para escritorios de advocacia, das finanças às processos,agenda, com cadastro de clientes, advogados e relatórios</p>
+                </div>
+                <div class="col-lg-3">
+                    <span class="icon-circle-compass"></span>
+                    <h4>Sistema para Clinicas Medicas</h4>
+                    <p>Integração dos processos de gestão para clinicas de medicas, das finanças às processos,agenda, com cadastro de clientes, medicos,prontuario eletronico e relatórios</p>
+                </div>
+                <div class="col-lg-3">
+                    <span class="icon-browser"></span>
+                    <h4>Sistema para Condominios</h4>
+                    <p>Controle de propostas e gestão para Condominio com relação despesas,graficos e boleto. Compras,prestação serviços e cadastros despesas ao cadastro de inquilinos,sindico e fornecedores</p>
+                </div>
+                <div class="col-lg-3">
+                    <span class="icon-global"></span>
+                    <h4>Integração com Contador</h4>
+                    <p>Ganhe tempo na troca de documentos e informações com o contador e melhore a qualidade da relação de sua empresa com a contabilidade</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Some Fune Facts
+    ============================================= -->
+    <section id="fun-facts">
+        <div class="container">
+            <h2>Principios </h2>
+            <hr class="light-sep">
+            <div class="row wow fadeInUp" data-wow-delay=".3s">
+                <div class="col-lg-4">
+                    <span class="icon-happy"></span>
+                    <h2 class="number timer">Missão</h2>
+                    <p>Prover com eficiência soluções em TI para empresas.</p>
+                </div>
+                <div class="col-lg-4">
+                    <span class="icon-trophy"></span>
+                    <h2 class="number timer">Visão</h2>
+                    <p>Sermos a principal referência em soluções Contabil para o mercado online.</p>
+                </div>
+                <div class="col-lg-4">
+                    <span class="icon-wine"></span>
+                    <h2 class="number timer">Quem Somos</h2>
+                    <p>A marca Assiste Soluções em Ti é conhecida em toda cidade de Uberaba. Tendo começado como representante da Empresa freedon  Com a migração para um sistema proprio inteiramente ONLINE.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Some Fune Facts
+    =============================================-->
+    </section>
+
+
+        <section style="margin-top : 100px" id="wizard" style="background-color : #000000">
+        <div class='container' >
+            <div id="rootwizard" class="agilContabil">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="container">
+                            <ul>
+                                <li><a href=".tab1" data-toggle="tab">Informações do Usuario</a></li>
+                                <li><a href=".tab2" data-toggle="tab">Informações da Empresa</a></li>
+                                <li><a href=".tab3" data-toggle="tab">Informações de Socios</a></li>
+                                <li><a href=".tab4" data-toggle="tab">Informações Plano Serviçoes</a></li>
+                                <li><a href=".tab5" data-toggle="tab">Contrato Social</a></li>
+                                <li><a href=".tab6" data-toggle="tab">Pagamento</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="bar" class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;background : red"></div>
+                </div>
+                <form ng-submit="submit()" class="empresaForm">
+                    <div class="tab-content">
+                        <div class="tab-pane tab1" id="tab1">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-8 col-md-offset-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Nome Completo</label>
+                                            <input type="text" ng-model="empresa.usuarios[0].nome" name="nome" class="form-control" placeholder="Nome Completo">
+                                            <span>{{empresa.usuarios[0].nome}}</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">CPF</label>
+                                            <input type="text" id="cpf" class="form-control" name="cpf" ng-model="empresa.usuarios[0].cpf.numero" placeholder="CPF">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Telefone</label>
+                                            <input type="text" class="form-control" ng-model="empresa.usuarios[0].telefone" name="telefone" placeholder="Telefone">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Email</label>
+                                            <input type="email" id='email' class="form-control" ng-model="empresa.usuarios[0].email" name="email" placeholder="Email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Senha</label>
+                                            <input type="password" class="form-control" ng-model="empresa.usuarios[0].senha" name="password" placeholder="Senha">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Confirmar Senha</label>
+                                            <input type="password" class="form-control" ng-model="senha" name="confirmPassword" placeholder="Confirmar Senha">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane tab2" id="tab2">
+                            <div class="panel-body">
+
+                                <div ng-include="'views/empresa/apps/cadEmpresa.html'"></div>
+
+                                <!-- email -->
+                                <div ng-include="'views/util/apps/endereco.html'"></div>
+
+                                <!-- telefone -->
+                                <div ng-include="'views/util/apps/telefone.html'"></div>
+
+
+                                <!-- email -->
+                                <div ng-include="'views/util/apps/email.html'"></div>
+
+
+                                <!-- Cnae -->
+                                <div ng-include="'views/util/apps/cnae.html'"></div>
+
+
+                            </div>
+                        </div>
+                        <div class="tab-pane tab3" id="tab3">
+                            <div class="row socios">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">CPF Socio</label>
+                                        <input type="text" class="form-control cpf-socio" name="book[0].cpf" placeholder="CPF Socio" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Nome Socio</label>
+                                        <input type="text" class="form-control nome-socio" name="book[0].nome" placeholder="Nome Socio" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Porcentagem</label>
+                                        <input type="text" class="form-control cota-socio" name="book[0].cota" placeholder="%" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:18px">
+                                    <div class="checkbox">
+                                        <label>
+                                                <input type="checkbox" name="receiver" class="check-socio" value="1" /> Socio Administrador ?
+                                            </label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-1" style="margin-top:18px">
+                                    <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-group hide" id="bookTemplate">
+                                <div class="row socios">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">CPF Socio</label>
+                                            <input type="text" class="form-control cpf-socio" name="cpf-socio" placeholder="CPF Socio" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Nome Socio</label>
+                                            <input type="text" class="form-control nome-socio" name="nome-socio" placeholder="Nome Socio" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Porcentagem</label>
+                                            <input type="text" class="form-control cota-socio" name="cota-socio" placeholder="%" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3" style="margin-top:18px">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="receiver" class="check-socio" value="1" /> Socio Administrador ?
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-1" style="margin-top:18px">
+                                        <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane tab4 col-sm-12" id="tab4"> <!-- data-ng-controller="SiteController as cc"> -->
+                            <div class="col-sm-8">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href=".collapseThree">1 - Planos</a>
+                                    </h4>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse collapseThree">
+                                        <div class="panel-body">
+                                            <section class="mbr-section mbr-section--relative mbr-section--fixed-size " id="pricing-table1-11" style="background-color: rgb(240, 240, 240);">
+                                                <div class="mbr-section__container mbr-section__container--std-top-padding  container" style="padding-top: 93px; margin-bottom: 0px;width:100%">
+                                                    <div class="row">
+                                                        <div class="mbr-plan col-xs-12 mbr-plan--first col-md-3 col-sm-6" ng-repeat="plano in cc.site.planoList">
+                                                            <div class="mbr-plan__box planos">
+                                                                <div class="plano-id hide">{{plano.id}}</div>
+                                                                <div class="plano-type hide">1</div>
+                                                                <div class="mbr-plan__header">
+                                                                    <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
+                                                                        <h3 class="mbr-header__text">{{plano.titulo}}</h3>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mbr-plan__number">
+                                                                    <div class="mbr-number mbr-number--price">
+                                                                        <div class="mbr-number__num">
+                                                                            <div class="{{plano.id}} hide id"></div>
+                                                                            <div class="hide type plano"></div>
+                                                                            <div class="mbr-number__group">
+                                                                                <sup class="mbr-number__left">$</sup><span class="mbr-number__value mbr-plan__number1 valor">{{plano.precoList[0].valor || 0}}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="mbr-number__caption">Mensal</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mbr-plan__details">
+                                                                    <ul ng-repeat="servico in plano.servicoList">
+                                                                        <li><strong>{{servico.servico.nome}}</strong> {{servico.servico.descricao}}</li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="mbr-plan__buttons">
+                                                                    <div class="mbr-buttons mbr-buttons--center">
+                                                                        <label>Contratar - <input type='checkbox' class="plano" ng-init='checkStatus=false' ng-model='checkStatus' ng-click='doIfChecked(checkStatus)'></label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href=".collapseFour">2 - Serviços</a>
+                                    </h4>
+                                    </div>
+                                    <div id="collapseFour" class="panel-collapse collapse collapseFour">
+                                        <div class="panel-body">
+                                            <section class="mbr-section mbr-section--relative mbr-section--fixed-size planos" id="pricing-table1-11" style="background-color: rgb(240, 240, 240);">
+                                                <div class="mbr-section__container mbr-section__container--std-top-padding container" style="padding-top: 93px; margin-bottom: 0px;">
+                                                    <div class="row">
+                                                        <div class="mbr-plan col-xs-8 mbr-plan--first col-md-3 col-sm-6" ng-repeat="servico in cc.site.servicoList">
+                                                            <div class="plano-id hide">{{servico.id}}</div>
+                                                            <div class="plano-type hide">2</div>
+                                                            <div class="mbr-plan__box">
+                                                                <div class="mbr-plan__header">
+                                                                    <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
+                                                                        <h3 class="mbr-header__text">{{servico.nome}}</h3>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mbr-plan__number">
+                                                                    <div class="{{servico.id}} hide id"></div>
+                                                                    <div class="hide type servico"></div>
+                                                                    <div class="mbr-number mbr-number--price">
+                                                                        <div class="mbr-number__num">
+                                                                            <div class="mbr-number__group">
+                                                                                <sup class="mbr-number__left">$</sup><span class="mbr-number__value mbr-plan__number1 valor" style="font-size:40%">{{servico.precoList[0].valor || 0}}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="mbr-number__caption">Mensal</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mbr-plan__details">
+                                                                    <ul>
+                                                                        <li><strong>{{servico.servico.descricao}}</strong></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="mbr-plan__buttons">
+                                                                    <div class="mbr-buttons mbr-buttons--center">
+                                                                        <label>Contratar - <input type='checkbox' class="plano" ng-init='checkStatus=false' ng-model='checkStatus' ng-click='doIfChecked(checkStatus,10,nome)'></label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href=".collapseten" style="font-size:24px">Total</a>
+                                    </h4>
+                                </div>
+
+                                <div class="panel-body">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Plano</th>
+                                                <th>Valor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id='table-plano'>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                        <div class="tab-pane tab5" id="tab5">
+
+
+
+                            <div class="container kv-main">
+                                <div class="page-header">
+                                    <h1>Bootstrap File Input Example <small><a href="https://github.com/kartik-v/bootstrap-fileinput-samples"><i class="glyphicon glyphicon-download"></i> Download Sample Files</a></small></h1>
+                                </div>
+                                <form enctype="multipart/form-data">
+                                    <input id="file-0a" class="file" type="file" multiple data-min-file-count="1">
+                                    <br>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="reset" class="btn btn-default">Reset</button>
+                                </form>
+                                <hr>
+                                <form enctype="multipart/form-data">
+                                    <label>Test invalid input type</label>
+                                    <input id="file-0b" class="file" type="text" multiple data-min-file-count="1">
+
+                                </form>
+                                <hr>
+                                <form enctype="multipart/form-data">
+                                    <input id="file-0a" class="file" type="file" multiple data-min-file-count="3">
+                                    <hr>
+                                    <div class="form-group">
+                                        <input id="file-0b" class="file" type="file">
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <input id="file-1" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="2">
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <input id="file-2" type="file" class="file" readonly data-show-upload="false">
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <label>Preview File Icon</label>
+                                        <input id="file-3" type="file" multiple=true>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <input id="file-4" type="file" class="file" data-upload-url="#">
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <button class="btn btn-warning" type="button">Disable Test</button>
+                                        <button class="btn btn-info" type="reset">Refresh Test</button>
+                                        <button class="btn btn-primary">Submit</button>
+                                        <button class="btn btn-default" type="reset">Reset</button>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <input type="file" class="file" id="test-upload" multiple>
+                                        <div id="errorBlock" class="help-block"></div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <input id="file-5" class="file" type="file" multiple data-preview-file-type="any" data-upload-url="#">
+                                    </div>
+                                </form>
+
+
+                                <hr>
+                                <h4>Multi Language Inputs</h4>
+                                <form enctype="multipart/form-data">
+                                    <label>French Input</label>
+                                    <input id="file-fr" name="file-fr[]" type="file" multiple>
+                                    <hr style="border: 2px dotted">
+                                    <label>Spanish Input</label>
+                                    <input id="file-es" name="file-es[]" type="file" multiple>
+                                </form>
+                                <hr>
+                                <br>
+                            </div>
+
+
+                        </div>
+                        <div class="tab-pane" id="tab6">
+                            6
+                        </div>
+                        <ul class="pager wizard">
+                            <li class="previous first" style="display:none;"><a href="javascript:;">Primeira</a></li>
+                            <li class="previous"><a href="javascript:;">Anterior</a></li>
+                            <li class="next last" style="display:none;"><a href="javascript:;">Ultima</a></li>
+                            <li class="next"><a href="javascript:;">Proximo</a></li>
+                            <li class="hide save-empresa"><input type="submit" id="submit" value="Submit" ng-click="cc.submit()" /></li>
+                        </ul>
+                    </div>
+                </form>
+
+
+
+            </div>
+
+ </div>
+
+        </section>
+    <!-- Testimonials
+    =============================================
+    <section id="testimonials">
+        <div class="container">
+            <h2>Testimonials</h2>
+            <hr class="light-seps">
+            <p>What Clients Say About Us</p>
+
+
+        </div>
+    </section>-->
+    <!-- Contact Us
+    ============================================= -->
+    <section id="contact">
+        <div class="container">
+            <h2>Contato</h2>
+            <hr class="sep">
+            <p>Se estiver com duvida quiser saber mais sobre o E-Contábil. Teremos o prazer de vos Atender</p>
+            <div class="col-md-6 col-md-offset-3 wow fadeInUp" data-wow-delay=".3s">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="Name" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="Email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" rows="3" placeholder="Message"></textarea>
+                    </div>
+                    <a href="#" class="btn-block">Enviar</a>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Google Map
+    ============================================= -->
+    <div id="map"></div>
+    <!-- Footer
+    ============================================= -->
+    <footer>
+        <div class="container">
+            <h1>Rise</h1>
+            <div class="social">
+                <a href="#"><i class="fa fa-facebook fa-2x"></i></a>
+                <a href="#"><i class="fa fa-twitter fa-2x"></i></a>
+                <a href="#"><i class="fa fa-dribbble fa-2x"></i></a>
+            </div>
+            <h6>&copy; 2015 Rise.Development By BootstrapDev</h6>
+        </div>
+    </footer>
+<script>
+
+
+    $('#file-fr').fileinput({
+        language: 'fr',
+        uploadUrl: '#',
+        allowedFileExtensions : ['jpg', 'png','gif'],
+    });
+    $('#file-es').fileinput({
+        language: 'es',
+        uploadUrl: '#',
+        allowedFileExtensions : ['jpg', 'png','gif'],
+    });
+    $("#file-0").fileinput({
+        'allowedFileExtensions' : ['jpg', 'png','gif'],
+    });
+    $("#file-1").fileinput({
+        uploadUrl: '#', // you must set a valid URL here else you will get an error
+        allowedFileExtensions : ['jpg', 'png','gif'],
+        overwriteInitial: false,
+        maxFileSize: 1000,
+        maxFilesNum: 10,
+        //allowedFileTypes: ['image', 'video', 'flash'],
+        slugCallback: function(filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        }
+    });
+    /*
+    $(".file").on('fileselect', function(event, n, l) {
+        alert('File Selected. Name: ' + l + ', Num: ' + n);
+    });
+    */
+    $("#file-3").fileinput({
+        showUpload: false,
+        showCaption: false,
+        browseClass: "btn btn-primary btn-lg",
+        fileType: "any",
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>"
+    });
+    $("#file-4").fileinput({
+        uploadExtraData: {kvId: '10'}
+    });
+    $(".btn-warning").on('click', function() {
+        if ($('#file-4').attr('disabled')) {
+            $('#file-4').fileinput('enable');
+        } else {
+            $('#file-4').fileinput('disable');
+        }
+    });
+    $(".btn-info").on('click', function() {
+        $('#file-4').fileinput('refresh', {previewClass:'bg-info'});
+    });
+    /*
+    $('#file-4').on('fileselectnone', function() {
+        alert('Huh! You selected no files.');
+    });
+    $('#file-4').on('filebrowse', function() {
+        alert('File browse clicked for #file-4');
+    });
+    */
+    $(document).ready(function() {
+
+
+        $("#test-upload").fileinput({
+            'showPreview' : false,
+            'allowedFileExtensions' : ['jpg', 'png','gif'],
+            'elErrorContainer': '#errorBlock'
+        });
+
+        bookIndex = 0;
+
+    $('#empresaForm')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+
+        //    'book[0].cpf': notEmptyStringMinMaxRegexp,
+        //    'book[0].nome': notEmptyStringMinMax,
+         ///   'book[0].cota': integerNotEmptyValidation,
+        //     nome: notEmptyStringMinMax,
+        //     nunFunc: integerNotEmptyValidation,
+        //    razao:notEmptyStringMinMax,
+        //    logradouro:notEmptyStringMinMax,
+        //    cpf: notEmptyStringMinMaxRegexp,
+         //   cep: notEmptyStringMinMax,
+        //    cnpj: notEmptyStringMinMax,
+        //    email: emailValidation,
+        //    telefone: telefoneValidation,
+        //    phone: telefoneValidation,
+        //    cep: cepNotEmptyValidation,
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required and can\'t be empty'
+                    }
+                }
+            },
+            confirmPassword: {
+                validators: {
+                    notEmpty: {
+                        message: 'The confirm password is required and can\'t be empty'
+                    },
+                    identical: {
+                        field: 'password',
+                        message: 'The password and its confirm are not the same'
+                    }
+                }
+            }
+
+        }
+        })
+
+        $("select").select2({
+          placeholder: "Select a state",
+          allowClear: true
+        });
+
+        $('#rootwizard').bootstrapWizard({onNext: function(tab, navigation, index) {
+            /*  if(index==2) {
+                    // Make sure we entered the name
+                    if(!$('#name').val()) {
+                        alert('You must enter your name');
+                        $('#name').focus();
+                        return false;
+                    }
+                }
+
+                // Set the name for the next tab
+                $('#tab3').html('Hello, ' + $('#name').val());
+            */
+            }, onTabShow: function(tab, navigation, index) {
+
+                var $total = navigation.find('li').length;
+                var $current = index+1;
+                var $percent = ($current/$total) * 100;
+                $('#rootwizard .progress-bar').css({width:$percent+'%'});
+                if($percent == 100)
+                {
+                    $('.save-empresa').removeClass('hide');
+                }else{
+                    $('.save-empresa').addClass('hide');
+                }
+            },
+            onNext: function(tab, navigation, index) {
+                var numTabs    = $('#installationForm').find('.tab-pane').length,
+                    isValidTab = validateTab(index - 1);
+                if (!isValidTab) {
+                    return false;
+                }
+
+                if (index === numTabs) {
+                    alert('agora');
+                    // We are at the last tab
+
+                    // Uncomment the following line to submit the form using the defaultSubmit() method
+                    // $('#installationForm').formValidation('defaultSubmit');
+
+                    // For testing purpose
+                    $('#completeModal').modal();
+                }
+
+                return true;
+            }});
+
+        window.prettyPrint && prettyPrint();
+
+
+        //============================= Email fim
+         function validateTab(index) {
+            var fv   = $('#empresaForm').data('formValidation'), // FormValidation instance
+                // The current tab
+                $tab = $('#empresaForm').find('.tab-pane').eq(index);
+
+            // Validate the container
+            fv.validateContainer($tab);
+
+            var isValidStep = fv.isValidContainer($tab);
+            if (isValidStep === false || isValidStep === null) {
+                // Do not jump to the target tab
+                return false;
+            }
+
+            return true;
+        }
+
+        //Tab 1
+$('#empresaForm').find('[name="nome"]').val('099.099.099.099');
+$('#empresaForm').find('[name="cpf"]').val('099.099.099.099');
+$('#empresaForm').find('[name="telefone"]').val('34988406670');
+$('#empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
+$('#empresaForm').find('[name="password"]').val('099.099.099.099');
+$('#empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
+
+//Tab 2
+$('#empresaForm').find('[name="cnpj"]').val('099.099.099.099');
+$('#empresaForm').find('[name="numfunc"]').val('8');
+$('#empresaForm').find('[name="razao"]').val('34988406670');
+$('#empresaForm').find('[name="cep"]').val('38082243');
+$('#empresaForm').find('[name="numero"]').val('686');
+$('#empresaForm').find('[name="complemento"]').val('complemento');
+$('#empresaForm').find('[name="logradouro"]').val('logradouro');
+$('#empresaForm').find('[name="book[0].nome"]').val('joao das coves');
+$('#empresaForm').find('[name="book[0].cpf"]').val('05790167659');
+$('#empresaForm').find('[name="book[0].cpf"]').val('10');
+
+    });
+//prencher form
+/*
+//Tab 1
+$('#empresaForm').find('[name="nome"]').val('099.099.099.099');
+$('#empresaForm').find('[name="cpf"]').val('099.099.099.099');
+$('#empresaForm').find('[name="telefone"]').val('34988406670');
+$('#empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
+$('#empresaForm').find('[name="password"]').val('099.099.099.099');
+$('#empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
+
+//Tab 2
+$('#empresaForm').find('[name="cnpj"]').val('099.099.099.099');
+$('#empresaForm').find('[name="nunfunc"]').val('8');
+$('#empresaForm').find('[name="razao"]').val('34988406670');
+$('#empresaForm').find('[name="cep"]').val('38082243');
+$('#empresaForm').find('[name="numero"]').val('686');
+$('#empresaForm').find('[name="complemento"]').val('complemento');
+
+//Tab 3
+$('#empresaForm').find('[name="nome"]').val('099.099.099.099');
+$('#empresaForm').find('[name="cpf"]').val('099.099.099.099');
+$('#empresaForm').find('[name="telefone"]').val('34988406670');
+$('#empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
+$('#empresaForm').find('[name="password"]').val('099.099.099.099');
+$('#empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
+*/
+    </script>
+
+</body>
 
 </html>
