@@ -1,16 +1,16 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<!-- CONFIGURAÇÕES GERAIS -->
-<div class="row">
+<meta charset="utf-8"/>
+<!-- CONFIGURAÃ‡Ã•ES GERAIS -->
+<div class="row col-sm-12">
     <div class="col-sm-5 tabs-was">
-        <h3>Configuração geral</h3>
+        <h3>ConfiguraÃ§Ã£o geral</h3>
         <table class="fullBox">
             <tbody>
                 <tr>
-                    <td class="halfBox" data-toggle="tooltip" data-placement="right" title="Proíbe cadastrar mais de uma vez o mesmo CPF ou CNPJ na tela de contatos">CPF e CNPJ unico:</td>
+                    <td class="halfBox" data-toggle="tooltip" data-placement="right" title="ProÃ­be cadastrar mais de uma vez o mesmo CPF ou CNPJ na tela de contatos">CPF e CNPJ unico:</td>
                     <td id="b_cpfUnico"><input type="checkbox" ng-model="configuracao.confGeral.cnpjCPFUnico" name="receiver" class="check-socio" value="1" /></td>
                 </tr>
                 <tr>
-                    <td class="halfBox" data-toggle="tooltip" data-placement="right" title=" Número máximo de casas decimais a ser usado nos preços de produtos e serviços.">Casas decimais no preço:</td>
+                    <td class="halfBox" data-toggle="tooltip" data-placement="right" title=" NÃºmero mÃ¡ximo de casas decimais a ser usado nos preÃ§os de produtos e serviÃ§os.">Casas decimais no preÃ§o:</td>
                     <td id="b_casasDecimais">
                         <div class="col-sm-12">
                             <div class="form-group">
@@ -20,19 +20,19 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="halfBox" data-toggle="tooltip" data-placement="right" title="Quando o produto tiver um código personalizado, o sistema imprimirá este código nas vendas, entradas e ordens de serviço no lugar do código interno.">Imprimir código personalizado:</td>
+                    <td class="halfBox" data-toggle="tooltip" data-placement="right" title="Quando o produto tiver um cÃ³digo personalizado, o sistema imprimirÃ¡ este cÃ³digo nas vendas, entradas e ordens de serviÃ§o no lugar do cÃ³digo interno.">Imprimir cÃ³digo personalizado:</td>
                     <td id="b_cpfUnico"><input type="checkbox" ng-model="configuracao.confGeral.impCodPersonalizado" name="receiver" class="check-socio" value="1" /></td>
                 </tr>
                 <tr>
-                    <td class="halfBox" data-toggle="tooltip" data-placement="right" title="Ao imprmimir as listagens e relatórios do sistema, será inserido o logotipo da empresa no topo da impressão.">Logotipo nas listagens e relatórios impressos:</td>
+                    <td class="halfBox" data-toggle="tooltip" data-placement="right" title="Ao imprmimir as listagens e relatÃ³rios do sistema, serÃ¡ inserido o logotipo da empresa no topo da impressÃ£o.">Logotipo nas listagens e relatÃ³rios impressos:</td>
                     <td id="b_cpfUnico"><input type="checkbox" ng-model="configuracao.confGeral.logListRelImp" name="receiver" class="check-socio" value="1" /></td>
                 </tr>
                 <tr>
-                    <td data-toggle="tooltip" data-placement="right" title="Permite a emissão de NFCe, através do módulo de vendas.">Ativar NFCe:</td>
+                    <td data-toggle="tooltip" data-placement="right" title="Permite a emissÃ£o de NFCe, atravÃ©s do mÃ³dulo de vendas.">Ativar NFCe:</td>
                     <td id="b_cpfUnico"><input type="checkbox" ng-model="configuracao.confGeral.ativNFCe" name="receiver" class="check-socio" value="1" /></td>
                 </tr>
                 <tr>
-                    <td data-toggle="tooltip" data-placement="right" title="Número de dias que será mostrado na carta de cobrança entregue ao cliente.">Dias da carta de cobrança:</td>
+                    <td data-toggle="tooltip" data-placement="right" title="NÃºmero de dias que serÃ¡ mostrado na carta de cobranÃ§a entregue ao cliente.">Dias da carta de cobranÃ§a:</td>
                     <td id="b_casasDecimais">
                         <div class="col-sm-12">
                             <div class="form-group">
@@ -42,24 +42,24 @@
                     </td>
                 </tr>
                 <tr>
-                    <td data-toggle="tooltip" data-placement="right" title="Mostrar as observações do cadastro do produto final dentro da ordem de produção.">Observações do produto final na produção:</td>
+                    <td data-toggle="tooltip" data-placement="right" title="Mostrar as observaÃ§Ãµes do cadastro do produto final dentro da ordem de produÃ§Ã£o.">ObservaÃ§Ãµes do produto final na produÃ§Ã£o:</td>
                     <td id="b_cpfUnico"><input type="checkbox" ng-model="configuracao.confGeral.obsProdFinProd" name="receiver" class="check-socio" value="1" /></td>
                 </tr>
                 <tr class="apenasV2">
-                    <td data-toggle="tooltip" data-placement="right" title="Ao colocar o mouse me cima de nomes de clientes e produtos, em partes do sistema, o sistema mostra mais detalhes sobre o respectivo cliente ou produto.">Mostrar informações ao posicionar o mouse:</td>
+                    <td data-toggle="tooltip" data-placement="right" title="Ao colocar o mouse me cima de nomes de clientes e produtos, em partes do sistema, o sistema mostra mais detalhes sobre o respectivo cliente ou produto.">Mostrar informaÃ§Ãµes ao posicionar o mouse:</td>
                     <td id="b_cpfUnico"><input type="checkbox" ng-model="configuracao.confGeral.infPosicionarMouse" name="receiver" class="check-socio" value="1" /></td>
                 </tr>
             </tbody>
         </table>
     </div>
     <div class="col-sm-5 tabs-was">
-        <!-- CONFIGURAÇÕES DAS VENDAS -->
+        <!-- CONFIGURAÃ‡Ã•ES DAS VENDAS -->
         <div class="panel fullBox verticalHeaderTableList bottomSpace">
-            <h3>Configuração das Vendas</h3>
+            <h3>ConfiguraÃ§Ã£o das Vendas</h3>
             <table class="fullBox">
                 <tbody>
                     <tr>
-                        <td class="halfBox">Desconto máximo na venda:</td>
+                        <td class="halfBox">Desconto mÃ¡ximo na venda:</td>
                         <td id="f_maxDescontoVenda">
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -81,7 +81,7 @@
                         <td id="f_vendaPrintFinanc"><input type="checkbox" ng-model="configuracao.confVendas.imprResumoFinanc"  name="receiver" class="check-socio" value="1" /></td>
                     </tr>
                     <tr>
-                        <td>Atualizar preço ao clonar?</td>
+                        <td>Atualizar preÃ§o ao clonar?</td>
                         <td id="f_atualizarPrecoClonagem"><input type="checkbox" ng-model="configuracao.confVendas.atuaPrecoClonar"  name="receiver" class="check-socio" value="1" /></td>
                     </tr>
                     <tr>
@@ -93,7 +93,7 @@
                         <td id="f_vendaPrintUnidade"><input type="checkbox" ng-model="configuracao.confVendas.imprColUnidade"  name="receiver" class="check-socio" value="1" /></td>
                     </tr>
                     <tr>
-                        <td>Adicionar despesas no cálculo do imposto?</td>
+                        <td>Adicionar despesas no cÃ¡lculo do imposto?</td>
                         <td id="f_addDespesasBC"><input type="checkbox" ng-model="configuracao.confVendas.addDespCalcImposto"  name="receiver" class="check-socio" value="1" /></td>
                     </tr>
                     <tr>
@@ -101,7 +101,7 @@
                         <td id="f_naoCobrarICMSST"><input type="checkbox" ng-model="configuracao.confVendas.retSubstTribICMS"  name="receiver" class="check-socio" value="1" /></td>
                     </tr>
                     <tr>
-                        <td>Observação padrão:</td>
+                        <td>ObservaÃ§Ã£o padrÃ£o:</td>
                         <td>
                             <input type="checkbox" name="receiver" ng-model="configuracao.confVendas.observacao"  class="check-socio" value="1" />
                         </td>
@@ -114,13 +114,13 @@
 <div class="row">
     <!-- DIV FIM DA COLUNA 1 -->
     <div id="col2" class="col-sm-5 tabs-was">
-        <!-- CONFIGURAÇÕES CABEÇALHO -->
+        <!-- CONFIGURAÃ‡Ã•ES CABEÃ‡ALHO -->
         <div class="panel fullBox verticalHeaderTableList bottomSpace">
-            <h3>Configuração do cabeçalho</h3>
+            <h3>ConfiguraÃ§Ã£o do cabeÃ§alho</h3>
             <table class="fullBox">
                 <tbody>
                     <tr>
-                        <td id="c_logomarca" class="halfBox right" data-toggle="tooltip" data-placement="right" title="Este cabeçalho é utilizado em Ordens de Serviço e Pedidos de Venda">
+                        <td id="c_logomarca" class="halfBox right" data-toggle="tooltip" data-placement="right" title="Este cabeÃ§alho Ã© utilizado em Ordens de ServiÃ§o e Pedidos de Venda">
                         </td>
                         <td id="c_cabecalho"><input id="file-fr"  ng-model="configuracao.confCabecalho" name="file-fr[]" type="file" multiple></td>
                     </tr>
@@ -129,9 +129,9 @@
         </div>
     </div>
     <div class="col-sm-5 tabs-was">
-        <!-- CONFIGURAÇÕES DAS ENTRADAS -->
+        <!-- CONFIGURAÃ‡Ã•ES DAS ENTRADAS -->
         <div class="panel fullBox verticalHeaderTableList bottomSpace">
-            <h3>Configurações das entradas</h3>
+            <h3>ConfiguraÃ§Ãµes das entradas</h3>
             <table class="fullBox">
                 <tbody>
                     <tr>
@@ -139,7 +139,7 @@
                         <td id="g_entradasValorTotalFixo"><input type="checkbox" ng-model="configuracao.confEntrada.valorTotalFixo" name="receiver" class="check-socio" value="1" /></td>
                     </tr>
                     <tr>
-                        <td>Manter o preço de venda cadastrado no produto:</td>
+                        <td>Manter o preÃ§o de venda cadastrado no produto:</td>
                         <td id="g_entradasManterPrecoVenda"><input type="checkbox" ng-model="configuracao.confEntrada.manterPrecoVendaProd" name="receiver" class="check-socio" value="1" /></td>
                     </tr>
                 </tbody>
@@ -149,9 +149,9 @@
 </div>
 <div class="row">
     <div class="col-sm-5 tabs-was">
-        <!-- CONFIGURAÇÕES DAS ORDENS DE SERVIÇO -->
+        <!-- CONFIGURAÃ‡Ã•ES DAS ORDENS DE SERVIÃ‡O -->
         <div class="panel fullBox verticalHeaderTableList bottomSpace">
-            <h3>Configuração das OS (Ordens de Serviço)</h3>
+            <h3>ConfiguraÃ§Ã£o das OS (Ordens de ServiÃ§o)</h3>
             <table class="fullBox">
                 <tbody>
                     <tr>
@@ -171,7 +171,7 @@
                         <td id="e_osPrintDetalhesHorizontal"><input  ng-model="configuracao.configOS.imprDetHorz" type="checkbox" name="receiver" class="check-socio" value="1" /></td>
                     </tr>
                     <tr>
-                        <td>Dias de garantia padrão:</td>
+                        <td>Dias de garantia padrÃ£o:</td>
                         <td id="e_osGarantiaPadrao">
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -181,7 +181,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Texto padrão para o campo <span class="config_osLabel4">Observações gerais</span>:</td>
+                        <td>Texto padrÃ£o para o campo <span class="config_osLabel4">ObservaÃ§Ãµes gerais</span>:</td>
                         <td>
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -194,17 +194,17 @@
             </table>
         </div>
     </div>
-    <!-- CONFIGURAÇÕES DE CARNÊS -->
+    <!-- CONFIGURAÃ‡Ã•ES DE CARNÃŠS -->
     <div class="col-sm-5 tabs-was">
-        <h3>Configurações dos carnês</h3>
+        <h3>ConfiguraÃ§Ãµes dos carnÃªs</h3>
         <table class="fullBox">
             <tbody>
                 <tr>
-                    <td class="halfBox">Ativar carnê de boletos?</td>
+                    <td class="halfBox">Ativar carnÃª de boletos?</td>
                     <td id="h_carneBoletosAtivo"><input type="checkbox" ng-model="configuracao.confCarne.carneBotelo" name="receiver" class="check-socio" value="1" /></td>
                 </tr>
                 <tr>
-                    <td class="halfBox">Ativar carnê normal?</td>
+                    <td class="halfBox">Ativar carnÃª normal?</td>
                     <td id="h_carneNormalAtivo"><input type="checkbox"  ng-model="configuracao.confCarne.carneNormal" name="receiver" class="check-socio" value="1" /></td>
                 </tr>
                 <tr>
@@ -218,7 +218,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="halfBox">Instruções 1:</td>
+                    <td class="halfBox">InstruÃ§Ãµes 1:</td>
                     <td id="h_carneInstrucoes1">
                         <div class="col-sm-12">
                             <div class="form-group">
@@ -228,7 +228,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="halfBox">Instruções 2:</td>
+                    <td class="halfBox">InstruÃ§Ãµes 2:</td>
                     <td id="h_carneInstrucoes2">
                         <div class="col-sm-12">
                             <div class="form-group">
@@ -238,7 +238,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="halfBox">Instruções 3:</td>
+                    <td class="halfBox">InstruÃ§Ãµes 3:</td>
                     <td id="h_carneInstrucoes3">
                         <div class="col-sm-12">
                             <div class="form-group">
@@ -248,7 +248,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="halfBox">Instruções 4:</td>
+                    <td class="halfBox">InstruÃ§Ãµes 4:</td>
                     <td id="h_carneInstrucoes4">
                         <div class="col-sm-12">
                             <div class="form-group">
@@ -262,7 +262,7 @@
     </div>
 </div>
 <div class="row">
-    <!-- CONFIGURAÇÕES BOLETOS -->
+    <!-- CONFIGURAÃ‡Ã•ES BOLETOS -->
     <div class="col-sm-5 tabs-was">
         <!-- DADOS FISCAIS -->
         <div class="panel fullBox verticalHeaderTableList bottomSpace selection">
@@ -272,15 +272,17 @@
                     <tr>
                         <td>Principal atividade da empresa:</td>
                         <td>
-                            <select ng-model="configuracao.confFiscal.princAtividade.id" class="selectpicker">
-                                <option value="1">Mustard</option>
-                                <option value="2">Ketchup</option>
-                                <option value="3">Relish</option>
+                        <div class="form-group col-sm-12">
+                            <select id="unidTributada" name="unidTributada"  ng-model="configuracao.confFiscal.princAtividade.id" class="form-control">
+                                <option value="01">Entrada</option>
+                                <option value="02">Saida</option>
                             </select>
+                        </div>
+
                         </td>
                     </tr>
                     <tr class="d_aliqsPS">
-                        <td class="d_labelAliqBC">Alíquota do Simples</td>
+                        <td class="d_labelAliqBC">AlÃ­quota do Simples</td>
                         <td id="d_tribAliqBC">
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -290,7 +292,7 @@
                         </td>
                     </tr>
                     <tr class="d_aliqsPR">
-                        <td>Alíquota ICMS:</td>
+                        <td>AlÃ­quota ICMS:</td>
                         <td id="d_tribICMS">
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -300,7 +302,7 @@
                         </td>
                     </tr>
                     <tr class="d_aliqsPR">
-                        <td>Alíquota PIS:</td>
+                        <td>AlÃ­quota PIS:</td>
                         <td id="d_tribPIS">
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -310,7 +312,7 @@
                         </td>
                     </tr>
                     <tr class="d_aliqsPR">
-                        <td>Alíquota COFINS:</td>
+                        <td>AlÃ­quota COFINS:</td>
                         <td id="d_tribCOFINS">
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -320,7 +322,7 @@
                         </td>
                     </tr>
                     <tr class="d_aliqsP">
-                        <td>Alíquota IRPJ:</td>
+                        <td>AlÃ­quota IRPJ:</td>
                         <td id="d_tribIRPJ">
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -330,7 +332,7 @@
                         </td>
                     </tr>
                     <tr class="d_aliqsP">
-                        <td>Alíquota CSLL:</td>
+                        <td>AlÃ­quota CSLL:</td>
                         <td id="d_tribCSLL">
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -345,21 +347,23 @@
     </div>
     <div class="col-sm-5 tabs-was">
         <div class="panel fullBox verticalHeaderTableList bottomSpace selection">
-            <h3>Configurações da NFe</h3>
+            <h3>ConfiguraÃ§Ãµes da NFe</h3>
             <table>
                 </thead>
                 <tbody>
                     <tr>
                         <td class="d_aliqsP">Ambiente de envio:</td>
                         <td>
-                            <select class="selectpicker" ng-model="configuracao.confNFe.ambienteEnvio">
-                                <option value="1002">Homologação</option>
-                                <option value="1003">Produção</option>
-                            </select>
+                            <div class="form-group col-sm-12">
+                                <select id="unidTributada" name="unidTributada"  ng-model="configuracao.confNFe.ambienteEnvio.id" class="form-control">
+                                    <option value="1002">HomologaÃ§Ã£o</option>
+                                    <option value="1003">ProduÃ§Ã£o</option>
+                                </select>
+                            </div>
                         </td>
                     </tr>
                     <tr>
-                        <td class="d_aliqsP">Série de envio:</td>
+                        <td class="d_aliqsP">SÃ©rie de envio:</td>
                         <td>
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -373,20 +377,22 @@
                         <td><input type="checkbox" name="receiver" class="check-socio" ng-model="configuracao.confNFe.anexarXmlEmail" value="1" /></td>
                     </tr>
                     <tr>
-                        <td class="d_aliqsP">Serviços na mesma nota?</td>
+                        <td class="d_aliqsP">ServiÃ§os na mesma nota?</td>
                         <td><input type="checkbox" name="receiver" class="check-socio" ng-model="configuracao.confNFe.servMsmNota" value="1" /></td>
                     </tr>
                     <tr>
-                        <td class="d_aliqsP">Preencher data/hora saída?</td>
+                        <td class="d_aliqsP">Preencher data/hora saÃ­da?</td>
                         <td><input type="checkbox" name="receiver" class="check-socio" ng-model="configuracao.confNFe.preencherDataHora" value="1" /></td>
                     </tr>
                     <tr>
-                        <td class="d_aliqsP">Presença comprador:</td>
+                        <td class="d_aliqsP">PresenÃ§a comprador:</td>
                         <td>
-                            <select class="selectpicker" ng-model="configuracao.confNFe.presCompr">
-                                <option>Presencial</option>
-                                <option>Produção</option>
-                            </select>
+                            <div class="form-group col-sm-12">
+                                <select id="unidTributada" name="unidTributada"  ng-model="configuracao.confNFe.presCompr" class="form-control">
+                                    <option value="1004">Presencial</option>
+                                    <option value="1005">ProduÃ§Ã£o</option>
+                                </select>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -394,7 +400,7 @@
                         <td><input type="checkbox" name="receiver" ng-model="configuracao.confNFe.destConsFinal" class="check-socio" value="1" /></td>
                     </tr>
                     <tr>
-                        <td class="d_aliqsP">ICMS padrão (%):</td>
+                        <td class="d_aliqsP">ICMS padrÃ£o (%):</td>
                         <td>
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -404,7 +410,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="d_aliqsP">IPI padrão (%):</td>
+                        <td class="d_aliqsP">IPI padrÃ£o (%):</td>
                         <td>
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -414,7 +420,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="d_aliqsP">PIS padrão (%):</td>
+                        <td class="d_aliqsP">PIS padrÃ£o (%):</td>
                         <td>
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -424,7 +430,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="d_aliqsP" >COFINS padrão (%):</td>
+                        <td class="d_aliqsP" >COFINS padrÃ£o (%):</td>
                         <td>
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -447,7 +453,7 @@
     </div>
     <div class="row">
         <div class="col-sm-5 tabs-was">
-            <!-- CONFIGURAÇÕES SMTP -->
+            <!-- CONFIGURAÃ‡Ã•ES SMTP -->
             <div class="panel fullBox verticalHeaderTableList bottomSpace">
                 <h3>Alertas</h3>
                 <div class="fullBox" id="configSMTP_resumo">
@@ -462,7 +468,7 @@
                                 <td id="d_tribCRT"><input type="checkbox" name="receiver" ng-model="configuracao.confAlertas.estoqMax" class="check-socio" value="1" /></td>
                             </tr>
                             <tr class="d_aliqsPS">
-                                <td class="d_labelAliqBC">Erro Emissão NF-e:</td>
+                                <td class="d_labelAliqBC">Erro EmissÃ£o NF-e:</td>
                                 <td id="d_tribAliqBC"><input type="checkbox" name="receiver" ng-model="configuracao.confAlertas.erroNFe" class="check-socio" value="1" /></td>
                             </tr>
                             <tr class="d_aliqsPR">
@@ -527,13 +533,14 @@
                             <td>25</td>
                         </tr>
                         <tr>
-                            <td >CFOP marcado como padrão:</td>
+                            <td >CFOP marcado como padrÃ£o:</td>
                             <td>
-                                <select ng-model="configuracao.confNFe.cfopPadrao.id" name="book[0].produto" class="select col-sm-12">
-                                    <option value="0">1010 - Coca Cola 1LT</option>
-                                    <option value="1">1011 - Coca Cola 1.5LT</option>
-                                    <option value="2">Cadastrar novo Produto</option>
+                                <div class="form-group col-sm-12">
+                                <select id="unidTributada" name="unidTributada"  ng-model="configuracao.confNFe.presCompr" class="form-control">
+                                    <option value="1004">Presencial</option>
+                                    <option value="1005">ProduÃ§Ã£o</option>
                                 </select>
+                            </div>
                             </td>
                         </tr>
                     </tbody>
@@ -545,7 +552,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <td colspan="2">Configurações de SMTP (envio de email)</td>
+                            <td colspan="2">ConfiguraÃ§Ãµes de SMTP (envio de email)</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -564,7 +571,7 @@
                             </td>
                         </tr>
                         <tr class="d_aliqsPS">
-                            <td class="d_labelAliqBC">Porta (caso necessário)</td>
+                            <td class="d_labelAliqBC">Porta (caso necessÃ¡rio)</td>
                             <td id="d_tribAliqBC">
                                 <div class="col-sm-12">
                                     <div class="form-group">
@@ -574,7 +581,7 @@
                             </td>
                         </tr>
                         <tr class="d_aliqsPR">
-                            <td>Endereço de e-mail:</td>
+                            <td>EndereÃ§o de e-mail:</td>
                             <td id="d_tribICMS">
                                 <div class="col-sm-12">
                                     <div class="form-group">
@@ -584,7 +591,7 @@
                             </td>
                         </tr>
                         <tr class="d_aliqsPR">
-                            <td>Usuário (do email):</td>
+                            <td>UsuÃ¡rio (do email):</td>
                             <td id="d_tribPIS">
                                 <div class="col-sm-12">
                                     <div class="form-group">
@@ -614,19 +621,21 @@
                             </td>
                         </tr>
                         <tr class="d_aliqsPR">
-                            <td>Segurança:</td>
+                            <td>SeguranÃ§a:</td>
                             <td id="d_tribPIS">
-                                <select class="selectpicker" ng-model="configuracao.confSMTP.seguranca.id">
-                                    <option value="102">Automatico</option>
-                                    <option value="103">SSL</option>
-                                    <option value="104">TLS</option>
-                                </select>
+                                <div class="form-group col-sm-12">
+                                    <select id="unidTributada" name="unidTributada"  ng-model="configuracao.confSMTP.seguranca.id" class="form-control">
+                                        <option value="102">Automatico</option>
+                                        <option value="103">SSL</option>
+                                        <option value="104">TLS</option>
+                                    </select>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
                     <tbody>
                         <tr>
-                            <td><a href="javascript:configuracoes.testarSMTP();" class="onRight">Testar configuração SMTP</a></td>
+                            <td><a href="javascript:configuracoes.testarSMTP();" class="onRight">Testar configuraÃ§Ã£o SMTP</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -651,7 +660,7 @@
                                 <td id="d_tribAtividade"><input type="radio" ng-model="empresa.permissaoTypeEnumValue" name="receiver" class="check-socio" value="1" /></td>
                             </tr>
                             <tr>
-                                <td>Escritorio Contábil</td>
+                                <td>Escritorio ContÃ¡bil</td>
                                 <td id="d_tribAtividade"><input type="radio" ng-model="empresa.permissaoTypeEnumValue" name="receiver" class="check-socio" value="3" /></td>
                             </tr>
                             <tr>

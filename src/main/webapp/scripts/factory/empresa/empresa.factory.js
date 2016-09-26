@@ -13,14 +13,7 @@
             var count = 0;
             var bb = [];
 
-            $('.gugu').each(function() {
-                if($(this).val() != "")
-                {
-                    bb.push(qat.model.fnTelefones($(this).val(),count,1,"INSERT"));
-                    count = count + 1;
-                }
-            });
-            empresa.telefones = bb;
+
 
             // email
             count = 0;

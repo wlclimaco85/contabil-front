@@ -1,67 +1,52 @@
-<div class="page page-table" data-ng-controller="EstadoController as cc"  >
-	<div class="row">
-		<div class="col-md-12">
-			<div class="panel panel-default">
-				<div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Estados </strong>&nbsp;<a href="javascript:;"  ng-show="hasRole('ROLE_DOMAIN_ADMINS')" data-ng-click="cc.refreshCounties(86)"><i class="fa fa-refresh" ng-class="{'fa-spin': cc.isActive}" ></i></a></div>
-				<div class="panel-body" style="text-align:center;">
-					<div ng-app="wdApp.apps.counties" class="container-fluid">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
 
-  <div class="row">
-    <div class="col-md-12" ng-controller="EstadoController as demo">
-      <div class="brn-group pull-right">
-        <button class="btn btn-default" ng-if="demo.isEditing" ng-click="demo.cancelChanges()">
-          <span class="glyphicon glyphicon-remove"></span>
-        </button>
-        <button class="btn btn-primary" ng-if="!demo.isEditing" ng-click="demo.isEditing = true">
-          <span class="glyphicon glyphicon-pencil"></span>
-        </button>
-        <button class="btn btn-primary" ng-if="demo.isEditing" ng-disabled="!demo.hasChanges() || demo.tableTracker.$invalid" ng-click="demo.saveChanges()">
-          <span class="glyphicon glyphicon-ok"></span>
-        </button>
-        <button class="btn btn-default" ng-click="demo.add()">
-          <span class="glyphicon glyphicon-plus"></span>
-        </button>
-      </div>
-      <table ng-table="demo.tableParams" class="table table-bordered table-hover table-condensed editable-table" ng-form="demo.tableForm" disable-filter="demo.isAdding" demo-tracked-table="demo.tableTracker">
-        <colgroup>
-          <col width="70%" />
-          <col width="12%" />
-          <col width="13%" />
-          <col width="5%" />
-        </colgroup>
-        <tr ng-repeat="row in $data" ng-form="rowForm" demo-tracked-table-row="row">
-          <td title="'Id'" filter="{id: 'number'}" sortable="'id'" ng-switch="demo.isEditing" ng-class="id.$dirty ? 'bg-warning' : ''" ng-form="id" demo-tracked-table-cell>
-            <span ng-switch-default class="editable-text">{{row.id}}</span>
-            <div class="controls" ng-class="id.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
-              <input type="text" name="id" ng-model="row.id" class="editable-input form-control input-sm" required />
-            </div>
-          </td>
-          <td title="'nome'" filter="{nome: 'text'}" sortable="'nome'" ng-switch="demo.isEditing" ng-class="nome.$dirty ? 'bg-warning' : ''" ng-form="nome" demo-tracked-table-cell>
-            <span ng-switch-default class="editable-text">{{row.nome}}</span>
-            <div class="controls" ng-class="nome.$invalid && nome.$dirty ? 'has-error' : ''" ng-switch-when="true">
-              <input type="number" name="nome" ng-model="row.nome" class="editable-input form-control input-sm" required/>
-            </div>
-          </td>
-          <td title="'Abreviacao'" filter="{abreviacao: 'text'}" sortable="'abreviacao'" ng-switch="demo.isEditing" ng-class="abreviacao.$dirty ? 'bg-warning' : ''" ng-form="abreviacao" demo-tracked-table-cell>
-            <span ng-switch-default class="editable-text">{{row.abreviacao}}</span>
-            <div class="controls" ng-class="abreviacao.$invalid && abreviacao.$dirty ? 'has-error' : ''" ng-switch-when="true">
-              <input type="number" name="abreviacao" ng-model="row.abreviacao" class="editable-input form-control input-sm" required/>
-            </div>
-          </td>
-         <td>
-            <button class="btn btn-primary btn-sm" ng-click="demo.save(row, rowForm)" ng-if="row.isEditing" ng-disabled="rowForm.$pristine || rowForm.$invalid"><span class="glyphicon glyphicon-ok"></span></button>
-            <button class="btn btn-default btn-sm" ng-click="demo.cancel(row, rowForm)" ng-if="row.isEditing"><span class="glyphicon glyphicon-remove"></span></button>
-            <button class="btn btn-default btn-sm" ng-click="row.isEditing = true" ng-if="!row.isEditing"><span class="glyphicon glyphicon-pencil"></span></button>
-            <button class="btn btn-danger btn-sm" ng-click="demo.del(row)" ng-if="!row.isEditing"><span class="glyphicon glyphicon-trash"></span></button>
-          </td>
-        </tr>
-      </table>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
+<div ng-controller="dCnae">
+<div ng-repeat="form in forms">
+        <hr/>
+        <form name="myForm" ng-init="name = form.ddd">
+            <div class="row">
+
+
+    <div ng-if="form.ddd==='form1'">
+    <!-- code to render the regular video block -->
+    <div class="col-sm-4">
+        <label for="exampleInputPassword1">Atividade Primaria</label>
+        <select  name="atividade2"  class="select1 cnaeList col-sm-12">
+            <option ng-repeat="option in produtos" value="{{option}}" >{{option.codigo}} {{option.prodId.ncm}} {{option.prodId.produto}}</option>
+        </select>
     </div>
-  </div>
+
+    <div class="col-sm-4" style="margin-top:18px">
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
+    Adicionar
+    <span class="caret"></span>
+  </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a ng-click="createForm('RESIDENCIAL')" class="addPhoneButton">Residencial</a></li>
+                <li><a ng-click="createForm('CELULAR TIM')" class="addPhoneButton">Celular TIM</a></li>
+                <li><a ng-click="createForm('CELULAR OI')" class="addPhoneButton">Celular OI</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a ng-click="createForm('OUTROS')" class="addPhoneButton">Outros</a></li>
+            </ul>
+        </div>
+    </div>
+
+    </div>
+    <div ng-if="form.ddd!=='form1'">
+         <div class="col-sm-4">
+            <label for="exampleInputPassword1" class="control-label">{{form.telefoneTypeEnum}}</label>
+            <input type="text" class="form-control gugu" ng-model="form.numero" name="phone" data-mask="(99) 9999-9999" placeholder="(55) 1111-2222">
+        </div>
+        <div class="col-sm-4" style="margin-top:25px">
+            <button type="button" ng-click="deleteForm(form)" class="btn btn-link removeButton">deletar</button>
+        </div>
+    </div>
+    </form>
 </div>
-				</div>
-			</div>
-		</div>
-	</div>
 </div>
-	<div data-ui-footer></div>

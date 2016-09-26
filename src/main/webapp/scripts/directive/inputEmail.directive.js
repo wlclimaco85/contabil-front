@@ -42,7 +42,7 @@ debugger
                 return;
             }
 
-            
+
             var oNewModel = angular.extend({}, $scope.model);
 
             oNewModel[$scope.propertyName] = newValue;
@@ -52,7 +52,7 @@ debugger
             $scope.disableControl();
             $scope.disableEditMode();
             $scope.enableViewMode();
-            
+
             return oNewModel;
         }
 
@@ -81,7 +81,7 @@ debugger
 
         $scope.onOverViewMode = function(){
             viewModeTimer = $timeout(function() {
-                
+
                 if($scope.elem.is(':hover')){
                     $scope.isViewMode = false;
                     $scope.isControlMode = true;

@@ -47,7 +47,7 @@
 
 <script>
     $(document).ready(function() {
-
+debugger
 var bookIndex = 0;
 
         $('.addEmailButton2').on('click', function() {
@@ -100,41 +100,33 @@ var bookIndex = 0;
 
         });
 
-        
 
-        $.ajax({
-           url: 'main/api/anonimo',
-           headers: { 
-            'Accept': 'application/json',
-            'Content-Type': 'application/json' 
-            },
-           data: JSON.stringify({
-                                        url: "fiscal/api/cnae/fetchPage",
-                                        request: new qat.model.siteInquiryRequest( 100/20, true, null)}),
-           error: function() {
+                var fnCallbackCnae = function(res){
+                var planos = "";
 
-              $('#info').html('<p>An error has occurred</p>');
-           },
-           dataType: 'json',
-           success: function(res) {
-              var cnaes = "";
-                                 
-                                   if(res.operationSuccess == true)
-                                   {
-                                       for(var x = 0 ;x < res.cnaeList.length;x++)
-                                       {
-                                           cnaes = cnaes + "<option value='"+res.cnaeList[x].id+"'> "+res.cnaeList[x].cnae+"</option>";
-                                       }
-                                        $('.cnaeList').append(cnaes);
+               if(res.operationSuccess == true)
+               {
 
-                                        $(".select1").select2({
-                                              placeholder: "Select a state",
-                                              allowClear: true
-                                            });
-                                   }
-           },
-           type: 'POST'
-        });
+                     var cnaes = "";
+
+                           if(res.operationSuccess == true)
+                           {
+                               for(var x = 0 ;x < res.cnaeList.length;x++)
+                               {
+                                   cnaes = cnaes + "<option value='"+res.cnaeList[x].id+"'> "+res.cnaeList[x].cnae+"</option>";
+                               }
+                                $('.cnaeList').append(cnaes);
+
+                                $(".select1").select2({
+                                      placeholder: "Select a state",
+                                      allowClear: true
+                                    });
+                           }
+               }
+
+            }
+
+            qat.model.select.util("fiscal/api/cnae/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackCnae);
 
 
             });

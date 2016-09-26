@@ -1,16 +1,16 @@
 <!-- -------------------  TELEFONE ----------------- -->
-<div ng-app="ngClassifieds" ng-controller="MyController">
+<div ng-controller="TelefoneControllers">
 <div ng-repeat="form in forms">
         <hr/>
-        <form name="myForm" ng-init="name = form.ddd">
+        <form name="myForm" ng-init="name = form.nome">
             <div class="row">
-   
 
-    <div ng-if="form.ddd==='form1'">
+
+    <div ng-if="form.nome==='form1'">
     <!-- code to render the regular video block -->
     <div class="col-sm-4">
         <label for="exampleInputPassword1" class="control-label">Telefone</label>
-        <input type="text" class="form-control gugu" ng-model="form.numero" name="phone" data-mask="(99) 9999-9999" placeholder="(55) 1111-2222">
+        <input type="text" class="form-control gugu" ng-model="form.telefone.numero" name="phone" data-mask="(99) 9999-9999" placeholder="(55) 1111-2222">
     </div>
 
     <div class="col-sm-4" style="margin-top:18px">
@@ -30,10 +30,10 @@
     </div>
 
     </div>
-    <div ng-if="form.ddd!=='form1'">
+    <div ng-if="form.nome!=='form1'">
          <div class="col-sm-4">
-            <label for="exampleInputPassword1" class="control-label">{{form.telefoneTypeEnum}}</label>
-            <input type="text" class="form-control gugu" ng-model="form.numero" name="phone" data-mask="(99) 9999-9999" placeholder="(55) 1111-2222">
+            <label for="exampleInputPassword1" class="control-label">{{form.telefone.telefoneTypeEnum}}</label>
+            <input type="text" class="form-control gugu" ng-model="form.telefone.numero" name="phone" data-mask="(99) 9999-9999" placeholder="(55) 1111-2222">
         </div>
         <div class="col-sm-4" style="margin-top:25px">
             <button type="button" ng-click="deleteForm(form)" class="btn btn-link removeButton">deletar</button>

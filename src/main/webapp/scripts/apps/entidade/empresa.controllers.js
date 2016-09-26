@@ -250,7 +250,11 @@
         .controller('NewEmpresaInsertController', function($rootScope, $scope, fModels, SysMgmtData, fEmpresa) {
             var vm = this;
 
+            $scope.forms = [{ nome : 'form1',telefone :{}}];
+            $scope.count = 0;
+
             $scope.empresa = {
+            telefones :[],
             enderecos : [{
                        modelAction    : "INSERT",
                        createUser     : "System",
@@ -353,6 +357,13 @@
             $scope.saveEmpresa = function() {
 
                 debugger
+                for(x = 0;x< $scope.forms.length; x++ )
+                {
+                    $scope.empresa.telefones.push(fModels.amont($scope.forms[x].telefone,"INSERT"));
+
+                }
+
+
                 console.log($scope.empresa);
                 console.log($scope.enderecos);
                 fEmpresa.fnMontaObjeto($scope.empresa,$scope.enderecos,"INSERT")

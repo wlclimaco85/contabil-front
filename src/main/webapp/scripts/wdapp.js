@@ -74,6 +74,8 @@ var WebDaptiveAppConfig = {
 
 				,'wdApp.apps.ordemProducao'
 
+				,'wdApp.apps.telefone'
+
 				,'wdApp.apps.funcionarios'
 				,'wdApp.apps.compras'
 				,'wdApp.apps.pagamentos'
