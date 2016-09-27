@@ -252,7 +252,7 @@
             var vm = this;
 
             $scope.notaFiscalSaida = {
-                frete : {endereco :{}},
+                conhecimentoTransporte : {endereco :{}},
                 notaFiscalItens :[],
                 formaPagList :[],
                 cliente :{}
@@ -316,17 +316,6 @@
                       placeholder: "Selecione o BANCO",
                       allowClear: true
                     });
-              /*     for(var x = 0 ;x < res.produtoParentList.length;x++)
-                   {
-                       $scope.produtosSelect = $scope.produtosSelect + "<option value='"+res.produtoParentList[x].id+"'> "+res.produtoParentList[x].codigo+" "+res.produtoParentList[x].prodId.ncm+" "+res.produtoParentList[x].prodId.produto+"  </option>";
-                   }
-
-                    $('.selectProduto').append($scope.produtosSelect);
-
-                    $(".produto").select2({
-                          placeholder: "Selecione o BANCO",
-                          allowClear: true
-                        });*/
                }
 
             }
@@ -338,23 +327,9 @@
 
             var fnCallbackEndereco = function(res){
                 var planos = "";
-                debugger
                if(res.operationSuccess == true)
                {
-                /*
-                debugger
-                   for(var x = 0 ;x < res.enderecoList.length;x++)
-                   {
-                       planos = planos + "<option value='"+ res.enderecoList[x] +"'> "+res.enderecoList[x].cep+" "+res.enderecoList[x].logradouro+" "+res.enderecoList[x].numero+" "+res.enderecoList[x].bairro+" "+res.enderecoList[x].cidade+" </option>";
-                   }
-                    $('.enderecoList').append(planos);
-
-                    $(".select2").select2({
-                          placeholder: "Selecione o BANCO",
-                          allowClear: true
-                        }); */
-
-                        $scope.enderecos = res.enderecoList;
+                   $scope.enderecos = res.enderecoList;
 
                    $(".select2").select2({
                       placeholder: "Selecione o BANCO",
@@ -362,7 +337,7 @@
                     });
                }
             }
-            debugger
+
             qat.model.select.util("entidade/api/endereco/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackEndereco);
 
         $scope.deleteForm = function(formScope){
@@ -398,13 +373,13 @@
                 debugger
 
                 for(var x = 0 ; x<$scope.forms.length;x++){
-                    $scope.forms[x].notaFiscalSaidaItens.produto =  fModels.amont(JSON.parse($scope.forms[x].notaFiscalSaidaItens.produto))
-                    $scope.notaFiscalSaida.notaFiscalItens.push($scope.forms[x].notaFiscalSaidaItens)
+                    $scope.forms[x].notaFiscalItens.produto =  fModels.amont({ id : JSON.parse($scope.forms[x].notaFiscalItens.produto).id})
+                    $scope.notaFiscalSaida.notaFiscalItens.push($scope.forms[x].notaFiscalItens)
                 }
 
                 $scope.notaFiscalSaida.formaPagList.push(fModels.amont($scope.formaPg,'INSERT'));
                 $scope.notaFiscalSaida.cliente = fModels.amont($scope.cliente);
-                $scope.notaFiscalSaida.frete.endereco = fModels.amont(JSON.parse($scope.notaFiscalSaida.frete.endereco));
+                $scope.notaFiscalSaida.conhecimentoTransporte.enderecoEntrega = fModels.amont(JSON.parse($scope.notaFiscalSaida.conhecimentoTransporte.enderecoEntrega));
 
 
                 var oObject = fModels.amont($scope.notaFiscalSaida,"INSERT");
