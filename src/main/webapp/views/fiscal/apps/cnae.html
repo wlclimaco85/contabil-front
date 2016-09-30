@@ -1,24 +1,80 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+<head>
+    <meta charset="utf-8">
+    <title>AngularJS ui-select</title>
 
-<div ng-controller="dCnae">
+    <!--
+      IE8 support, see AngularJS Internet Explorer Compatibility http://docs.angularjs.org/guide/ie
+      For Firefox 3.6, you will also need to include jQuery and ECMAScript 5 shim
+    -->
+    <!--[if lt IE 9]>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.2.0/es5-shim.js"></script>
+      <script>
+        document.createElement('ui-select');
+        document.createElement('ui-select-match');
+        document.createElement('ui-select-choices');
+      </script>
+    <![endif]-->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-sanitize.js"></script>
+
+    <!-- ui-select files -->
+    <script src="select.js"></script>
+    <link rel="stylesheet" href="select.css">
+
+
+    <!-- themes -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+    <!-- <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.bootstrap2.css"> -->
+    <!--<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.bootstrap3.css">-->
+
+    <style>
+        body {
+            padding: 15px;
+        }
+
+        .select2 > .select2-choice.ui-select-match {
+            /* Because of the inclusion of Bootstrap */
+            height: 29px;
+        }
+
+        .selectize-control > .selectize-dropdown {
+            top: 36px;
+        }
+        /* Some additional styling to demonstrate that append-to-body helps achieve the proper z-index layering. */
+        .select-box {
+          background: #fff;
+          position: relative;
+          z-index: 1;
+        }
+        .alert-info.positioned {
+          margin-top: 1em;
+          position: relative;
+          z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
+        }
+    </style>
+</head>
+
+<div class="ng-cloak" ng-controller="CnaeSelectControllers as ctrl">
+  <p>Selected: {{forms}}</p>
 <div ng-repeat="form in forms">
         <hr/>
-        <form name="myForm" ng-init="name = form.ddd">
-            <div class="row">
-
-
-    <div ng-if="form.ddd==='form1'">
-    <!-- code to render the regular video block -->
-    <div class="col-sm-4">
+<div class="row">
+  <div class="col-sm-4">
         <label for="exampleInputPassword1">Atividade Primaria</label>
-        <select  name="atividade2"  class="select1 cnaeList col-sm-12">
-            <option ng-repeat="option in produtos" value="{{option}}" >{{option.codigo}} {{option.prodId.ncm}} {{option.prodId.produto}}</option>
-        </select>
+        <div class="row">
+          <ui-select ng-model="form.cnae.id" theme="bootstrap">
+            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.codigo}}</ui-select-match>
+            <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
+              <div ng-bind-html="item.codigo | highlight: $select.search"></div>
+              <small ng-bind-html="item.cnae | highlight: $select.search"></small>
+            </ui-select-choices>
+          </ui-select>
+        </div>
     </div>
 
     <div class="col-sm-4" style="margin-top:18px">
@@ -36,17 +92,7 @@
             </ul>
         </div>
     </div>
-
     </div>
-    <div ng-if="form.ddd!=='form1'">
-         <div class="col-sm-4">
-            <label for="exampleInputPassword1" class="control-label">{{form.telefoneTypeEnum}}</label>
-            <input type="text" class="form-control gugu" ng-model="form.numero" name="phone" data-mask="(99) 9999-9999" placeholder="(55) 1111-2222">
-        </div>
-        <div class="col-sm-4" style="margin-top:25px">
-            <button type="button" ng-click="deleteForm(form)" class="btn btn-link removeButton">deletar</button>
-        </div>
-    </div>
-    </form>
 </div>
 </div>
+</html>

@@ -71,7 +71,6 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.transportador.delete'
 	            ,'wdApp.apps.transportador.view'
 
-
 				,'wdApp.apps.ordemProducao'
 
 				,'wdApp.apps.telefone'
@@ -263,11 +262,22 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.validacao.delete'
 	            ,'wdApp.apps.validacao.view'
 
+
+	            ,'wdApp.apps.principal'
+	            ,'wdApp.apps.principal.insert'
+	            ,'wdApp.apps.principal.update'
+	            ,'wdApp.apps.principal.delete'
+	            ,'wdApp.apps.principal.view'
+
+	            ,'wdApp.apps.select'
+
 	            ,'wdApp.apps.roles'
 	            ,'wdApp.apps.roles.insert'
 	            ,'wdApp.apps.roles.update'
 	            ,'wdApp.apps.roles.delete'
 	            ,'wdApp.apps.roles.view'
+
+	            ,'wdApp.apps.select.cnae'
 
 
 				]);
