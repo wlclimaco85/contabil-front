@@ -296,6 +296,31 @@ qat.model.fnTelefones =function(numero,id,type,modelAction)
             return emails;
         }
 
+  qat.model.fnSocios =function(_cota,_por,_adm,_nome,_cpf,id,type,modelAction)
+        {
+            socio  = {
+               id : id,
+               nome : _nome,
+               porcentagem : _por,
+               socioAdm : _adm,
+               pessoaTypeEnumValue : 6,
+               documentos : [{
+                  documentoTypeEnumValue :  2,
+                  numero : _cpf
+               }],
+               parentId       : 0,
+               emprId         : 0,
+               processId      : 0,
+               tableEnumValue : 0,
+               modelAction    : modelAction,
+               createUser     : "System",
+               createDateUTC  : (new Date()).getTime(),
+               modifyUser     : "System",
+               modifyDateUTC  : (new Date()).getTime()
+
+            }
+            return socio;
+        }
 
 
   qat.model.fnPlanoByServico=function(_id,_modelAction)
@@ -314,6 +339,45 @@ qat.model.fnTelefones =function(numero,id,type,modelAction)
             }
             return emails;
         }
+
+  qat.model.fnServicoAndPlano=function(_Valor,_planoServicoId,_type,_modelAction)
+  {
+    debugger
+      if(_type == 1)
+      {
+          servicoAndPlano  = {
+             valor : _Valor,
+             planoId    : {id : _planoServicoId},
+             emprId         : 0,
+             dataInicio     : (new Date()).getTime(),
+             tableEnumValue : 53,
+             servicoPlanoEnumValue : 2,
+             modelAction    : _modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+          }
+        }else{
+          servicoAndPlano  = {
+             valor : _Valor,
+             planoList      : {id : _planoServicoId},
+             emprId         : 0,
+             dataInicio     : (new Date()).getTime(),
+             servicoPlanoEnumValue : 1,
+             tableEnumValue : 53,
+             modelAction    : _modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+          }
+
+        }
+      return servicoAndPlano;
+  }
 
         //Endereco Object
 qat.model.fnEndereco = function(_oObjet,modelAction,user)

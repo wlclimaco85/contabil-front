@@ -163,10 +163,232 @@
   background: url("../images/checkmark.png") no-repeat center center;
 }
 
-
+.mbr-plan__header {
+    background: #444 none repeat scroll 0 0;
+    color: #fff;
+    overflow: hidden;
+    padding: 20px 15px;
+}
+.mbr-plan__box {
+    background: #fff none repeat scroll 0 0;
+}
+.mbr-number {
+    display: inline-block;
+    margin-top: -0.12em;
+}
+.mbr-plan__details {
+    padding-bottom: 41px;
+}
+.mbr-plan__buttons {
+    overflow: hidden;
+    padding: 0 15px 41px;
+}
+.mbr-plan {
+    padding-bottom: 41px;
+    padding-left: 1px;
+    padding-right: 0;
+    position: relative;
+}
+.mbr-number__caption {
+    display: block;
+    font-size: 0.19em;
+    line-height: 1em;
+    opacity: 0.5;
+    padding-top: 0.5em;
+    text-align: center;
+}
+.mbr-plan__number {
+    color: #333;
+    font-size: 20px;
+    line-height: 0;
+    text-align: center;
+}
+.mbr-number__group {
+    display: table-cell;
+    font-weight: bold;
+    position: relative;
+    vertical-align: middle;
+}
 .navbar-default {
     background-color: #000000;
 }
+    
+
+
+
+
+.mbr-plan {
+  padding-bottom: 41px;
+  padding-left: 1px;
+  padding-right: 0;
+  position: relative;
+}
+.mbr-plan--first,
+.mbr-plan:first-child {
+  padding-left: 0;
+}
+.mbr-plan--last,
+.mbr-plan:last-child {
+  padding-bottom: 93px;
+}
+.mbr-plan__box {
+  background: #fff;
+}
+.mbr-plan__header {
+  background: #444;
+  overflow: hidden;
+  padding: 20px 15px;
+  color: #fff;
+}
+.mbr-plan__number {
+  border-bottom: 1px dotted #ddd;
+  color: #333;
+  font-size: 50px;
+  line-height: 0;
+  margin: 0px 10px;
+  padding: 41px 0;
+  text-align: center;
+  margin-bottom: 41px;
+}
+.mbr-plan__details {
+  padding-bottom: 41px;
+}
+.mbr-plan__details ul,
+.mbr-plan__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.mbr-plan__details li,
+.mbr-plan__item {
+  line-height: 40px;
+  padding: 0 15px;
+  text-align: center;
+}
+.mbr-plan__buttons {
+  overflow: hidden;
+  padding: 0 15px 41px;
+}
+.mbr-plan--favorite {
+  margin-right: -1px;
+  margin-top: -30px;
+  padding-left: 0;
+  top: 15px;
+  z-index: 5;
+}
+.mbr-plan--favorite .mbr-plan__number:before {
+  content: "";
+  display: block;
+  height: 15px;
+}
+.mbr-plan--favorite .mbr-plan__box {
+  padding-bottom: 15px;
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.1);
+}
+.mbr-plan--primary .mbr-plan__header {
+  background: #4c6972;
+}
+.mbr-plan--success .mbr-plan__header {
+  background: #7ac673;
+}
+.mbr-plan--info .mbr-plan__header {
+  background: #27aae0;
+}
+.mbr-plan--warning .mbr-plan__header {
+  background: #faaf40;
+}
+.mbr-plan--danger .mbr-plan__header {
+  background: #f97352;
+}
+@media (max-width: 767px) {
+  .mbr-plan,
+  .mbr-plan--first,
+  .mbr-plan:first-child {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .mbr-plan__number {
+    font-size: 79px;
+  }
+  .mbr-plan__details {
+    font-size: 17px;
+  }
+  .mbr-plan--favorite {
+    margin: 0;
+    top: 0;
+  }
+}
+.mbr-number {
+  display: inline-block;
+  margin-top: -0.12em;
+}
+.mbr-number__num {
+  display: inline-table;
+  height: 1em;
+}
+.mbr-number__group {
+  display: table-cell;
+  font-weight: bold;
+  position: relative;
+  vertical-align: middle;
+}
+.mbr-number__left {
+  display: none;
+  font-size: 0.34em;
+  line-height: 0;
+  padding: 0px 5px;
+  vertical-align: super;
+}
+.mbr-number__right {
+  display: none;
+  font-size: 0.25em;
+  padding: 0px 5px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.mbr-number__caption {
+  display: block;
+  font-size: 0.19em;
+  line-height: 1em;
+  opacity: 0.5;
+  padding-top: 0.5em;
+  text-align: center;
+}
+.mbr-number--price .mbr-number__value {
+  padding-right: 0.28em;
+}
+.mbr-number--price .mbr-number__left {
+  display: inline;
+}
+.mbr-number--short-price .mbr-number__left,
+.mbr-number--short-price .mbr-number__right {
+  display: inline;
+}
+.mbr-number--short-price .mbr-number__caption {
+  display: none;
+}
+.mbr-number--inverse-price .mbr-number__group {
+  top: 0.1em;
+}
+.mbr-number--inverse-price .mbr-number__left {
+  display: none;
+}
+.mbr-number--inverse-price .mbr-number__value {
+  padding-left: 0.28em;
+}
+.mbr-number--inverse-price .mbr-number__right {
+  display: inline;
+}
+
+
+
+
+
+
+
+
+
+
         </style>
 
 
@@ -679,6 +901,7 @@ Controle de Estoque</h1>
                                         <a data-toggle="collapse" data-parent="#accordion" href=".collapseThree">1 - Planos</a>
                                     </h4>
                                     </div>
+
                                     <div id="collapseThree" class="panel-collapse collapse collapseThree">
                                         <div class="panel-body">
                                             <section class="mbr-section mbr-section--relative mbr-section--fixed-size " id="pricing-table1-11" style="background-color: rgb(240, 240, 240);">
@@ -885,7 +1108,7 @@ Controle de Estoque</h1>
                             <li class="previous"><a href="javascript:;">Anterior</a></li>
                             <li class="next last" style="display:none;"><a href="javascript:;">Ultima</a></li>
                             <li class="next"><a href="javascript:;">Proximo</a></li>
-                            <li class="hide save-empresa"><input type="submit" id="submit" value="Submit" ng-click="cc.submit()" /></li>
+                            <li class="hide save-empresa"><input type="submit" id="submit" value="Submit" ng-click="saveEmpresa()" /></li>
                         </ul>
                     </div>
                 </form>

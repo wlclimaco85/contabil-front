@@ -250,6 +250,36 @@
         .controller('NewEmpresaInsertController', function($rootScope, $scope, fModels, SysMgmtData, fEmpresa) {
             var vm = this;
 
+            $scope.doIfChecked = function(_ckecked,_value,_nome) {
+
+            var value = 0;
+            var sHtml = "",count =1;
+            $('.planos').each(function()
+            {
+                if($(this).find('.plano').is(":checked") == true)
+                {
+                    value = value + parseFloat(parseFloat($(this).find('.valor').text()).toFixed(2));
+                    sHtml = sHtml  + "<tr>";
+                    sHtml = sHtml  + "  <th scope='row'>"+count+"</th>";
+                    sHtml = sHtml  + "  <td>"+$(this).find('.mbr-header__text').text()+"</td>";
+                    sHtml = sHtml  + "  <td>"+parseFloat(parseFloat($(this).find('.valor').text()).toFixed(2))+"</td>";
+                    sHtml = sHtml  + "</tr>";
+                    count = count + 1
+                }
+            });
+
+
+            sHtml = sHtml  + "<tr style='background-color : red;color:black'>";
+            sHtml = sHtml  + "  <th scope='row'></th>";
+            sHtml = sHtml  + "  <td colspan='2'>Total</td>";
+            sHtml = sHtml  + "  <td>"+value+"</td>";
+            sHtml = sHtml  + "</tr>";
+            $('#table-plano').empty();
+            $('#table-plano').append(sHtml);
+            console.log(value);
+            pvm.total = value;
+        }
+
             $scope.forms = [{ nome : 'form1',telefone :{}}];
             $scope.count = 0;
 
@@ -366,7 +396,7 @@
 
                 console.log($scope.empresa);
                 console.log($scope.enderecos);
-                fEmpresa.fnMontaObjeto($scope.empresa,$scope.enderecos,"INSERT")
+                fEmpresa.fnMontaObjeto($scope.empresa,$scope.enderecos,"INSERT",'PRINCIPAL')
              //   fnMontaObjeto();
                 debugger
                 console.log($scope.empresa)

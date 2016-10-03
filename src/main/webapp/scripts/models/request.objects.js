@@ -188,6 +188,16 @@
 		this.maxPreQueryCount = 0;
 	};
 
+	qat.model.cidadeInquiryRequest = function (_estadoId, _iStartPage, _bCount,_emprId)
+	{
+		this.pageSize = 20;
+		this.estadoId =  _estadoId;
+		this.startPage = _iStartPage;
+		this.sortExpressions = null;
+		this.preQueryCount = _bCount;
+		this.maxPreQueryCount = 0;
+	};
+
 		//siteInquryRequest
 	qat.model.doisValoresInquiryRequest = function (_page, _iStartPage, _bCount,_emprId)
 	{
