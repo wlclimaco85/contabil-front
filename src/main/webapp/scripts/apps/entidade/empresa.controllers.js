@@ -441,6 +441,7 @@
             }
         });
 })();
+
 (function() {
     angular.module('wdApp.apps.newEmpresa.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('NewEmpresaViewController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {

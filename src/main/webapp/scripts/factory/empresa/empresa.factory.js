@@ -74,6 +74,7 @@
 
 	factory.method1 = function() {
 			//..
+		
 		}
 
 	factory.method2 = function() {

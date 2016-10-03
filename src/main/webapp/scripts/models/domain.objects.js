@@ -1,6 +1,7 @@
   /**
    * Initialize the main namespaces and constants.
    */
+
   var qat = {
     model   : {
                select: {},
