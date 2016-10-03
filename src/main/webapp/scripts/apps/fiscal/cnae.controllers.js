@@ -129,24 +129,6 @@
 
                         modal.element.modal();
 
-
-                        ('.cnaeForm').formValidation({
-                            framework: 'bootstrap',
-
-                            icon: {
-                                valid: 'glyphicon glyphicon-ok',
-                                invalid: 'glyphicon glyphicon-remove',
-                                validating: 'glyphicon glyphicon-refresh'
-                            },
-                            fields: {
-
-                                'codigo': notEmptyStringMinMaxRegexp,
-                                'cnae': integerNotEmptyValidation,
-
-
-                            }
-                        });
-
                         modal.close.then(function(result) {
                             $scope.message = "You said " + result;
                         });

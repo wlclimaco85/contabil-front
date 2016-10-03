@@ -7,9 +7,12 @@
 
 	factory.fnMontaObjeto = function(empresa,enderecos,action){
 
-            console.log(empresa);
-            debugger
-            empresa.enderecos[0] = qat.model.fnEndereco(enderecos[0],"INSERT",$rootScope.user.user);
+            var user = "system"
+            if($rootScope.user != undefined)
+            {
+                user = $rootScope.user.user;
+            }
+            empresa.enderecos[0] = qat.model.fnEndereco(enderecos[0],"INSERT",user);
             var count = 0;
             var bb = [];
 
@@ -33,7 +36,7 @@
             bb = [];
             $('.socios').each(function() {
                 if($(this).find('.nome-socio').val() !="")
-                {   
+                {
                     var a = 0
                     if($(this).find('.check-socio').is(":checked"))
                     {
@@ -51,7 +54,7 @@
             bb = [];
             $('.planos').each(function()
             {
-                debugger
+
                 if($(this).find('.plano').is(":checked") == true)
                 {   //_id,_Valor,_planoServicoId,_type,_modelAction
                     bb.push(qat.model.fnServicoAndPlano(parseFloat(parseFloat($(this).find('.valor').text()).toFixed(2)),$(this).find('.plano-id').text(),$(this).find('.plano-type').text()));
@@ -61,12 +64,12 @@
             $('.planos').each(function()
             {
                 if($(this).find('.Servico').is(":checked") == true)
-                {debugger
+                {
                     bb.push(qat.model.fnServicoAndPlano(parseFloat(parseFloat($(this).find('.valor').text()).toFixed(2)),$(this).find('.plano-id').text(),$(this).find('.plano-type').text()));
                     count = count + 1;
                 }
-            });
-            empresa.planosServicos = bb;
+            });//(_Valor,_planoServicoId,_type,_modelAction)
+            empresa.planosServicos = qat.model.fnPlanoByEmpresa(parseFloat(parseFloat($('#total-plano').text()).toFixed(2)),bb,'','INSERT');
 
 
             return empresa;
@@ -74,7 +77,7 @@
 
 	factory.method1 = function() {
 			//..
-		
+
 		}
 
 	factory.method2 = function() {
@@ -84,5 +87,3 @@
 	return factory;
 	}]);
 })();
-
-

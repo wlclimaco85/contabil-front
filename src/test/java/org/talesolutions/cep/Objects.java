@@ -33,7 +33,6 @@ import com.qat.samples.sysmgmt.condpag.model.FormaPgPessoa;
 import com.qat.samples.sysmgmt.condpag.model.TipoPag;
 import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
-import com.qat.samples.sysmgmt.contabilidade.model.PlanoByServico;
 import com.qat.samples.sysmgmt.contato.model.Contato;
 import com.qat.samples.sysmgmt.contato.model.ContatoItens;
 import com.qat.samples.sysmgmt.convenio.model.Convenio;
@@ -99,6 +98,7 @@ import com.qat.samples.sysmgmt.produto.model.Ipi;
 import com.qat.samples.sysmgmt.produto.model.Marca;
 import com.qat.samples.sysmgmt.produto.model.MarcaProduto;
 import com.qat.samples.sysmgmt.produto.model.Pis;
+import com.qat.samples.sysmgmt.produto.model.PlanoByServico;
 import com.qat.samples.sysmgmt.produto.model.Porcao;
 import com.qat.samples.sysmgmt.produto.model.PorcaoItens;
 import com.qat.samples.sysmgmt.produto.model.Preco;
@@ -1425,7 +1425,7 @@ public class Objects {
 			Produto produto = new Produto();
 			Date a = new Date();
 			produto.setId(id);
-			
+
 			produto.setCdBarras("cdBarras_2 - " + action.toString());
 			produto.setProduto("produto_3 - " + action.toString());
 			produto.setDataCreate(a.getTime());
@@ -2993,7 +2993,7 @@ public class Objects {
 			Field field = new Field();
 			Date a = new Date();
 			field.setId(id);
-			
+
 			field.setTabelaEnum(tabela);
 			field.setParentId(id);
 			field.setEmprId(EMPID);
@@ -3006,7 +3006,7 @@ public class Objects {
 
 			return field;
 		}
-		
+
 
 		public static ProdutoEmpresa insertProdutoEmpresa(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 			{
@@ -3066,12 +3066,12 @@ public class Objects {
 
 				return marcaproduto;
 			}
-		
+
 		public static Transaction insertTransaction(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			Transaction transaction = new Transaction();
 			Date a = new Date();
-			
+
 			transaction.setId(id);
 			transaction.setInicioSession(a.getTime());
 			transaction.setFinalSession(a.getTime());

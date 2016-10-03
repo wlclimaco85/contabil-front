@@ -272,12 +272,12 @@
             sHtml = sHtml  + "<tr style='background-color : red;color:black'>";
             sHtml = sHtml  + "  <th scope='row'></th>";
             sHtml = sHtml  + "  <td colspan='2'>Total</td>";
-            sHtml = sHtml  + "  <td>"+value+"</td>";
+            sHtml = sHtml  + "  <td id='total-plano'>"+value+"</td>";
             sHtml = sHtml  + "</tr>";
             $('#table-plano').empty();
             $('#table-plano').append(sHtml);
             console.log(value);
-            pvm.total = value;
+            vm.total = value;
         }
 
             $scope.forms = [{ nome : 'form1',telefone :{}}];

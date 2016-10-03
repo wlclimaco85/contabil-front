@@ -6,23 +6,33 @@
 		var factory = {};
 
 		factory.amont = function(object,action){
-			
+
+			var user = "system"
+			var empresa = null;
+			if($rootScope.user != undefined)
+			{
+				user = $rootScope.user.user;
+			}
+			if(localStorageService.get('empresa') != undefined)
+			{
+				empresa = localStorageService.get('empresa').id;
+			}
 			if(action === "INSERT"){
 				object.createDateUTC = (new Date()).getTime();
-				object.createUser = $rootScope.user.user;
-				object.emprId = localStorageService.get('empresa').id
+				object.createUser = user;
+				object.emprId = empresa
 			}else if(action === "UPDATE")
 			{
 				object.modifyDateUTC = (new Date()).getTime();
-				object.modifyUser = $rootScope.user.user;
-				object.emprId = localStorageService.get('empresa').id
+				object.modifyUser = user;
+				object.emprId = empresa
 			}
 
 			console.log($rootScope)
 			return object;
 		}
 
-	
+
      return factory;
 	}]);
 })();

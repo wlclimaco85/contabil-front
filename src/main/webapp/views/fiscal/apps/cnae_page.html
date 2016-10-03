@@ -1,0 +1,31 @@
+<script src="dist/js/formValidation.js"></script>
+<div class="row">
+    <div class="form-group col-sm-4">
+        <label for="exampleInputEmail1">Codigo</label>
+        <input type="text"  ng-model="cnae.codigo" name="codigo" class="form-control" placeholder="Codigo">
+    </div>
+
+    <div class="form-group col-sm-8">
+        <label for="exampleInputEmail1">CNAE</label>
+        <input type="text" class="form-control" ng-model="cnae.cnae" name="cnae" data-mask="(999) 999-9999 x9999" placeholder="(555) 111-2222">
+    </div>
+</div>
+<div class="row">
+     <div class="col-sm-9">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Descrição</label>
+            <input type="text" id="datepicker" class="form-control" ng-model="cnae.descricao" name="descricao" placeholder="Descrição">
+        </div>
+     </div>
+     <div class="col-sm-3">
+        <div class="form-group col-sm-4">
+            <label for="exampleInputEmail1">Abreviação</label>
+            <input type="email" id='email' class="form-control" ng-model="cnae.abreviado" name="email" placeholder="Abreviação">
+        </div>
+
+    </div>
+</div>
+
+
+
+

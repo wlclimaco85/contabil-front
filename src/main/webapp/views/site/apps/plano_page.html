@@ -1,0 +1,115 @@
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+    <!-- <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.bootstrap2.css"> -->
+    <!--<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.bootstrap3.css">-->
+
+    <style>
+
+        .select2 > .select2-choice.ui-select-match {
+            /* Because of the inclusion of Bootstrap */
+            height: 29px;
+        }
+
+        .selectize-control > .selectize-dropdown {
+            top: 36px;
+        }
+        /* Some additional styling to demonstrate that append-to-body helps achieve the proper z-index layering. */
+        .select-box {
+          background: #fff;
+          position: relative;
+          z-index: 1;
+        }
+        .alert-info.positioned {
+          margin-top: 1em;
+          position: relative;
+          z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
+        }
+    </style>
+
+
+
+<div class="row">
+                                            <div class="form-group col-sm-8">
+                                                <label for="exampleInputEmail1">Titulo</label>
+                                                <input type="text" class="form-control nome-socio" ng-model="plano.titulo"  placeholder="0.00" />
+                                            </div>
+
+                                            <div class="form-group col-sm-4">
+                                                <label for="exampleInputEmail1">Valor</label>
+                                                <input type="text" class="form-control nome-socio"  ng-model="plano.preco[0].valor"  placeholder="0.00" />
+                                            </div>
+
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-4">
+                                                <label for="exampleInputEmail1">Data Inicio</label>
+
+                                                <div  class="input-group row ui-datepicker">
+                                                <input type="text" ng-model="plano.dtInicio"
+                                                       class="form-control col-sm-12"
+                                                       uib-datepicker-popup="{{format}}"
+                                                       ng-model="dt"
+                                                       is-open="opened"
+                                                       datepicker-options="dateOptions"
+                                                       close-text="Close">
+                                                <span class="input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></span>
+                                            </div>
+                                            </div>
+
+                                            <div class="form-group col-sm-4">
+                                                <label for="exampleInputEmail1">Data Final</label>
+                                                <div class="input-group row ui-datepicker">
+                                                <input type="text" ng-model="plano.dtFinal"
+                                                       class="form-control col-sm-12"
+                                                       uib-datepicker-popup="{{ctrl.format}}"
+                                                       ng-model="ctrl.dt"
+                                                       is-open="ctrl.opened"
+                                                       datepicker-options="ctrl.dateOptions"
+                                                       close-text="ctrl.Close">
+                                                <span class="input-group-addon" ng-click="ctrl.open($event)"><i class="fa fa-calendar"></i></span>
+                                            </div>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <label for="exampleInputEmail1">Cor</label>
+                                                <input type="text" class="form-control nome-socio"  ng-model="plano.cor"  placeholder="FFFFFF" />
+                                            </div>
+                                        </div>
+                                    <div class="row " style="margin-top : 10px"></div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Serviço</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <!-- servico -->
+                                                <div class="form-group">
+                                                            <label class="col-sm-3 control-label">Multiple</label>
+                                                            <div class="col-sm-6">
+                                                              <div class="row">
+                                                              <ui-select multiple sortable="true" ng-model="plano.servicoList"  on-select="ctrl.onSelectCallback($item, $model)" theme="select2" class="col-sm-12" title="Choose a person">
+                                                                <ui-select-match placeholder="Select or search a servico in the list...">{{$item.nome}}</ui-select-match>
+                                                                <ui-select-choices repeat="item in ctrl.servico | filter: $select.search">
+                                                                  <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                                  <small ng-bind-html="item.preco[item.preco.length].valor | highlight: $select.search"></small>
+                                                                </ui-select-choices>
+                                                              </ui-select>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div clarr="row">
+                                             <div class="form-group col-sm-12">
+                                                <label for="exampleInputEmail1">Descrição</label>
+                                                <textarea class="form-control"  ng-model="plano.descricao"  rows="5" id="Observação"></textarea>
+                                            </div>
+                                        </div>
+
+</html>
+
+
+
+

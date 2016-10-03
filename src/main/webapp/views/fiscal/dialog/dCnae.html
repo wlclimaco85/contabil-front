@@ -3,40 +3,15 @@
                       <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                            <form  class="cnaeForm">
-                            
+
                           <div class="modal-header">
                             <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title">Cadastro CNAE</h4>
                           </div>
                           <div class="modal-body">
-                            
-                                    <div class="row">
-                                        <div class="form-group col-sm-4">
-                                            <label for="exampleInputEmail1">Codigo</label>
-                                            <input type="text"  ng-model="cnae.codigo" name="codigo" class="form-control" placeholder="Codigo">
-                                        </div>
 
-                                        <div class="form-group col-sm-8">
-                                            <label for="exampleInputEmail1">CNAE</label>
-                                            <input type="text" class="form-control" ng-model="cnae.cnae" name="cnae" data-mask="(999) 999-9999 x9999" placeholder="(555) 111-2222">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                         <div class="col-sm-9">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Descrição</label>
-                                                <input type="text" id="datepicker" class="form-control" ng-model="cnae.descricao" name="descricao" placeholder="Descrição">
-                                            </div>
-                                         </div>
-                                         <div class="col-sm-3">
-                                            <div class="form-group col-sm-4">
-                                                <label for="exampleInputEmail1">Abreviação</label>
-                                                <input type="email" id='email' class="form-control" ng-model="cnae.abreviado" name="email" placeholder="Abreviação">
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
- 
+                                   <div ng-include="'views/fiscal/apps/cnae_page.html'"></div>
+
                           </div>
                           <div class="modal-footer">
                             <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -47,5 +22,5 @@
                       </div>
                     </div>
 
-        
+
 

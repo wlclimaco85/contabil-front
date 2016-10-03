@@ -341,14 +341,31 @@ qat.model.fnTelefones =function(numero,id,type,modelAction)
             return emails;
         }
 
+  qat.model.fnPlanoByEmpresa=function(_Valor,_planoServicoId,_type,_modelAction)
+  {
+      PlanoByEmpresa = {
+        numContrato : null,
+        valor : _Valor,
+        dataInicio : (new Date()).getTime(),
+        planoServicoList : _planoServicoId,
+        modelAction    : _modelAction,
+        createUser     : "System",
+        createDateUTC  : (new Date()).getTime(),
+        modifyUser     : "System",
+        modifyDateUTC  : (new Date()).getTime()
+      }
+      return PlanoByEmpresa;
+  }
+
   qat.model.fnServicoAndPlano=function(_Valor,_planoServicoId,_type,_modelAction)
   {
-    debugger
+
+
       if(_type == 1)
       {
           servicoAndPlano  = {
              valor : _Valor,
-             planoId    : {id : _planoServicoId},
+             planoList    : {id : _planoServicoId},
              emprId         : 0,
              dataInicio     : (new Date()).getTime(),
              tableEnumValue : 53,
@@ -363,7 +380,7 @@ qat.model.fnTelefones =function(numero,id,type,modelAction)
         }else{
           servicoAndPlano  = {
              valor : _Valor,
-             planoList      : {id : _planoServicoId},
+             servicoList      : {id : _planoServicoId},
              emprId         : 0,
              dataInicio     : (new Date()).getTime(),
              servicoPlanoEnumValue : 1,

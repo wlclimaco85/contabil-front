@@ -278,6 +278,8 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.roles.view'
 
 	            ,'wdApp.apps.select.cnae'
+	            ,'wdApp.apps.servicoSelect'
+	            ,'wdApp.apps.plano.teste'
 
 
 				]);
