@@ -1881,8 +1881,8 @@ public class Objects {
 			plano.setCor("cor_6 - " + action.toString());
 			plano.setPrecoList(new ArrayList<Preco>());
 			plano.getPrecoList().add(insertPreco(id, TabelaEnum.PLANO, action));
-			plano.setServicoList(new ArrayList<PlanoByServico>());
-			plano.getServicoList().add(insertPlanoByServico(id, TabelaEnum.PLANO, action));
+			plano.setServicoList(new ArrayList<Servico>());
+			plano.getServicoList().add(insertServico(id, TabelaEnum.PLANO, action));
 			plano.setTabelaEnum(tabela);
 			plano.setParentId(id);
 			plano.setEmprId(EMPID);

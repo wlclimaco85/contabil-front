@@ -252,6 +252,51 @@ qat.model.fnCnaeEmpresa = function(_oObjet)
                     }
         }
 
+qat.model.fnDoisValores =function(id,_value,_nome,_tabela,modelAction)
+        {
+
+            telefones = {
+               id : id,
+               value : _value,
+               nome : _nome,
+               parentId       : 0,
+               emprId         : JSON.parse(localStorage.getItem('empresa')).id,
+               processId      : 0,
+               tabelaEnumValue : _tabela,
+               modelAction    : 0,
+               modelAction    : modelAction,
+               createUser     : "System",
+               createDateUTC  : (new Date()).getTime(),
+               modifyUser     : "System",
+               modifyDateUTC  : (new Date()).getTime()
+            }
+
+            return telefones;
+        }
+
+
+        qat.model.fnPreco =function(id,_value,_tabela,modelAction)
+        {
+
+            telefones = {
+               id : id,
+               valor : _value,
+               precoTypeEnumValue : 5,
+               parentId       : 0,
+               emprId         : JSON.parse(localStorage.getItem('empresa')).id,
+               processId      : 0,
+               tabelaEnumValue : _tabela,
+               modelAction    : 0,
+               modelAction    : modelAction,
+               createUser     : "System",
+               createDateUTC  : (new Date()).getTime(),
+               modifyUser     : "System",
+               modifyDateUTC  : (new Date()).getTime()
+            }
+
+            return telefones;
+        }
+
 qat.model.fnTelefones =function(numero,id,type,modelAction)
         {
 

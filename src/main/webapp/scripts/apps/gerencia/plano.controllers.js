@@ -473,6 +473,21 @@
             var vm = this;
             $scope.plano = {};
             $scope.plano.servicoList =[]
+            $scope.plano.itensList = [{value:"",
+             processId      : 0}]
+
+
+            $scope.createForm = function(type){
+
+            $scope.plano.itensList.push({ value : '',processId      : 1});
+
+        };
+
+        $scope.removeForm= function(type){
+
+            debugger
+
+        };
 
              vm.disabled = undefined;
   vm.searchEnabled = undefined;
@@ -600,8 +615,27 @@
        //   cfop : {"id":"10"}
        // }
     }, function(res) {
-        debugger
+     //   debugger
         vm.servico = res.servicoList;
+        console.log(res)
+    });
+
+
+     vm.site = [
+
+  ];
+
+   SysMgmtData.processPostPageData("main/api/request",{
+        url: "site/api/fetchPage/",
+        token: $rootScope.authToken,
+        request: new qat.model.PagedInquiryRequest(null,true, true)
+       // {
+          //  "cfop": oObject
+       //   cfop : {"id":"10"}
+       // }
+    }, function(res) {
+       // debugger
+        vm.site = res.sites;
         console.log(res)
     });
 
@@ -677,9 +711,24 @@
             $scope.savessssS = function() {
                 debugger
 
+                var array = [];
 
+                $scope.plano.parentId = $scope.plano.parentId.id;
+
+                for(var x = 0;x<$scope.plano.itensList.length;x++)
+                {
+                    array.push(fModels.amont(qat.model.fnDoisValores(null,$scope.plano.itensList[x].value,$scope.plano.itensList[x].nome,54,"INSERT"),"INSERT"));
+                }
+
+                $scope.plano.itensList = array;
+
+                var preco = $scope.plano.precoList;
+
+                $scope.plano.precoList = [];
+                $scope.plano.precoList.push(fModels.amont(qat.model.fnPreco(null,preco[0].valor,54,"INSERT"),"INSERT"));
 
                 var oObject = fModels.amont($scope.plano,"INSERT");
+                oObject.tabelaEnumValue = 64;
                 oObject.dataInicio = (new Date()).getTime();
                 oObject.dataFinal = (new Date()).getTime();
                 SysMgmtData.processPostPageData("main/api/request", {

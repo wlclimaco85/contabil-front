@@ -549,24 +549,45 @@ Controle de Estoque</h1>
             </div>
             <div class="pricing-area text-center">
                 <div class="row">
+                    <div ng-repeat="plano in cc.site.planoList">
+
+                    <div ng-if="cc.functionTest($index + 1) =='0'">
+                          <div class="row">
+                          <div class="col-sm-4 plan price-one wow fadeInDown">
+                              <ul>
+                                  <li class="heading-one" style="background: #000000">
+                                      <h1>{{plano.titulo}}</h1>
+                                      <span>R$ {{plano.precoList[0].valor}}</span>
+                                  </li>
+                                  <div ng-repeat="itens in plano.itensList">
+                                  <li>{{itens.value}}</li>
+                                  </div>
+                                  <li class="plan-action">
+                                      <a href="" class="btn btn-primary">Assinar</a>
+                                  </li>
+                              </ul>
+                          </div>
+                          </div>
+                          </div>
+                          <div ng-if="cc.functionTest($index + 1) !='0'">
                     <div class="col-sm-4 plan price-one wow fadeInDown">
                         <ul>
                             <li class="heading-one">
-                                <h1>Simples</h1>
-                                <span>R$ 49,99</span>
+                                <h1>{{plano.titulo}}</h1>
+                                <span>R$ {{plano.precoList[0].valor}}</span>
                             </li>
-                            <li>Controle de Estoque</li>
-                            <li>Financeiro</li>
-                            <li>NF-e</li>
-                            <li>2 Acessos (Login)</li>
-                            <li></li>
-                            <li></li>
+                            <div ng-repeat="itens in plano.itensList">
+                            <li>{{itens.value}}</li>
+                            </div>
                             <li class="plan-action">
                                 <a href="" class="btn btn-primary">Assinar</a>
                             </li>
                         </ul>
                     </div>
 
+                  </div>
+                  </div>
+<!--
                     <div class="col-sm-4 plan price-two wow fadeInDown">
                         <ul>
                             <li class="heading-two">
@@ -663,11 +684,12 @@ Controle de Estoque</h1>
                         </ul>
                     </div>
 
-                </div>
+                </div> -->
             </div><!--/pricing-area -->
 
             </div>
 
+        </div>
         </div>
     </section>
     <!-- Work Process

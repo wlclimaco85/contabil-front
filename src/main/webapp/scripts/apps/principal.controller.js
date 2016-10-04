@@ -5,12 +5,17 @@
     function principalController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory) {
         var vm = this;
 
+        vm.functionTest = function(s)
+        {
+          return s%3;
+        }
       SysMgmtData.processPostPageData("main/api/anonimo",{
                 url: "site/api/fetchPage",
                 request: new qat.model.siteInquiryRequest( 100/20, true, "http://localhost:8080/webSite/")}, function(res){
-           console.log(res)
-
+     //      console.log(res)
+console.log(res.sites[0].planoList)
            vm.site = new qat.model.Site(res.sites[0]);
+           localStorage.setItem("empresa", JSON.stringify(res.sites[0].empresa));
       });
 
 
