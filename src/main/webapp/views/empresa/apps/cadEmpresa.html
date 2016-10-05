@@ -1,9 +1,9 @@
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <div class="col-sm-12">
     <label for="exampleInputPassword1">Tipo de Empresa</label>
     <dl class="dl-horizontal">
         <dd>
-            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.entidadeEnumValue" value="1" checked ><span>Venda Compra e prest. de serviço</span></label>
+            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.entidadeEnumValue" value="1" ng-init="empresa.entidadeEnumValue=true" ><span data-i18n="Venda Compra e prest. de servico"></span></label>
             <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.entidadeEnumValue" value="2" ><span>Clinica </span></label>
             <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.entidadeEnumValue" value="3" ><span>Escritorio Advocacia</span></label>
             <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.entidadeEnumValue" value="3" ><span>Condominio</span></label>
@@ -17,8 +17,8 @@
         <label for="exampleInputPassword1">Sua Empresa Esta Ativa?</label>
         <dl class="dl-horizontal">
             <dd>
-                <label class="ui-radio"><input name="statusEmpresa" ng-model="empresa.statusInicial" type="radio" value="1" ><span>Sim</span></label>
-                <label class="ui-radio"><input name="statusEmpresa" ng-model="empresa.statusInicial" type="radio" value="2" checked><span>Não</span></label>
+                <label class="ui-radio"><input name="statusEmpresa" ng-model="empresa.statusInicial" type="radio" value="1" ng-init="empresa.statusInicial=true" ><span>Sim</span></label>
+                <label class="ui-radio"><input name="statusEmpresa" ng-model="empresa.statusInicial" type="radio" value="2" ><span data-i18n="Nao"></span></label>
             </dd>
         </dl>
     </div>
@@ -26,7 +26,7 @@
         <label for="exampleInputPassword1">Selecione o regime Tributario da Empresa</label>
         <dl class="dl-horizontal">
             <dd>
-                <label class="ui-radio"><input name="regime" type="radio" ng-model="empresa.regime.id" value="1" checked ><span>Simples Nacional</span></label>
+                <label class="ui-radio"><input name="regime" type="radio" ng-model="empresa.regime.id" value="1" ng-init="empresa.regime.id=true" ><span>Simples Nacional</span></label>
                 <label class="ui-radio"><input name="regime" type="radio" ng-model="empresa.regime.id" value="2" ><span>Lucro Real</span></label>
                 <label class="ui-radio"><input name="regime" type="radio" ng-model="empresa.regime.id" value="3" ><span>Lucro Presumido</span></label>
             </dd>
@@ -35,7 +35,7 @@
     </div>
 </div>
 <div class="row">
-    <label for="exampleInputPassword1">Selecione o Tipo Pessoa</label> 
+    <label for="exampleInputPassword1">Selecione o Tipo Pessoa</label>
     <dl class="dl-horizontal">
         <dd>
             <label class="ui-radio"><input name="radio5" type="radio"  ng-model="empresa.tipoPessoa" ng-init="empresa.tipoPessoa=true" value="1" checked ><span>Pessoa Fisica </span></label>
@@ -46,9 +46,9 @@
 <div class="row">
     <div class="form-group col-sm-12">
         <label for="exampleInputEmail1" ng-show="empresa.tipoPessoa == 1" ng-hide="empresa.tipoPessoa == 2">Nome</label>
-         <label for="exampleInputEmail1" ng-show="empresa.tipoPessoa == 2" ng-hide="empresa.tipoPessoa == 1">Razão social</label>
+         <label for="exampleInputEmail1" ng-show="empresa.tipoPessoa == 2" ng-hide="empresa.tipoPessoa == 1"><span data-i18n="Razao social"></span></label>
         <input type="text" ng-model="empresa.nome" name="razao" class="form-control" placeholder="Nome">
-    </div>  
+    </div>
 </div>
 
 <div ng-show="empresa.tipoPessoa == 1" ng-hide="empresa.tipoPessoa == 2" ng-include="'views/util/apps/documentosFisico.html'"></div>
@@ -62,8 +62,8 @@
 <div class="row">
 
     <div class="form-group col-sm-6">
-        <label for="exampleInputEmail1">Nome do responsável</label>
-        <input type="text" class="form-control col-sm-3" ng-model="empresa.responsavel" name="responsavel" placeholder="Nome do responsável">
+        <label for="exampleInputEmail1">Nome do responsÃ¡vel</label>
+        <input type="text" class="form-control col-sm-3" ng-model="empresa.responsavel" name="responsavel" placeholder="Nome do responsÃ¡vel">
     </div>
 
     <div class="form-group col-sm-6">

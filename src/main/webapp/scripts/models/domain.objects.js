@@ -469,6 +469,38 @@ qat.model.fnEndereco = function(_oObjet,modelAction,user)
      }
 }
 
+qat.model.fnUsuario = function(_oObjet,modelAction,user)
+{
+
+    return {
+     id       : _oObjet.id,
+     email    : _oObjet.email,
+     senha    : _oObjet.senha,
+     cpf      : {
+        numero         : _oObjet.numero,
+        documentoTypeEnumValue : 2,
+        modelAction    : modelAction,
+        createUser     : user,
+        createDateUTC  : (new Date()).getTime(),
+        modifyUser     : user,
+        modifyDateUTC  : (new Date()).getTime()
+     },
+     pergunta : _oObjet.pergunta,
+     role     : _oObjet.role,
+     telefone : _oObjet.telefone,
+     language : "pt-br",
+     parentId       : _oObjet.parentId,
+     emprId         : _oObjet.emprId,
+     processId      : _oObjet.processId,
+     tableEnumValue : _oObjet.tableEnumValue,
+     modelAction    : modelAction,
+     createUser     : user,
+     createDateUTC  : (new Date()).getTime(),
+     modifyUser     : user,
+     modifyDateUTC  : (new Date()).getTime()
+     }
+}
+
 //Empresa
 /** create by system gera-java version 1.0.0 01/06/2016 14:44 : 36*/
 

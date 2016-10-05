@@ -282,8 +282,9 @@
 
             $scope.forms = [{ nome : 'form1',telefone :{}}];
             $scope.count = 0;
-
+            $scope.usuario= {};
             $scope.empresa = {
+            usuarios  :[],
             telefones :[],
             enderecos : [{
                        modelAction    : "INSERT",
@@ -402,7 +403,7 @@
                 console.log($scope.empresa)
 
                 var oObject = fModels.amont($scope.empresa,"INSERT");
-
+                oObject.usuarios.push(fModels.amont(qat.model.fnUsuario($scope.usuario,"INSERT","system")));
                 SysMgmtData.processPostPageData("main/api/anonimo",{
                         url: "entidade/api/empresa"+   WebDaptiveAppConfig.create_url,
                         request: new qat.model.reqEmpr(oObject ,true, true)}, function(res){
