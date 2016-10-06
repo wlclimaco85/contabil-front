@@ -1096,7 +1096,7 @@ public class ConfiguracaoTest {
 	        String requestJson = "{\"configSMTP\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
 	        result = restTemplate.postForObject( REST_SERVICE_URI + "configuracao/api/configSMTP/insert/",entitys,  ConfigSMTPResponse.class);
-	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        Assert.assertEquals(result.isOperationSuccess(), false);
 
 
 	      //=========== Update ================================================================

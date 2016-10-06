@@ -59,6 +59,7 @@ import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.EntidadeTypeEnum;
 import com.qat.samples.sysmgmt.entidade.model.Field;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
+import com.qat.samples.sysmgmt.entidade.model.Role;
 import com.qat.samples.sysmgmt.entidade.model.Transaction;
 import com.qat.samples.sysmgmt.entidade.model.Usuario;
 import com.qat.samples.sysmgmt.estado.model.Estado;
@@ -932,7 +933,8 @@ public class Objects {
 			usuario.setEmail("email_3 - " + action.toString());
 			usuario.setSenha("senha_4 - " + action.toString());
 			usuario.setPergunta("pergunta_5 - " + action.toString());
-			usuario.setRole("role_6 - " + action.toString());
+			usuario.setRoles(new ArrayList<Role>());
+			usuario.getRoles().add(new Role(1,"wlclimaco@gmail.com"));
 			usuario.setLanguage("pt");
 			usuario.setUltAcesso(a.getTime());
 			usuario.setTabelaEnum(tabela);
