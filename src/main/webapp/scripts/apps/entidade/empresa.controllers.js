@@ -387,31 +387,24 @@
             }
             $scope.saveEmpresa = function() {
 
-                debugger
                 for(x = 0;x< $scope.forms.length; x++ )
                 {
                     $scope.empresa.telefones.push(fModels.amont($scope.forms[x].telefone,"INSERT"));
 
                 }
 
-
-                console.log($scope.empresa);
-                console.log($scope.enderecos);
                 fEmpresa.fnMontaObjeto($scope.empresa,$scope.enderecos,"INSERT",'PRINCIPAL')
-             //   fnMontaObjeto();
-                debugger
-                console.log($scope.empresa)
+
+
 
                 var oObject = fModels.amont($scope.empresa,"INSERT");
                 oObject.usuarios.push(fModels.amont(qat.model.fnUsuario($scope.usuario,"INSERT","system")));
                 SysMgmtData.processPostPageData("main/api/anonimo",{
                         url: "entidade/api/empresa"+   WebDaptiveAppConfig.create_url,
                         request: new qat.model.reqEmpr(oObject ,true, true)}, function(res){
-                   console.log(res)
-                   debugger
                    if(res.operationSuccess == true)
                    {
-                      debugger
+
                    }
 
                 });
@@ -447,12 +440,25 @@
     angular.module('wdApp.apps.newEmpresa.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('NewEmpresaViewController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa,localStorageService, $location) {
             var vm = this;
-            $scope.newEmpresa = {};
+            $scope.empresa = {};
+            $scope.enderecos = [];
+
+            $scope.toggle = function() {
+                $scope.state = !$scope.state;
+            };
+
+            $scope.toggle1 = function() {
+                $scope.state1 = !$scope.state1;
+            };
+
+            $scope.toggle2 = function() {
+                $scope.state2 = !$scope.state2;
+            };
 
          //   debugger
             var searchObject = $location.search();
             var _emprId = JSON.parse(localStorage.getItem('empresa')).id;
-            
+
 
             SysMgmtData.processPostPageData("main/api/request",{
                     url: "entidade/api/empresa/fetchPage",
@@ -461,12 +467,40 @@
                         //qat.model.empresaInquiryRequest = function ( _iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
                         //new qat.model.empresaInquiryRequest(0, true,null,null,null)
                console.log(res)
-            //   debugger
+               debugger
                if(res.operationSuccess == true)
                {
                   debugger
+                  $scope.empresa = res.empresaList[0];
+                  $scope.enderecos = res.empresaList[0].enderecos;
+                  console.log($scope.empresa)
                }
 
             });
+
+
+            // save
+            $scope.updateEmpresa = function() {
+
+                for(x = 0;x< $scope.forms.length; x++ )
+                {
+                    $scope.empresa.telefones.push(fModels.amont($scope.forms[x].telefone,"INSERT"));
+                }
+
+                fEmpresa.fnMontaObjeto($scope.empresa,$scope.enderecos,"INSERT",'PRINCIPAL')
+
+                var oObject = fModels.amont($scope.empresa,"UPDATE");
+                oObject.usuarios.push(fModels.amont(qat.model.fnUsuario($scope.usuario,"INSERT","system")));
+                SysMgmtData.processPostPageData("main/api/request",{
+                        url: "entidade/api/empresa"+   WebDaptiveAppConfig.update_url,
+                        token: $rootScope.authToken,
+                        request: new qat.model.reqEmpr(oObject ,true, true)}, function(res){
+                   if(res.operationSuccess == true)
+                   {
+
+                   }
+
+                });
+            };
         });
 })();

@@ -1121,7 +1121,7 @@ public class ConfiguracaoTest {
 	        entitys = new HttpEntity<String>(jsonInString,headers);
 	        result = restTemplate.postForObject( REST_SERVICE_URI + "configuracao/api/configSMTP/fetchPage/",entitys,  ConfigSMTPResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
-	        Assert.assertEquals(result.getConfigSMTPList().size(), 1);
+	        Assert.assertEquals(result.getConfigSMTPList().size(), 2);
 
 
 //	Assert.assertEquals(result.getConfigSMTPList().get(0).getServSMTP(),""servSMTP_1" - UPDATE");
