@@ -138,7 +138,7 @@
         display: none;
     }
 </style>
-<div class="container1" ng-app ng-init="tabs=1">
+<div class="container1" ng-app ng-init="tabs=1" ng-controller="NewEmpresaViewController as pc">
     <ul class="tabs-nav">
         <li><a ng-click="tabs=1" ng-class="{'active' : tabs==1}">Empresa</a>
         </li>
@@ -166,7 +166,7 @@
             <div class="container-fluid">
                 <div class="row content">
                     <br>
-                    <div class="col-sm-9" ng-controller="CadEmpresaController as pc">
+                    <div class="col-sm-9">
                         <div class="row col-sm-12 well">
                             <div class="col-sm-2">
                                 <label for="exampleInputEmail1"> Status: </label>
@@ -1250,7 +1250,7 @@
             </div>
         </div>
         <div class="tab-content1" ng-show="tabs == 2">
-            <div ng-controller="ContasReceberController as showCase">
+         <!--   <div ng-controller="ContasReceberController as showCase">
                 <table datatable dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" class="row-border hover">
                     <tfoot>
                         <tr>
@@ -1292,10 +1292,10 @@
                         </tr>
                     </tfoot>
                 </table>
-            </div>
+            </div> -->
         </div>
         <div class="tab-content1" ng-show="tabs == 3">
-            <div ng-controller="ProcessoController as showCase">
+           <!-- <div ng-controller="ProcessoController as showCase">
                 <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
                     <tfoot>
                         <tr>
@@ -1320,11 +1320,11 @@
                         </tr>
                     </tfoot>
                 </table>
-            </div>
+            </div> -->
         </div>
 
         <div class="tab-content1" ng-show="tabs == 4">
-            <div ng-controller="ProcessoController as showCase">
+           <!-- <div ng-controller="ProcessoController as showCase">
                 <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
                     <tfoot>
                         <tr>
@@ -1349,12 +1349,12 @@
                         </tr>
                     </tfoot>
                 </table>
-            </div>
+            </div> -->
         </div>
 
 
         <div class="tab-content1" ng-show="tabs == 5">
-            <div ng-controller="ProcessoController as showCase">
+         <!--   <div ng-controller="ProcessoController as showCase">
                 <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
                     <tfoot>
                         <tr>
@@ -1379,11 +1379,11 @@
                         </tr>
                     </tfoot>
                 </table>
-            </div>
+            </div> -->
         </div>
 
         <div class="tab-content1" ng-show="tabs == 6">
-            <div ng-controller="ProcessoController as showCase">
+          <!--  <div ng-controller="ProcessoController as showCase">
                 <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
                     <tfoot>
                         <tr>
@@ -1408,11 +1408,11 @@
                         </tr>
                     </tfoot>
                 </table>
-            </div>
+            </div> -->
         </div>
 
         <div class="tab-content1" ng-show="tabs == 7">
-            <div ng-controller="ProcessoController as showCase">
+           <!-- <div ng-controller="ProcessoController as showCase">
                 <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
                     <tfoot>
                         <tr>
@@ -1437,11 +1437,11 @@
                         </tr>
                     </tfoot>
                 </table>
-            </div>
+            </div> -->
         </div>
 
         <div class="tab-content1" ng-show="tabs == 8">
-            <div ng-controller="ProcessoController as showCase">
+          <!--  <div ng-controller="ProcessoController as showCase">
                 <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
                     <tfoot>
                         <tr>
@@ -1466,11 +1466,11 @@
                         </tr>
                     </tfoot>
                 </table>
-            </div>
+            </div> -->
         </div>
 
         <div class="tab-content1" ng-show="tabs == 9">
-            <div ng-controller="ProcessoController as showCase">
+          <!--  <div ng-controller="ProcessoController as showCase">
                 <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
                     <tfoot>
                         <tr>
@@ -1495,11 +1495,11 @@
                         </tr>
                     </tfoot>
                 </table>
-            </div>
+            </div> -->
         </div>
 
         <div class="tab-content1" ng-show="tabs == 10">
-            <div ng-controller="ProcessoController as showCase">
+           <!-- <div ng-controller="ProcessoController as showCase">
                 <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
                     <tfoot>
                         <tr>
@@ -1524,7 +1524,7 @@
                         </tr>
                     </tfoot>
                 </table>
-            </div>
+            </div> -->
         </div>
 
     </div>

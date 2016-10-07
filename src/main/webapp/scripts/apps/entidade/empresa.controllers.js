@@ -445,13 +445,28 @@
 
 (function() {
     angular.module('wdApp.apps.newEmpresa.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('NewEmpresaViewController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        .controller('NewEmpresaViewController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa,localStorageService, $location) {
             var vm = this;
             $scope.newEmpresa = {};
-            $scope.newEmpresa = $rootScope.newEmpresa;
-            console.log($rootScope.newEmpresa)
-            $scope.saveNewEmpresa = function() {
-                fPessoa.fnOpenView($scope.newEmpresa,"site/api/newEmpresa/update/", function(){console.log('aqui')});
-            }
+
+         //   debugger
+            var searchObject = $location.search();
+            var _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+            
+
+            SysMgmtData.processPostPageData("main/api/request",{
+                    url: "entidade/api/empresa/fetchPage",
+                    token: $rootScope.authToken,
+                    request: new qat.model.empresaInquiryRequest(0,true,null,parseInt(searchObject.id,10),null ,null)}, function(res){
+                        //qat.model.empresaInquiryRequest = function ( _iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
+                        //new qat.model.empresaInquiryRequest(0, true,null,null,null)
+               console.log(res)
+            //   debugger
+               if(res.operationSuccess == true)
+               {
+                  debugger
+               }
+
+            });
         });
 })();
