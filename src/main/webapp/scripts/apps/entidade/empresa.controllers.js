@@ -438,10 +438,38 @@
 
 (function() {
     angular.module('wdApp.apps.newEmpresa.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('NewEmpresaViewController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa,localStorageService, $location) {
+        .controller('NewEmpresaViewController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa,localStorageService, $location,fEmpresa) {
             var vm = this;
-            $scope.empresa = {};
+            $scope.empresa = {
+                configuracao :{
+                    confGeral : {},
+                    confVendas: {},
+                    confEntrada: {},
+                    configOS: {},
+                    confCarne: {},
+                    confFiscal: {},
+                    confNFe: {},
+                    confAlertas: {},
+                    confSMTP: {},
+                    confBlueSoft: {}
+
+                }
+            };
             $scope.enderecos = [];
+
+            $scope.configuracao = {
+                confGeral : {},
+                confVendas: {},
+                confEntrada: {},
+                configOS: {},
+                confCarne: {},
+                confFiscal: {},
+                confNFe: {},
+                confAlertas: {},
+                confSMTP: {},
+                confBlueSoft: {}
+
+            }
 
             $scope.toggle = function() {
                 $scope.state = !$scope.state;
@@ -482,15 +510,139 @@
             // save
             $scope.updateEmpresa = function() {
 
-                for(x = 0;x< $scope.forms.length; x++ )
+                if($scope.forms != undefined)
                 {
-                    $scope.empresa.telefones.push(fModels.amont($scope.forms[x].telefone,"INSERT"));
+                    for(x = 0;x< $scope.forms.length; x++ )
+                    {
+                        $scope.empresa.telefones.push(fModels.amont($scope.forms[x].telefone,"INSERT"));
+                    }
                 }
+
+                 if($scope.configuracao == undefined)
+                {
+                     $scope.empresa.configuracao = {
+                        confGeral : {},
+                        confVendas: {},
+                        confEntrada: {},
+                        configOS: {},
+                        confCarne: {},
+                        confFiscal: {},
+                        confNFe: {},
+                        confAlertas: {},
+                        confSMTP: {},
+                        confBlueSoft: {}
+
+                     };
+                }
+
+                //-------------------
+                if($scope.configuracao.confGeral.id !== undefined)
+                {
+                    $scope.empresa.configuracao.confGeral = fModels.amont($scope.configuracao.confGeral,"UPDATE");
+                }
+                else
+                {
+                    $scope.empresa.configuracao = {confGeral : {}};
+                    $scope.empresa.configuracao.confGeral = fModels.amont($scope.configuracao.confGeral,"INSERT");
+                }
+                //-------------------
+                if($scope.configuracao.confVendas.id !== undefined)
+                {
+                    $scope.empresa.configuracao.confVendas = fModels.amont($scope.configuracao.confVendas,"UPDATE");
+                }
+                else
+                {
+                    $scope.empresa.configuracao.confVendas = fModels.amont($scope.configuracao.confVendas,"INSERT");
+                }
+
+
+                //-------------------
+                if($scope.configuracao.confEntrada.id !== undefined)
+                {
+                    $scope.empresa.configuracao.confEntrada = fModels.amont($scope.configuracao.confEntrada,"UPDATE");
+                }
+                else
+                {
+                    $scope.empresa.configuracao.confEntrada = fModels.amont($scope.configuracao.confEntrada,"INSERT");
+                }
+
+
+                //-------------------
+                if($scope.configuracao.configOS.id !== undefined)
+                {
+                    $scope.empresa.configuracao.configOS = fModels.amont($scope.configuracao.configOS,"UPDATE");
+                }
+                else
+                {
+                    $scope.empresa.configuracao.configOS = fModels.amont($scope.configuracao.configOS,"INSERT");
+                }
+
+                //-------------------
+                if($scope.configuracao.confCarne.id !== undefined)
+                {
+                    $scope.empresa.configuracao.confCarne = fModels.amont($scope.configuracao.confCarne,"UPDATE");
+                }
+                else
+                {
+                    $scope.empresa.configuracao.confCarne = fModels.amont($scope.configuracao.confCarne,"INSERT");
+                }
+
+                //-------------------
+                if($scope.configuracao.confFiscal.id !== undefined)
+                {
+                    $scope.empresa.configuracao.confFiscal = fModels.amont($scope.configuracao.confFiscal,"UPDATE");
+                }
+                else
+                {
+                    $scope.empresa.configuracao.confFiscal = fModels.amont($scope.configuracao.confFiscal,"INSERT");
+                }
+
+                //-------------------
+                if($scope.configuracao.confNFe.id !== undefined)
+                {
+                    $scope.empresa.configuracao.confNFe = fModels.amont($scope.configuracao.confNFe,"UPDATE");
+                }
+                else
+                {
+                    $scope.empresa.configuracao.confNFe = fModels.amont($scope.configuracao.confNFe,"INSERT");
+                }
+                //-------------------
+                if($scope.configuracao.confAlertas.id !== undefined)
+                {
+                    $scope.empresa.configuracao.confAlertas = fModels.amont($scope.configuracao.confAlertas,"UPDATE");
+                }
+                else
+                {
+                    $scope.empresa.configuracao.confAlertas = fModels.amont($scope.configuracao.confAlertas,"INSERT");
+                }
+                //-------------------
+                if($scope.configuracao.confSMTP.id !== undefined)
+                {
+                    $scope.empresa.configuracao.confSMTP = fModels.amont($scope.configuracao.confSMTP,"UPDATE");
+                }
+                else
+                {
+                    $scope.empresa.configuracao.confSMTP = fModels.amont($scope.configuracao.confSMTP,"INSERT");
+                }
+                //-------------------
+                if($scope.configuracao.confBlueSoft.id !== undefined)
+                {
+                    $scope.empresa.configuracao.confBlueSoft = fModels.amont($scope.configuracao.confBlueSoft,"UPDATE");
+                }
+                else
+                {
+                    $scope.empresa.configuracao.confBlueSoft = fModels.amont($scope.configuracao.confBlueSoft,"INSERT");
+                }
+
 
                 fEmpresa.fnMontaObjeto($scope.empresa,$scope.enderecos,"INSERT",'PRINCIPAL')
 
                 var oObject = fModels.amont($scope.empresa,"UPDATE");
-                oObject.usuarios.push(fModels.amont(qat.model.fnUsuario($scope.usuario,"INSERT","system")));
+
+                if($scope.usuario != undefined)
+                {
+                    oObject.usuarios.push(fModels.amont(qat.model.fnUsuario($scope.usuario,"INSERT","system")));
+                }
                 SysMgmtData.processPostPageData("main/api/request",{
                         url: "entidade/api/empresa"+   WebDaptiveAppConfig.update_url,
                         token: $rootScope.authToken,

@@ -20,12 +20,21 @@
 			if(action === "INSERT"){
 				object.createDateUTC = (new Date()).getTime();
 				object.createUser = user;
-				object.emprId = empresa
+				object.emprId = empresa;
+				object.modelAction = "INSERT"
 			}else if(action === "UPDATE")
 			{
 				object.modifyDateUTC = (new Date()).getTime();
 				object.modifyUser = user;
-				object.emprId = empresa
+				object.emprId = empresa;
+				object.modelAction = "INSERT"
+			}
+			else
+			{
+				object.modifyDateUTC = (new Date()).getTime();
+				object.modifyUser = user;
+				object.emprId = empresa;
+				object.modelAction = "DELETE"
 			}
 
 			console.log($rootScope)
