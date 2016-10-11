@@ -437,9 +437,19 @@
 })();
 
 (function() {
-    angular.module('wdApp.apps.newEmpresa.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('NewEmpresaViewController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa,localStorageService, $location,fEmpresa) {
+    angular.module('wdApp.apps.newEmpresa.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter', 'angularModalService'])
+        .controller('NewEmpresaViewController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa,localStorageService, $location,fEmpresa,ModalService) {
             var vm = this;
+
+            vm.alterStatus = alterStatus;
+            vm.addSocios = addSocios;
+            vm.addCnae = addCnae;
+            vm.addPlano = addPlano;
+            vm.addSite = addSite;
+            vm.addColaborador = addColaborador;
+            vm.addPlanoContas = addPlanoContas;
+            vm.addFilial = addFilial;
+
             $scope.empresa = {
                 configuracao :{
                     confGeral : {},
@@ -471,6 +481,160 @@
 
             }
 
+
+
+            function alterStatus() {
+            ModalService.showModal({
+                templateUrl: 'views/util/dialog/dAlterStatus.html',
+                controller: "SocioInsertController",
+            }).then(function(modal) {
+                modal.element.modal();
+                modal.close.then(function(result) {
+                    $scope.message = "You said " + result;
+                });
+            });
+        }
+
+        function addSocios() {
+
+            ModalService.showModal({
+
+                templateUrl: 'views/gerencia/dialog/dSocios.html',
+                controller: "SocioInsertController"
+            }).then(function(modal) {
+                modal.element.modal();
+
+
+
+                modal.close.then(function(result) {
+                    $scope.message = "You said " + result;
+                });
+            });
+        }
+
+        function addPlano() {
+            debugger
+            ModalService.showModal({
+
+                templateUrl: 'views/gerencia/dialog/dSocios.html',
+                controller: function($scope) {
+
+                },
+                controllerAs: "futurama"
+            }).then(function(modal) {
+                modal.element.modal();
+
+
+
+                modal.close.then(function(result) {
+                    $scope.message = "You said " + result;
+                });
+            });
+        }
+
+         function addSite() {
+            debugger
+            ModalService.showModal({
+
+                templateUrl: 'views/gerencia/dialog/dSocios.html',
+                controller: function($scope) {
+
+                },
+                controllerAs: "futurama"
+            }).then(function(modal) {
+                modal.element.modal();
+
+
+
+                modal.close.then(function(result) {
+                    $scope.message = "You said " + result;
+                });
+            });
+        }
+
+         function addColaborador() {
+            debugger
+            ModalService.showModal({
+
+                templateUrl: 'views/gerencia/dialog/dSocios.html',
+                controller: function($scope) {
+
+                },
+                controllerAs: "futurama"
+            }).then(function(modal) {
+                modal.element.modal();
+
+
+
+                modal.close.then(function(result) {
+                    $scope.message = "You said " + result;
+                });
+            });
+        }
+
+         function addPlanoContas() {
+            debugger
+            ModalService.showModal({
+
+                templateUrl: 'views/gerencia/dialog/dSocios.html',
+                controller: function($scope) {
+
+                },
+                controllerAs: "futurama"
+            }).then(function(modal) {
+                modal.element.modal();
+
+
+
+                modal.close.then(function(result) {
+                    $scope.message = "You said " + result;
+                });
+            });
+        }
+
+        function addFilial() {
+            debugger
+            ModalService.showModal({
+
+                templateUrl: 'views/gerencia/dialog/dSocios.html',
+                controller: function($scope) {
+
+                },
+                controllerAs: "futurama"
+            }).then(function(modal) {
+                modal.element.modal();
+
+
+
+                modal.close.then(function(result) {
+                    $scope.message = "You said " + result;
+                });
+            });
+        }
+
+
+
+        function addCnae() {
+            ModalService.showModal({
+                templateUrl: 'views/gerencia/dialog/dCnae.html',
+                controller: function($scope) {
+
+
+
+                },
+                controllerAs: "futurama"
+            }).then(function(modal) {
+                modal.element.modal();
+
+                $(".selectd").select2({
+                    placeholder: "Select a state"
+                });
+                modal.close.then(function(result) {
+                    $scope.message = "You said " + result;
+                });
+            });
+        }
+
             $scope.toggle = function() {
                 $scope.state = !$scope.state;
             };
@@ -485,7 +649,12 @@
 
          //   debugger
             var searchObject = $location.search();
-            var _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+            var _emprId = null;
+            if((localStorage.getItem('empresa') !== undefined)&&(localStorage.getItem('empresa') !== null))
+            {
+                _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+            }
+
 
 
             SysMgmtData.processPostPageData("main/api/request",{
@@ -495,10 +664,10 @@
                         //qat.model.empresaInquiryRequest = function ( _iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
                         //new qat.model.empresaInquiryRequest(0, true,null,null,null)
                console.log(res)
-               debugger
+
                if(res.operationSuccess == true)
                {
-                  debugger
+
                   $scope.empresa = res.empresaList[0];
                   $scope.enderecos = res.empresaList[0].enderecos;
                   console.log($scope.empresa)
@@ -643,7 +812,7 @@
                 oObject.cnaes = [];
                 oObject.planosServicos = {};
                 oObject.siteList = [];
-debugger
+
 
 
                 if($scope.usuario != undefined)
@@ -656,7 +825,7 @@ debugger
                         request: new qat.model.reqEmpr(oObject ,true, true)}, function(res){
                    if(res.operationSuccess == true)
                    {
-                        debugger
+
                    }
 
                 });

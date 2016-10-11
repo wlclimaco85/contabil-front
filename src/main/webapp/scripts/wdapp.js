@@ -174,6 +174,12 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.marca.delete'
 	            ,'wdApp.apps.marca.view'
 
+	            ,'wdApp.apps.socio'
+	            ,'wdApp.apps.socio.insert'
+				,'wdApp.apps.socio.update'
+	            ,'wdApp.apps.socio.delete'
+	            ,'wdApp.apps.socio.view'
+
 	            ,'wdApp.apps.uniMed'
 	            ,'wdApp.apps.uniMed.insert'
 				,'wdApp.apps.uniMed.update'
