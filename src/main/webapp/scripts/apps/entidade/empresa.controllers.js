@@ -535,6 +535,7 @@
                      };
                 }
 
+                $scope.empresa.configuracao = fModels.amont($scope.configuracao,"UPDATE");
                 //-------------------
                 if($scope.configuracao.confGeral.id !== undefined)
                 {
@@ -542,7 +543,7 @@
                 }
                 else
                 {
-                    $scope.empresa.configuracao = {confGeral : {}};
+                    //$scope.empresa.configuracao = {confGeral : {}};
                     $scope.empresa.configuracao.confGeral = fModels.amont($scope.configuracao.confGeral,"INSERT");
                 }
                 //-------------------
@@ -635,13 +636,19 @@
                 }
 
 
-                fEmpresa.fnMontaObjeto($scope.empresa,$scope.enderecos,"INSERT",'PRINCIPAL')
+                fEmpresa.fnMontaObjeto($scope.empresa,$scope.enderecos,"UPDATE",'PRINCIPAL')
 
                 var oObject = fModels.amont($scope.empresa,"UPDATE");
 
+                oObject.cnaes = [];
+                oObject.planosServicos = {};
+                oObject.siteList = [];
+debugger
+
+
                 if($scope.usuario != undefined)
                 {
-                    oObject.usuarios.push(fModels.amont(qat.model.fnUsuario($scope.usuario,"INSERT","system")));
+                    oObject.usuarios.push(fModels.amont(qat.model.fnUsuario($scope.usuario,"UPDATE","system")));
                 }
                 SysMgmtData.processPostPageData("main/api/request",{
                         url: "entidade/api/empresa"+   WebDaptiveAppConfig.update_url,
@@ -649,7 +656,7 @@
                         request: new qat.model.reqEmpr(oObject ,true, true)}, function(res){
                    if(res.operationSuccess == true)
                    {
-
+                        debugger
                    }
 
                 });
