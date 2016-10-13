@@ -449,6 +449,8 @@
             vm.addColaborador = addColaborador;
             vm.addPlanoContas = addPlanoContas;
             vm.addFilial = addFilial;
+            vm.gravarNote = gravarNote;
+            $scope.text="";
 
             $scope.empresa = {
                 configuracao :{
@@ -460,7 +462,7 @@
                     confFiscal: {},
                     confNFe: {},
                     confAlertas: {},
-                    confSMTP: {},
+                    confCMTP: {},
                     confBlueSoft: {}
 
                 }
@@ -476,11 +478,30 @@
                 confFiscal: {},
                 confNFe: {},
                 confAlertas: {},
-                confSMTP: {},
+                confCMTP: {},
                 confBlueSoft: {}
 
             }
 
+            function gravarNote() {
+debugger
+                SysMgmtData.processPostPageData("main/api/request",{
+                    url: "entidade/api/note/insert",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqNote(fModels.amont(qat.model.fnNote({id : null,noteText : $scope.text,tabelaEnumValue : 1}),"INSERT") ,true, true)}, function(res){
+                        //qat.model.empresaInquiryRequest = function ( _iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
+                        //new qat.model.empresaInquiryRequest(0, true,null,null,null)
+               console.log(res)
+
+               if(res.operationSuccess == true)
+               {
+
+                  console.log(res)
+               }
+
+            });
+
+            }
 
 
             function alterStatus() {
@@ -671,6 +692,21 @@
                   $scope.empresa = res.empresaList[0];
                   $scope.enderecos = res.empresaList[0].enderecos;
                   $scope.configuracao = res.empresaList[0].configuracao;
+                  debugger
+                  if((res.empresaList[0].documentos != null)&&(res.empresaList[0].documentos.length == 0))
+                  {
+                        $scope.empresa.documentos = [
+                            {documentoTypeEnumValue : 2 , numero : ""},
+                            {documentoTypeEnumValue : 4 , numero : ""},
+                            {documentoTypeEnumValue : 1 , numero : ""},
+                            {documentoTypeEnumValue : 12 , numero : ""},
+                            {documentoTypeEnumValue : 14 , numero : ""},
+                            {documentoTypeEnumValue : 10 , numero : ""},
+                            {documentoTypeEnumValue : 11 , numero : ""},
+                            {documentoTypeEnumValue : 3 , numero : ""}
+
+                        ]
+                  }
                   console.log($scope.empresa)
                }
 
@@ -699,7 +735,7 @@
                         confFiscal: {},
                         confNFe: {},
                         confAlertas: {},
-                        confSMTP: {},
+                        confCMTP: {},
                         confBlueSoft: {}
 
                      };
@@ -713,7 +749,7 @@
                         confFiscal: {},
                         confNFe: {},
                         confAlertas: {},
-                        confSMTP: {},
+                        confCMTP: {},
                         confBlueSoft: {}
 
                      };
@@ -757,12 +793,13 @@
 
 
                 //-------------------
-                if($scope.configuracao.configOS.id !== undefined)
+                if(($scope.configuracao.configOS !== undefined)&&($scope.configuracao.configOS !== null))
                 {
                     $scope.empresa.configuracao.configOS = fModels.amont($scope.configuracao.configOS,"UPDATE");
                 }
                 else
                 {
+                    $scope.configuracao.configOS = {}
                     $scope.empresa.configuracao.configOS = fModels.amont($scope.configuracao.configOS,"INSERT");
                 }
 
@@ -796,30 +833,37 @@
                     $scope.empresa.configuracao.confNFe = fModels.amont($scope.configuracao.confNFe,"INSERT");
                 }
                 //-------------------
-                if($scope.configuracao.confAlertas.id !== undefined)
+
+                if(($scope.configuracao.confAlertas !== undefined)&&($scope.configuracao.confAlertas !== null))
                 {
                     $scope.empresa.configuracao.confAlertas = fModels.amont($scope.configuracao.confAlertas,"UPDATE");
                 }
                 else
                 {
+                    $scope.configuracao.confAlertas = {};
                     $scope.empresa.configuracao.confAlertas = fModels.amont($scope.configuracao.confAlertas,"INSERT");
                 }
                 //-------------------
-                if($scope.configuracao.confSMTP.id !== undefined)
+                if(($scope.configuracao.confCMTP !== undefined)&&($scope.configuracao.confCMTP !== null))
                 {
-                    $scope.empresa.configuracao.confSMTP = fModels.amont($scope.configuracao.confSMTP,"UPDATE");
+                    if($scope.configuracao.confCMTP.id !== undefined)
+                    {
+                        $scope.empresa.configuracao.confCMTP = fModels.amont($scope.configuracao.confCMTP,"UPDATE");
+                    }
                 }
                 else
                 {
-                    $scope.empresa.configuracao.confSMTP = fModels.amont($scope.configuracao.confSMTP,"INSERT");
+                    $scope.empresa.configuracao.confCMTP = fModels.amont($scope.configuracao.confCMTP,"INSERT");
                 }
                 //-------------------
-                if($scope.configuracao.confBlueSoft.id !== undefined)
+
+                if(($scope.configuracao.confBlueSoft !== undefined)&&($scope.configuracao.confBlueSoft !== null))
                 {
                     $scope.empresa.configuracao.confBlueSoft = fModels.amont($scope.configuracao.confBlueSoft,"UPDATE");
                 }
                 else
                 {
+                    $scope.configuracao.confBlueSoft = {}
                     $scope.empresa.configuracao.confBlueSoft = fModels.amont($scope.configuracao.confBlueSoft,"INSERT");
                 }
 
@@ -838,7 +882,7 @@
                 {
                     oObject.usuarios.push(fModels.amont(qat.model.fnUsuario($scope.usuario,"UPDATE","system")));
                 }
-  
+
                 SysMgmtData.processPostPageData("main/api/request",{
                         url: "entidade/api/empresa"+   WebDaptiveAppConfig.update_url,
                         token: $rootScope.authToken,

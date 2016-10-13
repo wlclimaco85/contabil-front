@@ -3,11 +3,11 @@
     <label for="exampleInputPassword1">Tipo de Empresa</label>
     <dl class="dl-horizontal">
         <dd>
-            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.entidadeEnumValue" value="1" ng-init="empresa.entidadeEnumValue=true" ><span data-i18n="Venda Compra e prest. de servico"></span></label>
-            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.entidadeEnumValue" value="2" ><span>Clinica </span></label>
-            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.entidadeEnumValue" value="3" ><span>Escritorio Advocacia</span></label>
-            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.entidadeEnumValue" value="3" ><span>Condominio</span></label>
-            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.entidadeEnumValue" value="3" ><span>Escritorio Contabil</span></label>
+            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.entidadeEnumValue" value="1" ng-true-value="'1'" ng-init="empresa.entidadeEnumValue=1" ><span data-i18n="Venda Compra e prest. de servico"></span></label>
+            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.entidadeEnumValue" value="2" ng-true-value="'2'"><span>Clinica </span></label>
+            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.entidadeEnumValue" value="3" ng-true-value="'3'"><span>Escritorio Advocacia</span></label>
+            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.entidadeEnumValue" value="4" ng-true-value="'4'"><span>Condominio</span></label>
+            <label class="ui-radio"><input name="tipoEmpr" type="radio" ng-model="empresa.entidadeEnumValue" value="5" ng-true-value="'5'"><span>Escritorio Contabil</span></label>
         </dd>
     </dl>
 
@@ -17,8 +17,8 @@
         <label for="exampleInputPassword1">Sua Empresa Esta Ativa?</label>
         <dl class="dl-horizontal">
             <dd>
-                <label class="ui-radio"><input name="statusEmpresa" ng-model="empresa.statusInicial" type="radio" value="1" ng-init="empresa.statusInicial=true" ><span>Sim</span></label>
-                <label class="ui-radio"><input name="statusEmpresa" ng-model="empresa.statusInicial" type="radio" value="2" ><span data-i18n="Nao"></span></label>
+                <label class="ui-radio"><input name="statusEmpresa" ng-model="empresa.statusInicial" type="radio" value="1" ng-true-value="'1'" ng-init="empresa.statusInicial=1" ><span>Sim</span></label>
+                <label class="ui-radio"><input name="statusEmpresa" ng-model="empresa.statusInicial" type="radio" value="2" ng-true-value="'2'"><span data-i18n="Nao"></span></label>
             </dd>
         </dl>
     </div>
@@ -26,9 +26,9 @@
         <label for="exampleInputPassword1">Selecione o regime Tributario da Empresa</label>
         <dl class="dl-horizontal">
             <dd>
-                <label class="ui-radio"><input name="regime" type="radio" ng-model="empresa.regime.id" value="1" ng-init="empresa.regime.id=true" ><span>Simples Nacional</span></label>
-                <label class="ui-radio"><input name="regime" type="radio" ng-model="empresa.regime.id" value="2" ><span>Lucro Real</span></label>
-                <label class="ui-radio"><input name="regime" type="radio" ng-model="empresa.regime.id" value="3" ><span>Lucro Presumido</span></label>
+                <label class="ui-radio"><input name="regime" type="radio" ng-model="empresa.regime.id" value="1" ng-true-value="'1'" ng-init="empresa.regime.id=1" ><span>Simples Nacional</span></label>
+                <label class="ui-radio"><input name="regime" type="radio" ng-model="empresa.regime.id" value="2" ng-true-value="'2'"><span>Lucro Real</span></label>
+                <label class="ui-radio"><input name="regime" type="radio" ng-model="empresa.regime.id" value="3" ng-true-value="'3'"><span>Lucro Presumido</span></label>
             </dd>
         </dl>
 
@@ -38,8 +38,8 @@
     <label for="exampleInputPassword1">Selecione o Tipo Pessoa</label>
     <dl class="dl-horizontal">
         <dd>
-            <label class="ui-radio"><input name="radio5" type="radio"  ng-model="empresa.tipoPessoa" ng-init="empresa.tipoPessoa=true" value="1" checked ><span>Pessoa Fisica </span></label>
-            <label class="ui-radio"><input name="radio6" type="radio" ng-model="empresa.tipoPessoa" value="2" ><span>Pessoa Juridica </span></label>
+            <label class="ui-radio"><input name="radio5" type="radio"  ng-model="empresa.tipoPessoa" ng-init="empresa.tipoPessoa=1" value="1" ng-true-value="'1'" ><span>Pessoa Fisica </span></label>
+            <label class="ui-radio"><input name="radio6" type="radio" ng-model="empresa.tipoPessoa" value="2" ng-true-value="'2'"><span>Pessoa Juridica </span></label>
         </dd>
     </dl>
 </div>

@@ -252,6 +252,21 @@ qat.model.fnCnaeEmpresa = function(_oObjet)
                     }
         }
 
+qat.model.fnNote = function(_oObjet)
+        {
+            return     note    = {
+                       id : _oObjet.id,
+                       noteText : _oObjet.noteText,
+                       parentId : JSON.parse(localStorage.getItem('empresa')).id,
+                       tabelaEnumValue: _oObjet.tabelaEnumValue,
+                       modelAction    : "NONE",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+                    }
+        }
+
 qat.model.fnDoisValores =function(id,_value,_nome,_tabela,modelAction)
         {
 

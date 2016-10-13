@@ -48,6 +48,13 @@
 		this.returnListPaged = _bPagedList;
 	};
 
+	qat.model.reqNote = function(_oNote, _bList, _bPagedList)
+	{
+		this.note = _oNote;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
+
 		//CountyMaintenanceRequest Object
 	qat.model.reqSite = function(_oCounty, _bList, _bPagedList)
 	{

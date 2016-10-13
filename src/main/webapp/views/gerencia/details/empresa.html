@@ -233,11 +233,10 @@
                                             <div ng-if="socio.socioAdm =='0'">
                                                 <p>Administrador : Não</p>
                                             </div>
-                                            {{socio.pessoa.emails[0]}}
-                                            <div ng-if="socio.pessoa.emails[0] !=='null'">
+                                            <div ng-if="socio.pessoa.emails[0] !==''">
                                                 <p>Email : {{socio.pessoa.emails[0].email}}</p>
                                             </div>
-                                            <div ng-if="socio.pessoa.telefones[0] !=='null'">
+                                            <div ng-if="socio.pessoa.telefones[0] !==''">
                                                 <p>Telefone : {{socio.pessoa.telefones[0].numero}}</p>
                                             </div>
                                         </div>
@@ -360,18 +359,18 @@
                             <a href="javaScript:;" class="list-group-item active">
                                 <div class="form-group">
                                     <h4 class="list-group-item-heading">Observação:</h4>
-                                    <textarea class="form-control" rows="5" id="Observação"></textarea>
-                                    <button type="submit" class="btn btn-primary">Gravar</button>
+                                    <textarea class="form-control" ng-model="text" rows="5" id="Observação"></textarea>
+                                    <button type="submit" ng-click="pc.gravarNote()" class="btn btn-primary">Gravar</button>
                                 </div>
                             </a>
-                            <a href="javaScript:;" class="list-group-item">
-                                <h4 class="list-group-item-heading">Washington  17/07/2016 8:00</h4>
-                                <p>Processo observação 01012 </p>
-                            </a>
-                            <a href="javaScript:;" class="list-group-item">
-                                <h4 class="list-group-item-heading">Washington  17/07/2016 8:00</h4>
-                                <p>Processo observação 01012 </p>
-                            </a>
+                            <div ng-repeat="note in empresa.notes">
+                                <a href="javaScript:;" class="list-group-item col-sm-12">
+                                    <h4 class="list-group-item-heading">{{note.createUser}}  {{note.createDateUTC}}</h4>
+                                     <div class="form-group col-sm-12" style="word-wrap: break-word;">
+                                        <label for="exampleInputEmail1">{{note.noteText}}</label>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
