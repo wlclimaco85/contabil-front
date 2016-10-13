@@ -456,7 +456,7 @@ qat.model.fnEndereco = function(_oObjet,modelAction,user)
      latitude : _oObjet.latitude,
      longitude : _oObjet.longitude,
      complemento : _oObjet.complemento,
-     cidade : _oObjet.cidade,
+     cidade : {id : _oObjet.cidade.id},
      parentId       : _oObjet.parentId,
      emprId         : _oObjet.emprId,
      processId      : _oObjet.processId,

@@ -112,6 +112,7 @@
 
             $('.select-estado').on("select2-selecting", function(e) {
                console.log($(this).val())
+          
                 qat.model.select.anonimo("cadastros/api/cidade/fetchPage",true,new qat.model.cidadeInquiryRequest( 100/20, true,$(this).val),callbackCidade);
             });
 

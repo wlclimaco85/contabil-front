@@ -27,7 +27,7 @@
 				object.modifyDateUTC = (new Date()).getTime();
 				object.modifyUser = user;
 				object.emprId = empresa;
-				object.modelAction = "INSERT"
+				object.modelAction = "UPDATE"
 			}
 			else
 			{

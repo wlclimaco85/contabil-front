@@ -670,6 +670,7 @@
 
                   $scope.empresa = res.empresaList[0];
                   $scope.enderecos = res.empresaList[0].enderecos;
+                  $scope.configuracao = res.empresaList[0].configuracao;
                   console.log($scope.empresa)
                }
 
@@ -687,7 +688,7 @@
                     }
                 }
 
-                 if($scope.configuracao == undefined)
+                 if(($scope.configuracao == undefined)&&($scope.configuracao == null))
                 {
                      $scope.empresa.configuracao = {
                         confGeral : {},
@@ -702,9 +703,27 @@
                         confBlueSoft: {}
 
                      };
-                }
 
-                $scope.empresa.configuracao = fModels.amont($scope.configuracao,"UPDATE");
+                     $scope.configuracao = {
+                        confGeral : {},
+                        confVendas: {},
+                        confEntrada: {},
+                        configOS: {},
+                        confCarne: {},
+                        confFiscal: {},
+                        confNFe: {},
+                        confAlertas: {},
+                        confSMTP: {},
+                        confBlueSoft: {}
+
+                     };
+                }
+                if(($scope.configuracao.id !== undefined)&&($scope.configuracao.id !== null)){
+                    $scope.empresa.configuracao = fModels.amont($scope.configuracao,"UPDATE");
+                }
+                else{
+                     $scope.empresa.configuracao = fModels.amont($scope.configuracao,"INSERT");
+                }
                 //-------------------
                 if($scope.configuracao.confGeral.id !== undefined)
                 {
@@ -819,6 +838,7 @@
                 {
                     oObject.usuarios.push(fModels.amont(qat.model.fnUsuario($scope.usuario,"UPDATE","system")));
                 }
+  
                 SysMgmtData.processPostPageData("main/api/request",{
                         url: "entidade/api/empresa"+   WebDaptiveAppConfig.update_url,
                         token: $rootScope.authToken,

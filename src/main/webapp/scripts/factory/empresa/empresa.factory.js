@@ -12,7 +12,8 @@
             {
                 user = $rootScope.user.user;
             }
-            empresa.enderecos[0] = qat.model.fnEndereco(enderecos[0],"INSERT",user);
+            empresa.enderecos[0] = qat.model.fnEndereco(enderecos[0],action,user);
+          //empresa.enderecos = [];
             var count = 0;
             var bb = [];
 
@@ -24,12 +25,12 @@
             $('.input-email').each(function() {
                 if($(this).val() != "")
                 {
-                    bb.push(qat.model.fnEmails($(this).val(),null,1,"INSERT"));
+                    bb.push(qat.model.fnEmails($(this).val(),null,1,action));
                     count = count + 1;
                 }
             });
             empresa.emails = bb;
-
+           //   empresa.emails = [];  
 
              // socios
             count = 0;
@@ -43,11 +44,12 @@
                         a = 1
                     }
                     //cota,_por,_adm,_nome,_cpf,id,type,modelAction
-                    bb.push(qat.model.fnSocios("",$(this).find('.cota-socio').val(),a,$(this).find('.nome-socio').val(),$(this).find('.cpf-socio').val(),"","",'INSERT'));
+                    bb.push(qat.model.fnSocios("",$(this).find('.cota-socio').val(),a,$(this).find('.nome-socio').val(),$(this).find('.cpf-socio').val(),"","",action));
                     count = count + 1;
                 }
             });
             empresa.socios = bb;
+      // empresa.socios = []
 
             //plano
             count = 0;
@@ -69,8 +71,8 @@
                     count = count + 1;
                 }
             });//(_Valor,_planoServicoId,_type,_modelAction)
-            empresa.planosServicos = qat.model.fnPlanoByEmpresa(parseFloat(parseFloat($('#total-plano').text()).toFixed(2)),bb,'','INSERT');
-
+            empresa.planosServicos = qat.model.fnPlanoByEmpresa(parseFloat(parseFloat($('#total-plano').text()).toFixed(2)),bb,'',action);
+           // empresa.planosServicos = {}
 
             return empresa;
         }

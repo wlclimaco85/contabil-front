@@ -224,12 +224,22 @@
                                 <div class="col-sm-3 well" style="margin-right:2px">
                                     <div class="show-image">
                                         <div>
-                                            <p>Nome : Washington Luis</p>
-                                            <p>Porcentagem : 50%</p>
-                                            <p>valor Prolabore : R$1000,00</p>
-                                            <p>Administrador : Sim</p>
-                                            <p>Email : liviaMiziara@econtabil.com.br</p>
-                                            <p>Telefone : (34) 99999-8888</p>
+                                            <p>Nome : {{socio.pessoa.nome}}</p>
+                                            <p>Porcentagem : {{socio.porcentagem}}%</p>
+                                            <p>valor Prolabore : R${{socio.valorProlabore}}</p>
+                                            <div ng-if="socio.socioAdm =='1'">
+                                                <p>Administrador : Sim</p>
+                                            </div>
+                                            <div ng-if="socio.socioAdm =='0'">
+                                                <p>Administrador : Não</p>
+                                            </div>
+                                            {{socio.pessoa.emails[0]}}
+                                            <div ng-if="socio.pessoa.emails[0] !=='null'">
+                                                <p>Email : {{socio.pessoa.emails[0].email}}</p>
+                                            </div>
+                                            <div ng-if="socio.pessoa.telefones[0] !=='null'">
+                                                <p>Telefone : {{socio.pessoa.telefones[0].numero}}</p>
+                                            </div>
                                         </div>
                                         <input class="btn btn-primary update" type="button" value="Alterar" />
                                         <input class="btn btn-primary delete" type="button" value="Deletar" />
