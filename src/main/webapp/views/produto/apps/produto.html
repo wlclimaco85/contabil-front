@@ -1,91 +1,59 @@
-<style>
-.form-control {
-    outline: 0;
-    border-color: #ECECEC;
-    border-style: solid;
-    border-width: 1px;
-    width: 95%;
-    background-color: #ffffff;
-    padding: 6px;
-    border-radius: 2px;
-    margin-bottom: 5px;
-    font-size: 14px;
-}
 
-.input-group .input-group-addon {
-    font-size : 10px !important;
-}
+<head>
+    <meta charset="utf-8">
+    <title>AngularJS ui-select</title>
 
-.angucomplete-holder {
-    position: relative;
-}
+    <!--
+      IE8 support, see AngularJS Internet Explorer Compatibility http://docs.angularjs.org/guide/ie
+      For Firefox 3.6, you will also need to include jQuery and ECMAScript 5 shim
+    -->
+    <!--[if lt IE 9]>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.2.0/es5-shim.js"></script>
+      <script>
+        document.createElement('ui-select');
+        document.createElement('ui-select-match');
+        document.createElement('ui-select-choices');
+      </script>
+    <![endif]-->
 
-.angucomplete-dropdown {
-    border-color: #ececec;
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 2px;
-    width: 250px;
-    padding: 6px;
-    cursor: pointer;
-    z-index: 9999;
-    position: absolute;
-    /*top: 32px;
-    left: 0px;
-    */
-    margin-top: -6px;
-    background-color: #ffffff;
-}
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-sanitize.js"></script>
 
-.angucomplete-searching {
-    color: #acacac;
-    font-size: 14px;
-}
+    <!-- ui-select files -->
+    <script src="select.js"></script>
+    <link rel="stylesheet" href="select.css">
 
-.angucomplete-description {
-    font-size: 14px;
-}
 
-.angucomplete-row {
-    padding: 5px;
-    color: #000000;
-    margin-bottom: 4px;
+    <!-- themes -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+    <!-- <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.bootstrap2.css"> -->
+    <!--<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.bootstrap3.css">-->
 
-}
+    <style>
+        .select2 > .select2-choice.ui-select-match {
+            /* Because of the inclusion of Bootstrap */
+            height: 29px;
+        }
 
-.angucomplete-selected-row, .angucomplete-row:hover {
-    background-color: lightblue;
-    color: #ffffff;
-}
-
-.angucomplete-image-holder {
-    padding-top: 2px;
-    float: left;
-    margin-right: 10px;
-    margin-left: 5px;
-}
-
-.angucomplete-image {
-    height: 34px;
-    width: 34px;
-    border-radius: 50%;
-    border-color: #ececec;
-    border-style: solid;
-    border-width: 1px;
-}
-
-.angucomplete-image-default {
-    /* Add your own default image here
-     background-image: url('/assets/default.png');
-    */
-    background-position: center;
-    background-size: contain;
-    height: 34px;
-    width: 34px;
-}
-
-</style>
-
+        .selectize-control > .selectize-dropdown {
+            top: 36px;
+        }
+        /* Some additional styling to demonstrate that append-to-body helps achieve the proper z-index layering. */
+        .select-box {
+          background: #fff;
+          position: relative;
+          z-index: 1;
+        }
+        .alert-info.positioned {
+          margin-top: 1em;
+          position: relative;
+          z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
+        }
+    </style>
+</head>
 <div class="row">
         <div class="hide">
             <div class="form-group">
@@ -106,8 +74,8 @@
         </div>
         <div class="col-sm-4 ">
             <div class="form-group">
-                <label for="exampleInputPassword1">Código personalizado</label>
-                <input type="text" class="form-control " ng-model="produtoEmpresa.codigo" name="codigo"  placeholder="Código Interno">
+                <label for="exampleInputPassword1">CÃ³digo personalizado</label>
+                <input type="text" class="form-control " ng-model="produtoEmpresa.codigo" name="codigo"  placeholder="CÃ³digo Interno">
             </div>
         </div>
     </div>
@@ -120,7 +88,7 @@
         </div>
         <div class="col-sm-3 ">
             <div class="form-group">
-                <label for="exampleInputPassword1">Código de barras (EAN):</label>
+                <label for="exampleInputPassword1">CÃ³digo de barras (EAN):</label>
                 <input type="text" class="form-control  " ng-model="produto.cdBarras" name="cdBarras"  placeholder="cdBarras">
             </div>
         </div>
@@ -132,8 +100,8 @@
         </div>
         <div class="col-sm-2 ">
             <div class="form-group">
-                <label for="exampleInputPassword1">Exceção tab IPI</label>
-                <input type="text" class="form-control  " ng-model="produto.excTabIPI" name="excecaoIPI"  placeholder="Exceção IPI">
+                <label for="exampleInputPassword1">ExceÃ§Ã£o tab IPI</label>
+                <input type="text" class="form-control  " ng-model="produto.excTabIPI" name="excecaoIPI"  placeholder="ExceÃ§Ã£o IPI">
             </div>
         </div>
         <div class="col-sm-2 ">
@@ -147,121 +115,64 @@
         <div class="col-sm-6 ">
             <div class="form-group">
                 <label for="exampleInputPassword1">Inform. adicionais para a NFe</label>
-                <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.informAdicionaisParaNFe" name="informAdicionaisParaNFe"  placeholder="Informações Adicionais Para NFe"></textarea>
+                <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.informAdicionaisParaNFe" name="informAdicionaisParaNFe"  placeholder="InformaÃ§Ãµes Adicionais Para NFe"></textarea>
             </div>
         </div>
         <div class="col-sm-6 ">
             <div class="form-group">
-                <label for="exampleInputPassword1">Anotações internas</label>
-                <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.anotainternas" name="anotainternas"  placeholder="Anotaçoes Internas"></textarea>
+                <label for="exampleInputPassword1">AnotaÃ§Ãµes internas</label>
+                <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.anotainternas" name="anotainternas"  placeholder="AnotaÃ§oes Internas"></textarea>
             </div>
         </div>
     </div>
     <div class="row">
-
-        <div class="col-sm-4 ">
-                <label for="exampleInputPassword1">Unidade tributada</label>
-                <div class="row">
-                <select id="unidTributada" name="unidTributada"  ng-model="produtoEmpresa.unidTributada.id" class="uniMedList selectUniMed col-sm-12">
-                </select>
+        <div class="col-sm-2 ">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Quant.</label>
+                <input type="text" class="form-control col-sm-8 " ng-model="produto.quant" name="cEST"  placeholder="">
             </div>
         </div>
-        <div class="col-sm-4 ">
-                <label for="exampleInputPassword1">Categoria</label>
-                <div class="row">
-                    <select id="atividade1" name="atividade1" ng-model="produtoEmpresa.categoria.id" class="categoriaList selectCategoria col-sm-12">
-                        
-                    </select>
-                </div>
+        <div class="ng-cloak" ng-controller="UniMedSelectController as ctrl">
+            <div class="col-sm-3 " >
+                    <label for="exampleInputPassword1">Unid. Medida <small ng-click="ctrl.addUniMed()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
+                    <div class="row">
+                      <ui-select ng-model="produto.unidTributada" theme="bootstrap">
+                        <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.sigla}}</ui-select-match>
+                        <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
+                          <div ng-bind-html="item.sigla | highlight: $select.search"></div>
+                          <small ng-bind-html="item.unimed | highlight: $select.search"></small>
+                        </ui-select-choices>
+                      </ui-select>
+                    </div>
+
+            </div>
         </div>
-        <div class="col-sm-4 ">
-                <label for="exampleInputPassword1">Marca</label>
-                <div class="row">
-                <select id="atividade1" name="atividade1" ng-model="produtoEmpresa.marca.id" class="col-sm-12 selectMarca marcaList">
-                    
-                </select>
+        <div class="ng-cloak" ng-controller="CategoriaSelectController as ctrl">
+            <div class="col-sm-4 ">
+                    <label for="exampleInputPassword1">Categoria <small ng-click="ctrl.addCategoria()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
+                    <div class="row">
+                        <ui-select ng-model="produtoEmpresa.categoria" theme="bootstrap">
+                        <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.categoria}}</ui-select-match>
+                        <ui-select-choices repeat="item in ctrl.categoria | filter: $select.search">
+                          <div ng-bind-html="item.categoria | highlight: $select.search"></div>
+                          <!--<small ng-bind-html="item.unimed | highlight: $select.search"></small> -->
+                        </ui-select-choices>
+                      </ui-select>
+                    </div>
+            </div>
+        </div>
+        <div class="ng-cloak" ng-controller="MarcaSelectController as ctrl">
+            <div class="col-sm-3 ">
+                    <label for="exampleInputPassword1">Marca <small ng-click="ctrl.addMarca()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
+                    <div class="row">
+                    <ui-select ng-model="produto.marca" theme="bootstrap">
+                            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.marca}}</ui-select-match>
+                            <ui-select-choices repeat="item in ctrl.marca | filter: $select.search">
+                              <div ng-bind-html="item.marca | highlight: $select.search"></div>
+                              <small ng-bind-html="item.fabricante | highlight: $select.search"></small> -
+                            </ui-select-choices>
+                          </ui-select>
+                </div>
             </div>
         </div>
     </div>
-
-
-
-<script>
-    $(document).ready(function() {
-        
-            var callback = function(res){
-                var planos = "";
-               if(res.operationSuccess == true)
-               {
-                   for(var x = 0 ;x < res.unimedList.length;x++)
-                   {
-                       planos = planos + "<option value='"+res.unimedList[x].id+"'> "+res.unimedList[x].sigla+" </option>";
-                   }
-
-                    $('.uniMedList').append(planos);
-                    $(".selectUniMed").select2({
-                      placeholder: "Select a state",
-                      allowClear: true
-                    });
-
-                    
-               }
-
-            }
-
-
-            qat.model.select.util("produto/api/unimed/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callback);
-
-
-             var fnCallbackCategoria = function(res){
-                var planos = "";
-               if(res.operationSuccess == true)
-               {
-                   for(var x = 0 ;x < res.categoriaList.length;x++)
-                   {
-                       planos = planos + "<option value='"+res.categoriaList[x].id+"'> "+res.categoriaList[x].categoria+" </option>";
-                   }
-
-                    $('.categoriaList').append(planos);
-                    $(".selectCategoria").select2({
-                      placeholder: "Select a state",
-                      allowClear: true
-                    });
-
-               }
-
-            }
-
-
-            qat.model.select.util("produto/api/categoria/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackCategoria);
-
-             var callbackMarca = function(res){
-                var planos = "";
-                var preco = 0;
-
-               if(res.operationSuccess == true)
-               {
-                   for(var x = 0 ;x < res.marcaList.length;x++)
-                   {
-                       planos = planos + "<option value='"+res.marcaList[x].id+"'> "+res.marcaList[x].marca+" </option>";
-                   }
-  
-                    $('.marcaList').append(planos);
-                    $(".selectMarca").select2({
-                      placeholder: "Select a state",
-                      allowClear: true
-                    });
-
-               }
-
-            }
-
-
-            qat.model.select.util("produto/api/marca/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackMarca);
-
-            $(".select").select2({
-              placeholder: "Select a state",
-              allowClear: true
-            });
-    });
-</script>

@@ -1,14 +1,79 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+<head>
+    <meta charset="utf-8">
+    <title>AngularJS ui-select</title>
+
+    <!--
+      IE8 support, see AngularJS Internet Explorer Compatibility http://docs.angularjs.org/guide/ie
+      For Firefox 3.6, you will also need to include jQuery and ECMAScript 5 shim
+    -->
+    <!--[if lt IE 9]>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.2.0/es5-shim.js"></script>
+      <script>
+        document.createElement('ui-select');
+        document.createElement('ui-select-match');
+        document.createElement('ui-select-choices');
+      </script>
+    <![endif]-->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-sanitize.js"></script>
+
+    <!-- ui-select files -->
+    <script src="select.js"></script>
+    <link rel="stylesheet" href="select.css">
+
+
+    <!-- themes -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+    <!-- <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.bootstrap2.css"> -->
+    <!--<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.bootstrap3.css">-->
+
+    <style>
+        .select2 > .select2-choice.ui-select-match {
+            /* Because of the inclusion of Bootstrap */
+            height: 29px;
+        }
+
+        .selectize-control > .selectize-dropdown {
+            top: 36px;
+        }
+        /* Some additional styling to demonstrate that append-to-body helps achieve the proper z-index layering. */
+        .select-box {
+          background: #fff;
+          position: relative;
+          z-index: 1;
+        }
+        .alert-info.positioned {
+          margin-top: 1em;
+          position: relative;
+          z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
+        }
+    </style>
+</head>
 
 <!-- ------------------------------------- -->
 <!-- ------------------------------------- -->
 
-<!-- -------------------  Email Empresa ----------------- -->
+
+<div class="ng-cloak" ng-controller="FormaPgSelectControllers as ctrl">
+  <div class="col-sm-12">
+        <label for="exampleInputPassword1">Atividade Primaria</label>
+        <div class="row">
+          <ui-select ng-model="form.cnae.id" theme="bootstrap">
+            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+            <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
+              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+              <small ng-bind-html="item.parcelamentoMax | highlight: $select.search"></small>
+            </ui-select-choices>
+          </ui-select>
+        </div>
+    </div>
+</div>
+<!-- -------------------  Email Empresa ----------------- 
 <div class="row">
     <div class="col-sm-12">
         <label for="exampleInputPassword1">Forma de Pag. </label>
@@ -16,12 +81,37 @@
         </select>
     </div>
 </div>
-
+-->
 
 <script>
-    $(document).ready(function() {
 
 
+(function() {
+    angular.module('wdApp.apps.roles', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('UtilFormaPgController', utilFormaPgController);
+
+    function utilFormaPgController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory) {
+debugger
+      debugger
+       var callbackBanco = function(res){
+        var planos = "";
+
+       if(res.operationSuccess == true)
+       {
+
+           vm.people = res.formaPgList;
+
+        }
+    }
+
+  //  qat.model.select.anonimo("fiscal/api/cnae/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, null),callbackBanco);
+    qat.model.select.util("financeiro/api/formaPg/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackBanco);
+
+    }
+  })();
+
+
+/*
                 var callbackBanco = function(res){
                 var planos = "";
                if(res.operationSuccess == true)
@@ -43,7 +133,7 @@
 
             qat.model.select.util("financeiro/api/formaPg/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackBanco);
 
+*/
 
-
-            });
+    
     </script>

@@ -458,3 +458,216 @@
         }
     ]);
 })();
+
+(function() {
+angular.module('wdApp.apps.cfop.select', ['ngSanitize', 'ui.select'])
+    .filter('propsFilter', function() {
+  return function(items, props) {
+    var out = [];
+
+    if (angular.isArray(items)) {
+      var keys = Object.keys(props);
+
+      items.forEach(function(item) {
+        var itemMatches = false;
+
+        for (var i = 0; i < keys.length; i++) {
+          var prop = keys[i];
+          var text = props[prop].toLowerCase();
+          if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+            itemMatches = true;
+            break;
+          }
+        }
+
+        if (itemMatches) {
+          out.push(item);
+        }
+      });
+    } else {
+      // Let the output be the input untouched
+      out = items;
+    }
+
+    return out;
+  };
+}).controller('CfopSelectController', cfopSelectController);
+
+    function cfopSelectController($scope, $http, $timeout, $interval,dialogFactory,validationFactory) {
+        var vm = this;
+
+
+    var closse = function(){
+          var fnCallbackCfop = function(res){
+        var planos = "";
+
+       if(res.operationSuccess == true)
+       {
+
+           vm.cfop = res.cfopList;
+
+        }
+    }
+
+ qat.model.select.util("fiscal/api/cfop/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackCfop);
+  } 
+
+vm.addCfop = function(){
+
+     dialogFactory.dialog('views/fiscal/dialog/dCfop.html',"RowSelectCtrl",validationFactory.cfop,closse);
+
+
+  }
+        
+
+  vm.disabled = undefined;
+  vm.searchEnabled = undefined;
+
+  vm.setInputFocus = function (){
+    $scope.$broadcast('UiSelectDemo1');
+  };
+
+  vm.enable = function() {
+    vm.disabled = false;
+  };
+
+  vm.disable = function() {
+    vm.disabled = true;
+  };
+
+  vm.enableSearch = function() {
+    vm.searchEnabled = true;
+  };
+
+  vm.disableSearch = function() {
+    vm.searchEnabled = false;
+  };
+
+  vm.clear = function() {
+    vm.person.selected = undefined;
+    vm.address.selected = undefined;
+    vm.country.selected = undefined;
+  };
+
+  vm.someGroupFn = function (item){
+
+    if (item.name[0] >= 'A' && item.name[0] <= 'M')
+        return 'From A - M';
+
+    if (item.name[0] >= 'N' && item.name[0] <= 'Z')
+        return 'From N - Z';
+
+  };
+
+  vm.firstLetterGroupFn = function (item){
+      return item.name[0];
+  };
+
+  vm.reverseOrderFilterFn = function(groups) {
+    return groups.reverse();
+  };
+
+  vm.personAsync = {selected : "wladimir@email.com"};
+  vm.peopleAsync = [];
+
+  $timeout(function(){
+   vm.peopleAsync = [
+
+      ];
+  },3000);
+
+  vm.counter = 0;
+  vm.onSelectCallback = function (item, model){
+    vm.counter++;
+    vm.eventResult = {item: item, model: model};
+  };
+
+  vm.removed = function (item, model) {
+    vm.lastRemoved = {
+        item: item,
+        model: model
+    };
+  };
+
+  vm.tagTransform = function (newTag) {
+    var item = {
+        name: newTag,
+        email: newTag.toLowerCase()+'@email.com',
+        age: 'unknown',
+        country: 'unknown'
+    };
+
+    return item;
+  };
+
+  vm.peopleObj = {
+
+  };
+
+  vm.person = {};
+
+  vm.person.selectedValue = vm.peopleObj[3];
+  vm.person.selectedSingle = 'Samantha';
+  vm.person.selectedSingleKey = '5';
+  // To run the demos with a preselected person object, uncomment the line below.
+  //vm.person.selected = vm.person.selectedValue;
+
+  vm.cfop = [
+
+  ];
+
+  closse();
+  vm.availableColors = ['Red','Green','Blue','Yellow','Magenta','Maroon','Umbra','Turquoise'];
+
+  vm.singleDemo = {};
+  vm.singleDemo.color = '';
+  vm.multipleDemo = {};
+  vm.multipleDemo.colors = ['Blue','Red'];
+  vm.multipleDemo.colors2 = ['Blue','Red'];
+  vm.multipleDemo.selectedPeople = [vm.cfop[5], vm.cfop[4]];
+  vm.multipleDemo.selectedPeople2 = vm.multipleDemo.selectedPeople;
+  vm.multipleDemo.selectedPeopleWithGroupBy = [vm.cfop[8], vm.cfop[6]];
+  vm.multipleDemo.selectedPeopleSimple = ['samantha@email.com','wladimir@email.com'];
+  vm.multipleDemo.removeSelectIsFalse = [vm.cfop[2], vm.cfop[0]];
+
+  vm.appendToBodyDemo = {
+    remainingToggleTime: 0,
+    present: true,
+    startToggleTimer: function() {
+      var scope = vm.appendToBodyDemo;
+      var promise = $interval(function() {
+        if (scope.remainingTime < 1000) {
+          $interval.cancel(promise);
+          scope.present = !scope.present;
+          scope.remainingTime = 0;
+        } else {
+          scope.remainingTime -= 1000;
+        }
+      }, 1000);
+      scope.remainingTime = 3000;
+    }
+  };
+
+  vm.address = {};
+  vm.refreshAddresses = function(address) {
+    var params = {address: address, sensor: false};
+    return $http.get(
+      'http://maps.googleapis.com/maps/api/geocode/json',
+      {params: params}
+    ).then(function(response) {
+      vm.addresses = response.data.results;
+    });
+  };
+
+  vm.addPerson = function(item, model){
+    if(item.hasOwnProperty('isTag')) {
+      delete item.isTag;
+      vm.cfop.push(item);
+    }
+  }
+
+
+    }
+
+
+})();

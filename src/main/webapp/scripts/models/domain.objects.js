@@ -457,6 +457,311 @@ qat.model.fnTelefones =function(numero,id,type,modelAction)
       return servicoAndPlano;
   }
 
+
+  qat.model.fnProduto =function(_produto,_modelAction,_userId)
+  {
+    //////debugger
+    var _id=null;
+    if(_produto.id != "" || _produto.id == " "){
+      _id = null;
+    }
+    var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
+  
+      produto  = {
+        id             : _id,
+        ncm            : _produto.ncm,
+        cdBarras       :_produto.cdBarras,
+        dataCreate     :_produto.dataCreate,
+        produto        :_produto.produto,
+        excTabIPI      :_produto.excTabIPI,
+        cEST           : _produto.cEST,
+        quant          :_produto.quant,
+        uniMed         :_produto.uniMed,
+        marca          : _produto.marca,
+        parentId       : 0,
+        emprId         : _emprId,
+        processId      : 0,
+        tableEnumValue : 0,
+        userId         : _userId,
+        modelAction    : _modelAction,
+        createUser     : _userId,
+        createDateUTC  : (new Date()).getTime(),
+        modifyUser     : _userId,
+        modifyDateUTC  : (new Date()).getTime()
+
+      }
+      return produto;
+  }
+
+  qat.model.fnTributacao =function(_tributacao,_modelAction,_userId)
+  {
+    var _id = null;
+    if(_tributacao.id == "" || _tributacao.id == " "){
+      _id = null;
+    }
+    var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
+  //  //////debugger
+      tributacao  = {
+        id             : _id,
+        prodId         : _tributacao.prodId,
+        cfop           : qat.model.fnCfop(_tributacao.cfop,_modelAction,_userId),
+        icms           : _tributacao.icms,
+        pis            : _tributacao.pis,
+        cofins         : _tributacao.cofins,
+        ipi            : _tributacao.ipi,
+        parentId       : 0,
+        emprId         : _emprId,
+        processId      : 0,
+        tableEnumValue : 0,
+        userId         : _userId,
+        modelAction    : _modelAction,
+        createUser     : _userId,
+        createDateUTC  : (new Date()).getTime(),
+        modifyUser     : _userId,
+        modifyDateUTC  : (new Date()).getTime()
+
+      }
+      //////debugger
+      return tributacao;
+  }
+
+  qat.model.fnEstoque =function(_estoque,_modelAction,_userId)
+  {
+    var _id = null;
+    if(_estoque.id == "" || _estoque.id == " "){
+      _id = null;
+    }
+    var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
+  //  //////debugger
+      estoque  = {
+        id                           : _id,
+        estoqueTypeEnumValue         : _estoque.estoqueTypeEnumValue,
+        ultimoMov                    : _estoque.ultimoMov,
+        quant                        : _estoque.quant,
+        parentId       : 0,
+        emprId         : _emprId,
+        processId      : 0,
+        tableEnumValue : 0,
+        userId         : _userId,
+        modelAction    : _modelAction,
+        createUser     : _userId,
+        createDateUTC  : (new Date()).getTime(),
+        modifyUser     : _userId,
+        modifyDateUTC  : (new Date()).getTime()
+
+      }
+      //////debugger
+      return estoque;
+  }
+
+
+  qat.model.fnPrecoProd =function(_estoque,_modelAction,_userId)
+  {
+    var _id = null;
+    if(_estoque.id == "" || _estoque.id == " "){
+      _id = null;
+    }
+    var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
+  //  //////debugger
+      estoque  = {
+        id                    : _id,
+        precoTypeEnumValue    : _estoque.precoTypeEnumValue,
+        dataMarcacao          : _estoque.dataMarcacao,
+        valor                 : _estoque.valor,
+        parentId       : 0,
+        emprId         : _emprId,
+        processId      : 0,
+        tableEnumValue : 0,
+        userId         : _userId,
+        modelAction    : _modelAction,
+        createUser     : _userId,
+        createDateUTC  : (new Date()).getTime(),
+        modifyUser     : _userId,
+        modifyDateUTC  : (new Date()).getTime()
+
+      }
+      //////debugger
+      return estoque;
+  }
+
+   qat.model.fnCusto =function(_estoque,_modelAction,_userId)
+  {
+    var _id = null;
+    if(_estoque.id == "" || _estoque.id == " "){
+      _id = null;
+    }
+    var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
+  //  //////debugger
+      estoque  = {
+        id                    : _id,
+        valor    : _estoque.valor,
+
+        parentId       : 0,
+        emprId         : _emprId,
+        processId      : 0,
+        tableEnumValue : 0,
+        userId         : _userId,
+        modelAction    : _modelAction,
+        createUser     : _userId,
+        createDateUTC  : (new Date()).getTime(),
+        modifyUser     : _userId,
+        modifyDateUTC  : (new Date()).getTime()
+
+      }
+      //////debugger
+      return estoque;
+  }
+
+
+
+  qat.model.fnCfop = function(_cfop,_modelAction,_userId)
+  {
+    var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
+      var cfop  = {
+         id               : _cfop.id,
+         cfop             : _cfop.cfop,
+         natureza         : _cfop.natureza,
+         simplificado     : _cfop.simplificado,
+         cfopTypeEnum     : _cfop.cfopTypeEnum,
+         icms             : _cfop.icms,
+         icmsReduzido     : _cfop.icmsReduzido,
+         margemAgregadaST : _cfop.margemAgregadaST,
+         cstPrincipal     : _cfop.cstPrincipal,
+         classFiscal      : _cfop.classFiscal,
+         observacao       : _cfop.observacao,
+         emprId           : _emprId,
+         tableEnumValue   : 53,
+         userId           : _userId,
+         modelAction      : _modelAction,
+         createUser       : _userId,
+         createDateUTC    : (new Date()).getTime(),
+         modifyUser       : _userId,
+         modifyDateUTC    : (new Date()).getTime()
+
+      }
+      return cfop;
+  }
+
+  qat.model.fnICMS = function(_cfop,_modelAction,_userId)
+  {
+    var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
+         _cfop.emprId         = _emprId,
+         _cfop.tableEnumValue = 53,
+         _cfop.userId         = _userId,
+         _cfop.modelAction    = _modelAction,
+         _cfop.createUser     = _userId,
+         _cfop.createDateUTC  = (new Date()).getTime(),
+         _cfop.modifyUser     = _userId,
+         _cfop.modifyDateUTC  = (new Date()).getTime()
+
+
+      return _cfop;
+  }
+
+  qat.model.fnPIS = function(_cfop,_modelAction,_userId)
+  {
+    var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
+
+
+         _cfop.emprId         = _emprId,
+         _cfop.tableEnumValue = 53,
+         _cfop.userId         = _userId,
+         _cfop.modelAction    = _modelAction,
+         _cfop.createUser     = _userId,
+         _cfop.createDateUTC  = (new Date()).getTime(),
+         _cfop.modifyUser     = _userId,
+         _cfop.modifyDateUTC  = (new Date()).getTime()
+
+
+      return _cfop;
+  }
+
+  qat.model.fnCOFINS = function(_cfop,_modelAction,_userId)
+  {
+
+var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
+
+         _cfop.emprId         = _emprId,
+         _cfop.tableEnumValue = 53,
+         _cfop.userId         = _userId,
+         _cfop.modelAction    = _modelAction,
+         _cfop.createUser     = _userId,
+         _cfop.createDateUTC  = (new Date()).getTime(),
+         _cfop.modifyUser     = _userId,
+         _cfop.modifyDateUTC  = (new Date()).getTime()
+
+  
+      return _cfop;
+  }
+
+  qat.model.fnIPI = function(_cfop,_modelAction,_userId)
+  {
+
+    var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
+
+         _cfop.emprId         = _emprId,
+         _cfop.tableEnumValue = 53,
+         _cfop.userId         = _userId,
+         _cfop.modelAction    = _modelAction,
+         _cfop.createUser     = _userId,
+         _cfop.createDateUTC  = (new Date()).getTime(),
+         _cfop.modifyUser     = _userId,
+         _cfop.modifyDateUTC  = (new Date()).getTime()
+
+
+      return _cfop;
+  }
+
         //Endereco Object
 qat.model.fnEndereco = function(_oObjet,modelAction,user)
 {

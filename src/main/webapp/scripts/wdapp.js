@@ -287,6 +287,15 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.servicoSelect'
 	            ,'wdApp.apps.plano.teste'
 
+	            ,'wdApp.apps.select.formaPg'
+	            ,'wdApp.apps.uniMed.select'
+	            ,'wdApp.apps.categoria.select'
+	            ,'wdApp.apps.marca.select'
+	            ,'wdApp.apps.cfop.select'
+	            ,'wdApp.ajaxCalls.validation'
+	            ,'wdApp.ajaxCalls.dialog.delete'
+	         //   ,'wdApp.apps.util.formaPg'
+
 
 				]);
 

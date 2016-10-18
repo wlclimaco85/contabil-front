@@ -11207,3 +11207,15 @@ body {
     font-size:12px!Important;
     height:800px!Important;
 }
+
+.adcionar {
+  font-size:64%;
+  font-style:italic;
+  color:red;
+  cursor: pointer;
+}
+
+.adcionar:hover {
+    font-size:90%;
+
+}

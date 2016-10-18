@@ -853,6 +853,7 @@ debugger
                 }
                 else
                 {
+                    $scope.configuracao.confCMTP = {};
                     $scope.empresa.configuracao.confCMTP = fModels.amont($scope.configuracao.confCMTP,"INSERT");
                 }
                 //-------------------

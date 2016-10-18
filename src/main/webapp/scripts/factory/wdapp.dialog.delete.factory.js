@@ -1,6 +1,6 @@
 (function() {
 'use strict';
-	var commonAuth = angular.module('wdApp.ajaxCalls', ['angularModalService']);
+	var commonAuth = angular.module('wdApp.ajaxCalls.dialog.delete', ['angularModalService']);
 
 	commonAuth.factory('dialogFactory', ['ModalService', function(ModalService){
 		return{
@@ -13,8 +13,7 @@
 			            modal.element.modal();
 			            _callback();
 			            modal.close.then(function(result) {
-			            	if((_close != null)&&(_close != undefined))
-			                	_close();
+			                _close();
 			            });
 			        });
 				}
