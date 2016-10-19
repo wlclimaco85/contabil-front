@@ -150,7 +150,7 @@
                 key: '1',
                 action: function(e, dt, node, config) {
 
-                    dialogFactory.dialog('views/produto/dialog/dMarca.html',"MarcaInsertController",openDialogUpdateCreate);
+                    dialogFactory.dialog('views/produto/dialog/dMarca.html',"MarcaInsertController",openDialogUpdateCreate,function(){});
                    
                 }
             }]);

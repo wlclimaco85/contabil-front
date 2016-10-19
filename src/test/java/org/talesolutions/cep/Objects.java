@@ -1410,7 +1410,7 @@ public class Objects {
 			produtoparent.setModelAction(action);
 			produtoparent.setAplicacao("aplicacao_5 - " + action.toString());
 			produtoparent.setFracao("fracao_6 - " + action.toString());
-			produtoparent.setMarca(insertMarca(id, TabelaEnum.PRODUTO, action));
+		//	produtoparent.setMarca(insertMarca(id, TabelaEnum.PRODUTO, action));
 			produtoparent.setPesoBruto(new Double(10.00));
 			produtoparent.setPesoLiquido(new Double(10.00));
 			produtoparent.setModoUso("modoUso_15 - " + action.toString());

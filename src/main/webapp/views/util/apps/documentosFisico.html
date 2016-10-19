@@ -1,21 +1,22 @@
 
 <div class="row">
     <div ng-repeat="documento in empresa.documentos">
+    <div ng-if="documento.documentoTypeEnumValue == 2">
       <div class="form-group col-sm-4">
-           <div ng-if="documento.documentoTypeEnumValue == 2">
+           
           <label for="exampleInputEmail1">CPF</label>
 
-              <input type="text" ng-model="documento.numero" name="cnpj" class="form-control" placeholder="NÂº Cart. Trab">
-              <input type="text" ng-model="documento.documentoTypeEnumValue" name="cnpjs" value="2" class="form-control hide" placeholder="NÂº Cart. Trab" ng-init="documento.documentoTypeEnumValue=2">
+              <input type="text" ng-model="documento.numero" name="cnpj" class="form-control" placeholder="Nº Cart. Trab">
+              <input type="text" ng-model="documento.documentoTypeEnumValue" name="cnpjs" value="2" class="form-control hide" placeholder="Nº Cart. Trab" ng-init="documento.documentoTypeEnumValue=2">
           </div>
       </div>
-
+<div ng-if="documento.documentoTypeEnumValue ==4">
       <div class="form-group col-sm-4">
-       <div ng-if="documento.documentoTypeEnumValue ==4">
+       
           <label for="exampleInputEmail1">RG</label>
 
               <input type="text" ng-model="documento.numero" name="IEST" class="form-control" placeholder="Inscr Est Subst Trib">
-              <input type="text" ng-model="documento.documentoTypeEnumValue" name="IEST2" value="4" class="form-control hide" placeholder="NÂº Cart. Trab" ng-init="documento.documentoTypeEnumValue=4">
+              <input type="text" ng-model="documento.documentoTypeEnumValue" name="IEST2" value="4" class="form-control hide" placeholder="Nº Cart. Trab" ng-init="documento.documentoTypeEnumValue=4">
           </div>
       </div>
     </div>

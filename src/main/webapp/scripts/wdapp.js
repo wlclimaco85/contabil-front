@@ -295,6 +295,12 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.ajaxCalls.validation'
 	            ,'wdApp.ajaxCalls.dialog.delete'
 	         //   ,'wdApp.apps.util.formaPg'
+	         	,'wdApp.apps.email'
+	         	,'wdApp.ajaxCalls.table.columns'
+	         	,'wdApp.ajaxCalls.table.ajax'
+	         	,'wdApp.ajaxCalls.table.option'
+	         	,'wdApp.ajaxCall.table.create'
+	         	,'wdApp.ajaxCalls.filters'
 
 
 				]);

@@ -312,15 +312,25 @@ qat.model.fnDoisValores =function(id,_value,_nome,_tabela,modelAction)
             return telefones;
         }
 
-qat.model.fnTelefones =function(numero,id,type,modelAction)
+qat.model.fnTelefones =function(_telefone,modelAction)
         {
+    var _id = null;
+    if(_telefone.id == "" || _telefone.id == " "){
+      _id = null;
+    }
+    var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
 
             telefones = {
-               id : id,
-               typeValue : 0,
+               id : _id,
+               typeValue : _telefone.typeValue,
                ddd : '',
-               numero : numero,
-               telefoneTypeEnumValue : type,
+               numero : _telefone.numero,
+               telefoneTypeEnumValue : _telefone.telefoneTypeEnumValue,
                parentId       : 0,
                emprId         : 0,
                processId      : 0,
@@ -336,13 +346,27 @@ qat.model.fnTelefones =function(numero,id,type,modelAction)
             return telefones;
         }
 
-  qat.model.fnEmails =function(email,id,type,modelAction)
+
+          
+
+  qat.model.fnEmails =function(_email,modelAction)
         {
+
+          var _id = null;
+    if(_email.id == "" || _email.id == " "){
+      _id = null;
+    }
+    var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
             emails  = {
-               id : id,
+               id : _id,
                typeValue : 0,
-               email : email,
-               emailTypeEnumValue : type,
+               email : _email.email,
+               emailTypeEnumValue : _email.emailTypeEnumValue,
                parentId       : 0,
                emprId         : 0,
                processId      : 0,
@@ -569,6 +593,42 @@ qat.model.fnTelefones =function(numero,id,type,modelAction)
       return estoque;
   }
 
+
+
+  qat.model.fnDocumento =function(_documento,_modelAction,_userId)
+  {
+    var _id = null;
+    if(_documento.id == "" || _documento.id == " "){
+      _id = null;
+    }
+    var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
+      estoque  = {
+        id                     : _id,
+        documentoType          : _documento.documentoType,
+        data                   : _documento.data,
+        estado                 : _documento.estado,
+        documentoTypeEnumValue : _documento.documentoTypeEnumValue,
+        numero                 : _documento.numero,
+        parentId       : 0,
+        emprId         : _emprId,
+        processId      : 0,
+        tableEnumValue : 0,
+        userId         : _userId,
+        modelAction    : _modelAction,
+        createUser     : _userId,
+        createDateUTC  : (new Date()).getTime(),
+        modifyUser     : _userId,
+        modifyDateUTC  : (new Date()).getTime()
+
+      }
+      //////debugger
+      return estoque;
+  }
 
   qat.model.fnPrecoProd =function(_estoque,_modelAction,_userId)
   {

@@ -6,10 +6,11 @@
         var vm = this;
 
 
+        //$scope.telefones = [{nome : 'form1',telefone :{telefoneTypeEnum : 1}}];
 
         $scope.createForm = function(type){
 
-            $scope.forms.push({ nome : 'form1' + ($scope.forms.length + 1),telefone :{telefoneTypeEnum : type}});
+            $scope.telefones.push({ nome : 'form1' + ($scope.telefones.length + 1),telefone :{telefoneTypeEnum : type}});
 
         };
 
@@ -43,7 +44,7 @@
 
         $scope.deleteForm = function(formScope){
 debugger
-            delete $scope.forms(formScope);
+            delete $scope.telefones(formScope);
         }
 
         $scope.saveForm = function(formScope){
