@@ -1,45 +1,47 @@
-<div class="row " style="margin-top : 10px"></div>
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">Produtos</h3>
-    </div>
-    <div class="panel-body"> 
-        <div class="row socios">
-            <div class="col-sm-5">
-                <label for="exampleInputPassword1">Produto</label>
-                <div class="row ">
-                    <select name="book[0].produto" class="col-sm-12 selectProduto produto"></select>
-                    <span class="input-group-btn">
-	        	<button class="btn btn-default" type="button"><i class="glyphicon glyphicon-question-sign"></i></button>
-	        </span>
+<div ng-repeat="produto in produtos">
+        <div class="row">
+            <div class="ng-cloak" ng-controller="ProdutoSelectController as ctrl">
+                <div class="col-sm-4 ">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Produto <small ng-click="ctrl.addCfop()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
+                        <div class="row">
+                            <ui-select ng-model="produto.produto" theme="bootstrap" on-select="onSelectCallback($item, $model)">
+                                <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.prodId.produto}}</ui-select-match>
+                                <ui-select-choices repeat="item in ctrl.produto | filter: $select.search">
+                                  <div ng-bind-html="item.prodId.produto | highlight: $select.search"></div>
+                                  <small ng-bind-html="item.codigo | highlight: $select.search"></small> -
+                                </ui-select-choices>
+                              </ui-select>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
             <div class="col-sm-1">
                 <div class="form-group">
                     <label for="exampleInputPassword1">CFOP</label>
-                    <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
+                    <input type="text" class="form-control nome-socio"  ng-model="produto.produto.tributacao.cfop.cfop" name="book[0].quantidade" placeholder="0.00" />
 
                 </div>
             </div>
-            <div class="col-sm-1">
+            <div class="col-sm-2">
                 <div class="form-group">
 
                     <label for="exampleInputPassword1">Quant.</label>
                     <div class="input-group">
-                        <span class="input-group-addon">$</span>
-                        <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
-                        <span class="input-group-addon">,00</span>
+                        <input type="text" class="form-control nome-socio" ng-init="qaunt=1" ng-model="qaunt" name="book[0].quantidade" placeholder="0.00" />
+                        <span class="input-group-addon">.00</span>
                     </div>
                 </div>
             </div>
             <div class="col-sm-2">
                 <div class="form-group">
 
-                    <label for="exampleInputPassword1">Valor Unitario</label>
+                    <label for="exampleInputPassword1">Valor Unitario </label>
                     <div class="input-group">
                         <span class="input-group-addon">$</span>
-                        <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="R$0,00" />
-                        <span class="input-group-addon">,00</span>
+                        <input type="text" class="form-control cota-socio" ng-init="produto.produto.precoList[0].valor=0" name="book[0].vlUnitario"  ng-model="produto.produto.precoList[0].valor" name="book[0].vlUnitario" placeholder="R$0,00" />
+                        <span class="input-group-addon">.00</span>
                     </div>
                 </div>
             </div>
@@ -48,72 +50,14 @@
                     <label for="exampleInputPassword1">Total prod.</label>
                     <div class="input-group">
                         <span class="input-group-addon">$</span>
-                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" />
-                        <span class="input-group-addon">,00</span>
+                        <input type="text" class="form-control cota-socio" ng-model="calcProd(qaunt,produto.produto.precoList[0].valor)" name="book[0].desconto" placeholder="R$0,00" />
+                        <span class="input-group-addon">.00</span>
                     </div>
                 </div>
             </div>
             <div class="col-xs-1" style="margin-top:18px">
-                <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
-            </div>
-        </div>
-        <div class="form-group hide" id="bookTemplate">
-            <div class="row socios">
-                <div class="col-sm-5">
-                    <label for="exampleInputPassword1">Produto</label>
-                    <div class="row ">
-                        <select name="produto" class="col-sm-12 selectProduto produto">
-				</select>
-                        <span class="input-group-btn">
-	        	<button class="btn btn-default" type="button"><i class="glyphicon glyphicon-question-sign"></i></button>
-	        </span>
-                    </div>
-                </div>
-                <div class="col-sm-1">
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">CFOP</label>
-                        <input type="text" class="form-control nome-socio" name="quantidade" placeholder="0.00" />
-                    </div>
-                </div>
-                <div class="col-sm-1">
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Quant.</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">$</span>
-                            <input type="text" class="form-control nome-socio" name="quantidade" placeholder="0.00" />
-                            <span class="input-group-addon">,00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Valor Unitario</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">$</span>
-                            <input type="text" class="form-control cota-socio" name="vlUnitario" placeholder="R$0,00" />
-                            <span class="input-group-addon">,00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Total prod.</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">$</span>
-                            <input type="text" class="form-control cota-socio" name="desconto" placeholder="R$0,00" />
-                            <span class="input-group-addon">,00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-1" style="margin-top:18px">
-                    <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
-                </div>
+                <button type="button" ng-click="createForm2()" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
             </div>
         </div>
     </div>
-</div>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-    });
-</script>
+        

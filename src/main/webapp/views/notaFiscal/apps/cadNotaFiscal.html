@@ -1,0 +1,207 @@
+<head>
+    <meta charset="utf-8">
+<style>
+.wash {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .tabs-was {
+        float: left;
+        border: 1px solid #000;
+        border-bottom-width: 0;
+        margin: 3px 3px 0px 3px;
+        padding: 5px 5px 0px 5px;
+        background-color: #CCC;
+        color: ##3767B9;
+    }
+
+
+     .selection {
+        border: 1px solid #000;
+        border-bottom-width: 0;
+        margin: 3px 3px 0px 3px;
+        padding: 5px 5px 0px 5px;
+        background-color: #CCC;
+        color: ##3767B9;
+    }
+
+    #mainView {
+        border: 1px solid black;
+        clear: both;
+    }
+
+    .active {
+        background-color: #FFF;
+        color: #000;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .tabs-nav {
+        padding: 20px 0 0;
+        list-style: none;
+    }
+
+    .tabs-nav li {
+        display: inline;
+    }
+
+    .tabs-nav a {
+        display: inline-block;
+        border: 1px solid #ddd;
+        border-bottom: none;
+        padding: 15px;
+        cursor: pointer;
+        border-radius: 5px 5px 0 0;
+        font-size: 14px;
+        color: #fff;
+        background: #1B3975;
+    }
+
+    .tabs-nav .active {
+        background: #fff;
+        color: #000;
+        border-bottom: 1px solid #fff;
+        margin-bottom: -1px;
+    }
+
+    .tab-content {
+        border: 1px solid #ddd;
+        padding: 20px;
+    }
+
+    .tab-content1 {
+        border: 1px solid #ddd;
+        padding: 20px;
+    }
+
+    p {
+        margin-bottom: 15px;
+    }
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+
+    .row.content {
+        height: 550px
+    }
+    /* Set gray background color and 100% height */
+
+    .sidenav {
+        background-color: #f1f1f1;
+        height: 100%;
+    }
+    /* On small screens, set height to 'auto' for the grid */
+
+    @media screen and (max-width: 767px) {
+        .row.content {
+            height: auto;
+        }
+    }
+
+    div.show-image {
+        position: relative;
+        float: left;
+        margin: 5px;
+    }
+
+    div.show-image:hover img {
+        opacity: 0.5;
+    }
+
+    div.show-image:hover input {
+        display: block;
+    }
+
+    div.show-image input {
+        position: absolute;
+        display: none;
+    }
+
+    div.show-image input.update {
+        top: 0;
+        left: 0;
+    }
+
+    div.show-image input.delete {
+        top: 0;
+        left: 79%;
+    }
+
+    .vis {
+        height: 100px;
+        display: none;
+    }
+
+        .select2 > .select2-choice.ui-select-match {
+            /* Because of the inclusion of Bootstrap */
+            height: 29px;
+        }
+
+        .selectize-control > .selectize-dropdown {
+            top: 36px;
+        }
+        /* Some additional styling to demonstrate that append-to-body helps achieve the proper z-index layering. */
+        .select-box {
+          background: #fff;
+          position: relative;
+          z-index: 1;
+        }
+        .alert-info.positioned {
+          margin-top: 1em;
+          position: relative;
+          z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
+        }
+
+</style>
+</head>
+                	<div class="container" ng-app ng-init="tab=1">
+                    <ul class="tabs-nav">
+                      <li><a ng-click="tab=1" ng-class="{'active' : tab==1}"  data-i18n="dados da nfe-e"></a></li>
+                      <li><a ng-click="tab=3" ng-class="{'active' : tab==3}" data-i18n="destinatario"></a></li>
+                      <li><a ng-click="tab=4" ng-class="{'active' : tab==4}" data-i18n="produtos e servicos"></a></li>
+                      <li><a ng-click="tab=5" ng-class="{'active' : tab==5}" data-i18n="totais"></a></li>
+                      <li><a ng-click="tab=6" ng-class="{'active' : tab==6}" data-i18n="transporte"></a></li>
+                      <li><a ng-click="tab=7" ng-class="{'active' : tab==7}" data-i18n="cobranca"></a></li>
+                      <li><a ng-click="tab=8" ng-class="{'active' : tab==8}" data-i18n="Info. Adic."></a></li>
+                      <li><a ng-click="tab=9" ng-class="{'active' : tab==9}" data-i18n="Export. e Compras"></a></li>
+                      <li><a ng-click="tab=10" ng-class="{'active' : tab==10}" data-i18n="Cana"></a></li>
+                    </ul>
+                    <div class="tabs-container">
+                      <div class="tab-content" ng-show="tab == 1">
+                        <div ng-include="'views/notaFiscal/apps/nf_Dados.html'"></div>
+                      </div>
+                      <div class="tab-content" ng-show="tab == 3">
+                      <div ng-include="'views/notaFiscal/apps/nf_Remetente.html'"></div>
+                      </div>
+                      <div class="tab-content" ng-show="tab == 4">
+                        <div ng-include="'views/notaFiscal/apps/nf_Produto.html'"></div>
+                      </div>
+                      <div class="tab-content" ng-show="tab == 5">
+                      <div ng-include="'views/notaFiscal/apps/nf_Totalizadores.html'"></div>
+                      </div>
+                      <div class="tab-content" ng-show="tab == 6">
+                      <div ng-include="'views/notaFiscal/apps/nf_Info_Transp.html'"></div>
+                      </div>
+                      <div class="tab-content" ng-show="tab == 7">
+                         <div ng-include="'views/notaFiscal/apps/nf_duplicata.html'"></div>
+                      </div>
+                      <div class="tab-content" ng-show="tab == 8">
+                      <div ng-include="'views/notaFiscal/apps/nf_Outras_Info.html'"></div>
+                      </div>
+                      <div class="tab-content" ng-show="tab == 9">
+
+                      </div>
+                      <div class="tab-content" ng-show="tab == 10">
+
+                      </div>
+                    </div>
+                  </div>
+
+              
+
+

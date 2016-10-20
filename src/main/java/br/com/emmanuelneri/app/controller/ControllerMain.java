@@ -110,6 +110,37 @@ public class ControllerMain {
 		}
 		return result;
     }
+	//cosmos software
+	@ResponseBody
+    @RequestMapping(value = "/blueSoft", method = RequestMethod.POST)
+    public String blueSoft(@RequestBody UtilRequest request) {
+
+        RestTemplate restTemplate = new RestTemplate();
+        String result ="";
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Header", "value");
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Other-Header", "othervalue");
+        headers.set("X-Cosmos-Token", "T9pFIi3coAXpypnWF4miGw" );
+
+        ObjectMapper mapper = new ObjectMapper();
+        //HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
+        String jsonInString = null;
+		try {
+			jsonInString = mapper.writeValueAsString(request.getRequest());
+
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+     //   result = restTemplate.postForObject(URL + request.getUrl(), entity, String.class,HttpMethod.GET);
+        result = restTemplate.getForObject("https://api.cosmos.bluesoft.com.br/gtins/7891910000197.json",  String.class,HttpMethod.GET,entity);
+
+System.out.println(result);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		}
+		return result;
+    }
 
 	@ResponseBody
     @RequestMapping(value = "/anonimo", method = RequestMethod.POST)
@@ -279,7 +310,7 @@ public class ControllerMain {
 //        cfop.setCfop("teste");
 //        cfop.setId(64);
 //        cfop.setNatureza("testando");
-//        cfop.setObservacao("Observação 123");
+//        cfop.setObservacao("Observaï¿½ï¿½o 123");
 //
 //        CfopMaintenanceRequest requess = new CfopMaintenanceRequest();
 //        requess.setCfop(cfop);

@@ -1,6 +1,6 @@
 (function() {
 'use strict';
-	var commonAuth = angular.module('wdApp.ajaxCalls.table.ajax', ['angularModalService']);
+	var commonAuth = angular.module('wdapp.table.Ajax.factory', ['angularModalService']);
 
 	commonAuth.factory('tableAjaxsFactory', ['ModalService', function(ModalService){
 		return{

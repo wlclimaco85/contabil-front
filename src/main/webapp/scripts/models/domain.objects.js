@@ -212,12 +212,19 @@ qat.model.Plano = function(_oObjet)
 
 qat.model.transaction = function(_user,_token,modelAction)
 {
+
+   var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
   return {
 
      token :_token,
      inicioSession:(new Date()).getTime(),
      userId : _user,
-     emprId :JSON.parse(localStorage.getItem('empresa')).id,
+     emprId : _emprId,
      modelAction    : modelAction,
      createUser     : _user,
      createDateUTC  : (new Date()).getTime(),

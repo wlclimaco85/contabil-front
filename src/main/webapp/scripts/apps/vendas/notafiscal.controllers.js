@@ -634,12 +634,37 @@
 
 (function() {
     angular.module('wdApp.apps.nfSaida.insert',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter','angucomplete','inputactions'])
-        .controller('NfSaidaInsertController', function($rootScope,$scope,fModels,SysMgmtData,fProduto) {
+        .controller('NfSaidaInsertController', function(localStorageService,$rootScope,$scope,fModels,SysMgmtData,fProduto) {
 
             var vm = this;
             $scope.slotDisplayName = "teste00";
+            $scope.empresa = null;
+            $scope.notaFiscal = null;
+            $scope.produtos = [{form : 'form',produto:{}}];
             
             $scope.clientes = [];
+
+            $scope.calcProd = function(quant,valor)
+            {
+              return quant * valor;
+            }
+
+
+            $scope.createForm2 = function(){
+            
+                $scope.produtos.push({ nome : 'form1' + ($scope.produtos.length + 1),produto :{}});
+
+            };
+            
+
+            if(localStorageService.get('empresa') != undefined)
+            {
+                $scope.empresa = localStorageService.get('empresa');
+            }
+
+            console.log($scope.empresa);
+
+
 /*
 
         SysMgmtData.processPostPageData("main/api/request", {

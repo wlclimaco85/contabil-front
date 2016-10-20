@@ -119,11 +119,10 @@
 		                    url: "entidade/api/transaction/fetch",
 							token : authToken,
 							request: new qat.model.transactionInquiryRequest(new  qat.model.transaction(currentUser.user,authToken), 100/20, true,currentUser.user,null,null)}, function(res){
-		                    	debugger
 								if(res.operationSuccess == true)
 								{
 									localStorageService.set('transaction', res.transactionList[0].id);
-									localStorage.setItem("transaction", JSON.stringify(res.transactionList[0]).id);
+									localStorage.setItem("transaction", JSON.stringify(res.transactionList[0]));
 								}
 					          });
 

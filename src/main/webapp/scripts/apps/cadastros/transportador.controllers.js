@@ -941,3 +941,31 @@ function pagamentosController($scope, $compile, DTOptionsBuilder, DTColumnBuilde
         };
     }
 })();
+(function() {
+    angular.module('wdApp.apps.transportador.search', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('TransportadorSearchController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+            var vm = this;
+            $scope.transportador = [];
+            $scope.pessoa =null
+            $scope.countrySelected = function(selected) {
+             // debugger
+              if (selected) {
+                debugger
+                $scope.pessoa = selected.originalObject;
+              } else {
+                console.log('cleared');
+              }
+            };
+
+            SysMgmtData.processPostPageData("main/api/request", {
+                    url: "pessoa/api/transportador/fetchPage",
+                    token: $rootScope.authToken,
+                    request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
+                }, function(res) {
+                  //  debugger
+                    $scope.transportador = res.transportadorList;
+                });
+          });
+})();
+
+

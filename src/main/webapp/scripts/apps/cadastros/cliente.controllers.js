@@ -271,3 +271,29 @@
             }
         });
 })();
+(function() {
+    angular.module('wdApp.apps.cliente.search', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('ClienteSearchController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+            var vm = this;
+            $scope.cliente = [];
+            $scope.pessoa =null
+            $scope.countrySelected = function(selected) {
+             // debugger
+              if (selected) {
+                debugger
+                $scope.pessoa = selected.originalObject;
+              } else {
+                console.log('cleared');
+              }
+            };
+
+            SysMgmtData.processPostPageData("main/api/request", {
+                    url: "pessoa/api/cliente/fetchPage",
+                    token: $rootScope.authToken,
+                    request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
+                }, function(res) {
+                  //  debugger
+                    $scope.cliente = res.clienteList;
+                });
+          });
+})();

@@ -1,87 +1,55 @@
 <div class="row">
-                        <div class="col-sm-3" style="margin-top:18px">
-                            <div class="checkbox">
-                                <label>
-                                         <input type="checkbox" name="receiver" class="check-socio" value="1" /> Cliente
-                                     </label>
-                            </div>
+                            <dl class="dl-horizontal">
+                                <dd>
+
+                                    <label class="ui-radio"><input name="radio1" type="radio" ng-init="pessoa.tipoPessoa=true" ng-model="pessoa.pessoaTypeEnumValue" value="1" checked ><span>Cliente </span></label>
+                                    <label class="ui-radio"><input name="radio2" type="radio" ng-model="pessoa.pessoaTypeEnumValue" value="2" checked ><span>Fornecedor</span></label>
+                                    <label class="ui-radio"><input name="radio3" type="radio" ng-model="pessoa.pessoaTypeEnumValue" value="3" checked ><span>Transportador </span></label>
+                                    <label class="ui-radio"><input name="radio4" type="radio" ng-model="pessoa.pessoaTypeEnumValue" value="4" checked ><span>Consumidor final </span></label>
+
+                                </dd>
+                            </dl>
                         </div>
-                        <div class="col-sm-3" style="margin-top:18px">
-                            <div class="checkbox">
-                                <label>
-                                         <input type="checkbox" name="receiver" class="check-socio" value="1" /> Fornecedor
-                                     </label>
-                            </div>
-                        </div>
-                        <div class="col-sm-3" style="margin-top:18px">
-                            <div class="checkbox">
-                                <label>
-                                         <input type="checkbox" name="receiver" class="check-socio" value="1" /> Transportador
-                                     </label>
-                            </div>
-                        </div>
-                        <div class="col-sm-3" style="margin-top:18px">
-                            <div class="checkbox">
-                                <label>
-                                         <input type="checkbox" name="receiver" class="check-socio" value="1" /> Consumidor final
-                                     </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-6">
-                            <label for="exampleInputEmail1">Nome ou Razão social</label>
-                            <input type="text" ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Nome ou Razão social">
+                        <div class="row">
+                            <dl class="dl-horizontal">
+                                <dd>
+                                    <label class="ui-radio"><input name="radio5" type="radio"  ng-model="pessoa.tipoPessoa" ng-init="pessoa.tipoPessoa=true" value="1" checked ><span>Pessoa Fisica </span></label>
+                                    <label class="ui-radio"><input name="radio6" type="radio" ng-model="pessoa.tipoPessoa" value="2" ><span>Pessoa Juridica </span></label>
+                                </dd>
+                            </dl>
                         </div>
 
-                        <div class="form-group col-sm-6">
-                            <label for="exampleInputEmail1">Nome Fantasia</label>
-                            <input type="text" ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Nome Fantasia">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-3">
-                            <label for="exampleInputEmail1">CPF ou CNPJ</label>
-                            <input type="text" ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Nº Cart. Trab">
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                                <label for="exampleInputEmail1" ng-show="pessoa.tipoPessoa == 1" ng-hide="pessoa.tipoPessoa == 2">
+                                 Nome</label>
+                                 <label for="exampleInputEmail1" ng-show="pessoa.tipoPessoa == 2" ng-hide="pessoa.tipoPessoa == 1">Raz�o social</label>
+                                <input type="text" ng-model="pessoa.nome" name="razao" class="form-control" placeholder="Nome">
+                            </div>  
                         </div>
 
-                        <div class="form-group col-sm-3">
-                            <label for="exampleInputEmail1">Inscr Est Subst Trib</label>
-                            <input type="text" ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="DD/MM/AAAA">
-                        </div>
-                        <div class="form-group col-sm-3">
-                            <label for="exampleInputEmail1">Indicador de IE</label>
-                            <div class="row">
-                                <select id="contatos_indIE" class="col-sm-12" name="contatos_indIE" autocomplete="off">
-                                         <option value="0"></option>
-                                         <option value="1">Contribuinte ICMS</option>
-                                         <option value="2">Isento de cadastro</option>
-                                         <option value="9">Não contribuinte</option>
-                                    </select>
+                        <div ng-show="pessoa.tipoPessoa == 1" ng-hide="pessoa.tipoPessoa == 2" ng-include="'views/util/apps/documentosFisico.html'"></div>
+
+                        <!-- telefone -->
+                        <div ng-show="pessoa.tipoPessoa == 2" ng-hide="pessoa.tipoPessoa == 1" ng-include="'views/util/apps/documentosJuridicos.html'"></div>
+
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label for="exampleInputEmail1">Nome do respons�vel</label>
+                                <input type="text" class="form-control col-sm-3" ng-model="pessoa.nomeResponsavel" name="nomeResponsavel" placeholder="Nome Responsavel">
                             </div>
-                        </div>
-                        <div class="form-group col-sm-3">
-                            <label for="exampleInputEmail1">Inscrição Estadual</label>
-                            <input type="text" class="form-control" ng-model="cfop.descricao" name="descricao" placeholder="Entrada">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-3">
-                            <label for="exampleInputEmail1">Inscrição Municipal</label>
-                            <input type="text" class="form-control col-sm-3" ng-model="cfop.descricao" name="descricao" placeholder="Entrada">
-                        </div>
-                        <div class="form-group col-sm-3">
-                            <label for="exampleInputEmail1">Inscrição Suframa</label>
-                            <input type="text" class="form-control col-sm-3" ng-model="cfop.descricao" name="descricao" placeholder="Entrada">
+
                         </div>
 
-                        <div class="form-group col-sm-3">
-                            <label for="exampleInputEmail1">Nome do responsável</label>
-                            <input type="text" class="form-control col-sm-3" ng-model="cfop.descricao" name="descricao" placeholder="Entrada">
-                        </div>
+                        <!-- Endereco -->
+                        <div ng-include="'views/util/apps/endereco.html'"></div>
 
-                        <div class="form-group col-sm-3">
-                            <label for="exampleInputEmail1">Data nascimento</label>
-                            <input type="text" ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Jornada Trabalho">
-                        </div>
-                    </div>
+                        <!-- -------------------  TELEFONE ----------------- -->
+
+                        <div ng-include="'views/util/apps/telefone.html'"></div>
+
+                        <!-- -------------------  Email Empresa ----------------- -->
+
+                        <div ng-include="'views/util/apps/email.html'"></div>
+
+                </div>

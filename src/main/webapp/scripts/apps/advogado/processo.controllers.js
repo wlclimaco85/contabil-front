@@ -567,7 +567,7 @@
         }
 
         function status() {
-            debugger
+      
 
         }
 
@@ -645,7 +645,7 @@
         }
 
         function toggle() {
-            debugger
+          
             $scope.state = !$scope.state;
         };
     }

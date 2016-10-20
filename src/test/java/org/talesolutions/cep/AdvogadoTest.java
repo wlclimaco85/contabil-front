@@ -24,6 +24,7 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.samples.sysmgmt.advocacia.Advogado;
 import com.qat.samples.sysmgmt.advocacia.Audiencia;
@@ -155,6 +156,41 @@ public class AdvogadoTest {
 		Assert.assertEquals(result.getAudienciaList().size(), count.intValue());
 
 	}
+	
+	
+//	@Test
+//	public void listAllAudiencia2() throws JsonParseException, JsonMappingException, IOException {
+//
+//		Integer count = 0;
+//		Integer id = 10000;
+//		RestTemplate restTemplate = new RestTemplate();
+//
+//
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.set("Header", "value");
+//		headers.setContentType(MediaType.APPLICATION_JSON);
+//		headers.set("Other-Header", "othervalue");
+//		headers.set("X-Cosmos-Token", "zOqsaXajQATQpmUY9dJdOA");
+//		//String a = "request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:advocacia/api/cfop/fetchPage/";
+//		HttpEntity<String> entity = new HttpEntity<String>("{}", headers);
+//		
+//
+//		// =========== fetch
+//		// ================================================================
+//		System.out.println("==================================FetchALL==============================================");
+//
+//		HttpEntity<String> entitys = new HttpEntity<String>(null, headers);
+//		//String result = restTemplate.postForObject("https://api.cosmos.bluesoft.com.br/gtins/7891910000197",
+//		//		entity, String.class);
+//		String result = restTemplate.getForObject("https://api.cosmos.bluesoft.com.br/gtins/7891910000197.json",String.class,HttpMethod.GET,entity) ;
+//		System.out.println(result);
+//		//Assert.assertEquals(result.isOperationSuccess(), true);
+//		//count = result.getAudienciaList().size();
+//
+//
+//
+//	}
+
 
 	// create by system gera-java version 1.0.0 02/08/2016 9:43 : 1//
 

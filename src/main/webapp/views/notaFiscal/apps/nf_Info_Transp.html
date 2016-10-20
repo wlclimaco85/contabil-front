@@ -29,24 +29,161 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="exampleInputPassword1">CNPJ/CPF transport.</label>
-                <div class="input-group">
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+        <head>
+    <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-touch.min.js"></script>
+</head>
+<h2>Dados do destinatário</h2>
+<div class="row" ng-controller="ClienteSearchController">
+<div angucomplete-alt id="ex1"
+  placeholder="Search countries"
+  maxlength="50"
+  pause="100"
+  selected-object="countrySelected"
+  local-data="cliente"
+  search-fields="nome"
+  title-field="nome"
+  minlength="1"
+  input-class="form-control form-control-small"
+  match-class="highlight"></div>
+
+
+      <div style="margin-bottom: 20px"></div>
+      
+      <div class="row">
+            <dl class="dl-horizontal">
+                <dd>
+                    <label class="ui-radio"><input name="radio5" type="radio"  ng-model="pessoa.tipoPessoa" ng-value="1"><span>Pessoa Fisica </span></label>
+                    <label class="ui-radio"><input name="radio6" type="radio" ng-model="pessoa.tipoPessoa" ng-value="2"><span>Pessoa Juridica </span></label>
+                </dd>
+            </dl>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2 ">
+                <div class="form-group">
+                    <div ng-repeat="documento in pessoa.documentos">
+                        <div ng-if="documento.documentoTypeEnumValue == 2">
+                            <label for="exampleInputPassword1">CPF:</label>
+                            <label for="exampleInputPassword1">{{documento.numero}}</label>
+                        </div>
+                        <div ng-if="documento.documentoTypeEnumValue == 1">
+                            <label for="exampleInputPassword1">CNPJ:</label>
+                            <label for="exampleInputPassword1">{{documento.numero}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div ng-if="pessoa.tipoPessoa == 2">
+                    <div class="col-sm-2 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Razão Social:</label>
+                            <label for="exampleInputPassword1">{{pessoa.razao}}</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Nome fantasia:</label>
+                            <label for="exampleInputPassword1">{{pessoa.nome}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="pessoa.tipoPessoa == 1">
+                    <div class="col-sm-4 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Nome:</label>
+                            <label for="exampleInputPassword1">{{pessoa.nome}}</label>
+                        </div>
+                    </div>
+                </div>
+            <div ng-repeat="documento in pessoa.documentos">
+                <div ng-if="documento.documentoTypeEnumValue == 10">
+                    <div class="col-sm-2 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Inscr. Est.:</label>
+                            <label for="exampleInputPassword1">{{documento.numero}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="documento.documentoTypeEnumValue == 3">
+                    <div class="col-sm-2 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Inscr. Mun.:</label>
+                            <label for="exampleInputPassword1">{{documento.numero}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2 ">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">CNAE:</label>
+                    <div ng-repeat="cnae in pessoa.cnaes">
+                        <label for="exampleInputPassword1">{{cnae.idCnae.cnae}}</label>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-sm-2 ">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Telefone:</label>
+                    <div ng-repeat="telefone in pessoa.telefones">
+                        <label for="exampleInputPassword1">{{telefone.numero}}</label>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-sm-2 ">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Endereço:</label>
+                    <label for="exampleInputPassword1">{{pessoa.enderecos[0].logradouro}}</label>
+                    
+                </div>
+            </div>
+            <div class="col-sm-2 ">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Numero:</label>
+                    <label for="exampleInputPassword1">{{pessoa.enderecos[0].numero}}</label>
+                
+                </div>
+            </div>
+            <div class="col-sm-2 ">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Bairro:</label>
+                    <label for="exampleInputPassword1">{{pessoa.enderecos[0].bairro}}</label>
+                
+                </div>
+            </div>
+            <div class="col-sm-2 ">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Cidade/UF:</label>
+                    <label for="exampleInputPassword1">{{pessoa.enderecos[0].cidade.nome}}/{{pessoa.enderecos[0].estado.sigla}}</label>
+
+                </div>
+            </div>
+            <div class="col-sm-2 ">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Complemento:</label>
+                    <label for="exampleInputPassword1">{{pessoa.enderecos[0].complemento}}</label>
+                    
+                </div>
+            </div>
+            <div class="col-sm-2 ">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">CEP:</label>
+                    <label for="exampleInputPassword1">{{pessoa.enderecos[0].cep}}</label>
                 </div>
             </div>
         </div>
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="exampleInputPassword1">Inscr. Est. transp.</label>
-                <div class="input-group">
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
-                </div>
-            </div>
-        </div>
+        <br>
+        
+        <hr>
+        
+  
+
+</div>
+    </div>
+    <div class="row">      
         <div class="col-sm-3">
             <div class="form-group">
                 <label for="exampleInputPassword1">Placa veículo</label>

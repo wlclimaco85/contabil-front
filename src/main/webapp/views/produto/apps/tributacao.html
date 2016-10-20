@@ -11,21 +11,21 @@
 		            <div id="collapseOne" class="panel-collapse collapse in cfop">
 		                <div class="panel-body">
 		                    <div class="row">
-<div class="ng-cloak" ng-controller="CfopSelectController as ctrl">
-		                        <div class="col-sm-6 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">CFOP padrão para NFe <small ng-click="ctrl.addCfop()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
-		                                <div class="row">
-		                                    <ui-select ng-model="tributacao.cfop" theme="bootstrap">
-					                            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.cfop}}</ui-select-match>
-					                            <ui-select-choices repeat="item in ctrl.cfop | filter: $select.search">
-					                              <div ng-bind-html="item.cfop | highlight: $select.search"></div>
-					                              <small ng-bind-html="item.natureza | highlight: $select.search"></small> -
-					                            </ui-select-choices>
-					                          </ui-select>
-		                                </div>
-		                            </div>
-		                        </div>
+								<div class="ng-cloak" ng-controller="CfopSelectController as ctrl">
+			                        <div class="col-sm-6 ">
+			                            <div class="form-group">
+			                                <label for="exampleInputPassword1">CFOP padrão para NFe <small ng-click="ctrl.addCfop()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
+			                                <div class="row">
+			                                    <ui-select ng-model="tributacao.cfop" theme="bootstrap">
+						                            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.cfop}}</ui-select-match>
+						                            <ui-select-choices repeat="item in ctrl.cfop | filter: $select.search">
+						                              <div ng-bind-html="item.cfop | highlight: $select.search"></div>
+						                              <small ng-bind-html="item.natureza | highlight: $select.search"></small> -
+						                            </ui-select-choices>
+						                          </ui-select>
+			                                </div>
+			                            </div>
+			                        </div>
 		                        </div>
 		                    </div>
 		                </div>

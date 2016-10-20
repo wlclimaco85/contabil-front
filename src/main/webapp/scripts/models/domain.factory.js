@@ -9,6 +9,7 @@
 
 			var user = "system"
 			var empresa = null;
+			var transactionId = null;
 			if($rootScope.user != undefined)
 			{
 				user = $rootScope.user.user;
@@ -17,13 +18,21 @@
 			{
 				empresa = localStorageService.get('empresa').id;
 			}
+
+			if(localStorageService.get('transaction') != undefined)
+			{
+				transactionId = localStorageService.get('transaction').id;
+			}
+
 			if(action === "INSERT"){
+				object.transactionId = transactionId;
 				object.createDateUTC = (new Date()).getTime();
 				object.createUser = user;
 				object.emprId = empresa;
 				object.modelAction = "INSERT"
 			}else if(action === "UPDATE")
 			{
+				object.transactionId = transactionId;
 				object.modifyDateUTC = (new Date()).getTime();
 				object.modifyUser = user;
 				object.emprId = empresa;
@@ -31,6 +40,7 @@
 			}
 			else
 			{
+				object.transactionId = transactionId;
 				object.modifyDateUTC = (new Date()).getTime();
 				object.modifyUser = user;
 				object.emprId = empresa;
