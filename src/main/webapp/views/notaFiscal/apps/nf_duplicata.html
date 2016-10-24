@@ -1,20 +1,16 @@
 <div class="row">
-
-    <div class="col-sm-8">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Forma Pagamento <sup> Cadastrar </sup></label>
-
-            <div class="row ">
-                <div class="input-group">
-                    <span class="input-group-addon fa fa-list-ol"></span>
-                    <span class="ui-select">
-                <select ng-model="tributacao.icms.motDesoneracao.id">
-                    <option value="0">0 - Emitente</option>
-                    <option value="1">1 - DestinatÃ¡rio</option>
-                    <option value="2">2 - Terceiros</option>
-                    <option value="9">9 - Sem frete</option>
-                </select>
-            </span>
+    <div class="ng-cloak" ng-controller="FormaPgSelectControllerss as ctrl">
+        <div class="col-sm-8 ">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Forma Pagamento <small ng-click="ctrl.addCfop()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
+                <div class="row">
+                    <ui-select ng-model="notaFiscal.cfop" theme="bootstrap">
+                        <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                        <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
+                          <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                          <small ng-bind-html="item.observacao | highlight: $select.search"></small> -
+                        </ui-select-choices>
+                      </ui-select>
                 </div>
             </div>
         </div>
@@ -23,14 +19,14 @@
 
 <div class="bottomSpace NFCeHide">
     <h2 class="bottomSpace">
-        Faturas e duplicatas 
+        Faturas e duplicatas ddddd
         <a href="ajuda: Clique para editar as duplicatas" id="link_editarDuplicatas" class="linkBox">Editar duplicatas</a>
     </h2>
     <div class="row socios">
         <div class="col-sm-3">
-            <label for="exampleInputPassword1">NÃºm. Fatura</label>
+            <label for="exampleInputPassword1">Núm. Fatura</label>
             <div class="input-group">
-                <span class="input-group-addon">NÂº</span>
+                <span class="input-group-addon">Nº</span>
                 <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
             </div>
         </div>
@@ -59,7 +55,7 @@
         <div class="col-sm-3">
             <div class="form-group">
 
-                <label for="exampleInputPassword1">Valor lÃ­quido fat.</label>
+                <label for="exampleInputPassword1">Valor líquido fat.</label>
                 <div class="input-group">
                     <span class="input-group-addon">$</span>
                     <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="R$0,00" />
@@ -74,9 +70,9 @@
     <div class="form-group hide" id="bookTemplate">
         <div class="row socios">
             <div class="col-sm-3">
-                <label for="exampleInputPassword1">NÃºm. Fatura</label>
+                <label for="exampleInputPassword1">Núm. Fatura</label>
                 <div class="input-group">
-                    <span class="input-group-addon">NÂº</span>
+                    <span class="input-group-addon">Nº</span>
                     <input type="text" class="form-control nome-socio" name="book[0].quantidade" placeholder="0.00" />
                 </div>
             </div>
@@ -105,7 +101,7 @@
             <div class="col-sm-3">
                 <div class="form-group">
 
-                    <label for="exampleInputPassword1">Valor lÃ­quido fat.</label>
+                    <label for="exampleInputPassword1">Valor líquido fat.</label>
                     <div class="input-group">
                         <span class="input-group-addon">$</span>
                         <input type="text" class="form-control cota-socio" name="book[0].vlUnitario" placeholder="R$0,00" />

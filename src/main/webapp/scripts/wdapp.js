@@ -52,6 +52,7 @@ var WebDaptiveAppConfig = {
 				'wdApp.apps.pdCompras','wdApp.apps.orcamento','wdApp.apps.ordemServico','wdApp.apps.nfEntrada','wdApp.apps.pdCompras'
 				,'wdApp.apps.cotacao','wdApp.apps.pdVendas','wdApp.apps.funcionario',
 				'wdApp.ajaxCall'
+				,'inputactions'
 				,'wdApp.apps.cliente'
 				,'wdApp.apps.cliente.insert'
 	            ,'wdApp.apps.cliente.update'
@@ -302,6 +303,7 @@ var WebDaptiveAppConfig = {
 	         	,'wdApp.ajaxCall.table.create'
 	         	,'wdApp.ajaxCalls.filters'
 	         	,'wdApp.apps.cliente.search'
+	         	,'wdApp.apps.formaPg.select'
 
 
 
