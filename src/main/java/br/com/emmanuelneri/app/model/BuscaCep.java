@@ -9,6 +9,11 @@ public class BuscaCep  {
     private String cep;
 
 
+	public BuscaCep() {
+		super();
+	}
+
+
 	public Integer getId() {
 		return id;
 	}
@@ -26,6 +31,12 @@ public class BuscaCep  {
 
 	public void setCep(String cep) {
 		this.cep = cep;
+	}
+
+
+	@Override
+	public String toString() {
+		return "BuscaCep [getId()=" + getId() + ", getCep()=" + getCep() + ", toString()=" + super.toString() + "]";
 	}
 
 

@@ -249,9 +249,16 @@ qat.model.fnCnae = function(_oObjet){
 }
 qat.model.fnCnaeEmpresa = function(_oObjet)
         {
+          var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
             return     cnaes    = {
-                       idCnae : _oObjet.idCnae,
-                       modelAction    : "NONE",
+                       idCnae : _oObjet,
+                       emprId : _emprId,
+                       modelAction    : "INSERT",
                        createUser     : "System",
                        createDateUTC  : (new Date()).getTime(),
                        modifyUser     : "System",
@@ -390,16 +397,31 @@ qat.model.fnTelefones =function(_telefone,modelAction)
 
   qat.model.fnSocios =function(_cota,_por,_adm,_nome,_cpf,id,type,modelAction)
         {
+          var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
+  
             socio  = {
                id : id,
-               nome : _nome,
+               pessoa : {
+                  nome : _nome,
+                  pessoaTypeEnumValue : 6,
+                  documentos : [{
+                    documentoTypeEnumValue :  2,
+                    numero : _cpf
+                 }],
+                 emprId         : _emprId,
+                 modelAction    : modelAction,
+                 createUser     : "System",
+                 createDateUTC  : (new Date()).getTime(),
+                 modifyUser     : "System",
+                 modifyDateUTC  : (new Date()).getTime()
+               },
                porcentagem : _por,
                socioAdm : _adm,
-               pessoaTypeEnumValue : 6,
-               documentos : [{
-                  documentoTypeEnumValue :  2,
-                  numero : _cpf
-               }],
                parentId       : 0,
                emprId         : 0,
                processId      : 0,

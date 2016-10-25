@@ -246,7 +246,7 @@
     }
 })();
 (function() {
-    angular.module('wdApp.apps.newEmpresa.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+    angular.module('wdApp.apps.newEmpresa.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter','ui.bootstrap'])
         .controller('NewEmpresaInsertController', function($rootScope, $scope, fModels, SysMgmtData, fEmpresa) {
             var vm = this;
 
@@ -280,24 +280,15 @@
             vm.total = value;
         }
 
-            $scope.forms = [{ nome : 'form1',telefone :{}}];
-            $scope.count = 0;
-            $scope.usuario= {};
+            $scope.emails = [{nome : 'form1',email :{emailTypeEnum : 1}}];
+            $scope.telefones = [{nome : 'form1',telefone :{telefoneTypeEnum : 1}}];
+            $scope.cnaes = [{ nome : 'cnae1' ,cnae :{id : 0}}];
+
             $scope.empresa = {
-            usuarios  :[],
-            telefones :[],
-            enderecos : [{
-                       modelAction    : "INSERT",
-                       createUser     : "System",
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : "System",
-                       modifyDateUTC  : (new Date()).getTime(),
-            }],
-            documentos          : [{
+                usuarios  :[],
+                documentos          : [{
                        documentoTypeEnumValue : 1,
-                       numero : 0,
                        tableEnumValue : 1,
-                       modelAction    : "INSERT",
                        createUser     : "System",
                        createDateUTC  : (new Date()).getTime(),
                        modifyUser     : "System",
@@ -306,9 +297,7 @@
                     },
                     {
                        documentoTypeEnumValue : 2,
-                       numero : 0,
                        tableEnumValue : 1,
-                       modelAction    : "INSERT",
                        createUser     : "System",
                        createDateUTC  : (new Date()).getTime(),
                        modifyUser     : "System",
@@ -316,10 +305,8 @@
 
                     },
                     {
-                       documentoTypeEnumValue : 3,
-                       numero : 0,
+                       documentoTypeEnumValue : 12,
                        tableEnumValue : 1,
-                       modelAction    : "INSERT",
                        createUser     : "System",
                        createDateUTC  : (new Date()).getTime(),
                        modifyUser     : "System",
@@ -328,9 +315,7 @@
                     },
                     {
                        documentoTypeEnumValue : 4,
-                       numero : 0,
                        tableEnumValue : 1,
-                       modelAction    : "INSERT",
                        createUser     : "System",
                        createDateUTC  : (new Date()).getTime(),
                        modifyUser     : "System",
@@ -338,10 +323,8 @@
 
                     },
                     {
-                       documentoTypeEnumValue : 5,
-                       numero : 0,
+                       documentoTypeEnumValue : 14,
                        tableEnumValue : 1,
-                       modelAction    : "INSERT",
                        createUser     : "System",
                        createDateUTC  : (new Date()).getTime(),
                        modifyUser     : "System",
@@ -349,10 +332,26 @@
 
                     },
                     {
-                       documentoTypeEnumValue : 6,
-                       numero : 0,
+                       documentoTypeEnumValue : 10,
                        tableEnumValue : 1,
-                       modelAction    : "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    },
+                    {
+                       documentoTypeEnumValue : 3,
+                       tableEnumValue : 1,
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    },
+                    {
+                       documentoTypeEnumValue : 11,
+                       tableEnumValue : 1,
                        createUser     : "System",
                        createDateUTC  : (new Date()).getTime(),
                        modifyUser     : "System",
@@ -360,9 +359,10 @@
 
                     }]
         };
+
         $scope.enderecos = [];
 
-
+            
             $scope.today = function() {
                 return $scope.dt = new Date();
             };
@@ -381,33 +381,137 @@
             };
             $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
             $scope.format = $scope.formats[1];
+
+
+            $scope.format = 'yyyy/MM/dd';
+            $scope.date = new Date();
+
+
+
+
+
+
+$scope.today = function() {
+    $scope.dt = new Date();
+  };
+  $scope.today();
+
+  $scope.clear = function() {
+    $scope.dt = null;
+  };
+
+  $scope.inlineOptions = {
+    customClass: getDayClass,
+    minDate: new Date(),
+    showWeeks: true
+  };
+
+  $scope.dateOptions = {
+    dateDisabled: disabled,
+    formatYear: 'yy',
+    maxDate: new Date(2020, 5, 22),
+    minDate: new Date(),
+    startingDay: 1
+  };
+
+  // Disable weekend selection
+  function disabled(data) {
+    var date = data.date,
+      mode = data.mode;
+    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+  }
+
+  $scope.toggleMin = function() {
+    $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
+    $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+  };
+
+  $scope.toggleMin();
+
+  $scope.open1 = function() {
+
+    $scope.popup1.opened = true;
+  };
+
+  $scope.open2 = function() {
+
+    $scope.popup2.opened = true;
+  };
+
+  $scope.setDate = function(year, month, day) {
+    $scope.dt = new Date(year, month, day);
+  };
+
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[0];
+  $scope.altInputFormats = ['M!/d!/yyyy'];
+
+  $scope.popup1 = {
+    opened: false
+  };
+
+  $scope.popup2 = {
+    opened: false
+  };
+
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  var afterTomorrow = new Date();
+  afterTomorrow.setDate(tomorrow.getDate() + 1);
+  $scope.events = [
+    {
+      date: tomorrow,
+      status: 'full'
+    },
+    {
+      date: afterTomorrow,
+      status: 'partially'
+    }
+  ];
+
+  function getDayClass(data) {
+    var date = data.date,
+      mode = data.mode;
+    if (mode === 'day') {
+      var dayToCheck = new Date(date).setHours(0,0,0,0);
+
+      for (var i = 0; i < $scope.events.length; i++) {
+        var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+
+        if (dayToCheck === currentDay) {
+          return $scope.events[i].status;
+        }
+      }
+    }
+
+    return '';
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             var fnCallBack = function(oResponse) {
                 debugger
                 console.log(oResponse)
             }
             $scope.saveEmpresa = function() {
 
-                for(x = 0;x< $scope.forms.length; x++ )
-                {
-                    $scope.empresa.telefones.push(fModels.amont($scope.forms[x].telefone,"INSERT"));
 
-                }
+                fEmpresa.fnMontaObjeto($scope.empresa,$scope.enderecos,$scope.emails,$scope.telefones,$scope.cnaes,$scope.usuario,"INSERT",'PRINCIPAL')
+               // factory.fnMontaObjeto = function(empresa,enderecos,emails,telefones,cnaes,action){
 
-                fEmpresa.fnMontaObjeto($scope.empresa,$scope.enderecos,"INSERT",'PRINCIPAL')
-
-
-
-                var oObject = fModels.amont($scope.empresa,"INSERT");
-                oObject.usuarios.push(fModels.amont(qat.model.fnUsuario($scope.usuario,"INSERT","system")));
-                SysMgmtData.processPostPageData("main/api/anonimo",{
-                        url: "entidade/api/empresa"+   WebDaptiveAppConfig.create_url,
-                        request: new qat.model.reqEmpr(oObject ,true, true)}, function(res){
-                   if(res.operationSuccess == true)
-                   {
-
-                   }
-
-                });
             };
         });
 })();
@@ -897,3 +1001,11 @@ debugger
             };
         });
 })();
+
+/*
+(function() {
+angular.module('ui.bootstrap.demo').controller('DateParserDemoCtrl', function ($scope, uibDateParser) {
+  $scope.format = 'yyyy/MM/dd';
+  $scope.date = new Date();
+});
+})();*/

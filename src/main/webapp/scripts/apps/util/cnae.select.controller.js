@@ -37,10 +37,10 @@ angular.module('wdApp.apps.select.cnae', ['ngSanitize', 'ui.select'])
         var vm = this;
 
 
-        $scope.forms = [{ nome : 'form1' ,cnae :{id : 0}}];
-        $scope.createForm = function(type){
+       // $scope.cnaes = [{ nome : 'cnae1' ,cnae :{id : 0}}];
+        $scope.createcnae = function(type){
 
-            $scope.forms.push({ nome : 'form1' + ($scope.forms.length + 1),cnae :{id : type}});
+            $scope.cnaes.push({ nome : 'cnae1' + ($scope.cnaes.length + 1),cnae :{id : type}});
 
         };
 
@@ -72,13 +72,13 @@ angular.module('wdApp.apps.select.cnae', ['ngSanitize', 'ui.select'])
 
         }
 
-        $scope.deleteForm = function(formScope){
+        $scope.deletecnae = function(cnaeScope){
 
-            delete $scope.forms(formScope);
+            delete $scope.cnaes(cnaeScope);
         }
 
-        $scope.saveForm = function(formScope){
-            alert("Save called for " + formScope.name + ", myInputValue = " + formScope.myInputValue);
+        $scope.savecnae = function(cnaeScope){
+            alert("Save called for " + cnaeScope.name + ", myInputValue = " + cnaeScope.myInputValue);
         };
 
 

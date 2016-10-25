@@ -44,62 +44,26 @@
 		            <div id="collapseOne" class="panel-collapse collapse in collapseFour">
 		                <div class="panel-body">
 		                    <div class="row">
-
-
-
-<div class="ng-cloak" ng-controller="ProdutoSelectControllers as ctrl">
-
-        <hr/>
-<div class="row">
-  <div class="col-sm-4">
-        <label for="exampleInputPassword1">Atividade Primaria</label>
-        <div class="row">
-        
-          <ui-select ng-model="form.cnae.id" theme="bootstrap">
-            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
-            <ui-select-choices repeat="item in ctrl.icmsST | filter: $select.search">
-              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-              
-            </ui-select-choices>
-          </ui-select>
-        </div>
-    </div>
-
-        </div>
-            </div>
-
-
-
-
-		                        <div class="col-sm-5 "  ng-controller="ProdutoSelectControllers as ctrl">
 		                                <label for="exampleInputPassword1">ICMS - Situação Tributária </label>
 		                                <div class="row">
-		                                <span class="ui-select">
-		                                <ui-select ng-model="form.cnae.id" theme="bootstrap">
+		                                <ui-select ng-model="tributacao.icms.sitTributaria" theme="bootstrap">
 								            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
-								            <ui-select-choices repeat="item in ctrl.icmsST | filter: $select.search">
+								            <ui-select-choices repeat="item in icmsST | filter: $select.search">
 								              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-								             
+								              
 								            </ui-select-choices>
 								          </ui-select>
-		                                </span>
 		                            </div>
-		                        </div>
-		                        <div class="col-sm-5 ">
+		                        <div class="col-sm-6 ">
 		                                <label for="exampleInputPassword1">ICMS - Origem</label>
 		                                <div class="row">
-		                                <span class="ui-select">
-		                                <select  ng-model="tributacao.icms.origem.id"   class=" col-sm-12">
-		                                    <option value="0">0 - Nacional, exceto as indicadas nos códigos de 3 a 5</option>
-		                                    <option value="1">1 - Estrangeira - Importação direta, exceto a indicada no código 6</option>
-		                                    <option value="2">2 - Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7</option>
-		                                    <option value="3">3 - Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40%</option>
-		                                    <option value="4">4 - Nacional, produção em conformidade com processos básicos que tratam as legisl. dos Ajustes</option>
-		                                    <option value="5">5 - Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%</option>
-		                                    <option value="6">6 - Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX</option>
-		                                    <option value="7">7 - Estrangeira - Adquirida mercado interno, sem similar nacional, constante em lista da CAMEX</option>
-		                                </select>
-		                                </span>
+		                                <ui-select ng-model="tributacao.icms.origem" theme="bootstrap">
+								            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+								            <ui-select-choices repeat="item in icmsOri | filter: $select.search">
+								              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+								              
+								            </ui-select-choices>
+								          </ui-select>
 		                            </div>
 		                        </div>
 		                    </div>
@@ -107,18 +71,13 @@
 		                    	<div class="col-sm-3 ">
                                         <label for="exampleInputPassword1">Modalidade BC</label>
                                         <div class="row ">
-                                       <span class="ui-select">
-                                            <select ng-model="tributacao.icms.modalidadeBC.id">
-                                                <option value="0">0 - Nacional, exceto as indicadas nos códigos de 3 a 5</option>
-												<option value="1">1 - Estrangeira - Importação direta, exceto a indicada no código 6</option>
-												<option value="2">2 - Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7</option>
-												<option value="3">3 - Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40%</option>
-												<option value="4">4 - Nacional, produção em conformidade com processos básicos que tratam as legisl. dos Ajustes</option>
-												<option value="5">5 - Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%</option>
-												<option value="6">6 - Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX</option>
-												<option value="7">7 - Estrangeira - Adquirida mercado interno, sem similar nacional, constante em lista da CAMEX</option>
-                                            </select>
-                                        </span>
+                                       		<ui-select ng-model="tributacao.icms.modalidadeBC" theme="bootstrap">
+								            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+								            <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
+								              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+								              
+								            </ui-select-choices>
+								          </ui-select>
                                      </div>
                                             
                                 </div>
@@ -139,14 +98,13 @@
 		                            <div class="form-group">
                                         <label for="exampleInputPassword1">Motivo desoneração</label>
                                         <div class="row ">
-	                                       <span class="ui-select">
-	                                            <select ng-model="tributacao.icms.motDesoneracao.id">
-	                                                <option value="0" selected="selected">- Não desejo usar -</option>
-													<option value="3">3: Produtor agropecuário</option>
-													<option value="9">9: Outros</option>
-													<option value="12">12: Órgão de fomento e desenvolv. agropecuário</option>
-	                                            </select>
-	                                        </span>
+	                                       <ui-select ng-model="tributacao.icms.motDesoneracao" theme="bootstrap">
+									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+									            <ui-select-choices repeat="item in icmsMD | filter: $select.search">
+									              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+									              
+									            </ui-select-choices>
+								          </ui-select>
 	                                     </div>                             
 		                        	</div>
 		                    </div>
@@ -169,25 +127,13 @@
 		                        <div class="col-sm-5 ">
 		                                <label for="exampleInputPassword1">IPI - Situação tributária</label>
 		                                <div class="row">
-		                                <span class="ui-select">
-		                                <select id="configTrib_OCST" ng-model="tributacao.ipi.sitTributaria.id" name="configTrib_OCST" class="col-sm-12 ">
-		                                    <option value="-1">- Não usar -</option>
-		                                    <option value="00">00: Entrada com recuperação de crédito</option>
-		                                    <option value="01">01: Entrada tributada com alíquota zero</option>
-		                                    <option value="02">02: Entrada isenta</option>
-		                                    <option value="03">03: Entrada não-tributada</option>
-		                                    <option value="04">04: Entrada imune</option>
-		                                    <option value="05">05: Entrada com suspensão</option>
-		                                    <option value="49">49: Outras entradas</option>
-		                                    <option value="50">50: Saída tributada</option>
-		                                    <option value="51">51: Saída tributada com alíquota zero</option>
-		                                    <option value="52">52: Saída isenta</option>
-		                                    <option value="53">53: Saída não-tributada</option>
-		                                    <option value="54">54: Saída imune</option>
-		                                    <option value="55">55: Saída com suspensão</option>
-		                                    <option value="99">99: Outras saídas</option>
-		                                </select>
-		                                </span>
+		                                <ui-select ng-model="tributacao.ipi.sitTributaria" theme="bootstrap">
+									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+									            <ui-select-choices repeat="item in iPISitTributaria | filter: $select.search">
+									              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+									              
+									            </ui-select-choices>
+								          </ui-select>
 		                            </div>
 		                        </div>
 		                        <div class="col-sm-5 ">
@@ -227,10 +173,13 @@
 		                        <div class="col-sm-4 ">
 		                            <div class="form-group">
 		                                <label for="exampleInputPassword1">Tipo de cálculo</label>
-		                                <select id="configTrib_OTipoCalc" ng-model="tributacao.ipi.tipoCalculo.id" name="configTrib_OTipoCalc" class="form-control disabled">
-		                                    <option value="1">Porcentagem</option>
-		                                    <option value="2">Em valor</option>
-		                                </select>
+		                                <ui-select ng-model="tributacao.ipi.tipoCalculo" theme="bootstrap">
+									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+									            <ui-select-choices repeat="item in tipoCalc | filter: $select.search">
+									              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+									              
+									            </ui-select-choices>
+								          </ui-select>
 		                            </div>
 		                        </div>
 		                        <div class="col-sm-4 ">
@@ -259,42 +208,13 @@
 		                        <div class="col-sm-8 ">
 		                                <label for="exampleInputPassword1">PIS - Situação tributária</label>
 		                                <div class="row">
-		                                <span class="ui-select">
-		                                <select id="configTrib_RTipoCalcd" class="col-sm-12" ng-model="tributacao.pis.pISSituaTributaria.id" name="tipocalculoSubstTribd" autocomplete="off">
-		                                    <option value="01">01: Operação tributável (BC = Operação alíq. normal (cumul./não cumul.)</option>
-		                                    <option value="02">02: Operação tributável (BC = valor da operação (alíquota diferenciada)</option>
-		                                    <option value="03">03: Operação tributável (BC = quant. x alíq. por unidade de produto)</option>
-		                                    <option value="04">04: Operação tributável (tributação monofásica, alíquota zero)</option>
-		                                    <option value="06">06: Operação tributável (alíquota zero)</option>
-		                                    <option value="07">07: Operação isenta da contribuição</option>
-		                                    <option value="08">08: Operação sem incidência da contribuição</option>
-		                                    <option value="09">09: Operação com suspensão da contribuição</option>
-		                                    <option value="49">49: Outras Operações de Saída</option>
-		                                    <option value="50">50: Direito a Crédito. Vinculada Exclusivamente a Receita Tributada no Mercado Interno</option>
-		                                    <option value="51">51: Direito a Crédito. Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno</option>
-		                                    <option value="52">52: Direito a Crédito. Vinculada Exclusivamente a Receita de Exportação</option>
-		                                    <option value="53">53: Direito a Crédito. Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno</option>
-		                                    <option value="54">54: Direito a Crédito. Vinculada a Receitas Tributadas no Mercado Interno e de Exportação</option>
-		                                    <option value="55">55: Direito a Crédito. Vinculada a Receitas Não-Trib. no Mercado Interno e de Exportação</option>
-		                                    <option value="56">56: Direito a Crédito. Vinculada a Rec. Trib. e Não-Trib. Mercado Interno e Exportação</option>
-		                                    <option value="60">60: Créd. Presumido. Aquisição Vinc. Exclusivamente a Receita Tributada no Mercado Interno</option>
-		                                    <option value="61">61: Créd. Presumido. Aquisição Vinc. Exclusivamente a Rec. Não-Trib. no Mercado Interno</option>
-		                                    <option value="62">62: Créd. Presumido. Aquisição Vinc. Exclusivamente a Receita de Exportação</option>
-		                                    <option value="63">63: Créd. Presumido. Aquisição Vinc. a Rec. Trib. e Não-Trib. no Mercado Interno</option>
-		                                    <option value="64">64: Créd. Presumido. Aquisição Vinc. a Rec. Trib. no Mercado Interno e de Exportação</option>
-		                                    <option value="65">65: Créd. Presumido. Aquisição Vinc. a Rec. Não-Trib. Mercado Interno e Exportação</option>
-		                                    <option value="66">66: Créd. Presumido. Aquisição Vinc. a Rec. Trib. e Não-Trib. Mercado Interno e Exportação</option>
-		                                    <option value="67">67: Crédito Presumido - Outras Operações</option>
-		                                    <option value="70">70: Operação de Aquisição sem Direito a Crédito</option>
-		                                    <option value="71">71: Operação de Aquisição com Isenção</option>
-		                                    <option value="72">72: Operação de Aquisição com Suspensão</option>
-		                                    <option value="73">73: Operação de Aquisição a Alíquota Zero</option>
-		                                    <option value="74">74: Operação de Aquisição sem Incidência da Contribuição</option>
-		                                    <option value="75">75: Operação de Aquisição por Substituição Tributária</option>
-		                                    <option value="98">98: Outras Operações de Entrada</option>
-		                                    <option value="99">99: Outras operações</option>
-		                                </select>
-		                                </span>
+		                                <ui-select ng-model="tributacao.pis.pISSituaTributaria" theme="bootstrap">
+									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+									            <ui-select-choices repeat="item in pisST | filter: $select.search">
+									              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+									              
+									            </ui-select-choices>
+								          </ui-select>
 		                            </div>
 		                        </div>
 		                        <div class="col-sm-3 ">
@@ -308,13 +228,13 @@
 		                        <div class="col-sm-8 ">
 		                                <label for="exampleInputPassword1">Tipo de cálculo Subst. Trib.</label>
 		                                <div class="row">
-		                                <span class="ui-select">
-		                                <select id="configTrib_RTipoCalc" class="col-sm-12" ng-model="tributacao.pis.tipocalculoSubstTrib.id" name="tipocalculoSubstTrib" autocomplete="off">
-		                                    <option value="0">- Não usar -</option>
-		                                    <option value="1">Porcentagem</option>
-		                                    <option value="2">Em valor</option>
-		                                </select>
-		                                </span>
+		                                <ui-select ng-model="tributacao.pis.tipocalculoSubstTrib" theme="bootstrap">
+									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+									            <ui-select-choices repeat="item in tipoCalc | filter: $select.search">
+									              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+									              
+									            </ui-select-choices>
+								          </ui-select>
 		                            </div>
 		                        </div>
 		                        <div class="col-sm-3 ">
@@ -344,42 +264,13 @@
 		                            <div class="form-group col-sm-8">
 		                                <label for="exampleInputPassword1">COFINS - Situação Tributária</label>
 		                                <div class="row">
-		                                 <span class="ui-select">
-		                                <select id="configTrib_SCST" ng-model="tributacao.cofins.sitTributaria.id" class="col-sm-12 " name="sitTributaria">
-		                                    <option value="01">01: Operação tributável (BC = Operação alíq. normal (cumul./não cumul.)</option>
-		                                    <option value="02">02: Operação tributável (BC = valor da operação (alíquota diferenciada)</option>
-		                                    <option value="03">03: Operação tributável (BC = quant. x alíq. por unidade de produto)</option>
-		                                    <option value="04">04: Operação tributável (tributação monofásica, alíquota zero)</option>
-		                                    <option value="06">06: Operação tributável (alíquota zero)</option>
-		                                    <option value="07">07: Operação isenta da contribuição</option>
-		                                    <option value="08">08: Operação sem incidência da contribuição</option>
-		                                    <option value="09">09: Operação com suspensão da contribuição</option>
-		                                    <option value="49">49: Outras Operações de Saída</option>
-		                                    <option value="50">50: Direito a Crédito. Vinculada Exclusivamente a Receita Tributada no Mercado Interno</option>
-		                                    <option value="51">51: Direito a Crédito. Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno</option>
-		                                    <option value="52">52: Direito a Crédito. Vinculada Exclusivamente a Receita de Exportação</option>
-		                                    <option value="53">53: Direito a Crédito. Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno</option>
-		                                    <option value="54">54: Direito a Crédito. Vinculada a Receitas Tributadas no Mercado Interno e de Exportação</option>
-		                                    <option value="55">55: Direito a Crédito. Vinculada a Receitas Não-Trib. no Mercado Interno e de Exportação</option>
-		                                    <option value="56">56: Direito a Crédito. Vinculada a Rec. Trib. e Não-Trib. Mercado Interno e Exportação</option>
-		                                    <option value="60">60: Créd. Presumido. Aquisição Vinc. Exclusivamente a Receita Tributada no Mercado Interno</option>
-		                                    <option value="61">61: Créd. Presumido. Aquisição Vinc. Exclusivamente a Rec. Não-Trib. no Mercado Interno</option>
-		                                    <option value="62">62: Créd. Presumido. Aquisição Vinc. Exclusivamente a Receita de Exportação</option>
-		                                    <option value="63">63: Créd. Presumido. Aquisição Vinc. a Rec. Trib. e Não-Trib. no Mercado Interno</option>
-		                                    <option value="64">64: Créd. Presumido. Aquisição Vinc. a Rec. Trib. no Mercado Interno e de Exportação</option>
-		                                    <option value="65">65: Créd. Presumido. Aquisição Vinc. a Rec. Não-Trib. Mercado Interno e Exportação</option>
-		                                    <option value="66">66: Créd. Presumido. Aquisição Vinc. a Rec. Trib. e Não-Trib. Mercado Interno e Exportação</option>
-		                                    <option value="67">67: Crédito Presumido - Outras Operações</option>
-		                                    <option value="70">70: Operação de Aquisição sem Direito a Crédito</option>
-		                                    <option value="71">71: Operação de Aquisição com Isenção</option>
-		                                    <option value="72">72: Operação de Aquisição com Suspensão</option>
-		                                    <option value="73">73: Operação de Aquisição a Alíquota Zero</option>
-		                                    <option value="74">74: Operação de Aquisição sem Incidência da Contribuição</option>
-		                                    <option value="75">75: Operação de Aquisição por Substituição Tributária</option>
-		                                    <option value="98">98: Outras Operações de Entrada</option>
-		                                    <option value="99">99: Outras operações</option>
-		                                </select>
-		                                </span>
+		                                 <ui-select ng-model="tributacao.cofins.sitTributaria" theme="bootstrap">
+									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+									            <ui-select-choices repeat="item in cofinsST | filter: $select.search">
+									              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+									              
+									            </ui-select-choices>
+								          </ui-select>
 		                            </div>
 		                        </div>
 		                        <div class="col-sm-3 ">
@@ -393,13 +284,13 @@
 		                        <div class="col-sm-8 ">
 		                                <label for="exampleInputPassword1">Tipo de cálculo Subst. Trib.</label>
 		                                <div class="row">
-		                                <span class="ui-select col-sm-12">
-		                                <select id="configTrib_RTipoCalc" ng-model="tributacao.cofins.tipoCalculoSubstTrib.id" class="col-sm-12" name="tipoCalculoSubstTrib" autocomplete="off">
-		                                    <option value="0">- Não usar -</option>
-		                                    <option value="1">Porcentagem</option>
-		                                    <option value="2">Em valor</option>
-		                                </select>
-		                                </span>
+		                                <ui-select ng-model="tributacao.cofins.tipoCalculoSubstTrib" theme="bootstrap">
+									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+									            <ui-select-choices repeat="item in tipoCalc | filter: $select.search">
+									              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+									              
+									            </ui-select-choices>
+								          </ui-select>
 		                            </div>
 		                        </div>
 		                        <div class="col-sm-3 ">

@@ -56,14 +56,13 @@
 </head>
 
 <div class="ng-cloak" ng-controller="CnaeSelectControllers as ctrl">
-  <p>Selected: {{forms}}</p>
-<div ng-repeat="form in forms">
+<div ng-repeat="cnae in cnaes">
         <hr/>
 <div class="row">
   <div class="col-sm-4">
         <label for="exampleInputPassword1">Atividade Primaria</label>
         <div class="row">
-          <ui-select ng-model="form.cnae.id" theme="bootstrap">
+          <ui-select ng-model="cnae.cnae" theme="bootstrap">
             <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.codigo}}</ui-select-match>
             <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
               <div ng-bind-html="item.codigo | highlight: $select.search"></div>
@@ -80,11 +79,11 @@
     <span class="caret"></span>
   </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a ng-click="createForm('RESIDENCIAL')" class="addPhoneButton">Residencial</a></li>
-                <li><a ng-click="createForm('CELULAR TIM')" class="addPhoneButton">Celular TIM</a></li>
-                <li><a ng-click="createForm('CELULAR OI')" class="addPhoneButton">Celular OI</a></li>
+                <li><a ng-click="createcnae('RESIDENCIAL')" class="addPhoneButton">Residencial</a></li>
+                <li><a ng-click="createcnae('CELULAR TIM')" class="addPhoneButton">Celular TIM</a></li>
+                <li><a ng-click="createcnae('CELULAR OI')" class="addPhoneButton">Celular OI</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a ng-click="createForm('OUTROS')" class="addPhoneButton">Outros</a></li>
+                <li><a ng-click="createcnae('OUTROS')" class="addPhoneButton">Outros</a></li>
             </ul>
         </div>
     </div>
