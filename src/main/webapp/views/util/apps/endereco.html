@@ -8,7 +8,7 @@
             </div>
             <span class="input-group-btn">
 
-             <button class="btn btn-default" type="button" ng-click="ctrl.buscaRCep('38082243')"><i class="glyphicon glyphicon-search"> </i></button>
+             <button class="btn btn-default" type="button" ng-click="ctrl.buscaRCep(enderecos[0].cep)"><i class="glyphicon glyphicon-search"> </i></button>
          </span>
         </div>
     </div>
@@ -105,7 +105,7 @@
 
             $('.select-estado').on("select2-selecting", function(e) {
                console.log($(this).val())
-          
+
                 qat.model.select.anonimo("cadastros/api/cidade/fetchPage",true,new qat.model.cidadeInquiryRequest( 100/20, true,$(this).val),callbackCidade);
             });
 

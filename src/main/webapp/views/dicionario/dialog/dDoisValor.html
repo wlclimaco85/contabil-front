@@ -1,0 +1,242 @@
+
+<div class="modal fade">
+    <div class="modal-dialog" style="width : 90%">
+        <div class="modal-content">
+            <form id="empresaForm">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Cadastro Empresa</h4>
+                </div>
+                <div class="modal-body">
+					<div class="row">
+						<div class="col-sm-4">
+					        <div class="form-group">
+					            <label for="exampleInputPassword1">Nome</label>
+					            <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="pagina.pagina" placeholder="Pagina">
+					        </div>
+					    </div>
+					    <div class="col-sm-4">
+					        <div class="form-group">
+					            <label for="exampleInputPassword1">Value</label>
+					            <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="pagina.pagina" placeholder="Pagina">
+					        </div>
+					    </div>
+					    <div class="col-sm-4">
+					        <div class="form-group">
+					            <label for="exampleInputPassword1">Descricao</label>
+					            <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="pagina.pagina" placeholder="Pagina">
+					        </div>
+					    </div>
+
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+					        <label for="exampleInputPassword1">Pagina <a><small> insert pagina</small></a></label>
+					        <div class="row">
+					          <ui-select ng-model="cnae.cnae" theme="bootstrap">
+					            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.codigo}}</ui-select-match>
+					            <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
+					              <div ng-bind-html="item.codigo | highlight: $select.search"></div>
+					              <small ng-bind-html="item.cnae | highlight: $select.search"></small>
+					            </ui-select-choices>
+					          </ui-select>
+					        </div>
+					    </div>
+					    <div class="col-sm-6">
+					        <label for="exampleInputPassword1">Tipo <a><small> insert Tipo</small></a></label>
+					        <div class="row">
+					          <ui-select ng-model="cnae.cnae" theme="bootstrap">
+					            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.codigo}}</ui-select-match>
+					            <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
+					              <div ng-bind-html="item.codigo | highlight: $select.search"></div>
+					              <small ng-bind-html="item.cnae | highlight: $select.search"></small>
+					            </ui-select-choices>
+					          </ui-select>
+					        </div>
+					    </div>
+
+					</div>
+					<div ng-show="cadMenu == 3"  class="row" >
+                	<hr>
+						<strong>Cadastro Tipo</strong>
+					    <div class="col-sm-6">
+					        <div class="form-group">
+					            <label for="exampleInputPassword1">Nome</label>
+					            <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="pagina.pagina" placeholder="Pagina">
+					        </div>
+					    </div>
+					    <div class="col-sm-6">
+					        <div class="form-group">
+					            <label for="exampleInputPassword1">Valor</label>
+					            <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="pagina.pagina" placeholder="Pagina">
+					        </div>
+					    </div>
+					</div>
+					<div ng-show="cadMenu == 3"  class="row" >
+						<button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    	<button type="submit" ng-click="saveEmpresa()" id="validateButton" class="btn btn-primary">Gravar</button>
+					</div>
+
+
+
+                	<div ng-show="cadMenu == 0"  class="row" >
+                	<hr>
+						<strong>Cadastro Pagina</strong>
+					    <div class="col-sm-6">
+					        <div class="form-group">
+					            <label for="exampleInputPassword1">pagina</label>
+					            <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="pagina.pagina" placeholder="Pagina">
+					        </div>
+					    </div>
+					    <div class="col-sm-6">
+					        <label for="exampleInputPassword1">Status</label>
+					        <dl class="dl-horizontal">
+					            <dd>
+					                <label class="ui-radio"><input name="regime" type="radio" ng-model="pagina.status" value="1" ng-true-value="'1'" ng-init="pagina.status=1" ><span>Ativo</span></label>
+					                <label class="ui-radio"><input name="regime" type="radio" ng-model="pagina.status" value="2" ng-true-value="'2'"><span>Inativo</span></label>
+					                <label class="ui-radio"><input name="regime" type="radio" ng-model="pagina.status" value="3" ng-true-value="'3'"><span>Em Desenvolvimento</span></label>
+					            </dd>
+					        </dl>
+
+					    </div>
+					</div>
+					<div ng-show="cadMenu == 0"  class="row" >
+						<div class="ng-cloak">
+							<div class="col-sm-4">
+							        <label for="exampleInputPassword1">Menu <a><small> insert menu</small></a></label>
+							        <div class="row">
+							          <ui-select ng-model="cnae.cnae" theme="bootstrap">
+							            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.codigo}}</ui-select-match>
+							            <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
+							              <div ng-bind-html="item.codigo | highlight: $select.search"></div>
+							              <small ng-bind-html="item.cnae | highlight: $select.search"></small>
+							            </ui-select-choices>
+							          </ui-select>
+							        </div>
+							    </div>
+							    <div class="col-sm-4">
+							        <label for="exampleInputPassword1">Ajuda <a><small> insert Ajuda</small></a></label>
+							        <div class="row">
+							          <ui-select ng-model="cnae.cnae" theme="bootstrap">
+							            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.codigo}}</ui-select-match>
+							            <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
+							              <div ng-bind-html="item.codigo | highlight: $select.search"></div>
+							              <small ng-bind-html="item.cnae | highlight: $select.search"></small>
+							            </ui-select-choices>
+							          </ui-select>
+							        </div>
+							    </div>
+							</div>
+					</div>
+					<div ng-show="cadMenu == 1"  class="row" >
+					<hr>
+						<strong>Cadastro Menu</strong>
+						<div class="col-sm-4">
+					        <div class="form-group">
+					            <label for="exampleInputPassword1">Nome</label>
+					            <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="pagina.pagina" placeholder="Pagina">
+					        </div>
+					    </div>
+					    <div class="col-sm-4">
+					        <div class="form-group">
+					            <label for="exampleInputPassword1">Label</label>
+					            <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="pagina.pagina" placeholder="Pagina">
+					        </div>
+					    </div>
+					    <div class="col-sm-4">
+					        <label for="exampleInputPassword1">Status</label>
+					        <dl class="dl-horizontal">
+					            <dd>
+					                <label class="ui-radio"><input name="regime" type="radio" ng-model="pagina.status" value="1" ng-true-value="'1'" ng-init="pagina.status=1" ><span>Ativo</span></label>
+					                <label class="ui-radio"><input name="regime" type="radio" ng-model="pagina.status" value="2" ng-true-value="'2'"><span>Inativo</span></label>
+					            </dd>
+					        </dl>
+
+					    </div>
+					</div>
+					<div ng-show="cadMenu == 1"  class="row" >
+						<div class="col-sm-4">
+					        <div class="form-group">
+					            <label for="exampleInputPassword1">Nivel</label>
+					            <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="pagina.pagina" placeholder="Pagina">
+					        </div>
+					    </div>
+					    <div class="ng-cloak">
+							<div class="col-sm-4">
+						        <label for="exampleInputPassword1">Permissão <a><small> insert permissão</small></a></label>
+						        <div class="row">
+						          <ui-select ng-model="cnae.cnae" theme="bootstrap">
+						            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.codigo}}</ui-select-match>
+						            <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
+						              <div ng-bind-html="item.codigo | highlight: $select.search"></div>
+						              <small ng-bind-html="item.cnae | highlight: $select.search"></small>
+						            </ui-select-choices>
+						          </ui-select>
+						        </div>
+						    </div>
+						</div>
+					    <div class="ng-cloak">
+							<div class="col-sm-4">
+						        <label for="exampleInputPassword1">Ajuda <a><small> insert Ajuda</small></a></label>
+						        <div class="row">
+						          <ui-select ng-model="cnae.cnae" theme="bootstrap">
+						            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.codigo}}</ui-select-match>
+						            <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
+						              <div ng-bind-html="item.codigo | highlight: $select.search"></div>
+						              <small ng-bind-html="item.cnae | highlight: $select.search"></small>
+						            </ui-select-choices>
+						          </ui-select>
+						        </div>
+						    </div>
+						</div>
+					</div>
+					<div ng-show="cadMenu == 1"  class="row" >
+						<button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    	<button type="submit" ng-click="saveEmpresa()" id="validateButton" class="btn btn-primary">Gravar</button>
+					</div>
+					<div ng-show="cadMenu == 0"  class="row" >
+						<button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    	<button type="submit" ng-click="saveEmpresa()" id="validateButton" class="btn btn-primary">Gravar</button>
+					</div>
+					<div ng-show="cadMenu == 2"  class="row" >
+					<hr>
+						<strong>Cadastro Ajuda</strong>
+						<div class="col-sm-4">
+					        <div class="form-group">
+					            <label for="exampleInputPassword1">Titulo</label>
+					            <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="pagina.pagina" placeholder="Pagina">
+					        </div>
+					    </div>
+					    <div class="col-sm-4">
+					        <div class="form-group">
+					            <label for="exampleInputPassword1">Texto</label>
+					            <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="pagina.pagina" placeholder="Pagina">
+					        </div>
+					    </div>
+					    <div class="col-sm-4">
+					        <label for="exampleInputPassword1">Status</label>
+					        <dl class="dl-horizontal">
+					            <dd>
+					                <label class="ui-radio"><input name="regime" type="radio" ng-model="pagina.status" value="1" ng-true-value="'1'" ng-init="pagina.status=1" ><span>Ativo</span></label>
+					                <label class="ui-radio"><input name="regime" type="radio" ng-model="pagina.status" value="2" ng-true-value="'2'"><span>Inativo</span></label>
+					            </dd>
+					        </dl>
+
+					    </div>
+					</div>
+					<div ng-show="cadMenu == 2"  class="row" >
+						<button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    	<button type="submit" ng-click="saveEmpresa()" id="validateButton" class="btn btn-primary">Gravar</button>
+					</div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" ng-click="saveEmpresa()" id="validateButton" class="btn btn-primary">Gravar</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
