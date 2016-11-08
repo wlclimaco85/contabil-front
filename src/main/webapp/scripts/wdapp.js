@@ -24,7 +24,6 @@ var WebDaptiveAppConfig = {
 	create_url: '/insert',
 	update_url: '/update',
 	delete_url: '/delete',
-	
 
 	//produto
 	base_site_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/produto/api',
