@@ -634,7 +634,7 @@
 
 (function() {
     angular.module('wdApp.apps.nfSaida.insert',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter','angucomplete','inputactions'])
-        .controller('NfSaidaInsertController', function(localStorageService,$rootScope,$scope,fModels,SysMgmtData,fProduto) {
+        .controller('NfSaidaInsertController', function(localStorageService,$rootScope,$scope,fModels,SysMgmtData,fProduto,fNotaFiscal) {
 
             var vm = this;
             $scope.slotDisplayName = "teste00";

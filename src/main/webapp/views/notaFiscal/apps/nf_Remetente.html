@@ -3,9 +3,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-touch.min.js"></script>
 </head>
 <h2>Dados do destinatário</h2>
-<div class="row" ng-controller="ClienteSearchController">
+<div class="row">
 <div angucomplete-alt id="ex1"
-  placeholder="Search countries"
+  placeholder="Buscar Clientes"
   maxlength="50"
   pause="100"
   selected-object="countrySelected"
@@ -15,10 +15,10 @@
   minlength="1"
   input-class="form-control form-control-small"
   match-class="highlight"></div>
-
-
+      <div class="row"></div>
+      <div ng-if="visibled == true">
       <div style="margin-bottom: 20px"></div>
-      
+      <div class="row"> </div>
       <div class="row">
             <dl class="dl-horizontal">
                 <dd>
@@ -152,12 +152,13 @@
                 </div>
             </div>
         </div>
-        <hr>
+        
         <div ng-if="enderecoEntrega == 1">
+            <hr>
             <div ng-include="'views/util/apps/endereco.html'"></div>
         </div>
         <hr>
-        
+     </div>   
   
 
 </div>

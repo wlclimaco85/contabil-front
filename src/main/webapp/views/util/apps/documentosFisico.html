@@ -23,15 +23,11 @@
     <div class="form-group col-sm-4">
         <label for="exampleInputEmail1">Data Nascimento</label>
 
-        <div class="input-group ui-datepicker">
-            <input type="text" ng-model="empresa.dtInicio"
-                   class="form-control"
-                   uib-datepicker-popup="{{format}}"
-                   ng-model="dt"
-                   is-open="opened"
-                   datepicker-options="dateOptions"
-                   close-text="Close">
-            <span class="input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></span>
+         <div class="input-group">
+          <input type="text" class="form-control" ng-model="empresa.dtInicio" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"   uib-datepicker-popup="{{format}}"/>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open1()"><i class="fa fa-calendar"></i></button>
+          </span>
         </div>
     </div>
 </div>

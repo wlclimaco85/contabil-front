@@ -360,7 +360,7 @@
                     <tr>
                         <td class="d_aliqsP">Ambiente de envio:</td>
                         <td>
-                            <div class="form-group col-sm-12">
+                            <div class="form-group">
                                 <input type="text" class="form-control hide" ng-model="configuracao.confNFe.id" />
                                 <select id="unidTributada" name="unidTributada"  ng-model="configuracao.confNFe.ambienteEnvio.id" class="form-control">
                                     <option value="1002">Homologação</option>
@@ -375,6 +375,16 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <input type="text" class="form-control cota-socio" ng-model="configuracao.confNFe.serieEnvio" name="book[0].vlUnitario" placeholder="0" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td class="d_aliqsP">Modelo:</td>
+                        <td>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control cota-socio" ng-model="configuracao.confNFe.modelo" name="book[0].vlUnitario" placeholder="0" />
                                 </div>
                             </div>
                         </td>

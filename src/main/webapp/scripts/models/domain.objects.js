@@ -854,8 +854,22 @@ var _emprId = null;
         //Endereco Object
 qat.model.fnEndereco = function(_oObjet,modelAction,user)
 {
+    var _emprId = null;
 
-    return { id : _oObjet.id,
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
+
+    var _id = null;
+    if((_oObjet !== undefined)&&( _oObjet.id !== undefined))
+    {
+      if(_oObjet.id == "" || _oObjet.id == " "){
+        _id = null;
+      }
+    
+    return { id : _id,
      codIbge : _oObjet.codIbge,
      logradouro : _oObjet.logradouro,
      bairro : _oObjet.bairro,
@@ -867,7 +881,7 @@ qat.model.fnEndereco = function(_oObjet,modelAction,user)
      complemento : _oObjet.complemento,
      cidade : {id : _oObjet.cidade.id},
      parentId       : _oObjet.parentId,
-     emprId         : _oObjet.emprId,
+     emprId         : _emprId,
      processId      : _oObjet.processId,
      tableEnumValue : _oObjet.tableEnumValue,
      modelAction    : modelAction,
@@ -875,6 +889,7 @@ qat.model.fnEndereco = function(_oObjet,modelAction,user)
      createDateUTC  : (new Date()).getTime(),
      modifyUser     : user,
      modifyDateUTC  : (new Date()).getTime()
+     }
      }
 }
 
@@ -1186,6 +1201,1281 @@ qat.model.Telefone = function(_oObjet)
      this.modifyUser     = $rootScope.user;
      this.modifyDateUTC  = (new Date()).getTime();
 }
+
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNota =function(_NFNota,modelAction)
+{
+
+     var _id = null;
+     if(_NFNota.id == "" || _NFNota.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNota  = {
+             id : _id,
+             identificadorLocal : _NFNota.identificadorLocal,
+             info : _NFNota.info,
+             infoSuplementar : _NFNota.infoSuplementar,
+             assinatura : _NFNota.assinatura,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNota;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfo =function(_NFNotaInfo,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfo.id == "" || _NFNotaInfo.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfo  = {
+             id : _id,
+             identificador : _NFNotaInfo.identificador,
+             versao : _NFNotaInfo.versao,
+             identificacao : _NFNotaInfo.identificacao,
+             emitente : _NFNotaInfo.emitente,
+             avulsa : _NFNotaInfo.avulsa,
+             destinatario : _NFNotaInfo.destinatario,
+             retirada : _NFNotaInfo.retirada,
+             entrega : _NFNotaInfo.entrega,
+             pessoasAutorizadasDownloadNFe : _NFNotaInfo.pessoasAutorizadasDownloadNFe,
+             itens : _NFNotaInfo.itens,
+             total : _NFNotaInfo.total,
+             transporte : _NFNotaInfo.transporte,
+             cobranca : _NFNotaInfo.cobranca,
+             pagamentos : _NFNotaInfo.pagamentos,
+             informacoesAdicionais : _NFNotaInfo.informacoesAdicionais,
+             exportacao : _NFNotaInfo.exportacao,
+             compra : _NFNotaInfo.compra,
+             cana : _NFNotaInfo.cana,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfo;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFInfoCupomFiscalReferenciado =function(_NFInfoCupomFiscalReferenciado,modelAction)
+{
+
+     var _id = null;
+     if(_NFInfoCupomFiscalReferenciado.id == "" || _NFInfoCupomFiscalReferenciado.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFInfoCupomFiscalReferenciado  = {
+             id : _id,
+         modeloDocumentoFiscal : _NFInfoCupomFiscalReferenciado.modeloDocumentoFiscal,
+         numeroOrdemSequencialECF : _NFInfoCupomFiscalReferenciado.numeroOrdemSequencialECF,
+         numeroContadorOrdemOperacao : _NFInfoCupomFiscalReferenciado.numeroContadorOrdemOperacao,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFInfoCupomFiscalReferenciado;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoIdentificacao =function(_NFNotaInfoIdentificacao,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoIdentificacao.id == "" || _NFNotaInfoIdentificacao.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoIdentificacao  = {
+             id : _id,
+         uf : _NFNotaInfoIdentificacao.uf,
+         codigoRandomico : _NFNotaInfoIdentificacao.codigoRandomico,
+         naturezaOperacao : _NFNotaInfoIdentificacao.naturezaOperacao,
+         formaPagamento : _NFNotaInfoIdentificacao.formaPagamento,
+         modelo : _NFNotaInfoIdentificacao.modelo,
+         serie : _NFNotaInfoIdentificacao.serie,
+         numeroNota : _NFNotaInfoIdentificacao.numeroNota,
+         dataHoraEmissao : _NFNotaInfoIdentificacao.dataHoraEmissao,
+         dataHoraSaidaOuEntrada : _NFNotaInfoIdentificacao.dataHoraSaidaOuEntrada,
+         tipo : _NFNotaInfoIdentificacao.tipo,
+         identificadorLocalDestinoOperacao : _NFNotaInfoIdentificacao.identificadorLocalDestinoOperacao,
+         codigoMunicipio : _NFNotaInfoIdentificacao.codigoMunicipio,
+         tipoImpressao : _NFNotaInfoIdentificacao.tipoImpressao,
+         tipoEmissao : _NFNotaInfoIdentificacao.tipoEmissao,
+         digitoVerificador : _NFNotaInfoIdentificacao.digitoVerificador,
+         ambiente : _NFNotaInfoIdentificacao.ambiente,
+         finalidade : _NFNotaInfoIdentificacao.finalidade,
+         operacaoConsumidorFinal : _NFNotaInfoIdentificacao.operacaoConsumidorFinal,
+         indicadorPresencaComprador : _NFNotaInfoIdentificacao.indicadorPresencaComprador,
+         programaEmissor : _NFNotaInfoIdentificacao.programaEmissor,
+         versaoEmissor : _NFNotaInfoIdentificacao.versaoEmissor,
+         dataHoraContigencia : _NFNotaInfoIdentificacao.dataHoraContigencia,
+         justificativaEntradaContingencia : _NFNotaInfoIdentificacao.justificativaEntradaContingencia,
+         referenciadas : _NFNotaInfoIdentificacao.referenciadas,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoIdentificacao;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFInfoModelo1Por1AReferenciada =function(_NFInfoModelo1Por1AReferenciada,modelAction)
+{
+
+     var _id = null;
+     if(_NFInfoModelo1Por1AReferenciada.id == "" || _NFInfoModelo1Por1AReferenciada.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFInfoModelo1Por1AReferenciada  = {
+             id : _id,
+         uf : _NFInfoModelo1Por1AReferenciada.uf,
+         anoMesEmissaoNFe : _NFInfoModelo1Por1AReferenciada.anoMesEmissaoNFe,
+         cnpj : _NFInfoModelo1Por1AReferenciada.cnpj,
+         modeloDocumentoFiscal : _NFInfoModelo1Por1AReferenciada.modeloDocumentoFiscal,
+         serie : _NFInfoModelo1Por1AReferenciada.serie,
+         numeroDocumentoFiscal : _NFInfoModelo1Por1AReferenciada.numeroDocumentoFiscal,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFInfoModelo1Por1AReferenciada;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFInfoReferenciada =function(_NFInfoReferenciada,modelAction)
+{
+
+     var _id = null;
+     if(_NFInfoReferenciada.id == "" || _NFInfoReferenciada.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFInfoReferenciada  = {
+             id : _id,
+         chaveAcesso : _NFInfoReferenciada.chaveAcesso,
+         modelo1por1Referenciada : _NFInfoReferenciada.modelo1por1Referenciada,
+         infoNFProdutorRuralReferenciada : _NFInfoReferenciada.infoNFProdutorRuralReferenciada,
+         chaveAcessoCTReferenciada : _NFInfoReferenciada.chaveAcessoCTReferenciada,
+         cupomFiscalReferenciado : _NFInfoReferenciada.cupomFiscalReferenciado,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFInfoReferenciada;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFInfoProdutorRuralReferenciada =function(_NFInfoProdutorRuralReferenciada,modelAction)
+{
+
+     var _id = null;
+     if(_NFInfoProdutorRuralReferenciada.id == "" || _NFInfoProdutorRuralReferenciada.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFInfoProdutorRuralReferenciada  = {
+             id : _id,
+         ufEmitente : _NFInfoProdutorRuralReferenciada.ufEmitente,
+         anoMesEmissao : _NFInfoProdutorRuralReferenciada.anoMesEmissao,
+         cnpjEmitente : _NFInfoProdutorRuralReferenciada.cnpjEmitente,
+         cpfEmitente : _NFInfoProdutorRuralReferenciada.cpfEmitente,
+         ieEmitente : _NFInfoProdutorRuralReferenciada.ieEmitente,
+         modeloDocumentoFiscal : _NFInfoProdutorRuralReferenciada.modeloDocumentoFiscal,
+         serieDocumentoFiscal : _NFInfoProdutorRuralReferenciada.serieDocumentoFiscal,
+         numeroDocumentoFiscal : _NFInfoProdutorRuralReferenciada.numeroDocumentoFiscal,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFInfoProdutorRuralReferenciada;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoEmitente =function(_NFNotaInfoEmitente,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoEmitente.id == "" || _NFNotaInfoEmitente.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoEmitente  = {
+             id : _id,
+         cnpj : _NFNotaInfoEmitente.cnpj,
+         cpf : _NFNotaInfoEmitente.cpf,
+         razaoSocial : _NFNotaInfoEmitente.razaoSocial,
+         nomeFantasia : _NFNotaInfoEmitente.nomeFantasia,
+         endereco : _NFNotaInfoEmitente.endereco,
+         inscricaoEstadual : _NFNotaInfoEmitente.inscricaoEstadual,
+         inscricaoEstadualSubstituicaoTributaria : _NFNotaInfoEmitente.inscricaoEstadualSubstituicaoTributaria,
+         inscricaoMunicipal : _NFNotaInfoEmitente.inscricaoMunicipal,
+         classificacaoNacionalAtividadesEconomicas : _NFNotaInfoEmitente.classificacaoNacionalAtividadesEconomicas,
+         regimeTributario : _NFNotaInfoEmitente.regimeTributario,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoEmitente;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoAvulsa =function(_NFNotaInfoAvulsa,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoAvulsa.id == "" || _NFNotaInfoAvulsa.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoAvulsa  = {
+             id : _id,
+         cnpj : _NFNotaInfoAvulsa.cnpj,
+         orgaoEmitente : _NFNotaInfoAvulsa.orgaoEmitente,
+         matriculaAgente : _NFNotaInfoAvulsa.matriculaAgente,
+         nomeAgente : _NFNotaInfoAvulsa.nomeAgente,
+         fone : _NFNotaInfoAvulsa.fone,
+         uf : _NFNotaInfoAvulsa.uf,
+         numeroDocumentoArrecadacaoReceita : _NFNotaInfoAvulsa.numeroDocumentoArrecadacaoReceita,
+         dataEmissaoDocumentoArrecadacao : _NFNotaInfoAvulsa.dataEmissaoDocumentoArrecadacao,
+         valorTotalConstanteDocumentoArrecadacaoReceita : _NFNotaInfoAvulsa.valorTotalConstanteDocumentoArrecadacaoReceita,
+         reparticaoFiscalEmitente : _NFNotaInfoAvulsa.reparticaoFiscalEmitente,
+         dataPagamentoDocumentoArrecadacao : _NFNotaInfoAvulsa.dataPagamentoDocumentoArrecadacao,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoAvulsa;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoDestinatario =function(_NFNotaInfoDestinatario,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoDestinatario.id == "" || _NFNotaInfoDestinatario.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoDestinatario  = {
+             id : _id,
+         cnpj : _NFNotaInfoDestinatario.cnpj,
+         cpf : _NFNotaInfoDestinatario.cpf,
+         idEstrangeiro : _NFNotaInfoDestinatario.idEstrangeiro,
+         razaoSocial : _NFNotaInfoDestinatario.razaoSocial,
+         endereco : _NFNotaInfoDestinatario.endereco,
+         indicadorIEDestinatario : _NFNotaInfoDestinatario.indicadorIEDestinatario,
+         inscricaoEstadual : _NFNotaInfoDestinatario.inscricaoEstadual,
+         inscricaoSuframa : _NFNotaInfoDestinatario.inscricaoSuframa,
+         inscricaoMunicipal : _NFNotaInfoDestinatario.inscricaoMunicipal,
+         email : _NFNotaInfoDestinatario.email,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoDestinatario;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoLocal =function(_NFNotaInfoLocal,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoLocal.id == "" || _NFNotaInfoLocal.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoLocal  = {
+             id : _id,
+         cnpj : _NFNotaInfoLocal.cnpj,
+         cpf : _NFNotaInfoLocal.cpf,
+         logradouro : _NFNotaInfoLocal.logradouro,
+         numero : _NFNotaInfoLocal.numero,
+         complemento : _NFNotaInfoLocal.complemento,
+         bairro : _NFNotaInfoLocal.bairro,
+         codigoMunicipio : _NFNotaInfoLocal.codigoMunicipio,
+         nomeMunicipio : _NFNotaInfoLocal.nomeMunicipio,
+         uf : _NFNotaInfoLocal.uf,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoLocal;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFPessoaAutorizadaDownloadNFe =function(_NFPessoaAutorizadaDownloadNFe,modelAction)
+{
+
+     var _id = null;
+     if(_NFPessoaAutorizadaDownloadNFe.id == "" || _NFPessoaAutorizadaDownloadNFe.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFPessoaAutorizadaDownloadNFe  = {
+             id : _id,
+         cnpj : _NFPessoaAutorizadaDownloadNFe.cnpj,
+         cpf : _NFPessoaAutorizadaDownloadNFe.cpf,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFPessoaAutorizadaDownloadNFe;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoTotal =function(_NFNotaInfoTotal,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoTotal.id == "" || _NFNotaInfoTotal.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoTotal  = {
+             id : _id,
+         icmsTotal : _NFNotaInfoTotal.icmsTotal,
+         issqnTotal : _NFNotaInfoTotal.issqnTotal,
+         retencoesTributos : _NFNotaInfoTotal.retencoesTributos,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoTotal;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoICMSTotal =function(_NFNotaInfoICMSTotal,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoICMSTotal.id == "" || _NFNotaInfoICMSTotal.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoICMSTotal  = {
+             id : _id,
+         baseCalculoICMS : _NFNotaInfoICMSTotal.baseCalculoICMS,
+         valorTotalICMS : _NFNotaInfoICMSTotal.valorTotalICMS,
+         valorICMSDesonerado : _NFNotaInfoICMSTotal.valorICMSDesonerado,
+         valorICMSFundoCombatePobreza : _NFNotaInfoICMSTotal.valorICMSFundoCombatePobreza,
+         valorICMSPartilhaDestinatario : _NFNotaInfoICMSTotal.valorICMSPartilhaDestinatario,
+         valorICMSPartilhaRementente : _NFNotaInfoICMSTotal.valorICMSPartilhaRementente,
+         baseCalculoICMSST : _NFNotaInfoICMSTotal.baseCalculoICMSST,
+         valorTotalICMSST : _NFNotaInfoICMSTotal.valorTotalICMSST,
+         valorTotalDosProdutosServicos : _NFNotaInfoICMSTotal.valorTotalDosProdutosServicos,
+         valorTotalFrete : _NFNotaInfoICMSTotal.valorTotalFrete,
+         valorTotalSeguro : _NFNotaInfoICMSTotal.valorTotalSeguro,
+         valorTotalDesconto : _NFNotaInfoICMSTotal.valorTotalDesconto,
+         valorTotalII : _NFNotaInfoICMSTotal.valorTotalII,
+         valorTotalIPI : _NFNotaInfoICMSTotal.valorTotalIPI,
+         valorPIS : _NFNotaInfoICMSTotal.valorPIS,
+         valorCOFINS : _NFNotaInfoICMSTotal.valorCOFINS,
+         outrasDespesasAcessorias : _NFNotaInfoICMSTotal.outrasDespesasAcessorias,
+         valorTotalNFe : _NFNotaInfoICMSTotal.valorTotalNFe,
+         valorTotalTributos : _NFNotaInfoICMSTotal.valorTotalTributos,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoICMSTotal;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoISSQNTotal =function(_NFNotaInfoISSQNTotal,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoISSQNTotal.id == "" || _NFNotaInfoISSQNTotal.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoISSQNTotal  = {
+             id : _id,
+         valorTotalServicosSobNaoIncidenciaNaoTributadosICMS : _NFNotaInfoISSQNTotal.valorTotalServicosSobNaoIncidenciaNaoTributadosICMS,
+         baseCalculoISS : _NFNotaInfoISSQNTotal.baseCalculoISS,
+         valorTotalISS : _NFNotaInfoISSQNTotal.valorTotalISS,
+         valorPISsobreServicos : _NFNotaInfoISSQNTotal.valorPISsobreServicos,
+         valorCOFINSsobreServicos : _NFNotaInfoISSQNTotal.valorCOFINSsobreServicos,
+         dataPrestacaoServico : _NFNotaInfoISSQNTotal.dataPrestacaoServico,
+         valorDeducao : _NFNotaInfoISSQNTotal.valorDeducao,
+         valorOutros : _NFNotaInfoISSQNTotal.valorOutros,
+         valorTotalDescontoIncondicionado : _NFNotaInfoISSQNTotal.valorTotalDescontoIncondicionado,
+         valorTotalDescontoCondicionado : _NFNotaInfoISSQNTotal.valorTotalDescontoCondicionado,
+         valorTotalRetencaoISS : _NFNotaInfoISSQNTotal.valorTotalRetencaoISS,
+         tributacao : _NFNotaInfoISSQNTotal.tributacao,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoISSQNTotal;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoRetencoesTributos =function(_NFNotaInfoRetencoesTributos,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoRetencoesTributos.id == "" || _NFNotaInfoRetencoesTributos.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoRetencoesTributos  = {
+             id : _id,
+         valorRetidoPIS : _NFNotaInfoRetencoesTributos.valorRetidoPIS,
+         valorRetidoCOFINS : _NFNotaInfoRetencoesTributos.valorRetidoCOFINS,
+         valorRetidoCSLL : _NFNotaInfoRetencoesTributos.valorRetidoCSLL,
+         baseCalculoIRRF : _NFNotaInfoRetencoesTributos.baseCalculoIRRF,
+         valorRetidoIRRF : _NFNotaInfoRetencoesTributos.valorRetidoIRRF,
+         baseCalculoRetencaoPrevidenciaSocial : _NFNotaInfoRetencoesTributos.baseCalculoRetencaoPrevidenciaSocial,
+         valorRetencaoPrevidenciaSocial : _NFNotaInfoRetencoesTributos.valorRetencaoPrevidenciaSocial,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoRetencoesTributos;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoTransporte =function(_NFNotaInfoTransporte,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoTransporte.id == "" || _NFNotaInfoTransporte.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoTransporte  = {
+             id : _id,
+         modalidadeFrete : _NFNotaInfoTransporte.modalidadeFrete,
+         transportador : _NFNotaInfoTransporte.transportador,
+         icmsTransporte : _NFNotaInfoTransporte.icmsTransporte,
+         veiculo : _NFNotaInfoTransporte.veiculo,
+         reboques : _NFNotaInfoTransporte.reboques,
+         vagao : _NFNotaInfoTransporte.vagao,
+         balsa : _NFNotaInfoTransporte.balsa,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoTransporte;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoRetencaoICMSTransporte =function(_NFNotaInfoRetencaoICMSTransporte,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoRetencaoICMSTransporte.id == "" || _NFNotaInfoRetencaoICMSTransporte.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoRetencaoICMSTransporte  = {
+             id : _id,
+         valorServico : _NFNotaInfoRetencaoICMSTransporte.valorServico,
+         bcRetencaoICMS : _NFNotaInfoRetencaoICMSTransporte.bcRetencaoICMS,
+         aliquotaRetencao : _NFNotaInfoRetencaoICMSTransporte.aliquotaRetencao,
+         valorICMSRetido : _NFNotaInfoRetencaoICMSTransporte.valorICMSRetido,
+         cfop : _NFNotaInfoRetencaoICMSTransporte.cfop,
+         codigoMunicipioOcorrenciaFatoGeradorICMSTransporte : _NFNotaInfoRetencaoICMSTransporte.codigoMunicipioOcorrenciaFatoGeradorICMSTransporte,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoRetencaoICMSTransporte;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoTransportador =function(_NFNotaInfoTransportador,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoTransportador.id == "" || _NFNotaInfoTransportador.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoTransportador  = {
+             id : _id,
+         cnpj : _NFNotaInfoTransportador.cnpj,
+         cpf : _NFNotaInfoTransportador.cpf,
+         razaoSocial : _NFNotaInfoTransportador.razaoSocial,
+         inscricaoEstadual : _NFNotaInfoTransportador.inscricaoEstadual,
+         enderecoComplemento : _NFNotaInfoTransportador.enderecoComplemento,
+         nomeMunicipio : _NFNotaInfoTransportador.nomeMunicipio,
+         uf : _NFNotaInfoTransportador.uf,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoTransportador;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoVeiculo =function(_NFNotaInfoVeiculo,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoVeiculo.id == "" || _NFNotaInfoVeiculo.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoVeiculo  = {
+             id : _id,
+         placaVeiculo : _NFNotaInfoVeiculo.placaVeiculo,
+         uf : _NFNotaInfoVeiculo.uf,
+         registroNacionalTransportadorCarga : _NFNotaInfoVeiculo.registroNacionalTransportadorCarga,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoVeiculo;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoReboque =function(_NFNotaInfoReboque,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoReboque.id == "" || _NFNotaInfoReboque.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoReboque  = {
+             id : _id,
+         placaVeiculo : _NFNotaInfoReboque.placaVeiculo,
+         uf : _NFNotaInfoReboque.uf,
+         registroNacionalTransportadorCarga : _NFNotaInfoReboque.registroNacionalTransportadorCarga,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoReboque;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoCobranca =function(_NFNotaInfoCobranca,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoCobranca.id == "" || _NFNotaInfoCobranca.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoCobranca  = {
+             id : _id,
+         fatura : _NFNotaInfoCobranca.fatura,
+         duplicatas : _NFNotaInfoCobranca.duplicatas,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoCobranca;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoDuplicata =function(_NFNotaInfoDuplicata,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoDuplicata.id == "" || _NFNotaInfoDuplicata.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoDuplicata  = {
+             id : _id,
+         numeroDuplicata : _NFNotaInfoDuplicata.numeroDuplicata,
+         dataVencimento : _NFNotaInfoDuplicata.dataVencimento,
+         valorDuplicata : _NFNotaInfoDuplicata.valorDuplicata,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoDuplicata;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoFatura =function(_NFNotaInfoFatura,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoFatura.id == "" || _NFNotaInfoFatura.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoFatura  = {
+             id : _id,
+         numeroFatura : _NFNotaInfoFatura.numeroFatura,
+         valorOriginalFatura : _NFNotaInfoFatura.valorOriginalFatura,
+         valorDesconto : _NFNotaInfoFatura.valorDesconto,
+         valorLiquidoFatura : _NFNotaInfoFatura.valorLiquidoFatura,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoFatura;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoCartao =function(_NFNotaInfoCartao,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoCartao.id == "" || _NFNotaInfoCartao.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoCartao  = {
+             id : _id,
+         tipoIntegracao : _NFNotaInfoCartao.tipoIntegracao,
+         cnpj : _NFNotaInfoCartao.cnpj,
+         operadoraCartao : _NFNotaInfoCartao.operadoraCartao,
+         numeroAutorizacaoOperacaoCartao : _NFNotaInfoCartao.numeroAutorizacaoOperacaoCartao,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoCartao;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoPagamento =function(_NFNotaInfoPagamento,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoPagamento.id == "" || _NFNotaInfoPagamento.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoPagamento  = {
+             id : _id,
+         formaPagamentoMoeda : _NFNotaInfoPagamento.formaPagamentoMoeda,
+         valorPagamento : _NFNotaInfoPagamento.valorPagamento,
+         cartao : _NFNotaInfoPagamento.cartao,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoPagamento;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoInformacoesAdicionais =function(_NFNotaInfoInformacoesAdicionais,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoInformacoesAdicionais.id == "" || _NFNotaInfoInformacoesAdicionais.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoInformacoesAdicionais  = {
+             id : _id,
+         informacoesAdicionaisInteresseFisco : _NFNotaInfoInformacoesAdicionais.informacoesAdicionaisInteresseFisco,
+         informacoesComplementaresInteresseContribuinte : _NFNotaInfoInformacoesAdicionais.informacoesComplementaresInteresseContribuinte,
+         observacoesContribuinte : _NFNotaInfoInformacoesAdicionais.observacoesContribuinte,
+         observacoesFisco : _NFNotaInfoInformacoesAdicionais.observacoesFisco,
+         processosRefenciado : _NFNotaInfoInformacoesAdicionais.processosRefenciado,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoInformacoesAdicionais;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoObservacao =function(_NFNotaInfoObservacao,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoObservacao.id == "" || _NFNotaInfoObservacao.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoObservacao  = {
+             id : _id,
+         identificacaoCampo : _NFNotaInfoObservacao.identificacaoCampo,
+         conteudoCampo : _NFNotaInfoObservacao.conteudoCampo,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoObservacao;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoProcessoReferenciado =function(_NFNotaInfoProcessoReferenciado,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoProcessoReferenciado.id == "" || _NFNotaInfoProcessoReferenciado.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoProcessoReferenciado  = {
+             id : _id,
+         identificadorProcessoOuAtoConcessorio : _NFNotaInfoProcessoReferenciado.identificadorProcessoOuAtoConcessorio,
+         indicadorOrigemProcesso : _NFNotaInfoProcessoReferenciado.indicadorOrigemProcesso,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoProcessoReferenciado;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoExportacao =function(_NFNotaInfoExportacao,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoExportacao.id == "" || _NFNotaInfoExportacao.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoExportacao  = {
+             id : _id,
+         ufEmbarqueProduto : _NFNotaInfoExportacao.ufEmbarqueProduto,
+         localEmbarqueProdutos : _NFNotaInfoExportacao.localEmbarqueProdutos,
+         localDespachoProdutos : _NFNotaInfoExportacao.localDespachoProdutos,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoExportacao;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoCompra =function(_NFNotaInfoCompra,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoCompra.id == "" || _NFNotaInfoCompra.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoCompra  = {
+             id : _id,
+         notaDeEmpenho : _NFNotaInfoCompra.notaDeEmpenho,
+         pedido : _NFNotaInfoCompra.pedido,
+         contrato : _NFNotaInfoCompra.contrato,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoCompra;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoCana =function(_NFNotaInfoCana,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoCana.id == "" || _NFNotaInfoCana.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoCana  = {
+             id : _id,
+         safra : _NFNotaInfoCana.safra,
+         referencia : _NFNotaInfoCana.referencia,
+         fornecimentosDiario : _NFNotaInfoCana.fornecimentosDiario,
+         deducoes : _NFNotaInfoCana.deducoes,
+         quantidadeTotalMes : _NFNotaInfoCana.quantidadeTotalMes,
+         quantidadeTotalAnterior : _NFNotaInfoCana.quantidadeTotalAnterior,
+         quantidadeTotalGeral : _NFNotaInfoCana.quantidadeTotalGeral,
+         valorFornecimento : _NFNotaInfoCana.valorFornecimento,
+         valorTotalDeducao : _NFNotaInfoCana.valorTotalDeducao,
+         valorLiquidoFornecimento : _NFNotaInfoCana.valorLiquidoFornecimento,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoCana;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoCanaFornecimentoDiario =function(_NFNotaInfoCanaFornecimentoDiario,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoCanaFornecimentoDiario.id == "" || _NFNotaInfoCanaFornecimentoDiario.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoCanaFornecimentoDiario  = {
+             id : _id,
+         dia : _NFNotaInfoCanaFornecimentoDiario.dia,
+         quantidade : _NFNotaInfoCanaFornecimentoDiario.quantidade,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoCanaFornecimentoDiario;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoCanaDeducao =function(_NFNotaInfoCanaDeducao,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoCanaDeducao.id == "" || _NFNotaInfoCanaDeducao.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoCanaDeducao  = {
+             id : _id,
+         descricaoDeducao : _NFNotaInfoCanaDeducao.descricaoDeducao,
+         valorDeducao : _NFNotaInfoCanaDeducao.valorDeducao,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoCanaDeducao;
+}
+
+/** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
+qat.model.fnNFNotaInfoSuplementar =function(_NFNotaInfoSuplementar,modelAction)
+{
+
+     var _id = null;
+     if(_NFNotaInfoSuplementar.id == "" || _NFNotaInfoSuplementar.id == " "){
+         _id = null;
+     }
+     var _emprId = null;
+     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){
+         _emprId = null;
+     }else{
+         _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+     }
+     NFNotaInfoSuplementar  = {
+             id : _id,
+         qrCode : _NFNotaInfoSuplementar.qrCode,
+             parentId       : 0,
+             emprId         : _emprId,
+             processId      : 0,
+             tableEnumValue : 0,
+             modelAction    : modelAction,
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime()
+
+     }
+     return NFNotaInfoSuplementar;
+}
+
 
 
 

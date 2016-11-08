@@ -127,6 +127,7 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.produto.delete'
 	            ,'wdApp.apps.produto.view'
 	            ,'wdApp.apps.produto.select'
+	            ,'wdApp.apps.produto.selects'
 	            ,'wdApp.ajaxCall.produto'
 
 	            ,'wdApp.apps.agencia'
@@ -305,6 +306,8 @@ var WebDaptiveAppConfig = {
 	         	,'wdApp.apps.cliente.search'
 	         	,'wdApp.apps.formaPg.select'
 	         	,'wdApp.apps.endereco'
+	         	,'wdApp.ajaxCalls.doisValores'
+	         	,'wdApp.ajaxCall.notaFiscal'
 
 
 

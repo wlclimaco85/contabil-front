@@ -275,13 +275,15 @@
     angular.module('wdApp.apps.cliente.search', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('ClienteSearchController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
             var vm = this;
-            $scope.cliente = [];
-            $scope.pessoa =null
+            $scope.visibled = false
+         //   $scope.cliente = [];
+  
             $scope.countrySelected = function(selected) {
              // debugger
               if (selected) {
-                debugger
+                
                 $scope.pessoa = selected.originalObject;
+                $scope.visibled = true;
               } else {
                 console.log('cleared');
               }

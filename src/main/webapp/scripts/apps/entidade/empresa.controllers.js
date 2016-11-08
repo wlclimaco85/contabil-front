@@ -145,7 +145,7 @@
                     decodeEntities: true
                 }
             }, {
-                text: 'Novo Plano',
+                text: 'Novo Empresa',
                 key: '1',
                 action: function(e, dt, node, config) {
 
@@ -442,8 +442,8 @@ $scope.today = function() {
     $scope.dt = new Date(year, month, day);
   };
 
-  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  $scope.format = $scope.formats[0];
+  $scope.formats = ['dd-MMMM-yyyy','dd/MM/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[1];
   $scope.altInputFormats = ['M!/d!/yyyy'];
 
   $scope.popup1 = {
@@ -508,6 +508,8 @@ $scope.today = function() {
             }
             $scope.saveEmpresa = function() {
 
+                $scope.empresa.dtInicio = (new Date($scope.empresa.dtInicio)).getTime();
+                $scope.empresa.dtAbertura = (new Date($scope.empresa.dtAbertura)).getTime();
 
                 fEmpresa.fnMontaObjeto($scope.empresa,$scope.enderecos,$scope.emails,$scope.telefones,$scope.cnaes,$scope.usuario,"INSERT",'PRINCIPAL')
                // factory.fnMontaObjeto = function(empresa,enderecos,emails,telefones,cnaes,action){

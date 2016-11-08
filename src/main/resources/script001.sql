@@ -149,3 +149,18 @@ INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, 
 	   ('75','Operação de Aquisição por Substituição Tributária','75: Operação de Aquisição por Substituição Tributária',9,2, 1477075035443, 'System'),
 	   ('98','Outras Operações de Entrada','98: Outras Operações de Entrada',9,2, 1477075035443, 'System'),
 	   ('99','Outras operações','99: Outras operações',9,2, 1477075035443, 'System');
+
+	   
+	   INSERT INTO pagina(id,pagina,parentid, tabelaenumvalue, create_date, create_user)
+    VALUES (5,'Pedido Vendas', 0, 101, 1477075035443, 'System');
+
+
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
+    VALUES (26,'TIPO FRETE', 'TIPO FRETE', 1477075035443, 'System');
+
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES ('0', '0 - Emitente','0 - Emitente',26,5, 1477075035443, 'System'),
+	   ('1', '1 - Destinatário','1 - Destinatário',26,5, 1477075035443, 'System'),
+	   ('2', '2 - Terceiros','2 - Terceiros',26,5, 1477075035443, 'System'),
+	   ('9', '9 - Sem frete','9 - Sem frete',26,5, 1477075035443, 'System');

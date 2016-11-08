@@ -8,40 +8,67 @@
 			              </div>
 			              <div class="modal-body">
 			                <form  class="pdVendasForm">
-	                                    <div class="col-sm-12" ng-include="'views/financeiro/apps/cliente.html'"></div>
+	                                    <div class="col-sm-12" ng-include="'views/notaFiscal/apps/nf_Remetente.html'"></div>
+	                                    <div style="margin-bottom: 20px"></div>
 	                                     <div class="row">
-	                                        <div class="col-sm-3" ng-include="'views/util/apps/formaPg.html'"></div>
-	                                        <div class="col-sm-3">
-	                                            <label for="exampleInputEmail1">Tipo Frete</label>
-	                                            <div class="row ">
-		                                            <select id="XmodFrete" name="unidTributada" class=" form-group col-sm-12"  ng-model="notaFiscalSaida.frete.tipo">
-														<option value="0">0 - Emitente</option>
-														<option value="1">1 - Destinatário</option>
-														<option value="2">2 - Terceiros</option>
-														<option value="9">9 - Sem frete</option>
-													</select>
-												 </div>
-	                                        </div>
+	                                        <div class="ng-cloak" ng-controller="FormaPgSelectControllerss as ctrl">
+										        <div class="col-sm-3 ">
+										            <div class="form-group">
+										                <label for="exampleInputPassword1">Forma Pagamento <small ng-click="ctrl.addCfop()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
+										                <div class="row">
+										                    <ui-select ng-model="notaFiscalSaida.formapg" theme="bootstrap">
+										                        <ui-select-match placeholder="Formas de Pagamento">{{$select.selected.descricao}}</ui-select-match>
+										                        <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
+										                          <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+										                          <small ng-bind-html="item.observacao | highlight: $select.search"></small> -
+										                        </ui-select-choices>
+										                      </ui-select>
+										                </div>
+										            </div>
+										        </div>
+										    </div>
+										        <div class="col-sm-2 ">
+										            <div class="form-group">
+										                <label for="exampleInputPassword1">Tipo Frete </label>
+										                <div class="row">
+										                    <ui-select class="col-sm-12" ng-model="notaFiscalSaida.frete.tipoFrete" theme="bootstrap">
+										                        <ui-select-match placeholder="Tipo de Frete">{{$select.selected.nome}}</ui-select-match>
+										                        <ui-select-choices repeat="item in tipoFrete | filter: $select.search">
+										                          <div ng-bind-html="item.nome | highlight: $select.search"></div>
+										                        </ui-select-choices>
+										                      </ui-select>
+										                </div>
+										            </div>
+	                                        	</div>
 	                                        <div class="form-group col-sm-2">
 	                                            <label for="exampleInputPassword1">Valor Frete</label>
+	                                            <div class="input-group">
+	                                            <span class="input-group-addon">$</span>
 	                                            <input type="text" class="form-control" ng-model="notaFiscalSaida.frete.vrFrete" name="password" placeholder="0.00">
+	                                            <span class="input-group-addon">.00</span>
+	                                            </div>
 	                                        </div>
 	                                        <div class="form-group col-sm-2">
+	                                        	
 	                                            <label for="exampleInputPassword1">Desconto</label>
-	                                            <input type="text" class="form-control" ng-model="notaFiscalSaida.frete.vrDesconto" name="password" placeholder="0.00">
+	                                            <div class="input-group">
+	                                            <span class="input-group-addon">$</span>
+	                                            <input type="text" class="form-control" ng-model="notaFiscalSaida.vrDesconto" name="password" placeholder="0.00">
+	                                            <span class="input-group-addon">.00</span>
+	                                            </div>
 	                                        </div>
 	                                        <div class="form-group col-sm-2">
+	                                        	
 	                                            <label for="exampleInputPassword1">Valor Total</label>
-	                                            <input type="text" class="form-control" value="{{notaFiscalSaida.frete.vrFrete + notaFiscalSaida.frete.vrDesconto}}" name="password" placeholder="0.00">
+	                                            <div class="input-group">
+	                                            <span class="input-group-addon">$</span>
+	                                            <input type="text" class="form-control" ng-model="notaFiscalSaida.vrtotal" name="password" placeholder="0.00">
+	                                            <span class="input-group-addon">.00</span>
+	                                            </div>
 	                                        </div>
 	                                    </div>
-	                                     <div class="row">
-	                                     	<div  class="col-sm-6" ng-include="'views/util/apps/enderecoSelect.html'"></div>
-                                		</div>
-                                <div class="row " style="margin-top : 10px"></div>
-								  	<div ng-include="'views/util/apps/produtoSelect.html'"></div>
-
-
+                                <div class="row " style="margin-top : 20px"></div>
+								  	<div class="col-sm-12" ng-include="'views/notaFiscal/apps/nf_Produto.html'"></div>
 			            </form>
 			              </div>
 			              <div class="modal-footer">

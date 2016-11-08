@@ -73,12 +73,13 @@ public class ControllerMain {
 	private FileManager fileManager = new FileManager();
 
 
-
-	@RequestMapping(value = "/fetchCep", method = RequestMethod.POST)
 	@ResponseBody
+	@RequestMapping(value = "/fetchCep", method = RequestMethod.POST)
 	public String fetchCep(@RequestBody BuscaCep cep) {
+		String result = "";
 		buscaCEP = CEPServiceFactory.getCEPService();
-		return (buscaCEP.obtemPorNumeroCEP(cep.getCep())).toString();
+		result = (buscaCEP.obtemPorNumeroCEP(cep.getCep())).toString();
+		return result;
 	}
 
 	@ResponseBody

@@ -300,6 +300,13 @@
 		this.returnListPaged = _bPagedList;
 	};
 
+	qat.model.reqNotaFiscal = function ( _oEmpr, _bList, _bPagedList)
+	{
+		this.notafiscal = _oEmpr;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
+
 	//empresaInquryRequest
  	qat.model.transactionInquiryRequest = function ( _transaction ,_iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
  	{

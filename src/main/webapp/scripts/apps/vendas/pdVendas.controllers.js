@@ -248,24 +248,59 @@
 })();
 (function() {
     angular.module('wdApp.apps.pedidoVenda.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('PedidoVendaInsertController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        .controller('PedidoVendaInsertController', function(localStorageService,$rootScope, $scope, fModels, SysMgmtData,doisValorFactory,fNotaFiscal) {
             var vm = this;
 
             $scope.notaFiscalSaida = {
-                conhecimentoTransporte : {endereco :{}},
-                notaFiscalItens :[],
-                formaPagList :[],
-                cliente :{}
-
+                
             };
-            $scope.cliente = {};
-            $scope.formaPg = {};
-            $scope.endereco = {};
-            $scope.enderecos = {};
+            $scope.cliente  = {};
+            $scope.formaPg  = {};
+            $scope.endereco = null;
+            $scope.pessoa   = {};
+
+            $scope.visibled = false
+         //   $scope.cliente = [];
+  
+            $scope.countrySelected = function(selected) {
+             // debugger
+              if (selected) {
+                
+                $scope.pessoa = selected.originalObject;
+                $scope.visibled = true;
+              } else {
+                console.log('cleared');
+              }
+            };
+
+            SysMgmtData.processPostPageData("main/api/request", {
+                url: "pessoa/api/cliente/fetchPage",
+                token: $rootScope.authToken,
+                request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
+            }, function(res) {
+              //  debugger
+                $scope.cliente = res.clienteList;
+            });
 
 
             $scope.produtosSelect = "";
-            $scope.produto = {};
+            $scope.produto  = {};
+
+            $scope.produtos = [{form : 'form',produto:{}}];
+            
+            $scope.clientes = [];
+
+            $scope.calcProd = function(quant,valor)
+            {
+              return quant * valor;
+            }
+
+
+            $scope.createForm2 = function(){
+            
+                $scope.produtos.push({ nome : 'form1' + ($scope.produtos.length + 1),produto :{}});
+
+            };
 
 
 
@@ -303,42 +338,9 @@
             }
         }
 
-
-        var callbackBanco = function(res){
-                var planos = "";
-
-               if(res.operationSuccess == true)
-               {
-
-                   $scope.produtos = res.produtoParentList;
-
-                   $(".produto").select2({
-                      placeholder: "Selecione o BANCO",
-                      allowClear: true
-                    });
-               }
-
-            }
-
-            qat.model.select.util("produto/api/produtoParent/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackBanco);
-
-
-
-
-            var fnCallbackEndereco = function(res){
-                var planos = "";
-               if(res.operationSuccess == true)
-               {
-                   $scope.enderecos = res.enderecoList;
-
-                   $(".select2").select2({
-                      placeholder: "Selecione o BANCO",
-                      allowClear: true
-                    });
-               }
-            }
-
-            qat.model.select.util("entidade/api/endereco/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackEndereco);
+        doisValorFactory.pedidoVendas($scope);
+        
+        
 
         $scope.deleteForm = function(formScope){
 
@@ -365,34 +367,11 @@
             };
             $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
             $scope.format = $scope.formats[1];
-            var fnCallBack = function(oResponse) {
-                debugger
-                console.log(oResponse)
-            }
+
             $scope.savePedidoVenda = function() {
-                debugger
 
-                for(var x = 0 ; x<$scope.forms.length;x++){
-                    $scope.forms[x].notaFiscalItens.produto =  fModels.amont({ id : JSON.parse($scope.forms[x].notaFiscalItens.produto).id})
-                    $scope.notaFiscalSaida.notaFiscalItens.push($scope.forms[x].notaFiscalItens)
-                }
-
-                $scope.notaFiscalSaida.formaPagList.push(fModels.amont($scope.formaPg,'INSERT'));
-                $scope.notaFiscalSaida.cliente = fModels.amont($scope.cliente);
-                $scope.notaFiscalSaida.conhecimentoTransporte.enderecoEntrega = fModels.amont(JSON.parse($scope.notaFiscalSaida.conhecimentoTransporte.enderecoEntrega));
-
-
-                var oObject = fModels.amont($scope.notaFiscalSaida,"INSERT");
-
-                SysMgmtData.processPostPageData("main/api/request", {
-                    url: "vendas/api/nfSaidas/insert",
-                    token: $rootScope.authToken,
-                    request: new qat.model.reqNFSAIDA(oObject, true, true)
-                }, function(res) {
-                    callBack(res);
-                });
-
-               // fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos, 'INSERT', "site/api/pedidoVenda/insert/", fnCallBack);
+                fNotaFiscal.fnCreateObjectPdVendas(localStorageService.get('empresa'),$scope.pessoa,$scope.endereco,$scope.produtos,$scope.formaPg,$scope.notaFiscalSaida,1,'INSERT');
+              // function(emitente,remetente,endereco,produtos,formaPg,notaFiscal,type,action){
             };
         });
 })();

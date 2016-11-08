@@ -1,9 +1,4 @@
-package br.com.emmanuelneri.app.model;
-
-import java.time.LocalDate;
-
-import br.com.emmanuelneri.app.utils.Model;
-
+	package br.com.emmanuelneri.app.model;
 
 public class UtilRequest {
 

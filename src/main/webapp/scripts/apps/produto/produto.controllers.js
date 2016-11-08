@@ -892,7 +892,7 @@ angular.module('wdApp.apps.produto.select', ['ngSanitize', 'ui.select'])
 
 
 (function() {
-angular.module('wdApp.apps.produto.select', ['ngSanitize', 'ui.select'])
+angular.module('wdApp.apps.produto.selects', ['ngSanitize', 'ui.select'])
     .filter('propsFilter', function() {
   return function(items, props) {
     var out = [];

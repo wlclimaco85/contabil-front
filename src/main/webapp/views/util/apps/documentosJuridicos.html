@@ -8,7 +8,7 @@
 <div class="row">
     <div ng-repeat="documento in empresa.documentos">
     <div ng-if="documento.documentoTypeEnumValue =='1'">
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-3">
             <label for="exampleInputEmail1">CNPJ</label>
             
                 <input type="text" ng-model="documento.numero" name="cnpj" class="form-control" placeholder="Nº Cart. Trab">
@@ -16,7 +16,7 @@
             </div>
         </div>
 <div ng-if="documento.documentoTypeEnumValue =='12'">
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-3">
             <label for="exampleInputEmail1">Inscr Est Subst Trib</label>
             
                 <input type="text" ng-model="documento.numero" name="IEST" class="form-control" placeholder="Inscr Est Subst Trib">
@@ -24,7 +24,7 @@
             </div>
         </div>
         <div ng-if="documento.documentoTypeEnumValue =='14'">
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-3">
             <label for="exampleInputEmail1">Indicador de IE</label>
             
                 <input type="text" name="IEs" ng-model="documento.documentoTypeEnumValue" value="14" class="form-control hide" placeholder="Nº Cart. Trab" ng-init="documento.documentoTypeEnumValue=14">
@@ -40,10 +40,9 @@
                 </div>
             </div>
         </div>
-        </div>
-        </div>
-        <div class="row">
-        <div ng-repeat="documento in empresa.documentos">
+        
+        
+        
         <div ng-if="documento.documentoTypeEnumValue =='10'">
         <div class="form-group col-sm-3">
             <label for="exampleInputEmail1">Inscrição Estadual</label>
@@ -52,7 +51,10 @@
                 <input type="text" ng-model="documento.documentoTypeEnumValue" name="incrEst2" value="10" class="form-control hide" ng-init="documento.documentoTypeEnumValue=10">
             </div>
         </div>
-
+        </div>
+        </div>
+<div class="row">
+        <div ng-repeat="documento in empresa.documentos">
 <div ng-if="documento.documentoTypeEnumValue =='3'">
         <div class="form-group col-sm-3">
             <label for="exampleInputEmail1">Inscrição Municipal</label>
@@ -71,18 +73,19 @@
             </div>
         </div>
     </div>
-    </div>
+   
     <div class="form-group col-sm-3">
         <label for="exampleInputEmail1">Data Abertura</label>
-
-        <div class="input-group ui-datepicker">
-            <input type="text" ng-model="plano.dtInicio"
-                   class="form-control"
-                   uib-datepicker-popup="{{format}}"
-                   ng-model="dt"
-                   is-open="opened"
-                   datepicker-options="dateOptions"
-                   close-text="Close">
-            <span class="input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></span>
+        <div class="input-group">
+          <input type="text" class="form-control" ng-model="empresa.dtAbertura" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"   uib-datepicker-popup="{{format}}"/>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
         </div>
+      </div>
+      <div class="form-group col-sm-3">
+        <label for="exampleInputEmail1">N° Funcionarios</label>
+        <input type="text" ng-model="empresa.nomeFantasia" name="fantasia" class="form-control" placeholder="Nome Fantasia">
     </div>
+ </div>
+

@@ -1,5 +1,5 @@
 <div ng-repeat="produto in produtos">
-        <div class="row">
+        <div class="row" style="margin-top:3%">
             <div class="ng-cloak" ng-controller="ProdutoSelectController as ctrl">
                 <div class="col-sm-4 ">
                     <div class="form-group">
@@ -17,11 +17,20 @@
                     
                 </div>
             </div>
-            <div class="col-sm-1">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">CFOP</label>
-                    <input type="text" class="form-control nome-socio"  ng-model="produto.produto.tributacao.cfop.cfop" name="book[0].quantidade" placeholder="0.00" />
-
+            <div class="ng-cloak" ng-controller="CfopSelectController as ctrl">
+                <div class="col-sm-1 ">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">CFOP</label>
+                        <div class="row" style="margin-left:0px">
+                            <ui-select ng-model="produto.produto.tributacao.cfop" theme="bootstrap">
+                                <ui-select-match placeholder="CFOP">{{$select.selected.cfop}}</ui-select-match>
+                                <ui-select-choices repeat="item in ctrl.cfop | filter: $select.search">
+                                  <div ng-bind-html="item.cfop | highlight: $select.search"></div>
+                                  <small ng-bind-html="item.natureza | highlight: $select.search"></small> -
+                                </ui-select-choices>
+                              </ui-select>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-2">
@@ -29,7 +38,7 @@
 
                     <label for="exampleInputPassword1">Quant.</label>
                     <div class="input-group">
-                        <input type="text" class="form-control nome-socio" ng-init="qaunt=1" ng-model="qaunt" name="book[0].quantidade" placeholder="0.00" />
+                        <input type="text" class="form-control nome-socio" ng-init="produto.produto.quantidade=1" ng-model="produto.produto.quantidade" name="book[0].quantidade" placeholder="0.00" />
                         <span class="input-group-addon">.00</span>
                     </div>
                 </div>
@@ -50,12 +59,12 @@
                     <label for="exampleInputPassword1">Total prod.</label>
                     <div class="input-group">
                         <span class="input-group-addon">$</span>
-                        <input type="text" class="form-control cota-socio" ng-model="calcProd(qaunt,produto.produto.precoList[0].valor)" name="book[0].desconto" placeholder="R$0,00" />
+                        <input type="text" class="form-control cota-socio" ng-model="calcProd(produto.produto.quantidade,produto.produto.precoList[0].valor)" name="book[0].desconto" placeholder="R$0,00" />
                         <span class="input-group-addon">.00</span>
                     </div>
                 </div>
             </div>
-            <div class="col-xs-1" style="margin-top:18px">
+            <div class="col-xs-1" style="margin-top:25px">
                 <button type="button" ng-click="createForm2()" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
             </div>
         </div>
