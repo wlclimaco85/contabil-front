@@ -13,32 +13,40 @@
 
         };
 
-        
 
-        qat.model.select.anonimo("cadastros/api/estado/fetchPage",true,new qat.model.estadoInquiryRequest( 100/20, true,null),callbackEstado);
+
+       // qat.model.select.anonimo("cadastros/api/estado/fetchPage",true,new qat.model.estadoInquiryRequest( 100/20, true,null),callbackEstado);
 
         vm.buscaRCep = function(_cepValue){
-debugger
+
              var cepValue = _cepValue;
-            var formatedCep;
+             var formatedCep;
             //formatedCep = cepValue.replace(/\D/g, '');
-            var formatedCep = cepValue.replace(/\D/g, '');
-            
-            SysMgmtData.processPostPageData("main/api/fetchCep",{
-                    request: {'cep': '38082243'}}, function(res){
-                debugger        
-               if(res.operationSuccess == true)
-               {
-                    initLoad = true;
-                    toastr.success('Deu Certo seu tanga.', 'Sucess');
-               }
-               else
-               {
-                   toastr.error('County form error, please correct and resubmit.', 'Error');
-               }
+         //   var formatedCep = cepValue.replace(/\D/g, '');
+
+          //  SysMgmtData.processPostPageData("main/api/fetchCep",{
+            //        request: {'cep': '38082243'}}, function(res){
+            $.getJSON("//viacep.com.br/ws/"+_cepValue+"/json/?callback=?", function(res) {console.log(res)
+              //  debugger
+             //  if(res.operationSuccess == true)
+            //   {
+                  //  initLoad = true;
+                  //  toastr.success('Deu Certo seu tanga.', 'Sucess');
+                    //$scope.enderecos[0].cep = raw.cep;
+                    $scope.enderecos[0].bairro = res.bairro;
+                    $scope.enderecos[0].complemento = res.complemento;
+                    $scope.enderecos[0].codIbge = res.ibge;
+                    $scope.enderecos[0].cidade = {nome : res.localidade,estado :{abreviacao : res.uf  }};
+                    $scope.enderecos[0].logradouro = res.logradouro;
+
+            //   }
+            //   else
+             //  {
+             //      toastr.error('County form error, please correct and resubmit.', 'Error');
+             //  }
 
             });
-            
+
 /*
             var config = {headers: {
             'X-Cosmos-Token': 'T9pFIi3coAXpypnWF4miGw',
@@ -70,7 +78,7 @@ debugger
         }
 
         $scope.deleteForm = function(formScope){
-debugger
+
             delete $scope.enderecos(formScope);
         }
 
