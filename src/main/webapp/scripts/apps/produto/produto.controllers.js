@@ -34,6 +34,9 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
                         'texto': integerNotEmptyValidation,
                     }
                 });
+
+            
+
         }
 
         $scope.toggle = function() {
@@ -276,6 +279,8 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
                 '</button>';
         }
 
+
+
         function toggleAll(selectAll, selectedItems) {
             for (var id in selectedItems) {
                 if (selectedItems.hasOwnProperty(id)) {
@@ -283,6 +288,19 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
                 }
             }
         }
+
+
+        $scope.buscaRCep = function(){
+                $scope.detail = 0;
+
+                 debugger
+
+                 $('.toggle-one').bootstrapToggle();
+                 $('.toggle-one').change(function() {
+                  $scope.detail = 1;
+                })
+                 $scope.tabs=5;
+            }
 
         function status() {
         }
@@ -342,6 +360,8 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
         $scope.produto = {};
         $scope.tributacao = {};
         $scope.produtoEmpresa = {};
+        $scope.details = 0;
+        $scope.teste = 1;
 
 
         $scope.produto.produto = "Coca Cola";
@@ -482,7 +502,25 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
             }
 
 
+            $scope.buscaRCep = function(){
+                
 
+                 
+
+                 $('.toggle-ones').bootstrapToggle('toggle')
+                 $('.toggle-ones').change(function() {
+                    debugger
+                    if($(this).prop('checked') == true)
+                    {
+                        $('#Edit').show()
+                    }
+                    else
+                    {
+                        $('#Edit').hide()
+                    }
+                })
+    
+            }
 
 
             $scope.today = function() {
@@ -934,9 +972,31 @@ angular.module('wdApp.apps.produto.selects', ['ngSanitize', 'ui.select'])
 
             $scope.forms.push({ nome : 'form1' + ($scope.forms.length + 1),cnae :{id : type}});
 
+
         };
 
         $scope.fnTelefoneType = function(type){
+
+
+        $scope.buscaRCep = function(){
+                
+
+                 
+
+                 $('.toggle-ones').bootstrapToggle('toggle')
+                 $('.toggle-ones').change(function() {
+                    debugger
+                    if($(this).prop('checked') == true)
+                    {
+                        $('#Edit').show()
+                    }
+                    else
+                    {
+                        $('#Edit').hide()
+                    }
+                })
+    
+            }   
 
         var typeEnum
             switch (new Date().getDay()) {

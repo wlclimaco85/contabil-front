@@ -304,5 +304,120 @@
 		            </div>
 		        </div>
 		    </div>
+		    		    <div class="panel-group" id="accordion">
+		        <div class="panel panel-default">
+		            <div class="panel-heading">
+		                <h4 class="panel-title">
+		                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
+		                    ICMS em Operações Interestaduais
+		                    </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+		                </h4>
+		            </div>
+		            
+		            <div id="collapseOne" class="panel-collapse collapse in collapseFour">
+		                <div class="panel-body">
+		                    <div class="row">
+		                    	<div class="col-sm-3 ">
+		                            <div class="form-group">
+		                                <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Percentual ICMS Relativo ao FCP na UF de Destino">Per ICMS Rel UF Dest.</label>
+		                                <input type="text" class="form-control col-sm-8 " ng-model="tributacao.pis.valorUnidtribPIS" name="valorUnidtribPIS"  placeholder="Valor unid. trib. PIS">
+		                            </div>
+		                        </div>
+		                        <div class="col-sm-3 ">
+		                            <div class="form-group">
+		                                <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Valor da base de  cálculo na UF destinatário">Vr da base de  cálc UF dest.</label>
+		                                <input type="text" class="form-control col-sm-8 " ng-model="tributacao.pis.valorUnidtribPIS" name="valorUnidtribPIS"  placeholder="Valor unid. trib. PIS">
+		                            </div>
+		                        </div>
+		                        <div class="col-sm-3 ">
+		                            <div class="form-group">
+		                                <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Aliquota interna da UF do destinatario">Aliq interna da UF dest.</label>
+		                                <input type="text" class="form-control col-sm-8 " ng-model="tributacao.pis.valorUnidtribPIS" name="valorUnidtribPIS"  placeholder="Valor unid. trib. PIS">
+		                            </div>
+		                        </div>
+		                        <div class="col-sm-3 ">
+		                                <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Aliquota interestadual">Aliq interestadual</label>
+		                                <div class="row">
+		                                <ui-select ng-model="tributacao.pis.pISSituaTributaria" theme="bootstrap">
+									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+									            <ui-select-choices repeat="item in pisST | filter: $select.search">
+									              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+									              
+									            </ui-select-choices>
+								          </ui-select>
+		                            </div>
+		                        </div>
+		                        </div>
+		                        <div class="row">
+		                        <!-- 
+					
+						Percentual ICMS Relativo ao FCP na UF de Destino
+						Valor da base de  cálculo na UF destinatário
+						Aliquota interna da UF do destinatario
+						Aliquota interestadual
+						Percental provisório de partilha
+						Valor ICMS de partilha para UF do destinatário
+						Valor ICMS de partilha para UF do remetente
+						Valor ICMS relativo ao FCP da UF de destino
+
+
+		            -->
+		            			<div class="col-sm-3 ">
+		                                <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Percental provisório de partilha">Perc prov partilha</label>
+		                                <div class="row">
+		                                <ui-select ng-model="tributacao.pis.tipocalculoSubstTrib" theme="bootstrap">
+									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+									            <ui-select-choices repeat="item in tipoCalc | filter: $select.search">
+									              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+									              
+									            </ui-select-choices>
+								          </ui-select>
+		                            </div>
+		                        </div>
+		                        <div class="col-sm-3 ">
+		                            <div class="form-group">
+		                                <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Valor ICMS de partilha para UF do destinatário">Vr ICMS de part UF do dest.</label>
+		                                <input type="text" class="form-control col-sm-8 " ng-model="tributacao.pis.valorUnidtribPIS" name="valorUnidtribPIS"  placeholder="Valor unid. trib. PIS">
+		                            </div>
+		                        </div>
+		                        <div class="col-sm-3 ">
+		                            <div class="form-group">
+		                                <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Valor ICMS de partilha para UF do remetente">Vr ICMS de part UF do remet.</label>
+		                                <input type="text" class="form-control " ng-model="tributacao.pis.valorTribPISST" name="valorTribPISST"  placeholder="Valor unid trib PIS ST">
+		                            </div>
+		                        </div>
+		                        <div class="col-sm-3 ">
+		                            <div class="form-group">
+		                                <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Valor ICMS relativo ao FCP da UF de destino">Vr ICMS rel FCP UF dest.</label>
+		                                <input type="text" class="form-control " ng-model="tributacao.pis.valorTribPISST" name="valorTribPISST"  placeholder="Valor unid trib PIS ST">
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="row">
+		                    		<div class="checkbox">
+
+
+<input type="checkbox" class="toggle-ones" checked data-toggle="toggle" data-on="Ready" data-off="Not Ready" data-onstyle="success" data-offstyle="danger" ng-true-value="'2'" ng-false-value="'1'" >
+
+<strong>{{details}}</strong>
+
+<div id="Edit">
+dasdasdsdasdasdasdasdasddasdasd
+dsdadasdasd
+adasdasdasd
+</div>
+
+
+
+
+
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
 		</div>
+
+
+
 

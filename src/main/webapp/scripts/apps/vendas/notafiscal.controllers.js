@@ -649,10 +649,44 @@
               return quant * valor;
             }
 
+            $scope.buscaRCep = function(){
+                
+
+                 
+
+                 $('.toggle-ones').bootstrapToggle('toggle')
+                 $('.toggle-ones').change(function() {
+                    debugger
+                    if($(this).prop('checked') == true)
+                    {
+                        $(this).parents('.teste').find('.edit').show()
+                    }
+                    else
+                    {
+                        $(this).parents('.teste').find('.edit').hide()
+                    }
+                })
+    
+            }   
 
             $scope.createForm2 = function(){
             
                 $scope.produtos.push({ nome : 'form1' + ($scope.produtos.length + 1),produto :{}});
+
+              //  debugger
+              //   $('.toggle-ones').bootstrapToggle('destroy')
+                 $('.toggle-ones').bootstrapToggle()
+                 $('.toggle-ones').change(function() {
+                   // debugger
+                    if($(this).prop('checked') == true)
+                    {
+                        $(this).parents('.teste').find('.edit').show()
+                    }
+                    else
+                    {
+                        $(this).parents('.teste').find('.edit').hide()
+                    }
+                })
 
             };
             
