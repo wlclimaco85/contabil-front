@@ -6,7 +6,7 @@
                     <div class="form-group">
                         <label for="exampleInputPassword1">Produto <small ng-click="ctrl.addCfop()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
                         <div class="row">
-                            <ui-select ng-model="produto.produto" theme="bootstrap" on-select="onSelectCallback($item, $model)">
+                            <ui-select ng-model="produto.produto" theme="bootstrap" on-select="ctrl.onSelectCallback($item, $model)">
                                 <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.prodId.produto}}</ui-select-match>
                                 <ui-select-choices repeat="item in ctrl.produto | filter: $select.search">
                                   <div ng-bind-html="item.prodId.produto | highlight: $select.search"></div>
@@ -67,7 +67,7 @@
                     </div>
                 </div>
                     <div class="col-sm-4" style="margin-top:20px">
-                    <input type="checkbox" class="toggle-ones" checked data-toggle="toggle" style="width: 80%" data-on="Editar" data-off="Fechar" data-onstyle="success" data-offstyle="danger" ng-true-value="'2'" ng-false-value="'1'" >
+                    <input type="checkbox" class="toggle-ones" data-toggle="toggle" style="width: 100%" data-on="Editar" data-off="Fechar" data-onstyle="success" data-offstyle="danger" ng-true-value="'2'" ng-false-value="'1'" >
                     </div>
                 </div>
             </div>
@@ -504,7 +504,6 @@ adasdasdasd
 
 
         </div>
-    </div>
     </div>
     </div>
         

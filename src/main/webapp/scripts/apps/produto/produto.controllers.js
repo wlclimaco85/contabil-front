@@ -293,7 +293,7 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
         $scope.buscaRCep = function(){
                 $scope.detail = 0;
 
-                 debugger
+                 
 
                  $('.toggle-one').bootstrapToggle();
                  $('.toggle-one').change(function() {
@@ -509,7 +509,7 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
 
                  $('.toggle-ones').bootstrapToggle('toggle')
                  $('.toggle-ones').change(function() {
-                    debugger
+                    
                     if($(this).prop('checked') == true)
                     {
                         $('#Edit').show()
@@ -802,8 +802,22 @@ angular.module('wdApp.apps.produto.select', ['ngSanitize', 'ui.select'])
 
   vm.counter = 0;
   vm.onSelectCallback = function (item, model){
+    
     vm.counter++;
     vm.eventResult = {item: item, model: model};
+    $('.toggle-ones').bootstrapToggle()
+    $('.toggle-ones').change(function() {
+        // debugger
+        if($(this).prop('checked') == true)
+        {
+            $(this).parents('.teste').find('.edit').hide()
+        }
+        else
+        {
+            $(this).parents('.teste').find('.edit').show()
+        }
+    })
+
   };
 
   vm.removed = function (item, model) {

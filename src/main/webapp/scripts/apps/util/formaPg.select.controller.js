@@ -207,7 +207,7 @@ angular.module('wdApp.apps.select.formaPg', ['ngSanitize', 'ui.select'])
 
    var callbackBanco = function(res){
         var planos = "";
-debugger
+
        if(res.operationSuccess == true)
        {
 

@@ -225,11 +225,11 @@
             $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
             $scope.format = $scope.formats[1];
             var fnCallBack = function(oResponse) {
-                debugger
+                
                 console.log(oResponse)
             }
             $scope.saveCliente = function() {
-                debugger
+                
                 console.log($scope.emails);
                 fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos,$scope.emails,$scope.telefones, 'INSERT', "pessoa/api/cliente/insert", fnCallBack);
             };

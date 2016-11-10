@@ -371,11 +371,11 @@
             $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
             $scope.format = $scope.formats[1];
             var fnCallBack = function(oResponse) {
-                debugger
+                
                 console.log(oResponse)
             }
             $scope.saveCidade = function() {
-                debugger
+                
                 fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos, 'INSERT', "site/api/cidade/insert/", fnCallBack);
             };
         });

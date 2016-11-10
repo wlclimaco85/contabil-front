@@ -43,7 +43,7 @@
         }
 
         $scope.deleteForm = function(formScope){
-debugger
+
             delete $scope.telefones(formScope);
         }
 
