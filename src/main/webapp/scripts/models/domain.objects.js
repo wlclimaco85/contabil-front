@@ -2475,6 +2475,7 @@ qat.model.fnNFNotaInfoSuplementar =function(_NFNotaInfoSuplementar,modelAction)
 
      }
      
+     
      return NFNotaInfoSuplementar;
 }
 
