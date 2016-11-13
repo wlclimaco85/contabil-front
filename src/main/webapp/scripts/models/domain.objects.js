@@ -538,6 +538,7 @@ qat.model.fnTelefones =function(_telefone,modelAction)
         marca          : _produto.marca,
         parentId       : 0,
         emprId         : _emprId,
+        prodId         : _produto.prodId,
         processId      : 0,
         tableEnumValue : 0,
         userId         : _userId,

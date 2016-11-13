@@ -13,12 +13,12 @@
                 cpf : null,
                 razaosocial: emitente.razao,
                 nomefantasia : emitente.nome,
-                endereco : emitente.enderecos[0],
+                endereco : qat.model.fnEndereco(emitente.enderecos[0],'INSERT'),
                 inscricaoestadual : null,
                 inscricaoestadualsubstituicaotributaria : null,
                 inscricaomunicipal : null,
                 classificacaonacionalatividadeseconomicas: null,
-                regimetributario: emitente.regime,
+               // regimetributario: emitente.regime,
 
             }
    
@@ -112,47 +112,49 @@
             var oItens = [];
             var oIten = {
                 
-                datainicio                      : null,
-                valor                           : null,                          
-                servicoplanoenumvalue           : null,
-                servicolist                     : null,
-                planolist                       : null,
-                numeroregistro                  : null,
-                dataregistro                    : null,
-                localdesembaraco                : null,
-                ufdesembaraco                   : null,
-                datadesembaraco                 : null,
-                transporteinternacional         : null,
-                valorafrmm                      : null,
-                tpintermedio                    : null,
-                cnpj                            : null,
-                ufterceiro                      : null,
-                codigoexportador                : null,
-                descricao                       : null,
+            //    datainicio                      : null,
+            //    valor                           : null,                          
+            //    servicoplanoenumvalue           : null,
+           //     servicolist                     : null,
+           //     planolist                       : null,
+           //     numeroregistro                  : null,
+           //     dataregistro                    : null,
+           //     localdesembaraco                : null,
+           //     ufdesembaraco                   : null,
+            //    datadesembaraco                 : null,
+            //    transporteinternacional         : null,
+            //    valorafrmm                      : null,
+            //    tpintermedio                    : null,
+            //    cnpj                            : null,
+            //    ufterceiro                      : null,
+            //    codigoexportador                : null,
+            //    descricao                       : null,
                 produto                         : null,
                 cfop                            : null,
                 valorunitario                   : null,
                 valortotalbruto                 : null,
-                valorfrete                      : null,
-                valorseguro                     : null,
-                valordesconto                   : null,
-                valoroutrasdespesasacessorias   : null,
-                numerorecopi                    : null,
+            //    valorfrete                      : null,
+           //     valorseguro                     : null,
+             //   valordesconto                   : null,
+            //    valoroutrasdespesasacessorias   : null,
+            //    numerorecopi                    : null,
                 quantidade                      : null
             }
+            debugger
             for(var x = 0;x<produtos.length;x++)
             {
-                oIten.produto          = produtos[x].produto;
-                oIten.cfop             = produtos[x].produto.tributacao.cfop;
-                oIten.valortotalbruto  = (produtos[x].produto.quantidade * produtos[x].produto.precoList[0].valor),
+                
+                oIten.produto          = qat.model.fnProduto(produtos[x].produto,'INSERT','system');
+              // oIten.cfop             = produtos[x].produto.tributacao.cfop;
+               oIten.valortotalbruto  = (produtos[x].produto.quantidade * produtos[x].produto.precoList[0].valor),
                 oIten.valorunitario    = produtos[x].produto.precoList[0].valor,
-                oIten.valordesconto    = 0,
-                oIten.quantidade       = produtos[x].produto.quantidade;
+               oIten.valordesconto    = 0,
+               oIten.quantidade       = produtos[x].produto.quantidade;
                 oItens.push(fModels.amont(oIten,'INSERT'));
             }
 
             var oInfosuplementar = {
-                id                              : null
+             //   id                              : null
 
             }
 
@@ -200,24 +202,25 @@
                 retencoestributos  : null
             }
 
+            debugger
             var oNFNotaInfoIdentificacao = {
                 id                                  : null,
-                uf                                  : emitente.enderecos[0].cidade.estado.abreviacao, 
+                uf                                  : emitente.enderecos[0].cidade.estado, 
                 codigorandomico                     : 555,
                 naturezaoperacao                    : '5011',//emitente.configuracao.confNFe.cfopPadrao.cfop,
                 formapagamento                      : formaPg,
-                modelo                              : '55',//emitente.configuracao.confNFe.modelo.value,
-                serie                               : emitente.configuracao.confNFe.serieEnvio.value,
+                modelo                              : {id : 1 },//emitente.configuracao.confNFe.modelo.value,
+                serie                               : emitente.configuracao.confNFe.serieEnvio,
                 numeronota                          : null,
                 datahoraemissao                     : null,
                 datahorasaidaouentrada              : null,
-                tipo                                : 5,
-                identificadorlocaldestinooperacao   : null,
-                codigomunicipio                     : emitente.enderecos[0].codIbge,
+                tipo                                : {id : 5},
+                identificadorlocaldestinooperacao   : {value : 1},
+                codigomunicipio                     : emitente.enderecos[0].cidade.codIbge,
                 tipoimpressao                       : {value : 1},
                 tipoemissao                         : {value : 1},
                 digitoverificador                   : 0,
-                ambiente                            : emitente.configuracao.confNFe.ambienteEnvio.value,
+                ambiente                            : emitente.configuracao.confNFe.ambienteEnvio,
                 finalidade                          : {value : 1},
                 operacaoconsumidorfinal             : {value : 1},
                 indicadorpresencacomprador          : {value : 1},
@@ -230,6 +233,7 @@
 
 
             //NFNote
+            debugger
             var oNFNotaInfo = {
                 id                              : null,
                 identificador                   : '10',
@@ -258,11 +262,11 @@
               //NFNote
             var oNFNote = {
                 identificadorlocal : null,
-            //    info : fModels.amont(qat.model.fnNFNotaInfo(oNFNotaInfo,action)),
+                info : fModels.amont(qat.model.fnNFNotaInfo(oNFNotaInfo,action)),
                 infosuplementar : oInfosuplementar,
-                assinatura : 'teste'
+                assinatura :{ value : 'teste'}
             };
- 
+ debugger
             console.log(oNFNote);
             var initLoad = true; //used to ensure not calling server multiple times
             var user = "system";
@@ -275,13 +279,14 @@
          //   var enderecos =[];
           //  enderecos.push(fModels.amont(qat.model.fnEndereco(enderecos[0],action,user),action));
         
-       debugger  
-
+   //    debugger  //notafiscal
+console.log(oNFNote);
 
      //   var oObject = fModels.amont(empresa,"INSERT");
     //    oObject.usuarios.push(fModels.amont(qat.model.fnUsuario(usuario,"INSERT","system")));
         SysMgmtData.processPostPageData("main/api/request",{
                 url: "vendas/api/nfSaidas/insert",
+                token: $rootScope.authToken,
                 request: new qat.model.reqNotaFiscal(oNFNote ,true, true)}, function(res){
                debugger     
            if(res.operationSuccess == true)
