@@ -2474,6 +2474,7 @@ qat.model.fnNFNotaInfoSuplementar =function(_NFNotaInfoSuplementar,modelAction)
              modifyDateUTC  : (new Date()).getTime()
 
      }
+     
      return NFNotaInfoSuplementar;
 }
 
