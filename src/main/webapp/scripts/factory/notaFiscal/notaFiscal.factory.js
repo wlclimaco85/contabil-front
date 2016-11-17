@@ -7,7 +7,6 @@
 
 	factory.fnCreateObjectPdVendas = function(emitente,remetente,endereco,produtos,formaPg,notaFiscal,type,action){
 
-            alert('ddd')
             action = "INSERT";
              var oEmitente = {
                 id                              : null,
@@ -142,7 +141,7 @@
             //    numerorecopi                    : null,
                 quantidade                      : null
             }
-            debugger
+
             for(var x = 0;x<produtos.length;x++)
             {
 
@@ -267,7 +266,6 @@
                 infosuplementar : oInfosuplementar,
                 assinatura :{ value : 'teste'}
             };
- debugger
             console.log(oNFNote);
             var initLoad = true; //used to ensure not calling server multiple times
             var user = "system";

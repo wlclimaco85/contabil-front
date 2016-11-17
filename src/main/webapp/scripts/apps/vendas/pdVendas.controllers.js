@@ -252,7 +252,7 @@
             var vm = this;
 
             $scope.notaFiscalSaida = {
-                
+
             };
             $scope.cliente  = {};
             $scope.formaPg  = {};
@@ -261,11 +261,11 @@
 
             $scope.visibled = false
          //   $scope.cliente = [];
-  
+
             $scope.countrySelected = function(selected) {
              // debugger
               if (selected) {
-                
+
                 $scope.pessoa = selected.originalObject;
                 $scope.visibled = true;
               } else {
@@ -287,7 +287,7 @@
             $scope.produto  = {};
 
             $scope.produtos = [{form : 'form',produto:{}}];
-            
+
             $scope.clientes = [];
 
             $scope.calcProd = function(quant,valor)
@@ -297,7 +297,7 @@
 
 
             $scope.createForm2 = function(){
-            
+
                 $scope.produtos.push({ nome : 'form1' + ($scope.produtos.length + 1),produto :{}});
 
             };
@@ -338,9 +338,21 @@
             }
         }
 
+        var fnFunction = function(){
+            debugger
+        }
+        $inputaction = $('#teste')
+            $inputaction.inputaction({
+                    confirmAction: fnFunction,
+                    model: $scope.cliente,
+                    fullData: {},
+                    propertyName: 'name'
+                });
+
+
         doisValorFactory.pedidoVendas($scope);
-        
-        
+
+
 
         $scope.deleteForm = function(formScope){
 

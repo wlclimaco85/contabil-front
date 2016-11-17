@@ -28,13 +28,13 @@
             </dl>
         </div>
 
-        <div class="row">
+        <div class="row" >
             <div class="col-sm-2 ">
                 <div class="form-group">
                     <div ng-repeat="documento in pessoa.documentos">
                         <div ng-if="documento.documentoTypeEnumValue == 2">
                             <label for="exampleInputPassword1">CPF:</label>
-                            <label for="exampleInputPassword1">{{documento.numero}}</label>
+                            <label for="exampleInputPassword1" id="teste">{{documento.numero}}</label>
                         </div>
                         <div ng-if="documento.documentoTypeEnumValue == 1">
                             <label for="exampleInputPassword1">CNPJ:</label>
@@ -91,7 +91,7 @@
                     </div>
                 </div>
             </div>
-        
+
             <div class="col-sm-2 ">
                 <div class="form-group">
                     <label for="exampleInputPassword1">Telefone:</label>
@@ -106,21 +106,21 @@
                 <div class="form-group">
                     <label for="exampleInputPassword1">Endereço:</label>
                     <label for="exampleInputPassword1">{{pessoa.enderecos[0].logradouro}}</label>
-                    
+
                 </div>
             </div>
             <div class="col-sm-2 ">
                 <div class="form-group">
                     <label for="exampleInputPassword1">Numero:</label>
                     <label for="exampleInputPassword1">{{pessoa.enderecos[0].numero}}</label>
-                
+
                 </div>
             </div>
             <div class="col-sm-2 ">
                 <div class="form-group">
                     <label for="exampleInputPassword1">Bairro:</label>
                     <label for="exampleInputPassword1">{{pessoa.enderecos[0].bairro}}</label>
-                
+
                 </div>
             </div>
             <div class="col-sm-2 ">
@@ -134,7 +134,7 @@
                 <div class="form-group">
                     <label for="exampleInputPassword1">Complemento:</label>
                     <label for="exampleInputPassword1">{{pessoa.enderecos[0].complemento}}</label>
-                    
+
                 </div>
             </div>
             <div class="col-sm-2 ">
@@ -152,13 +152,13 @@
                 </div>
             </div>
         </div>
-        
+
         <div ng-if="enderecoEntrega == 1">
             <hr>
             <div ng-include="'views/util/apps/endereco.html'"></div>
         </div>
         <hr>
-     </div>   
-  
+     </div>
+
 
 </div>

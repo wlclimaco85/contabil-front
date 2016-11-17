@@ -303,7 +303,7 @@
                     token: $rootScope.authToken,
                     request: new qat.model.reqFormaPg(oObject, true, true)
                 }, function(res) {
-                    debugger
+
                 });
             };
         });
@@ -526,7 +526,7 @@ angular.module('wdApp.apps.formaPg.select', ['ngSanitize', 'ui.select'])
 
    var callbackBanco = function(res){
         var planos = "";
-debugger
+
        if(res.operationSuccess == true)
        {
 
@@ -534,7 +534,7 @@ debugger
 
         }
     }
-qat.model.select.util("financeiro/api/formaPg/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackBanco); 
+qat.model.select.util("financeiro/api/formaPg/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackBanco);
 
 vm.availableColors = ['Red','Green','Blue','Yellow','Magenta','Maroon','Umbra','Turquoise'];
 
