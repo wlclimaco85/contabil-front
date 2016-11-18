@@ -5,9 +5,9 @@
 	commonAuth.factory('fNotaFiscal', ['$rootScope','fModels','SysMgmtData','toastr' ,function($rootScope,fModels,SysMgmtData,toastr){
 		var factory = {};
 
-	factory.fnCreateObjectPdVendas = function(emitente,remetente,endereco,produtos,formaPg,notaFiscal,type,action){
-
-            action = "INSERT";
+	factory.fnCreateObjectPdVendas = function(emitente,remetente,endereco,produtos,formaPg,notaFiscal,type,_action){
+debugger
+            _action = "INSERT";
              var oEmitente = {
                 id                              : null,
                 cnpj : null,
@@ -19,6 +19,7 @@
                 inscricaoestadualsubstituicaotributaria : null,
                 inscricaomunicipal : null,
                 classificacaonacionalatividadeseconomicas: null,
+                modelAction    : _action
                // regimetributario: emitente.regime,
 
             }
@@ -59,6 +60,7 @@
                 inscricaoestadual : null,
                 inscricaosuframa : null,
                 inscricaomunicipal : null,
+                modelAction    : _action,
                 email : remetente.emails[0].email
             }
 
@@ -108,6 +110,7 @@
                 bairro          : oEndEntrega.bairro,
                 codigomunicipio : oEndEntrega.codIbge,
                 nomemunicipio   : oEndEntrega.cidade.nome,
+                modelAction     : _action,
                 uf              : oEndEntrega.cidade.estado.abreviacao
             }
             var oItens = [];
@@ -145,13 +148,13 @@
             for(var x = 0;x<produtos.length;x++)
             {
 
-                oIten.produto          = qat.model.fnProduto(produtos[x].produto,'INSERT','system');
-              // oIten.cfop             = produtos[x].produto.tributacao.cfop;
-               oIten.valortotalbruto  = (produtos[x].produto.quantidade * produtos[x].produto.precoList[0].valor),
-                oIten.valorunitario    = produtos[x].produto.precoList[0].valor,
-               oIten.valordesconto    = 0,
-               oIten.quantidade       = produtos[x].produto.quantidade;
-                oItens.push(fModels.amont(oIten,'INSERT'));
+                   oIten.produto          = qat.model.fnProduto(produtos[x].produto,'INSERT','system');
+                  // oIten.cfop             = produtos[x].produto.tributacao.cfop;
+                   oIten.valortotalbruto  = (produtos[x].produto.quantidade * produtos[x].produto.precoList[0].valor),
+                   oIten.valorunitario    = produtos[x].produto.precoList[0].valor,
+                   oIten.valordesconto    = 0,
+                   oIten.quantidade       = produtos[x].produto.quantidade;
+               oItens.push(fModels.amont(oIten,'INSERT'));
             }
 
             var oInfosuplementar = {
@@ -162,6 +165,7 @@
             var oTransporte = {
                 id                              : null,
                 modalidadefrete : notaFiscal.frete.tipoFrete,
+                modelAction     : _action,
                 transportador   : null,
                 icmstransporte  : null,
                 veiculo         : null,
@@ -192,15 +196,17 @@
                 valorcofins                     : null,
                 outrasdespesasacessorias        : null,
                 valortotalnfe                   : notaFiscal.vrtotal,
+                modelAction                     : _action,
                 valortotaltributos              : null
 
             }
 
             var oTotal = {
                 id                 : null,
-                icmstotal          : fModels.amont(qat.model.fnNFNotaInfoICMSTotal(oIcmstotal,action)),
+                icmstotal          : fModels.amont(qat.model.fnNFNotaInfoICMSTotal(oIcmstotal,_action),_action),
                 issqntotal         : null,
-                retencoestributos  : null
+                retencoestributos  : null,
+                modelAction        : _action
             }
 
 
@@ -209,9 +215,9 @@
                 uf                                  : emitente.enderecos[0].cidade.estado,
                 codigorandomico                     : 555,
                 naturezaoperacao                    : '5011',//emitente.configuracao.confNFe.cfopPadrao.cfop,
-                formapagamento                      : formaPg,
+                formapagamento                      : notaFiscal.formaPg,
                 modelo                              : {id : 1 },//emitente.configuracao.confNFe.modelo.value,
-                serie                               : emitente.configuracao.confNFe.serieEnvio,
+                serie                               : {id : 1 },//emitente.configuracao.confNFe.serieEnvio,
                 numeronota                          : null,
                 datahoraemissao                     : null,
                 datahorasaidaouentrada              : null,
@@ -229,31 +235,34 @@
                 versaoemissor                       : {value : 1},
                 datahoracontigencia                 : null,
                 justificativaentradacontingencia    : null,
-                referenciadas                       : null
+                referenciadas                       : null,
+                modelAction                         : _action
             }
 
 
             //NFNote
+
             var oNFNotaInfo = {
                 id                              : null,
                 identificador                   : '10',
                 versao                          : '3.4',
-                identificacao                   : fModels.amont(qat.model.fnNFNotaInfoIdentificacao(oNFNotaInfoIdentificacao,action)),
-                emitente                        : fModels.amont(qat.model.fnNFNotaInfoEmitente(oEmitente,action)),
+                identificacao                   : fModels.amont(qat.model.fnNFNotaInfoIdentificacao(oNFNotaInfoIdentificacao,_action),_action),
+                emitente                        : fModels.amont(qat.model.fnNFNotaInfoEmitente(oEmitente,_action),_action),
                 avulsa                          : null,
-                destinatario                    : fModels.amont(qat.model.fnNFNotaInfoDestinatario(oDestinatario,action)),
+                destinatario                    : fModels.amont(qat.model.fnNFNotaInfoDestinatario(oDestinatario,_action),_action),
                 retirada                        : null,
-                entrega                         : fModels.amont(qat.model.fnNFNotaInfoLocal(oEntrega,action)),
+                entrega                         : fModels.amont(qat.model.fnNFNotaInfoLocal(oEntrega,_action),_action),
                 pessoasautorizadasdownloadnfe   : null,
                 itens                           : oItens,
-                total                           : fModels.amont(qat.model.fnNFNotaInfoTotal(oTotal,action)),
-                transporte                      : fModels.amont(qat.model.fnNFNotaInfoTransporte(oTransporte,action)),
+                total                           : fModels.amont(qat.model.fnNFNotaInfoTotal(oTotal,_action),_action),
+                transporte                      : fModels.amont(qat.model.fnNFNotaInfoTransporte(oTransporte,_action),_action),
                 cobranca                        : null,
                 pagamentos                      : null,
                 informacoesadicionais           : null,
                 exportacao                      : null,
                 compra                          : null,
-                cana                            : null
+                cana                            : null,
+                modelAction                     : _action
             }
 
 
@@ -262,11 +271,12 @@
               //NFNote
             var oNFNote = {
                 identificadorlocal : null,
-                info : fModels.amont(qat.model.fnNFNotaInfo(oNFNotaInfo,action)),
+                info : fModels.amont(qat.model.fnNFNotaInfo(oNFNotaInfo,_action),_action),
                 infosuplementar : oInfosuplementar,
-                assinatura :{ value : 'teste'}
+                assinatura :{ value : 'teste'},
+                modelAction    : _action
             };
-            console.log(oNFNote);
+
             var initLoad = true; //used to ensure not calling server multiple times
             var user = "system";
             if(($rootScope.user != null)&&($rootScope.user !=undefined))
@@ -276,7 +286,7 @@
 
             //=================== ENDERECO
          //   var enderecos =[];
-          //  enderecos.push(fModels.amont(qat.model.fnEndereco(enderecos[0],action,user),action));
+          //  enderecos.push(fModels.amont(qat.model.fnEndereco(enderecos[0],_action,user),_action));
 
    //    debugger  //notafiscal
 console.log(oNFNote);
@@ -286,8 +296,8 @@ console.log(oNFNote);
         SysMgmtData.processPostPageData("main/api/request",{
                 url: "vendas/api/nfSaidas/insert",
                 token: $rootScope.authToken,
-                request: new qat.model.reqNotaFiscal(fModels.amont(oNFNote,action) ,true, true)}, function(res){
-               debugger
+                request: new qat.model.reqNotaFiscal(fModels.amont(oNFNote,_action) ,true, true)}, function(res){
+
            if(res.operationSuccess == true)
            {
                 initLoad = true;

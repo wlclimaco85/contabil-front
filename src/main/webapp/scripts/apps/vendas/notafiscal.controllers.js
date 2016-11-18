@@ -2,7 +2,7 @@
     angular.module('wdApp.apps.nfSaida', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('NfSaidasController', nfSaidaController);
 
-    function nfSaidaController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData) {
+    function nfSaidaController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData,tableColumnsFactory) {
         var vm = this;
         vm.selected = {};
         vm.selectAll = false;
@@ -548,7 +548,7 @@
         }
 
         function status() {
-            
+
 
         }
 
@@ -626,7 +626,7 @@
         }
 
         function toggle() {
-            
+
             $scope.state = !$scope.state;
         };
     }
@@ -641,7 +641,7 @@
             $scope.empresa = null;
             $scope.notaFiscal = null;
             $scope.produtos = [{form : 'form',produto:{}}];
-            
+
             $scope.clientes = [];
 
             $scope.calcProd = function(quant,valor)
@@ -650,13 +650,13 @@
             }
 
           /*  $scope.buscaRCep = function(){
-                
 
-                 
+
+
                 $('.edit').hide();
                  $('.toggle-ones').bootstrapToggle('toggle')
                  $('.toggle-ones').change(function() {
-                    
+
                     if($(this).prop('checked') == true)
                     {
                         $(this).parents('.teste').find('.edit').hide()
@@ -666,14 +666,14 @@
                         $(this).parents('.teste').find('.edit').show()
                     }
                 })
-    
-            }   
+
+            }
 */
             $scope.createForm2 = function(){
-            
+
                 $scope.produtos.push({ nome : 'form1' + ($scope.produtos.length + 1),produto :{}});
             };
-            
+
 
             if(localStorageService.get('empresa') != undefined)
             {

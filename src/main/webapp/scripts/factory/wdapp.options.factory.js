@@ -18,7 +18,7 @@
 			            })
 			            .withPaginationType('full_numbers')
 			            .withColumnFilter({
-			                aoColumns: filters 
+			                aoColumns: filters
 			            })
 			            .withOption('initComplete', function(settings, json) {
 			                $('.dt-buttons').find('.dt-button:eq(1)').before(
@@ -103,7 +103,7 @@
 				//County Object
 				defaut : function() {
 
-					
+
 
 				},
 				cliente : function(vm,createdRow,scope, _callback) {
@@ -116,7 +116,21 @@
 			                action: function(e, dt, node, config) {
 
 			                    dialogFactory.dialog('views/cadastros/dialog/dCliente.html',"ClienteInsertController",validationFactory.cliente,null);
-			                   
+
+			                }
+			            })
+
+			            return oOptions;
+				},
+				pdVendas : function(vm,createdRow,scope, _callback) {
+
+					var oOptions = padrao(vm,createdRow,scope, _callback);
+				     oOptions.buttons.push({
+			                text: 'Novo Pedido de Venda',
+			                key: '1',
+			                action: function(e, dt, node, config) {
+			                    dialogFactory.dialog('views/vendas/dialog/dPedidoVendas.html',"PedidoVendaInsertController",validationFactory.pdVendas,null);
+
 			                }
 			            })
 
