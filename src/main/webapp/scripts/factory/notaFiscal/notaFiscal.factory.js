@@ -5,7 +5,7 @@
 	commonAuth.factory('fNotaFiscal', ['$rootScope','fModels','SysMgmtData','toastr' ,function($rootScope,fModels,SysMgmtData,toastr){
 		var factory = {};
 
-	factory.fnCreateObjectPdVendas = function(emitente,remetente,endereco,produtos,formaPg,notaFiscal,type,_action){
+	factory.fnCreateObjectPdVendasOrcamento = function(emitente,remetente,endereco,produtos,formaPg,notaFiscal,type,_action,_tipo){
 debugger
             _action = "INSERT";
              var oEmitente = {
@@ -274,6 +274,7 @@ debugger
                 info : fModels.amont(qat.model.fnNFNotaInfo(oNFNotaInfo,_action),_action),
                 infosuplementar : oInfosuplementar,
                 assinatura :{ value : 'teste'},
+                tipo :{ id : _tipo},
                 modelAction    : _action
             };
 

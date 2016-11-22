@@ -49,7 +49,7 @@ var WebDaptiveAppConfig = {
 				'wdApp.charts.other.controllers', 'wdApp.charts.echarts.controllers', 'wdApp.charts.directives', 'wdApp.authentication',
 				'wdApp.pages.controllers', 'wdApp.demodata', 'wdApp.apps.stocks', 'wdApp.apps.stocksdata',
 				'wdApp.apps.counties','datatables','datatables.bootstrap', 'wdApp.apps.procedures','wdApp.apps.sysmgmt.data','wdApp.apps.site','wdApp.apps.empresa','wdApp.apps.produtos','wdApp.apps.produtoss','wdApp.apps.produto','wdApp.apps.notaFiscal',
-				'wdApp.apps.pdCompras','wdApp.apps.orcamento','wdApp.apps.ordemServico','wdApp.apps.nfEntrada','wdApp.apps.pdCompras'
+				'wdApp.apps.pdCompras','wdApp.apps.ordemServico','wdApp.apps.nfEntrada','wdApp.apps.pdCompras'
 				,'wdApp.apps.cotacao','wdApp.apps.pdVendas','wdApp.apps.funcionario',
 				'wdApp.ajaxCall'
 				,'inputactions'
@@ -269,6 +269,12 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.validacao.update'
 	            ,'wdApp.apps.validacao.delete'
 	            ,'wdApp.apps.validacao.view'
+
+	            ,'wdApp.apps.orcamento'
+	            ,'wdApp.apps.orcamento.insert'
+	            ,'wdApp.apps.orcamento.update'
+	            ,'wdApp.apps.orcamento.delete'
+	            ,'wdApp.apps.orcamento.view'
 
 
 	            ,'wdApp.apps.principal'

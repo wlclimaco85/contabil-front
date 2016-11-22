@@ -135,6 +135,34 @@
 			            })
 
 			            return oOptions;
+				},
+				orcamento : function(vm,createdRow,scope, _callback) {
+
+					var oOptions = padrao(vm,createdRow,scope, _callback);
+				     oOptions.buttons.push({
+			                text: 'Novo Orcamento',
+			                key: '1',
+			                action: function(e, dt, node, config) {
+			                    dialogFactory.dialog('views/vendas/dialog/dOrcamento.html',"OrcamentoInsertController",validationFactory.orcamento,null);
+
+			                }
+			            })
+
+			            return oOptions;
+				},
+				nfSaida : function(vm,createdRow,scope, _callback) {
+
+					var oOptions = padrao(vm,createdRow,scope, _callback);
+				     oOptions.buttons.push({
+			                text: 'Novo Nota Fiscal Saida',
+			                key: '1',
+			                action: function(e, dt, node, config) {
+			                    dialogFactory.dialog('views/vendas/dialog/dNotaFiscalSaida.html',"NfSaidaInsertController",validationFactory.nfSaida,null);
+
+			                }
+			            })
+
+			            return oOptions;
 				}
 			};
 	}]);

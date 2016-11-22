@@ -19,24 +19,6 @@
             tipoPessoa: 2
         };
 
-        var openDialogUpdateCreate = function () {
-            bookIndex = 0;
-            $('.PedidoVendaForm')
-                .formValidation({
-                    framework: 'bootstrap',
-                    icon: {
-                        valid: 'glyphicon glyphicon-ok',
-                        invalid: 'glyphicon glyphicon-remove',
-                        validating: 'glyphicon glyphicon-refresh'
-                    },
-                    fields: {
-                        'nome': notEmptyStringMinMaxRegexp,
-                        'email': integerNotEmptyValidation,
-                        'texto': integerNotEmptyValidation,
-                    }
-                });
-        }
-
         $scope.toggle = function() {
             $scope.state = !$scope.state;
         };
@@ -250,8 +232,7 @@
             $scope.format = $scope.formats[1];
 
             $scope.savePedidoVenda = function() {
-                fNotaFiscal.fnCreateObjectPdVendas(localStorageService.get('empresa'),$scope.pessoa,$scope.endereco,$scope.produtos,$scope.formaPg,$scope.notaFiscalSaida,1,'INSERT');
-              // function(emitente,remetente,endereco,produtos,formaPg,notaFiscal,type,action){
+                fNotaFiscal.fnCreateObjectPdVendasOrcamento(localStorageService.get('empresa'),$scope.pessoa,$scope.endereco,$scope.produtos,$scope.formaPg,$scope.notaFiscalSaida,1,'INSERT',1001);
             };
         });
 })();
