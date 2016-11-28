@@ -386,7 +386,7 @@ public class ConfiguracaoTest {
 	        entitys = new HttpEntity<String>(jsonInString,headers);
 	        result = restTemplate.postForObject( REST_SERVICE_URI + "configuracao/api/configCarne/fetchPage/",entitys,  ConfigCarneResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
-	        Assert.assertEquals(result.getConfigCarneList().size(), 15);
+	        Assert.assertEquals(result.getConfigCarneList().size(), 16);
 
 
 	//Assert.assertEquals(result.getConfigCarneList().get(0).getCarneBotelo(),(1001);
@@ -502,7 +502,7 @@ public class ConfiguracaoTest {
 	        entitys = new HttpEntity<String>(jsonInString,headers);
 	        result = restTemplate.postForObject( REST_SERVICE_URI + "configuracao/api/configEntrada/fetchPage/",entitys,  ConfigEntradaResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
-	        Assert.assertEquals(result.getConfigEntradaList().size(), 15);
+	        Assert.assertEquals(result.getConfigEntradaList().size(), 16);
 
 
 	//Assert.assertEquals(result.getConfigEntradaList().get(0).getValorTotalFixo(),(1001);
@@ -618,7 +618,7 @@ public class ConfiguracaoTest {
 	        entitys = new HttpEntity<String>(jsonInString,headers);
 	        result = restTemplate.postForObject( REST_SERVICE_URI + "configuracao/api/configFiscal/fetchPage/",entitys,  ConfigFiscalResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
-	        Assert.assertEquals(result.getConfigFiscalList().size(), 15);
+	        Assert.assertEquals(result.getConfigFiscalList().size(), 16);
 
 
 	//Assert.assertEquals(result.getConfigFiscalList().get(0).getPrincAtividade(),(new DoisValores());
@@ -853,7 +853,7 @@ public class ConfiguracaoTest {
 	        entitys = new HttpEntity<String>(jsonInString,headers);
 	        result = restTemplate.postForObject( REST_SERVICE_URI + "configuracao/api/configGeral/fetchPage/",entitys,  ConfigGeralResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
-	        Assert.assertEquals(result.getConfigGeralList().size(), 15);
+	        Assert.assertEquals(result.getConfigGeralList().size(), 16);
 //
 //
 //	Assert.assertEquals(result.getConfigGeralList().get(0).getFusoHorario(),(1001);
@@ -1241,7 +1241,7 @@ public class ConfiguracaoTest {
 	        entitys = new HttpEntity<String>(jsonInString,headers);
 	        result = restTemplate.postForObject( REST_SERVICE_URI + "configuracao/api/configuracaoNFe/fetchPage/",entitys,  ConfiguracaoNFeResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
-	        Assert.assertEquals(result.getConfiguracaoNFeList().size(), 15);
+	        Assert.assertEquals(result.getConfiguracaoNFeList().size(), 16);
 
 
 //	Assert.assertEquals(result.getConfiguracaoNFeList().get(0).getPresCompr(),(new DoisValores());

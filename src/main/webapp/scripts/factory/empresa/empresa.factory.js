@@ -143,7 +143,7 @@
             }
 
          }
-         debugger
+         
          empresa.cnaes =[];
          empresa.cnaes = cnaesAux;
 
@@ -183,6 +183,7 @@
 
         var oObject = fModels.amont(empresa,"INSERT");
         oObject.usuarios.push(fModels.amont(qat.model.fnUsuario(usuario,"INSERT","system")));
+        debugger
         SysMgmtData.processPostPageData("main/api/anonimo",{
                 url: "entidade/api/empresa"+   WebDaptiveAppConfig.create_url,
                 request: new qat.model.reqEmpr(oObject ,true, true)}, function(res){
