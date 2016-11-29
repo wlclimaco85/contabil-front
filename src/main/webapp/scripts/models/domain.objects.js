@@ -361,7 +361,7 @@ qat.model.fnTelefones =function(_telefone,modelAction)
         }
 
 
-          
+
 
   qat.model.fnEmails =function(_email,modelAction)
         {
@@ -403,7 +403,7 @@ qat.model.fnTelefones =function(_telefone,modelAction)
     }else{
       _emprId = JSON.parse(localStorage.getItem('empresa')).id;
     }
-  
+
             socio  = {
                id : id,
                pessoa : {
@@ -470,44 +470,24 @@ qat.model.fnTelefones =function(_telefone,modelAction)
       return PlanoByEmpresa;
   }
 
-  qat.model.fnServicoAndPlano=function(_Valor,_planoServicoId,_type,_modelAction)
+  qat.model.fnServicoAndPlano=function(_campo,_modelAction)
   {
 
+      return {
+        id          : _campo.id,
+        numContrato : _campo.numContrato,
+        valor        : _campo.valor,
+        dataInicio     : (new Date()).getTime(),
+        dataFim        : _campo.dataFim,
+        planoServicoList : _campo.planoServicoList,
+        tableEnumValue : 53,
+        modelAction    : _modelAction,
+        createUser     : "System",
+        createDateUTC  : (new Date()).getTime(),
+        modifyUser     : "System",
+        modifyDateUTC  : (new Date()).getTime()
+      };
 
-      if(_type == 1)
-      {
-          servicoAndPlano  = {
-             valor : _Valor,
-             planoList    : {id : _planoServicoId},
-             emprId         : 0,
-             dataInicio     : (new Date()).getTime(),
-             tableEnumValue : 53,
-             servicoPlanoEnumValue : 2,
-             modelAction    : _modelAction,
-             createUser     : "System",
-             createDateUTC  : (new Date()).getTime(),
-             modifyUser     : "System",
-             modifyDateUTC  : (new Date()).getTime()
-
-          }
-        }else{
-          servicoAndPlano  = {
-             valor : _Valor,
-             servicoList      : {id : _planoServicoId},
-             emprId         : 0,
-             dataInicio     : (new Date()).getTime(),
-             servicoPlanoEnumValue : 1,
-             tableEnumValue : 53,
-             modelAction    : _modelAction,
-             createUser     : "System",
-             createDateUTC  : (new Date()).getTime(),
-             modifyUser     : "System",
-             modifyDateUTC  : (new Date()).getTime()
-
-          }
-
-        }
-      return servicoAndPlano;
   }
 
 
@@ -524,7 +504,7 @@ qat.model.fnTelefones =function(_telefone,modelAction)
     }else{
       _emprId = JSON.parse(localStorage.getItem('empresa')).id;
     }
-  
+
       produto  = {
         id             : _id,
         ncm            : _produto.ncm,
@@ -825,7 +805,7 @@ var _emprId = null;
          _cfop.modifyUser     = _userId,
          _cfop.modifyDateUTC  = (new Date()).getTime()
 
-  
+
       return _cfop;
   }
 
@@ -869,7 +849,7 @@ qat.model.fnEndereco = function(_oObjet,modelAction,user)
       if(_oObjet.id == "" || _oObjet.id == " "){
         _id = null;
       }
-    
+
     return { id : _id,
      codIbge : _oObjet.codIbge,
      logradouro : _oObjet.logradouro,
@@ -2474,8 +2454,8 @@ qat.model.fnNFNotaInfoSuplementar =function(_NFNotaInfoSuplementar,modelAction)
              modifyDateUTC  : (new Date()).getTime()
 
      }
-     
-     
+
+
      return NFNotaInfoSuplementar;
 }
 

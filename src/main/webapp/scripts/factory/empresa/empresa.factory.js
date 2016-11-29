@@ -6,13 +6,13 @@
 		var factory = {};
 
 	factory.fnMontaObjeto = function(empresa,enderecos,emails,telefones,cnaes,usuario,action){
-   
+
             var initLoad = true; //used to ensure not calling server multiple times
             var user = "system";
             if(($rootScope.user != null)&&($rootScope.user !=undefined))
             {
                 user = $rootScope.user.user;
-            }    
+            }
              // socios
            var count = 0;
            var bb = [];
@@ -34,13 +34,35 @@
 
             //plano
             count = 0;
+          var  fValor = 0;
             bb = [];
+           var  oServicoAndPlano = [];
+           var  oPlanoByEmpresa  = {
+                numContrato : 0,
+                valor        : 0,
+                dataInicio     : (new Date()).getTime(),
+                dataFim        : null,
+                planoServicoList : [],
+            }
             $('.planos').each(function()
             {
 
                 if($(this).find('.plano').is(":checked") == true)
                 {   //_id,_Valor,_planoServicoId,_type,_modelAction
-                    bb.push(qat.model.fnServicoAndPlano(parseFloat(parseFloat($(this).find('.valor').text()).toFixed(2)),$(this).find('.plano-id').text(),$(this).find('.plano-type').text()));
+                    oServicoAndPlano.push({
+                        servicoPlanoEnum  : 1,
+                        servicoList       : null,
+                        planoList         : {id : $(this).find('.plano-id').text()},
+                        valor             : parseFloat($(this).find('.valor').text()).toFixed(2),
+                        modelAction       : action,
+                        tableEnumValue : 53,
+                        createUser     : "System",
+                        createDateUTC  : (new Date()).getTime(),
+                        modifyUser     : "System",
+                        modifyDateUTC  : (new Date()).getTime()
+                    })
+                    fValor = fValor + parseFloat($(this).find('.valor').text()).toFixed(2);
+                  //  bb.push(qat.model.fnServicoAndPlano(parseFloat(parseFloat($(this).find('.valor').text()).toFixed(2)),$(this).find('.plano-id').text(),$(this).find('.plano-type').text()));
                     count = count + 1;
                 }
             });
@@ -48,11 +70,27 @@
             {
                 if($(this).find('.Servico').is(":checked") == true)
                 {
-                    bb.push(qat.model.fnServicoAndPlano(parseFloat(parseFloat($(this).find('.valor').text()).toFixed(2)),$(this).find('.plano-id').text(),$(this).find('.plano-type').text()));
+                    oServicoAndPlano.push({
+                        servicoPlanoEnum  : 2,
+                        servicoList       : {id : $(this).find('.plano-id').text()},
+                        planoList         : null,
+                        valor             : parseFloat($(this).find('.valor').text()).toFixed(2),
+                        modelAction       : action,
+                        tableEnumValue : 53,
+                        createUser     : "System",
+                        createDateUTC  : (new Date()).getTime(),
+                        modifyUser     : "System",
+                        modifyDateUTC  : (new Date()).getTime()
+                    })
+
+                    //bb.push(qat.model.fnServicoAndPlano(parseFloat(parseFloat($(this).find('.valor').text()).toFixed(2)),$(this).find('.plano-id').text(),$(this).find('.plano-type').text()));
                     count = count + 1;
                 }
             });//(_Valor,_planoServicoId,_type,_modelAction)
-            empresa.planosServicos = qat.model.fnPlanoByEmpresa(parseFloat(parseFloat($('#total-plano').text()).toFixed(2)),bb,'',action);
+debugger
+            oPlanoByEmpresa.planoServicoList.push(oServicoAndPlano);
+            oPlanoByEmpresa.valor = parseFloat(parseFloat($('#total-plano').text()).toFixed(2));
+            empresa.planosServicos = qat.model.fnServicoAndPlano(oPlanoByEmpresa,action);
            // empresa.planosServicos = {}
 
 
@@ -74,7 +112,7 @@
                 {
                     documentos.push(fModels.amont(qat.model.fnDocumento(empresa.documentos[x],"INSERT",user),"INSERT"));
                 }
-                
+
             }
 
          }
@@ -84,14 +122,14 @@
          //=================== ENDERECO
          empresa.enderecos =[];
          empresa.enderecos.push(fModels.amont(qat.model.fnEndereco(enderecos[0],action,user),action));
-        
+
          //==================Telefone==================================
          var telefonesAux = [];
          for(var x=0;x < telefones.length;x++)
          {
             if(telefones[x].telefone == undefined || telefones[x].telefone == undefined )
             {
-                
+
                 if((telefones[x].telefone.id != null)&&(telefones[x].telefone.id != undefined))
                 {
                     telefonesAux.push(fModels.amont(qat.model.fnTelefones(telefones[x].telefone,"DELETE"),"DELETE"));
@@ -108,7 +146,7 @@
                 {
                     telefonesAux.push(fModels.amont(qat.model.fnTelefones(telefones[x].telefone,"INSERT"),"INSERT"));
                 }
-                
+
             }
 
          }
@@ -122,7 +160,7 @@
          {
             if(cnaes[x].cnae == undefined || cnaes[x].cnae == undefined )
             {
-                
+
                 if((cnaes[x].cnae.id != null)&&(cnaes[x].cnae.id != undefined))
                 {
                     cnaesAux.push(fModels.amont(qat.model.fnCnaeEmpresa(cnaes[x].cnae,"DELETE"),"DELETE"));
@@ -139,11 +177,11 @@
                 {
                     cnaesAux.push(fModels.amont(qat.model.fnCnaeEmpresa(cnaes[x].cnae,"INSERT"),"INSERT"));
                 }
-                
+
             }
 
          }
-         
+
          empresa.cnaes =[];
          empresa.cnaes = cnaesAux;
 
@@ -156,7 +194,7 @@
 
             if(email == undefined || email == undefined )
             {
-                
+
                 if((email.id != null)&&(email.id != undefined))
                 {
                     emailsAux.push(fModels.amont(qat.model.fnEmails(email,"DELETE"),"DELETE"));
@@ -173,7 +211,7 @@
                 {
                     emailsAux.push(fModels.amont(qat.model.fnEmails(email,"INSERT"),"INSERT"));
                 }
-                
+
             }
 
          }
@@ -187,7 +225,7 @@
         SysMgmtData.processPostPageData("main/api/anonimo",{
                 url: "entidade/api/empresa"+   WebDaptiveAppConfig.create_url,
                 request: new qat.model.reqEmpr(oObject ,true, true)}, function(res){
-                    
+
            if(res.operationSuccess == true)
            {
                 initLoad = true;

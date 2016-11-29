@@ -6,7 +6,7 @@
 		var factory = {};
 
 	factory.fnCreateObjectPdVendasOrcamento = function(emitente,remetente,endereco,produtos,formaPg,notaFiscal,type,_action,_tipo){
-debugger
+
             _action = "INSERT";
              var oEmitente = {
                 id                              : null,
