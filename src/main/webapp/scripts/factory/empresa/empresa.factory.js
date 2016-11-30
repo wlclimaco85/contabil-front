@@ -42,7 +42,7 @@
                 valor        : 0,
                 dataInicio     : (new Date()).getTime(),
                 dataFim        : null,
-                planoServicoList : [],
+                planoServicoList : null,
             }
             $('.planos').each(function()
             {
@@ -52,7 +52,7 @@
                     oServicoAndPlano.push({
                         servicoPlanoEnum  : 1,
                         servicoList       : null,
-                        planoList         : {id : $(this).find('.plano-id').text()},
+                        planoList         : {id : parseInt($(this).find('.plano-id').text())},
                         valor             : parseFloat($(this).find('.valor').text()).toFixed(2),
                         modelAction       : action,
                         tableEnumValue : 53,
@@ -72,7 +72,7 @@
                 {
                     oServicoAndPlano.push({
                         servicoPlanoEnum  : 2,
-                        servicoList       : {id : $(this).find('.plano-id').text()},
+                        servicoList       : {id : parseInt($(this).find('.plano-id').text(),10)},
                         planoList         : null,
                         valor             : parseFloat($(this).find('.valor').text()).toFixed(2),
                         modelAction       : action,
@@ -88,7 +88,7 @@
                 }
             });//(_Valor,_planoServicoId,_type,_modelAction)
 debugger
-            oPlanoByEmpresa.planoServicoList.push(oServicoAndPlano);
+            oPlanoByEmpresa.planoServicoList = oServicoAndPlano ;
             oPlanoByEmpresa.valor = parseFloat(parseFloat($('#total-plano').text()).toFixed(2));
             empresa.planosServicos = qat.model.fnServicoAndPlano(oPlanoByEmpresa,action);
            // empresa.planosServicos = {}

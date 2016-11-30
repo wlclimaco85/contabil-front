@@ -1,10 +1,14 @@
 <meta charset="utf-8"/>
 <!-- CONFIGURAÇÕES GERAIS -->
-<div class="row col-sm-12">
-    <div class="col-sm-5 tabs-was">
-        <h3>Configuração geral</h3>
-        <table class="fullBox">
-            <tbody>
+<div class="col-sm-12">
+    <div class="col-sm-6">
+    <h3>Configuração geral</h3>
+    <table class="table table-hover table-bordered">
+                        <thead>
+                        </thead>
+
+                        <tbody>
+
                 <tr>
                     <input type="text" class="form-control hide" ng-model="configuracao.confGeral.id" />
                     <td class="halfBox" data-toggle="tooltip" data-placement="right" title="Proíbe cadastrar mais de uma vez o mesmo CPF ou CNPJ na tela de contatos">CPF e CNPJ unico:</td>
@@ -53,11 +57,10 @@
             </tbody>
         </table>
     </div>
-    <div class="col-sm-5 tabs-was">
+    <div class="col-sm-6">
         <!-- CONFIGURAÇÕES DAS VENDAS -->
-        <div class="panel fullBox verticalHeaderTableList bottomSpace">
             <h3>Configuração das Vendas</h3>
-            <table class="fullBox">
+            <table class="table table-hover table-bordered">
                 <tbody>
                     <tr>
                         <input type="text" class="form-control hide" ng-model="configuracao.confVendas.id" />
@@ -110,16 +113,14 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
     </div>
 </div>
 <div class="row">
     <!-- DIV FIM DA COLUNA 1 -->
-    <div id="col2" class="col-sm-5 tabs-was">
+    <div id="col2" class="col-sm-6">
         <!-- CONFIGURAÇÕES CABEÇALHO -->
-        <div class="panel fullBox verticalHeaderTableList bottomSpace">
             <h3>Configuração do cabeçalho</h3>
-            <table class="fullBox">
+            <table class="table table-hover table-bordered">
                 <tbody>
                     <tr>
                         <td id="c_logomarca" class="halfBox right" data-toggle="tooltip" data-placement="right" title="Este cabeçalho é utilizado em Ordens de Serviço e Pedidos de Venda">
@@ -128,13 +129,12 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
+
     </div>
-    <div class="col-sm-5 tabs-was">
+    <div class="col-sm-6">
         <!-- CONFIGURAÇÕES DAS ENTRADAS -->
-        <div class="panel fullBox verticalHeaderTableList bottomSpace">
             <h3>Configurações das entradas</h3>
-            <table class="fullBox">
+            <table class="table table-hover table-bordered">
                 <tbody>
                     <tr>
                         <input type="text" class="form-control hide" ng-model="configuracao.confEntrada.id" />
@@ -147,15 +147,14 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-5 tabs-was">
+    <div class="col-sm-6">
         <!-- CONFIGURAÇÕES DAS ORDENS DE SERVIÇO -->
         <div class="panel fullBox verticalHeaderTableList bottomSpace">
             <h3>Configuração das OS (Ordens de Serviço)</h3>
-            <table class="fullBox">
+            <table class="table table-hover table-bordered">
                 <tbody>
                     <tr>
                         <input type="text" class="form-control hide" ng-model="configuracao.configOS.id" />
@@ -199,9 +198,9 @@
         </div>
     </div>
     <!-- CONFIGURAÇÕES DE CARNÊS -->
-    <div class="col-sm-5 tabs-was">
+    <div class="col-sm-5">
         <h3>Configurações dos carnês</h3>
-        <table class="fullBox">
+        <table class="table table-hover table-bordered">
             <tbody>
                 <tr>
                     <td class="halfBox">Ativar carnê de boletos?</td>
@@ -268,11 +267,11 @@
 </div>
 <div class="row">
     <!-- CONFIGURAÇÕES BOLETOS -->
-    <div class="col-sm-5 tabs-was">
+    <div class="col-sm-6">
         <!-- DADOS FISCAIS -->
         <div class="panel fullBox verticalHeaderTableList bottomSpace selection">
             <h3>Dados fiscais da empresa</h3>
-            <table class="fullBox">
+            <table class="table table-hover table-bordered">
                 <tbody>
                     <tr>
                         <td>Principal atividade da empresa:</td>
@@ -351,10 +350,11 @@
             </table>
         </div>
     </div>
-    <div class="col-sm-5 tabs-was">
+    <div class="col-sm-6">
         <div class="panel fullBox verticalHeaderTableList bottomSpace selection">
             <h3>Configurações da NFe</h3>
-            <table>
+            <table class="table table-hover table-bordered">
+             <thead>
                 </thead>
                 <tbody>
                     <tr>
@@ -469,12 +469,12 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-5 tabs-was">
+        <div class="col-sm-6">
             <!-- CONFIGURAÇÕES SMTP -->
             <div class="panel fullBox verticalHeaderTableList bottomSpace">
                 <h3>Alertas</h3>
                 <div class="fullBox" id="configSMTP_resumo">
-                    <table class="fullBox">
+                    <table class="table table-hover table-bordered">
                         <tbody>
                             <tr>
                                 <td>Estoque Minimo:</td>
@@ -506,9 +506,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-5 tabs-was">
+        <div class="col-sm-6">
             <div id="dadosCertificado" class="tableList bottomSpace">
-                <table>
+                <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
                             <td>Certificado Digital A1</td>
@@ -537,9 +537,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-5 tabs-was">
+        <div class="col-sm-6">
             <div id="dadosCFOP" class="tableList bottomSpace">
-                <table>
+                <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
                             <td colspan="2">Lista de CFOPs</td>
@@ -565,9 +565,9 @@
                 </table>
             </div>
         </div>
-        <div class="col-sm-5 tabs-was">
+        <div class="col-sm-6">
             <div id="dadosSMTP" class="tableList bottomSpace">
-                <table>
+                <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
                             <input type="text" class="form-control hide" ng-model="configuracao.confSMTP.id" />
@@ -661,9 +661,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-5 tabs-was">
+            <div class="col-sm-6">
                 <div id="dadosSMTP" class="tableList bottomSpace">
-                    <table>
+                    <table class="table table-hover table-bordered">
                         <thead>
                             <tr>
                                 <td colspan="2">Sistema</td>
@@ -698,9 +698,9 @@
                     </table>
                 </div>
             </div>
-            <div class="col-sm-5 tabs-was">
+            <div class="col-sm-6">
                 <div id="dadosSMTP" class="tableList bottomSpace">
-                    <table>
+                    <table class="table table-hover table-bordered">
                         <thead>
                             <tr>
                                 <td colspan="2">Cosmos Bluesoft </td>
