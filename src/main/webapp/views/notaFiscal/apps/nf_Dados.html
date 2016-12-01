@@ -18,7 +18,7 @@
 
                 <div class="col-sm-2 ">
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Razão Social:</label>
+                        <label for="exampleInputPassword1">RazÃ£o Social:</label>
                         <label for="exampleInputPassword1">{{empresa.razao}}</label>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
             </div>
             <div class="col-sm-2 ">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Endereço:</label>
+                    <label for="exampleInputPassword1">EndereÃ§o:</label>
                     <label for="exampleInputPassword1">{{empresa.enderecos[0].logradouro}}</label>
 
                 </div>
@@ -81,14 +81,14 @@
             <div class="col-sm-2 ">
                 <div class="form-group">
                     <label for="exampleInputPassword1">Cidade/UF:</label>
-                    <label for="exampleInputPassword1">{{empresa.enderecos[0].cidade.nome}}/{{empresa.enderecos[0].estado.sigla}}</label>
+                    <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.uf = empresa.enderecos[0].estado">{{empresa.enderecos[0].cidade.nome}}/{{empresa.enderecos[0].estado.sigla}}</label>
 
                 </div>
             </div>
             <div class="col-sm-2 ">
                 <div class="form-group">
                     <label for="exampleInputPassword1">Local fato gerador:</label>
-                    <label for="exampleInputPassword1">{{empresa.enderecos[0].cidade.nome}}</label>
+                    <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.codigomunicipio = empresa.enderecos[0].cidade.cdIBGE">{{empresa.enderecos[0].cidade.nome}}</label>
 
                 </div>
             </div>
@@ -111,23 +111,37 @@
                     <div class="col-sm-2 ">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Modelo nota:</label>
-                            <label for="exampleInputPassword1">{{empresa.configuracao.confNFe.modelo.value}}</label>
+                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.modelo = empresa.configuracao.confNFe.modelo">{{empresa.configuracao.confNFe.modelo.value}}</label>
 
                         </div>
                     </div>
                     <div class="col-sm-2 ">
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Série nota:</label>
+                            <label for="exampleInputPassword1">SÃ©rie nota:</label>
                             <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.serie = empresa.configuracao.confNFe.serieEnvio">{{empresa.configuracao.confNFe.serieEnvio.value}}</label>
 
                         </div>
                     </div>
                     <div class="col-sm-2 ">
                         <div class="form-group">
-                            <label for="exampleInputPassword1" title="As notas enviadas em ambiente de testes não tem validade jurídica e servem para o aprendizado sobre os processos de criação, envio e armazenamento das notas.">Ambiente envio:</label>
+                            <label for="exampleInputPassword1" title="As notas enviadas em ambiente de testes nÃ£o tem validade jurÃ­dica e servem para o aprendizado sobre os processos de criaÃ§Ã£o, envio e armazenamento das notas.">Ambiente envio:</label>
                             <div ng-if="empresa.configuracao.confNFe.ambienteEnvio != null">
                                 <label for="exampleInputPassword1">{{empresa.configuracao.confNFe.ambienteEnvio.descricao}}</label>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Tipo ImpressÃ£o:</label>
+                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.serie = empresa.configuracao.confNFe.serieEnvio">{{empresa.configuracao.confNFe.serieEnvio.value}}</label>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-2 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Tipo EmissÃ£o:</label>
+                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.serie = empresa.configuracao.confNFe.serieEnvio">{{empresa.configuracao.confNFe.serieEnvio.value}}</label>
+
                         </div>
                     </div>
                 </div>
@@ -137,17 +151,17 @@
     <div class="row">
             <div class="col-sm-2 ">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Número da NFe:</label>
+                    <label for="exampleInputPassword1">NÃºmero da NFe:</label>
                     <input type="text" class="form-control " ng-model="notaFiscal.info.identificacao.numeronota" name="valorTribCOFINS"  placeholder="">
                 </div>
             </div>
             <div class="ng-cloak" ng-controller="CfopSelectController as ctrl">
                 <div class="col-sm-4 ">
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Natureza da operação <small ng-click="ctrl.addCfop()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
+                        <label for="exampleInputPassword1">Natureza da operaÃ§Ã£o <small ng-click="ctrl.addCfop()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
                         <div class="row">
                             <ui-select ng-model="notaFiscal.info.identificacao.naturezaoperacao" theme="bootstrap">
-                                <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.cfop.id}}</ui-select-match>
+                                <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.cfop}}</ui-select-match>
                                 <ui-select-choices repeat="item in ctrl.cfop | filter: $select.search">
                                   <div ng-bind-html="item.cfop | highlight: $select.search"></div>
                                   <small ng-bind-html="item.natureza | highlight: $select.search"></small> -
@@ -164,11 +178,11 @@
             </div>
             <div class="col-sm-3">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Tipo de operação</label>
+                    <label for="exampleInputPassword1">Tipo de operaÃ§Ã£o</label>
                     <div class="row ">
                        <span class="ui-select">
                             <select ng-model="notaFiscal.info.identificacao.tipo.id">
-                                <option value="1" selected="selected"> Saída </option>
+                                <option value="1" selected="selected"> SaÃ­da </option>
                                 <option value="0">Entrada</option>
                             </select>
                         </span>
@@ -180,14 +194,14 @@
         <div class="row">
             <div class="col-sm-4 ">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Finalidade da emissão:</label>
+                    <label for="exampleInputPassword1">Finalidade da emissÃ£o:</label>
                     <div class="row ">
                        <span class="ui-select">
                             <select ng-model="notaFiscal.info.identificacao.finalidade.id">
                                 <option value="1" selected="selected">Normal</option>
                                 <option value="2">Complementar</option>
                                 <option value="3">De ajuste</option>
-                                <option value="4">Devolução de mercadoria</option>
+                                <option value="4">DevoluÃ§Ã£o de mercadoria</option>
                             </select>
                         </span>
                      </div>
@@ -195,14 +209,14 @@
             </div>
             <div class="col-sm-4 ">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Destino da operação:</label>
+                    <label for="exampleInputPassword1">Destino da operaÃ§Ã£o:</label>
                     <div class="row ">
                        <span class="ui-select">
                             <select ng-model="notaFiscal.info.identificacao.identificadorlocaldestinooperacao.id">
                                 <option value="0" selected="selected"></option>
-                                <option value="1">Operação interna</option>
-                                <option value="2">Operação interestadual</option>
-                                <option value="3">Operação com exterior</option>
+                                <option value="1">OperaÃ§Ã£o interna</option>
+                                <option value="2">OperaÃ§Ã£o interestadual</option>
+                                <option value="3">OperaÃ§Ã£o com exterior</option>
                             </select>
                         </span>
                      </div>
@@ -222,7 +236,7 @@
                         <div class="row ">
                            <span class="ui-select">
                                 <select ng-model="notaFiscal.tipoNFeReferenciada">
-                                    <option value="1">NF eletrônica</option>
+                                    <option value="1">NF eletrÃ´nica</option>
                                     <option value="2">NF impressa</option>
                                     <option value="3">NF produtor rural</option>
                                     <option value="4">CTe</option>
@@ -259,7 +273,7 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Ano e mês da emissão (AAMM)</label>
+                                <label for="exampleInputPassword1">Ano e mÃªs da emissÃ£o (AAMM)</label>
                                 <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
                             </div>
                         </div>
@@ -273,13 +287,13 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Série da nota fiscal</label>
+                                <label for="exampleInputPassword1">SÃ©rie da nota fiscal</label>
                                 <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Número da nota fiscal</label>
+                                <label for="exampleInputPassword1">NÃºmero da nota fiscal</label>
                                 <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
                             </div>
                         </div>
@@ -295,7 +309,7 @@
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Ano e mês da emissão (AAMM)</label>
+                                <label for="exampleInputPassword1">Ano e mÃªs da emissÃ£o (AAMM)</label>
                                 <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
                             </div>
                         </div>
@@ -321,13 +335,13 @@
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Série da nota fiscal</label>
+                                <label for="exampleInputPassword1">SÃ©rie da nota fiscal</label>
                                 <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Número da nota fiscal</label>
+                                <label for="exampleInputPassword1">NÃºmero da nota fiscal</label>
                                 <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
                             </div>
                         </div>
@@ -343,13 +357,13 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Número sequencial do ECF</label>
+                                <label for="exampleInputPassword1">NÃºmero sequencial do ECF</label>
                                 <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Núm. Contador Ordem de Operação - COO</label>
+                                <label for="exampleInputPassword1">NÃºm. Contador Ordem de OperaÃ§Ã£o - COO</label>
                                 <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
                             </div>
                         </div>
@@ -363,7 +377,7 @@
         <div class="row">
             <div class="col-sm-3 " style="margin-top:1%">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Data emissão NF /Hora Emissao</label>               
+                    <label for="exampleInputPassword1">Data emissÃ£o NF /Hora Emissao</label>
                 <div class="input-group">
                   <input type="text" class="form-control" ng-model="notaFiscal.info.identificacao.datahoraemissao1" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"   uib-datepicker-popup="{{format}}"/>
                   <span class="input-group-btn">
@@ -379,7 +393,7 @@
             </div>
             <div class="col-sm-3 " style="margin-top:1%">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Data saída/entrada:</label>
+                    <label for="exampleInputPassword1">Data saÃ­da/entrada:</label>
                     <div class="input-group">
                   <input type="text" class="form-control" ng-model="notaFiscal.info.identificacao.datahorasaidaouentrada1" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"   uib-datepicker-popup="{{format}}"/>
                   <span class="input-group-btn">
@@ -416,16 +430,16 @@
             </div>
             <div class="col-sm-4 ">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Presença do comprador:</label>
+                    <label for="exampleInputPassword1">PresenÃ§a do comprador:</label>
                     <div class="row ">
                        <span class="ui-select">
                             <select ng-model="notaFiscal.info.identificacao.indicadorpresencacomprador">
-                                <option value="0">Não se aplica</option>
-                                <option value="1">Operação presencial</option>
-                                <option value="2">Operação pela internet</option>
-                                <option value="3">Operação por teleatendimento</option>
-                                <option value="4">NFC-e com entrega a domicílio</option>
-                                <option value="9">Não presencial, outros</option>
+                                <option value="0">NÃ£o se aplica</option>
+                                <option value="1">OperaÃ§Ã£o presencial</option>
+                                <option value="2">OperaÃ§Ã£o pela internet</option>
+                                <option value="3">OperaÃ§Ã£o por teleatendimento</option>
+                                <option value="4">NFC-e com entrega a domicÃ­lio</option>
+                                <option value="9">NÃ£o presencial, outros</option>
                             </select>
                         </span>
                      </div>
@@ -444,11 +458,11 @@
 
     <div id="quadroReferenciadas" class="invisible bottomSpace NFCeHide" style="display: none;">
         <h2>Dados da Nota Fiscal referenciada</h2>
-        <div class="alerta">Esta informação será automaticamente impressa nas Informações Complementares, no DANFE.</div>
+        <div class="alerta">Esta informaÃ§Ã£o serÃ¡ automaticamente impressa nas InformaÃ§Ãµes Complementares, no DANFE.</div>
         <table>
             <tbody>
                 <tr>
-                    <td class="boxField" id="meuTipoNotaRef_rcpt"><label for="meuTipoNotaRef"> <span>Tipo de nota a ser referenciada</span></label><select id="meuTipoNotaRef" class="undefined ui-widget-content ui-corner-all" name="meuTipoNotaRef" autocomplete="off"><option value="1">NF eletrônica</option><option value="2">NF impressa</option><option value="3">NF produtor rural</option><option value="4">CTe</option><option value="5">Cupom Fiscal</option></select></td>
+                    <td class="boxField" id="meuTipoNotaRef_rcpt"><label for="meuTipoNotaRef"> <span>Tipo de nota a ser referenciada</span></label><select id="meuTipoNotaRef" class="undefined ui-widget-content ui-corner-all" name="meuTipoNotaRef" autocomplete="off"><option value="1">NF eletrÃ´nica</option><option value="2">NF impressa</option><option value="3">NF produtor rural</option><option value="4">CTe</option><option value="5">Cupom Fiscal</option></select></td>
                     <td class="boxField" id="BrefNFe_rcpt"><label for="BrefNFe"> <span>Chave de acesso da NFe</span></label><input type="text" id="BrefNFe" class="requiredField ui-widget-content ui-corner-all" name="BrefNFe" autocomplete="off" especialtype="integer" exactsize="44"></td>
                     <td class="boxField" id="BrefCTe_rcpt"><label for="BrefCTe"> <span>Chave de acesso do CT-e</span></label><input type="text" id="BrefCTe" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefCTe" autocomplete="off" especialtype="integer" exactsize="44"></td>
                 </tr>
@@ -458,23 +472,23 @@
             <tbody>
                 <tr>
                     <td class="boxField" id="BrefcUF_rcpt"><label for="BrefcUF"> <span>UF emitente da nota ref.</span></label><select id="BrefcUF" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefcUF" autocomplete="off"><option value=""></option><option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option><option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option><option value="MT">MT</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option><option value="PI">PI</option><option value="PR">PR</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RO">RO</option><option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option><option value="SE">SE</option><option value="SP">SP</option><option value="TO">TO</option></select></td>
-                    <td class="boxField" id="BrefAAMM_rcpt"><label for="BrefAAMM"> <span>Ano e mês da emissão (AAMM)</span></label><input type="text" id="BrefAAMM" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefAAMM" autocomplete="off" especialtype="integer" exactsize="4"></td>
+                    <td class="boxField" id="BrefAAMM_rcpt"><label for="BrefAAMM"> <span>Ano e mÃªs da emissÃ£o (AAMM)</span></label><input type="text" id="BrefAAMM" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefAAMM" autocomplete="off" especialtype="integer" exactsize="4"></td>
                     <td class="boxField" id="BrefCNPJ_rcpt"><label for="BrefCNPJ"> <span>CNPJ / CPF do emitente</span></label><input type="text" id="BrefCNPJ" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefCNPJ" autocomplete="off" especialtype="cpfcnpj"></td>
                     <td class="boxField" id="BrefIE_rcpt"><label for="BrefIE"> <span>Inscr. Est. do emitente</span></label><input type="text" id="BrefIE" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefIE" autocomplete="off" especialtype="string" minsize="2" maxsize="14"></td>
                 </tr>
                 <tr>
                     <td class="boxField" id="Brefmod_rcpt"><label for="Brefmod"> <span>Modelo da nota fiscal</span></label><select id="Brefmod" class="undefined ui-widget-content ui-corner-all requiredField" name="Brefmod" autocomplete="off"><option value="01">NF avulsa</option><option value="04">NF produtor rural</option></select></td>
-                    <td class="boxField" id="Brefserie_rcpt"><label for="Brefserie"> <span>Série da nota fiscal</span></label><input type="text" id="Brefserie" class="undefined ui-widget-content ui-corner-all requiredField" name="Brefserie" autocomplete="off" especialtype="integer" maxsize="3"></td>
-                    <td class="boxField" id="BrefnNF_rcpt"><label for="BrefnNF"> <span>Número da nota fiscal</span></label><input type="text" id="BrefnNF" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefnNF" autocomplete="off" especialtype="integer" maxsize="9"></td>
+                    <td class="boxField" id="Brefserie_rcpt"><label for="Brefserie"> <span>SÃ©rie da nota fiscal</span></label><input type="text" id="Brefserie" class="undefined ui-widget-content ui-corner-all requiredField" name="Brefserie" autocomplete="off" especialtype="integer" maxsize="3"></td>
+                    <td class="boxField" id="BrefnNF_rcpt"><label for="BrefnNF"> <span>NÃºmero da nota fiscal</span></label><input type="text" id="BrefnNF" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefnNF" autocomplete="off" especialtype="integer" maxsize="9"></td>
                 </tr>
             </tbody>
         </table>
         <table id="quadroRefCF" class="invisible">
             <tbody>
                 <tr>
-                    <td class="boxField" id="BrefCFmod_rcpt"><label for="BrefCFmod"> <span>Modelo do Cupom Fiscal</span></label><select id="BrefCFmod" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefCFmod" autocomplete="off"><option value="2B">Máquina registradora</option><option value="2C">Cupom Fiscal PDV</option><option value="2D">Cupom Fiscal ECF</option></select></td>
-                    <td class="boxField" id="BrefnECF_rcpt"><label for="BrefnECF"> <span>Número sequencial do ECF</span></label><input type="text" id="BrefnECF" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefnECF" autocomplete="off" especialtype="integer" exactsize="3"></td>
-                    <td class="boxField" id="BrefnCOO_rcpt"><label for="BrefnCOO"> <span>Núm. Contador Ordem de Operação - COO</span></label><input type="text" id="BrefnCOO" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefnCOO" autocomplete="off" especialtype="integer" exactsize="6"></td>
+                    <td class="boxField" id="BrefCFmod_rcpt"><label for="BrefCFmod"> <span>Modelo do Cupom Fiscal</span></label><select id="BrefCFmod" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefCFmod" autocomplete="off"><option value="2B">MÃ¡quina registradora</option><option value="2C">Cupom Fiscal PDV</option><option value="2D">Cupom Fiscal ECF</option></select></td>
+                    <td class="boxField" id="BrefnECF_rcpt"><label for="BrefnECF"> <span>NÃºmero sequencial do ECF</span></label><input type="text" id="BrefnECF" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefnECF" autocomplete="off" especialtype="integer" exactsize="3"></td>
+                    <td class="boxField" id="BrefnCOO_rcpt"><label for="BrefnCOO"> <span>NÃºm. Contador Ordem de OperaÃ§Ã£o - COO</span></label><input type="text" id="BrefnCOO" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefnCOO" autocomplete="off" especialtype="integer" exactsize="6"></td>
                 </tr>
             </tbody>
         </table>
