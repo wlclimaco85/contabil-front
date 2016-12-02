@@ -118,17 +118,41 @@
             $scope.empresa = null;
             $scope.notaFiscal = {
                 info : {
-                    identificacao : {}
+                    identificacao : {},
+                    destinatario  : {}
                 }
             };
             $scope.produtos = [{form : 'form',produto:{}}];
 
-            $scope.clientes = [];
+            $scope.cliente = [];
+
+            $scope.visibled = false
+         //   $scope.cliente = [];
+
+            $scope.countrySelected = function(selected) {
+             // debugger
+              if (selected) {
+
+                $scope.pessoa = selected.originalObject;
+                $scope.visibled = true;
+              } else {
+                console.log('cleared');
+              }
+            };
 
             $scope.calcProd = function(quant,valor)
             {
               return quant * valor;
             }
+
+            SysMgmtData.processPostPageData("main/api/request", {
+                url: "pessoa/api/cliente/fetchPage",
+                token: $rootScope.authToken,
+                request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
+            }, function(res) {
+              //  debugger
+                $scope.cliente = res.clienteList;
+            });
 
           /*  $scope.buscaRCep = function(){
 

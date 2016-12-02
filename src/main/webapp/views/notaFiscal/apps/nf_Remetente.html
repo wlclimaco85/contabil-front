@@ -34,11 +34,11 @@
                     <div ng-repeat="documento in pessoa.documentos">
                         <div ng-if="documento.documentoTypeEnumValue == 2">
                             <label for="exampleInputPassword1">CPF:</label>
-                            <label for="exampleInputPassword1" id="teste">{{documento.numero}}</label>
+                            <label for="exampleInputPassword1 " ng-init="notaFiscal.info.destinatario.cpf = documento.numero" id="teste">{{documento.numero}}</label>
                         </div>
                         <div ng-if="documento.documentoTypeEnumValue == 1">
                             <label for="exampleInputPassword1">CNPJ:</label>
-                            <label for="exampleInputPassword1">{{documento.numero}}</label>
+                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.destinatario.cnpj = documento.numero">{{documento.numero}}</label>
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                     <div class="col-sm-2 ">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Razão Social:</label>
-                            <label for="exampleInputPassword1">{{pessoa.razao}}</label>
+                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.destinatario.razaosocial = pessoa.razao">{{pessoa.razao}}</label>
                         </div>
                     </div>
                     <div class="col-sm-2 ">
@@ -61,24 +61,33 @@
                     <div class="col-sm-4 ">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Nome:</label>
-                            <label for="exampleInputPassword1">{{pessoa.nome}}</label>
+                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.destinatario.razaosocial = pessoa.nome">{{pessoa.nome}}</label>
                         </div>
                     </div>
                 </div>
+            <label for="exampleInputPassword1" class="hide" ng-init="notaFiscal.info.destinatario.endereco = pessoa.enderecos[0]"></label>
             <div ng-repeat="documento in pessoa.documentos">
                 <div ng-if="documento.documentoTypeEnumValue == 10">
                     <div class="col-sm-2 ">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Inscr. Est.:</label>
-                            <label for="exampleInputPassword1">{{documento.numero}}</label>
+                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.destinatario.inscricaoestadual = documento.numero">{{documento.numero}}</label>
                         </div>
                     </div>
                 </div>
-                <div ng-if="documento.documentoTypeEnumValue == 3">
+                <div ng-if="documento.documentoTypeEnumValue == 2">
                     <div class="col-sm-2 ">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Inscr. Mun.:</label>
-                            <label for="exampleInputPassword1">{{documento.numero}}</label>
+                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.destinatario.inscricaomunicipal = documento.numero">{{documento.numero}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="documento.documentoTypeEnumValue == 11">
+                    <div class="col-sm-2 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Inscr. Suframa.:</label>
+                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.destinatario.inscricaosuframa = documento.numero">{{documento.numero}}</label>
                         </div>
                     </div>
                 </div>
@@ -91,15 +100,34 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-sm-2 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Telefone:</label>
-                    <div ng-repeat="telefone in pessoa.telefones">
-                        <label for="exampleInputPassword1">{{telefone.numero}}</label>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 ">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Telefone:</label>
+                        <div ng-repeat="telefone in pessoa.telefones">
+                            <label for="exampleInputPassword1">{{telefone.numero}}</label>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="col-sm-2 ">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Email:</label>
+                        <div ng-repeat="email in pessoa.emails">
+                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.destinatario.email = email.email">{{email.email}}</label>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-sm-2 ">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Tipo Contribuinte:</label>
+                        <label for="exampleInputPassword1" ng-init="notaFiscal.info.destinatario.tipoContribuinte = pessoa.tipoContribuinte">{{pessoa.tipoContribuinte.descricao}}</label>
+                    </div>
+                </div>
+
             </div>
             <div class="row">
             <div class="col-sm-2 ">
@@ -148,9 +176,15 @@
         <div class="row">
           <div class="col-sm-4 ">
                 <div class="form-group">
-                    <label for="BindFinal"><input ng-model="enderecoEntrega" type="checkbox" ng-true-value="1" ng-false-value="2" id="BindFinal" class="destDados ui-widget-content ui-corner-all" name="BindFinal" autocomplete="off" value="1"> <span>Endereço de entrega diferente</span></label>
+                    <label for="BindFinal"><input ng-model="enderecoEntrega" type="checkbox" ng-true-value="1" ng-false-value="2" id="BindFinal" class="destDados ui-widget-content ui-corner-all" name="BindFinal" autocomplete="off" value="1"> <span>Local Entrega Diferente Destinatario</span></label>
                 </div>
             </div>
+            <div class="col-sm-4 ">
+                <div class="form-group">
+                    <label for="BindFinal"><input ng-model="enderecoEntrega" type="checkbox" ng-true-value="1" ng-false-value="2" id="BindFinal" class="destDados ui-widget-content ui-corner-all" name="BindFinal" autocomplete="off" value="1"> <span>Local Entrega Diferente Emitente</span></label>
+                </div>
+            </div>
+            
         </div>
 
         <div ng-if="enderecoEntrega == 1">
