@@ -1130,3 +1130,342 @@ public enum NFViaTransporteInternacional {
     COURIER("11", "Courier"),
     HANDCARRY("12", "Handcarry");
 
+function NFProdutoCompoeValorNota() {
+    var a = [];
+    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
+
+    NAO("0", "N\u00e3o"),
+    SIM("1", "Sim");
+
+    private final String codigo;
+    private final String descricao;
+
+	return a;
+ };
+
+     public enum NFViaTransporteInternacional {
+
+    MARITIMA("1", "Mar\u00edtima"),
+    FLUVIAL("2", "Fluvial"),
+    LACUSTRE("3", "Lacustre"),
+    AEREA("4", "A\u00e9rea"),
+    POSTAL("5", "Postal"),
+    FERROVIARIA("6", "Ferrovi\u00e1ria"),
+    RODOVIARIA("7", "Rodovi\u00e1ria"),
+    CONDUTO_REDE_TRANSMISSAO("8", "Conduto rede transmiss\u00e3o"),
+    MEIOS_PROPRIOS("9", "Meios pr\u00f3prios"),
+    ENTRADA_SAIDA("10", "Entrada/Sa\u00edda"),
+    COURIER("11", "Courier"),
+    HANDCARRY("12", "Handcarry");
+
+
+public enum NFFormaImportacaoIntermediacao {
+
+    IMPORTACAO_CONTA_PROPRIA("1", "Importa\u00e7\u00e3o conta pr\u00f3pria"),
+    IMPORTACAO_CONTA_ORDEM("2", "Importa\u00e7\u00e3o conta ordem"),
+    IMPORTACAO_ENCOMENDA("3", "Importa\u00e7\u00e3o encomenda");
+
+
+
+function NFNotaInfo() {
+    var a = [];
+    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
+    public enum NFNotaInfoCombustivelTipo {
+
+    ALCOOL("01", "\u00c1lcool"),
+    GASOLINA("02", "Gasolina"),
+    DIESEL("03", "Diesel"),
+    GASOGENIO("04", "Gasog\u00eanio"),
+    GAS_METANO("05", "G\u00e1s metano"),
+    ELETRICO_FONTE_INTERNA("06", "El\u00e9trico (fonte interna)"),
+    ELETRICO_FONTE_EXTERNA("07", "El\u00e9trico (fonte externa)"),
+    GASOL_GAS_NATURAL_COMBUSTIVEL("08", "Gasol/G\u00e1s natural/Combust\u00edvel"),
+    ALCOOL_GAS_NATURAL("09", "\u00c1lcool/G\u00e1s natural"),
+    DIESEL_GAS_NATURAL("10", "Diesel/G\u00e1s natural"),
+    VIDE_CAMPO_OBSERVACAO("11", "Vide campo observa\u00e7\u00e3o"),
+    ALCOOL_GAS_NATURAL_VEICULAR("12", "\u00c1lcool/G\u00e1s natural veicular"),
+    GASOLINA_GAS_NATURAL_VEICULAR("13", "Gasolina/G\u00e1s natural veicular"),
+    DIESEL_GAS_NATURAL_VEICULAR("14", "Diesel/G\u00e1s natural veicular"),
+    GAS_NATURAL_VEICULAR("15", "G\u00e1s natural veicular"),
+    ALCOOL_GASOLINA("16", "\u00c1lcool/Gasolina"),
+    GASOLINA_ALCOOL_GAS_NATURAL("17", "Gasolina/\u00c1lcool/G\u00e1s natural"),
+    GASOLINA_ELETRICO("18", "Gasolina/El\u00e9trico");
+
+
+
+function NFNotaInfo() {
+    var a = [];
+    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
+
+    public enum NFNotaInfoTipoVeiculo {
+
+    AUTOMOVEL("06", "Autom\u00f3vel"),
+    CAMINHAO("14", "Caminh\u00e3o"),
+    CAMINHONETA("13", "Caminhoneta"),
+    CARGA_CAM("24", "Carga"),
+    CICLOMOTO("02", "Ciclomotor"),
+    ESP_ONIBUS("22", "Especial \u00d4nibus"),
+    MICROONIBUS("07", "Micro\u00f4nibus"),
+    MISTO_CAM("23", "Misto"),
+    MOTOCICLO("04", "Motociclo"),
+    MOTONETA("03", "Motoneta"),
+    ONIBUS("08", "\u00d4nibus"),
+    REBOQUE("10", "Reboque"),
+    TRICICLO("05", "Triciclo"),
+    TRATOR("17", "Trator");
+
+
+function NFNotaInfo() {
+    var a = [];
+    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
+public enum NFNotaInfoEspecieVeiculo {
+
+    PASSAGEIRO("1", "Passageiro"),
+    CARGA("2", "Carga"),
+    MISTO("3", "Misto"),
+    CORRIDA("4", "Corrida"),
+    TRACAO("5", "Tra\u00e7\u00e3o"),
+    ESPECIAL("6", "Especial"),
+    COLECAO("7", "Cole\u00e7\u00e3o");
+
+function NFNotaInfo() {
+    var a = [];
+    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
+public enum NFNotaInfoItemProdutoVeiculoCondicaoChassi {
+
+    NORMAL("N", "Normal"),
+    REMARCADO("R", "Remarcado");
+
+function NFNotaInfo() {
+    var a = [];
+    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
+    public enum NFNotaInfoItemProdutoVeiculoCondicao {
+
+    ACABADO("1", "Acabado"),
+    INACABADO("2", "Inacabado"),
+    SEMI_ACABADO("3", "Semi-acabado");
+
+
+function NFNotaInfo() {
+    var a = [];
+    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
+    public enum NFNotaInfoVeiculoCor {
+
+    AMARELA("01", "Amarela"),
+    AZUL("02", "Azul"),
+    BEGE("03", "Bege"),
+    BRANCA("04", "Branca"),
+    CINZA("05", "Cinza"),
+    DOURADA("06", "Dourada"),
+    GRENA("07", "Gren\u00e1"),
+    LARANJA("08", "Laranja"),
+    MARROM("09", "Marrom"),
+    PRATA("10", "Prata"),
+    PRETA("11", "Preta"),
+    ROSA("12", "Rosa"),
+    ROXA("13", "Roxa"),
+    VERDE("14", "Verde"),
+    VERMELHA("15", "Vermelha"),
+    FANTASIA("16", "Fantasia");
+
+
+function NFNotaInfo() {
+    var a = [];
+    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
+    public enum NFNotaInfoItemProdutoVeiculoRestricao {
+
+    NAO_HA("0", "N\u00e3o h\u00e1"),
+    ALIENACAO_FIDUCIARIA("1", "Aliena\u00e7\u00e3o fiduci\u00e1ria"),
+    ARRENDAMENTO_MERCANTIL("2", "Arrendamento mercantil"),
+    RESERVA_DOMINIO("3", "Reserva dom\u00ednio"),
+    PENHOR("4", "Penhor"),
+    OUTRAS("9", "Outras");
+
+
+
+    function NFNotaInfo() {
+    var a = [];
+    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
+    public enum NFNotaInfoItemProdutoArmamentoTipo {
+
+    PERMITIDO("0", "Permitido"),
+    RESTRITO("1", "Restrito");
+
+
+    function NFNotaInfo() {
+    var a = [];
+    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
+    public enum NFOrigem {
+
+    NACIONAL("0", "Nacional"),
+    ESTRANGEIRA_IMPORTACAO_DIRETA("1", "Estrangeira importa\u00e7\u00e3o direta"),
+    ESTRANGEIRA_ADQUIRIDA_MERCADO_INTERNO("2", "Estrangeira adquirida mercado interno"),
+    NACIONAL_MERCADORIA_OU_BEM_CONTEUDO_IMPORTACAO_SUPERIOR_40_P("3", "Nacional mercadoria ou bem conte\u00fado importa\u00e7\u00e3o superior 40 P"),
+    NACIONAL_PRODUCAO_EM_CONFORMIDADE_COM_PROCESSOS_PRODUTIVOS_BASICOS("4", "Nacional produ\u00e7\u00e3o em conformidade com processos produtivos b\u00e1sicos"),
+    NACIONAL_MERCADORIA_OU_BEM_CONTEUDO_IMPORTACAO_INFERIOR_40_P("5", "Nacional mercadoria ou bem conte\u00fado importa\u00e7\u00e3o inferior 40 P"),
+    ESTRANGEIRA_IMPORTACAO_DIRETA_SEM_SIMILAR_NACIONAL_CONSTANTE_EM_LISTA_CAMEX("6", "Estrangeira importa\u00e7\u00e3o direta sem similar nacional constante em lista Camex"),
+    ESTRANGEIRA_ADQUIRIDA_MERCADO_INTERNO_SEM_SIMILAR_NACIONAL_CONSTANTE_EM_LISTA_CAMEX("7", "Estrangeira adquirida mercado interno sem similar nacional constante em lista Camex"),
+    NACIONAL_MERCADORIA_OU_BEM_COM_CONTEUDO_IMPORTACAO_SUPERIOR_70_P("8", "Nacional mercadoria ou bem conte\u00fado importa\u00e7\u00e3o superior 70 P");
+
+
+
+function NFNotaInfo() {
+    var a = [];
+    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
+    public enum NFNotaInfoImpostoTributacaoICMS {
+
+    TRIBUTACAO_INTEGRALMENTE("00", "Tributada integralmente"),
+    TRIBUTADA_COM_COBRANCA_ICMS_POR_SUBSTITUICAO_TRIBUTARIA("10", "Tributada com cobran\u00e7a de ICMS por ST"),
+    COM_REDUCAO_BASE_CALCULO("20", "Com redu\u00e7\u00e3o da base de c\u00e1lculo"),
+    ISENTA_OU_NAO_TRIBUTADA_COM_COBRANCA_ICMS_POR_SUBSTITUICAO_TRIBUTARIA("30", "Isenta ou n\u00e3o tributada com cobran\u00e7a de ICMS por ST"),
+    ISENTA("40", "Isenta"),
+    NAO_TRIBUTADO("41", "N\u00e3o tributada"),
+    SUSPENSAO("50", "Suspens\u00e3o"),
+    DIFERIMENTO("51", "Diferimento"),
+    ICMS_COBRADO_ANTERIORMENTE_POR_SUBSTITUICAO_TRIBUTARIA("60", "ICMS cobrado anteriormente por ST"),
+    COM_REDUCAO_BASE_CALCULO_COBRANCA_ICMS_POR_SUBSTITUICAO_TRIBUTARIA_ICMS_SUBSTITUICAO_TRIBUTARIA("70", "Com redu\u00e7\u00e3o da base de c\u00e1lculo/Cobran\u00e7a ICMS por ST/ICMS ST"),
+    OUTROS("90", "Outros");
+
+
+function NFNotaInfo() {
+    var a = [];
+    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
+    public enum NFNotaInfoItemModalidadeBCICMS {
+
+    MVA("0", "Margem de valor agregado"),
+    PAUTA("1", "Pauta"),
+    PRECO_TABELADO_MAXIMO("2", "Pre\u00e7o tabelado m\u00e1ximo"),
+    VALOR_OPERACAO("3", "Valor da opera\u00e7\u00e3o");
+
+
+    function NFNotaInfo() {
+    var a = [];
+    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
+    public enum NFNotaInfoItemModalidadeBCICMSST {
+
+    PRECO_TABELADO("0", "Pre\u00e7o Tabelado"),
+    LISTA_NEGATIVA("1", "Lista Negativa"),
+    LISTA_POSITIVA("2", "Lista Positiva"),
+    LISTA_NEUTRA("3", "Lista Neutra"),
+    MARGEM_VALOR_AGREGADO("4", "Margem Valor Agregado"),
+    PAUTA("5", "Pauta");
+
+
+function NFNotaInfo() {
+    var a = [];
+    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
+    public enum NFNotaMotivoDesoneracaoICMS {
+
+    TAXI("1", "T\u00e1xi"),
+    PRODUTOR_AGROPECUARIO("3", "Produtor agropecu\u00e1rio"),
+    FROTISTA_LOCADORA("4", "Frotista locadora"),
+    DIPLOMATICO_CONSULAR("5", "Diplom\u00e1tico consular"),
+    UTILITARIOS_MOTOCICLETAS_AMAZONIA_OCIDENTAL_AREAS_LIVRE_COMERCIO("6", "Utilit\u00e1rios motocicletas Amaz\u00f4nia Ocidental \u00e1reas livre com\u00e9rcio"),
+    SUFRAMA("7", "Suframa"),
+    VENDA_ORGAOS_PUBLICOS("8", "Venda \u00f3rg\u00e3os p\u00fablicos"),
+    OUTROS("9", "Outros"),
+    DEFICIENTE_CONDUTOR("10", "Deficiente condutor"),
+    DEFICIENTE_NAO_CONDUTOR("11", "Deficiente n\u00e3o condutor"),
+    ORGAO_DE_FOMENTO_DESENVOLVIMENTO_AGROPECUARIO("12", "\u00d5rg\u00e3o de fomento desenvolvimento agropecu\u00e1rio");
+
+
+
+function NFNotaInfo() {
+    var a = [];
+    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
+	public enum NFNotaSituacaoOperacionalSimplesNacional {
+
+    TRIBUTADA_COM_PERMISSAO_CREDITO("101", "Tributada com permiss\u00e3o de cr\u00e9dito"),
+    TRIBUTADA_SEM_PERMISSAO_CREDITO("102", "Tributada sem permiss\u00e3o de cr\u00e9dito"),
+    ISENCAO_ICMS_FAIXA_RECEITA_BRUTA("103", "Isen\u00e7\u00e3o ICMS faixa receita bruta"),
+    TRIBUTADA_SIMPLES_NACIONAL_COM_PERMISSAO_DE_CREDITO_E_COBRANCA_ICMS_SUBSTITUICAO_TRIBUTARIA("201", "Tributada Simples Nacional com permiss\u00e3o de cr\u00e9dito e cobran\u00e7a ICMS ST"),
+    TRIBUTADA_SIMPLES_NACIONAL_SEM_PERMISSAO_DE_CREDITO_E_COBRANCA_ICMS_SUBSTITUICAO_TRIBUTARIA("202", "Tributada Simples Nacional sem permiss\u00e3o de cr\u00e9dito e cobran\u00e7a ICMS ST"),
+    TRIBUTADA_SIMPLES_NACIONAL_PARA_FAIXA_RECEITA_BRUTA_E_COBRANCA_ICMS_SUBSTITUICAO_TRIBUTARIA("203", "Tributada Simples Nacional para faixa receita bruta e cobran\u00e7a ICMS ST"),
+    IMUNE("300", "Imune"),
+    NAO_TRIBUTADA("400", "N\u00e3o tributada"),
+    ICMS_COBRADO_ANTERIORMENTE_POR_SUBSTITUICAO_TRIBUTARIA_SUBSIDIO_OU_POR_ANTECIPACAO("500", "ICMS cobrado anteriormente por ST subs\u00eddio ou por antecipa\u00e7\u00e3o"),
+    OUTROS("900", "Outros");
+
+
+
+function NFNotaInfo() {
+    var a = [];
+    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
+    public enum NFNotaInfoSituacaoTributariaIPI {
+
+    ENTRADA_RECUPERACAO_CREDITO("00", "Entrada recupera\u00e7\u00e3o cr\u00e9dito"),
+    ENTRADA_TRIBUTADA_ALIQUOTA_ZERO("01", "Entrada tributada al\u00edquota zero"),
+    ENTRADA_ISENTA("02", "Entrada isenta"),
+    ENTRADA_NAO_TRIBUTADA("03", "Entrada n\u00e3o tributada"),
+    ENTRADA_IMUNE("04", "Entrada imune"),
+    ENTRADA_COM_SUSPENSAO("05", "Entrada com suspens\u00e3o"),
+    OUTRAS_ENTRADAS("49", "Outras entradas"),
+    SAIDA_TRIBUTADA("50", "Sa\u00edda tributada"),
+    SAIDA_TRIBUTADA_COM_ALIQUOTA_ZERO("51", "Sa\u00edda tributada com al\u00edquota zero"),
+    SAIDA_ISENTA("52", "Sa\u00edda isenta"),
+    SAIDA_NAO_TRIBUTADA("53", "Sa\u00edda n\u00e3o tributada"),
+    SAIDA_IMUNE("54", "Sa\u00edda imune"),
+    SAIDA_COM_SUSPENSAO("55", "Sa\u00edda com suspens\u00e3o"),
+    OUTRAS_SAIDAS("99", "Outras sa\u00eddas");
+
+
+function NFNotaInfo() {
+    var a = [];
+    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
+    public enum NFNotaInfoItemIndicadorExigibilidadeISS {
+
+    EXIGIVEL("1", "Exig\u00edvel"),
+    NAO_INCIDENCIA("2", "N\u00e3o incid\u00eancia"),
+    ISENCAO("3", "Isen\u00e7\u00e3o"),
+    EXPORTACAO("4", "Exporta\u00e7\u00e3o"),
+    IMUNIDADE("5", "Imunidade"),
+    EXIGIBILIDADE_SUSPENSA_POR_DECISAO_JUDICIAL("6", "Exigibilidade suspensa por decis\u00e3o judicial"),
+    EXIGIBILIDADE_SUSPENSA_POR_PROCESSO_ADMINISTRATIVO("7", "Exigibilidade suspensa por processo administrativo");
+
+function NFNotaInfo() {
+    var a = [];
+    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
+    public enum NFNotaInfoItemIndicadorIncentivoFiscal {
+
+    SIM("1", "Sim"),
+    NAO("2", "N\u00e3o");
+
+function NFNotaInfo() {
+    var a = [];
+    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
+    public enum NFNotaInfoSituacaoTributariaCOFINS {
+
+    OPERACAO_TRIBUTAVEL_CUMULATIVO_NAO_CUMULATIVO("01", "Opera\u00e7\u00e3o tribut\u00e1vel cumulativo/n\u00e3o cumulativo"),
+    OPERACAO_TRIBUTAVEL_ALIQUOTA_DIFERENCIADA("02", "Opera\u00e7\u00e3o tribut\u00e1vel al\u00edquota diferenciada"),
+    OPERACAO_TRIBUTAVEL_QUANTIDADE_VENDIDA_POR_ALIQUOTA_POR_UNIDADE_PRODUTO("03", "Opera\u00e7\u00e3o tribut\u00e1vel quantidade vendida por al\u00edquota por unidade produto"),
+    OPERACAO_TRIBUTAVEL_MONOFASICA_ALIQUOTA_ZERO("04", "Opera\u00e7\u00e3o tribut\u00e1vel monof\u00e1sica al\u00edquota zero"),
+    OPERACAO_TRIBUTAVEL_SUBSTITUICAO_TRIBUTARIA("05", "Opera\u00e7\u00e3o tribut\u00e1vel ST"),
+    OPERACAO_TRIBUTAVEL_ALIQUOTA_ZERO("06", "Opera\u00e7\u00e3o tribut\u00e1vel al\u00edquota zero"),
+    OPERACAO_ISENTA_CONTRIBUICAO("07", "Opera\u00e7\u00e3o isenta de contribui\u00e7\u00e3o"),
+    OPERACAO_SEM_INCIDENCIA_CONTRIBUICAO("08", "Opera\u00e7\u00e3o sem incid\u00eancia de contribui\u00e7\u00e3o"),
+    OPERACAO_COM_SUSPENSAO_CONTRIBUICAO("09", "Opera\u00e7\u00e3o com suspens\u00e3o de contribui\u00e7\u00e3o"),
+    OUTRAS_OPERACOES_SAIDA("49", "Outras opera\u00e7\u00f5es de sa\u00edda"),
+    OPERACAO_DIREITO_CREDITO_VINCULADA_EXCLUSIVAMENTE_RECEITA_TRIBUTADA_MERCADO_INTERNO("50", "Opera\u00e7\u00e3o direito cr\u00e9dito vinculada exclusivamente receita tributada mercado interno"),
+    OPERACAO_DIREITO_CREDITO_VINCULADA_EXCLUSIVAMENTE_RECEITA_NAO_TRIBUTADA_MERCADO_INTERNO("51", "Opera\u00e7\u00e3o direito cr\u00e9dito vinculada exclusivamente receita n\u00e3o tributada mercado interno"),
+    OPERACAO_DIREITO_CREDITO_VINCULADA_EXCLUSIVAMENTE_RECEITA_EXPORTACAO("52", "Opera\u00e7\u00e3o direito cr\u00e9dito vinculada exclusivamente receita exporta\u00e7\u00e3o"),
+    OPERACAO_DIREITO_CREDITO_VINCULADA_RECEITAS_TRIBUTADA_E_NAO_TRIBUTADA_MERCADO_INTERNO("53", "Opera\u00e7\u00e3o direito cr\u00e9dito vinculada receitas tributada e n\u00e3o tributada mercado interno"),
+    OPERACAO_DIREITO_CREDITO_VINCULADA_RECEITAS_TRIBUTADAS_NO_MERCADO_INTERNO_EXPORTACAO("54", "Opera\u00e7\u00e3o direito cr\u00e9dito vinculada receitas tributadas no mercado interno exporta\u00e7\u00e3o"),
+    OPERACAO_DIREITO_CREDITO_VINCULADA_RECEITAS_NAO_TRIBUTADA_NO_MERCADO_INTERNO_EXPORTACAO("55", "Opera\u00e7\u00e3o direito cr\u00e9dito vinculada receitas n\u00e3o tributada no mercado interno exporta\u00e7\u00e3o"),
+    OPERACAO_DIREITO_CREDITO_VINCULADA_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_MERCADO_INTERNO_EXPORTACAO("56", "Opera\u00e7\u00e3o direito cr\u00e9dito vinculada receitas tributadas e n\u00e3o tributadas mercado interno exporta\u00e7\u00e3o"),
+    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_EXCLUSIVAMENTE_RECEITA_TRIBUTADA_MERCADO_INTERNO("60", "Cr\u00e9dito presumido opera\u00e7\u00e3o aquisi\u00e7\u00e3o vinculada exclusivamente receita tributada mercado interno"),
+    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_EXCLUSIVAMENTE_A_RECEITA_NAO_TRIBUTADA_MERCADO_INTERNO("61", "Cr\u00e9dito presumido opera\u00e7\u00e3o aquisi\u00e7\u00e3o vinculada exclusivamente \u00e0 receita n\u00e3o tributada mercado interno"),
+    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_EXCLUSIVAMENTE_RECEITA_EXPORTACAO("62", "Cr\u00e9dito presumido opera\u00e7\u00e3o aquisi\u00e7\u00e3o vinculada exclusivamente receita exporta\u00e7\u00e3o"),
+    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_MERCADO_INTERNO("63", "Cr\u00e9dito presumido opera\u00e7\u00e3o aquisi\u00e7\u00e3o vinculada receitas tributadas mercado interno"),
+    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_RECEITAS_TRIBUTADA_MERCADO_INTERNO_EXPORTACAO("64", "Cr\u00e9dito presumido opera\u00e7\u00e3o aquisi\u00e7\u00e3o vinculada receitas tributadas mercado interno exporta\u00e7\u00e3o"),
+    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_RECEITAS_NAO_TRIBUTADAS_MERCADO_INTERNO_EXPORTACAO("65", "Cr\u00e9dito presumido opera\u00e7\u00e3o aquisi\u00e7\u00e3o vinculada receitas n\u00e3o tributadas mercado interno exporta\u00e7\u00e3o"),
+    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_MERCADO_INTERNO_EXPORTACAO("66", "Cr\u00e9dito presumido opera\u00e7\u00e3o aquisi\u00e7\u00e3o vinculada receitas tributadas e n\u00e3o tributadas mercado interno exporta\u00e7\u00e3o"),
+    CREDITO_PRESUMIDO_OUTRAS_OPERACOES("67", "Cr\u00e9dito presumido outras opera\u00e7\u00f5es"),
+    OPERACAO_AQUISICAO_SEM_DIREITO_CREDITO("70", "Opera\u00e7\u00e3o aquisi\u00e7\u00e3o sem direito cr\u00e9dito"),
+    OPERACAO_AQUISICAO_COM_ISENCAO("71", "Opera\u00e7\u00e3o aquisi\u00e7\u00e3o com isen\u00e7\u00e3o"),
+    OPERACAO_AQUISICAO_COM_SUSPENSAO("72", "Opera\u00e7\u00e3o aquisi\u00e7\u00e3o com suspens\u00e3o"),
+    OPERACAO_AQUISICAO_ALIQUOTA_ZERO("73", "Opera\u00e7\u00e3o aquisi\u00e7\u00e3o al\u00edquota zero"),
+    OPERACAO_AQUISICAO_SEM_INCIDENCIA_CONTRIBUICAO("74", "Opera\u00e7\u00e3o aquisi\u00e7\u00e3o sem incid\u00eancia de contribui\u00e7\u00e3o"),
+    OPERACAO_AQUISICAO_POR_SUBSTITUICAO_TRIBUTARIA("75", "Opera\u00e7\u00e3o aquisi\u00e7\u00e3o por substitui\u00e7\u00e3o tribut\u00e1ria"),
+    OUTRAS_OPERACOES_ENTRADA("98", "Outras opera\u00e7\u00f5es de entrada"),
+    OUTRAS_OPERACOES("99", "Outras opera\u00e7\u00f5es");
+

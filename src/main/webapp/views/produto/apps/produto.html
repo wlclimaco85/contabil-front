@@ -112,16 +112,32 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6 ">
+        <div class="col-sm-4 ">
             <div class="form-group">
                 <label for="exampleInputPassword1">Inform. adicionais para a NFe</label>
                 <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.informAdicionaisParaNFe" name="informAdicionaisParaNFe"  placeholder="Informações Adicionais Para NFe"></textarea>
             </div>
         </div>
-        <div class="col-sm-6 ">
+        <div class="col-sm-4 ">
             <div class="form-group">
                 <label for="exampleInputPassword1">Anotações internas</label>
                 <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.anotainternas" name="anotainternas"  placeholder="Anotaçoes Internas"></textarea>
+            </div>
+        </div>
+        <div class="ng-cloak" ng-controller="CfopSelectController as ctrl">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">CFOP</label>
+                    <div class="row" style="margin-left:0px">
+                        <ui-select ng-model="produto.produto.tributacao.cfop" theme="bootstrap">
+                            <ui-select-match placeholder="CFOP">{{$select.selected.cfop}}</ui-select-match>
+                            <ui-select-choices repeat="item in ctrl.cfop | filter: $select.search">
+                              <div ng-bind-html="item.cfop | highlight: $select.search"></div>
+                              <small ng-bind-html="item.natureza | highlight: $select.search"></small> -
+                            </ui-select-choices>
+                          </ui-select>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

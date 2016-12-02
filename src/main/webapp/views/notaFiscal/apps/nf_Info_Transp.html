@@ -1,47 +1,46 @@
-<div id="quadroTransporte" class="bottomSpace NFCeHide">
-    <h2>Dados do transporte</h2>
-    <div style="margin-bottom: 20px"></div>
-    <hr>
-    <div class="row">
-                <div class="form-group">
-                <label for="exampleInputPassword1">Transportador</label>
-    <div ng-controller="ClienteSearchController">
-    <div angucomplete-alt id="ex1"
-      placeholder="Search countries"
-      maxlength="50"
-      pause="100"
-      selected-object="countrySelected"
-      local-data="cliente"
-      search-fields="nome"
-      title-field="nome"
-      minlength="1"
-      input-class="form-control form-control-small"
-      match-class="highlight"></div>
-      </div>
-      </div>
-      </div>
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-touch.min.js"></script>
+</head>
+<h2>Dados do Transportador</h2>
+<div class="row">
+<div angucomplete-alt id="ex1"
+  placeholder="Buscar Transportador"
+  maxlength="50"
+  pause="100"
+  selected-object="countrySelected"
+  local-data="cliente"
+  search-fields="nome"
+  title-field="nome"
+  minlength="1"
+  input-class="form-control form-control-small"
+  match-class="highlight"></div>
+      <div class="row"></div>
+      <div ng-if="visibled == true">
       <div style="margin-bottom: 20px"></div>
-      
-      <div class="row">
-            <dl class="dl-horizontal">
-                <dd>
-                    <label class="ui-radio"><input name="radio5" type="radio"  ng-model="pessoa.tipoPessoa" ng-value="1"><span>Pessoa Fisica </span></label>
-                    <label class="ui-radio"><input name="radio6" type="radio" ng-model="pessoa.tipoPessoa" ng-value="2"><span>Pessoa Juridica </span></label>
-                </dd>
-            </dl>
-        </div>
-
-        <div class="row">
+      <div class="row"> </div>
+        <input type="text" class="form-control testes hide" ng-model="pessoa.id" name="cliente">
+        <div class="row" >
+            <div class="col-sm-2 ">
+                <div class="form-group">
+                    <div ng-if="pessoa.tipoPessoa == 1">
+                        <label for="exampleInputPassword1">Pessoa Fisica</label>
+                    </div>
+                    <div ng-if="pessoa.tipoPessoa == 2">
+                        <label for="exampleInputPassword1">Pessoa Juridica</label>
+                    </div>
+                </div>
+            </div>
             <div class="col-sm-2 ">
                 <div class="form-group">
                     <div ng-repeat="documento in pessoa.documentos">
                         <div ng-if="documento.documentoTypeEnumValue == 2">
                             <label for="exampleInputPassword1">CPF:</label>
-                            <label for="exampleInputPassword1">{{documento.numero}}</label>
+                            <label for="exampleInputPassword1 " ng-init="notaFiscal.info.transporte.transportador.cpf = documento.numero" id="teste">{{documento.numero}}</label>
                         </div>
                         <div ng-if="documento.documentoTypeEnumValue == 1">
                             <label for="exampleInputPassword1">CNPJ:</label>
-                            <label for="exampleInputPassword1">{{documento.numero}}</label>
+                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.transporte.transportador.cnpj = documento.numero">{{documento.numero}}</label>
                         </div>
                     </div>
                 </div>
@@ -49,8 +48,8 @@
                 <div ng-if="pessoa.tipoPessoa == 2">
                     <div class="col-sm-2 ">
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Raz„o Social:</label>
-                            <label for="exampleInputPassword1">{{pessoa.razao}}</label>
+                            <label for="exampleInputPassword1">Raz√£o Social:</label>
+                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.transporte.transportador.razaosocial = pessoa.razao">{{pessoa.razao}}</label>
                         </div>
                     </div>
                     <div class="col-sm-2 ">
@@ -64,66 +63,95 @@
                     <div class="col-sm-4 ">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Nome:</label>
-                            <label for="exampleInputPassword1">{{pessoa.nome}}</label>
+                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.transporte.transportador.razaosocial = pessoa.nome">{{pessoa.nome}}</label>
                         </div>
                     </div>
                 </div>
+            <label for="exampleInputPassword1" class="hide" ng-init="notaFiscal.info.transporte.transportador.endereco = pessoa.enderecos[0]"></label>
             <div ng-repeat="documento in pessoa.documentos">
                 <div ng-if="documento.documentoTypeEnumValue == 10">
                     <div class="col-sm-2 ">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Inscr. Est.:</label>
-                            <label for="exampleInputPassword1">{{documento.numero}}</label>
+                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.transporte.transportador.inscricaoestadual = documento.numero">{{documento.numero}}</label>
                         </div>
                     </div>
                 </div>
-                <div ng-if="documento.documentoTypeEnumValue == 3">
+                <div ng-if="documento.documentoTypeEnumValue == 2">
                     <div class="col-sm-2 ">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Inscr. Mun.:</label>
-                            <label for="exampleInputPassword1">{{documento.numero}}</label>
+                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.transporte.transportador.inscricaomunicipal = documento.numero">{{documento.numero}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="documento.documentoTypeEnumValue == 11">
+                    <div class="col-sm-2 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Inscr. Suframa.:</label>
+                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.transporte.transportador.inscricaosuframa = documento.numero">{{documento.numero}}</label>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-2 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">CNAE:</label>
-                    <div ng-repeat="cnae in pessoa.cnaes">
-                        <label for="exampleInputPassword1">{{cnae.idCnae.cnae}}</label>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-2 ">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">CNAE:</label>
+                        <div ng-repeat="cnae in pessoa.cnaes">
+                            <label for="exampleInputPassword1">{{cnae.idCnae.cnae}}</label>
+                        </div>
                     </div>
                 </div>
-            </div>
-        
-            <div class="col-sm-2 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Telefone:</label>
-                    <div ng-repeat="telefone in pessoa.telefones">
-                        <label for="exampleInputPassword1">{{telefone.numero}}</label>
+                <div class="col-sm-2 ">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Telefone:</label>
+                        <div ng-repeat="telefone in pessoa.telefones">
+                            <label for="exampleInputPassword1">{{telefone.numero}}</label>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="col-sm-2 ">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Email:</label>
+                        <div ng-repeat="email in pessoa.emails">
+                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.destinatario.email = email.email">{{email.email}}</label>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-sm-2 ">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Tipo Contribuinte:</label>
+                        <label for="exampleInputPassword1" ng-init="notaFiscal.info.destinatario.tipoContribuinte = pessoa.tipoContribuinte">{{pessoa.tipoContribuinte.descricao}}</label>
+                    </div>
+                </div>
+
             </div>
             <div class="row">
             <div class="col-sm-2 ">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">EndereÁo:</label>
+                    <label for="exampleInputPassword1">Endere√ßo:</label>
                     <label for="exampleInputPassword1">{{pessoa.enderecos[0].logradouro}}</label>
-                    
+
                 </div>
             </div>
             <div class="col-sm-2 ">
                 <div class="form-group">
                     <label for="exampleInputPassword1">Numero:</label>
                     <label for="exampleInputPassword1">{{pessoa.enderecos[0].numero}}</label>
-                
+
                 </div>
             </div>
             <div class="col-sm-2 ">
                 <div class="form-group">
                     <label for="exampleInputPassword1">Bairro:</label>
                     <label for="exampleInputPassword1">{{pessoa.enderecos[0].bairro}}</label>
-                
+
                 </div>
             </div>
             <div class="col-sm-2 ">
@@ -137,7 +165,7 @@
                 <div class="form-group">
                     <label for="exampleInputPassword1">Complemento:</label>
                     <label for="exampleInputPassword1">{{pessoa.enderecos[0].complemento}}</label>
-                    
+
                 </div>
             </div>
             <div class="col-sm-2 ">
@@ -148,47 +176,47 @@
             </div>
         </div>
         <br>
-        
+
         <hr>
-        
-  
+
+
 
 </div>
     </div>
-    <div class="row">   
+    <div class="row">
         <div class="col-sm-4">
             <label for="exampleInputPassword1">Modalidade do frete</label>
             <div class="row ">
                 <span class="ui-select">
-                <select ng-model="tributacao.icms.motDesoneracao.id">
+                <select ng-model="notaFiscal.info.transporte.modalidadefrete">
                     <option value="0">0 - Emitente</option>
-                    <option value="1">1 - Destinat·rio</option>
+                    <option value="1">1 - Destinat√°rio</option>
                     <option value="2">2 - Terceiros</option>
                     <option value="9">9 - Sem frete</option>
                 </select>
             </span>
             </div>
-        </div>   
+        </div>
         <div class="col-sm-3">
             <div class="form-group">
-                <label for="exampleInputPassword1">Placa veÌculo</label>
+                <label for="exampleInputPassword1">Placa ve√≠culo</label>
                 <div class="input-group">
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)" ng-model="notaFiscal.info.transporte.veiculo.placaveiculo">
                     <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                 </div>
             </div>
         </div>
         <div class="col-sm-3">
             <div class="form-group">
-                <label for="exampleInputPassword1">UF veÌculo</label>
+                <label for="exampleInputPassword1">UF ve√≠culo</label>
 
                 <div class="row ">
                     <div class="input-group">
                         <span class="input-group-addon fa fa-list-ol"></span>
                         <span class="ui-select">
-                <select ng-model="tributacao.icms.motDesoneracao.id">
+                <select ng-model="notaFiscal.info.transporte.veiculo.uf">
                     <option value="0">0 - Emitente</option>
-                    <option value="1">1 - Destinat·rio</option>
+                    <option value="1">1 - Destinat√°rio</option>
                     <option value="2">2 - Terceiros</option>
                     <option value="9">9 - Sem frete</option>
                 </select>
@@ -204,32 +232,32 @@
             <div class="form-group">
                 <label for="exampleInputPassword1">Reg. Nac. Trans. Carga</label>
                 <div class="input-group">
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)" ng-model="notaFiscal.info.transporte.veiculo.registronacionaltransportadorcarga">
                     <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                 </div>
             </div>
         </div>
         <div class="col-sm-3">
             <div class="form-group">
-                <label for="exampleInputPassword1">IdentificaÁ„o vag„o</label>
+                <label for="exampleInputPassword1">Identifica√ß√£o vag√£o</label>
                 <div class="input-group">
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)" ng-model="notaFiscal.info.transporte.vagao">
                     <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                 </div>
             </div>
         </div>
         <div class="col-sm-3">
             <div class="form-group">
-                <label for="exampleInputPassword1">IdentificaÁ„o balsa</label>
+                <label for="exampleInputPassword1">Identifica√ß√£o balsa</label>
                 <div class="input-group">
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)" ng-model="notaFiscal.info.transporte.balsa">
                     <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                 </div>
             </div>
         </div>
         <div class="col-sm-3 ">
             <div class="form-group">
-                <label for="BindFinal"><input ng-model="notaFiscal.nfReferenciada" type="checkbox" ng-true-value="1" ng-false-value="2" id="BindFinal" class="destDados ui-widget-content ui-corner-all" name="BindFinal" autocomplete="off" value="1"> <span>Informar retenÁıes de ICMS de transporte</span></label>
+                <label for="BindFinal"><input ng-model="notaFiscal.nfReferenciada" type="checkbox" ng-true-value="1" ng-false-value="2" id="BindFinal" class="destDados ui-widget-content ui-corner-all" name="BindFinal" autocomplete="off" value="1"> <span>Informar reten√ß√µes de ICMS de transporte</span></label>
             </div>
         </div>
     </div>
@@ -238,27 +266,27 @@
         <div class="row">
             <div class="col-sm-3">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Valor do serviÁo</label>
+                    <label for="exampleInputPassword1">Valor do servi√ßo</label>
                     <div class="input-group">
-                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)" ng-model="notaFiscal.info.transporte.icmstransporte.valorservico">
                         <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                     </div>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">BC retenÁ„o ICMS</label>
+                    <label for="exampleInputPassword1">BC reten√ß√£o ICMS</label>
                     <div class="input-group">
-                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)" ng-model="notaFiscal.info.transporte.icmstransporte.bcretencaoicms">
                         <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                     </div>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">AlÌq. da retenÁ„o</label>
+                    <label for="exampleInputPassword1">Al√≠q. da reten√ß√£o</label>
                     <div class="input-group">
-                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)" ng-model="notaFiscal.info.transporte.icmstransporte.aliquotaretencao">
                         <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                     </div>
                 </div>
@@ -269,7 +297,7 @@
                 <div class="form-group">
                     <label for="exampleInputPassword1">Valor ICMS retido</label>
                     <div class="input-group">
-                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)" ng-model="notaFiscal.info.transporte.icmstransporte.valoricmsretido">
                         <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                     </div>
                 </div>
@@ -278,7 +306,7 @@
                 <div class="form-group">
                     <label for="exampleInputPassword1">CFOP transp</label>
                     <div class="input-group">
-                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)" ng-model="notaFiscal.info.transporte.icmstransporte.cfop">
                         <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                     </div>
                 </div>
@@ -287,16 +315,16 @@
                 <div class="form-group">
                     <label for="exampleInputPassword1">UF do ICMS</label>
                     <div class="input-group">
-                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)" ng-model="notaFiscal.info.transporte.icmstransporte.uf">
                         <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                     </div>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">MunicÌpio do ICMS</label>
+                    <label for="exampleInputPassword1">Munic√≠pio do ICMS</label>
                     <div class="input-group">
-                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)" ng-model="notaFiscal.info.transporte.icmstransporte.codigomunicipioocorrenciafatogeradoricmstransporte">
                         <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                     </div>
                 </div>
@@ -309,16 +337,16 @@
             <div class="form-group">
                 <label for="exampleInputPassword1">Quantidade de vol.</label>
                 <div class="input-group">
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)" ng-model="notaFiscal.info.transporte.quantVol">
                     <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                 </div>
             </div>
         </div>
         <div class="col-sm-3">
             <div class="form-group">
-                <label for="exampleInputPassword1">EspÈcie dos vol.</label>
+                <label for="exampleInputPassword1">Esp√©cie dos vol.</label>
                 <div class="input-group">
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)" ng-model="notaFiscal.info.transporte.especieVol">
                     <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                 </div>
             </div>
@@ -327,16 +355,16 @@
             <div class="form-group">
                 <label for="exampleInputPassword1">Marca dos volumes</label>
                 <div class="input-group">
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)" ng-model="notaFiscal.info.transporte.marcaVol">
                     <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                 </div>
             </div>
         </div>
         <div class="col-sm-3">
             <div class="form-group">
-                <label for="exampleInputPassword1">NumeraÁ„o dos vol.</label>
+                <label for="exampleInputPassword1">Numera√ß√£o dos vol.</label>
                 <div class="input-group">
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)" ng-model="notaFiscal.info.transporte.numeroVol">
                     <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                 </div>
             </div>
@@ -347,9 +375,9 @@
     <div class="row">
         <div class="col-sm-3">
             <div class="form-group">
-                <label for="exampleInputPassword1">Peso lÌquido</label>
+                <label for="exampleInputPassword1">Peso l√≠quido</label>
                 <div class="input-group">
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)" ng-model="notaFiscal.info.transporte.pesoLiquido">
                     <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                 </div>
             </div>
@@ -358,16 +386,16 @@
             <div class="form-group">
                 <label for="exampleInputPassword1">Peso bruto</label>
                 <div class="input-group">
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)" ng-model="notaFiscal.info.transporte.pesoBruto">
                     <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                 </div>
             </div>
         </div>
         <div class="col-sm-3">
             <div class="form-group">
-                <label for="exampleInputPassword1">N˙meros dos lacres</label>
+                <label for="exampleInputPassword1">N√∫meros dos lacres</label>
                 <div class="input-group">
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)" ng-model="notaFiscal.info.transporte.numeroLacres">
                     <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                 </div>
             </div>

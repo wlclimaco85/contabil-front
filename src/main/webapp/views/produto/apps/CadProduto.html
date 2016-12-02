@@ -150,41 +150,40 @@
                         </div>
                         <div class="tab-content1" ng-show="tabs == 5">
                             <div role="tabpanel" class="tab-pane profile" id="profile">
-                                <div class="panel-group" id="accordion">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".peso">
-                                                Pesos
-                                                </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseOne" class="panel-collapse collapse in peso">
-                                            <div class="panel-body">
-                                                <div class="row">
-                                                    <div class="col-sm-4 ">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputPassword1">Peso unitário líquido (kg)</label>
-                                                            <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.pesoliquido" name="pesoLiquido"  placeholder="Peso unitário líquido (kg)">
+                                <div ng-include="'views/produto/apps/tributacao.html'"></div>
+                            </div>
+                            </div>
+                            <div class="tab-content1" ng-show="tabs == 6">
+                                <div role="tabpanel" class="tab-pane messages" id="messages">
+                                    <div class="panel-group" id="accordion">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".peso">
+                                                    Pesos
+                                                    </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseOne" class="panel-collapse collapse in peso">
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-4 ">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputPassword1">Peso unitário líquido (kg)</label>
+                                                                <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.pesoliquido" name="pesoLiquido"  placeholder="Peso unitário líquido (kg)">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-sm-4 ">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputPassword1">Peso unitário bruto (kg)</label>
-                                                            <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.pesobruto" name="pesobruto"  placeholder="Peso unitário bruto (kg)">
+                                                        <div class="col-sm-4 ">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputPassword1">Peso unitário bruto (kg)</label>
+                                                                <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.pesobruto" name="pesobruto"  placeholder="Peso unitário bruto (kg)">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <div ng-include="'views/produto/apps/tributacao.html'"></div>
-                            </div>
-                            </div>
-                            <div class="tab-content1" ng-show="tabs == 6">
-                                <div role="tabpanel" class="tab-pane messages" id="messages">
                                     <div class="panel-group" id="accordion">
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -259,7 +258,6 @@
                                     </div>
                                 </div>
                             </div>
-                        
+
                     </div>
                     </div>
-           
