@@ -9,6 +9,12 @@
         {
           return s%3;
         }
+        vm.generatePDF = function() {
+        debugger
+        kendo.drawing.drawDOM($("#contrato")).then(function(group) {
+          kendo.drawing.pdf.saveAs(group, "Converted PDF.pdf");
+        });
+      }
       SysMgmtData.processPostPageData("main/api/anonimo",{
                 url: "site/api/fetchPage",
                 request: new qat.model.siteInquiryRequest( 100/20, true, "http://localhost:8080/webSite/")}, function(res){
@@ -17,6 +23,8 @@ console.log(res.sites[0].planoList)
            vm.site = new qat.model.Site(res.sites[0]);
            localStorage.setItem("empresa", JSON.stringify(res.sites[0].empresa));
       });
+
+
 
 
     }
