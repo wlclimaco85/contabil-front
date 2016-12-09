@@ -5,7 +5,7 @@
 	commonAuth.factory('fEmpresa', ['$rootScope','fModels','SysMgmtData','toastr' ,function($rootScope,fModels,SysMgmtData,toastr){
 		var factory = {};
 
-	factory.fnMontaObjeto = function(empresa,enderecos,emails,telefones,cnaes,usuario,action){
+	factory.fnMontaObjeto = function(empresa,enderecos,emails,telefones,cnaes,usuario,action,fnCallBack){
 
             var initLoad = true; //used to ensure not calling server multiple times
             var user = "system";
@@ -230,6 +230,9 @@ debugger
            {
                 initLoad = true;
                 toastr.success('Deu Certo seu tanga.', 'Sucess');
+                fnCallBack(res);
+                //$location.path("#/pages/signin");
+
            }
            else
            {

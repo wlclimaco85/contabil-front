@@ -185,139 +185,139 @@ public class ProdutoTest {
 	}
 
 	// create by system gera-java version 1.0.0 02/08/2016 11:38 : 45//
-
-	@Test
-	public void listAllProduto() throws JsonParseException, JsonMappingException, IOException {
-
-		Integer count = 0;
-		Integer id = 10000;
-		RestTemplate restTemplate = new RestTemplate();
-
-		HttpHeaders headers = new HttpHeaders();
-		headers.set("Header", "value");
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.set("Other-Header", "othervalue");
-		headers.set("username", "taz@qat.com");
-
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("username", "taz@qat.com");
-		params.put("password", "taz@qat.com");
-
-		RestTemplate rest = new RestTemplate();
-		rest.setMessageConverters(Arrays.asList(new StringHttpMessageConverter(), new FormHttpMessageConverter()));
-		MultiValueMap<String, String> paramss = new LinkedMultiValueMap<String, String>();
-		paramss.set("username", "taz@qat.com");
-		paramss.set("password", "devil");
-		URI tgtUrl = rest.postForLocation(REST_SERVICE_URI + "auth/api/authenticate", paramss, Collections.emptyMap());
-		System.out.println("[" + tgtUrl + "]");
-
-		System.out.println("[" + tgtUrl + "]");
-
-		ResponseEntity<String> st = rest.postForEntity(REST_SERVICE_URI + "auth/api/authenticate", paramss,
-				String.class);
-		System.out.println("[" + st.getBody() + "]");
-		System.out.println("[" + st + "]");
-		String tk = st.getBody();
-		Class<? extends String> mt = tk.getClass();
-		System.out.println("[" + mt + "]");
-		ObjectMapper mapper = new ObjectMapper();
-		ModelToken obj = mapper.readValue(st.getBody(), ModelToken.class);
-
-		System.out.println("[" + obj.getToken() + "]");
-
-		headers = new HttpHeaders();
-		headers.set("Header", "value");
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.set("Other-Header", "othervalue");
-		headers.set("X-Auth-Token", obj.getToken());
-		String a = "request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:produto/api/cfop/fetchPage/";
-		HttpEntity<String> entity = new HttpEntity<String>("{}", headers);
-
-		// =========== fetch
-		// ================================================================
-		System.out.println("==================================FetchALL==============================================");
-		String jsonInString = mapper.writeValueAsString(new ProdutoInquiryRequest());
-		System.out.println(jsonInString);
-		HttpEntity<String> entitys = new HttpEntity<String>(jsonInString, headers);
-		ProdutoResponse result = restTemplate.postForObject(REST_SERVICE_URI + "produto/api/fetchPage/", entitys,
-				ProdutoResponse.class);
-		Assert.assertEquals(result.isOperationSuccess(), true);
-		count = result.getProdutoList().size();
-
-		// =========== Insert
-		// ================================================================
-		System.out.println("==================================INSERT==============================================");
-		jsonInString = mapper
-				.writeValueAsString(Objects.insertProduto(id, TabelaEnum.PRODUTO, PersistenceActionEnum.INSERT));
-		System.out.println(jsonInString);
-		String requestJson = "{\"produto\":" + jsonInString + "}";
-		entitys = new HttpEntity<String>(requestJson, headers);
-		result = restTemplate.postForObject(REST_SERVICE_URI + "produto/api/insert/", entitys,
-				ProdutoResponse.class);
-	//	Assert.assertEquals(result.isOperationSuccess(), true);
-
-		// =========== Update
-		// ================================================================
-		System.out.println("==================================UPDATE==============================================");
-
-		jsonInString = mapper
-				.writeValueAsString(Objects.insertProduto(id, TabelaEnum.PRODUTO, PersistenceActionEnum.UPDATE));
-		requestJson = "{\"produto\":" + jsonInString + "}";
-		entitys = new HttpEntity<String>(requestJson, headers);
-		result = restTemplate.postForObject(REST_SERVICE_URI + "produto/api/update/", entitys,
-				ProdutoResponse.class);
-		//Assert.assertEquals(result.isOperationSuccess(), true);
-
-		// =========== FetchbyID
-		// ================================================================
-		System.out.println("==================================FetchID==============================================");
-
-		ProdutoInquiryRequest request001 = new ProdutoInquiryRequest();
-		request001.setId(id);
-		jsonInString = mapper.writeValueAsString(request001);
-		System.out.println(jsonInString);
-		entitys = new HttpEntity<String>(jsonInString, headers);
-		result = restTemplate.postForObject(REST_SERVICE_URI + "produto/api/fetchPage/", entitys,
-				ProdutoResponse.class);
-		//Assert.assertEquals(result.isOperationSuccess(), true);
-		//Assert.assertEquals(result.getProdutoList().size(), 1);
-
-		// Assert.assertEquals(result.getProdutoList().get(0).getCodigo(),""codigo_1"
-		// - UPDATE");
-		// Assert.assertEquals(result.getProdutoList().get(0).getCdBarras(),""cdBarras_2"
-		// - UPDATE");
-		// Assert.assertEquals(result.getProdutoList().get(0).getProduto(),""produto_3"
-		// - UPDATE");
-		// Assert.assertEquals(result.getProdutoList().get(0).getDataCreate(),(new
-		// Long());
-		// Assert.assertEquals(result.getProdutoList().get(0).getAplicacao(),""aplicacao_5"
-		// - UPDATE");
-		// Assert.assertEquals(result.getProdutoList().get(0).getFracao(),""fracao_6"
-		// - UPDATE");
-		// Assert.assertEquals(result.getProdutoList().get(0).getClassificacao(),(1007);
-		// Assert.assertEquals(result.getProdutoList().get(0).getUniMed(),(1008);
-		// Assert.assertEquals(result.getProdutoList().get(0).getGrupo(),(1009);
-		// Assert.assertEquals(result.getProdutoList().get(0).getSubGrupo(),(1010);
-		// objeto.setMarca(new ArrayList<List<MarcaProd>> ())
-		// objeto.get().add(new List<MarcaProd>());
-		// Assert.assertEquals(result.getProdutoList().get(0).getPorcao(),(10.00);
-		// Assert.assertEquals(result.getProdutoList().get(0).getPesoBruto(),(10.00);
-		// Assert.assertEquals(result.getProdutoList().get(0).getPesoLiquido(),(10.00);
-		// Assert.assertEquals(result.getProdutoList().get(0).getModoUso(),""modoUso_15"
-		// - UPDATE");
-
-		// =======================
-		System.out.println("==================================DELETE==============================================");
-		jsonInString = mapper
-				.writeValueAsString(Objects.insertProduto(id, TabelaEnum.PRODUTO, PersistenceActionEnum.DELETE));
-		requestJson = "{\"produto\":" + jsonInString + "}";
-		entitys = new HttpEntity<String>(requestJson, headers);
-		result = restTemplate.postForObject(REST_SERVICE_URI + "produto/api/delete/", entitys,
-				ProdutoResponse.class);
-		//Assert.assertEquals(result.isOperationSuccess(), true);
-		//Assert.assertEquals(result.getProdutoList().size(), count.intValue());
-
-	}
+//
+//	@Test
+//	public void listAllProduto() throws JsonParseException, JsonMappingException, IOException {
+//
+//		Integer count = 0;
+//		Integer id = 10000;
+//		RestTemplate restTemplate = new RestTemplate();
+//
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.set("Header", "value");
+//		headers.setContentType(MediaType.APPLICATION_JSON);
+//		headers.set("Other-Header", "othervalue");
+//		headers.set("username", "taz@qat.com");
+//
+//		Map<String, String> params = new HashMap<String, String>();
+//		params.put("username", "taz@qat.com");
+//		params.put("password", "taz@qat.com");
+//
+//		RestTemplate rest = new RestTemplate();
+//		rest.setMessageConverters(Arrays.asList(new StringHttpMessageConverter(), new FormHttpMessageConverter()));
+//		MultiValueMap<String, String> paramss = new LinkedMultiValueMap<String, String>();
+//		paramss.set("username", "taz@qat.com");
+//		paramss.set("password", "devil");
+//		URI tgtUrl = rest.postForLocation(REST_SERVICE_URI + "auth/api/authenticate", paramss, Collections.emptyMap());
+//		System.out.println("[" + tgtUrl + "]");
+//
+//		System.out.println("[" + tgtUrl + "]");
+//
+//		ResponseEntity<String> st = rest.postForEntity(REST_SERVICE_URI + "auth/api/authenticate", paramss,
+//				String.class);
+//		System.out.println("[" + st.getBody() + "]");
+//		System.out.println("[" + st + "]");
+//		String tk = st.getBody();
+//		Class<? extends String> mt = tk.getClass();
+//		System.out.println("[" + mt + "]");
+//		ObjectMapper mapper = new ObjectMapper();
+//		ModelToken obj = mapper.readValue(st.getBody(), ModelToken.class);
+//
+//		System.out.println("[" + obj.getToken() + "]");
+//
+//		headers = new HttpHeaders();
+//		headers.set("Header", "value");
+//		headers.setContentType(MediaType.APPLICATION_JSON);
+//		headers.set("Other-Header", "othervalue");
+//		headers.set("X-Auth-Token", obj.getToken());
+//		String a = "request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:produto/api/cfop/fetchPage/";
+//		HttpEntity<String> entity = new HttpEntity<String>("{}", headers);
+//
+//		// =========== fetch
+//		// ================================================================
+//		System.out.println("==================================FetchALL==============================================");
+//		String jsonInString = mapper.writeValueAsString(new ProdutoInquiryRequest());
+//		System.out.println(jsonInString);
+//		HttpEntity<String> entitys = new HttpEntity<String>(jsonInString, headers);
+//		ProdutoResponse result = restTemplate.postForObject(REST_SERVICE_URI + "produto/api/fetchPage/", entitys,
+//				ProdutoResponse.class);
+//		Assert.assertEquals(result.isOperationSuccess(), true);
+//		count = result.getProdutoList().size();
+//
+//		// =========== Insert
+//		// ================================================================
+//		System.out.println("==================================INSERT==============================================");
+//		jsonInString = mapper
+//				.writeValueAsString(Objects.insertProduto(id, TabelaEnum.PRODUTO, PersistenceActionEnum.INSERT));
+//		System.out.println(jsonInString);
+//		String requestJson = "{\"produto\":" + jsonInString + "}";
+//		entitys = new HttpEntity<String>(requestJson, headers);
+//		result = restTemplate.postForObject(REST_SERVICE_URI + "produto/api/insert/", entitys,
+//				ProdutoResponse.class);
+//	//	Assert.assertEquals(result.isOperationSuccess(), true);
+//
+//		// =========== Update
+//		// ================================================================
+//		System.out.println("==================================UPDATE==============================================");
+//
+//		jsonInString = mapper
+//				.writeValueAsString(Objects.insertProduto(id, TabelaEnum.PRODUTO, PersistenceActionEnum.UPDATE));
+//		requestJson = "{\"produto\":" + jsonInString + "}";
+//		entitys = new HttpEntity<String>(requestJson, headers);
+//		result = restTemplate.postForObject(REST_SERVICE_URI + "produto/api/update/", entitys,
+//				ProdutoResponse.class);
+//		//Assert.assertEquals(result.isOperationSuccess(), true);
+//
+//		// =========== FetchbyID
+//		// ================================================================
+//		System.out.println("==================================FetchID==============================================");
+//
+//		ProdutoInquiryRequest request001 = new ProdutoInquiryRequest();
+//		request001.setId(id);
+//		jsonInString = mapper.writeValueAsString(request001);
+//		System.out.println(jsonInString);
+//		entitys = new HttpEntity<String>(jsonInString, headers);
+//		result = restTemplate.postForObject(REST_SERVICE_URI + "produto/api/fetchPage/", entitys,
+//				ProdutoResponse.class);
+//		//Assert.assertEquals(result.isOperationSuccess(), true);
+//		//Assert.assertEquals(result.getProdutoList().size(), 1);
+//
+//		// Assert.assertEquals(result.getProdutoList().get(0).getCodigo(),""codigo_1"
+//		// - UPDATE");
+//		// Assert.assertEquals(result.getProdutoList().get(0).getCdBarras(),""cdBarras_2"
+//		// - UPDATE");
+//		// Assert.assertEquals(result.getProdutoList().get(0).getProduto(),""produto_3"
+//		// - UPDATE");
+//		// Assert.assertEquals(result.getProdutoList().get(0).getDataCreate(),(new
+//		// Long());
+//		// Assert.assertEquals(result.getProdutoList().get(0).getAplicacao(),""aplicacao_5"
+//		// - UPDATE");
+//		// Assert.assertEquals(result.getProdutoList().get(0).getFracao(),""fracao_6"
+//		// - UPDATE");
+//		// Assert.assertEquals(result.getProdutoList().get(0).getClassificacao(),(1007);
+//		// Assert.assertEquals(result.getProdutoList().get(0).getUniMed(),(1008);
+//		// Assert.assertEquals(result.getProdutoList().get(0).getGrupo(),(1009);
+//		// Assert.assertEquals(result.getProdutoList().get(0).getSubGrupo(),(1010);
+//		// objeto.setMarca(new ArrayList<List<MarcaProd>> ())
+//		// objeto.get().add(new List<MarcaProd>());
+//		// Assert.assertEquals(result.getProdutoList().get(0).getPorcao(),(10.00);
+//		// Assert.assertEquals(result.getProdutoList().get(0).getPesoBruto(),(10.00);
+//		// Assert.assertEquals(result.getProdutoList().get(0).getPesoLiquido(),(10.00);
+//		// Assert.assertEquals(result.getProdutoList().get(0).getModoUso(),""modoUso_15"
+//		// - UPDATE");
+//
+//		// =======================
+//		System.out.println("==================================DELETE==============================================");
+//		jsonInString = mapper
+//				.writeValueAsString(Objects.insertProduto(id, TabelaEnum.PRODUTO, PersistenceActionEnum.DELETE));
+//		requestJson = "{\"produto\":" + jsonInString + "}";
+//		entitys = new HttpEntity<String>(requestJson, headers);
+//		result = restTemplate.postForObject(REST_SERVICE_URI + "produto/api/delete/", entitys,
+//				ProdutoResponse.class);
+//		//Assert.assertEquals(result.isOperationSuccess(), true);
+//		//Assert.assertEquals(result.getProdutoList().size(), count.intValue());
+//
+//	}
 
 	// create by system gera-java version 1.0.0 02/08/2016 11:38 : 45//
 //

@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="thirdparty/jquery-ui-1.12.0/jquery-ui.min.css">
 <!--
   <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/bootstrap/dist/css/bootstrap.min.css">
-   Bootstrap Css 
+   Bootstrap Css
     <link href="views/template-assets/bootstrap-assets/css/bootstrap.min.css" rel="stylesheet">
 -->
     <!-- Angular -->
@@ -1118,7 +1118,7 @@ Controle de Estoque</h1>
                     </div>
                     <a href="#" class="btn-block">Enviar</a>
                 </form>
-                
+
             </div>
         </div>
     </section>
@@ -1219,7 +1219,7 @@ Controle de Estoque</h1>
       <script src="thirdparty/angular-datatables/vendor/angular-highlightjs/angular-highlightjs.min.js"></script>
       <script src="thirdparty/angular-resource/angular-resource.min.js"></script>
       <script src="thirdparty/angular-datatables/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
-
+      <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
       <script src="thirdparty/angular-datatables-master/vendor/datatables-colreorder/js/dataTables.colReorder.js"></script>
       <script src="thirdparty/angular-datatables-master/vendor/datatables-colvis/js/dataTables.colVis.js"></script>
       <script src="thirdparty/angular-datatables-master/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
@@ -1236,7 +1236,7 @@ Controle de Estoque</h1>
       <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.print.js"></script>
       <script src="thirdparty/angular-datatables-master/vendor/datatables-select/js/dataTables.select.js"></script>
 
-      
+
       <script src="thirdparty/angular-datatables-master/vendor/angular-translate/angular-translate.min.js"></script>
       <script src="thirdparty/angular-datatables-master/src/angular-datatables.js"></script>
       <script src="thirdparty/angular-datatables-master/src/angular-datatables.util.js"></script>
@@ -1272,7 +1272,7 @@ Controle de Estoque</h1>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
-    <!-- Include all compiled plugins (below), or include individual files as needed 
+    <!-- Include all compiled plugins (below), or include individual files as needed
     <script src="views/template-assets/bootstrap-assets/js/bootstrap.min.js"></script>
 -->
 
@@ -1289,6 +1289,7 @@ Controle de Estoque</h1>
     <script src="select.js"></script>
 
          <!--webdaptive -->
+        <!--webdaptive -->
         <script src="scripts/wdapp.js"></script>
 
         <script src="scripts/commons/wdapp.controllers.js"></script>
@@ -1305,6 +1306,7 @@ Controle de Estoque</h1>
         <script src="scripts/factory/wdapp.table.ajax.factory.js"></script>
         <script src="scripts/factory/wdapp.table.filters.factory.js"></script>
         <script src="scripts/factory/wdapp.dialog.delete.factory.js"></script>
+        <script src="scripts/factory/notaFiscal/notaFiscal.factory.js"></script>
         <script src="scripts/models/domain.objects.js"></script>
         <script src="scripts/models/request.objects.js"></script>
         <script src="scripts/models/domain.selects.js"></script>
@@ -1335,10 +1337,9 @@ Controle de Estoque</h1>
         <script src="scripts/apps/site.controllers.js"></script>
         <script src="scripts/apps/empresa.controllers.js"></script>
         <script src="scripts/apps/produto/produto.controllers.js"></script>
-        <script src="scripts/factory/notaFiscal/notaFiscal.factory.js"></script>
         <script src="scripts/apps/notafiscal/notafiscal.controllers.js"></script>
-        
-      <script src="scripts/apps/fiscal/cfop.controllers.js"></script>
+
+        <script src="scripts/apps/fiscal/cfop.controllers.js"></script>
         <script src="scripts/apps/fiscal/cnae.controllers.js"></script>
         <script src="scripts/apps/vendas/pdVendas.controllers.js"></script>
         <script src="scripts/apps/vendas/notafiscal.controllers.js"></script>
@@ -1401,15 +1402,16 @@ Controle de Estoque</h1>
         <script src="scripts/factory/site/site.factory.js"></script>
         <script src="scripts/factory/pessoa/pessoa.factory.js"></script>
         <script src="scripts/factory/produto/produto.factory.js"></script>
+        <script src="scripts/factory/produto/cadTributos.factory.js"></script>
         <script src="scripts/factory/wdapp.datatables.factory.js"></script>
         <script src="scripts/factory/wdapp.initPage.factory.js"></script>
         <script src="scripts/models/domain.factory.js"></script>
         <script src="scripts/util/ngAutocomplete.js"></script>
-        
+        <script src="scripts/factory/wdapp.doisValor.util.factory.js"></script>
+
         <script src="scripts/apps/entidade/empresa.controllers.js"></script>
         <script src="scripts/apps/principal.controller.js"></script>
-        <script src="scripts/util/endereco.controllers.js"></script>
-        <script src="scripts/factory/wdapp.doisValor.util.factory.js"></script>
+         <script src="scripts/util/endereco.controllers.js"></script>
 
             <script src="vendor/bootstrap/js/bootstrap.js"></script>
     <script src="dist/js/select2.min.js"></script>
@@ -1526,7 +1528,7 @@ Controle de Estoque</h1>
     $(document).ready(function() {
 
 
-      
+
 
 
         $("#test-upload").fileinput({
@@ -1708,6 +1710,6 @@ $('.empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
     </script>
 
     </body>
-    
+
 
 </html>

@@ -247,8 +247,11 @@
 })();
 (function() {
     angular.module('wdApp.apps.newEmpresa.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter','ui.bootstrap'])
-        .controller('NewEmpresaInsertController', function($rootScope, $scope, fModels, SysMgmtData, fEmpresa) {
+        .controller('NewEmpresaInsertController', function($rootScope, $scope, fModels, SysMgmtData, fEmpresa,$location) {
             var vm = this;
+
+            var $window;
+            $window = $(window);
 
             $scope.doIfChecked = function(_ckecked,_value,_nome) {
 
@@ -362,7 +365,7 @@
 
         $scope.enderecos = [];
 
-            
+
             $scope.today = function() {
                 return $scope.dt = new Date();
             };
@@ -487,23 +490,11 @@ $scope.today = function() {
     return '';
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             var fnCallBack = function(oResponse) {
                 debugger
+              //  $location.path("advogado/forms/advogadoAgenda");
+                window.location.href = "http://localhost:8080/springmvc-angularjs/index3.html#/pages/signin"
+
                 console.log(oResponse)
             }
             $scope.saveEmpresa = function() {
@@ -511,7 +502,7 @@ $scope.today = function() {
                 $scope.empresa.dtInicio = (new Date($scope.empresa.dtInicio)).getTime();
                 $scope.empresa.dtAbertura = (new Date($scope.empresa.dtAbertura)).getTime();
 
-                fEmpresa.fnMontaObjeto($scope.empresa,$scope.enderecos,$scope.emails,$scope.telefones,$scope.cnaes,$scope.usuario,"INSERT",'PRINCIPAL')
+                fEmpresa.fnMontaObjeto($scope.empresa,$scope.enderecos,$scope.emails,$scope.telefones,$scope.cnaes,$scope.usuario,"INSERT",fnCallBack)
                // factory.fnMontaObjeto = function(empresa,enderecos,emails,telefones,cnaes,action){
 
             };

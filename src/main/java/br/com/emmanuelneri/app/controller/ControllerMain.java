@@ -111,6 +111,43 @@ public class ControllerMain {
 		}
 		return result;
     }
+
+	// nota fiscal eletronica
+	@ResponseBody
+    @RequestMapping(value = "/notafiscal", method = RequestMethod.POST)
+    public String notaFiscal(@RequestBody UtilRequest request) {
+
+        RestTemplate restTemplate = new RestTemplate();
+        String result ="";
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Header", "value");
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Other-Header", "othervalue");
+        headers.set("X-Auth-Token", request.getToken() );
+
+        ObjectMapper mapper = new ObjectMapper();
+        //HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
+        String jsonInString = null;
+		try {
+			jsonInString = mapper.writeValueAsString(request.getRequest());
+
+        HttpEntity<String> entity = new HttpEntity<String>(jsonInString, headers);
+        result = restTemplate.postForObject(URL + request.getUrl(), entity, String.class,HttpMethod.GET);
+
+        if(1==1)
+        {
+
+        }
+
+
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		}
+		return result;
+    }
+
 	//cosmos software
 	@ResponseBody
     @RequestMapping(value = "/blueSoft", method = RequestMethod.POST)
