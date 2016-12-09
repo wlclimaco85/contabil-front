@@ -966,7 +966,7 @@ Controle de Estoque</h1>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel panel-default">
+                            <!--    <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href=".collapseFour">2 - Serviços</a>
@@ -1016,6 +1016,8 @@ Controle de Estoque</h1>
                                         </div>
                                     </div>
                                 </div>
+
+                                 -->
                             </div>
                             <div class="col-sm-4">
                                 <div class="panel-heading">
@@ -1043,9 +1045,15 @@ Controle de Estoque</h1>
 
                             </div>
                         </div>
-                        <div class="tab-pane tab5" id="tab5">
+                        <div class="tab-pane tab5" id="tab5" style="height:500px;">
+                          <div id="Layer1" style="overflow:auto;height:400px;left:10px; top:20px;">
+                            <div ng-include="'views/empresa/apps/contrato.html'"></div>
 
-
+                            </div>
+                            <div>
+                            <button class="btn btn-primary" ng-click="cc.generatePDF()"><i class="fa fa-save"></i> Save as PDF</button>
+                            </div>
+                            <!--
 
                             <div class="container kv-main">
 
@@ -1056,68 +1064,7 @@ Controle de Estoque</h1>
                                     <button type="reset" class="btn btn-default">Reset</button>
                                 </form>
                                 <hr>
-                              </div>
-                         <!--       <form enctype="multipart/form-data">
-                                    <label>Test invalid input type</label>
-                                    <input id="file-0b" class="file" type="text" multiple data-min-file-count="1">
-
-                                </form>
-                                <hr>
-                                <form enctype="multipart/form-data">
-                                    <input id="file-0a" class="file" type="file" multiple data-min-file-count="3">
-                                    <hr>
-                                    <div class="form-group">
-                                        <input id="file-0b" class="file" type="file">
-                                    </div>
-                                    <hr>
-                                    <div class="form-group">
-                                        <input id="file-1" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="2">
-                                    </div>
-                                    <hr>
-                                    <div class="form-group">
-                                        <input id="file-2" type="file" class="file" readonly data-show-upload="false">
-                                    </div>
-                                    <hr>
-                                    <div class="form-group">
-                                        <label>Preview File Icon</label>
-                                        <input id="file-3" type="file" multiple=true>
-                                    </div>
-                                    <hr>
-                                    <div class="form-group">
-                                        <input id="file-4" type="file" class="file" data-upload-url="#">
-                                    </div>
-                                    <hr>
-                                    <div class="form-group">
-                                        <button class="btn btn-warning" type="button">Disable Test</button>
-                                        <button class="btn btn-info" type="reset">Refresh Test</button>
-                                        <button class="btn btn-primary">Submit</button>
-                                        <button class="btn btn-default" type="reset">Reset</button>
-                                    </div>
-                                    <hr>
-                                    <div class="form-group">
-                                        <input type="file" class="file" id="test-upload" multiple>
-                                        <div id="errorBlock" class="help-block"></div>
-                                    </div>
-                                    <hr>
-                                    <div class="form-group">
-                                        <input id="file-5" class="file" type="file" multiple data-preview-file-type="any" data-upload-url="#">
-                                    </div>
-                                </form>
-
-
-                                <hr>
-                                <h4>Multi Language Inputs</h4>
-                                <form enctype="multipart/form-data">
-                                    <label>French Input</label>
-                                    <input id="file-fr" name="file-fr[]" type="file" multiple>
-                                    <hr style="border: 2px dotted">
-                                    <label>Spanish Input</label>
-                                    <input id="file-es" name="file-es[]" type="file" multiple>
-                                </form>
-                                <hr>
-                                <br>
-                            </div> -->
-
+                              </div> -->
 
                         </div>
                         <div class="tab-pane" id="tab6">
@@ -1171,60 +1118,11 @@ Controle de Estoque</h1>
                     </div>
                     <a href="#" class="btn-block">Enviar</a>
                 </form>
-                <button class="btn btn-primary" ng-click="cc.generatePDF()"><i class="fa fa-save"></i> Save as PDF</button>
+                
             </div>
         </div>
     </section>
-<div  class="">
-    <div id="contrato">
 
-    <meta charset="utf-8">
-      <h2>CONTRATO DE CONCESSÃO DE USO DE SOFTWARE</h2><br>
-<p>Pelo presente instrumento e na melhor forma de direito, as partes abaixo qualificadas têm, entre si, justo e acordado, este Contrato de Concessão de Uso de Software que será regido de acordo com as seguintes cláusulas e condições de vontades.</p>
-
-De um lado ZIPLINE TECNOLOGIA LTDA., com sede na cidade de SANTA MARIA/RS, à Rua Dr. Alberto Pasqualini n. 111 / 901, CEP 97.015-010, inscrita no CNPJ/MF sob n. 04.693.497/0001-21 neste ato, representada por seus representantes legais, doravante simplesmente denominada CONTRATADA, e, de outro lado doravante denominado simplesmente CONTRATANTE, tem entre si justo e avençado o seguinte:
-CLÁUSULA PRIMEIRA - DO OBJETO
-1.1. Por este instrumento particular, a CONTRATADA concede a CONTRATANTE, o uso do programa EGESTOR - http://www.egestor.com.br, doravante denominado simplesmente SOFTWARE, em forma de código fechado e proprietário, bem como o conteúdo e a estrutura do banco de dados, arquivos de ajuda e qualquer outro de natureza técnica eventualmente fornecidos pela CONTRATADA.
-1.2. A CONTRATADA concede a CONTRATANTE o uso do SOFTWARE, unicamente, não constituindo a venda do programa original, dos elementos que o compõem ou de qualquer cópia do mesmo, mas apenas um licenciamento temporário de uso, não exclusivo, mediante contraprestação da mensalidade.
-Parágrafo Único: A natureza do presente contrato é a licença de uso do SOFTWARE EGESTOR, para uso da CONTRATANTE, sendo a relação norteada pelo ordenamento jurídico em especial pela lei 9.609/98.
-1.3. A propriedade do EGESTOR não é objeto deste contrato e continua sendo propriedade exclusiva da ZIPLINE TECNOLOGIA LTDA, sendo que tais direitos estão protegidos pela Legislação Brasileira e Internacional, aplicável a propriedade intelectual e aos direitos autorais, especificamente no Brasil, pela Lei n° 9.609 (Lei do Software) e Lei n° 9.610 (Lei de Direitos Autorais).
-Parágrafo Único: Fica expressamente vedado a CONTRATANTE ceder, transferir, conceder, comercializar e licenciar o SOFTWARE EGESTOR.
-1.4. A CONTRATADA somente certifica Notas Fiscais Eletrônicas no modelo A1, sendo impossível a certificação no modelo A3.
-Parágrafo Único - O funcionamento das Notas Fiscais Eletrônicas dependem das Secretarias das Fazendas dos Estados e Municípios Brasileiros. Fica expressamente acordado que ocorrendo falha na comunicação entre a Secretaria da Fazenda do Estado ou Município e o EGestor, este não poderá ser responsabilizado pela falha da comunicação, ficando a CONTRATADA desobrigada por quaisquer danos civil, criminal, tributário e patrimonial.
-1.5. O funcionamento das Notas Fiscais Eletrônicas dependem dos Estados e Municípios Brasileiros possuírem o sistema de emissão de Notas Fiscais Eletrônicas.
-1.6. A CONTRATADA não realizará personalização ou customização do sistema ao CONTRATANTE, as alterações que ocorrerem no sistema, por deliberalidade da CONTRATADA, será universal e geral.
-CLÁUSULA SEGUNDA - DO PREÇO E DAS CONDIÇÕES DE PAGAMENTO
-
-2.1. A CONTRATANTE opta pelo plano Egestor de Testes.
-Parágrafo Único: Para optar por algum plano profissional o cliente deverá fazer um novo contrato.
-CLÁUSULA TERCEIRA - DAS RESPONSABILIDADES E LIMITAÇÕES
-3.1. A CONTRATADA se obriga a manter o SOFTWARE em pleno funcionamento 24 (vinte e quatro) horas por dia e 07 (sete) dias por semana, exceto nas situações de caso fortuito ou força maior.
-3.2. A CONTRATADA se obriga a disponibilizar meio para a realização de backup (cópia de segurança) dos bancos de dados das informações adicionadas e mantidas pela CONTRATANTE no SOFTWARE, somente para as versões pagas, que poderá ser executada a qualquer momento pela CONTRATANTE, sendo o conteúdo e a guarda do backup extraído de inteira responsabilidade da CONTRATANTE.
-3.2.1. A restauração da cópia de segurança será feita em até 2 (dois) dias após a CONTRATANTE entrar em contato com a CONTRATADA e efetivar a solicitação. A restauração de cópia será gratuita apenas uma única vez ao mês, caso haja a necessidade de ser feita uma ou mais restaurações, será cobrada uma taxa por restauração a qual será informada no momento da solicitação.
-3.2.2. No plano gratuíto a restauração da cópia de segurança será realizada após a CONTRATANTE contratar um dos plano pagos, mediante solicitação e condicionado ao disposto na cláusula 3.2.1..
-3.2.3. Ocorrendo algum dos casos previstos no ponto 3.4 do presente contrato, em sendo necessárias restaurações, as mesmas serão feitas de forma gratuita, não ocasionando ônus algum a CONTRATANTE.
-3.3. A CONTRATADA não se responsabiliza pelo conteúdo das informações contidas no(s) banco(s) de dados do SOFTWARE, sendo este de inteira responsabilidade da CONTRATANTE, inclusive perante terceiros.
-3.4. O SOFTWARE poderá ficar indisponível por dificuldades técnicas, falhas de Internet, manutenção improrrogável ou qualquer outra circunstância alheia a vontade da CONTRATADA, as quais não se responsabiliza, tampouco responderá por lucro cessante, bem como qualquer outro tipo de danos diretos e indiretos que surjam em conexão com o presente contrato.
-3.5. A CONTRATADA não se responsabiliza por quaisquer insucessos comerciais da CONTRATANTE decorrentes dos serviços aqui prestados, bem como por perdas e danos, lucros cessantes ou qualquer outra indenização, bem como quando decorrente de eventual indisponibilidade dos serviços, quer por ação da CONTRATANTE, quer por terceiros.
-3.6. Se as partes deixarem de exigir em qualquer tempo o cumprimento de quaisquer cláusulas ou condições deste contrato, à parte prejudicada não ficará impedida de quando entender, fazer com que a outra parte inadimplente cumpra todas as condições contratuais.
-3.7. A eventual tolerância, por uma das partes, a qualquer infração de cláusula ou condição deste contrato, não significará qualquer liberação das obrigações futuras da parte infratora, sem qualquer modificação do dispositivo infringido.
-3.8. A CONTRATADA manterá, sob rigoroso sigilo, todos os dados da CONTRATANTE, principalmente aqueles inseridos no SOFTWARE, sob pena de ser responsabilizada civil e criminalmente.
-3.9. A CONTRATADA reserva-se no direito de alterar o código-fonte e a sistemática de funcionamento do SOFTWARE sem aviso prévio a CONTRATANTE, desde que não gere prejuízos financeiros.
-CLÁUSULA QUARTA - CONDIÇÕES GERAIS
-4.1. A CONTRATANTE não poderá copiar, traduzir, modificar, adaptar, separar, desmontar ou reconstruir o SOFTWARE, bem como o conteúdo e a estrutura do(s) banco(s) de dados.
-4.2. Para a utilização do SOFTWARE - EGESTOR, por parte da CONTRATANTE, será necessária a utilização mínima dos seguintes equipamentos e programas:
-1 - Conexão de banda larga com a Internet de no mínimo 1Mbps (Um Megabyte por segundo);
-2 - Pelo menos 01 microcomputador com processador de 800 MHz (Oitocentos Megahertz) ou maior e memória de 512 MB (Quinhentos e doze Megabyte) ou maior;
-3 - Navegador Mozilla Firefox na versão atualizada.
-Paragrafo Único - O SOFTWARE - EGESTOR poderá funcionar em aparelhos celulares e tablets, contudo a CONTRATADA não se responsabiliza pelo não funcionamento e ocorrências de erros.
-4.3. O suporte será prestado pela CONTRATADA através dos meio eletrônicos (e-mail e Chat) e por telefone, ambos no horário comercial em que esta presta seus serviços.
-CLÁUSULA QUINTA - DO PRAZO E DA RESCISÃO
-5.1. O presente contrato é pactuado pelo prazo determinado de 15 dias.
-5.2. Entende-se como solicitação de rescisão contratual a solicitação da parte para migrar do plano gratuito para algum plano pago ou a exclusão dos dados do sistema.
-6.1. As partes elegem o foro de Santa Maria, estado do Rio Grande do Sul, como único competente para dirimir qualquer controvérsia ou dúvida oriunda do presente contrato, com expressa renúncia a qualquer outro, por mais privilegiado que seja.
-
-</div>
-    </div>
     <!-- Google Map
     ============================================= -->
     <div id="map"></div>

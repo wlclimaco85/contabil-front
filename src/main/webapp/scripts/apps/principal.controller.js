@@ -5,12 +5,14 @@
     function principalController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory) {
         var vm = this;
 
+        vm.doc ="";
+        vm.docTipo ="";
         vm.functionTest = function(s)
         {
           return s%3;
         }
         vm.generatePDF = function() {
-        debugger
+        
         kendo.drawing.drawDOM($("#contrato")).then(function(group) {
           kendo.drawing.pdf.saveAs(group, "Converted PDF.pdf");
         });
@@ -18,10 +20,29 @@
       SysMgmtData.processPostPageData("main/api/anonimo",{
                 url: "site/api/fetchPage",
                 request: new qat.model.siteInquiryRequest( 100/20, true, "http://localhost:8080/webSite/")}, function(res){
-     //      console.log(res)
-console.log(res.sites[0].planoList)
+
            vm.site = new qat.model.Site(res.sites[0]);
-           localStorage.setItem("empresa", JSON.stringify(res.sites[0].empresa));
+           console.log(res.sites[0].empresa)
+           if((res.sites[0].empresa != undefined)&&(res.sites[0].empresa != null))
+           {
+                localStorage.setItem("empresa", JSON.stringify(res.sites[0].empresa));
+                var docs = res.sites[0].empresa.documentos
+
+                for(var x=0; x<docs.length;x++ )
+                {
+                  if(docs[x].documentoType == "CPF")
+                  {
+                      vm.doc = docs[x].numero;
+                      vm.docTipo = "CPF"
+                  }
+                  else if(docs[x].documentoType == "CNPJ")
+                  {
+
+                      vm.doc = docs[x].numero;
+                      vm.docTipo = "CNPJ"
+                  }
+                }
+            }
       });
 
 
