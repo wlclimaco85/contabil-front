@@ -17,14 +17,15 @@
 					            <div class="col-sm-4 ">
 					                <div class="form-group">
 					                    <label for="exampleInputPassword1">Regime</label>
-					                    <div class="row ">
-					                       <span class="ui-select">
-					                            <select ng-model="notaFiscal.info.identificacao.finalidade.id">
-					                                <option value="1" selected="selected">Simples Nacional</option>
-					                                <option value="2">Tributação Normal</option>
-					                            </select>
-					                        </span>
-					                     </div>
+					                    <div class="row">
+			                                <ui-select ng-model="tributacao.icms.regime" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+									            <ui-select-choices repeat="item in regime | filter: $select.search">
+									              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+									              
+									            </ui-select-choices>
+									          </ui-select>
+			                            </div>
 					                </div>
 					            </div>
 					        </div>

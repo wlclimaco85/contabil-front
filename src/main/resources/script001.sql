@@ -3,16 +3,6 @@ INSERT INTO pagina(pagina,parentid, tabelaenumvalue, create_date, create_user)
 
 
 
-INSERT INTO doisvalortype(tipo, descricao,  create_date, create_user)
-    VALUES ('ICMS - SITUAÇÃO TRIBUTARIA', 'ICMS - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System'),
-	('ICMS - ORIGEM', 'ICMS - ORIGEM', 1477075035443, 'System'),
-	('ICMS - MODALIDADE BC', 'MODALIDADE BC', 1477075035443, 'System'),
-	('ICMS - MOTIVO DESONERAÇÃO', 'ICMS - MOTIVO DESONERAÇÃO', 1477075035443, 'System'),
-	('IPI - SITUAÇÃO TRIBUTARIA', 'IPI - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System'),
-	('TIPO CALCULO', 'TIPO CALCULO', 1477075035443, 'System'),
-	('PIS - SITUAÇÃO TRIBUTARIA', 'PIS - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System'),
-	('COFINS - SITUAÇÃO TRIBUTARIA', 'COFINS - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System');
-
 
 
 INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
@@ -79,6 +69,12 @@ INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, 
 	   ('54','Saída imune','54: Saída imune',6,2, 1477075035443, 'System'),
 	   ('55','Saída com suspensão','55: Saída com suspensão',6,2, 1477075035443, 'System'),
 	   ('99','Outras saídas','99: Outras saídas',6,2, 1477075035443, 'System'),
+	   
+	   
+	   
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES ('00', '00: Tributada Normal','00: Tributada Normal',23,2, 1477075035443, 'System'),
+	   ('10', '10: Simples Nacional','10: Simples Nacional',23,2, 1477075035443, 'System');
 
 
 	   ('1','Porcentagem','Porcentagem',7,2, 1477075035443, 'System'),
@@ -156,8 +152,6 @@ INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, 
 
 
 
-INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
-    VALUES (26,'TIPO FRETE', 'TIPO FRETE', 1477075035443, 'System');
 
 INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
     VALUES ('0', '0 - Emitente','0 - Emitente',26,5, 1477075035443, 'System'),
@@ -169,8 +163,6 @@ INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, 
 INSERT INTO pagina(id,pagina,parentid, tabelaenumvalue, create_date, create_user)
     VALUES (10,'Nota Fiscal', 0, 100, 1477075035443, 'System');
 
-INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
-    VALUES (1001,'TIPO NOTA FISCAL', 'TIPO NOTA FISCAL', 1477075035443, 'System');
 
 INSERT INTO doisvalor(id,value,nome, descricao, doisvalortype, pagina,create_date, create_user )
     VALUES
@@ -185,8 +177,6 @@ INSERT INTO doisvalor(id,value,nome, descricao, doisvalortype, pagina,create_dat
 	   INSERT INTO pagina(id,pagina,parentid, tabelaenumvalue, create_date, create_user)
     VALUES (10,'Nota Fiscal', 0, 100, 1477075035443, 'System');
 
-INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
-    VALUES (1001,'TIPO NOTA FISCAL', 'TIPO NOTA FISCAL', 1477075035443, 'System');
 
 INSERT INTO doisvalor(id,value,nome, descricao, doisvalortype, pagina,create_date, create_user )
     VALUES
@@ -196,6 +186,51 @@ INSERT INTO doisvalor(id,value,nome, descricao, doisvalortype, pagina,create_dat
 	   (1004,'3', '3 - NF-e Entrada','3 - NF-e Entrada',1001,10, 1477075035443, 'System'),
 	   (1005,'4', '4 - Pedido Compra','4 - Pedido Compra',1001,10, 1477075035443, 'System');
 //===============
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
+    VALUES (1,'NFNotaInfoItemModalidadeBCICMSST', 'NF NOTA INFO ITEM MODALIDADE BC ICMS ST', 1477075035443, 'System'),
+	(2,'NFNotaInfoItemModalidadeBCICMS', 'NF NOTA INFO ITEM MODALIDADE BC ICMS', 1477075035443, 'System'),
+	(3,'NFNotaInfoImpostoTributacaoISSQN', 'NF NOTA INFO IMPOSTO TRIBUTACAO ISSQN', 1477075035443, 'System'),
+	(4,'NFNotaInfoImpostoTributacaoICMS', 'NF NOTAINFO IMPOSTO TRIBUTACAO ICMS', 1477075035443, 'System'),
+	(5,'NFNotaInfoEspecieVeiculo', 'NF NOTA INFO ESPECIE VEICULO', 1477075035443, 'System'),
+	(6,'NFNotaInfoCombustivelTipo', 'NF NOTA INFO COMBUSTIVEL TIPO', 1477075035443, 'System'),
+	(7,'TIPO NOTA FISCAL', 'TIPO NOTA FISCAL', 1477075035443, 'System'),
+	(8,'ICMS - SITUAÇÃO TRIBUTARIA ', 'ICMS - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System'),
+	(9,'ICMS - ORIGEM', 'ICMS - ORIGEM', 1477075035443, 'System'),
+	(10,'ICMS - MODALIDADE BC', 'MODALIDADE BC', 1477075035443, 'System'),
+	(11,'ICMS - MOTIVO DESONERAÇÃO', 'ICMS - MOTIVO DESONERAÇÃO', 1477075035443, 'System'),
+	(12,'IPI - SITUAÇÃO TRIBUTARIA', 'IPI - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System'),
+	(13,'TIPO CALCULO', 'TIPO CALCULO', 1477075035443, 'System'),
+	(14,'PIS - SITUAÇÃO TRIBUTARIA', 'PIS - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System'),
+	(15,'COFINS - SITUAÇÃO TRIBUTARIA', 'COFINS - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System'),
+	(16,'TIPO FRETE', 'TIPO FRETE', 1477075035443, 'System'),
+	(17,'TIPO NOTA FISCAL', 'TIPO NOTA FISCAL', 1477075035443, 'System'),
+	(18,'NF AMBIENTE', 'NF AMBIENTE', 1477075035443, 'System'),
+	(19,'NF MODALIDADE FRETE', 'NF MODALIDADE FRETE', 1477075035443, 'System'),
+	(20,'NFModelo', 'NF MODELO', 1477075035443, 'System'),
+	(21,'ICMS - SITUAÇÃO TRIBUTARIA SIMPLES NACIONAL', 'ICMS - SITUAÇÃO TRIBUTARIA SIMPLES NACIONAL', 1477075035443, 'System'),
+	(22,'ICMS - SITUAÇÃO TRIBUTARIA TRIBUTACAO NORMAL', 'ICMS - SITUAÇÃO TRIBUTARIA TRIBUTACAO NORMAL' , 1477075035443, 'System'),
+	(23,'ICMS - REGINE', 'ICMS - REGIME' , 1477075035443, 'System');
+
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
+    VALUES (1001,'TIPO NOTA FISCAL', 'TIPO NOTA FISCAL', 1477075035443, 'System');
+    
+    INSERT INTO doisvalortype(tipo, descricao,  create_date, create_user)
+    VALUES ('ICMS - SITUAÇÃO TRIBUTARIA ', 'ICMS - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System'),
+	('ICMS - ORIGEM', 'ICMS - ORIGEM', 1477075035443, 'System'),
+	('ICMS - MODALIDADE BC', 'MODALIDADE BC', 1477075035443, 'System'),
+	('ICMS - MOTIVO DESONERAÇÃO', 'ICMS - MOTIVO DESONERAÇÃO', 1477075035443, 'System'),
+	('IPI - SITUAÇÃO TRIBUTARIA', 'IPI - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System'),
+	('TIPO CALCULO', 'TIPO CALCULO', 1477075035443, 'System'),
+	('PIS - SITUAÇÃO TRIBUTARIA', 'PIS - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System'),
+	('COFINS - SITUAÇÃO TRIBUTARIA', 'COFINS - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System');
+
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
+    VALUES (26,'TIPO FRETE', 'TIPO FRETE', 1477075035443, 'System');
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
+    VALUES (1001,'TIPO NOTA FISCAL', 'TIPO NOTA FISCAL', 1477075035443, 'System');
 
 INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
     VALUES (1002,'NF AMBIENTE', 'NF AMBIENTE', 1477075035443, 'System');

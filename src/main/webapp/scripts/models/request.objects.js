@@ -221,10 +221,11 @@
 	};
 
 		//siteInquryRequest
-	qat.model.doisValoresInquiryRequest = function (_page, _iStartPage, _bCount,_emprId)
+	qat.model.doisValoresInquiryRequest = function (_page, _iStartPage, _bCount,_emprId,_doisValorType)
 	{
 		this.pageSize = 20;
 		this.paginaId =  _page;
+		this.doisValorType = _doisValorType;
 		this.emprId =  _emprId;
 		this.startPage = _iStartPage;
 		this.sortExpressions = null;

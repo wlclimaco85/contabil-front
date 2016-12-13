@@ -481,6 +481,8 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
             vm.icmsMBC = [];
             vm.icmsMD = [];
 
+            $scope.icmsST = [];
+
 
             $scope.updateSlotName = function(updatedModel){
 
@@ -550,8 +552,23 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
                 fProduto.fnMontaObjeto($scope.produto, $scope.tributacao,$scope.produtoEmpresa, 'INSERT', "produto/api/produtoParent/insert/", fnCallBack);
             };
 
+            $scope.getRegimeTriburario = function (oObject)
+            {
+                debugger
+                var iType = 0;
+                 if(oObject.value == "10")
+                   iType = 21
+                 else
+                    iType = 22
 
-               $scope.icmsST = [];
+                 qat.model.select.util("entidade/api/doisValores/fetchPage",true,new qat.model.doisValoresInquiryRequest(null, 100/20, true, JSON.parse(localStorage.getItem("empresa")).id,iType),function(res){
+                    
+                    $scope.icmsST  = res.doisValoresList;
+                 });
+            }
+
+               
+               $scope.regime = [];
                $scope.icmsOri = [];
                $scope.icmsMBC = [];
                $scope.icmsMD = [];
@@ -574,8 +591,8 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
                             {
                                 switch (planos.doisValorType.tipo) 
                                 {                          
-                                    case 'ICMS - SITUAÇÃO TRIBUTARIA':
-                                        $scope.icmsST.push(planos);
+                                    case 'ICMS - REGINE':
+                                        $scope.regime.push(planos);
                                         break;                
                                     case 'ICMS - ORIGEM':
                                         $scope.icmsOri.push(planos)
@@ -1177,7 +1194,7 @@ angular.module('wdApp.apps.produto.selects', ['ngSanitize', 'ui.select'])
         var planos = "";
 
 
-
+debugger
        if(res.operationSuccess == true)
        {
             for(var x=0;x<res.doisValoresList.length;x++)

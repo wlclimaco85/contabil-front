@@ -220,7 +220,9 @@ debugger
 
 
         var oObject = fModels.amont(empresa,"INSERT");
-        oObject.usuarios.push(fModels.amont(qat.model.fnUsuario(usuario,"INSERT","system")));
+        var oUsuario = fModels.amont(qat.model.fnUsuario(usuario,"INSERT","system"),"INSERT");
+        oObject.usuarios = [];
+        oObject.usuarios.push(oUsuario);
         debugger
         SysMgmtData.processPostPageData("main/api/anonimo",{
                 url: "entidade/api/empresa"+   WebDaptiveAppConfig.create_url,

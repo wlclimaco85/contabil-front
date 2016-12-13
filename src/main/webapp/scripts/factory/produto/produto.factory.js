@@ -8,9 +8,6 @@
 	factory.fnMontaObjeto = function(produto,tributacao,produtoEmpresa,action,url,callBack){
 
           //  produtoEmpresa.prodId = fModels.amont(qat.model.fnProduto(produto,action,$rootScope.user.user),action);
-
-debugger
-
             
             //================ Estoque ======================
             for (var x = 0;x<produtoEmpresa.estoqueList.length;x++){
