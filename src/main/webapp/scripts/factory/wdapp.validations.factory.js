@@ -129,6 +129,22 @@
 	                        'texto': integerNotEmptyValidation,
 	                    }
 	                });
+				},
+				tributacao : function() {
+				    $('.tributacaoForm')
+	                .formValidation({
+	                    framework: 'bootstrap',
+	                    icon: {
+	                        valid: 'glyphicon glyphicon-ok',
+	                        invalid: 'glyphicon glyphicon-remove',
+	                        validating: 'glyphicon glyphicon-refresh'
+	                    },
+	                    fields: {
+	                        'nome': notEmptyStringMinMaxRegexp,
+	                        'email': integerNotEmptyValidation,
+	                        'texto': integerNotEmptyValidation,
+	                    }
+	                });
 				}
 			};
 	}]);

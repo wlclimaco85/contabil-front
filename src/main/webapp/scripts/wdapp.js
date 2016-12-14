@@ -315,6 +315,12 @@ var WebDaptiveAppConfig = {
 	         	,'wdApp.ajaxCalls.doisValores'
 	         	,'wdApp.ajaxCall.notaFiscal'
 
+	         	,'wdApp.apps.tributacao'
+	            ,'wdApp.apps.tributacao.insert'
+				,'wdApp.apps.tributacao.update'
+	            ,'wdApp.apps.tributacao.delete'
+	            ,'wdApp.apps.tributacao.view'
+
 
 
 
@@ -367,6 +373,7 @@ var WebDaptiveAppConfig = {
             ,'dicionario/tables/tela'
             ,'dicionario/tables/relatorios'
             ,'gerencia/details/empresa'
+            ,'gerencia/tables/tributacao'
 			];
 
 			//geeric routeine for building route from array

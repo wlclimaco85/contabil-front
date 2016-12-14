@@ -163,6 +163,20 @@
 			            })
 
 			            return oOptions;
+				},
+				tributacao : function(vm,createdRow,scope, _callback) {
+
+					var oOptions = padrao(vm,createdRow,scope, _callback);
+				     oOptions.buttons.push({
+			                text: 'Nova Tributação',
+			                key: '1',
+			                action: function(e, dt, node, config) {
+			                    dialogFactory.dialog('views/gerencia/dialog/dTributacao.html',"TributacaoInsertController",validationFactory.tributacao,null);
+
+			                }
+			            })
+
+			            return oOptions;
 				}
 			};
 	}]);
