@@ -2,6 +2,199 @@ INSERT INTO pagina(pagina,parentid, tabelaenumvalue, create_date, create_user)
     VALUES ('Produto', 0, 100, 1477075035443, 'System');
 
 
+INSERT INTO pagina(id,pagina,parentid, tabelaenumvalue, create_date, create_user)
+    VALUES (6,'tributação', 0, 100, 1477075035443, 'System');
+
+
+    INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
+    VALUES (21,'ICMS - SITUAÇÃO TRIBUTARIA SIMPLES NACIONAL', 'ICMS - SITUAÇÃO TRIBUTARIA SIMPLES NACIONAL', 1477075035443, 'System'),
+	(22,'ICMS - SITUAÇÃO TRIBUTARIA TRIBUTACAO NORMAL', 'ICMS - SITUAÇÃO TRIBUTARIA TRIBUTACAO NORMAL' , 1477075035443, 'System'),
+	(23,'ICMS - REGINE', 'ICMS - REGIME' , 1477075035443, 'System'),
+	(10,'ICMS - MODALIDADE BC', 'MODALIDADE BC', 1477075035443, 'System'),
+	(11,'ICMS - MODALIDADE BC ST', 'MODALIDADE BC', 1477075035443, 'System'),
+	(12,'ICMS - MOTIVO DESONERAÇÃO', 'ICMS - MOTIVO DESONERAÇÃO', 1477075035443, 'System'),
+	(13,'IPI - SITUAÇÃO TRIBUTARIA', 'IPI - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System'),
+	(14,'TIPO CALCULO', 'TIPO CALCULO', 1477075035443, 'System'),
+	(15,'PIS - SITUAÇÃO TRIBUTARIA', 'PIS - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System'),
+	(16,'COFINS - SITUAÇÃO TRIBUTARIA', 'COFINS - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System');
+
+
+	INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+
+
+    	/* MODALIDADE BC */
+    	('0', 'Margem valor agregado','Margem valor agregado',10,6, 1477075035443, 'System'),
+    	('1', 'Pauta (valor)','Pauta (valor)',10,6, 1477075035443, 'System'),
+    	('2', 'Preço tabelado máx. (valor)','Preço tabelado máx. (valor)',10,6, 1477075035443, 'System'),
+    	('3', 'Valor da operação','Valor da operação',10,6, 1477075035443, 'System'),
+
+    	/* ICMS - REGINE */
+       ('00', '00: Tributada Normal','00: Tributada Normal',23,6, 1477075035443, 'System'),
+	   ('10', '10: Simples Nacional','10: Simples Nacional',23,6, 1477075035443, 'System'),
+
+	   /*MODALIDADE BC ST*/
+	   ('0', 'Tabelado ou máx. sugerido','Tabelado ou máx. sugerido',11,6, 1477075035443, 'System'),
+	   ('1', 'Lista Negativa (valor)','Lista Negativa (valor)',11,6, 1477075035443, 'System'),
+	   ('2', 'Lista Positiva (valor)','Lista Positiva (valor)',11,6, 1477075035443, 'System'),
+	   ('3', 'Lista Neutra (valor)','Lista Neutra (valor)',11,6, 1477075035443, 'System'),
+	   ('4', 'Margem Valor Agregado (%)','Margem Valor Agregado (%)',11,6, 1477075035443, 'System'),
+	   ('5', 'Pauta (valor)','Pauta (valor)',11,6, 1477075035443, 'System'),
+
+	   /* ICMS - SITUAÇÃO TRIBUTARIA */
+	   <option value="00">00: Tributada integralmente</option>
+	   <option value="10">10: Tributada com cobr. por subst. trib.</option>
+	   <option value="20">20: Com redução de base de cálculo</option>
+	   <option value="30">30: Isenta ou não trib com cobr por subst trib</option>
+	   <option value="40">40: Isenta</option>
+	   <option value="41">41: Não tributada</option>
+	   <option value="50">50: Suspesão</option>
+	   <option value="51">51: Diferimento</option>
+	   <option value="60">60: ICMS cobrado anteriormente por subst trib</option>
+	   <option value="70">70: Redução de Base Calc e cobr ICMS por subst trib</option>
+	   <option value="90">90: Outros</option>
+	   <option value="10Part">Partilha 10: Entre UF origem e destino ou definida na legislação com Subst Trib</option>
+	   <option value="90Part">Partilha 90: Entre UF origem e destino ou definida na legislação - outros</option>
+	   <option value="41ST">Repasse 41: ICMS ST retido em operações interestaduais com repasses do Subst Trib</option>
+	   <option value="101" selected="selected">101 (Simples): Com permissão de crédito</option>
+	   <option value="102">102 (Simples): Sem permissão de crédito</option>
+	   <option value="103">103 (Simples): Isenção do ICMS para faixa de receita bruta</option>
+	   <option value="201">201 (Simples): Com permissão de crédito, com cobr ICMS por Subst Trib</option>
+	   <option value="202">202 (Simples): Sem permissão de crédito, com cobr ICMS por Subst Trib</option>
+	   <option value="203">203 (Simples): Isenção ICMS p/ faixa de receita bruta e cobr do ICMS por ST</option>
+	   <option value="300">300 (Simples): Imune</option><option value="400">400 (Simples): Não tributada</option>
+	   <option value="500">500 (Simples): ICMS cobrado antes por subst trib ou antecipação</option>
+	   <option value="900">900 (Simples): Outros</option></select>
+       ('00', '00: Tributada integralmente','Tributada integralmente',22,6, 1477075035443, 'System'),
+	   ('10', '10: Tributada com cobr. por subst. trib.','10: Tributada com cobr. por subst. trib.',22,6, 1477075035443, 'System'),
+	   ('20', '20: Com redução de base de cálculo','20: Com redução de base de cálculo',22,6, 1477075035443, 'System'),
+	   ('30', '30: Isenta ou não trib com cobr por subst trib','30: Isenta ou não trib com cobr por subst trib',22,6, 1477075035443, 'System'),
+	   ('40', '40: Isenta','40: Isenta',22,6, 1477075035443, 'System'),
+	   ('41', '41: Não tributada','41: Não tributada',22,6, 1477075035443, 'System'),
+	   ('50', '50: Suspesão','50: Suspesão',22,6, 1477075035443, 'System'),
+	   ('51', '51: Diferimento','51: Diferimento',22,6, 1477075035443, 'System'),
+	   ('60', '60: ICMS cobrado anteriormente por subst trib','60: ICMS cobrado anteriormente por subst trib',22,6, 1477075035443, 'System'),
+	   ('70', '70: Redução de Base Calc e cobr ICMS por subst trib','70: Redução de Base Calc e cobr ICMS por subst trib',22,6, 1477075035443, 'System'),
+	   ('90', '90: Outros','90: Outros',22,6, 1477075035443, 'System'),
+	   ('10Part', 'Partilha 10: Entre UF origem e destino ou definida na legislação com Subst Trib','Entre UF origem e destino ou definida na legislação com Subst Trib',22,6, 1477075035443, 'System'),
+	   ('90Part', 'Partilha 90: Entre UF origem e destino ou definida na legislação - outros','Entre UF origem e destino ou definida na legislação - outros',22,6, 1477075035443, 'System'),
+	   ('41ST', 'ICMS ST retido em operações interestaduais com repasses do Subst Trib','ICMS ST retido em operações interestaduais com repasses do Subst Trib',22,6, 1477075035443, 'System'),
+	   ('101', '101: Com permissão de crédito','101: Com permissão de crédito',21,6, 1477075035443, 'System'),
+	   ('102', '102: Sem permissão de crédito','102: Sem permissão de crédito',21,6, 1477075035443, 'System'),
+	   ('103', '103: Isenção do ICMS para faixa de receita bruta','103: Isenção do ICMS para faixa de receita bruta',2,6, 1477075035443, 'System'),
+	   ('201', '201: Com permissão de crédito, com cobr ICMS por Subst Trib','201: Com permissão de crédito, com cobr ICMS por Subst Trib',21,6, 1477075035443, 'System'),
+	   ('202', '202: Sem permissão de crédito, com cobr ICMS por Subst Trib','202: Sem permissão de crédito, com cobr ICMS por Subst Trib',21,6, 1477075035443, 'System'),
+	   ('203', '203: Isenção ICMS p/ faixa de receita bruta e cobr do ICMS por ST','203: Isenção ICMS p/ faixa de receita bruta e cobr do ICMS por ST',21,6, 1477075035443, 'System'),
+	   ('300', '300: Imune','300: Imune',21,6, 1477075035443, 'System'),
+	   ('400', '400: Não tributada','400: Não tributada',21,6, 1477075035443, 'System'),
+	   ('500', '500: ICMS cobrado antes por subst trib ou antecipação','500: ICMS cobrado antes por subst trib ou antecipação',21,6, 1477075035443, 'System'),
+	   ('900', '900: Outros','900: Outros',21,6, 1477075035443, 'System'),
+
+	   /* MODALIDADE BC */
+	   ('0','Nacional, exceto as indicadas nos códigos de 3 a 5','0 - Nacional, exceto as indicadas nos códigos de 3 a 5',4,6, 1477075035443, 'System'),
+	   ('1','Estrangeira - Importação direta, exceto a indicada no código 6','1 - Estrangeira - Importação direta, exceto a indicada no código 6',4,6, 1477075035443, 'System'),
+	   ('2','Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7','2 - Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7',4,6, 1477075035443, 'System'),
+	   ('3','Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40%','3 - Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40%',4,6, 1477075035443, 'System'),
+	   ('4','Nacional, produção em conformidade com processos básicos que tratam as legisl. dos Ajustes','4 - Nacional, produção em conformidade com processos básicos que tratam as legisl. dos Ajustes',4,6, 1477075035443, 'System'),
+	   ('5','Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%','5 - Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%',4,6, 1477075035443, 'System'),
+	   ('6','Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX','6 - Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX',4,6, 1477075035443, 'System'),
+	   ('7','Estrangeira - Adquirida mercado interno, sem similar nacional, constante em lista da CAMEX','7 - Estrangeira - Adquirida mercado interno, sem similar nacional, constante em lista da CAMEX',4,6, 1477075035443, 'System'),
+
+	   /*MOTIVO DESONERAÇÃO*/
+	   ('0','Não desejo usar','Não desejo usar',12,6, 1477075035443, 'System'),
+	   ('3','Produtor agropecuário','3: Produtor agropecuário',12,6, 1477075035443, 'System'),
+	   ('9','Outros','9: Outros',12,6, 1477075035443, 'System'),
+	   ('12','Órgão de fomento e desenvolv. agropecuário','12: Órgão de fomento e desenvolv. agropecuário',12,6, 1477075035443, 'System'),
+
+	   /*IPI - SITUAÇÃO TRIBUTARIA*/
+	   ('-1','Não usar','- Não usar -',13,6, 1477075035443, 'System'),
+	   ('00','00: Entrada com recuperação de crédito','00: Entrada com recuperação de crédito',13,6, 1477075035443, 'System'),
+	   ('01','01: Entrada tributada com alíquota zero','01: Entrada tributada com alíquota zero',13,6, 1477075035443, 'System'),
+	   ('02','02: Entrada isenta','02: Entrada isenta',13,6, 1477075035443, 'System'),
+	   ('03','03: Entrada não-tributada','03: Entrada não-tributada',13,6, 1477075035443, 'System'),
+	   ('04','04: Entrada imune','04: Entrada imune',13,6, 1477075035443, 'System'),
+	   ('05','05: Entrada com suspensão','05: Entrada com suspensão',13,6, 1477075035443, 'System'),
+	   ('49','49: Outras entradas','49: Outras entradas',13,6, 1477075035443, 'System'),
+	   ('50','50: Saída tributada','50: Saída tributada',13,6, 1477075035443, 'System'),
+	   ('51','51: Saída tributada com alíquota zero','51: Saída tributada com alíquota zero',13,6, 1477075035443, 'System'),
+	   ('52','52: Saída isenta','52: Saída isenta',13,6, 1477075035443, 'System'),
+	   ('53','53: Saída não-tributada','53: Saída não-tributada',13,6, 1477075035443, 'System'),
+	   ('54','54: Saída imune','54: Saída imune',13,6, 1477075035443, 'System'),
+	   ('55','55: Saída com suspensão','55: Saída com suspensão',13,6, 1477075035443, 'System'),
+	   ('99','99: Outras saídas','99: Outras saídas',13,6, 1477075035443, 'System'),
+
+	   /* Porcentagem BC */
+	   ('1','Porcentagem','Porcentagem',14,6, 1477075035443, 'System'),
+	   ('2','Em valor','Em valor',14,6, 1477075035443, 'System'),
+
+	   /* PIS SITUAÇÃO TRIBUTARIA */
+	   ('01','01: Operação tributável (BC = Operação alíq. normal (cumul./não cumul.)','01: Operação tributável (BC = Operação alíq. normal (cumul./não cumul.)',15,6, 1477075035443, 'System'),
+	   ('02','02: Operação tributável (BC = valor da operação (alíquota diferenciada)','02: Operação tributável (BC = valor da operação (alíquota diferenciada)',15,6, 1477075035443, 'System'),
+	   ('03','03: Operação tributável (BC = quant. x alíq. por unidade de produto)','03: Operação tributável (BC = quant. x alíq. por unidade de produto)',15,6, 1477075035443, 'System'),
+	   ('04','04: Operação tributável (tributação monofásica, alíquota zero)','04: Operação tributável (tributação monofásica, alíquota zero)',15,6, 1477075035443, 'System'),
+	   ('06','06: Operação tributável (alíquota zero)','06: Operação tributável (alíquota zero)',15,6, 1477075035443, 'System'),
+	   ('07','07: Operação isenta da contribuição','07: Operação isenta da contribuição',15,6, 1477075035443, 'System'),
+	   ('08','08: Operação sem incidência da contribuição','08: Operação sem incidência da contribuição',15,6, 1477075035443, 'System'),
+	   ('09','09: Operação com suspensão da contribuição','09: Operação com suspensão da contribuição',15,6, 1477075035443, 'System'),
+	   ('49','49: Outras Operações de Saída','49: Outras Operações de Saída',15,6, 1477075035443, 'System'),
+	   ('50','50: Direito a Crédito. Vinculada Exclusivamente a Receita Tributada no Mercado Interno','50: Direito a Crédito. Vinculada Exclusivamente a Receita Tributada no Mercado Interno',15,6, 1477075035443, 'System'),
+	   ('51','51: Direito a Crédito. Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno','51: Direito a Crédito. Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno',15,6, 1477075035443, 'System'),
+	   ('52','52: Direito a Crédito. Vinculada Exclusivamente a Receita de Exportação','52: Direito a Crédito. Vinculada Exclusivamente a Receita de Exportação',15,6, 1477075035443, 'System'),
+	   ('53','53: Direito a Crédito. Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno','53: Direito a Crédito. Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno',15,6, 1477075035443, 'System'),
+	   ('54','54: Direito a Crédito. Vinculada a Receitas Tributadas no Mercado Interno e de Exportação','54: Direito a Crédito. Vinculada a Receitas Tributadas no Mercado Interno e de Exportação',15,6, 1477075035443, 'System'),
+	   ('55','55: Direito a Crédito. Vinculada a Receitas Não-Trib. no Mercado Interno e de Exportação','55: Direito a Crédito. Vinculada a Receitas Não-Trib. no Mercado Interno e de Exportação',15,6, 1477075035443, 'System'),
+	   ('56','56: Direito a Crédito. Vinculada a Rec. Trib. e Não-Trib. Mercado Interno e Exportação','56: Direito a Crédito. Vinculada a Rec. Trib. e Não-Trib. Mercado Interno e Exportação',15,6, 1477075035443, 'System'),
+	   ('60','60: Créd. Presumido. Aquisição Vinc. Exclusivamente a Receita Tributada no Mercado Interno','60: Créd. Presumido. Aquisição Vinc. Exclusivamente a Receita Tributada no Mercado Interno',15,6, 1477075035443, 'System'),
+	   ('61','61: Créd. Presumido. Aquisição Vinc. Exclusivamente a Rec. Não-Trib. no Mercado Interno','61: Créd. Presumido. Aquisição Vinc. Exclusivamente a Rec. Não-Trib. no Mercado Interno',15,6, 1477075035443, 'System'),
+	   ('62','62: Créd. Presumido. Aquisição Vinc. Exclusivamente a Receita de Exportação','62: Créd. Presumido. Aquisição Vinc. Exclusivamente a Receita de Exportação',15,6, 1477075035443, 'System'),
+	   ('63','63: Créd. Presumido. Aquisição Vinc. a Rec. Trib. e Não-Trib. no Mercado Interno','63: Créd. Presumido. Aquisição Vinc. a Rec. Trib. e Não-Trib. no Mercado Interno',15,6, 1477075035443, 'System'),
+	   ('64','64: Créd. Presumido. Aquisição Vinc. a Rec. Trib. no Mercado Interno e de Exportação','64: Créd. Presumido. Aquisição Vinc. a Rec. Trib. no Mercado Interno e de Exportação',15,6, 1477075035443, 'System'),
+	   ('65','65: Créd. Presumido. Aquisição Vinc. a Rec. Não-Trib. Mercado Interno e Exportação','65: Créd. Presumido. Aquisição Vinc. a Rec. Não-Trib. Mercado Interno e Exportação',15,6, 1477075035443, 'System'),
+	   ('66','66: Créd. Presumido. Aquisição Vinc. a Rec. Trib. e Não-Trib. Mercado Interno e Exportação','66: Créd. Presumido. Aquisição Vinc. a Rec. Trib. e Não-Trib. Mercado Interno e Exportação',15,6, 1477075035443, 'System'),
+	   ('67','67: Crédito Presumido - Outras Operações','67: Crédito Presumido - Outras Operações',15,6, 1477075035443, 'System'),
+	   ('70','70: Operação de Aquisição sem Direito a Crédito','70: Operação de Aquisição sem Direito a Crédito',15,6, 1477075035443, 'System'),
+	   ('71','71: Operação de Aquisição com Isenção','71: Operação de Aquisição com Isenção',15,6, 1477075035443, 'System'),
+	   ('72','72: Operação de Aquisição com Suspensão','72: Operação de Aquisição com Suspensão',15,6, 1477075035443, 'System'),
+	   ('73','73: Operação de Aquisição a Alíquota Zero','73: Operação de Aquisição a Alíquota Zero',15,6, 1477075035443, 'System'),
+	   ('74','74: Operação de Aquisição sem Incidência da Contribuição','74: Operação de Aquisição sem Incidência da Contribuição',15,6, 1477075035443, 'System'),
+	   ('75','75: Operação de Aquisição por Substituição Tributária','75: Operação de Aquisição por Substituição Tributária',15,6, 1477075035443, 'System'),
+	   ('98','98: Outras Operações de Entrada','98: Outras Operações de Entrada',15,6, 1477075035443, 'System'),
+	   ('99','99: Outras operações','99: Outras operações',15,6, 1477075035443, 'System'),
+
+		/* COFINS SITUAÇÃO TRIBUTARIA */
+	   ('01','Operação tributável (BC = Operação alíq. normal (cumul./não cumul.)','01: Operação tributável (BC = Operação alíq. normal (cumul./não cumul.)',16,6, 1477075035443, 'System'),
+	   ('02','02: Operação tributável (BC = valor da operação (alíquota diferenciada)','02: Operação tributável (BC = valor da operação (alíquota diferenciada)',16,6, 1477075035443, 'System'),
+	   ('03','Operação tributável (BC = quant. x alíq. por unidade de produto)','03: Operação tributável (BC = quant. x alíq. por unidade de produto)',16,6, 1477075035443, 'System'),
+	   ('04','Operação tributável (tributação monofásica, alíquota zero)','04: Operação tributável (tributação monofásica, alíquota zero)',16,6, 1477075035443, 'System'),
+	   ('06','Operação tributável (alíquota zero)','06: Operação tributável (alíquota zero)',16,6, 1477075035443, 'System'),
+	   ('07','Operação isenta da contribuição','07: Operação isenta da contribuição',16,6, 1477075035443, 'System'),
+	   ('08','Operação sem incidência da contribuição','08: Operação sem incidência da contribuição',16,6, 1477075035443, 'System'),
+	   ('09','Operação com suspensão da contribuição','09: Operação com suspensão da contribuição',16,6, 1477075035443, 'System'),
+	   ('49','Outras Operações de Saída','49: Outras Operações de Saída',16,6, 1477075035443, 'System'),
+	   ('50','Direito a Crédito. Vinculada Exclusivamente a Receita Tributada no Mercado Interno','50: Direito a Crédito. Vinculada Exclusivamente a Receita Tributada no Mercado Interno',16,6, 1477075035443, 'System'),
+	   ('51','Direito a Crédito. Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno','51: Direito a Crédito. Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno',16,6, 1477075035443, 'System'),
+	   ('52','Direito a Crédito. Vinculada Exclusivamente a Receita de Exportação','52: Direito a Crédito. Vinculada Exclusivamente a Receita de Exportação',16,6, 1477075035443, 'System'),
+	   ('53','Direito a Crédito. Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno','53: Direito a Crédito. Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno',16,6, 1477075035443, 'System'),
+	   ('54','Direito a Crédito. Vinculada a Receitas Tributadas no Mercado Interno e de Exportação','54: Direito a Crédito. Vinculada a Receitas Tributadas no Mercado Interno e de Exportação',16,6, 1477075035443, 'System'),
+	   ('55','Direito a Crédito. Vinculada a Receitas Não-Trib. no Mercado Interno e de Exportação','55: Direito a Crédito. Vinculada a Receitas Não-Trib. no Mercado Interno e de Exportação',16,6, 1477075035443, 'System'),
+	   ('56','Direito a Crédito. Vinculada a Rec. Trib. e Não-Trib. Mercado Interno e Exportação','56: Direito a Crédito. Vinculada a Rec. Trib. e Não-Trib. Mercado Interno e Exportação',16,6, 1477075035443, 'System'),
+	   ('60','Créd. Presumido. Aquisição Vinc. Exclusivamente a Receita Tributada no Mercado Interno','60: Créd. Presumido. Aquisição Vinc. Exclusivamente a Receita Tributada no Mercado Interno',16,6, 1477075035443, 'System'),
+	   ('61','Créd. Presumido. Aquisição Vinc. Exclusivamente a Rec. Não-Trib. no Mercado Interno','61: Créd. Presumido. Aquisição Vinc. Exclusivamente a Rec. Não-Trib. no Mercado Interno',16,6, 1477075035443, 'System'),
+	   ('62','Créd. Presumido. Aquisição Vinc. Exclusivamente a Receita de Exportação','62: Créd. Presumido. Aquisição Vinc. Exclusivamente a Receita de Exportação',16,6, 1477075035443, 'System'),
+	   ('63','Créd. Presumido. Aquisição Vinc. a Rec. Trib. e Não-Trib. no Mercado Interno','63: Créd. Presumido. Aquisição Vinc. a Rec. Trib. e Não-Trib. no Mercado Interno',16,6, 1477075035443, 'System'),
+	   ('64','Créd. Presumido. Aquisição Vinc. a Rec. Trib. no Mercado Interno e de Exportação','64: Créd. Presumido. Aquisição Vinc. a Rec. Trib. no Mercado Interno e de Exportação',16,6, 1477075035443, 'System'),
+	   ('65','Créd. Presumido. Aquisição Vinc. a Rec. Não-Trib. Mercado Interno e Exportação','65: Créd. Presumido. Aquisição Vinc. a Rec. Não-Trib. Mercado Interno e Exportação',16,6, 1477075035443, 'System'),
+	   ('66','Créd. Presumido. Aquisição Vinc. a Rec. Trib. e Não-Trib. Mercado Interno e Exportação','66: Créd. Presumido. Aquisição Vinc. a Rec. Trib. e Não-Trib. Mercado Interno e Exportação',16,6, 1477075035443, 'System'),
+	   ('67','Crédito Presumido - Outras Operações','67: Crédito Presumido - Outras Operações',16,6, 1477075035443, 'System'),
+	   ('70','Operação de Aquisição sem Direito a Crédito','70: Operação de Aquisição sem Direito a Crédito',16,6, 1477075035443, 'System'),
+	   ('71','Operação de Aquisição com Isenção','71: Operação de Aquisição com Isenção',16,6, 1477075035443, 'System'),
+	   ('72','Operação de Aquisição com Suspensão','72: Operação de Aquisição com Suspensão',16,6, 1477075035443, 'System'),
+	   ('73','Operação de Aquisição a Alíquota Zero','73: Operação de Aquisição a Alíquota Zero',16,6, 1477075035443, 'System'),
+	   ('74','Operação de Aquisição sem Incidência da Contribuição','74: Operação de Aquisição sem Incidência da Contribuição',16,6, 1477075035443, 'System'),
+	   ('75','Operação de Aquisição por Substituição Tributária','75: Operação de Aquisição por Substituição Tributária',16,6, 1477075035443, 'System'),
+	   ('98','Outras Operações de Entrada','98: Outras Operações de Entrada',16,6, 1477075035443, 'System'),
+	   ('99','Outras operações','99: Outras operações',16,6, 1477075035443, 'System');
+
 
 
 
@@ -40,45 +233,16 @@ INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, 
 	   ('6', 'Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX','6 - Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX',3,2, 1477075035443, 'System'),
 	   ('7', 'Estrangeira - Adquirida mercado interno, sem similar nacional, constante em lista da CAMEX','7 - Estrangeira - Adquirida mercado interno, sem similar nacional, constante em lista da CAMEX',3,2, 1477075035443, 'System'),
 
-	   ('0','Nacional, exceto as indicadas nos códigos de 3 a 5','0 - Nacional, exceto as indicadas nos códigos de 3 a 5',4,2, 1477075035443, 'System'),
-	   ('1','Estrangeira - Importação direta, exceto a indicada no código 6','1 - Estrangeira - Importação direta, exceto a indicada no código 6',4,2, 1477075035443, 'System'),
-	   ('2','Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7','2 - Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7',4,2, 1477075035443, 'System'),
-	   ('3','Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40%','3 - Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40%',4,2, 1477075035443, 'System'),
-	   ('4','Nacional, produção em conformidade com processos básicos que tratam as legisl. dos Ajustes','4 - Nacional, produção em conformidade com processos básicos que tratam as legisl. dos Ajustes',4,2, 1477075035443, 'System'),
-	   ('5','Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%','5 - Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%',4,2, 1477075035443, 'System'),
-	   ('6','Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX','6 - Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX',4,2, 1477075035443, 'System'),
-	   ('7','Estrangeira - Adquirida mercado interno, sem similar nacional, constante em lista da CAMEX','7 - Estrangeira - Adquirida mercado interno, sem similar nacional, constante em lista da CAMEX',4,2, 1477075035443, 'System'),
 
-	   ('0','Não desejo usar','Não desejo usar',5,2, 1477075035443, 'System'),
-	   ('3','Produtor agropecuário','3: Produtor agropecuário',5,2, 1477075035443, 'System'),
-	   ('9','Outros','9: Outros',5,2, 1477075035443, 'System'),
-	   ('12','Órgão de fomento e desenvolv. agropecuário','12: Órgão de fomento e desenvolv. agropecuário',5,2, 1477075035443, 'System'),
 
-	   ('-1','Não usar','- Não usar -',6,2, 1477075035443, 'System'),
-	   ('00','Entrada com recuperação de crédito','00: Entrada com recuperação de crédito',6,2, 1477075035443, 'System'),
-	   ('01','Entrada tributada com alíquota zero','01: Entrada tributada com alíquota zero',6,2, 1477075035443, 'System'),
-	   ('02','Entrada isenta','02: Entrada isenta',6,2, 1477075035443, 'System'),
-	   ('03','Entrada não-tributada','03: Entrada não-tributada',6,2, 1477075035443, 'System'),
-	   ('04','Entrada imune','04: Entrada imune',6,2, 1477075035443, 'System'),
-	   ('05','Entrada com suspensão','05: Entrada com suspensão',6,2, 1477075035443, 'System'),
-	   ('49','Outras entradas','49: Outras entradas',6,2, 1477075035443, 'System'),
-	   ('50','Saída tributada','50: Saída tributada',6,2, 1477075035443, 'System'),
-	   ('51','Saída tributada com alíquota zero','51: Saída tributada com alíquota zero',6,2, 1477075035443, 'System'),
-	   ('52','Saída isenta','52: Saída isenta',6,2, 1477075035443, 'System'),
-	   ('53','Saída não-tributada','53: Saída não-tributada',6,2, 1477075035443, 'System'),
-	   ('54','Saída imune','54: Saída imune',6,2, 1477075035443, 'System'),
-	   ('55','Saída com suspensão','55: Saída com suspensão',6,2, 1477075035443, 'System'),
-	   ('99','Outras saídas','99: Outras saídas',6,2, 1477075035443, 'System'),
-	   
-	   
-	   
+
+
 INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
     VALUES ('00', '00: Tributada Normal','00: Tributada Normal',23,2, 1477075035443, 'System'),
 	   ('10', '10: Simples Nacional','10: Simples Nacional',23,2, 1477075035443, 'System');
 
 
-	   ('1','Porcentagem','Porcentagem',7,2, 1477075035443, 'System'),
-	   ('2','Em valor','Em valor',7,2, 1477075035443, 'System'),
+
 
 	   ('01','Operação tributável (BC = Operação alíq. normal (cumul./não cumul.)','01: Operação tributável (BC = Operação alíq. normal (cumul./não cumul.)',8,2, 1477075035443, 'System'),
 	   ('02','Operação tributável (BC = valor da operação (alíquota diferenciada)','02: Operação tributável (BC = valor da operação (alíquota diferenciada)',8,2, 1477075035443, 'System'),
@@ -194,6 +358,15 @@ INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
 	(4,'NFNotaInfoImpostoTributacaoICMS', 'NF NOTAINFO IMPOSTO TRIBUTACAO ICMS', 1477075035443, 'System'),
 	(5,'NFNotaInfoEspecieVeiculo', 'NF NOTA INFO ESPECIE VEICULO', 1477075035443, 'System'),
 	(6,'NFNotaInfoCombustivelTipo', 'NF NOTA INFO COMBUSTIVEL TIPO', 1477075035443, 'System'),
+
+	(16,'TIPO FRETE', 'TIPO FRETE', 1477075035443, 'System'),
+	(17,'TIPO NOTA FISCAL', 'TIPO NOTA FISCAL', 1477075035443, 'System'),
+	(18,'NF AMBIENTE', 'NF AMBIENTE', 1477075035443, 'System'),
+	(19,'NF MODALIDADE FRETE', 'NF MODALIDADE FRETE', 1477075035443, 'System'),
+	(20,'NFModelo', 'NF MODELO', 1477075035443, 'System'),
+	(21,'ICMS - SITUAÇÃO TRIBUTARIA SIMPLES NACIONAL', 'ICMS - SITUAÇÃO TRIBUTARIA SIMPLES NACIONAL', 1477075035443, 'System'),
+	(22,'ICMS - SITUAÇÃO TRIBUTARIA TRIBUTACAO NORMAL', 'ICMS - SITUAÇÃO TRIBUTARIA TRIBUTACAO NORMAL' , 1477075035443, 'System'),
+	(23,'ICMS - REGINE', 'ICMS - REGIME' , 1477075035443, 'System'),
 	(7,'TIPO NOTA FISCAL', 'TIPO NOTA FISCAL', 1477075035443, 'System'),
 	(8,'ICMS - SITUAÇÃO TRIBUTARIA ', 'ICMS - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System'),
 	(9,'ICMS - ORIGEM', 'ICMS - ORIGEM', 1477075035443, 'System'),
@@ -202,20 +375,12 @@ INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
 	(12,'IPI - SITUAÇÃO TRIBUTARIA', 'IPI - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System'),
 	(13,'TIPO CALCULO', 'TIPO CALCULO', 1477075035443, 'System'),
 	(14,'PIS - SITUAÇÃO TRIBUTARIA', 'PIS - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System'),
-	(15,'COFINS - SITUAÇÃO TRIBUTARIA', 'COFINS - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System'),
-	(16,'TIPO FRETE', 'TIPO FRETE', 1477075035443, 'System'),
-	(17,'TIPO NOTA FISCAL', 'TIPO NOTA FISCAL', 1477075035443, 'System'),
-	(18,'NF AMBIENTE', 'NF AMBIENTE', 1477075035443, 'System'),
-	(19,'NF MODALIDADE FRETE', 'NF MODALIDADE FRETE', 1477075035443, 'System'),
-	(20,'NFModelo', 'NF MODELO', 1477075035443, 'System'),
-	(21,'ICMS - SITUAÇÃO TRIBUTARIA SIMPLES NACIONAL', 'ICMS - SITUAÇÃO TRIBUTARIA SIMPLES NACIONAL', 1477075035443, 'System'),
-	(22,'ICMS - SITUAÇÃO TRIBUTARIA TRIBUTACAO NORMAL', 'ICMS - SITUAÇÃO TRIBUTARIA TRIBUTACAO NORMAL' , 1477075035443, 'System'),
-	(23,'ICMS - REGINE', 'ICMS - REGIME' , 1477075035443, 'System');
+	(15,'COFINS - SITUAÇÃO TRIBUTARIA', 'COFINS - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System');
 
 
 INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
     VALUES (1001,'TIPO NOTA FISCAL', 'TIPO NOTA FISCAL', 1477075035443, 'System');
-    
+
     INSERT INTO doisvalortype(tipo, descricao,  create_date, create_user)
     VALUES ('ICMS - SITUAÇÃO TRIBUTARIA ', 'ICMS - SITUAÇÃO TRIBUTARIA', 1477075035443, 'System'),
 	('ICMS - ORIGEM', 'ICMS - ORIGEM', 1477075035443, 'System'),

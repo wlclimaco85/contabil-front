@@ -11,7 +11,7 @@
 
 					var fnCallbackDoisValor = function(res){
 	                    var planos = "";
-	                    
+
 	                    if(res.operationSuccess == true)
 	                    {
 	                        for(var x=0;x<res.doisValoresList.length;x++)
@@ -19,11 +19,11 @@
 	                            planos = res.doisValoresList[x] ;
 	                            if(planos.doisValorType != null)
 	                            {
-	                                switch (planos.doisValorType.tipo) 
-	                                {                          
+	                                switch (planos.doisValorType.tipo)
+	                                {
 	                                    case 'TIPO FRETE':
 	                                        scope.tipoFrete.push(planos);
-	                                        break;                
+	                                        break;
 	                                    /*case 'ICMS - ORIGEM':
 	                                        $scope.icmsOri.push(planos)
 	                                        break;
@@ -48,7 +48,7 @@
 	                                }
 	                            }
 	                        }
-	                       
+
 	                   //    return tipoFrete;
 	                   console.log(scope)
 	                   }
@@ -107,11 +107,13 @@
 	                });
 				},
 				tributacao : function(scope) {
-				   
+
 				   scope.regime = [];
 	               scope.icmsOri = [];
 	               scope.icmsMBC = [];
+	               scope.icmsMBCST = [];
 	               scope.icmsMD = [];
+	               scope.icmsMDST = [];
 	               scope.iPISitTributaria = [];
 	               scope.tipoCalc = [];
 	               scope.pisST = [];
@@ -129,19 +131,25 @@
                             planos = res.doisValoresList[x] ;
                             if(planos.doisValorType != null)
                             {
-                                switch (planos.doisValorType.tipo) 
-                                {                          
+                                switch (planos.doisValorType.tipo)
+                                {
                                     case 'ICMS - REGINE':
                                         scope.regime.push(planos);
-                                        break;                
+                                        break;
                                     case 'ICMS - ORIGEM':
                                         scope.icmsOri.push(planos)
                                         break;
                                     case 'ICMS - MODALIDADE BC':
                                         scope.icmsMBC.push(planos)
                                         break;
+                                    case 'ICMS - MODALIDADE BC ST':
+                                        scope.icmsMBCST.push(planos)
+                                        break;
                                     case 'ICMS - MOTIVO DESONERAÇÃO':
                                         scope.icmsMD.push(planos)
+                                        break;
+                                    case 'ICMS - MOTIVO DESONERAÇÃO ST':
+                                        scope.icmsMDST.push(planos)
                                         break;
                                     case 'IPI - SITUAÇÃO TRIBUTARIA':
                                         scope.iPISitTributaria.push(planos)
@@ -158,17 +166,17 @@
                                 }
                             }
                         }
-                       
-                       
+
+
                    }
                 }
 
-                qat.model.select.util("entidade/api/doisValores/fetchPage",true,new qat.model.doisValoresInquiryRequest(2, 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackDoisValor);
+                qat.model.select.util("entidade/api/doisValores/fetchPage",true,new qat.model.doisValoresInquiryRequest(6, 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackDoisValor);
 
 
 	               scope.getRegimeTriburario = function (oObject)
 				   {
-				        
+
 				        var iType = 0;
 				         if(oObject.value == "10")
 				           iType = 21
@@ -176,7 +184,7 @@
 				            iType = 22
 
 				         qat.model.select.util("entidade/api/doisValores/fetchPage",true,new qat.model.doisValoresInquiryRequest(null, 100/20, true, JSON.parse(localStorage.getItem("empresa")).id,iType),function(res){
-				            
+				            scope.icmsST = [];
 				            scope.icmsST  = res.doisValoresList;
 				         });
 				    }

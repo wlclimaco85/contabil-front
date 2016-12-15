@@ -35,7 +35,7 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
                     }
                 });
 
-            
+
 
         }
 
@@ -293,7 +293,7 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
         $scope.buscaRCep = function(){
                 $scope.detail = 0;
 
-                 
+
 
                  $('.toggle-one').bootstrapToggle();
                  $('.toggle-one').change(function() {
@@ -505,13 +505,13 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
 
 
             $scope.buscaRCep = function(){
-                
 
-                 
+
+
 
                  $('.toggle-ones').bootstrapToggle('toggle')
                  $('.toggle-ones').change(function() {
-                    
+
                     if($(this).prop('checked') == true)
                     {
                         $('#Edit').show()
@@ -521,7 +521,7 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
                         $('#Edit').hide()
                     }
                 })
-    
+
             }
 
 
@@ -544,93 +544,13 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
             $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
             $scope.format = $scope.formats[1];
             var fnCallBack = function(oResponse) {
-               
+
                 console.log(oResponse)
             }
             $scope.saveProduto = function() {
 
                 fProduto.fnMontaObjeto($scope.produto, $scope.tributacao,$scope.produtoEmpresa, 'INSERT', "produto/api/produtoParent/insert/", fnCallBack);
             };
-
-            $scope.getRegimeTriburario = function (oObject)
-            {
-                debugger
-                var iType = 0;
-                 if(oObject.value == "10")
-                   iType = 21
-                 else
-                    iType = 22
-
-                 qat.model.select.util("entidade/api/doisValores/fetchPage",true,new qat.model.doisValoresInquiryRequest(null, 100/20, true, JSON.parse(localStorage.getItem("empresa")).id,iType),function(res){
-                    
-                    $scope.icmsST  = res.doisValoresList;
-                 });
-            }
-
-               
-               $scope.regime = [];
-               $scope.icmsOri = [];
-               $scope.icmsMBC = [];
-               $scope.icmsMD = [];
-               $scope.iPISitTributaria = [];
-               $scope.tipoCalc = [];
-               $scope.pisST = [];
-               $scope.cofinsST = [];
-
-                  var fnCallbackDoisValor = function(res){
-                    var planos = "";
-
-//ICMS - MODALIDADE BC
-
-                   if(res.operationSuccess == true)
-                   {
-                        for(var x=0;x<res.doisValoresList.length;x++)
-                        {
-                            planos = res.doisValoresList[x] ;
-                            if(planos.doisValorType != null)
-                            {
-                                switch (planos.doisValorType.tipo) 
-                                {                          
-                                    case 'ICMS - REGINE':
-                                        $scope.regime.push(planos);
-                                        break;                
-                                    case 'ICMS - ORIGEM':
-                                        $scope.icmsOri.push(planos)
-                                        break;
-                                    case 'ICMS - MODALIDADE BC':
-                                        $scope.icmsMBC.push(planos)
-                                        break;
-                                    case 'ICMS - MOTIVO DESONERAÇÃO':
-                                        $scope.icmsMD.push(planos)
-                                        break;
-                                    case 'IPI - SITUAÇÃO TRIBUTARIA':
-                                        $scope.iPISitTributaria.push(planos)
-                                        break;
-                                    case 'TIPO CALCULO':
-                                        $scope.tipoCalc.push(planos)
-                                        break;
-                                    case 'PIS - SITUAÇÃO TRIBUTARIA':
-                                        $scope.pisST.push(planos)
-                                        break;
-                                    case 'COFINS - SITUAÇÃO TRIBUTARIA':
-                                        $scope.cofinsST.push(planos)
-                                        break;
-                                }
-                            }
-                        }
-                       
-                       
-                   }
-                }
-
-                qat.model.select.util("entidade/api/doisValores/fetchPage",true,new qat.model.doisValoresInquiryRequest(2, 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackDoisValor);
-
-
-
-
-
-
-
         });
 })();
 (function() {
@@ -819,7 +739,7 @@ angular.module('wdApp.apps.produto.select', ['ngSanitize', 'ui.select'])
 
   vm.counter = 0;
   vm.onSelectCallback = function (item, model){
-    
+
     vm.counter++;
     vm.eventResult = {item: item, model: model};
     $('.toggle-ones').bootstrapToggle()
@@ -1010,9 +930,9 @@ angular.module('wdApp.apps.produto.selects', ['ngSanitize', 'ui.select'])
 
 
         $scope.buscaRCep = function(){
-                
 
-                 
+
+
 
                  $('.toggle-ones').bootstrapToggle('toggle')
                  $('.toggle-ones').change(function() {
@@ -1026,8 +946,8 @@ angular.module('wdApp.apps.produto.selects', ['ngSanitize', 'ui.select'])
                         $('#Edit').hide()
                     }
                 })
-    
-            }   
+
+            }
 
         var typeEnum
             switch (new Date().getDay()) {
@@ -1202,19 +1122,19 @@ debugger
                 planos = res.doisValoresList[x] ;
                 if(planos.doisValorType != null)
                 {
-                    switch (planos.doisValorType.tipo) 
-                    {                          
+                    switch (planos.doisValorType.tipo)
+                    {
                         case 'ICMS - SITUAÇÃO TRIBUTARIA':
                             vm.icmsST.push(planos);
-                            break;                
+                            break;
                         case 'ICMS - ORIGEM':
                             vm.icmsOri.push(planos)
                             break;
                     }
                 }
             }
-           
-           
+
+
        }
     }
 

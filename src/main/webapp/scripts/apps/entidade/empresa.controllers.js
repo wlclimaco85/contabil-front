@@ -493,7 +493,7 @@ $scope.today = function() {
             var fnCallBack = function(oResponse) {
                 debugger
               //  $location.path("advogado/forms/advogadoAgenda");
-                window.location.href = "http://localhost:8080/springmvc-angularjs/index3.html#/pages/signin"
+                window.location.href = "https://dev1.eu-gb.mybluemix.net/index3.html#/pages/signin"
 
                 console.log(oResponse)
             }

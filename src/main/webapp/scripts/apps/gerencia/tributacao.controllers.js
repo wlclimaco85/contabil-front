@@ -115,7 +115,7 @@ function RowSelect($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalServ
     angular.module('wdApp.apps.tributacao.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('TributacaoInsertController', function(localStorageService,$rootScope, $scope, fModels, SysMgmtData,doisValorFactory,fNotaFiscal) {
             var vm = this;
-            
+
             $scope.notaFiscalSaida = {
 
             };
