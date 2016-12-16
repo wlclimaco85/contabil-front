@@ -120,12 +120,119 @@ function RowSelect($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalServ
 
             };
             $scope.tributacao = {
-                icms : {}
+                imposto : {
+                    icms : {
+                        icms00 :{},
+                        icms10 :{},
+                        icms20 :{},
+                        icms30 :{},
+                        icms40 :{},
+                        icms51 :{},
+                        icms60 :{},
+                        icms70 :{},
+                        icms90 :{},
+                        icmsPartilhado :{},
+                        icmsst :{},
+                        icmssn101 :{},
+                        icmssn102 :{},
+                        icmssn201 :{},
+                        icmssn202 :{},
+                        icmssn500 :{},
+                        icmssn900 :{}
+                    },
+                    ipi :{
+                        tributado :{},
+                        naoTributado:{},
+
+                    },
+                    pis  :{},
+                    cofins :{},
+                    impostoImportacao :{},
+                    pisst:{},
+                    cofinsst:{},
+                    icmsUfDestino:{}
+
+                },
+
             };
             $scope.formaPg  = {};
             $scope.endereco = null;
             $scope.pessoa   = {};
 
+            var fnHidePIS = function(){
+                $('#pis-Aliquota').hide()
+                $('#pis-Aliquota-unid').hide()
+            }
+
+            var fnHideCOFINS = function(){
+                $('#cofins-por-aliq').hide()
+                $('#cofins-val-aliq').hide()
+            }
+
+            $scope.getInputsCOFINS = function (oObject)
+            {
+                fnHidePIS();
+                if(oObject.value == "01" || oObject.value == "02")
+                {
+                    $('#cofins-por-aliq').show()
+                }
+                else if(oObject.value == "03")
+                {
+                    $('#cofins-val-aliq').show()
+                }
+
+            }
+
+            $scope.getInputsPIS = function (oObject)
+            {
+                fnHidePIS();
+                if(oObject.value == "01" || oObject.value == "02")
+                {
+                    $('#pis-Aliquota').show()
+                }
+                else if(oObject.value == "03")
+                {
+                    $('#pis-Aliquota-unid').show()
+                }
+
+            }
+            
+            $scope.getInputsIPI = function (oObject)
+            {
+                if(oObject.value == "-1")
+                {
+                    $('#Classe-cigarros-bebidas').hide();
+                    $('#cnpj-produtor').hide();
+                    $('#cod-selo').hide();
+                    $('#quant-selo').hide();
+                    $('#cod-enquadramento').hide();
+                    $('#ipi-tipo-calc').hide();
+                    $('#ipi-aliq').hide();
+                    $('#ipi-valor').hide();
+                }
+                else
+                {
+                    $('#Classe-cigarros-bebidas').show();
+                    $('#cnpj-produtor').show();
+                    $('#cod-selo').show();
+                    $('#quant-selo').show();
+                    $('#cod-enquadramento').show();
+                    $('#ipi-tipo-calc').show();
+                    $('#ipi-aliq').show();
+                    $('#ipi-valor').show();
+                }
+                if(oObject.value == "-1" ||oObject.value == "01" || oObject.value == "02"||oObject.value == "03" || oObject.value == "04" || oObject.value == "05")
+                {
+                    $('#ipi-tipo-calc').hide();
+                    $('#ipi-aliq').hide();
+                    $('#ipi-valor').hide();
+                }else{
+                    $('#ipi-tipo-calc').show();
+                    $('#ipi-aliq').show();
+                    $('#ipi-valor').show();
+                }
+
+            }
 
             doisValorFactory.tributacao($scope);
 

@@ -42,30 +42,7 @@ INSERT INTO pagina(id,pagina,parentid, tabelaenumvalue, create_date, create_user
 	   ('5', 'Pauta (valor)','Pauta (valor)',11,6, 1477075035443, 'System'),
 
 	   /* ICMS - SITUAÇÃO TRIBUTARIA */
-	   <option value="00">00: Tributada integralmente</option>
-	   <option value="10">10: Tributada com cobr. por subst. trib.</option>
-	   <option value="20">20: Com redução de base de cálculo</option>
-	   <option value="30">30: Isenta ou não trib com cobr por subst trib</option>
-	   <option value="40">40: Isenta</option>
-	   <option value="41">41: Não tributada</option>
-	   <option value="50">50: Suspesão</option>
-	   <option value="51">51: Diferimento</option>
-	   <option value="60">60: ICMS cobrado anteriormente por subst trib</option>
-	   <option value="70">70: Redução de Base Calc e cobr ICMS por subst trib</option>
-	   <option value="90">90: Outros</option>
-	   <option value="10Part">Partilha 10: Entre UF origem e destino ou definida na legislação com Subst Trib</option>
-	   <option value="90Part">Partilha 90: Entre UF origem e destino ou definida na legislação - outros</option>
-	   <option value="41ST">Repasse 41: ICMS ST retido em operações interestaduais com repasses do Subst Trib</option>
-	   <option value="101" selected="selected">101 (Simples): Com permissão de crédito</option>
-	   <option value="102">102 (Simples): Sem permissão de crédito</option>
-	   <option value="103">103 (Simples): Isenção do ICMS para faixa de receita bruta</option>
-	   <option value="201">201 (Simples): Com permissão de crédito, com cobr ICMS por Subst Trib</option>
-	   <option value="202">202 (Simples): Sem permissão de crédito, com cobr ICMS por Subst Trib</option>
-	   <option value="203">203 (Simples): Isenção ICMS p/ faixa de receita bruta e cobr do ICMS por ST</option>
-	   <option value="300">300 (Simples): Imune</option><option value="400">400 (Simples): Não tributada</option>
-	   <option value="500">500 (Simples): ICMS cobrado antes por subst trib ou antecipação</option>
-	   <option value="900">900 (Simples): Outros</option></select>
-       ('00', '00: Tributada integralmente','Tributada integralmente',22,6, 1477075035443, 'System'),
+	   ('00', '00: Tributada integralmente','Tributada integralmente',22,6, 1477075035443, 'System'),
 	   ('10', '10: Tributada com cobr. por subst. trib.','10: Tributada com cobr. por subst. trib.',22,6, 1477075035443, 'System'),
 	   ('20', '20: Com redução de base de cálculo','20: Com redução de base de cálculo',22,6, 1477075035443, 'System'),
 	   ('30', '30: Isenta ou não trib com cobr por subst trib','30: Isenta ou não trib com cobr por subst trib',22,6, 1477075035443, 'System'),

@@ -1516,136 +1516,109 @@
             </div>
             <div class="tab-content1" ng-show="tabs == 2">
             	<div class="row">
-		                        <div class="col-sm-4 ">
-		                                <label for="exampleInputPassword1">IPI - Situação tributária</label>
-		                                <div class="row">
-		                                <ui-select ng-model="ipi.sitTributaria" theme="bootstrap">
-									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
-									            <ui-select-choices repeat="item in iPISitTributaria | filter: $select.search">
-									              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                    <div class="col-sm-4">
+                            <label for="exampleInputPassword1">IPI - Situação tributária</label>
+                            <div class="row">
+                            <ui-select ng-model="imposto.ipi.sitTributaria" theme="bootstrap" on-select="getInputsIPI($item, $model)">
+						            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+						            <ui-select-choices repeat="item in iPISitTributaria | filter: $select.search">
+						              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
-									            </ui-select-choices>
-								          </ui-select>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Classe Enquadramento</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">N°</span>
-		                                	<input type="text" class="form-control" ng-model="ipi.classeEnquadramento" name="classeEnquadramento"  placeholder="Classe cigarros e bebidas">
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Cod Enquadramento</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">N°</span>
-		                                	<input type="text" class="form-control" ng-model="ipi.codigoEnquadramento" name="codigoEnquadramento"  placeholder="Classe cigarros e bebidas">
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </div>
-		                    <div class="row">
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">CNPJ Produtor</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">N°</span>
-		                                	<input type="text" class="form-control" ng-model="ipi.cnpjProdutor" name="cNPJProdutor"  placeholder="CNPJ Produtor">
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Cod. selo controle IPI</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">N°</span>
-		                                	<input type="text" class="form-control" ng-model="ipi.codigoSelo" name="codControleIPI"  placeholder="Cod. selo controle IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Qtd. selo IPI</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">N°</span>
-		                                	<input type="text" class="form-control" ng-model="ipi.quantidadeSelo" name="quantidadeSelo"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </div>
-		                    <div class="row">
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Tipo de cálculo</label>
-		                                <ui-select ng-model="ipi.tipoCalculo" theme="bootstrap">
-									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
-									            <ui-select-choices repeat="item in tipoCalc | filter: $select.search">
-									              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+						            </ui-select-choices>
+					          </ui-select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4" id="Classe-cigarros-bebidas">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Classe cigarros/bebidas</label>
+                            <div class="input-group">
+			                    <span class="input-group-addon">N°</span>
+                            	<input type="text" class="form-control" ng-model="imposto.ipi.classeEnquadramento" name="classeEnquadramento"  placeholder="Classe cigarros e bebidas">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 " id="cnpj-produtor">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">CNPJ Produtor</label>
+                            <div class="input-group">
+			                    <span class="input-group-addon">N°</span>
+                            	<input type="text" class="form-control" ng-model="imposto.ipi.cnpjProdutor" name="cNPJProdutor"  placeholder="CNPJ Produtor">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2" id="cod-selo">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Cod. selo controle IPI</label>
+                            <div class="input-group">
+			                    <span class="input-group-addon">N°</span>
+                            	<input type="text" class="form-control" ng-model="imposto.ipi.codigoSelo" name="codControleIPI"  placeholder="Cod. selo controle IPI">
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-sm-2 " id="quant-selo">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Qtd. selo IPI</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">N°</span>
+                                <input type="text" class="form-control" ng-model="imposto.ipi.quantidadeSelo" name="quantidadeSelo"  placeholder="Qtd. selo IPI">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2" id="cod-enquadramento">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Cod Enquadramento</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">N°</span>
+                                <input type="text" class="form-control" ng-model="imposto.ipi.codigoEnquadramento" name="codigoEnquadramento"  placeholder="Classe cigarros e bebidas">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2" id="ipi-tipo-calc">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Tipo de cálculo</label>
+                            <ui-select ng-model="imposto.ipi.tipoCalculo" theme="bootstrap">
+						            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+						            <ui-select-choices repeat="item in tipoCalc | filter: $select.search">
+						              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
-									            </ui-select-choices>
-								          </ui-select>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Vr Base Calc.</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">$°</span>
-		                                	<input type="text" class="form-control" ng-model="ipi.valorBaseCalculo" name="valorBaseCalculo"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Aliquota</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">N°</span>
-		                                	<input type="text" class="form-control" ng-model="ipi.percentualAliquota" name="percentualAliquota"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </div>
-		                    <div class="row">
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Quant. Total Unit. Padrão</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">N°</span>
-		                                	<input type="text" class="form-control" ng-model="ipi.quantidade" name="quantidade"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Vr por Unidade</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">$°</span>
-		                                	<input type="text" class="form-control" ng-model="ipi.valorUnidadeTributavel" name="valorUnidadeTributavel"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Vr do IPI</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">$</span>
-		                                	<input type="text" class="form-control" ng-model="ipi.valorTributo" name="valorTributo"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </div>
+						            </ui-select-choices>
+					          </ui-select>
+                        </div>
+                    </div>
+                    <div ng-if="ipi.tipoCalculo == 1" id="ipi-aliq">
+                        <div class="col-sm-2" >
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Aliquota</label>
+                                <div class="input-group">
+				                    <span class="input-group-addon">N°</span>
+                                	<input type="text" class="form-control" ng-model="imposto.ipi.percentualAliquota" name="percentualAliquota"  placeholder="Qtd. selo IPI">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div ng-if="ipi.tipoCalculo == 2" id="ipi-valor">
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Vr do IPI</label>
+                                <div class="input-group">
+				                    <span class="input-group-addon">$</span>
+                                	<input type="text" class="form-control" ng-model="imposto.ipi.valorTributo" name="valorTributo"  placeholder="Qtd. selo IPI">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+		         </div>
             </div>
-
             <div class="tab-content1" ng-show="tabs == 3">
-
             	<div class="row">
-		                        <div class="col-sm-6 ">
-		                                <label for="exampleInputPassword1">PIS - Situação tributária</label>
-		                                <div class="row">
-		                                <ui-select ng-model="imposto.pis.pISSituaTributaria" theme="bootstrap">
+		                        <div class="col-sm-4 ">
+	                                <label for="exampleInputPassword1">PIS - Situação tributária</label>
+	                                <div class="row">
+		                                <ui-select ng-model="imposto.pis.pISSituaTributaria" theme="bootstrap" on-select="getInputsPIS($item, $model)">
 									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
 									            <ui-select-choices repeat="item in pisST | filter: $select.search">
 									              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -1654,8 +1627,28 @@
 								          </ui-select>
 		                            </div>
 		                        </div>
-		                        <div class="col-sm-6 ">
-		                                <label for="exampleInputPassword1">Tipo de cálculo</label>
+                                <div class="col-sm-4 " id="pis-Aliquota">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Aliquota</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="pis.aliquota.valorBaseCalculo" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 " id="pis-Aliquota-unid">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Valor PIS/unidade</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="pis.aliquota.valorBaseCalculo" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+		                        <div class="col-sm-6 " id="pis-tipo-calc">
+		                                <label for="exampleInputPassword1">Tipo de cálculo ST</label>
 		                                <div class="row">
 		                                <ui-select ng-model="imposto.pis.tipocalculoSubstTrib" theme="bootstrap">
 									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
@@ -1666,256 +1659,104 @@
 								          </ui-select>
 		                            </div>
 		                        </div>
+                                <div ng-if="imposto.pis.tipocalculoSubstTrib.value == 1" id="pis-por-Aliq-st">
+                                    <div class="col-sm-4 ">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Aliquota (ST)</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">%</span>
+                                                <input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-if="imposto.pis.tipocalculoSubstTrib.value == 2" id="pis-val-aliq-st">
+                                    <div class="col-sm-4 ">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Aliquota (ST)</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                <input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 		                    </div>
-		                    <div class="row">
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Vr Base Calc.</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">$</span>
-		                                	<input type="text" class="form-control" ng-model="pis.outrasOperacoes.valorBaseCalculo" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Aliquota</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">%</span>
-		                                	<input type="text" class="form-control" ng-model="pis.aliquota.valorBaseCalculo" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Aliquota</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">$</span>
-		                                	<input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Quant. vendida</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">$</span>
-		                                	<input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Vr do PIS</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">$</span>
-		                                	<input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </div>
-		                    <div class="row">
-
-		                    	<div class="col-sm-4 ">
-		                                <label for="exampleInputPassword1">Tipo de cálculo (ST)</label>
-		                                <div class="row">
-		                                <ui-select ng-model="imposto.pis.tipocalculoSubstTrib" theme="bootstrap">
-									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
-									            <ui-select-choices repeat="item in tipoCalc | filter: $select.search">
-									              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-
-									            </ui-select-choices>
-								          </ui-select>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Vr Base Calc. (ST)</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">$</span>
-		                                	<input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Aliquota (ST)</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">%</span>
-		                                	<input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </div>
-		                    <div class="row">
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Aliquota (ST)</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">$</span>
-		                                	<input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Quant. vendida (ST)</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">$</span>
-		                                	<input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Vr do PIS (ST)</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">$</span>
-		                                	<input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-
-		                    </div>
+		                  
             </div>
 
             <div class="tab-content1" ng-show="tabs == 4">
             	 <div class="row">
-		                        <div class="col-sm-6 ">
-		                                <label for="exampleInputPassword1">COFINS - Situação tributária</label>
-		                                <div class="row">
-		                                <ui-select ng-model="imposto.pis.pISSituaTributaria" theme="bootstrap">
-									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
-									            <ui-select-choices repeat="item in pisST | filter: $select.search">
-									              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                    <div class="col-sm-6 ">
+                            <label for="exampleInputPassword1">COFINS - Situação tributária</label>
+                            <div class="row">
+                            <ui-select ng-model="imposto.cofins.pISSituaTributaria" theme="bootstrap" on-select="getInputsCOFINS($item, $model)">
+						            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+						            <ui-select-choices repeat="item in pisST | filter: $select.search">
+						              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
-									            </ui-select-choices>
-								          </ui-select>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-6 ">
-		                                <label for="exampleInputPassword1">Tipo de cálculo</label>
-		                                <div class="row">
-		                                <ui-select ng-model="imposto.pis.tipocalculoSubstTrib" theme="bootstrap">
-									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
-									            <ui-select-choices repeat="item in tipoCalc | filter: $select.search">
-									              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+						            </ui-select-choices>
+					          </ui-select>
+                        </div>
+                    </div>
+                   
+                    <div class="col-sm-4 " id="cofins-por-aliq">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Aliquota</label>
+                            <div class="input-group">
+			                    <span class="input-group-addon">%</span>
+                            	<input type="text" class="form-control" ng-model="imposto.cofins.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 " id="cofins-val-aliq">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Valor COFINS/unidade</label>
+                            <div class="input-group">
+			                    <span class="input-group-addon">$</span>
+                            	<input type="text" class="form-control" ng-model="imposto.cofins.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+		        <div class="row">
+                	<div class="col-sm-4 ">
+                            <label for="exampleInputPassword1">Tipo de cálculo (ST)</label>
+                            <div class="row">
+                            <ui-select ng-model="imposto.cofins.tipocalculoSubstTrib" theme="bootstrap">
+						            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+						            <ui-select-choices repeat="item in tipoCalc | filter: $select.search">
+						              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
-									            </ui-select-choices>
-								          </ui-select>
-		                            </div>
-		                        </div>
-		                    </div>
-		                    <div class="row">
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Vr Base Calc.</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">$</span>
-		                                	<input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Aliquota</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">%</span>
-		                                	<input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Aliquota</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">$</span>
-		                                	<input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Quant. vendida</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">$</span>
-		                                	<input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Vr do COFINS</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">$</span>
-		                                	<input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </div>
-		                    <div class="row">
+						            </ui-select-choices>
+					          </ui-select>
+                        </div>
+                    </div>
+                    <div ng-if="imposto.cofins.tipocalculoSubstTrib.value == 2" id="cofins-val-aliq-st">
+                        <div class="col-sm-4 ">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Aliquota (ST)</label>
+                                <div class="input-group">
+    			                    <span class="input-group-addon">%</span>
+                                	<input type="text" class="form-control" ng-model="imposto.cofins.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="imposto.cofins.tipocalculoSubstTrib.value == 2" id="cofins-val-aliq-st">
+                        <div class="col-sm-4 ">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Aliquota (ST)</label>
+                                <div class="input-group">
+    			                    <span class="input-group-addon">$</span>
+                                	<input type="text" class="form-control" ng-model="imposto.cofins.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
 
-		                    	<div class="col-sm-4 ">
-		                                <label for="exampleInputPassword1">Tipo de cálculo (ST)</label>
-		                                <div class="row">
-		                                <ui-select ng-model="imposto.pis.tipocalculoSubstTrib" theme="bootstrap">
-									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
-									            <ui-select-choices repeat="item in tipoCalc | filter: $select.search">
-									              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-
-									            </ui-select-choices>
-								          </ui-select>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Vr Base Calc. (ST)</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">$</span>
-		                                	<input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Aliquota (ST)</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">%</span>
-		                                	<input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </div>
-		                    <div class="row">
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Aliquota (ST)</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">$</span>
-		                                	<input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Quant. vendida (ST)</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">$</span>
-		                                	<input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="col-sm-4 ">
-		                            <div class="form-group">
-		                                <label for="exampleInputPassword1">Vr do COFINS (ST)</label>
-		                                <div class="input-group">
-						                    <span class="input-group-addon">$</span>
-		                                	<input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
-		                                </div>
-		                            </div>
-		                        </div>
-
-		                    </div>
+                </div>
             </div>
 
             <div class="tab-content1" ng-show="tabs == 5">
@@ -1970,7 +1811,7 @@
 		                                <label for="exampleInputPassword1">Perc. da Merc. Devolvida</label>
 		                                <div class="input-group">
 						                    <span class="input-group-addon">$</span>
-		                                	<input type="text" class="form-control" ng-model="icmsUfDestino.ddd" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+		                                	<input type="text" class="form-control" ng-model="impostoDevolvido.percentualDevolucao" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
 		                                </div>
 		                            </div>
 		                        </div>
@@ -1979,7 +1820,7 @@
 		                                <label for="exampleInputPassword1">Vr IPI Devolvido</label>
 		                                <div class="input-group">
 						                    <span class="input-group-addon">$</span>
-		                                	<input type="text" class="form-control" ng-model="icmsUfDestino.dd" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+		                                	<input type="text" class="form-control" ng-model="impostoDevolvido.informacaoIPIDevolvido" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
 		                                </div>
 		                            </div>
 		                        </div>
