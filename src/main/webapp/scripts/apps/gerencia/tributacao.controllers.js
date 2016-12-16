@@ -196,7 +196,7 @@ function RowSelect($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalServ
                 }
 
             }
-            
+
             $scope.getInputsIPI = function (oObject)
             {
                 if(oObject.value == "-1")

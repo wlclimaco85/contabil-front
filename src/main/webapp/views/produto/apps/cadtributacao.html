@@ -1555,7 +1555,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="row">
                     <div class="col-sm-2 " id="quant-selo">
@@ -1599,7 +1599,7 @@
                             </div>
                         </div>
                     </div>
-                  
+
                     <div ng-if="ipi.tipoCalculo == 2" id="ipi-valor">
                         <div class="col-sm-2">
                             <div class="form-group">
@@ -1618,7 +1618,7 @@
 		                        <div class="col-sm-4 ">
 	                                <label for="exampleInputPassword1">PIS - Situação tributária</label>
 	                                <div class="row">
-		                                <ui-select ng-model="imposto.pis.pISSituaTributaria" theme="bootstrap" on-select="getInputsPIS($item, $model)">
+		                                <ui-select ng-model="pis.pISSituaTributaria" theme="bootstrap" on-select="getInputsPIS($item, $model)">
 									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
 									            <ui-select-choices repeat="item in pisST | filter: $select.search">
 									              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -1632,7 +1632,7 @@
                                         <label for="exampleInputPassword1">Aliquota</label>
                                         <div class="input-group">
                                             <span class="input-group-addon">%</span>
-                                            <input type="text" class="form-control" ng-model="pis.aliquota.valorBaseCalculo" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                            <input type="text" class="form-control" ng-model="pis.aliquota" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
                                         </div>
                                     </div>
                                 </div>
@@ -1641,7 +1641,7 @@
                                         <label for="exampleInputPassword1">Valor PIS/unidade</label>
                                         <div class="input-group">
                                             <span class="input-group-addon">%</span>
-                                            <input type="text" class="form-control" ng-model="pis.aliquota.valorBaseCalculo" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                            <input type="text" class="form-control" ng-model="pis.valorUnidade" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
                                         </div>
                                     </div>
                                 </div>
@@ -1650,7 +1650,7 @@
 		                        <div class="col-sm-6 " id="pis-tipo-calc">
 		                                <label for="exampleInputPassword1">Tipo de cálculo ST</label>
 		                                <div class="row">
-		                                <ui-select ng-model="imposto.pis.tipocalculoSubstTrib" theme="bootstrap">
+		                                <ui-select ng-model="pis.tipocalculoSubstTrib" theme="bootstrap">
 									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
 									            <ui-select-choices repeat="item in tipoCalc | filter: $select.search">
 									              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -1659,13 +1659,13 @@
 								          </ui-select>
 		                            </div>
 		                        </div>
-                                <div ng-if="imposto.pis.tipocalculoSubstTrib.value == 1" id="pis-por-Aliq-st">
+                                <div ng-if="pis.tipocalculoSubstTrib.value == 1" id="pis-por-Aliq-st">
                                     <div class="col-sm-4 ">
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Aliquota (ST)</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">%</span>
-                                                <input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                                <input type="text" class="form-control" ng-model="imposto.pisst.percentualAliquota" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
                                             </div>
                                         </div>
                                     </div>
@@ -1676,13 +1676,13 @@
                                             <label for="exampleInputPassword1">Aliquota (ST)</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">$</span>
-                                                <input type="text" class="form-control" ng-model="imposto.ipi.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                                <input type="text" class="form-control" ng-model="imposto.pisst.valorAliquota" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 		                    </div>
-		                  
+
             </div>
 
             <div class="tab-content1" ng-show="tabs == 4">
@@ -1699,7 +1699,7 @@
 					          </ui-select>
                         </div>
                     </div>
-                   
+
                     <div class="col-sm-4 " id="cofins-por-aliq">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Aliquota</label>
@@ -1723,7 +1723,7 @@
                 	<div class="col-sm-4 ">
                             <label for="exampleInputPassword1">Tipo de cálculo (ST)</label>
                             <div class="row">
-                            <ui-select ng-model="imposto.cofins.tipocalculoSubstTrib" theme="bootstrap">
+                            <ui-select ng-model="cofins.tipocalculoSubstTrib" theme="bootstrap">
 						            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
 						            <ui-select-choices repeat="item in tipoCalc | filter: $select.search">
 						              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -1732,29 +1732,29 @@
 					          </ui-select>
                         </div>
                     </div>
-                    <div ng-if="imposto.cofins.tipocalculoSubstTrib.value == 2" id="cofins-val-aliq-st">
+                    <div ng-if="cofins.tipocalculoSubstTrib.value == 1" id="cofins-val-aliq-st">
                         <div class="col-sm-4 ">
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Aliquota (ST)</label>
                                 <div class="input-group">
     			                    <span class="input-group-addon">%</span>
-                                	<input type="text" class="form-control" ng-model="imposto.cofins.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                	<input type="text" class="form-control" ng-model="imposto.cofinsst.percentualAliquota" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div ng-if="imposto.cofins.tipocalculoSubstTrib.value == 2" id="cofins-val-aliq-st">
+                    <div ng-if="cofins.tipocalculoSubstTrib.value == 2" id="cofins-val-aliq-st">
                         <div class="col-sm-4 ">
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Aliquota (ST)</label>
                                 <div class="input-group">
     			                    <span class="input-group-addon">$</span>
-                                	<input type="text" class="form-control" ng-model="imposto.cofins.qtdSeloIPI" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                	<input type="text" class="form-control" ng-model="imposto.cofinsst.valorAliquotaCOFINS" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
 
                 </div>
             </div>
