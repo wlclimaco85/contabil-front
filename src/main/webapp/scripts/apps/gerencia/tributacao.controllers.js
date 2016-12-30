@@ -113,7 +113,7 @@ function RowSelect($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalServ
 })();
 (function() {
     angular.module('wdApp.apps.tributacao.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('TributacaoInsertController', function(localStorageService,$rootScope, $scope, fModels, SysMgmtData,doisValorFactory,fNotaFiscal) {
+        .controller('TributacaoInsertController', function(localStorageService,$rootScope, $scope, fModels, SysMgmtData,doisValorFactory,fTributacao) {
             var vm = this;
 
             $scope.notaFiscalSaida = {
@@ -138,15 +138,27 @@ function RowSelect($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalServ
                         icmssn201 :{},
                         icmssn202 :{},
                         icmssn500 :{},
-                        icmssn900 :{}
+                        icmssn900 :{},
+                        sitTributaria:{value : "00" }
                     },
+
                     ipi :{
                         tributado :{},
                         naoTributado:{},
 
                     },
-                    pis  :{},
-                    cofins :{},
+                    pis  :{
+                            aliquota:{},
+                            quantidade:{},
+                            naoTributado:{},
+                            outrasOperacoes:{}
+                    },
+                    cofins :{
+                            aliquota:{},
+                            quantidade:{},
+                            naoTributavel:{},
+                            outrasOperacoes:{}
+                    },
                     impostoImportacao :{},
                     pisst:{},
                     cofinsst:{},
@@ -347,7 +359,8 @@ function RowSelect($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalServ
             $scope.format = $scope.formats[1];
 
             $scope.saveTributacao = function() {
-               fNotaFiscal.fnCreateObjectPdVendasTributacao(localStorageService.get('empresa'),$scope.pessoa,$scope.endereco,$scope.produtos,$scope.formaPg,$scope.notaFiscalSaida,1,'INSERT',1002);
+                debugger
+               fTributacao.fnMontaObjeto($scope.tributacao,'INSERT','',function(){console.log("Teste")});
             };
         });
 })();

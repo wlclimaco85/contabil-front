@@ -126,6 +126,13 @@
 		this.returnListPaged = _bPagedList;
 	};
 
+	qat.model.reqTributacao = function(_oCounty, _bList, _bPagedList)
+	{
+		this.tributacao = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
+
 
 	qat.model.reqBanco = function(_oCounty, _bList, _bPagedList)
 	{
