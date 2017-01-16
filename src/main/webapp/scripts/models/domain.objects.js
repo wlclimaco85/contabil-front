@@ -454,6 +454,56 @@ qat.model.fnTelefones =function(_telefone,modelAction)
             return emails;
         }
 
+   qat.model.fnDoisValores=function(_DoisValores,_modelAction)
+        {
+            doisValores  = {
+               id             : _DoisValores.id,
+               emprId         : JSON.parse(localStorage.getItem('empresa')).id,
+               tableEnumValue : 53,
+               modelAction    : _modelAction,
+               createUser     : "System",
+               createDateUTC  : (new Date()).getTime(),
+               modifyUser     : "System",
+               modifyDateUTC  : (new Date()).getTime()
+
+            }
+            return doisValores;
+        }
+
+
+     qat.model.fnNFNotaInfoItemImpostoICMS=function(_NFNotaInfoItemImpostoICMS,_modelAction)
+        {
+            notaInfoItemImpostoICMS  = {
+              id  : _NFNotaInfoItemImpostoICMS.id ,
+              icms00 : _NFNotaInfoItemImpostoICMS.icms00 ,
+              icms10 : _NFNotaInfoItemImpostoICMS.icms10 ,
+              icms20 : _NFNotaInfoItemImpostoICMS.icms20 ,
+              icms30 : _NFNotaInfoItemImpostoICMS.icms30 ,
+              icms40 : _NFNotaInfoItemImpostoICMS.icms40 ,
+              icms51 : _NFNotaInfoItemImpostoICMS.icms51 ,
+              icms60 : _NFNotaInfoItemImpostoICMS.icms60 ,
+              icms70 : _NFNotaInfoItemImpostoICMS.icms70 ,
+              icms90 : _NFNotaInfoItemImpostoICMS.icms90 ,
+              icmsPartilhado : _NFNotaInfoItemImpostoICMS.icmsPartilhado ,
+              icmsst: _NFNotaInfoItemImpostoICMS.icmsst ,
+              icmssn101 : _NFNotaInfoItemImpostoICMS.icmssn101 ,
+              icmssn102: _NFNotaInfoItemImpostoICMS.icmssn102 ,
+              icmssn201 : _NFNotaInfoItemImpostoICMS.icmssn201 ,
+              icmssn202 : _NFNotaInfoItemImpostoICMS.icmssn202 ,
+              icmssn500 : _NFNotaInfoItemImpostoICMS.icmssn500 ,
+              icmssn900: _NFNotaInfoItemImpostoICMS.icmssn900 ,
+              emprId         : JSON.parse(localStorage.getItem('empresa')).id,
+              tableEnumValue : 53,
+              modelAction    : _modelAction,
+              createUser     : "System",
+              createDateUTC  : (new Date()).getTime(),
+              modifyUser     : "System",
+              modifyDateUTC  : (new Date()).getTime()
+
+            }
+            return notaInfoItemImpostoICMS;
+        }
+
   qat.model.fnPlanoByEmpresa=function(_Valor,_planoServicoId,_type,_modelAction)
   {
       PlanoByEmpresa = {

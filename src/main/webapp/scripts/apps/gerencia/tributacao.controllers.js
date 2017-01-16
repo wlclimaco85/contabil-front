@@ -115,7 +115,6 @@ function RowSelect($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalServ
     angular.module('wdApp.apps.tributacao.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('TributacaoInsertController', function(localStorageService,$rootScope, $scope, fModels, SysMgmtData,doisValorFactory,fTributacao) {
             var vm = this;
-
             $scope.notaFiscalSaida = {
 
             };
@@ -123,7 +122,7 @@ function RowSelect($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalServ
                 imposto : {
                     icms : {
                         icms00 :{},
-                        icms10 :{},
+                        icms10 :{situacaoTributaria:{}},
                         icms20 :{},
                         icms30 :{},
                         icms40 :{},
@@ -359,7 +358,6 @@ function RowSelect($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalServ
             $scope.format = $scope.formats[1];
 
             $scope.saveTributacao = function() {
-                debugger
                fTributacao.fnMontaObjeto($scope.tributacao,'INSERT','',function(){console.log("Teste")});
             };
         });

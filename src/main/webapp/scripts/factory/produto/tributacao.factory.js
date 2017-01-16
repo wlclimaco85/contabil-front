@@ -6,127 +6,135 @@
 		var factory = {};
 
 	factory.fnMontaObjeto = function(tributacao,action,url,callBack){
-     
-      var oObject = fModels.amont(tributacao,action);
 
-      if(sitTributaria.value == "00")
+      var oObject = fModels.amont(tributacao,action);
+debugger
+      tributacao.imposto.modelAction    : _modelAction,
+      tributacao.imposto.createUser     : "System",
+      tributacao.imposto.createDateUTC  : (new Date()).getTime(),
+      tributacao.imposto.modifyUser     : "System",
+      tributacao.imposto.modifyDateUTC  : (new Date()).getTime()
+
+      if(tributacao.imposto.icms.sitTributaria.value == "00")
       {
-          tributacao.imposto.icms.icms00.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icms00.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icms00 = fModels.amont(tributacao.imposto.icms.icms00,action) ;
       }
-      else if(sitTributaria.value == "10")
+      else if(tributacao.imposto.icms.sitTributaria.value == "10")
       {
-          tributacao.imposto.icms.icms10.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icms10.situacaoTributaria.id = tributacao.imposto.icms.sitTributaria.id
           tributacao.imposto.icms.icms10 = fModels.amont(tributacao.imposto.icms.icms10,action) ;
+          tributacao.imposto.icms.icms10.modalidadeBCICMS = qat.model.fnDoisValores(tributacao.imposto.icms.icms10.modalidadeBCICMS,action)
+          tributacao.imposto.icms.icms10.modalidadeBCICMSST =  qat.model.fnDoisValores(tributacao.imposto.icms.icms10.modalidadeBCICMSST,action)
       }
-      else if(sitTributaria.value == "20")
+      else if(tributacao.imposto.icms.sitTributaria.value == "20")
       {
-          tributacao.imposto.icms.icms20.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icms20.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icms20 = fModels.amont(tributacao.imposto.icms.icms20,action) ;
       }
-      else if(sitTributaria.value == "30")
+      else if(tributacao.imposto.icms.sitTributaria.value == "30")
       {
-          tributacao.imposto.icms.icms30.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icms30.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icms30 = fModels.amont(tributacao.imposto.icms.icms30,action) ;
       }
-      else if(sitTributaria.value == "40")
+      else if(tributacao.imposto.icms.sitTributaria.value == "40")
       {
-          tributacao.imposto.icms.icms40.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icms40.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icms40 = fModels.amont(tributacao.imposto.icms.icms40,action) ;
       }
-      else if(sitTributaria.value == "41")
+      else if(tributacao.imposto.icms.sitTributaria.value == "41")
       {
-          tributacao.imposto.icms.icms41.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icms41.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icms41 = fModels.amont(tributacao.imposto.icms.icms41,action) ;
       }
-      else if(sitTributaria.value == "50")
+      else if(tributacao.imposto.icms.sitTributaria.value == "50")
       {
-          tributacao.imposto.icms.icms50.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icms50.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icms50 = fModels.amont(tributacao.imposto.icms.icms50,action) ;
       }
-      else if(sitTributaria.value == "51")
+      else if(tributacao.imposto.icms.sitTributaria.value == "51")
       {
-          tributacao.imposto.icms.icms51.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icms51.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icms51 = fModels.amont(tributacao.imposto.icms.icms51,action) ;
       }
-      else if(sitTributaria.value == "60")
+      else if(tributacao.imposto.icms.sitTributaria.value == "60")
       {
-          tributacao.imposto.icms.icms60.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icms60.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icms60 = fModels.amont(tributacao.imposto.icms.icms60,action) ;
       }
-      else if(sitTributaria.value == "70")
+      else if(tributacao.imposto.icms.sitTributaria.value == "70")
       {
-          tributacao.imposto.icms.icms70.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icms70.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icms70 = fModels.amont(tributacao.imposto.icms.icms70,action) ;
       }
-      else if(sitTributaria.value == "90")
+      else if(tributacao.imposto.icms.sitTributaria.value == "90")
       {
-          tributacao.imposto.icms.icms90.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icms90.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icms90 = fModels.amont(tributacao.imposto.icms.icms90,action) ;
       }
-      else if(sitTributaria.value == "10Part")
+      else if(tributacao.imposto.icms.sitTributaria.value == "10Part")
       {
-          tributacao.imposto.icms.icmsPartilhado.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icmsPartilhado.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icmsPartilhado = fModels.amont(tributacao.imposto.icms.icmsPartilhado,action) ;
       }
-      else if(sitTributaria.value == "90Part")
+      else if(tributacao.imposto.icms.sitTributaria.value == "90Part")
       {
-          tributacao.imposto.icms.icmsPartilhado.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icmsPartilhado.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icmsPartilhado = fModels.amont(tributacao.imposto.icms.icmsPartilhado,action) ;
       }
-      else if(sitTributaria.value == "41ST")
+      else if(tributacao.imposto.icms.sitTributaria.value == "41ST")
       {
-          tributacao.imposto.icms.icmsst.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icmsst.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icmsst = fModels.amont(tributacao.imposto.icms.icmsst,action) ;
       }
       else if(sitTributaria.value == "101")
       {
-          tributacao.imposto.icms.icmssn101.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icmssn101.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icmssn101 = fModels.amont(tributacao.imposto.icms.icmssn101,action) ;
       }
       else if(sitTributaria.value == "102")
       {
-          tributacao.imposto.icms.icmssn102.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icmssn102.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icmssn102 = fModels.amont(tributacao.imposto.icms.icmssn102,action) ;
       }
-      else if(sitTributaria.value == "103")
+      else if(tributacao.imposto.icms.sitTributaria.value == "103")
       {
-          tributacao.imposto.icms.icmssn103.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icmssn103.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icmssn103 = fModels.amont(tributacao.imposto.icms.icmssn103,action) ;
       }
-      else if(sitTributaria.value == "201")
+      else if(tributacao.imposto.icms.sitTributaria.value == "201")
       {
-          tributacao.imposto.icms.icmssn201.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icmssn201.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icmssn201 = fModels.amont(tributacao.imposto.icms.icmssn201,action) ;
       }
-      else if(sitTributaria.value == "202")
+      else if(tributacao.imposto.icms.sitTributaria.value == "202")
       {
-          tributacao.imposto.icms.icmssn202.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icmssn202.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icmssn202 = fModels.amont(tributacao.imposto.icms.icmssn202,action) ;
       }
-      else if(sitTributaria.value == "203")
+      else if(tributacao.imposto.icms.sitTributaria.value == "203")
       {
-          tributacao.imposto.icms.icmssn203.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icmssn203.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icmssn203 = fModels.amont(tributacao.imposto.icms.icmssn203,action) ;
       }
-      else if(sitTributaria.value == "300")
+      else if(tributacao.imposto.icms.sitTributaria.value == "300")
       {
-          tributacao.imposto.icms.icmssn300.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icmssn300.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icmssn300 = fModels.amont(tributacao.imposto.icms.icmssn300,action) ;
       }
-      else if(sitTributaria.value == "400")
+      else if(tributacao.imposto.icms.sitTributaria.value == "400")
       {
-          tributacao.imposto.icms.icmssn400.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icmssn400.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icmssn400 = fModels.amont(tributacao.imposto.icms.icmssn400,action) ;
       }
-      else if(sitTributaria.value == "500")
+      else if(tributacao.imposto.icms.sitTributaria.value == "500")
       {
-          tributacao.imposto.icms.icmssn500.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icmssn500.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icmssn500 = fModels.amont(tributacao.imposto.icms.icmssn500,action) ;
       }
-      else if(sitTributaria.value == "900")
+      else if(tributacao.imposto.icms.sitTributaria.value == "900")
       {
-          tributacao.imposto.icms.icmssn900.situacaoTributaria = sitTributaria
+          tributacao.imposto.icms.icmssn900.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icmssn900 = fModels.amont(tributacao.imposto.icms.icmssn900,action) ;
       }
 /*
@@ -230,9 +238,11 @@
 
 
       tributacao.imposto.icmsUfDestino = fModels.amont(tributacao.imposto.icmsUfDestino,action) ;
+debugger
+      tributacao.imposto.icms = qat.model.fnNFNotaInfoItemImpostoICMS(tributacao.imposto.icms,action);
 
       var oObject = fModels.amont(tributacao,action);
-debugger
+
       SysMgmtData.processPostPageData("main/api/request", {
           url: 'produto/api/tributacao/insert',
           token: $rootScope.authToken,

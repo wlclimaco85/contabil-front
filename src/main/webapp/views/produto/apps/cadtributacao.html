@@ -181,7 +181,7 @@
 					                <div class="form-group">
 					                    <label for="exampleInputPassword1">Regime</label>
 					                    <div class="row">
-			                                <ui-select ng-model="imposto.icms.regime" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+			                                <ui-select ng-model="tributacao.imposto.icms.regime" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
 									            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
 									            <ui-select-choices repeat="item in regime | filter: $select.search">
 									              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -194,9 +194,9 @@
 					        </div>
                             <div class="row">
                             	<div class="col-sm-10 ">
-                                <label for="exampleInputPassword1">ICMS - Situação Tributária </label>
+                                <label for="exampleInputPassword1">ICMS - Situação Tributária ddd {{imposto.icms.regime}}</label>
                                 <div class="row">
-	                                <ui-select ng-model="sitTributaria" theme="bootstrap">
+	                                <ui-select ng-model="tributacao.imposto.icms.sitTributaria" theme="bootstrap">
 							            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
 							            <ui-select-choices repeat="item in icmsST | filter: $select.search">
 							              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -206,7 +206,7 @@
 	                            </div>
                             </div>
 		                    </div>
-		                    <div ng-if="sitTributaria.value == 00">
+		                    <div ng-if="tributacao.imposto.icms.sitTributaria.value == 00">
 		                    	<div class="row">
 						            <div class="col-sm-6">
 						                <div class="form-group">
@@ -235,7 +235,7 @@
 		                    </div>
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
-		                    <div ng-if="sitTributaria.value == 10">
+		                    <div ng-if="tributacao.imposto.icms.sitTributaria.value == 10">
 		                    	<div class="row" style="margin-top: 20px!important;"></div>
 		                    	<div role="tabpanel" class="tab-pane messages" id="messages">
                                     <div class="panel-group" id="accordion">
@@ -347,7 +347,7 @@
 		                    </div>
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
-		                    <div ng-if="sitTributaria.value == 11">
+		                    <div ng-if="tributacao.imposto.icms.sitTributaria.value == 11">
 		                    	<div class="row" style="margin-top: 20px!important;"></div>
 		                    	<div role="tabpanel" class="tab-pane messages" id="messages">
                                     <div class="panel-group" id="accordion">
@@ -499,7 +499,7 @@
 
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
-		                    <div ng-if="sitTributaria.value == 20">
+		                    <div ng-if="tributacao.imposto.icms.sitTributaria.value == 20">
 		                    	<div class="row">
 						            <div class="col-sm-6 ">
 						                <div class="form-group">
@@ -554,7 +554,7 @@
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-		                    <div ng-if="sitTributaria.value == 30">
+		                    <div ng-if="tributacao.imposto.icms.sitTributaria.value == 30">
 		                    	<div class="row">
 		                    		<div class="col-sm-6 ">
 		                                <label for="exampleInputPassword1">Motivo desoneração</label>
@@ -625,7 +625,7 @@
 		                    </div>
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-		                    <div ng-if="sitTributaria.value == 40">
+		                    <div ng-if="tributacao.imposto.icms.sitTributaria.value == 40">
 		                    	<div class="row">
 						            <div class="col-sm-5">
 						                <div class="form-group">
@@ -647,7 +647,7 @@
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 
-		                    <div ng-if="sitTributaria.value == 41">
+		                    <div ng-if="tributacao.imposto.icms.sitTributaria.value == 41">
 		                    	<div class="row">
 						            <div class="col-sm-10 ">
 						                <div class="form-group">
@@ -668,14 +668,14 @@
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-		                    <div ng-if="sitTributaria.value == 42">
+		                    <div ng-if="tributacao.imposto.icms.sitTributaria.value == 42">
 		                    	<div class="row">
 
 						        </div>
 		                    </div>
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-		                    <div ng-if="sitTributaria.value == 50">
+		                    <div ng-if="tributacao.imposto.icms.sitTributaria.value == 50">
 		                    	<div class="row">
 						            <div class="col-sm-10 ">
 						                <div class="form-group">
@@ -695,7 +695,7 @@
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-		                    <div ng-if="sitTributaria.value == 51">
+		                    <div ng-if="tributacao.imposto.icms.sitTributaria.value == 51">
 		                    	<div class="row">
 		                    		<div class="col-sm-6">
 						                <div class="form-group">
@@ -734,11 +734,11 @@
 			                    </div>
 		                    </div>
 		                    <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
-		                    <div ng-if="sitTributaria.value == 60">
+		                    <div ng-if="tributacao.imposto.icms.sitTributaria.value == 60">
 
 		                    </div>
 		                    <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
-		                    <div ng-if="sitTributaria.value == 70">
+		                    <div ng-if="tributacao.imposto.icms.sitTributaria.value == 70">
 		                    	<div class="row" style="margin-top: 20px!important;"></div>
 		                    	<div role="tabpanel" class="tab-pane messages" id="messages">
                                     <div class="panel-group" id="accordion">
@@ -870,7 +870,7 @@
 		                    <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 
-		                    <div ng-if="sitTributaria.value == 90">
+		                    <div ng-if="tributacao.imposto.icms.sitTributaria.value == 90">
 		                    	<div class="row" style="margin-top: 20px!important;"></div>
 		                    	<div role="tabpanel" class="tab-pane messages" id="messages">
                                     <div class="panel-group" id="accordion">
@@ -999,7 +999,7 @@
 						        </div>
 		                    </div>
 		                    <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
-		                    <div ng-if="sitTributaria.value == 91">
+		                    <div ng-if="tributacao.imposto.icms.sitTributaria.value == 91">
 		                    	<div class="row">
 						            <div class="col-sm-6 ">
 						                <div class="form-group">
@@ -1091,7 +1091,7 @@
 		                    </div>
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-	<div ng-if="sitTributaria.value == icmsPartilhado">
+	<div ng-if="tributacao.imposto.icms.sitTributaria.value == icmsPartilhado">
     	<div class="row">
     		<div class="col-sm-4">
                 <label for="exampleInputPassword1">ICMS - Origem</label>
@@ -1111,7 +1111,7 @@
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-	<div ng-if="sitTributaria.value == icmsst">
+	<div ng-if="tributacao.imposto.icms.sitTributaria.value == icmsst">
     	<div class="row">
     		<div class="col-sm-4">
                 <label for="exampleInputPassword1">ICMS - Origem</label>
@@ -1177,7 +1177,7 @@
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-	<div ng-if="sitTributaria.value == 101">
+	<div ng-if="tributacao.imposto.icms.sitTributaria.value == 101">
     	<div class="row">
 
 			<div class="col-sm-3 ">
@@ -1196,13 +1196,13 @@
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-	<div ng-if="sitTributaria.value == 102">
+	<div ng-if="tributacao.imposto.icms.sitTributaria.value == 102">
 	</div>
-	<div ng-if="sitTributaria.value == 103">
+	<div ng-if="tributacao.imposto.icms.sitTributaria.value == 103">
 	</div>
 
 
-	<div ng-if="sitTributaria.value == 201">
+	<div ng-if="tributacao.imposto.icms.sitTributaria.value == 201">
     	<div class="row">
         </div>
 		<div class="row">
@@ -1279,7 +1279,7 @@
     </div>
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
-	<div ng-if="sitTributaria.value == 202">
+	<div ng-if="tributacao.imposto.icms.sitTributaria.value == 202">
     	<div class="row">
 
 			<div class="col-sm-4">
@@ -1336,7 +1336,7 @@
 	</div>
 
 
-	<div ng-if="sitTributaria.value == 203">
+	<div ng-if="tributacao.imposto.icms.sitTributaria.value == 203">
     	<div class="row">
 
 			<div class="col-sm-4">
@@ -1394,16 +1394,16 @@
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-<div ng-if="sitTributaria.value == 300"></div>
+<div ng-if="tributacao.imposto.icms.sitTributaria.value == 300"></div>
 
-<div ng-if="sitTributaria.value == 400"></div>
-	<div ng-if="sitTributaria.value == 500">
+<div ng-if="tributacao.imposto.icms.sitTributaria.value == 400"></div>
+	<div ng-if="tributacao.imposto.icms.sitTributaria.value == 500">
 
 	</div>
 
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
-    <div ng-if="sitTributaria.value == 900">
+    <div ng-if="tributacao.imposto.icms.sitTributaria.value == 900">
     	<div class="row">
 		    <div class="col-sm-2">
 		        <div class="form-group">
