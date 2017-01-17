@@ -470,6 +470,93 @@ qat.model.fnTelefones =function(_telefone,modelAction)
             return doisValores;
         }
 
+   qat.model.fnNFNotaInfoItemImpostoIPI=function(_Ipi,_modelAction)
+    {
+        NFNotaInfoItemImpostoIPI  = {
+            id                    : _Ipi.id,
+            classeEnquadramento   : _Ipi.classeEnquadramento,
+            cnpjProdutor          : _Ipi.cnpjProdutor,
+            codigoSelo            : _Ipi.codigoSelo,
+            quantidadeSelo        : _Ipi.quantidadeSelo,
+            codigoEnquadramento   : _Ipi.codigoEnquadramento,
+            tributado             : _Ipi.tributado,
+            naoTributado          : _Ipi.naoTributado,
+            emprId         : JSON.parse(localStorage.getItem('empresa')).id,
+            tableEnumValue : 53,
+            modelAction    : _modelAction,
+            createUser     : "System",
+            createDateUTC  : (new Date()).getTime(),
+            modifyUser     : "System",
+            modifyDateUTC  : (new Date()).getTime()
+
+        }
+        return NFNotaInfoItemImpostoIPI;
+    }
+
+    qat.model.fnNFNotaInfoItemImpostoPIS=function(_Pis,_modelAction)
+    {
+        NFNotaInfoItemImpostoIPI  = {
+            id              : _Pis.id,
+            aliquota        : _Pis.aliquota,
+            quantidade      : _Pis.quantidade,
+            naoTributado    : _Pis.naoTributado,
+            outrasOperacoes : _Pis.outrasOperacoes,
+            emprId          : JSON.parse(localStorage.getItem('empresa')).id,
+            tableEnumValue  : 53,
+            modelAction     : _modelAction,
+            createUser      : "System",
+            createDateUTC   : (new Date()).getTime(),
+            modifyUser      : "System",
+            modifyDateUTC   : (new Date()).getTime()
+
+        }
+        return NFNotaInfoItemImpostoIPI;
+    }
+
+    qat.model.fnNFNotaInfoItemImpostoCOFINS=function(_Cofins,_modelAction)
+    {
+        NFNotaInfoItemImpostoCOFINS  = {
+            id              : _Cofins.id,
+            aliquota        : _Cofins.aliquota,
+            quantidade      : _Cofins.quantidade,
+            naoTributado    : _Cofins.naoTributado,
+            outrasOperacoes : _Cofins.outrasOperacoes,
+            emprId          : JSON.parse(localStorage.getItem('empresa')).id,
+            tableEnumValue  : 53,
+            modelAction     : _modelAction,
+            createUser      : "System",
+            createDateUTC   : (new Date()).getTime(),
+            modifyUser      : "System",
+            modifyDateUTC   : (new Date()).getTime()
+
+        }
+        return NFNotaInfoItemImpostoCOFINS;
+    }
+
+    qat.model.fnNFNotaInfoItemImpostoIcmsUfDest=function(_IcmsUfDest,_modelAction)
+    {
+        NFNotaInfoItemImpostoIcmsUfDest  = {
+            id : _IcmsUfDest.id,
+            valorBaseCalculoDestino : _IcmsUfDest.valorBaseCalculoDestino,
+            percentualRelativoFundoCombatePobrezaDestino : _IcmsUfDest.percentualRelativoFundoCombatePobrezaDestino,
+            percentualAliquotaInternaDestino : _IcmsUfDest.percentualAliquotaInternaDestino,
+            percentualInterestadual : _IcmsUfDest.percentualInterestadual.value,
+            percentualProvisorioPartilha : _IcmsUfDest.percentualProvisorioPartilha.value,
+            valorRelativoFundoCombatePobrezaDestino : _IcmsUfDest.valorRelativoFundoCombatePobrezaDestino,
+            valorICMSInterestadualDestino : _IcmsUfDest.valorICMSInterestadualDestino,
+            valorICMSInterestadualRemetente : _IcmsUfDest.valorICMSInterestadualRemetente,
+            emprId          : JSON.parse(localStorage.getItem('empresa')).id,
+            tableEnumValue  : 53,
+            modelAction     : _modelAction,
+            createUser      : "System",
+            createDateUTC   : (new Date()).getTime(),
+            modifyUser      : "System",
+            modifyDateUTC   : (new Date()).getTime()
+
+        }
+        return NFNotaInfoItemImpostoIcmsUfDest;
+    }
+
 
      qat.model.fnNFNotaInfoItemImpostoICMS=function(_NFNotaInfoItemImpostoICMS,_modelAction)
         {

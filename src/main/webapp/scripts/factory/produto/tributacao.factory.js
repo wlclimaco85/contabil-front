@@ -8,12 +8,12 @@
 	factory.fnMontaObjeto = function(tributacao,action,url,callBack){
 
       var oObject = fModels.amont(tributacao,action);
-debugger
-      tributacao.imposto.modelAction    : _modelAction,
-      tributacao.imposto.createUser     : "System",
-      tributacao.imposto.createDateUTC  : (new Date()).getTime(),
-      tributacao.imposto.modifyUser     : "System",
-      tributacao.imposto.modifyDateUTC  : (new Date()).getTime()
+
+      tributacao.imposto.modelAction    = action;
+      tributacao.imposto.createUser     = "System";
+      tributacao.imposto.createDateUTC  = (new Date()).getTime();
+      tributacao.imposto.modifyUser     = "System";
+      tributacao.imposto.modifyDateUTC  = (new Date()).getTime();
 
       if(tributacao.imposto.icms.sitTributaria.value == "00")
       {
@@ -137,52 +137,105 @@ debugger
           tributacao.imposto.icms.icmssn900.situacaoTributaria = tributacao.imposto.icms.sitTributaria
           tributacao.imposto.icms.icmssn900 = fModels.amont(tributacao.imposto.icms.icmssn900,action) ;
       }
-/*
 
-      tributacao.imposto.ipi = fModels.amont(tributacao.imposto.ipi,action) ;
+      tributacao.imposto.icms.modelAction    = action;
+      tributacao.imposto.icms.createUser     = "System";
+      tributacao.imposto.icms.createDateUTC  = (new Date()).getTime();
+      tributacao.imposto.icms.modifyUser     = "System";
+      tributacao.imposto.icms.modifyDateUTC  = (new Date()).getTime();
+
+
+      if((tributacao.imposto.ipi.sitTributaria.value == "00") || (tributacao.imposto.ipi.sitTributaria.value == "49")|| (tributacao.imposto.ipi.sitTributaria.value == "50")|| (tributacao.imposto.ipi.sitTributaria.value == "99"))
+      {
+            tributacao.imposto.ipi.tributado = {
+                percentualAliquota : tributacao.imposto.ipi.percentualAliquota,
+                quantidade         : tributacao.imposto.ipi.valorTributo,
+                situacaoTributaria : qat.model.fnDoisValores(tributacao.imposto.ipi.sitTributaria,action),
+                modelAction        : action,
+                createUser         : "System",
+                createDateUTC      : (new Date()).getTime(),
+                modifyUser         : "System",
+                modifyDateUTC      : (new Date()).getTime(),
+
+            }
+      }
+      else
+      {
+          tributacao.imposto.ipi.naoTributado = {
+                situacaoTributaria : qat.model.fnDoisValores(tributacao.imposto.ipi.sitTributaria,action),
+                modelAction        : action,
+                createUser         : "System",
+                createDateUTC      : (new Date()).getTime(),
+                modifyUser         : "System",
+                modifyDateUTC      : (new Date()).getTime(),
+
+            }
+      }
+
+      tributacao.imposto.ipi = qat.model.fnNFNotaInfoItemImpostoIPI(tributacao.imposto.ipi,action) ;
 
 
       //private NFNotaInfoItemImpostoPISAliquota aliquota;
-      if((tributacao.imposto.pis.pISSituaTributaria.value == "01")||(tributacao.imposto.pis.pISSituaTributaria.value == "06")||(tributacao.imposto.pis.pISSituaTributaria.value == "07")||(tributacao.imposto.pis.pISSituaTributaria.value == "08"))
+      if((tributacao.imposto.pis.pISSituaTributaria.value == "01")||(tributacao.imposto.pis.pISSituaTributaria.value == "02"))
       {
-        tributacao.imposto.pis.aliquota.situacaoTributaria = tributacao.imposto.pis.pISSituaTributaria;
-        tributacao.imposto.pis.aliquota.valorBaseCalculo = 0;
-        tributacao.imposto.pis.aliquota.percentualAliquota = tributacao.imposto.pis.percentualAliquota;
-        tributacao.imposto.pis.aliquota.valorTributo = 0;
+          tributacao.imposto.pis.aliquota = {
+              situacaoTributaria : qat.model.fnDoisValores(tributacao.imposto.pis.pISSituaTributaria,action),
+              percentualAliquota : tributacao.imposto.pis.percentualAliquota,
+              modelAction        : action,
+              createUser         : "System",
+              createDateUTC      : (new Date()).getTime(),
+              modifyUser         : "System",
+              modifyDateUTC      : (new Date()).getTime(),
+        }
 
-        tributacao.imposto.pis.aliquota = fModels.amont(tributacao.imposto.pis.aliquota,action) ;
       }
 
       //private NFNotaInfoItemImpostoPISQuantidade quantidade;
-      if(tributacao.imposto.pis.pISSituaTributaria.value  == "02")
+      if(tributacao.imposto.pis.pISSituaTributaria.value  == "03")
       {
-        tributacao.imposto.pis.quantidade.situacaoTributaria = tributacao.imposto.pis.pISSituaTributaria;
-        tributacao.imposto.pis.quantidade.quantidadeVendida = 0;
-        tributacao.imposto.pis.quantidade.valorAliquota = tributacao.imposto.pis.valorUnidade;
-        tributacao.imposto.pis.quantidade.valorTributo = 0;
+        tributacao.imposto.pis.quantidade = {
+            situacaoTributaria  : qat.model.fnDoisValores(tributacao.imposto.pis.pISSituaTributaria,action),
+            valorAliquota       : tributacao.imposto.pis.valorUnidade,
+            modelAction        : action,
+            createUser         : "System",
+            createDateUTC      : (new Date()).getTime(),
+            modifyUser         : "System",
+            modifyDateUTC      : (new Date()).getTime(),
+        }
 
-        tributacao.imposto.pis.quantidade = fModels.amont(tributacao.imposto.pis.quantidade,action) ;
       }
 
       //NFNotaInfoItemImpostoPISNaoTributado naoTributado
-      if(tributacao.imposto.pis.pISSituaTributaria.value  == "03")
+      if((tributacao.imposto.pis.pISSituaTributaria.value  == "04")||(tributacao.imposto.pis.pISSituaTributaria.value == "05")||(tributacao.imposto.pis.pISSituaTributaria.value == "06")
+        ||(tributacao.imposto.pis.pISSituaTributaria.value == "07")||(tributacao.imposto.pis.pISSituaTributaria.value == "08")||(tributacao.imposto.pis.pISSituaTributaria.value == "09"))
       {
-          tributacao.imposto.pis.naoTributavel.situacaoTributaria = tributacao.imposto.pis.pISSituaTributaria;
+          tributacao.imposto.pis.naoTributavel = {
 
-          tributacao.imposto.pis.naoTributavel = fModels.amont(tributacao.imposto.pis.naoTributavel,action) ;
+            situacaoTributaria : qat.model.fnDoisValores(tributacao.imposto.pis.pISSituaTributaria,action),
+            modelAction        : action,
+            createUser         : "System",
+            createDateUTC      : (new Date()).getTime(),
+            modifyUser         : "System",
+            modifyDateUTC      : (new Date()).getTime(),
+          }
       }
 
       //NFNotaInfoItemImpostoPISOutrasOperacoes outrasOperacoes
-      if(tributacao.imposto.pis.pISSituaTributaria.value  == "04")
+      if(tributacao.imposto.pis.pISSituaTributaria.value  == "99")
       {
-        tributacao.imposto.pis.outrasOperacoes.situacaoTributaria = tributacao.imposto.pis.pISSituaTributaria;
-        tributacao.imposto.pis.outrasOperacoes.percentualAliquota = tributacao.imposto.pis.percentualAliquota;
-        tributacao.imposto.pis.outrasOperacoes.quantidadeVendida = 0;
-        tributacao.imposto.pis.outrasOperacoes.valorAliquota = tributacao.imposto.pis.valorUnidade;
-        tributacao.imposto.pis.outrasOperacoes.valorTributo = 0;
-
-        tributacao.imposto.pis.outrasOperacoes = fModels.amont(tributacao.imposto.pis.outrasOperacoes,action) ;
+        tributacao.imposto.pis.outrasOperacoes = {
+            situacaoTributaria : qat.model.fnDoisValores(tributacao.imposto.pis.pISSituaTributaria,action),
+            percentualAliquota : tributacao.imposto.pis.percentualAliquota,
+            valorAliquota      : tributacao.imposto.pis.valorUnidade,
+            modelAction        : action,
+            createUser         : "System",
+            createDateUTC      : (new Date()).getTime(),
+            modifyUser         : "System",
+            modifyDateUTC      : (new Date()).getTime(),
+        }
       }
+
+      tributacao.imposto.pis = qat.model.fnNFNotaInfoItemImpostoPIS(tributacao.imposto.pis,action);
 
       if( tributacao.imposto.pisst  != undefined)
       {
@@ -190,55 +243,59 @@ debugger
       }
 
       //COFINS
-      tributacao.imposto.cofins   = fModels.amont(tributacao.imposto.cofins,action) ;
-      //private NFNotaInfoItemImpostoPISAliquota aliquota;
-      if((tributacao.imposto.cofins.pISSituaTributaria.value  == "01")||(tributacao.imposto.cofins.pISSituaTributaria.value  == "05")||(tributacao.imposto.cofins.pISSituaTributaria.value  == "06")||(tributacao.imposto.cofins.pISSituaTributaria.value  == "07"))
+      if((tributacao.imposto.cofins.pISSituaTributaria.value  == "01")||(tributacao.imposto.cofins.pISSituaTributaria.value  == "02"))
       {
-        tributacao.imposto.cofins.aliquota.situacaoTributaria = tributacao.imposto.cofins.pISSituaTributaria;
-        tributacao.imposto.cofins.aliquota.valorBaseCalculo = 0;
-        tributacao.imposto.cofins.aliquota.percentualAliquota = tributacao.imposto.cofins.percentualAliquota;
-        tributacao.imposto.cofins.aliquota.valorTributo = 0;
+        tributacao.imposto.cofins.aliquota = {
+            situacaoTributaria : qat.model.fnDoisValores(tributacao.imposto.cofins.pISSituaTributaria,action),
+            percentualAliquota : tributacao.imposto.cofins.percentualAliquota,
 
+        }
         tributacao.imposto.cofins.aliquota = fModels.amont(tributacao.imposto.cofins.aliquota,action) ;
       }
 
       //private NFNotaInfoItemImpostoPISQuantidade quantidade;
-      if(tributacao.imposto.cofins.pISSituaTributaria.value  == "02")
+      if(tributacao.imposto.cofins.pISSituaTributaria.value  == "03")
       {
-        tributacao.imposto.cofins.quantidade.situacaoTributaria = tributacao.imposto.cofins.pISSituaTributaria;
-        tributacao.imposto.cofins.quantidade.quantidadeVendida = 0;
-        tributacao.imposto.cofins.quantidade.valorAliquota = tributacao.imposto.cofins.valorUnidade;
-        tributacao.imposto.cofins.quantidade.valorTributo = 0;
+        tributacao.imposto.cofins.quantidade = {
+            situacaoTributaria : qat.model.fnDoisValores(tributacao.imposto.cofins.pISSituaTributaria,action),
+            valorAliquota      : tributacao.imposto.cofins.valorUnidade,
+        }
 
         tributacao.imposto.cofins.quantidade = fModels.amont(tributacao.imposto.cofins.quantidade,action) ;
       }
 
       //NFNotaInfoItemImpostoPISNaoTributado naoTributado
-      if(tributacao.imposto.cofins.pISSituaTributaria.value  == "03")
+      if((tributacao.imposto.cofins.pISSituaTributaria.value  == "04")||(tributacao.imposto.cofins.pISSituaTributaria.value  == "05")||(tributacao.imposto.cofins.pISSituaTributaria.value  == "06")||
+        (tributacao.imposto.cofins.pISSituaTributaria.value  == "07")||(tributacao.imposto.cofins.pISSituaTributaria.value  == "08") ||(tributacao.imposto.cofins.pISSituaTributaria.value  == "09"))
       {
-          tributacao.imposto.cofins.naoTributavel.situacaoTributaria = tributacao.imposto.cofins.pISSituaTributaria;
+          tributacao.imposto.cofins.naoTributavel = {
+              situacaoTributaria : qat.model.fnDoisValores(tributacao.imposto.cofins.pISSituaTributaria,action),
+          }
 
           tributacao.imposto.cofins.naoTributavel = fModels.amont(tributacao.imposto.cofins.naoTributavel,action) ;
       }
 
       //NFNotaInfoItemImpostoPISOutrasOperacoes outrasOperacoes
-      if(tributacao.imposto.cofins.pISSituaTributaria.value == "04")
+      if(tributacao.imposto.cofins.pISSituaTributaria.value == "99")
       {
-        tributacao.imposto.cofins.outrasOperacoes.situacaoTributaria = tributacao.imposto.cofins.pISSituaTributaria;
-        tributacao.imposto.cofins.outrasOperacoes.percentualAliquota = tributacao.imposto.cofins.percentualAliquota;
-        tributacao.imposto.cofins.outrasOperacoes.quantidadeVendida = 0;
-        tributacao.imposto.cofins.outrasOperacoes.valorAliquota = tributacao.imposto.cofins.valorUnidade;
-        tributacao.imposto.cofins.outrasOperacoes.valorTributo = 0;
+        tributacao.imposto.cofins.outrasOperacoes = {
+            situacaoTributaria : qat.model.fnDoisValores(tributacao.imposto.cofins.pISSituaTributaria,action),
+            percentualAliquota : tributacao.imposto.cofins.percentualAliquota,
+            valorAliquota      : tributacao.imposto.cofins.valorUnidade,
+        }
+
+
 
         tributacao.imposto.cofins.outrasOperacoes = fModels.amont(tributacao.imposto.cofins.outrasOperacoes,action) ;
       }
 
-      */
+      tributacao.imposto.cofins = qat.model.fnNFNotaInfoItemImpostoCOFINS(tributacao.imposto.cofins,action);
+
       tributacao.imposto.cofinsst = fModels.amont(tributacao.imposto.cofinsst,action) ;
 
 
-      tributacao.imposto.icmsUfDestino = fModels.amont(tributacao.imposto.icmsUfDestino,action) ;
-debugger
+      tributacao.imposto.icmsUfDestino = qat.model.fnNFNotaInfoItemImpostoIcmsUfDest(tributacao.imposto.icmsUfDestino,action) ;
+
       tributacao.imposto.icms = qat.model.fnNFNotaInfoItemImpostoICMS(tributacao.imposto.icms,action);
 
       var oObject = fModels.amont(tributacao,action);

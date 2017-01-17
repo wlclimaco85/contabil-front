@@ -1588,7 +1588,8 @@
 					          </ui-select>
                         </div>
                     </div>
-                    <div ng-if="ipi.tipoCalculo == 1" id="ipi-aliq">
+                    <p>{{tributacao.imposto.ipi.tipoCalculo}}</p>
+                    <div ng-if="tributacao.imposto.ipi.tipoCalculo.value == 1" id="ipi-aliq">
                         <div class="col-sm-2" >
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Aliquota</label>
@@ -1600,7 +1601,7 @@
                         </div>
                     </div>
 
-                    <div ng-if="ipi.tipoCalculo == 2" id="ipi-valor">
+                    <div ng-if="tributacao.imposto.ipi.tipoCalculo.value == 2" id="ipi-valor">
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Vr do IPI</label>
