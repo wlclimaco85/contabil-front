@@ -194,7 +194,7 @@
 					        </div>
                             <div class="row">
                             	<div class="col-sm-10 ">
-                                <label for="exampleInputPassword1">ICMS - Situação Tributária ddd {{imposto.icms.regime}}</label>
+                                <label for="exampleInputPassword1">ICMS - Situação Tributária</label>
                                 <div class="row">
 	                                <ui-select ng-model="tributacao.imposto.icms.sitTributaria" theme="bootstrap">
 							            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
@@ -537,7 +537,7 @@
 			                        </div>
 			                        <div class="col-sm-6 ">
 						                <div class="form-group">
-						                    <label for="exampleInputPassword1">desoneracao ICMS</label>
+						                    <label for="exampleInputPassword1">Desoneracao ICMS</label>
 						                    <div class="row ">
 				                                <ui-select ng-model="tributacao.imposto.icms.icms20.desoneracao" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
 										            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
@@ -1588,7 +1588,6 @@
 					          </ui-select>
                         </div>
                     </div>
-                    <p>{{tributacao.imposto.ipi.tipoCalculo}}</p>
                     <div ng-if="tributacao.imposto.ipi.tipoCalculo.value == 1" id="ipi-aliq">
                         <div class="col-sm-2" >
                             <div class="form-group">
@@ -1724,7 +1723,7 @@
                 	<div class="col-sm-4 ">
                             <label for="exampleInputPassword1">Tipo de cálculo (ST)</label>
                             <div class="row">
-                            <ui-select ng-model="cofins.tipocalculoSubstTrib" theme="bootstrap">
+                            <ui-select ng-model="tributacao.imposto.cofins.tipocalculoSubstTrib" theme="bootstrap">
 						            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
 						            <ui-select-choices repeat="item in tipoCalc | filter: $select.search">
 						              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -1733,7 +1732,7 @@
 					          </ui-select>
                         </div>
                     </div>
-                    <div ng-if="cofins.tipocalculoSubstTrib.value == 1" id="cofins-val-aliq-st">
+                    <div ng-if="tributacao.imposto.cofins.tipocalculoSubstTrib.value == 1" id="cofins-val-aliq-st">
                         <div class="col-sm-4 ">
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Aliquota (ST)</label>
@@ -1744,7 +1743,7 @@
                             </div>
                         </div>
                     </div>
-                    <div ng-if="cofins.tipocalculoSubstTrib.value == 2" id="cofins-val-aliq-st">
+                    <div ng-if="tributacao.imposto.cofins.tipocalculoSubstTrib.value == 2" id="cofins-val-aliq-st">
                         <div class="col-sm-4 ">
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Aliquota (ST)</label>

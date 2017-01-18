@@ -744,13 +744,228 @@
 			            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
 			        ];
 				},tributacao : function(vm,_html,_actions) {
+
 				    return  [
 			            DTColumnBuilder.newColumn(null).withTitle(_html).notSortable()
 			            .renderWith(function(data, type, full, meta) {
 			                vm.selected[full.id] = false;
 			                return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
-			            }).withOption('width', '10px'),
+			            }).withOption('width', '3px'),
 			            DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
+			            DTColumnBuilder.newColumn(null).withTitle('Icms').renderWith(function(data, type, full, meta) {
+			            	//debugger
+			            	 var sline = "0";
+			            	if(data.imposto != undefined)
+							{
+							    if (data.imposto.icms != undefined)
+							    {
+									var keys = Object.keys(data.imposto.icms);
+
+								    for (var i = 0, len = keys.length; i < len; i++){
+										if (keys[i].includes('icms'))
+								        {
+											if(data.imposto.icms[keys[i]] != null ){
+												if(keys[i] == "icms00")
+												{
+													sline = dialogFactory.icms00(data.imposto.icms[keys[i]]);
+												}
+												else if(keys[i] == "icms10")
+												{
+													sline = dialogFactory.icms10(data.imposto.icms[keys[i]]);
+												}
+												else if(keys[i] == "icms11")
+												{
+													sline = dialogFactory.icms20(data.imposto.icms[keys[i]]);
+												}
+												else if(keys[i] == "icms20")
+												{
+													sline = dialogFactory.icms30(data.imposto.icms[keys[i]]);
+												}
+												else if(keys[i] == "icms30")
+												{
+													sline = dialogFactory.icms40(data.imposto.icms[keys[i]]);
+												}
+												else if(keys[i] == "icms40")
+												{
+													sline = dialogFactory.icms50(data.imposto.icms[keys[i]]);
+												}
+												else if(keys[i] == "icms50")
+												{
+													sline = dialogFactory.icms60(data.imposto.icms[keys[i]]);
+												}
+											}
+
+								        }
+								    }
+								}
+							}
+
+
+			            	return sline;
+			            }).withOption('width', '10px'),
+			            DTColumnBuilder.newColumn(null).withTitle('IPI').renderWith(function(data, type, full, meta) {
+			            	//debugger
+			            	var retorno = '<table class="table"><thead></thead><tbody>';
+			            	if(data.imposto != undefined)
+							{
+							    if (data.imposto.ipi != undefined)
+							    {
+
+
+									if(data.imposto.ipi.tributado != undefined)
+									{
+										retorno = retorno + "<tr><td>IPI - Situação tributária</td><td>"+data.imposto.ipi.tributado.situacaoTributaria.descricao+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Classe cigarros/bebidas</td><td>"+data.imposto.ipi.classeEnquadramento+"</td></tr>"
+						    			retorno = retorno + "<tr><td>CNPJ Produtor</td><td>"+data.imposto.ipi.cnpjProdutor+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Cod. selo controle IPI</td><td>"+data.imposto.ipi.codigoSelo+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Qtd. selo IPI</td><td>"+data.imposto.ipi.quantidadeSelo+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Cod Enquadramento</td><td>"+data.imposto.ipi.codigoEnquadramento+"</td></tr>"
+							        	retorno = retorno + "<tr><td>Aliquota</td><td>"+data.imposto.ipi.tributado.percentualAliquota+"</td></tr>"
+							        	retorno = retorno + "<tr><td>Vr do IPI</td><td>"+data.imposto.ipi.tributado.valorTributo+"</td></tr>"
+
+									}else if(data.imposto.ipi.naotributado != undefined){
+										retorno = retorno + "<tr><td>IPI - Situação tributária</td><td>"+data.imposto.ipi.naotributado.situacaoTributaria.descricao+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Classe cigarros/bebidas</td><td>"+data.imposto.ipi.classeEnquadramento+"</td></tr>"
+						    			retorno = retorno + "<tr><td>CNPJ Produtor</td><td>"+data.imposto.ipi.cnpjProdutor+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Cod. selo controle IPI</td><td>"+data.imposto.ipi.codigoSelo+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Qtd. selo IPI</td><td>"+data.imposto.ipi.quantidadeSelo+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Cod Enquadramento</td><td>"+data.imposto.ipi.codigoEnquadramento+"</td></tr>"
+									}
+
+							    }
+							}
+
+
+			            	return retorno + '</tbody></table>';
+			            }).withOption('width', '10px'),
+			            DTColumnBuilder.newColumn(null).withTitle('PIS').renderWith(function(data, type, full, meta) {
+			            	//debugger
+			            	var retorno = '<table class="table"><thead></thead><tbody>';
+			            	if(data.imposto != undefined)
+							{
+							    if (data.imposto.pis != undefined)
+							    {
+
+
+									if(data.imposto.pis.aliquota != undefined)
+									{
+										retorno = retorno + "<tr><td>PIS - Situação tributária</td><td>"+data.imposto.pis.aliquota.situacaoTributaria.descricao+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Aliquota</td><td>"+data.imposto.pis.aliquota.percentualAliquota+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Valor PIS/unidade</td><td>"+data.imposto.pis.aliquota.valorUnidade+"</td></tr>"
+						    			if(data.imposto.pisst.percentualAliquota != undefined)
+						    			{
+						    				retorno = retorno + "<tr><td>Aliquota (ST) % </td><td>"+data.imposto.pisst.percentualAliquota+"</td></tr>"
+						    			}else
+						    			{
+						    				retorno = retorno + "<tr><td>Aliquota (ST) $ </td><td>"+data.imposto.pisst.valorAliquota+"</td></tr>"
+						    			}
+
+
+									}else if(data.imposto.pis.quantidade != undefined){
+										retorno = retorno + "<tr><td>PIS - Situação tributária</td><td>"+data.imposto.pis.quantidade.situacaoTributaria.descricao+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Aliquota</td><td>"+data.imposto.pis.quantidade.percentualAliquota+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Valor PIS/unidade</td><td>"+data.imposto.pis.quantidade.valorUnidade+"</td></tr>"
+						    			if(data.imposto.pisst.percentualAliquota != undefined)
+						    			{
+						    				retorno = retorno + "<tr><td>Aliquota (ST) % </td><td>"+data.imposto.pisst.percentualAliquota+"</td></tr>"
+						    			}else
+						    			{
+						    				retorno = retorno + "<tr><td>Aliquota (ST) $ </td><td>"+data.imposto.pisst.valorAliquota+"</td></tr>"
+						    			}
+									}else if(data.imposto.pis.naoTributavel != undefined){
+										retorno = retorno + "<tr><td>PIS - Situação tributária</td><td>"+data.imposto.pis.naoTributavel.situacaoTributaria.descricao+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Aliquota</td><td>"+data.imposto.pis.naoTributavel.percentualAliquota+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Valor PIS/unidade</td><td>"+data.imposto.pis.naoTributavel.valorUnidade+"</td></tr>"
+						    			if(data.imposto.pisst.percentualAliquota != undefined)
+						    			{
+						    				retorno = retorno + "<tr><td>Aliquota (ST) % </td><td>"+data.imposto.pisst.percentualAliquota+"</td></tr>"
+						    			}else
+						    			{
+						    				retorno = retorno + "<tr><td>Aliquota (ST) $ </td><td>"+data.imposto.pisst.valorAliquota+"</td></tr>"
+						    			}
+									}else if(data.imposto.pis.outrasOperacoes != undefined){
+										retorno = retorno + "<tr><td>PIS - Situação tributária</td><td>"+data.imposto.pis.outrasOperacoes.situacaoTributaria.descricao+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Aliquota</td><td>"+data.imposto.pis.outrasOperacoes.percentualAliquota+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Valor PIS/unidade</td><td>"+data.imposto.pis.outrasOperacoes.valorUnidade+"</td></tr>"
+						    			if(data.imposto.pisst.percentualAliquota != undefined)
+						    			{
+						    				retorno = retorno + "<tr><td>Aliquota (ST) % </td><td>"+data.imposto.pisst.percentualAliquota+"</td></tr>"
+						    			}else
+						    			{
+						    				retorno = retorno + "<tr><td>Aliquota (ST) $ </td><td>"+data.imposto.pisst.valorAliquota+"</td></tr>"
+						    			}
+									}
+
+							    }
+							}
+
+
+			            	return retorno + '</tbody></table>';
+			            }).withOption('width', '10px'),
+			            DTColumnBuilder.newColumn(null).withTitle('COFINS').renderWith(function(data, type, full, meta) {
+			            	//debugger
+			            	var retorno = '<table class="table"><thead></thead><tbody>';
+			            	if(data.imposto != undefined)
+							{
+							    if (data.imposto.cofins != undefined)
+							    {
+
+
+									if(data.imposto.cofins.aliquota != undefined)
+									{
+										retorno = retorno + "<tr><td>PIS - Situação tributária</td><td>"+data.imposto.cofins.aliquota.situacaoTributaria.descricao+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Aliquota</td><td>"+data.imposto.cofins.aliquota.percentualAliquota+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Valor PIS/unidade</td><td>"+data.imposto.cofins.aliquota.valorUnidade+"</td></tr>"
+						    			if(data.imposto.cofinsst.percentualAliquota != undefined)
+						    			{
+						    				retorno = retorno + "<tr><td>Aliquota (ST) % </td><td>"+data.imposto.cofinsst.percentualAliquota+"</td></tr>"
+						    			}else
+						    			{
+						    				retorno = retorno + "<tr><td>Aliquota (ST) $ </td><td>"+data.imposto.cofinsst.valorAliquota+"</td></tr>"
+						    			}
+
+
+									}else if(data.imposto.cofins.quantidade != undefined){
+										retorno = retorno + "<tr><td>PIS - Situação tributária</td><td>"+data.imposto.cofins.quantidade.situacaoTributaria.descricao+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Aliquota</td><td>"+data.imposto.cofins.quantidade.percentualAliquota+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Valor PIS/unidade</td><td>"+data.imposto.cofins.quantidade.valorUnidade+"</td></tr>"
+						    			if(data.imposto.cofinsst.percentualAliquota != undefined)
+						    			{
+						    				retorno = retorno + "<tr><td>Aliquota (ST) % </td><td>"+data.imposto.cofinsst.percentualAliquota+"</td></tr>"
+						    			}else
+						    			{
+						    				retorno = retorno + "<tr><td>Aliquota (ST) $ </td><td>"+data.imposto.cofinsst.valorAliquota+"</td></tr>"
+						    			}
+									}else if(data.imposto.cofins.naoTributavel != undefined){
+										retorno = retorno + "<tr><td>PIS - Situação tributária</td><td>"+data.imposto.cofins.naoTributavel.situacaoTributaria.descricao+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Aliquota</td><td>"+data.imposto.cofins.naoTributavel.percentualAliquota+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Valor PIS/unidade</td><td>"+data.imposto.cofins.naoTributavel.valorUnidade+"</td></tr>"
+						    			if(data.imposto.cofinsst.percentualAliquota != undefined)
+						    			{
+						    				retorno = retorno + "<tr><td>Aliquota (ST) % </td><td>"+data.imposto.cofinsst.percentualAliquota+"</td></tr>"
+						    			}else
+						    			{
+						    				retorno = retorno + "<tr><td>Aliquota (ST) $ </td><td>"+data.imposto.cofinsst.valorAliquota+"</td></tr>"
+						    			}
+									}else if(data.imposto.cofins.outrasOperacoes != undefined){
+										retorno = retorno + "<tr><td>PIS - Situação tributária</td><td>"+data.imposto.cofins.outrasOperacoes.situacaoTributaria.descricao+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Aliquota</td><td>"+data.imposto.cofins.outrasOperacoes.percentualAliquota+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Valor PIS/unidade</td><td>"+data.imposto.cofins.outrasOperacoes.valorUnidade+"</td></tr>"
+						    			if(data.imposto.cofinsst.percentualAliquota != undefined)
+						    			{
+						    				retorno = retorno + "<tr><td>Aliquota (ST) % </td><td>"+data.imposto.cofinsst.percentualAliquota+"</td></tr>"
+						    			}else
+						    			{
+						    				retorno = retorno + "<tr><td>Aliquota (ST) $ </td><td>"+data.imposto.cofinsst.valorAliquota+"</td></tr>"
+						    			}
+									}
+
+							    }
+							}
+
+
+			            	return retorno + '</tbody></table>';
+			            }).withOption('width', '10px'),
 			            DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
 			            DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
 			            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
