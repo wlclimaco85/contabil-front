@@ -141,18 +141,12 @@
                 <div class="container1" ng-app ng-init="tabs=4">
                     <ul class="tabs-nav">
                         <li><a ng-click="tabs=4" ng-class="{'active' : tabs==4}">Detalhes</a></li>
-                        <li><a ng-click="tabs=5" ng-class="{'active' : tabs==5}">Tributação</a></li>
                         <li><a ng-click="tabs=6" ng-class="{'active' : tabs==6}">Estoque/Custo</a></li>
                     </ul>
                     <div class="tabs-container1">
                         <div class="tab-content1" ng-show="tabs == 4">
                             <div ng-include="'views/produto/apps/produto.html'"></div>
                         </div>
-                        <div class="tab-content1" ng-show="tabs == 5">
-                            <div role="tabpanel" class="tab-pane profile" id="profile">
-                                <div ng-include="'views/produto/apps/tributacao.html'"></div>
-                            </div>
-                            </div>
                             <div class="tab-content1" ng-show="tabs == 6">
                                 <div role="tabpanel" class="tab-pane messages" id="messages">
                                     <div class="panel-group" id="accordion">

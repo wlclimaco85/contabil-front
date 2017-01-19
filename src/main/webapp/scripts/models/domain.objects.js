@@ -647,7 +647,7 @@ qat.model.fnTelefones =function(_telefone,modelAction)
         ncm            : _produto.ncm,
         cdBarras       :_produto.cdBarras,
         dataCreate     :_produto.dataCreate,
-        produto        :_produto.produto,
+    //    produto        :_produto.produto,
         excTabIPI      :_produto.excTabIPI,
         cEST           : _produto.cEST,
         quant          :_produto.quant,
@@ -674,6 +674,8 @@ qat.model.fnTelefones =function(_telefone,modelAction)
     var _id = null;
     if(_tributacao.id == "" || _tributacao.id == " "){
       _id = null;
+    }else{
+      _id = _tributacao.id;
     }
     var _emprId = null;
     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
@@ -685,7 +687,7 @@ qat.model.fnTelefones =function(_telefone,modelAction)
       tributacao  = {
         id             : _id,
         prodId         : _tributacao.prodId,
-        cfop           : qat.model.fnCfop(_tributacao.cfop,_modelAction,_userId),
+    //    cfop           :  qat.model.fnCfop(_tributacao.cfop,_modelAction,_userId),
         icms           : _tributacao.icms,
         pis            : _tributacao.pis,
         cofins         : _tributacao.cofins,

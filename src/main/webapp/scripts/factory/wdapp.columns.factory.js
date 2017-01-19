@@ -752,9 +752,21 @@
 			                return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
 			            }).withOption('width', '3px'),
 			            DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
+			            DTColumnBuilder.newColumn('descricao').withTitle('descrição').withOption('width', '10px'),
+			            DTColumnBuilder.newColumn(null).withTitle('Icms').renderWith(function(data, type, full, meta) {
+			            	var sline = "";
+
+			            	if(data.cfop != undefined)
+			            	{
+			            		sline = data.cfop.cfop;
+			            	}
+
+			            	return sline;
+
+			            }).withOption('width', '10px'),
 			            DTColumnBuilder.newColumn(null).withTitle('Icms').renderWith(function(data, type, full, meta) {
 			            	//debugger
-			            	 var sline = "0";
+			            	var sline = "0";
 			            	if(data.imposto != undefined)
 							{
 							    if (data.imposto.icms != undefined)
@@ -913,9 +925,9 @@
 
 									if(data.imposto.cofins.aliquota != undefined)
 									{
-										retorno = retorno + "<tr><td>PIS - Situação tributária</td><td>"+data.imposto.cofins.aliquota.situacaoTributaria.descricao+"</td></tr>"
+										retorno = retorno + "<tr><td>COFINS - Situação tributária</td><td>"+data.imposto.cofins.aliquota.situacaoTributaria.descricao+"</td></tr>"
 						    			retorno = retorno + "<tr><td>Aliquota</td><td>"+data.imposto.cofins.aliquota.percentualAliquota+"</td></tr>"
-						    			retorno = retorno + "<tr><td>Valor PIS/unidade</td><td>"+data.imposto.cofins.aliquota.valorUnidade+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Valor COFINS/unidade</td><td>"+data.imposto.cofins.aliquota.valorUnidade+"</td></tr>"
 						    			if(data.imposto.cofinsst.percentualAliquota != undefined)
 						    			{
 						    				retorno = retorno + "<tr><td>Aliquota (ST) % </td><td>"+data.imposto.cofinsst.percentualAliquota+"</td></tr>"
@@ -926,9 +938,9 @@
 
 
 									}else if(data.imposto.cofins.quantidade != undefined){
-										retorno = retorno + "<tr><td>PIS - Situação tributária</td><td>"+data.imposto.cofins.quantidade.situacaoTributaria.descricao+"</td></tr>"
+										retorno = retorno + "<tr><td>COFINS - Situação tributária</td><td>"+data.imposto.cofins.quantidade.situacaoTributaria.descricao+"</td></tr>"
 						    			retorno = retorno + "<tr><td>Aliquota</td><td>"+data.imposto.cofins.quantidade.percentualAliquota+"</td></tr>"
-						    			retorno = retorno + "<tr><td>Valor PIS/unidade</td><td>"+data.imposto.cofins.quantidade.valorUnidade+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Valor COFINS/unidade</td><td>"+data.imposto.cofins.quantidade.valorUnidade+"</td></tr>"
 						    			if(data.imposto.cofinsst.percentualAliquota != undefined)
 						    			{
 						    				retorno = retorno + "<tr><td>Aliquota (ST) % </td><td>"+data.imposto.cofinsst.percentualAliquota+"</td></tr>"
@@ -937,9 +949,9 @@
 						    				retorno = retorno + "<tr><td>Aliquota (ST) $ </td><td>"+data.imposto.cofinsst.valorAliquota+"</td></tr>"
 						    			}
 									}else if(data.imposto.cofins.naoTributavel != undefined){
-										retorno = retorno + "<tr><td>PIS - Situação tributária</td><td>"+data.imposto.cofins.naoTributavel.situacaoTributaria.descricao+"</td></tr>"
+										retorno = retorno + "<tr><td>COFINS - Situação tributária</td><td>"+data.imposto.cofins.naoTributavel.situacaoTributaria.descricao+"</td></tr>"
 						    			retorno = retorno + "<tr><td>Aliquota</td><td>"+data.imposto.cofins.naoTributavel.percentualAliquota+"</td></tr>"
-						    			retorno = retorno + "<tr><td>Valor PIS/unidade</td><td>"+data.imposto.cofins.naoTributavel.valorUnidade+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Valor COFINS/unidade</td><td>"+data.imposto.cofins.naoTributavel.valorUnidade+"</td></tr>"
 						    			if(data.imposto.cofinsst.percentualAliquota != undefined)
 						    			{
 						    				retorno = retorno + "<tr><td>Aliquota (ST) % </td><td>"+data.imposto.cofinsst.percentualAliquota+"</td></tr>"
@@ -948,9 +960,9 @@
 						    				retorno = retorno + "<tr><td>Aliquota (ST) $ </td><td>"+data.imposto.cofinsst.valorAliquota+"</td></tr>"
 						    			}
 									}else if(data.imposto.cofins.outrasOperacoes != undefined){
-										retorno = retorno + "<tr><td>PIS - Situação tributária</td><td>"+data.imposto.cofins.outrasOperacoes.situacaoTributaria.descricao+"</td></tr>"
+										retorno = retorno + "<tr><td>COFINS - Situação tributária</td><td>"+data.imposto.cofins.outrasOperacoes.situacaoTributaria.descricao+"</td></tr>"
 						    			retorno = retorno + "<tr><td>Aliquota</td><td>"+data.imposto.cofins.outrasOperacoes.percentualAliquota+"</td></tr>"
-						    			retorno = retorno + "<tr><td>Valor PIS/unidade</td><td>"+data.imposto.cofins.outrasOperacoes.valorUnidade+"</td></tr>"
+						    			retorno = retorno + "<tr><td>Valor COFINS/unidade</td><td>"+data.imposto.cofins.outrasOperacoes.valorUnidade+"</td></tr>"
 						    			if(data.imposto.cofinsst.percentualAliquota != undefined)
 						    			{
 						    				retorno = retorno + "<tr><td>Aliquota (ST) % </td><td>"+data.imposto.cofinsst.percentualAliquota+"</td></tr>"
@@ -966,6 +978,67 @@
 
 			            	return retorno + '</tbody></table>';
 			            }).withOption('width', '10px'),
+			            DTColumnBuilder.newColumn(null).withTitle('Imposto Importação').renderWith(function(data, type, full, meta) {
+			            	//debugger
+			            	var retorno = '<table class="table"><thead></thead><tbody>';
+			            	if(data.imposto != undefined)
+							{
+							    if (data.imposto.impostoImportacao != undefined)
+							    {
+									retorno = retorno + "<tr><td>Vr Base Calc.</td><td>"+data.imposto.impostoImportacao.valorBaseCalculo+"</td></tr>"
+					    			retorno = retorno + "<tr><td>Vr despesas Arduaneiras</td><td>"+data.imposto.impostoImportacao.valorDespesaAduaneira+"</td></tr>"
+					    			retorno = retorno + "<tr><td>IOF</td><td>"+data.imposto.impostoImportacao.valorIOF+"</td></tr>"
+					    			retorno = retorno + "<tr><td>Vr Imposto Impot.</td><td>"+data.imposto.impostoImportacao.valorImpostoImportacao+"</td></tr>"
+							    }
+							}
+
+
+			            	return retorno + '</tbody></table>';
+			            }).withOption('width', '10px'),
+			            DTColumnBuilder.newColumn(null).withTitle('IPI Devolvido').renderWith(function(data, type, full, meta) {
+			            	//debugger
+			            	var retorno = '<table class="table"><thead></thead><tbody>';
+			            	if(data.imposto != undefined)
+							{
+							    if (data.imposto.impostoDevolvido != undefined)
+							    {
+
+									retorno = retorno + "<tr><td>Perc. da Merc. Devolvida</td><td>"+data.imposto.impostoDevolvido.percentualDevolucao+"</td></tr>"
+					    			retorno = retorno + "<tr><td>Vr IPI Devolvido</td><td>"+data.imposto.impostoDevolvido.informacaoIPIDevolvido+"</td></tr>"
+							    }
+							}
+
+
+			            	return retorno + '</tbody></table>';
+			            }).withOption('width', '10px').notVisible(),
+			            DTColumnBuilder.newColumn(null).withTitle('ICMS Ope. Interestaduais').renderWith(function(data, type, full, meta) {
+			            	//debugger
+			            	var retorno = '<table class="table"><thead></thead><tbody>';
+			            	if(data.imposto != undefined)
+							{
+							    if (data.imposto.icmsUfDestino != undefined)
+							    {
+
+									retorno = retorno + "<tr><td>Per ICMS Rel UF Dest.</td><td>"+data.imposto.icmsUfDestino.valorRelativoFundoCombatePobrezaDestino+"</td></tr>"
+					    			retorno = retorno + "<tr><td>Vr da base de  cálc UF dest.</td><td>"+data.imposto.icmsUfDestino.valorBaseCalculoDestino+"</td></tr>"
+					    			retorno = retorno + "<tr><td>Aliq interna da UF dest.</td><td>"+data.imposto.icmsUfDestino.percentualAliquotaInternaDestino+"</td></tr>"
+					    			if(data.imposto.icmsUfDestino.percentualInterestadual != undefined)
+					    			{
+					    				retorno = retorno + "<tr><td>Aliq interestadual</td><td>"+data.imposto.icmsUfDestino.percentualInterestadual.descricao+"</td></tr>"
+					    			}
+					    			if(data.imposto.icmsUfDestino.percentualProvisorioPartilha != undefined)
+					    			{
+					    				retorno = retorno + "<tr><td>Perc prov partilha</td><td>"+data.imposto.icmsUfDestino.percentualProvisorioPartilha.descricao+"</td></tr>"
+					    			}
+					    			retorno = retorno + "<tr><td>Vr ICMS de part UF do dest.</td><td>"+data.imposto.icmsUfDestino.valorICMSInterestadualDestino+"</td></tr>"
+									retorno = retorno + "<tr><td>Vr ICMS de part UF do remet.</td><td>"+data.imposto.icmsUfDestino.valorICMSInterestadualRemetente+"</td></tr>"
+					    			retorno = retorno + "<tr><td>Vr ICMS rel FCP UF dest.</td><td>"+data.imposto.icmsUfDestino.percentualRelativoFundoCombatePobrezaDestino+"</td></tr>"
+							    }
+							}
+
+
+			            	return retorno + '</tbody></table>';
+			            }).withOption('width', '10px').notVisible(),
 			            DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
 			            DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
 			            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),

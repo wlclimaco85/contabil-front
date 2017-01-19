@@ -112,44 +112,28 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-4 ">
+        <div class="col-sm-6 ">
             <div class="form-group">
                 <label for="exampleInputPassword1">Inform. adicionais para a NFe</label>
                 <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.informAdicionaisParaNFe" name="informAdicionaisParaNFe"  placeholder="Informações Adicionais Para NFe"></textarea>
             </div>
         </div>
-        <div class="col-sm-4 ">
+        <div class="col-sm-6 ">
             <div class="form-group">
                 <label for="exampleInputPassword1">Anotações internas</label>
                 <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.anotainternas" name="anotainternas"  placeholder="Anotaçoes Internas"></textarea>
             </div>
         </div>
-        <div class="ng-cloak" ng-controller="CfopSelectController as ctrl">
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">CFOP</label>
-                    <div class="row" style="margin-left:0px">
-                        <ui-select ng-model="produto.produto.tributacao.cfop" theme="bootstrap">
-                            <ui-select-match placeholder="CFOP">{{$select.selected.cfop}}</ui-select-match>
-                            <ui-select-choices repeat="item in ctrl.cfop | filter: $select.search">
-                              <div ng-bind-html="item.cfop | highlight: $select.search"></div>
-                              <small ng-bind-html="item.natureza | highlight: $select.search"></small> -
-                            </ui-select-choices>
-                          </ui-select>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="row">
-        <div class="col-sm-2 ">
+        <div class="col-sm-4 ">
             <div class="form-group">
                 <label for="exampleInputPassword1">Quant.</label>
                 <input type="text" class="form-control col-sm-8 " ng-model="produto.quant" name="cEST"  placeholder="">
             </div>
         </div>
         <div class="ng-cloak" ng-controller="UniMedSelectController as ctrl">
-            <div class="col-sm-3 " >
+            <div class="col-sm-4 " >
                     <label for="exampleInputPassword1">Unid. Medida <small ng-click="ctrl.addUniMed()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
                     <div class="row">
                       <ui-select ng-model="produto.unidTributada" theme="bootstrap">
@@ -177,18 +161,34 @@
                     </div>
             </div>
         </div>
-        <div class="ng-cloak" ng-controller="MarcaSelectController as ctrl">
-            <div class="col-sm-3 ">
-                    <label for="exampleInputPassword1">Marca <small ng-click="ctrl.addMarca()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
-                    <div class="row">
-                    <ui-select ng-model="produto.marca" theme="bootstrap">
-                            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.marca}}</ui-select-match>
-                            <ui-select-choices repeat="item in ctrl.marca | filter: $select.search">
-                              <div ng-bind-html="item.marca | highlight: $select.search"></div>
-                              <small ng-bind-html="item.fabricante | highlight: $select.search"></small> -
-                            </ui-select-choices>
-                          </ui-select>
+        </div>
+        <div class="row">
+            <div class="ng-cloak" ng-controller="TributacaoSelectController as ctrl">
+                <div class="col-sm-6">
+                        <label for="exampleInputPassword1">Tributação <small ng-click="ctrl.addMarca()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
+                        <div class="row">
+                        <ui-select ng-model="produto.tributacao" theme="bootstrap">
+                                <ui-select-match placeholder="lista de Tributação">{{$select.selected.descricao}}</ui-select-match>
+                                <ui-select-choices repeat="item in ctrl.tributacao | filter: $select.search">
+                                  <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                  <small ng-bind-html="item.cfop.cfop | highlight: $select.search"></small> -
+                                </ui-select-choices>
+                              </ui-select>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="ng-cloak" ng-controller="MarcaSelectController as ctrl">
+                <div class="col-sm-6">
+                        <label for="exampleInputPassword1">Marca <small ng-click="ctrl.addMarca()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
+                        <div class="row">
+                        <ui-select ng-model="produto.marca" theme="bootstrap">
+                                <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.marca}}</ui-select-match>
+                                <ui-select-choices repeat="item in ctrl.marca | filter: $select.search">
+                                  <div ng-bind-html="item.marca | highlight: $select.search"></div>
+                                  <small ng-bind-html="item.fabricante | highlight: $select.search"></small> -
+                                </ui-select-choices>
+                              </ui-select>
+                    </div>
+                </div>
+            </div>
     </div>

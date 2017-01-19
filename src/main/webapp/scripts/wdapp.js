@@ -321,6 +321,7 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.tributacao.delete'
 	            ,'wdApp.apps.tributacao.view'
 	            ,'wdApp.ajaxCall.tributacao'
+	            ,'wdApp.apps.tributacao.select'
 
 
 

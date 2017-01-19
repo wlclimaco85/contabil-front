@@ -12,10 +12,10 @@
                             <dl class="dl-horizontal">
                                 <dd>
 
-                                    <label class="ui-radio"><input name="radio1" type="radio" ng-init="empresa.tipoPessoa=true" ng-model="empresa.pessoaTypeEnumValue" value="1" checked ><span>Cliente </span></label>
-                                    <label class="ui-radio"><input name="radio2" type="radio" ng-model="empresa.pessoaTypeEnumValue" value="2" checked ><span>Fornecedor</span></label>
-                                    <label class="ui-radio"><input name="radio3" type="radio" ng-model="empresa.pessoaTypeEnumValue" value="3" checked ><span>Transportador </span></label>
-                                    <label class="ui-radio"><input name="radio4" type="radio" ng-model="empresa.pessoaTypeEnumValue" value="4" checked ><span>Consumidor final </span></label>
+                                    <label class="ui-checkbox"><input name="radio1" type="checkbox" ng-init="empresa.tipoPessoa=true" ng-model="empresa.pessoaTypeEnumValue" value="1" checked ><span>Cliente </span></label>
+                                    <label class="ui-checkbox"><input name="radio2" type="checkbox" ng-model="empresa.pessoaTypeEnumValue" value="2" checked ><span>Fornecedor</span></label>
+                                    <label class="ui-checkbox"><input name="radio3" type="checkbox" ng-model="empresa.pessoaTypeEnumValue" value="3" checked ><span>Transportador </span></label>
+                                    <label class="ui-checkbox"><input name="radio4" type="checkbox" ng-model="empresa.pessoaTypeEnumValue" value="4" checked ><span>Consumidor final </span></label>
 
                                 </dd>
                             </dl>
@@ -32,9 +32,9 @@
                         <div class="row">
                             <div class="form-group col-sm-12">
                                 <label for="exampleInputEmail1" ng-show="empresa.tipoPessoa == 1" ng-hide="empresa.tipoPessoa == 2">Nome</label>
-                                 <label for="exampleInputEmail1" ng-show="empresa.tipoPessoa == 2" ng-hide="empresa.tipoPessoa == 1">Raz„o social</label>
+                                 <label for="exampleInputEmail1" ng-show="empresa.tipoPessoa == 2" ng-hide="empresa.tipoPessoa == 1">Raz√£o social</label>
                                 <input type="text" ng-model="empresa.nome" name="razao" class="form-control" placeholder="Nome">
-                            </div>  
+                            </div>
                         </div>
 
                         <div ng-show="empresa.tipoPessoa == 1" ng-hide="empresa.tipoPessoa == 2" ng-include="'views/util/apps/documentosFisico.html'"></div>
@@ -44,7 +44,7 @@
 
                         <div class="row">
                             <div class="form-group col-sm-3">
-                                <label for="exampleInputEmail1">Nome do respons·vel</label>
+                                <label for="exampleInputEmail1">Nome do respons√°vel</label>
                                 <input type="text" class="form-control col-sm-3" ng-model="empresa.nomeResponsavel" name="nomeResponsavel" placeholder="Nome Responsavel">
                             </div>
 

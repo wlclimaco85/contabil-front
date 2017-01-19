@@ -21,7 +21,9 @@
           {
                 if(tributacao.imposto.icms.sitTributaria.value == "00")
                 {
-                    tributacao.imposto.icms.icms00.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+
+                    tributacao.imposto.icms.icms00.situacaoTributaria = qat.model.fnDoisValores(tributacao.imposto.icms.sitTributaria);
+                    tributacao.imposto.icms.icms00.modalidadeBCICMS   = qat.model.fnDoisValores(tributacao.imposto.icms.icms00.modalidadeBCICMS);
                     tributacao.imposto.icms.icms00 = fModels.amont(tributacao.imposto.icms.icms00,action) ;
                 }
                 else if(tributacao.imposto.icms.sitTributaria.value == "10")
@@ -33,18 +35,23 @@
                 }
                 else if(tributacao.imposto.icms.sitTributaria.value == "20")
                 {
-                    tributacao.imposto.icms.icms20.situacaoTributaria = tributacao.imposto.icms.sitTributaria
-                    tributacao.imposto.icms.icms20 = fModels.amont(tributacao.imposto.icms.icms20,action) ;
+                    tributacao.imposto.icms.icms20.situacaoTributaria = qat.model.fnDoisValores(tributacao.imposto.icms.sitTributaria);
+                    tributacao.imposto.icms.icms20.modalidadeBCICMS   = qat.model.fnDoisValores(tributacao.imposto.icms.icms20.modalidadeBCICMS,action)
+                    tributacao.imposto.icms.icms20.desoneracao        = qat.model.fnDoisValores(tributacao.imposto.icms.icms20.desoneracao,action)
+                    tributacao.imposto.icms.icms20                    = fModels.amont(tributacao.imposto.icms.icms20,action) ;
                 }
                 else if(tributacao.imposto.icms.sitTributaria.value == "30")
                 {
-                    tributacao.imposto.icms.icms30.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+                    tributacao.imposto.icms.icms30.situacaoTributaria = qat.model.fnDoisValores(tributacao.imposto.icms.sitTributaria);
+                    tributacao.imposto.icms.icms30.modalidadeBCICMS   = qat.model.fnDoisValores(tributacao.imposto.icms.icms30.modalidadeBCICMS,action)
+                    tributacao.imposto.icms.icms30.desoneracao        = qat.model.fnDoisValores(tributacao.imposto.icms.icms30.desoneracao,action)
                     tributacao.imposto.icms.icms30 = fModels.amont(tributacao.imposto.icms.icms30,action) ;
                 }
                 else if(tributacao.imposto.icms.sitTributaria.value == "40")
                 {
-                    tributacao.imposto.icms.icms40.situacaoTributaria = tributacao.imposto.icms.sitTributaria
-                    tributacao.imposto.icms.icms40 = fModels.amont(tributacao.imposto.icms.icms40,action) ;
+                    tributacao.imposto.icms.icms40.situacaoTributaria     = qat.model.fnDoisValores(tributacao.imposto.icms.sitTributaria);
+                    tributacao.imposto.icms.icms40.motivoDesoneracaoICMS  = qat.model.fnDoisValores(tributacao.imposto.icms.icms40.motivoDesoneracaoICMS,action)
+                    tributacao.imposto.icms.icms40                        = fModels.amont(tributacao.imposto.icms.icms40,action) ;
                 }
                 else if(tributacao.imposto.icms.sitTributaria.value == "41")
                 {
@@ -306,6 +313,10 @@
       tributacao.imposto.icmsUfDestino = qat.model.fnNFNotaInfoItemImpostoIcmsUfDest(tributacao.imposto.icmsUfDestino,action) ;
 
       tributacao.imposto.icms = qat.model.fnNFNotaInfoItemImpostoICMS(tributacao.imposto.icms,action);
+
+      var iId = tributacao.cfop.id
+
+      tributacao.cfop= { id : iId};
 
       var oObject = fModels.amont(tributacao,action);
 

@@ -412,55 +412,8 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
 
 
         //
-        $scope.tributacao.cfop = {}
-        $scope.tributacao.cfop.id = 1
-        $scope.tributacao.icms = {};
-        $scope.tributacao.icms.sitTributaria = {}
-        $scope.tributacao.icms.sitTributaria.id = 1;
-        $scope.tributacao.icms.origem = {};
-        $scope.tributacao.icms.origem.id = 5;
-        $scope.tributacao.icms.modalidadeBC = {};
-        $scope.tributacao.icms.modalidadeBC.id = 3;
-        $scope.tributacao.icms.redBase = 1.99;
-        $scope.tributacao.icms.aliqICMS = 0.99;
-        $scope.tributacao.icms.motDesoneracao = {};
-        $scope.tributacao.icms.motDesoneracao.id = 3;
+        $scope.tributacao =  {}
 
-        $scope.tributacao.ipi ={};
-        $scope.tributacao.ipi.sitTributaria ={};
-        $scope.tributacao.ipi.sitTributaria.id = "53";
-        $scope.tributacao.ipi.classeCigarrosBebidas = "504";
-        $scope.tributacao.ipi.cNPJProdutor = "55555555555/0001";
-        $scope.tributacao.ipi.codControleIPI = "00054";
-        $scope.tributacao.ipi.qtdSeloIPI = "4444";
-        $scope.tributacao.ipi.codEnquadramento = {}
-        $scope.tributacao.ipi.codEnquadramento.id = 900;
-        $scope.tributacao.ipi.tipoCalculo = {}
-        $scope.tributacao.ipi.tipoCalculo.id = 1;
-        $scope.tributacao.ipi.aliquotaIPI = 1.99;
-
-        $scope.tributacao.pis = {}
-        $scope.tributacao.pis.pISSituaTributaria = {}
-        $scope.tributacao.pis.pISSituaTributaria.id = 72;
-        $scope.tributacao.pis.valorUnidtribPIS = "4454";
-        $scope.tributacao.pis.tipocalculoSubstTrib = {};
-        $scope.tributacao.pis.tipocalculoSubstTrib.id = 2;
-        $scope.tributacao.pis.valorTribPISST = "1.99";
-
-        $scope.tributacao.cofins = {}
-        $scope.tributacao.cofins.sitTributaria = {}
-        $scope.tributacao.cofins.sitTributaria.id = 63;
-        $scope.tributacao.cofins.valorTribCOFINS = "0.99";
-        $scope.tributacao.cofins.tipoCalculoSubstTrib ={};
-        $scope.tributacao.cofins.tipoCalculoSubstTrib.id = 2;
-        $scope.tributacao.cofins.aliquotaCOFINSST = "0.01";
-
-
-        $scope.produto = [
-            {firstName: "Daryl", surname: "Rowland", twitter: "@darylrowland", pic: "img/daryl.jpeg"},
-            {firstName: "Alan", surname: "Partridge", twitter: "@alangpartridge", pic: "img/alanp.jpg"},
-            {firstName: "Annie", surname: "Rowland", twitter: "@anklesannie", pic: "img/annie.jpg"}
-        ];
 
         var callbackBanco = function(res){
         var planos = "";
@@ -548,7 +501,6 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
                 console.log(oResponse)
             }
             $scope.saveProduto = function() {
-
                 fProduto.fnMontaObjeto($scope.produto, $scope.tributacao,$scope.produtoEmpresa, 'INSERT', "produto/api/produtoParent/insert/", fnCallBack);
             };
         });
