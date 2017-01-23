@@ -13,10 +13,12 @@
 
         vm.dtInstance = {};
         vm.persons = {};
-        
+
         $scope.cliente = {
             tipoPessoa: 2
         };
+
+
 
 
         $scope.toggle = function() {
@@ -35,7 +37,7 @@
         function recompile(row, data, dataIndex) {
             $compile(angular.element(row).contents())($scope);
         }
-        
+
 
         var createdRow = function (row, data, dataIndex) {
             // Recompiling so we can bind Angular directive to the DT
@@ -71,27 +73,27 @@
         }
 
         function deleteRow(person) {
-           $rootScope.cliente = person; 
+           $rootScope.cliente = person;
            dialogFactory.dialog('views/cadastros/dialog/dCliente.html',"ClienteDeleteController",openDialogUpdateCreate);
-        } 
+        }
 
-       
+
 
         Datatablessss.getTable('/pessoa/api/cliente/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cliente(vm,createdRow,$scope,FiltersFactory.cliente()), tableColumnsFactory.cliente(vm,titleHtml,actionsHtml));
-          
+
           //return vm;
 
 
-        
 
-       
+
+
 
       //  Datatablessss.getTable('/pessoa/api/cliente/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cliente(vm,createdRow,$scope,filtes), tableColumnsFactory.cliente(vm,titleHtml,actionsHtml));
 
 
-        
+
      //   TableCreate.getCliente(vm,$scope);
-         
+
 
         function toggleAll(selectAll, selectedItems) {
             for (var id in selectedItems) {
@@ -204,6 +206,24 @@
                     }]
         };
 
+        $scope.cliente = {
+          pessoaTipo  : [],
+          pessoaTipos : [{
+
+          pessoaTypeEnum : "CLIENTE",
+          label          : "Cliente"
+        }, {
+              pessoaTypeEnum : "FORNECEDOR",
+              label          : "Fornecedor"
+        }, {
+              pessoaTypeEnum : "TRANSPORTADOR",
+              label          : "Transportador"
+        }, {
+              pessoaTypeEnum : "CONSFINAL",
+              label          : "Consumidor Final"
+        }]
+      }
+
         $scope.enderecos = [];
 
             $scope.today = function() {
@@ -225,11 +245,11 @@
             $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
             $scope.format = $scope.formats[1];
             var fnCallBack = function(oResponse) {
-                
+
                 console.log(oResponse)
             }
             $scope.saveCliente = function() {
-                
+
                 console.log($scope.emails);
                 fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos,$scope.emails,$scope.telefones, 'INSERT', "pessoa/api/cliente/insert", fnCallBack);
             };
@@ -277,11 +297,11 @@
             var vm = this;
             $scope.visibled = false
          //   $scope.cliente = [];
-  
+
             $scope.countrySelected = function(selected) {
              // debugger
               if (selected) {
-                
+
                 $scope.pessoa = selected.originalObject;
                 $scope.visibled = true;
               } else {

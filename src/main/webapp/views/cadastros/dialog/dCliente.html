@@ -12,11 +12,18 @@
                             <dl class="dl-horizontal">
                                 <dd>
 
+    <label ng-repeat="song in cliente.pessoaTipos">
+        <input type="checkbox" name="{{song.label}}" id="{{song.label}}" ng-model="cliente.pessoaTipo[song.pessoaTypeEnum]">
+        <label class="ui-checkbox" type="checkbox" for="{{song.label}}">{{song.label}}</label>
+    </label>
+
+
+<!--
                                     <label class="ui-checkbox"><input name="radio1" type="checkbox" ng-init="empresa.tipoPessoa=true" ng-model="empresa.pessoaTypeEnumValue" value="1" checked ><span>Cliente </span></label>
                                     <label class="ui-checkbox"><input name="radio2" type="checkbox" ng-model="empresa.pessoaTypeEnumValue" value="2" checked ><span>Fornecedor</span></label>
                                     <label class="ui-checkbox"><input name="radio3" type="checkbox" ng-model="empresa.pessoaTypeEnumValue" value="3" checked ><span>Transportador </span></label>
                                     <label class="ui-checkbox"><input name="radio4" type="checkbox" ng-model="empresa.pessoaTypeEnumValue" value="4" checked ><span>Consumidor final </span></label>
-
+-->
                                 </dd>
                             </dl>
                         </div>
