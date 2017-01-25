@@ -130,8 +130,9 @@
 
             $scope.emails = [{nome : 'form1',email :{emailTypeEnum : 1}}];
             $scope.telefones = [{nome : 'form1',telefone :{telefoneTypeEnum : 1}}];
-
+            $scope.confirmed = "";
             $scope.empresa = {
+            pessoaTipo  : [],
             documentos          : [{
                        documentoTypeEnumValue : 1,
                        tableEnumValue : 1,
@@ -207,7 +208,7 @@
         };
 
         $scope.cliente = {
-          pessoaTipo  : [],
+
           pessoaTipos : [{
 
           pessoaTypeEnum : "CLIENTE",
@@ -223,6 +224,28 @@
               label          : "Consumidor Final"
         }]
       }
+
+        $scope.changes = function($event, id) {
+
+
+         var checkbox = $event.target;
+         if(checkbox.checked)
+         {
+           $scope.empresa.pessoaTipo.push(qat.model.fnPessoaTipo(id.pessoaTypeEnum,"INSERT","System"))
+         }
+         else
+         {
+            for (x = 0; x< $scope.empresa.pessoaTipo.length;x++)
+            {
+                if($scope.empresa.pessoaTipo[x].pessoaTypeEnum == id.pessoaTypeEnum)
+                {
+                    $scope.empresa.pessoaTipo.splice(x,1);
+                }
+            }
+          //  $scope.empresa.pessoaTipo.remove(qat.model.fnPessoaTipo(id.pessoaTypeEnum,"INSERT","System"))
+         }
+         console.log($scope.empresa.pessoaTipo)
+        };
 
         $scope.enderecos = [];
 
@@ -250,7 +273,7 @@
             }
             $scope.saveCliente = function() {
 
-                console.log($scope.emails);
+                debugger
                 fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos,$scope.emails,$scope.telefones, 'INSERT', "pessoa/api/cliente/insert", fnCallBack);
             };
         });

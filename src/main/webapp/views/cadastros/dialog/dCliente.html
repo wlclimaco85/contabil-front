@@ -13,8 +13,8 @@
                                 <dd>
 
     <label ng-repeat="song in cliente.pessoaTipos">
-        <input type="checkbox" name="{{song.label}}" id="{{song.label}}" ng-model="cliente.pessoaTipo[song.pessoaTypeEnum]">
-        <label class="ui-checkbox" type="checkbox" for="{{song.label}}">{{song.label}}</label>
+        <input type="checkbox" name="{{song.label}}" id="{{song.label}}" ng-model="confirmed" ng-click="changes($event,song)">
+        <label class="ui-checkbox" type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'" for="{{song.label}}">{{song.label}}</label>
     </label>
 
 

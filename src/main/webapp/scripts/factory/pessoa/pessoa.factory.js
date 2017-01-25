@@ -7,7 +7,7 @@
 //fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos,scope.emails,scope.telefones, 'INSERT', "pessoa/api/cliente/insert", fnCallBack);
 	factory.fnMontaObjeto = function(empresa,enderecos,emails,telefones,action,url,callBack){
 
-
+debugger
          //===============Documentos====================
          var documentos = [];
          for(var x=0;x < empresa.documentos.length;x++)
@@ -26,7 +26,7 @@
                 {
                     documentos.push(fModels.amont(qat.model.fnDocumento(empresa.documentos[x],"INSERT",$rootScope.user.user),"INSERT"));
                 }
-                
+
             }
 
          }
@@ -36,14 +36,14 @@
          //=================== ENDERECO
          empresa.enderecos =[];
          empresa.enderecos.push(fModels.amont(qat.model.fnEndereco(enderecos[0],action,$rootScope.user.user),action));
-        
+
          //==================Telefone==================================
          var telefonesAux = [];
          for(var x=0;x < telefones.length;x++)
          {
             if(telefones[x].telefone == undefined || telefones[x].telefone == undefined )
             {
-                
+
                 if((telefones[x].telefone.id != null)&&(telefones[x].telefone.id != undefined))
                 {
                     telefonesAux.push(fModels.amont(qat.model.fnTelefones(telefones[x].telefone,"DELETE"),"DELETE"));
@@ -60,7 +60,7 @@
                 {
                     telefonesAux.push(fModels.amont(qat.model.fnTelefones(telefones[x].telefone,"INSERT"),"INSERT"));
                 }
-                
+
             }
 
          }
@@ -76,7 +76,7 @@
 
             if(email == undefined || email == undefined )
             {
-                
+
                 if((email.id != null)&&(email.id != undefined))
                 {
                     emailsAux.push(fModels.amont(qat.model.fnEmails(email,"DELETE"),"DELETE"));
@@ -93,7 +93,7 @@
                 {
                     emailsAux.push(fModels.amont(qat.model.fnEmails(email,"INSERT"),"INSERT"));
                 }
-                
+
             }
 
          }

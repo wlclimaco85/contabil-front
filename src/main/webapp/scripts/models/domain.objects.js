@@ -708,6 +708,36 @@ qat.model.fnTelefones =function(_telefone,modelAction)
       return tributacao;
   }
 
+  qat.model.fnPessoaTipo =function(_pessoaTypeEnum,_modelAction,_userId)
+  {
+    var _id = null;
+
+    var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
+  //  //////debugger
+      tributacao  = {
+        id             : _id,
+        pessoaTypeEnum : _pessoaTypeEnum,
+        parentId       : 0,
+        emprId         : _emprId,
+        processId      : 0,
+        tableEnumValue : 0,
+        userId         : _userId,
+        modelAction    : _modelAction,
+        createUser     : _userId,
+        createDateUTC  : (new Date()).getTime(),
+        modifyUser     : _userId,
+        modifyDateUTC  : (new Date()).getTime()
+
+      }
+      //////debugger
+      return tributacao;
+  }
+
   qat.model.fnEstoque =function(_estoque,_modelAction,_userId)
   {
     var _id = null;
