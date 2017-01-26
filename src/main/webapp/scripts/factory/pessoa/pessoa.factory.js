@@ -7,7 +7,6 @@
 //fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos,scope.emails,scope.telefones, 'INSERT', "pessoa/api/cliente/insert", fnCallBack);
 	factory.fnMontaObjeto = function(empresa,enderecos,emails,telefones,action,url,callBack){
 
-debugger
          //===============Documentos====================
          var documentos = [];
          for(var x=0;x < empresa.documentos.length;x++)

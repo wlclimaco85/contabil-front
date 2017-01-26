@@ -51,7 +51,7 @@
 	                });
 				},
 				cliente : function() {
-				    $('.ClienteForm')
+				    $('.clienteForm')
 	                .formValidation({
 	                    framework: 'bootstrap',
 	                    icon: {
@@ -60,9 +60,8 @@
 	                        validating: 'glyphicon glyphicon-refresh'
 	                    },
 	                    fields: {
-	                        'nome': notEmptyStringMinMaxRegexp,
-	                        'email': integerNotEmptyValidation,
-	                        'texto': integerNotEmptyValidation,
+	                        'nomeResponsavel': notEmptyStringMinMaxRegexp,
+	                        'cpf': integerNotEmptyValidation
 	                    }
 	                });
 				},

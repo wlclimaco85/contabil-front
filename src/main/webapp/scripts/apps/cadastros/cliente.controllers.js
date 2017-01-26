@@ -2,7 +2,7 @@
     angular.module('wdApp.apps.cliente', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('ClienteController', clienteController);
 
-    function clienteController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate,Datatablessss,tableOptionsFactory,tableColumnsFactory,FiltersFactory) {
+    function clienteController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate,Datatablessss,tableOptionsFactory,tableColumnsFactory,FiltersFactory,validationFactory) {
         var vm = this;
         vm.selected = {};
         vm.selectAll = false;
@@ -69,17 +69,17 @@
         function edit(person) {
             $rootScope.cliente = person;
           //  Datatablessss.reloadData(vm)
-            dialogFactory.dialog('views/cadastros/dialog/dCliente.html',"ClienteUpdateController",openDialogUpdateCreate);
+            dialogFactory.dialog('views/cadastros/dialog/dCliente.html',"ClienteUpdateController",validationFactory.cliente());
         }
 
         function deleteRow(person) {
            $rootScope.cliente = person;
-           dialogFactory.dialog('views/cadastros/dialog/dCliente.html',"ClienteDeleteController",openDialogUpdateCreate);
+           dialogFactory.dialog('views/cadastros/dialog/dCliente.html',"ClienteDeleteController",validationFactory.cliente());
         }
 
 
 
-        Datatablessss.getTable('/pessoa/api/cliente/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cliente(vm,createdRow,$scope,FiltersFactory.cliente()), tableColumnsFactory.cliente(vm,titleHtml,actionsHtml));
+        Datatablessss.getTable('/pessoa/api/cliente/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cliente(vm,createdRow,$scope,FiltersFactory.cliente()), tableColumnsFactory.pessoa(vm,titleHtml,actionsHtml));
 
           //return vm;
 
@@ -126,12 +126,109 @@
 (function() {
     angular.module('wdApp.apps.cliente.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('ClienteInsertController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
-            var vm = this;
+              var vm = this;
+
+              $scope.today = function() {
+                $scope.dt = new Date();
+              };
+              $scope.today();
+
+              $scope.clear = function() {
+                $scope.dt = null;
+              };
+
+              $scope.inlineOptions = {
+                customClass: getDayClass,
+                minDate: new Date(),
+                showWeeks: true
+              };
+
+              $scope.dateOptions = {
+                dateDisabled: disabled,
+                formatYear: 'yy',
+                maxDate: new Date(2020, 5, 22),
+                minDate: new Date(),
+                startingDay: 1
+              };
+
+              // Disable weekend selection
+              function disabled(data) {
+                var date = data.date,
+                  mode = data.mode;
+                return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+              }
+
+              $scope.toggleMin = function() {
+                $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
+                $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+              };
+
+              $scope.toggleMin();
+
+              $scope.open1 = function() {
+
+                $scope.popup1.opened = true;
+              };
+
+              $scope.open2 = function() {
+
+                $scope.popup2.opened = true;
+              };
+
+              $scope.setDate = function(year, month, day) {
+                $scope.dt = new Date(year, month, day);
+              };
+
+              $scope.formats = ['dd-MMMM-yyyy','dd/MM/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+              $scope.format = $scope.formats[1];
+              $scope.altInputFormats = ['M!/d!/yyyy'];
+
+              $scope.popup1 = {
+                opened: false
+              };
+
+              $scope.popup2 = {
+                opened: false
+              };
+
+              var tomorrow = new Date();
+              tomorrow.setDate(tomorrow.getDate() + 1);
+              var afterTomorrow = new Date();
+              afterTomorrow.setDate(tomorrow.getDate() + 1);
+              $scope.events = [
+                {
+                  date: tomorrow,
+                  status: 'full'
+                },
+                {
+                  date: afterTomorrow,
+                  status: 'partially'
+                }
+              ];
+
+              function getDayClass(data) {
+                var date = data.date,
+                  mode = data.mode;
+                if (mode === 'day') {
+                  var dayToCheck = new Date(date).setHours(0,0,0,0);
+
+                  for (var i = 0; i < $scope.events.length; i++) {
+                    var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+
+                    if (dayToCheck === currentDay) {
+                      return $scope.events[i].status;
+                    }
+                  }
+                }
+
+                return '';
+              }
 
             $scope.emails = [{nome : 'form1',email :{emailTypeEnum : 1}}];
             $scope.telefones = [{nome : 'form1',telefone :{telefoneTypeEnum : 1}}];
             $scope.confirmed = "";
             $scope.empresa = {
+            tipoPessoa : 1,
             pessoaTipo  : [],
             documentos          : [{
                        documentoTypeEnumValue : 1,
@@ -249,23 +346,7 @@
 
         $scope.enderecos = [];
 
-            $scope.today = function() {
-                return $scope.dt = new Date();
-            };
-            $scope.today();
-            $scope.clear = function() {
-                return $scope.dt = null;
-            };
-            $scope.open = function($event) {
-                $event.preventDefault();
-                $event.stopPropagation();
-                return $scope.opened = true;
-            };
-            $scope.dateOptions = {
-                'year-format': "'yy'",
-                'starting-day': 0
-            };
-            $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
+
             $scope.format = $scope.formats[1];
             var fnCallBack = function(oResponse) {
 
@@ -273,7 +354,6 @@
             }
             $scope.saveCliente = function() {
 
-                debugger
                 fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos,$scope.emails,$scope.telefones, 'INSERT', "pessoa/api/cliente/insert", fnCallBack);
             };
         });

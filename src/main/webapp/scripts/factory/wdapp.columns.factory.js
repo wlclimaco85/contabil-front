@@ -7,7 +7,7 @@
 
 		return{
 				//County Object
-				cliente : function(vm,_html,_actions) {
+				pessoa : function(vm,_html,_actions) {
 				    return  [
 			            DTColumnBuilder.newColumn(null).withTitle(_html).notSortable()
 			            .renderWith(function(data, type, full, meta) {

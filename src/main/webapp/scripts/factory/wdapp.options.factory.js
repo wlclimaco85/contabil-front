@@ -122,6 +122,38 @@
 
 			            return oOptions;
 				},
+				fornecedor : function(vm,createdRow,scope, _callback) {
+
+					var oOptions = padrao(vm,createdRow,scope, _callback);
+					console.log(oOptions)
+				     oOptions.buttons.push({
+			                text: 'Novo Fornecedor',
+			                key: '1',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/cadastros/dialog/dFornecedor.html',"FornecedorInsertController",validationFactory.fornecedor,null);
+
+			                }
+			            })
+
+			            return oOptions;
+				},
+				transportador : function(vm,createdRow,scope, _callback) {
+
+					var oOptions = padrao(vm,createdRow,scope, _callback);
+					console.log(oOptions)
+				     oOptions.buttons.push({
+			                text: 'Novo Transportador',
+			                key: '1',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/cadastros/dialog/dTransportador.html',"TransportadorInsertController",validationFactory.transportador,null);
+
+			                }
+			            })
+
+			            return oOptions;
+				},
 				pdVendas : function(vm,createdRow,scope, _callback) {
 
 					var oOptions = padrao(vm,createdRow,scope, _callback);

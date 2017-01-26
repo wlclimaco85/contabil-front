@@ -10,45 +10,51 @@
     <div ng-if="documento.documentoTypeEnumValue =='1'">
         <div class="form-group col-sm-3">
             <label for="exampleInputEmail1">CNPJ</label>
-            
-                <input type="text" ng-model="documento.numero" name="cnpj" class="form-control" placeholder="Nº Cart. Trab">
-                <input type="text" ng-model="documento.documentoTypeEnumValue" name="cnpjs" value="1" class="form-control hide" placeholder="Nº Cart. Trab" ng-init="documento.documentoTypeEnumValue=1">
+                <div class="input-group">
+                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas nÃºmeros" class="fa fa-credit-card"></span></span>
+                <input type="text" ng-model="documento.numero" name="cnpj" class="form-control" ui-mask="99.999.999/9999-99"  ui-mask-placeholder ui-mask-placeholder-char="_">
+                <input type="text" ng-model="documento.documentoTypeEnumValue" name="cnpjs" value="1" class="form-control hide" placeholder="NÂº Cart. Trab" ng-init="documento.documentoTypeEnumValue=1">
+            </div>
             </div>
         </div>
 <div ng-if="documento.documentoTypeEnumValue =='12'">
         <div class="form-group col-sm-3">
             <label for="exampleInputEmail1">Inscr Est Subst Trib</label>
-            
-                <input type="text" ng-model="documento.numero" name="IEST" class="form-control" placeholder="Inscr Est Subst Trib">
-                <input type="text" ng-model="documento.documentoTypeEnumValue" name="IEST2" value="12" class="form-control hide" placeholder="Nº Cart. Trab" ng-init="documento.documentoTypeEnumValue=12">
+                <div class="input-group">
+                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas nÃºmeros" class="fa fa-credit-card"></span></span>
+                <input type="text" ng-model="documento.numero" name="IEST" class="form-control" >
+                <input type="text" ng-model="documento.documentoTypeEnumValue" name="IEST2" value="12" class="form-control hide" placeholder="NÂº Cart. Trab" ng-init="documento.documentoTypeEnumValue=12">
+                </div>
             </div>
         </div>
         <div ng-if="documento.documentoTypeEnumValue =='14'">
         <div class="form-group col-sm-3">
             <label for="exampleInputEmail1">Indicador de IE</label>
-            
-                <input type="text" name="IEs" ng-model="documento.documentoTypeEnumValue" value="14" class="form-control hide" placeholder="Nº Cart. Trab" ng-init="documento.documentoTypeEnumValue=14">
+
+                <input type="text" name="IEs" ng-model="documento.documentoTypeEnumValue" value="14" class="form-control hide" placeholder="NÂº Cart. Trab" ng-init="documento.documentoTypeEnumValue=14">
                 <div class="row">
                     <span class="ui-select">
                         <select ng-model="documento.numero" >
                             <option value="0"></option>
                             <option value="1">Contribuinte ICMS</option>
                             <option value="2">Isento de cadastro</option>
-                            <option value="9">Não contribuinte</option>
+                            <option value="9">NÃ£o contribuinte</option>
                         </select>
                     </span>
                 </div>
             </div>
         </div>
-        
-        
-        
+
+
+
         <div ng-if="documento.documentoTypeEnumValue =='10'">
         <div class="form-group col-sm-3">
-            <label for="exampleInputEmail1">Inscrição Estadual</label>
-            
-                <input type="text" ng-model="documento.numero" name="incrEst" class="form-control" placeholder="Inscrição Estadual">
+            <label for="exampleInputEmail1">InscriÃ§Ã£o Estadual</label>
+                <div class="input-group">
+                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas nÃºmeros" class="fa fa-credit-card"></span></span>
+                <input type="text" ng-model="documento.numero" name="incrEst" class="form-control">
                 <input type="text" ng-model="documento.documentoTypeEnumValue" name="incrEst2" value="10" class="form-control hide" ng-init="documento.documentoTypeEnumValue=10">
+            </div>
             </div>
         </div>
         </div>
@@ -57,23 +63,27 @@
         <div ng-repeat="documento in empresa.documentos">
 <div ng-if="documento.documentoTypeEnumValue =='3'">
         <div class="form-group col-sm-3">
-            <label for="exampleInputEmail1">Inscrição Municipal</label>
-            
-                <input type="text" ng-model="documento.numero" name="incrMun" class="form-control" placeholder="Inscrição Municipal">
+            <label for="exampleInputEmail1">InscriÃ§Ã£o Municipal</label>
+            <div class="input-group">
+                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas nÃºmeros" class="fa fa-credit-card"></span></span>
+                <input type="text" ng-model="documento.numero" name="incrMun" class="form-control">
                 <input type="text" ng-model="documento.documentoTypeEnumValue" name="incrMun2" value="3" class="form-control hide" ng-init="documento.documentoTypeEnumValue=3">
+                </div>
             </div>
 
         </div>
          <div ng-if="documento.documentoTypeEnumValue =='11'">
         <div class="form-group col-sm-3">
-            <label for="exampleInputEmail1">Inscrição Suframa</label>
-           
-                <input type="text" ng-model="documento.numero" name="suframa" class="form-control" placeholder="Inscrição Estadual">
+            <label for="exampleInputEmail1">InscriÃ§Ã£o Suframa</label>
+           <div class="input-group">
+                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas nÃºmeros" class="fa fa-credit-card"></span></span>
+                <input type="text" ng-model="documento.numero" name="suframa" class="form-control">
                 <input type="text" ng-model="documento.documentoTypeEnumValue" name="suframa2" value="11" class="form-control hide" ng-init="documento.documentoTypeEnumValue=11">
+                </div>
             </div>
         </div>
     </div>
-   
+
     <div class="form-group col-sm-3">
         <label for="exampleInputEmail1">Data Abertura</label>
         <div class="input-group">
@@ -84,8 +94,8 @@
         </div>
       </div>
       <div class="form-group col-sm-3">
-        <label for="exampleInputEmail1">N° Funcionarios</label>
-        <input type="text" ng-model="empresa.numFunc" name="numFunc" class="form-control" placeholder="N° Func">
+        <label for="exampleInputEmail1">NÂ° Funcionarios</label>
+        <input type="text" ng-model="empresa.numFunc" name="numFunc" class="form-control" placeholder="NÂ° Func">
     </div>
  </div>
 

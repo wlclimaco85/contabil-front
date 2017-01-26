@@ -13,10 +13,10 @@
         <input type="text" class="form-control col-sm-4 hide input-id" name="id" placeholder="Email">
         <input type="text" class="form-control col-sm-4 hide input-type" name="type" value="1" placeholder="Email">
         <div class="input-group">
+          <span class="InputSign input-group-addon" target="contatos_emails"><span title="Apenas emails válidos" class="fa fa-envelope"></span></span>
           <input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2" ng-model="email.email.email">
-          <span class="input-group-addon" id="basic-addon2">@example.com</span>
         </div>
-       
+
     </div>
 
     <div class="col-sm-4" style="margin-top:18px">
@@ -41,8 +41,8 @@
          <div class="col-sm-4">
             <label for="exampleInputPassword1" class="control-label">{{email.email.emailTypeEnum}}</label>
             <div class="input-group">
+              <span class="InputSign input-group-addon" target="contatos_emails"><span title="Apenas emails válidos" class="fa fa-envelope"></span></span>
               <input type="text" class="form-control" ng-model="email.email.email" placeholder="Recipient's username" aria-describedby="basic-addon2" ng-model="email.email.email">
-              <span class="input-group-addon" id="basic-addon2">@example.com</span>
             </div>
         </div>
         <div class="col-sm-4" style="margin-top:25px">
@@ -77,7 +77,7 @@
 <!-- ------------------------------------- -->
 <!-- ------------------------------------- -->
 
-<!-- -------------------  Email Empresa ----------------- 
+<!-- -------------------  Email Empresa -----------------
 <div class="row emails">
     <div class="col-sm-4">
         <label for="exampleInputPassword1">Email</label>
@@ -104,7 +104,7 @@
     </div>
 </div>
 -->
-<!-- Template for dynamic field 
+<!-- Template for dynamic field
 <div class="row emails" id="template-email" style="display: none;">
     <div class="col-sm-4">
         <label for="exampleInputPassword1" class="control-label input-type">Email</label>
