@@ -7,7 +7,7 @@
 
 		return{
 				//County Object
-				pessoa : function(vm,_html,_actions) {
+				cliente : function(vm,_html,_actions) {
 				    return  [
 			            DTColumnBuilder.newColumn(null).withTitle(_html).notSortable()
 			            .renderWith(function(data, type, full, meta) {
@@ -1043,7 +1043,45 @@
 			            DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
 			            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
 			            ];
-			         }
+			         },
+			         regime : function(vm,_html,_actions) {
+						return  [
+					            DTColumnBuilder.newColumn(null).withTitle(_html).notSortable()
+					            .renderWith(function(data, type, full, meta) {
+					                vm.selected[full.id] = false;
+					                return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
+					            }).withOption('width', '3px'),
+					            DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
+					            DTColumnBuilder.newColumn('nome').withTitle('Nome'),
+					            DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
+					            DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
+					            DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
+					            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
+								];
+					},
+					cfop : function(vm,_html,_actions) {
+						return   [
+
+				            DTColumnBuilder.newColumn(null).withTitle(_html).notSortable()
+				            .renderWith(function(data, type, full, meta) {
+				                vm.selected[full.id] = false;
+				                return '<input type="checkbox" ng-model="vm.selected[' + data.id + ']" ng-click="vm.toggleOne(vm.selected)"/>';
+				            }).withOption('width', '10px'),
+				            DTColumnBuilder.newColumn('id').withTitle('ID').withOption('width', '10px'),
+				            DTColumnBuilder.newColumn('cfop').withTitle('CFOP').withOption('width', '40px'),
+				            DTColumnBuilder.newColumn('natureza').withTitle('Natureza'),
+				            DTColumnBuilder.newColumn('simplificado').withTitle('simplificado').notVisible(),
+				            DTColumnBuilder.newColumn('icms').withTitle('icms').notVisible(),
+				            DTColumnBuilder.newColumn('icmsReduzido').withTitle('icmsReduzido').notVisible(),
+				            DTColumnBuilder.newColumn('margemAgregadaST').withTitle('margemAgregadaST').notVisible(),
+				            DTColumnBuilder.newColumn('cstPrincipal').withTitle('cstPrincipal').notVisible(),
+				            DTColumnBuilder.newColumn('classFiscal').withTitle('classFiscal').notVisible(),
+				            DTColumnBuilder.newColumn('observacao').withTitle('observacao').notVisible(),
+				            DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
+				            DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
+				            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '100px')
+				        ];
+					}
 			};
 	}]);
 })();

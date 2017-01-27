@@ -78,7 +78,6 @@ var WebDaptiveAppConfig = {
 
 				,'wdApp.apps.funcionarios'
 				,'wdApp.apps.compras'
-				,'wdApp.apps.pagamentos'
 				,'wdApp.apps.convenio'
 				,'wdApp.apps.util'
 				,'wdApp.apps.cidade'
@@ -115,6 +114,12 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.servicos.update'
 	            ,'wdApp.apps.servicos.delete'
 	            ,'wdApp.apps.servicos.view'
+
+	            ,'wdApp.apps.regime'
+	            ,'wdApp.apps.regime.insert'
+	            ,'wdApp.apps.regime.update'
+	            ,'wdApp.apps.regime.delete'
+	            ,'wdApp.apps.regime.view'
 
 
 	            ,'wdApp.apps.contato.insert'
@@ -299,6 +304,11 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.uniMed.select'
 	            ,'wdApp.apps.categoria.select'
 	            ,'wdApp.apps.marca.select'
+
+	            ,'wdApp.apps.cfop.insert'
+	            ,'wdApp.apps.cfop.update'
+	            ,'wdApp.apps.cfop.delete'
+	            ,'wdApp.apps.cfop.view'
 	            ,'wdApp.apps.cfop.select'
 	            ,'wdApp.ajaxCalls.validation'
 	            ,'wdApp.ajaxCalls.dialog.delete'
@@ -376,6 +386,7 @@ var WebDaptiveAppConfig = {
             ,'dicionario/tables/relatorios'
             ,'gerencia/details/empresa'
             ,'gerencia/tables/tributacao'
+            ,'fiscal/tables/regime'
 			];
 
 			//geeric routeine for building route from array

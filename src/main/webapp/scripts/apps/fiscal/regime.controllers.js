@@ -1,176 +1,200 @@
 (function() {
-  angular.module('wdApp.apps.counties', []).controller('CountiesController', 
-  ['$scope', 'SysMgmtData', 'toastr', 'toastrConfig',
-	function($scope, SysMgmtData, toastr, toastrConfig) {
-		var cvm = this;		
-		var initLoad = true; //used to ensure not calling server multiple times
-		var fetch_url = WebDaptiveAppConfig.base_county_url +  WebDaptiveAppConfig.fetch_url;
-		var refresh_url =  WebDaptiveAppConfig.base_county_url +  WebDaptiveAppConfig.refresh_url;
-		var create_url =  WebDaptiveAppConfig.base_county_url +  WebDaptiveAppConfig.create_url;
-		var update_url =  WebDaptiveAppConfig.base_county_url +  WebDaptiveAppConfig.update_url;	
-		var delete_url =  WebDaptiveAppConfig.base_county_url +  WebDaptiveAppConfig.delete_url;		
-		cvm.isActive = false;
-		toastrConfig.closeButton = true;		
-		
-		//form model data
-		cvm.county = {
-			id: '',
-			description: ''
-		};
-		
-		//grid column defs
-		var countyColumnDefs = [
-			{headerName: "County Id", field: "id", width: 270},
-			{headerName: "County Description", field: "description", width: 450}
-		];
-		
-		//grid row select function
-		function rowSelectedFunc(event) {
-			cvm.county.id = event.node.data.id;
-			cvm.county.description = event.node.data.description;			
-		};
+    angular.module('wdApp.apps.regime', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('RegimeController', regimeController);
 
-		//grid options
-		cvm.countyGridOptions = {
-			columnDefs: countyColumnDefs,
-			rowSelection: 'single',
-			onRowSelected: rowSelectedFunc,
-			rowHeight: 30,			
-			headerHeight: 30,			
-			enableColResize: true
-		};
-		
-		//reusable paging datasource grid
-		function createNewDatasource(resIn) {
-			var countyDataSource = {
-				pageSize: 20, //using default paging of 20 
-				getRows: function (params) {
-					if (initLoad){
-						//console.log("getRows() initLoad=true: " + resIn);	
-						initLoad=false;
-						cvm.isActive = false;
-						var dataThisPage = resIn.counties;
-						cvm.gList =  dataThisPage;						 
-						var lastRow = (resIn) ? resIn.resultsSetInfo.totalRowsAvailable : 0;
-						params.successCallback(dataThisPage, lastRow);
-	                    
-					}
-					else{
-						//console.log('asking for ' + params.startRow + ' to ' + params.endRow);	
-						SysMgmtData.processPostPageData(fetch_url, new qat.model.pagedInquiryRequest(  params.startRow/20, true), function(res){
-							var dataThisPage = res.counties;
-							cvm.gList =  dataThisPage;							
-							var lastRow = res.resultsSetInfo.totalRowsAvailable;
-							params.successCallback(dataThisPage, lastRow);	
-						});
-					}		
-				}
-			};
-			cvm.countyGridOptions.api.setDatasource(countyDataSource);
-		};
-	
-		//initial data load
-		processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), false);
-		
-		//reusable data methods
-		//reusable processGetData (refresh,delete)
-		function processGetData(_url)
-		{
-			//console.log(_url);			
-			cvm.countyGridOptions.api.showLoadingOverlay(true);
-			SysMgmtData.processGetPageData(_url,  function(res){
-				if (res){	
-					initLoad = true;
-					createNewDatasource(res); //send Data
-				}
-				else{
-					cvm.countyGridOptions.api.hideOverlay();				
-				}				
-				
-			});				
-		};	
+    function regimeController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate,Datatablessss,tableOptionsFactory,tableColumnsFactory,FiltersFactory,validationFactory) {
+        var vm = this;
+        vm.selected = {};
+        vm.selectAll = false;
+        vm.toggleAll = toggleAll;
+        vm.toggleOne = toggleOne;
+        vm.status = status;
+        vm.message = '';
 
-		//reusable processGetData (insert, update, pagedFetch)
-		function processPostData(_url, _req, _bLoading)
-		{
-			//console.log(_url);	
-			if (_bLoading){	
-				cvm.countyGridOptions.api.showLoadingOverlay(true);
-			}	
-			SysMgmtData.processPostPageData(_url, _req, function(res){
-				if (res){	
-					initLoad = true;
-					createNewDatasource(res); //send Data
-				}
-				else{
-					cvm.countyGridOptions.api.hideOverlay();				
-				}		
-			});				
-		};			
-		
-		//refresh county function
-		cvm.refreshCounties = function(refreshCount) {
-			cvm.isActive = !cvm.isActive;			
-			//clear form data
-			cvm.clearForm();		
-			var send_url = refresh_url + "?refreshInt=" + refreshCount + "&retList=true&retPaged=true";
-			processGetData(send_url);
-		};			
-		
-		//form methods
-		//reusable clear form logic
-		cvm.clearForm = function (){
-			//clear data
-			cvm.county.id = "";
-			cvm.county.description = "";	
-			//clear grid selection	
-			cvm.countyGridOptions.api.deselectAll();	
-			//set form to pristine
-			cvm.form_county.$setPristine();			
-		};
-		
-		//reusable button form logic		
-		cvm.processButtons = function(_btnType){	
-			//console.log(_btnType);		
-			if (cvm.form_county.$valid)
-			{	
-				switch (_btnType) {
-				//Add Button							
-				case 'A':
-					processPostData(create_url,  new qat.model.reqCounty( new qat.model.county(cvm.county.id, cvm.county.description),true, true), true);		
-					break;
-				//Update Button						
-				case 'U':
-					processPostData(update_url,  new qat.model.reqCounty( new qat.model.county(cvm.county.id, cvm.county.description),true, true), true);	
-					break;
-				//Delete Button	
-				case 'D':
-					var send_url = delete_url + "?countyId=" + cvm.county.id + "&retList=true&retPaged=true";
-					processGetData(send_url);
-					break;	
-				//List Button	
-				case 'L':
-					processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), true);
-					break;					
-				default: 
-					console.log('Invalid button type: ' + _btnType);					
-				};
-				//clear the form
-				cvm.clearForm();
-			}
-			else{
-				if (_btnType == 'L'){
-					processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), true);
-					//clear the form
-					cvm.clearForm();
-				}
-				else{	
-					toastr.error('County form error, please correct and resubmit.', 'Error');
-				}	
-			}		
-		};
-		
+        vm.dtInstance = {};
+        vm.persons = {};
+
+        $scope.toggle = function() {
+            $scope.state = !$scope.state;
+        };
+
+        vm.edit = edit;
+        vm.delete = deleteRow;
+        vm.dtInstance = {};
+        vm.persons = {};
+
+       function rCallback(nRow, aData) {
+            // console.log('row');
+        }
+
+        function recompile(row, data, dataIndex) {
+            $compile(angular.element(row).contents())($scope);
+        }
+
+
+        var createdRow = function (row, data, dataIndex) {
+            // Recompiling so we can bind Angular directive to the DT
+            $compile(angular.element(row).contents())($scope);
+        }
+
+       var fnDataSRC = function(json) {
+            console.log(json)
+            json['recordsTotal'] = json.regimeList.length
+            json['recordsFiltered'] = json.regimeList.length
+            json['draw'] = 1
+            console.log(json)
+            return json.regimeList;
+        }
+
+       var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
+            'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
+
+       var actionsHtml = function (data, type, full, meta) {
+
+            return '<button class="btn btn-info" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
+                '   <i class="glyphicon glyphicon-save"></i>' +
+                '</button>&nbsp;' +
+                '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
+                '   <i class="fa fa-trash-o"></i>' +
+                '</button>';
+        }
+
+        function edit(person) {
+            $rootScope.regime = person;
+          //  Datatablessss.reloadData(vm)
+            dialogFactory.dialog('views/fiscal/dialog/dRegime.html',"RegimeUpdateController",validationFactory.regime());
+        }
+
+        function deleteRow(person) {
+           $rootScope.regime = person;
+           dialogFactory.dialog('views/fiscal/dialog/dRegime.html',"RegimeDeleteController",validationFactory.regime());
+        }
+
+
+
+        Datatablessss.getTable('/fiscal/api/regime/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.regime(vm,createdRow,$scope,FiltersFactory.regime()), tableColumnsFactory.regime(vm,titleHtml,actionsHtml));
+
+        function toggleAll(selectAll, selectedItems) {
+            for (var id in selectedItems) {
+                if (selectedItems.hasOwnProperty(id)) {
+                    selectedItems[id] = selectAll;
+                }
+            }
+        }
+
+        function status() {
+        }
+
+        function toggleOne(selectedItems) {
+            for (var id in selectedItems) {
+                if (selectedItems.hasOwnProperty(id)) {
+                    if (!selectedItems[id]) {
+                        vm.selectAll = false;
+                        return;
+                    }
+                }
+            }
+            vm.selectAll = true;
+        }
+
+        function toggle() {
+            $scope.state = !$scope.state;
+        };
     }
-  ]);
-}).call(this);
+})();
+(function() {
+    angular.module('wdApp.apps.regime.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('RegimeInsertController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa,toastr) {
+            var vm = this;
+            $scope.regime = {};
+            
+            var fnCallBack = function(res) {
+                if(res.operationSuccess == true)
+                {
+                    initLoad = true;
+                    toastr.success('Deu Certo seu tanga.', 'Sucess');
+                }
+                else
+                {
+                   toastr.error('County form error, please correct and resubmit.', 'Error');
+                }
+            }
+            $scope.saveRegime = function() {
 
+                var oObject = fModels.amont(qat.model.fnRegime($scope.regime,"INSERT"),"INSERT");
+
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "fiscal/api/regime/insert",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqRegime(oObject, true, true)
+                }, function(res) {
+                  
+                    fnCallBack(res);
+                });
+            };
+        });
+})();
+(function() {
+    angular.module('wdApp.apps.regime.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('RegimeUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+            var vm = this;
+            $scope.regime = {};
+            $scope.regime = $rootScope.regime;
+            console.log($rootScope.regime)
+            $scope.saveRegime = function() {
+                fPessoa.fnMontaObjeto($scope.regime, $scope.endereco, 'UPDATE', "pessoa/api/regime/update/", fnCallBack);
+            }
+        });
+})();
+(function() {
+    angular.module('wdApp.apps.regime.delete', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('RegimeDeleteController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+            var vm = this;
+            $scope.regime = {};
+            $scope.regime = $rootScope.regime;
+            console.log($rootScope.regime)
+            $scope.saveRegime = function() {
+                fPessoa.fnDelete($scope.regime, "pessoa/api/regime/update/", function(){console.log('ddda   aqui')});
+            }
+        });
+})();
+(function() {
+    angular.module('wdApp.apps.regime.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('RegimeViewController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+            var vm = this;
+            $scope.regime = {};
+            $scope.regime = $rootScope.regime;
+            console.log($rootScope.regime)
+            $scope.saveRegime = function() {
+                fPessoa.fnOpenView($scope.regime,"pessoa/api/regime/update/", function(){console.log('aqui')});
+            }
+        });
+})();
+(function() {
+    angular.module('wdApp.apps.regime.search', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('RegimeSearchController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+            var vm = this;
+            $scope.visibled = false
+         //   $scope.regime = [];
+
+            $scope.countrySelected = function(selected) {
+             // debugger
+              if (selected) {
+
+                $scope.pessoa = selected.originalObject;
+                $scope.visibled = true;
+              } else {
+                console.log('cleared');
+              }
+            };
+
+            SysMgmtData.processPostPageData("main/api/request", {
+                    url: "pessoa/api/regime/fetchPage",
+                    token: $rootScope.authToken,
+                    request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
+                }, function(res) {
+                  //  debugger
+                    $scope.regime = res.regimeList;
+                });
+          });
+})();

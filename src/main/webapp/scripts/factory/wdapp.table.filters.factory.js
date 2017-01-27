@@ -11,6 +11,8 @@
 				},
 				cfop : function() {
 				},
+                regime : function() {
+                },
 				cliente : function() {
 					return [{
                                 type: 'number'

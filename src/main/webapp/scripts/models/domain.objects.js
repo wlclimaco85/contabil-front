@@ -247,6 +247,21 @@ qat.model.fnCnae = function(_oObjet){
                        }
 
 }
+qat.model.fnRegime = function(_oObjet,modelAction){
+    return regime = {
+
+                           id             : _oObjet.id,
+                           nome           : _oObjet.nome,
+                           descricao      : _oObjet.descricao,
+                           createUser     : "System",
+                           createDateUTC  : (new Date()).getTime(),
+                           modifyUser     : "System",
+                           modifyDateUTC  : (new Date()).getTime(),
+
+                       }
+
+}
+
 qat.model.fnCnaeEmpresa = function(_oObjet)
         {
           var _emprId = null;

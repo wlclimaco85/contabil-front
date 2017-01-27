@@ -209,7 +209,39 @@
 			            })
 
 			            return oOptions;
-				}
+				},
+				regime : function(vm,createdRow,scope, _callback) {
+
+					var oOptions = padrao(vm,createdRow,scope, _callback);
+					console.log(oOptions)
+				     oOptions.buttons.push({
+			                text: 'Novo Regime',
+			                key: '1',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/fiscal/dialog/dRegime.html',"RegimeInsertController",validationFactory.regime,null);
+
+			                }
+			            })
+
+			            return oOptions;
+				},
+				cfop : function(vm,createdRow,scope, _callback) {
+
+					var oOptions = padrao(vm,createdRow,scope, _callback);
+					console.log(oOptions)
+				     oOptions.buttons.push({
+			                text: 'Novo Cfop',
+			                key: '1',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/fiscal/dialog/dCfop.html',"CfopInsertController",validationFactory.cfop,null);
+
+			                }
+			            })
+
+			            return oOptions;
+				},
 			};
 	}]);
 })();

@@ -1,0 +1,36 @@
+<div class="modal fade">
+    <div class="modal-dialog" style="width : 40%">
+        <div class="modal-content">
+            <form class="regimeForm">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Cadastro Regime</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" ng-model="regime.id" name="descricao" class="hide form-control">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <label for="exampleInputEmail1">Nome</label>
+                            <div class="input-group">
+                                <input type="text" ng-model="regime.nome" name="nome" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                            <label for="exampleInputEmail1">Descrição</label>
+                            <div class="col-sm-12">
+                            <div class="input-group">
+                                <input type="text" ng-model="regime.descricao" name="descricao" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" ng-click="saveRegime()" class="btn btn-primary">Gravar</button>
+                </div>
+                </form>
+        </div>
+    </div>
+</div>

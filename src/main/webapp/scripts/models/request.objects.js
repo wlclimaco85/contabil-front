@@ -63,6 +63,13 @@
 		this.returnListPaged = _bPagedList;
 	};
 
+	qat.model.reqRegime = function(_oCounty, _bList, _bPagedList)
+	{
+		this.regime = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
+
 	qat.model.reqRoles = function(_oCounty, _bList, _bPagedList)
 	{
 		this.role = _oCounty;

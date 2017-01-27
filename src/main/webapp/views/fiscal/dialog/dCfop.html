@@ -29,8 +29,8 @@
 	                                     </div>
 	                                     <div class="row col-sm-12">
 	                                        <div class="form-group">
-	                                            <label for="exampleInputEmail1">DescriÃ§Ã£o <span style="color:red" >*</span></label>
-	                                            <input type="text" id="descricao" name="lastName" class="form-control" ng-model="cfop.natureza"  placeholder="DescriÃ§Ã£o">
+	                                            <label for="exampleInputEmail1">Descrição <span style="color:red" >*</span></label>
+	                                            <input type="text" id="descricao" name="lastName" class="form-control" ng-model="cfop.natureza"  placeholder="Descrição">
 	                                        </div>
 	                                     </div>
 	                                     <div class="row col-sm-12">
@@ -53,14 +53,14 @@
 	                                            <input type="text" class="form-control" ng-model="cfop.icmsReduzido" name="Principal" placeholder="0.00">
 	                                        </div>
 	                                        <div class="form-group col-sm-4">
-	                                            <label for="exampleInputPassword1">ClassificaÃ§Ã£o Fiscal</label>
+	                                            <label for="exampleInputPassword1">Classificação Fiscal</label>
 	                                            <input type="text" class="form-control" ng-model="cfop.classFiscal" name="Classificacao" placeholder="0.00">
 	                                        </div>
 	                                    </div>
 	                                     <div class="row col-sm-12">
 	                                        <div class="form-group">
-	                                            <label for="exampleInputPassword1">ObservaÃ§Ã£o</label>
-	                                            <input type="text" class="form-control" ng-model="cfop.observacao" name="Observacao" placeholder="ObservaÃ§Ã£o">
+	                                            <label for="exampleInputPassword1">Observação</label>
+	                                            <input type="text" class="form-control" ng-model="cfop.observacao" name="Observacao" placeholder="Observação">
 	                                        </div>
 	                                    </div>
 	                                    </div>
@@ -69,8 +69,9 @@
 
       </div>
       <div class="modal-footer">
-        <button type="submit"  ng-click="save()" class="btn btn-primary">Salvar</button>
+        
         <button type="button" ng-click="cancel()" class="btn">Cancel</button>
+        <button type="submit"  ng-click="saveCfop()" class="btn btn-primary">Salvar</button>
       </div>
 </form>
     </div>

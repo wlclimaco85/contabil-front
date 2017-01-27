@@ -35,7 +35,7 @@
 	                });
 				},
 				cfop : function() {
-				    $('.CfopForm')
+				    $('.cfopForm')
 	                .formValidation({
 	                    framework: 'bootstrap',
 	                    icon: {
@@ -44,9 +44,8 @@
 	                        validating: 'glyphicon glyphicon-refresh'
 	                    },
 	                    fields: {
-	                        'nome': notEmptyStringMinMaxRegexp,
-	                        'email': integerNotEmptyValidation,
-	                        'texto': integerNotEmptyValidation,
+	                        'firstName': notEmptyStringMinMaxRegexp,
+	                        'lastName': integerNotEmptyValidation,
 	                    }
 	                });
 				},
@@ -78,6 +77,21 @@
 	                        'nome': notEmptyStringMinMaxRegexp,
 	                        'email': integerNotEmptyValidation,
 	                        'texto': integerNotEmptyValidation,
+	                    }
+	                });
+				},
+				regime : function() {
+				    $('.regimeForm')
+	                .formValidation({
+	                    framework: 'bootstrap',
+	                    icon: {
+	                        valid: 'glyphicon glyphicon-ok',
+	                        invalid: 'glyphicon glyphicon-remove',
+	                        validating: 'glyphicon glyphicon-refresh'
+	                    },
+	                    fields: {
+	                        'nome': notEmptyStringMinMaxRegexp,
+	                        'descricao': integerNotEmptyValidation,
 	                    }
 	                });
 				},

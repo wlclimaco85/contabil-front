@@ -2,11 +2,9 @@ package org.talesolutions.cep;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -24,16 +22,11 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.qat.framework.model.BaseModel.PersistenceActionEnum;
-import com.qat.samples.sysmgmt.advocacia.Advogado;
-import com.qat.samples.sysmgmt.advocacia.Audiencia;
 import com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest;
 import com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest;
 import com.qat.samples.sysmgmt.advocacia.response.AudienciaResponse;
 import com.qat.samples.sysmgmt.advocacia.response.ProcessoResponse;
-import com.qat.samples.sysmgmt.pessoa.model.Cliente;
-import com.qat.samples.sysmgmt.util.model.Note;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 
 import br.com.emmanuelneri.app.model.ModelToken;

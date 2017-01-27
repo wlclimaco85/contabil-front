@@ -37,9 +37,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.talesolutions.cep.CEP;
-import org.talesolutions.cep.CEPService;
-import org.talesolutions.cep.CEPServiceFactory;
 
 import com.aronkatona.FileManager.FileManager;
 import com.aronkatona.model.Item;
@@ -68,19 +65,19 @@ public class ControllerMain {
 //	private static final String URL = "http://prod001.mybluemix.net/";
 	//private static final String URL = "http://prod00001.mybluemix.net/qat-sysmgmt-controller-rest/";
 	private static final String URL = "http://localhost:8080/qat-sysmgmt-controller-rest/";
-	private CEPService buscaCEP;
+	//private CEPService buscaCEP;
 
 	private FileManager fileManager = new FileManager();
 
 
-	@ResponseBody
-	@RequestMapping(value = "/fetchCep", method = RequestMethod.POST)
-	public String fetchCep(@RequestBody BuscaCep cep) {
-		String result = "";
-		buscaCEP = CEPServiceFactory.getCEPService();
-		result = (buscaCEP.obtemPorNumeroCEP(cep.getCep())).toString();
-		return result;
-	}
+//	@ResponseBody
+//	@RequestMapping(value = "/fetchCep", method = RequestMethod.POST)
+//	public String fetchCep(@RequestBody BuscaCep cep) {
+//		String result = "";
+//		buscaCEP = CEPServiceFactory.getCEPService();
+//		result = (buscaCEP.obtemPorNumeroCEP(cep.getCep())).toString();
+//		return result;
+//	}
 
 	@ResponseBody
     @RequestMapping(value = "/request", method = RequestMethod.POST)
