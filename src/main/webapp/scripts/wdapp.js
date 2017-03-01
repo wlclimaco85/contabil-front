@@ -41,7 +41,7 @@ var WebDaptiveAppConfig = {
   'use strict';
 		var wdApp = angular.module('wdApp',
 				['ngRoute', 'ngAnimate', 'ngSanitize', 'angucomplete-alt','ngTouch', 'ui.bootstrap', 'easypiechart', 'textAngular','ui.mask',
-				'ui.tree', 'ngMap', 'ngTagsInput', 'toastr', 'angular-loading-bar', 'chart.js', 'ngecharts',
+				'ui.tree', 'ngMap','ui.toggle', 'ngTagsInput', 'toastr', 'angular-loading-bar', 'chart.js', 'ngecharts',
 				'agGrid', 'base64', 'LocalStorageModule', 'wdApp.controllers', 'wdApp.directives', 'wdApp.httpint',
 				'wdApp.localization', 'wdApp.ui.controllers', 'wdApp.forms.controllers',
 				'wdApp.forms.directives', 'wdApp.tables.controllers', 'wdApp.tasks',
@@ -357,7 +357,7 @@ var WebDaptiveAppConfig = {
 			'compras/forms/CadCotacao','compras/forms/CadNfEntrada','compras/forms/CadPedCompras','compras/forms/CadAprovPedidoCompra',
 			'compras/tables/aprovarPedCompras','compras/tables/cotacao','compras/tables/nfEntrada','compras/tables/pedCompras',
 			'financeiro/tables/baixaTitulo','financeiro/tables/banco','financeiro/tables/caixa','vendas/tables/notaFiscalSaida',
-			'financeiro/tables/contaCC','financeiro/tables/contasPagar','financeiro/tables/contasReceber','financeiro/tables/formaPg','financeiro/tables/agencia',
+			'financeiro/tables/contaCC','financeiro/tables/conta','financeiro/tables/contasPagar','financeiro/tables/contasReceber','financeiro/tables/formaPg','financeiro/tables/agencia',
 			'funcionario/tables/folhaPonto','funcionario/tables/funcionario','funcionario/forms/CadFolhaPonto','funcionario/forms/funcionario',
 			'ordemServico/tables/ordemServico','ordemServico/forms/CadOrdemServico',
 			'cadastros/tables/almoxarifado','cadastros/tables/cidade','cadastros/tables/cliente','cadastros/tables/convenio',

@@ -281,6 +281,41 @@ qat.model.fnCnaeEmpresa = function(_oObjet)
                     }
         }
 
+qat.model.fnFormaPagar = function(_oObjet,action)
+{
+          var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
+    return     cnaes    = {
+
+              descricao      : _oObjet.descricao,
+              numero         : _oObjet.numero,
+              fornecedor     : { id : _oObjet.fornecedor.description.id},
+              parcela        : _oObjet.parcela,
+              formapg        : { id : _oObjet.formapg.id},
+              dataEmissao    : _oObjet.dataEmissao.getTime(),
+              dataVencimento : _oObjet.dataVencimento.getTime(),
+              dataPagamento  : _oObjet.dataPagamento.getTime(),
+              docId          : _oObjet.docId,
+              tipoDoc        : qat.model.fnDoisValor(_oObjet.tipoDoc,action),
+              formaCadastro  : qat.model.fnDoisValor(_oObjet.formaCadastro,action),
+              intervalo      : qat.model.fnDoisValor(_oObjet.intervalo,action),
+              categoria      : qat.model.fnDoisValor(_oObjet.categoria,action),
+              observacao     : _oObjet.observacao,
+              valor          : _oObjet.valor,
+              financeiroEnum : _oObjet.financeiroEnum,
+              emprId         : _emprId,
+              modelAction    : "INSERT",
+              createUser     : "System",
+              createDateUTC  : (new Date()).getTime(),
+              modifyUser     : "System",
+              modifyDateUTC  : (new Date()).getTime(),
+            }
+}
+
 qat.model.fnNote = function(_oObjet)
         {
             return     note    = {
@@ -303,6 +338,7 @@ qat.model.fnDoisValores =function(id,_value,_nome,_tabela,modelAction)
                id : id,
                value : _value,
                nome : _nome,
+
                parentId       : 0,
                emprId         : JSON.parse(localStorage.getItem('empresa')).id,
                processId      : 0,
@@ -313,6 +349,17 @@ qat.model.fnDoisValores =function(id,_value,_nome,_tabela,modelAction)
                createDateUTC  : (new Date()).getTime(),
                modifyUser     : "System",
                modifyDateUTC  : (new Date()).getTime()
+            }
+
+            return telefones;
+        }
+
+
+        qat.model.fnDoisValor =function(_oObjet,modelAction)
+        {
+
+            telefones = {
+               id             : _oObjet.id,
             }
 
             return telefones;

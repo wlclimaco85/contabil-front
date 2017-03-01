@@ -158,6 +158,21 @@
 	                        'texto': integerNotEmptyValidation,
 	                    }
 	                });
+				},
+				contasPagar : function() {
+				    $('.regimeForm')
+	                .formValidation({
+	                    framework: 'bootstrap',
+	                    icon: {
+	                        valid: 'glyphicon glyphicon-ok',
+	                        invalid: 'glyphicon glyphicon-remove',
+	                        validating: 'glyphicon glyphicon-refresh'
+	                    },
+	                    fields: {
+	                        'nome': notEmptyStringMinMaxRegexp,
+	                        'descricao': integerNotEmptyValidation,
+	                    }
+	                });
 				}
 			};
 	}]);

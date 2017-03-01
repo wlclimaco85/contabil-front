@@ -1,3 +1,118 @@
+INSERT INTO pagina(id ,pagina,parentid, tabelaenumvalue, create_date, create_user)
+    VALUES (101,'Financeiro', 0, 100, 1477075035443, 'System');
+
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
+    VALUES (102,'TIPO DOCUMENTO', 'TIPO DOCUMENTO', 1477075035443, 'System'),
+	(103,'CATEGORIA', 'CATEGORIA' , 1477075035443, 'System'),
+(104,'CADASTROMAIS', 'CADASTRO MAIS VEZES' , 1477075035443, 'System'),
+(105,'INTERVALO', 'INTERVALO' , 1477075035443, 'System'),
+(106,'SITUACAO', 'SITUACAO' , 1477075035443, 'System');
+
+
+
+
+
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+
+('1', 'Apenas uma vez','Apenas uma vez',104,101, 1477075035443, 'System'),
+('2', '2 vezes ao todo','2 vezes ao todo',104,101, 1477075035443, 'System'),
+('3', '3 vezes ao todo','3 vezes ao todo',104,101, 1477075035443, 'System'),
+('4', '4 vezes ao todo','4 vezes ao todo',104,101, 1477075035443, 'System'),
+('5', '5 vezes ao todo','5 vezes ao todo',104,101, 1477075035443, 'System'),
+('6', '6 vezes ao todo','6 vezes ao todo',104,101, 1477075035443, 'System'),
+('7', '7 vezes ao todo','7 vezes ao todo',104,101, 1477075035443, 'System'),
+('8', '8 vezes ao todo','8 vezes ao todo',104,101, 1477075035443, 'System'),
+('9', '9 vezes ao todo','9 vezes ao todo',104,101, 1477075035443, 'System'),
+('10', '10 vezes ao todo','10 vezes ao todo',104,101, 1477075035443, 'System'),
+('11', '11 vezes ao todo','11 vezes ao todo',104,101, 1477075035443, 'System'),
+('12', '12 vezes ao todo','12 vezes ao todo',104,101, 1477075035443, 'System'),
+('13', '13 vezes ao todo','13 vezes ao todo',104,101, 1477075035443, 'System'),
+('14', '14 vezes ao todo','14 vezes ao todo',104,101, 1477075035443, 'System'),
+('15', '15 vezes ao todo','15 vezes ao todo',104,101, 1477075035443, 'System'),
+('16', '16 vezes ao todo','16 vezes ao todo',104,101, 1477075035443, 'System'),
+('17', '17 vezes ao todo','17 vezes ao todo',104,101, 1477075035443, 'System'),
+('18', '18 vezes ao todo','18 vezes ao todo',104,101, 1477075035443, 'System'),
+('19', '19 vezes ao todo','19 vezes ao todo',104,101, 1477075035443, 'System'),
+('20', '20 vezes ao todo','20 vezes ao todo',104,101, 1477075035443, 'System'),
+('21', '21 vezes ao todo','21 vezes ao todo',104,101, 1477075035443, 'System'),
+('22', '22 vezes ao todo','22 vezes ao todo',104,101, 1477075035443, 'System'),
+('23', '23 vezes ao todo','23 vezes ao todo',104,101, 1477075035443, 'System'),
+('24', '24 vezes ao todo','24 vezes ao todo',104,101, 1477075035443, 'System'),
+
+
+('1', 'Dias','Dias',105,101, 1477075035443, 'System'),
+('7', 'Semanas','Semanas',105,101, 1477075035443, 'System'),
+('15', 'Quinzenas','Quinzenas',105,101, 1477075035443, 'System'),
+('30', 'Meses','Meses',105,101, 1477075035443, 'System'),
+('60', 'Bimestres','Bimestres',105,101, 1477075035443, 'System'),
+('90', 'Trimestres','Trimestres',105,101, 1477075035443, 'System'),
+('180', 'Semestres','Semestres',105,101, 1477075035443, 'System'),
+('365', 'Anos','Anos',105,101, 1477075035443, 'System'),
+('0', 'Sem intervalo','Sem intervalo',105,101, 1477075035443, 'System'),
+
+
+('1', 'Pago','Pago',106,101, 1477075035443, 'System'),
+('2', 'Aberta','Aberta',106,101, 1477075035443, 'System'),
+('3', 'Vencida','Vencida',106,101, 1477075035443, 'System'),
+('4', 'Cancelada','Cancelada',106,101, 1477075035443, 'System');
+                                               
+
+
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+
+	('1', 'Dinheiro','Dinheiro',102,101, 1477075035443, 'System'),
+        ('2', 'Cheque','Cheque',102,101, 1477075035443, 'System'),
+        ('3', 'Boleto','Boleto',102,101, 1477075035443, 'System'),
+        ('4', 'Cartão Crédito','Cartão Crédito',102,101, 1477075035443, 'System'),
+        ('5', 'Cartão Débito','Cartão Débito',102,101, 1477075035443, 'System'),
+        ('6', 'Duplicata','Duplicata',102,101, 1477075035443, 'System'),
+        ('7', 'Carnê','Carnê',102,101, 1477075035443, 'System'),
+        ('8', 'Transf. Eletrônica','Transf. Eletrônica',102,101, 1477075035443, 'System'),
+        ('9', 'Crédito Loja','Crédito Loja',102,101, 1477075035443, 'System'),
+        ('10', 'Vale Alimentação','Vale Alimentação',102,101, 1477075035443, 'System'),
+        ('11', 'Vale Refeição','Vale Refeição',102,101, 1477075035443, 'System'),
+        ('12', 'Vale Presente','Vale Presente',102,101, 1477075035443, 'System'),
+        ('13', 'Vale Combustível','Vale Combustível',102,101, 1477075035443, 'System'),
+        ('14', 'Sem documento','Sem documento',102,101, 1477075035443, 'System'),
+
+('14', 'Despesas operacionais Água','Despesas operacionais Água',103,101, 1477075035443, 'System'),
+('14', 'Despesas operacionais Aluguel','Despesas operacionais Aluguel',103,101, 1477075035443, 'System'),
+('14', 'Despesas operacionais Condomínio','Despesas operacionais Condomínio',103,101, 1477075035443, 'System'),
+('14', 'Despesas operacionais FGTS','Despesas operacionais FGTS',103,101, 1477075035443, 'System'),
+('14', 'Despesas operacionais INSS','Despesas operacionais INSS',103,101, 1477075035443, 'System'),
+('14', 'Despesas operacionais Luz','Despesas operacionais Luz',103,101, 1477075035443, 'System'),
+('14', 'Despesas operacionais Material de consumo','Despesas operacionais Material de consumo',103,101, 1477075035443, 'System'),
+('14', 'Despesas operacionais Material de escritório','Despesas operacionais Material de escritório',103,101, 1477075035443, 'System'),
+('14', 'Despesas operacionais Salário','Despesas operacionais Salário',103,101, 1477075035443, 'System'),
+('14', 'Despesas operacionais Outras despesas','Despesas operacionais Outras despesas',103,101, 1477075035443, 'System'),
+('14', 'Despesas de vendas Comissões','Despesas de vendas Comissões',103,101, 1477075035443, 'System'),
+('14', 'Despesas de vendas Embalagens','Despesas de vendas Embalagens',103,101, 1477075035443, 'System'),
+('14', 'Despesas de vendas Fretes','Despesas de vendas Fretes',103,101, 1477075035443, 'System'),
+('14', 'Despesas de vendas Outras despesas','Despesas de vendas Outras despesas',103,101, 1477075035443, 'System'),
+('14', 'Impostos IPI','Impostos IPI',103,101, 1477075035443, 'System'),
+('14', 'Impostos ICMS','Impostos ICMS',103,101, 1477075035443, 'System'),
+('14', 'Impostos ISSQN','Impostos ISSQN',103,101, 1477075035443, 'System'),
+('14', 'Impostos SIMPLES','Impostos SIMPLES',103,101, 1477075035443, 'System'),
+('14', 'Impostos Outro imposto','Impostos Outro imposto',103,101, 1477075035443, 'System'),
+('14', 'Despesas diversas Tarifas bancárias','Despesas diversas Tarifas bancárias',103,101, 1477075035443, 'System'),
+('14', 'Despesas diversas Juros e multas','Despesas diversas Juros e multas',103,101, 1477075035443, 'System'),
+('14', 'Despesas diversas Outras despesas','Sem_documento',103,101, 1477075035443, 'System'),
+('14', 'Investimentos Automóvel','Investimentos Automóvel',103,101, 1477075035443, 'System'),
+('14', 'Investimentos Computador','Investimentos Computador',103,101, 1477075035443, 'System'),
+('14', 'Investimentos Móveis','Investimentos Móveis',103,101, 1477075035443, 'System'),
+('14', 'Investimentos Outros investimentos','Investimentos Outros investimentos',103,101, 1477075035443, 'System'),
+('14', 'Compras (estoque) Compras (estoque)','Compras (estoque) Compras (estoque)',103,101, 1477075035443, 'System'),
+
+
+('14', 'Compras (estoque) Compras (estoque)','Compras (estoque) Compras (estoque)',104,101, 1477075035443, 'System'),
+
+('14', 'Compras (estoque) Compras (estoque)','Compras (estoque) Compras (estoque)',105,101, 1477075035443, 'System');
+
+
+
 INSERT INTO pagina(pagina,parentid, tabelaenumvalue, create_date, create_user)
     VALUES ('Produto', 0, 100, 1477075035443, 'System');
 

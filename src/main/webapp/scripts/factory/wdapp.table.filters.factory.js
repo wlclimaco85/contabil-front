@@ -124,6 +124,13 @@
                             }, {
                                 type: 'text'
                             }];
+                },
+                contasPagar : function() {
+                    return [{
+                                type: 'number'
+                            }, {
+                                type: 'number',
+                            }];
                 }
 			};
 	}]);

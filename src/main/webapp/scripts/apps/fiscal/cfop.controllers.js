@@ -70,8 +70,6 @@
            dialogFactory.dialog('views/fiscal/dialog/dCfop.html',"CfopDeleteController",validationFactory.cfop());
         }
 
-
-
         Datatablessss.getTable('/fiscal/api/cfop/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cfop(vm,createdRow,$scope,FiltersFactory.cfop()), tableColumnsFactory.cfop(vm,titleHtml,actionsHtml));
 
         function toggleAll(selectAll, selectedItems) {

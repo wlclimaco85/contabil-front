@@ -189,7 +189,28 @@
 				         });
 				    }
 				    return scope;
-				}
+				},
+				financeiro : function(pageId,scope,fnCallback) {
+
+					scope.tipoFrete = [];
+
+					var fnCallbackDoisValor = function(res){
+	                    var planos = "";
+
+	                    if(res.operationSuccess == true)
+	                    {
+	                    	if(fnCallback != undefined)
+	                    	{
+	                    		fnCallback(res);
+	                    	}
+	                   		console.log(scope)
+	                   }
+	                }
+
+                	qat.model.select.util("entidade/api/doisValores/fetchPage",true,new qat.model.doisValoresInquiryRequest(pageId, 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackDoisValor);
+
+
+				},
 			};
 	}]);
 })();
