@@ -281,7 +281,7 @@ qat.model.fnCnaeEmpresa = function(_oObjet)
                     }
         }
 
-qat.model.fnFormaPagar = function(_oObjet,action)
+qat.model.fnFormaPagar = function(_oObjet,_action)
 {
           var _emprId = null;
     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
@@ -295,24 +295,55 @@ qat.model.fnFormaPagar = function(_oObjet,action)
               numero         : _oObjet.numero,
               fornecedor     : { id : _oObjet.fornecedor.description.id},
               parcela        : _oObjet.parcela,
-              formapg        : { id : _oObjet.formapg.id},
-              dataEmissao    : _oObjet.dataEmissao.getTime(),
-              dataVencimento : _oObjet.dataVencimento.getTime(),
-              dataPagamento  : _oObjet.dataPagamento.getTime(),
+              formapg        : _oObjet.formapg ? { id : _oObjet.formapg ? _oObjet.formapg.id : null} : null,
+              dataEmissao    : _oObjet.dataEmissao ? _oObjet.dataEmissao.getTime() : null,
+              dataVencimento : _oObjet.dataVencimento ? _oObjet.dataVencimento.getTime() : null,
+              dataPagamento  : _oObjet.dataPagamento ? _oObjet.dataPagamento.getTime() : null,
               docId          : _oObjet.docId,
-              tipoDoc        : qat.model.fnDoisValor(_oObjet.tipoDoc,action),
-              formaCadastro  : qat.model.fnDoisValor(_oObjet.formaCadastro,action),
-              intervalo      : qat.model.fnDoisValor(_oObjet.intervalo,action),
-              categoria      : qat.model.fnDoisValor(_oObjet.categoria,action),
+              tipoDoc        : _oObjet.tipoDoc ? qat.model.fnDoisValor(_oObjet.tipoDoc ? _oObjet.tipoDoc :{},_action) : null,
+              formaCadastro  : _oObjet.formaCadastro ? qat.model.fnDoisValor(_oObjet.formaCadastro ? _oObjet.formaCadastro : {},_action) : null,
+              intervalo      : _oObjet.intervalo ? qat.model.fnDoisValor(_oObjet.intervalo ? _oObjet.intervalo : {},_action) : null,
+              categoria      : _oObjet.categoria ? qat.model.fnDoisValor(_oObjet.categoria ? _oObjet.categoria : {},_action) : null,
+              situacao       : _oObjet.situacao ? qat.model.fnDoisValor(_oObjet.situacao ? _oObjet.situacao : {},_action) : null,
+              listBaixa      : [qat.model.fnBaixaTitulo(_oObjet.listBaixa,_action)],
               observacao     : _oObjet.observacao,
               valor          : _oObjet.valor,
               financeiroEnum : _oObjet.financeiroEnum,
               emprId         : _emprId,
-              modelAction    : "INSERT",
+              modelAction    : _action,
               createUser     : "System",
               createDateUTC  : (new Date()).getTime(),
               modifyUser     : "System",
               modifyDateUTC  : (new Date()).getTime(),
+            }
+}
+
+
+qat.model.fnBaixaTitulo = function(_oObjet,_action)
+{
+          var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
+    return     cnaes    = {
+
+              id            : _oObjet.id,
+              finanId       : _oObjet.finanId,
+              dataBaixa     : _oObjet.dataBaixa,
+              observacao    : _oObjet.observacao,
+              valor         : _oObjet.valor,
+              juros         : _oObjet.juros,
+              multa         : _oObjet.multa,
+              desconto      : _oObjet.desconto,
+              conta         :  { id : _oObjet.conta ? _oObjet.conta.id : null},
+              emprId        : _emprId,
+              modelAction   : _action,
+              createUser    : "System",
+              createDateUTC : (new Date()).getTime(),
+              modifyUser    : "System",
+              modifyDateUTC : (new Date()).getTime(),
             }
 }
 
@@ -971,6 +1002,35 @@ qat.model.fnTelefones =function(_telefone,modelAction)
 
       }
       return cfop;
+  }
+
+  qat.model.fnConta = function(_conta,_modelAction)
+  {
+    var _emprId = null;
+    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+      _emprId = null;
+    }else{
+      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    }
+      var conta  = {
+         id               : _conta.id,
+         descricao        : _conta.descricao,
+         saldo            : _conta.saldo,
+         dataUltLanc      : _conta.dataUltLanc,
+         numeroConta      : _conta.numeroConta,
+         tipoConta        : qat.model.fnDoisValor(_conta.tipoConta,_modelAction),
+         observacao       : _conta.observacao,
+         emprId           : _emprId,
+         tableEnumValue   : 53,
+         userId           : "_userId",
+         modelAction      : _modelAction,
+         createUser       : "_userId",
+         createDateUTC    : (new Date()).getTime(),
+         modifyUser       : "_userId",
+         modifyDateUTC    : (new Date()).getTime()
+
+      }
+      return conta;
   }
 
   qat.model.fnICMS = function(_cfop,_modelAction,_userId)

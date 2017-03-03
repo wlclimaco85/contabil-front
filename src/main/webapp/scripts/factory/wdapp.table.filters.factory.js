@@ -131,6 +131,13 @@
                             }, {
                                 type: 'number',
                             }];
+                },
+                conta : function() {
+                    return [{
+                                type: 'number'
+                            }, {
+                                type: 'number',
+                            }];
                 }
 			};
 	}]);

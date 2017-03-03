@@ -356,6 +356,33 @@
 			            return  padrao(vm,createdRow,scope, _callback , buttons,2);
 					
 				},
+				conta : function(vm,createdRow,scope, _callback) {
+
+					var buttons = [];
+				      buttons.push(
+			            {
+			                text: '<span class="fa fa-trash"></span>',
+			                key: '1',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dConta.html',"ContaInsertController",validationFactory.contasPagar,null);
+
+			                }
+		                },
+		                
+		                {
+			                text: 'Nova Conta',
+			                key: '4',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dConta.html',"ContaInsertController",validationFactory.contasPagar,null);
+
+			                }
+			            })
+
+			            return  padrao(vm,createdRow,scope, _callback , buttons,2);
+					
+				},
 			};
 	}]);
 })();

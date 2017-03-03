@@ -10,38 +10,43 @@
                             <form  id="empresaForm">
 
                                         <div class="row">
-                                            <div class="form-group col-sm-6">
+                                            <div class="form-group col-sm-12">
                                                 <label for="exampleInputEmail1">Descrição</label>
-                                                <input type="text"  ng-model="caixa.nome" name="nome" class="form-control" placeholder="Descrição">
+                                                <input type="text"  ng-model="conta.descricao" name="nome" class="form-control" placeholder="Descrição">
                                             </div>
-
-                                            <div class="form-group col-sm-6">
-                                                <label for="exampleInputEmail1">Caixa Tipo</label>
-                                                <select id="unidTributada" name="unidTributada"  ng-model="caixa.caixaType" class="form-control">
-                                                    <option value="1">Caixa</option>
-                                                    <option value="2">Banco</option>
-                                                    <option value="3">Outros</option>
-                                                </select>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label for="exampleInputPassword1">Tipo Conta</label>
+                                                <div class="row">
+                                                    <ui-select ng-model="conta.tipoConta" theme="bootstrap">
+                                                        <ui-select-match placeholder="Escolha o Tipo de documento ...">{{$select.selected.descricao}}</ui-select-match>
+                                                        <ui-select-choices repeat="item in tipoConta | filter: $select.search">
+                                                            <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                        </ui-select-choices>
+                                                    </ui-select>
+                                                </div>
                                             </div>
-                                         </div>
-                                         <div class="row">
-                                         <div class="col-sm-6">
+                                         
+                                         
+                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Saldo</label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon">$</span>
-                                                    <input type="text" class="form-control cota-socio" ng-model="caixa.saldo" name="desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                                                    <input type="text" class="form-control cota-socio" ng-model="conta.saldo" name="desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                                                     <span class="input-group-addon">,00</span>
                                                 </div>
                                             </div>
                                          </div>
-                                         <div ng-show="caixa.caixaType == 2" ng-hide="caixa.caixaType != 2">
-                                             <div class="row col-sm-6">
+
+                                         <div ng-show="conta.tipoConta.value == 2" ng-hide="conta.tipoConta.value != 2">
+                                             <div class="row col-sm-4">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">N° Conta</label>
                                                     <div class="input-group">
                                                         <span class="input-group-addon">N°</span>
-                                                        <input type="text" class="form-control cota-socio" ng-model="caixa.saldo" name="desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                                                        <input type="text" class="form-control cota-socio" ng-model="conta.numeroConta" name="desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                                                         
                                                     </div>
                                                 </div>
@@ -51,7 +56,7 @@
                                          <div class="row col-sm-12">
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Observação</label>
-                                                <textarea class="form-control" rows="5" ng-model="caixa.observacao" id="Observação"></textarea>
+                                                <textarea class="form-control" rows="5" ng-model="conta.observacao" id="Observação"></textarea>
                                             </div>
                                         </div>
 
@@ -59,7 +64,7 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Gravar</button>
+                            <button type="submit"  ng-click="saveConta()" class="btn btn-primary">Gravar</button>
                           </div>
                         </div>
                       </div>

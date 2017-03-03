@@ -31,8 +31,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row col-sm-12">
-                <div ng-show="titulo.pagarAgora == false" ng-hide="titulo.pagarAgora == true">    
+            <div class="row col-sm-12">    
                     <div class="col-sm-6" style="margin-top:1%">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Data do vencimento</label>
@@ -46,8 +45,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div ng-show="titulo.pagarAgora == true" ng-hide="titulo.pagarAgora == false">
                     <div class="col-sm-6" style="margin-top:1%">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Data do pagamento</label>
@@ -61,18 +58,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <label for="exampleInputPassword1">Conta Baixa</label>
-                        <div class="row">
-                            <ui-select ng-model="titulo.categoria" theme="bootstrap">
-                                <ui-select-match placeholder="Escolha o Tipo de documento ...">{{$select.selected.descricao}}</ui-select-match>
-                                <ui-select-choices repeat="item in categoria | filter: $select.search">
-                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-                                </ui-select-choices>
-                            </ui-select>
-                        </div>
-                    </div>
                 </div>
+                <div ng-show="titulo.pagarAgora == true" ng-hide="titulo.pagarAgora == false">
+                    <div class=" row col-sm-12">
+                            <div class="ng-cloak" ng-controller="ContaSelectController as conta">
+                                <div class="col-sm-12 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Conta Baixa <small ng-click="conta.addCfop()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
+                                        <div class="row">
+                                            <ui-select ng-model="titulo.listBaixa[0].conta" theme="bootstrap">
+                                                <ui-select-match placeholder="Formas de Pagamento">{{$select.selected.descricao}}</ui-select-match>
+                                                <ui-select-choices repeat="item in conta.conta | filter: $select.search">
+                                                  <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                  <small ng-bind-html="item.saldo | highlight: $select.search"></small> -
+                                                </ui-select-choices>
+                                              </ui-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
             </div>
         </div>
     </div>
@@ -86,7 +91,7 @@
         <div class="col-sm-12">
         <div ng-show="titulo.pagarAgora == false" ng-hide="titulo.pagarAgora == true">
             <div class="form-group col-sm-6">
-                <label for="exampleInputPassword1">Valor cobrado</label>
+                <label for="exampleInputPassword1">Valor do titulo</label>
                 <div class="inputClass input-group">
                     <span class="InputSign input-group-addon" target="fin_valor">
                         <span title="Valor monetário" class="fa fa-usd"></span>
@@ -97,7 +102,7 @@
         </div>
         <div ng-show="titulo.pagarAgora == true" ng-hide="titulo.pagarAgora == false">
             <div class="form-group col-sm-6">
-                <label for="exampleInputPassword1">Valor cobrado</label>
+                <label for="exampleInputPassword1">Valor do titulo</label>
                 <div class="inputClass input-group">
                     <span class="InputSign input-group-addon" target="fin_valor">
                         <span title="Valor monetário" class="fa fa-usd"></span>
@@ -153,7 +158,7 @@
                                         <label for="exampleInputPassword1">Forma Pagamento <small ng-click="ctrl.addCfop()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
                                         <div class="row">
                                             <ui-select ng-model="titulo.formapg" theme="bootstrap">
-                                                <ui-select-match placeholder="Formas de Pagamento">{{$select.selected}}</ui-select-match>
+                                                <ui-select-match placeholder="Formas de Pagamento">{{$select.selected.descricao}}</ui-select-match>
                                                 <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
                                                   <div ng-bind-html="item.descricao | highlight: $select.search"></div>
                                                   <small ng-bind-html="item.observacao | highlight: $select.search"></small> -

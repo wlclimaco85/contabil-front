@@ -2,7 +2,7 @@
     angular.module('wdApp.apps.contasPagar', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('ContasPagarController', contasPagarController);
 
-    function contasPagarController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate,Datatablessss,tableOptionsFactory,tableColumnsFactory,FiltersFactory,validationFactory,$filter) {
+    function contasPagarController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate,Datatablessss,tableOptionsFactory,tableColumnsFactory,FiltersFactory,validationFactory,$filter,dialogFactory) {
         var vm = this;
         vm.selected = {};
         vm.selectAll = false;
@@ -78,8 +78,34 @@
         }
 
         function edit(person) {
-            $rootScope.contasPagar = person;
-            dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarUpdateController",openDialogUpdateCreate);
+            debugger
+            var table = '<table class="table table-bordered">'+
+    '<thead>'+
+      '<tr>'+
+        '<th>Firstname</th>'+
+        '<th>Lastname</th>'+
+        '<th>Email</th>'+
+      '</tr>'+
+    '</thead>'+
+    '<tbody>'+
+     ' <tr>'+
+        '<td>John</td>'+
+        '<td>Doe</td>'+
+        '<td>john@example.com</td>'+
+      '</tr>'+
+      '<tr>'+
+        '<td>Mary</td>'+
+        '<td>Moe</td>'+
+        '<td>mary@example.com</td>'+
+      '</tr>'+
+      '<tr>'+
+        '<td>July</td>'+
+        '<td>Dooley</td>'+
+        '<td>july@example.com</td>'+
+      '</tr>'+
+    '</tbody>'+
+ '</table>'
+            dialogFactory.dialog('views/financeiro/dialog/dBaixa.html',"ContasPagarUpdateController",function(){$("#teste").append(table)});
         }
 
         function deleteRow(person) {
@@ -122,61 +148,6 @@
     angular.module('wdApp.apps.contasPagar.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('ContasPagarInsertController', function($rootScope, $scope, fModels, SysMgmtData,doisValorFactory,toastr) {
             var vm = this;
-
-            $scope.titulo = {
-            }
-
-           // $('.toggle-ones').bootstrapToggle('toggle')
-
-            SysMgmtData.processPostPageData("main/api/request", {
-                url: "pessoa/api/cliente/fetchPage",
-                token: $rootScope.authToken,
-                request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
-            }, function(res) {
-              //  debugger
-                $scope.cliente = res.clienteList;
-            });
-            var fnFunctionCallback = function (res){
-               $scope.categoria = [];
-               $scope.tipoDocumento = [];
-               $scope.cadastro = [];
-               $scope.intervalo = [];
-               $scope.situacao = [];
-               
-               if(res.operationSuccess == true)
-                   {
-                        for(var x=0;x<res.doisValoresList.length;x++)
-                        {
-                            planos = res.doisValoresList[x] ;
-                            if(planos.doisValorType != null)
-                            {
-                                switch (planos.doisValorType.tipo)
-                                {
-                                    case 'TIPO DOCUMENTO':
-                                        $scope.tipoDocumento.push(planos);
-                                        break;
-                                    case 'CATEGORIA':
-                                        $scope.categoria.push(planos);
-                                        break;
-                                    case 'CADASTROMAIS':
-                                        $scope.cadastro.push(planos);
-                                        break;
-                                    case 'INTERVALO':
-                                        $scope.intervalo.push(planos);
-                                        break;
-                                    case 'SITUACAO':
-                                        $scope.situacao.push(planos);
-                                        break;
-                                }
-                            }
-                        }
-                    }
-                console.log(res);
-            }
-
-            doisValorFactory.financeiro(101,$scope,fnFunctionCallback);
-
-            $scope.enderecos = [];
 
             $scope.formatterDate = function(iDate) {
                 return $filter('date')(new Date(iDate), 'dd/MM/yyyy');
@@ -287,6 +258,84 @@
                 return '';
               }
 
+            $scope.titulo = {
+                listBaixa : [],
+                dataEmissao : moment(new Date()).format('DD/MM/YYYY'),
+                dataPagamento : moment(new Date()).format('DD/MM/YYYY'),
+                dataVencimento : moment(new Date()).format('DD/MM/YYYY')
+            }
+
+            function edit(person) {
+               debugger
+            }
+
+           // $('.toggle-ones').bootstrapToggle('toggle')
+
+            SysMgmtData.processPostPageData("main/api/request", {
+                url: "pessoa/api/cliente/fetchPage",
+                token: $rootScope.authToken,
+                request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
+            }, function(res) {
+              //  debugger
+                $scope.cliente = res.clienteList;
+            });
+            var fnFunctionCallback = function (res){
+               $scope.categoria = [];
+               $scope.tipoDocumento = [];
+               $scope.cadastro = [];
+               $scope.intervalo = [];
+               $scope.situacao = [];
+               
+               if(res.operationSuccess == true)
+                   {
+                        for(var x=0;x<res.doisValoresList.length;x++)
+                        {
+                            planos = res.doisValoresList[x] ;
+                            if(planos.doisValorType != null)
+                            {
+                                switch (planos.doisValorType.tipo)
+                                {
+                                    case 'TIPO DOCUMENTO':
+                                        $scope.tipoDocumento.push(planos);
+                                        break;
+                                    case 'CATEGORIA':
+                                        $scope.categoria.push(planos);
+                                        break;
+                                    case 'CADASTROMAIS':
+                                        $scope.cadastro.push(planos);
+                                        break;
+                                    case 'INTERVALO':
+                                        $scope.intervalo.push(planos);
+                                        break;
+                                    case 'SITUACAO':
+                                        $scope.situacao.push(planos);
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                console.log(res);
+            }
+
+            doisValorFactory.financeiro(101,$scope,fnFunctionCallback);
+
+            var fnCallbackConta = function (res){
+               $scope.conta = [];
+               debugger
+               
+               if(res.operationSuccess == true)
+               {
+                    $scope.conta = res.bancoList;
+               }
+            }
+
+
+            qat.model.select.util("financeiro/api/conta/fetchPage",true,new qat.model.doisValoresInquiryRequest(0, 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackConta);
+
+            $scope.enderecos = [];
+
+            
+
 
             var fnCallBack = function(res,scope) {
                 debugger
@@ -296,7 +345,7 @@
                     initLoad = true;
                     var dDate  = new Date();
                     var dDocId = scope.titulo.docId;
-                    if((scope.titulo)&&(scope.titulo.formaCadastro.value))
+                    if((scope.titulo)&&(scope.titulo.formaCadastro) && (scope.titulo.formaCadastro.value))
                     {
                         for(x=0;x < parseInt(scope.titulo.formaCadastro.value,10);x++)
                         {
@@ -335,15 +384,16 @@
                 }
             }
             $scope.saveContasPagar = function() {
-                debugger
+                
 
-                $scope.titulo.listBaixa[0].dataBaixa = ($scope.titulo.dataPagamento).getTime();
+                $scope.titulo.listBaixa[0].dataBaixa = $scope.titulo ? $scope.titulo.dataPagamento.getTime() : (new Date()).getTime();
                 $scope.titulo.listBaixa[0].observacao = "";
                 $scope.titulo.listBaixa[0].juros  = 0;
                 $scope.titulo.listBaixa[0].multa = 0;
                 $scope.titulo.listBaixa[0].desconto = 0;
 
-
+                fModels.amont($scope.titulo.listBaixa[0],"INSERT");
+                
                 $scope.titulo.situacao = { id : 392}
                 var oObject = fModels.amont(qat.model.fnFormaPagar($scope.titulo,"INSERT"),"INSERT");
 

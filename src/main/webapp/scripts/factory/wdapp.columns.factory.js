@@ -1083,13 +1083,14 @@
 				        ];
 					},
 					contasPagar : function(vm,_html,_actions) {
+						debugger
 				    return  [
 				    		DTColumnBuilder.newColumn(null).withTitle(_html).notSortable()
 				            .renderWith(function(data, type, full, meta) {
 				                vm.selected[full.id] = false;
 				                return '<input type="checkbox" ng-model="vm.selected[' + data.id + ']" ng-click="vm.toggleOne(vm.selected)"/>';
 				            }).withOption('width', '10px'),
-				            DTColumnBuilder.newColumn('id').withTitle('ID').withOption('width', '10px'),
+				            DTColumnBuilder.newColumn('id').withTitle('ID').withOption('width', '10px').notVisible(),
 				            DTColumnBuilder.newColumn(null).withTitle('Fornecedor').renderWith(function(data, type, full, meta) {
 				            var shtml = "";
 			            	if(data.fornecedor)
@@ -1156,11 +1157,27 @@
 
 			            	return shtml;
 			            	}).withOption('width', '10px'),
-			            	DTColumnBuilder.newColumn(null).withTitle('Valor').renderWith(function(data, type, full, meta) {
+			            	DTColumnBuilder.newColumn(null).withTitle('Valor Doc').renderWith(function(data, type, full, meta) {
 				            var shtml = "";
 			            	if(data.valor)
 							{	
 								shtml = '<span>'+numeral(data.valor).format('$0.0')+'</span>';
+							}
+
+			            	return shtml;
+			            	}).withOption('width', '10px'),
+			            	DTColumnBuilder.newColumn(null).withTitle('Valor Pago').renderWith(function(data, type, full, meta) {
+				            var shtml = "";
+				            var dValor = 0;
+				            debugger
+			            	if(data.listBaixa)
+							{	
+								for(var x = 0;x < data.listBaixa.length;x++)
+								{
+									dValor = dValor + data.listBaixa[x].valor;
+								}
+								showCase.persons = data.listBaixa
+								shtml = '<a ng-click="showCase.edit(' + 10 + ')"><span>'+numeral(dValor).format('$0.0')+'</span></a>';
 							}
 
 			            	return shtml;
@@ -1170,6 +1187,50 @@
 				            DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
 				            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '100px')
 				    	];
+					},
+					conta : function(vm,_html,_actions) {
+						return  [
+					            DTColumnBuilder.newColumn(null).withTitle(_html).notSortable()
+					            .renderWith(function(data, type, full, meta) {
+					                vm.selected[full.id] = false;
+					                return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
+					            }).withOption('width', '3px'),
+					            DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px').notVisible(),
+					            DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
+					            DTColumnBuilder.newColumn(null).withTitle('Saldo').renderWith(function(data, type, full, meta) {
+					            var shtml = "";
+				            	if(data.saldo)
+								{	
+									shtml = '<span>'+numeral(data.saldo).format('$0.0')+'</span>';
+								}
+
+				            	return shtml;
+				            	}).withOption('width', '10px'),
+					            DTColumnBuilder.newColumn(null).withTitle('Ultima Transação').renderWith(function(data, type, full, meta) {
+					            var shtml = "";
+				            	if(data.dataUltLanc)
+								{	var date = new Date();
+									var formattedDate = moment(data.dataUltLanc).format('DD/MM/YYYY');
+								   	shtml = "<p><b>"+formattedDate+"<b></p>";
+								}
+
+				            	return shtml;
+				            	}).withOption('width', '10px'),
+				            	DTColumnBuilder.newColumn('numeroConta').withTitle('N° Conta'),
+				            	DTColumnBuilder.newColumn('observacao').withTitle('Observação'),
+				            	DTColumnBuilder.newColumn(null).withTitle('Baixas').renderWith(function(data, type, full, meta) {
+					            var shtml = "";
+				            	if(data.listBaixa)
+								{	
+									shtml = "<p><b>"+data.listBaixa.length+"<b></p>";
+								}
+
+				            	return shtml;
+				            	}).withOption('width', '10px'),
+					            DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
+					            DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
+					            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
+								];
 					}
 			};
 	}]);

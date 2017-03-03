@@ -39,11 +39,11 @@
 
        var fnDataSRC = function(json) {
             console.log(json)
-            json['recordsTotal'] = json.contaList.length
-            json['recordsFiltered'] = json.contaList.length
+            json['recordsTotal'] = json.bancoList.length
+            json['recordsFiltered'] = json.bancoList.length
             json['draw'] = 1
             console.log(json)
-            return json.contaList;
+            return json.bancoList;
         }
 
        var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
@@ -70,7 +70,7 @@
            dialogFactory.dialog('views/financeiro/dialog/dCaixa.html',"CaixaDeleteController",validationFactory.caixa());
         }
 
-        Datatablessss.getTable('/financeiro/api/contaCorrente/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.conta(vm,createdRow,$scope,FiltersFactory.conta()), tableColumnsFactory.conta(vm,titleHtml,actionsHtml));
+        Datatablessss.getTable('/financeiro/api/conta/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.conta(vm,createdRow,$scope,FiltersFactory.conta()), tableColumnsFactory.conta(vm,titleHtml,actionsHtml));
 
         function toggleAll(selectAll, selectedItems) {
             for (var id in selectedItems) {
@@ -102,9 +102,35 @@
 })();
 (function() {
     angular.module('wdApp.apps.conta.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('CfopInsertController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa,toastr) {
+        .controller('ContaInsertController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa, SysMgmtData,doisValorFactory,toastr) {
             var vm = this;
             $scope.conta = {};
+
+
+            var fnFunctionCallback = function (res){
+               $scope.tipoConta = [];
+               
+               
+               if(res.operationSuccess == true)
+                   {
+                        for(var x=0;x<res.doisValoresList.length;x++)
+                        {
+                            planos = res.doisValoresList[x] ;
+                            if(planos.doisValorType != null)
+                            {
+                                switch (planos.doisValorType.tipo)
+                                {
+                                    case 'TIPO CONTA':
+                                        $scope.tipoConta.push(planos);
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                console.log(res);
+            }
+
+            doisValorFactory.financeiro(102,$scope,fnFunctionCallback);
             
             var fnCallBack = function(res) {
                 if(res.operationSuccess == true)
@@ -117,14 +143,14 @@
                    toastr.error('County form error, please correct and resubmit.', 'Error');
                 }
             }
-            $scope.saveCfop = function() {
-
-                var oObject = fModels.amont(qat.model.fnCfop($scope.conta,"INSERT"),"INSERT");
+            $scope.saveConta = function() {
+              debugger
+                var oObject = fModels.amont(qat.model.fnConta($scope.conta,"INSERT"),"INSERT");
 
                 SysMgmtData.processPostPageData("main/api/request", {
-                    url: "fiscal/api/conta/insert",
+                    url: "financeiro/api/conta/insert",
                     token: $rootScope.authToken,
-                    request: new qat.model.reqCfop(oObject, true, true)
+                    request: new qat.model.reqConta(oObject, true, true)
                 }, function(res) {
                   
                     fnCallBack(res);
@@ -134,7 +160,7 @@
 })();
 (function() {
     angular.module('wdApp.apps.conta.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('CfopUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        .controller('ContaUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
             var vm = this;
             $scope.conta = {};
             $scope.conta = $rootScope.conta;
@@ -146,7 +172,7 @@
 })();
 (function() {
     angular.module('wdApp.apps.conta.delete', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('CfopDeleteController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        .controller('ContaDeleteController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
             var vm = this;
             $scope.conta = {};
             $scope.conta = $rootScope.conta;
@@ -158,7 +184,7 @@
 })();
 (function() {
     angular.module('wdApp.apps.conta.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('CfopViewController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        .controller('ContaViewController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
             var vm = this;
             $scope.conta = {};
             $scope.conta = $rootScope.conta;
@@ -170,7 +196,7 @@
 })();
 (function() {
 
-    var app = angular.module('wdApp.apps.produtoss');
+    var app = angular.module("wdApp.apps.conta.delete");
 
     app.controller('ComplexController', [
         '$scope', '$element', 'title', 'close',
@@ -239,7 +265,7 @@ angular.module('wdApp.apps.conta.select', ['ngSanitize', 'ui.select'])
 
     return out;
   };
-}).controller('CfopSelectController', contaSelectController);
+}).controller('ContaSelectController', contaSelectController);
 
     function contaSelectController($scope, $http, $timeout, $interval,dialogFactory,validationFactory) {
         var vm = this;
@@ -252,13 +278,13 @@ angular.module('wdApp.apps.conta.select', ['ngSanitize', 'ui.select'])
        if(res.operationSuccess == true)
        {
 
-           vm.conta = res.contaList;
+           vm.conta = res.bancoList;
 
         }
     }
 
- qat.model.select.util("fiscal/api/conta/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackCfop);
-  } 
+ qat.model.select.util("financeiro/api/conta/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackCfop);
+} 
 
 vm.addCfop = function(){
 

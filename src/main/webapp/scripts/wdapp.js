@@ -300,6 +300,8 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.servicoSelect'
 	            ,'wdApp.apps.plano.teste'
 
+	            ,'wdApp.apps.conta.select'
+
 	            ,'wdApp.apps.select.formaPg'
 	            ,'wdApp.apps.uniMed.select'
 	            ,'wdApp.apps.categoria.select'

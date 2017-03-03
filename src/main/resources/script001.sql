@@ -10,7 +10,20 @@ INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
 (106,'SITUACAO', 'SITUACAO' , 1477075035443, 'System');
 
 
+INSERT INTO pagina(id ,pagina,parentid, tabelaenumvalue, create_date, create_user)
+    VALUES (102,'Conta', 0, 100, 1477075035443, 'System');
 
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
+    VALUES (110,'TIPO CONTA', 'TIPO CONTA', 1477075035443, 'System');
+
+
+
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+
+('1', 'Caixa','Caixa',110,102, 1477075035443, 'System'),
+('2', 'Banco Itaú','Banco Itaú',110,102, 1477075035443, 'System');
 
 
 INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
