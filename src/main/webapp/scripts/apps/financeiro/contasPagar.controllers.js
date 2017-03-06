@@ -7,6 +7,7 @@
         vm.selected = {};
         vm.selectAll = false;
         vm.toggleAll = toggleAll;
+        vm.toggleAlls = toggleAlls;
         vm.toggleOne = toggleOne;
         vm.status = status;
         vm.message = '';
@@ -14,6 +15,7 @@
         vm.delete = deleteRow;
         vm.dtInstance = {};
         vm.persons = {};
+        vm.baixas = [];
 
         $scope.contasPagar = {
         };
@@ -69,43 +71,19 @@
                 '<span class="caret"></span>'+
               '</button>'+
               '<ul class="dropdown-menu" style="height:120px" aria-labelledby="dropdownMenu1">'+
-                '<li><a href="#"><span class="fa fa-trash"></span> Deletar</a></li>'+
-                '<li><a href="#"><span class="glyphicon glyphicon-edit"></span> Alterar</a></li>'+
-                '<li><a href="#"><span class="glyphicon glyphicon-print"></span> Emitir Recibo</a></li>'+
-                '<li><a href="#"><span class="fa fa-usd">                </span> Pagar</a></li>'+
+                '<li><a href="javaScript:;" ng-click="showCase.edit(showCase.persons[' + data.id + '])"><span class="fa fa-trash"></span> Deletar</a></li>'+
+                '<li><a href="javaScript:;" ng-click="showCase.edit(showCase.persons[' + data.id + '])"><span class="glyphicon glyphicon-edit"></span> Alterar</a></li>'+
+                '<li><a href="javaScript:;" ng-click="showCase.edit(showCase.persons[' + data.id + '])"><span class="glyphicon glyphicon-print"></span> Emitir Recibo</a></li>'+
+                '<li><a href="javaScript:;" ng-click="showCase.edit(showCase.persons[' + data.id + '])"><span class="fa fa-usd">                </span> Pagar</a></li>'+
               '</ul>'+
             '</div>'
         }
 
         function edit(person) {
             debugger
-            var table = '<table class="table table-bordered">'+
-    '<thead>'+
-      '<tr>'+
-        '<th>Firstname</th>'+
-        '<th>Lastname</th>'+
-        '<th>Email</th>'+
-      '</tr>'+
-    '</thead>'+
-    '<tbody>'+
-     ' <tr>'+
-        '<td>John</td>'+
-        '<td>Doe</td>'+
-        '<td>john@example.com</td>'+
-      '</tr>'+
-      '<tr>'+
-        '<td>Mary</td>'+
-        '<td>Moe</td>'+
-        '<td>mary@example.com</td>'+
-      '</tr>'+
-      '<tr>'+
-        '<td>July</td>'+
-        '<td>Dooley</td>'+
-        '<td>july@example.com</td>'+
-      '</tr>'+
-    '</tbody>'+
- '</table>'
-            dialogFactory.dialog('views/financeiro/dialog/dBaixa.html',"ContasPagarUpdateController",function(){$("#teste").append(table)});
+            console.log($(this))
+
+            dialogFactory.dialog('views/financeiro/dialog/dBaixa.html',"ContasPagarUpdateController",function(){$("#teste").append('<p> teste </p>')});
         }
 
         function deleteRow(person) {
@@ -117,6 +95,7 @@
       //  Datatablessss.getTable('/fiscal/api/cfop/fetchPage           ', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cfop(vm,createdRow,$scope,FiltersFactory.cfop()), tableColumnsFactory.cfop(vm,titleHtml,actionsHtml));
 
         function toggleAll(selectAll, selectedItems) {
+          debugger
             for (var id in selectedItems) {
                 if (selectedItems.hasOwnProperty(id)) {
                     selectedItems[id] = selectAll;
@@ -124,6 +103,37 @@
             }
         }
 
+        function toggleAlls(selectAll, selectedItems) {
+debugger
+                    var sTbody = "";
+
+                    for(var x= 0;x < selectAll.length;x++ )
+                    {
+                      sTbody = sTbody +'<tr>'+
+                        '<td>'+selectAll[x].id+'</td>'+
+                        '<td>'+moment(selectAll[x].dataBaixa).format('DD/MM/YYYY')+'</td>'+
+                        '<td>'+selectAll[x].conta[0].descricao+'</td>'+
+                        '<td>'+numeral(selectAll[x].valor).format('$0.0')+'</td>'+
+                      '</tr>';
+                    }
+
+                    var table = '<table class="table table-bordered">'+
+                    '<thead>'+
+                      '<tr>'+
+                        '<th>Id</th>'+
+                        '<th>Data Baixa</th>'+
+                        '<th>Conta</th>'+
+                        '<th>Valor Baixa</th>'+ 
+                      '</tr>'+
+                    '</thead>'+
+                    '<tbody>'+
+                    sTbody +
+                     
+                    '</tbody>'+
+                 '</table>'
+
+                 dialogFactory.dialog('views/financeiro/dialog/dBaixa.html',"ContasPagarUpdateController",function(){$("#teste").append(table)});
+}
         function status() {
         }
 
