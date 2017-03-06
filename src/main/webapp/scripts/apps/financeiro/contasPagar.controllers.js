@@ -11,11 +11,15 @@
         vm.toggleOne = toggleOne;
         vm.status = status;
         vm.message = '';
-        vm.edit = edit;
         vm.delete = deleteRow;
         vm.dtInstance = {};
         vm.persons = {};
         vm.baixas = [];
+
+        vm.fnDelete  = fnDelete;
+        vm.fnEdit    = fnEdit;
+        vm.fnRecibo  = fnRecibo;
+        vm.fnBaixar  = fnBaixar;
 
         $scope.contasPagar = {
         };
@@ -29,7 +33,7 @@
         };
         var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
             'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
-        
+
         function rCallback(nRow, aData) {
             // console.log('row');
         }
@@ -71,19 +75,40 @@
                 '<span class="caret"></span>'+
               '</button>'+
               '<ul class="dropdown-menu" style="height:120px" aria-labelledby="dropdownMenu1">'+
-                '<li><a href="javaScript:;" ng-click="showCase.edit(showCase.persons[' + data.id + '])"><span class="fa fa-trash"></span> Deletar</a></li>'+
+                '<li><a href="javaScript:;" ng-click="showCase.delete(showCase.persons[' + data.id + '])"><span class="fa fa-trash"></span> Deletar</a></li>'+
                 '<li><a href="javaScript:;" ng-click="showCase.edit(showCase.persons[' + data.id + '])"><span class="glyphicon glyphicon-edit"></span> Alterar</a></li>'+
-                '<li><a href="javaScript:;" ng-click="showCase.edit(showCase.persons[' + data.id + '])"><span class="glyphicon glyphicon-print"></span> Emitir Recibo</a></li>'+
-                '<li><a href="javaScript:;" ng-click="showCase.edit(showCase.persons[' + data.id + '])"><span class="fa fa-usd">                </span> Pagar</a></li>'+
+                '<li><a href="javaScript:;" ng-click="showCase.recibo(showCase.persons[' + data.id + '])"><span class="glyphicon glyphicon-print"></span> Emitir Recibo</a></li>'+
+                '<li><a href="javaScript:;" ng-click="showCase.baixar(showCase.persons[' + data.id + '])"><span class="fa fa-usd">                </span> Pagar</a></li>'+
               '</ul>'+
             '</div>'
         }
 
-        function edit(person) {
+        function fnDelete(person) {
             debugger
             console.log($(this))
 
             dialogFactory.dialog('views/financeiro/dialog/dBaixa.html',"ContasPagarUpdateController",function(){$("#teste").append('<p> teste </p>')});
+        }
+
+        function fnEdit(person) {
+            debugger
+            console.log($(this))
+
+            dialogFactory.dialog('views/financeiro/dialog/dBaixa.html',"ContasPagarUpdateController",function(){$("#teste").append('<p> teste </p>')});
+        }
+
+        function fnRecibo(person) {
+            debugger
+            console.log($(this))
+
+            dialogFactory.dialog('views/financeiro/dialog/dBaixa.html',"ContasPagarUpdateController",function(){$("#teste").append('<p> teste </p>')});
+        }
+
+        function fnBaixar(person) {
+            debugger
+            console.log($(this))
+
+            dialogFactory.dialog('views/financeiro/dialog/dBaixaTitulo.html',"ContasPagarUpdateController",function(){$("#teste").append('<p> teste </p>')});
         }
 
         function deleteRow(person) {
@@ -91,11 +116,11 @@
            dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarDeleteController",openDialogUpdateCreate);
         }
 
-        Datatablessss.getTable('/financeiro/api/contasPagar/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.contasPagar(vm,createdRow,$scope,FiltersFactory.contasPagar()), tableColumnsFactory.contasPagar(vm,"",actionsHtml));  
+        Datatablessss.getTable('/financeiro/api/contasPagar/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.contasPagar(vm,createdRow,$scope,FiltersFactory.contasPagar()), tableColumnsFactory.contasPagar(vm,"",actionsHtml));
       //  Datatablessss.getTable('/fiscal/api/cfop/fetchPage           ', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cfop(vm,createdRow,$scope,FiltersFactory.cfop()), tableColumnsFactory.cfop(vm,titleHtml,actionsHtml));
 
         function toggleAll(selectAll, selectedItems) {
-          debugger
+
             for (var id in selectedItems) {
                 if (selectedItems.hasOwnProperty(id)) {
                     selectedItems[id] = selectAll;
@@ -104,7 +129,7 @@
         }
 
         function toggleAlls(selectAll, selectedItems) {
-debugger
+
                     var sTbody = "";
 
                     for(var x= 0;x < selectAll.length;x++ )
@@ -112,7 +137,7 @@ debugger
                       sTbody = sTbody +'<tr>'+
                         '<td>'+selectAll[x].id+'</td>'+
                         '<td>'+moment(selectAll[x].dataBaixa).format('DD/MM/YYYY')+'</td>'+
-                        '<td>'+selectAll[x].conta[0].descricao+'</td>'+
+                        '<td>'+selectAll[x].conta.descricao+'</td>'+
                         '<td>'+numeral(selectAll[x].valor).format('$0.0')+'</td>'+
                       '</tr>';
                     }
@@ -123,17 +148,18 @@ debugger
                         '<th>Id</th>'+
                         '<th>Data Baixa</th>'+
                         '<th>Conta</th>'+
-                        '<th>Valor Baixa</th>'+ 
+                        '<th>Valor Baixa</th>'+
                       '</tr>'+
                     '</thead>'+
                     '<tbody>'+
                     sTbody +
-                     
+
                     '</tbody>'+
                  '</table>'
 
                  dialogFactory.dialog('views/financeiro/dialog/dBaixa.html',"ContasPagarUpdateController",function(){$("#teste").append(table)});
-}
+        }
+
         function status() {
         }
 
@@ -162,7 +188,7 @@ debugger
             $scope.formatterDate = function(iDate) {
                 return $filter('date')(new Date(iDate), 'dd/MM/yyyy');
               };
-           
+
             $scope.today = function() {
                 $scope.dt = new Date();
               };
@@ -295,7 +321,7 @@ debugger
                $scope.cadastro = [];
                $scope.intervalo = [];
                $scope.situacao = [];
-               
+
                if(res.operationSuccess == true)
                    {
                         for(var x=0;x<res.doisValoresList.length;x++)
@@ -332,7 +358,7 @@ debugger
             var fnCallbackConta = function (res){
                $scope.conta = [];
                debugger
-               
+
                if(res.operationSuccess == true)
                {
                     $scope.conta = res.bancoList;
@@ -344,7 +370,7 @@ debugger
 
             $scope.enderecos = [];
 
-            
+
 
 
             var fnCallBack = function(res,scope) {
@@ -380,7 +406,7 @@ debugger
                                 request: new qat.model.reqContasPagar(oObject, true, true)
                             }, function(res) {
                                 if(res.operationSuccess == true)
-                                { 
+                                {
                                     toastr.success(scope.titulo.docId+'-' + x, 'Sucess');
                                 }
                             });
@@ -394,7 +420,7 @@ debugger
                 }
             }
             $scope.saveContasPagar = function() {
-                
+
 
                 $scope.titulo.listBaixa[0].dataBaixa = $scope.titulo ? $scope.titulo.dataPagamento.getTime() : (new Date()).getTime();
                 $scope.titulo.listBaixa[0].observacao = "";
@@ -403,7 +429,7 @@ debugger
                 $scope.titulo.listBaixa[0].desconto = 0;
 
                 fModels.amont($scope.titulo.listBaixa[0],"INSERT");
-                
+
                 $scope.titulo.situacao = { id : 392}
                 var oObject = fModels.amont(qat.model.fnFormaPagar($scope.titulo,"INSERT"),"INSERT");
 

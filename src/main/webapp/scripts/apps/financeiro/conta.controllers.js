@@ -2,7 +2,7 @@
     angular.module('wdApp.apps.conta', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter', 'datatables.bootstrap', 'datatables.columnfilter'])
         .controller('ContaController', ContaController);
 
-    function ContaController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate,Datatablessss,tableOptionsFactory,tableColumnsFactory,FiltersFactory,validationFactory) {
+    function ContaController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate,Datatablessss,tableOptionsFactory,tableColumnsFactory,FiltersFactory,validationFactory,dialogFactory) {
         var vm = this;
         vm.selected = {};
         vm.selectAll = false;
@@ -10,18 +10,67 @@
         vm.toggleOne = toggleOne;
         vm.status = status;
         vm.message = '';
-
+        vm.toggleAllss = toggleAllss;
         vm.dtInstance = {};
         vm.persons = {};
+        vm.selectAlls = {};
 
         $scope.toggle = function() {
             $scope.state = !$scope.state;
         };
 
+
         vm.edit = edit;
         vm.delete = deleteRow;
         vm.dtInstance = {};
         vm.persons = {};
+
+
+        function toggleAllss(selectAlls, selectedItems) {
+
+                var sTbody = "";
+                var aBaixaTitulos = []
+
+                if(selectAlls.listBaixa.length > 0)
+                {
+                    aBaixaTitulos = selectAlls.listBaixa;
+                    for(var x= 0;x < aBaixaTitulos.length;x++ )
+                    {
+
+                      sTbody = sTbody +'<tr>'+
+                        '<td>'+aBaixaTitulos[x].id+'</td>'+
+                        '<td>'+aBaixaTitulos[x].docid+'</td>'+
+                        '<td>'+aBaixaTitulos[x].tipoDoc+'</td>'+
+                        '<td>'+moment(aBaixaTitulos[x].dataVencimento).format('DD/MM/YYYY')+'</td>'+
+                        '<td>'+moment(aBaixaTitulos[x].dataBaixa).format('DD/MM/YYYY')+'</td>'+
+                        '<td>'+numeral(aBaixaTitulos[x].valorTitulo).format('$0.0')+'</td>'+
+                        '<td>'+numeral(aBaixaTitulos[x].valorBaixa).format('$0.0')+'</td>'+
+                        '<td>'+aBaixaTitulos[x].situacao+'</td>'+
+                      '</tr>';
+                    }
+
+                    var table = '<table class="table table-bordered">'+
+                    '<thead>'+
+                      '<tr>'+
+                        '<th>Id</th>'+
+                        '<th>Nº Doc</th>'+
+                        '<th>Tipo Doc</th>'+
+                        '<th>Dt Vendimento</th>'+
+                        '<th>Dt Baixa</th>'+
+                        '<th>Vr Titulo</th>'+
+                        '<th>Vr Baixa</th>'+
+                        '<th>Situação</th>'+
+                      '</tr>'+
+                    '</thead>'+
+                    '<tbody>'+
+                    sTbody +
+
+                    '</tbody>'+
+                 '</table>'
+
+                 dialogFactory.dialog('views/financeiro/dialog/dBaixa.html',"ContasPagarUpdateController",function(){$("#teste").append(table)});
+              }
+        }
 
        function rCallback(nRow, aData) {
             // console.log('row');
@@ -43,6 +92,7 @@
             json['recordsFiltered'] = json.bancoList.length
             json['draw'] = 1
             console.log(json)
+            vm.persons = json.bancoList;
             return json.bancoList;
         }
 
@@ -109,8 +159,8 @@
 
             var fnFunctionCallback = function (res){
                $scope.tipoConta = [];
-               
-               
+
+
                if(res.operationSuccess == true)
                    {
                         for(var x=0;x<res.doisValoresList.length;x++)
@@ -131,7 +181,7 @@
             }
 
             doisValorFactory.financeiro(102,$scope,fnFunctionCallback);
-            
+
             var fnCallBack = function(res) {
                 if(res.operationSuccess == true)
                 {
@@ -152,7 +202,7 @@
                     token: $rootScope.authToken,
                     request: new qat.model.reqConta(oObject, true, true)
                 }, function(res) {
-                  
+
                     fnCallBack(res);
                 });
             };
@@ -284,7 +334,7 @@ angular.module('wdApp.apps.conta.select', ['ngSanitize', 'ui.select'])
     }
 
  qat.model.select.util("financeiro/api/conta/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackCfop);
-} 
+}
 
 vm.addCfop = function(){
 
@@ -292,7 +342,7 @@ vm.addCfop = function(){
 
 
   }
-        
+
 
   vm.disabled = undefined;
   vm.searchEnabled = undefined;

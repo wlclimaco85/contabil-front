@@ -180,7 +180,7 @@ var WebDaptiveAppConfig = {
 
 		$rootScope.main = {
 			brand: 'E-Contábil',
-			name: 'Jonh Snow'
+			name: ''
 		};
 
 		/* Reset error when a new view is loaded */
@@ -208,7 +208,7 @@ var WebDaptiveAppConfig = {
 			delete $rootScope.authToken;
 			delete $rootScope.callingPath;
 			delete $rootScope.displayRoles;
-			$rootScope.main.name = "Jonh Snow";
+			$rootScope.main.name = "";
 			localStorageService.clearAll();
 		};
 

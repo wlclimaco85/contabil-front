@@ -1083,7 +1083,7 @@
 				        ];
 					},
 					contasPagar : function(vm,_html,_actions) {
-						debugger
+
 				    return  [
 				    		DTColumnBuilder.newColumn(null).withTitle(_html).notSortable()
 				            .renderWith(function(data, type, full, meta) {
@@ -1142,7 +1142,7 @@
 			            	DTColumnBuilder.newColumn(null).withTitle('Categoria').renderWith(function(data, type, full, meta) {
 				            var shtml = "";
 			            	if(data.categoria)
-							{	
+							{
 								shtml = '<span>'+data.categoria.descricao+'</span>';
 							}
 
@@ -1151,7 +1151,7 @@
 			            	DTColumnBuilder.newColumn(null).withTitle('Situação').renderWith(function(data, type, full, meta) {
 				            var shtml = "";
 			            	if(data.situacao)
-							{	
+							{
 								shtml = '<span>'+data.situacao.descricao+'</span>';
 							}
 
@@ -1160,7 +1160,7 @@
 			            	DTColumnBuilder.newColumn(null).withTitle('Valor Doc').renderWith(function(data, type, full, meta) {
 				            var shtml = "";
 			            	if(data.valor)
-							{	
+							{
 								shtml = '<span>'+numeral(data.valor).format('$0.0')+'</span>';
 							}
 
@@ -1169,9 +1169,9 @@
 			            	DTColumnBuilder.newColumn(null).withTitle('Valor Pago').renderWith(function(data, type, full, meta) {
 				            var shtml = "";
 				            var dValor = 0;
-				            debugger
+
 			            	if(data.listBaixa)
-							{	
+							{
 								for(var x = 0;x < data.listBaixa.length;x++)
 								{
 									dValor = dValor + data.listBaixa[x].valor;
@@ -1200,7 +1200,7 @@
 					            DTColumnBuilder.newColumn(null).withTitle('Saldo').renderWith(function(data, type, full, meta) {
 					            var shtml = "";
 				            	if(data.saldo)
-								{	
+								{
 									shtml = '<span>'+numeral(data.saldo).format('$0.0')+'</span>';
 								}
 
@@ -1220,9 +1220,17 @@
 				            	DTColumnBuilder.newColumn('observacao').withTitle('Observação'),
 				            	DTColumnBuilder.newColumn(null).withTitle('Baixas').renderWith(function(data, type, full, meta) {
 					            var shtml = "";
+					            var dValor = 0;
+
 				            	if(data.listBaixa)
-								{	
-									shtml = "<p><b>"+data.listBaixa.length+"<b></p>";
+								{
+									for(var x = 0;x < data.listBaixa.length;x++)
+									{
+										dValor = dValor + data.listBaixa[x].valorBaixa;
+									}
+
+									vm.selectAlls = data.listBaixa
+									shtml = '<a ng-click="showCase.toggleAllss(showCase.persons[' + (meta.row)+ '], showCase.selected)"><span>'+numeral(dValor).format('$0.0')+'</span></a>';
 								}
 
 				            	return shtml;
