@@ -75,45 +75,45 @@
                 '<span class="caret"></span>'+
               '</button>'+
               '<ul class="dropdown-menu" style="height:120px" aria-labelledby="dropdownMenu1">'+
-                '<li><a href="javaScript:;" ng-click="showCase.delete(showCase.persons[' + data.id + '])"><span class="fa fa-trash"></span> Deletar</a></li>'+
-                '<li><a href="javaScript:;" ng-click="showCase.edit(showCase.persons[' + data.id + '])"><span class="glyphicon glyphicon-edit"></span> Alterar</a></li>'+
-                '<li><a href="javaScript:;" ng-click="showCase.recibo(showCase.persons[' + data.id + '])"><span class="glyphicon glyphicon-print"></span> Emitir Recibo</a></li>'+
-                '<li><a href="javaScript:;" ng-click="showCase.baixar(showCase.persons[' + data.id + '])"><span class="fa fa-usd">                </span> Pagar</a></li>'+
+                '<li><a href="javaScript:;" ng-click="showCase.fnDelete(showCase.persons[' + data.id + '])"><span class="fa fa-trash"></span> Deletar</a></li>'+
+                '<li><a href="javaScript:;" ng-click="showCase.fnEdit(showCase.persons[' + data.id + '])"><span class="glyphicon glyphicon-edit"></span> Alterar</a></li>'+
+                '<li><a href="javaScript:;" ng-click="showCase.fnRecibo(showCase.persons[' + data.id + '])"><span class="glyphicon glyphicon-print"></span> Emitir Recibo</a></li>'+
+                '<li><a href="javaScript:;" ng-click="showCase.fnBaixar(showCase.persons[' + data.id + '])"><span class="fa fa-usd">                </span> Pagar</a></li>'+
               '</ul>'+
             '</div>'
         }
 
         function fnDelete(person) {
-            debugger
+      
             console.log($(this))
 
-            dialogFactory.dialog('views/financeiro/dialog/dBaixa.html',"ContasPagarUpdateController",function(){$("#teste").append('<p> teste </p>')});
+            dialogFactory.dialog('views/util/dialog/dDelete.html',"ContasPagarUpdateController",validationFactory.contasPagar());
         }
 
         function fnEdit(person) {
-            debugger
+
             console.log($(this))
 
-            dialogFactory.dialog('views/financeiro/dialog/dBaixa.html',"ContasPagarUpdateController",function(){$("#teste").append('<p> teste </p>')});
+            dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarUpdateController",validationFactory.contasPagar());
         }
 
         function fnRecibo(person) {
-            debugger
+
             console.log($(this))
 
-            dialogFactory.dialog('views/financeiro/dialog/dBaixa.html',"ContasPagarUpdateController",function(){$("#teste").append('<p> teste </p>')});
+            dialogFactory.dialog('views/financeiro/dialog/dTituloImprimir.html',"ContasPagarUpdateController",validationFactory.contasPagar());
         }
 
         function fnBaixar(person) {
-            debugger
+        
             console.log($(this))
 
-            dialogFactory.dialog('views/financeiro/dialog/dBaixaTitulo.html',"ContasPagarUpdateController",function(){$("#teste").append('<p> teste </p>')});
+            dialogFactory.dialog('views/financeiro/dialog/dBaixarContasPagar.html',"ContasPagarUpdateController",validationFactory.contasPagar());
         }
 
         function deleteRow(person) {
            $rootScope.contasPagar = person;
-           dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarDeleteController",openDialogUpdateCreate);
+           dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarDeleteController",validationFactory.contasPagar());
         }
 
         Datatablessss.getTable('/financeiro/api/contasPagar/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.contasPagar(vm,createdRow,$scope,FiltersFactory.contasPagar()), tableColumnsFactory.contasPagar(vm,"",actionsHtml));
@@ -130,6 +130,14 @@
 
         function toggleAlls(selectAll, selectedItems) {
 
+            SysMgmtData.processPostPageData("main/api/request", {
+                url: "financeiro/api/contasPagar/fetchPage",
+                token: $rootScope.authToken,          //_iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
+                request: new qat.model.empresaInquiryRequest(0, true, $rootScope.user.user, selectAll, null,null)
+            }, function(res) {
+              //  debugger
+                $scope.cliente = res.clienteList;
+            });
                     var sTbody = "";
 
                     for(var x= 0;x < selectAll.length;x++ )

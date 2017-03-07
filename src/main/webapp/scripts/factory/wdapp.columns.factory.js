@@ -1177,7 +1177,7 @@
 									dValor = dValor + data.listBaixa[x].valor;
 								}
 								vm.selectAll = data.listBaixa
-								shtml = '<a ng-click="showCase.toggleAlls(showCase.selectAll, showCase.selected)"><span>'+numeral(dValor).format('$0.0')+'</span></a>';
+								shtml = '<a ng-click="showCase.toggleAlls('+data.id+', showCase.selected)"><span>'+numeral(dValor).format('$0.0')+'</span></a>';
 							}
 
 			            	return shtml;
