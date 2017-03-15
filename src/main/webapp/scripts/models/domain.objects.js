@@ -290,10 +290,10 @@ qat.model.fnFormaPagar = function(_oObjet,_action)
       _emprId = JSON.parse(localStorage.getItem('empresa')).id;
     }
     return     cnaes    = {
-
+              id             : _oObjet.id ? _oObjet.id : null,
               descricao      : _oObjet.descricao,
               numero         : _oObjet.numero,
-              fornecedor     : { id : _oObjet.fornecedor.description.id},
+              fornecedor     : { id : _oObjet.fornecedor ? _oObjet.fornecedor.description.id : null},
               parcela        : _oObjet.parcela,
               formapg        : _oObjet.formapg ? { id : _oObjet.formapg ? _oObjet.formapg.id : null} : null,
               dataEmissao    : _oObjet.dataEmissao ? _oObjet.dataEmissao.getTime() : null,

@@ -39,6 +39,14 @@
 					object.modifyUser = user;
 					object.emprId = empresa;
 					object.modelAction = "UPDATE"
+
+				}else if(action === "DELETE")
+				{
+					object.transactionId = transactionId;
+					object.modifyDateUTC = (new Date()).getTime();
+					object.modifyUser = user;
+					object.emprId = empresa;
+					object.modelAction = "DELETE"
 				}
 				else
 				{
@@ -46,7 +54,7 @@
 					object.modifyDateUTC = (new Date()).getTime();
 					object.modifyUser = user;
 					object.emprId = empresa;
-					object.modelAction = "DELETE"
+					object.modelAction = "NONE"
 				}
 
 				console.log($rootScope)
