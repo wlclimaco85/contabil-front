@@ -1,0 +1,151 @@
+            <div class="modal fade">
+                <div class="modal-dialog" style="width : 70%">
+                    <div class="modal-content">
+                        <form  id="contasPagarForm">
+                            <div class="modal-header">
+                                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Editar Contas Pagar</h4>
+                            </div>
+                            <div class="modal-body">
+                            <div class = "row">
+                                <div class="form-group col-sm-8" style="margin-top:26px">
+                                        <div class="inputClass input-group">
+            <span class="InputSign input-group-addon" target="fin_valor">
+                <span title="Valor monetário" class="fa fa-user"></span>
+            </span>
+                                        <div angucomplete-alt id="ex1"
+                                          placeholder="Buscar Clientes"
+                                          maxlength="50"
+                                          pause="100"
+                                          selected-object="titulo.fornecedor"
+                                          local-data="cliente"
+                                          search-fields="nome"
+                                          title-field="nome"
+                                          minlength="1"
+                                          ng-model="titulo.fornecedor"
+                                          input-class="form-control form-control-small"
+                                          match-class="highlight">
+
+                                          </div>
+</div>
+                                </div>
+
+                            </div>
+                                        <div class="row col-sm-12">
+        <div class="form-group col-sm-6">
+            <label for="exampleInputEmail1">Descrição</label>
+            <textarea class="form-control" ng-model="titulo.descricao" rows="5" ></textarea>
+        </div>
+        <div class="col-sm-6">
+            <div class="col-sm-12">
+                <div class="row col-sm-6" >
+                    <label for="exampleInputPassword1">Tipo de documento</label>
+                    <div class="row">
+                        <ui-select ng-model="titulo.tipoDoc" theme="bootstrap">
+                            <ui-select-match placeholder="Escolha o Tipo de documento ...">{{$select.selected.descricao}}</ui-select-match>
+                            <ui-select-choices repeat="item in tipoDocumento | filter: $select.search">
+                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="col-sm-6" style="margin-left:1%" >
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Data Emissão</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-model="titulo.dataEmissao" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"   uib-datepicker-popup="{{format}}"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open1()">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row col-sm-12">
+                    <div class="col-sm-6" style="margin-top:1%">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Data do vencimento</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" ng-model="titulo.dataVencimento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"   uib-datepicker-popup="{{format}}"/>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open2()">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" style="margin-top:1%">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Data do pagamento</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" ng-model="titulo.dataPagamento" is-open="popup3.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"   uib-datepicker-popup="{{format}}"/>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open3()">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    <div class="row col-sm-12">
+        <div class="form-group col-sm-6">
+            <label for="exampleInputEmail1">Observações</label>
+            <textarea class="form-control" ng-model="titulo.observacao" rows="5" ></textarea>
+        </div>
+        <div class="row col-sm-6">
+        <div class="col-sm-12">
+        <div ng-show="titulo.pagarAgora == false" ng-hide="titulo.pagarAgora == true">
+            <div class="form-group col-sm-6">
+                <label for="exampleInputPassword1">Valor do titulo</label>
+                <div class="inputClass input-group">
+                    <span class="InputSign input-group-addon" target="fin_valor">
+                        <span title="Valor monetário" class="fa fa-usd"></span>
+                    </span>
+                    <input type="text" id="fin_valor" ng-model="titulo.valor" class="form-control InputNum RequiredField WithValidate" value="" autocomplete="off" name="valor" especialtype="money" data-thousands="." data-decimal="," data-precision="2" decimal="15,2">
+                </div>
+            </div>
+        </div>
+
+        </div>
+            <div class="col-sm-12">
+                <div class="row col-sm-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nro. do documento</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">N°</span>
+                            <input type="text" class="form-control cota-socio" ng-model="titulo.docId" name="desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="exampleInputPassword1">Categoria</label>
+                    <div class="row">
+                        <ui-select ng-model="titulo.categoria" theme="bootstrap">
+                            <ui-select-match placeholder="Escolha o Tipo de documento ...">{{$select.selected.descricao}}</ui-select-match>
+                            <ui-select-choices repeat="item in categoria | filter: $select.search">
+                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit"  ng-click="saveContasPagar()" class="btn btn-primary">Gravar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
