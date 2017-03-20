@@ -10,22 +10,27 @@
                                 <div class="row ">
 
                                     <div class="form-group col-sm-4">
-                                        <label for="exampleInputPassword1">Valor cobrado</label>
-                                        <input type="password" ng-disabled="true" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="Valor cobrado">
+                                        <label for="exampleInputPassword1">Valor Titulo</label>
+                                        <div class="inputClass input-group">
+                                            <span class="InputSign input-group-addon" target="fin_valor">
+                                                <span title="Valor monetário" class="fa fa-usd"></span>
+                                            </span>
+                                            <input ng-disabled="true" type="text" id="fin_valor" ng-model="titulo.valor" class="form-control InputNum RequiredField WithValidate" value="" autocomplete="off" name="valor" especialtype="money" data-thousands="." data-decimal="," data-precision="2" decimal="15,2">
+                                        </div>
                                     </div>
                                     <div class="form-group col-sm-4">
-                                        <label for="exampleInputPassword1">Data de pagamento</label>
-                                        <input type="password" ng-disabled="true" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="Valor cobrado">
+                                        <label for="exampleInputPassword1">Data de Pagamento</label>
+                                        <input type="text" ng-disabled="true" class="form-control" ng-model="dataPagamento" name="text" placeholder="Valor cobrado">
                                     </div>
                                     <div class="row col-sm-4">
                                         <div class="form-group">
-                                        <label for="exampleInputEmail1">Data de vencimento</label>
-                                        <input type="text" ng-disabled="true" class="form-control" ng-model="cfop.descricao" name="descricao" placeholder="Data de vencimento">
+                                        <label for="exampleInputEmail1">Data Vencimento</label>
+                                        <input type="text" ng-disabled="true" class="form-control" ng-model="dataVencimento" name="descricao" placeholder="Data de vencimento">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row ">
-                                    <div class=" row col-sm-4">
+                                    <div class=" row col-sm-6">
 				                        <div class="ng-cloak" ng-controller="ContaSelectController as conta">
 				                            <div class="col-sm-12 ">
 				                                <div class="form-group">
@@ -43,34 +48,69 @@
 				                            </div>
 				                        </div>
 				                    </div>
-                                    <div class="form-group col-sm-4">
-                                        <label for="exampleInputPassword1">Valor do PAGO</label>
-                                        <input type="password"  class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="R$0,00">
+
+                                    <div class="form-group col-sm-3">
+                                        <label for="exampleInputPassword1">Valor a Pagar</label>
+                                         <div class="inputClass input-group">
+                                            <span class="InputSign input-group-addon" target="fin_valor">
+                                                <span title="Valor monetário" class="fa fa-usd"></span>
+                                            </span>
+                                            <input type="text" id="fin_valor" ng-model="titulo.listBaixa[0].valor" class="form-control InputNum RequiredField WithValidate" value="" autocomplete="off" name="valor" especialtype="money" data-thousands="." data-decimal="," data-precision="2" decimal="15,2">
+                                        </div>
                                     </div>
-                                    <div class="form-group col-sm-4">
+                                    <div class="form-group col-sm-3">
                                         <label for="exampleInputPassword1">Valor JUROS</label>
-                                         <input type="password"  class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="R$0,00">
+                                         <div class="inputClass input-group">
+                                            <span class="InputSign input-group-addon" target="fin_valor">
+                                                <span title="Valor monetário" class="fa fa-usd"></span>
+                                            </span>
+                                            <input type="text" id="fin_valor" ng-model="titulo.listBaixa[0].juros" class="form-control InputNum RequiredField WithValidate" value="" autocomplete="off" name="valor" especialtype="money" data-thousands="." data-decimal="," data-precision="2" decimal="15,2">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row ">
-                                    <div class="form-group col-sm-4">
+                                    <div class="form-group col-sm-3">
                                         <label for="exampleInputPassword1">Valor MULTA</label>
-                                        <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="R$0,00">
+                                         <div class="inputClass input-group">
+                                            <span class="InputSign input-group-addon" target="fin_valor">
+                                                <span title="Valor monetário" class="fa fa-usd"></span>
+                                            </span>
+                                            <input type="text" id="fin_valor" ng-model="titulo.listBaixa[0].multa" class="form-control InputNum RequiredField WithValidate" value="" autocomplete="off" name="valor" especialtype="money" data-thousands="." data-decimal="," data-precision="2" decimal="15,2">
+                                        </div>
                                     </div>
 
-                                    <div class="form-group col-sm-4">
+                                    <div class="form-group col-sm-3">
                                         <label for="exampleInputPassword1">Valor SEGURO</label>
-                                         <input type="password"  class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="R$0,00">
+                                          <div class="inputClass input-group">
+                                            <span class="InputSign input-group-addon" target="fin_valor">
+                                                <span title="Valor monetário" class="fa fa-usd"></span>
+                                            </span>
+                                            <input type="text" id="fin_valor" ng-model="titulo.listBaixa[0].seguro" class="form-control InputNum RequiredField WithValidate" value="" autocomplete="off" name="valor" especialtype="money" data-thousands="." data-decimal="," data-precision="2" decimal="15,2">
+                                        </div>
                                     </div>
-                                    <div class="form-group col-sm-4">
+                                    <div class="form-group col-sm-3">
+                                        <label for="exampleInputPassword1">Desconto</label>
+                                          <div class="inputClass input-group">
+                                            <span class="InputSign input-group-addon" target="fin_valor">
+                                                <span title="Valor monetário" class="fa fa-usd"></span>
+                                            </span>
+                                            <input type="text" id="fin_valor" ng-model="titulo.listBaixa[0].desconto" class="form-control InputNum RequiredField WithValidate" value="" autocomplete="off" name="valor" especialtype="money" data-thousands="." data-decimal="," data-precision="2" decimal="15,2">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-3">
                                         <label for="exampleInputPassword1">OUTRO Valor</label>
-                                         <input type="password"  class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="R$0,00">
+                                          <div class="inputClass input-group">
+                                            <span class="InputSign input-group-addon" target="fin_valor">
+                                                <span title="Valor monetário" class="fa fa-usd"></span>
+                                            </span>
+                                            <input type="text" id="fin_valor" ng-model="titulo.listBaixa[0].outros" class="form-control InputNum RequiredField WithValidate" value="" autocomplete="off" name="valor" especialtype="money" data-thousands="." data-decimal="," data-precision="2" decimal="15,2">
+                                        </div>
                                     </div>
                                 </div>
                           </div>
                           <div class="modal-footer">
                             <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Baixar</button>
+                            <button type="submit"  ng-click="saveBaixaContasPagar()" class="btn btn-primary">Baixar</button>
                           </div>
                         </div>
                       </div>
