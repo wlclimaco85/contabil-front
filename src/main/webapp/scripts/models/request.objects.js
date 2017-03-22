@@ -162,7 +162,13 @@
 		this.returnListPaged = _bPagedList;
 	};
 
-	
+	qat.model.reqDoisValor = function(_oCounty, _bList, _bPagedList)
+	{
+		this.doisValor = _oCounty;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
+
 
 	qat.model.reqContasReceber = function(_oCounty, _bList, _bPagedList)
 	{
@@ -280,6 +286,20 @@
 		this.id = _id;
 		this.emprId = _emprId;
 	//	this.permissaoTypeEnumValue = _permissaoType;
+		this.startPage = _iStartPage;
+		this.sortExpressions = null;
+		this.preQueryCount = _bCount;
+		this.maxPreQueryCount = 0;
+	};
+
+	qat.model.doisValorInquiryRequest = function (_pageId,typeId, _iStartPage, _bCount,_userId,_permissaoType)
+	{
+
+		this.paginaId = _pageId;
+		this.doisValorType = typeId;
+		this.pageSize = 20;
+		this.userId = _userId;
+		this.id = _id;
 		this.startPage = _iStartPage;
 		this.sortExpressions = null;
 		this.preQueryCount = _bCount;
