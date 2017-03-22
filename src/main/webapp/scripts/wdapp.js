@@ -241,6 +241,9 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.contasReceber.update'
 	            ,'wdApp.apps.contasReceber.delete'
 	            ,'wdApp.apps.contasReceber.view'
+	            ,'wdApp.apps.contasReceber.Baixa'
+	            ,'wdApp.apps.contasReceber.baixas'
+	            ,'wdApp.apps.contasReceber.Recibo'
 
 	            ,'wdApp.apps.conta'
 	            ,'wdApp.apps.conta.insert'

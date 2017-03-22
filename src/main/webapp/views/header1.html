@@ -42,7 +42,7 @@
                 <a href="javascript:;" class="dropdown-toggle" uib-dropdown-toggle>
                     <img src="images/anonymity.jpg" alt="" class="img-circle img30_30">
                     <span class="hidden-xs">
-                        <span data-i18n="Jonh Snow"></span>
+                        <span ng-show="user.name">{{user.name}</span>
 						<span ng-show="user.user">({{user.user}})</span>
                     </span>
                 </a>
@@ -75,8 +75,8 @@
                 </ul>
 			</li>
             <li class="dropdown langs text-normal"  uib-dropdown on-toggle="toggled(open)" data-ng-controller="LangController">
-                
-            </li>   
+
+            </li>
             <li class="dropdown hidden-xs" uib-dropdown on-toggle="toggled(open)">
                 <a href="javascript:;" class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-cogs"></i></a>
                 <div class="pull-right dropdown-menu with-arrow panel panel-default admin-options">

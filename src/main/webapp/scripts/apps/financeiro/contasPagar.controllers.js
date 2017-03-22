@@ -94,7 +94,7 @@
 
              $rootScope.contaPagar = person;
 
-            debugger
+
         }
 
         function fnEdit(person) {
@@ -284,7 +284,7 @@
             }
 
             function edit(person) {
-               debugger
+
             }
 
            // $('.toggle-ones').bootstrapToggle('toggle')
@@ -294,7 +294,7 @@
                 token: $rootScope.authToken,
                 request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
             }, function(res) {
-              //  debugger
+              //
                 $scope.cliente = res.clienteList;
             });
             var fnFunctionCallback = function (res){
@@ -339,7 +339,7 @@
 
             var fnCallbackConta = function (res){
                $scope.conta = [];
-               debugger
+
 
                if(res.operationSuccess == true)
                {
@@ -356,7 +356,7 @@
 
 
             var fnCallBack = function(res,scope) {
-                debugger
+
                 if(res.operationSuccess == true)
                 {
                     var ultDate = new Date();
@@ -436,7 +436,7 @@
                 token: $rootScope.authToken,
                 request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
             }, function(res) {
-              //  debugger
+              //
                 $scope.cliente = res.clienteList;
             });
 
@@ -607,7 +607,7 @@
                 fModels.amont($scope.titulo.listBaixa[0],"INSERT");
 */
              //   $scope.titulo.situacao = { id : 392}
-             debugger
+
                 var oObject = fModels.amont(qat.model.fnFormaPagar($scope.titulo,"UPDATE"),"UPDATE");
 
 
@@ -640,15 +640,33 @@
                 token: $rootScope.authToken,          //_iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
                 request: new qat.model.empresaInquiryRequest(0, true, $rootScope.user.user, $scope.titulo.id, null,null)
             }, function(res) {
-                debugger
+
                 var oContasPagar = res.contasPagarList;
+                var valorPago = 0;
+                var sTbody = "<tr></tr>"
+                if(oContasPagar.listBaixa)
+                {
+                	sTbody = "";
+	                for(var x=0;x<oContasPagar.listBaixa.length;x++)
+	                {
+	                	  valorPago = valorPago + oContasPagar.listBaixa[x].valor;
+	                      var aListBaixa = oContasPagar[0].listBaixa[x];
+	                      sTbody = sTbody +'<tr>'+
+	                        '<td>'+aListBaixa.id+'</td>'+
+	                        '<td>'+aListBaixa.createUser+'</td>'+
+	                        '<td>'+moment(aListBaixa.dataBaixa).format('DD/MM/YYYY')+'</td>'+
+	                        '<td>'+aListBaixa.conta.descricao+'</td>'+
+	                        '<td>'+numeral(aListBaixa.valor).format('$0.0')+'</td>'+
+	                      '</tr>';
+                    }
+                }
 //<a href="#" class="btn btn-link active" type="button">Button</a>
                   var sHtml = '<div class="container-fluid">'+
   '<div class="row" style="font-size:100%!important">'+
     '<div class="col-md-12">'+
       '<div class="row">'+
         '<div class="col-md-12">'+
-           '<span style="display : block;font-size:100%!important" class="label label-info">Deseja Realmente deletar o Titulo a PAGAR #<a href="#" class="btn btn-link active" type="button">6664</a></span>'+
+           '<span style="display : block;font-size:100%!important" class="label label-info">Deseja Realmente deletar o Titulo a PAGAR #<a href="#" class="btn btn-link active" type="button">'+oContasPagar.id+'</a></span>'+
         '</div>'+
       '</div>'+
       '<div class="row"></div>'+
@@ -662,9 +680,9 @@
                   '<div class="row"><span class="label label-default">Valor :</span></div>'+
             '</div>'+
             '<div class="col-md-3">'+
-               '<div class="row"><span class="label label-warning">Label</span></div>'+
-               '<div class="row"><span class="label label-warning">Label</span></div>'+
-               '<div class="row"><span class="label label-warning">Label</span></div>'+
+               '<div class="row"><span class="label label-warning">'+oContasPagar.descricao+'</span></div>'+
+               '<div class="row"><span class="label label-warning">'+oContasPagar.docId+'</span></div>'+
+               '<div class="row"><span class="label label-warning">'+numeral(oContasPagar.valor).format('$0.0')+'</span></div>'+
             '</div>'+
             '<div class="col-md-3">'+
                   '<div class="row"><span class="label label-default">Data Vencimento :</span></div>'+
@@ -672,9 +690,9 @@
                   '<div class="row"><span class="label label-default">Status :</span></div>'+
             '</div>'+
             '<div class="col-md-3">'+
-               '<div class="row"><span class="label label-warning">Label</span></div>'+
-               '<div class="row"><span class="label label-warning">Label</span></div>'+
-               '<div class="row"><span class="label label-warning">Label</span></div>'+
+               '<div class="row"><span class="label label-warning">'+moment(oContasPagar.dataVencimento).format("DD/MM/YYYY")+'</span></div>'+
+               '<div class="row"><span class="label label-warning">'+numeral(valorPago).format('$0.0')+'</span></div>'+
+               '<div class="row"><span class="label label-warning">'+oContasPagar.situacao.descricao+'</span></div>'+
             '</div>'+
         '</div>'+
       '</div>'+
@@ -690,91 +708,15 @@
           '<table class="table table-bordered table-hover table-condensed">'+
             '<thead>'+
               '<tr>'+
-                '<th>'+
-                 ' #'+
-                '</th>'+
-                '<th>'+
-                  'Product'+
-                '</th>'+
-                '<th>'+
-                 ' Payment Taken'+
-                '</th>'+
-                '<th>'+
-                  'Status'+
-                '</th>'+
+            		'<th>#</th>'+
+            		'<th>Usuario</th>'+
+	                '<th>Data Pagamento</th>'+
+	                '<th>Conta</th>'+
+	                '<th>Valor</th>'+
               '</tr>'+
             '</thead>'+
             '<tbody>'+
-              '<tr>'+
-                '<td>'+
-                  '1'+
-                '</td>'+
-                '<td>'+
-                  'TB - Monthly'+
-                '</td>'+
-                '<td>'+
-                  '01/04/2012'+
-                '</td>'+
-                '<td>'+
-                  'Default'+
-                '</td>'+
-              '</tr>'+
-              '<tr class="active">'+
-                '<td>'+
-                  '1'+
-                '</td>'+
-                '<td>'+
-                  'TB - Monthly'+
-                '</td>'+
-                '<td>'+
-                  '01/04/2012'+
-                '</td>'+
-                '<td>'+
-                  'Approved'+
-                '</td>'+
-              '</tr>'+
-              '<tr class="success">'+
-                '<td>'+
-                  '2'+
-                '</td>'+
-                '<td>'+
-                  'TB - Monthly'+
-                '</td>'+
-                '<td>'+
-                  '02/04/2012'+
-                '</td>'+
-                '<td>'+
-                  'Declined'+
-                '</td>'+
-              '</tr>'+
-              '<tr class="warning">'+
-                '<td>'+
-                  '3'+
-                '</td>'+
-                '<td>'+
-                 ' TB - Monthly'+
-                '</td>'+
-                '<td>'+
-                 ' 03/04/2012'+
-                '</td>'+
-                '<td>'+
-                 ' Pending'+
-                '</td>'+
-              '</tr>'+
-              '<tr class="danger">'+
-                '<td>'+
-                 ' 4'+
-                '</td>'+
-                '<td>'+
-                 ' TB - Monthly'+
-                '</td>'+
-                '<td>'+
-                 ' 04/04/2012'+
-                '</td>'+
-                '<td>'+
-                  'Call in to confirm'+
-                '</td>'+
-              '</tr>'+
+            sTbody +
             '</tbody>'+
           '</table>'+
         '</div>'+
@@ -786,14 +728,20 @@ $('#delete').append(sHtml);
                });
 
             $scope.saveContasPagar = function() {
-                var oObject = fModels.amont(qat.model.fnFormaPagar($scope.titulo,"INSERT"),"INSERT");
+                var oObject = fModels.amont(qat.model.fnFormaPagar($scope.titulo,"DELETE"),"DELETE");
 
                 SysMgmtData.processPostPageData("main/api/request", {
-                    url: "financeiro/api/contasPagar/insert",
+                    url: "financeiro/api/contasPagar/delete",
                     token: $rootScope.authToken,
                     request: new qat.model.reqContasPagar(oObject, true, true)
                 }, function(res) {
-                    callBack(res);
+                	if(res.operationSuccess == true){
+	                    toastr.success('Deu Certo seu tanga.', 'Sucess');
+	                  }
+	                  else
+	                  {
+	                     toastr.error('County form error, please correct and resubmit.', 'Error');
+	                  }
                 });
             }
         });
@@ -831,15 +779,15 @@ $('#delete').append(sHtml);
 
                 $rootScope.contaPagar = person;
 
-                debugger
+
             }
-debugger
+
             SysMgmtData.processPostPageData("main/api/request", {
                 url: "financeiro/api/contasPagar/fetchPage",
                 token: $rootScope.authToken,          //_iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
                 request: new qat.model.empresaInquiryRequest(0, true, $rootScope.user.user, $rootScope.baixa, null,null)
             }, function(res) {
-              //  debugger
+              //
                 var oContasPagar = res.contasPagarList;
 
                     var sTbody = "";
@@ -878,10 +826,10 @@ debugger
 
                  $( ".table tbody" ).off();
             $( ".table tbody" ).on( "click", ".fnDeleteBaixa", function() {
-              debugger
+
               var iId =  $( this ).attr('id')
               dialogFactory.dialog('views/util/dialog/dDelete.html',"ContasPagarBaixasController",function(){
-                debugger
+
                 a= '<small>Deseja remover baixa com ID</small><strong> : '+iId+'</strong>'
                 $("#delete").append(a);
 /*
@@ -890,7 +838,7 @@ debugger
                     token: $rootScope.authToken,
                     request: new qat.model.reqContasPagar(oObject, true, true)
                 }, function(res) {
-                    debugger
+
                 });
 */
               });
@@ -907,13 +855,13 @@ debugger
     angular.module('wdApp.apps.contasPagar.Baixa', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('ContasPagarBaixaController', function($rootScope, $scope, fModels, SysMgmtData) {
             var vm = this;
-            debugger
+
             $scope.contasPagar = {};
             $scope.titulo = $rootScope.contaPagar;
             dataVencimento =   moment($scope.titulo.dataVencimento).format('DD/MM/YYYY');
             $scope.dataPagamento =   moment(new Date()).format('DD/MM/YYYY');
             $scope.saveBaixaContasPagar = function() {
-debugger
+
                 $scope.titulo.listBaixa[0].id = null;
                 $scope.titulo.listBaixa[0].dataBaixa = (new Date()).getTime();
                 $scope.titulo.listBaixa[0].dataVencimento = $scope.titulo.dataVencimento
@@ -925,7 +873,7 @@ debugger
                     token: $rootScope.authToken,
                     request: new qat.model.reqContasPagar(oObject, true, true)
                 }, function(res) {
-                    debugger
+
                 });
             }
         });
