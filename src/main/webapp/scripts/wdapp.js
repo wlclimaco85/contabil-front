@@ -221,6 +221,7 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.contasPagar.view'
 	            ,'wdApp.apps.contasPagar.Baixa'
 	            ,'wdApp.apps.contasPagar.baixas'
+	            ,'wdApp.apps.contasPagar.Recibo'
 
 
 	            ,'wdApp.apps.formaPg',

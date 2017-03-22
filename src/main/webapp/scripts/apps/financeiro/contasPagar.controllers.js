@@ -87,7 +87,7 @@
 
              $rootScope.contaPagar = person;
 
-            dialogFactory.dialog('views/util/dialog/dDelete.html',"ContasPagarUpdateController",validationFactory.contasPagar());
+            dialogFactory.dialog('views/util/dialog/dDelete.html',"ContasPagarDeleteController",validationFactory.contasPagar());
         }
 
         function fnDeleteBaixa(person) {
@@ -108,7 +108,7 @@
 
             console.log($(this))
 
-            dialogFactory.dialog('views/financeiro/dialog/dTituloImprimir.html',"ContasPagarUpdateController",validationFactory.contasPagar());
+            dialogFactory.dialog('views/financeiro/dialog/dTituloImprimir.html',"ContasPagarReciboController",validationFactory.contasPagar());
         }
 
         function fnBaixar(person) {
@@ -428,7 +428,7 @@
 })();
 (function() {
     angular.module('wdApp.apps.contasPagar.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('ContasPagarUpdateController', function($rootScope, $scope, fModels, SysMgmtData,doisValorFactory) {
+        .controller('ContasPagarUpdateController', function($rootScope, $scope, fModels, SysMgmtData,doisValorFactory,toastr) {
             var vm = this;
 
             SysMgmtData.processPostPageData("main/api/request", {
@@ -591,12 +591,13 @@
               }
 
             $scope.titulo = {};
-            debugger
+
             $scope.titulo = $rootScope.contaPagar;
+            $scope.fornecedor = $rootScope.contaPagar.fornecedor
             console.log($rootScope.contasPagar)
             $scope.saveContasPagar = function() {
 
-
+/*
                 $scope.titulo.listBaixa[0].dataBaixa = $scope.titulo ? $scope.titulo.dataPagamento.getTime() : (new Date()).getTime();
                 $scope.titulo.listBaixa[0].observacao = "";
                 $scope.titulo.listBaixa[0].juros  = 0;
@@ -604,8 +605,9 @@
                 $scope.titulo.listBaixa[0].desconto = 0;
 
                 fModels.amont($scope.titulo.listBaixa[0],"INSERT");
-
+*/
              //   $scope.titulo.situacao = { id : 392}
+             debugger
                 var oObject = fModels.amont(qat.model.fnFormaPagar($scope.titulo,"UPDATE"),"UPDATE");
 
 
@@ -614,7 +616,15 @@
                     token: $rootScope.authToken,
                     request: new qat.model.reqContasPagar(oObject, true, true)
                 }, function(res) {
-                    fnCallBack(res,$scope);
+
+                  if(res.operationSuccess == true){
+                    toastr.success('Deu Certo seu tanga.', 'Sucess');
+                  }
+                  else
+                  {
+                     toastr.error('County form error, please correct and resubmit.', 'Error');
+                  }
+
                 });
             };
         });
@@ -623,9 +633,158 @@
     angular.module('wdApp.apps.contasPagar.delete', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('ContasPagarDeleteController', function($rootScope, $scope, fModels, SysMgmtData) {
             var vm = this;
-            $scope.contasPagar = {};
-            $scope.titulo = $rootScope.contasPagar;
-            console.log($rootScope.contasPagar)
+
+            $scope.titulo = $rootScope.contaPagar;
+            SysMgmtData.processPostPageData("main/api/request", {
+                url: "financeiro/api/contasPagar/fetchPage",
+                token: $rootScope.authToken,          //_iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
+                request: new qat.model.empresaInquiryRequest(0, true, $rootScope.user.user, $scope.titulo.id, null,null)
+            }, function(res) {
+                debugger
+                var oContasPagar = res.contasPagarList;
+//<a href="#" class="btn btn-link active" type="button">Button</a>
+                  var sHtml = '<div class="container-fluid">'+
+  '<div class="row" style="font-size:100%!important">'+
+    '<div class="col-md-12">'+
+      '<div class="row">'+
+        '<div class="col-md-12">'+
+           '<span style="display : block;font-size:100%!important" class="label label-info">Deseja Realmente deletar o Titulo a PAGAR #<a href="#" class="btn btn-link active" type="button">6664</a></span>'+
+        '</div>'+
+      '</div>'+
+      '<div class="row"></div>'+
+      '<div class="row">'+
+        '<div class="row"></div>'+
+        '<div class="col-md-12" style="font-size:100%!important">'+
+            '<div class="row">'+
+            '<div class="col-md-3">'+
+                  '<div class="row"><span class="label label-default">Descrição :</span></div>'+
+                  '<div class="row"><span class="label label-default">N° Doc :</span></div>'+
+                  '<div class="row"><span class="label label-default">Valor :</span></div>'+
+            '</div>'+
+            '<div class="col-md-3">'+
+               '<div class="row"><span class="label label-warning">Label</span></div>'+
+               '<div class="row"><span class="label label-warning">Label</span></div>'+
+               '<div class="row"><span class="label label-warning">Label</span></div>'+
+            '</div>'+
+            '<div class="col-md-3">'+
+                  '<div class="row"><span class="label label-default">Data Vencimento :</span></div>'+
+                  '<div class="row"><span class="label label-default">Valor Pago :</span></div>'+
+                  '<div class="row"><span class="label label-default">Status :</span></div>'+
+            '</div>'+
+            '<div class="col-md-3">'+
+               '<div class="row"><span class="label label-warning">Label</span></div>'+
+               '<div class="row"><span class="label label-warning">Label</span></div>'+
+               '<div class="row"><span class="label label-warning">Label</span></div>'+
+            '</div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="row"></div>'+
+      '<div class="row">'+
+        '<div class="col-md-12">'+
+           '<div class="col-md-4"></div>'+
+           '<div class="col-md-4">'+
+           '<h4>Baixas</h4></div>'+
+           '<div class="col-md-4"></div>'+
+        '</div>'+
+        '<div class="col-md-12">'+
+          '<table class="table table-bordered table-hover table-condensed">'+
+            '<thead>'+
+              '<tr>'+
+                '<th>'+
+                 ' #'+
+                '</th>'+
+                '<th>'+
+                  'Product'+
+                '</th>'+
+                '<th>'+
+                 ' Payment Taken'+
+                '</th>'+
+                '<th>'+
+                  'Status'+
+                '</th>'+
+              '</tr>'+
+            '</thead>'+
+            '<tbody>'+
+              '<tr>'+
+                '<td>'+
+                  '1'+
+                '</td>'+
+                '<td>'+
+                  'TB - Monthly'+
+                '</td>'+
+                '<td>'+
+                  '01/04/2012'+
+                '</td>'+
+                '<td>'+
+                  'Default'+
+                '</td>'+
+              '</tr>'+
+              '<tr class="active">'+
+                '<td>'+
+                  '1'+
+                '</td>'+
+                '<td>'+
+                  'TB - Monthly'+
+                '</td>'+
+                '<td>'+
+                  '01/04/2012'+
+                '</td>'+
+                '<td>'+
+                  'Approved'+
+                '</td>'+
+              '</tr>'+
+              '<tr class="success">'+
+                '<td>'+
+                  '2'+
+                '</td>'+
+                '<td>'+
+                  'TB - Monthly'+
+                '</td>'+
+                '<td>'+
+                  '02/04/2012'+
+                '</td>'+
+                '<td>'+
+                  'Declined'+
+                '</td>'+
+              '</tr>'+
+              '<tr class="warning">'+
+                '<td>'+
+                  '3'+
+                '</td>'+
+                '<td>'+
+                 ' TB - Monthly'+
+                '</td>'+
+                '<td>'+
+                 ' 03/04/2012'+
+                '</td>'+
+                '<td>'+
+                 ' Pending'+
+                '</td>'+
+              '</tr>'+
+              '<tr class="danger">'+
+                '<td>'+
+                 ' 4'+
+                '</td>'+
+                '<td>'+
+                 ' TB - Monthly'+
+                '</td>'+
+                '<td>'+
+                 ' 04/04/2012'+
+                '</td>'+
+                '<td>'+
+                  'Call in to confirm'+
+                '</td>'+
+              '</tr>'+
+            '</tbody>'+
+          '</table>'+
+        '</div>'+
+      '</div>'+
+    '</div>'+
+  '</div>'+
+'</div>';
+$('#delete').append(sHtml);
+               });
+
             $scope.saveContasPagar = function() {
                 var oObject = fModels.amont(qat.model.fnFormaPagar($scope.titulo,"INSERT"),"INSERT");
 
@@ -755,6 +914,7 @@ debugger
             $scope.dataPagamento =   moment(new Date()).format('DD/MM/YYYY');
             $scope.saveBaixaContasPagar = function() {
 debugger
+                $scope.titulo.listBaixa[0].id = null;
                 $scope.titulo.listBaixa[0].dataBaixa = (new Date()).getTime();
                 $scope.titulo.listBaixa[0].dataVencimento = $scope.titulo.dataVencimento
                 $scope.titulo.listBaixa[0].modelAction = "INSERT"
@@ -768,5 +928,13 @@ debugger
                     debugger
                 });
             }
+        });
+})();
+
+(function() {
+    angular.module('wdApp.apps.contasPagar.Recibo', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('ContasPagarReciboController', function($rootScope, $scope, fModels, SysMgmtData) {
+            var vm = this;
+
         });
 })();
