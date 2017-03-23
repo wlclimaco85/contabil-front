@@ -172,7 +172,7 @@
 
 	qat.model.reqContasReceber = function(_oCounty, _bList, _bPagedList)
 	{
-		this.financeiro = _oCounty;
+		this.contasReceber = _oCounty;
 		this.returnList = _bList;
 		this.returnListPaged = _bPagedList;
 	};

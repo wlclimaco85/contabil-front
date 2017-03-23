@@ -631,7 +631,7 @@
 })();
 (function() {
     angular.module('wdApp.apps.contasPagar.delete', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('ContasPagarDeleteController', function($rootScope, $scope, fModels, SysMgmtData) {
+        .controller('ContasPagarDeleteController', function($rootScope, $scope, fModels, SysMgmtData,toastr) {
             var vm = this;
 
             $scope.titulo = $rootScope.contaPagar;
@@ -641,7 +641,7 @@
                 request: new qat.model.empresaInquiryRequest(0, true, $rootScope.user.user, $scope.titulo.id, null,null)
             }, function(res) {
 
-                var oContasPagar = res.contasPagarList;
+                var oContasPagar = res.contasPagarList[0];
                 var valorPago = 0;
                 var sTbody = "<tr></tr>"
                 if(oContasPagar.listBaixa)
@@ -650,7 +650,7 @@
 	                for(var x=0;x<oContasPagar.listBaixa.length;x++)
 	                {
 	                	  valorPago = valorPago + oContasPagar.listBaixa[x].valor;
-	                      var aListBaixa = oContasPagar[0].listBaixa[x];
+	                      var aListBaixa = oContasPagar.listBaixa[x];
 	                      sTbody = sTbody +'<tr>'+
 	                        '<td>'+aListBaixa.id+'</td>'+
 	                        '<td>'+aListBaixa.createUser+'</td>'+
@@ -669,35 +669,35 @@
            '<span style="display : block;font-size:100%!important" class="label label-info">Deseja Realmente deletar o Titulo a PAGAR #<a href="#" class="btn btn-link active" type="button">'+oContasPagar.id+'</a></span>'+
         '</div>'+
       '</div>'+
-      '<div class="row"></div>'+
+      '<div class="row" style="margin-bottom : 5%" ></div>'+
       '<div class="row">'+
         '<div class="row"></div>'+
         '<div class="col-md-12" style="font-size:100%!important">'+
             '<div class="row">'+
             '<div class="col-md-3">'+
-                  '<div class="row"><span class="label label-default">Descrição :</span></div>'+
-                  '<div class="row"><span class="label label-default">N° Doc :</span></div>'+
-                  '<div class="row"><span class="label label-default">Valor :</span></div>'+
+                  '<div class="row"><span class="label-especial label label-default">Descrição :</span></div>'+
+                  '<div class="row"><span class="label-especial label label-default">N° Doc :</span></div>'+
+                  '<div class="row"><span class="label-especial label label-default">Valor :</span></div>'+
             '</div>'+
             '<div class="col-md-3">'+
-               '<div class="row"><span class="label label-warning">'+oContasPagar.descricao+'</span></div>'+
-               '<div class="row"><span class="label label-warning">'+oContasPagar.docId+'</span></div>'+
-               '<div class="row"><span class="label label-warning">'+numeral(oContasPagar.valor).format('$0.0')+'</span></div>'+
+               '<div class="row"><span class="label-especial label label-warning">'+oContasPagar.descricao+'</span></div>'+
+               '<div class="row"><span class="label-especial label label-warning">'+oContasPagar.docId+'</span></div>'+
+               '<div class="row"><span class="label-especial label label-warning">'+numeral(oContasPagar.valor).format('$0.0')+'</span></div>'+
             '</div>'+
             '<div class="col-md-3">'+
-                  '<div class="row"><span class="label label-default">Data Vencimento :</span></div>'+
-                  '<div class="row"><span class="label label-default">Valor Pago :</span></div>'+
-                  '<div class="row"><span class="label label-default">Status :</span></div>'+
+                  '<div class="row"><span class="label-especial label label-default">Data Vencimento :</span></div>'+
+                  '<div class="row"><span class="label-especial label label-default">Valor Pago :</span></div>'+
+                  '<div class="row"><span class="label-especial label label-default">Status :</span></div>'+
             '</div>'+
             '<div class="col-md-3">'+
-               '<div class="row"><span class="label label-warning">'+moment(oContasPagar.dataVencimento).format("DD/MM/YYYY")+'</span></div>'+
-               '<div class="row"><span class="label label-warning">'+numeral(valorPago).format('$0.0')+'</span></div>'+
-               '<div class="row"><span class="label label-warning">'+oContasPagar.situacao.descricao+'</span></div>'+
+               '<div class="row"><span class="label-especial label label-warning">'+moment(oContasPagar.dataVencimento).format("DD/MM/YYYY")+'</span></div>'+
+               '<div class="row"><span class="label-especial label label-warning">'+numeral(valorPago).format('$0.0')+'</span></div>'+
+               '<div class="row"><span class="label-especial label label-warning">'+oContasPagar.situacao.descricao+'</span></div>'+
             '</div>'+
         '</div>'+
       '</div>'+
       '<div class="row"></div>'+
-      '<div class="row">'+
+      '<div class="row" style="margin-bottom : 5%">'+
         '<div class="col-md-12">'+
            '<div class="col-md-4"></div>'+
            '<div class="col-md-4">'+
@@ -727,7 +727,17 @@
 $('#delete').append(sHtml);
                });
 
-            $scope.saveContasPagar = function() {
+            $scope.delete = function() {
+                if($scope.titulo)
+                {
+                    if($scope.titulo.listBaixa)
+                    {
+                        for(var x = 0;x<$scope.titulo.listBaixa.length;x++)
+                        {
+                            $scope.titulo.listBaixa[x].modelAction = "DELETE"
+                        }
+                    }
+                }
                 var oObject = fModels.amont(qat.model.fnFormaPagar($scope.titulo,"DELETE"),"DELETE");
 
                 SysMgmtData.processPostPageData("main/api/request", {
@@ -735,6 +745,7 @@ $('#delete').append(sHtml);
                     token: $rootScope.authToken,
                     request: new qat.model.reqContasPagar(oObject, true, true)
                 }, function(res) {
+
                 	if(res.operationSuccess == true){
 	                    toastr.success('Deu Certo seu tanga.', 'Sucess');
 	                  }
@@ -748,7 +759,7 @@ $('#delete').append(sHtml);
 })();
 (function() {
     angular.module('wdApp.apps.contasPagar.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('ContasPagarViewController', function($rootScope, $scope, fModels, SysMgmtData) {
+        .controller('ContasPagarViewController', function($rootScope, $scope, fModels, SysMgmtData,toastr) {
             var vm = this;
             $scope.contasPagar = {};
             $scope.contasPagar = $rootScope.contasPagar;
@@ -761,7 +772,13 @@ $('#delete').append(sHtml);
                     token: $rootScope.authToken,
                     request: new qat.model.reqContasPagar(oObject, true, true)
                 }, function(res) {
-                    callBack(res);
+                    if(res.operationSuccess == true){
+                      toastr.success('Deu Certo seu tanga.', 'Sucess');
+                    }
+                    else
+                    {
+                       toastr.error('County form error, please correct and resubmit.', 'Error');
+                    }
                 });
             }
         });
@@ -853,7 +870,7 @@ $('#delete').append(sHtml);
 
 (function() {
     angular.module('wdApp.apps.contasPagar.Baixa', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('ContasPagarBaixaController', function($rootScope, $scope, fModels, SysMgmtData) {
+        .controller('ContasPagarBaixaController', function($rootScope, $scope, fModels, SysMgmtData,toastr) {
             var vm = this;
 
             $scope.contasPagar = {};
@@ -873,6 +890,9 @@ $('#delete').append(sHtml);
                     token: $rootScope.authToken,
                     request: new qat.model.reqContasPagar(oObject, true, true)
                 }, function(res) {
+                    if(res.operationSuccess == true){
+                      toastr.success('Deu Certo seu tanga.', 'Sucess');
+                    }
 
                 });
             }

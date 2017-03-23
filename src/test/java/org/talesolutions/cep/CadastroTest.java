@@ -250,7 +250,7 @@ public class CadastroTest {
 	        entitys = new HttpEntity<String>(jsonInString,headers);
 	        result = restTemplate.postForObject( REST_SERVICE_URI + "cadastros/api/cidade/fetchPage/",entitys,  CidadeResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
-	        Assert.assertEquals(result.getCidadeList().size(), 1);
+	        Assert.assertEquals(result.getCidadeList().size(), 5566);
 
 
 //	Assert.assertEquals(result.getCidadeList().get(0).getCodigo(),"codigo_1 - UPDATE");

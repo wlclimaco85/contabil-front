@@ -287,8 +287,6 @@
 
             }
 
-           // $('.toggle-ones').bootstrapToggle('toggle')
-
             SysMgmtData.processPostPageData("main/api/request", {
                 url: "pessoa/api/cliente/fetchPage",
                 token: $rootScope.authToken,
@@ -396,21 +394,19 @@
                     }
                     toastr.success('Deu Certo seu tanga.', 'Sucess');
                 }
-                else
-                {
-                   toastr.error('County form error, please correct and resubmit.', 'Error');
-                }
             }
             $scope.saveContasReceber = function() {
 
+                if($scope.titulo.pagarAgora)
+                {
+                    $scope.titulo.listBaixa[0].dataBaixa = $scope.titulo ? $scope.titulo.dataPagamento.getTime() : (new Date()).getTime();
+                    $scope.titulo.listBaixa[0].observacao = "";
+                    $scope.titulo.listBaixa[0].juros  = 0;
+                    $scope.titulo.listBaixa[0].multa = 0;
+                    $scope.titulo.listBaixa[0].desconto = 0;
 
-                $scope.titulo.listBaixa[0].dataBaixa = $scope.titulo ? $scope.titulo.dataPagamento.getTime() : (new Date()).getTime();
-                $scope.titulo.listBaixa[0].observacao = "";
-                $scope.titulo.listBaixa[0].juros  = 0;
-                $scope.titulo.listBaixa[0].multa = 0;
-                $scope.titulo.listBaixa[0].desconto = 0;
-
-                fModels.amont($scope.titulo.listBaixa[0],"INSERT");
+                    fModels.amont($scope.titulo.listBaixa[0],"INSERT");
+                }
 
                 $scope.titulo.situacao = { id : 392}
                 var oObject = fModels.amont(qat.model.fnFormaPagar($scope.titulo,"INSERT"),"INSERT");

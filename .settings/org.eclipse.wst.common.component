@@ -9,9 +9,6 @@
         <dependent-module archiveName="sysmgmt-implementation-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/sysmgmt-implementation/sysmgmt-implementation">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="sysmgmt-interface-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/sysmgmt-interface/sysmgmt-interface">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="context-root" value="springmvc-angularjs"/>
         <property name="java-output-path" value="/springmvc-angularjs-master/target/classes"/>
     </wb-module>

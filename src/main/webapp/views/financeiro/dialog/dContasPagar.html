@@ -1,49 +1,48 @@
-            <div class="modal fade">
-                <div class="modal-dialog" style="width : 70%">
-                    <div class="modal-content">
-                        <form  id="contasPagarForm">
-                            <div class="modal-header">
-                                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title">Cadastro Contas Pagar</h4>
-                            </div>
-                            <div class="modal-body">
-                            <div class = "row">
-                                <div class="form-group col-sm-8" style="margin-top:26px">
-                                        <div class="inputClass input-group">
-            <span class="InputSign input-group-addon" target="fin_valor">
-                <span title="Valor monetário" class="fa fa-user"></span>
-            </span>
-                                        <div angucomplete-alt id="ex1"
-                                          placeholder="Buscar Clientes"
-                                          maxlength="50"
-                                          pause="100"
-                                          selected-object="titulo.fornecedor"
-                                          local-data="cliente"
-                                          search-fields="nome"
-                                          title-field="nome"
-                                          minlength="1"
-                                          ng-model="titulo.fornecedor"
-                                          input-class="form-control form-control-small"
-                                          match-class="highlight">
 
-                                          </div>
+<div class="modal fade">
+	<div class="modal-dialog" style="width: 70%">
+		<div class="modal-content">
+			<form class="contasPagarForm">
+				<div class="modal-header">
+					<button type="button" class="close" ng-click="close('Cancel')"
+						data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Cadastro Contas Pagar</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="form-group col-sm-8" style="margin-top: 26px">
+							<div class="inputClass input-group">
+								<span class="InputSign input-group-addon" target="fin_valor">
+									<span title="Valor monetário" class="fa fa-user"></span>
+								</span>
+								<div angucomplete-alt id="ex1" placeholder="Buscar Clientes"
+									maxlength="50" pause="100" selected-object="titulo.fornecedor"
+									local-data="cliente" search-fields="nome" title-field="nome"
+									minlength="1" ng-model="titulo.fornecedor"
+									input-class="form-control form-control-small"
+									match-class="highlight"></div>
+							</div>
+						</div>
+						<div class="form-group col-sm-4">
+							<label for="exampleInputPassword1">Pagar agora</label>
+							<div class="row">
+								<!--    <input type="checkbox" ng-model="titulo.pagarAgora" class="toggle-ones" data-width="155" data-toggle="toggle"  style="width: 100%!important;margin-left: 18px" data-on="Sim" data-off="Não" data-onstyle="success" data-offstyle="danger" ng-true-value="'2'" ng-false-value="'1'" ></div> -->
+								<toggle ng-model="titulo.pagarAgora"
+									ng-init="titulo.pagarAgora = false" style="android" on="Sim"
+									off="Não" onstyle="btn-success" offstyle="btn-danger"
+									ng-true-value="'2'" ng-false-value="'1'"></toggle>
+							</div>
+						</div>
+						<!-- -------------------  titulo ----------------- -->
+						<div ng-include="'views/financeiro/apps/titulo.html'"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" ng-click="close('No')"
+							class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<button type="submit" ng-click="saveContasPagar()"
+							class="btn btn-primary">Gravar</button>
+					</div>
+			</form>
+		</div>
+	</div>
 </div>
-                                </div>
-                                <div class="form-group col-sm-4">
-                                <label for="exampleInputPassword1">Pagar agora</label>
-                                    <div class="row">
-                                <!--    <input type="checkbox" ng-model="titulo.pagarAgora" class="toggle-ones" data-width="155" data-toggle="toggle"  style="width: 100%!important;margin-left: 18px" data-on="Sim" data-off="Não" data-onstyle="success" data-offstyle="danger" ng-true-value="'2'" ng-false-value="'1'" ></div> -->
-                                <toggle ng-model="titulo.pagarAgora" ng-init="titulo.pagarAgora = false" style="android" on="Sim" off="Não" onstyle="btn-success" offstyle="btn-danger" ng-true-value="'2'" ng-false-value="'1'"></toggle>
-                                </div>
-                            </div>
-                                    <!-- -------------------  titulo ----------------- -->
-                                    <div ng-include="'views/financeiro/apps/titulo.html'"></div>
-</div>
-                                <div class="modal-footer">
-                                    <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                    <button type="submit"  ng-click="saveContasPagar()" class="btn btn-primary">Gravar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>

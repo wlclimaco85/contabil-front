@@ -11240,6 +11240,11 @@ body {
     width: 200px!important;
 
 }
- .toggle.android .toggle-handle {
+
+.toggle.android .toggle-handle {
     border-radius: 0px;
+}
+
+.label-especial {
+    font-size:100%!important;
 }

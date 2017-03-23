@@ -96,7 +96,7 @@
 			                }
 		                })
 
-			//var sCombo = 
+			//var sCombo =
 
 			return DTOptionsBuilder.newOptions()
 			            .withDOM('frtip')
@@ -312,6 +312,50 @@
 
 			            return oOptions;
 				},
+				contasReceber : function(vm,createdRow,scope, _callback) {
+
+					var buttons = [];
+				      buttons.push(
+			            {
+			                text: '<span class="fa fa-trash"></span>',
+			                key: '1',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasReceber.html',"ContasReceberInsertController",validationFactory.contasReceber,null);
+
+			                }
+		                },
+		                {
+			                text: '<span data-tooltip="Pagar selecionado(s)" id="pag_pagarEmLote" class=""><span class="fa fa-usd"> </span></span>',
+			                key: '2',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasReceber.html',"ContasReceberInsertController",validationFactory.contasReceber,null);
+
+			                }
+		                },
+		                {
+			                text: '<span data-tooltip="Emitir recibo" id="pag_emitirRecibo" class=""><span class="glyphicon glyphicon-print"> </span></span>',
+			                key: '3',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasReceber.html',"ContasReceberInsertController",validationFactory.contasReceber,null);
+
+			                }
+		                },
+		                {
+			                text: 'Nova Conta Receber',
+			                key: '4',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasReceber.html',"ContasReceberInsertController",validationFactory.contasReceber,null);
+
+			                }
+			            })
+
+			            return  padrao(vm,createdRow,scope, _callback , buttons,2);
+
+				},
 				contasPagar : function(vm,createdRow,scope, _callback) {
 
 					var buttons = [];
@@ -354,7 +398,7 @@
 			            })
 
 			            return  padrao(vm,createdRow,scope, _callback , buttons,2);
-					
+
 				},
 				conta : function(vm,createdRow,scope, _callback) {
 
@@ -369,7 +413,7 @@
 
 			                }
 		                },
-		                
+
 		                {
 			                text: 'Nova Conta',
 			                key: '4',
@@ -381,7 +425,7 @@
 			            })
 
 			            return  padrao(vm,createdRow,scope, _callback , buttons,2);
-					
+
 				},
 			};
 	}]);

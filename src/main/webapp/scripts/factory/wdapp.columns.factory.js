@@ -1188,6 +1188,112 @@
 				            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '100px')
 				    	];
 					},
+					contasReceber : function(vm,_html,_actions) {
+
+				    return  [
+				    		DTColumnBuilder.newColumn(null).withTitle(_html).notSortable()
+				            .renderWith(function(data, type, full, meta) {
+				                vm.selected[full.id] = false;
+				                return '<input type="checkbox" ng-model="vm.selected[' + data.id + ']" ng-click="vm.toggleOne(vm.selected)"/>';
+				            }).withOption('width', '10px'),
+				            DTColumnBuilder.newColumn('id').withTitle('ID').withOption('width', '10px').notVisible(),
+				            DTColumnBuilder.newColumn(null).withTitle('Fornecedor').renderWith(function(data, type, full, meta) {
+				            var shtml = "";
+			            	if(data.fornecedor)
+							{
+							   	shtml = '<a id="'+data.fornecedor.id+'">'+data.fornecedor.nome+'</a>';
+							}
+
+			            	return shtml;
+			            }).withOption('width', '10px'),
+				            DTColumnBuilder.newColumn(null).withTitle('Descrição').renderWith(function(data, type, full, meta) {
+				            var shtml = "";
+			            	if(data.descricao)
+							{
+							   	shtml = '<span>'+data.descricao+'</span>';
+							}
+
+			            	return shtml;
+			            	}).withOption('width', '10px'),
+			            	DTColumnBuilder.newColumn(null).withTitle('Data Vencimento').renderWith(function(data, type, full, meta) {
+				            var shtml = "";
+			            	if(data.dataVencimento)
+							{	var date = new Date();
+								var formattedDate = moment(data.dataVencimento).format('DD/MM/YYYY');
+							   	shtml = "<p><b>"+formattedDate+"<b></p>";
+							}
+
+			            	return shtml;
+			            	}).withOption('width', '10px'),
+			            	DTColumnBuilder.newColumn(null).withTitle('Data Pagamento').renderWith(function(data, type, full, meta) {
+				            var shtml = "";
+			            	if(data.dataPagamento)
+							{	var date = new Date();
+								var formattedDate = moment(data.dataPagamento).format('DD/MM/YYYY');
+							   	shtml = "<p><b>"+formattedDate+"<b></p>";
+							}
+
+			            	return shtml;
+			            	}).withOption('width', '10px').notVisible(),
+			            	DTColumnBuilder.newColumn(null).withTitle('Data Emissão').renderWith(function(data, type, full, meta) {
+				            var shtml = "";
+			            	if(data.dataEmissao)
+							{	var date = new Date();
+								var formattedDate = moment(data.dataEmissao).format('DD/MM/YYYY');
+							   	shtml = "<p><b>"+formattedDate+"<b></p>";
+							}
+
+			            	return shtml;
+			            	}).withOption('width', '10px').notVisible(),
+			            	DTColumnBuilder.newColumn(null).withTitle('Categoria').renderWith(function(data, type, full, meta) {
+				            var shtml = "";
+			            	if(data.categoria)
+							{
+								shtml = '<span>'+data.categoria.descricao+'</span>';
+							}
+
+			            	return shtml;
+			            	}).withOption('width', '10px'),
+			            	DTColumnBuilder.newColumn(null).withTitle('Situação').renderWith(function(data, type, full, meta) {
+				            var shtml = "";
+			            	if(data.situacao)
+							{
+								shtml = '<span>'+data.situacao.descricao+'</span>';
+							}
+
+			            	return shtml;
+			            	}).withOption('width', '10px'),
+			            	DTColumnBuilder.newColumn(null).withTitle('Valor Doc').renderWith(function(data, type, full, meta) {
+				            var shtml = "";
+			            	if(data.valor)
+							{
+								shtml = '<span>'+numeral(data.valor).format('$0.0')+'</span>';
+							}
+
+			            	return shtml;
+			            	}).withOption('width', '10px'),
+			            	DTColumnBuilder.newColumn(null).withTitle('Valor Pago').renderWith(function(data, type, full, meta) {
+				            var shtml = "";
+				            var dValor = 0;
+
+			            	if(data.listBaixa)
+							{
+								for(var x = 0;x < data.listBaixa.length;x++)
+								{
+									dValor = dValor + data.listBaixa[x].valor;
+								}
+								vm.selectAll = data.listBaixa
+								shtml = '<a ng-click="showCase.toggleAlls('+data.id+', showCase.selected)"><span>'+numeral(dValor).format('$0.0')+'</span></a>';
+							}
+
+			            	return shtml;
+			            	}).withOption('width', '10px'),
+				    		DTColumnBuilder.newColumn('observacao').withTitle('observacao').notVisible(),
+				            DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
+				            DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
+				            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '100px')
+				    	];
+					},
 					conta : function(vm,_html,_actions) {
 						return  [
 					            DTColumnBuilder.newColumn(null).withTitle(_html).notSortable()

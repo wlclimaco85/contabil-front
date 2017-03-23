@@ -132,6 +132,13 @@
                                 type: 'number',
                             }];
                 },
+                contasReceber : function() {
+                    return [{
+                                type: 'number'
+                            }, {
+                                type: 'number',
+                            }];
+                },
                 conta : function() {
                     return [{
                                 type: 'number'
