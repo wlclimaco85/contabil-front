@@ -177,6 +177,8 @@ import com.qat.samples.sysmgmt.pessoa.model.Fornecedor;
 import com.qat.samples.sysmgmt.pessoa.model.Funcionario;
 import com.qat.samples.sysmgmt.pessoa.model.Medico;
 import com.qat.samples.sysmgmt.pessoa.model.Paciente;
+import com.qat.samples.sysmgmt.pessoa.model.PessoaTipo;
+import com.qat.samples.sysmgmt.pessoa.model.PessoaTypeEnum;
 import com.qat.samples.sysmgmt.pessoa.model.Socio;
 import com.qat.samples.sysmgmt.pessoa.model.Transportador;
 import com.qat.samples.sysmgmt.produto.model.Cofins;
@@ -300,6 +302,8 @@ public class Objects {
 		cliente.setContatoList(new ArrayList<Contato>());
 		cliente.getContatoList().add(insertContato(null, TabelaEnum.CLIENTE, action));
 		cliente.setTabelaEnum(tabela);
+		cliente.setPessoaTipo(new ArrayList<PessoaTipo>());
+		cliente.getPessoaTipo().add(insertPessoaTipo(id,PessoaTypeEnum.CLIENTE,action));
 		cliente.setParentId(id);
 		cliente.setEmprId(EMPID);
 		cliente.setModifyDateUTC(a.getTime());
@@ -310,6 +314,23 @@ public class Objects {
 		cliente.setModelAction(action);
 
 		return cliente;
+	}
+
+	public static PessoaTipo insertPessoaTipo(Integer id, PessoaTypeEnum tabela, PersistenceActionEnum action) {
+		PessoaTipo pessoaTipo = new PessoaTipo();
+		Date a = new Date();
+		pessoaTipo.setId(id);
+		pessoaTipo.setPessoaTypeEnum(tabela);
+		pessoaTipo.setParentId(id);
+		pessoaTipo.setEmprId(EMPID);
+		pessoaTipo.setModifyDateUTC(a.getTime());
+		pessoaTipo.setCreateDateUTC(a.getTime());
+		pessoaTipo.setCreateUser("system");
+		pessoaTipo.setModifyUser("system");
+		pessoaTipo.setProcessId(1);
+		pessoaTipo.setModelAction(action);
+
+		return pessoaTipo;
 	}
 
 	public static Fornecedor insertFornecedor(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {

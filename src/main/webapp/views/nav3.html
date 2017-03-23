@@ -156,5 +156,12 @@
 
             </ul>
         </li>
+        <li ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA') || hasRole('ROLE_EMPRESA')">
+            <a href="#/apps"><i class="fa fa-wrench"></i><span data-i18n="Historico"></span></a>
+            <ul>
+                <li><a href="#/historico/tables/historico"><i class="fa fa-caret-right"></i><span data-i18n="Lista de Notas"></span></a></li>
+
+            </ul>
+        </li>
     </ul>
 </div>

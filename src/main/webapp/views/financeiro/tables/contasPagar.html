@@ -1,35 +1,87 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <div ng-controller="ContasPagarController as showCase">
-    <table datatable dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" class="row-border hover">
-   <!--     <tfoot>
-        <tr>
-            <th>ID
-            </th><th>First Name
-            </th><th>Last Name
-            </th><th>
-            <select id="financeiro_cod_tipoDoc" name="financeiro_cod_tipoDoc">
-                <option value="0"></option>
-                <option value="1">Dinheiro</option>
-                <option value="2">Cheque</option>
-                <option value="3">Boleto</option>
-                <option value="4">Cartão Crédito</option>
-                <option value="5">Cartão Débito</option>
-                <option value="6">Duplicata</option>
-                <option value="7">Carnê</option>
-                <option value="8">Transf. Eletrônica</option>
-                <option value="9">Crédito Loja</option>
-                <option value="10">Vale Alimentação</option>
-                <option value="11">Vale Refeição</option>
-                <option value="12">Vale Presente</option>
-                <option value="13">Vale Combustível</option>
-                <option value="14">Sem documento</option>
-            </select>
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-        </th></tr>
-        </tfoot> -->
-    </table>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class=" row col-sm-12">
+                            <div class="ng-cloak" ng-controller="ContaSelectController as conta">
+                                <div class="col-sm-12 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Conta</label>
+                                        <div class="row">
+                                            <ui-select id="conta" ng-model="filter.conta"
+                                                theme="bootstrap"> <ui-select-match
+                                                placeholder="Formas de Pagamento">{{$select.selected.descricao}}</ui-select-match>
+                                            <ui-select-choices
+                                                repeat="item in conta.conta | filter: $select.search">
+                                            <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                            <small ng-bind-html="item.saldo | highlight: $select.search"></small>
+                                            - </ui-select-choices> </ui-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Periodo Inicio</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control"
+                                        ng-model="filter.inicial" is-open="popup1.opened"
+                                        datepicker-options="dateOptions" ng-required="true"
+                                        close-text="Close" uib-datepicker-popup="{{format}}" /> <span
+                                        class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open1()">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Periodo Final</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control"
+                                        ng-model="filter.final" is-open="popup2.opened"
+                                        datepicker-options="dateOptions" ng-required="true"
+                                        close-text="Close" uib-datepicker-popup="{{format}}" /> <span
+                                        class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open1()">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-primary btn-block active btn-sm">Buscar</button>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <span class="label label-info">Saldo Atual</span>
+                        </div>
+                        <div class="row">
+                            <span class="label label-info">$100,00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table datatable dt-options="showCase.dtOptions" class="row-border hover"></table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table datatable dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" class="row-border hover"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

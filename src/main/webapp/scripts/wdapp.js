@@ -395,6 +395,7 @@ var WebDaptiveAppConfig = {
             ,'gerencia/details/empresa'
             ,'gerencia/tables/tributacao'
             ,'fiscal/tables/regime'
+            ,'historico/tables/historico'
 			];
 
 			//geeric routeine for building route from array

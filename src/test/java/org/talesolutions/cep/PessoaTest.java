@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.Assert;
 //Assert;
 import org.junit.Test;
 import org.springframework.http.HttpEntity;
@@ -258,7 +259,7 @@ public class PessoaTest {
 		entitys = new HttpEntity<String>(requestJson, headers);
 		result = restTemplate.postForObject(REST_SERVICE_URI + "pessoa/api/cliente/insert/", entitys,
 				ClienteResponse.class);
-		//Assert.assertEquals(result.isOperationSuccess(), true);
+		Assert.assertEquals(result.isOperationSuccess(), true);
 
 		// =========== Update
 		// ================================================================
