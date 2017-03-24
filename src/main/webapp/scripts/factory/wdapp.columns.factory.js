@@ -1197,11 +1197,11 @@
 				                return '<input type="checkbox" ng-model="vm.selected[' + data.id + ']" ng-click="vm.toggleOne(vm.selected)"/>';
 				            }).withOption('width', '10px'),
 				            DTColumnBuilder.newColumn('id').withTitle('ID').withOption('width', '10px').notVisible(),
-				            DTColumnBuilder.newColumn(null).withTitle('Fornecedor').renderWith(function(data, type, full, meta) {
+				            DTColumnBuilder.newColumn(null).withTitle('Cliente').renderWith(function(data, type, full, meta) {
 				            var shtml = "";
-			            	if(data.fornecedor)
+			            	if(data.cliente)
 							{
-							   	shtml = '<a id="'+data.fornecedor.id+'">'+data.fornecedor.nome+'</a>';
+							   	shtml = '<a id="'+data.cliente.id+'">'+data.cliente.nome+'</a>';
 							}
 
 			            	return shtml;
