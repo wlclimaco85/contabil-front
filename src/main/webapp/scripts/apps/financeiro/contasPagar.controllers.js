@@ -51,7 +51,7 @@
             json['recordsTotal'] = json.contasPagarList.length
             json['recordsFiltered'] = json.contasPagarList.length
             json['draw'] = 1
-            console.log(json)
+
             return json.contasPagarList;
         }
 
@@ -404,13 +404,16 @@
             $scope.saveContasPagar = function() {
 
 
-                $scope.titulo.listBaixa[0].dataBaixa = $scope.titulo ? $scope.titulo.dataPagamento.getTime() : (new Date()).getTime();
-                $scope.titulo.listBaixa[0].observacao = "";
-                $scope.titulo.listBaixa[0].juros  = 0;
-                $scope.titulo.listBaixa[0].multa = 0;
-                $scope.titulo.listBaixa[0].desconto = 0;
+                if($scope.titulo.pagarAgora)
+                {
+                    $scope.titulo.listBaixa[0].dataBaixa = $scope.titulo ? $scope.titulo.dataPagamento.getTime() : (new Date()).getTime();
+                    $scope.titulo.listBaixa[0].observacao = "";
+                    $scope.titulo.listBaixa[0].juros  = 0;
+                    $scope.titulo.listBaixa[0].multa = 0;
+                    $scope.titulo.listBaixa[0].desconto = 0;
 
-                fModels.amont($scope.titulo.listBaixa[0],"INSERT");
+                    fModels.amont($scope.titulo.listBaixa[0],"INSERT");
+                }
 
                 $scope.titulo.situacao = { id : 392}
                 var oObject = fModels.amont(qat.model.fnFormaPagar($scope.titulo,"INSERT"),"INSERT");
@@ -646,18 +649,18 @@
                 var sTbody = "<tr></tr>"
                 if(oContasPagar.listBaixa)
                 {
-                	sTbody = "";
-	                for(var x=0;x<oContasPagar.listBaixa.length;x++)
-	                {
-	                	  valorPago = valorPago + oContasPagar.listBaixa[x].valor;
-	                      var aListBaixa = oContasPagar.listBaixa[x];
-	                      sTbody = sTbody +'<tr>'+
-	                        '<td>'+aListBaixa.id+'</td>'+
-	                        '<td>'+aListBaixa.createUser+'</td>'+
-	                        '<td>'+moment(aListBaixa.dataBaixa).format('DD/MM/YYYY')+'</td>'+
-	                        '<td>'+aListBaixa.conta.descricao+'</td>'+
-	                        '<td>'+numeral(aListBaixa.valor).format('$0.0')+'</td>'+
-	                      '</tr>';
+                  sTbody = "";
+                  for(var x=0;x<oContasPagar.listBaixa.length;x++)
+                  {
+                      valorPago = valorPago + oContasPagar.listBaixa[x].valor;
+                        var aListBaixa = oContasPagar.listBaixa[x];
+                        sTbody = sTbody +'<tr>'+
+                          '<td>'+aListBaixa.id+'</td>'+
+                          '<td>'+aListBaixa.createUser+'</td>'+
+                          '<td>'+moment(aListBaixa.dataBaixa).format('DD/MM/YYYY')+'</td>'+
+                          '<td>'+aListBaixa.conta.descricao+'</td>'+
+                          '<td>'+numeral(aListBaixa.valor).format('$0.0')+'</td>'+
+                        '</tr>';
                     }
                 }
 //<a href="#" class="btn btn-link active" type="button">Button</a>
@@ -708,11 +711,11 @@
           '<table class="table table-bordered table-hover table-condensed">'+
             '<thead>'+
               '<tr>'+
-            		'<th>#</th>'+
-            		'<th>Usuario</th>'+
-	                '<th>Data Pagamento</th>'+
-	                '<th>Conta</th>'+
-	                '<th>Valor</th>'+
+                '<th>#</th>'+
+                '<th>Usuario</th>'+
+                  '<th>Data Pagamento</th>'+
+                  '<th>Conta</th>'+
+                  '<th>Valor</th>'+
               '</tr>'+
             '</thead>'+
             '<tbody>'+
@@ -746,13 +749,13 @@ $('#delete').append(sHtml);
                     request: new qat.model.reqContasPagar(oObject, true, true)
                 }, function(res) {
 
-                	if(res.operationSuccess == true){
-	                    toastr.success('Deu Certo seu tanga.', 'Sucess');
-	                  }
-	                  else
-	                  {
-	                     toastr.error('County form error, please correct and resubmit.', 'Error');
-	                  }
+                  if(res.operationSuccess == true){
+                      toastr.success('Deu Certo seu tanga.', 'Sucess');
+                    }
+                    else
+                    {
+                       toastr.error('County form error, please correct and resubmit.', 'Error');
+                    }
                 });
             }
         });

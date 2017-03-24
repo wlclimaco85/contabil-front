@@ -46,7 +46,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qat.samples.sysmgmt.produto.model.response.CfopResponse;
 
-import br.com.emmanuelneri.app.model.BuscaCep;
 import br.com.emmanuelneri.app.model.ModelToken;
 import br.com.emmanuelneri.app.model.UploadedFile;
 import br.com.emmanuelneri.app.model.UtilRequest;

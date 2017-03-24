@@ -101,6 +101,8 @@
 			return DTOptionsBuilder.newOptions()
 			            .withDOM('frtip')
 			            .withPaginationType('full_numbers')
+			            .withOption('serverSide', true)
+            			.withOption('paging', true)
 			            .withOption('createdRow', createdRow)
 			            .withOption('headerCallback', function(header) {
 			                if (!vm.headerCompiled) {

@@ -10,6 +10,26 @@
 
       getTable: function(url,dataSrc,request, vm, rCallback, cCallback, recompile,oOption,oColluns){
 
+          var  serverData = function(sSource, aoData, fnCallback, oSettings) {
+debugger
+            //All the parameters you need is in the aoData variable
+            var draw = aoData[0].value;
+            var order = aoData[2].value;
+            var start = aoData[3].value;
+            var length = aoData[4].value;
+
+            //Then just call your service to get the records from server side
+            filterService.execute(start, length, order).then(function(result){
+
+                var records = {
+                        'draw': draw,
+                        'recordsTotal': result.total,
+                        'recordsFiltered': result.filtered,
+                        'data': result.records  
+                    };
+                fnCallback(records);
+            });
+        }
         var _this = this;
         console.log(recompile);
         vm.dtOptions = oOption;
@@ -17,6 +37,7 @@
         // _vm = vm;
         // debugger;
         // _scope = scope;
+        vm.dtOptions.withFnServerData(serverData);
          vm.dtOptions.withOption('ajax', {
                 dataSrc: dataSrc,
                 "contentType": "application/json; charset=utf-8",
@@ -24,8 +45,23 @@
                 "url": "main/api/request",
                 "type": "POST",
                 "data": function(d) {
+                  debugger
                     //   console.log("data");
                     //    d.search = $scope.searchData || {}; //search criteria
+                    var dir = d.order[0].dir;
+                    if(dir == "asc")
+                    {
+                        dir = "Ascending"
+                    }
+                    else
+                    {
+                        dir = "Descending"
+                    }
+                    request.pageSize = d.length;
+                    request.startPage = d.start;
+                    request.columnName1 = (d.order[0].column + 1);
+                    request.direction1 = dir;
+
                     return JSON.stringify({
                         "url": url,
                         "token": $rootScope.authToken,
@@ -65,6 +101,7 @@
         vm.dtColumns = vm.dtColumns = Datatables.genererateColumnDef('getFlavorings');
       });
     }
+
   };
   }]);
   })();
