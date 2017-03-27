@@ -176,6 +176,67 @@
             return json.contasPagarList;
         }
 
+        //===================================
+        $scope.open = function(id) {
+            var reqId = id;
+            var requestedData;
+            var getData = function userDetails(){
+                var defer = $q.defer();
+                $.ajax({
+                    'dataType': 'json',
+                    'type': 'POST',
+                    'contentType': 'application/json',
+                    'url': 'cgi/userNavListsData.py',
+                    'data': JSON.stringify({'requestId':reqId}),
+                    'success': function(data, textStatus, jqXHR, fnCallback){
+                        defer.resolve(data);
+                    },
+
+                });
+                return defer.promise;
+            }
+                getData().then(function(data){
+                    $rootScope.jsonData = data;
+                    $scope.state.submittedClick = false;
+                    $scope.state.submittedClickButton = true;
+                });
+
+        };
+        var vm = this;
+        $scope.$on('handleRequest', function(){
+            $scope.request = requestService.request;
+            $rootScope.requestValue = $scope.request;
+            console.log($scope.request);
+            $rootScope.getTableData();
+        });
+
+        $rootScope.getTableData = function serverData() {
+            console.log($rootScope.requestValue);
+            var req = $rootScope.requestValue;
+            var defer = $q.defer();
+
+            $.ajax({
+                'dataType': 'json',
+                'type': 'POST',
+                'contentType': 'application/json',
+                'url': 'cgi/userNavLists.py',
+                'data': JSON.stringify({'request':req}),
+                'success': function(data, textStatus, jqXHR, fnCallback){
+                    defer.resolve(data);
+                    console.log(data);
+                },
+
+            });
+
+            return defer.promise;
+        }
+        vm.dtOptions = DTOptionsBuilder.fromFnPromise($rootScope.getTableData).withPaginationType('full_numbers').withOption('initComplete', function(settings) {
+            $compile(angular.element('#' + settings.sTableId).contents())($scope);
+        });
+
+
+        //========================================
+
      /*   function actionsHtml(data, type, full, meta) {
             vm.persons[data.id] = data;
             return '<button class="btn btn-info" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
