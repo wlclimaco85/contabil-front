@@ -4,12 +4,12 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-	<meta charset="utf-8"/>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>E-Contábil</title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width">
-	<link rel="icon" type="image/png" href="favicon.png">
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>E-Contábil</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" type="image/png" href="favicon.png">
 
 
   <script src="thirdparty/headjs-1.0.3/dist/1.0.0/head.min.js"></script>
@@ -64,9 +64,9 @@
                "thirdparty/angular-datatables/dist/css/angular-datatables.css",
                "thirdparty/font-awesome/css/font-awesome.min.css",
               "thirdparty/bootstrap/css/bootstrap.min.css",
-              	"thirdparty/angular-toastr/angular-toastr.min.css",
-              	"thirdparty/angular-ag/ag-grid.css",
-              	"thirdparty/angular-ag/theme-fresh.css",
+                "thirdparty/angular-toastr/angular-toastr.min.css",
+                "thirdparty/angular-ag/ag-grid.css",
+                "thirdparty/angular-ag/theme-fresh.css",
               "thirdparty/angular-chartjs/angular-chart.min.css",
               "thirdparty/angular/angular-csp.css",
               "select.css",
@@ -78,9 +78,9 @@
 
 
     </head>
-	<div class="loader" ng-hide="initialized">
-		Carregando...
-	</div>
+  <div class="loader" ng-hide="initialized">
+    Carregando...
+  </div>
        <body data-ng-app="wdApp"
           id="wdApp"
           class="wdApp"
@@ -208,10 +208,15 @@
 
 
         <!-- datatables -->
-      <script src="thirdparty/angular-datatables/vendor/angular-highlightjs/angular-highlightjs.min.js"></script>
-      <script src="thirdparty/angular-resource/angular-resource.min.js"></script>
-      <script src="thirdparty/angular-datatables/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/highlightjs/highlight.pack.js"></script>
 
+    <script src="thirdparty/angular-datatables-master/vendor/backtotop/backtotop.min.js"></script>
+
+    <script src="thirdparty/angular-datatables-master/vendor/angular-highlightjs/angular-highlightjs.min.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/angular-resource/angular-resource.min.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+    <script src="thirdparty/angular-datatables-master/vendor/datatables/media/js/jquery.dataTables.js"></script>
       <script src="thirdparty/angular-datatables-master/vendor/datatables-colreorder/js/dataTables.colReorder.js"></script>
       <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
       <script src="thirdparty/angular-datatables-master/vendor/datatables-colvis/js/dataTables.colVis.js"></script>

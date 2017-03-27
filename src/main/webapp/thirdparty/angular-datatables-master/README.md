@@ -7,7 +7,7 @@ Notes
 
 The required dependencies are:
 
-* [AngularJS](http://angular.org) (tested with version 1.3.0+)
+* [AngularJS](http://angular.org) (tested with version 1.6.0+)
 * [jQuery](http://jquery.com) (tested with version 1.11.0+)
 * [Datatables](https://datatables.net) (tested with version 1.10+)
 
@@ -39,9 +39,10 @@ The files can be downloaded from:
 > The CSS file only contains `Twitter Bootstrap` styles to support datatables.
 
 **With Bower**
+This will install `angular-datatables` for Angular 1.X. For Angular 2 supported version, please navigate to https://github.com/l-lin/angular-datatables/ 
 
 ```
-bower install angular-datatables
+bower install angular-datatables#0.6.0
 ```
 
 ### Installation

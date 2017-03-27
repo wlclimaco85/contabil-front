@@ -88,6 +88,9 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.site'
 	            ,'wdApp.apps.sites'
 	            ,'wdApp.apps.plano'
+	            ,'wdApp.apps.contasPagar.view3'
+	            ,'wdApp.apps.contasPagar.view2'
+	            ,'wdApp.apps.contasPagar.view1'
 
 	            ,'wdApp.apps.usuarios'
 	            ,'wdApp.apps.contatos'

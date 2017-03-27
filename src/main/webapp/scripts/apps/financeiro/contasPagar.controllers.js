@@ -123,7 +123,26 @@
            dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarDeleteController",validationFactory.contasPagar());
         }
 
-        Datatablessss.getTable('/financeiro/api/contasPagar/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.contasPagar(vm,createdRow,$scope,FiltersFactory.contasPagar()), tableColumnsFactory.contasPagar(vm,"",actionsHtml));
+
+     vm.reloadData = reloadData;
+    vm.dtInstance = {};
+
+    function reloadData() {
+        var resetPaging = false;
+        vm.dtInstance.reloadData(callback, resetPaging);
+    }
+
+    function callback(json) {
+        console.log(json);
+    }
+
+       var reloadData = function() {
+
+            var resetPaging = false;
+            vm.dtInstance.reloadData(callback, resetPaging);
+        }
+
+        Datatablessss.getTable('/financeiro/api/contasPagar/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.contasPagar(vm,createdRow,$scope,FiltersFactory.contasPagar(),reloadData), tableColumnsFactory.contasPagar(vm,"",actionsHtml));
       //  Datatablessss.getTable('/fiscal/api/cfop/fetchPage           ', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cfop(vm,createdRow,$scope,FiltersFactory.cfop()), tableColumnsFactory.cfop(vm,titleHtml,actionsHtml));
 
         function toggleAll(selectAll, selectedItems) {
@@ -143,6 +162,13 @@
         }
 
         function status() {
+        }
+
+
+
+
+        function callback(json) {
+            console.log(json);
         }
 
         function toggleOne(selectedItems) {

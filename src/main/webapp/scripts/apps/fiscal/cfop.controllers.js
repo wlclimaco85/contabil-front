@@ -2,7 +2,7 @@
     angular.module('wdApp.apps.produtoss', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter', 'datatables.bootstrap', 'datatables.columnfilter'])
         .controller('RowSelectCtrl', CfopController);
 
-    function CfopController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate,Datatablessss,tableOptionsFactory,tableColumnsFactory,FiltersFactory,validationFactory) {
+    function CfopController($http,$scope, $compile, DTOptionsBuilder, DTColumnBuilder, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate,Datatablessss,tableOptionsFactory,tableColumnsFactory,FiltersFactory,validationFactory,DTInstances   ) {
         var vm = this;
         vm.selected = {};
         vm.selectAll = false;
@@ -13,6 +13,9 @@
 
         vm.dtInstance = {};
         vm.persons = {};
+
+        var url = '/fiscal/api/cfop/fetchPage'
+        var request = new qat.model.empresaInquiryRequest(0, true, null, null, null);
 
         $scope.toggle = function() {
             $scope.state = !$scope.state;
@@ -37,14 +40,6 @@
             $compile(angular.element(row).contents())($scope);
         }
 
-       var fnDataSRC = function(json) {
-            console.log(json)
-            json['recordsTotal'] = json.cfopList.length
-            json['recordsFiltered'] = json.cfopList.length
-            json['draw'] = 1
-            console.log(json)
-            return json.cfopList;
-        }
 
        var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
             'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
@@ -70,7 +65,202 @@
            dialogFactory.dialog('views/fiscal/dialog/dCfop.html',"CfopDeleteController",validationFactory.cfop());
         }
 
-        Datatablessss.getTable('/fiscal/api/cfop/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cfop(vm,createdRow,$scope,FiltersFactory.cfop()), tableColumnsFactory.cfop(vm,titleHtml,actionsHtml));
+     //   Datatablessss.getTable('/fiscal/api/cfop/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cfop(vm,createdRow,$scope,FiltersFactory.cfop()), tableColumnsFactory.cfop(vm,titleHtml,actionsHtml));
+
+
+
+
+       var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
+            'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
+
+
+       vm.dtOptions = DTOptionsBuilder.newOptions()
+          .withFnServerData(
+                function (sSource, aoData, fnCallback, oSettings) {
+                    debugger
+                    for(var x = 0; x < aoData.length;x++)
+                    {
+                        if(aoData[x].name == "order")
+                        {
+                            var dir = aoData[x].value[0].dir;
+                            if(dir == "asc")
+                            {
+                                dir = "Ascending"
+                            }
+                            else
+                            {
+                                dir = "Descending"
+                            }
+                            request.columnName1 = (aoData[x].value[0].column + 1);
+                            request.direction1 = dir;
+                        }
+                        if(aoData[x].name == "draw"){
+                            request.draw = aoData[x].value;
+                        }
+                        if(aoData[x].name == "length"){
+                            request.pageSize = aoData[x].value;
+                        }
+                        if(aoData[x].name == "start"){
+                        request.startPage = (aoData[x].value/10);}
+                        
+                        
+                    }
+                    request.userId = $rootScope.user.user;
+                    $http({
+                        method: 'POST',
+                        url: 'main/api/request',
+                        dataType: "json",
+                        data: JSON.stringify({
+                                "url": url,
+                                "token": $rootScope.authToken,
+                                "request": request}),
+                        headers: {
+                            'Content-type': 'application/json; charset=utf-8'
+                        }
+                    })
+                    .then(function(result) {
+debugger
+                            var records = {
+                                'draw': result.data.resultsSetInfo.startPage,
+                                'recordsTotal': result.data.resultsSetInfo.totalRowsAvailable,
+                                'recordsFiltered': result.data.resultsSetInfo.totalRowsAvailable,
+                                'data': result.data.cfopList
+                            };
+
+                            fnCallback(records);
+
+                    });
+                }
+            )
+ 
+            .withOption('processing', true)
+            .withPaginationType('full_numbers')
+            .withOption("bPaginate", true)
+            .withDisplayLength(10)
+            .withDOM('frtip')
+            .withDataProp('data')
+            .withOption('serverSide', true)
+            .withOption('rowCallback', vm.rowCallback)
+
+
+            .withButtons([{
+                extend: "colvis",
+                fileName: "Data_Analysis",
+                exportOptions: {
+                    columns: ':visible'
+                },
+                exportData: {
+                    decodeEntities: true
+                }
+            }, {
+                extend: "csvHtml5",
+                fileName: "Data_Analysis",
+                exportOptions: {
+                    columns: ':visible'
+                },
+                exportData: {
+                    decodeEntities: true
+                }
+            }, {
+                extend: "pdfHtml5",
+                fileName: "Data_Analysis",
+                title: "Data Analysis Report",
+                exportOptions: {
+                    columns: ':visible'
+                },
+                exportData: {
+                    decodeEntities: true
+                }
+            }, {
+                extend: "copy",
+                fileName: "Data_Analysis",
+                title: "Data Analysis Report",
+                exportOptions: {
+                    columns: ':visible'
+                },
+                exportData: {
+                    decodeEntities: true
+                }
+            }, {
+                extend: "print",
+                //text: 'Print current page',
+                autoPrint: true,
+                exportOptions: {
+                    columns: ':visible'
+                }
+            }, {
+                extend: "excelHtml5",
+                filename: "Data_Analysis",
+                title: "Data Analysis Report",
+                exportOptions: {
+                    columns: ':visible'
+                },
+                //CharSet: "utf8",
+                exportData: {
+                    decodeEntities: true
+                }
+
+            }, {
+                text: 'Novo Empresa',
+                key: '1',
+                action: function(e, dt, node, config) {
+                    ModalService.showModal({
+                        templateUrl: 'views/empresa/dialog/dEmpresa.html',
+                        controller: "NewEmpresaInsertController"
+                    }).then(function(modal) {
+
+
+                        modal.element.modal();
+                        openDialogUpdateCreate();
+                        modal.close.then(function(result) {
+                            $scope.message = "You said " + result;
+                        });
+                    });
+                }
+            }])
+
+        vm.dtColumns = [
+
+                    DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
+                    .renderWith(function(data, type, full, meta) {debugger
+                        vm.selected[full.id] = false;
+                        return '<input type="checkbox" ng-model="vm.selected[' + data.id + ']" ng-click="vm.toggleOne(vm.selected)"/>';
+                    }).withOption('width', '10px'),
+                    DTColumnBuilder.newColumn('id').withTitle('ID').withOption('width', '10px'),
+                    DTColumnBuilder.newColumn('cfop').withTitle('CFOP').withOption('width', '40px'),
+                    DTColumnBuilder.newColumn('natureza').withTitle('Natureza'),
+                    DTColumnBuilder.newColumn('simplificado').withTitle('simplificado').notVisible(),
+                    DTColumnBuilder.newColumn('icms').withTitle('icms').notVisible(),
+                    DTColumnBuilder.newColumn('icmsReduzido').withTitle('icmsReduzido').notVisible(),
+                    DTColumnBuilder.newColumn('margemAgregadaST').withTitle('margemAgregadaST').notVisible(),
+                    DTColumnBuilder.newColumn('cstPrincipal').withTitle('cstPrincipal').notVisible(),
+                    DTColumnBuilder.newColumn('classFiscal').withTitle('classFiscal').notVisible(),
+                    DTColumnBuilder.newColumn('observacao').withTitle('observacao').notVisible(),
+                    DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
+                    DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
+                    DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '100px')
+                ];
+
+        vm.rowCallback = function(nRow, aData ) { //, iDisplayIndex, iDisplayIndexFull) {
+            // Unbind first in order to avoid any duplicate handler (see https://github.com/l-lin/angular-datatables/issues/87)
+            $('td', nRow).unbind('click');
+            $('td', nRow).bind('click', function() {
+                $scope.$apply(function() {
+                    vm.rowClicked(aData);
+                });
+            });
+            return nRow;
+        };
+
+        vm.dtInstance = {};
+        vm.dtInstanceCallback = function(_dtInstance){
+            $log.debug(_dtInstance);
+            vm.dtInstance = _dtInstance;
+        };
+
+         DTInstances.getList().then(function(dtInstances) {
+          console.log('dtInstances: ', dtInstances);
+        });
 
         function toggleAll(selectAll, selectedItems) {
             for (var id in selectedItems) {
@@ -419,3 +609,242 @@ vm.addCfop = function(){
 
 
 })();
+
+(function() {
+    angular.module('wdApp.apps.contasPagar.view1', ['datatables', 'datatables.scroller', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('DataReloadWithAjaxCtrl', DataReloadWithAjaxCtrl);
+
+function DataReloadWithAjaxCtrl($rootScope,DTOptionsBuilder, DTColumnBuilder) {
+    var vm = this;
+    var url = '/fiscal/api/cfop/fetchPage'
+    var request = new qat.model.empresaInquiryRequest(0, true, null, null, null);
+    vm.dtOptions = DTOptionsBuilder.newOptions()
+            .withOption('ajax', {
+
+                dataSrc: function(json) {
+                    console.log(json)
+                    debugger
+                    json['recordsTotal'] = json.cfopList.length
+                    json['recordsFiltered'] = json.cfopList.length
+                    json['draw'] = 1
+                    console.log(json)
+                    return json.cfopList;
+                },
+                "contentType": "application/json; charset=utf-8",
+                "dataType": "json",
+                "url": "main/api/request",
+                "type": "POST",
+                "data": function(d) {
+                    //   console.log("data");
+                    //    d.search = $scope.searchData || {}; //search criteria
+                    return JSON.stringify({
+                        "url": url,
+                        "token": $rootScope.authToken,
+                        "request": new qat.model.empresaInquiryRequest(0, true,null,null,null)
+                    });
+                }
+            })
+        .withOption('stateSave', true)
+        .withScroller()
+        .withOption('deferRender', true)
+        // Do not forget to add the scorllY option!!!
+        .withOption('scrollY', 200)
+        .withPaginationType('full_numbers');
+
+    vm.dtColumns = [
+       DTColumnBuilder.newColumn('id').withTitle('ID').withOption('width', '10px'),
+                    DTColumnBuilder.newColumn('cfop').withTitle('CFOP').withOption('width', '40px'),
+                    DTColumnBuilder.newColumn('natureza').withTitle('Natureza'),
+                    DTColumnBuilder.newColumn('simplificado').withTitle('simplificado').notVisible(),
+                    DTColumnBuilder.newColumn('icms').withTitle('icms').notVisible(),
+                    DTColumnBuilder.newColumn('icmsReduzido').withTitle('icmsReduzido').notVisible(),
+                    DTColumnBuilder.newColumn('margemAgregadaST').withTitle('margemAgregadaST').notVisible(),
+                    DTColumnBuilder.newColumn('cstPrincipal').withTitle('cstPrincipal').notVisible(),
+                    DTColumnBuilder.newColumn('classFiscal').withTitle('classFiscal').notVisible(),
+                    DTColumnBuilder.newColumn('observacao').withTitle('observacao').notVisible(),
+                    DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
+                    DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
+    ];
+    vm.newSource = 'data1.json';
+    vm.reloadData = reloadData;
+    vm.dtInstance = {};
+
+    function reloadData() {
+        var resetPaging = false;
+        vm.dtInstance.reloadData(callback, resetPaging);
+    }
+
+    function callback(json) {
+        console.log(json);
+    }
+}
+})();
+
+(function() {
+    angular.module('wdApp.apps.contasPagar.view2', ['datatables','ngResource', 'datatables.scroller', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('AngularWayChangeDataCtrl', AngularWayChangeDataCtrl);
+
+function AngularWayChangeDataCtrl($resource, DTOptionsBuilder, DTColumnDefBuilder) {
+    var vm = this;
+    vm.persons = $resource('data1.json').query();
+    vm.dtOptions = DTOptionsBuilder.newOptions().withPaginationType('full_numbers');
+    vm.dtColumnDefs = [
+        DTColumnDefBuilder.newColumnDef(0),
+        DTColumnDefBuilder.newColumnDef(1),
+        DTColumnDefBuilder.newColumnDef(2),
+        DTColumnDefBuilder.newColumnDef(3).notSortable()
+    ];
+    vm.person2Add = _buildPerson2Add(1);
+    vm.addPerson = addPerson;
+    vm.modifyPerson = modifyPerson;
+    vm.removePerson = removePerson;
+
+    function _buildPerson2Add(id) {
+        return {
+            id: id,
+            firstName: 'Foo' + id,
+            lastName: 'Bar' + id
+        };
+    }
+    function addPerson() {
+        vm.persons.push(angular.copy(vm.person2Add));
+        vm.person2Add = _buildPerson2Add(vm.person2Add.id + 1);
+    }
+    function modifyPerson(index) {
+        vm.persons.splice(index, 1, angular.copy(vm.person2Add));
+        vm.person2Add = _buildPerson2Add(vm.person2Add.id + 1);
+    }
+    function removePerson(index) {
+        vm.persons.splice(index, 1);
+    }
+}
+})();
+
+
+(function() {
+    angular.module('wdApp.apps.contasPagar.view3', ['datatables','ngResource', 'datatables.scroller', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('ServerSideProcessingCtrl', ServerSideProcessingCtrl);
+
+function ServerSideProcessingCtrl($http,$rootScope,DTOptionsBuilder, DTColumnBuilder) {
+    var vm = this;
+    var url = '/fiscal/api/cfop/fetchPage'
+    var request = new qat.model.empresaInquiryRequest(0, true, null, null, null);
+    vm.dtOptions = DTOptionsBuilder.newOptions()
+    
+.withFnServerData(
+                function (sSource, aoData, fnCallback, oSettings) {
+                    debugger
+                    for(var x = 0; x < aoData.length;x++)
+                    {
+                        if(aoData[x].name == "order")
+                        {
+                            var dir = aoData[x].value[0].dir;
+                            if(dir == "asc")
+                            {
+                                dir = "Ascending"
+                            }
+                            else
+                            {
+                                dir = "Descending"
+                            }
+                            request.columnName1 = (aoData[x].value[0].column + 1);
+                            request.direction1 = dir;
+                        }
+                        if(aoData[x].name == "draw"){
+                            request.draw = aoData[x].value;
+                        }
+                        if(aoData[x].name == "length"){
+                            request.pageSize = aoData[x].value;
+                        }
+                        if(aoData[x].name == "start"){
+                        request.startPage = (aoData[x].value/10);}
+                        
+                        
+                    }
+                    request.userId = $rootScope.user.user;
+                    $http({
+                        method: 'POST',
+                        url: 'main/api/request',
+                        dataType: "json",
+                        data: JSON.stringify({
+                                "url": url,
+                                "token": $rootScope.authToken,
+                                "request": request}),
+                        headers: {
+                            'Content-type': 'application/json; charset=utf-8'
+                        }
+                    })
+                    .then(function(result) {
+debugger
+                            var records = {
+                                'draw': result.data.resultsSetInfo.startPage,
+                                'recordsTotal': result.data.resultsSetInfo.totalRowsAvailable,
+                                'recordsFiltered': result.data.resultsSetInfo.totalRowsAvailable,
+                                'data': result.data.cfopList
+                            };
+
+                            fnCallback(records);
+                            
+                    });
+                }
+            )
+    
+       /*  .withOption('ajax', {
+
+                dataSrc: function(json) {
+                    console.log(json)
+                    debugger
+                    json['recordsTotal'] = json.cfopList.length
+                    json['recordsFiltered'] = json.cfopList.length
+                    json['draw'] = 1
+                    console.log(json)
+                    return json.cfopList;
+                },
+                "contentType": "application/json; charset=utf-8",
+                "dataType": "json",
+                "url": "main/api/request",
+                "type": "POST",
+                "data": function(d) {
+                    //   console.log("data");
+                    //    d.search = $scope.searchData || {}; //search criteria
+                    return JSON.stringify({
+                        "url": url,
+                        "token": $rootScope.authToken,
+                        "request": new qat.model.empresaInquiryRequest(0, true,null,null,null)
+                    });
+                }
+            })*/
+     // or here
+     .withDataProp('data')
+        .withOption('processing', true)
+        .withOption('serverSide', true)
+        .withPaginationType('full_numbers');
+    vm.dtColumns = [
+        DTColumnBuilder.newColumn('id').withTitle('ID'),
+         DTColumnBuilder.newColumn('cfop').withTitle('CFOP').withOption('width', '40px'),
+                    DTColumnBuilder.newColumn('natureza').withTitle('Natureza'),
+                    DTColumnBuilder.newColumn('simplificado').withTitle('simplificado').notVisible(),
+                    DTColumnBuilder.newColumn('icms').withTitle('icms').notVisible(),
+                    DTColumnBuilder.newColumn('icmsReduzido').withTitle('icmsReduzido').notVisible(),
+                    DTColumnBuilder.newColumn('margemAgregadaST').withTitle('margemAgregadaST').notVisible(),
+                    DTColumnBuilder.newColumn('cstPrincipal').withTitle('cstPrincipal').notVisible(),
+                    DTColumnBuilder.newColumn('classFiscal').withTitle('classFiscal').notVisible(),
+                    DTColumnBuilder.newColumn('observacao').withTitle('observacao').notVisible(),
+                    DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
+                    DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible()
+    ];
+
+    vm.reloadData = reloadData;
+    vm.dtInstance = {};
+
+    function reloadData() {
+        var resetPaging = false;
+        vm.dtInstance.reloadData(callback, resetPaging);
+    }
+
+    function callback(json) {
+        console.log(json);
+    }
+}
+})();
+

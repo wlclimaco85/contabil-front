@@ -1,10 +1,10 @@
 (function() {
 'use strict';
 	//var commonAuth = angular.module('wdApp.ajaxCalls.table.option', ['angularModalService','datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter']);
-	var commonAuth = angular.module('wdApp.ajaxCalls.table.option', ['datatables','angularModalService', 'datatables.buttons', 'datatables.light-columnfilter']);
+	var commonAuth = angular.module('wdApp.ajaxCalls.table.option', ['datatables','datatables.scroller','angularModalService', 'datatables.buttons', 'datatables.light-columnfilter']);
     commonAuth.factory('tableOptionsFactory', ['$rootScope', 'DTOptionsBuilder',  'DTColumnBuilder', '$log','$compile','dialogFactory','validationFactory',function($rootScope,DTOptionsBuilder, DTColumnBuilder, $log,$compile,dialogFactory,validationFactory){
 	//commonAuth.factory('tableOptionsFactory', ['ModalService','$rootScope', 'DTOptionsBuilder', 'DTColumnBuilder', '$log','$compile', function(ModalService,$scope,  DTOptionsBuilder,$compile,dialogFactory,validationFactory){
-		function padrao(vm,createdRow,scope, filters,aButtons,sPosition){
+		function padrao(vm,createdRow,scope, filters,aButtons,sPosition,functionReload){
 			var sPos = 1
 			var aCollunsReturn;
 			if(sPosition)
@@ -91,7 +91,8 @@
 			                key: '30',
 			                action: function(e, dt, node, config) {
 
-			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,null);
+			                functionReload();
+			                  //  dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,null);
 
 			                }
 		                })
@@ -101,8 +102,6 @@
 			return DTOptionsBuilder.newOptions()
 			            .withDOM('frtip')
 			            .withPaginationType('full_numbers')
-			            .withOption('serverSide', true)
-            			.withOption('paging', true)
 			            .withOption('createdRow', createdRow)
 			            .withOption('headerCallback', function(header) {
 			                if (!vm.headerCompiled) {
@@ -116,7 +115,12 @@
 			            .withColumnFilter({
 			                aoColumns: filters
 			            })
+			            .withOption('stateSave', true)
 
+			        .withOption('deferRender', true)
+			        // Do not forget to add the scorllY option!!!
+			        .withOption('scrollY', 380)
+			        .withPaginationType('full_numbers')
 
 			            .withBootstrap()
 				        .withOption('responsive', true)
@@ -128,7 +132,7 @@
 				            "sInfoPostFix":    "",
 				            "sInfoThousands":  ",",
 				            "sLengthMenu":     "Mostrando _MENU_ entradas",
-				       //     "sLoadingRecords": '<div class="container"><button class="btn btn-lg" style="backgroud : #1B3975"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></button></div>',
+				            "sLoadingRecords": '<div class="container"><button class="btn btn-lg" style="backgroud : #1B3975"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></button></div>',
 				            "sProcessing":     '<div class="container"><button class="btn btn-lg" style="color : #1B3975;font-size : 50px;background :transparent"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></button></div>',
 				          //  "loadingRecords":  '<div class="container"><h3>Animated button</h3><button class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></button></div>',
 				            "sSearch":         "Buscar: ",
@@ -358,7 +362,7 @@
 			            return  padrao(vm,createdRow,scope, _callback , buttons,2);
 
 				},
-				contasPagar : function(vm,createdRow,scope, _callback) {
+				contasPagar : function(vm,createdRow,scope, _callback,_function) {
 
 					var buttons = [];
 				      buttons.push(
@@ -394,12 +398,12 @@
 			                key: '4',
 			                action: function(e, dt, node, config) {
 
-			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,null);
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,_function);
 
 			                }
 			            })
 
-			            return  padrao(vm,createdRow,scope, _callback , buttons,2);
+			            return  padrao(vm,createdRow,scope, _callback , buttons,2,_function);
 
 				},
 				conta : function(vm,createdRow,scope, _callback) {

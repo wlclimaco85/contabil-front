@@ -32,9 +32,6 @@ function dtRendererService(DTLoadingTemplate) {
     function hideLoading($elem) {
         $elem.show();
         var next = $elem.next();
-        if (DTLoadingTemplate.isLoading(next)) {
-            next.remove();
-        }
     }
 
     function renderDataTable($elem, options) {
@@ -129,7 +126,12 @@ function dtDefaultRenderer($q, DTRenderer, DTRendererService, DTInstanceFactory)
         }
 
         function rerender() {
-            _oTable.destroy();
+            debugger
+            try{
+                _oTable.destroy();
+            }catch(e){
+               // ...
+            }
             DTRendererService.showLoading(_$elem, _$scope);
             render(_$elem, _$scope);
         }
@@ -172,10 +174,11 @@ function dtNGRenderer($log, $q, $compile, $timeout, DTRenderer, DTRendererServic
             dtInstance = DTInstanceFactory.newDTInstance(renderer);
 
             var defer = $q.defer();
-            var _expression = $elem.find('tbody').html();
+            var _$tableElem = _staticHTML.match(/<tbody([\s\S]*)<\/tbody>/i);
+            var _expression = _$tableElem[1];
             // Find the resources from the comment <!-- ngRepeat: item in items --> displayed by angular in the DOM
             // This regexp is inspired by the one used in the "ngRepeat" directive
-            var _match = _expression.match(/^\s*.+?\s+in\s+(\S*)\s*/m);
+            var _match = _expression.match(/^\s*.+?\s+in\s+([a-zA-Z0-9\.-_$]*)\s*/m);
 
             if (!_match) {
                 throw new Error('Expected expression in form of "_item_ in _collection_[ track by _id_]" but got "{0}".', _expression);
@@ -227,7 +230,7 @@ function dtNGRenderer($log, $q, $compile, $timeout, DTRenderer, DTRendererServic
             if (_newParentScope) {
                 _newParentScope.$destroy();
             }
-            _oTable.ngDestroy();
+            _oTable.destroy();
             // Re-compile because we lost the angular binding to the existing data
             _$elem.html(_staticHTML);
             _newParentScope = _parentScope.$new();
@@ -445,27 +448,27 @@ function dtAjaxRenderer($q, $timeout, DTRenderer, DTRendererService, DT_DEFAULT_
         }
 
         function _doRender(options, $elem) {
-                var defer = $q.defer();
-                // Destroy the table if it exists in order to be able to redraw the dataTable
-                options.bDestroy = true;
-                if (_oTable) {
-                    _oTable.destroy();
-                    DTRendererService.showLoading(_$elem, _$scope);
-                    // Empty in case of columns change
-                    $elem.empty();
-                }
-                DTRendererService.hideLoading($elem);
-                // Condition to refresh the dataTable
-                if (_shouldDeferRender(options)) {
-                    $timeout(function() {
-                        defer.resolve(DTRendererService.renderDataTable($elem, options));
-                    }, 0, false);
-                } else {
-                    defer.resolve(DTRendererService.renderDataTable($elem, options));
-                }
-                return defer.promise;
+            var defer = $q.defer();
+            // Destroy the table if it exists in order to be able to redraw the dataTable
+            options.bDestroy = true;
+            if (_oTable) {
+                _oTable.destroy();
+                DTRendererService.showLoading(_$elem, _$scope);
+                // Empty in case of columns change
+                $elem.empty();
             }
-            // See https://github.com/l-lin/angular-datatables/issues/147
+            DTRendererService.hideLoading($elem);
+            // Condition to refresh the dataTable
+            if (_shouldDeferRender(options)) {
+                $timeout(function() {
+                    defer.resolve(DTRendererService.renderDataTable($elem, options));
+                }, 0, false);
+            } else {
+                defer.resolve(DTRendererService.renderDataTable($elem, options));
+            }
+            return defer.promise;
+        }
+        // See https://github.com/l-lin/angular-datatables/issues/147
         function _shouldDeferRender(options) {
             if (angular.isDefined(options) && angular.isDefined(options.dom)) {
                 // S for scroller plugin

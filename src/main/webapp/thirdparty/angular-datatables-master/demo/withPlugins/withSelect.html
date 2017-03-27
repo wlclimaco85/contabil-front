@@ -19,27 +19,27 @@
         </p>
     </section>
     <section class="showcase">
-        <tabset>
-            <tab heading="Preview">
+        <uib-tabset>
+            <uib-tab heading="Preview">
                 <article class="preview">
                     <div ng-controller="WithSelectCtrl as showCase">
                         <table datatable dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" class="row-border hover"></table>
                     </div>
                 </article>
-            </tab>
-            <tab heading="HTML">
+            </uib-tab>
+            <uib-tab heading="HTML">
 <div hljs>
-<link rel="stylesheet" href="vendor/datatables-select/css/dataTables.select.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.0/css/select.dataTables.min.css">
 <!-- ... -->
 <div ng-controller="WithSelectCtrl as showCase">
     <table datatable dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" class="row-border hover"></table>
 </div>
 <!-- ... -->
-<script src="vendor/datatables-select/js/select.dataTables.js"></script>
+<script src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
 <script src="vendor/angular-datatables/dist/plugins/select/angular-datatables.select.min.js"></script>
 </div>
-            </tab>
-            <tab heading="JS">
+            </uib-tab>
+            <uib-tab heading="JS">
 <div hljs language="js">
 angular.module('showcase.withSelect', ['datatables', 'datatables.select'])
     .controller('WithSelectCtrl', WithSelectCtrl);
@@ -66,7 +66,7 @@ function WithSelectCtrl(DTOptionsBuilder, DTColumnBuilder) {
 }
 
 </div>
-            </tab>
-        </tabset>
+            </uib-tab>
+        </uib-tabset>
     </section>
 </article>
