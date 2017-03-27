@@ -2,7 +2,7 @@
     angular.module('wdApp.apps.contasPagar', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('ContasPagarController', contasPagarController);
 
-    function contasPagarController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate,Datatablessss,tableOptionsFactory,tableColumnsFactory,FiltersFactory,validationFactory,$filter,dialogFactory) {
+    function contasPagarController($http,$scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate,Datatablessss,tableOptionsFactory,tableColumnsFactory,FiltersFactory,validationFactory,$filter,dialogFactory) {
         var vm = this;
         vm.selected = {};
         vm.selectAll = false;
@@ -16,13 +16,134 @@
         vm.persons = {};
         vm.baixas = [];
 
+        vm.buscarField  = buscarField;
         vm.fnDelete  = fnDelete;
         vm.fnEdit    = fnEdit;
         vm.fnRecibo  = fnRecibo;
         vm.fnBaixar  = fnBaixar;
 
+        var dDateAtual = new Date();
+        var dAux = new Date();
+        dAux.setDate(01);
+        var dDateInicial = dAux;
+
+        $scope.filter = {};
+        $scope.filter.final   = dDateAtual;
+        $scope.filter.inicial = dDateInicial;
+
+        var request = new qat.model.contasPagarInquiryRequest(null,$scope.filter.inicial.getTime(),$scope.filter.final.getTime(),$scope.filter.conta,0, true, null, null, null)
+
         $scope.contasPagar = {
         };
+
+        $scope.formatterDate = function(iDate) {
+                return $filter('date')(new Date(iDate), 'dd/MM/yyyy');
+              };
+
+            $scope.today = function() {
+                $scope.dt = new Date();
+              };
+              $scope.today();
+
+              $scope.clear = function() {
+                $scope.dt = null;
+              };
+
+              $scope.inlineOptions = {
+                customClass: getDayClass,
+                minDate: new Date(),
+                showWeeks: true
+              };
+
+              $scope.dateOptions = {
+                dateDisabled: disabled,
+                formatYear: 'yy',
+                maxDate: new Date(2020, 5, 22),
+                minDate: new Date(),
+                startingDay: 1
+              };
+
+              // Disable weekend selection
+              function disabled(data) {
+                var date = data.date,
+                  mode = data.mode;
+                return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+              }
+
+              $scope.toggleMin = function() {
+                $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
+                $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+              };
+
+              $scope.toggleMin();
+
+              $scope.open1 = function() {
+
+                $scope.popup1.opened = true;
+              };
+
+              $scope.open2 = function() {
+
+                $scope.popup2.opened = true;
+              };
+
+              $scope.open3 = function() {
+
+                $scope.popup3.opened = true;
+              };
+
+              $scope.setDate = function(year, month, day) {
+                $scope.dt = new Date(year, month, day);
+              };
+
+              $scope.formats = ['dd-MMMM-yyyy','dd/MM/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+              $scope.format = $scope.formats[1];
+              $scope.altInputFormats = ['M!/d!/yyyy'];
+
+              $scope.popup1 = {
+                opened: false
+              };
+
+              $scope.popup2 = {
+                opened: false
+              };
+
+              $scope.popup3 = {
+                opened: false
+              };
+
+              var tomorrow = new Date();
+              tomorrow.setDate(tomorrow.getDate() + 1);
+              var afterTomorrow = new Date();
+              afterTomorrow.setDate(tomorrow.getDate() + 1);
+              $scope.events = [
+                {
+                  date: tomorrow,
+                  status: 'full'
+                },
+                {
+                  date: afterTomorrow,
+                  status: 'partially'
+                }
+              ];
+
+              function getDayClass(data) {
+                var date = data.date,
+                  mode = data.mode;
+                if (mode === 'day') {
+                  var dayToCheck = new Date(date).setHours(0,0,0,0);
+
+                  for (var i = 0; i < $scope.events.length; i++) {
+                    var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+
+                    if (dayToCheck === currentDay) {
+                      return $scope.events[i].status;
+                    }
+                  }
+                }
+
+                return '';
+              }
 
         $scope.formatterDate = function(iDate) {
             return $filter('date')(new Date(iDate), 'dd/MM/yyyy');
@@ -46,7 +167,7 @@
             // Recompiling so we can bind Angular directive to the DT
             $compile(angular.element(row).contents())($scope);
         }
-        var fnDataSRC = function(json) {
+        var fnDataSRC = function(json) {debugger
             console.log(json)
             json['recordsTotal'] = json.contasPagarList.length
             json['recordsFiltered'] = json.contasPagarList.length
@@ -123,9 +244,50 @@
            dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarDeleteController",validationFactory.contasPagar());
         }
 
+    var options =   tableOptionsFactory.contasPagar(vm,createdRow,$scope,FiltersFactory.contasPagar(),reloadData);
+
 
      vm.reloadData = reloadData;
     vm.dtInstance = {};
+
+    var aaaa = function () {
+
+            request = new qat.model.contasPagarInquiryRequest(null,null,null,null,0, true, null, null, null)
+      $http({
+                        method: 'POST',
+                        url: 'main/api/request',
+                        dataType: "json",
+                        data: JSON.stringify({
+                                "url": '/financeiro/api/contasPagar/fetchPage',
+                                "token": $rootScope.authToken,
+                                "request": request}),
+                        headers: {
+                            'Content-type': 'application/json; charset=utf-8'
+                        }
+                    })
+                    .then(function(data) {
+                     var test;
+                             test['recordsTotal'] = data.data.contasPagarList.length
+                             test['recordsFiltered'] = data.data.contasPagarList.length
+                             test['data'] = data.data.contasPagarList
+                             test['draw'] = 2
+
+                           return data
+                    });
+
+    }
+
+    function buscarField(){
+debugger
+   //   request = new qat.model.contasPagarInquiryRequest(null,$scope.filter.inicial.getTime(),$scope.filter.final.getTime(),$scope.filter.conta,0, true, null, null, null)
+
+vm.dtInstance.changeData(aaaa);
+vm.dtInstance.rerender()
+     //     Datatablessss.getTable('/financeiro/api/contasPagar/fetchPage', fnDataSRC, request, this, rCallback, null, recompile, tableOptionsFactory.contasPagar(vm,createdRow,$scope,FiltersFactory.contasPagar(),reloadData), tableColumnsFactory.contasPagar(vm,"",actionsHtml));
+      //    vm.dtInstance.reloadData(function(json){console.log(json)}, false);
+    }
+
+
 
     function reloadData() {
         var resetPaging = false;
@@ -141,8 +303,9 @@
             var resetPaging = false;
             vm.dtInstance.reloadData(callback, resetPaging);
         }
-
-        Datatablessss.getTable('/financeiro/api/contasPagar/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.contasPagar(vm,createdRow,$scope,FiltersFactory.contasPagar(),reloadData), tableColumnsFactory.contasPagar(vm,"",actionsHtml));
+        debugger
+       // qat.model.contasPagarInquiryRequest = function (_descricao,_dataInicial,_dataFinal,_conta, _iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
+        Datatablessss.getTable('/financeiro/api/contasPagar/fetchPage', fnDataSRC, request, this, rCallback, null, recompile, options , tableColumnsFactory.contasPagar(vm,"",actionsHtml));
       //  Datatablessss.getTable('/fiscal/api/cfop/fetchPage           ', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cfop(vm,createdRow,$scope,FiltersFactory.cfop()), tableColumnsFactory.cfop(vm,titleHtml,actionsHtml));
 
         function toggleAll(selectAll, selectedItems) {
@@ -163,7 +326,6 @@
 
         function status() {
         }
-
 
 
 

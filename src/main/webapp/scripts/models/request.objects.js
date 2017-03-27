@@ -1,4 +1,5 @@
 	//FetchAllRequest Object
+	qat.model.pageSize = 10;
 	qat.model.fetchAllRequest = function()
 	{
 
@@ -209,7 +210,7 @@
 	//PagedInquryRequest
 	qat.model.pagedInquiryRequest = function ( _iStartPage, _bCount)
 	{
-		this.pageSize = 20;
+		this.pageSize = qat.model.pageSize;
 		this.startPage = _iStartPage;
 		this.sortExpressions = null;
 		this.preQueryCount = _bCount;
@@ -219,7 +220,7 @@
 	//siteInquryRequest
 	qat.model.siteInquiryRequest = function ( _iStartPage, _bCount,_url)
 	{
-		this.pageSize = 20;
+		this.pageSize = qat.model.pageSize;
 		this.url = _url
 		this.startPage = _iStartPage;
 		this.sortExpressions = null;
@@ -230,7 +231,7 @@
 	//siteInquryRequest
 	qat.model.planoInquiryRequest = function ( _iStartPage, _bCount,_emprId)
 	{
-		this.pageSize = 20;
+		this.pageSize = qat.model.pageSize;
 		this.emprId =  _emprId;
 		this.startPage = _iStartPage;
 		this.sortExpressions = null;
@@ -241,7 +242,7 @@
 
 	qat.model.cidadeInquiryRequest = function (_estadoId, _iStartPage, _bCount,_emprId)
 	{
-		//this.pageSize = 20;
+		//this.pageSize = qat.model.pageSize;
 		this.estadoId =  parseInt(_estadoId,10);
 		//this.startPage = _iStartPage;
 		//this.sortExpressions = null;
@@ -252,7 +253,7 @@
 		//siteInquryRequest
 	qat.model.doisValoresInquiryRequest = function (_page, _iStartPage, _bCount,_emprId,_doisValorType)
 	{
-		this.pageSize = 20;
+		this.pageSize = qat.model.pageSize;
 		this.paginaId =  _page;
 		this.doisValorType = _doisValorType;
 		this.emprId =  _emprId;
@@ -264,7 +265,7 @@
 
 	qat.model.estadoInquiryRequest = function ( _iStartPage, _bCount,_emprId)
 	{
-		this.pageSize = 20;
+		this.pageSize = qat.model.pageSize;
 		this.estadoId =  _emprId;
 		this.startPage = _iStartPage;
 		this.sortExpressions = null;
@@ -281,7 +282,36 @@
 	    }else{
 	      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
 	    }
-		this.pageSize = 20;
+		this.pageSize = qat.model.pageSize;
+		this.userId = _userId;
+		this.id = _id;
+		this.emprId = _emprId;
+	//	this.permissaoTypeEnumValue = _permissaoType;
+		this.startPage = _iStartPage;
+		this.sortExpressions = null;
+		this.preQueryCount = _bCount;
+		this.maxPreQueryCount = 0;
+	};
+
+	qat.model.contasPagarInquiryRequest = function (_descricao,_dataInicial,_dataFinal,_conta, _iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
+	{
+		var _emprId = null;
+	    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+	      _emprId = null;
+	    }else{
+	      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	    }
+	    if(_descricao)
+	    	this.descricao = _descricao
+	    if(_dataInicial && _dataFinal)
+	    {
+	    	this.dataInicial = _dataInicial
+	    	this.dataFinal   = _dataFinal
+	    }
+	    if(_conta)
+	    	this.conta = _conta
+
+		this.pageSize = qat.model.pageSize;
 		this.userId = _userId;
 		this.id = _id;
 		this.emprId = _emprId;
@@ -297,7 +327,7 @@
 
 		this.paginaId = _pageId;
 		this.doisValorType = typeId;
-		this.pageSize = 20;
+		this.pageSize = qat.model.pageSize;
 		this.userId = _userId;
 		this.id = _id;
 		this.startPage = _iStartPage;
@@ -310,7 +340,7 @@
 	qat.model.transactionInquiryRequest = function ( _transaction ,_iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
 	{
 		//this.transaction = _transaction;
-		this.pageSize = 20;
+		this.pageSize = qat.model.pageSize;
 		this.userId = _userId;
 		this.id = _id;
 		this.emprId = _emprId;
@@ -356,7 +386,7 @@
  	{
 
  		this.transaction = _transaction;
- 		this.pageSize = 20;
+ 		this.pageSize = qat.model.pageSize;
  		this.userId = _userId;
  		this.id = _id;
  		this.emprId = _emprId;
