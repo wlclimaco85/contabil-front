@@ -1044,6 +1044,21 @@
 			            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
 			            ];
 			         },
+			         doisValores : function(vm,_html,_actions) {
+						return  [
+					            DTColumnBuilder.newColumn(null).withTitle(_html).notSortable()
+					            .renderWith(function(data, type, full, meta) {
+					                vm.selected[full.id] = false;
+					                return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
+					            }).withOption('width', '3px'),
+					            DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
+					            DTColumnBuilder.newColumn('nome').withTitle('Nome'),
+					            DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
+					            DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
+					            DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
+					            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
+								];
+					},
 			         regime : function(vm,_html,_actions) {
 						return  [
 					            DTColumnBuilder.newColumn(null).withTitle(_html).notSortable()

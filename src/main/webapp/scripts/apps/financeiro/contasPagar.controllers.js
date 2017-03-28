@@ -366,7 +366,7 @@ vm.dtInstance.rerender()
         }
         debugger
        // qat.model.contasPagarInquiryRequest = function (_descricao,_dataInicial,_dataFinal,_conta, _iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
-        Datatablessss.getTable('/financeiro/api/contasPagar/fetchPage', fnDataSRC, request, this, rCallback, null, recompile, options , tableColumnsFactory.contasPagar(vm,"",actionsHtml));
+        Datatablessss.getTable('/financeiro/api/contasPagar/fetchPage', fnDataSRC, request, this, rCallback, null, recompile, tableOptionsFactory.contasPagar(vm,createdRow,$scope,FiltersFactory.contasPagar()) , tableColumnsFactory.contasPagar(vm,"",actionsHtml));
       //  Datatablessss.getTable('/fiscal/api/cfop/fetchPage           ', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cfop(vm,createdRow,$scope,FiltersFactory.cfop()), tableColumnsFactory.cfop(vm,titleHtml,actionsHtml));
 
         function toggleAll(selectAll, selectedItems) {

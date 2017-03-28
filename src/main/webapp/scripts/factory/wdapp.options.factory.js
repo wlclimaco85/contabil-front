@@ -5,97 +5,101 @@
     commonAuth.factory('tableOptionsFactory', ['$rootScope', 'DTOptionsBuilder',  'DTColumnBuilder', '$log','$compile','dialogFactory','validationFactory',function($rootScope,DTOptionsBuilder, DTColumnBuilder, $log,$compile,dialogFactory,validationFactory){
 	//commonAuth.factory('tableOptionsFactory', ['ModalService','$rootScope', 'DTOptionsBuilder', 'DTColumnBuilder', '$log','$compile', function(ModalService,$scope,  DTOptionsBuilder,$compile,dialogFactory,validationFactory){
 		function padrao(vm,createdRow,scope, filters,aButtons,sPosition,functionReload){
-			var sPos = 1
-			var aCollunsReturn;
-			if(sPosition)
-				sPos = 2
-			var aColluns = [{
-			                extend: "colvis",
-			                fileName: "Data_Analysis",
-			                exportOptions: {
-			                    columns: ':visible'
-			                },
-			                exportData: {
-			                    decodeEntities: true
-			                }
-			            }, {
-			                extend: "csvHtml5",
-			                fileName: "Data_Analysis",
-			                exportOptions: {
-			                    columns: ':visible'
-			                },
-			                exportData: {
-			                    decodeEntities: true
-			                }
-			            }, {
-			                extend: "pdfHtml5",
-			                fileName: "Data_Analysis",
-			                title: "Data Analysis Report",
-			                exportOptions: {
-			                    columns: ':visible'
-			                },
-			                exportData: {
-			                    decodeEntities: true
-			                }
-			            }, {
-			                extend: "copy",
-			                fileName: "Data_Analysis",
-			                title: "Data Analysis Report",
-			                exportOptions: {
-			                    columns: ':visible'
-			                },
-			                exportData: {
-			                    decodeEntities: true
-			                }
-			            }, {
-			                extend: "print",
-			                //text: 'Print current page',
-			                autoPrint: true,
-			                exportOptions: {
-			                    columns: ':visible'
-			                }
-			            }, {
-			                extend: "excelHtml5",
-			                filename: "Data_Analysis",
-			                title: "Data Analysis Report",
-			                exportOptions: {
-			                    columns: ':visible'
-			                },
-			                //CharSet: "utf8",
-			                exportData: {
-			                    decodeEntities: true
-			                }
-			            }]
 
-			if(sPos == 2 ){
-				aCollunsReturn = aButtons
-				for(var x = 0;x < aColluns.length ;x++)
-				{
-					aCollunsReturn.push(aColluns[x])
-				}
-			}
-			else
+			if(aButtons)
 			{
-				aCollunsReturn = aColluns;
-				if(aButtons)
-				{
-					for(var x = 0;x < aButtons.length ;x++)
+				var sPos = 1
+				var aCollunsReturn;
+				if(sPosition)
+					sPos = 2
+				var aColluns = [{
+				                extend: "colvis",
+				                fileName: "Data_Analysis",
+				                exportOptions: {
+				                    columns: ':visible'
+				                },
+				                exportData: {
+				                    decodeEntities: true
+				                }
+				            }, {
+				                extend: "csvHtml5",
+				                fileName: "Data_Analysis",
+				                exportOptions: {
+				                    columns: ':visible'
+				                },
+				                exportData: {
+				                    decodeEntities: true
+				                }
+				            }, {
+				                extend: "pdfHtml5",
+				                fileName: "Data_Analysis",
+				                title: "Data Analysis Report",
+				                exportOptions: {
+				                    columns: ':visible'
+				                },
+				                exportData: {
+				                    decodeEntities: true
+				                }
+				            }, {
+				                extend: "copy",
+				                fileName: "Data_Analysis",
+				                title: "Data Analysis Report",
+				                exportOptions: {
+				                    columns: ':visible'
+				                },
+				                exportData: {
+				                    decodeEntities: true
+				                }
+				            }, {
+				                extend: "print",
+				                //text: 'Print current page',
+				                autoPrint: true,
+				                exportOptions: {
+				                    columns: ':visible'
+				                }
+				            }, {
+				                extend: "excelHtml5",
+				                filename: "Data_Analysis",
+				                title: "Data Analysis Report",
+				                exportOptions: {
+				                    columns: ':visible'
+				                },
+				                //CharSet: "utf8",
+				                exportData: {
+				                    decodeEntities: true
+				                }
+				            }]
+
+				if(sPos == 2 ){
+					aCollunsReturn = aButtons
+					for(var x = 0;x < aColluns.length ;x++)
 					{
-						aCollunsReturn.push(aButtons[x])
+						aCollunsReturn.push(aColluns[x])
 					}
 				}
+				else
+				{
+					aCollunsReturn = aColluns;
+					if(aButtons)
+					{
+						for(var x = 0;x < aButtons.length ;x++)
+						{
+							aCollunsReturn.push(aButtons[x])
+						}
+					}
+				}
+
+				aCollunsReturn.push({
+				                text: '<span data-tooltip="Recaregar Pagina" id="recareggarPag" class=""><span class="glyphicon glyphicon-refresh"> </span></span>',
+				                key: '30',
+				                action: function(e, dt, node, config) {
+
+				                functionReload();
+				                  //  dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,null);
+
+				                }
+			                })
 			}
-
-			aCollunsReturn.push({
-			                text: '<span data-tooltip="Recaregar Pagina" id="recareggarPag" class=""><span class="glyphicon glyphicon-refresh"> </span></span>',
-			                key: '30',
-			                action: function(e, dt, node, config) {
-
-			                functionReload();
-			                  //  dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,null);
-
-			                }
-		                })
 
 			//var sCombo =
 
@@ -404,6 +408,33 @@
 			            })
 
 			            return  padrao(vm,createdRow,scope, _callback , buttons,2,_function);
+
+				},
+				doisValores : function(vm,createdRow,scope, _callback,_function) {
+
+					var buttons = [];
+				      buttons.push(
+			            {
+			                text: '<span class="fa fa-trash"></span>',
+			                key: '1',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,null);
+
+			                }
+		                },
+
+		                {
+			                text: 'Nova Conta Pagar',
+			                key: '4',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,_function);
+
+			                }
+			            })
+
+			            return padrao(vm,createdRow,scope, _callback , buttons,null,_function);
 
 				},
 				conta : function(vm,createdRow,scope, _callback) {

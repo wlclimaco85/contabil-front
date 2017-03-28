@@ -2,108 +2,73 @@
     angular.module('wdApp.apps.contasPagar.view2', ['datatables','ngResource', 'datatables.scroller', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('AngularWayChangeDataCtrl', AngularWayChangeDataCtrl);
 
-function AngularWayChangeDataCtrl($q,$compile,$http,$rootScope,$scope,$resource, DTOptionsBuilder, DTColumnDefBuilder) {
+function AngularWayChangeDataCtrl($q,$http,$scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate,Datatablessss,tableOptionsFactory,tableColumnsFactory,FiltersFactory,validationFactory,$filter,dialogFactory) {
     var vm = this;
+        vm.selected = {};
+        vm.dtInstance = {};
+        vm.persons = {};
+        vm.selectAll = false;
 
-    var url = 'financeiro/api/contasReceber/fetchPage'// '/entidade/api/doisValores/fetchPage';
-    var request =  request = new qat.model.contasPagarInquiryRequest(null,null,null,null,0, true, null, null, null)//new qat.model.doisValoresInquiryRequest(null, 0, null,null,null) //new qat.model.doisValoresInquiryRequest(101, 0, null,null,106)
+    var url = '/entidade/api/doisValores/fetchPage';// 'financeiro/api/contasReceber/fetchPage'// '/entidade/api/doisValores/fetchPage'; qat.model.doisValoresInquiryRequest = function (_page, _iStartPage, _bCount,_emprId,_doisValorType)
+    var request =  new qat.model.doisValoresInquiryRequest(101,0,true,null,106);//new qat.model.doisValoresInquiryRequest(null, 0, null,null,null) //new qat.model.doisValoresInquiryRequest(101, 0, null,null,106)
     //===================================
 
-
-
-
-        $scope.open = function(id) {
-        var reqId = id;
-        var requestedData;
-        var getData = function userDetails(){
-            var defer = $q.defer();
-                        $http({
-                        method: 'POST',
-                        url: 'main/api/request',
-                        dataType: "json",
-                        data: JSON.stringify({
-                                "url": url,
-                                "token": $rootScope.authToken,
-                                "request": request}),
-                        headers: {
-                            'Content-type': 'application/json; charset=utf-8'
-                        }
-                    })
-                    .then(function(data) {
-
-                           defer.resolve(data.data.contasReceberList);
-                    });
-
-            return defer.promise;
-        }
-            getData().then(function(data){
-                $rootScope.jsonData = data;
-                $scope.state.submittedClick = false;
-                $scope.state.submittedClickButton = true;
-            });
-
-    };
-    var vm = this;
-    $scope.$on('handleRequest', function(){
-        $scope.request = requestService.request;
-        $rootScope.requestValue = $scope.request;
-        console.log($scope.request);
-        $rootScope.getTableData();
-    });
-
-    $rootScope.getTableData = function serverData() {
-        console.log($rootScope.requestValue);
-        var req = $rootScope.requestValue;
-        var defer = $q.defer();
-
-
-        $http({
-                        method: 'POST',
-                        url: 'main/api/request',
-                        dataType: "json",
-                        data: JSON.stringify({
-                                "url": url,
-                                "token": $rootScope.authToken,
-                                "request": request}),
-                        headers: {
-                            'Content-type': 'application/json; charset=utf-8'
-                        }
-                    })
-                    .then(function(data) {
-
-                        defer.resolve(data.data.contasReceberList);
-                        console.log(data.data.contasReceberList);
-                        vm.personss = data.data.contasReceberList
-                        return data.data.contasReceberList;
-                    });
-
-
-
-
-    }
 
     //========================================
 
 
-    vm.personsss = $resource($rootScope.getTableData());
-    debugger
-    vm.dtOptions = DTOptionsBuilder.newOptions().withPaginationType('full_numbers');
-    vm.dtColumnDefs = [
-        DTColumnDefBuilder.newColumnDef(0),
-        DTColumnDefBuilder.newColumnDef(1),
-        DTColumnDefBuilder.newColumnDef(2),
-        DTColumnDefBuilder.newColumnDef(3).notSortable()
-    ];
-    vm.person2Add = _buildPerson2Add(1);
-    vm.addPerson = addPerson;
-    vm.modifyPerson = modifyPerson;
-    vm.removePerson = removePerson;
+    vm.personsss = {};//$resource($rootScope.getTableData());
+
+
+    function actionsHtml(data, type, full, meta) {
+        debugger
+        vm.persons[data.id] = data;
+
+        return ' <div class="dropdown" >'+
+          '<button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">'+
+           ' Açoes'+
+            '<span class="caret"></span>'+
+          '</button>'+
+          '<ul class="dropdown-menu" style="height:120px" aria-labelledby="dropdownMenu1">'+
+            '<li><a href="javaScript:;" ng-click="showCase.fnDelete(showCase.persons[' + data.id + '])"><span class="fa fa-trash"></span> Deletar</a></li>'+
+            '<li><a href="javaScript:;" ng-click="showCase.fnEdit(showCase.persons[' + data.id + '])"><span class="glyphicon glyphicon-edit"></span> Alterar</a></li>'+
+            '<li><a href="javaScript:;" ng-click="showCase.fnRecibo(showCase.persons[' + data.id + '])"><span class="glyphicon glyphicon-print"></span> Emitir Recibo</a></li>'+
+            '<li><a href="javaScript:;" ng-click="showCase.fnBaixar(showCase.persons[' + data.id + '])"><span class="fa fa-usd">                </span> Pagar</a></li>'+
+          '</ul>'+
+        '</div>'
+    }
+
+    var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
+        'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
+
+    function rCallback(nRow, aData) {
+        // console.log('row');
+    }
+
+    function recompile(row, data, dataIndex) {
+        $compile(angular.element(row).contents())($scope);
+    }
+
+    function createdRow(row, data, dataIndex) {
+        // Recompiling so we can bind Angular directive to the DT
+        $compile(angular.element(row).contents())($scope);
+    }
+    var fnDataSRC = function(json) {debugger
+        console.log(json)
+        json['recordsTotal'] = json.doisValoresList.length
+        json['recordsFiltered'] = json.doisValoresList.length
+        json['draw'] = 1
+
+        return json.doisValoresList;
+    }
+
+    Datatablessss.getTable(url, fnDataSRC, request, this, rCallback, null, recompile, tableOptionsFactory.doisValores(vm,createdRow,$scope,FiltersFactory.doisValores()) , tableColumnsFactory.doisValores(vm,"",actionsHtml));
 
     function _buildPerson2Add(id) {
         return {
             id: id,
-            firstName: 'Foo' + id,
-            lastName: 'Bar' + id
+            descricao: 'Foo' + id,
+            createUser: 'Bar' + id
         };
     }
     function addPerson() {

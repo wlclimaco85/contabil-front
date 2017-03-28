@@ -253,6 +253,12 @@
 		//siteInquryRequest
 	qat.model.doisValoresInquiryRequest = function (_page, _iStartPage, _bCount,_emprId,_doisValorType)
 	{
+		var _emprId = null;
+	    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){
+	      _emprId = null;
+	    }else{
+	      _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	    }
 		this.pageSize = qat.model.pageSize;
 		this.paginaId =  _page;
 		this.doisValorType = _doisValorType;

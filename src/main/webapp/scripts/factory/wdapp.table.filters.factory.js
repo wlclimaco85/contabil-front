@@ -145,6 +145,13 @@
                             }, {
                                 type: 'number',
                             }];
+                },
+                doisValores : function() {
+                    return [{
+                                type: 'number'
+                            }, {
+                                type: 'number',
+                            }];
                 }
 			};
 	}]);
