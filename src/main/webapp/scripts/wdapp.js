@@ -399,6 +399,12 @@ var WebDaptiveAppConfig = {
             ,'gerencia/tables/tributacao'
             ,'fiscal/tables/regime'
             ,'historico/tables/historico'
+            ,'financeiro/tables/tipoDocumentos'
+            ,'financeiro/tables/categoria'
+            ,'financeiro/tables/situacao'
+
+
+
 			];
 
 			//geeric routeine for building route from array
