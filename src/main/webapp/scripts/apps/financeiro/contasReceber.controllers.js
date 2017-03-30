@@ -21,6 +21,8 @@
         vm.fnRecibo  = fnRecibo;
         vm.fnBaixar  = fnBaixar;
 
+
+
         $scope.contasReceber = {
         };
 
@@ -278,6 +280,7 @@
 
             $scope.titulo = {
                 listBaixa : [],
+                maisopcoes : false,
                 dataEmissao : moment(new Date()).format('DD/MM/YYYY'),
                 dataPagamento : moment(new Date()).format('DD/MM/YYYY'),
                 dataVencimento : moment(new Date()).format('DD/MM/YYYY')

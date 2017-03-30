@@ -178,6 +178,16 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.categoria.delete'
 	            ,'wdApp.apps.categoria.view'
 
+	            ,'wdApp.apps.categorias'
+	            ,'wdApp.apps.categorias.insert'
+				,'wdApp.apps.categorias.update'
+	            ,'wdApp.apps.categorias.delete'
+
+	            ,'wdApp.apps.tipoDocumentos'
+	            ,'wdApp.apps.tipoDocumentos.insert'
+				,'wdApp.apps.tipoDocumentos.update'
+	            ,'wdApp.apps.tipoDocumentos.delete'
+
 	            ,'wdApp.apps.marca'
 	            ,'wdApp.apps.marca.insert'
 				,'wdApp.apps.marca.update'

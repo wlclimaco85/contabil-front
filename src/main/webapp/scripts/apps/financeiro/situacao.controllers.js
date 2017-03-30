@@ -1,6 +1,20 @@
 (function() {
     angular.module('wdApp.apps.situacao', ['datatables','ngResource', 'datatables.scroller', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('AngularWayChangeDataCtrl', AngularWayChangeDataCtrl);
+        .controller('AngularWayChangeDataCtrl', AngularWayChangeDataCtrl).filter("myfilter", function() {
+          return function(items, from, to) {
+                var df = parseDate(from);
+                var dt = parseDate(to);
+                var result = [];
+                for (var i=0; i<items.length; i++){
+                    var tf = new Date(items[i].date1 * 1000),
+                        tt = new Date(items[i].date2 * 1000);
+                    if (tf > df && tt < dt)  {
+                        result.push(items[i]);
+                    }
+                }
+                return result;
+          };
+        });
 
 function AngularWayChangeDataCtrl($q,$http,$scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate,Datatablessss,tableOptionsFactory,tableColumnsFactory,FiltersFactory,validationFactory,$filter,dialogFactory) {
     var vm = this;
@@ -11,6 +25,12 @@ function AngularWayChangeDataCtrl($q,$http,$scope, $compile, DTOptionsBuilder, D
         vm.button='Novo'
         vm.fnDelete  = fnDelete;
         vm.fnEdit    = fnEdit;
+
+
+        function parseDate(input) {
+          var parts = input.split('-');
+          return new Date(parts[2], parts[1]-1, parts[0]);
+        }
 
 
         function reloadData() {
@@ -90,6 +110,9 @@ function AngularWayChangeDataCtrl($q,$http,$scope, $compile, DTOptionsBuilder, D
 
         return json.doisValoresList;
     }
+
+
+
 
     Datatablessss.getTable(url, fnDataSRC, request, this, rCallback, null, recompile, tableOptionsFactory.doisValores(vm,createdRow,$scope,FiltersFactory.doisValores(),reloadData) , tableColumnsFactory.doisValores(vm,"",actionsHtml));
 

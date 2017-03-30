@@ -124,6 +124,13 @@
 			        .withOption('deferRender', true)
 			        // Do not forget to add the scorllY option!!!
 			        .withOption('scrollY', 380)
+			        .withOption('initComplete', function() {
+					     $('.dataTables_filter input').unbind();
+					     $('<button/>').text('search').attr('id', 'new-search').appendTo('.dataTables_filter');
+					     $('#new-search').on('click', function() {
+					       vm.dtInstance.DataTable.search($('.dataTables_filter input').val()).draw();
+					     })
+					   })
 			        .withPaginationType('full_numbers')
 
 			            .withBootstrap()
