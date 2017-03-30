@@ -344,6 +344,12 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.ajaxCall.tributacao'
 	            ,'wdApp.apps.tributacao.select'
 
+	            ,'wdApp.apps.situacao'
+	            ,'wdApp.apps.situacao.insert'
+	            ,'wdApp.apps.situacao.update'
+	            ,'wdApp.apps.situacao.delete'
+
+
 
 
 

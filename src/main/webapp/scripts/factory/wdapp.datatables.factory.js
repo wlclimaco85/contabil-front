@@ -59,11 +59,6 @@
     reloadData: function(vm){
       var resetPaging = false;
       vm.dtInstance.reloadData(resetPaging);
-
-      $rootScope.$on('$translateChangeSuccess', function (event, lang) {
-        vm.dtOptions.withLanguageSource('http://cdn.datatables.net/plug-ins/1.10.11/i18n/'+(lang.language == 'de' ? 'German' : 'English')+'.json');
-        vm.dtColumns = vm.dtColumns = Datatables.genererateColumnDef('getFlavorings');
-      });
     }
   };
   }]);

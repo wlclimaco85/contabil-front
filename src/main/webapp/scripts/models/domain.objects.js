@@ -372,22 +372,23 @@ qat.model.fnNote = function(_oObjet) {
 	}
 }
 
-qat.model.fnDoisValores = function(id, _value, _nome, _tabela, modelAction) {
+qat.model.fnDoisValores = function(id, _value, _nome, _tabela, modelAction,_user,_descricao,_type,_page) {
 
 	telefones = {
 		id : id,
 		value : _value,
+		descricao : _descricao,
 		nome : _nome,
-
 		parentId : 0,
 		emprId : JSON.parse(localStorage.getItem('empresa')).id,
 		processId : 0,
-		tabelaEnumValue : _tabela,
+		doisValorType :{id : _type},
+		pagina : { id : _page},
 		modelAction : 0,
 		modelAction : modelAction,
-		createUser : "System",
+		createUser : _user,
 		createDateUTC : (new Date()).getTime(),
-		modifyUser : "System",
+		modifyUser : _user,
 		modifyDateUTC : (new Date()).getTime()
 	}
 
@@ -550,7 +551,7 @@ qat.model.fnPlanoByServico = function(_id, _modelAction) {
 	return emails;
 }
 
-qat.model.fnDoisValores = function(_DoisValores, _modelAction) {
+qat.model.fnDoisValoress = function(_DoisValores, _modelAction) {
 	doisValores = {
 		id : _DoisValores.id,
 		emprId : JSON.parse(localStorage.getItem('empresa')).id,

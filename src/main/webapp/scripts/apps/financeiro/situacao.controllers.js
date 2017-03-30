@@ -1,5 +1,5 @@
 (function() {
-    angular.module('wdApp.apps.contasPagar.view2', ['datatables','ngResource', 'datatables.scroller', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+    angular.module('wdApp.apps.situacao', ['datatables','ngResource', 'datatables.scroller', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('AngularWayChangeDataCtrl', AngularWayChangeDataCtrl);
 
 function AngularWayChangeDataCtrl($q,$http,$scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate,Datatablessss,tableOptionsFactory,tableColumnsFactory,FiltersFactory,validationFactory,$filter,dialogFactory) {
@@ -8,6 +8,43 @@ function AngularWayChangeDataCtrl($q,$http,$scope, $compile, DTOptionsBuilder, D
         vm.dtInstance = {};
         vm.persons = {};
         vm.selectAll = false;
+        vm.button='Novo'
+        vm.fnDelete  = fnDelete;
+        vm.fnEdit    = fnEdit;
+
+
+        function reloadData() {
+            var resetPaging = false;
+            vm.dtInstance.reloadData(callback, resetPaging);
+        }
+
+        function callback(json) {
+            console.log(json);
+        }
+
+       var reloadData = function() {
+
+            var resetPaging = false;
+            vm.dtInstance.reloadData(callback, resetPaging);
+        }
+
+        $rootScope.reloadDataSit = function(_callback) {
+
+            var resetPaging = false;
+            vm.dtInstance.reloadData(_callback, resetPaging);
+        }
+
+        function fnEdit(person) {
+
+             $rootScope.doisValor = person;
+
+            dialogFactory.dialog('views/financeiro/dialog/dSituacao.html',"SituacaoUpdateController",validationFactory.contasPagar(),reloadData());
+        }
+
+        function fnDelete(person) {
+           $rootScope.doisValor = person;
+           dialogFactory.dialog('views/util/dialog/dDelete.html',"SituacaoDeleteController",validationFactory.contasPagar(),reloadData());
+        }
 
     var url = '/entidade/api/doisValores/fetchPage';// 'financeiro/api/contasReceber/fetchPage'// '/entidade/api/doisValores/fetchPage'; qat.model.doisValoresInquiryRequest = function (_page, _iStartPage, _bCount,_emprId,_doisValorType)
     var request =  new qat.model.doisValoresInquiryRequest(101,0,true,null,106);//new qat.model.doisValoresInquiryRequest(null, 0, null,null,null) //new qat.model.doisValoresInquiryRequest(101, 0, null,null,106)
@@ -21,22 +58,14 @@ function AngularWayChangeDataCtrl($q,$http,$scope, $compile, DTOptionsBuilder, D
 
 
     function actionsHtml(data, type, full, meta) {
-        debugger
-        vm.persons[data.id] = data;
-
-        return ' <div class="dropdown" >'+
-          '<button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">'+
-           ' Açoes'+
-            '<span class="caret"></span>'+
-          '</button>'+
-          '<ul class="dropdown-menu" style="height:120px" aria-labelledby="dropdownMenu1">'+
-            '<li><a href="javaScript:;" ng-click="showCase.fnDelete(showCase.persons[' + data.id + '])"><span class="fa fa-trash"></span> Deletar</a></li>'+
-            '<li><a href="javaScript:;" ng-click="showCase.fnEdit(showCase.persons[' + data.id + '])"><span class="glyphicon glyphicon-edit"></span> Alterar</a></li>'+
-            '<li><a href="javaScript:;" ng-click="showCase.fnRecibo(showCase.persons[' + data.id + '])"><span class="glyphicon glyphicon-print"></span> Emitir Recibo</a></li>'+
-            '<li><a href="javaScript:;" ng-click="showCase.fnBaixar(showCase.persons[' + data.id + '])"><span class="fa fa-usd">                </span> Pagar</a></li>'+
-          '</ul>'+
-        '</div>'
-    }
+            vm.persons[data.id] = data;
+            return '<button class="btn btn-warning" ng-click="showCase.fnEdit(showCase.persons[' + data.id + '])">' +
+                '   <i class="fa fa-edit"></i>' +
+                '</button>&nbsp;' +
+                '<button class="btn btn-danger" ng-click="showCase.fnDelete(showCase.persons[' + data.id + '])">' +
+                '   <i class="fa fa-trash-o"></i>' +
+                '</button>';
+        }
 
     var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
         'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
@@ -53,7 +82,7 @@ function AngularWayChangeDataCtrl($q,$http,$scope, $compile, DTOptionsBuilder, D
         // Recompiling so we can bind Angular directive to the DT
         $compile(angular.element(row).contents())($scope);
     }
-    var fnDataSRC = function(json) {debugger
+    var fnDataSRC = function(json) {
         console.log(json)
         json['recordsTotal'] = json.doisValoresList.length
         json['recordsFiltered'] = json.doisValoresList.length
@@ -62,27 +91,86 @@ function AngularWayChangeDataCtrl($q,$http,$scope, $compile, DTOptionsBuilder, D
         return json.doisValoresList;
     }
 
-    Datatablessss.getTable(url, fnDataSRC, request, this, rCallback, null, recompile, tableOptionsFactory.doisValores(vm,createdRow,$scope,FiltersFactory.doisValores()) , tableColumnsFactory.doisValores(vm,"",actionsHtml));
+    Datatablessss.getTable(url, fnDataSRC, request, this, rCallback, null, recompile, tableOptionsFactory.doisValores(vm,createdRow,$scope,FiltersFactory.doisValores(),reloadData) , tableColumnsFactory.doisValores(vm,"",actionsHtml));
 
-    function _buildPerson2Add(id) {
-        return {
-            id: id,
-            descricao: 'Foo' + id,
-            createUser: 'Bar' + id
-        };
-    }
-    function addPerson() {
-        vm.persons.push(angular.copy(vm.person2Add));
-        vm.person2Add = _buildPerson2Add(vm.person2Add.id + 1);
-    }
-    function modifyPerson(index) {
-        debugger
-        vm.persons.splice(index, 1, angular.copy(vm.person2Add));
-        vm.person2Add = _buildPerson2Add(vm.person2Add.id + 1);
-    }
-    function removePerson(index) {
-        debugger
-        vm.persons.splice(index, 1);
-    }
 }
+})();
+(function() {
+    angular.module('wdApp.apps.situacao.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('SituacaoInsertController', function($rootScope, $scope, fModels, SysMgmtData,toastr,$element, close) {
+            var vm = this;
+            $scope.contasPagar = {};
+            $scope.contasPagar = $rootScope.contasPagar;
+            console.log($rootScope.contasPagar)
+            $scope.saveDoisValor = function() {
+                var oObject = qat.model.fnDoisValores(null, $scope.situacao.value, $scope.situacao.nome, "SITUACAO", "INSERT",$rootScope.user.user,$scope.situacao.descricao,106,101)
+
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "entidade/api/doisValores/insert",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqDoisValor(oObject, true, true)
+                }, function(res) {
+                    if(res.operationSuccess == true){
+                      $element.modal('hide');
+                      close(null, 500);
+                      toastr.success('Deu Certo seu tanga.', 'Sucess');
+                      $rootScope.reloadDataSit(function(data){debugger})
+                    }
+
+                });
+            }
+        });
+})();
+(function() {
+    angular.module('wdApp.apps.situacao.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('SituacaoUpdateController', function($rootScope, $scope, fModels, SysMgmtData,toastr,$element, close) {
+            var vm = this;
+
+            console.log($rootScope.doisValor)
+            $scope.situacao = $rootScope.doisValor
+            $scope.saveDoisValor = function() {
+                var oObject = qat.model.fnDoisValores($scope.situacao.id, $scope.situacao.value, $scope.situacao.nome, "SITUACAO", "UPDATE",$rootScope.user.user,$scope.situacao.descricao,106,101)
+
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "entidade/api/doisValores/update",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqDoisValor(oObject, true, true)
+                }, function(res) {
+                    if(res.operationSuccess == true){
+                      $element.modal('hide');
+                      close(null, 500);
+                      toastr.success('Deu Certo seu tanga.', 'Sucess');
+                      $rootScope.reloadDataSit(function(data){debugger})
+                    }
+
+                });
+            }
+        });
+})();
+(function() {
+    angular.module('wdApp.apps.situacao.delete', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('SituacaoDeleteController', function($rootScope, $scope, fModels, SysMgmtData,toastr,$element, close) {
+            var vm = this;
+
+            var sHtml = '<div class="container-fluid">'
+            $('#delete').append(sHtml);
+            console.log($rootScope.doisValor)
+            $scope.delete = function() {
+                var oObject = qat.model.fnDoisValores($rootScope.doisValor.id, null, null, "SITUACAO", "DELETE",$rootScope.user.user,null,106,101)
+
+                SysMgmtData.processPostPageData("main/api/request", {
+                     url: "entidade/api/doisValores/delete",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqDoisValor(oObject, true, true)
+                }, function(res) {
+                    if(res.operationSuccess == true){
+                      $element.modal('hide');
+                      close(null, 500);
+                      toastr.success('Deu Certo seu tanga.', 'Sucess');
+                      $rootScope.reloadDataSit(function(data){debugger})
+                    }
+
+                });
+            }
+        });
 })();

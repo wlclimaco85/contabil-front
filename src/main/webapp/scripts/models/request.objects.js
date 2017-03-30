@@ -164,7 +164,7 @@
 	};
 
 	qat.model.reqDoisValor = function(_oCounty, _bList, _bPagedList)
-	{
+	{debugger
 		this.doisValor = _oCounty;
 		this.returnList = _bList;
 		this.returnListPaged = _bPagedList;
@@ -251,7 +251,7 @@
 	};
 
 		//siteInquryRequest
-	qat.model.doisValoresInquiryRequest = function (_page, _iStartPage, _bCount,_emprId,_doisValorType)
+	qat.model.doisValoresInquiryRequest = function (_page, _iStartPage, _bCount,_emprId,_doisValorType,_id)
 	{
 		var _emprId = null;
 	    if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ""){

@@ -414,22 +414,11 @@
 
 					var buttons = [];
 				      buttons.push(
-			            {
-			                text: '<span class="fa fa-trash"></span>',
-			                key: '1',
-			                action: function(e, dt, node, config) {
-
-			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,null);
-
-			                }
-		                },
-
 		                {
-			                text: 'Nova Conta Pagar',
-			                key: '4',
+			                text: vm.button,
+			                key: '3',
 			                action: function(e, dt, node, config) {
-
-			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,_function);
+			                    dialogFactory.dialog('views/financeiro/dialog/dSituacao.html',"SituacaoInsertController",validationFactory.situacao,_function);
 
 			                }
 			            })
