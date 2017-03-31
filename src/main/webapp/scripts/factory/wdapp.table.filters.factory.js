@@ -152,6 +152,13 @@
                             }, {
                                 type: 'number',
                             }];
+                },
+                formaPg : function() {
+                    return [{
+                                type: 'number'
+                            }, {
+                                type: 'number',
+                            }];
                 }
 			};
 	}]);

@@ -329,7 +329,7 @@
 
 			            return oOptions;
 				},
-				contasReceber : function(vm,createdRow,scope, _callback) {
+				contasReceber : function(vm,createdRow,scope, _callback,_function) {
 
 					var buttons = [];
 				      buttons.push(
@@ -338,7 +338,7 @@
 			                key: '1',
 			                action: function(e, dt, node, config) {
 
-			                    dialogFactory.dialog('views/financeiro/dialog/dContasReceber.html',"ContasReceberInsertController",validationFactory.contasReceber,null);
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasReceber.html',"ContasReceberInsertController",validationFactory.contasReceber,_function);
 
 			                }
 		                },
@@ -347,7 +347,7 @@
 			                key: '2',
 			                action: function(e, dt, node, config) {
 
-			                    dialogFactory.dialog('views/financeiro/dialog/dContasReceber.html',"ContasReceberInsertController",validationFactory.contasReceber,null);
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasReceber.html',"ContasReceberInsertController",validationFactory.contasReceber,_function);
 
 			                }
 		                },
@@ -356,7 +356,7 @@
 			                key: '3',
 			                action: function(e, dt, node, config) {
 
-			                    dialogFactory.dialog('views/financeiro/dialog/dContasReceber.html',"ContasReceberInsertController",validationFactory.contasReceber,null);
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasReceber.html',"ContasReceberInsertController",validationFactory.contasReceber,_function);
 
 			                }
 		                },
@@ -365,12 +365,12 @@
 			                key: '4',
 			                action: function(e, dt, node, config) {
 
-			                    dialogFactory.dialog('views/financeiro/dialog/dContasReceber.html',"ContasReceberInsertController",validationFactory.contasReceber,null);
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasReceber.html',"ContasReceberInsertController",validationFactory.contasReceber,_function);
 
 			                }
 			            })
 
-			            return  padrao(vm,createdRow,scope, _callback , buttons,2);
+			            return  padrao(vm,createdRow,scope, _callback , buttons,2,_function);
 
 				},
 				contasPagar : function(vm,createdRow,scope, _callback,_function) {
@@ -382,7 +382,7 @@
 			                key: '1',
 			                action: function(e, dt, node, config) {
 
-			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,null);
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,_function);
 
 			                }
 		                },
@@ -391,7 +391,7 @@
 			                key: '2',
 			                action: function(e, dt, node, config) {
 
-			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,null);
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,_function);
 
 			                }
 		                },
@@ -400,7 +400,7 @@
 			                key: '3',
 			                action: function(e, dt, node, config) {
 
-			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,null);
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,_function);
 
 			                }
 		                },
@@ -458,6 +458,32 @@
 			            })
 
 			            return  padrao(vm,createdRow,scope, _callback , buttons,2);
+
+				},
+				formaPg : function(vm,createdRow,scope, _callback,_function) {
+
+					var buttons = [];
+				      buttons.push(
+			            {
+			                text: '<span class="fa fa-trash"></span>',
+			                key: '1',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,_function);
+
+			                }
+		                },
+		                {
+			                text: 'Nova Forma Pagamento',
+			                key: '4',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dFormaPg.html',"FormaPgInsertController",validationFactory.formaPg,_function);
+
+			                }
+			            })
+
+			            return  padrao(vm,createdRow,scope, _callback , buttons,2,_function);
 
 				},
 			};

@@ -271,6 +271,63 @@ qat.model.fnCnaeEmpresa = function(_oObjet) {
 	}
 }
 
+qat.model.fnFormaReceber = function(_oObjet, _action) {
+	var _emprId = null;
+	if (localStorage.getItem('empresa') == null
+			|| localStorage.getItem('empresa') == "") {
+		_emprId = null;
+	} else {
+		_emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	}
+	var _fornecedor = {};
+	if (_oObjet.cliente) {
+		if (_oObjet.cliente.description) {
+			_fornecedor = _oObjet.cliente.description
+		} else if (_oObjet.cliente.id) {
+			_fornecedor = _oObjet.cliente;
+		}
+	}
+	return cnaes = {
+		id : _oObjet.id ? _oObjet.id : null,
+		descricao : _oObjet.descricao,
+		numero : _oObjet.numero,
+		cliente : _fornecedor,
+		parcela : _oObjet.parcela,
+		formapg : _oObjet.formapg ? {
+			id : _oObjet.formapg ? _oObjet.formapg.id : null
+		} : null,
+		dataEmissao : _oObjet.dataEmissao ? new Date(_oObjet.dataEmissao)
+				.getTime() : null,
+		dataVencimento : _oObjet.dataVencimento ? new Date(
+				_oObjet.dataVencimento).getTime() : null,
+		dataPagamento : _oObjet.dataPagamento ? new Date(_oObjet.dataPagamento)
+				.getTime() : null,
+		docId : _oObjet.docId,
+		tipoDoc : _oObjet.tipoDoc ? qat.model.fnDoisValor(
+				_oObjet.tipoDoc ? _oObjet.tipoDoc : {}, _action) : null,
+		formaCadastro : _oObjet.formaCadastro ? qat.model.fnDoisValor(
+				_oObjet.formaCadastro ? _oObjet.formaCadastro : {}, _action)
+				: null,
+		intervalo : _oObjet.intervalo ? qat.model.fnDoisValor(
+				_oObjet.intervalo ? _oObjet.intervalo : {}, _action) : null,
+		categoria : _oObjet.categoria ? qat.model.fnDoisValor(
+				_oObjet.categoria ? _oObjet.categoria : {}, _action) : null,
+		situacao : _oObjet.situacao ? qat.model.fnDoisValor(
+				_oObjet.situacao ? _oObjet.situacao : {}, _action) : null,
+		listBaixa : _oObjet.listBaixa[0] ? [ qat.model.fnBaixaTitulo(
+				_oObjet.listBaixa[0], _action) ] : [],
+		observacao : _oObjet.observacao,
+		valor : _oObjet.valor,
+		financeiroEnum : _oObjet.financeiroEnum,
+		emprId : _emprId,
+		modelAction : _action,
+		createUser : "System",
+		createDateUTC : (new Date()).getTime(),
+		modifyUser : "System",
+		modifyDateUTC : (new Date()).getTime(),
+	}
+}
+
 qat.model.fnFormaPagar = function(_oObjet, _action) {
 	var _emprId = null;
 	if (localStorage.getItem('empresa') == null

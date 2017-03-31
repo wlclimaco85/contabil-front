@@ -413,7 +413,7 @@ vm.dtInstance.rerender()
 })();
 (function() {
     angular.module('wdApp.apps.contasPagar.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('ContasPagarInsertController', function($rootScope, $scope, fModels, SysMgmtData,doisValorFactory,toastr) {
+        .controller('ContasPagarInsertController', function($rootScope, $scope, fModels, SysMgmtData,doisValorFactory,toastr,$element, close) {
             var vm = this;
 
             $scope.formatterDate = function(iDate) {

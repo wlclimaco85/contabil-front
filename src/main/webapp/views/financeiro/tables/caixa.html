@@ -1,20 +1,205 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="dist/css/select2.css"/>
-<script src="dist/js/select2.min.js"></script>
-<div ng-controller="PdComprasController as showCase">
-    <table datatable dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" class="row-border hover">
-        <tfoot>
-        <tr>
-            <th>ID
-            </th><th>First Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-            </th><th>Last Name
-        </th></tr>
-        </tfoot>
-    </table>
+<div ng-controller="CaixaController as showCase">
+<div class="row">
+    <div class="col-md-5">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Periodo Inicio</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control"
+                            ng-model="filter.inicial" is-open="popup1.opened"
+                            datepicker-options="dateOptions" ng-required="true"
+                            close-text="Close" uib-datepicker-popup="{{format}}" /> <span
+                            class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open1()">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Periodo Final</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control"
+                            ng-model="filter.final" is-open="popup2.opened"
+                            datepicker-options="dateOptions" ng-required="true"
+                            close-text="Close" uib-datepicker-popup="{{format}}" /> <span
+                            class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open1()">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="row">
+        <div class="col-md-8">
+                <table datatable="" dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" dt-instance="showCase.dtInstanceCR" class="row-border hover"></table>
+        </div>
+                <div id="overviewContent" class="col-md-4 hidden-sm hidden-xs" style="height: auto;">
+      <div id="overviewBox" view-balance="true" class="shift" style="width: auto; top: 60px;">
+            <div id="overviewDock" data-original-title="" title="">
+              <table id="overviewBalance" style="display: none;">
+                <tbody><tr>
+                  <td>
+                    <span class="label-default">Saldo atual:</span>
+                  </td>
+                  <td class="text-right">
+                    <span rel="tooltip" data-placement="bottom" id="overviewCurrentBalance" title="" data-original-title="Este é o saldo atual da sua conta." class="green">R$  100,00</span>
+                  </td>
+                </tr>
+              </tbody></table>
+
+              <div id="overviewText">
+                <h3 id="overviewMonth">Março / 2017</h3>
+                <p id="overviewPrevMonth" class="positive">
+                  Você fechou o <strong>mês anterior</strong> com o balanço de: <span id="spBalancePrevMonth">R$  100,00</span>
+                </p>
+
+                <p id="overviewFutureMonth" class="positive">
+                  Para o <strong>mês atual</strong>, a previsão de fechamento é: <span id="spBalanceFuture">R$  100,00</span>
+                </p>
+              </div>
+
+              <table id="overviewBars">
+                <tbody>
+                <tr>
+                  <td>
+                    <p><strong>Recebimentos</strong></p>
+                  </td>
+                  <td class="text-right">
+                    <p>realizado: <strong class="sp_total_incoming_current_pano green">R$  0,00</strong></p>
+                    <p>previsto: <strong class="sp_total_incoming_current_future">R$  0,00</strong></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <div class="progress">
+                      <div class="progress-bar-primary dv_total_incoming_perc" style="width: 0%;"></div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p><strong>Saídas totais</strong></p>
+                  </td>
+                  <td class="text-right">
+                    <p>realizado: <strong class="sp_total_expenses_current_pano red">R$  0,00</strong></p>
+                    <p>previsto: <strong class="sp_total_expenses_current_future">R$  0,00</strong></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <div class="progress">
+                      <div class="progress-bar-red dv_total_expenses_perc" style="width: 0%;"></div>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+
+              <table id="overviewAreas" class="hide">
+                <tbody id="ulBalanceCategory">
+                <tr class="overviewAreaHidden">
+                  <td>
+                    <p><span class="sp-balance-category-name">Recebimentos</span></p>
+                  </td>
+                  <td class="text-right">
+                    <p>realizado: <strong class="sp-balance-category-current">R$  0,00</strong></p>
+                    <p>previsto: <strong class="sp-balance-category-future">R$  0,00</strong></p>
+                  </td>
+                </tr>
+                <tr class="overviewAreaHidden">
+                  <td colspan="2">
+                    <div class="progress">
+                      <div class="progress-bar-yellow sp-balance-category-perc" style="width: 0%;"></div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p><span class="sp-balance-category-name">Despesas fixas</span></p>
+                  </td>
+                  <td class="text-right">
+                    <p>realizado: <strong class="sp-balance-category-current">R$  0,00</strong></p>
+                    <p>previsto: <strong class="sp-balance-category-future">R$  0,00</strong></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <div class="progress">
+                      <div class="progress-bar-yellow sp-balance-category-perc" style="width: 0%;"></div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p><span class="sp-balance-category-name">Despesas variáveis</span></p>
+                  </td>
+                  <td class="text-right">
+                    <p>realizado: <strong class="sp-balance-category-current">R$  0,00</strong></p>
+                    <p>previsto: <strong class="sp-balance-category-future">R$  0,00</strong></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <div class="progress">
+                      <div class="progress-bar-yellow sp-balance-category-perc" style="width: 0%;"></div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p><span class="sp-balance-category-name">Pessoas</span></p>
+                  </td>
+                  <td class="text-right">
+                    <p>realizado: <strong class="sp-balance-category-current">R$  0,00</strong></p>
+                    <p>previsto: <strong class="sp-balance-category-future">R$  0,00</strong></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <div class="progress">
+                      <div class="progress-bar-yellow sp-balance-category-perc" style="width: 0%;"></div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p><span class="sp-balance-category-name">Impostos</span></p>
+                  </td>
+                  <td class="text-right">
+                    <p>realizado: <strong class="sp-balance-category-current">R$  0,00</strong></p>
+                    <p>previsto: <strong class="sp-balance-category-future">R$  0,00</strong></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <div class="progress">
+                      <div class="progress-bar-yellow sp-balance-category-perc" style="width: 0%;"></div>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+
+              <div class="text-right">
+                <button type="button" id="tableOverviewShowMore" data-collapse="yes">Ver mais <i class="fa fa-chevron-down"></i></button>
+              </div>
+            </div>
+      </div>
+      <input type="hidden" id="_cdC" name="_cdC" value="1474487">
+    </div>
+
+    </div>
 </div>

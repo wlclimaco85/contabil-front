@@ -1306,6 +1306,11 @@
 				    		DTColumnBuilder.newColumn('observacao').withTitle('observacao').notVisible(),
 				            DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
 				            DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
+				            DTColumnBuilder.newColumn(null).withTitle('Pagar').notSortable().renderWith(function(data, type, full, meta) {
+				            	return "<toggle style='width : 10px' ng-model='titulo.pagarAgora"+data.id+"' " +
+									'ng-change="showCase.fnPagarAgora(showCase.persons[' + data.id + '])"  style="android" on="Sim"'+
+									'off="Não" onstyle="btn-success" offstyle="btn-danger"'+
+									'ng-true-value="true" ng-false-value="false"></toggle>'}).withOption('width', '10px'),
 				            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '100px')
 				    	];
 					},
@@ -1360,7 +1365,41 @@
 					            DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
 					            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
 								];
-					}
+					},
+					formaPg : function(vm,_html,_actions) {
+						return  [
+					            DTColumnBuilder.newColumn(null).withTitle(_html).notSortable()
+					            .renderWith(function(data, type, full, meta) {
+					                vm.selected[full.id] = false;
+					                return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
+					            }).withOption('width', '10px'),
+					            DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
+					            DTColumnBuilder.newColumn('descricao').withTitle('Descricao'),
+					            DTColumnBuilder.newColumn('diasPg').withTitle('Dias Pagamento'),
+					            DTColumnBuilder.newColumn('parcelamentoMax').withTitle('Parcelamento Max'),
+					            DTColumnBuilder.newColumn(null).withTitle('Tipo Doc.').renderWith(function(data, type, full, meta) {
+					                var sDocumento = "";
+
+					                if((data.tipoDoc)&&(data.tipoDoc.length > 0))
+					                {
+					                    return '<p>'+data.tipoDoc.nome+'</p>';
+					                }
+					                return '<p>'+sDocumento+'</p>';
+					            }),
+					            DTColumnBuilder.newColumn('parcelamentoSemJuros').withTitle('Parcelamento Sem Juros').notVisible(),
+					            DTColumnBuilder.newColumn('juros').withTitle('Juros').notVisible(),
+					            DTColumnBuilder.newColumn('taxaFixa').withTitle('Taxa Fixa').notVisible(),
+					            DTColumnBuilder.newColumn('descAvista').withTitle('Desconto Avista').notVisible(),
+					            DTColumnBuilder.newColumn('qntIntervalo').withTitle('Tempo Intervalo').notVisible(),
+					            DTColumnBuilder.newColumn('intervalo').withTitle('Intervalo').notVisible(),
+					            DTColumnBuilder.newColumn('entrada').withTitle('Entrada'),
+					            DTColumnBuilder.newColumn('observacao').withTitle('Observação').notVisible(),
+					            DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
+					            DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
+					            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
+								];
+					},
+
 			};
 	}]);
 })();

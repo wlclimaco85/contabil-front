@@ -8,14 +8,23 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="form-group col-sm-12" style="margin-top: 26px">
+                        <div class="form-group col-sm-8" style="margin-top: 26px">
                             <div class="inputClass input-group">
                                 <span class="InputSign input-group-addon" target="fin_valor">
                   					<span title="Valor monetário" class="fa fa-user"></span>
                                 </span>
-                                <div angucomplete-alt id="ex1" placeholder="Buscar Clientes" maxlength="50" pause="100" selected-object="titulo.fornecedor" local-data="cliente" search-fields="nome" title-field="nome" minlength="1" ng-model="titulo.fornecedor" input-class="form-control form-control-small" match-class="highlight"></div>
+                                <div angucomplete-alt id="ex1" placeholder="Buscar Clientes" maxlength="50" pause="100" selected-object="titulo.cliente" local-data="cliente" search-fields="nome" title-field="nome" minlength="1" ng-model="titulo.cliente" input-class="form-control form-control-small" match-class="highlight"></div>
                             </div>
                         </div>
+                        <div class="form-group col-sm-4">
+							<label for="exampleInputPassword1">Receber agora</label>
+							<div class="row">
+								<toggle ng-model="titulo.pagarAgora"
+									ng-init="titulo.pagarAgora = false" style="android" on="Sim"
+									off="Não" onstyle="btn-success" offstyle="btn-danger"
+									ng-true-value="'true'" ng-false-value="'false'"></toggle>
+							</div>
+						</div>
                     </div>
                     <div class="row col-sm-12">
                         <div class="form-group col-sm-6">
@@ -56,16 +65,41 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="row">
-
-                            	<div class="form-group">
-                                <label for="exampleInputPassword1">Valor do titulo</label>
-                                <div class="inputClass input-group">
-                                    <span class="InputSign input-group-addon" target="fin_valor">
-                           <span title="Valor monetário" class="fa fa-usd"></span>
-                                    </span>
-                                    <input type="text" id="fin_valor" ng-model="titulo.valor" class="form-control InputNum RequiredField WithValidate" value="" autocomplete="off" name="valor" especialtype="money" data-thousands="." data-decimal="," data-precision="2" decimal="15,2">
-                                </div>
-                            </div>
+                            	<div ng-show="titulo.pagarAgora == true" ng-hide="titulo.pagarAgora == false">
+	                            	<div class="col-sm-6">
+		                            	<div class="form-group">
+			                                <label for="exampleInputPassword1">Valor do titulo</label>
+			                                <div class="inputClass input-group">
+			                                    <span class="InputSign input-group-addon" target="fin_valor">
+			                           				<span title="Valor monetário" class="fa fa-usd"></span>
+			                                    </span>
+			                                    <input type="text" id="fin_valor" ng-model="titulo.valor" class="form-control InputNum RequiredField WithValidate" value="" autocomplete="off" name="valor" especialtype="money" data-thousands="." data-decimal="," data-precision="2" decimal="15,2">
+			                                </div>
+			                            </div>
+			                        </div>
+			                        <div class="col-sm-6">
+		                            	<div class="form-group">
+			                                <label for="exampleInputPassword1">Valor Pago</label>
+			                                <div class="inputClass input-group">
+			                                    <span class="InputSign input-group-addon" target="fin_valor">
+			                           				<span title="Valor monetário" class="fa fa-usd"></span>
+			                                    </span>
+			                                    <input type="text" id="fin_valor" ng-model="titulo.listBaixa[0].valor" class="form-control InputNum RequiredField WithValidate" value="" autocomplete="off" name="valor" especialtype="money" data-thousands="." data-decimal="," data-precision="2" decimal="15,2">
+			                                </div>
+			                            </div>
+			                        </div>
+			                    </div>
+			                    <div ng-show="titulo.pagarAgora == false" ng-hide="titulo.pagarAgora == true">
+			                    	<div class="form-group">
+			                                <label for="exampleInputPassword1">Valor do titulo</label>
+			                                <div class="inputClass input-group">
+			                                    <span class="InputSign input-group-addon" target="fin_valor">
+			                           				<span title="Valor monetário" class="fa fa-usd"></span>
+			                                    </span>
+			                                    <input type="text" id="fin_valor" ng-model="titulo.valor" class="form-control InputNum RequiredField WithValidate" value="" autocomplete="off" name="valor" especialtype="money" data-thousands="." data-decimal="," data-precision="2" decimal="15,2">
+			                                </div>
+			                            </div>
+			                    </div>
                             </div>
                             <div class="row">
                                 <div class="form-group">
@@ -92,11 +126,12 @@
                                     </ui-select>
                                 </div>
                             </div>
-                            <div class="col-sm-3"></div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-3" style="margin-top : 3%">
                             	                        <toggle ng-model="titulo.maisopcoes" ng-init="titulo.maisopcoes = false" style="android" on="Menos opções" off="Mais Opções" onstyle="btn-success" offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
 
                             </div>
+                            <div class="col-sm-1"></div>
                             </div>
 
                     </div>

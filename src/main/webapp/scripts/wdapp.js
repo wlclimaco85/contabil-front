@@ -257,6 +257,7 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.contasReceber.Baixa'
 	            ,'wdApp.apps.contasReceber.baixas'
 	            ,'wdApp.apps.contasReceber.Recibo'
+	            ,'wdApp.apps.contasReceber.copiar'
 
 	            ,'wdApp.apps.conta'
 	            ,'wdApp.apps.conta.insert'
@@ -358,6 +359,7 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.situacao.insert'
 	            ,'wdApp.apps.situacao.update'
 	            ,'wdApp.apps.situacao.delete'
+	            ,'wdApp.apps.caixa'
 
 
 

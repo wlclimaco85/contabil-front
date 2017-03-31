@@ -20,6 +20,31 @@
         vm.fnEdit    = fnEdit;
         vm.fnRecibo  = fnRecibo;
         vm.fnBaixar  = fnBaixar;
+        vm.fnCopiar  = fnCopiar;
+        vm.fnPagarAgora = fnPagarAgora;
+
+        vm.dtInstanceCR = {};
+
+        function reloadData() {
+            var resetPaging = false;
+            vm.dtInstanceCR.reloadData(callback, resetPaging);
+        }
+
+        function callback(json) {
+            console.log(json);
+        }
+
+       var reloadData = function() {
+
+            var resetPaging = false;
+            vm.dtInstanceCR.reloadData(callback, resetPaging);
+        }
+
+        $rootScope.reloadDataCR = function(_callback) {
+
+            var resetPaging = false;
+            vm.dtInstanceCR.reloadData(_callback, resetPaging);
+        }
 
 
 
@@ -67,7 +92,10 @@
                 '</button>';
         }
 */
+         function fnPagarAgora(person) {
+            return
 
+         }
         function actionsHtml(data, type, full, meta) {
             vm.persons[data.id] = data;
 
@@ -76,9 +104,10 @@
                ' Açoes'+
                 '<span class="caret"></span>'+
               '</button>'+
-              '<ul class="dropdown-menu" style="height:120px" aria-labelledby="dropdownMenu1">'+
+              '<ul class="dropdown-menu" style="height:140px" aria-labelledby="dropdownMenu1">'+
                 '<li><a href="javaScript:;" ng-click="showCase.fnDelete(showCase.persons[' + data.id + '])"><span class="fa fa-trash"></span> Deletar</a></li>'+
                 '<li><a href="javaScript:;" ng-click="showCase.fnEdit(showCase.persons[' + data.id + '])"><span class="glyphicon glyphicon-edit"></span> Alterar</a></li>'+
+                '<li><a href="javaScript:;" ng-click="showCase.fnCopiar(showCase.persons[' + data.id + '])"><span class="glyphicon glyphicon-edit"></span> Copiar</a></li>'+
                 '<li><a href="javaScript:;" ng-click="showCase.fnRecibo(showCase.persons[' + data.id + '])"><span class="glyphicon glyphicon-print"></span> Emitir Recibo</a></li>'+
                 '<li><a href="javaScript:;" ng-click="showCase.fnBaixar(showCase.persons[' + data.id + '])"><span class="fa fa-usd">                </span> Pagar</a></li>'+
               '</ul>'+
@@ -89,7 +118,7 @@
 
              $rootScope.contaPagar = person;
 
-            dialogFactory.dialog('views/util/dialog/dDelete.html',"ContasReceberDeleteController",validationFactory.contasReceber());
+            dialogFactory.dialog('views/util/dialog/dDelete.html',"ContasReceberDeleteController",validationFactory.contasReceber(),reloadData());
         }
 
         function fnDeleteBaixa(person) {
@@ -99,33 +128,40 @@
 
         }
 
+        function fnCopiar(person) {
+
+             $rootScope.contaPagar = person;
+
+            dialogFactory.dialog('views/financeiro/dialog/dContasReceber.html',"ContasReceberCloneController",validationFactory.contasReceber(),reloadData());
+        }
+
         function fnEdit(person) {
 
              $rootScope.contaPagar = person;
 
-            dialogFactory.dialog('views/financeiro/dialog/dContasReceberUpdate.html',"ContasReceberUpdateController",validationFactory.contasReceber());
+            dialogFactory.dialog('views/financeiro/dialog/dContasReceber.html',"ContasReceberUpdateController",validationFactory.contasReceber(),reloadData());
         }
 
         function fnRecibo(person) {
 
             console.log($(this))
 
-            dialogFactory.dialog('views/financeiro/dialog/dTituloImprimir.html',"ContasReceberReciboController",validationFactory.contasReceber());
+            dialogFactory.dialog('views/financeiro/dialog/dTituloImprimir.html',"ContasReceberReciboController",validationFactory.contasReceber(),reloadData());
         }
 
         function fnBaixar(person) {
 
              $rootScope.contaPagar = person;
 
-            dialogFactory.dialog('views/financeiro/dialog/dBaixarContasReceber.html',"ContasReceberBaixaController",validationFactory.contasReceber());
+            dialogFactory.dialog('views/financeiro/dialog/dBaixarContasPagar.html',"ContasReceberBaixaController",validationFactory.contasReceber(),reloadData());
         }
 
         function deleteRow(person) {
            $rootScope.contasReceber = person;
-           dialogFactory.dialog('views/financeiro/dialog/dContasReceber.html',"ContasReceberDeleteController",validationFactory.contasReceber());
+           dialogFactory.dialog('views/financeiro/dialog/dContasReceber.html',"ContasReceberDeleteController",validationFactory.contasReceber(),reloadData());
         }
 
-        Datatablessss.getTable('/financeiro/api/contasReceber/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.contasReceber(vm,createdRow,$scope,FiltersFactory.contasReceber()), tableColumnsFactory.contasReceber(vm,"",actionsHtml));
+        Datatablessss.getTable('/financeiro/api/contasReceber/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.contasReceber(vm,createdRow,$scope,FiltersFactory.contasReceber(),reloadData), tableColumnsFactory.contasReceber(vm,"",actionsHtml));
       //  Datatablessss.getTable('/fiscal/api/cfop/fetchPage           ', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cfop(vm,createdRow,$scope,FiltersFactory.cfop()), tableColumnsFactory.cfop(vm,titleHtml,actionsHtml));
 
         function toggleAll(selectAll, selectedItems) {
@@ -166,8 +202,10 @@
 })();
 (function() {
     angular.module('wdApp.apps.contasReceber.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('ContasReceberInsertController', function($rootScope, $scope, fModels, SysMgmtData,doisValorFactory,toastr) {
+        .controller('ContasReceberInsertController', function($rootScope, $scope, fModels, SysMgmtData,doisValorFactory,toastr,$element, close) {
             var vm = this;
+
+            $scope.titulo.pagarAgora = false;
 
             $scope.formatterDate = function(iDate) {
                 return $filter('date')(new Date(iDate), 'dd/MM/yyyy');
@@ -281,9 +319,9 @@
             $scope.titulo = {
                 listBaixa : [],
                 maisopcoes : false,
-                dataEmissao : moment(new Date()).format('DD/MM/YYYY'),
-                dataPagamento : moment(new Date()).format('DD/MM/YYYY'),
-                dataVencimento : moment(new Date()).format('DD/MM/YYYY')
+                dataEmissao : new Date(),
+                dataPagamento : new Date(),
+                dataVencimento : new Date()
             }
 
             function edit(person) {
@@ -395,11 +433,15 @@
                             });
                         }
                     }
+
+                    $element.modal('hide');
+                    close(null, 500);
                     toastr.success('Deu Certo seu tanga.', 'Sucess');
+                    $rootScope.reloadDataCR(function(data){debugger})
                 }
             }
             $scope.saveContasReceber = function() {
-
+debugger
                 if($scope.titulo.pagarAgora)
                 {
                     $scope.titulo.listBaixa[0].dataBaixa = $scope.titulo ? $scope.titulo.dataPagamento.getTime() : (new Date()).getTime();
@@ -412,7 +454,7 @@
                 }
 
                 $scope.titulo.situacao = { id : 392}
-                var oObject = fModels.amont(qat.model.fnFormaPagar($scope.titulo,"INSERT"),"INSERT");
+                var oObject = fModels.amont(qat.model.fnFormaReceber($scope.titulo,"INSERT"),"INSERT");
 
 
                 SysMgmtData.processPostPageData("main/api/request", {
@@ -427,7 +469,7 @@
 })();
 (function() {
     angular.module('wdApp.apps.contasReceber.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('ContasReceberUpdateController', function($rootScope, $scope, fModels, SysMgmtData,doisValorFactory,toastr) {
+        .controller('ContasReceberUpdateController', function($rootScope, $scope, fModels, SysMgmtData,doisValorFactory,toastr,$element, close) {
             var vm = this;
 
             SysMgmtData.processPostPageData("main/api/request", {
@@ -617,11 +659,10 @@
                 }, function(res) {
 
                   if(res.operationSuccess == true){
+                    $element.modal('hide');
+                    close(null, 500);
                     toastr.success('Deu Certo seu tanga.', 'Sucess');
-                  }
-                  else
-                  {
-                     toastr.error('County form error, please correct and resubmit.', 'Error');
+                    $rootScope.reloadDataCR(function(data){debugger})
                   }
 
                 });
@@ -630,7 +671,7 @@
 })();
 (function() {
     angular.module('wdApp.apps.contasReceber.delete', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('ContasReceberDeleteController', function($rootScope, $scope, fModels, SysMgmtData) {
+        .controller('ContasReceberDeleteController', function($rootScope, $scope, fModels, SysMgmtData,toastr,$element, close) {
             var vm = this;
 
             $scope.titulo = $rootScope.contaPagar;
@@ -735,12 +776,11 @@ $('#delete').append(sHtml);
                     request: new qat.model.reqContasReceber(oObject, true, true)
                 }, function(res) {
                 	if(res.operationSuccess == true){
-	                    toastr.success('Deu Certo seu tanga.', 'Sucess');
-	                  }
-	                  else
-	                  {
-	                     toastr.error('County form error, please correct and resubmit.', 'Error');
-	                  }
+  	                  $element.modal('hide');
+                      close(null, 500);
+                      toastr.success('Deu Certo seu tanga.', 'Sucess');
+                      $rootScope.reloadDataCR(function(data){debugger})
+	                }
                 });
             }
         });
@@ -760,7 +800,6 @@ $('#delete').append(sHtml);
                     token: $rootScope.authToken,
                     request: new qat.model.reqContasReceber(oObject, true, true)
                 }, function(res) {
-                    callBack(res);
                 });
             }
         });
@@ -852,15 +891,15 @@ $('#delete').append(sHtml);
 
 (function() {
     angular.module('wdApp.apps.contasReceber.Baixa', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('ContasReceberBaixaController', function($rootScope, $scope, fModels, SysMgmtData) {
+        .controller('ContasReceberBaixaController', function($rootScope, $scope, fModels, SysMgmtData,toastr,$element, close) {
             var vm = this;
 
             $scope.contasReceber = {};
             $scope.titulo = $rootScope.contaPagar;
             dataVencimento =   moment($scope.titulo.dataVencimento).format('DD/MM/YYYY');
             $scope.dataPagamento =   moment(new Date()).format('DD/MM/YYYY');
-            $scope.saveBaixaContasReceber = function() {
-
+            $scope.saveBaixaContasPagar = function() {
+debugger
                 $scope.titulo.listBaixa[0].id = null;
                 $scope.titulo.listBaixa[0].dataBaixa = (new Date()).getTime();
                 $scope.titulo.listBaixa[0].dataVencimento = $scope.titulo.dataVencimento
@@ -872,7 +911,12 @@ $('#delete').append(sHtml);
                     token: $rootScope.authToken,
                     request: new qat.model.reqContasReceber(oObject, true, true)
                 }, function(res) {
-
+                    if(res.operationSuccess == true){
+                      $element.modal('hide');
+                      close(null, 500);
+                      toastr.success('Deu Certo seu tanga.', 'Sucess');
+                      $rootScope.reloadDataCR(function(data){debugger})
+                  }
                 });
             }
         });
@@ -883,5 +927,211 @@ $('#delete').append(sHtml);
         .controller('ContasReceberReciboController', function($rootScope, $scope, fModels, SysMgmtData) {
             var vm = this;
 
+        });
+})();
+(function() {
+    angular.module('wdApp.apps.contasReceber.copiar', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('ContasReceberCloneController', function($rootScope, $scope, fModels, SysMgmtData,doisValorFactory,toastr,$element, close) {
+            var vm = this;
+
+            SysMgmtData.processPostPageData("main/api/request", {
+                url: "pessoa/api/cliente/fetchPage",
+                token: $rootScope.authToken,
+                request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
+            }, function(res) {
+              //
+                $scope.cliente = res.clienteList;
+            });
+
+            var fnFunctionCallback = function (res){
+               $scope.categoria = [];
+               $scope.tipoDocumento = [];
+               $scope.cadastro = [];
+               $scope.intervalo = [];
+               $scope.situacao = [];
+
+               if(res.operationSuccess == true)
+                   {
+                        for(var x=0;x<res.doisValoresList.length;x++)
+                        {
+                            planos = res.doisValoresList[x] ;
+                            if(planos.doisValorType != null)
+                            {
+                                switch (planos.doisValorType.tipo)
+                                {
+                                    case 'TIPO DOCUMENTO':
+                                        $scope.tipoDocumento.push(planos);
+                                        break;
+                                    case 'CATEGORIA':
+                                        $scope.categoria.push(planos);
+                                        break;
+                                    case 'CADASTROMAIS':
+                                        $scope.cadastro.push(planos);
+                                        break;
+                                    case 'INTERVALO':
+                                        $scope.intervalo.push(planos);
+                                        break;
+                                    case 'SITUACAO':
+                                        $scope.situacao.push(planos);
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                console.log(res);
+            }
+
+            doisValorFactory.financeiro(101,$scope,fnFunctionCallback);
+
+
+            $scope.formatterDate = function(iDate) {
+                return $filter('date')(new Date(iDate), 'dd/MM/yyyy');
+              };
+
+            $scope.today = function() {
+                $scope.dt = new Date();
+              };
+              $scope.today();
+
+              $scope.clear = function() {
+                $scope.dt = null;
+              };
+
+              $scope.inlineOptions = {
+                customClass: getDayClass,
+                minDate: new Date(),
+                showWeeks: true
+              };
+
+              $scope.dateOptions = {
+                dateDisabled: disabled,
+                formatYear: 'yy',
+                maxDate: new Date(2020, 5, 22),
+                minDate: new Date(),
+                startingDay: 1
+              };
+
+              // Disable weekend selection
+              function disabled(data) {
+                var date = data.date,
+                  mode = data.mode;
+                return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+              }
+
+              $scope.toggleMin = function() {
+                $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
+                $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+              };
+
+              $scope.toggleMin();
+
+              $scope.open1 = function() {
+
+                $scope.popup1.opened = true;
+              };
+
+              $scope.open2 = function() {
+
+                $scope.popup2.opened = true;
+              };
+
+              $scope.open3 = function() {
+
+                $scope.popup3.opened = true;
+              };
+
+              $scope.setDate = function(year, month, day) {
+                $scope.dt = new Date(year, month, day);
+              };
+
+              $scope.formats = ['dd-MMMM-yyyy','dd/MM/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+              $scope.format = $scope.formats[1];
+              $scope.altInputFormats = ['M!/d!/yyyy'];
+
+              $scope.popup1 = {
+                opened: false
+              };
+
+              $scope.popup2 = {
+                opened: false
+              };
+
+              $scope.popup3 = {
+                opened: false
+              };
+
+              var tomorrow = new Date();
+              tomorrow.setDate(tomorrow.getDate() + 1);
+              var afterTomorrow = new Date();
+              afterTomorrow.setDate(tomorrow.getDate() + 1);
+              $scope.events = [
+                {
+                  date: tomorrow,
+                  status: 'full'
+                },
+                {
+                  date: afterTomorrow,
+                  status: 'partially'
+                }
+              ];
+
+              function getDayClass(data) {
+                var date = data.date,
+                  mode = data.mode;
+                if (mode === 'day') {
+                  var dayToCheck = new Date(date).setHours(0,0,0,0);
+
+                  for (var i = 0; i < $scope.events.length; i++) {
+                    var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+
+                    if (dayToCheck === currentDay) {
+                      return $scope.events[i].status;
+                    }
+                  }
+                }
+
+                return '';
+              }
+
+            $scope.titulo = {};
+
+            $scope.titulo = $rootScope.contaPagar;
+            $scope.cliente = $rootScope.contaPagar.cliente
+
+            $scope.saveContasReceber = function() {
+
+                if($scope.titulo.pagarAgora)
+                {
+                    $scope.titulo.listBaixa = [{}];
+                    $scope.titulo.listBaixa[0].dataBaixa = (new Date()).getTime();
+                    $scope.titulo.listBaixa[0].observacao = "";
+                    $scope.titulo.listBaixa[0].juros  = 0;
+                    $scope.titulo.listBaixa[0].multa = 0;
+                    $scope.titulo.listBaixa[0].desconto = 0;
+                    fModels.amont($scope.titulo.listBaixa[0],"INSERT");
+                }
+
+
+
+                $scope.titulo.situacao = { id : 392}
+                $scope.titulo.id = null;
+                var oObject = fModels.amont(qat.model.fnFormaReceber($scope.titulo,"INSERT"),"INSERT");
+
+
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "financeiro/api/contasReceber/insert",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqContasReceber(oObject, true, true)
+                }, function(res) {
+
+                  if(res.operationSuccess == true){
+                    $element.modal('hide');
+                    close(null, 500);
+                    toastr.success('Deu Certo seu tanga.', 'Sucess');
+                    $rootScope.reloadDataCR(function(data){debugger})
+                  }
+
+                });
+            };
         });
 })();

@@ -199,6 +199,20 @@
 								'descricao' : integerNotEmptyValidation,
 							}
 						});
+					},
+					formaPg : function() {
+						$('.formaPgForm').formValidation({
+							framework : 'bootstrap',
+							icon : {
+								valid : 'glyphicon glyphicon-ok',
+								invalid : 'glyphicon glyphicon-remove',
+								validating : 'glyphicon glyphicon-refresh'
+							},
+							fields : {
+								'nome' : notEmptyStringMinMaxRegexp,
+								'descricao' : integerNotEmptyValidation,
+							}
+						});
 					}
 				};
 			} ]);
