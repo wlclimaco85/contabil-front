@@ -269,20 +269,6 @@
 
 			            return oOptions;
 				},
-				nfSaida : function(vm,createdRow,scope, _callback) {
-
-					var oOptions = padrao(vm,createdRow,scope, _callback);
-				     oOptions.buttons.push({
-			                text: 'Novo Nota Fiscal Saida',
-			                key: '1',
-			                action: function(e, dt, node, config) {
-			                    dialogFactory.dialog('views/vendas/dialog/dNotaFiscalSaida.html',"NfSaidaInsertController",validationFactory.nfSaida,null);
-
-			                }
-			            })
-
-			            return oOptions;
-				},
 				tributacao : function(vm,createdRow,scope, _callback) {
 
 					var oOptions = padrao(vm,createdRow,scope, _callback);
@@ -374,6 +360,94 @@
 
 				},
 				contasPagar : function(vm,createdRow,scope, _callback,_function) {
+
+					var buttons = [];
+				      buttons.push(
+			            {
+			                text: '<span class="fa fa-trash"></span>',
+			                key: '1',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,_function);
+
+			                }
+		                },
+		                {
+			                text: '<span data-tooltip="Pagar selecionado(s)" id="pag_pagarEmLote" class=""><span class="fa fa-usd"> </span></span>',
+			                key: '2',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,_function);
+
+			                }
+		                },
+		                {
+			                text: '<span data-tooltip="Emitir recibo" id="pag_emitirRecibo" class=""><span class="glyphicon glyphicon-print"> </span></span>',
+			                key: '3',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,_function);
+
+			                }
+		                },
+		                {
+			                text: 'Nova Conta Pagar',
+			                key: '4',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,_function);
+
+			                }
+			            })
+
+			            return  padrao(vm,createdRow,scope, _callback , buttons,2,_function);
+
+				},
+				nfEntrada : function(vm,createdRow,scope, _callback,_function) {
+
+					var buttons = [];
+				      buttons.push(
+			            {
+			                text: '<span class="fa fa-trash"></span>',
+			                key: '1',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/notaFiscal/apps/dUploadNFe.html',"NotaFiscalEntradaUploadController",validationFactory.contasPagar,_function);
+
+			                }
+		                },
+		                {
+			                text: '<span data-tooltip="Pagar selecionado(s)" id="pag_pagarEmLote" class=""><span class="fa fa-usd"> </span></span>',
+			                key: '2',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,_function);
+
+			                }
+		                },
+		                {
+			                text: '<span data-tooltip="Emitir recibo" id="pag_emitirRecibo" class=""><span class="glyphicon glyphicon-print"> </span></span>',
+			                key: '3',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,_function);
+
+			                }
+		                },
+		                {
+			                text: 'Nova Conta Pagar',
+			                key: '4',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,_function);
+
+			                }
+			            })
+
+			            return  padrao(vm,createdRow,scope, _callback , buttons,2,_function);
+
+				},
+				nfSaida : function(vm,createdRow,scope, _callback,_function) {
 
 					var buttons = [];
 				      buttons.push(

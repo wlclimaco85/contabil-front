@@ -44,6 +44,8 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fincatto.nfe310.classes.nota.NFNota;
+import com.fincatto.nfe310.parsers.NotaParser;
 import com.qat.samples.sysmgmt.produto.model.response.CfopResponse;
 
 import br.com.emmanuelneri.app.model.ModelToken;
@@ -371,10 +373,10 @@ System.out.println(result);
 		return "error";
 	}
 
-	@RequestMapping(value = "/upload", method = RequestMethod.GET)
-    public String uploadFileForm() {
-        return "uploadItem";
-    }
+//	@RequestMapping(value = "/upload", method = RequestMethod.GET)
+//    public String uploadFileForm() {
+//        return "uploadItem";
+//    }
 
 	@RequestMapping(value = "/saveFiles", method = RequestMethod.POST)
     public String uploadFile( @RequestParam("name") String[] itemNames,
@@ -471,16 +473,14 @@ System.out.println(result);
      @RequestMapping(value = "/upload", method = RequestMethod.POST)
      public @ResponseBody String upload(MultipartHttpServletRequest request, HttpServletResponse response) {
 
-       //0. notice, we have used MultipartHttpServletRequest
-
-       //1. get the files from the request object
        Iterator<String> itr =  request.getFileNames();
 
        MultipartFile mpf = request.getFile(itr.next());
        System.out.println(mpf.getOriginalFilename() +" uploaded!");
 
        try {
-                  //just temporary save file info into ufile
+
+          //just temporary save file info into ufile
           ufile.length = mpf.getBytes().length;
           ufile.bytes= mpf.getBytes();
           ufile.type = mpf.getContentType();
@@ -488,6 +488,13 @@ System.out.println(result);
           response.setContentType(ufile.type);
           response.setContentLength(ufile.length);
           FileCopyUtils.copy(ufile.bytes, response.getOutputStream());
+
+        //Now do something with file...
+          FileCopyUtils.copy(ufile.bytes, new File("c:/uploads/" + response.getOutputStream()));
+
+          final NFNota nota = new NotaParser().notaParaObjeto(mpf.getOriginalFilename());
+
+          System.out.println(nota);
 
       } catch (IOException e) {
           // TODO Auto-generated catch block

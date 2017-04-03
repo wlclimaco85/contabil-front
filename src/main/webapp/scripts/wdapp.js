@@ -361,6 +361,11 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.apps.situacao.delete'
 	            ,'wdApp.apps.caixa'
 
+	            ,'wdApp.apps.notaFiscalEntrada'
+	            ,'wdApp.apps.notaFiscalEntrada.insert'
+	            ,'wdApp.apps.notaFiscalEntrada.update'
+	            ,'wdApp.apps.notaFiscalEntrada.delete'
+	            ,'wdApp.apps.notaFiscalEntrada.upload'
 
 
 
@@ -420,6 +425,8 @@ var WebDaptiveAppConfig = {
             ,'financeiro/tables/tipoDocumentos'
             ,'financeiro/tables/categoria'
             ,'financeiro/tables/situacao'
+            ,'notaFiscal/tables/notaFiscalSaida'
+            ,'notaFiscal/tables/notaFiscalEntrada'
 
 
 
