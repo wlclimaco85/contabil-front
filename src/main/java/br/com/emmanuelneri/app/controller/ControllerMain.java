@@ -2,6 +2,8 @@ package br.com.emmanuelneri.app.controller;
 
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -38,19 +41,20 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.aronkatona.FileManager.FileManager;
 import com.aronkatona.model.Item;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fincatto.nfe310.classes.nota.NFNota;
+import com.fincatto.nfe310.classes.nota.NFNotaProcessada;
 import com.fincatto.nfe310.parsers.NotaParser;
 import com.qat.samples.sysmgmt.produto.model.response.CfopResponse;
 
+import br.com.emmanuelneri.FileManager.FileManager;
 import br.com.emmanuelneri.app.model.ModelToken;
 import br.com.emmanuelneri.app.model.UploadedFile;
 import br.com.emmanuelneri.app.model.UtilRequest;
+
 
 @Controller
 @RequestMapping("/main/api")
@@ -471,11 +475,17 @@ System.out.println(result);
     }
 
      @RequestMapping(value = "/upload", method = RequestMethod.POST)
-     public @ResponseBody String upload(MultipartHttpServletRequest request, HttpServletResponse response) {
+     public @ResponseBody String upload(MultipartHttpServletRequest request, HttpServletResponse response) throws FileNotFoundException {
 
        Iterator<String> itr =  request.getFileNames();
 
+       String s = "C:\\uploads\\nota.xml";
+        // esta é a tal "conversão que você queria :P
+
+
        MultipartFile mpf = request.getFile(itr.next());
+       File f = new File (mpf.getOriginalFilename());
+       FileInputStream fis = new FileInputStream (f);
        System.out.println(mpf.getOriginalFilename() +" uploaded!");
 
        try {
@@ -489,12 +499,16 @@ System.out.println(result);
           response.setContentLength(ufile.length);
           FileCopyUtils.copy(ufile.bytes, response.getOutputStream());
 
+          final NFNotaProcessada notass = new NotaParser().notaProcessadaParaObjeto(FileUtils.readFileToString(f, "UTF-8"));
+
         //Now do something with file...
           FileCopyUtils.copy(ufile.bytes, new File("c:/uploads/" + response.getOutputStream()));
 
-          final NFNota nota = new NotaParser().notaParaObjeto(mpf.getOriginalFilename());
+      //    final NFNotaProcessada notass = new NotaParser().notaProcessadaParaObjeto(mpf.getInputStream().toString());
 
-          System.out.println(nota);
+        //  final NFNota nota = new NotaParser().notaParaObjeto(mpf.toString());
+
+          System.out.println(notass);
 
       } catch (IOException e) {
           // TODO Auto-generated catch block

@@ -1,12 +1,18 @@
 package org.talesolutions.cep;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.http.HttpEntity;
@@ -18,10 +24,14 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.w3c.dom.Document;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fincatto.nfe310.classes.nota.NFNota;
+import com.fincatto.nfe310.classes.nota.NFNotaProcessada;
+import com.fincatto.nfe310.parsers.NotaParser;
 import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest;
 import com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest;
@@ -31,14 +41,129 @@ import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 
 import br.com.emmanuelneri.app.model.ModelToken;
 
+
+
 public class AdvogadoTest {
 
 	public static final String REST_SERVICE_URI = "http://localhost:8080/qat-sysmgmt-controller-rest/";
 
 	// create by system gera-java version 1.0.0 02/08/2016 9:43 : 1//
 
+
+    @Test
+    public void deveParsearCorretamenteArquivoDaNota310() throws Exception {
+    	System.out.println("teste");
+        Assert.assertNotNull(new NotaParser().notaParaObjeto(new File(new URI(AdvogadoTest.class.getResource("nota.xml").getFile()).getPath())));
+    }
+
+
+    @Test
+    public void deveParsearCorretamenteArquivoDaNotaProcessada310() throws Exception {
+        Assert.assertNotNull(new NotaParser().notaProcessadaParaObjeto(new File(new URI(NotaParser.class.getResource("notaprocessada.xml").getFile()).getPath())));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void deveLancarExcecaoCasoRecebaUmArquivoInvalidoParaNotaProcessada() {
+        new NotaParser().notaProcessadaParaObjeto(new File(""));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void deveLancarExcecaoCasoRecebaUmArquivoInvalidoParaNota() {
+        new NotaParser().notaParaObjeto(new File(""));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void deveLancarExcecaoCasoRecebaUmaStringInvalidaParaNotaProcessada() {
+        new NotaParser().notaProcessadaParaObjeto("");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void deveLancarExcecaoCasoRecebaUmaStringInvalidaParaNota() {
+        new NotaParser().notaParaObjeto("");
+    }
+
+    @Test
+    public void deveParsearCorretamenteArquivoDoNFEnviaEventoCartaCorrecao() throws Exception {
+        Assert.assertNotNull(new NotaParser().enviaEventoCartaCorrecaoParaObjeto(new File(new URI(AdvogadoTest.class.getResource("enviaEventoCartaCorrecao.xml").getFile()).getPath())));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void deveLancarExcecaoCasoRecebaUmaStringInvalidaParaEnviaEventoCartaCorrecao() {
+        new NotaParser().enviaEventoCartaCorrecaoParaObjeto("");
+    }
+
+
+    @Test
+    public void deveParsearCorretamenteArquivoDoNFEnviaEventoCancelamento() throws Exception {
+        Assert.assertNotNull(new NotaParser().enviaEventoCancelamentoParaObjeto(new File(new URI(AdvogadoTest.class.getResource("enviaEventoCancelamento.xml").getFile()).getPath())));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void deveLancarExcecaoCasoRecebaUmaStringInvalidaParaEnviaEventoCancelamento() {
+        new NotaParser().enviaEventoCancelamentoParaObjeto("");
+    }
+
+
+    @Test
+    public void deveParsearCorretamenteArquivoDoNFEnviaEventoInutilizacao() throws Exception {
+        Assert.assertNotNull(new NotaParser().enviaEventoInutilizacaoParaObjeto(new File(new URI(NotaParser.class.getResource("enviaEventoInutilizacao.xml").getFile()).getPath())));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void deveLancarExcecaoCasoRecebaUmaStringInvalidaParaEnviaEventoInutilizacao() {
+        new NotaParser().enviaEventoInutilizacaoParaObjeto("");
+    }
 	@Test
-	public void listAllAudiencia() throws JsonParseException, JsonMappingException, IOException {
+	public void listAllAudiencia() throws JsonParseException, JsonMappingException, IOException, URISyntaxException {
+
+
+		String s = "C:\\uploads\\nota.xml";
+
+	//	File temp = new File(new URI(AdvogadoTest.class.getResource(s).getFile()));
+	//	temp.createNewFile();
+	   File myhtml = new File("C:\\uploads\\nota.xml");
+       File f = new File (s); // esta é a tal "conversão que você queria :P
+       String str = FileUtils.readFileToString(f, "UTF-8");
+//       FileInputStream fis = new FileInputStream (f);
+//       MultipartHttpServletRequest requestFile = null;
+//       requestFile.setCharacterEncoding(str);
+//       Iterator<String> itr =  requestFile.getFileNames();
+//
+//       MultipartFile mpf = requestFile.getFile(itr.next());
+//
+//       UploadedFile ufile = new UploadedFile();
+//       ufile.length = mpf.getBytes().length;
+//       ufile.bytes= mpf.getBytes();
+   //    ufile.type = mpf.getContentType();
+ //      ufile.name = mpf.getOriginalFilename();
+
+     //  FileCopyUtils.copy(ufile.bytes, response.getOutputStream());
+
+       BufferedReader reader = new BufferedReader(
+    		    new InputStreamReader(
+    		        new FileInputStream("c:\\uploads\\nota.xml"),
+    		        "UTF-8"
+    		    )
+    		);
+       reader.readLine();
+       reader.toString();
+ //      Document docFile1 = XMLDocumentStore.getDoc("/path/to/File1.xml");
+       final NFNota nota = new NotaParser().notaParaObjeto(FileUtils.readFileToString(f, "UTF-8"));
+
+       final NFNotaProcessada notass = new NotaParser().notaProcessadaParaObjeto(new File(new URI(AdvogadoTest.class.getResource("notaprocessada.xml").getFile()).getPath()));
+
+ //      Assert.assertNotNull(new NotaParser().notaParaObjeto(str));
+
+       File fss = new File(new URI(AdvogadoTest.class.getResource(s).getFile()).getPath());
+    //   File fs = new File(new URI(AdvogadoTest.class.getResource(s).getFile()).getPath());
+
+
+
+       //NFNota contact = serializer.read(NFNota.class, s, false);
+
+       //FileCopyUtils.copy(f, new File("c:/uploads/teste/" + f));
+       final NFNota notas = new NotaParser().notaParaObjeto(fss);
+     //  final NFNota notas = new NotaParser().notaParaObjeto(fs);
 
 		Integer count = 0;
 		Integer id = 10000;
@@ -149,8 +274,8 @@ public class AdvogadoTest {
 		Assert.assertEquals(result.getAudienciaList().size(), count.intValue());
 
 	}
-	
-	
+
+
 //	@Test
 //	public void listAllAudiencia2() throws JsonParseException, JsonMappingException, IOException {
 //
@@ -166,7 +291,7 @@ public class AdvogadoTest {
 //		headers.set("X-Cosmos-Token", "zOqsaXajQATQpmUY9dJdOA");
 //		//String a = "request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:advocacia/api/cfop/fetchPage/";
 //		HttpEntity<String> entity = new HttpEntity<String>("{}", headers);
-//		
+//
 //
 //		// =========== fetch
 //		// ================================================================
