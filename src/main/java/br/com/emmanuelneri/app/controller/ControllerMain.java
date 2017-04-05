@@ -3,7 +3,6 @@ package br.com.emmanuelneri.app.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.io.FileUtils;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -40,6 +41,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.aronkatona.model.Item;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -472,37 +474,90 @@ System.out.println(result);
               // TODO Auto-generated catch block
               e.printStackTrace();
           }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          System.out.println("Teste");
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
      @RequestMapping(value = "/upload", method = RequestMethod.POST)
-     public @ResponseBody String upload(MultipartHttpServletRequest request, HttpServletResponse response) throws FileNotFoundException {
+     public @ResponseBody String upload(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException {
 
        Iterator<String> itr =  request.getFileNames();
+       String jsonInString = null;
 
        String s = "C:\\uploads\\nota.xml";
         // esta é a tal "conversão que você queria :P
 
 
        MultipartFile mpf = request.getFile(itr.next());
-       File f = new File (mpf.getOriginalFilename());
+       File f = new File(mpf.getOriginalFilename());
+       f.createNewFile();
        FileInputStream fis = new FileInputStream (f);
-       System.out.println(mpf.getOriginalFilename() +" uploaded!");
+       System.out.println(mpf.getName() +" uploaded!");
 
        try {
 
-          //just temporary save file info into ufile
+        //  just temporary save file info into ufile
           ufile.length = mpf.getBytes().length;
           ufile.bytes= mpf.getBytes();
           ufile.type = mpf.getContentType();
           ufile.name = mpf.getOriginalFilename();
           response.setContentType(ufile.type);
           response.setContentLength(ufile.length);
-          FileCopyUtils.copy(ufile.bytes, response.getOutputStream());
+          FileCopyUtils.copy(ufile.bytes, new File("\\uploads\\" + response.getOutputStream()));
 
-          final NFNotaProcessada notass = new NotaParser().notaProcessadaParaObjeto(FileUtils.readFileToString(f, "UTF-8"));
+          NFNotaProcessada notass = new NotaParser().notaProcessadaParaObjeto(FileUtils.readFileToString(getTempFile(mpf), "UTF-8"));
+
+          ObjectMapper mapper = new ObjectMapper();
+          //HttpEntity<String> entity = new HttpEntity<String>("{}",headers);
+
+          jsonInString = mapper.writeValueAsString(notass);
 
         //Now do something with file...
-          FileCopyUtils.copy(ufile.bytes, new File("c:/uploads/" + response.getOutputStream()));
+          FileCopyUtils.copy(ufile.bytes, new File("C:\\uploads\\" + response.getOutputStream()));
 
       //    final NFNotaProcessada notass = new NotaParser().notaProcessadaParaObjeto(mpf.getInputStream().toString());
 
@@ -515,12 +570,40 @@ System.out.println(result);
           e.printStackTrace();
       }
 
+
        //2. send it back to the client as <img> that calls get method
        //we are using getTimeInMillis to avoid server cached image
 
-       return "<img src='http://localhost:8080/springmvc-angularjs/main/api/get/"+Calendar.getInstance().getTimeInMillis()+"' />";
+       return jsonInString;
 
     }
+
+     public File getTempFile(MultipartFile multipartFile)
+     {
+         CommonsMultipartFile commonsMultipartFile = (CommonsMultipartFile) multipartFile;
+         FileItem fileItem = commonsMultipartFile.getFileItem();
+         DiskFileItem diskFileItem = (DiskFileItem) fileItem;
+         String absPath = diskFileItem.getStoreLocation().getAbsolutePath();
+         File file = new File(absPath);
+
+         //trick to implicitly save on disk small files (<10240 bytes by default)
+         if (!file.exists()) {
+             try {
+				file.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+             try {
+				multipartFile.transferTo(file);
+			} catch (IllegalStateException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+         }
+
+         return file;
+     }
 
 
 

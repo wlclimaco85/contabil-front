@@ -201,9 +201,9 @@ function AngularWayChangeDataCtrl($q,$http,$scope, $compile, DTOptionsBuilder, D
     angular.module('wdApp.apps.notaFiscalEntrada.upload', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('NotaFiscalEntradaUploadController', function($http,$rootScope,$resource, $scope, fModels, SysMgmtData,toastr,$element, close) {
             var vm = this;
-            debugger
+
             $scope.uploadFile = function(files) {
-                        debugger
+
             var fd = new FormData();
             //Take the first selected file
             fd.append("file", files[0]);
@@ -212,7 +212,7 @@ function AngularWayChangeDataCtrl($q,$http,$scope, $compile, DTOptionsBuilder, D
                 withCredentials: true,
                 headers: {'Content-Type': undefined },
                 transformRequest: angular.identity
-            }).success( '...all right!... ').error( '..damn!...' );
+            }).success(function(data){console.log(data); debugger}).error( '..damn!...' );
 
         };
 
