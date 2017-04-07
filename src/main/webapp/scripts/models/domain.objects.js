@@ -1514,7 +1514,7 @@ qat.model.fnNFNota = function(_NFNota, modelAction) {
 	NFNota = {
 		id : _id,
 		identificadorLocal : _NFNota.identificadorLocal,
-		info : _NFNota.info,
+		info : qat.model.fnNFNotaInfo(_NFNota.info,modelAction),
 		infoSuplementar : _NFNota.infoSuplementar,
 		assinatura : _NFNota.assinatura,
 		parentId : 0,
