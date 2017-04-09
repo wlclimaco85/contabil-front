@@ -241,19 +241,49 @@
 
 			            return oOptions;
 				},
-				pdVendas : function(vm,createdRow,scope, _callback) {
+				pdVendas : function(vm,createdRow,scope, _callback,_function) {
 
-					var oOptions = padrao(vm,createdRow,scope, _callback);
-				     oOptions.buttons.push({
-			                text: 'Novo Pedido de Venda',
+					var buttons = [];
+				      buttons.push(
+			            {
+			                text: '<span class="fa fa-trash"></span>',
 			                key: '1',
 			                action: function(e, dt, node, config) {
-			                    dialogFactory.dialog('views/vendas/dialog/dPedidoVendas.html',"PedidoVendaInsertController",validationFactory.pdVendas,null);
 
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasReceber.html',"ContasReceberInsertController",validationFactory.contasReceber,_function);
+
+			                }
+		                },
+		                {
+			                text: '<span data-tooltip="Pagar selecionado(s)" id="pag_pagarEmLote" class=""><span class="fa fa-usd"> </span></span>',
+			                key: '2',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasReceber.html',"ContasReceberInsertController",validationFactory.contasReceber,_function);
+
+			                }
+		                },
+		                {
+			                text: '<span data-tooltip="Emitir recibo" id="pag_emitirRecibo" class=""><span class="glyphicon glyphicon-print"> </span></span>',
+			                key: '3',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasReceber.html',"ContasReceberInsertController",validationFactory.contasReceber,_function);
+
+			                }
+		                },
+		                {
+			                text: 'Novo Pedido de Venda',
+			                key: '4',
+			                action: function(e, dt, node, config) {
+
+			                  //  dialogFactory.dialog('views/financeiro/dialog/dContasReceber.html',"ContasReceberInsertController",validationFactory.contasReceber,_function);
+			                    dialogFactory.dialog('views/vendas/dialog/dPedidoVendas.html',"PedidoVendaInsertController",validationFactory.pdVendas,_function);
 			                }
 			            })
 
-			            return oOptions;
+			            return  padrao(vm,createdRow,scope, _callback , buttons,2,_function);
+
 				},
 				orcamento : function(vm,createdRow,scope, _callback) {
 

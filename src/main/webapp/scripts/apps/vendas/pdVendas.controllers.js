@@ -12,7 +12,7 @@
         vm.message = '';
         vm.edit = edit;
         vm.delete = deleteRow;
-        vm.dtInstance = {};
+        vm.dtInstancePdVendas = {};
         vm.persons = {};
 
         $scope.pedidoVenda = {
@@ -25,6 +25,26 @@
         var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
             'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
 
+        function reloadData() {
+            var resetPaging = false;
+            vm.dtInstancePdVendas.reloadData(callback, resetPaging);
+        }
+
+        function callback(json) {
+            console.log(json);
+        }
+
+       var reloadData = function() {
+
+            var resetPaging = false;
+            vm.dtInstancePdVendas.reloadData(callback, resetPaging);
+        }
+
+        $rootScope.reloadDataSit = function(_callback) {
+
+            var resetPaging = false;
+            vm.dtInstancePdVendas.reloadData(_callback, resetPaging);
+        }
 
         function rCallback(nRow, aData) {
             // console.log('row');
@@ -42,8 +62,7 @@
             return json.nfnotaList;
         }
       //  Datatablessss.getTable('/vendas/api/nfSaidas/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cliente(vm,createdRow,$scope,FiltersFactory.cliente()), tableColumnsFactory.cliente(vm,titleHtml,actionsHtml));
-        Datatablessss.getTable('/vendas/api/nfSaidas/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.pdVendas(vm,createdRow,$scope,FiltersFactory.pdVendas()), tableColumnsFactory.pdVendas(vm,titleHtml,actionsHtml));
-
+        Datatablessss.getTable('/vendas/api/nfSaidas/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile,    tableOptionsFactory.pdVendas(vm,createdRow,$scope,FiltersFactory.pdVendas(),reloadData),     tableColumnsFactory.pdVendas(vm,titleHtml,actionsHtml));
         function edit(person) {
             $rootScope.pedidoVenda = person;
             dialogFactory.dialog('views/vendas/dialog/dPedidoVendas.html',"PedidoVendasUpdateController",openDialogUpdateCreate);
@@ -109,16 +128,44 @@
             $scope.formaPg  = {};
             $scope.endereco = null;
             $scope.pessoa   = {};
+            $scope.tooltip = {
+              "title": "Hello Tooltip<br />This is a multiline message!",
+              "checked": true
+            };
+
 
             $scope.visibled = false
          //   $scope.cliente = [];
 
             $scope.countrySelected = function(selected) {
-             // debugger
+
               if (selected) {
 
                 $scope.pessoa = selected.originalObject;
                 $scope.visibled = true;
+/*
+               $scope.popovers = function(el){
+                        {
+                            show = true,
+                            placement = 'right',
+                            template = '<p>teste</p>',
+                            animation = 'am-flip-x'
+                        };
+                 }; */
+
+                $scope.popovers = {
+                "html" : "<div>Hello Popover<br />This is a multiline message!</div>",
+              "title": "Informação",
+           //   "data-template-url" : '<p>teste</p>',
+              "animation" : 'am-flip-x',
+              "content": " "+ $scope.pessoa.nome +" " +
+                         " "+ $scope.pessoa.nome +" " +
+                         " "+ $scope.pessoa.nome +" " +
+                         " "+ $scope.pessoa.nome +" " +
+                         " "+ $scope.pessoa.nome +" " +
+                         " "+ $scope.pessoa.nome +" "
+            };
+
               } else {
                 console.log('cleared');
               }

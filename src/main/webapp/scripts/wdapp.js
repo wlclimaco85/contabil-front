@@ -40,8 +40,8 @@ var WebDaptiveAppConfig = {
 (function() {
   'use strict';
 		var wdApp = angular.module('wdApp',
-				['ngRoute', 'ngAnimate', 'ngSanitize', 'angucomplete-alt','ngTouch', 'ui.bootstrap', 'easypiechart', 'textAngular','ui.mask',
-				'ui.tree', 'ngMap','ui.toggle', 'ngTagsInput', 'toastr', 'angular-loading-bar', 'chart.js', 'ngecharts',
+				['ngRoute', 'ngAnimate', 'ngSanitize', 'angucomplete-alt','ngTouch', 'hl.sticky','ui.bootstrap', 'easypiechart', 'textAngular','ui.mask',
+				'mgcrea.ngStrap','ui.tree', 'ngMap','ui.toggle', 'ngTagsInput', 'toastr', 'angular-loading-bar', 'chart.js', 'ngecharts',
 				'agGrid', 'base64', 'LocalStorageModule', 'wdApp.controllers', 'wdApp.directives', 'wdApp.httpint',
 				'wdApp.localization', 'wdApp.ui.controllers', 'wdApp.forms.controllers',
 				'wdApp.forms.directives', 'wdApp.tables.controllers', 'wdApp.tasks',

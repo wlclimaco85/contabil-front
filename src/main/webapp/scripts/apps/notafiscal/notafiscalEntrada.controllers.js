@@ -212,7 +212,7 @@ function AngularWayChangeDataCtrl($q,$http,$scope, $compile, DTOptionsBuilder, D
                 withCredentials: true,
                 headers: {'Content-Type': undefined },
                 transformRequest: angular.identity
-            }).success(function(data){console.log(data); debugger}).error( '..damn!...' );
+            }).success(function(data){console.log(data); $scope.nota = data}).error( '..damn!...' );
 
         };
 
