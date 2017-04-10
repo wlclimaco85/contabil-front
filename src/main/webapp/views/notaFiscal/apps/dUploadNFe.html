@@ -1,502 +1,496 @@
-
 <div class="modal fade">
-  <div class="modal-dialog" style="width: 90%">
-    <div class="modal-content">
-      <form class="contasPagarForm">
-        <div class="modal-header">
-          <button type="button" class="close" ng-click="close('Cancel')"
-            data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Cadastro Contas Pagar</h4>
+<div class="modal-dialog" style="width: 90%">
+  <div class="modal-content">
+    <form class="contasPagarForm">
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="close('Cancel')"
+          data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Cadastro Contas Pagar</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
         </div>
-        <div class="modal-body">
-          <div class="row">
-            <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
-          </div>
-          <div class="row">
+        <div class="row">
           <div class="container" ng-app ng-init="tab=1">
-                    <ul class="tabs-nav">
-                      <li><a ng-click="tab=1" ng-class="{'active' : tab==1}"  data-i18n="dados da nfe-e"></a></li>
-                      <li><a ng-click="tab=2" ng-class="{'active' : tab==2}" data-i18n="Emitente"></a></li>
-                      <li><a ng-click="tab=3" ng-class="{'active' : tab==3}" data-i18n="destinatario"></a></li>
-                      <li><a ng-click="tab=4;buscaRCep()" ng-class="{'active' : tab==4}" data-i18n="produtos e servicos"></a></li>
-                      <li><a ng-click="tab=5" ng-class="{'active' : tab==5}" data-i18n="totais"></a></li>
-                      <li><a ng-click="tab=6" ng-class="{'active' : tab==6}" data-i18n="transporte"></a></li>
-                      <li><a ng-click="tab=7" ng-class="{'active' : tab==7}" data-i18n="cobranca"></a></li>
-                      <li><a ng-click="tab=8" ng-class="{'active' : tab==8}" data-i18n="Info. Adic."></a></li>
-                      <li><a ng-click="tab=9" ng-class="{'active' : tab==9}" data-i18n="Export. e Compras"></a></li>
-                      <li><a ng-click="tab=10" ng-class="{'active' : tab==10}" data-i18n="Cana"></a></li>
-                    </ul>
-                    <div class="tabs-container">
-                    <div class="tab-content" ng-show="tab == 1">
-                      <div class="row">
-                          <div ng-if="nota.nota.info.identificador != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">Identificador :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificador}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="nota.nota.info.versao != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">Versão :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.versao}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="nota.nota.info.identificacao.uf != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">uf :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.uf}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="nota.nota.info.identificacao.codigoRandomico != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">codigoRandomico :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.codigoRandomico}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="nota.nota.info.identificacao.naturezaOperacao != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">naturezaOperacao :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.naturezaOperacao}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="nota.nota.info.identificacao.formaPagamento != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">formaPagamento :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.formaPagamento}}</label>
-                            </div>
-                          </div>
+            <ul class="tabs-nav">
+              <li><a ng-click="tab=1" ng-class="{'active' : tab==1}"  data-i18n="dados da nfe-e"></a></li>
+              <li><a ng-click="tab=2" ng-class="{'active' : tab==2}" data-i18n="Emitente"></a></li>
+              <li><a ng-click="tab=3" ng-class="{'active' : tab==3}" data-i18n="destinatario"></a></li>
+              <li><a ng-click="tab=4;buscaRCep()" ng-class="{'active' : tab==4}" data-i18n="produtos e servicos"></a></li>
+              <li><a ng-click="tab=5" ng-class="{'active' : tab==5}" data-i18n="totais"></a></li>
+              <li><a ng-click="tab=6" ng-class="{'active' : tab==6}" data-i18n="transporte"></a></li>
+              <li><a ng-click="tab=7" ng-class="{'active' : tab==7}" data-i18n="cobranca"></a></li>
+              <li><a ng-click="tab=8" ng-class="{'active' : tab==8}" data-i18n="Info. Adic."></a></li>
+              <li><a ng-click="tab=9" ng-class="{'active' : tab==9}" data-i18n="Export. e Compras"></a></li>
+              <li><a ng-click="tab=10" ng-class="{'active' : tab==10}" data-i18n="Cana"></a></li>
+            </ul>
+            <div class="tabs-container">
+              <div class="tab-content" ng-show="tab == 1">
+                <div class="panel panel-default" style="background:#EEEEEE">
+                  <div class="panel-body">
+                    <div class="row">
+                      <div ng-if="nota.nota.info.identificador != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">Identificador :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificador}}</label>
+                        </div>
                       </div>
-                      <div class="row">
-                          <div ng-if="nota.nota.info.identificacao.modelo != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">modelo :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.modelo}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="nota.nota.info.identificacao.serie != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">serie :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.serie}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="nota.nota.info.identificacao.numeroNota != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">numeroNota :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.numeroNota}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="nota.nota.info.identificacao.dataHoraEmissao != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">dataHoraEmissao :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.dataHoraEmissao}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="nota.nota.info.identificacao.dataHoraSaidaOuEntrada != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">dataHoraSaidaOuEntrada :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.dataHoraSaidaOuEntrada}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="nota.nota.info.identificacao.tipo != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">tipo :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.tipo}}</label>
-                            </div>
-                          </div>
+                      <div ng-if="nota.nota.info.versao != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">Versão :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.versao}}</label>
+                        </div>
                       </div>
-
-
-                      <div class="row">
-                          <div ng-if="nota.nota.info.identificacao.identificadorLocalDestinoOperacao != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">identificadorLocalDestinoOperacao :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.identificadorLocalDestinoOperacao}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="nota.nota.info.identificacao.codigoMunicipio != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">codigoMunicipio :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.codigoMunicipio}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="nota.nota.info.identificacao.tipoImpressao != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">tipoImpressao :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.tipoImpressao}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="nota.nota.info.identificacao.tipoEmissao != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">tipoEmissao :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.tipoEmissao}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="nota.nota.info.identificacao.digitoVerificador != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">digitoVerificador :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.digitoVerificador}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="nota.nota.info.identificacao.ambiente != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">ambiente :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.ambiente}}</label>
-                            </div>
-                          </div>
+                      <div ng-if="nota.nota.info.identificacao.uf != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">uf :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.uf}}</label>
+                        </div>
                       </div>
-
-
-                      <div class="row">
-                          <div ng-if="nota.nota.info.identificacao.finalidade != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">finalidade :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.finalidade}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="nota.nota.info.identificacao.operacaoConsumidorFinal != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">operacaoConsumidorFinal :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.operacaoConsumidorFinal}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="nota.nota.info.identificacao.indicadorPresencaComprador != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">indicadorPresencaComprador :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.indicadorPresencaComprador}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="nota.nota.info.identificacao.programaEmissor != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">programaEmissor :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.programaEmissor}}</label>
-                            </div>
-                          </div>
-
-                          <div ng-if="nota.nota.info.identificacao.dataHoraContigencia != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">dataHoraContigencia :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.dataHoraContigencia}}</label>
-                            </div>
-                          </div>
-                                                    <div ng-if="nota.nota.info.identificacao.justificativaEntradaContingencia != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">justificativaEntradaContingencia :</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.identificacao.justificativaEntradaContingencia}}</label>
-                            </div>
-                          </div>
+                      <div ng-if="nota.nota.info.identificacao.codigoRandomico != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">codigoRandomico :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.codigoRandomico}}</label>
+                        </div>
                       </div>
-                      <div id="quadroTribAprox" class="bottomSpace" ng-if="nota.nota.info.identificacao.referenciadas != null">
-                              <h2>Lei da Transparência</h2>
-                              <div class="descr">Esta lei mostra ao cliente a quantidade de impostos que ele está pagando para o governo ao adquirir a mercadoria. (<a href="ajuda: Clique para saber mais sobre a Lei da Transparência" id="link_infoTribAprox">saiba mais</a>)</div>
-                              <div class="row" ng-if="nota.nota.info.identificacao.referenciadas != null">
-                                <div class="row" ng-repeat="x6 in nota.nota.info.identificacao.referenciadas">
-                                    <div ng-if="x6.chaveAcesso != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">chaveAcesso :</label>
-                                <label for="exampleInputPassword1">{{x6.chaveAcesso}}</label>
-                            </div>
-                          </div>
-
-                          <div ng-if="x6.modelo1por1Referenciada != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">modelo1por1Referenciada :</label>
-                                <label for="exampleInputPassword1">{{x6.modelo1por1Referenciada.anoMesEmissaoNFe - x6.modelo1por1Referenciada.cnpj - x6.modelo1por1Referenciada.numeroDocumentoFiscal}}</label>
-                            </div>
-                          </div>
-
-                          <div ng-if="x6.infoNFProdutorRuralReferenciada != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">infoNFProdutorRuralReferenciada :</label>
-                                <label for="exampleInputPassword1">{{{{x6.infoNFProdutorRuralReferenciada.anoMesEmissaoNFe - x6.infoNFProdutorRuralReferenciada.cnpj - x6.infoNFProdutorRuralReferenciada.numeroDocumentoFiscal}}}}</label>
-                            </div>
-                          </div>
-
-                          <div ng-if="x6.chaveAcessoCTReferenciada != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">chaveAcessoCTReferenciada :</label>
-                                <label for="exampleInputPassword1">{{x6.chaveAcessoCTReferenciada}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="x6.cupomFiscalReferenciado != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">cupomFiscalReferenciado :</label>
-                                <label for="exampleInputPassword1">{{x6.cupomFiscalReferenciado.modeloDocumentoFiscal - x6.cupomFiscalReferenciado.numeroOrdemSequencialECF - x6.cupomFiscalReferenciado.numeroContadorOrdemOperacao}}</label>
-                            </div>
-                          </div>
-
-                                </div>
-                              </div>
+                      <div ng-if="nota.nota.info.identificacao.naturezaOperacao != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">naturezaOperacao :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.naturezaOperacao}}</label>
+                        </div>
                       </div>
-
-                       <div id="quadroTribAprox" class="bottomSpace" ng-if="nota.nota.info.pessoasAutorizadasDownloadNFe != null">
-                              <h2>Lei da Transparência</h2>
-                              <div class="descr">Esta lei mostra ao cliente a quantidade de impostos que ele está pagando para o governo ao adquirir a mercadoria. (<a href="ajuda: Clique para saber mais sobre a Lei da Transparência" id="link_infoTribAprox">saiba mais</a>)</div>
-                              <div class="row" ng-if="nota.nota.info.pessoasAutorizadasDownloadNFe != null">
-                                <div class="row" ng-repeat="x7 in nota.nota.info.pessoasAutorizadasDownloadNFe">
-                                <div ng-if="x7.cnpj != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">cnpj :</label>
-                                <label for="exampleInputPassword1">{{x7.cnpj}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="x7.cpf != null">
-                            <div class="col-sm-2">
-                                <label for="exampleInputPassword1">cpf :</label>
-                                <label for="exampleInputPassword1">{{x7.cpf}}</label>
-                            </div>
-                          </div>
-                                </div>
-                              </div>
-                              </div>
-
-
+                      <div ng-if="nota.nota.info.identificacao.formaPagamento != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">formaPagamento :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.formaPagamento}}</label>
+                        </div>
+                      </div>
                     </div>
-                      <div class="tab-content" ng-show="tab == 2">
-
-                            <div class="row">
-                                <div class="col-sm-2 ">
-                                    <div class="form-group">
-                                        <div ng-if="nota.nota.info.emitente.cnpj != null">
-                                            <label for="exampleInputPassword1">CNPJ:</label>
-                                            <label for="exampleInputPassword1">{{nota.nota.info.emitente.cnpj}}</label>
-                                        </div>
-                                        <div ng-if="nota.nota.info.emitente.cpf != null">
-                                            <label for="exampleInputPassword1">CPF:</label>
-                                            <label for="exampleInputPassword1">{{nota.nota.info.emitente.cpf}}</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div ng-if="nota.nota.info.emitente.razaoSocial != null">
-                                      <div class="col-sm-2 ">
-                                          <div class="form-group">
-                                              <label for="exampleInputPassword1">Razão Social:</label>
-
-                                              <label for="exampleInputPassword1">{{nota.nota.info.emitente.razaoSocial}}</label>
-                                          </div>
-                                      </div>
-                                    </div>
-                                    <div ng-if="nota.nota.info.emitente.nomeFantasia != null">
-                                        <div class="col-sm-2 ">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Nome fantasia:</label>
-                                                <label for="exampleInputPassword1">{{nota.nota.info.emitente.nomeFantasia}}</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div ng-if="nota.nota.info.emitente.inscricaoEstadual != null">
-                                        <div class="col-sm-2 ">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Inscr. Est.:</label>
-                                                <label for="exampleInputPassword1">{{nota.nota.info.emitente.inscricaoEstadual}}</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div ng-if="nota.nota.info.emitente.inscricaoMunicipal != null">
-                                        <div class="col-sm-2 ">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Inscr. Mun.:</label>
-                                                <label for="exampleInputPassword1">{{nota.nota.info.emitente.inscricaoMunicipal}}</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div ng-if="nota.nota.info.emitente.inscricaoEstadualSubstituicaoTributaria != null">
-                                        <div class="col-sm-2 ">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Inscr Estadual Substituicao Tributaria:</label>
-                                                <label for="exampleInputPassword1">{{nota.nota.info.emitente.inscricaoEstadualSubstituicaoTributaria}}</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <div class="col-sm-2 ">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">CNAE:</label>
-                                        <label for="exampleInputPassword1">{{nota.nota.info.emitente.classificacaoNacionalAtividadesEconomicas}}</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2 ">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Regime:</label>
-                                        <label for="exampleInputPassword1">{{nota.nota.info.emitente.regimeTributario}}</label>
-                                    </div>
-                                </div>
-                            </div>
-                             <div class="row">
-                                <div class="col-sm-2 ">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Telefone:</label>
-                                        <div ng-if="nota.nota.info.emitente.endereco.telefone != null">
-                                            <label for="exampleInputPassword1">{{nota.nota.info.emitente.endereco.telefone}}</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2 ">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Endereço:</label>
-                                        <label for="exampleInputPassword1">{{nota.nota.info.emitente.endereco.logradouro}}</label>
-
-                                    </div>
-                                </div>
-                                <div class="col-sm-2 ">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Bairro:</label>
-                                        <label for="exampleInputPassword1">{{nota.nota.info.emitente.endereco.bairro}}</label>
-
-                                    </div>
-                                </div>
-                                <div class="col-sm-2 ">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Cidade/UF:</label>
-                                        <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.uf = empresa.enderecos[0].estado">{{nota.nota.info.emitente.endereco.descricaoMunicipio}}/{{nota.nota.info.emitente.endereco.uf}}</label>
-
-                                    </div>
-                                </div>
-                                <div class="col-sm-2 ">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Local fato gerador:</label>
-                                        <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.codigomunicipio = empresa.enderecos[0].cidade.cdIBGE">{{nota.nota.info.emitente.endereco.descricaoMunicipio}}</label>
-
-                                    </div>
-                                </div>
-                                <div class="col-sm-2 ">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">CEP:</label>
-                                        <label for="exampleInputPassword1">{{nota.nota.info.emitente.endereco.cep}}</label>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="row">
+                      <div ng-if="nota.nota.info.identificacao.modelo != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">modelo :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.modelo}}</label>
+                        </div>
                       </div>
-                      <div class="tab-content" ng-show="tab == 3">
-                                                <div class="row">
-                                <div class="col-sm-2 ">
-                                    <div class="form-group">
-                                        <div ng-if="nota.nota.info.destinatario.cnpj != null">
-                                            <label for="exampleInputPassword1">CNPJ:</label>
-                                            <label for="exampleInputPassword1">{{nota.nota.info.destinatario.cnpj}}</label>
-                                        </div>
-                                        <div ng-if="nota.nota.info.destinatario.cpf != null">
-                                            <label for="exampleInputPassword1">CPF:</label>
-                                            <label for="exampleInputPassword1">{{nota.nota.info.destinatario.cpf}}</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div ng-if="nota.nota.info.destinatario.razaoSocial != null">
-                                      <div class="col-sm-2 ">
-                                          <div class="form-group">
-                                              <label for="exampleInputPassword1">Razão Social:</label>
-
-                                              <label for="exampleInputPassword1">{{nota.nota.info.destinatario.razaoSocial}}</label>
-                                          </div>
-                                      </div>
-                                    </div>
-                                    <div ng-if="nota.nota.info.destinatario.nomeFantasia != null">
-                                        <div class="col-sm-2 ">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Nome fantasia:</label>
-                                                <label for="exampleInputPassword1">{{nota.nota.info.destinatario.nomeFantasia}}</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div ng-if="nota.nota.info.destinatario.inscricaoEstadual != null">
-                                        <div class="col-sm-2 ">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Inscr. Est.:</label>
-                                                <label for="exampleInputPassword1">{{nota.nota.info.destinatario.inscricaoEstadual}}</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div ng-if="nota.nota.info.destinatario.inscricaoMunicipal != null">
-                                        <div class="col-sm-2 ">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Inscr. Mun.:</label>
-                                                <label for="exampleInputPassword1">{{nota.nota.info.destinatario.inscricaoMunicipal}}</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div ng-if="nota.nota.info.destinatario.inscricaoEstadualSubstituicaoTributaria != null">
-                                        <div class="col-sm-2 ">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Inscr Estadual Substituicao Tributaria:</label>
-                                                <label for="exampleInputPassword1">{{nota.nota.info.destinatario.inscricaoEstadualSubstituicaoTributaria}}</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <div class="col-sm-2 ">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">CNAE:</label>
-                                        <label for="exampleInputPassword1">{{nota.nota.info.destinatario.classificacaoNacionalAtividadesEconomicas}}</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2 ">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Regime:</label>
-                                        <label for="exampleInputPassword1">{{nota.nota.info.destinatario.regimeTributario}}</label>
-                                    </div>
-                                </div>
-                            </div>
-                             <div class="row">
-                                <div class="col-sm-2 ">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Telefone:</label>
-                                        <div ng-if="nota.nota.info.destinatario.endereco.telefone != null">
-                                            <label for="exampleInputPassword1">{{nota.nota.info.destinatario.endereco.telefone}}</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2 ">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Endereço:</label>
-                                        <label for="exampleInputPassword1">{{nota.nota.info.destinatario.endereco.logradouro}}</label>
-
-                                    </div>
-                                </div>
-                                <div class="col-sm-2 ">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Bairro:</label>
-                                        <label for="exampleInputPassword1">{{nota.nota.info.destinatario.endereco.bairro}}</label>
-
-                                    </div>
-                                </div>
-                                <div class="col-sm-2 ">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Cidade/UF:</label>
-                                        <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.uf = empresa.enderecos[0].estado">{{nota.nota.info.destinatario.endereco.descricaoMunicipio}}/{{nota.nota.info.destinatario.endereco.uf}}</label>
-
-                                    </div>
-                                </div>
-                                <div class="col-sm-2 ">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Local fato gerador:</label>
-                                        <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.codigomunicipio = empresa.enderecos[0].cidade.cdIBGE">{{nota.nota.info.destinatario.endereco.descricaoMunicipio}}</label>
-
-                                    </div>
-                                </div>
-                                <div class="col-sm-2 ">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">CEP:</label>
-                                        <label for="exampleInputPassword1">{{nota.nota.info.destinatario.endereco.cep}}</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2 ">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Email:</label>
-                                        <label for="exampleInputPassword1">{{nota.nota.info.destinatario.email}}</label>
-                                    </div>
-                                </div>
-                            </div>
+                      <div ng-if="nota.nota.info.identificacao.serie != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">serie :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.serie}}</label>
+                        </div>
                       </div>
-                      <div class="tab-content" ng-show="tab == 4">
-
-
-                        <section class="panel panel-default">
-        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Produtos</strong></div>
-        <div class="panel-body">
-            <section class="table-flip-scroll">
-                <table class="table table-bordered table-striped cf">
-                    <thead class="cf">
-
-                        <tr>
+                      <div ng-if="nota.nota.info.identificacao.numeroNota != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">numeroNota :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.numeroNota}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.identificacao.dataHoraEmissao != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">dataHoraEmissao :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.dataHoraEmissao}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.identificacao.dataHoraSaidaOuEntrada != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">dataHoraSaidaOuEntrada :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.dataHoraSaidaOuEntrada}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.identificacao.tipo != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">tipo :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.tipo}}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class = "row"></div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                  <div class="panel-body">
+                    <div class="row">
+                      <div ng-if="nota.nota.info.identificacao.identificadorLocalDestinoOperacao != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">identificadorLocalDestinoOperacao :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.identificadorLocalDestinoOperacao}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.identificacao.codigoMunicipio != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">codigoMunicipio :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.codigoMunicipio}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.identificacao.tipoImpressao != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">tipoImpressao :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.tipoImpressao}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.identificacao.tipoEmissao != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">tipoEmissao :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.tipoEmissao}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.identificacao.digitoVerificador != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">digitoVerificador :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.digitoVerificador}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.identificacao.ambiente != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">ambiente :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.ambiente}}</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div ng-if="nota.nota.info.identificacao.finalidade != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">finalidade :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.finalidade}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.identificacao.operacaoConsumidorFinal != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">operacaoConsumidorFinal :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.operacaoConsumidorFinal}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.identificacao.indicadorPresencaComprador != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">indicadorPresencaComprador :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.indicadorPresencaComprador}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.identificacao.programaEmissor != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">programaEmissor :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.programaEmissor}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.identificacao.dataHoraContigencia != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">dataHoraContigencia :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.dataHoraContigencia}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.identificacao.justificativaEntradaContingencia != null">
+                        <div class="col-sm-2">
+                          <label for="exampleInputPassword1">justificativaEntradaContingencia :</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.identificacao.justificativaEntradaContingencia}}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class = "row"></div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                  <div class="panel-body">
+                    <div class="row" ng-if="nota.nota.info.identificacao.referenciadas != null">
+                      <div class="row" ng-repeat="x6 in nota.nota.info.identificacao.referenciadas">
+                        <div ng-if="x6.chaveAcesso != null">
+                          <div class="col-sm-2">
+                            <label for="exampleInputPassword1">chaveAcesso :</label>
+                            <label for="exampleInputPassword1">{{x6.chaveAcesso}}</label>
+                          </div>
+                        </div>
+                        <div ng-if="x6.modelo1por1Referenciada != null">
+                          <div class="col-sm-2">
+                            <label for="exampleInputPassword1">modelo1por1Referenciada :</label>
+                            <label for="exampleInputPassword1">{{x6.modelo1por1Referenciada.anoMesEmissaoNFe - x6.modelo1por1Referenciada.cnpj - x6.modelo1por1Referenciada.numeroDocumentoFiscal}}</label>
+                          </div>
+                        </div>
+                        <div ng-if="x6.infoNFProdutorRuralReferenciada != null">
+                          <div class="col-sm-2">
+                            <label for="exampleInputPassword1">infoNFProdutorRuralReferenciada :</label>
+                            <label for="exampleInputPassword1">{{{{x6.infoNFProdutorRuralReferenciada.anoMesEmissaoNFe - x6.infoNFProdutorRuralReferenciada.cnpj - x6.infoNFProdutorRuralReferenciada.numeroDocumentoFiscal}}}}</label>
+                          </div>
+                        </div>
+                        <div ng-if="x6.chaveAcessoCTReferenciada != null">
+                          <div class="col-sm-2">
+                            <label for="exampleInputPassword1">chaveAcessoCTReferenciada :</label>
+                            <label for="exampleInputPassword1">{{x6.chaveAcessoCTReferenciada}}</label>
+                          </div>
+                        </div>
+                        <div ng-if="x6.cupomFiscalReferenciado != null">
+                          <div class="col-sm-2">
+                            <label for="exampleInputPassword1">cupomFiscalReferenciado :</label>
+                            <label for="exampleInputPassword1">{{x6.cupomFiscalReferenciado.modeloDocumentoFiscal - x6.cupomFiscalReferenciado.numeroOrdemSequencialECF - x6.cupomFiscalReferenciado.numeroContadorOrdemOperacao}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class = "row"></div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                  <div class="panel-body">
+                    <div class="row" ng-if="nota.nota.info.pessoasAutorizadasDownloadNFe != null">
+                      <div class="row" ng-repeat="x7 in nota.nota.info.pessoasAutorizadasDownloadNFe">
+                        <div ng-if="x7.cnpj != null">
+                          <div class="col-sm-2">
+                            <label for="exampleInputPassword1">cnpj :</label>
+                            <label for="exampleInputPassword1">{{x7.cnpj}}</label>
+                          </div>
+                        </div>
+                        <div ng-if="x7.cpf != null">
+                          <div class="col-sm-2">
+                            <label for="exampleInputPassword1">cpf :</label>
+                            <label for="exampleInputPassword1">{{x7.cpf}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-content" ng-show="tab == 2">
+                <div class = "row"></div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="col-sm-2 ">
+                        <div class="form-group">
+                          <div ng-if="nota.nota.info.emitente.cnpj != null">
+                            <label for="exampleInputPassword1">CNPJ:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.emitente.cnpj}}</label>
+                          </div>
+                          <div ng-if="nota.nota.info.emitente.cpf != null">
+                            <label for="exampleInputPassword1">CPF:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.emitente.cpf}}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.emitente.razaoSocial != null">
+                        <div class="col-sm-2 ">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Razão Social:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.emitente.razaoSocial}}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.emitente.nomeFantasia != null">
+                        <div class="col-sm-2 ">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Nome fantasia:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.emitente.nomeFantasia}}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.emitente.inscricaoEstadual != null">
+                        <div class="col-sm-2 ">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Inscr. Est.:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.emitente.inscricaoEstadual}}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.emitente.inscricaoMunicipal != null">
+                        <div class="col-sm-2 ">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Inscr. Mun.:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.emitente.inscricaoMunicipal}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div ng-if="nota.nota.info.emitente.inscricaoEstadualSubstituicaoTributaria != null">
+                        <div class="col-sm-2 ">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Inscr Estadual Substituicao Tributaria:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.emitente.inscricaoEstadualSubstituicaoTributaria}}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 ">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">CNAE:</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.emitente.classificacaoNacionalAtividadesEconomicas}}</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 ">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Regime:</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.emitente.regimeTributario}}</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-2 ">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Telefone:</label>
+                          <div ng-if="nota.nota.info.emitente.endereco.telefone != null">
+                            <label for="exampleInputPassword1">{{nota.nota.info.emitente.endereco.telefone}}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 ">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Endereço:</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.emitente.endereco.logradouro}}</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 ">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Bairro:</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.emitente.endereco.bairro}}</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 ">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Cidade/UF:</label>
+                          <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.uf = empresa.enderecos[0].estado">{{nota.nota.info.emitente.endereco.descricaoMunicipio}}/{{nota.nota.info.emitente.endereco.uf}}</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 ">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Local fato gerador:</label>
+                          <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.codigomunicipio = empresa.enderecos[0].cidade.cdIBGE">{{nota.nota.info.emitente.endereco.descricaoMunicipio}}</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 ">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">CEP:</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.emitente.endereco.cep}}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-content" ng-show="tab == 3">
+                <div class = "row"></div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="col-sm-2 ">
+                        <div class="form-group">
+                          <div ng-if="nota.nota.info.destinatario.cnpj != null">
+                            <label for="exampleInputPassword1">CNPJ:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.destinatario.cnpj}}</label>
+                          </div>
+                          <div ng-if="nota.nota.info.destinatario.cpf != null">
+                            <label for="exampleInputPassword1">CPF:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.destinatario.cpf}}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.destinatario.razaoSocial != null">
+                        <div class="col-sm-2 ">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Razão Social:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.destinatario.razaoSocial}}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.destinatario.nomeFantasia != null">
+                        <div class="col-sm-2 ">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Nome fantasia:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.destinatario.nomeFantasia}}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.destinatario.inscricaoEstadual != null">
+                        <div class="col-sm-2 ">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Inscr. Est.:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.destinatario.inscricaoEstadual}}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.destinatario.inscricaoMunicipal != null">
+                        <div class="col-sm-2 ">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Inscr. Mun.:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.destinatario.inscricaoMunicipal}}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.destinatario.inscricaoEstadualSubstituicaoTributaria != null">
+                        <div class="col-sm-2 ">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Inscr Estadual Substituicao Tributaria:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.destinatario.inscricaoEstadualSubstituicaoTributaria}}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 ">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">CNAE:</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.destinatario.classificacaoNacionalAtividadesEconomicas}}</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 ">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Regime:</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.destinatario.regimeTributario}}</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-2 ">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Telefone:</label>
+                          <div ng-if="nota.nota.info.destinatario.endereco.telefone != null">
+                            <label for="exampleInputPassword1">{{nota.nota.info.destinatario.endereco.telefone}}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 ">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Endereço:</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.destinatario.endereco.logradouro}}</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 ">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Bairro:</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.destinatario.endereco.bairro}}</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 ">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Cidade/UF:</label>
+                          <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.uf = empresa.enderecos[0].estado">{{nota.nota.info.destinatario.endereco.descricaoMunicipio}}/{{nota.nota.info.destinatario.endereco.uf}}</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 ">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Local fato gerador:</label>
+                          <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.codigomunicipio = empresa.enderecos[0].cidade.cdIBGE">{{nota.nota.info.destinatario.endereco.descricaoMunicipio}}</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 ">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">CEP:</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.destinatario.endereco.cep}}</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 ">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Email:</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.destinatario.email}}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-content" ng-show="tab == 4">
+                <section class="panel panel-default">
+                  <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Produtos</strong></div>
+                  <div class="panel-body">
+                    <section class="table-flip-scroll">
+                      <table class="table table-bordered table-striped cf">
+                        <thead class="cf">
+                          <tr>
                             <th>Cfop</th>
                             <th>Codigo</th>
                             <th class="numeric">Cd Barra</th>
@@ -506,898 +500,904 @@
                             <th class="numeric">Unid Com/Trib</th>
                             <th class="numeric">Valor Unitario</th>
                             <th class="numeric">Valor Bruto</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="x in nota.nota.info.itens">
-                          <td>{{ x.produto.cfop }}</td>
-                          <td>{{ x.produto.codigo }}</td>
-                          <td>{{ x.produto.codigoDeBarras }}</td>
-                          <td>{{ x.produto.descricao }}</td>
-                          <td>{{ x.produto.ncm }}</td>
-                          <td>{{ x.produto.quantidadeComercial }}</td>
-                          <td>{{ x.produto.unidadeComercial }}</td>
-                          <td>{{ x.produto.valorUnitario }}</td>
-                          <td>{{ x.produto.valorTotalBruto}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-        </div>
-    </section>
-
-
-
-
-                      </div>
-                      <div class="tab-content" ng-show="tab == 5">
-
-                        <div>
-<h2>Totalizadores <span class="descr">(estes valores não podem ser alterados manualmente)</span></h2>
-<div class="row">
-    <div class="col-sm-3">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total BC ICMS</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" value="{{nota.nota.info.total.icmsTotal.baseCalculoICMS}}" disabled name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-2">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total ICMS</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" disabled value="{{nota.nota.info.total.icmsTotal.valorTotalICMS}}" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total BC ICMS ST</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.baseCalculoICMSST}}"  disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total ICMS ST</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorTotalICMSST}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-    </div>
-    <div class="row">
-    <div class="col-sm-3">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total bruto dos produtos</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorTotalDosProdutosServicos}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="col-sm-3">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total ICMS desonerado</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorICMSDesonerado}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total de frete</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorTotalFrete}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total de seguro</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorTotalSeguro}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-    </div>
-    <div class="row">
-    <div class="col-sm-3">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total de desconto</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorTotalDesconto}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total de IPI</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorTotalIPI}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="col-sm-3">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total de PIS</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto"  value="{{nota.nota.info.total.icmsTotal.valorPIS}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total de PIS ST</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.baseCalculoICMS}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-    </div>
-    <div class="row">
-    <div class="col-sm-4">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total de COFINS</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorCOFINS}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total de COFINS ST</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.baseCalculoICMS}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total de II</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorTotalII}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-</div>
-    <div class="row">
-    <div class="col-sm-4">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total do FCP</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.baseCalculoICMS}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm-4">
-        <div class="form-group">
-            <label for="exampleInputPassword1">ICMS UF remet. </label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.baseCalculoICMS}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="form-group">
-            <label for="exampleInputPassword1">ICMS UF destino</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.baseCalculoICMS}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-      </div>
-    <div class="row">
-    <div class="col-sm-4">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Total Outras Despesas</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.outrasDespesasAcessorias}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm-4">
-        <div class="form-group">
-            <label for="exampleInputPassword1">TOTAL Tributos</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorTotalTributos}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm-4">
-        <div class="form-group">
-            <label for="exampleInputPassword1">TOTAL DA NF</label>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorTotalNFe}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon">,00</span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="meuRetencoes_rcpt"><label for="meuRetencoes"><input type="checkbox" id="meuRetencoes" value="{{nota.nota.info.total.icmsTotal.baseCalculoICMS}}" disabled class="undefined ui-widget-content ui-corner-all" name="meuRetencoes" autocomplete="off" value="1">
-    <span>Informar retenções de impostos</span></label>
-
-    <h2>Retenções de impostos</h2>
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="exampleInputPassword1">Valor retido PIS</label>
-                <div class="input-group">
-                    <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.retencoesTributos.valorRetidoPIS}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                    <span class="input-group-addon">,00</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="exampleInputPassword1">Valor retido COFINS</label>
-                <div class="input-group">
-                    <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.retencoesTributos.valorRetidoCOFINS}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                    <span class="input-group-addon">,00</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="exampleInputPassword1">Valor retido CSLL</label>
-                <div class="input-group">
-                    <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.retencoesTributos.valorRetidoCSLL}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                    <span class="input-group-addon">,00</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="exampleInputPassword1">BC retido IRRF</label>
-                <div class="input-group">
-                    <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.retencoesTributos.baseCalculoIRRF}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                    <span class="input-group-addon">,00</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="exampleInputPassword1">Valor retido IRRF</label>
-                <div class="input-group">
-                    <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.retencoesTributos.valorRetidoIRRF}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                    <span class="input-group-addon">,00</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="exampleInputPassword1">BC retido previdência</label>
-                <div class="input-group">
-                    <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.retencoesTributos.baseCalculoRetencaoPrevidenciaSocial}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                    <span class="input-group-addon">,00</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="exampleInputPassword1">Valor retido previdência</label>
-                <div class="input-group">
-                    <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.retencoesTributos.valorRetencaoPrevidenciaSocial}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                    <span class="input-group-addon">,00</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="quadroTribAprox" class="bottomSpace">
-        <h2>Lei da Transparência</h2>
-        <div class="descr">Esta lei mostra ao cliente a quantidade de impostos que ele está pagando para o governo ao adquirir a mercadoria. (<a href="ajuda: Clique para saber mais sobre a Lei da Transparência" id="link_infoTribAprox">saiba mais</a>)</div>
-
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Impostos federais</label>
-                    <div class="input-group">
-                        <span class="input-group-addon">$</span>
-                        <input type="text" class="form-control cota-socio" name="book[0].desconto" value="nota.nota.info.total.icmsTotal.baseCalculoICMS" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                        <span class="input-group-addon">,00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Impostos estaduais</label>
-                    <div class="input-group">
-                        <span class="input-group-addon">$</span>
-                        <input type="text" class="form-control cota-socio" name="book[0].desconto" value="nota.nota.info.total.icmsTotal.baseCalculoICMS" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                        <span class="input-group-addon">,00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Impostos municipais</label>
-                    <div class="input-group">
-                        <span class="input-group-addon">$</span>
-                        <input type="text" class="form-control cota-socio" name="book[0].desconto" value="nota.nota.info.total.icmsTotal.baseCalculoICMS" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                        <span class="input-group-addon">,00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Total aproximado</label>
-                    <div class="input-group">
-                        <span class="input-group-addon">$</span>
-                        <input type="text" class="form-control cota-socio" name="book[0].desconto" value="nota.nota.info.total.icmsTotal.baseCalculoICMS" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
-                        <span class="input-group-addon">,00</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-        </div>
-        </div>
-
-
-
-                      </div>
-                      <div class="tab-content" ng-show="tab == 6">
-                      <div class="row">
-                        <div ng-if="nota.nota.info.transporte.modalidadeFrete != null">
-                            <div class="col-sm-2 ">
-                                <label for="exampleInputPassword1">Modalidade Frete:</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.transporte.modalidadeFrete}}</label>
-                            </div>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="x in nota.nota.info.itens">
+                            <td>{{ x.produto.cfop }}</td>
+                            <td>{{ x.produto.codigo }}</td>
+                            <td>{{ x.produto.codigoDeBarras }}</td>
+                            <td>{{ x.produto.descricao }}</td>
+                            <td>{{ x.produto.ncm }}</td>
+                            <td>{{ x.produto.quantidadeComercial }}</td>
+                            <td>{{ x.produto.unidadeComercial }}</td>
+                            <td>{{ x.produto.valorUnitario }}</td>
+                            <td>{{ x.produto.valorTotalBruto}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </section>
+                  </div>
+                </section>
+              </div>
+              <div class="tab-content" ng-show="tab == 5">
+                <div class = "row"></div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                  <div class="panel-body">
+                    <h2>Totalizadores <span class="descr">(estes valores não podem ser alterados manualmente)</span></h2>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Total BC ICMS</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" value="{{nota.nota.info.total.icmsTotal.baseCalculoICMS}}" disabled name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
                           </div>
-                          <div ng-if="nota.nota.info.transporte.vagao != null">
-                            <div class="col-sm-2 ">
-                                <label for="exampleInputPassword1">Vagão:</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.transporte.vagao}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="nota.nota.info.transporte.balsa != null">
-                            <div class="col-sm-2 ">
-                                <label for="exampleInputPassword1">Balsa:</label>
-                                <label for="exampleInputPassword1">{{nota.nota.info.transporte.balsa}}</label>
-                            </div>
-                          </div>
-                          <div ng-if="nota.nota.info.transporte.veiculo != null">
-                              <div ng-if="nota.nota.info.transporte.veiculo.placaVeiculo != null">
-                                  <div class="col-sm-2 ">
-                                    <label for="exampleInputPassword1">Placa :</label>
-                                    <label for="exampleInputPassword1">{{nota.nota.info.transporte.veiculo.placaVeiculo}}</label>
-                                </div>
-                              </div>
-                              <div ng-if="nota.nota.info.transporte.veiculo.uf != null">
-                                  <div class="col-sm-2 ">
-                                    <label for="exampleInputPassword1">UF:</label>
-                                    <label for="exampleInputPassword1">{{nota.nota.info.transporte.veiculo.uf}}</label>
-                                </div>
-                              </div>
-                              <div ng-if="nota.nota.info.transporte.veiculo.registroNacionalTransportadorCarga != null">
-                                  <div class="col-sm-2 ">
-                                    <label for="exampleInputPassword1">Reg Nac Transp Carga:</label>
-                                    <label for="exampleInputPassword1">{{nota.nota.info.transporte.veiculo.registroNacionalTransportadorCarga}}</label>
-                                </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="row" ng-if="nota.nota.info.transporte.reboques != null">
-                          <div ng-repeat="x in nota.nota.info.transporte.reboques">
-                              <div class="row">
-
-                                <div ng-if="x.placaVeiculo != null">
-                                    <div class="col-sm-2 ">
-                                        <label for="exampleInputPassword1">Placa :</label>
-                                        <label for="exampleInputPassword1">{{x.placaVeiculo}}</label>
-                                    </div>
-                                </div>
-                                <div ng-if="x.uf != null">
-                              <div class="col-sm-2 ">
-
-                                    <label for="exampleInputPassword1">UF:</label>
-                                    <label for="exampleInputPassword1">{{x.uf}}</label>
-                                </div>
-                              </div>
-                              <div ng-if="x.registroNacionalTransportadorCarga != null">
-                              <div class="col-sm-2 ">
-
-                                    <label for="exampleInputPassword1">Reg Nac Transp Carga:</label>
-                                    <label for="exampleInputPassword1">{{x.registroNacionalTransportadorCarga}}</label>
-                                </div>
-                              </div>
-
-                              </div>
-                          </div>
-
-                      </div>
-                      <div class="row">
-                      <div ng-if="nota.nota.info.transporte.cnpj != null">
-                        <div class="col-sm-2 ">
-
-                                            <label for="exampleInputPassword1">CNPJ:</label>
-                                            <label for="exampleInputPassword1">{{nota.nota.info.transporte.cnpj}}</label>
-                                        </div>
-                                        </div>
-                                        <div ng-if="nota.nota.info.transporte.cpf != null">
-                                        <div class="col-sm-2 ">
-
-                                            <label for="exampleInputPassword1">CPF:</label>
-                                            <label for="exampleInputPassword1">{{nota.nota.info.transporte.cpf}}</label>
-                                        </div>
-                                    </div>
-
-                                    <div ng-if="nota.nota.info.transporte.razaoSocial != null">
-                                      <div class="col-sm-2 ">
-                                          <div class="form-group">
-                                              <label for="exampleInputPassword1">Razão Social:</label>
-
-                                              <label for="exampleInputPassword1">{{nota.nota.info.transporte.razaoSocial}}</label>
-                                          </div>
-                                      </div>
-                                    </div>
-                                    <div ng-if="nota.nota.info.transporte.nomeFantasia != null">
-                                        <div class="col-sm-2 ">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Nome fantasia:</label>
-                                                <label for="exampleInputPassword1">{{nota.nota.info.transporte.nomeFantasia}}</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                      </div>
-
-                      <div id="quadroTribAprox" class="bottomSpace" ng-if="nota.nota.info.transporte.icmsTransporte != null">
-                          <h2>Lei da Transparência</h2>
-                          <div class="descr">Esta lei mostra ao cliente a quantidade de impostos que ele está pagando para o governo ao adquirir a mercadoria. (<a href="ajuda: Clique para saber mais sobre a Lei da Transparência" id="link_infoTribAprox">saiba mais</a>)</div>
-                          <div class="row">
-                              <div ng-if="nota.nota.info.transporte.icmsTransporte.valorServico != null">
-                                  <div class="col-sm-2 ">
-                                      <div class="form-group">
-                                          <label for="exampleInputPassword1">Vr Serviço:</label>
-                                          <label for="exampleInputPassword1">{{nota.nota.info.transporte.icmsTransporte.valorServico}}</label>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div ng-if="nota.nota.info.transporte.icmsTransporte.valorServico != null">
-                              <div class="col-sm-2 ">
-                                  <div class="form-group">
-                                      <label for="exampleInputPassword1">Vr Base Calc Ret ICMS:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.transporte.icmsTransporte.bcRetencaoICMS}}</label>
-                                  </div>
-                              </div>
-                              </div>
-                              <div ng-if="nota.nota.info.transporte.icmsTransporte.valorServico != null">
-                              <div class="col-sm-2 ">
-                                  <div class="form-group">
-                                      <label for="exampleInputPassword1">Aliq Retenção:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.transporte.icmsTransporte.aliquotaRetencao}}</label>
-                                  </div>
-                              </div>
-                              </div>
-                              <div ng-if="nota.nota.info.transporte.icmsTransporte.valorServico != null">
-                              <div class="col-sm-2 ">
-                                  <div class="form-group">
-                                      <label for="exampleInputPassword1">Vr ICMS Ret:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.transporte.icmsTransporte.valorICMSRetido}}</label>
-                                  </div>
-                              </div>
-                              </div>
-                              <div ng-if="nota.nota.info.transporte.icmsTransporte.valorServico != null">
-                              <div class="col-sm-2 ">
-                                  <div class="form-group">
-                                      <label for="exampleInputPassword1">CFOP:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.transporte.icmsTransporte.cfop}}</label>
-                                  </div>
-                              </div>
-                              </div>
-                              <div ng-if="nota.nota.info.transporte.icmsTransporte.valorServico != null">
-                              <div class="col-sm-2 ">
-                                  <div class="form-group">
-                                      <label for="exampleInputPassword1">Cod Mun Fato Ger ICMS Trans:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.transporte.icmsTransporte.codigoMunicipioOcorrenciaFatoGeradorICMSTransporte}}</label>
-                                  </div>
-                              </div>
-                              </div>
-
-                          </div>
-                      </div>
-                          <div id="quadroTribAprox" class="bottomSpace" ng-if="nota.nota.info.transporte.volumes != null">
-                              <h2>Lei da Transparência</h2>
-                              <div class="descr">Esta lei mostra ao cliente a quantidade de impostos que ele está pagando para o governo ao adquirir a mercadoria. (<a href="ajuda: Clique para saber mais sobre a Lei da Transparência" id="link_infoTribAprox">saiba mais</a>)</div>
-                              <div class="row" ng-if="nota.nota.info.transporte.volumes != null">
-                          <div ng-repeat="vol in nota.nota.info.transporte.volumes">
-                                <div ng-if="vol.quantidadeVolumesTransportados != null">
-                                <div class="col-sm-2 ">
-
-                                    <label for="exampleInputPassword1">Quant Vol Transp :</label>
-                                    <label for="exampleInputPassword1">{{vol.quantidadeVolumesTransportados}}</label>
-                                </div>
-                              </div>
-                              <div ng-if="vol.especieVolumesTransportados != null">
-                              <div class="col-sm-2 ">
-
-                                    <label for="exampleInputPassword1">Esp Vol Transp:</label>
-                                    <label for="exampleInputPassword1">{{vol.especieVolumesTransportados}}</label>
-                                </div>
-                              </div>
-                              <div ng-if="vol.marca != null">
-                              <div class="col-sm-2 ">
-
-                                    <label for="exampleInputPassword1">Marca :</label>
-                                    <label for="exampleInputPassword1">{{vol.marca}}</label>
-                                </div>
-                              </div>
-                              <div ng-if="vol.numeracaoVolumesTransportados != null">
-                              <div class="col-sm-2 ">
-
-                                    <label for="exampleInputPassword1">N° Vol Transportados:</label>
-                                    <label for="exampleInputPassword1">{{vol.numeracaoVolumesTransportados}}</label>
-                                </div>
-                              </div>
-                              <div ng-if="vol.pesoLiquido != null">
-                              <div class="col-sm-2 ">
-
-                                    <label for="exampleInputPassword1">Peso Liquido:</label>
-                                    <label for="exampleInputPassword1">{{vol.pesoLiquido}}</label>
-                                </div>
-                              </div>
-                              <div ng-if="vol.pesoBruto != null">
-                              <div class="col-sm-2 ">
-
-                                    <label for="exampleInputPassword1">Peso Bruto:</label>
-                                    <label for="exampleInputPassword1">{{vol.pesoBruto}}</label>
-                                </div>
-                              </div>
-                              <div class="row" ng-if="vol.lacres != null">
-                                <div ng-repeat="xx in vol.lacres">
-                                <div ng-if="xx.numeroLacres != null">
-                                    <div class="col-sm-2 ">
-
-                                    <label for="exampleInputPassword1">{{$index}} Lacre:</label>
-                                    <label for="exampleInputPassword1">{{xx.numeroLacres}}</label>
-                                </div>
-                              </div>
-                                </div>
-                                </div>
-
-                              </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="tab-content" ng-show="tab == 7">
-                         <div ng-repeat="x in nota.nota.info.cobranca.duplicatas">
-                             <div class="row">
-                                <div ng-if="x.numeroDuplicata != null">
-                                  <div class="col-sm-2 ">
-                                      <label for="exampleInputPassword1">Nº Duplic:</label>
-                                      <label for="exampleInputPassword1">{{x.numeroDuplicata}}</label>
-                                  </div>
-                                </div>
-                                <div ng-if="x.numeroDuplicata != null">
-                                  <div class="col-sm-2 ">
-                                      <label for="exampleInputPassword1">Data Vencimento:</label>
-                                      <label for="exampleInputPassword1">{{x.dataVencimento}}</label>
-                                  </div>
-                                </div>
-                                <div ng-if="x.numeroDuplicata != null">
-                                  <div class="col-sm-2 ">
-                                      <label for="exampleInputPassword1">Valor Duplicata:</label>
-                                      <label for="exampleInputPassword1">{{x.valorDuplicata}}</label>
-                                  </div>
-                                </div>
-                             </div>
-                          </div>
-                          <div id="quadroTribAprox" class="bottomSpace" ng-if="nota.nota.info.cobranca.fatura != null">
-                              <h2>Lei da Transparência</h2>
-                              <div class="descr">Esta lei mostra ao cliente a quantidade de impostos que ele está pagando para o governo ao adquirir a mercadoria. (<a href="ajuda: Clique para saber mais sobre a Lei da Transparência" id="link_infoTribAprox">saiba mais</a>)</div>
-                              <div class="row" ng-if="nota.nota.info.cobranca.fatura != null">
-                                  <div ng-if="nota.nota.info.cobranca.fatura.numeroFatura != null">
-                                  <div class="col-sm-2 ">
-                                      <label for="exampleInputPassword1">Nº Fatura:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.cobranca.fatura.numeroFatura}}</label>
-                                  </div>
-                                </div>
-                                <div ng-if="nota.nota.info.cobranca.fatura.valorOriginalFatura != null">
-                                  <div class="col-sm-2 ">
-                                      <label for="exampleInputPassword1">Vr Original Fatura</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.cobranca.fatura.valorOriginalFatura}}</label>
-                                  </div>
-                                </div>
-                                <div ng-if="nota.nota.info.cobranca.fatura.valorDesconto != null">
-                                  <div class="col-sm-2 ">
-                                      <label for="exampleInputPassword1">Vr Desconto:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.cobranca.fatura.valorDesconto}}</label>
-                                  </div>
-                                </div>
-                                <div ng-if="nota.nota.info.cobranca.fatura.valorLiquidoFatura != null">
-                                  <div class="col-sm-2 ">
-                                      <label for="exampleInputPassword1">Vr Liquido Fatura:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.cobranca.fatura.valorLiquidoFatura}}</label>
-                                  </div>
-                                </div>
-                              </div>
-                              </div>
-
-                        <div id="quadroTribAprox" class="bottomSpace" ng-if="nota.nota.info.pagamentos != null">
-                              <h2>Lei da Transparência</h2>
-                              <div class="descr">Esta lei mostra ao cliente a quantidade de impostos que ele está pagando para o governo ao adquirir a mercadoria. (<a href="ajuda: Clique para saber mais sobre a Lei da Transparência" id="link_infoTribAprox">saiba mais</a>)</div>
-                              <div class="row" ng-if="nota.nota.info.pagamentos != null">
-                                  <div ng-repeat="x in nota.nota.info.pagamentos">
-                                    <div ng-if="x.formaPagamentoMoeda != null">
-                                  <div class="col-sm-2 ">
-                                      <label for="exampleInputPassword1">Forma Pagamento:</label>
-                                      <label for="exampleInputPassword1">{{x.formaPagamentoMoeda}}</label>
-                                  </div>
-                                </div>
-                                <div ng-if="x.valorPagamento != null">
-                                  <div class="col-sm-2 ">
-                                      <label for="exampleInputPassword1">Vr Pagamento:</label>
-                                      <label for="exampleInputPassword1">{{x.valorPagamento}}</label>
-                                  </div>
-                                </div>
-                                <div ng-if="x.cartao != null">
-                                  <div class="col-sm-6">
-                                      <label for="exampleInputPassword1">Cartão:</label>
-                                      <label for="exampleInputPassword1">{{x.cartao.tipoIntegracao - x.cartao.operadoraCartao - x.cartao.numeroAutorizacaoOperacaoCartao}}</label>
-                                  </div>
-                                </div>
-                                  </div>
-                              </div>
                         </div>
                       </div>
-                      <div class="tab-content" ng-show="tab == 8">
-                          <div id="quadroTribAprox" class="bottomSpace" ng-if="nota.nota.info.informacoesAdicionais != null">
-                              <h2>Lei da Transparência</h2>
-                              <div class="descr">Esta lei mostra ao cliente a quantidade de impostos que ele está pagando para o governo ao adquirir a mercadoria. (<a href="ajuda: Clique para saber mais sobre a Lei da Transparência" id="link_infoTribAprox">saiba mais</a>)</div>
-                              <div class="row" ng-if="nota.nota.info.informacoesAdicionais != null">
-                                  <div ng-if="nota.nota.info.informacoesAdicionais.informacoesAdicionaisInteresseFisco != null">
-                                  <div class="col-sm-6">
-                                      <label for="exampleInputPassword1">informacoesAdicionaisInteresseFisco:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.informacoesAdicionais.informacoesAdicionaisInteresseFisco}}</label>
-                                  </div>
-                                </div>
-                                <div ng-if="nota.nota.info.informacoesAdicionais.informacoesComplementaresInteresseContribuinte != null">
-                                  <div class="col-sm-6">
-                                      <label for="exampleInputPassword1">informacoesComplementaresInteresseContribuinte:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.informacoesAdicionais.informacoesComplementaresInteresseContribuinte}}</label>
-                                  </div>
-                                </div>
-
-                              </div>
-                              <div class="row">
-                              <div ng-repeat="x1 in nota.nota.info.informacoesAdicionais.observacoesContribuinte">
-                              <div ng-if="x1.identificacaoCampo != null">
-                                  <div class="col-sm-6">
-                                      <label for="exampleInputPassword1">identificacaoCampo:</label>
-                                      <label for="exampleInputPassword1">{{x1.identificacaoCampo}}</label>
-                                  </div>
-                                </div>
-                                <div ng-if="x1.conteudoCampo != null">
-                                  <div class="col-sm-6">
-                                      <label for="exampleInputPassword1">conteudoCampo:</label>
-                                      <label for="exampleInputPassword1">{{x1.conteudoCampo}}</label>
-                                  </div>
-                                </div>
-
-                              </div>
-                              </div>
-
-                              <div class="row">
-                              <div ng-repeat="x2 in nota.nota.info.informacoesAdicionais.observacoesFisco">
-                              <div ng-if="x2.identificacaoCampo != null">
-                                  <div class="col-sm-6">
-                                      <label for="exampleInputPassword1">identificacaoCampo:</label>
-                                      <label for="exampleInputPassword1">{{x2.identificacaoCampo}}</label>
-                                  </div>
-                                </div>
-                                <div ng-if="x2.conteudoCampo != null">
-                                  <div class="col-sm-6">
-                                      <label for="exampleInputPassword1">conteudoCampo:</label>
-                                      <label for="exampleInputPassword1">{{x2.conteudoCampo}}</label>
-                                  </div>
-                                </div>
-                              </div>
-                              </div>
-
-                              <div class="row">
-                              <div ng-repeat="x3 in nota.nota.info.informacoesAdicionais.processosRefenciado">
-                                                            <div ng-if="x3.identificacaoCampo != null">
-                                  <div class="col-sm-6">
-                                      <label for="exampleInputPassword1">identificacaoCampo:</label>
-                                      <label for="exampleInputPassword1">{{x3.identificacaoCampo}}</label>
-                                  </div>
-                                </div>
-                                <div ng-if="x3.conteudoCampo != null">
-                                  <div class="col-sm-6">
-                                      <label for="exampleInputPassword1">conteudoCampo:</label>
-                                      <label for="exampleInputPassword1">{{x3.conteudoCampo}}</label>
-                                  </div>
-                                </div>
-                              </div>
-                              </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Total ICMS</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" disabled value="{{nota.nota.info.total.icmsTotal.valorTotalICMS}}" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                          </div>
+                        </div>
                       </div>
-                      <div class="tab-content" ng-show="tab == 9">
-                          <div ng-if="nota.nota.info.exportacao.ufEmbarqueProduto != null">
-                                  <div class="col-sm-4">
-                                      <label for="exampleInputPassword1">ufEmbarqueProduto:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.exportacao.ufEmbarqueProduto}}</label>
-                                  </div>
-                                </div>
-                           <div ng-if="nota.nota.info.exportacao.localEmbarqueProdutos != null">
-                                  <div class="col-sm-4">
-                                      <label for="exampleInputPassword1">localEmbarqueProdutos:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.exportacao.localEmbarqueProdutos}}</label>
-                                  </div>
-                                </div>
-                             <div ng-if="nota.nota.info.exportacao.localDespachoProdutos != null">
-                                  <div class="col-sm-4">
-                                      <label for="exampleInputPassword1">localDespachoProdutos:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.exportacao.localDespachoProdutos}}</label>
-                                  </div>
-                                </div>
-
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Total BC ICMS ST</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.baseCalculoICMSST}}"  disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                          </div>
+                        </div>
                       </div>
-                      <div class="tab-content" ng-show="tab == 10">
-                          <div class="row">
-                          <div ng-if="nota.nota.info.cana.safra != null">
-                                  <div class="col-sm-2">
-                                      <label for="exampleInputPassword1">Safra:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.cana.safra}}</label>
-                                  </div>
-                                </div>
-
-                          <div ng-if="nota.nota.info.cana.referencia != null">
-                                  <div class="col-sm-2">
-                                      <label for="exampleInputPassword1">referencia:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.cana.referencia}}</label>
-                                  </div>
-                                </div>
-
-                          <div ng-if="nota.nota.info.cana.quantidadeTotalMes != null">
-                                  <div class="col-sm-2">
-                                      <label for="exampleInputPassword1">quantidadeTotalMes:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.cana.quantidadeTotalMes}}</label>
-                                  </div>
-                                </div>
-
-                          <div ng-if="nota.nota.info.cana.quantidadeTotalAnterior != null">
-                                  <div class="col-sm-2">
-                                      <label for="exampleInputPassword1">quantidadeTotalAnterior:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.cana.quantidadeTotalAnterior}}</label>
-                                  </div>
-                                </div>
-
-                                <div ng-if="nota.nota.info.cana.quantidadeTotalGeral != null">
-                                  <div class="col-sm-2">
-                                      <label for="exampleInputPassword1">quantidadeTotalGeral:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.cana.quantidadeTotalGeral}}</label>
-                                  </div>
-                                </div>
-
-                                <div ng-if="nota.nota.info.cana.valorFornecimento != null">
-                                  <div class="col-sm-2">
-                                      <label for="exampleInputPassword1">valorFornecimento:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.cana.valorFornecimento}}</label>
-                                  </div>
-                                </div>
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Total ICMS ST</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorTotalICMSST}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
                           </div>
-                          <div class="row">
-                            <div ng-if="nota.nota.info.cana.valorTotalDeducao != null">
-                                  <div class="col-sm-2">
-                                      <label for="exampleInputPassword1">valorTotalDeducao:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.cana.valorTotalDeducao}}</label>
-                                  </div>
-                                </div>
-                                <div ng-if="nota.nota.info.cana.vLiqFor != null">
-                                  <div class="col-sm-2">
-                                      <label for="exampleInputPassword1">vLiqFor:</label>
-                                      <label for="exampleInputPassword1">{{nota.nota.info.cana.vLiqFor}}</label>
-                                  </div>
-                                </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Total bruto dos produtos</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorTotalDosProdutosServicos}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
                           </div>
-                          <div class="row">
-                              <div ng-repeat="x4 in nota.nota.info.cana.fornecimentosDiario">
-                              <div class="row">
-                                  <div ng-if="x4.dia != null">
-                                    <div class="col-sm-3">
-                                        <label for="exampleInputPassword1">Dia :</label>
-                                        <label for="exampleInputPassword1">{{x4.dia}}</label>
-                                    </div>
-                                  </div>
-                                  <div ng-if="x4.quantidade != null">
-                                    <div class="col-sm-3">
-                                        <label for="exampleInputPassword1">Quantidade :</label>
-                                        <label for="exampleInputPassword1">{{x4.quantidade}}</label>
-                                    </div>
-                                  </div>
-                              </div>
-                              </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Total ICMS desonerado</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorICMSDesonerado}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
                           </div>
-                          <div class="row">
-                              <div ng-repeat="x5 in nota.nota.info.cana.deducoes">
-                              <div class="row">
-                                  <div ng-if="x5.descricaoDeducao != null">
-                                    <div class="col-sm-4">
-                                        <label for="exampleInputPassword1">Descricao Deducao :</label>
-                                        <label for="exampleInputPassword1">{{x5.descricaoDeducao}}</label>
-                                    </div>
-                                  </div>
-                                  <div ng-if="x5.valorDeducao != null">
-                                    <div class="col-sm-4>
-                                        <label for="exampleInputPassword1">Valor Deducao :</label>
-                                        <label for="exampleInputPassword1">{{x5.valorDeducao}}</label>
-                                    </div>
-                                  </div>
-                              </div>
-                              </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Total de frete</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorTotalFrete}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
                           </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Total de seguro</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorTotalSeguro}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Total de desconto</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorTotalDesconto}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Total de IPI</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorTotalIPI}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Total de PIS</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto"  value="{{nota.nota.info.total.icmsTotal.valorPIS}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Total de PIS ST</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.baseCalculoICMS}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Total de COFINS</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorCOFINS}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Total de COFINS ST</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.baseCalculoICMS}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Total de II</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorTotalII}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Total do FCP</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.baseCalculoICMS}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">ICMS UF remet. </label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.baseCalculoICMS}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">ICMS UF destino</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.baseCalculoICMS}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Total Outras Despesas</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.outrasDespesasAcessorias}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">TOTAL Tributos</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorTotalTributos}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">TOTAL DA NF</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.icmsTotal.valorTotalNFe}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
+                </div>
+                <div class = "row"></div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                  <div class="panel-body">
+                    <h2>Retenções de impostos</h2>
+                    <div id="meuRetencoes_rcpt">
+                      <label for="meuRetencoes"><input type="checkbox" id="meuRetencoes" value="{{nota.nota.info.total.icmsTotal.baseCalculoICMS}}" disabled class="undefined ui-widget-content ui-corner-all" name="meuRetencoes" autocomplete="off" value="1">
+                      <span>Informar retenções de impostos</span></label>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Valor retido PIS</label>
+                            <div class="input-group">
+                              <span class="input-group-addon">$</span>
+                              <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.retencoesTributos.valorRetidoPIS}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                              <span class="input-group-addon">,00</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-3">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Valor retido COFINS</label>
+                            <div class="input-group">
+                              <span class="input-group-addon">$</span>
+                              <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.retencoesTributos.valorRetidoCOFINS}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                              <span class="input-group-addon">,00</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-3">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Valor retido CSLL</label>
+                            <div class="input-group">
+                              <span class="input-group-addon">$</span>
+                              <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.retencoesTributos.valorRetidoCSLL}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                              <span class="input-group-addon">,00</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-3">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">BC retido IRRF</label>
+                            <div class="input-group">
+                              <span class="input-group-addon">$</span>
+                              <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.retencoesTributos.baseCalculoIRRF}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                              <span class="input-group-addon">,00</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Valor retido IRRF</label>
+                            <div class="input-group">
+                              <span class="input-group-addon">$</span>
+                              <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.retencoesTributos.valorRetidoIRRF}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                              <span class="input-group-addon">,00</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-3">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">BC retido previdência</label>
+                            <div class="input-group">
+                              <span class="input-group-addon">$</span>
+                              <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.retencoesTributos.baseCalculoRetencaoPrevidenciaSocial}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                              <span class="input-group-addon">,00</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-3">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Valor retido previdência</label>
+                            <div class="input-group">
+                              <span class="input-group-addon">$</span>
+                              <input type="text" class="form-control cota-socio" name="book[0].desconto" value="{{nota.nota.info.total.retencoesTributos.valorRetencaoPrevidenciaSocial}}" disabled placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                              <span class="input-group-addon">,00</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-
-
-          <div class="modal-footer">
-            <button type="button" ng-click="close('No')"
-              class="btn btn-default" data-dismiss="modal">Cancelar</button>
-            <button type="submit" ng-click="saveContasPagar()"
-              class="btn btn-primary">Gravar</button>
+                </div>
+                <div class = "row"></div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                  <div class="panel-body">
+                    <h2>Lei da Transparência</h2>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Impostos federais</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="nota.nota.info.total.icmsTotal.baseCalculoICMS" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Impostos estaduais</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="nota.nota.info.total.icmsTotal.baseCalculoICMS" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Impostos municipais</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="nota.nota.info.total.icmsTotal.baseCalculoICMS" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Total aproximado</label>
+                          <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" name="book[0].desconto" value="nota.nota.info.total.icmsTotal.baseCalculoICMS" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-content" ng-show="tab == 6">
+                <div class = "row"></div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                  <div class="panel-body">
+                    <div class="row">
+                      <div ng-if="nota.nota.info.transporte.modalidadeFrete != null">
+                        <div class="col-sm-2 ">
+                          <label for="exampleInputPassword1">Modalidade Frete:</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.transporte.modalidadeFrete}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.transporte.vagao != null">
+                        <div class="col-sm-2 ">
+                          <label for="exampleInputPassword1">Vagão:</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.transporte.vagao}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.transporte.balsa != null">
+                        <div class="col-sm-2 ">
+                          <label for="exampleInputPassword1">Balsa:</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.transporte.balsa}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.transporte.veiculo != null">
+                        <div ng-if="nota.nota.info.transporte.veiculo.placaVeiculo != null">
+                          <div class="col-sm-2 ">
+                            <label for="exampleInputPassword1">Placa :</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.transporte.veiculo.placaVeiculo}}</label>
+                          </div>
+                        </div>
+                        <div ng-if="nota.nota.info.transporte.veiculo.uf != null">
+                          <div class="col-sm-2 ">
+                            <label for="exampleInputPassword1">UF:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.transporte.veiculo.uf}}</label>
+                          </div>
+                        </div>
+                        <div ng-if="nota.nota.info.transporte.veiculo.registroNacionalTransportadorCarga != null">
+                          <div class="col-sm-2 ">
+                            <label for="exampleInputPassword1">Reg Nac Transp Carga:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.transporte.veiculo.registroNacionalTransportadorCarga}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class = "row"></div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                  <div class="panel-body">
+                    <div class="row" ng-if="nota.nota.info.transporte.reboques != null">
+                      <div ng-repeat="x in nota.nota.info.transporte.reboques">
+                        <div class="row">
+                          <div ng-if="x.placaVeiculo != null">
+                            <div class="col-sm-2 ">
+                              <label for="exampleInputPassword1">Placa :</label>
+                              <label for="exampleInputPassword1">{{x.placaVeiculo}}</label>
+                            </div>
+                          </div>
+                          <div ng-if="x.uf != null">
+                            <div class="col-sm-2 ">
+                              <label for="exampleInputPassword1">UF:</label>
+                              <label for="exampleInputPassword1">{{x.uf}}</label>
+                            </div>
+                          </div>
+                          <div ng-if="x.registroNacionalTransportadorCarga != null">
+                            <div class="col-sm-2 ">
+                              <label for="exampleInputPassword1">Reg Nac Transp Carga:</label>
+                              <label for="exampleInputPassword1">{{x.registroNacionalTransportadorCarga}}</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div ng-if="nota.nota.info.transporte.cnpj != null">
+                    <div class="col-sm-2 ">
+                      <label for="exampleInputPassword1">CNPJ:</label>
+                      <label for="exampleInputPassword1">{{nota.nota.info.transporte.cnpj}}</label>
+                    </div>
+                  </div>
+                  <div ng-if="nota.nota.info.transporte.cpf != null">
+                    <div class="col-sm-2 ">
+                      <label for="exampleInputPassword1">CPF:</label>
+                      <label for="exampleInputPassword1">{{nota.nota.info.transporte.cpf}}</label>
+                    </div>
+                  </div>
+                  <div ng-if="nota.nota.info.transporte.razaoSocial != null">
+                    <div class="col-sm-2 ">
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Razão Social:</label>
+                        <label for="exampleInputPassword1">{{nota.nota.info.transporte.razaoSocial}}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div ng-if="nota.nota.info.transporte.nomeFantasia != null">
+                    <div class="col-sm-2 ">
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Nome fantasia:</label>
+                        <label for="exampleInputPassword1">{{nota.nota.info.transporte.nomeFantasia}}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class = "row"></div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                  <div class="panel-body">
+                    <h2>ICMS Transporte</h2>
+                    <div class="row">
+                      <div ng-if="nota.nota.info.transporte.icmsTransporte.valorServico != null">
+                        <div class="col-sm-2 ">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Vr Serviço:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.transporte.icmsTransporte.valorServico}}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.transporte.icmsTransporte.valorServico != null">
+                        <div class="col-sm-2 ">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Vr Base Calc Ret ICMS:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.transporte.icmsTransporte.bcRetencaoICMS}}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.transporte.icmsTransporte.valorServico != null">
+                        <div class="col-sm-2 ">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Aliq Retenção:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.transporte.icmsTransporte.aliquotaRetencao}}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.transporte.icmsTransporte.valorServico != null">
+                        <div class="col-sm-2 ">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Vr ICMS Ret:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.transporte.icmsTransporte.valorICMSRetido}}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.transporte.icmsTransporte.valorServico != null">
+                        <div class="col-sm-2 ">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">CFOP:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.transporte.icmsTransporte.cfop}}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.transporte.icmsTransporte.valorServico != null">
+                        <div class="col-sm-2 ">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Cod Mun Fato Ger ICMS Trans:</label>
+                            <label for="exampleInputPassword1">{{nota.nota.info.transporte.icmsTransporte.codigoMunicipioOcorrenciaFatoGeradorICMSTransporte}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class = "row"></div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                  <div class="panel-body">
+                    <h2>Volumes</h2>
+                    <div class="row" ng-if="nota.nota.info.transporte.volumes != null">
+                      <div ng-repeat="vol in nota.nota.info.transporte.volumes">
+                        <div ng-if="vol.quantidadeVolumesTransportados != null">
+                          <div class="col-sm-2 ">
+                            <label for="exampleInputPassword1">Quant Vol Transp :</label>
+                            <label for="exampleInputPassword1">{{vol.quantidadeVolumesTransportados}}</label>
+                          </div>
+                        </div>
+                        <div ng-if="vol.especieVolumesTransportados != null">
+                          <div class="col-sm-2 ">
+                            <label for="exampleInputPassword1">Esp Vol Transp:</label>
+                            <label for="exampleInputPassword1">{{vol.especieVolumesTransportados}}</label>
+                          </div>
+                        </div>
+                        <div ng-if="vol.marca != null">
+                          <div class="col-sm-2 ">
+                            <label for="exampleInputPassword1">Marca :</label>
+                            <label for="exampleInputPassword1">{{vol.marca}}</label>
+                          </div>
+                        </div>
+                        <div ng-if="vol.numeracaoVolumesTransportados != null">
+                          <div class="col-sm-2 ">
+                            <label for="exampleInputPassword1">N° Vol Transportados:</label>
+                            <label for="exampleInputPassword1">{{vol.numeracaoVolumesTransportados}}</label>
+                          </div>
+                        </div>
+                        <div ng-if="vol.pesoLiquido != null">
+                          <div class="col-sm-2 ">
+                            <label for="exampleInputPassword1">Peso Liquido:</label>
+                            <label for="exampleInputPassword1">{{vol.pesoLiquido}}</label>
+                          </div>
+                        </div>
+                        <div ng-if="vol.pesoBruto != null">
+                          <div class="col-sm-2 ">
+                            <label for="exampleInputPassword1">Peso Bruto:</label>
+                            <label for="exampleInputPassword1">{{vol.pesoBruto}}</label>
+                          </div>
+                        </div>
+                        <div class="row" ng-if="vol.lacres != null">
+                          <div ng-repeat="xx in vol.lacres">
+                            <div ng-if="xx.numeroLacres != null">
+                              <div class="col-sm-2 ">
+                                <label for="exampleInputPassword1">{{$index}} Lacre:</label>
+                                <label for="exampleInputPassword1">{{xx.numeroLacres}}</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-content" ng-show="tab == 7">
+                <div class = "row"></div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                  <div class="panel-body">
+                    <h2>Duplicatas</h2>
+                    <div ng-repeat="x in nota.nota.info.cobranca.duplicatas">
+                      <div class="row">
+                        <div ng-if="x.numeroDuplicata != null">
+                          <div class="col-sm-2 ">
+                            <label for="exampleInputPassword1">Nº Duplic:</label>
+                            <label for="exampleInputPassword1">{{x.numeroDuplicata}}</label>
+                          </div>
+                        </div>
+                        <div ng-if="x.numeroDuplicata != null">
+                          <div class="col-sm-2 ">
+                            <label for="exampleInputPassword1">Data Vencimento:</label>
+                            <label for="exampleInputPassword1">{{x.dataVencimento}}</label>
+                          </div>
+                        </div>
+                        <div ng-if="x.numeroDuplicata != null">
+                          <div class="col-sm-2 ">
+                            <label for="exampleInputPassword1">Valor Duplicata:</label>
+                            <label for="exampleInputPassword1">{{x.valorDuplicata}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class = "row"></div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                  <div class="panel-body">
+                    <h2>Faturas</h2>
+                    <div class="row" ng-if="nota.nota.info.cobranca.fatura != null">
+                      <div ng-if="nota.nota.info.cobranca.fatura.numeroFatura != null">
+                        <div class="col-sm-2 ">
+                          <label for="exampleInputPassword1">Nº Fatura:</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.cobranca.fatura.numeroFatura}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.cobranca.fatura.valorOriginalFatura != null">
+                        <div class="col-sm-2 ">
+                          <label for="exampleInputPassword1">Vr Original Fatura</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.cobranca.fatura.valorOriginalFatura}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.cobranca.fatura.valorDesconto != null">
+                        <div class="col-sm-2 ">
+                          <label for="exampleInputPassword1">Vr Desconto:</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.cobranca.fatura.valorDesconto}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.cobranca.fatura.valorLiquidoFatura != null">
+                        <div class="col-sm-2 ">
+                          <label for="exampleInputPassword1">Vr Liquido Fatura:</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.cobranca.fatura.valorLiquidoFatura}}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class = "row"></div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                  <div class="panel-body">
+                    <h2>Pagamentos</h2>
+                    <div class="row" ng-if="nota.nota.info.pagamentos != null">
+                      <div ng-repeat="x in nota.nota.info.pagamentos">
+                        <div ng-if="x.formaPagamentoMoeda != null">
+                          <div class="col-sm-2 ">
+                            <label for="exampleInputPassword1">Forma Pagamento:</label>
+                            <label for="exampleInputPassword1">{{x.formaPagamentoMoeda}}</label>
+                          </div>
+                        </div>
+                        <div ng-if="x.valorPagamento != null">
+                          <div class="col-sm-2 ">
+                            <label for="exampleInputPassword1">Vr Pagamento:</label>
+                            <label for="exampleInputPassword1">{{x.valorPagamento}}</label>
+                          </div>
+                        </div>
+                        <div ng-if="x.cartao != null">
+                          <div class="col-sm-6">
+                            <label for="exampleInputPassword1">Cartão:</label>
+                            <label for="exampleInputPassword1">{{x.cartao.tipoIntegracao - x.cartao.operadoraCartao - x.cartao.numeroAutorizacaoOperacaoCartao}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-content" ng-show="tab == 8">
+                <div class = "row"></div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                  <div class="panel-body">
+                    <h2>Informações Adcionais Interesse ao Fisco</h2>
+                    <div class="row" ng-if="nota.nota.info.informacoesAdicionais != null">
+                      <div ng-if="nota.nota.info.informacoesAdicionais.informacoesAdicionaisInteresseFisco != null">
+                        <div class="col-sm-6">
+                          <label for="exampleInputPassword1">informacoesAdicionaisInteresseFisco:</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.informacoesAdicionais.informacoesAdicionaisInteresseFisco}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="nota.nota.info.informacoesAdicionais.informacoesComplementaresInteresseContribuinte != null">
+                        <div class="col-sm-6">
+                          <label for="exampleInputPassword1">informacoesComplementaresInteresseContribuinte:</label>
+                          <label for="exampleInputPassword1">{{nota.nota.info.informacoesAdicionais.informacoesComplementaresInteresseContribuinte}}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class = "row"></div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                  <div class="panel-body">
+                    <h2>Informações Adcionais Contribuinte</h2>
+                    <div class="row">
+                      <div ng-repeat="x1 in nota.nota.info.informacoesAdicionais.observacoesContribuinte">
+                        <div ng-if="x1.identificacaoCampo != null">
+                          <div class="col-sm-6">
+                            <label for="exampleInputPassword1">identificacaoCampo:</label>
+                            <label for="exampleInputPassword1">{{x1.identificacaoCampo}}</label>
+                          </div>
+                        </div>
+                        <div ng-if="x1.conteudoCampo != null">
+                          <div class="col-sm-6">
+                            <label for="exampleInputPassword1">conteudoCampo:</label>
+                            <label for="exampleInputPassword1">{{x1.conteudoCampo}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class = "row"></div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                  <div class="panel-body">
+                    <h2>Informações Adcionais Observações do Fisco</h2>
+                    <div class="row">
+                      <div ng-repeat="x2 in nota.nota.info.informacoesAdicionais.observacoesFisco">
+                        <div ng-if="x2.identificacaoCampo != null">
+                          <div class="col-sm-6">
+                            <label for="exampleInputPassword1">identificacaoCampo:</label>
+                            <label for="exampleInputPassword1">{{x2.identificacaoCampo}}</label>
+                          </div>
+                        </div>
+                        <div ng-if="x2.conteudoCampo != null">
+                          <div class="col-sm-6">
+                            <label for="exampleInputPassword1">conteudoCampo:</label>
+                            <label for="exampleInputPassword1">{{x2.conteudoCampo}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class = "row"></div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                  <div class="panel-body">
+                    <h2>Informações Adcionais Processos Referenciados</h2>
+                    <div class="row">
+                      <div ng-repeat="x3 in nota.nota.info.informacoesAdicionais.processosRefenciado">
+                        <div ng-if="x3.identificacaoCampo != null">
+                          <div class="col-sm-6">
+                            <label for="exampleInputPassword1">identificacaoCampo:</label>
+                            <label for="exampleInputPassword1">{{x3.identificacaoCampo}}</label>
+                          </div>
+                        </div>
+                        <div ng-if="x3.conteudoCampo != null">
+                          <div class="col-sm-6">
+                            <label for="exampleInputPassword1">conteudoCampo:</label>
+                            <label for="exampleInputPassword1">{{x3.conteudoCampo}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-content" ng-show="tab == 9">
+                <div ng-if="nota.nota.info.exportacao.ufEmbarqueProduto != null">
+                  <div class="col-sm-4">
+                    <label for="exampleInputPassword1">ufEmbarqueProduto:</label>
+                    <label for="exampleInputPassword1">{{nota.nota.info.exportacao.ufEmbarqueProduto}}</label>
+                  </div>
+                </div>
+                <div ng-if="nota.nota.info.exportacao.localEmbarqueProdutos != null">
+                  <div class="col-sm-4">
+                    <label for="exampleInputPassword1">localEmbarqueProdutos:</label>
+                    <label for="exampleInputPassword1">{{nota.nota.info.exportacao.localEmbarqueProdutos}}</label>
+                  </div>
+                </div>
+                <div ng-if="nota.nota.info.exportacao.localDespachoProdutos != null">
+                  <div class="col-sm-4">
+                    <label for="exampleInputPassword1">localDespachoProdutos:</label>
+                    <label for="exampleInputPassword1">{{nota.nota.info.exportacao.localDespachoProdutos}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-content" ng-show="tab == 10">
+                <div class="row">
+                  <div ng-if="nota.nota.info.cana.safra != null">
+                    <div class="col-sm-2">
+                      <label for="exampleInputPassword1">Safra:</label>
+                      <label for="exampleInputPassword1">{{nota.nota.info.cana.safra}}</label>
+                    </div>
+                  </div>
+                  <div ng-if="nota.nota.info.cana.referencia != null">
+                    <div class="col-sm-2">
+                      <label for="exampleInputPassword1">referencia:</label>
+                      <label for="exampleInputPassword1">{{nota.nota.info.cana.referencia}}</label>
+                    </div>
+                  </div>
+                  <div ng-if="nota.nota.info.cana.quantidadeTotalMes != null">
+                    <div class="col-sm-2">
+                      <label for="exampleInputPassword1">quantidadeTotalMes:</label>
+                      <label for="exampleInputPassword1">{{nota.nota.info.cana.quantidadeTotalMes}}</label>
+                    </div>
+                  </div>
+                  <div ng-if="nota.nota.info.cana.quantidadeTotalAnterior != null">
+                    <div class="col-sm-2">
+                      <label for="exampleInputPassword1">quantidadeTotalAnterior:</label>
+                      <label for="exampleInputPassword1">{{nota.nota.info.cana.quantidadeTotalAnterior}}</label>
+                    </div>
+                  </div>
+                  <div ng-if="nota.nota.info.cana.quantidadeTotalGeral != null">
+                    <div class="col-sm-2">
+                      <label for="exampleInputPassword1">quantidadeTotalGeral:</label>
+                      <label for="exampleInputPassword1">{{nota.nota.info.cana.quantidadeTotalGeral}}</label>
+                    </div>
+                  </div>
+                  <div ng-if="nota.nota.info.cana.valorFornecimento != null">
+                    <div class="col-sm-2">
+                      <label for="exampleInputPassword1">valorFornecimento:</label>
+                      <label for="exampleInputPassword1">{{nota.nota.info.cana.valorFornecimento}}</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div ng-if="nota.nota.info.cana.valorTotalDeducao != null">
+                    <div class="col-sm-2">
+                      <label for="exampleInputPassword1">valorTotalDeducao:</label>
+                      <label for="exampleInputPassword1">{{nota.nota.info.cana.valorTotalDeducao}}</label>
+                    </div>
+                  </div>
+                  <div ng-if="nota.nota.info.cana.vLiqFor != null">
+                    <div class="col-sm-2">
+                      <label for="exampleInputPassword1">vLiqFor:</label>
+                      <label for="exampleInputPassword1">{{nota.nota.info.cana.vLiqFor}}</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div ng-repeat="x4 in nota.nota.info.cana.fornecimentosDiario">
+                    <div class="row">
+                      <div ng-if="x4.dia != null">
+                        <div class="col-sm-3">
+                          <label for="exampleInputPassword1">Dia :</label>
+                          <label for="exampleInputPassword1">{{x4.dia}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="x4.quantidade != null">
+                        <div class="col-sm-3">
+                          <label for="exampleInputPassword1">Quantidade :</label>
+                          <label for="exampleInputPassword1">{{x4.quantidade}}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div ng-repeat="x5 in nota.nota.info.cana.deducoes">
+                    <div class="row">
+                      <div ng-if="x5.descricaoDeducao != null">
+                        <div class="col-sm-4">
+                          <label for="exampleInputPassword1">Descricao Deducao :</label>
+                          <label for="exampleInputPassword1">{{x5.descricaoDeducao}}</label>
+                        </div>
+                      </div>
+                      <div ng-if="x5.valorDeducao != null">
+                        <div class="col-sm-4>
+                          <label for="exampleInputPassword1">Valor Deducao :</label>
+                          <label for="exampleInputPassword1">{{x5.valorDeducao}}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-      </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" ng-click="close('No')"
+            class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="submit" ng-click="saveContasPagar()"
+            class="btn btn-primary">Gravar</button>
+        </div>
+    </form>
     </div>
   </div>
 </div>
