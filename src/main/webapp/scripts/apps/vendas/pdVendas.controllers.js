@@ -117,7 +117,12 @@
 	}
 })();
 (function () {
-	angular.module('wdApp.apps.pedidoVenda.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+	angular.module('wdApp.apps.pedidoVenda.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter']).run([
+                'validator',
+                function (validator) {
+                    validator.setValidElementStyling(false);
+                    validator.setInvalidElementStyling(false);
+            }])
 		.controller('PedidoVendaInsertController', function (localStorageService, $rootScope, $scope, fModels, SysMgmtData, doisValorFactory, fNotaFiscal) {
 			var vm = this;
 

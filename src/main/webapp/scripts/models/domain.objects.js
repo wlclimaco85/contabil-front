@@ -1812,7 +1812,7 @@ qat.model.fnNFInfoCupomFiscalReferenciado = function (
 qat.model.fnNFNotaInfoIdentificacao = function (_NFNotaInfoIdentificacao,
 	modelAction)
 {
-
+debugger
 	var _id = null;
 	if (_NFNotaInfoIdentificacao.id == "" || _NFNotaInfoIdentificacao.id == " ")
 	{
@@ -1998,8 +1998,7 @@ qat.model.fnNFInfoProdutorRuralReferenciada = function (
 
 /** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
 qat.model.fnNFNotaInfoEmitente = function (_NFNotaInfoEmitente, modelAction)
-{
-
+{debugger
 	var _id = null;
 	if (_NFNotaInfoEmitente.id == "" || _NFNotaInfoEmitente.id == " ")
 	{
@@ -2019,14 +2018,14 @@ qat.model.fnNFNotaInfoEmitente = function (_NFNotaInfoEmitente, modelAction)
 		id: _id,
 		cnpj: _NFNotaInfoEmitente.cnpj,
 		cpf: _NFNotaInfoEmitente.cpf,
-		razaoSocial: _NFNotaInfoEmitente.razaoSocial,
-		nomeFantasia: _NFNotaInfoEmitente.nomeFantasia,
+		razaoSocial: _NFNotaInfoEmitente.razaosocial,
+		nomeFantasia: _NFNotaInfoEmitente.nomefantasia,
 		endereco: _NFNotaInfoEmitente.endereco,
-		inscricaoEstadual: _NFNotaInfoEmitente.inscricaoEstadual,
-		inscricaoEstadualSubstituicaoTributaria: _NFNotaInfoEmitente.inscricaoEstadualSubstituicaoTributaria,
-		inscricaoMunicipal: _NFNotaInfoEmitente.inscricaoMunicipal,
-		classificacaoNacionalAtividadesEconomicas: _NFNotaInfoEmitente.classificacaoNacionalAtividadesEconomicas,
-		regimeTributario: _NFNotaInfoEmitente.regimeTributario,
+		inscricaoEstadual: _NFNotaInfoEmitente.inscricaoestadual,
+		inscricaoEstadualSubstituicaoTributaria: _NFNotaInfoEmitente.inscricaoestadualsubstituicaotributaria,
+		inscricaoMunicipal: _NFNotaInfoEmitente.inscricaomunicipal,
+		classificacaoNacionalAtividadesEconomicas: _NFNotaInfoEmitente.classificacaonacionalatividadeseconomicas,
+		regimeTributario: _NFNotaInfoEmitente.regimetributario,
 		parentId: 0,
 		emprId: _emprId,
 		processId: 0,

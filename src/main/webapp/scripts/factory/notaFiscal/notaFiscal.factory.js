@@ -39,19 +39,20 @@
 				}
 			}
 
+
 			var oDestinatario = {
 				id: null,
 				cnpj: null,
 				cpf: null,
-				idestrangeiro: null,
-				razaosocial: remetente.razao,
+				idEstrangeiro: null,
+				razaoSocial: remetente.nome,
 				endereco: remetente.endereco,
-				indicadoriedestinatario: {
+				indicadorIEDestinatario: {
 					id: 1
 				},
-				inscricaoestadual: null,
-				inscricaosuframa: null,
-				inscricaomunicipal: null,
+				inscricaoEstadual: null,
+				inscricaoSuframa: null,
+				inscricaoMunicipal: null,
 				modelAction: _action,
 				email: remetente.emails[0].email
 			}
@@ -62,13 +63,13 @@
 				} else if (remetente.documentos[x].documentoTypeEnumValue == 2) {
 					oDestinatario.cpf = remetente.documentos[x].numero;
 				} else if (remetente.documentos[x].documentoTypeEnumValue == 15) {
-					oDestinatario.idestrangeiro = remetente.documentos[x].numero;
+					oDestinatario.idEstrangeiro = remetente.documentos[x].numero;
 				} else if (remetente.documentos[x].documentoTypeEnumValue == 10) {
-					oDestinatario.inscricaoestadual = remetente.documentos[x].numero;
+					oDestinatario.inscricaoEstadual = remetente.documentos[x].numero;
 				} else if (remetente.documentos[x].documentoTypeEnumValue == 11) {
-					oDestinatario.inscricaosuframa = remetente.documentos[x].numero;
+					oDestinatario.inscricaoSuframa = remetente.documentos[x].numero;
 				} else if (remetente.documentos[x].documentoTypeEnumValue == 3) {
-					oDestinatario.inscricaomunicipal = remetente.documentos[x].numero;
+					oDestinatario.inscricaoMunicipal = remetente.documentos[x].numero;
 				}
 			}
 
@@ -94,12 +95,48 @@
 				}
 			}
 			var oItens = [];
-			var oIten = {
-				produto: null,
-				valorunitario: null,
-				valortotalbruto: null,
-				quantidade: null
-			}
+            var oIten = {
+                id : null,
+                numeroItem : 0,
+                produto :  {
+                        id  : null,
+                        codigo:  null,
+                        codigoDeBarras:  null,
+                        descricao:  null,
+                        ncm:  null,
+                        nomeclaturaValorAduaneiroEstatistica:  null,
+                        codigoEspecificadorSituacaoTributaria:  null,
+                        extipi :  null,
+                        cfop :  null,
+                        unidadeComercial :  null,
+                        quantidadeComercial :  null,
+                        valorUnitario :  null,
+                        valorTotalBruto :  null,
+                        codigoDeBarrasTributavel :  null,
+                        unidadeTributavel :  null,
+                        quantidadeTributavel :  null,
+                        valorUnitarioTributavel :  null,
+                        valorFrete :  null,
+                        valorSeguro :  null,
+                        valorDesconto :  null,
+                        valorOutrasDespesasAcessorias :  null,
+                        compoeValorNota :  null,
+                        declaracoesImportacao :  null,
+                        detalhesExportacao :  null,
+                        numeroPedidoCliente :  null,
+                        numeroPedidoItemCliente :  null,
+                        numeroControleFCI :  null,
+                        veiculo :  null,
+                        medicamentos :  null,
+                        armamentos :  null,
+                        combustivel :  null,
+                        numeroRECOPI :  null
+                    },
+
+                imposto : null,
+                impostoDevolvido : null,
+                informacoesAdicionais : null
+            }
 
 
 			var oDuplicatas = [];
@@ -123,12 +160,52 @@
 
 
 			for (var x = 0; x < produtos.length; x++) {
+                oIten = {};
+                oIten.numeroItem = x,
+                oIten.produto =  {
+                        id  : null,
+                        codigo:  produtos[x].produto.codigo,
+                        codigoDeBarras:  produtos[x].produto.prodId.cdBarras,
+                        descricao:  produtos[x].produto.prodId.produto,
+                        ncm:  produtos[x].produto.prodId.ncm ? produtos[x].produto.prodId.ncm : "1111111",
+                        nomeclaturaValorAduaneiroEstatistica:  null,
+                        codigoEspecificadorSituacaoTributaria:  null,
+                        extipi :  produtos[x].produto.prodId.excTabIPI,
+                        cfop :  produtos[x].tributacao ? produtos[x].tributacao.cfop : "5400",
+                        unidadeComercial :  produtos[x].produto.prodId.uniMed ? produtos[x].produto.prodId.uniMed.sigla : "UN",
+                        quantidadeComercial :  produtos[x].produto.quantidade,
+                        valorUnitario :  produtos[x].produto.precoList[0].valor,
+                        valorTotalBruto :  (produtos[x].produto.quantidade * produtos[x].produto.precoList[0].valor),
+                        codigoDeBarrasTributavel :  null,
+                        unidadeTributavel :  produtos[x].produto.prodId.uniMed ? produtos[x].produto.prodId.uniMed.sigla : "UN",
+                        quantidadeTributavel :  produtos[x].produto.quantidade,
+                        valorUnitarioTributavel :   produtos[x].produto.precoList[0].valor,
+                        valorFrete :  0,
+                        valorSeguro :  0,
+                        valorDesconto :  produtos[x].produto.desconto,
+                        valorOutrasDespesasAcessorias :  0,
+                        compoeValorNota :  null,
+                        declaracoesImportacao :  null,
+                        detalhesExportacao :  null,
+                        numeroPedidoCliente :  null,
+                        numeroPedidoItemCliente :  null,
+                        numeroControleFCI :  null,
+                        veiculo :  null,
+                        medicamentos :  null,
+                        armamentos :  null,
+                        combustivel :  null,
+                        numeroRECOPI :  null,
+                        modelAction: 'INSERT',
+                        createUser: "System",
+                        createDateUTC: (new Date()).getTime(),
+                        modifyUser: "System",
+                        modifyDateUTC: (new Date()).getTime()
+                    },
 
-				oIten.produto = qat.model.fnProduto(produtos[x].produto, 'INSERT', 'system');
-				oIten.valortotalbruto = (produtos[x].produto.quantidade * produtos[x].produto.precoList[0].valor),
-					oIten.valorunitario = produtos[x].produto.precoList[0].valor,
-					oIten.valordesconto = 0,
-					oIten.quantidade = produtos[x].produto.quantidade;
+                oIten.imposto = null,
+                oIten.impostoDevolvido = null,
+                oIten.informacoesAdicionais = null
+
 				oItens.push(fModels.amont(oIten, 'INSERT'));
 			}
 
@@ -149,37 +226,36 @@
 				balsa: null
 			}
 
-
 			var oIcmstotal = {
 				id: null,
-				basecalculoicms: notaFiscal.vrtotal,
-				valortotalicms: null,
-				valoricmsdesonerado: null,
-				valoricmsfundocombatepobreza: null,
-				valoricmspartilhadestinatario: null,
-				valoricmspartilharementente: null,
-				basecalculoicmsst: null,
-				valortotalicmsst: null,
-				valortotaldosprodutosservicos: null,
-				valortotalfrete: notaFiscal.frete.vrFrete,
-				valortotalseguro: null,
-				valortotaldesconto: notaFiscal.vrDesconto,
-				valortotalii: null,
-				valortotalipi: null,
-				valorpis: null,
-				valorcofins: null,
-				outrasdespesasacessorias: null,
-				valortotalnfe: notaFiscal.vrtotal,
+				baseCalculoICMS: notaFiscal.vrtotal,
+				valorTotalICMS: null,
+				valorICMSDesonerado: null,
+				valorICMSFundoCombatePobreza: null,
+				valorICMSPartilhaDestinatario: null,
+				valorICMSPartilhaRementente: null,
+				baseCalculoICMSST: null,
+				valorTotalICMSST: null,
+				valorTotalDosProdutosServicos: null,
+				valorTotalFrete: notaFiscal.frete.vrFrete,
+				valorTotalSeguro: null,
+				valorTotalDesconto: notaFiscal.vrDesconto,
+				valorTotalII: null,
+				valorTotalIPI: null,
+				valorPIS: null,
+				valorCOFINS: null,
+				outrasDespesasAcessorias: null,
+				valorTotalNFe: notaFiscal.vrtotal,
 				modelAction: _action,
-				valortotaltributos: null
+				valorTotalTributos: null
 
 			}
 
 			var oTotal = {
 				id: null,
-				icmstotal: fModels.amont(qat.model.fnNFNotaInfoICMSTotal(oIcmstotal, _action), _action),
-				issqntotal: null,
-				retencoestributos: null,
+				icmsTotal: fModels.amont(qat.model.fnNFNotaInfoICMSTotal(oIcmstotal, _action), _action),
+				issqnTotal: null,
+				retencoesTributos: null,
 				modelAction: _action
 			}
 
@@ -187,50 +263,48 @@
 			var oNFNotaInfoIdentificacao = {
 				id: null,
 				uf: emitente.enderecos[0].cidade ? emitente.enderecos[0].cidade.estado : "MG",
-				codigorandomico: 555,
-				naturezaoperacao: '5011', //emitente.configuracao.confNFe.cfopPadrao.cfop,
-				formapagamento: notaFiscal.formaPg,
+				codigoRandomico: 555,
+				naturezaOperacao: '5011', //emitente.configuracao.confNFe.cfopPadrao.cfop,
+				formaPagamento: notaFiscal.formapg,
 				modelo: {
 					id: 1
 				}, //emitente.configuracao.confNFe.modelo.value,
 				serie: {
 					id: 1
 				}, //emitente.configuracao.confNFe.serieEnvio,
-				numeronota: null,
-				datahoraemissao: null,
-				datahorasaidaouentrada: null,
+				numeroNota: null,
+				dataHoraEmissao: null,
+				dataHoraSaidaOuEntrada: null,
 				tipo: {
 					id: 5
 				},
-				identificadorlocaldestinooperacao: {
+				identificadorLocalDestinoOperacao: {
 					value: 1
 				},
-				codigomunicipio: emitente.enderecos[0].cidade ? emitente.enderecos[0].cidade.codIbge : "",
-				tipoimpressao: {
+				codigoMunicipio: emitente.enderecos[0].cidade ? emitente.enderecos[0].cidade.codIbge : "",
+				tipoImpressao: {
 					value: 1
 				},
-				tipoemissao: {
+				tipoEmissao: {
 					value: 1
 				},
-				digitoverificador: 0,
+				digitoVerificador: 0,
 				ambiente: emitente.configuracao.confNFe.ambienteEnvio,
 				finalidade: {
 					value: 1
 				},
-				operacaoconsumidorfinal: {
+				operacaoConsumidorFinal: {
 					value: 1
 				},
-				indicadorpresencacomprador: {
+				indicadorPresencaComprador: {
 					value: 1
 				},
-				programaemissor: {
+				programaEmissor: {
 					value: 1
 				},
-				versaoemissor: {
-					value: 1
-				},
-				datahoracontigencia: null,
-				justificativaentradacontingencia: null,
+				versaoEmissor: "3.10",
+				dataHoraContigencia: null,
+				justificativaEntradaContingencia: null,
 				referenciadas: null,
 				modelAction: _action
 			}

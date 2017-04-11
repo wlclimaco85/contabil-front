@@ -248,44 +248,44 @@
 			                return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
 			            }).withOption('width', '10px'),
 			            DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
-			            DTColumnBuilder.newColumn(null).withTitle('Destinatario').renderWith(function(data, type, full, meta) {
+			            DTColumnBuilder.newColumn(null).withTitle('Cliente').renderWith(function(data, type, full, meta) {
 			            	var sline = "";
+			           // 	debugger
 			            	if((data.info != undefined)&&(data.info != null))
 			            	{
 			            		if((data.info.destinatario != undefined)&&(data.info.destinatario != null))
 			            		{
 			            			if((data.info.destinatario.cpf != undefined)&&(data.info.destinatario.cpf != null))
 			            			{
-			            				sline = '<p>' + data.info.destinatario.cpf + ' <br> ' +data.info.destinatario.nomeFantasia + '</p>'
+			            				sline = '<p>' + data.info.destinatario.cpf + ' <br> ' +data.info.destinatario.razaosocial + '</p>'
 			            			}
 			            			else if((data.info.destinatario.cnpj != undefined)&&(data.info.destinatario.cnpj != null))
 			            			{
-			            				sline = '<p>' + data.info.destinatario.cnpj + ' <br> ' +data.info.destinatario.razaoSocial + '</p>'
-			            			}
-			            			else
-			            			{
-			            				if(data.info.destinatario.nomeFantasia != undefined)
-			            				{
-			            					sline = '<p>' + data.info.destinatario.nomeFantasia + '</p>';
-			            				}
-			            				else
-			            				{
-			            					sline = '<p>' + data.info.destinatario.razaoSocial + '</p>';
-			            				}
+			            				sline = '<p>' + data.info.destinatario.cnpj + ' <br> ' +data.info.destinatario.razaosocial + '</p>'
 			            			}
 			            		}
 			            	}
 			                return sline;
 			            }).withOption('width', '100px'),
+			            DTColumnBuilder.newColumn(null).withTitle('Vendedor').renderWith(function(data, type, full, meta) {
+			            	var sline = "";
+			            //	debugger
+			            	if((data.createUser != undefined)&&(data.createUser != null))
+			            	{
+			            		sline = '<p>' + data.createUser + '</p>';
+			            	}
+			                return sline;
+			            }).withOption('width', '100px'),
 			            DTColumnBuilder.newColumn(null).withTitle('Forma de Pagamento').renderWith(function(data, type, full, meta) {
 			            	var sline = "";
+			            //	debugger
 			            	if((data.info != undefined)&&(data.info != null))
 			            	{
 			            		if((data.info.identificacao != undefined)&&(data.info.identificacao != null))
 			            		{
 			            			if((data.info.identificacao.formaPagamento != undefined)&&(data.info.identificacao.formaPagamento != null))
 				            		{
-				            			sline = '<p>'+ data.info.identificacao.formaPagamento.descricao +' - '+data.info.identificacao.formaPagamento.parcelamentoMax+' - '+data.info.identificacao.formaPagamento.parcelamentoSemJuros+'</p>'
+				            			sline = '<p>'+ data.info.identificacao.formaPagamento.descricao +'</p>'
 				            		}
 			            		}
 			            	}
@@ -313,16 +313,16 @@
 			            		{
 			            			if((data.info.total.icmstotal != undefined)&&(data.info.total.icmstotal != null))
 				            		{
-				            			if((data.info.total.icmstotal.valortotalfrete != undefined)&&(data.info.total.icmstotal.valortotalfrete != null))
+				            			if((data.info.total.icmstotal.valorTotalFrete != undefined)&&(data.info.total.icmstotal.valorTotalFrete != null))
 					            		{
-					            			sline = '<p> R$' +data.info.total.valortotalfrete+'</p>'
+					            			sline = '<p> R$' +data.info.total.icmstotal.valorTotalFrete+'</p>'
 					            		}
 
 				            		}
 			            		}
 			            	}
 			            	return sline;
-			            }).withOption('width', '100px').notVisible(),
+			            }).withOption('width', '100px'),
 			            DTColumnBuilder.newColumn(null).withTitle('Valor Desconto').renderWith(function(data, type, full, meta) {
 			                var sline = "0";
 			            	if((data.info != undefined)&&(data.info != null))
@@ -331,9 +331,9 @@
 			            		{
 			            			if((data.info.total.icmstotal != undefined)&&(data.info.total.icmstotal != null))
 				            		{
-				            			if((data.info.total.icmstotal.valortotaldesconto != undefined)&&(data.info.total.icmstotal.valortotaldesconto != null))
+				            			if((data.info.total.icmstotal.valorTotalDesconto != undefined)&&(data.info.total.icmstotal.valorTotalDesconto != null))
 					            		{
-					            			sline = '<p> R$' +data.info.total.valortotaldesconto+'</p>'
+					            			sline = '<p> R$' +data.info.total.icmstotal.valorTotalDesconto+'</p>'
 					            		}
 
 				            		}
@@ -342,16 +342,16 @@
 			            	return sline;
 			            }).withOption('width', '100px').notVisible(),
 			            DTColumnBuilder.newColumn(null).withTitle('Valor Total').renderWith(function(data, type, full, meta) {
-			                var sline = "0";
+			                var sline = "0";debugger
 			            	if((data.info != undefined)&&(data.info != null))
 			            	{
 			            		if((data.info.total != undefined)&&(data.info.total != null))
 			            		{
 			            			if((data.info.total.icmstotal != undefined)&&(data.info.total.icmstotal != null))
 				            		{
-				            			if((data.info.total.icmstotal.valortotalnfe != undefined)&&(data.info.total.icmstotal.valortotalnfe != null))
+				            			if((data.info.total.icmstotal.valorTotalNFe != undefined)&&(data.info.total.icmstotal.valorTotalNFe != null))
 					            		{
-					            			sline = '<p> R$'+ data.info.total.valortotalnfe+'</p>'
+					            			sline = '<p> R$'+ data.info.total.icmstotal.valorTotalNFe+'</p>'
 					            		}
 
 				            		}
@@ -359,7 +359,7 @@
 			            	}
 			            	return sline;
 
-			            }).withOption('width', '100px').notVisible(),
+			            }).withOption('width', '100px'),
 			            DTColumnBuilder.newColumn(null).withTitle('Produto').renderWith(function(data, type, full, meta) {
 			                var sline = "";
 			            	if((data.info != undefined)&&(data.info != null))
@@ -370,19 +370,13 @@
 			            			{
 				            			if((data.info.itens[x].produto != undefined)&&(data.info.itens[x].produto != null))
 					            		{
-					            			if((data.info.itens[x].produto.prodId != undefined)&&(data.info.itens[x].produto.prodId != null))
-						            		{
-						            			if((data.info.itens[x].produto.prodId.produto != undefined)&&(data.info.itens[x].produto.prodId.produto != null))
-							            		{
-							            			sline = sline + '<p>' +data.info.itens[x].produto.prodId.produto +' '+data.info.itens[x].produto.prodId.ncm+'</p> <br>'
-							            		}
-						            		}
+					            			sline = '<p> '+ data.info.itens[x].produto.codigo + ' ' +data.info.itens[x].produto.descricao+ '<br> Qnt '+ data.info.itens[x].produto.quantidadeComercial+' Vr Total  R$'+ data.info.itens[x].produto.valorTotalBruto+'</p>'
 					            		}
 					            	}
 			            		}
 			            	}
 			            	return sline;
-			            }).withOption('width', '100px').notVisible(),
+			            }).withOption('width', '200px'),
 			            DTColumnBuilder.newColumn(null).withTitle('Endereco Entrega').renderWith(function(data, type, full, meta) {
 			                var sline = "0";
 			            	if((data.info != undefined)&&(data.info != null))

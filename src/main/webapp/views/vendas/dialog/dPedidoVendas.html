@@ -1,12 +1,12 @@
 <div class="modal fade">
 	<div class="modal-dialog" style="width : 80%">
 		<div class="modal-content">
+		<form name="signupFrm" novalidate="novalidate">
 			<div class="modal-header">
 				<button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<h4 class="modal-title">Cadastro Pedido Venda</h4>
 			</div>
 			<div class="modal-body">
-				<form  class="pdVendasForm">
 					<div class="panel panel-default" style="background:#EEEEEE">
 						<div class="panel-body">
 							<div class="col-sm-12">
@@ -23,13 +23,13 @@
 										minlength="1"
 										hover="popovers"
 										input-class="form-control form-control-small"
-										match-class="highlight"></div>
+										match-class="highlight" required></div>
 								</div>
 								<div class="col-sm-3">
 									<div class="form-group">
 										<label for="exampleInputPassword1">Data Emissão</label>
 										<div class="input-group">
-											<input type="text" class="form-control"
+											<input type="text" class="form-control" required
 												ng-model="notaFiscalSaida.dataEmissao" is-open="popup1.opened"
 												datepicker-options="dateOptions" ng-required="true"
 												close-text="Close" uib-datepicker-popup="{{format}}" /> <span
@@ -45,7 +45,7 @@
 									<label for="exampleInputPassword1">Consumidor Final</label>
 									<div class="row">
 										<toggle ng-model="titulo.pagarAgora"
-											ng-init="titulo.pagarAgora = false" style="android" on="Sim"
+											ng-init="titulo.pagarAgora = false" style="android" on="Sim" required
 											off="Não" onstyle="btn-success" offstyle="btn-danger"
 											ng-true-value="'2'" ng-false-value="'1'"></toggle>
 									</div>
@@ -77,7 +77,7 @@
 														</select>
 													</div>
 													<div class="col-sm-8" style="margin-left: 2%">
-														<ui-select ng-model="produto.produto" theme="bootstrap" on-select="ctrl.onSelectCallback($item, $model)">
+														<ui-select ng-model="produto.produto" theme="bootstrap" required on-select="ctrl.onSelectCallback($item, $model)">
 															<ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.prodId.produto}}</ui-select-match>
 															<ui-select-choices repeat="item in ctrl.produto | filter: $select.search">
 																<div ng-bind-html="item.prodId.produto | highlight: $select.search"></div>
@@ -266,12 +266,13 @@
 							</div>
 						</div>
 					</div>
-				</form>
+
 			</div>
 			<div class="modal-footer">
 				<button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 				<button type="submit"  ng-click="savePedidoVenda()" class="btn btn-primary">Gravar</button>
 			</div>
+			</form>
 		</div>
 	</div>
 </div>
