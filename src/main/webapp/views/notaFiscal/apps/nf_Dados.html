@@ -1,4 +1,6 @@
-
+<div class="panel panel-default" style="background:#EEEEEE">
+                        <div class="panel-body">
+                            <div class="col-sm-12">
     <div id="dadosBasicos" class="bottomSpace">
         <div class="row">
             <div class="col-sm-2 ">
@@ -99,6 +101,13 @@
                 </div>
             </div>
         </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="panel panel-default" style="background:#EEEEEE">
+                        <div class="panel-body">
+                            <div class="col-sm-12">
         <div class="row">
             <div ng-if="empresa.configuracao.confNFe != null">
                     <div class="col-sm-2 ">
@@ -118,7 +127,7 @@
                     <div class="col-sm-2 ">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Série nota:</label>
-                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.serie = empresa.configuracao.confNFe.serieEnvio">{{empresa.configuracao.confNFe.serieEnvio.value}}</label>
+                            <label for="exampleInputPassword1" name="nome" ng-init="notaFiscal.info.identificacao.serie = empresa.configuracao.confNFe.serieEnvio">{{empresa.configuracao.confNFe.serieEnvio.value}}</label>
 
                         </div>
                     </div>
@@ -133,26 +142,31 @@
                     <div class="col-sm-2 ">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Tipo Impressão:</label>
-                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.serie = empresa.configuracao.confNFe.serieEnvio">{{empresa.configuracao.confNFe.serieEnvio.value}}</label>
+                            <label for="exampleInputPassword1" name="email" ng-init="notaFiscal.info.identificacao.serie = empresa.configuracao.confNFe.serieEnvio">{{empresa.configuracao.confNFe.serieEnvio.value}}</label>
 
                         </div>
                     </div>
                     <div class="col-sm-2 ">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Tipo Emissão:</label>
-                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.serie = empresa.configuracao.confNFe.serieEnvio">{{empresa.configuracao.confNFe.serieEnvio.value}}</label>
+                            <label for="exampleInputPassword1" name="texto" ng-init="notaFiscal.info.identificacao.serie = empresa.configuracao.confNFe.serieEnvio">{{empresa.configuracao.confNFe.serieEnvio.value}}</label>
 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
+        </div>
 <nr>
+<div class="panel panel-default" style="background:#EEEEEE">
+                        <div class="panel-body">
+                            <div class="col-sm-12">
     <div class="row">
             <div class="col-sm-2 ">
                 <div class="form-group">
                     <label for="exampleInputPassword1">Número da NFe:</label>
-                    <input type="text" class="form-control " ng-model="notaFiscal.info.identificacao.numeronota" name="valorTribCOFINS"  placeholder="">
+                    <input type="text" id="nfnumber" class="form-control " ng-model="notaFiscal.info.identificacao.numeronota" name="valorTribCOFINS"  placeholder="">
                 </div>
             </div>
             <div class="ng-cloak" ng-controller="CfopSelectController as ctrl">
@@ -173,7 +187,12 @@
             </div>
             <div class="col-sm-3 ">
                 <div class="form-group">
-                    <label for="BindFinal"><input type="checkbox" ng-model="notaFiscal.info.identificacao.operacaoconsumidorfinal" id="BindFinal" class="destDados ui-widget-content ui-corner-all" name="BindFinal" autocomplete="off" value="1"> <span>Destinado a consumidor final</span></label>
+                    <label for="BindFinal"><span>Destinado a consumidor final</span></label>
+                <toggle ng-model="notaFiscal.info.identificacao.operacaoconsumidorfinal"
+                                                ng-init="financeiro.pagarAgora = '2'" style="android" on="Sim"
+                                                off="Não" onstyle="btn-default" offstyle="btn-info"
+                                                ng-true-value="'2'" ng-false-value="'1'"></toggle>
+
                 </div>
             </div>
             <div class="col-sm-3">
@@ -223,9 +242,17 @@
                 </div>
             </div>
             <div class="col-sm-4 ">
-                <div class="form-group">
-                    <label for="BindFinal"><input ng-model="notaFiscal.nfReferenciada" type="checkbox" ng-true-value="1" ng-false-value="2" id="BindFinal" class="destDados ui-widget-content ui-corner-all" name="BindFinal" autocomplete="off" value="1"> <span>Possui NF referenciada</span></label>
+                                <div class="form-group">
+                    <label for="BindFinal"><span>Possui NF referenciada</span></label>
+                    <div class="row">
+                <toggle ng-model="notaFiscal.nfReferenciada"
+                                                ng-init="financeiro.pagarAgora = '1'" style="android" on="Sim"
+                                                off="Não" onstyle="btn-default" offstyle="btn-info"
+                                                ng-true-value="'2'" ng-false-value="'1'"></toggle>
+
                 </div>
+                 </div>
+
             </div>
         </div>
         <div ng-if="notaFiscal.nfReferenciada == 1">
@@ -370,6 +397,12 @@
                     </div>
                 </div>
         </div>
+        </div>
+        </div>
+        </div>
+        <div class="panel panel-default" style="background:#EEEEEE">
+                        <div class="panel-body">
+                            <div class="col-sm-12">
         <div class="row">
 
         </div>
@@ -379,9 +412,9 @@
                 <div class="form-group">
                     <label for="exampleInputPassword1">Data emissão NF /Hora Emissao</label>
                 <div class="input-group">
-                  <input type="text" class="form-control" ng-model="notaFiscal.info.identificacao.datahoraemissao1" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"   uib-datepicker-popup="{{format}}"/>
+                  <input type="text" class="form-control" ng-model="notaFiscal.info.identificacao.datahoraemissao1" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"   uib-datepicker-popup="{{format}}"/>
                   <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
                   </span>
                 </div>
                 </div>
@@ -454,8 +487,13 @@
             </div>
 
         </div>
+</div>
+</div>
+</div>
 
-
+<div class="panel panel-default" style="background:#EEEEEE">
+                        <div class="panel-body">
+                            <div class="col-sm-12">
     <div id="quadroReferenciadas" class="invisible bottomSpace NFCeHide" style="display: none;">
         <h2>Dados da Nota Fiscal referenciada</h2>
         <div class="alerta">Esta informação será automaticamente impressa nas Informações Complementares, no DANFE.</div>
@@ -492,4 +530,8 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+
+    </div>
+    </div>
     </div>

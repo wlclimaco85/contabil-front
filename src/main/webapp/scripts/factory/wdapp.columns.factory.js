@@ -250,7 +250,7 @@
 			            DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
 			            DTColumnBuilder.newColumn(null).withTitle('Cliente').renderWith(function(data, type, full, meta) {
 			            	var sline = "";
-			           // 	debugger
+
 			            	if((data.info != undefined)&&(data.info != null))
 			            	{
 			            		if((data.info.destinatario != undefined)&&(data.info.destinatario != null))
@@ -269,7 +269,7 @@
 			            }).withOption('width', '100px'),
 			            DTColumnBuilder.newColumn(null).withTitle('Vendedor').renderWith(function(data, type, full, meta) {
 			            	var sline = "";
-			            //	debugger
+
 			            	if((data.createUser != undefined)&&(data.createUser != null))
 			            	{
 			            		sline = '<p>' + data.createUser + '</p>';
@@ -278,7 +278,7 @@
 			            }).withOption('width', '100px'),
 			            DTColumnBuilder.newColumn(null).withTitle('Forma de Pagamento').renderWith(function(data, type, full, meta) {
 			            	var sline = "";
-			            //	debugger
+
 			            	if((data.info != undefined)&&(data.info != null))
 			            	{
 			            		if((data.info.identificacao != undefined)&&(data.info.identificacao != null))
@@ -342,7 +342,7 @@
 			            	return sline;
 			            }).withOption('width', '100px').notVisible(),
 			            DTColumnBuilder.newColumn(null).withTitle('Valor Total').renderWith(function(data, type, full, meta) {
-			                var sline = "0";debugger
+			                var sline = "0";
 			            	if((data.info != undefined)&&(data.info != null))
 			            	{
 			            		if((data.info.total != undefined)&&(data.info.total != null))
@@ -759,7 +759,7 @@
 
 			            }).withOption('width', '10px'),
 			            DTColumnBuilder.newColumn(null).withTitle('Icms').renderWith(function(data, type, full, meta) {
-			            	//debugger
+
 			            	var sline = "0";
 			            	if(data.imposto != undefined)
 							{
@@ -810,7 +810,7 @@
 			            	return sline;
 			            }).withOption('width', '10px'),
 			            DTColumnBuilder.newColumn(null).withTitle('IPI').renderWith(function(data, type, full, meta) {
-			            	//debugger
+
 			            	var retorno = '<table class="table"><thead></thead><tbody>';
 			            	if(data.imposto != undefined)
 							{
@@ -845,7 +845,7 @@
 			            	return retorno + '</tbody></table>';
 			            }).withOption('width', '10px'),
 			            DTColumnBuilder.newColumn(null).withTitle('PIS').renderWith(function(data, type, full, meta) {
-			            	//debugger
+
 			            	var retorno = '<table class="table"><thead></thead><tbody>';
 			            	if(data.imposto != undefined)
 							{
@@ -909,7 +909,7 @@
 			            	return retorno + '</tbody></table>';
 			            }).withOption('width', '10px'),
 			            DTColumnBuilder.newColumn(null).withTitle('COFINS').renderWith(function(data, type, full, meta) {
-			            	//debugger
+
 			            	var retorno = '<table class="table"><thead></thead><tbody>';
 			            	if(data.imposto != undefined)
 							{
@@ -973,7 +973,7 @@
 			            	return retorno + '</tbody></table>';
 			            }).withOption('width', '10px'),
 			            DTColumnBuilder.newColumn(null).withTitle('Imposto Importação').renderWith(function(data, type, full, meta) {
-			            	//debugger
+
 			            	var retorno = '<table class="table"><thead></thead><tbody>';
 			            	if(data.imposto != undefined)
 							{
@@ -990,7 +990,7 @@
 			            	return retorno + '</tbody></table>';
 			            }).withOption('width', '10px'),
 			            DTColumnBuilder.newColumn(null).withTitle('IPI Devolvido').renderWith(function(data, type, full, meta) {
-			            	//debugger
+
 			            	var retorno = '<table class="table"><thead></thead><tbody>';
 			            	if(data.imposto != undefined)
 							{
@@ -1006,7 +1006,7 @@
 			            	return retorno + '</tbody></table>';
 			            }).withOption('width', '10px').notVisible(),
 			            DTColumnBuilder.newColumn(null).withTitle('ICMS Ope. Interestaduais').renderWith(function(data, type, full, meta) {
-			            	//debugger
+
 			            	var retorno = '<table class="table"><thead></thead><tbody>';
 			            	if(data.imposto != undefined)
 							{

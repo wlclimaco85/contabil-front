@@ -1,11 +1,14 @@
-<h2>Totalizadores <span class="descr">(estes valores nÃ£o podem ser alterados manualmente)</span></h2>
+<div class="panel panel-default" style="background:#EEEEEE">
+                        <div class="panel-body">
+                            <div class="col-sm-12">
+<h2>Totalizadores <span class="descr">(estes valores não podem ser alterados manualmente)</span></h2>
 <div class="row">
     <div class="col-sm-3">
         <div class="form-group">
             <label for="exampleInputPassword1">Total BC ICMS</label>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.baseCalculoICMS" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-addon">,00</span>
             </div>
         </div>
@@ -15,7 +18,7 @@
             <label for="exampleInputPassword1">Total ICMS</label>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.valorTotalICMS" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-addon">,00</span>
             </div>
         </div>
@@ -25,7 +28,7 @@
             <label for="exampleInputPassword1">Total BC ICMS ST</label>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.baseCalculoICMSST"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-addon">,00</span>
             </div>
         </div>
@@ -35,7 +38,7 @@
             <label for="exampleInputPassword1">Total ICMS ST</label>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.valorTotalICMSST"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-addon">,00</span>
             </div>
         </div>
@@ -47,7 +50,7 @@
             <label for="exampleInputPassword1">Total bruto dos produtos</label>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.valorTotalDosProdutosServicos"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-addon">,00</span>
             </div>
         </div>
@@ -59,7 +62,7 @@
             <label for="exampleInputPassword1">Total ICMS desonerado</label>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.valorICMSDesonerado"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-addon">,00</span>
             </div>
         </div>
@@ -69,7 +72,7 @@
             <label for="exampleInputPassword1">Total de frete</label>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.valorTotalFrete"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-addon">,00</span>
             </div>
         </div>
@@ -79,7 +82,7 @@
             <label for="exampleInputPassword1">Total de seguro</label>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.valorTotalSeguro"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-addon">,00</span>
             </div>
         </div>
@@ -91,7 +94,7 @@
             <label for="exampleInputPassword1">Total de desconto</label>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.valorTotalDesconto"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-addon">,00</span>
             </div>
         </div>
@@ -101,7 +104,7 @@
             <label for="exampleInputPassword1">Total de IPI</label>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.valorTotalIPI"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-addon">,00</span>
             </div>
         </div>
@@ -113,7 +116,7 @@
             <label for="exampleInputPassword1">Total de PIS</label>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.valorPIS"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-addon">,00</span>
             </div>
         </div>
@@ -123,7 +126,7 @@
             <label for="exampleInputPassword1">Total de PIS ST</label>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.valorPIS"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-addon">,00</span>
             </div>
         </div>
@@ -135,7 +138,7 @@
             <label for="exampleInputPassword1">Total de COFINS</label>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.valorCOFINS"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-addon">,00</span>
             </div>
         </div>
@@ -145,7 +148,7 @@
             <label for="exampleInputPassword1">Total de COFINS ST</label>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.valorCOFINS"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-addon">,00</span>
             </div>
         </div>
@@ -155,7 +158,7 @@
             <label for="exampleInputPassword1">Total de II</label>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.valorTotalII"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-addon">,00</span>
             </div>
         </div>
@@ -168,7 +171,7 @@
             <label for="exampleInputPassword1">Total do FCP</label>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.valorICMSFundoCombatePobreza"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-addon">,00</span>
             </div>
         </div>
@@ -179,7 +182,7 @@
             <label for="exampleInputPassword1">ICMS UF remet. </label>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.valorICMSPartilhaRementente"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-addon">,00</span>
             </div>
         </div>
@@ -189,7 +192,7 @@
             <label for="exampleInputPassword1">ICMS UF destino</label>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.valorICMSPartilhaDestinatario"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-addon">,00</span>
             </div>
         </div>
@@ -201,35 +204,60 @@
             <label for="exampleInputPassword1">Total Outras Despesas</label>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.outrasDespesasAcessorias"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-addon">,00</span>
             </div>
         </div>
     </div>
-    
+
+    <div class="col-sm-4">
+        <div class="form-group">
+            <label for="exampleInputPassword1">TOTAL DA Tributos</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.valorTotalTributos"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-addon">,00</span>
+            </div>
+        </div>
+    </div>
+
     <div class="col-sm-4">
         <div class="form-group">
             <label for="exampleInputPassword1">TOTAL DA NF</label>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control cota-socio" name="book[0].desconto" ng-model="notaFiscal.total.icmstotal.valorTotalNFe"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-addon">,00</span>
             </div>
         </div>
     </div>
 </div>
-
-<div id="meuRetencoes_rcpt"><label for="meuRetencoes"><input type="checkbox" id="meuRetencoes" class="undefined ui-widget-content ui-corner-all" name="meuRetencoes" autocomplete="off" value="1"> 
-    <span>Informar retenÃ§Ãµes de impostos</span></label>
-
-    <h2>RetenÃ§Ãµes de impostos</h2>
+</div>
+</div>
+<div class="row"></div>
+<div class="panel panel-default" style="background:#EEEEEE">
+                        <div class="panel-body">
+                            <div class="col-sm-12">
+<div id="meuRetencoes_rcpt">
+<div class="row">
+<div class="form-group col-sm-4">
+<label for="meuRetencoes">Informar retenções de impostos</label>
+                                        <div class="row">
+                                            <toggle ng-model="infoRetencao"
+                                                ng-init="financeiro.pagarAgora = false" style="android" on="Não"
+                                                off="Sim" onstyle="btn-default" offstyle="btn-info"
+                                                ng-true-value="'2'" ng-false-value="'1'"></toggle>
+                                        </div>
+                                    </div>
+</div>
+    <h2>Retenções de impostos</h2>
     <div class="row">
         <div class="col-sm-3">
             <div class="form-group">
                 <label for="exampleInputPassword1">Valor retido PIS</label>
                 <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto"  ng-model="notaFiscal.total.retencoestributos.valorRetidoPIS"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                     <span class="input-group-addon">,00</span>
                 </div>
             </div>
@@ -239,7 +267,7 @@
                 <label for="exampleInputPassword1">Valor retido COFINS</label>
                 <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto"  ng-model="notaFiscal.total.retencoestributos.valorRetidoCOFINS"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                     <span class="input-group-addon">,00</span>
                 </div>
             </div>
@@ -249,7 +277,7 @@
                 <label for="exampleInputPassword1">Valor retido CSLL</label>
                 <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto"  ng-model="notaFiscal.total.retencoestributos.valorRetidoCSLL"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                     <span class="input-group-addon">,00</span>
                 </div>
             </div>
@@ -259,7 +287,7 @@
                 <label for="exampleInputPassword1">BC retido IRRF</label>
                 <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto"  ng-model="notaFiscal.total.retencoestributos.baseCalculoIRRF"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                     <span class="input-group-addon">,00</span>
                 </div>
             </div>
@@ -271,35 +299,43 @@
                 <label for="exampleInputPassword1">Valor retido IRRF</label>
                 <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto"  ng-model="notaFiscal.total.retencoestributos.valorRetidoIRRF"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                     <span class="input-group-addon">,00</span>
                 </div>
             </div>
         </div>
         <div class="col-sm-3">
             <div class="form-group">
-                <label for="exampleInputPassword1">BC retido previdÃªncia</label>
+                <label for="exampleInputPassword1">BC retido previdência</label>
                 <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto"  ng-model="notaFiscal.total.retencoestributos.baseCalculoRetencaoPrevidenciaSocial"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                     <span class="input-group-addon">,00</span>
                 </div>
             </div>
         </div>
         <div class="col-sm-3">
             <div class="form-group">
-                <label for="exampleInputPassword1">Valor retido previdÃªncia</label>
+                <label for="exampleInputPassword1">Valor retido previdência</label>
                 <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                    <input type="text" class="form-control cota-socio" name="book[0].desconto"  ng-model="notaFiscal.total.retencoestributos.valorRetencaoPrevidenciaSocial"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                     <span class="input-group-addon">,00</span>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="row"></div>
+    <div class="panel panel-default" style="background:#EEEEEE">
+                        <div class="panel-body">
+                            <div class="col-sm-12">
     <div id="quadroTribAprox" class="bottomSpace">
-        <h2>Lei da TransparÃªncia</h2>
-        <div class="descr">Esta lei mostra ao cliente a quantidade de impostos que ele estÃ¡ pagando para o governo ao adquirir a mercadoria. (<a href="ajuda: Clique para saber mais sobre a Lei da TransparÃªncia" id="link_infoTribAprox">saiba mais</a>)</div>
+        <h2>Lei da Transparência</h2>
+        <div class="descr">Esta lei mostra ao cliente a quantidade de impostos que ele está pagando para o governo ao adquirir a mercadoria. (<a href="ajuda: Clique para saber mais sobre a Lei da Transparência" id="link_infoTribAprox">saiba mais</a>)</div>
 
         <div class="row">
             <div class="col-sm-3">
@@ -307,7 +343,7 @@
                     <label for="exampleInputPassword1">Impostos federais</label>
                     <div class="input-group">
                         <span class="input-group-addon">$</span>
-                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                        <input type="text" class="form-control cota-socio" name="book[0].desconto"  ng-model="notaFiscal.total.retencoestributos."  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                         <span class="input-group-addon">,00</span>
                     </div>
                 </div>
@@ -317,7 +353,7 @@
                     <label for="exampleInputPassword1">Impostos estaduais</label>
                     <div class="input-group">
                         <span class="input-group-addon">$</span>
-                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                        <input type="text" class="form-control cota-socio" name="book[0].desconto"  ng-model="notaFiscal.total.retencoestributos.ie"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                         <span class="input-group-addon">,00</span>
                     </div>
                 </div>
@@ -327,7 +363,7 @@
                     <label for="exampleInputPassword1">Impostos municipais</label>
                     <div class="input-group">
                         <span class="input-group-addon">$</span>
-                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                        <input type="text" class="form-control cota-socio" name="book[0].desconto"  ng-model="notaFiscal.total.retencoestributos.im"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                         <span class="input-group-addon">,00</span>
                     </div>
                 </div>
@@ -337,9 +373,13 @@
                     <label for="exampleInputPassword1">Total aproximado</label>
                     <div class="input-group">
                         <span class="input-group-addon">$</span>
-                        <input type="text" class="form-control cota-socio" name="book[0].desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                        <input type="text" class="form-control cota-socio" name="book[0].desconto"  ng-model="notaFiscal.total.retencoestributos.it"  placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
                         <span class="input-group-addon">,00</span>
                     </div>
                 </div>
             </div>
+        </div>
+        </div>
+        </div>
+        </div>
         </div>

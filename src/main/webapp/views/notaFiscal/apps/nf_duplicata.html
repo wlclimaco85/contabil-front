@@ -1,3 +1,6 @@
+<div class="panel panel-default" style="background:#EEEEEE">
+                        <div class="panel-body">
+                            <div class="col-sm-12">
 <div class="row">
     <div class="ng-cloak" ng-controller="FormaPgSelectControllerss as ctrl">
         <div class="col-sm-8 ">
@@ -16,10 +19,15 @@
         </div>
     </div>
 </div>
-
+</div>
+</div>
+</div>
+<div class="panel panel-default" style="background:#EEEEEE">
+                        <div class="panel-body">
+                            <div class="col-sm-12">
 <div class="bottomSpace NFCeHide">
     <h2 class="bottomSpace">
-        Faturas e duplicatas 
+        Faturas e duplicatas
     </h2>
     <div class="row socios">
         <div class="col-sm-2">
@@ -114,3 +122,73 @@
         </div>
     </div>
 </div>
+</div>
+</div>
+</div>
+
+                    <div class="row " style="margin-top : 20px"></div>
+                    <div class="panel panel-default" style="background:#EEEEEE">
+                        <div class="panel-heading" style="background: #DDDDDD">
+                            <div class="row">
+                                <div class="col-sm-2">Parcela</div>
+                                <div class="col-sm-2">Valor</div>
+                                <div class="col-sm-2">Dt. pag.</div>
+                                <div class="col-sm-3">Forma pg.</div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-1"></div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-sm-12">
+                                <div ng-repeat="financeiro in financeiros">
+                                    <div class="col-sm-2">{{$index +1 }} / {{financeiros.length}}</div>
+                                    <div class="col-sm-2">
+                                        <div class="inputClass input-group"><span class="InputSign input-group-addon" target="vendas_finValor1"><span title="Valor monetário" class="fa fa-usd"></span></span><input type="text" ng-model="financeiro.financeiro.valor" id="vendas_finValor1" class="vendas_finValor form-control InputNum" value="" autocomplete="off" name="finValor[]" especialtype="money" data-thousands="." data-decimal="," data-precision="2"></div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control"
+                                                    ng-model="financeiro.financeiro.dataVencimento" is-open="popup2.opened"
+                                                    datepicker-options="dateOptions" ng-required="true"
+                                                    close-text="Close" uib-datepicker-popup="{{format}}" /> <span
+                                                    class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open2()">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                                </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <ui-select ng-model="financeiro.financeiro.tipoDoc" theme="bootstrap">
+                                            <ui-select-match placeholder="">{{$select.selected.descricao}}</ui-select-match>
+                                            <ui-select-choices
+                                                repeat="item in tipoDocumento | filter: $select.search">
+                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <div class="row">
+                                            <toggle ng-model="financeiro.financeiro.pagarAgora"
+                                                ng-init="financeiro.pagarAgora = false" style="android" on="A Receber"
+                                                off="Recebido" onstyle="btn-default" offstyle="btn-info"
+                                                ng-true-value="'2'" ng-false-value="'1'"></toggle>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <button type="button" ng-click="createForm3()" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer" style="background: #DDDDDD">
+                            <div class="row">
+                                <div class="col-sm-3">Total</div>
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-3">${{total}}</div>
+                            </div>
+                        </div>
+                    </div>

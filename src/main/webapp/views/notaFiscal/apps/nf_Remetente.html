@@ -3,6 +3,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-touch.min.js"></script>
 </head>
 <h2>Dados do destinatário</h2>
+<div class="panel panel-default" style="background:#EEEEEE">
+                        <div class="panel-body">
+                            <div class="col-sm-12">
 <div class="row">
 <div angucomplete-alt id="ex1"
   placeholder="Buscar Clientes"
@@ -19,14 +22,14 @@
       <div ng-if="visibled == true">
       <div style="margin-bottom: 20px"></div>
       <div class="row"> </div>
-      <div class="row">
-            <dl class="dl-horizontal">
-                <dd>
-                    <label class="ui-radio"><input name="radio5" type="radio"  ng-model="pessoa.tipoPessoa" ng-value="1"><span>Pessoa Fisica </span></label>
-                    <label class="ui-radio"><input name="radio6" type="radio" ng-model="pessoa.tipoPessoa" ng-value="2"><span>Pessoa Juridica </span></label>
-                </dd>
-            </dl>
-        </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="panel panel-default" style="background:#EEEEEE">
+                        <div class="panel-body">
+                            <div class="col-sm-12">
          <input type="text" class="form-control testes hide" ng-model="pessoa.id" name="cliente">
         <div class="row" >
             <div class="col-sm-2 ">
@@ -172,27 +175,37 @@
                 </div>
             </div>
         </div>
+        </div>
+        </div>
+        </div>
+        <div class="row"></div>
         <br>
+        <div class="panel panel-default" style="background:#EEEEEE">
+                        <div class="panel-body">
+                            <div class="col-sm-12">
         <div class="row">
           <div class="col-sm-4 ">
                 <div class="form-group">
-                    <label for="BindFinal"><input ng-model="enderecoEntrega" type="checkbox" ng-true-value="1" ng-false-value="2" id="BindFinal" class="destDados ui-widget-content ui-corner-all" name="BindFinal" autocomplete="off" value="1"> <span>Local Entrega Diferente Destinatario</span></label>
+                                    <label for="BindFinal"><span>Local Entrega Diferente Destinatario</span></label>
+                <toggle ng-model="enderecoEntrega"
+                                                ng-init="enderecoEntrega = '2'" style="android" on="Sim"
+                                                off="Não" onstyle="btn-default" offstyle="btn-info"
+                                                ng-true-value="'2'" ng-false-value="'1'"></toggle>
                 </div>
             </div>
-            <div class="col-sm-4 ">
-                <div class="form-group">
-                    <label for="BindFinal"><input ng-model="enderecoEntrega" type="checkbox" ng-true-value="1" ng-false-value="2" id="BindFinal" class="destDados ui-widget-content ui-corner-all" name="BindFinal" autocomplete="off" value="1"> <span>Local Entrega Diferente Emitente</span></label>
-                </div>
-            </div>
-            
-        </div>
 
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="panel panel-default" style="background:#EEEEEE">
+                        <div class="panel-body">
+                            <div class="col-sm-12">
         <div ng-if="enderecoEntrega == 1">
             <hr>
             <div ng-include="'views/util/apps/endereco.html'"></div>
         </div>
         <hr>
      </div>
-
-
+</div>
 </div>

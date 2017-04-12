@@ -13,6 +13,7 @@
         vm.delete = deleteRow;
         vm.dtInstance = {};
         vm.persons = {};
+        vm.dtInstancePdVendas = {};
 
         $scope.pedidoVenda = {
             tipoPessoa: 2
@@ -39,9 +40,36 @@
             json['draw'] = 1
             console.log(json)
             return json.nfnotaList;
+
+
         }
-      //  Datatablessss.getTable('/vendas/api/nfSaidas/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cliente(vm,createdRow,$scope,FiltersFactory.cliente()), tableColumnsFactory.cliente(vm,titleHtml,actionsHtml));
-        Datatablessss.getTable('/vendas/api/nfSaidas/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.nfSaida(vm,createdRow,$scope,FiltersFactory.nfSaida()), tableColumnsFactory.nfSaida(vm,titleHtml,actionsHtml));
+
+        function reloadData() {
+          var resetPaging = false;
+          vm.dtInstancePdVendas.reloadData(callback, resetPaging);
+        }
+
+        function callback(json) {
+          console.log(json);
+        }
+
+        var reloadData = function () {
+
+          var resetPaging = false;
+          vm.dtInstancePdVendas.reloadData(callback, resetPaging);
+        }
+
+        $rootScope.reloadDataSit = function (_callback) {
+
+          var resetPaging = false;
+          vm.dtInstancePdVendas.reloadData(_callback, resetPaging);
+        }
+
+        function rCallback(nRow, aData) {
+          // console.log('row');
+        }
+
+        Datatablessss.getTable('/vendas/api/nfSaidas/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.nfSaida(vm,createdRow,$scope,FiltersFactory.nfSaida(), reloadData     ), tableColumnsFactory.nfSaida(vm,titleHtml,actionsHtml));
 
         function edit(person) {
             $rootScope.pedidoVenda = person;
@@ -59,7 +87,7 @@
         }
 
         function deleteRowAll(person) {
-            debugger
+
             ModalService.showModal({
                 templateUrl: 'cfopAllDelete.html',
                 controller: "CfopController"
@@ -111,7 +139,7 @@
 
 (function() {
     angular.module('wdApp.apps.nfSaida.insert',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter','angucomplete','inputactions'])
-        .controller('NfSaidaInsertController', function(localStorageService,$rootScope,$scope,fModels,SysMgmtData,fProduto,fNotaFiscal) {
+        .controller('NfSaidaInsertController', function(localStorageService,$rootScope,$scope,fModels,SysMgmtData,fProduto,fNotaFiscal,validationFactory) {
 
             var vm = this;
             $scope.slotDisplayName = "teste00";
@@ -125,6 +153,8 @@
             $scope.produtos = [{form : 'form',produto:{}}];
 
             $scope.cliente = [];
+
+            $scope.enderecos = [];
 
             $scope.visibled = false
          //   $scope.cliente = [];
@@ -154,29 +184,24 @@
                 $scope.cliente = res.clienteList;
             });
 
-          /*  $scope.buscaRCep = function(){
-
-
-
-                $('.edit').hide();
-                 $('.toggle-ones').bootstrapToggle('toggle')
-                 $('.toggle-ones').change(function() {
-
-                    if($(this).prop('checked') == true)
-                    {
-                        $(this).parents('.teste').find('.edit').hide()
-                    }
-                    else
-                    {
-                        $(this).parents('.teste').find('.edit').show()
-                    }
-                })
-
-            }
-*/
             $scope.createForm2 = function(){
 
                 $scope.produtos.push({ nome : 'form1' + ($scope.produtos.length + 1),produto :{}});
+            };
+
+            $scope.createForm3 = function () {
+
+              $scope.financeiros.push({
+                nome: 'formFinc' + ($scope.financeiros.length + 1),
+                financeiro: {
+                  valor: 0
+                }
+              });
+
+              for (var x = 0; x < $scope.financeiros.length; x++) {
+                $scope.financeiros[x].financeiro.valor = parseFloat($scope.notaFiscal ? $scope.notaFiscal.vrtotal : 0) / (parseFloat($scope.financeiros.length));
+              }
+
             };
 
 
@@ -185,65 +210,41 @@
                 $scope.empresa = localStorageService.get('empresa');
             }
 
-            console.log($scope.empresa);
-
-
-/*
-
-        SysMgmtData.processPostPageData("main/api/request", {
-            url: 'pessoa/api/cliente/fetchPage',
-            token: $rootScope.authToken,
-            request: new qat.model.PagedInquiryRequest(10)
-        }, function(res) {
-        //    debugger
-            $scope.clientes = res.clienteList;
-        });
-
-*/
-
-            $scope.updateSlotName = function(updatedModel){
-//debugger
-           /*     var tgbMaintenanceRequest = {
-                    tgbId: vm.towerSelected,
-                    slotName: updatedModel.slotDisplayName,
-                    slotId: updatedModel.slotChannelId
-                };
-
-                $http({
-                    headers: {'Content-Type': 'application/json; charset=utf-8'},
-                    url: "bandplan/updateslotname",
-                    method: "POST",
-                    data: JSON.stringify(tgbMaintenanceRequest)
-                }).then(function(oResponse){
-
-                    submitTower($scope.filterForm);
-                });*/
-            }
-
-     //   fProduto.fnSelectProduto();
         $scope.nfSaida = {};
+
+          $scope.financeiros = [{
+        form: 'formFinc',
+        financeiro: {
+          valor: parseFloat($scope.notaFiscal ? $scope.notaFiscal.vrtotal : 0) / (1)
+        }
+      }];
 
         $scope.saveNFeNota = function() {
 
-            debugger
-            console.log($scope.notaFiscal);
 
-                var oObject = fModels.amont($scope.nfSaida,'INSERT');
-                console.log($scope.nfSaida);
-                SysMgmtData.processPostPageData("main/api/request",{
-                    url: "nfSaida/api/insert/",
-                    token: $rootScope.authToken,
-                    request: new qat.model.reqNfSaida( oObject,true, true)
-                   // {
-                      //  "cfop": oObject
-                   //   cfop : {"id":"10"}
-                   // }
-                }, function(res) {
+         /*
 
-                    console.log(res)
-                });
-               // $('#cfopForm').formValidation('resetForm', true);
-               // vm.processButtons('U',$scope.cfop);
+            $('.nfSaidaForm').formValidation({
+              framework : 'bootstrap',
+              icon : {
+                valid : 'glyphicon glyphicon-ok',
+                invalid : 'glyphicon glyphicon-remove',
+                validating : 'glyphicon glyphicon-refresh'
+              },
+              fields : {
+                '#nfnumber' : integerNotEmptyValidation,
+              }
+            }).on('success.form.fv', function(e) {
+                // Save the form data via an Ajax request
+                e.preventDefault();
+
+                debugger;
+            });
+  console.log($scope.notaFiscal); */
+
+       //     factory.fnCreateObjectNFSaida = function (_notaFiscal,_produtos,financeiros, _action) {
+            fNotaFiscal.fnCreateObjectNFSaida(localStorageService.get('empresa'),$scope.notaFiscal,$scope.produtos,$scope.financeiros,$scope.enderecos[0], 'INSERT');
+
             };
 
 

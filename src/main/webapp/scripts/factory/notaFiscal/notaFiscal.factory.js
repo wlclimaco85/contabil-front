@@ -5,6 +5,22 @@
 	commonAuth.factory('fNotaFiscal', ['$rootScope', 'fModels', 'SysMgmtData', 'toastr', function ($rootScope, fModels, SysMgmtData, toastr) {
 		var factory = {};
 
+        //function padrao(vm,createdRow,scope, filters,aButtons,sPosition,functionReload){
+        function ajaxCall (_request) {
+            var initLoad = true; //used to ensure not calling server multiple times
+            SysMgmtData.processPostPageData("main/api/request", {
+                url: "vendas/api/nfSaidas/insert",
+                token: $rootScope.authToken,
+                request: _request
+            }, function (res) {
+
+                if (res.operationSuccess == true) {
+                    initLoad = true;
+                    toastr.success('Deu Certo seu tanga.', 'Sucess');
+                }
+            });
+        }
+
 		factory.fnCreateObjectPdVendasOrcamento = function (emitente, remetente, endereco, produtos, formaPg, notaFiscal, type, _action, _tipo, financeiros) {
 
 			_action = "INSERT";
@@ -342,43 +358,259 @@
 			var oNFNote = {
 				identificadorlocal: null,
 				info: fModels.amont(qat.model.fnNFNotaInfo(oNFNotaInfo, _action), _action),
-				infosuplementar: oInfosuplementar,
+				infosuplementar: {},
 				assinatura: {
 					value: 'teste'
 				},
 				tipo: {
-					id: _tipo
+					id: 1003
 				},
 				modelAction: _action
 			};
 
-			var initLoad = true; //used to ensure not calling server multiple times
+
 			var user = "system";
 			if (($rootScope.user != null) && ($rootScope.user != undefined)) {
 				user = $rootScope.user.user;
 			}
 
+            ajaxCall(new qat.model.reqNotaFiscal(fModels.amont(oNFNote, _action), true, true));
 
+		}
+
+		factory.fnCreateObjectNFSaida = function (_emitente,_notaFiscal,_produtos,_financeiros,_endereco, _action) {
+			debugger
+
+
+            _action = "INSERT";
+            var oEmitente = {
+                id: null,
+                cnpj: null,
+                cpf: null,
+                razaosocial: _emitente.razao,
+                nomefantasia: _emitente.nome,
+                endereco: _emitente.enderecos ? qat.model.fnEndereco(_emitente.enderecos[0], 'INSERT') : null,
+                inscricaoestadual: null,
+                inscricaoestadualsubstituicaotributaria: null,
+                inscricaomunicipal: null,
+                classificacaonacionalatividadeseconomicas: null,
+                modelAction: _action
+                    // regimetributario: emitente.regime,
+
+            }
+
+
+            for (var x = 0; x < _emitente.documentos.length; x++) {
+                if (_emitente.documentos[x].documentoTypeEnumValue == 1) {
+                    oEmitente.cnpj = _emitente.documentos[x].numero;
+                } else if (_emitente.documentos[x].documentoTypeEnumValue == 2) {
+                    oEmitente.cpf = _emitente.documentos[x].numero;
+                } else if (_emitente.documentos[x].documentoTypeEnumValue == 10) {
+                    oEmitente.inscricaoestadual = _emitente.documentos[x].numero;
+                } else if (_emitente.documentos[x].documentoTypeEnumValue == 12) {
+                    oEmitente.inscricaoestadualsubstituicaotributaria = _emitente.documentos[x].numero;
+                } else if (_emitente.documentos[x].documentoTypeEnumValue == 3) {
+                    oEmitente.inscricaomunicipal = _emitente.documentos[x].numero;
+                }
+            }
+
+            var oEndEntrega = null;
+            if ((_endereco == null) || (_endereco == undefined)) {
+                oEndEntrega = _notaFiscal.remetente.enderecos[0];
+            } else {
+                oEndEntrega = _endereco;
+            }
+            if (oEndEntrega) {
+                var oEntrega = {
+                    id: null,
+                    cnpj: null,
+                    cpf: null,
+                    logradouro: oEndEntrega.logradouro,
+                    numero: oEndEntrega.numero,
+                    complemento: oEndEntrega.complemento,
+                    bairro: oEndEntrega.bairro,
+                    codigomunicipio: oEndEntrega.codIbge,
+                    nomemunicipio: oEndEntrega.cidade.nome,
+                    modelAction: _action,
+                    uf: oEndEntrega.cidade.estado.abreviacao
+                }
+            }
+
+
+            var oItens = [];
+            var oIten = {
+                id : null,
+                numeroItem : 0,
+                produto :  {
+                        id  : null,
+                        codigo:  null,
+                        codigoDeBarras:  null,
+                        descricao:  null,
+                        ncm:  null,
+                        nomeclaturaValorAduaneiroEstatistica:  null,
+                        codigoEspecificadorSituacaoTributaria:  null,
+                        extipi :  null,
+                        cfop :  null,
+                        unidadeComercial :  null,
+                        quantidadeComercial :  null,
+                        valorUnitario :  null,
+                        valorTotalBruto :  null,
+                        codigoDeBarrasTributavel :  null,
+                        unidadeTributavel :  null,
+                        quantidadeTributavel :  null,
+                        valorUnitarioTributavel :  null,
+                        valorFrete :  null,
+                        valorSeguro :  null,
+                        valorDesconto :  null,
+                        valorOutrasDespesasAcessorias :  null,
+                        compoeValorNota :  null,
+                        declaracoesImportacao :  null,
+                        detalhesExportacao :  null,
+                        numeroPedidoCliente :  null,
+                        numeroPedidoItemCliente :  null,
+                        numeroControleFCI :  null,
+                        veiculo :  null,
+                        medicamentos :  null,
+                        armamentos :  null,
+                        combustivel :  null,
+                        numeroRECOPI :  null
+                    },
+
+                imposto : null,
+                impostoDevolvido : null,
+                informacoesAdicionais : null
+            }
+
+
+            var oDuplicatas = [];
+            var oDuplicata = {
+                numeroDuplicata: null,
+                dataVencimento: null,
+                valorDuplicata: null,
+                receberAgora: null,
+                tipoDoc: null
+
+            }
+
+            for (var x = 0; x < _financeiros.length; x++) {
+                oDuplicata.numeroDuplicata = _financeiros[x].numero;
+                oDuplicata.dataVencimento = _financeiros[x].dataVencimento;
+                oDuplicata.valorDuplicata = _financeiros[x].valor;
+                oDuplicata.receberAgora = _financeiros[x].receberAgora;
+                oDuplicata.tipoDoc = _financeiros[x].tipoDoc;
+                oDuplicatas.push(fModels.amont(oDuplicata, 'INSERT'));
+            }
+
+
+            for (var x = 0; x < _produtos.length; x++) {
+                oIten = {};
+                oIten.numeroItem = x,
+                oIten.produto =  {
+                        id  : null,
+                        codigo:  _produtos[x].produto.codigo,
+                        codigoDeBarras:  _produtos[x].produto.prodId.cdBarras,
+                        descricao:  _produtos[x].produto.prodId.produto,
+                        ncm:  _produtos[x].produto.prodId.ncm ? _produtos[x].produto.prodId.ncm : "1111111",
+                        nomeclaturaValorAduaneiroEstatistica:  null,
+                        codigoEspecificadorSituacaoTributaria:  null,
+                        extipi :  _produtos[x].produto.prodId.excTabIPI,
+                        cfop :  _produtos[x].tributacao ? _produtos[x].tributacao.cfop : "5400",
+                        unidadeComercial :  _produtos[x].produto.prodId.uniMed ? _produtos[x].produto.prodId.uniMed.sigla : "UN",
+                        quantidadeComercial :  _produtos[x].produto.quantidade,
+                        valorUnitario :  _produtos[x].produto.precoList[0].valor,
+                        valorTotalBruto :  (_produtos[x].produto.quantidade * _produtos[x].produto.precoList[0].valor),
+                        codigoDeBarrasTributavel :  null,
+                        unidadeTributavel :  _produtos[x].produto.prodId.uniMed ? _produtos[x].produto.prodId.uniMed.sigla : "UN",
+                        quantidadeTributavel :  _produtos[x].produto.quantidade,
+                        valorUnitarioTributavel :   _produtos[x].produto.precoList[0].valor,
+                        valorFrete :  0,
+                        valorSeguro :  0,
+                        valorDesconto :  _produtos[x].produto.desconto,
+                        valorOutrasDespesasAcessorias :  0,
+                        compoeValorNota :  null,
+                        declaracoesImportacao :  null,
+                        detalhesExportacao :  null,
+                        numeroPedidoCliente :  null,
+                        numeroPedidoItemCliente :  null,
+                        numeroControleFCI :  null,
+                        veiculo :  null,
+                        medicamentos :  null,
+                        armamentos :  null,
+                        combustivel :  null,
+                        numeroRECOPI :  null,
+                        modelAction: 'INSERT',
+                        createUser: "System",
+                        createDateUTC: (new Date()).getTime(),
+                        modifyUser: "System",
+                        modifyDateUTC: (new Date()).getTime()
+                    },
+
+                oIten.imposto = null,
+                oIten.impostoDevolvido = null,
+                oIten.informacoesAdicionais = null
+
+                oItens.push(fModels.amont(oIten, 'INSERT'));
+            }
+
+
+            var oNFNotaInfo = {
+                id: null,
+                identificador: '10',
+                versao: '3.4',
+                identificacao: fModels.amont(qat.model.fnNFNotaInfoIdentificacao(_notaFiscal.info.identificacao, _action), _action),
+                emitente: fModels.amont(qat.model.fnNFNotaInfoEmitente(oEmitente, _action), _action),
+                avulsa: null,
+                destinatario: fModels.amont(qat.model.fnNFNotaInfoDestinatario(_notaFiscal.info.destinatario, _action), _action),
+                retirada: null,
+                entrega: oEntrega ? fModels.amont(qat.model.fnNFNotaInfoLocal(oEntrega, _action), _action) : null,
+                pessoasautorizadasdownloadnfe: null,
+                itens: oItens,
+                total: fModels.amont( _notaFiscal.info.total ? qat.model.fnNFNotaInfoTotal(_notaFiscal.info.total, _action) : {}, _action),
+                transporte: fModels.amont(qat.model.fnNFNotaInfoTransporte(_notaFiscal.info.transporte, _action), _action),
+                cobranca: {
+                    duplicatas: fModels.amont(oDuplicatas, _action)
+                },
+                pagamentos: null,
+                informacoesadicionais: null,
+                exportacao: null,
+                compra: null,
+                cana: null,
+                modelAction: _action
+            }
+
+
+            //NFNote
+            var oNFNote = {
+                identificadorlocal: null,
+                info: fModels.amont(qat.model.fnNFNotaInfo(oNFNotaInfo, _action), _action),
+                infosuplementar: {},
+                assinatura: {
+                    value: 'teste'
+                },
+                tipo: {
+                    id: 1001
+                },
+                modelAction: _action
+            };
+
+
+            ajaxCall(new qat.model.reqNotaFiscal(fModels.amont(oNFNote, _action), true, true));
+
+		}
+
+		factory.ajaxCalls = function (_request) {
+            var initLoad = true; //used to ensure not calling server multiple times
 			SysMgmtData.processPostPageData("main/api/request", {
-				url: "vendas/api/nfSaidas/insert",
-				token: $rootScope.authToken,
-				request: new qat.model.reqNotaFiscal(fModels.amont(oNFNote, _action), true, true)
-			}, function (res) {
+                url: "vendas/api/nfSaidas/insert",
+                token: $rootScope.authToken,
+                request: _request
+            }, function (res) {
 
-				if (res.operationSuccess == true) {
-					initLoad = true;
-					toastr.success('Deu Certo seu tanga.', 'Sucess');
-				}
-			});
-		}
-
-		factory.method1 = function () {
-			//..
-
-		}
-
-		factory.method2 = function () {
-			//..
+                if (res.operationSuccess == true) {
+                    initLoad = true;
+                    toastr.success('Deu Certo seu tanga.', 'Sucess');
+                }
+            });
 		}
 
 		return factory;

@@ -3,6 +3,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-touch.min.js"></script>
 </head>
 <h2>Dados do Transportador</h2>
+<div class="panel panel-default" style="background:#EEEEEE">
+                        <div class="panel-body">
+                            <div class="col-sm-12">
 <div class="row">
 <div angucomplete-alt id="ex1"
   placeholder="Buscar Transportador"
@@ -15,6 +18,14 @@
   minlength="1"
   input-class="form-control form-control-small"
   match-class="highlight"></div>
+
+  </div>
+  </div>
+  </div>
+  </div>
+  <div class="panel panel-default" style="background:#EEEEEE">
+                        <div class="panel-body">
+                            <div class="col-sm-12">
       <div class="row"></div>
       <div ng-if="visibled == true">
       <div style="margin-bottom: 20px"></div>
@@ -175,6 +186,9 @@
                 </div>
             </div>
         </div>
+        </div>
+        </div>
+        </div>
         <br>
 
         <hr>
@@ -183,6 +197,9 @@
 
 </div>
     </div>
+    <div class="panel panel-default" style="background:#EEEEEE">
+                        <div class="panel-body">
+                            <div class="col-sm-12">
     <div class="row">
         <div class="col-sm-4">
             <label for="exampleInputPassword1">Modalidade do frete</label>
@@ -257,7 +274,11 @@
         </div>
         <div class="col-sm-3 ">
             <div class="form-group">
-                <label for="BindFinal"><input ng-model="notaFiscal.nfReferenciada" type="checkbox" ng-true-value="1" ng-false-value="2" id="BindFinal" class="destDados ui-widget-content ui-corner-all" name="BindFinal" autocomplete="off" value="1"> <span>Informar retenções de ICMS de transporte</span></label>
+                <label for="BindFinal"><span>Informar retenções de ICMS de transporte</span></label>
+                <toggle ng-model="notaFiscal.nfReferenciada"
+                                                ng-init="financeiro.pagarAgora = false" style="android" on="Sim"
+                                                off="Não" onstyle="btn-default" offstyle="btn-info"
+                                                ng-true-value="'2'" ng-false-value="'1'"></toggle>
             </div>
         </div>
     </div>
@@ -331,7 +352,14 @@
             </div>
         </div>
     </div>
+    </div>
+    </div>
+    </div>
+
     <hr>
+    <div class="panel panel-default" style="background:#EEEEEE">
+                        <div class="panel-body">
+                            <div class="col-sm-12">
     <div class="row">
         <div class="col-sm-3">
             <div class="form-group">
@@ -400,4 +428,7 @@
                 </div>
             </div>
         </div>
+    </div>
+    </div>
+    </div>
     </div>

@@ -64,7 +64,7 @@
 						});
 					},
 					pdVendas : function() {
-						$('.pdVendasForm').formValidation({
+						$('.nfSaidaForm').formValidation({
 							framework : 'bootstrap',
 							icon : {
 								valid : 'glyphicon glyphicon-ok',
@@ -72,7 +72,7 @@
 								validating : 'glyphicon glyphicon-refresh'
 							},
 							fields : {
-								'nome' : notEmptyStringMinMaxRegexp,
+								'nome'  : notEmptyStringMinMaxRegexp,
 								'email' : integerNotEmptyValidation,
 								'texto' : integerNotEmptyValidation,
 							}

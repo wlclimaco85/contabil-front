@@ -509,11 +509,10 @@
 			                }
 		                },
 		                {
-			                text: 'Nova Conta Pagar',
+			                text: 'Novo Nota Fiscal Saida',
 			                key: '4',
 			                action: function(e, dt, node, config) {
-
-			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,_function);
+			                    dialogFactory.dialog('views/vendas/dialog/dNotaFiscalSaida.html',"NfSaidaInsertController",validationFactory.nfSaida,_function);
 
 			                }
 			            })

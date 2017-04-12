@@ -457,25 +457,6 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
             }
 
 
-            $scope.buscaRCep = function(){
-
-
-
-
-                 $('.toggle-ones').bootstrapToggle('toggle')
-                 $('.toggle-ones').change(function() {
-
-                    if($(this).prop('checked') == true)
-                    {
-                        $('#Edit').show()
-                    }
-                    else
-                    {
-                        $('#Edit').hide()
-                    }
-                })
-
-            }
 
 
             $scope.today = function() {
@@ -690,24 +671,7 @@ angular.module('wdApp.apps.produto.select', ['ngSanitize', 'ui.select'])
   },3000);
 
   vm.counter = 0;
-  vm.onSelectCallback = function (item, model){
 
-    vm.counter++;
-    vm.eventResult = {item: item, model: model};
-    $('.toggle-ones').bootstrapToggle()
-    $('.toggle-ones').change(function() {
-        // debugger
-        if($(this).prop('checked') == true)
-        {
-            $(this).parents('.teste').find('.edit').hide()
-        }
-        else
-        {
-            $(this).parents('.teste').find('.edit').show()
-        }
-    })
-
-  };
 
   vm.removed = function (item, model) {
     vm.lastRemoved = {
@@ -880,27 +844,6 @@ angular.module('wdApp.apps.produto.selects', ['ngSanitize', 'ui.select'])
 
         $scope.fnTelefoneType = function(type){
 
-
-        $scope.buscaRCep = function(){
-
-
-
-
-                 $('.toggle-ones').bootstrapToggle('toggle')
-                 $('.toggle-ones').change(function() {
-                    debugger
-                    if($(this).prop('checked') == true)
-                    {
-                        $('#Edit').show()
-                    }
-                    else
-                    {
-                        $('#Edit').hide()
-                    }
-                })
-
-            }
-
         var typeEnum
             switch (new Date().getDay()) {
                 case "":
@@ -1003,10 +946,7 @@ angular.module('wdApp.apps.produto.selects', ['ngSanitize', 'ui.select'])
   },3000);
 
   vm.counter = 0;
-  vm.onSelectCallback = function (item, model){
-    vm.counter++;
-    vm.eventResult = {item: item, model: model};
-  };
+
 
   vm.removed = function (item, model) {
     vm.lastRemoved = {
