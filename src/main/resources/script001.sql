@@ -1,3 +1,195 @@
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
+    VALUES
+(111,'TIPO DOCUMENTO', 'TIPO DOCUMENTO', 1477075035443, 'System'),
+(112,'MODELO', 'MODELO' , 1477075035443, 'System');
+
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+    ('55', 'NFE','NF-e',112,10, 1477075035443, 'System'),
+    ('65', 'NFCE','NFC-e',112,10, 1477075035443, 'System');
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
+(113,'SERIE', 'SERIE' , 1477075035443, 'System');
+
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+('1', '1', '1',113,10, 1477075035443, 'System'),
+('2', '2', '2',113,10, 1477075035443, 'System');
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
+(114,'TIPO', 'TIPO' , 1477075035443, 'System');
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+    ('0', 'ENTRADA', 'Entrada',114,10, 1477075035443, 'System'),
+    ('1', 'SAIDA', 'Saida',114,10, 1477075035443, 'System');
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
+(115,'IDENTIFICADOR LOCAL DESTINO OPERACAO', 'IDENTIFICADOR LOCAL DESTINO OPERACAO' , 1477075035443, 'System');
+
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+    ('1', 'OPERACAO_INTERNA','Operação interna',115,10, 1477075035443, 'System'),
+    ('2', 'OPERACAO_INTERESTADUAL','Operação interestadual',115,10, 1477075035443, 'System'),
+    ('3', 'OPERACAO_COM_EXTERIOR','Operação com o exterior',115,10, 1477075035443, 'System');
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
+(130,'TIPO IMPRESSAO', 'TIPO IMPRESSAO' , 1477075035443, 'System');
+
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+    ('0', 'SEM_GERACAO_DANFE','Sem geração de DANFe',130,10, 1477075035443, 'System'),
+    ('1', 'DANFE_NORMAL_RETRATO','DANFe normal retrato',130,10, 1477075035443, 'System'),
+    ('2', 'DANFE_NORMAL_PAISAGEM','DANFe normal paisagem',130,10, 1477075035443, 'System'),
+    ('3', 'DANFE_SIMPLIFICADO','DANFe simplificado',130,10, 1477075035443, 'System'),
+    ('4', 'DANFE_NFCE','DANFe NFCe',130,10, 1477075035443, 'System'),
+    ('5', 'DANFE_NFCE_MENSAGEM_ELETRONICA','DANFe NFCe mensagem eletronica',130,10, 1477075035443, 'System');
+
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
+(116,'TIPO EMISSAO', 'TIPO EMISSAO' , 1477075035443, 'System');
+
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+    ('1', 'EMISSAO_NORMAL','Normal',116,10, 1477075035443, 'System'),
+    ('2', 'CONTINGENCIA_FS_IA','Contingeancia FS',116,10, 1477075035443, 'System'),
+    ('3', 'CONTINGENCIA_SCAN','Contingeancia SCAN',116,10, 1477075035443, 'System'),
+    ('4', 'CONTINGENCIA_DPEC','Contingeancia DPEC',116,10, 1477075035443, 'System'),
+    ('5', 'CONTINGENCIA_FSDA','Contingeancia FSDA',116,10, 1477075035443, 'System'),
+    ('6', 'CONTINGENCIA_SVCAN','Contingeancia SVCAN',116,10, 1477075035443, 'System'),
+    ('7', 'CONTINGENCIA_SVCRS(','Contingeancia SVCRS',116,10, 1477075035443, 'System'),
+    ('9', 'CONTIGENCIA_OFFLINE','Contingeancia offline NFC-e',116,10, 1477075035443, 'System');
+
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
+(117,'AMBIENTE', 'AMBIENTE' , 1477075035443, 'System');
+
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+    ('1', 'PRODUCAO','Produção',117,10, 1477075035443, 'System'),
+    ('2', 'HOMOLOGACAO','Homologação',117,10, 1477075035443, 'System');
+
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
+(118,'FINALIDADE', 'FINALIDADE' , 1477075035443, 'System');
+
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+    ('1', 'NORMAL','Normal',118,10, 1477075035443, 'System'),
+    ('2', 'COMPLEMENTAR','Complementar',118,10, 1477075035443, 'System'),
+    ('3', 'AJUSTE','Ajuste',118,10, 1477075035443, 'System'),
+    ('4', 'DEVOLUCAO_OU_RETORNO','Devolução ou retorno',118,10, 1477075035443, 'System');
+
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
+(119,'OPERACAO CONSUMIDOR FINAL', 'OPERACAO CONSUMIDOR FINAL' , 1477075035443, 'System');
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+    ('0', 'NAO','Não',119,10, 1477075035443, 'System'),
+    ('1', 'SIM','Sim',119,10, 1477075035443, 'System');
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
+(120,'INDICADOR	PRESENCA COMPRADOR','INDICADOR	PRESENCA COMPRADOR' , 1477075035443, 'System');
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+    ('0', 'NAO_APLICA','N\u00e3o se aplica',120,10, 1477075035443, 'System'),
+    ('1', 'OPERACAO_PRESENCIAL','Operação presencial',120,10, 1477075035443, 'System'),
+    ('2', 'OPERACAO_NAO_PRESENCIAL_INTERNET','Operação não presencial - Internet',120,10, 1477075035443, 'System'),
+    ('3', 'OPERACAO_NAO_PRESENCIAL_TELEATENDIMENTO','Operação não presencial - Teleatendimento',120,10, 1477075035443, 'System'),
+    ('4', 'NFCE_EM_OPERACAO_COM_ENTREGA_DOMICILIO','NFC-e emOperação com entrega a domicilio',120,10, 1477075035443, 'System'),
+    ('9', 'OPERACAO_NAO_PRESENCIAL_OUTROS','Operação não presencial - Outros',120,10, 1477075035443, 'System');
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
+(121,'PROGRAMA EMISSOR', 'PROGRAMA EMISSOR' , 1477075035443, 'System');
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+    ('0', 'CONTRIBUINTE','Aplicativo do contribuinte',121,10, 1477075035443, 'System'),
+    ('1', 'AVULSA_FISCO','Emissão de NF-e avulsa pelo Fisco',121,10, 1477075035443, 'System'),
+    ('2', 'AVULSA_CONTRIBUINTE_COM_CERTIFICADO_DIGITAL_FISCO','Emissão de NF-e avulsa, pelo contribuinte com certificado digital atravas do Fisco',121,10, 1477075035443, 'System'),
+    ('3', 'CONTRIBUINTE_APLICATIVO_FISCO','Emissão de NF-e pelo contribuinte com aplicativo fornecido pelo Fisco',121,10, 1477075035443, 'System');
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
+(122,'INDICADOR IE DESTINATARIO', 'INDICADOR IE DESTINATARIO' , 1477075035443, 'System');
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+    ('1', 'CONTRIBUINTE_ICMS','Contribuinte ICMS',122,10, 1477075035443, 'System'),
+    ('2', 'CONTRIBUINTE_ISENTO_INSCRICAO_CONTRIBUINTES_ICMS','Contribuinte isento inscrição contribuintes ICMS',122,10, 1477075035443, 'System'),
+    ('9', 'NAO_CONTRIBUINTE','Não contribuinte',122,10, 1477075035443, 'System');
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
+(123,'MODALIDADE FRETE', 'MODALIDADE FRETE' , 1477075035443, 'System');
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+    ('0', 'POR_CONTA_DO_EMITENTE','Por conta do emitente',123,10, 1477075035443, 'System'),
+    ('1', 'POR_CONTA_DO_DESTINATARIO_REMETENTE','Por conta do destinatário remetente',123,10, 1477075035443, 'System'),
+    ('2', 'POR_CONTA_DE_TERCEIROS','Por conta de terceiros',123,10, 1477075035443, 'System'),
+    ('9', 'SEM_FRETE','Sem frete',123,10, 1477075035443, 'System');
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
+(124,'TIPO DOC', 'TIPO DOC' , 1477075035443, 'System');
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+('1', 'ORCAMENTO','Orçamento',124,10, 1477075035443, 'System'),
+('2', 'PEDIDO VENDA','Pedido Venda',124,10, 1477075035443, 'System'),
+('3', 'PEDIDO COMPRA','Pedido Compra',124,10, 1477075035443, 'System'),
+('4', 'NOTA FISCAL SAIDA','Nota Fiscal Saida',124,10, 1477075035443, 'System'),
+('5', 'NOTA FISCAL ENTRADA','Nota Fiscal Entrada',124,10, 1477075035443, 'System');
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
+(125,'FORMA PAGAMENTO MOEDA', 'FORMA PAGAMENTO MOEDA' , 1477075035443, 'System');
+
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+    ('01', 'DINHEIRO','Dinheiro',125,10, 1477075035443, 'System'),
+    ('02', 'CHEQUE','Cheque',125,10, 1477075035443, 'System'),
+    ('03', 'CARTAO_CREDITO','Cartão de credito',125,10, 1477075035443, 'System'),
+    ('04', 'CARTAO_DEBITO','Cartão de debito',125,10, 1477075035443, 'System'),
+    ('05', 'CARTAO_LOJA','Cartão da loja',125,10, 1477075035443, 'System'),
+    ('10', 'VALE_ALIMENTACAO','Vale alimentaçao',125,10, 1477075035443, 'System'),
+    ('11', 'VALE_REFEICAO','Vale refeiçao',125,10, 1477075035443, 'System'),
+    ('12', 'VALE_PRESENTE','Vale presente',125,10, 1477075035443, 'System'),
+    ('13', 'VALE_COMBUSTIVEL','Vale combustível',125,10, 1477075035443, 'System'),
+    ('99', 'OUTRO','Outro',125,10, 1477075035443, 'System');
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
+(126,'INDICADOR ORIGEM PROCESSO', 'INDICADOR ORIGEM PROCESSO' , 1477075035443, 'System');
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+    ('0', 'SEFAZ','Sefaz',126,10, 1477075035443, 'System'),
+    ('1', 'JUSTICA_FEDERAL','Justiça Federal',126,10, 1477075035443, 'System'),
+    ('2', 'JUSTICA_ESTADUAL','Justiça Estadual',126,10, 1477075035443, 'System'),
+    ('3', 'SECEX_RFB','Secex RFB',126,10, 1477075035443, 'System'),
+    ('9', 'OUTROS','Outros',126,10, 1477075035443, 'System');
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
+(127,'ASSINATURA', 'ASSINATURA' , 1477075035443, 'System');
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+('1', '',110,10, 1477075035443, 'System');
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
+(128,'TIPO NOTA FISCAL', 'TIPO NOTA FISCAL' , 1477075035443, 'System');
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+('1', 'ORCAMENTO','Orçamento',128,10, 1477075035443, 'System'),
+('2', 'PEDIDO VENDA','Pedido Venda',128,10, 1477075035443, 'System'),
+('3', 'PEDIDO COMPRA','Pedido Compra',128,10, 1477075035443, 'System'),
+('4', 'NOTA FISCAL SAIDA','Nota Fiscal Saida',128,10, 1477075035443, 'System'),
+('5', 'NOTA FISCAL ENTRADA','Nota Fiscal Entrada',128,10, 1477075035443, 'System');
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
+(129,'TRIBUTACAO', 'TRIBUTACAO' , 1477075035443, 'System');
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+    ('1', 'MICROEMPRESA_MUNICIPAL','Microempresa municipal',110,10, 1477075035443, 'System'),
+    ('2', 'ESTIMATIVA','Estimativa',110,10, 1477075035443, 'System'),
+    ('3', 'SOCIEDADE_PROFISSIONAIS','Sociedade profissionais',110,10, 1477075035443, 'System'),
+    ('4', 'COOPERATIVA','Cooperativa',110,10, 1477075035443, 'System'),
+    ('5', 'MICROEMPRESARIO_INDIVIDUAL_MEI','Microempresario individual MEI',110,10, 1477075035443, 'System'),
+    ('6', 'MICROEMPRESARIO_E_EMPRESA_PEQUENOPORTE','Microempresario e empresa de pequeno porte',110,10, 1477075035443, 'System');
+
+
+
 INSERT INTO pagina(id ,pagina,parentid, tabelaenumvalue, create_date, create_user)
     VALUES (101,'Financeiro', 0, 100, 1477075035443, 'System');
 
@@ -14,8 +206,7 @@ INSERT INTO pagina(id ,pagina,parentid, tabelaenumvalue, create_date, create_use
     VALUES (102,'Conta', 0, 100, 1477075035443, 'System');
 
 
-INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
-    VALUES (110,'TIPO CONTA', 'TIPO CONTA', 1477075035443, 'System');
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES (110,'TIPO CONTA', 'TIPO CONTA', 1477075035443, 'System');
 
 
 
@@ -70,7 +261,7 @@ INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, 
 ('2', 'Aberta','Aberta',106,101, 1477075035443, 'System'),
 ('3', 'Vencida','Vencida',106,101, 1477075035443, 'System'),
 ('4', 'Cancelada','Cancelada',106,101, 1477075035443, 'System');
-                                               
+
 
 
 INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
