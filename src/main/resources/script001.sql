@@ -1,4 +1,7 @@
 
+delete from doisvalor where pagina = 10 ;
+
+delete from doisvalortype where id >110;
 INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
     VALUES
 (111,'TIPO DOCUMENTO', 'TIPO DOCUMENTO', 1477075035443, 'System'),
@@ -163,9 +166,10 @@ INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, 
 
 INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
 (127,'ASSINATURA', 'ASSINATURA' , 1477075035443, 'System');
+
 INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
     VALUES
-('1', '',110,10, 1477075035443, 'System');
+('1', 'dddddd','',110,10, 1477075035443, 'System');
 
 INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
 (128,'TIPO NOTA FISCAL', 'TIPO NOTA FISCAL' , 1477075035443, 'System');

@@ -5,7 +5,7 @@
 <div ng-repeat="produto in produtos">
      <div class="teste">
         <div class="row" style="margin-top:3%">
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <div class="ng-cloak" ng-controller="ProdutoSelectController as ctrl">
 
                     <div class="form-group">
@@ -61,34 +61,29 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4">
-
-                <div class="form-group">
-                <div class="col-sm-6">
-                    <label for="exampleInputPassword1">Desconto</label>
-                    <div class="input-group">
-                        <span class="input-group-addon">$</span>
-                        <input type="text" class="form-control cota-socio" ng-model="produto.produto.desconto" name="book[0].desconto" placeholder="R$0,00" />
-                        <span class="input-group-addon">.00</span>
-                    </div>
+            <div class="col-sm-2">
+                <label for="exampleInputPassword1">Desconto</label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input type="text" class="form-control cota-socio" ng-model="produto.produto.desconto" name="book[0].desconto" placeholder="R$0,00" />
+                    <span class="input-group-addon">.00</span>
                 </div>
-                <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Total prod.</label>
-                            <div class="input-group">
-                                <label for="exampleInputPassword1">{{(produto.produto.quantidade * produto.produto.precoList[0].valor) - produto.produto.desconto}}</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2" style="margin-top:20px">
-                    <toggle ng-model="produto.produto.pagarAgora"
-                                    ng-init="produto.produto.pagarAgora = false" style="android2" on="Sim"
-                                    off="Não" onstyle="btn-success" offstyle="btn-danger"
-                                    ng-true-value="'true'" ng-false-value="'false'"></toggle>
+            </div>
+            <div class="col-sm-1">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Total prod.</label>
+                    <div class="row">
+                        <label for="exampleInputPassword1">{{(produto.produto.quantidade * produto.produto.precoList[0].valor) - produto.produto.desconto}}</label>
                     </div>
                 </div>
             </div>
-            <div class="col-xs-1" style="margin-top:20px">
+            <div class="col-sm-1" style="margin-top:20px">
+                <toggle ng-model="produto.produto.pagarAgora"
+                            ng-init="produto.produto.pagarAgora = false" style="android2" on="Sim"
+                            off="Não" onstyle="btn-success" offstyle="btn-danger"
+                            ng-true-value="'true'" ng-false-value="'false'"></toggle>
+            </div>
+            <div class="col-sm-1" style="margin-top:20px">
 
                 <button type="button" ng-click="createForm2()" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
             </div>

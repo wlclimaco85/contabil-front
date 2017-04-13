@@ -491,7 +491,7 @@
 			                }
 		                },
 		                {
-			                text: '<span data-tooltip="Pagar selecionado(s)" id="pag_pagarEmLote" class=""><span class="fa fa-usd"> </span></span>',
+			                text: '<span data-tooltip="Buscar Retorno" id="pag_pagarEmLote" class=""><span class="fa fa-usd"> Buscar Retorno </span></span>',
 			                key: '2',
 			                action: function(e, dt, node, config) {
 
@@ -500,7 +500,25 @@
 			                }
 		                },
 		                {
-			                text: '<span data-tooltip="Emitir recibo" id="pag_emitirRecibo" class=""><span class="glyphicon glyphicon-print"> </span></span>',
+			                text: '<span data-tooltip="Situação Nota" id="pag_emitirRecibo" class=""><span class="glyphicon glyphicon-print"> Situação Nota</span></span>',
+			                key: '3',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,_function);
+
+			                }
+		                },
+		                {
+			                text: '<span data-tooltip="Cancelar NFe" id="pag_emitirRecibo" class=""><span class="glyphicon glyphicon-print"> Cancelar NFe</span></span>',
+			                key: '3',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,_function);
+
+			                }
+		                },
+		                {
+			                text: '<span data-tooltip="Imprimir" id="pag_emitirRecibo" class=""><span class="glyphicon glyphicon-print"> Imprimir</span></span>',
 			                key: '3',
 			                action: function(e, dt, node, config) {
 

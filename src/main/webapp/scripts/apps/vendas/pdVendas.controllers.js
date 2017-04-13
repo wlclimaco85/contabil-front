@@ -122,6 +122,7 @@
                 function (validator) {
                     validator.setValidElementStyling(false);
                     validator.setInvalidElementStyling(false);
+                    editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
             }])
 		.controller('PedidoVendaInsertController', function (localStorageService, $rootScope, $scope, fModels, SysMgmtData, doisValorFactory, fNotaFiscal) {
 			var vm = this;

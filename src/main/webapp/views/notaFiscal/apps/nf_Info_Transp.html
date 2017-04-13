@@ -204,14 +204,13 @@
         <div class="col-sm-4">
             <label for="exampleInputPassword1">Modalidade do frete</label>
             <div class="row ">
-                <span class="ui-select">
-                <select ng-model="notaFiscal.info.transporte.modalidadefrete">
-                    <option value="0">0 - Emitente</option>
-                    <option value="1">1 - Destinatário</option>
-                    <option value="2">2 - Terceiros</option>
-                    <option value="9">9 - Sem frete</option>
-                </select>
-            </span>
+                <ui-select ng-model="notaFiscal.info.transporte.modalidadefrete" theme="bootstrap">
+                    <ui-select-match placeholder="">{{$select.selected.descricao}}</ui-select-match>
+                    <ui-select-choices repeat="item in MODALIDADE_FRETE | filter: $select.search">
+                      <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+
+                    </ui-select-choices>
+                </ui-select>
             </div>
         </div>
         <div class="col-sm-3">
@@ -230,14 +229,13 @@
                 <div class="row ">
                     <div class="input-group">
                         <span class="input-group-addon fa fa-list-ol"></span>
-                        <span class="ui-select">
-                <select ng-model="notaFiscal.info.transporte.veiculo.uf">
-                    <option value="0">0 - Emitente</option>
-                    <option value="1">1 - Destinatário</option>
-                    <option value="2">2 - Terceiros</option>
-                    <option value="9">9 - Sem frete</option>
-                </select>
-            </span>
+                        <ui-select ng-model="notaFiscal.info.transporte.veiculo.uf" theme="bootstrap">
+                            <ui-select-match placeholder="">{{$select.selected.descricao}}</ui-select-match>
+                            <ui-select-choices repeat="item in estado | filter: $select.search">
+                              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+
+                            </ui-select-choices>
+                        </ui-select>
                     </div>
                 </div>
             </div>

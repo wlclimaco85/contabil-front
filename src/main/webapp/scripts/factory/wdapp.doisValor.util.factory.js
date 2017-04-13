@@ -259,7 +259,7 @@
 
 					var fnCallbackDoisValor = function(res){
 	                    var planos = "";
-
+debugger
 	                    if(res.operationSuccess == true)
 	                    {
 	                        for(var x=0;x<res.doisValoresList.length;x++)

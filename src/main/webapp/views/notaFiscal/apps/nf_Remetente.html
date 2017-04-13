@@ -188,12 +188,20 @@
                 <div class="form-group">
                                     <label for="BindFinal"><span>Local Entrega Diferente Destinatario</span></label>
                 <toggle ng-model="enderecoEntrega"
-                                                ng-init="enderecoEntrega = '2'" style="android" on="Sim"
-                                                off="Não" onstyle="btn-default" offstyle="btn-info"
+                                                ng-init="enderecoEntrega = '2'" style="android" on="Não"
+                                                off="Sim" onstyle="btn-default" offstyle="btn-info"
                                                 ng-true-value="'2'" ng-false-value="'1'"></toggle>
                 </div>
             </div>
-
+             <div class="col-sm-4 " ng-if="enderecoEntrega == 1">
+                            <div class="form-group" >
+                                    <label for="BindFinal"><span>Salvar Novo Endereço</span></label>
+                <toggle ng-model="enderecoEntrega"
+                                                ng-init="enderecoEntrega = '2'" style="android" on="Não"
+                                                off="Sim" onstyle="btn-default" offstyle="btn-info"
+                                                ng-true-value="'2'" ng-false-value="'1'"></toggle>
+                </div>
+                </div>
         </div>
         </div>
         </div>

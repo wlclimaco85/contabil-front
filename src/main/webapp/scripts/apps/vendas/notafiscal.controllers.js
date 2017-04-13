@@ -139,17 +139,21 @@
 
 (function() {
     angular.module('wdApp.apps.nfSaida.insert',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter','angucomplete','inputactions'])
-        .controller('NfSaidaInsertController', function(localStorageService,$rootScope,$scope,fModels,SysMgmtData,fProduto,fNotaFiscal,validationFactory) {
+        .controller('NfSaidaInsertController', function(localStorageService,$rootScope,$scope,fModels,SysMgmtData,fProduto,fNotaFiscal,validationFactory,doisValorFactory) {
 
             var vm = this;
             $scope.slotDisplayName = "teste00";
             $scope.empresa = null;
+            $scope.estado = null;
             $scope.notaFiscal = {
                 info : {
                     identificacao : {},
                     destinatario  : {}
                 }
             };
+
+            doisValorFactory.notaFiscal($scope);
+
             $scope.produtos = [{form : 'form',produto:{}}];
 
             $scope.cliente = [];
@@ -184,6 +188,19 @@
                 $scope.cliente = res.clienteList;
             });
 
+            SysMgmtData.processPostPageData("main/api/request", {
+                url: "cadastros/api/estado/fetchPage",
+                token: $rootScope.authToken,
+                request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
+            }, function(res) {
+              //  debugger
+                $scope.estado = res.estadoList;
+            });
+
+            $scope.contribuintes  = [{form : 'form',conti:{}}];
+            $scope.fiscos  = [{form : 'form',fisco:{}}];
+            $scope.processos  = [{form : 'form',proc:{}}];
+
             $scope.createForm2 = function(){
 
                 $scope.produtos.push({ nome : 'form1' + ($scope.produtos.length + 1),produto :{}});
@@ -197,6 +214,21 @@
                   valor: 0
                 }
               });
+
+            $scope.createForm6 = function(){
+
+                $scope.contribuintes.push({ nome : 'form1' + ($scope.contribuintes.length + 1),conti :{}});
+            };
+
+            $scope.createForm7 = function(){
+
+                $scope.fiscos.push({ nome : 'form1' + ($scope.fiscos.length + 1),fisco :{}});
+            };
+
+            $scope.createForm8 = function(){
+
+                $scope.processos.push({ nome : 'form1' + ($scope.processos.length + 1),proc :{}});
+            };
 
               for (var x = 0; x < $scope.financeiros.length; x++) {
                 $scope.financeiros[x].financeiro.valor = parseFloat($scope.notaFiscal ? $scope.notaFiscal.vrtotal : 0) / (parseFloat($scope.financeiros.length));
@@ -221,31 +253,9 @@
 
         $scope.saveNFeNota = function() {
 
-
-         /*
-
-            $('.nfSaidaForm').formValidation({
-              framework : 'bootstrap',
-              icon : {
-                valid : 'glyphicon glyphicon-ok',
-                invalid : 'glyphicon glyphicon-remove',
-                validating : 'glyphicon glyphicon-refresh'
-              },
-              fields : {
-                '#nfnumber' : integerNotEmptyValidation,
-              }
-            }).on('success.form.fv', function(e) {
-                // Save the form data via an Ajax request
-                e.preventDefault();
-
-                debugger;
-            });
-  console.log($scope.notaFiscal); */
-
-       //     factory.fnCreateObjectNFSaida = function (_notaFiscal,_produtos,financeiros, _action) {
             fNotaFiscal.fnCreateObjectNFSaida(localStorageService.get('empresa'),$scope.notaFiscal,$scope.produtos,$scope.financeiros,$scope.enderecos[0], 'INSERT');
 
-            };
+        };
 
 
 

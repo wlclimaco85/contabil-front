@@ -5,14 +5,88 @@
 <div class="row">
     <div class="form-group col-sm-6">
         <label for="exampleInputPassword1">Informações complementares</label>
-        <textarea class="form-control" rows="7" ng-model="site.titulo" id="Observação"></textarea>
+        <textarea class="form-control" rows="7" ng-model="notaFiscal.info.informacoesadicionais.informacoescomplementaresinteressecontribuinte" id="Observação"></textarea>
     </div>
 
     <div class="form-group col-sm-6">
         <label for="exampleInputPassword1">Informações para o Fisco</label>
-        <textarea class="form-control" rows="7" ng-model="site.titulo" id="Observação"> </textarea>
+        <textarea class="form-control" rows="7" ng-model="notaFiscal.info.informacoesadicionais.informacoesadicionaisinteressefisco" id="Observação"> </textarea>
     </div>
 </div>
 </div>
 </div>
+</div>
+<div class="panel panel-default" style="background:#EEEEEE">
+    <div class="panel-body">
+        <div class="col-sm-12">
+        <h2>Observações Contribuinte</h2>
+            <div ng-repeat="conti in contribuintes">
+                <div class="form-group col-sm-5">
+                    <label for="exampleInputPassword1">Identificacao Campo</label>
+                    <textarea class="form-control" rows="3" ng-model="notaFiscal.info.informacoesadicionais.observacoescontribuinte[$index].identificacaocampo" id="Observação"></textarea>
+                </div>
+
+                <div class="form-group col-sm-5">
+                    <label for="exampleInputPassword1">Conteudo Campo</label>
+                    <textarea class="form-control" rows="3" ng-model="notaFiscal.info.informacoesadicionais.observacoescontribuinte[$index].conteudocampo" id="Observação"> </textarea>
+                </div>
+                <div class="col-sm-2" style="margin-top:20px">
+                    <button type="button" ng-click="createForm6()" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default" style="background:#EEEEEE">
+    <div class="panel-body">
+        <div class="col-sm-12">
+            <h2>Observacões Fisco</h2>
+            <div ng-repeat="fisco in fiscos">
+                <div class="form-group col-sm-5">
+                    <label for="exampleInputPassword1">Identificacao Campo</label>
+                    <textarea class="form-control" rows="3" ng-model="notaFiscal.info.informacoesadicionais.observacoesfisco[$index].identificacaocampo" id="Observação"></textarea>
+                </div>
+
+                <div class="form-group col-sm-5">
+                    <label for="exampleInputPassword1">Conteudo Campo</label>
+                    <textarea class="form-control" rows="3" ng-model="notaFiscal.info.informacoesadicionais.observacoesfisco[$index].conteudocampo" id="Observação"> </textarea>
+                </div>
+                <div class="col-sm-2" style="margin-top:20px">
+                    <button type="button" ng-click="createForm7()" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel panel-default" style="background:#EEEEEE">
+    <div class="panel-body">
+        <div class="col-sm-12">
+            <h2>Processos Refenciado</h2>
+            <div ng-repeat="proc in processos">
+                <div class="form-group col-sm-5">
+                    <label for="exampleInputPassword1">Informações complementares</label>
+                    <textarea class="form-control" rows="3" ng-model="notaFiscal.info.informacoesadicionais.processosrefenciado[$index].identificadorprocessoouatoconcessorio" id="Observação"></textarea>
+                </div>
+
+                <div class="form-group col-sm-5">
+                    <label for="exampleInputPassword1">Informações para o Fisco</label>
+                    <div class="row ">
+                        <ui-select ng-model="notaFiscal.info.informacoesadicionais.processosrefenciado[$index].identificacaocampo" theme="bootstrap">
+                            <ui-select-match placeholder="">{{$select.selected.descricao}}</ui-select-match>
+                            <ui-select-choices repeat="item in INDICADOR_ORIGEM_PROCESSO | filter: $select.search">
+                              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+
+                            </ui-select-choices>
+                        </ui-select>
+                     </div>
+                </div>
+                <div class="col-sm-2" style="margin-top:20px">
+                    <button type="button" ng-click="createForm8()" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

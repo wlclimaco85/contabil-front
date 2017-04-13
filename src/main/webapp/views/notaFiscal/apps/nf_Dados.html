@@ -127,7 +127,7 @@
                     <div class="col-sm-2 ">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Série nota:</label>
-                            <label for="exampleInputPassword1" name="nome" ng-init="notaFiscal.info.identificacao.serie = empresa.configuracao.confNFe.serieEnvio">{{empresa.configuracao.confNFe.serieEnvio.value}}</label>
+                            <label for="exampleInputPassword1" name="nome" ng-init="notaFiscal.info.identificacao.serie.id = empresa.configuracao.confNFe.serieEnvio.id">{{empresa.configuracao.confNFe.serieEnvio.value}}</label>
 
                         </div>
                     </div>
@@ -188,7 +188,7 @@
             <div class="col-sm-3 ">
                 <div class="form-group">
                     <label for="BindFinal"><span>Destinado a consumidor final</span></label>
-                <toggle ng-model="notaFiscal.info.identificacao.operacaoconsumidorfinal"
+                <toggle ng-model="notaFiscal.info.identificacao.operacaoconsumidorfinal.id"
                                                 ng-init="financeiro.pagarAgora = '2'" style="android" on="Sim"
                                                 off="Não" onstyle="btn-default" offstyle="btn-info"
                                                 ng-true-value="'2'" ng-false-value="'1'"></toggle>
@@ -196,16 +196,19 @@
                 </div>
             </div>
             <div class="col-sm-3">
+
+
                 <div class="form-group">
                     <label for="exampleInputPassword1">Tipo de operação</label>
                     <div class="row ">
-                       <span class="ui-select">
-                            <select ng-model="notaFiscal.info.identificacao.tipo.id">
-                                <option value="1" selected="selected"> Saída </option>
-                                <option value="0">Entrada</option>
-                            </select>
-                        </span>
-                     </div>
+                        <ui-select ng-model="notaFiscal.info.identificacao.tipo" theme="bootstrap">
+                            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                            <ui-select-choices repeat="item in TIPO | filter: $select.search">
+                              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+
+                            </ui-select-choices>
+                          </ui-select>
+                    </div>
                 </div>
             </div>
         </div>
@@ -215,14 +218,13 @@
                 <div class="form-group">
                     <label for="exampleInputPassword1">Finalidade da emissão:</label>
                     <div class="row ">
-                       <span class="ui-select">
-                            <select ng-model="notaFiscal.info.identificacao.finalidade.id">
-                                <option value="1" selected="selected">Normal</option>
-                                <option value="2">Complementar</option>
-                                <option value="3">De ajuste</option>
-                                <option value="4">Devolução de mercadoria</option>
-                            </select>
-                        </span>
+                        <ui-select ng-model="notaFiscal.info.identificacao.finalidade" theme="bootstrap">
+                            <ui-select-match placeholder="">{{$select.selected.descricao}}</ui-select-match>
+                            <ui-select-choices repeat="item in FINALIDADE | filter: $select.search">
+                              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+
+                            </ui-select-choices>
+                        </ui-select>
                      </div>
                 </div>
             </div>
@@ -230,14 +232,13 @@
                 <div class="form-group">
                     <label for="exampleInputPassword1">Destino da operação:</label>
                     <div class="row ">
-                       <span class="ui-select">
-                            <select ng-model="notaFiscal.info.identificacao.identificadorlocaldestinooperacao.id">
-                                <option value="0" selected="selected"></option>
-                                <option value="1">Operação interna</option>
-                                <option value="2">Operação interestadual</option>
-                                <option value="3">Operação com exterior</option>
-                            </select>
-                        </span>
+                        <ui-select ng-model="notaFiscal.info.identificacao.identificadorlocaldestinooperacao" theme="bootstrap">
+                            <ui-select-match placeholder="">{{$select.selected.descricao}}</ui-select-match>
+                            <ui-select-choices repeat="item in IDENTIFICADOR_LOCAL_DESTINO_OPERACAO | filter: $select.search">
+                              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+
+                            </ui-select-choices>
+                        </ui-select>
                      </div>
                 </div>
             </div>
@@ -465,16 +466,13 @@
                 <div class="form-group">
                     <label for="exampleInputPassword1">Presença do comprador:</label>
                     <div class="row ">
-                       <span class="ui-select">
-                            <select ng-model="notaFiscal.info.identificacao.indicadorpresencacomprador">
-                                <option value="0">Não se aplica</option>
-                                <option value="1">Operação presencial</option>
-                                <option value="2">Operação pela internet</option>
-                                <option value="3">Operação por teleatendimento</option>
-                                <option value="4">NFC-e com entrega a domicílio</option>
-                                <option value="9">Não presencial, outros</option>
-                            </select>
-                        </span>
+                        <ui-select ng-model="notaFiscal.info.identificacao.indicadorpresencacomprador" theme="bootstrap">
+                            <ui-select-match placeholder="">{{$select.selected.descricao}}</ui-select-match>
+                            <ui-select-choices repeat="item in INDICADOR_PRESENCA_COMPRADOR | filter: $select.search">
+                              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+
+                            </ui-select-choices>
+                        </ui-select>
                      </div>
                 </div>
             </div>
