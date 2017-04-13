@@ -97,6 +97,10 @@
 			}
 		}
 
+		$scope.user = {
+		    name: 'awesome user'
+		};
+
 		function status() {}
 
 		function toggleOne(selectedItems) {
@@ -117,19 +121,19 @@
 	}
 })();
 (function () {
-	angular.module('wdApp.apps.pedidoVenda.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter']).run([
-                'validator',
-                function (validator) {
-                    validator.setValidElementStyling(false);
-                    validator.setInvalidElementStyling(false);
-                    editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
-            }])
-		.controller('PedidoVendaInsertController', function (localStorageService, $rootScope, $scope, fModels, SysMgmtData, doisValorFactory, fNotaFiscal) {
+	angular.module('wdApp.apps.pedidoVenda.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+	.controller('PedidoVendaInsertController', function (localStorageService, $rootScope, $scope, fModels, SysMgmtData, doisValorFactory, fNotaFiscal) {
 			var vm = this;
 
 			$scope.notaFiscalSaida = {
 
 			};
+
+			 $scope.user = {
+    name: 'awesome user'
+  };
+
+
 			$scope.cliente = {};
 			$scope.formaPg = {};
 			$scope.endereco = null;

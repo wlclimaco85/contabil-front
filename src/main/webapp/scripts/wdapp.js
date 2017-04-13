@@ -472,7 +472,12 @@ var WebDaptiveAppConfig = {
 	}]);
 
 	//run each time angular app comes up (runs only once)
-	wdApp.run(function($rootScope, $location, localStorageService) {
+	wdApp.run(function($rootScope, $location, localStorageService,editableOptions,validator) {
+
+		validator.setValidElementStyling(false);
+        validator.setInvalidElementStyling(false);
+
+        editableOptions.theme = 'bs3'; // bootstrap
 
 		$rootScope.main = {
 			brand: 'E-Contábil',
