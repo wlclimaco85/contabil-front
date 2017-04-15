@@ -2,7 +2,7 @@
     angular.module('wdApp.apps.nfSaida', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('NfSaidasController', nfSaidaController);
 
-    function nfSaidaController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory,tableColumnsFactory,tableOptionsFactory,FiltersFactory) {
+    function nfSaidaController($filter,localStorageService,$scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory,tableColumnsFactory,tableOptionsFactory,FiltersFactory,doisValorFactory) {
         var vm = this;
         vm.selected = {};
         vm.selectAll = false;
@@ -15,8 +15,53 @@
         vm.persons = {};
         vm.dtInstancePdVendas = {};
 
+        doisValorFactory.notaFiscal($scope);
+
+        //cnae fiscal/api/cnae/fetchPage
+        SysMgmtData.processPostPageData("main/api/request", {
+                url: "fiscal/api/cnae/fetchPage",
+                token: $rootScope.authToken,
+                request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
+            }, function(res) {
+              //  debugger
+              console.log('cnaes')
+                $scope.cnaes = res.cnaeList;
+            });
+
+
+         SysMgmtData.processPostPageData("main/api/request", {
+                url: "fiscal/api/regime/fetchPage",
+                token: $rootScope.authToken,
+                request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
+            }, function(res) {
+                $scope.regime = res.regimeList;
+            });
+
+        $scope.empresa = localStorageService.get('empresa');
+console.log($scope.empresa)
         $scope.pedidoVenda = {
             tipoPessoa: 2
+        };
+
+
+        $scope.showRegime = function() {
+          var selected = $filter('filter')($scope.regime, {value: $scope.empresa.regime ? $scope.empresa.regime.nome : {}});
+          return ($scope.empresa.regime ? $scope.empresa.regime.nome : {} && selected.length) ? selected[0].text : 'Not set';
+        };
+
+        $scope.showStatus = function() {
+          var selected = $filter('filter')($scope.cnaes, {value: $scope.empresa.cnaes[0].cnae});
+          return ($scope.empresa.cnaes[0].cnae && selected.length) ? selected[0].text : 'Not set';
+        };
+
+        $scope.showAmbiente = function() {debugger
+          var selected = $filter('filter')($scope.AMBIENTE, {value: $scope.empresa.configuracao.confNFe.ambienteEnvio});
+          return ($scope.empresa.configuracao.confNFe.ambienteEnvio && selected.length) ? selected[0].text : 'Not set';
+        };
+
+        $scope.updateEmpresa = function() {
+          debugger
+          //return  'teste';//$http.post('/updateUser', {id: $scope.user.id, name: data});
         };
 
         $scope.toggle = function() {

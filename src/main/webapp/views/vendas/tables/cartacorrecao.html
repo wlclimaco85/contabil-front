@@ -1,12 +1,13 @@
 
+
 	<div class="container" ng-app ng-init="tab=1" style="width: 100%">
                     <ul class="tabs-nav">
                       <li><a ng-click="tab=1" ng-class="{'active' : tab==1}" data-i18n="Listas de Notas"></a></li>
-                      <li><a ng-click="tab=3" ng-class="{'active' : tab==3}" data-i18n="Carta de CorreÃ§Ã£o"></a></li>
+                      <li><a ng-click="tab=3" ng-class="{'active' : tab==3}" data-i18n="Carta de Correção"></a></li>
                       <li><a ng-click="tab=4" ng-class="{'active' : tab==4}" data-i18n="Carregar XML"></a></li>
                       <li><a ng-click="tab=5" ng-class="{'active' : tab==5}" data-i18n="Downloads Notas"></a></li>
                       <li><a ng-click="tab=6" ng-class="{'active' : tab==6}" data-i18n="Status CEFAZ"></a></li>
-                      <li><a ng-click="tab=7" ng-class="{'active' : tab==7}" data-i18n="ConfiguraÃ§Ã£o"></a></li>
+                      <li><a ng-click="tab=7" ng-class="{'active' : tab==7}" data-i18n="Configuração"></a></li>
                     </ul>
                     <div class="tabs-container">
                       <div class="tab-content" ng-show="tab == 1">
@@ -15,23 +16,19 @@
 							</div>
                       </div>
                       <div class="tab-content" ng-show="tab == 3">
-							<div ng-controller="CartaCorrecaoController as showCase">
-							    <table datatable dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" class="row-border hover"></table>
-							</div>
+
                       </div>
                       <div class="tab-content" ng-show="tab == 4">
-							<div ng-include="'views/vendas/forms/cadCarregarXML.html'"></div>
+
                       </div>
                       <div class="tab-content" ng-show="tab == 5">
-							<div ng-include="'views/vendas/forms/CadDownloadNFe.html'"></div>
+
                       </div>
                       <div class="tab-content" ng-show="tab == 6">
-							<div ng-include="'views/vendas/forms/cadStatusCEFAZ.html'"></div>
+
                       </div>
                       <div class="tab-content" ng-show="tab == 7">
-                        <div ng-controller="NfSaidasController as showCase">
-							               <div ng-include="'views/vendas/forms/cadConfiguracaoNfe.html'"></div>
-                        </div>
+
                       </div>
                     </div>
                   </div>

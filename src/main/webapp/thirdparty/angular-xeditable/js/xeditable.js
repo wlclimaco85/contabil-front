@@ -616,7 +616,41 @@ angular.module('xeditable').directive('editableTextarea', ['editableDirectiveFac
   function(editableDirectiveFactory) {
     return editableDirectiveFactory({
       directiveName: 'editableTextarea',
-      inputTpl: '<textarea></textarea>',
+      inputTpl: '<input type="file"></input>',
+      addListeners: function() {
+        var self = this;
+        self.parent.addListeners.call(self);
+        // submit textarea by ctrl+enter even with buttons
+        if (self.single && self.buttons !== 'no') {
+          self.autosubmit();
+        }
+      },
+      autosubmit: function() {
+        var self = this;
+        self.inputEl.bind('keydown', function(e) {
+          if (self.attrs.submitOnEnter) {
+            if (e.keyCode === 13 && !e.shiftKey) {
+              self.scope.$apply(function() {
+                self.scope.$form.$submit();
+              });
+            }
+          } else if ((e.ctrlKey || e.metaKey) && (e.keyCode === 13) || 
+                (e.keyCode === 9 && self.editorEl.attr('blur') === 'submit')) {
+            self.scope.$apply(function() {
+              self.scope.$form.$submit();
+            });
+          }
+        });
+      }
+    });
+}]);
+
+//textarea
+angular.module('xeditable').directive('editableTextFile', ['editableDirectiveFactory',
+  function(editableDirectiveFactory) { debugger
+    return editableDirectiveFactory({
+      directiveName: 'editableTextFile',
+      inputTpl: '<input type="file" id="exampleInputFile"><p class="help-block">Example block-level help text here.</p>',
       addListeners: function() {
         var self = this;
         self.parent.addListeners.call(self);
@@ -2639,6 +2673,7 @@ angular.module('xeditable').factory('editableThemes', function() {
           case 'editableWeek':
           case 'editablePassword':
           case 'editableDatetimeLocal':
+          case 'editableTextFile':
             this.inputEl.addClass('form-control');
             if(this.theme.inputClass) {
               // don`t apply `input-sm` and `input-lg` to select multiple

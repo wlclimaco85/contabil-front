@@ -355,6 +355,11 @@ var WebDaptiveAppConfig = {
 	            ,'wdApp.ajaxCall.tributacao'
 	            ,'wdApp.apps.tributacao.select'
 
+	            ,'wdApp.apps.cartaCorrecao'
+	            ,'wdApp.apps.cartaCorrecao.insert'
+	            ,'wdApp.apps.cartaCorrecao.update'
+	            ,'wdApp.apps.cartaCorrecao.delete'
+
 	            ,'wdApp.apps.situacao'
 	            ,'wdApp.apps.situacao.insert'
 	            ,'wdApp.apps.situacao.update'

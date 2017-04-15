@@ -1,0 +1,370 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="col-sm-12">
+	<div class="col-sm-6">
+		<div id="col1" class="halfBox onLeft">
+			<div id="dadosEmpresa" class="tableList bottomSpace">
+				<div class="row " style="margin-top : 20px"></div>
+					<div class="panel panel-default" style="background:#EEEEEE">
+						<div class="panel-heading" style="background: #DDDDDD">
+							<div class="row" style="background : #FFF">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Razão Social:</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-text="empresa.razao" onaftersave="updateEmpresa()" >{{ empresa.razao || '' }}</a>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Nome Fantasia:</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-text="empresa.nome" onaftersave="updateEmpresa()" >{{ empresa.nome || '' }}</a>
+								</div>
+							</div>
+							<div class="row" style="background : #FFF">
+								<div class="form-group col-sm-6">
+
+								<label for="exampleInputPassword1">CNPJ ou CPF:</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<div ng-repeat="produto in empresa.documentos | filter:{ documentoType: 'CNPJ' || 'CPF' } ">
+									<a href="#" editable-text="produto.numero" onaftersave="updateEmpresa()" >{{ produto.numero || 'empty' }}</a>
+								</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Inscr. Est.:</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<div ng-repeat="produto in empresa.documentos | filter:{ documentoType: 'IE' } ">
+									<a href="#" editable-text="produto.numero" onaftersave="updateEmpresa()" >{{ produto.numero || 'empty' }}</a>
+								</div>
+								</div>
+							</div>
+							<div class="row" style="background : #FFF">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Endereço:</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-text="empresa.enderecos[0].logradouro" >{{ empresa.enderecos[0].logradouro || 'empty' }}</a>
+								</div>
+							</div>
+							<div class="row" >
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Bairro:</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-text="empresa.enderecos[0].bairro" >{{ empresa.enderecos[0].bairro || 'empty' }}</a>
+								</div>
+							</div>
+							<div class="row" style="background : #FFF">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Cidade/UF:</label>
+								</div>
+								<div class="form-group col-sm-3">
+								<a href="#" editable-text="empresa.enderecos[0].cidade.nome" >{{ empresa.enderecos[0].cidade.nome || 'empty' }}</a>
+								</div>
+								<div class="form-group col-sm-3">
+								<a href="#" editable-text="empresa.enderecos[0].cidade.estado.sigla" >{{ empresa.enderecos[0].cidade.estado.sigla || 'empty' }}</a>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">CEP:</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-text="empresa.enderecos[0].cep" >{{ empresa.enderecos[0].cep || 'empty' }}</a>
+								</div>
+							</div>
+							<div class="row" style="background : #FFF">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Telefone:</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-text="empresa.telefones[0].numero" >{{ empresa.telefones[0].numero || 'empty' }}</a>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">E-mail:</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-text="empresa.emails[0].email" >{{ empresa.emails[0].email || 'empty' }}</a>
+								</div>
+							</div>
+							<div class="row" style="background : #FFF">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Inscr. Municipal:</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<div ng-repeat="produto in empresa.documentos | filter:{ documentoType: 'IM' } ">
+									<a href="#" editable-text="produto.numero" onaftersave="updateEmpresa()" >{{ produto.numero || 'empty' }}</a>
+								</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-6">
+									<label for="exampleInputPassword1">CNAE fiscal:</label>
+								</div>
+								<div class="col-sm-6">
+									<a href="#" editable-select="empresa.cnaes[0].id" e-ng-options="se.id as se.cnae for se in cnaes">{{ showStatus() }}</a>
+								</div>
+							</div>
+							<div class="row" style="background : #FFF">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Código Regime Tribut.:</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-select="empresa.regime.id" e-ng-options="sa.id as sa.nome for sa in regime">{{ showRegime() }}</a>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Cód.Reg.Trib. serviços:</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div>
+			<div class="col-sm-6">
+				<div class="row " style="margin-top : 20px"></div>
+					<div class="panel panel-default" style="background:#EEEEEE">
+						<div class="panel-heading" style="background: #DDDDDD">
+							<div class="row">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Ambiente de envio:</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-select="empresa.configuracao.confNFe.ambienteEnvio" e-ng-options="ss.id as ss.descricao for ss in AMBIENTE">{{ showAmbiente() }}</a>
+								</div>
+							</div>
+							<div class="row" style="background : #FFF">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Série de envio:</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-select="empresa.configuracao.confNFe.serie" e-ng-options="s.id as s.descricao for s in SERIE" onaftersave="updateEmpresa()">{{ showAmbiente() }}</a>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Modelo:</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-select="empresa.configuracao.confNFe.modelo" e-ng-options="s.id as s.descricao for s in MODELO" onaftersave="updateEmpresa()">{{ showAmbiente() }}</a>
+								</div>
+							</div>
+							<div class="row" style="background : #FFF">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Tipo:</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-select="empresa.configuracao.confNFe.tipo" e-ng-options="s.id as s.descricao for s in TIPO" onaftersave="updateEmpresa()">{{ showAmbiente() }}</a>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Anexar XML no e-mail?</label>
+								</div>
+								<div class="form-group col-sm-6">
+									<a href="#" editable-checkbox="empresa.configuracao.confNFe.anexarXmlEmail" >
+									    {{ empresa.configuracao.confNFe.anexarXmlEmail && "Sim" || "Não" }}
+									</a>
+								</div>
+							</div>
+							<div class="row" style="background : #FFF">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Serviços na mesma nota?</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-checkbox="empresa.configuracao.confNFe.servMsmNota" >
+									    {{ empresa.configuracao.confNFe.servMsmNota && "Sim" || "Não" }}
+									</a>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Preencher data/hora saída?</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-checkbox="empresa.configuracao.confNFe.preencherDataHora" >
+									    {{ empresa.configuracao.confNFe.preencherDataHora && "Sim" || "Não" }}
+									</a>
+								</div>
+							</div>
+							<div class="row" style="background : #FFF">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Presença comprador:</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-select="empresa.configuracao.confNFe.ambienteEnvios.id" e-ng-options="s.id as s.descricao for s in INDICADOR_PRESENCA_COMPRADOR" onaftersave="updateEmpresa()">{{ showRegime() }}</a>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Consumidor final?</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-select="empresa.configuracao.confNFe.ambienteEnvioss.id" e-ng-options="s.id as s.descricao for s in regime" onaftersave="updateEmpresa()">{{ showRegime() }}</a>
+								</div>
+							</div>
+							<div class="row" style="background : #FFF">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">ICMS padrão (%):</label>
+								</div>
+								<div class="form-group col-sm-6 popover-wrapper">
+								<a href="#" editable-text="empresa.configuracao.confNFe.icmsPadrao" >{{ empresa.configuracao.confNFe.icmsPadrao || 'empty' }}</a>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">IPI padrão (%):</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-text="empresa.configuracao.confNFe.ipiPadrao" >{{ empresa.configuracao.confNFe.ipiPadrao || 'empty' }}</a>
+								</div>
+							</div>
+							<div class="row" style="background : #FFF">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">PIS padrão (%):</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-text="empresa.configuracao.confNFe.pisPadrao" >{{ empresa.configuracao.confNFe.pisPadrao || 'empty' }}</a>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">COFINS padrão (%):</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-text="empresa.configuracao.confNFe.cofinsPadrao" >{{ empresa.configuracao.confNFe.cofinsPadrao || 'empty' }}</a>
+								</div>
+							</div>
+							<div class="row" style="background : #FFF">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Inform. Adic. padrão:</label>
+								</div>
+								<div class="form-group col-sm-6">
+								<a href="#" editable-text="empresa.configuracao.confNFe.informacaoAdd" >{{ empresa.configuracao.confNFe.informacaoAdd || 'empty' }}</a>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-6">
+								<label for="exampleInputPassword1">Logomarca para o Danfe:</label>
+								</div>
+								<div class="form-group col-sm-6 popover-wrapper">
+								<a href="#" editable-textarea="user.name" >{{ user.name || 'empty' }}</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="col-sm-6">
+					<div id="col1" class="halfBox onLeft">
+						<div id="dadosEmpresa" class="tableList bottomSpace">
+							<div class="row " style="margin-top : 20px"></div>
+								<div class="panel panel-default" style="background:#EEEEEE">
+									<div class="panel-heading" style="background: #DDDDDD">
+										<div class="row" style="background : #FFF">
+											<div class="form-group col-sm-6">
+											<label for="exampleInputPassword1">CNPJ:</label>
+											</div>
+											<div class="form-group col-sm-6">
+											<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-sm-6">
+											<label for="exampleInputPassword1">Entidade:</label>
+											</div>
+											<div class="form-group col-sm-6">
+											<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+											</div>
+										</div>
+										<div class="row" style="background : #FFF">
+											<div class="form-group col-sm-6">
+											<label for="exampleInputPassword1">Empresa certificadora:</label>
+											</div>
+											<div class="form-group col-sm-6">
+											<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-sm-6">
+											<label for="exampleInputPassword1">Situação:</label>
+											</div>
+											<div class="form-group col-sm-6">
+											<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+											</div>
+										</div>
+										<div class="row" style="background : #FFF">
+											<div class="form-group col-sm-6">
+											<label for="exampleInputPassword1">Data de validade:</label>
+											</div>
+											<div class="form-group col-sm-6">
+											<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+					<div id="col1" class="halfBox onLeft">
+						<div id="dadosEmpresa" class="tableList bottomSpace">
+							<div class="row " style="margin-top : 20px"></div>
+								<div class="panel panel-default" style="background:#EEEEEE">
+									<div class="panel-heading" style="background: #DDDDDD">
+										<div class="row" style="background : #FFF">
+											<div class="form-group col-sm-6">
+											<label for="exampleInputPassword1">Total CFOPs cadastrados:</label>
+											</div>
+											<div class="form-group col-sm-6">
+											<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+											</div>
+										</div>
+										<div class="row" style="background : #FFF">
+											<div class="form-group col-sm-6">
+											<label for="exampleInputPassword1">CFOP marcado como padrão:</label>
+											</div>
+											<div class="form-group col-sm-6">
+											<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+					<div id="col1" class="halfBox onLeft">
+						<div id="dadosEmpresa" class="tableList bottomSpace">
+							<div class="row " style="margin-top : 20px"></div>
+								<div class="panel panel-default" style="background:#EEEEEE">
+									<div class="panel-heading" style="background: #DDDDDD">
+										<div class="row" style="background : #FFF">
+											<div class="form-group col-sm-6">
+											<label for="exampleInputPassword1">SMTP próprio desativado. Sistema utilizando configurações globais de envio de e-mails.</label>
+											</div>
+											<div class="form-group col-sm-6">
+											<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+		
