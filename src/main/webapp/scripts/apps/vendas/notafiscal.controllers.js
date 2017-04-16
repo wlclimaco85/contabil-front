@@ -45,18 +45,84 @@ console.log($scope.empresa)
 
 
         $scope.showRegime = function() {
-          var selected = $filter('filter')($scope.regime, {value: $scope.empresa.regime ? $scope.empresa.regime.nome : {}});
-          return ($scope.empresa.regime ? $scope.empresa.regime.nome : {} && selected.length) ? selected[0].text : 'Not set';
+          var sReturn = 'Not set';
+
+          console.log($scope.empresa.regime)
+
+           console.log($scope.regime)
+          for(var x = 0;x < $scope.regime.length;x++)
+          {
+              if( $scope.empresa.regime && $scope.regime[x].id == $scope.empresa.regime.id)
+              {
+                  sReturn =  $scope.regime[x].nome
+              }
+          }
+      
+          return sReturn;
         };
 
         $scope.showStatus = function() {
-          var selected = $filter('filter')($scope.cnaes, {value: $scope.empresa.cnaes[0].cnae});
-          return ($scope.empresa.cnaes[0].cnae && selected.length) ? selected[0].text : 'Not set';
+          var sReturn = 'Not set';
+
+          console.log($scope.empresa.cnaes[0].idCnae.id)
+
+           console.log($scope.cnaes)
+          for(var x = 0;x < $scope.cnaes.length;x++)
+          {
+              if($scope.cnaes[x].id == $scope.empresa.cnaes[0].idCnae.id)
+              {
+                  sReturn =  $scope.cnaes[x].cnae
+              }
+          }
+      
+          return sReturn;
         };
 
-        $scope.showAmbiente = function() {debugger
-          var selected = $filter('filter')($scope.AMBIENTE, {value: $scope.empresa.configuracao.confNFe.ambienteEnvio});
-          return ($scope.empresa.configuracao.confNFe.ambienteEnvio && selected.length) ? selected[0].text : 'Not set';
+        $scope.showAmbiente = function() {
+
+            return $scope.empresa.configuracao.confNFe.ambienteEnvio ? doisValoresShow($scope.AMBIENTE,$scope.empresa.configuracao.confNFe.ambienteEnvio.id) : 'Not set';
+        }
+
+        $scope.showSerie = function() {
+
+            return $scope.empresa.configuracao.confNFe.serie ? doisValoresShow($scope.SERIE,$scope.empresa.configuracao.confNFe.serie.id) : 'Not set';
+        }
+
+        $scope.showModelo = function() {
+
+            return $scope.empresa.configuracao.confNFe.modelo ? doisValoresShow($scope.MODELO,$scope.empresa.configuracao.confNFe.modelo.id) : 'Not set';
+        }
+
+        $scope.showTipo = function() {
+
+            return $scope.empresa.configuracao.confNFe.Tipo ? doisValoresShow($scope.TIPO,$scope.empresa.configuracao.confNFe.Tipo.id) : 'Not set';
+        }
+
+        $scope.presCompr = function() {
+
+            return $scope.empresa.configuracao.confNFe.presCompr ? doisValoresShow($scope.INDICADOR_PRESENCA_COMPRADOR,$scope.empresa.configuracao.confNFe.presCompr.id) : 'Not set';
+        }
+
+        $scope.destConsFinal = function() {
+
+            return $scope.empresa.configuracao.confNFe.destConsFinal ? doisValoresShow($scope.OPERACAO_CONSUMIDOR_FINAL,$scope.empresa.configuracao.confNFe.destConsFinal.id) : 'Not set';
+        }
+
+        function doisValoresShow(aArrays,sKey) {
+          var sReturn = 'Not set';
+
+          console.log(sKey)
+
+           console.log(aArrays)
+          for(var x = 0;x < aArrays.length;x++)
+          {
+              if(aArrays[x].id == sKey)
+              {
+                  sReturn =  aArrays[x].descricao
+              }
+          }
+      
+          return sReturn;
         };
 
         $scope.updateEmpresa = function() {

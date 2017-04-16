@@ -243,15 +243,15 @@ qat.model.transaction = function (_user, _token, modelAction)
 	}
 }
 
-qat.model.fnCnae = function (_oObjet)
+qat.model.fnCnae = function (_oObjet,_modelAction,_user)
 {
 	return idCnae = {
 
 		id: _oObjet.id,
-		modelAction: _oObjet.modelAction,
-		createUser: "System",
+		modelAction: _modelAction,
+		createUser: _user,
 		createDateUTC: (new Date()).getTime(),
-		modifyUser: "System",
+		modifyUser: _user,
 		modifyDateUTC: (new Date()).getTime(),
 
 	}
@@ -1398,26 +1398,499 @@ qat.model.fnUsuario = function (_oObjet, modelAction, user)
 	}
 }
 
+qat.model.fnDocumentos = function (_documentos, _modelAction,_userId)
+{
+	
+	var _emprId = null;
+	var estoques = [];
+	if (localStorage.getItem('empresa') == null ||
+		localStorage.getItem('empresa') == "")
+	{
+		_emprId = null;
+	}
+	else
+	{
+		_emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	}
+	
+	for(var x= 0; x < _documentos.length;x++)
+	{
+		var _id = null;
+		if (_documentos[x].id == "" || _documentos[x].id == " ")
+		{
+			_id = null;
+		}
+	
+		estoque = {
+				id: _id,
+				documentoType: _documentos[x].documentoType,
+				data: _documentos[x].data,
+				estado: _documentos[x].estado,
+				documentoTypeEnumValue: _documentos[x].documentoTypeEnumValue,
+				numero: _documentos[x].numero,
+				parentId: 0,
+				emprId: _emprId,
+				processId: 0,
+				tableEnumValue: 0,
+				userId: _userId,
+				modelAction: _modelAction,
+				createUser: _userId,
+				createDateUTC: (new Date()).getTime(),
+				modifyUser: _userId,
+				modifyDateUTC: (new Date()).getTime()
+	
+			}
+		estoques.push(estoque);
+	}
+		//////debugger
+	return estoques;
+}
+
+
+//Endereco Object
+qat.model.fnEnderecos = function (_oObjets, modelAction, user)
+{
+	var _emprId = null;
+	var endereco = {}
+	var enderecos = [];
+	if (localStorage.getItem('empresa') == null ||
+		localStorage.getItem('empresa') == "")
+	{
+		_emprId = null;
+	}
+	else
+	{
+		_emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	}
+
+	for(var x= 0; x < _oObjets.length;x++)
+	{
+	var _id = null;
+	if ((_oObjets[x] !== undefined) && (_oObjets[x].id !== undefined))
+	{
+		if (_oObjets[x].id == "" || _oObjets[x].id == " ")
+		{
+			_id = null;
+		}
+		else
+		{
+			_id = _oObjets[x].id;
+		}
+
+		endereco = {
+			id: _id,
+			codIbge: _oObjets[x].codIbge,
+			logradouro: _oObjets[x].logradouro,
+			bairro: _oObjets[x].bairro,
+			numero: _oObjets[x].numero,
+			enderecoTypeValue: _oObjets[x].enderecoTypeValue,
+			cep: _oObjets[x].cep,
+			latitude: _oObjets[x].latitude,
+			longitude: _oObjets[x].longitude,
+			complemento: _oObjets[x].complemento,
+			cidade:
+			{
+				id: _oObjets[x].cidade ? _oObjets[x].cidade.id : null
+			},
+			parentId: _oObjets[x].parentId,
+			emprId: _emprId,
+			processId: _oObjets[x].processId,
+			tableEnumValue: _oObjets[x].tableEnumValue,
+			modelAction: _modelAction,
+			createUser: _user,
+			createDateUTC: (new Date()).getTime(),
+			modifyUser: _user,
+			modifyDateUTC: (new Date()).getTime()
+		}
+
+
+		enderecos.push(endereco);
+	}
+}
+	return enderecos;
+}
+
+qat.model.Emails = function (_oObjet,_modelAction,_user)
+{
+	var email = {};
+	var emails = [];
+	for(var x= 0; x < _oObjet.length;x++)
+	{
+		email = qat.model.Email(_oObjet[x],_modelAction,_user)
+		emails.push(email)
+	}
+
+	return emails;
+}
+
+
+qat.model.Telefones = function (_oObjet,_modelAction,_user)
+{
+	var email = {};
+	var emails = [];
+	for(var x= 0; x < _oObjet.length;x++)
+	{
+		email = qat.model.Telefone(_oObjet[x],_modelAction,_user)
+		emails.push(email)
+	}
+
+	return emails;
+}
+
+qat.model.Cnaes = function (_oObjet,_modelAction,_user)
+{
+	var email = {};
+	var emails = [];
+	for(var x= 0; x < _oObjet.length;x++)
+	{
+		email = qat.model.fnCnae(_oObjet[x],_modelAction,_user)
+		emails.push(email)
+	}
+
+	return emails;
+}
+
+qat.model.confGeral = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.fusoHorario = _oObjet.fusoHorario;
+	this.casasDecimais = _oObjet.casasDecimais;
+	this.diasCartaCobr = _oObjet.diasCartaCobr;
+	this.infPosicionarMouse = _oObjet.infPosicionarMouse;
+	this.cnpjCPFUnico = _oObjet.cnpjCPFUnico;
+	this.ativNFCe = _oObjet.ativNFCe;
+	this.impCodPersonalizado = _oObjet.impCodPersonalizado;
+	this.logListRelImp = _oObjet.logListRelImp;
+	this.obsProdFinProd = _oObjet.obsProdFinProd;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.confFiscal = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.princAtividade = {id :  _oObjet.princAtividade.id};
+	this.regime = {id : _oObjet.regime.id};
+	this.aliqSimples = _oObjet.aliqSimples;
+	this.aliqICMS = _oObjet.aliqICMS;
+	this.aliqPIS = _oObjet.aliqPIS;
+	this.aliqCONFINS = _oObjet.aliqCONFINS;
+	this.aliqIRPJ = _oObjet.aliqIRPJ;
+	this.aliqCLSS = _oObjet.aliqCLSS;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.confProd = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.cfop = {id : _oObjet.cfop.id}
+	this.icmsSitTrib = {id : _oObjet.icmsSitTrib.id}
+	this.icmsOrigem = {id : _oObjet.icmsOrigem.id}
+	this.icmsModalidadeBC = {id : _oObjet.icmsModalidadeBC.id}
+	this.icmsRedBaseCalc = _oObjet.icmsRedBaseCalc
+	this.icmsAliq = _oObjet.icmsAliq;
+	this.icmsMotDesoneracao = {id : _oObjet.icmsMotDesoneracao.id}
+	this.icmsModBCST = {id : _oObjet.icmsModBCST.id}
+	this.icmsMargValAdic = _oObjet.icmsMargValAdic;
+	this.icmsRedBaseCalcST = _oObjet.icmsRedBaseCalcST;
+	this.icmsPrecoUnitPautaST = _oObjet.icmsPrecoUnitPautaST;
+	this.icmsAliqST = _oObjet.icmsAliqST;
+	this.ipiSitTrib = {id : _oObjet.ipiSitTrib.id}
+	this.ipiClasCigarroBebida = _oObjet.ipiClasCigarroBebida;
+	this.ipiCNPJProd= _oObjet.ipiCNPJProd;
+	this.ipiCodSeloCont= _oObjet.ipiCodSeloCont;
+	this.ipiQtdSelo= _oObjet.ipiQtdSelo;
+	this.ipiCodEnquad= _oObjet.ipiCodEnquad;
+	this.ipiTipCalc = {id : _oObjet.ipiTipCalc.id}
+	this.ipiAliq= _oObjet.ipiAliq;
+	this.pisSitTrib = {id : _oObjet.pisSitTrib.id}
+	this.pisAliq= _oObjet.pisAliq;
+	this.pisValUnidtrib= _oObjet.pisValUnidtrib;
+	this.pistipoCalcSubstTrib = {id : _oObjet.pistipoCalcSubstTrib.id}
+	this.pisAliqST= _oObjet.pisAliqST;
+	this.pisValorAliqST= _oObjet.pisValorAliqST;
+	this.cofinsSubstTrib = {id : _oObjet.cofinsSubstTrib}
+	this.cofinsAliq= _oObjet.cofinsAliq;
+	this.cofinsValorAliq= _oObjet.cofinsValorAliq;
+	this.cofinsTipoCalcSubstTrib = {id : _oObjet.cofinsTipoCalcSubstTrib}
+	this.cofinsAliqST= _oObjet.cofinsAliqST;
+	this.cofinsValorAliqST= _oObjet.cofinsValorAliqST;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.confVendas = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.descontoMaxVenda = _oObjet.descontoMaxVenda;
+	this.observacao = _oObjet.observacao;
+	this.imprSegVia = _oObjet.imprSegVia;
+	this.imprAssinatura = _oObjet.imprAssinatura;
+	this.imprResumoFinanc = _oObjet.imprResumoFinanc;
+	this.atuaPrecoClonar = _oObjet.atuaPrecoClonar;
+	this.imprColUnidade = _oObjet.imprColUnidade;
+	this.bloquearvendProdSemEstoq = _oObjet.bloquearvendProdSemEstoq;
+	this.addDespCalcImposto = _oObjet.addDespCalcImposto;
+	this.retSubstTribICMS = _oObjet.retSubstTribICMS;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.confSMTP = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.ativSMTP = _oObjet.ativSMTP;
+	this.servSMTP = _oObjet.servSMTP;
+	this.porta = _oObjet.porta;
+	this.endEmail = _oObjet.endEmail;
+	this.usuario = _oObjet.usuario;
+	this.senha = _oObjet.senha;
+	this.seguranca = {id : _oObjet.seguranca};
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.configOS = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.impr2Via = _oObjet.impr2Via;
+	this.imprAss = _oObjet.imprAss;
+	this.imprResumo = _oObjet.imprResumo;
+	this.imprDetHorz = _oObjet.imprDetHorz;
+	this.diasGarantia = _oObjet.diasGarantia;
+	this.observ = _oObjet.observ;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.confEntrada = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.valorTotalFixo = _oObjet.valorTotalFixo;
+	this.manterPrecoVendaProd = _oObjet.manterPrecoVendaProd;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.confCarne = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.carneBotelo = _oObjet.carneBotelo;
+	this.carneNormal = _oObjet.carneNormal;
+	this.localPag = _oObjet.localPag;
+	this.instr1 = _oObjet.instr1;
+	this.instr2 = _oObjet.instr2;
+	this.instr3 = _oObjet.instr3;
+	this.instr4 = _oObjet.instr4;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.confNFe = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.presCompr = {id : _oObjet.presCompr.id};
+	this.destConsFinal = {id : _oObjet.destConsFinal.id};
+	this.preencherDataHora = _oObjet.preencherDataHora;
+	this.icmsPadrao = _oObjet.icmsPadrao;
+	this.ipiPadrao = _oObjet.ipiPadrao;
+	this.pisPadrao = _oObjet.pisPadrao;
+	this.cofinsPadrao = _oObjet.cofinsPadrao;
+	this.ambienteEnvio = {id : _oObjet.ambienteEnvio.id};
+	this.servMsmNota = {id : _oObjet.servMsmNota.id};
+	this.serieEnvio = _oObjet.serieEnvio;
+	this.anexarXmlEmail = _oObjet.anexarXmlEmail;
+	this.idCSC = _oObjet.idCSC;
+	this.cSC = _oObjet.cSC;
+	this.informacaoAdd = _oObjet.informacaoAdd;
+	this.certificado = _oObjet.certificado;
+	this.senha = _oObjet.senha;
+	this.tokenNFCe = _oObjet.tokenNFCe;
+	this.logoDanfe = _oObjet.logoDanfe;
+	this.salvarSenha = _oObjet.salvarSenha;
+	this.cfopPadrao = {id : _oObjet.cfopPadrao.id};
+	this.modelo = {id : _oObjet.modelo.id};
+	this.tipoImpressao = {id : _oObjet.tipoImpressao.id};
+	this.tipoEmissao = {id : _oObjet.tipoEmissao.id};
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.confAlertas = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.estoqMin = _oObjet.estoqMin;
+	this.estoqMax = _oObjet.estoqMax;
+	this.erroNFe = _oObjet.erroNFe;
+	this.pdCompra = _oObjet.pdCompra;
+	this.nvCliente = _oObjet.nvCliente;
+	this.retCaixa = _oObjet.retCaixa;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.confBlueSoft = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.ativBlue = _oObjet.ativBlue;
+	this.url = _oObjet.url;
+	this.token = _oObjet.token;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.boleto = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.ativarBolOnLine = _oObjet.ativarBolOnLine;
+	this.tipoBoleto = {id : _oObjet.tipoBoleto.id};
+	this.agencia = _oObjet.agencia;
+	this.cedente = _oObjet.cedente;
+	this.juros = _oObjet.juros;
+	this.tipoCalcMora = {id : _oObjet.tipoCalcMora.id};
+	this.mora = _oObjet.mora;
+	this.instrucoes = _oObjet.instrucoes;
+	this.demonstrativo = _oObjet.demonstrativo;
+	this.impJuros = _oObjet.impJuross;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.configuracao = function (_oObjet,_modelAction,_user)
+{
+	this.confCabecalho = _oObjet.confCabecalho;
+	this.confGeral = _oObjet.confGeral ? qat.model.confGeral(_oObjet.confGeral ,_modelAction,_user) : {};
+	this.confFiscal = _oObjet.confFiscal ? qat.model.confFiscal(_oObjet.confFiscal ,_modelAction,_user) : {};
+	this.confProd = _oObjet.confProd ? qat.model.confProd(_oObjet.confProd ,_modelAction,_user) : {};
+	this.confVendas = _oObjet.confVendas ? qat.model.confVendas(_oObjet.confVendas ,_modelAction,_user) : {};
+	this.confSMTP = _oObjet.confSMTP ? qat.model.confSMTP(_oObjet.confSMTP ,_modelAction,_user) : {};
+	this.configOS = _oObjet.configOS ? qat.model.configOS(_oObjet.configOS ,_modelAction,_user) : {};
+	this.confEntrada = _oObjet.confEntrada ? qat.model.confEntrada(_oObjet.confEntrada ,_modelAction,_user) : {};
+	this.confCarne = _oObjet.confCarne ? qat.model.confCarne(_oObjet.confCarne ,_modelAction,_user) : {};
+	this.confNFe = _oObjet.confNFe ? qat.model.confNFe(_oObjet.confNFe ,_modelAction,_user) : {};
+	this.confAlertas = _oObjet.confAlertas ? qat.model.confAlertas(_oObjet.confAlertas ,_modelAction,_user) : {};
+	this.confBlueSoft = _oObjet.confBlueSoft ? qat.model.confBlueSoft(_oObjet.confBlueSoft ,_modelAction,_user) : {};
+	this.boletoList = _oObjet.boletoList ? qat.model.boleto(_oObjet.boletoList ,_modelAction,_user) : {};
+}
+
+
 //Empresa
 /** create by system gera-java version 1.0.0 01/06/2016 14:44 : 36*/
 
 //Empresa Object
-qat.model.Empresa = function (_oObjet)
+qat.model.Empresa = function (_oObjet,_modelAction)
 {
 	if (_oObjet != undefined)
 	{
 		this.id = _oObjet.id;
 		this.nome = _oObjet.nome;
+		this.razao = _oObjet.razao;
+		this.statusEmpresa = _oObjet.statusEmpresa;
+		this.dtAbertura = _oObjet.dtAbertura;
+		this.entidadeId = _oObjet.entidadeId;
+		this.entidadeEnum = _oObjet.entidadeEnum;
+		this.configuracao = _oObjet.configuracao ? new qat.model.configuracao(_oObjet.regime,_modelAction,$rootScope.user) : {};
+		this.usuarios = _oObjet.usuarios;
+		this.bancos = _oObjet.bancos;
+		this.socios = _oObjet.socios;
+		this.siteList = _oObjet.siteList;
+		this.responsavel = _oObjet.responsavel;
+		this.notificacoes = _oObjet.notificacoes;
 		this.entidadeId = _oObjet.entidadeId;
 		this.numFunc = _oObjet.numFunc;
 		this.statusInicial = _oObjet.statusInicial;
 		this.entidadeEnumValue = _oObjet.entidadeEnumValue;
-		this.regime = _oObjet.regime;
-		this.documentos = _oObjet.documentos;
-		this.enderecos = _oObjet.enderecos;
-		this.emails = _oObjet.emails;
-		this.telefones = _oObjet.telefones;
-		this.cnaes = _oObjet.cnaes;
+		this.regime = _oObjet.regime ? qat.model.fnRegime(_oObjet.regime,_modelAction,$rootScope.user) : {};
+		this.documentos = _oObjet.documentos ? qat.model.fnDocumentos(_oObjet.documentos,_modelAction,$rootScope.user) : [];
+		this.enderecos = _oObjet.enderecos   ? qat.model.fnEnderecos(_oObjet.enderecos,_modelAction,$rootScope.user) : {};
+		this.emails = _oObjet.emails ? qat.model.Emails(_oObjet.emails,_modelAction,$rootScope.user) :[];
+		this.telefones = _oObjet.telefones ? qat.model.Telefones(_oObjet.telefones,_modelAction,$rootScope.user):[];
+		this.cnaes = _oObjet.cnaes ? qat.model.Cnaes(_oObjet.cnaes,_modelAction,$rootScope.user) : []
 		this.statusList = _oObjet.statusList;
 		this.notes = _oObjet.notes;
 		this.parentId = _oObjet.parentId;
@@ -1638,42 +2111,49 @@ qat.model.Condominio = function (_oObjet)
 /** create by system gera-java version 1.0.0 01/06/2016 15:2 : 48*/
 
 //Email Object
-qat.model.Email = function (_oObjet)
+qat.model.Email = function (_oObjet,_modelAction,_user)
 {
-	this.id = _oObjet.id;
-	this.typeValue = _oObjet.typeValue;
-	this.email = _oObjet.email;
-	this.emailTypeEnumValue = _oObjet.emailTypeEnumValue;
-	this.parentId = _oObjet.parentId;
-	this.emprId = _oObjet.emprId;
-	this.processId = _oObjet.processId;
-	this.tableEnumValue = _oObjet.tableEnumValue;
-	this.modelAction = _oObjet.modelAction;
-	this.createUser = $rootScope.user;
-	this.createDateUTC = (new Date()).getTime();
-	this.modifyUser = $rootScope.user;
-	this.modifyDateUTC = (new Date()).getTime();
+	var email = {};
+	email.id = _oObjet.id;
+	email.typeValue = _oObjet.typeValue;
+	email.email = _oObjet.email;
+	email.emailTypeEnumValue = _oObjet.emailTypeEnumValue;
+	email.parentId = _oObjet.parentId;
+	email.emprId = _oObjet.emprId;
+	email.processId = _oObjet.processId;
+	email.tableEnumValue = _oObjet.tableEnumValue;
+	email.emprId = JSON.parse(localStorage.getItem('empresa')).id
+	email.modelAction = _modelAction;
+	email.createUser = _user;
+	email.createDateUTC = (new Date()).getTime();
+	email.modifyUser = _user;
+	email.modifyDateUTC = (new Date()).getTime();
+
+	return email;
 }
 
 /** create by system gera-java version 1.0.0 01/06/2016 15:3 : 11*/
 
 //Telefone Object
-qat.model.Telefone = function (_oObjet)
+qat.model.Telefone = function (_oObjet,_modelAction,_user)
 {
-	this.id = _oObjet.id;
-	this.typeValue = _oObjet.typeValue;
-	this.ddd = _oObjet.ddd;
-	this.numero = _oObjet.numero;
-	this.telefoneTypeEnumValue = _oObjet.telefoneTypeEnumValue;
-	this.parentId = _oObjet.parentId;
-	this.emprId = _oObjet.emprId;
-	this.processId = _oObjet.processId;
-	this.tableEnumValue = _oObjet.tableEnumValue;
-	this.modelAction = _oObjet.modelAction;
-	this.createUser = $rootScope.user;
-	this.createDateUTC = (new Date()).getTime();
-	this.modifyUser = $rootScope.user;
-	this.modifyDateUTC = (new Date()).getTime();
+	var telefone = {};
+	telefone.id = _oObjet.id;
+	telefone.typeValue = _oObjet.typeValue;
+	telefone.ddd = _oObjet.ddd;
+	telefone.numero = _oObjet.numero;
+	telefone.telefoneTypeEnumValue = _oObjet.telefoneTypeEnumValue;
+	telefone.parentId = _oObjet.parentId;
+	telefone.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	telefone.processId = _oObjet.processId;
+	telefone.tableEnumValue = _oObjet.tableEnumValue;
+	telefone.modelAction = _modelAction;
+	telefone.createUser = _user;
+	telefone.createDateUTC = (new Date()).getTime();
+	telefone.modifyUser = _user;
+	telefone.modifyDateUTC = (new Date()).getTime();
+
+	return telefone;
 }
 
 /** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/

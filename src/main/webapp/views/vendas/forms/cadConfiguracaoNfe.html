@@ -109,7 +109,7 @@
 									<label for="exampleInputPassword1">CNAE fiscal:</label>
 								</div>
 								<div class="col-sm-6">
-									<a href="#" editable-select="empresa.cnaes[0].id" e-ng-options="se.id as se.cnae for se in cnaes">{{ showStatus() }}</a>
+									<a href="#" editable-select="empresa.cnaes[0].idCnae.id" e-ng-options="se.id as se.cnae for se in cnaes">{{ showStatus() }}</a>
 								</div>
 							</div>
 							<div class="row" style="background : #FFF">
@@ -142,7 +142,7 @@
 								<label for="exampleInputPassword1">Ambiente de envio:</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-select="empresa.configuracao.confNFe.ambienteEnvio" e-ng-options="ss.id as ss.descricao for ss in AMBIENTE">{{ showAmbiente() }}</a>
+								<a href="#" editable-select="empresa.configuracao.confNFe.ambienteEnvio.id" e-ng-options="ss.id as ss.descricao for ss in AMBIENTE">{{ showAmbiente() }}</a>
 								</div>
 							</div>
 							<div class="row" style="background : #FFF">
@@ -150,7 +150,7 @@
 								<label for="exampleInputPassword1">Série de envio:</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-select="empresa.configuracao.confNFe.serie" e-ng-options="s.id as s.descricao for s in SERIE" onaftersave="updateEmpresa()">{{ showAmbiente() }}</a>
+								<a href="#" editable-select="empresa.configuracao.confNFe.serie.id" e-ng-options="s.id as s.descricao for s in SERIE" onaftersave="updateEmpresa()">{{ showSerie() }}</a>
 								</div>
 							</div>
 							<div class="row">
@@ -158,7 +158,7 @@
 								<label for="exampleInputPassword1">Modelo:</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-select="empresa.configuracao.confNFe.modelo" e-ng-options="s.id as s.descricao for s in MODELO" onaftersave="updateEmpresa()">{{ showAmbiente() }}</a>
+								<a href="#" editable-select="empresa.configuracao.confNFe.modelo.id" e-ng-options="s.id as s.descricao for s in MODELO" onaftersave="updateEmpresa()">{{ showModelo() }}</a>
 								</div>
 							</div>
 							<div class="row" style="background : #FFF">
@@ -166,7 +166,7 @@
 								<label for="exampleInputPassword1">Tipo:</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-select="empresa.configuracao.confNFe.tipo" e-ng-options="s.id as s.descricao for s in TIPO" onaftersave="updateEmpresa()">{{ showAmbiente() }}</a>
+								<a href="#" editable-select="empresa.configuracao.confNFe.tipo.id" e-ng-options="s.id as s.descricao for s in TIPO" onaftersave="updateEmpresa()">{{ showTipo() }}</a>
 								</div>
 							</div>
 							<div class="row">
@@ -203,8 +203,8 @@
 								<div class="form-group col-sm-6">
 								<label for="exampleInputPassword1">Presença comprador:</label>
 								</div>
-								<div class="form-group col-sm-6">
-								<a href="#" editable-select="empresa.configuracao.confNFe.ambienteEnvios.id" e-ng-options="s.id as s.descricao for s in INDICADOR_PRESENCA_COMPRADOR" onaftersave="updateEmpresa()">{{ showRegime() }}</a>
+								<div class="form-group col-sm-6 popover-wrapper">
+								<a href="#" editable-select="empresa.configuracao.confNFe.presCompr.id" e-ng-options="s.id as s.descricao for s in INDICADOR_PRESENCA_COMPRADOR" onaftersave="updateEmpresa()">{{ presCompr() }}</a>
 								</div>
 							</div>
 							<div class="row">
@@ -212,7 +212,7 @@
 								<label for="exampleInputPassword1">Consumidor final?</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-select="empresa.configuracao.confNFe.ambienteEnvioss.id" e-ng-options="s.id as s.descricao for s in regime" onaftersave="updateEmpresa()">{{ showRegime() }}</a>
+								<a href="#" editable-select="empresa.configuracao.confNFe.destConsFinal.id" e-ng-options="s.id as s.descricao for s in OPERACAO_CONSUMIDOR_FINAL" onaftersave="updateEmpresa()">{{ destConsFinal() }}</a>
 								</div>
 							</div>
 							<div class="row" style="background : #FFF">
