@@ -48,7 +48,7 @@
 								<label for="exampleInputPassword1">Endereço:</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-text="empresa.enderecos[0].logradouro" >{{ empresa.enderecos[0].logradouro || 'empty' }}</a>
+								<a href="#" editable-text="empresa.enderecos[0].logradouro" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].logradouro || 'empty' }}</a>
 								</div>
 							</div>
 							<div class="row" >
@@ -56,7 +56,7 @@
 								<label for="exampleInputPassword1">Bairro:</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-text="empresa.enderecos[0].bairro" >{{ empresa.enderecos[0].bairro || 'empty' }}</a>
+								<a href="#" editable-text="empresa.enderecos[0].bairro" onaftersave="updateEmpresa()">{{ empresa.enderecos[0].bairro || 'empty' }}</a>
 								</div>
 							</div>
 							<div class="row" style="background : #FFF">
@@ -64,10 +64,10 @@
 								<label for="exampleInputPassword1">Cidade/UF:</label>
 								</div>
 								<div class="form-group col-sm-3">
-								<a href="#" editable-text="empresa.enderecos[0].cidade.nome" >{{ empresa.enderecos[0].cidade.nome || 'empty' }}</a>
+								<a href="#" editable-text="empresa.enderecos[0].cidade.nome" onaftersave="updateEmpresa()">{{ empresa.enderecos[0].cidade.nome || 'empty' }}</a>
 								</div>
 								<div class="form-group col-sm-3">
-								<a href="#" editable-text="empresa.enderecos[0].cidade.estado.sigla" >{{ empresa.enderecos[0].cidade.estado.sigla || 'empty' }}</a>
+								<a href="#" editable-text="empresa.enderecos[0].cidade.estado.sigla" onaftersave="updateEmpresa()">{{ empresa.enderecos[0].cidade.estado.sigla || 'empty' }}</a>
 								</div>
 							</div>
 							<div class="row">
@@ -75,7 +75,7 @@
 								<label for="exampleInputPassword1">CEP:</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-text="empresa.enderecos[0].cep" >{{ empresa.enderecos[0].cep || 'empty' }}</a>
+								<a href="#" editable-text="empresa.enderecos[0].cep" onaftersave="updateEmpresa()">{{ empresa.enderecos[0].cep || 'empty' }}</a>
 								</div>
 							</div>
 							<div class="row" style="background : #FFF">
@@ -83,7 +83,7 @@
 								<label for="exampleInputPassword1">Telefone:</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-text="empresa.telefones[0].numero" >{{ empresa.telefones[0].numero || 'empty' }}</a>
+								<a href="#" editable-text="empresa.telefones[0].numero" onaftersave="updateEmpresa()">{{ empresa.telefones[0].numero || 'empty' }}</a>
 								</div>
 							</div>
 							<div class="row">
@@ -91,7 +91,7 @@
 								<label for="exampleInputPassword1">E-mail:</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-text="empresa.emails[0].email" >{{ empresa.emails[0].email || 'empty' }}</a>
+								<a href="#" editable-text="empresa.emails[0].email" onaftersave="updateEmpresa()" >{{ empresa.emails[0].email || 'empty' }}</a>
 								</div>
 							</div>
 							<div class="row" style="background : #FFF">
@@ -109,7 +109,7 @@
 									<label for="exampleInputPassword1">CNAE fiscal:</label>
 								</div>
 								<div class="col-sm-6">
-									<a href="#" editable-select="empresa.cnaes[0].idCnae.id" e-ng-options="se.id as se.cnae for se in cnaes">{{ showStatus() }}</a>
+									<a href="#" editable-select="empresa.cnaes[0].idCnae.id" onaftersave="updateEmpresa()" e-ng-options="se.id as se.cnae for se in cnaes">{{ showStatus() }}</a>
 								</div>
 							</div>
 							<div class="row" style="background : #FFF">
@@ -117,7 +117,7 @@
 								<label for="exampleInputPassword1">Código Regime Tribut.:</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-select="empresa.regime.id" e-ng-options="sa.id as sa.nome for sa in regime">{{ showRegime() }}</a>
+								<a href="#" editable-select="empresa.regime.id" onaftersave="updateEmpresa()" e-ng-options="sa.id as sa.nome for sa in regime">{{ showRegime() }}</a>
 								</div>
 							</div>
 							<div class="row">
@@ -125,12 +125,12 @@
 								<label for="exampleInputPassword1">Cód.Reg.Trib. serviços:</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+								<a href="#" editable-text="user.name" onaftersave="updateEmpresa()" >{{ user.name || 'empty' }}</a>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>	
+				</div>
 			</div>
 		</div>
 			<div class="col-sm-6">
@@ -142,7 +142,7 @@
 								<label for="exampleInputPassword1">Ambiente de envio:</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-select="empresa.configuracao.confNFe.ambienteEnvio.id" e-ng-options="ss.id as ss.descricao for ss in AMBIENTE">{{ showAmbiente() }}</a>
+								<a href="#" editable-select="empresa.configuracao.confNFe.ambienteEnvio.id"onaftersave="updateEmpresa()" e-ng-options="ss.id as ss.descricao for ss in AMBIENTE">{{ showAmbiente() }}</a>
 								</div>
 							</div>
 							<div class="row" style="background : #FFF">
@@ -150,7 +150,7 @@
 								<label for="exampleInputPassword1">Série de envio:</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-select="empresa.configuracao.confNFe.serie.id" e-ng-options="s.id as s.descricao for s in SERIE" onaftersave="updateEmpresa()">{{ showSerie() }}</a>
+								<a href="#" editable-select="empresa.configuracao.confNFe.serie.id"  e-ng-options="s.id as s.descricao for s in SERIE" onaftersave="updateEmpresa()">{{ showSerie() }}</a>
 								</div>
 							</div>
 							<div class="row">
@@ -174,7 +174,7 @@
 								<label for="exampleInputPassword1">Anexar XML no e-mail?</label>
 								</div>
 								<div class="form-group col-sm-6">
-									<a href="#" editable-checkbox="empresa.configuracao.confNFe.anexarXmlEmail" >
+									<a href="#" editable-checkbox="empresa.configuracao.confNFe.anexarXmlEmail" onaftersave="updateEmpresa()" >
 									    {{ empresa.configuracao.confNFe.anexarXmlEmail && "Sim" || "Não" }}
 									</a>
 								</div>
@@ -184,7 +184,7 @@
 								<label for="exampleInputPassword1">Serviços na mesma nota?</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-checkbox="empresa.configuracao.confNFe.servMsmNota" >
+								<a href="#" editable-checkbox="empresa.configuracao.confNFe.servMsmNota" onaftersave="updateEmpresa()">
 									    {{ empresa.configuracao.confNFe.servMsmNota && "Sim" || "Não" }}
 									</a>
 								</div>
@@ -194,7 +194,7 @@
 								<label for="exampleInputPassword1">Preencher data/hora saída?</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-checkbox="empresa.configuracao.confNFe.preencherDataHora" >
+								<a href="#" editable-checkbox="empresa.configuracao.confNFe.preencherDataHora" onaftersave="updateEmpresa()">
 									    {{ empresa.configuracao.confNFe.preencherDataHora && "Sim" || "Não" }}
 									</a>
 								</div>
@@ -220,7 +220,7 @@
 								<label for="exampleInputPassword1">ICMS padrão (%):</label>
 								</div>
 								<div class="form-group col-sm-6 popover-wrapper">
-								<a href="#" editable-text="empresa.configuracao.confNFe.icmsPadrao" >{{ empresa.configuracao.confNFe.icmsPadrao || 'empty' }}</a>
+								<a href="#" editable-text="empresa.configuracao.confNFe.icmsPadrao" onaftersave="updateEmpresa()" >{{ empresa.configuracao.confNFe.icmsPadrao || 'empty' }}</a>
 								</div>
 							</div>
 							<div class="row">
@@ -228,7 +228,7 @@
 								<label for="exampleInputPassword1">IPI padrão (%):</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-text="empresa.configuracao.confNFe.ipiPadrao" >{{ empresa.configuracao.confNFe.ipiPadrao || 'empty' }}</a>
+								<a href="#" editable-text="empresa.configuracao.confNFe.ipiPadrao" onaftersave="updateEmpresa()" >{{ empresa.configuracao.confNFe.ipiPadrao || 'empty' }}</a>
 								</div>
 							</div>
 							<div class="row" style="background : #FFF">
@@ -236,7 +236,7 @@
 								<label for="exampleInputPassword1">PIS padrão (%):</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-text="empresa.configuracao.confNFe.pisPadrao" >{{ empresa.configuracao.confNFe.pisPadrao || 'empty' }}</a>
+								<a href="#" editable-text="empresa.configuracao.confNFe.pisPadrao" onaftersave="updateEmpresa()">{{ empresa.configuracao.confNFe.pisPadrao || 'empty' }}</a>
 								</div>
 							</div>
 							<div class="row">
@@ -244,7 +244,7 @@
 								<label for="exampleInputPassword1">COFINS padrão (%):</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-text="empresa.configuracao.confNFe.cofinsPadrao" >{{ empresa.configuracao.confNFe.cofinsPadrao || 'empty' }}</a>
+								<a href="#" editable-text="empresa.configuracao.confNFe.cofinsPadrao" onaftersave="updateEmpresa()">{{ empresa.configuracao.confNFe.cofinsPadrao || 'empty' }}</a>
 								</div>
 							</div>
 							<div class="row" style="background : #FFF">
@@ -252,7 +252,7 @@
 								<label for="exampleInputPassword1">Inform. Adic. padrão:</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-text="empresa.configuracao.confNFe.informacaoAdd" >{{ empresa.configuracao.confNFe.informacaoAdd || 'empty' }}</a>
+								<a href="#" editable-text="empresa.configuracao.confNFe.informacaoAdd" onaftersave="updateEmpresa()">{{ empresa.configuracao.confNFe.informacaoAdd || 'empty' }}</a>
 								</div>
 							</div>
 							<div class="row">
@@ -367,4 +367,3 @@
 					</div>
 				</div>
 
-		

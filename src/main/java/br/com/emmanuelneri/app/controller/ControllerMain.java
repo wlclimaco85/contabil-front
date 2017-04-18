@@ -4,6 +4,7 @@ package br.com.emmanuelneri.app.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -12,13 +13,17 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.WebServiceContext;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -51,6 +56,9 @@ import com.fincatto.nfe310.classes.nota.NFNotaProcessada;
 import com.fincatto.nfe310.parsers.NotaParser;
 import com.qat.samples.sysmgmt.produto.model.response.CfopResponse;
 
+import br.com.certisign.certisignon.test.CertificadoBean;
+import br.com.certisign.certisignon.tools.certificados.CryptoLogin;
+import br.com.certisign.certisignon.tools.certificados.NewCripto2;
 import br.com.emmanuelneri.FileManager.FileManager;
 import br.com.emmanuelneri.app.model.ModelToken;
 import br.com.emmanuelneri.app.model.UploadedFile;
@@ -604,7 +612,74 @@ System.out.println(result);
          return file;
      }
 
+     @RequestMapping(value = "/certificado", method = RequestMethod.GET)
+     public @ResponseBody String doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+ 		return doPost(request, response);
+ 	}
+
+     protected String doPost(HttpServletRequest request, HttpServletResponse response) throws  ServletException, IOException  {
+
+ 		// obter retorno encriptado da resposta
+ 		String ret = request.getParameter("cb");
+ 		WebServiceContext wsContext;
+ 		ret = ret.replace(" ", "");
+
+ 		System.out.println("ret: " + ret);
+
+ 		String decriptado = "";
+
+ 		try {
+ 			HttpSession session = request.getSession();
+ 			InputStream chave =
+ 					session.getServletContext().getResourceAsStream("/WEB-INF/keys/CERTISIGNON_PROD_4.pk");
+ 			// obter chave que foi feito o download
+ 			//ServletContext sc = this.getServletContext();
+ 			//FileInputStream fis = new FileInputStream(getServletContext().getRealPath("/")
+         //           + "");
+ 			ServletContext context = null;
+ 		//	Object arg0;
+			// ServletContext ctx = getServletContext();
+ 			//ServletContext context = getServletContext();
+ 		//	Object sContext= wsContext.getMessageContext()
+         //           .get(arg0);
+
+ 			//InputStream chave =context.getResourceAsStream("/WEB-INF/keys/CERTISIGNON_PROD_4.pk"); //getServletContext().getResourceAsStream("/WEB-INF/keys/CERTISIGNON_PROD_4.pk");
+
+ 			String schave = IOUtils.toString(chave, "UTF-8");
+
+ 			System.out.println("Resource Stream is : "+schave);
+
+ 			String decriptadod = CryptoLogin.decrypt(ret, schave);
+
+ 			decriptado = NewCripto2.decrypt(ret, schave);
+
+ 			// usar client e chave para decriptar o retorno encriptado
+ 			decriptado = NewCripto2.decrypt(ret, schave);
+
+ 			System.out.println(decriptado);
+
+ 		} catch (Exception e) {
+ 			e.printStackTrace();
+ 		}
+
+ 		decriptado = decriptado.replace("CertificadoBean : ", "");
+ 		decriptado = decriptado.replace("'", "\"");
+
+ 		System.out.println(decriptado);
+
+ 		// transformando JSON em Objeto
+ 		ObjectMapper mapper = new ObjectMapper();
+ 		CertificadoBean certificado = mapper.readValue(decriptado, CertificadoBean.class);
+
+ 		request.setAttribute("ret", ret);
+ 		request.setAttribute("decriptado", decriptado);
+ 		request.setAttribute("certificado", certificado);
+
+ 		request.getRequestDispatcher("/retorno.jsp").forward(request, response);
 
 
+ 		return  "";
+
+ 	}
 
 }

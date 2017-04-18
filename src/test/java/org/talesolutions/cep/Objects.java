@@ -2996,7 +2996,7 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		Date a = new Date();
 		configuracaonfe.setId(id);
 		configuracaonfe.setPresCompr(insertDoisValor(id, TabelaEnum.BOLETO, action));
-		configuracaonfe.setDestConsFinal(1002);
+		configuracaonfe.setDestConsFinal(insertDoisValor(id, TabelaEnum.BOLETO, action));
 		configuracaonfe.setPreencherDataHora(1003);
 		configuracaonfe.setIcmsPadrao(new Double(10.00));
 		configuracaonfe.setIpiPadrao(new Double(10.00));
@@ -3004,7 +3004,7 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		configuracaonfe.setCofinsPadrao(new Double(10.00));
 		configuracaonfe.setAmbienteEnvio(insertDoisValor(id, TabelaEnum.BOLETO, action));
 		configuracaonfe.setServMsmNota(insertDoisValor(id, TabelaEnum.BOLETO, action));
-		configuracaonfe.setSerieEnvio("serieEnvio_10 - " + action.toString());
+		configuracaonfe.setSerieEnvio(insertDoisValor(id, TabelaEnum.BOLETO, action));
 		configuracaonfe.setAnexarXmlEmail(1011);
 		configuracaonfe.setIdCSC("idCSC_12 - " + action.toString());
 		configuracaonfe.setcSC("cSC_13 - " + action.toString());

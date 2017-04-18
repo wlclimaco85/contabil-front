@@ -1,10 +1,9 @@
 package org.talesolutions.cep;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Arrays;
@@ -12,7 +11,14 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.xml.ws.WebServiceContext;
+
+import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.http.HttpEntity;
@@ -21,16 +27,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.util.ClassUtils;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-import org.w3c.dom.Document;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fincatto.nfe310.classes.nota.NFNota;
-import com.fincatto.nfe310.classes.nota.NFNotaProcessada;
 import com.fincatto.nfe310.parsers.NotaParser;
 import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest;
@@ -39,6 +43,9 @@ import com.qat.samples.sysmgmt.advocacia.response.AudienciaResponse;
 import com.qat.samples.sysmgmt.advocacia.response.ProcessoResponse;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 
+import br.com.certisign.certisignon.test.CertificadoBean;
+import br.com.certisign.certisignon.tools.certificados.CryptoLogin;
+import br.com.certisign.certisignon.tools.certificados.NewCripto2;
 import br.com.emmanuelneri.app.model.ModelToken;
 
 
@@ -46,6 +53,7 @@ import br.com.emmanuelneri.app.model.ModelToken;
 public class AdvogadoTest {
 
 	public static final String REST_SERVICE_URI = "http://localhost:8080/qat-sysmgmt-controller-rest/";
+	private HttpServletRequest request;
 
 	// create by system gera-java version 1.0.0 02/08/2016 9:43 : 1//
 
@@ -113,8 +121,92 @@ public class AdvogadoTest {
     public void deveLancarExcecaoCasoRecebaUmaStringInvalidaParaEnviaEventoInutilizacao() {
         new NotaParser().enviaEventoInutilizacaoParaObjeto("");
     }
+    public void setServletRequest(javax.servlet.http.HttpServletRequest request){
+        this.request = request;
+    }
+
+    public HttpSession getSession(){
+        return request.getSession();
+    }
 	@Test
-	public void listAllAudiencia() throws JsonParseException, JsonMappingException, IOException, URISyntaxException {
+	public void listAllAudiencia() throws JsonParseException, JsonMappingException, IOException, URISyntaxException, ServletException {
+
+
+		HttpServletRequest request = null;//HttpServletRequest();
+		HttpServletResponse response = null;
+		// obter retorno encriptado da resposta
+		 	//	String ret = request.getParameter("cb");
+		 		WebServiceContext wsContext;
+		 	//	ret = ret.replace(" ", "");
+
+		 	//	System.out.println("ret: " + ret);
+
+		 		String decriptado = "";
+
+		 		try {
+		 		//	((HttpSession) request).getServletContext();
+		 			HttpSession session = request.getSession();
+		 			InputStream chave =
+		 					session.getServletContext().getResourceAsStream("2830.pk");
+
+		 			File outputFile = new File("2830.pk");
+		 			outputFile.createNewFile();
+		 			FileWriter outfile = new FileWriter(outputFile);
+
+		 			InputStream sourcess = ClassUtils.getDefaultClassLoader()
+		 		    .getResourceAsStream("2830.pk");
+
+		 			InputStream sources = this.getClass().getClassLoader().getResourceAsStream("2830.pk");
+
+		 			InputStream source = this.getClass().getResourceAsStream("2830.pk");
+		 			// obter chave que foi feito o download
+		 			//ServletContext sc = this.getServletContext();
+		 			//FileInputStream fis = new FileInputStream(getServletContext().getRealPath("/")
+		         //           + "");
+		 			ServletContext context = null;
+
+		 			String schaves = IOUtils.toString(source, "UTF-8");
+		 		//	Object arg0;
+					// ServletContext ctx = getServletContext();
+		 			//ServletContext context = getServletContext();
+		 		//	Object sContext= wsContext.getMessageContext()
+		         //           .get(arg0);
+
+		 			//InputStream chave =context.getResourceAsStream("CERTISIGNON_PROD_4.pk"); //getServletContext().getResourceAsStream("/WEB-INF/keys/CERTISIGNON_PROD_4.pk");
+
+		 		//	String schave = IOUtils.toString(chaves, "UTF-8");
+
+		 			System.out.println("Resource Stream is : "+schaves);
+
+		 			String decriptadod = CryptoLogin.decrypt("teste", schaves);
+
+		 			// usar client e chave para decriptar o retorno encriptado
+		 			decriptado = NewCripto2.decrypt("teste", schaves);
+
+		 			System.out.println(decriptado);
+
+		 		} catch (Exception e) {
+		 			e.printStackTrace();
+		 		}
+
+		 		decriptado = decriptado.replace("CertificadoBean : ", "");
+		 		decriptado = decriptado.replace("'", "\"");
+
+		 		System.out.println(decriptado);
+
+		 		// transformando JSON em Objeto
+		 		ObjectMapper mapper = new ObjectMapper();
+		 		//CertificadoBean certificado = mapper.readValue(decriptado, CertificadoBean.class);
+
+		 	//	request.setAttribute("ret", "rest");
+		 //		request.setAttribute("decriptado", decriptado);
+		 	//	request.setAttribute("certificado", certificado);
+
+	//	 		request.getRequestDispatcher("/retorno.jsp").forward(request, response);
+
+
+
+
 
 
 //		String s = "C:\\uploads\\nota.xml";
@@ -189,6 +281,9 @@ public class AdvogadoTest {
 
 		System.out.println("[" + tgtUrl + "]");
 
+
+
+
 		ResponseEntity<String> st = rest.postForEntity(REST_SERVICE_URI + "auth/api/authenticate", paramss,
 				String.class);
 		System.out.println("[" + st.getBody() + "]");
@@ -196,7 +291,7 @@ public class AdvogadoTest {
 		String tk = st.getBody();
 		Class<? extends String> mt = tk.getClass();
 		System.out.println("[" + mt + "]");
-		ObjectMapper mapper = new ObjectMapper();
+		ObjectMapper mappers = new ObjectMapper();
 		ModelToken obj = mapper.readValue(st.getBody(), ModelToken.class);
 
 		System.out.println("[" + obj.getToken() + "]");
@@ -310,7 +405,8 @@ public class AdvogadoTest {
 //	}
 
 
-	// create by system gera-java version 1.0.0 02/08/2016 9:43 : 1//
+
+
 
 	@Test
 	public void listAllProcesso() throws JsonParseException, JsonMappingException, IOException {

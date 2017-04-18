@@ -2,6 +2,11 @@ package org.talesolutions.cep;
 
 import java.io.IOException;
 import java.net.URI;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,6 +27,10 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fincatto.nfe310.classes.NFModelo;
+import com.fincatto.nfe310.classes.NFUnidadeFederativa;
+import com.fincatto.nfe310.classes.statusservico.consulta.NFStatusServicoConsultaRetorno;
+import com.fincatto.nfe310.webservices.WSFacade;
 import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.samples.sysmgmt.entidade.model.response.BoletoResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.ConfigAlertasResponse;
@@ -37,6 +46,7 @@ import com.qat.samples.sysmgmt.entidade.model.response.ConfiguracaoResponse;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
+import br.com.emmanuelneri.app.controller.NFeConfigTeste;
 import br.com.emmanuelneri.app.model.ModelToken;
 
 public class ConfiguracaoTest {
@@ -1150,7 +1160,7 @@ public class ConfiguracaoTest {
 	// create by system gera-java version 1.0.0 01/08/2016 22:39 : 56//
 
 	@Test
-	public void listAllConfiguracaoNFe() throws JsonParseException, JsonMappingException, IOException{
+	public void listAllConfiguracaoNFe() throws KeyManagementException, UnrecoverableKeyException, KeyStoreException, NoSuchAlgorithmException, CertificateException, Exception{
 
 	    Integer count =0;
 	    Integer id =10000;
@@ -1241,8 +1251,12 @@ public class ConfiguracaoTest {
 	        entitys = new HttpEntity<String>(jsonInString,headers);
 	        result = restTemplate.postForObject( REST_SERVICE_URI + "configuracao/api/configuracaoNFe/fetchPage/",entitys,  ConfiguracaoNFeResponse.class);
 	        Assert.assertEquals(result.isOperationSuccess(), true);
-	        Assert.assertEquals(result.getConfiguracaoNFeList().size(), 20);
+	     //   Assert.assertEquals(result.getConfiguracaoNFeList().size(), 20);
 
+	        NFeConfigTeste config = new NFeConfigTeste();
+	        NFStatusServicoConsultaRetorno retorno = new WSFacade(config).consultaStatus(NFUnidadeFederativa.SC, NFModelo.NFE);
+	        System.out.println(retorno.getStatus());
+	        System.out.println(retorno.getMotivo());
 
 //	Assert.assertEquals(result.getConfiguracaoNFeList().get(0).getPresCompr(),(new DoisValores());
 //	Assert.assertEquals(result.getConfiguracaoNFeList().get(0).getDestConsFinal(),(1002);
