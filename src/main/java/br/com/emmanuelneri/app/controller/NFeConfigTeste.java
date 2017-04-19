@@ -19,24 +19,24 @@ public class NFeConfigTeste extends NFeConfig {
 
  @Override
  public NFUnidadeFederativa getCUF() {
-     return NFUnidadeFederativa.SC;
+     return NFUnidadeFederativa.MG;
  }
 
  @Override
  public String getCertificadoSenha() {
-     return "senha_certificado";
+     return "123456";
  }
 
  @Override
  public String getCadeiaCertificadosSenha() {
-     return "senha_cadeia";
+     return "123456";
  }
 
  @Override
  public KeyStore getCertificadoKeyStore() throws KeyStoreException {
      if (this.keyStoreCertificado == null) {
          this.keyStoreCertificado = KeyStore.getInstance("PKCS12");
-         try (InputStream certificadoStream = new FileInputStream("/tmp/certificado.pfx")) {
+         try (InputStream certificadoStream = new FileInputStream("C:/Users/Washington/Desktop/laticinios.pfx")) {
              this.keyStoreCertificado.load(certificadoStream, this.getCertificadoSenha().toCharArray());
          } catch (CertificateException | NoSuchAlgorithmException | IOException e) {
              this.keyStoreCadeia = null;
@@ -50,7 +50,7 @@ public class NFeConfigTeste extends NFeConfig {
  public KeyStore getCadeiaCertificadosKeyStore() throws KeyStoreException {
      if (this.keyStoreCadeia == null) {
          this.keyStoreCadeia = KeyStore.getInstance("JKS");
-         try (InputStream cadeia = new FileInputStream("/tmp/cadeia.jks")) {
+         try (InputStream cadeia = new FileInputStream("C:/Users/Washington/Desktop/laticinios.pfx")) {
              this.keyStoreCadeia.load(cadeia, this.getCadeiaCertificadosSenha().toCharArray());
          } catch (CertificateException | NoSuchAlgorithmException | IOException e) {
              this.keyStoreCadeia = null;

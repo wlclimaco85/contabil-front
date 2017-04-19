@@ -15,120 +15,7 @@
         vm.persons = {};
         vm.dtInstancePdVendas = {};
 
-        doisValorFactory.notaFiscal($scope);
 
-        //cnae fiscal/api/cnae/fetchPage
-        SysMgmtData.processPostPageData("main/api/request", {
-                url: "fiscal/api/cnae/fetchPage",
-                token: $rootScope.authToken,
-                request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
-            }, function(res) {
-              //  debugger
-              console.log('cnaes')
-                $scope.cnaes = res.cnaeList;
-            });
-
-
-         SysMgmtData.processPostPageData("main/api/request", {
-                url: "fiscal/api/regime/fetchPage",
-                token: $rootScope.authToken,
-                request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
-            }, function(res) {
-                $scope.regime = res.regimeList;
-            });
-
-        $scope.empresa = localStorageService.get('empresa');
-console.log($scope.empresa)
-        $scope.pedidoVenda = {
-            tipoPessoa: 2
-        };
-
-
-        $scope.showRegime = function() {
-          var sReturn = 'Not set';
-
-          console.log($scope.empresa.regime)
-
-           console.log($scope.regime)
-          for(var x = 0;x < $scope.regime.length;x++)
-          {
-              if( $scope.empresa.regime && $scope.regime[x].id == $scope.empresa.regime.id)
-              {
-                  sReturn =  $scope.regime[x].nome
-              }
-          }
-      
-          return sReturn;
-        };
-
-        $scope.showStatus = function() {
-          var sReturn = 'Not set';
-
-          console.log($scope.empresa.cnaes[0].idCnae.id)
-
-           console.log($scope.cnaes)
-          for(var x = 0;x < $scope.cnaes.length;x++)
-          {
-              if($scope.cnaes[x].id == $scope.empresa.cnaes[0].idCnae.id)
-              {
-                  sReturn =  $scope.cnaes[x].cnae
-              }
-          }
-      
-          return sReturn;
-        };
-
-        $scope.showAmbiente = function() {
-
-            return $scope.empresa.configuracao.confNFe.ambienteEnvio ? doisValoresShow($scope.AMBIENTE,$scope.empresa.configuracao.confNFe.ambienteEnvio.id) : 'Not set';
-        }
-
-        $scope.showSerie = function() {
-
-            return $scope.empresa.configuracao.confNFe.serie ? doisValoresShow($scope.SERIE,$scope.empresa.configuracao.confNFe.serie.id) : 'Not set';
-        }
-
-        $scope.showModelo = function() {
-
-            return $scope.empresa.configuracao.confNFe.modelo ? doisValoresShow($scope.MODELO,$scope.empresa.configuracao.confNFe.modelo.id) : 'Not set';
-        }
-
-        $scope.showTipo = function() {
-
-            return $scope.empresa.configuracao.confNFe.Tipo ? doisValoresShow($scope.TIPO,$scope.empresa.configuracao.confNFe.Tipo.id) : 'Not set';
-        }
-
-        $scope.presCompr = function() {
-
-            return $scope.empresa.configuracao.confNFe.presCompr ? doisValoresShow($scope.INDICADOR_PRESENCA_COMPRADOR,$scope.empresa.configuracao.confNFe.presCompr.id) : 'Not set';
-        }
-
-        $scope.destConsFinal = function() {
-
-            return $scope.empresa.configuracao.confNFe.destConsFinal ? doisValoresShow($scope.OPERACAO_CONSUMIDOR_FINAL,$scope.empresa.configuracao.confNFe.destConsFinal.id) : 'Not set';
-        }
-
-        function doisValoresShow(aArrays,sKey) {
-          var sReturn = 'Not set';
-
-          console.log(sKey)
-
-           console.log(aArrays)
-          for(var x = 0;x < aArrays.length;x++)
-          {
-              if(aArrays[x].id == sKey)
-              {
-                  sReturn =  aArrays[x].descricao
-              }
-          }
-      
-          return sReturn;
-        };
-
-        $scope.updateEmpresa = function() {
-          debugger
-          //return  'teste';//$http.post('/updateUser', {id: $scope.user.id, name: data});
-        };
 
         $scope.toggle = function() {
             $scope.state = !$scope.state;
@@ -529,9 +416,159 @@ console.log($scope.empresa)
 
 (function() {
     angular.module('wdApp.apps.nfSaida.view',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('NfSaidaViewController', function($scope,$rootScope,fModels,SysMgmtData) {
+        .controller('NfSaidaViewController', function($filter,localStorageService,$scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory,tableColumnsFactory,tableOptionsFactory,FiltersFactory,toastr,doisValorFactory) {
 
             var vm = this;
+             doisValorFactory.notaFiscal($scope);
+
+        //cnae fiscal/api/cnae/fetchPage
+        SysMgmtData.processPostPageData("main/api/request", {
+                url: "fiscal/api/cnae/fetchPage",
+                token: $rootScope.authToken,
+                request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
+            }, function(res) {
+                $scope.cnaes = res.cnaeList;
+            });
+
+
+        SysMgmtData.processPostPageData("main/api/request", {
+                url: "fiscal/api/cfop/fetchPage",
+                token: $rootScope.authToken,
+                request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
+            }, function(res) {
+                $scope.cfop = res.cfopList;
+            });
+
+
+         SysMgmtData.processPostPageData("main/api/request", {
+                url: "fiscal/api/regime/fetchPage",
+                token: $rootScope.authToken,
+                request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
+            }, function(res) {
+                $scope.regime = res.regimeList;
+            });
+
+        $scope.empresa = localStorageService.get('empresa');
+        $scope.pedidoVenda = {
+            tipoPessoa: 2
+        };
+
+
+        $scope.showRegime = function() {
+          var sReturn = 'Not set';
+
+          for(var x = 0;x < $scope.regime.length;x++)
+          {
+              if( $scope.empresa.regime && $scope.regime[x].id == $scope.empresa.regime.id)
+              {
+                  sReturn =  $scope.regime[x].nome
+              }
+          }
+
+          return sReturn;
+        };
+
+        $scope.showStatus = function() {
+          var sReturn = 'Not set';
+
+          for(var x = 0;x < $scope.cnaes.length;x++)
+          {
+              if($scope.cnaes[x].id == $scope.empresa.cnaes[0].idCnae.id)
+              {
+                  sReturn =  $scope.cnaes[x].cnae
+              }
+          }
+
+          return sReturn;
+        };
+        $scope.certificado = false;
+
+        $scope.showCFOP = function() {
+          var sReturn = 'Not set';
+
+          for(var x = 0;x < $scope.cfop.length;x++)
+          {
+              if(($scope.empresa.configuracao.confNFe.cfopPadrao) && ($scope.cfop[x].id == $scope.empresa.configuracao.confNFe.cfopPadrao.id))
+              {
+                  sReturn =  $scope.cfop[x].cfop + ' - ' + $scope.cfop[x].natureza
+              }
+          }
+
+          return sReturn;
+        };
+
+
+        $scope.showAmbiente = function() {
+
+            return $scope.empresa.configuracao.confNFe.ambienteEnvio ? doisValoresShow($scope.AMBIENTE,$scope.empresa.configuracao.confNFe.ambienteEnvio.id) : 'Not set';
+        }
+
+        $scope.showSerie = function() {
+
+            return $scope.empresa.configuracao.confNFe.serie ? doisValoresShow($scope.SERIE,$scope.empresa.configuracao.confNFe.serie.id) : 'Not set';
+        }
+
+        $scope.showModelo = function() {
+
+            return $scope.empresa.configuracao.confNFe.modelo ? doisValoresShow($scope.MODELO,$scope.empresa.configuracao.confNFe.modelo.id) : 'Not set';
+        }
+
+        $scope.showTipo = function() {
+
+            return $scope.empresa.configuracao.confNFe.Tipo ? doisValoresShow($scope.TIPO,$scope.empresa.configuracao.confNFe.Tipo.id) : 'Not set';
+        }
+
+        $scope.presCompr = function() {
+
+            return $scope.empresa.configuracao.confNFe.presCompr ? doisValoresShow($scope.INDICADOR_PRESENCA_COMPRADOR,$scope.empresa.configuracao.confNFe.presCompr.id) : 'Not set';
+        }
+
+        $scope.destConsFinal = function() {
+
+            return $scope.empresa.configuracao.confNFe.destConsFinal ? doisValoresShow($scope.OPERACAO_CONSUMIDOR_FINAL,$scope.empresa.configuracao.confNFe.destConsFinal.id) : 'Not set';
+        }
+
+        function doisValoresShow(aArrays,sKey) {
+          var sReturn = 'Not set';
+
+          for(var x = 0;x < aArrays.length;x++)
+          {
+              if(aArrays[x].id == sKey)
+              {
+                  sReturn =  aArrays[x].descricao
+              }
+          }
+
+          return sReturn;
+        };
+
+        $scope.updateEmpresa = function() {
+          console.log('dddd');
+          var oObject = new qat.model.Empresa($scope.empresa,"UPDATE",$rootScope.user.user);
+
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "entidade/api/empresa/update",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqEmpr(oObject, true, true)
+                }, function(res) {
+                  debugger
+                    if(res.operationSuccess == true){
+                      for(var x = 0; x < res.empresaList.length;x++)
+                      {
+                          if(res.empresaList[x].id === $scope.empresa.id)
+                          {
+                              localStorageService.set('empresa',res.empresaList[x]);
+                              $scope.empresa = localStorageService.get('empresa');
+                          }
+                      }
+                    //  $element.modal('hide');
+                    //  close(null, 500);
+                      toastr.success('Deu Certo seu tanga.', 'Sucess');
+                     // $rootScope.reloadDataSit(function(data){debugger})
+                    }
+
+                });
+        };
 
 });
 })();

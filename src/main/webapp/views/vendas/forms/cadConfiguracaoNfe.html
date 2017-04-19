@@ -212,7 +212,7 @@
 								<label for="exampleInputPassword1">Consumidor final?</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-select="empresa.configuracao.confNFe.destConsFinal.id" e-ng-options="s.id as s.descricao for s in OPERACAO_CONSUMIDOR_FINAL" onaftersave="updateEmpresa()">{{ destConsFinal() }}</a>
+									<a href="#" editable-select="empresa.configuracao.confNFe.destConsFinal.id" e-ng-options="s.id as s.descricao for s in OPERACAO_CONSUMIDOR_FINAL" onaftersave="updateEmpresa()">{{ destConsFinal() }}</a>
 								</div>
 							</div>
 							<div class="row" style="background : #FFF">
@@ -260,7 +260,7 @@
 								<label for="exampleInputPassword1">Logomarca para o Danfe:</label>
 								</div>
 								<div class="form-group col-sm-6 popover-wrapper">
-								<a href="#" editable-textarea="user.name" >{{ user.name || 'empty' }}</a>
+								<input type="file" name="pic" accept="image/*">
 								</div>
 							</div>
 						</div>
@@ -274,44 +274,55 @@
 							<div class="row " style="margin-top : 20px"></div>
 								<div class="panel panel-default" style="background:#EEEEEE">
 									<div class="panel-heading" style="background: #DDDDDD">
-										<div class="row" style="background : #FFF">
+									<div class="row" style="background : #FFF">
 											<div class="form-group col-sm-6">
-											<label for="exampleInputPassword1">CNPJ:</label>
+											<label for="exampleInputPassword1">Certificado:</label>
 											</div>
 											<div class="form-group col-sm-6">
-											<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+											<input type="file" name="pic" accept="image/*">
 											</div>
-										</div>
-										<div class="row">
-											<div class="form-group col-sm-6">
-											<label for="exampleInputPassword1">Entidade:</label>
+
+									</div>
+										<div  ng-show="certificado == true" ng-hide="certificado == false">>
+											<div class="row" style="background : #FFF">
+												<div class="form-group col-sm-6">
+												<label for="exampleInputPassword1">CNPJ:</label>
+												</div>
+												<div class="form-group col-sm-6">
+												<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+												</div>
 											</div>
-											<div class="form-group col-sm-6">
-											<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+											<div class="row">
+												<div class="form-group col-sm-6">
+												<label for="exampleInputPassword1">Entidade:</label>
+												</div>
+												<div class="form-group col-sm-6">
+												<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+												</div>
 											</div>
-										</div>
-										<div class="row" style="background : #FFF">
-											<div class="form-group col-sm-6">
-											<label for="exampleInputPassword1">Empresa certificadora:</label>
+											<div class="row" style="background : #FFF">
+												<div class="form-group col-sm-6">
+												<label for="exampleInputPassword1">Empresa certificadora:</label>
+												</div>
+												<div class="form-group col-sm-6">
+												<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+												</div>
 											</div>
-											<div class="form-group col-sm-6">
-											<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+											<div class="row">
+												<div class="form-group col-sm-6">
+												<label for="exampleInputPassword1">Situação:</label>
+												</div>
+												<div class="form-group col-sm-6">
+												<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+												</div>
 											</div>
-										</div>
-										<div class="row">
-											<div class="form-group col-sm-6">
-											<label for="exampleInputPassword1">Situação:</label>
-											</div>
-											<div class="form-group col-sm-6">
-											<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
-											</div>
-										</div>
-										<div class="row" style="background : #FFF">
-											<div class="form-group col-sm-6">
-											<label for="exampleInputPassword1">Data de validade:</label>
-											</div>
-											<div class="form-group col-sm-6">
-											<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+											<div class="row" style="background : #FFF">
+												<div class="form-group col-sm-6">
+												<label for="exampleInputPassword1">Data de validade:</label>
+												</div>
+												<div class="form-group col-sm-6">
+												<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -330,7 +341,7 @@
 											<label for="exampleInputPassword1">Total CFOPs cadastrados:</label>
 											</div>
 											<div class="form-group col-sm-6">
-											<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+												<label for="exampleInputPassword1">{{cfop.length}}</label>
 											</div>
 										</div>
 										<div class="row" style="background : #FFF">
@@ -338,7 +349,7 @@
 											<label for="exampleInputPassword1">CFOP marcado como padrão:</label>
 											</div>
 											<div class="form-group col-sm-6">
-											<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+												<a href="#" editable-select="empresa.configuracao.confNFe.cfopPadrao.id" e-ng-options="s.id as s.cfop for s in cfop" onaftersave="updateEmpresa()">{{ showCFOP() }}</a>
 											</div>
 										</div>
 									</div>
@@ -357,7 +368,9 @@
 											<label for="exampleInputPassword1">SMTP próprio desativado. Sistema utilizando configurações globais de envio de e-mails.</label>
 											</div>
 											<div class="form-group col-sm-6">
-											<a href="#" editable-text="user.name" >{{ user.name || 'empty' }}</a>
+												<a href="#" editable-checkbox="empresa.configuracao.confSMTP.ativSMTP" onaftersave="updateEmpresa()">
+												    {{ empresa.configuracao.confSMTP.ativSMTP && "Sim" || "Não" }}
+												</a>
 											</div>
 										</div>
 									</div>

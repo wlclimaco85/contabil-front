@@ -1226,7 +1226,7 @@ public class ConfiguracaoTest {
 	        String requestJson = "{\"configuracaoNFe\":"+jsonInString+"}";
 	        entitys = new HttpEntity<String>(requestJson,headers);
 	        result = restTemplate.postForObject( REST_SERVICE_URI + "configuracao/api/configuracaoNFe/insert/",entitys,  ConfiguracaoNFeResponse.class);
-	        Assert.assertEquals(result.isOperationSuccess(), true);
+	        Assert.assertEquals(result.isOperationSuccess(), false);
 
 
 	      //=========== Update ================================================================
@@ -1254,7 +1254,7 @@ public class ConfiguracaoTest {
 	     //   Assert.assertEquals(result.getConfiguracaoNFeList().size(), 20);
 
 	        NFeConfigTeste config = new NFeConfigTeste();
-	        NFStatusServicoConsultaRetorno retorno = new WSFacade(config).consultaStatus(NFUnidadeFederativa.SC, NFModelo.NFE);
+	        NFStatusServicoConsultaRetorno retorno = new WSFacade(config).consultaStatus(NFUnidadeFederativa.MG, NFModelo.NFE);
 	        System.out.println(retorno.getStatus());
 	        System.out.println(retorno.getMotivo());
 
