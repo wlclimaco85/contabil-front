@@ -142,7 +142,7 @@
 								<label for="exampleInputPassword1">Ambiente de envio:</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-select="empresa.configuracao.confNFe.ambienteEnvio.id"onaftersave="updateEmpresa()" e-ng-options="ss.id as ss.descricao for ss in AMBIENTE">{{ showAmbiente() }}</a>
+								<a href="#" editable-select="empresa.configuracao.confNFe.ambienteEnvio.id" onaftersave="updateEmpresa()" e-ng-options="ss.id as ss.descricao for ss in AMBIENTE">{{ showAmbiente() }}</a>
 								</div>
 							</div>
 							<div class="row" style="background : #FFF">
@@ -150,7 +150,7 @@
 								<label for="exampleInputPassword1">Série de envio:</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-select="empresa.configuracao.confNFe.serie.id"  e-ng-options="s.id as s.descricao for s in SERIE" onaftersave="updateEmpresa()">{{ showSerie() }}</a>
+								<a href="#" editable-select="empresa.configuracao.confNFe.serieEnvio.id"  e-ng-options="s.id as s.descricao for s in SERIE" onaftersave="updateEmpresa()">{{ showSerie() }}</a>
 								</div>
 							</div>
 							<div class="row">
@@ -184,9 +184,7 @@
 								<label for="exampleInputPassword1">Serviços na mesma nota?</label>
 								</div>
 								<div class="form-group col-sm-6">
-								<a href="#" editable-checkbox="empresa.configuracao.confNFe.servMsmNota" onaftersave="updateEmpresa()">
-									    {{ empresa.configuracao.confNFe.servMsmNota && "Sim" || "Não" }}
-									</a>
+								<a href="#" editable-select="empresa.configuracao.confNFe.servMsmNota.id" e-ng-options="s.id as s.descricao for s in SERV_MSM_NOTA" onaftersave="updateEmpresa()">{{ destConsFinal() }}</a>
 								</div>
 							</div>
 							<div class="row">

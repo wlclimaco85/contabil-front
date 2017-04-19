@@ -245,7 +245,7 @@ qat.model.transaction = function (_user, _token, modelAction)
 
 qat.model.fnCnae = function (_oObjet,_modelAction,_user)
 {
-	if(_oObjet.id){
+	if(_oObjet){
 	return idCnae = {
 
 		id: _oObjet.id,
@@ -256,7 +256,9 @@ qat.model.fnCnae = function (_oObjet,_modelAction,_user)
 		modifyDateUTC: (new Date()).getTime(),
 
 	}
-}else{return {}}
+}else{
+	return {}
+}
 
 }
 qat.model.fnRegime = function (_oObjet, modelAction)
@@ -1333,9 +1335,9 @@ qat.model.fnEndereco = function (_oObjet, modelAction, user)
 	}
 
 	var _id = null;
-	if ((_oObjet !== undefined) && (_oObjet.id !== undefined))
+	if (_oObjet !== undefined)
 	{
-		if (_oObjet.id == "" || _oObjet.id == " ")
+		if (_oObjet.id == "" || _oObjet.id == " " || _oObjet.id == null || _oObjet.id == undefined)
 		{
 			_id = null;
 		}
@@ -1407,7 +1409,7 @@ qat.model.fnUsuario = function (_oObjet, modelAction, user)
 
 qat.model.fnDocumentos = function (_documentos, _modelAction,_userId)
 {
-
+debugger
 	var _emprId = null;
 	var estoques = [];
 	if (localStorage.getItem('empresa') == null ||
@@ -1423,11 +1425,14 @@ qat.model.fnDocumentos = function (_documentos, _modelAction,_userId)
 	for(var x= 0; x < _documentos.length;x++)
 	{
 		var _id = null;
-		if (_documentos[x].id == "" || _documentos[x].id == " ")
+		if (_documentos[x].id == "" || _documentos[x].id == " " || _documentos[x].id == undefined || _documentos[x].id == null)
 		{
 			_id = null;
 		}
-
+		else
+		{
+			_id = _documentos[x].id;
+		}
 		estoque = {
 				id: _id,
 				documentoType: _documentos[x].documentoType,
@@ -1546,12 +1551,13 @@ qat.model.Telefones = function (_oObjet,_modelAction,_user)
 
 qat.model.Cnaes = function (_oObjet,_modelAction,_user)
 {
+	debugger
 	var email = {};
 	var emails = [];
 	for(var x= 0; x < _oObjet.length;x++)
 	{
 		email = qat.model.fnCnae(_oObjet[x],_oObjet[x].id ? _modelAction : "INSERT",_user)
-		emails.push(qat.model.fnCnaeEmpresa(email))
+		emails.push(qat.model.fnCnaeEmpresa(email ,email.id ? _modelAction : "INSERT",_user))
 	}
 
 	return emails;
@@ -1761,9 +1767,10 @@ qat.model.confNFe = function (_oObjet,_modelAction,_user)
 	this.pisPadrao = _oObjet.pisPadrao;
 	this.cofinsPadrao = _oObjet.cofinsPadrao;
 	this.ambienteEnvio = _oObjet.ambienteEnvio ? {id : _oObjet.ambienteEnvio.id} : {};
+	this.tipo = _oObjet.tipo ? {id : _oObjet.tipo.id} : {};
 	this.servMsmNota = _oObjet.servMsmNota ? {id : _oObjet.servMsmNota.id} : {};
-	this.serieEnvio = _oObjet.serieEnvio;
-	this.anexarXmlEmail = _oObjet.anexarXmlEmail;
+	this.serieEnvio = _oObjet.serieEnvio ? {id : _oObjet.serieEnvio.id} : {};
+	this.anexarXmlEmail = _oObjet.anexarXmlEmail == true ? 1 : 0;
 	this.idCSC = _oObjet.idCSC;
 	this.cSC = _oObjet.cSC;
 	this.informacaoAdd = _oObjet.informacaoAdd;
@@ -1850,7 +1857,8 @@ qat.model.boleto = function (_oObjet,_modelAction,_user)
 
 qat.model.configuracao = function (_oObjet,_modelAction,_user)
 {
-
+debugger
+	this.id = _oObjet.id;
 	this.confCabecalho = _oObjet.confCabecalho;
 	this.confGeral = _oObjet.confGeral ? new qat.model.confGeral(_oObjet.confGeral ,_oObjet.confGeral.id ? _modelAction : "INSERT",_user) : {};
 	this.confFiscal = _oObjet.confFiscal ? new qat.model.confFiscal(_oObjet.confFiscal ,_oObjet.confFiscal.id ? _modelAction : "INSERT",_user) : {};

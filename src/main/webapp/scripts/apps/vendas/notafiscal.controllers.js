@@ -505,7 +505,7 @@
 
         $scope.showSerie = function() {
 
-            return $scope.empresa.configuracao.confNFe.serie ? doisValoresShow($scope.SERIE,$scope.empresa.configuracao.confNFe.serie.id) : 'Not set';
+            return $scope.empresa.configuracao.confNFe.serieEnvio ? doisValoresShow($scope.SERIE,$scope.empresa.configuracao.confNFe.serieEnvio.id) : 'Not set';
         }
 
         $scope.showModelo = function() {
