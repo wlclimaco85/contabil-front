@@ -264,6 +264,12 @@
                                                 </div>
                                             </div>
                                             <div class="row">
+                                                <div class="form-group col-sm-9">
+                                                    <label for="exampleInputEmail1">Nome Fantasia</label>
+                                                    <a href="#" editable-text="empresa.nome" onaftersave="updateEmpresa()" >{{ empresa.nome || 'Vazio' }}</a>
+                                                </div>
+                                            </div>
+                                            <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="form-group col-sm-4">
                                                     <label for="exampleInputPassword1">Nome Fantasia:</label>
@@ -271,6 +277,39 @@
                                                     <div class="form-group col-sm-8">
                                                     <a href="#" editable-text="empresa.nome" onaftersave="updateEmpresa()" >{{ empresa.nome || '' }}</a>
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group col-sm-6">
+
+                                                <label for="exampleInputPassword1">CNPJ ou CPF:</label>
+                                                </div>
+                                                <div class="form-group col-sm-6">
+                                                <div ng-repeat="produto in empresa.documentos | filter:{ documentoType: 'CNPJ' || 'CPF' } ">
+                                                    <a href="#" editable-text="produto.numero" onaftersave="updateEmpresa()" >{{ produto.numero || 'empty' }}</a>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group col-sm-6">
+                                                <label for="exampleInputPassword1">Inscr. Est.:</label>
+                                                </div>
+                                                <div class="form-group col-sm-6">
+                                                <div ng-repeat="produto in empresa.documentos | filter:{ documentoType: 'IE' } ">
+                                                    <a href="#" editable-text="produto.numero" onaftersave="updateEmpresa()" >{{ produto.numero || 'empty' }}</a>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-sm-6">
+                                                <label for="exampleInputPassword1">Inscr. Municipal:</label>
+                                                </div>
+                                                <div class="form-group col-sm-6">
+                                                <div ng-repeat="produto in empresa.documentos | filter:{ documentoType: 'IM' } ">
+                                                    <a href="#" editable-text="produto.numero" onaftersave="updateEmpresa()" >{{ produto.numero || 'empty' }}</a>
+                                                </div>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -421,21 +460,51 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="form-group col-sm-3">
-                                                    <label for="exampleInputPassword1">CEP:</label>
+                                                    <label for="exampleInputPassword1">Tipo Email:</label>
                                                     </div>
                                                     <div class="form-group col-sm-3">
-                                                    <a href="#" editable-text="empresa.enderecos[0].cep" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].cep || '' }}</a>
+                                                    <a href="#" editable-select="empresa.regime.id" onaftersave="updateEmpresa()" e-ng-options="sa.id as sa.nome for sa in regime">{{ showRegime() }}</a>
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                         <div class="form-group col-sm-3">
-                                                            <label for="exampleInputPassword1">Logradouro:</label>
+                                                            <label for="exampleInputPassword1">Email:</label>
                                                         </div>
-                                                        <div class="col-sm-5">
+                                                        <div class="col-sm-8">
                                                             <a href="#" editable-text="empresa.enderecos[0].logradouro" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].logradouro || '' }}</a>
                                                         </div>
 
-                                                        <div class="col-sm-5">
-                                                            <a href="#" editable-text="empresa.enderecos[0].numero" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].numero || '' }}</a>
+                                                        <div class="col-sm-2">
+                                                            <button type="button" ng-click="deleteForm(form)" class="btn btn-link removeButton">deletar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div class="row " style="margin-top : 20px"></div>
+                                    <div class="panel panel-default" style="background:#EEEEEE">
+                                        <div class="panel-heading" style="background: #DDDDDD">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group col-sm-3">
+                                                    <label for="exampleInputPassword1">Tipo Telefone:</label>
+                                                    </div>
+                                                    <div class="form-group col-sm-3">
+                                                    <a href="#" editable-select="empresa.regime.id" onaftersave="updateEmpresa()" e-ng-options="sa.id as sa.nome for sa in regime">{{ showRegime() }}</a>
+                                                    </div>
+                                                    <div class="form-group col-sm-6">
+                                                        <div class="form-group col-sm-3">
+                                                            <label for="exampleInputPassword1">Telefone:</label>
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            <a href="#" editable-text="empresa.enderecos[0].logradouro" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].logradouro || '' }}</a>
+                                                        </div>
+
+                                                        <div class="col-sm-2">
+                                                            <button type="button" ng-click="deleteForm(form)" class="btn btn-link removeButton">deletar</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -595,6 +664,20 @@
                                     <h4><a ng-click="pc.addColaborador()">Adicionar Parceiro</a></h4>
                                 </div>
                             </div>
+                            <ul class="table-list list-offer">
+                                <li class="text-light">
+                                    <span class="ch-icon-envelope-alt"></span>
+                                    Normal
+                                    <p class="table-list-detail">É a opção mais econômica, ideal se você não tiver pressa para receber o produto.</p>
+                                    <small class="text-light"></small>
+                                </li>
+                                <li class="text-light">
+                                    <span class="ch-icon-envelope-alt"></span>
+                                    Expresso
+                                    <p class="table-list-detail">Você receberá o produto assim que possível.</p>
+                                    <small class="text-light"></small>
+                                </li>
+                            </ul>
                             <div class="col-sm-4">
                                 <div class="well">
                                     <p>Nome : Damião Junior</p>

@@ -5,14 +5,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URISyntaxException;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -35,7 +39,12 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fincatto.nfe310.NFeConfig;
+import com.fincatto.nfe310.classes.NFModelo;
+import com.fincatto.nfe310.classes.NFUnidadeFederativa;
+import com.fincatto.nfe310.classes.statusservico.consulta.NFStatusServicoConsultaRetorno;
 import com.fincatto.nfe310.parsers.NotaParser;
+import com.fincatto.nfe310.webservices.WSFacade;
 import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest;
 import com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest;
@@ -43,14 +52,17 @@ import com.qat.samples.sysmgmt.advocacia.response.AudienciaResponse;
 import com.qat.samples.sysmgmt.advocacia.response.ProcessoResponse;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 
-import br.com.certisign.certisignon.test.CertificadoBean;
 import br.com.certisign.certisignon.tools.certificados.CryptoLogin;
 import br.com.certisign.certisignon.tools.certificados.NewCripto2;
+import br.com.emmanuelneri.app.controller.NFeConfigTeste;
 import br.com.emmanuelneri.app.model.ModelToken;
 
 
 
-public class AdvogadoTest {
+public class AdvogadoTest extends NFeConfig {
+
+    private KeyStore keyStoreCertificado = null;
+    private KeyStore keyStoreCadeia = null;
 
 	public static final String REST_SERVICE_URI = "http://localhost:8080/qat-sysmgmt-controller-rest/";
 	private HttpServletRequest request;
@@ -129,7 +141,7 @@ public class AdvogadoTest {
         return request.getSession();
     }
 	@Test
-	public void listAllAudiencia() throws JsonParseException, JsonMappingException, IOException, URISyntaxException, ServletException {
+	public void listAllAudiencia() throws KeyManagementException, UnrecoverableKeyException, NoSuchAlgorithmException, CertificateException, Exception {
 
 
 		HttpServletRequest request = null;//HttpServletRequest();
@@ -142,6 +154,31 @@ public class AdvogadoTest {
 		 	//	System.out.println("ret: " + ret);
 
 		 		String decriptado = "";
+
+		 		if (this.keyStoreCertificado == null) {
+		            this.keyStoreCertificado = KeyStore.getInstance("PKCS12");
+		            try (InputStream certificadoStream = AdvogadoTest.class.getResourceAsStream("laticinios.pfx")) {
+		                this.keyStoreCertificado.load(certificadoStream, this.getCertificadoSenha().toCharArray());
+		                String schaves = IOUtils.toString(certificadoStream, "UTF-8");
+		              //  String decriptadod = CryptoLogin.decrypt("teste", schaves);
+		            } catch (CertificateException | NoSuchAlgorithmException | IOException e) {
+		                this.keyStoreCadeia = null;
+		                throw new KeyStoreException("Nao foi possibel montar o KeyStore com a cadeia de certificados", e);
+		            }
+		        }
+		 		NFeConfigTeste config = new NFeConfigTeste("C:\\QATEclipseWorkSpace\\contabil-front\\src\\main\\java\\br\\com\\emmanuelneri\\app\\controller\\laticinios.pfx","123456",NFUnidadeFederativa.MG);
+		 		for (NFUnidadeFederativa estados : NFUnidadeFederativa.values())
+		 		{
+		 			if(!estados.equals(NFUnidadeFederativa.AM))
+		 			{
+		 			NFStatusServicoConsultaRetorno retorno = new WSFacade(config).consultaStatus(NFUnidadeFederativa.valueOf(estados.getCodigo()), NFModelo.NFE);
+
+		 			System.out.println(estados.getCodigo());
+			 		System.out.println(retorno.getStatus());
+			 		System.out.println(retorno.getMotivo());}
+		 		}
+
+
 
 		 		try {
 		 		//	((HttpSession) request).getServletContext();
@@ -519,5 +556,49 @@ public class AdvogadoTest {
 		Assert.assertEquals(result.getProcessoList().size(), count.intValue());
 
 	}
+
+
+    @Override
+    public NFUnidadeFederativa getCUF() {
+        return NFUnidadeFederativa.MG;
+    }
+
+    @Override
+    public KeyStore getCertificadoKeyStore() throws KeyStoreException {
+        if (this.keyStoreCertificado == null) {
+            this.keyStoreCertificado = KeyStore.getInstance("PKCS12");
+            try (InputStream certificadoStream = AdvogadoTest.class.getResourceAsStream("laticinios.pfx")) {
+                this.keyStoreCertificado.load(certificadoStream, this.getCertificadoSenha().toCharArray());
+            } catch (CertificateException | NoSuchAlgorithmException | IOException e) {
+                this.keyStoreCadeia = null;
+                throw new KeyStoreException("Nao foi possibel montar o KeyStore com a cadeia de certificados", e);
+            }
+        }
+        return this.keyStoreCertificado;
+    }
+
+    @Override
+    public String getCertificadoSenha() {
+        return "123456";
+    }
+
+    @Override
+    public KeyStore getCadeiaCertificadosKeyStore() throws KeyStoreException {
+        if (this.keyStoreCadeia == null) {
+            this.keyStoreCadeia = KeyStore.getInstance("JKS");
+            try (InputStream cadeia = AdvogadoTest.class.getResourceAsStream("homologacao.cacerts")) {
+                this.keyStoreCadeia.load(cadeia, this.getCadeiaCertificadosSenha().toCharArray());
+            } catch (CertificateException | NoSuchAlgorithmException | IOException e) {
+                this.keyStoreCadeia = null;
+                throw new KeyStoreException("Nao foi possibel montar o KeyStore com o certificado", e);
+            }
+        }
+        return this.keyStoreCadeia;
+    }
+
+    @Override
+    public String getCadeiaCertificadosSenha() {
+        return "senha";
+    }
 
 }

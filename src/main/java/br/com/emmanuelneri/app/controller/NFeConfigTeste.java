@@ -16,27 +16,65 @@ public class NFeConfigTeste extends NFeConfig {
 
  private KeyStore keyStoreCertificado = null;
  private KeyStore keyStoreCadeia = null;
+ private String cert;
+ private String senha;
+ private NFUnidadeFederativa estado;
 
- @Override
+
+
+
+
+ public NFeConfigTeste(String cert, String senha, NFUnidadeFederativa estado) {
+	super();
+	setCert(cert);
+	setSenha(senha);
+	setEstado(estado);
+}
+
+public String getCert() {
+	return cert;
+}
+
+public void setCert(String cert) {
+	this.cert = cert;
+}
+
+public String getSenha() {
+	return senha;
+}
+
+public void setSenha(String senha) {
+	this.senha = senha;
+}
+
+public NFUnidadeFederativa getEstado() {
+	return estado;
+}
+
+public void setEstado(NFUnidadeFederativa estado) {
+	this.estado = estado;
+}
+
+@Override
  public NFUnidadeFederativa getCUF() {
-     return NFUnidadeFederativa.MG;
+     return getEstado();
  }
 
  @Override
  public String getCertificadoSenha() {
-     return "123456";
+     return getSenha();
  }
 
  @Override
  public String getCadeiaCertificadosSenha() {
-     return "123456";
+     return "senha";
  }
-
+//"C:\\QATEclipseWorkSpace\\contabil-front\\src\\main\\java\\br\\com\\emmanuelneri\\app\\controller\\laticinios.pfx"
  @Override
  public KeyStore getCertificadoKeyStore() throws KeyStoreException {
      if (this.keyStoreCertificado == null) {
          this.keyStoreCertificado = KeyStore.getInstance("PKCS12");
-         try (InputStream certificadoStream = new FileInputStream("C:/Users/Washington/Desktop/laticinios.pfx")) {
+         try (InputStream certificadoStream = new FileInputStream(getCert())) {
              this.keyStoreCertificado.load(certificadoStream, this.getCertificadoSenha().toCharArray());
          } catch (CertificateException | NoSuchAlgorithmException | IOException e) {
              this.keyStoreCadeia = null;
@@ -50,7 +88,7 @@ public class NFeConfigTeste extends NFeConfig {
  public KeyStore getCadeiaCertificadosKeyStore() throws KeyStoreException {
      if (this.keyStoreCadeia == null) {
          this.keyStoreCadeia = KeyStore.getInstance("JKS");
-         try (InputStream cadeia = new FileInputStream("C:/Users/Washington/Desktop/laticinios.pfx")) {
+         try (InputStream cadeia = new FileInputStream("C:\\QATEclipseWorkSpace\\contabil-front\\src\\main\\java\\br\\com\\emmanuelneri\\app\\controller\\homologacao.cacerts")) {
              this.keyStoreCadeia.load(cadeia, this.getCadeiaCertificadosSenha().toCharArray());
          } catch (CertificateException | NoSuchAlgorithmException | IOException e) {
              this.keyStoreCadeia = null;
