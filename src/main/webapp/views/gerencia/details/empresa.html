@@ -1,139 +1,116 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style type="text/css">
     .wash {
-        list-style: none;
-        padding: 0;
-        margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
     }
-
     .tabs-was {
-        float: left;
-        border: 1px solid #000;
-        border-bottom-width: 0;
-        margin: 3px 3px 0px 3px;
-        padding: 5px 5px 0px 5px;
-        background-color: #CCC;
-        color: ##3767B9;
+    float: left;
+    border: 1px solid #000;
+    border-bottom-width: 0;
+    margin: 3px 3px 0px 3px;
+    padding: 5px 5px 0px 5px;
+    background-color: #CCC;
+    color: ##3767B9;
     }
-
-
-     .selection {
-        border: 1px solid #000;
-        border-bottom-width: 0;
-        margin: 3px 3px 0px 3px;
-        padding: 5px 5px 0px 5px;
-        background-color: #CCC;
-        color: ##3767B9;
+    .selection {
+    border: 1px solid #000;
+    border-bottom-width: 0;
+    margin: 3px 3px 0px 3px;
+    padding: 5px 5px 0px 5px;
+    background-color: #CCC;
+    color: ##3767B9;
     }
-
     #mainView {
-        border: 1px solid black;
-        clear: both;
+    border: 1px solid black;
+    clear: both;
     }
-
     .active {
-        background-color: #FFF;
-        color: #000;
+    background-color: #FFF;
+    color: #000;
     }
-
     * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     }
-
     .tabs-nav {
-        padding: 20px 0 0;
-        list-style: none;
+    padding: 20px 0 0;
+    list-style: none;
     }
-
     .tabs-nav li {
-        display: inline;
+    display: inline;
     }
-
     .tabs-nav a {
-        display: inline-block;
-        border: 1px solid #ddd;
-        border-bottom: none;
-        padding: 15px;
-        cursor: pointer;
-        border-radius: 5px 5px 0 0;
-        font-size: 14px;
-        color: #fff;
-        background: #1B3975;
+    display: inline-block;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 5px 5px 0 0;
+    font-size: 14px;
+    color: #fff;
+    background: #1B3975;
     }
-
     .tabs-nav .active {
-        background: #fff;
-        color: #000;
-        border-bottom: 1px solid #fff;
-        margin-bottom: -1px;
+    background: #fff;
+    color: #000;
+    border-bottom: 1px solid #fff;
+    margin-bottom: -1px;
     }
-
     .tab-content {
-        border: 1px solid #ddd;
-        padding: 20px;
+    border: 1px solid #ddd;
+    padding: 20px;
     }
-
     .tab-content1 {
-        border: 1px solid #ddd;
-        padding: 20px;
+    border: 1px solid #ddd;
+    padding: 20px;
     }
-
     p {
-        margin-bottom: 15px;
+    margin-bottom: 15px;
     }
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-
     .row.content {
-        height: 550px
+    height: 550px
     }
     /* Set gray background color and 100% height */
-
     .sidenav {
-        background-color: #f1f1f1;
-        height: 100%;
+    background-color: #f1f1f1;
+    height: 100%;
     }
     /* On small screens, set height to 'auto' for the grid */
-
     @media screen and (max-width: 767px) {
-        .row.content {
-            height: auto;
-        }
+    .row.content {
+    height: auto;
     }
-
+    }
     div.show-image {
-        position: relative;
-        float: left;
-        margin: 5px;
+    position: relative;
+    float: left;
+    margin: 5px;
     }
-
     div.show-image:hover img {
-        opacity: 0.5;
+    opacity: 0.5;
     }
-
     div.show-image:hover input {
-        display: block;
+    display: block;
     }
-
     div.show-image input {
-        position: absolute;
-        display: none;
+    position: absolute;
+    display: none;
     }
-
     div.show-image input.update {
-        top: 0;
-        left: 0;
+    top: 0;
+    left: 0;
     }
-
     div.show-image input.delete {
-        top: 0;
-        left: 79%;
+    top: 0;
+    left: 79%;
     }
-
     .vis {
-        height: 100px;
-        display: none;
+    height: 100px;
+    display: none;
     }
 </style>
 <div class="container1" ng-app ng-init="tabs=1" ng-controller="NewEmpresaViewController as pc">
@@ -160,351 +137,265 @@
         </li>
     </ul>
     <div class="tabs-container1">
-        <div class="tab-content1" ng-show="tabs == 1">
+        <div ng-controller="NfSaidaViewController as showCase">
             <div class="container-fluid">
                 <div class="row content">
                     <br>
                     <div class="col-sm-9">
-                        <div class="row col-sm-12 well">
-                            <div class="col-sm-2">
-                                <label for="exampleInputEmail1"> Status: </label>
-                            </div>
-                            <div class="col-sm-2"> <span class="label label-info">Ativo</span> </div>
-                            <div class="col-sm-2">
-                                <button class="btn btn-warning" ng-click="pc.status(10)"><i class="fa fa-edit"></i>
-                                </button>
-                                <button class="btn btn-danger" ng-click="pc.status(10)"><i class="fa fa-trash-o"></i>
-                                </button>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                        60%
+                        <div class="tab-content1" ng-show="tabs == 1">
+                            <div class="row col-sm-12 well">
+                                <div class="col-sm-2">
+                                    <label for="exampleInputEmail1"> Status: </label>
+                                </div>
+                                <div class="col-sm-2"> <span class="label label-info">Ativo</span> </div>
+                                <div class="col-sm-2">
+                                    <button class="btn btn-warning" ng-click="pc.status(10)"><i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger" ng-click="pc.status(10)"><i class="fa fa-trash-o"></i>
+                                    </button>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                            60%
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <br>
-
-                        <!--
-
-
-    private Configuracao configuracao;
-
-    private List<Endereco> enderecos;
-
-    private List<Documento> documentos;
-
-    private List<Email> emails;
-
-    private List<Telefone> telefones;
-
-    private List<CnaeEmpresa> cnaes;
-
-    private List<Usuario> usuarios;
-
-    private List<BancoPessoa> bancos;
-
-    private PlanoByEmpresa planosServicos;
-
-    private List<Socio> socios;
-
-    private List<Site> siteList;
-
-
-    private List<NotificationPreferences> notificacoes;
-
-                        private List<Plano> planoList;
-
-                        private Integer qntFilial;
-
-                        private Integer qntDeposito;
-
-                        private List<Filial> filialList;
-
-                        private List<Deposito> depositoList;
-
-                        private List<ContaCorrente> contaCorrenteList;
-
-                        private List<TarefaEnt> tarefaList;
-
-                        private Integer parceiroId;
-
-                        private Integer contabilidadeId;
-
-                        private EmpresaTypeEnum permissaoTypeEnum;
-
-
-     -->
-                        <div class="row"></div>
-                        <div class="well">
-                            <a href="javaScript:;" ng-click="toggle()">Editar Empresa</a>
-                            <div ng-show="state">
-
-                                <div class="col-sm-12">
-                                    <div class="row " style="margin-top : 20px"></div>
-                                    <div class="panel panel-default" style="background:#EEEEEE">
-                                        <div class="panel-heading" style="background: #DDDDDD">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="form-group col-sm-3">
-                                                    <label for="exampleInputPassword1">Razão Social:</label>
-                                                    </div>
-                                                    <div class="form-group col-sm-5">
-                                                    <a href="#" editable-text="empresa.razao" onaftersave="updateEmpresa()" >{{ empresa.razao || '' }}</a>
-                                                    </div>
-                                                    <div class="form-group col-sm-4">
-                                                        <div class="form-group col-sm-6">
-                                                            <label for="exampleInputPassword1">CNAE:</label>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <a href="#" editable-select="empresa.cnaes[0].idCnae.id" onaftersave="updateEmpresa()" e-ng-options="se.id as se.cnae for se in cnaes">{{ showStatus() }}</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group col-sm-9">
-                                                    <label for="exampleInputEmail1">Nome Fantasia</label>
-                                                    <a href="#" editable-text="empresa.nome" onaftersave="updateEmpresa()" >{{ empresa.nome || 'Vazio' }}</a>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="form-group col-sm-4">
-                                                    <label for="exampleInputPassword1">Nome Fantasia:</label>
-                                                    </div>
-                                                    <div class="form-group col-sm-8">
-                                                    <a href="#" editable-text="empresa.nome" onaftersave="updateEmpresa()" >{{ empresa.nome || '' }}</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-group col-sm-6">
-
-                                                <label for="exampleInputPassword1">CNPJ ou CPF:</label>
-                                                </div>
-                                                <div class="form-group col-sm-6">
-                                                <div ng-repeat="produto in empresa.documentos | filter:{ documentoType: 'CNPJ' || 'CPF' } ">
-                                                    <a href="#" editable-text="produto.numero" onaftersave="updateEmpresa()" >{{ produto.numero || 'empty' }}</a>
-                                                </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group col-sm-6">
-                                                <label for="exampleInputPassword1">Inscr. Est.:</label>
-                                                </div>
-                                                <div class="form-group col-sm-6">
-                                                <div ng-repeat="produto in empresa.documentos | filter:{ documentoType: 'IE' } ">
-                                                    <a href="#" editable-text="produto.numero" onaftersave="updateEmpresa()" >{{ produto.numero || 'empty' }}</a>
-                                                </div>
-                                                </div>
-                                            </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group col-sm-6">
-                                                <label for="exampleInputPassword1">Inscr. Municipal:</label>
-                                                </div>
-                                                <div class="form-group col-sm-6">
-                                                <div ng-repeat="produto in empresa.documentos | filter:{ documentoType: 'IM' } ">
-                                                    <a href="#" editable-text="produto.numero" onaftersave="updateEmpresa()" >{{ produto.numero || 'empty' }}</a>
-                                                </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="form-group col-sm-6">
-                                                    <label for="exampleInputPassword1">N° Funcionarios:</label>
-                                                    </div>
-                                                    <div class="form-group col-sm-6">
-                                                    <a href="#" editable-text="empresa.numFunc" onaftersave="updateEmpresa()" >{{ empresa.numFunc || '' }}</a>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group col-sm-6">
-                                                    <label for="exampleInputPassword1">Dt. Abertura:</label>
-                                                    </div>
-                                                    <div class="form-group col-sm-6">
-                                                    <a href="#" editable-text="empresa.dtAbertura" onaftersave="updateEmpresa()" >{{ empresa.dtAbertura || '' }}</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="form-group col-sm-6">
-                                                    <label for="exampleInputPassword1">Código Regime Tribut.:</label>
-                                                    </div>
-                                                    <div class="form-group col-sm-6">
-                                                    <a href="#" editable-select="empresa.regime.id" onaftersave="updateEmpresa()" e-ng-options="sa.id as sa.nome for sa in regime">{{ showRegime() }}</a>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group col-sm-6">
-                                                    <label for="exampleInputPassword1">Responsavel:</label>
-                                                    </div>
-                                                    <div class="form-group col-sm-6">
-                                                    <a href="#" editable-text="empresa.Responsavel" onaftersave="updateEmpresa()" >{{ empresa.Responsavel || '' }}</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div id="col1" class="halfBox onLeft">
-                                            <div id="dadosEmpresa" class="tableList bottomSpace">
-                                                <div class="row " style="margin-top : 20px"></div>
-                                                <div class="panel panel-default" style="background:#EEEEEE">
-                                                    <div class="panel-heading" style="background: #DDDDDD">
-                                                        <div class="row" style="background : #FFF">
-                                                            <div class="form-group col-sm-6">
+                            <br>
+                            <div class="row"></div>
+                            <div class="well">
+                                <a href="javaScript:;" ng-click="toggle()">Editar Empresa</a>
+                                <div ng-show="state">
+                                    <div class="col-sm-12">
+                                        <div class="row " style="margin-top : 20px"></div>
+                                        <div class="panel panel-default" style="background:#EFEFEF">
+                                            <div class="panel-heading" style="background: #EFEFEF">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group col-sm-3">
                                                             <label for="exampleInputPassword1">Razão Social:</label>
-                                                            </div>
-                                                            <div class="form-group col-sm-6">
+                                                        </div>
+                                                        <div class="form-group col-sm-5">
                                                             <a href="#" editable-text="empresa.razao" onaftersave="updateEmpresa()" >{{ empresa.razao || '' }}</a>
+                                                        </div>
+                                                        <div class="form-group col-sm-4">
+                                                            <div class="form-group col-sm-6">
+                                                                <label for="exampleInputPassword1">CNAE:</label>
                                                             </div>
+                                                            <div class="col-sm-6">
+                                                                <a href="#" editable-select="empresa.cnaes[0].idCnae.id" onaftersave="updateEmpresa()" e-ng-options="se.id as se.cnae for se in cnaes">{{ showStatus() }}</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-sm-9">
+                                                        <label for="exampleInputEmail1">Nome Fantasia</label>
+                                                        <a href="#" editable-text="empresa.nome" onaftersave="updateEmpresa()" >{{ empresa.nome || 'Vazio' }}</a>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="exampleInputPassword1">CNPJ ou CPF:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <div ng-repeat="produto in empresa.documentos | filter:{ documentoType: 'CNPJ' || 'CPF' } ">
+                                                                <a href="#" editable-text="produto.numero" onaftersave="updateEmpresa()" >{{ produto.numero || 'empty' }}</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="exampleInputPassword1">Inscr. Est.:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <div ng-repeat="produto in empresa.documentos | filter:{ documentoType: 'IE' } ">
+                                                                <a href="#" editable-text="produto.numero" onaftersave="updateEmpresa()" >{{ produto.numero || 'empty' }}</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-sm-6">
+                                                        <label for="exampleInputPassword1">Inscr. Municipal:</label>
+                                                    </div>
+                                                    <div class="form-group col-sm-6">
+                                                        <div ng-repeat="produto in empresa.documentos | filter:{ documentoType: 'IM' } ">
+                                                            <a href="#" editable-text="produto.numero" onaftersave="updateEmpresa()" >{{ produto.numero || 'empty' }}</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="exampleInputPassword1">N° Funcionarios:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <a href="#" editable-text="empresa.numFunc" onaftersave="updateEmpresa()" >{{ empresa.numFunc || '' }}</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="exampleInputPassword1">Dt. Abertura:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <a href="#" editable-text="empresa.dtAbertura" onaftersave="updateEmpresa()" >{{ empresa.dtAbertura || '' }}</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="exampleInputPassword1">Código Regime Tribut.:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <a href="#" editable-select="empresa.regime.id" onaftersave="updateEmpresa()" e-ng-options="sa.id as sa.nome for sa in regime">{{ showRegime() }}</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="exampleInputPassword1">Responsavel:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <a href="#" editable-text="empresa.Responsavel" onaftersave="updateEmpresa()" >{{ empresa.Responsavel || '' }}</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="row " style="margin-top : 20px"></div>
-                                    <div class="panel panel-default" style="background:#EEEEEE">
-                                        <div class="panel-heading" style="background: #DDDDDD">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="form-group col-sm-3">
-                                                    <label for="exampleInputPassword1">CEP:</label>
-                                                    </div>
-                                                    <div class="form-group col-sm-3">
-                                                    <a href="#" editable-text="empresa.enderecos[0].cep" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].cep || '' }}</a>
-                                                    </div>
-                                                    <div class="form-group col-sm-6">
+                                    <div class="col-sm-12">
+                                        <div class="row " style="margin-top : 20px"></div>
+                                        <div class="panel panel-default" style="background:#EEEEEE">
+                                            <div class="panel-heading" style="background: #DDDDDD">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
                                                         <div class="form-group col-sm-3">
-                                                            <label for="exampleInputPassword1">Logradouro:</label>
+                                                            <label for="exampleInputPassword1">CEP:</label>
                                                         </div>
-                                                        <div class="col-sm-5">
-                                                            <a href="#" editable-text="empresa.enderecos[0].logradouro" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].logradouro || '' }}</a>
+                                                        <div class="form-group col-sm-3">
+                                                            <a href="#" editable-text="empresa.enderecos[0].cep" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].cep || '' }}</a>
                                                         </div>
-
-                                                        <div class="col-sm-5">
-                                                            <a href="#" editable-text="empresa.enderecos[0].numero" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].numero || '' }}</a>
+                                                        <div class="form-group col-sm-6">
+                                                            <div class="form-group col-sm-3">
+                                                                <label for="exampleInputPassword1">Logradouro:</label>
+                                                            </div>
+                                                            <div class="col-sm-5">
+                                                                <a href="#" editable-text="empresa.enderecos[0].logradouro" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].logradouro || '' }}</a>
+                                                            </div>
+                                                            <div class="col-sm-5">
+                                                                <a href="#" editable-text="empresa.enderecos[0].numero" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].numero || '' }}</a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="form-group col-sm-2">
-                                                    <label for="exampleInputPassword1">Bairro:</label>
-                                                    </div>
-                                                    <div class="form-group col-sm-3">
-                                                    <a href="#" editable-text="empresa.enderecos[0].bairro" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].bairro || '' }}</a>
-                                                    </div>
-                                                    <div class="form-group col-sm-4">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group col-sm-2">
+                                                            <label for="exampleInputPassword1">Bairro:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <a href="#" editable-text="empresa.enderecos[0].bairro" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].bairro || '' }}</a>
+                                                        </div>
                                                         <div class="form-group col-sm-4">
-                                                            <label for="exampleInputPassword1">Cidade:</label>
+                                                            <div class="form-group col-sm-4">
+                                                                <label for="exampleInputPassword1">Cidade:</label>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <a href="#" editable-text="empresa.enderecos[0].cidade.nome" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].cidade.nome || '' }}</a>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-sm-8">
-                                                            <a href="#" editable-text="empresa.enderecos[0].cidade.nome" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].cidade.nome || '' }}</a>
-                                                        </div>
-                                                    </div>
                                                         <div class="col-sm-3">
                                                             <div class="form-group col-sm-6">
-                                                            <label for="exampleInputPassword1">Estado:</label>
+                                                                <label for="exampleInputPassword1">Estado:</label>
                                                             </div>
                                                             <div class="form-group col-sm-6">
-                                                            <a href="#" editable-text="empresa.enderecos[0].cidade.estado.sigla" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].cidade.estado.sigla || '' }}</a>
+                                                                <a href="#" editable-text="empresa.enderecos[0].cidade.estado.sigla" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].cidade.estado.sigla || '' }}</a>
                                                             </div>
                                                         </div>
-
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="form-group col-sm-2">
-                                                    <label for="exampleInputPassword1">Cod. IBGE:</label>
-                                                    </div>
-                                                    <div class="form-group col-sm-3">
-                                                    <a href="#" editable-text="empresa.enderecos[0].codIbge" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].bairro || '' }}</a>
-                                                    </div>
-                                                    <div class="form-group col-sm-4">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group col-sm-2">
+                                                            <label for="exampleInputPassword1">Cod. IBGE:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <a href="#" editable-text="empresa.enderecos[0].codIbge" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].bairro || '' }}</a>
+                                                        </div>
                                                         <div class="form-group col-sm-4">
-                                                            <label for="exampleInputPassword1">Latitude:</label>
+                                                            <div class="form-group col-sm-4">
+                                                                <label for="exampleInputPassword1">Latitude:</label>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <a href="#" editable-text="empresa.enderecos[0].latitude" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].cidade.nome || '' }}</a>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-sm-8">
-                                                            <a href="#" editable-text="empresa.enderecos[0].latitude" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].cidade.nome || '' }}</a>
-                                                        </div>
-                                                    </div>
                                                         <div class="col-sm-3">
                                                             <div class="form-group col-sm-6">
-                                                            <label for="exampleInputPassword1">Longitude:</label>
+                                                                <label for="exampleInputPassword1">Longitude:</label>
                                                             </div>
                                                             <div class="form-group col-sm-6">
-                                                            <a href="#" editable-text="empresa.enderecos[0].longitude" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].cidade.estado.sigla || '' }}</a>
+                                                                <a href="#" editable-text="empresa.enderecos[0].longitude" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].cidade.estado.sigla || '' }}</a>
                                                             </div>
                                                         </div>
-
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="row " style="margin-top : 20px"></div>
-                                    <div class="panel panel-default" style="background:#EEEEEE">
-                                        <div class="panel-heading" style="background: #DDDDDD">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="form-group col-sm-3">
-                                                    <label for="exampleInputPassword1">Tipo Email:</label>
-                                                    </div>
-                                                    <div class="form-group col-sm-3">
-                                                    <a href="#" editable-select="empresa.regime.id" onaftersave="updateEmpresa()" e-ng-options="sa.id as sa.nome for sa in regime">{{ showRegime() }}</a>
-                                                    </div>
-                                                    <div class="form-group col-sm-6">
+                                    <div class="col-sm-12">
+                                        <div class="row " style="margin-top : 20px"></div>
+                                        <div class="panel panel-default" style="background:#EEEEEE">
+                                            <div class="panel-heading" style="background: #DDDDDD">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
                                                         <div class="form-group col-sm-3">
-                                                            <label for="exampleInputPassword1">Email:</label>
+                                                            <label for="exampleInputPassword1">Tipo Email:</label>
                                                         </div>
-                                                        <div class="col-sm-8">
-                                                            <a href="#" editable-text="empresa.enderecos[0].logradouro" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].logradouro || '' }}</a>
-                                                        </div>
-
-                                                        <div class="col-sm-2">
-                                                            <button type="button" ng-click="deleteForm(form)" class="btn btn-link removeButton">deletar</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-12">
-                                    <div class="row " style="margin-top : 20px"></div>
-                                    <div class="panel panel-default" style="background:#EEEEEE">
-                                        <div class="panel-heading" style="background: #DDDDDD">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="form-group col-sm-3">
-                                                    <label for="exampleInputPassword1">Tipo Telefone:</label>
-                                                    </div>
-                                                    <div class="form-group col-sm-3">
-                                                    <a href="#" editable-select="empresa.regime.id" onaftersave="updateEmpresa()" e-ng-options="sa.id as sa.nome for sa in regime">{{ showRegime() }}</a>
-                                                    </div>
-                                                    <div class="form-group col-sm-6">
                                                         <div class="form-group col-sm-3">
-                                                            <label for="exampleInputPassword1">Telefone:</label>
+                                                            <a href="#" editable-select="empresa.regime.id" onaftersave="updateEmpresa()" e-ng-options="sa.id as sa.nome for sa in regime">{{ showRegime() }}</a>
                                                         </div>
-                                                        <div class="col-sm-8">
-                                                            <a href="#" editable-text="empresa.enderecos[0].logradouro" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].logradouro || '' }}</a>
+                                                        <div class="form-group col-sm-6">
+                                                            <div class="form-group col-sm-3">
+                                                                <label for="exampleInputPassword1">Email:</label>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <a href="#" editable-text="empresa.enderecos[0].logradouro" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].logradouro || '' }}</a>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <button type="button" ng-click="deleteForm(form)" class="btn btn-link removeButton">deletar</button>
+                                                            </div>
                                                         </div>
-
-                                                        <div class="col-sm-2">
-                                                            <button type="button" ng-click="deleteForm(form)" class="btn btn-link removeButton">deletar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="row " style="margin-top : 20px"></div>
+                                        <div class="panel panel-default" style="background:#EEEEEE">
+                                            <div class="panel-heading" style="background: #DDDDDD">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group col-sm-3">
+                                                            <label for="exampleInputPassword1">Tipo Telefone:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <a href="#" editable-select="empresa.regime.id" onaftersave="updateEmpresa()" e-ng-options="sa.id as sa.nome for sa in regime">{{ showRegime() }}</a>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <div class="form-group col-sm-3">
+                                                                <label for="exampleInputPassword1">Telefone:</label>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <a href="#" editable-text="empresa.enderecos[0].logradouro" onaftersave="updateEmpresa()" >{{ empresa.enderecos[0].logradouro || '' }}</a>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <button type="button" ng-click="deleteForm(form)" class="btn btn-link removeButton">deletar</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -512,26 +403,13 @@
                                         </div>
                                     </div>
                                 </div>
-
-                               <!-- <div ng-include="'views/empresa/apps/cadEmpresa.html'"></div>
-
-                                 email -->
-                               <!-- <div ng-include="'views/util/apps/endereco.html'"></div>
-
-                                 telefone -->
-                               <!-- <div ng-include="'views/util/apps/telefone.html'"></div>
-
-                                 email
-                                <div ng-include="'views/util/apps/email.html'"></div>-->
-
-                                <button type="submit" ng-click="updateEmpresa()" id="validateButton" class="btn btn-primary">Gravar</button>
                             </div>
-                        </div>
-                        <div class="row"></div>
-                        <div class="well">
-                            <a href="javaScript:;" ng-click="toggle1()">Editar Configuração</a>
-                            <div ng-show="state1">
-                                <div ng-include="'views/empresa/apps/configuracaoEmpresa.html'"></div>
+                            <div class="row"></div>
+                            <div class="well">
+                                <a href="javaScript:;" ng-click="toggle1()">Editar Configuração</a>
+                                <div ng-show="state1">
+                                    <div ng-include="'views/empresa/apps/configuracaoEmpresa.html'"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="row"></div>
@@ -566,7 +444,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div class="row">
                             <div class="col-sm-3">
@@ -584,7 +461,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div class="row">
                             <div class="col-sm-3">
@@ -687,7 +563,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="col-sm-3 sidenav hidden-xs">
                         <div class="list-group">
@@ -701,7 +576,7 @@
                             <div ng-repeat="note in empresa.notes">
                                 <a href="javaScript:;" class="list-group-item col-sm-12">
                                     <h4 class="list-group-item-heading">{{note.createUser}}  {{note.createDateUTC}}</h4>
-                                     <div class="form-group col-sm-12" style="word-wrap: break-word;">
+                                    <div class="form-group col-sm-12" style="word-wrap: break-word;">
                                         <label for="exampleInputEmail1">{{note.noteText}}</label>
                                     </div>
                                 </a>
@@ -740,7 +615,7 @@
             </div>
         </div>
         <div class="tab-content1" ng-show="tabs == 2">
-         <!--   <div ng-controller="ContasReceberController as showCase">
+            <!--   <div ng-controller="ContasReceberController as showCase">
                 <table datatable dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" class="row-border hover">
                     <tfoot>
                         <tr>
@@ -782,10 +657,10 @@
                         </tr>
                     </tfoot>
                 </table>
-            </div> -->
+                </div> -->
         </div>
         <div class="tab-content1" ng-show="tabs == 3">
-           <!-- <div ng-controller="ProcessoController as showCase">
+            <!-- <div ng-controller="ProcessoController as showCase">
                 <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
                     <tfoot>
                         <tr>
@@ -810,11 +685,10 @@
                         </tr>
                     </tfoot>
                 </table>
-            </div> -->
+                </div> -->
         </div>
-
         <div class="tab-content1" ng-show="tabs == 4">
-           <!-- <div ng-controller="ProcessoController as showCase">
+            <!-- <div ng-controller="ProcessoController as showCase">
                 <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
                     <tfoot>
                         <tr>
@@ -839,12 +713,10 @@
                         </tr>
                     </tfoot>
                 </table>
-            </div> -->
+                </div> -->
         </div>
-
-
         <div class="tab-content1" ng-show="tabs == 5">
-         <!--   <div ng-controller="ProcessoController as showCase">
+            <!--   <div ng-controller="ProcessoController as showCase">
                 <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
                     <tfoot>
                         <tr>
@@ -869,11 +741,10 @@
                         </tr>
                     </tfoot>
                 </table>
-            </div> -->
+                </div> -->
         </div>
-
         <div class="tab-content1" ng-show="tabs == 6">
-          <!--  <div ng-controller="ProcessoController as showCase">
+            <!--  <div ng-controller="ProcessoController as showCase">
                 <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
                     <tfoot>
                         <tr>
@@ -898,11 +769,10 @@
                         </tr>
                     </tfoot>
                 </table>
-            </div> -->
+                </div> -->
         </div>
-
         <div class="tab-content1" ng-show="tabs == 7">
-           <!-- <div ng-controller="ProcessoController as showCase">
+            <!-- <div ng-controller="ProcessoController as showCase">
                 <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
                     <tfoot>
                         <tr>
@@ -927,11 +797,10 @@
                         </tr>
                     </tfoot>
                 </table>
-            </div> -->
+                </div> -->
         </div>
-
         <div class="tab-content1" ng-show="tabs == 8">
-          <!--  <div ng-controller="ProcessoController as showCase">
+            <!--  <div ng-controller="ProcessoController as showCase">
                 <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
                     <tfoot>
                         <tr>
@@ -956,11 +825,10 @@
                         </tr>
                     </tfoot>
                 </table>
-            </div> -->
+                </div> -->
         </div>
-
         <div class="tab-content1" ng-show="tabs == 9">
-          <!--  <div ng-controller="ProcessoController as showCase">
+            <!--  <div ng-controller="ProcessoController as showCase">
                 <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
                     <tfoot>
                         <tr>
@@ -985,11 +853,10 @@
                         </tr>
                     </tfoot>
                 </table>
-            </div> -->
+                </div> -->
         </div>
-
         <div class="tab-content1" ng-show="tabs == 10">
-           <!-- <div ng-controller="ProcessoController as showCase">
+            <!-- <div ng-controller="ProcessoController as showCase">
                 <table datatable dt-options="showCase.dtOptionsContato" dt-columns="showCase.dtColumnsContato" class="row-border hover">
                     <tfoot>
                         <tr>
@@ -1014,13 +881,10 @@
                         </tr>
                     </tfoot>
                 </table>
-            </div> -->
+                </div> -->
         </div>
-
     </div>
 </div>
-
-
 <script>
     $(document).ready(function() {
 

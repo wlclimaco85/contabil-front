@@ -858,7 +858,7 @@ debugger
                      $scope.empresa.configuracao = fModels.amont($scope.configuracao,"INSERT");
                 }
                 //-------------------
-                if($scope.configuracao.confGeral.id !== undefined)
+                if($scope.configuracao.confGeral && $scope.configuracao.confGeral.id !== undefined)
                 {
                     $scope.empresa.configuracao.confGeral = fModels.amont($scope.configuracao.confGeral,"UPDATE");
                 }
@@ -868,7 +868,7 @@ debugger
                     $scope.empresa.configuracao.confGeral = fModels.amont($scope.configuracao.confGeral,"INSERT");
                 }
                 //-------------------
-                if($scope.configuracao.confVendas.id !== undefined)
+                if($scope.configuracao.confVendas && $scope.configuracao.confVendas.id !== undefined)
                 {
                     $scope.empresa.configuracao.confVendas = fModels.amont($scope.configuracao.confVendas,"UPDATE");
                 }
@@ -879,7 +879,7 @@ debugger
 
 
                 //-------------------
-                if($scope.configuracao.confEntrada.id !== undefined)
+                if($scope.configuracao.confEntrada && $scope.configuracao.confEntrada.id !== undefined)
                 {
                     $scope.empresa.configuracao.confEntrada = fModels.amont($scope.configuracao.confEntrada,"UPDATE");
                 }
@@ -901,7 +901,7 @@ debugger
                 }
 
                 //-------------------
-                if($scope.configuracao.confCarne.id !== undefined)
+                if($scope.configuracao.confCarne && $scope.configuracao.confCarne.id !== undefined)
                 {
                     $scope.empresa.configuracao.confCarne = fModels.amont($scope.configuracao.confCarne,"UPDATE");
                 }
@@ -911,7 +911,7 @@ debugger
                 }
 
                 //-------------------
-                if($scope.configuracao.confFiscal.id !== undefined)
+                if($scope.configuracao.confFiscal && $scope.configuracao.confFiscal.id !== undefined)
                 {
                     $scope.empresa.configuracao.confFiscal = fModels.amont($scope.configuracao.confFiscal,"UPDATE");
                 }
@@ -921,7 +921,7 @@ debugger
                 }
 
                 //-------------------
-                if($scope.configuracao.confNFe.id !== undefined)
+                if($scope.configuracao.confNFe && $scope.configuracao.confNFe.id !== undefined)
                 {
                     $scope.empresa.configuracao.confNFe = fModels.amont($scope.configuracao.confNFe,"UPDATE");
                 }

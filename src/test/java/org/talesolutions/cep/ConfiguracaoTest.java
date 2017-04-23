@@ -1253,7 +1253,7 @@ public class ConfiguracaoTest {
 	        Assert.assertEquals(result.isOperationSuccess(), true);
 	     //   Assert.assertEquals(result.getConfiguracaoNFeList().size(), 20);
 
-	        NFeConfigTeste config = new NFeConfigTeste();
+	     //   NFeConfigTeste config = new NFeConfigTeste();
 	     //   NFStatusServicoConsultaRetorno retorno = new WSFacade(config).consultaStatus(NFUnidadeFederativa.MG, NFModelo.NFE);
 	     //   System.out.println(retorno.getStatus());
 	     //   System.out.println(retorno.getMotivo());

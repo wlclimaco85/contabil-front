@@ -155,28 +155,30 @@ public class AdvogadoTest extends NFeConfig {
 
 		 		String decriptado = "";
 
-		 		if (this.keyStoreCertificado == null) {
-		            this.keyStoreCertificado = KeyStore.getInstance("PKCS12");
-		            try (InputStream certificadoStream = AdvogadoTest.class.getResourceAsStream("laticinios.pfx")) {
-		                this.keyStoreCertificado.load(certificadoStream, this.getCertificadoSenha().toCharArray());
-		                String schaves = IOUtils.toString(certificadoStream, "UTF-8");
-		              //  String decriptadod = CryptoLogin.decrypt("teste", schaves);
-		            } catch (CertificateException | NoSuchAlgorithmException | IOException e) {
-		                this.keyStoreCadeia = null;
-		                throw new KeyStoreException("Nao foi possibel montar o KeyStore com a cadeia de certificados", e);
-		            }
-		        }
+//		 		if (this.keyStoreCertificado == null) {
+//		            this.keyStoreCertificado = KeyStore.getInstance("PKCS12");
+//		            try (InputStream certificadoStream = AdvogadoTest.class.getResourceAsStream("laticinios.pfx")) {
+//		                this.keyStoreCertificado.load(certificadoStream, this.getCertificadoSenha().toCharArray());
+//		                String schaves = IOUtils.toString(certificadoStream, "UTF-8");
+//		              //  String decriptadod = CryptoLogin.decrypt("teste", schaves);
+//		            } catch (CertificateException | NoSuchAlgorithmException | IOException e) {
+//		                this.keyStoreCadeia = null;
+//		                throw new KeyStoreException("Nao foi possibel montar o KeyStore com a cadeia de certificados", e);
+//		            }
+//		        }
 		 		NFeConfigTeste config = new NFeConfigTeste("C:\\QATEclipseWorkSpace\\contabil-front\\src\\main\\java\\br\\com\\emmanuelneri\\app\\controller\\laticinios.pfx","123456",NFUnidadeFederativa.MG);
-		 		for (NFUnidadeFederativa estados : NFUnidadeFederativa.values())
-		 		{
-		 			if(!estados.equals(NFUnidadeFederativa.AM))
-		 			{
-		 			NFStatusServicoConsultaRetorno retorno = new WSFacade(config).consultaStatus(NFUnidadeFederativa.valueOf(estados.getCodigo()), NFModelo.NFE);
+		 		//for (NFUnidadeFederativa estados : NFUnidadeFederativa.values())
+		 	//	{
+		 		//	if(!estados.equals(NFUnidadeFederativa.AM))
+		 		//	{
+		 			NFStatusServicoConsultaRetorno retorno = new WSFacade(config).consultaStatus(NFUnidadeFederativa.MG, NFModelo.NFE);
 
-		 			System.out.println(estados.getCodigo());
+		 		//	System.out.println(estados.getCodigo());
 			 		System.out.println(retorno.getStatus());
-			 		System.out.println(retorno.getMotivo());}
-		 		}
+			 		System.out.println(retorno.getMotivo());
+			 		
+	//}
+		 		//}
 
 
 
