@@ -5,7 +5,7 @@
 	commonAuth.factory('fCalcProduto', ['$rootScope','SysMgmtData' ,function($rootScope,SysMgmtData){
 		var factory = {};
 
-	factory.fnCalcTributo = function(tributacao,NFNotaInfoICMSTotal,vBC){
+	factory.fnCalcTributo = function(scope){
 
 
 
@@ -45,7 +45,7 @@
 //	    private String valortotaltributos;
 
 		//Base de Cálculo
-		var
+
 		var $vBC;
 		var $qBCProd;
 		var $vAliqProd;
@@ -119,23 +119,34 @@
 	    // |                         CALCULA O PIS                                |
 	    // +----------------------------------------------------------------------+
 
-
+	    for(var x = 0; x < scope.notaFiscal.itens.length;x++)
+	    {
 			// PIS 01 - Operação Tributável (base de cálculo = valor da operação alíquota normal)
-			if (tributacao.pis.pISSituaTributaria.value == '01'){
+			if (scope.notaFiscal.itens[x].imposto.pis.aliquota.situacaoTributaria.value == '01'){
 
-				NFNotaInfoICMSTotal.valorpis = vBC * ( tributacao.pis.valorUnidtribPIS / 100 );
+				scope.notaFiscal.total.icmstotal.valorpis = scope.notaFiscal.total.icmstotal.valorpis + (scope.notaFiscal.itens[x].produto.valorTotalBruto * ( scope.notaFiscal.itens[x].imposto.pis.percentualAliquota / 100 ));
+				scope.notaFiscal.itens[x].imposto.pis.valorBaseCalculo = scope.notaFiscal.itens[x].produto.valorTotalBruto;
+				scope.notaFiscal.itens[x].imposto.pis.valorTributo =  (scope.notaFiscal.itens[x].produto.valorTotalBruto * ( scope.notaFiscal.itens[x].imposto.pis.percentualAliquota / 100 ))
 			}
 
 			// PIS 02 - Operação Tributável (base de cálculo = valor da operação (alíquota diferenciada));
-			if (tributacao.pis.pISSituaTributaria.value == '02'){
+			if (scope.notaFiscal.itens[x].imposto.pis.aliquota.situacaoTributaria.value == '02'){
 
-				NFNotaInfoICMSTotal.valorpis = vBC * ( tributacao.pis.valorUnidtribPIS / 100 );
+				scope.notaFiscal.total.icmstotal.valorpis = scope.notaFiscal.total.icmstotal.valorpis + (scope.notaFiscal.itens[x].produto.valorTotalBruto * ( scope.notaFiscal.itens[x].imposto.pis.percentualAliquota / 100 ));
+				scope.notaFiscal.itens[x].imposto.pis.valorBaseCalculo = scope.notaFiscal.itens[x].produto.valorTotalBruto;
+				scope.notaFiscal.itens[x].imposto.pis.valorTributo = (scope.notaFiscal.itens[x].produto.valorTotalBruto * ( scope.notaFiscal.itens[x].imposto.pis.percentualAliquota / 100 ))
 			}
 
 			// PIS 03 - Operação Tributável (base de cálculo = qtd vendida x alíquota por unidade de produto);
-			if (tributacao.pis.pISSituaTributaria.value == '03'){
+			if (scope.notaFiscal.itens[x].imposto.pis.aliquota.situacaoTributaria.value == '03'){
 
-				NFNotaInfoICMSTotal.valorpis = vBC * tributacao.pis.valorTribPISST;
+				for(var i = 0; i < scope.notaFiscal.itens[x].produto.quantidadeTributavel; i++)
+				{
+					scope.notaFiscal.total.icmstotal.valorpis = scope.notaFiscal.total.icmstotal.valorpis + (scope.notaFiscal.itens[x].produto.valorUnitario * ( scope.notaFiscal.itens[x].imposto.pis.percentualAliquota / 100 ));
+				}
+				scope.notaFiscal.total.icmstotal.valorpis = scope.notaFiscal.total.icmstotal.valorpis + scope.notaFiscal.total.icmstotal.valorpis;
+				scope.notaFiscal.itens[x].imposto.pis.valorBaseCalculo = scope.notaFiscal.itens[x].produto.valorTotalBruto;
+				scope.notaFiscal.itens[x].imposto.pis.valorTributo = scope.notaFiscal.total.icmstotal.valorpis;
 			}
 
 			// PIS04-OperaçãoTributável(tributaçãomonofásica(alíquotazero));
@@ -146,23 +157,19 @@
 
 			// array com a Situação Tributária do COFINS
 			$_cstPIS = array('04','06','07','08','09');
-			if ( in_array( tributacao.pis.pISSituaTributaria.value, $_cstPIS ) ){
+			if ( in_array(scope.notaFiscal.itens[x].imposto.pis.aliquota.situacaoTributaria.value, $_cstPIS ) ){
 
-				NFNotaInfoICMSTotal.valorpis = 0.00;
+				scope.notaFiscal.total.icmstotal.valorpis = scope.notaFiscal.total.icmstotal.valorpis + 0;
+				scope.notaFiscal.itens[x].imposto.pis.valorBaseCalculo = 0;
+				scope.notaFiscal.itens[x].imposto.pis.valorTributo = 0
 			}
 
 			// PIS 99 - Outras operações
-			if (tributacao.pis.pISSituaTributaria.value == '03'){
-				if(tributacao.pis.tipocalculoSubstTrib.value == "Porcentagem")
-				{
+			if (scope.notaFiscal.itens[x].imposto.pis.aliquota.situacaoTributaria.value == '99'){
 
-					NFNotaInfoICMSTotal.valorpis = vBC * ( tributacao.pis.valorTribPISST / 100 );
-				}
-				else
-				{
-					//qBCProd
-					NFNotaInfoICMSTotal.valorpis = vBC * tributacao.pis.valorTribPISST
-				}
+				scope.notaFiscal.total.icmstotal.valorpis = scope.notaFiscal.total.icmstotal.valorpis + 0;
+				scope.notaFiscal.itens[x].imposto.pis.valorBaseCalculo = 0;
+				scope.notaFiscal.itens[x].imposto.pis.valorTributo = 0;
 		    }
 
 
@@ -171,8 +178,11 @@
 	    // +----------------------------------------------------------------------+
 
 			// PIS 01 - Operação Tributável (base de cálculo = valor da operação alíquota normal)
-			if (tributacao.cofins.sitTributaria.value == '01'){
-				NFNotaInfoICMSTotal.valorcofins = vBC * ( tributacao.cofins.valorTribCOFINS / 100 );
+			if (scope.notaFiscal.itens[x].imposto.cofins.aliquota.situacaoTributaria.value == '01'){
+
+				scope.notaFiscal.total.icmstotal.valorcofins = scope.notaFiscal.total.icmstotal.valorcofins + (scope.notaFiscal.itens[x].produto.valorTotalBruto * ( scope.notaFiscal.itens[x].imposto.cofins.percentualAliquota / 100 ));
+				scope.notaFiscal.itens[x].imposto.cofins.valorBaseCalculo = scope.notaFiscal.itens[x].produto.valorTotalBruto;
+				scope.notaFiscal.itens[x].imposto.cofins.valorTributo =  (scope.notaFiscal.itens[x].produto.valorTotalBruto * ( scope.notaFiscal.itens[x].imposto.cofins.percentualAliquota / 100 ))
 			}
 
 			// PIS 02 - Operação Tributável (base de cálculo = valor da operação (alíquota diferenciada));
@@ -440,9 +450,8 @@
 
 			   }
 
-
-    }
-
+			}
+    };
 })();
 
 
