@@ -272,7 +272,7 @@ angular.module('wdApp.apps.produto', ['datatables','angularModalService', 'datat
         function actionsHtml(data, type, full, meta) {
             vm.persons[data.id] = data;
             return '<button class="btn btn-info" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
-                '   <i class="glyphicon glyphicon-save"></i>' +
+                '   <i class="fa fa-edit"></i>' +
                 '</button>&nbsp;' +
                 '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
                 '   <i class="fa fa-trash-o"></i>' +
@@ -671,6 +671,13 @@ angular.module('wdApp.apps.produto.select', ['ngSanitize', 'ui.select'])
   },3000);
 
   vm.counter = 0;
+
+
+  vm.onSelectCallback = function (item, model)
+  {
+        debugger;
+        $scope
+  }
 
 
   vm.removed = function (item, model) {

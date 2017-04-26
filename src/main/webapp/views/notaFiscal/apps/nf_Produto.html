@@ -89,8 +89,9 @@
             </div>
 
         </div>
+
         <div ng-show="produto.produto.pagarAgora == true" ng-hide="produto.produto.pagarAgora == false">
-            <div ng-include="'views/produto/apps/tributacao.html'"></div>
+            <div ng-init="tributacao = produto.produto.tributacao" ng-include="'views/produto/apps/tributacao.html'"></div>
 
     </div>
     </div>

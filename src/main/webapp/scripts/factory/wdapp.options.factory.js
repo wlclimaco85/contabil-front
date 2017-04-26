@@ -299,19 +299,31 @@
 
 			            return oOptions;
 				},
-				tributacao : function(vm,createdRow,scope, _callback) {
+				tributacao : function(vm,createdRow,scope, _callback,_function) {
 
-					var oOptions = padrao(vm,createdRow,scope, _callback);
-				     oOptions.buttons.push({
-			                text: 'Nova Tributação',
+					var buttons = [];
+				      buttons.push(
+			            {
+			                text: '<span class="fa fa-trash"></span>',
 			                key: '1',
 			                action: function(e, dt, node, config) {
-			                    dialogFactory.dialog('views/gerencia/dialog/dTributacao.html',"TributacaoInsertController",validationFactory.tributacao,null);
+
+			                    dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html',"ContasPagarInsertController",validationFactory.contasPagar,_function);
+
+			                }
+		                },
+		                {
+			                text: 'Nova Tributação',
+			                key: '4',
+			                action: function(e, dt, node, config) {
+
+			                    dialogFactory.dialog('views/gerencia/dialog/dTributacao.html',"TributacaoInsertController",validationFactory.tributacao,_function);
 
 			                }
 			            })
 
-			            return oOptions;
+			            return  padrao(vm,createdRow,scope, _callback , buttons,2,_function);
+
 				},
 				regime : function(vm,createdRow,scope, _callback) {
 

@@ -2,35 +2,94 @@
 angular.module('wdApp.apps.tributacao', ['datatables','angularModalService', 'datatables.buttons', 'datatables.light-columnfilter', 'datatables.bootstrap','datatables.columnfilter'])
     .controller('TributacaoController', RowSelect);
 
-function RowSelect($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalService, Datatablessss, dialogFactory,tableColumnsFactory,tableOptionsFactory,FiltersFactory) {
+function RowSelect($q,$http,$scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate,Datatablessss,tableOptionsFactory,tableColumnsFactory,FiltersFactory,validationFactory,$filter,dialogFactory) {
+
 
     var vm = this;
-    vm.selected = {};
-    vm.selectAll = false;
-    vm.toggleAll = toggleAll;
-    vm.toggleOne = toggleOne;
-    vm.message = '';
-    vm.edit = edit;
-    vm.delete = deleteRow;
-    vm.dtInstance = {};
-    vm.persons = {};
+        vm.selected = {};
+        vm.dtInstance = {};
+        vm.persons = {};
+        vm.selectAll = false;
+        vm.button='Novo'
+        vm.fnDelete  = fnDelete;
+        vm.fnEdit    = fnEdit;
 
-    $scope.pedidoVenda = {
-        tipoPessoa: 2
-    };
 
-    $scope.toggle = function() {
-        $scope.state = !$scope.state;
-    };
+        function parseDate(input) {
+          var parts = input.split('-');
+          return new Date(parts[2], parts[1]-1, parts[0]);
+        }
+
+
+        function reloadData() {
+            var resetPaging = false;
+            vm.dtInstance.reloadData(callback, resetPaging);
+        }
+
+        function callback(json) {
+            console.log(json);
+        }
+
+       var reloadData = function() {
+
+            var resetPaging = false;
+            vm.dtInstance.reloadData(callback, resetPaging);
+        }
+
+        $rootScope.reloadDataSit = function(_callback) {
+
+            var resetPaging = false;
+            vm.dtInstance.reloadData(_callback, resetPaging);
+        }
+
+        function fnEdit(person) {
+
+             $rootScope.doisValor = person;
+
+            dialogFactory.dialog('views/financeiro/dialog/dSituacao.html',"SituacaoUpdateController",validationFactory.contasPagar(),reloadData());
+        }
+
+        function fnDelete(person) {
+           $rootScope.doisValor = person;
+           dialogFactory.dialog('views/util/dialog/dDelete.html',"SituacaoDeleteController",validationFactory.contasPagar(),reloadData());
+        }
+
+    var url = '/entidade/api/doisValores/fetchPage';// 'financeiro/api/contasReceber/fetchPage'// '/entidade/api/doisValores/fetchPage'; qat.model.doisValoresInquiryRequest = function (_page, _iStartPage, _bCount,_emprId,_doisValorType)
+    var request =  new qat.model.doisValoresInquiryRequest(101,0,true,null,106);//new qat.model.doisValoresInquiryRequest(null, 0, null,null,null) //new qat.model.doisValoresInquiryRequest(101, 0, null,null,106)
+    //===================================
+
+
+    //========================================
+
+
+    vm.personsss = {};//$resource($rootScope.getTableData());
+
+
+
+
+    function actionsHtml(data, type, full, meta) {
+            vm.persons[data.id] = data;
+            return '<button class="btn btn-warning" ng-click="showCase.fnEdit(showCase.persons[' + data.id + '])">' +
+                '   <i class="fa fa-edit"></i>' +
+                '</button>&nbsp;' +
+                '<button class="btn btn-danger" ng-click="showCase.fnDelete(showCase.persons[' + data.id + '])">' +
+                '   <i class="fa fa-trash-o"></i>' +
+                '</button>';
+        }
+
     var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
         'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
-
 
     function rCallback(nRow, aData) {
         // console.log('row');
     }
 
     function recompile(row, data, dataIndex) {
+        $compile(angular.element(row).contents())($scope);
+    }
+
+    function createdRow(row, data, dataIndex) {
+        // Recompiling so we can bind Angular directive to the DT
         $compile(angular.element(row).contents())($scope);
     }
     var fnDataSRC = function(json) {
@@ -42,72 +101,11 @@ function RowSelect($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalServ
         console.log(json)
         return json.tributacaoList;
     }
-  //  Datatablessss.getTable('/vendas/api/nfSaidas/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cliente(vm,createdRow,$scope,FiltersFactory.cliente()), tableColumnsFactory.cliente(vm,titleHtml,actionsHtml));
-    Datatablessss.getTable('/produto/api/tributacao/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.tributacao(vm,createdRow,$scope,FiltersFactory.tributacao()), tableColumnsFactory.tributacao(vm,titleHtml,actionsHtml));
 
-    function edit(person) {
-        $rootScope.pedidoVenda = person;
-        dialogFactory.dialog('views/vendas/dialog/dTributacao.html',"TributacaoUpdateController",openDialogUpdateCreate);
-    }
 
-    function deleteRow(person) {
-       $rootScope.pedidoVenda = person;
-       dialogFactory.dialog('views/vendas/dialog/dTributacao.html',"TributacaoDeleteController",openDialogUpdateCreate);
-    }
 
-    function createdRow(row, data, dataIndex) {
-        // Recompiling so we can bind Angular directive to the DT
-        $compile(angular.element(row).contents())($scope);
-    }
 
-    function deleteRowAll(person) {
-        debugger
-        ModalService.showModal({
-            templateUrl: 'cfopAllDelete.html',
-            controller: "CfopController"
-        }).then(function(modal) {
-            modal.element.modal();
-            modal.close.then(function(result) {
-                $scope.message = "You said " + result;
-            });
-        });
-    }
-
-    function actionsHtml(data, type, full, meta) {
-        vm.persons[data.id] = data;
-
-        return ' <div class="dropdown">'+
-          '<button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">'+
-           ' Açoes'+
-            '<span class="caret"></span>'+
-          '</button>'+
-          '<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">'+
-            '<li><a href="#">Deletar</a></li>'+
-            '<li><a href="#">Alterar</a></li>'+
-            '<li><a href="#">Transformar em Pedido Compra</a></li>'+
-            '<li role="separator" class="divider"></li>'+
-            '<li><a href="#">Transformar Em NF-e</a></li>'+
-          '</ul>'+
-        '</div>'
-    }
-    function toggleAll (selectAll, selectedItems) {
-        for (var id in selectedItems) {
-            if (selectedItems.hasOwnProperty(id)) {
-                selectedItems[id] = selectAll;
-            }
-        }
-    }
-    function toggleOne (selectedItems) {
-        for (var id in selectedItems) {
-            if (selectedItems.hasOwnProperty(id)) {
-                if(!selectedItems[id]) {
-                    vm.selectAll = false;
-                    return;
-                }
-            }
-        }
-        vm.selectAll = true;
-    }
+    Datatablessss.getTable('/produto/api/tributacao/fetchPage', fnDataSRC, request, this, rCallback, null, recompile, tableOptionsFactory.tributacao(vm,createdRow,$scope,FiltersFactory.tributacao(),reloadData) , tableColumnsFactory.tributacao(vm,"",actionsHtml));
 
 }
 })();
@@ -299,7 +297,6 @@ function RowSelect($scope, $compile, DTOptionsBuilder, DTColumnBuilder,ModalServ
         $scope.count = 0;
 
         $scope.createForm = function(type){
-            debugger
             $scope.forms.push({id : 0,
                produto : "",
                ddd : 'form2',
