@@ -719,7 +719,7 @@ qat.model.fnDoisValoress = function (_DoisValores, _modelAction)
 	return doisValores;
 }
 
-qat.model.fnNFNotaInfoItemImpostoIPI = function (_Ipi, _modelAction)
+qat.model.fnNFNotaInfoItemImpostoIPI = function (_Ipi, _modelAction,_user)
 {
 	NFNotaInfoItemImpostoIPI = {
 		id: _Ipi.id,
@@ -733,49 +733,49 @@ qat.model.fnNFNotaInfoItemImpostoIPI = function (_Ipi, _modelAction)
 		emprId: JSON.parse(localStorage.getItem('empresa')).id,
 		tableEnumValue: 53,
 		modelAction: _modelAction,
-		createUser: "System",
+		createUser: _user,
 		createDateUTC: (new Date()).getTime(),
-		modifyUser: "System",
+		modifyUser: _user,
 		modifyDateUTC: (new Date()).getTime()
 
 	}
 	return NFNotaInfoItemImpostoIPI;
 }
 
-qat.model.fnNFNotaInfoItemImpostoPIS = function (_Pis, _modelAction)
+qat.model.fnNFNotaInfoItemImpostoPIS = function (_Pis, _modelAction,_user)
 {
 	NFNotaInfoItemImpostoIPI = {
 		id: _Pis.id,
-		aliquota: _Pis.aliquota,
-		quantidade: _Pis.quantidade,
-		naoTributado: _Pis.naoTributado,
-		outrasOperacoes: _Pis.outrasOperacoes,
+		aliquota: _Pis.aliquota ? _Pis.aliquota : {},
+		quantidade: _Pis.quantidade ? _Pis.quantidade : {},
+		naoTributado: _Pis.naoTributado ? _Pis.naoTributado : {},
+		outrasOperacoes: _Pis.outrasOperacoes ? _Pis.outrasOperacoes : {},
 		emprId: JSON.parse(localStorage.getItem('empresa')).id,
 		tableEnumValue: 53,
 		modelAction: _modelAction,
-		createUser: "System",
+		createUser: _user,
 		createDateUTC: (new Date()).getTime(),
-		modifyUser: "System",
+		modifyUser: _user,
 		modifyDateUTC: (new Date()).getTime()
 
 	}
 	return NFNotaInfoItemImpostoIPI;
 }
 
-qat.model.fnNFNotaInfoItemImpostoCOFINS = function (_Cofins, _modelAction)
+qat.model.fnNFNotaInfoItemImpostoCOFINS = function (_Cofins, _modelAction,_user)
 {
 	NFNotaInfoItemImpostoCOFINS = {
 		id: _Cofins.id,
-		aliquota: _Cofins.aliquota,
-		quantidade: _Cofins.quantidade,
-		naoTributado: _Cofins.naoTributado,
-		outrasOperacoes: _Cofins.outrasOperacoes,
+		aliquota: _Cofins.aliquota ?  _Cofins.aliquota : {},
+		quantidade: _Cofins.quantidade ? _Cofins.quantidade : {},
+		naoTributado: _Cofins.naoTributado ? _Cofins.naoTributado : {},
+		outrasOperacoes: _Cofins.outrasOperacoes ? _Cofins.outrasOperacoes : {},
 		emprId: JSON.parse(localStorage.getItem('empresa')).id,
 		tableEnumValue: 53,
 		modelAction: _modelAction,
-		createUser: "System",
+		createUser: _user,
 		createDateUTC: (new Date()).getTime(),
-		modifyUser: "System",
+		modifyUser: _user,
 		modifyDateUTC: (new Date()).getTime()
 
 	}
@@ -808,33 +808,33 @@ qat.model.fnNFNotaInfoItemImpostoIcmsUfDest = function (_IcmsUfDest,
 }
 
 qat.model.fnNFNotaInfoItemImpostoICMS = function (_NFNotaInfoItemImpostoICMS,
-	_modelAction)
+	_modelAction,_user)
 {
 	notaInfoItemImpostoICMS = {
 		id: _NFNotaInfoItemImpostoICMS.id,
-		icms00: _NFNotaInfoItemImpostoICMS.icms00,
-		icms10: _NFNotaInfoItemImpostoICMS.icms10,
-		icms20: _NFNotaInfoItemImpostoICMS.icms20,
-		icms30: _NFNotaInfoItemImpostoICMS.icms30,
-		icms40: _NFNotaInfoItemImpostoICMS.icms40,
-		icms51: _NFNotaInfoItemImpostoICMS.icms51,
-		icms60: _NFNotaInfoItemImpostoICMS.icms60,
-		icms70: _NFNotaInfoItemImpostoICMS.icms70,
-		icms90: _NFNotaInfoItemImpostoICMS.icms90,
-		icmsPartilhado: _NFNotaInfoItemImpostoICMS.icmsPartilhado,
-		icmsst: _NFNotaInfoItemImpostoICMS.icmsst,
-		icmssn101: _NFNotaInfoItemImpostoICMS.icmssn101,
-		icmssn102: _NFNotaInfoItemImpostoICMS.icmssn102,
-		icmssn201: _NFNotaInfoItemImpostoICMS.icmssn201,
-		icmssn202: _NFNotaInfoItemImpostoICMS.icmssn202,
-		icmssn500: _NFNotaInfoItemImpostoICMS.icmssn500,
-		icmssn900: _NFNotaInfoItemImpostoICMS.icmssn900,
+		icms00: _NFNotaInfoItemImpostoICMS.icms00 ? _NFNotaInfoItemImpostoICMS.icms00 : {},
+		icms10: _NFNotaInfoItemImpostoICMS.icms10 ? _NFNotaInfoItemImpostoICMS.icms10 : {},
+		icms20: _NFNotaInfoItemImpostoICMS.icms20 ? _NFNotaInfoItemImpostoICMS.icms20 : {},
+		icms30: _NFNotaInfoItemImpostoICMS.icms30 ? _NFNotaInfoItemImpostoICMS.icms30 : {},
+		icms40: _NFNotaInfoItemImpostoICMS.icms40 ? _NFNotaInfoItemImpostoICMS.icms40 : {},
+		icms51: _NFNotaInfoItemImpostoICMS.icms51 ? _NFNotaInfoItemImpostoICMS.icms51 : {},
+		icms60: _NFNotaInfoItemImpostoICMS.icms60 ? _NFNotaInfoItemImpostoICMS.icms60 : {},
+		icms70: _NFNotaInfoItemImpostoICMS.icms70 ? _NFNotaInfoItemImpostoICMS.icms70 : {},
+		icms90: _NFNotaInfoItemImpostoICMS.icms90 ? _NFNotaInfoItemImpostoICMS.icms90 : {},
+		icmsPartilhado: _NFNotaInfoItemImpostoICMS.icmsPartilhado ? _NFNotaInfoItemImpostoICMS.icmsPartilhado : {},
+		icmsst: _NFNotaInfoItemImpostoICMS.icmsst ? _NFNotaInfoItemImpostoICMS.icmsst : {},
+		icmssn101: _NFNotaInfoItemImpostoICMS.icmssn101 ? _NFNotaInfoItemImpostoICMS.icmssn101 : {},
+		icmssn102: _NFNotaInfoItemImpostoICMS.icmssn102 ? _NFNotaInfoItemImpostoICMS.icmssn102 : {},
+		icmssn201: _NFNotaInfoItemImpostoICMS.icmssn201 ? _NFNotaInfoItemImpostoICMS.icmssn201 : {},
+		icmssn202: _NFNotaInfoItemImpostoICMS.icmssn202 ? _NFNotaInfoItemImpostoICMS.icmssn202 : {},
+		icmssn500: _NFNotaInfoItemImpostoICMS.icmssn500 ? _NFNotaInfoItemImpostoICMS.icmssn500 : {},
+		icmssn900: _NFNotaInfoItemImpostoICMS.icmssn900 ? _NFNotaInfoItemImpostoICMS.icmssn900 : {},
 		emprId: JSON.parse(localStorage.getItem('empresa')).id,
 		tableEnumValue: 53,
 		modelAction: _modelAction,
-		createUser: "System",
+		createUser: _user,
 		createDateUTC: (new Date()).getTime(),
-		modifyUser: "System",
+		modifyUser: _user,
 		modifyDateUTC: (new Date()).getTime()
 
 	}
@@ -877,6 +877,9 @@ qat.model.fnServicoAndPlano = function (_campo, _modelAction)
 	};
 
 }
+
+
+
 
 qat.model.fnProduto = function (_produto, _modelAction, _userId)
 {
@@ -1561,6 +1564,410 @@ qat.model.Cnaes = function (_oObjet,_modelAction,_user)
 	}
 
 	return emails;
+}
+
+qat.model.NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.numero = _oObjet.numero;
+	this.sequencial = _oObjet.sequencial;
+	this.codigoFabricante = _oObjet.codigoFabricante;
+	this.desconto = _oObjet.desconto;
+	this.numeroAtoConcessorioDrawback = _oObjet.numeroAtoConcessorioDrawback;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.NFNotaInfoItemProdutoDeclaracaoImportacao = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.numeroRegistro = _oObjet.numeroRegistro;
+	this.dataRegistro = _oObjet.dataRegistro;
+	this.localDesembaraco = _oObjet.localDesembaraco;
+	this.ufDesembaraco = _oObjet.ufDesembaraco;
+	this.dataDesembaraco = _oObjet.dataDesembaraco;
+	this.transporteInternacional = _oObjet.transporteInternacional ? {id : _oObjet.transporteInternacional.id} : {};
+	this.valorAFRMM = _oObjet.valorAFRMM;
+	this.formaImportacaoIntermediacao = _oObjet.formaImportacaoIntermediacao ? {id : _oObjet.formaImportacaoIntermediacao.id} : {};
+	this.cnpj = _oObjet.cnpj;
+	this.ufTerceiro = _oObjet.ufTerceiro;
+	this.codigoExportador = _oObjet.codigoExportador;
+	this.adicoes = _oObjet.adicoes ? new qat.model.NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao(_oObjet.adicoes ,_oObjet.adicoes.id ? _modelAction : "INSERT",_user) : [];
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.NFNotaInfoItemExportacaoIndireta = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.numeroRegistroExportacao = _oObjet.numeroRegistroExportacao;
+	this.chaveAcessoNFe = _oObjet.chaveAcessoNFe;
+	this.quantidadeItemEfetivamenteExportado = _oObjet.quantidadeItemEfetivamenteExportado;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+
+qat.model.NFNotaInfoItemDetalheExportacao = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.atoConcessorioDrawback = _oObjet.atoConcessorioDrawback;
+	this.exportacaoIndireta = _oObjet.exportacaoIndireta ? new qat.model.NFNotaInfoItemExportacaoIndireta(_oObjet.exportacaoIndireta ,_oObjet.exportacaoIndireta.id ? _modelAction : "INSERT",_user) : {};
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.NFNotaInfoItemProdutoVeiculo = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.tipoOperacao = _oObjet.tipoOperacao ? {id : _oObjet.tipoOperacao.id} : {};
+	this.chassi  = _oObjet.chassi;
+	this.codigoCor  = _oObjet.codigoCor;
+	this.descricaoCor  = _oObjet.descricaoCor;
+	this.potencia  = _oObjet.potencia;
+	this.cilindrada  = _oObjet.cilindrada;
+	this.pesoLiquido  = _oObjet.pesoLiquido;
+	this.pesoBruto  = _oObjet.pesoBruto;
+	this.numeroSerie  = _oObjet.numeroSerie;
+	this.tipoCombustivel = _oObjet.tipoCombustivel ? {id : _oObjet.tipoCombustivel.id} : {};
+	this.numeroMotor  = _oObjet.numeroMotor;
+	this.capacidadeMaximaTracao  = _oObjet.capacidadeMaximaTracao;
+	this.distanciaEntreEixos  = _oObjet.distanciaEntreEixos;
+	this.anoModeloFabricacao  = _oObjet.anoModeloFabricacao;
+	this.anoFabricacao  = _oObjet.anoFabricacao;
+	this.tipoPintura  = _oObjet.tipoPintura;
+	this.tipoVeiculo = _oObjet.tipoVeiculo ? {id : _oObjet.tipoVeiculo.id} : {};
+	this.especieVeiculo  = _oObjet.especieVeiculo;
+	this.condicaoChassi = _oObjet.condicaoChassi ? {id : _oObjet.condicaoChassi.id} : {};
+	this.condicao = _oObjet.condicao ? {id : _oObjet.condicao.id} : {};
+	this.codigoMarcaModelo  = _oObjet.codigoMarcaModelo;
+	this.corDENATRAN = _oObjet.corDENATRAN ? {id : _oObjet.corDENATRAN.id} : {};
+	this.lotacao  = _oObjet.lotacao;
+	this.restricao = _oObjet.restricao ? {id : _oObjet.restricao.id} : {};
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.NFNotaInfoItemProdutoMedicamento = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.lote = _oObjet.lote;
+	this.quantidade = _oObjet.quantidade;
+	this.dataFabricacao = _oObjet.dataFabricacao;
+	this.dataValidade = _oObjet.dataValidade;
+	this.precoMaximoConsumidor = _oObjet.precoMaximoConsumidor;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.NFNotaInfoItemProdutoArmamento = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.tipo  = _oObjet.tipo ? {id : _oObjet.tipo.id} : {};
+	this.numeroSerieArma   = _oObjet.numeroSerieArma;
+	this.numeroSerieCano   = _oObjet.numeroSerieCano;
+	this.descricao  = _oObjet.descricao;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.NFNotaInfoItemProdutoCombustivelCIDE = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.quantidadeBCCIDE = _oObjet.quantidadeBCCIDE;
+	this.valorAliquota = _oObjet.valorAliquota;
+	this.valor = _oObjet.valor;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.NFNotaInfoItemProdutoCombustivel = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.codigoProdutoANP = _oObjet.codigoProdutoANP;
+	this.percentualGasNatural = _oObjet.percentualGasNatural;
+	this.codigoAutorizacaoCOFIF = _oObjet.codigoAutorizacaoCOFIF;
+	this.quantidade = _oObjet.quantidade;
+	this.uf = _oObjet.uf;
+	this.cide  = _oObjet.cide ? new qat.model.NFNotaInfoItemProdutoCombustivelCIDE(_oObjet.cide ,_oObjet.cide.id ? _modelAction : "INSERT",_user) : {};
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.NFNotaInfoItemProduto = function (_oObjet,_modelAction,_user)
+{
+
+	this.id = _oObjet.id;
+	this.codigo = _oObjet.codigo;
+	this.codigoDeBarras = _oObjet.codigoDeBarras;
+	this.descricao = _oObjet.descricao;
+	this.ncm = _oObjet.ncm;
+	this.nomeclaturaValorAduaneiroEstatistica = _oObjet.nomeclaturaValorAduaneiroEstatistica;
+	this.codigoEspecificadorSituacaoTributaria = _oObjet.codigoEspecificadorSituacaoTributaria;
+	this.extipi = _oObjet.extipi;
+	this.cfop = _oObjet.cfop;
+	this.unidadeComercial = _oObjet.unidadeComercial;
+	this.quantidadeComercial = _oObjet.quantidadeComercial;
+	this.valorUnitario = _oObjet.valorUnitario;
+	this.valorTotalBruto = _oObjet.valorTotalBruto;
+	this.codigoDeBarrasTributavel = _oObjet.codigoDeBarrasTributavel;
+	this.unidadeTributavel = _oObjet.unidadeTributavel;
+	this.quantidadeTributavel = _oObjet.quantidadeTributavel;
+	this.valorUnitarioTributavel = _oObjet.valorUnitarioTributavel;
+	this.valorFrete = _oObjet.valorFrete;
+	this.valorSeguro = _oObjet.valorSeguro;
+	this.valorDesconto = _oObjet.valorDesconto;
+	this.valorOutrasDespesasAcessorias = _oObjet.valorOutrasDespesasAcessorias;
+	this.compoeValorNota = _oObjet.tipoVeiculo ? {id : _oObjet.tipoVeiculo.id} : {};
+	this.declaracoesImportacao  = _oObjet.declaracoesImportacao ? new qat.model.NFNotaInfoItemProdutoDeclaracaoImportacao(_oObjet.declaracoesImportacao ,_modelAction,_user) : [];
+	this.detalhesExportacao  = _oObjet.detalhesExportacao ? new qat.model.NFNotaInfoItemDetalheExportacao(_oObjet.detalhesExportacao ,_modelAction,_user) : [];
+	this.numeroPedidoCliente = _oObjet.numeroPedidoCliente;
+	this.numeroPedidoItemCliente = _oObjet.numeroPedidoItemCliente;
+	this.numeroControleFCI = _oObjet.numeroControleFCI;
+	this.veiculo   = _oObjet.veiculo ? new qat.model.NFNotaInfoItemProdutoVeiculo(_oObjet.veiculo ,_oObjet.veiculo.id ? _modelAction : "INSERT",_user) : {};
+	this.medicamentos   = _oObjet.medicamentos ? new qat.model.NFNotaInfoItemProdutoMedicamento(_oObjet.armamentos , _modelAction,_user) : [];
+	this.armamentos  = _oObjet.armamentos ? new qat.model.NFNotaInfoItemProdutoArmamento(_oObjet.armamentos , _modelAction,_user) : [];
+	this.combustivel  = _oObjet.combustivel ? new qat.model.NFNotaInfoItemProdutoCombustivel(_oObjet.combustivel ,_oObjet.combustivel.id ? _modelAction : "INSERT",_user) : {};
+	this.numeroRECOPI = _oObjet.numeroRECOPI;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+
+}
+
+qat.model.NFNotaInfoItemImpostoImportacao = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.valorBaseCalculo = _oObjet.valorBaseCalculo;
+	this.valorDespesaAduaneira = _oObjet.valorDespesaAduaneira;
+	this.valorImpostoImportacao = _oObjet.valorImpostoImportacao;
+	this.valorIOF = _oObjet.valorIOF;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.NFNotaInfoItemImpostoPISST = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.valorBaseCalculo = _oObjet.valorBaseCalculo;
+	this.percentualAliquota = _oObjet.percentualAliquota;
+	this.quantidadeVendida = _oObjet.quantidadeVendida;
+	this.valorAliquota = _oObjet.valorAliquota;
+	this.valorTributo = _oObjet.valorTributo;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.NFNotaInfoItemImpostoICMSUFDestino = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.valorBaseCalculoDestino = _oObjet.valorBaseCalculoDestino;
+	this.percentualRelativoFundoCombatePobrezaDestino = _oObjet.percentualRelativoFundoCombatePobrezaDestino;
+	this.percentualAliquotaInternaDestino = _oObjet.percentualAliquotaInternaDestino;
+	this.percentualInterestadual = _oObjet.percentualInterestadual;
+	this.percentualProvisorioPartilha = _oObjet.percentualProvisorioPartilha;
+	this.valorRelativoFundoCombatePobrezaDestino = _oObjet.valorRelativoFundoCombatePobrezaDestino;
+	this.valorICMSInterestadualDestino = _oObjet.valorICMSInterestadualDestino;
+	this.valorICMSInterestadualRemetente = _oObjet.valorICMSInterestadualRemetente;
+	this.parentId = _oObjet.parentId = _oObjet.id;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.NFNotaInfoItemImpostoISSQN = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.valorBaseCalculo = _oObjet.valorBaseCalculo;
+	this.valorAliquota = _oObjet.valorAliquota;
+	this.valor = _oObjet.valor;
+	this.codigoMunicipio = _oObjet.codigoMunicipio;
+	this.itemListaServicos = _oObjet.itemListaServicos;
+	this.valorDeducao = _oObjet.valorDeducao;
+	this.valorOutro = _oObjet.valorOutro;
+	this.valorDescontoIncondicionado = _oObjet.valorDescontoIncondicionado;
+	this.valorDescontoCondicionado = _oObjet.valorDescontoCondicionado;
+	this.valorRetencaoISS = _oObjet.valorRetencaoISS;
+	this.indicadorExigibilidadeISS = _oObjet.indicadorExigibilidadeISS ? {id :  _oObjet.indicadorExigibilidadeISS.id} :{};
+	this.codigoServico = _oObjet.codigoServico;
+	this.codigoMunicipioIncidenciaImposto = _oObjet.codigoMunicipioIncidenciaImposto;
+	this.codigoPais = _oObjet.codigoPais;
+	this.numeroProcesso = _oObjet.numeroProcesso;
+	this.indicadorIncentivoFiscal = _oObjet.indicadorIncentivoFiscal ? {id :  _oObjet.indicadorIncentivoFiscal.id} :{};
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.NFNotaInfoItemImposto = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.valorTotalTributos;
+	this.icms = _oObjet.icms ?  qat.model.fnNFNotaInfoItemImpostoICMS(_oObjet.icms,_oObjet.icms.id ? _modelAction : "INSERT",_user) : {};
+	this.ipi  = _oObjet.ipi  ?  qat.model.fnNFNotaInfoItemImpostoIPI (_oObjet.ipi,_oObjet.ipi.id   ? _modelAction : "INSERT",_user) : {};
+	this.impostoImportacao  = _oObjet.impostoImportacao ? new qat.model.NFNotaInfoItemImpostoImportacao(_oObjet.impostoImportacao ,_oObjet.impostoImportacao.id ? _modelAction : "INSERT",_user) : {};
+	this.issqn = _oObjet.veiculo ? new qat.model.NFNotaInfoItemImpostoISSQN(_oObjet.veiculo ,_oObjet.veiculo.id ? _modelAction : "INSERT",_user) : {};
+	this.pis  = _oObjet.pis  ?  qat.model.fnNFNotaInfoItemImpostoPIS (_oObjet.pis,_oObjet.pis.id   ? _modelAction : "INSERT",_user) : {};
+	this.pisst = _oObjet.pisst ? new qat.model.NFNotaInfoItemImpostoPISST(_oObjet.pisst ,_oObjet.pisst.id ? _modelAction : "INSERT",_user) : {};
+	this.cofins   = _oObjet.cofins  ?  qat.model.fnNFNotaInfoItemImpostoCOFINS (_oObjet.cofins,_oObjet.cofins.id   ? _modelAction : "INSERT",_user) : {};
+	this.cofinsst = _oObjet.cofinsst ? new qat.model.NFNotaInfoItemImpostoCOFINSST(_oObjet.cofinsst ,_oObjet.cofinsst.id ? _modelAction : "INSERT",_user) : {};
+	this.icmsUfDestino  = _oObjet.icmsUfDestino ? new qat.model.NFNotaInfoItemImpostoICMSUFDestino(_oObjet.icmsUfDestino ,_oObjet.icmsUfDestino.id ? _modelAction : "INSERT",_user) : {};
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.NFInformacaoImpostoDevolvido = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.valorIPIDevolvido = _oObjet.valorIPIDevolvido;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+
+qat.model.NFImpostoDevolvido = function (_oObjet,_modelAction,_user)
+{
+	this.id = _oObjet.id;
+	this.percentualDevolucao;
+    this.informacaoIPIDevolvido  = _oObjet.informacaoIPIDevolvido ? new qat.model.NFInformacaoImpostoDevolvido(_oObjet.informacaoIPIDevolvido ,_oObjet.informacaoIPIDevolvido.id ? _modelAction : "INSERT",_user) : {};
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.itens = function (_oObjet,_modelAction,_user)
+{
+
+	this.id = _oObjet.id;
+	this.numeroItem = _oObjet.numeroItem;
+	this.produto  = _oObjet.produto ? new qat.model.NFNotaInfoItemProduto(_oObjet.produto ,_oObjet.produto.id ? _modelAction : "INSERT",_user) : {};
+	this.imposto  = _oObjet.imposto ? new qat.model.NFNotaInfoItemImposto(_oObjet.imposto ,_oObjet.imposto.id ? _modelAction : "INSERT",_user) : {};
+	this.impostoDevolvido  = _oObjet.impostoDevolvido ? new qat.model.NFImpostoDevolvido(_oObjet.impostoDevolvido ,_oObjet.impostoDevolvido.id ? _modelAction : "INSERT",_user) : {};
+	this.informacoesAdicionais = _oObjet.informacoesAdicionais;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+
 }
 
 qat.model.confGeral = function (_oObjet,_modelAction,_user)
@@ -2722,11 +3129,11 @@ qat.model.fnNFPessoaAutorizadaDownloadNFe = function (
 }
 
 /** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
-qat.model.fnNFNotaInfoTotal = function (_NFNotaInfoTotal, modelAction)
+qat.model.fnNFNotaInfoTotal = function (_NFNotaInfoTotal, modelAction,_user)
 {
 
 	var _id = null;
-	if (_NFNotaInfoTotal.id == "" || _NFNotaInfoTotal.id == " ")
+	if (_NFNotaInfoTotal &&(_NFNotaInfoTotal.id == "" || _NFNotaInfoTotal.id == " "))
 	{
 		_id = null;
 	}
@@ -2742,17 +3149,17 @@ qat.model.fnNFNotaInfoTotal = function (_NFNotaInfoTotal, modelAction)
 	}
 	NFNotaInfoTotal = {
 		id: _id,
-		icmsTotal: _NFNotaInfoTotal.icmsTotal,
-		issqnTotal: _NFNotaInfoTotal.issqnTotal,
-		retencoesTributos: _NFNotaInfoTotal.retencoesTributos,
+		icmsTotal: _NFNotaInfoTotal.icmsTotal ? qat.model.fnNFNotaInfoICMSTotal(_NFNotaInfoTotal.icmsTotal,modelAction,_user) : {},
+		issqnTotal: _NFNotaInfoTotal.issqnTotal ? qat.model.fnNFNotaInfoISSQNTotal(_NFNotaInfoTotal.issqnTotal,modelAction,_user) : {},
+		retencoesTributos: _NFNotaInfoTotal.retencoesTributos ? qat.model.fnNFNotaInfoRetencoesTributos(_NFNotaInfoTotal.retencoesTributos,modelAction,_user) : {},
 		parentId: 0,
 		emprId: _emprId,
 		processId: 0,
 		tableEnumValue: 0,
 		modelAction: modelAction,
-		createUser: "System",
+		createUser: _user,
 		createDateUTC: (new Date()).getTime(),
-		modifyUser: "System",
+		modifyUser: _user,
 		modifyDateUTC: (new Date()).getTime()
 
 	}
@@ -2760,7 +3167,7 @@ qat.model.fnNFNotaInfoTotal = function (_NFNotaInfoTotal, modelAction)
 }
 
 /** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
-qat.model.fnNFNotaInfoICMSTotal = function (_NFNotaInfoICMSTotal, modelAction)
+qat.model.fnNFNotaInfoICMSTotal = function (_NFNotaInfoICMSTotal, modelAction,_user)
 {
 
 	var _id = null;
@@ -2804,9 +3211,9 @@ qat.model.fnNFNotaInfoICMSTotal = function (_NFNotaInfoICMSTotal, modelAction)
 		processId: 0,
 		tableEnumValue: 0,
 		modelAction: modelAction,
-		createUser: "System",
+		createUser: _user,
 		createDateUTC: (new Date()).getTime(),
-		modifyUser: "System",
+		modifyUser: _user,
 		modifyDateUTC: (new Date()).getTime()
 
 	}
@@ -2862,7 +3269,7 @@ qat.model.fnNFNotaInfoISSQNTotal = function (_NFNotaInfoISSQNTotal, modelAction)
 
 /** create by system gera-java version 1.0.0 03/11/2016 18:34 : 4*/
 qat.model.fnNFNotaInfoRetencoesTributos = function (
-	_NFNotaInfoRetencoesTributos, modelAction)
+	_NFNotaInfoRetencoesTributos, modelAction,_user)
 {
 
 	var _id = null;
@@ -2895,9 +3302,9 @@ qat.model.fnNFNotaInfoRetencoesTributos = function (
 		processId: 0,
 		tableEnumValue: 0,
 		modelAction: modelAction,
-		createUser: "System",
+		createUser: _user,
 		createDateUTC: (new Date()).getTime(),
-		modifyUser: "System",
+		modifyUser: _user,
 		modifyDateUTC: (new Date()).getTime()
 
 	}

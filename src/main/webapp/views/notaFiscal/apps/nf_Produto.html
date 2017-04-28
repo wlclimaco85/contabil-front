@@ -1,110 +1,1744 @@
 <div class="panel panel-default" style="background:#EEEEEE">
-                        <div class="panel-body">
-                            <div class="col-sm-12">
-
-<div ng-repeat="produto in produtos">
-     <div class="teste">
-        <div class="row" style="margin-top:3%">
-        <div class="col-sm-2">
-            <div class="ng-cloak" ng-controller="ProdutoSelectController as ctrl">
-
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Produto <small ng-click="ctrl.addCfop()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
-                        <div class="row">
-                            <ui-select ng-model="produto.produto" theme="bootstrap" on-select="ctrl.onSelectCallback($item, $model)">
-                                <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.prodId.produto}}</ui-select-match>
-                                <ui-select-choices repeat="item in ctrl.produto | filter: $select.search">
-                                  <div ng-bind-html="item.prodId.produto | highlight: $select.search"></div>
-                                  <small ng-bind-html="item.codigo | highlight: $select.search"></small> -
-                                </ui-select-choices>
-                              </ui-select>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-sm-1 ">
-            <div class="ng-cloak" ng-controller="CfopSelectController as ctrl">
-
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">CFOP</label>
-                        <div class="row" style="margin-left:0px">
-                            <ui-select ng-model="produto.produto.tributacao.cfop" theme="bootstrap">
-                                <ui-select-match placeholder="CFOP">{{$select.selected.cfop}}</ui-select-match>
-                                <ui-select-choices repeat="item in ctrl.cfop | filter: $select.search">
-                                  <div ng-bind-html="item.cfop | highlight: $select.search"></div>
-                                  <small ng-bind-html="item.natureza | highlight: $select.search"></small> -
-                                </ui-select-choices>
-                              </ui-select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-group">
-
-                    <label for="exampleInputPassword1">Quant.</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control nome-socio" ng-init="produto.produto.quantidade=1" ng-model="produto.produto.quantidade" name="book[0].quantidade" placeholder="0.00" />
-                        <span class="input-group-addon">.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-group">
-
-                    <label for="exampleInputPassword1">Valor Unitario </label>
-                    <div class="input-group">
-                        <span class="input-group-addon">$</span>
-                        <input type="text" class="form-control cota-socio" ng-init="produto.produto.precoList[0].valor=0" name="book[0].vlUnitario"  ng-model="produto.produto.precoList[0].valor" name="book[0].vlUnitario" placeholder="R$0,00" />
-                        <span class="input-group-addon">.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <label for="exampleInputPassword1">Desconto</label>
-                <div class="input-group">
-                    <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control cota-socio" ng-model="produto.produto.desconto" name="book[0].desconto" placeholder="R$0,00" />
-                    <span class="input-group-addon">.00</span>
-                </div>
-            </div>
-            <div class="col-sm-1">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Total prod.</label>
-                    <div class="row">
-                        <label for="exampleInputPassword1">{{(produto.produto.quantidade * produto.produto.precoList[0].valor) - produto.produto.desconto}}</label>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-1" style="margin-top:20px">
-                <toggle ng-model="produto.produto.pagarAgora"
-                            ng-init="produto.produto.pagarAgora = false" style="android2" on="Sim"
-                            off="Não" onstyle="btn-success" offstyle="btn-danger"
-                            ng-true-value="'true'" ng-false-value="'false'"></toggle>
-            </div>
-            <div class="col-sm-1" style="margin-top:20px">
-
-                <button type="button" ng-click="createForm2()" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
-            </div>
-
-        </div>
-
-        <div ng-show="produto.produto.pagarAgora == true" ng-hide="produto.produto.pagarAgora == false">
-            <div ng-init="tributacao = produto.produto.tributacao" ng-include="'views/produto/apps/tributacao.html'"></div>
-
-    </div>
-    </div>
-    </div>
-    </div>
-      </div>
-   <div class="panel-footer" style="background: #DDDDDD">
+<div class="panel-body">
+<div class="col-sm-12">
+    <div ng-repeat="produto in produtos">
+        <div class="teste">
+            <div class="row" style="margin-top:3%">
+                <div class="col-sm-2">
+                    <div class="ng-cloak" ng-controller="ProdutoSelectController as ctrl">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Produto <small ng-click="ctrl.addCfop()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
                             <div class="row">
-                                <div class="col-sm-3">Total</div>
-                                <div class="col-sm-3"></div>
-                                <div class="col-sm-3"></div>
-                                <div class="col-sm-3">${{totals}}</div>
+                                <ui-select ng-model="produto.produto" theme="bootstrap" on-select="ctrl.onSelectCallback($item, $model)">
+                                    <ui-select-match placeholder="...">{{$select.selected.prodId.produto}}</ui-select-match>
+                                    <ui-select-choices repeat="item in ctrl.produto | filter: $select.search">
+                                        <div ng-bind-html="item.prodId.produto | highlight: $select.search"></div>
+                                        <small ng-bind-html="item.codigo | highlight: $select.search"></small> -
+                                    </ui-select-choices>
+                                </ui-select>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="col-sm-1 ">
+                    <div class="ng-cloak" ng-controller="CfopSelectController as ctrl">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">CFOP</label>
+                            <div class="row" style="margin-left:0px">
+                                <ui-select ng-model="produto.produto.tributacao.cfop" theme="bootstrap">
+                                    <ui-select-match placeholder="CFOP">{{$select.selected.cfop}}</ui-select-match>
+                                    <ui-select-choices repeat="item in ctrl.cfop | filter: $select.search">
+                                        <div ng-bind-html="item.cfop | highlight: $select.search"></div>
+                                        <small ng-bind-html="item.natureza | highlight: $select.search"></small> -
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Quant.</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control nome-socio" ng-init="produto.produto.quantidade=1" ng-model="produto.produto.quantidade" name="book[0].quantidade" placeholder="0.00" />
+                            <span class="input-group-addon">.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Valor Unitario </label>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" ng-init="produto.produto.precoList[0].valor=0" name="book[0].vlUnitario"  ng-model="produto.produto.precoList[0].valor" name="book[0].vlUnitario" placeholder="R$0,00" />
+                            <span class="input-group-addon">.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <label for="exampleInputPassword1">Desconto</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        <input type="text" class="form-control cota-socio" ng-model="produto.produto.desconto" name="book[0].desconto" placeholder="R$0,00" />
+                        <span class="input-group-addon">.00</span>
+                    </div>
+                </div>
+                <div class="col-sm-1">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Total prod.</label>
+                        <div class="row">
+                            <label for="exampleInputPassword1">{{((produto.produto.quantidade ? produto.produto.quantidade : 0)  * produto.produto.precoList[0].valor) - produto.produto.desconto ? produto.produto.desconto : 0 }}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1" style="margin-top:20px">
+                    <toggle ng-model="produto.produto.pagarAgora"
+                        ng-init="produto.produto.pagarAgora = false" style="android2" on="Sim"
+                        off="Não" onstyle="btn-success" offstyle="btn-danger"
+                        ng-true-value="'true'" ng-false-value="'false'"></toggle>
+                </div>
+                <div class="col-sm-1" style="margin-top:20px">
+                    <button type="button" ng-click="createForm2()" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
 
+            <div ng-show="produto.produto.pagarAgora == true" ng-hide="produto.produto.pagarAgora == false"  class="ng-cloak" ng-controller="ProdutoSelectController as ctrl">
+                <ul class="tabs-nav">
+                    <li><a ng-click="tabs=1" ng-class="{'active' : tabs==1}">ICMS</a></li>
+                    <li><a ng-click="tabs=2" ng-class="{'active' : tabs==2}">IPI</a></li>
+                    <li><a ng-click="tabs=3" ng-class="{'active' : tabs==3}">PIS</a></li>
+                    <li><a ng-click="tabs=4" ng-class="{'active' : tabs==4}">COFINS</a></li>
+                    <li><a ng-click="tabs=5" ng-class="{'active' : tabs==5}">Imposto Importação</a></li>
+                    <li><a ng-click="tabs=6" ng-class="{'active' : tabs==6}">ISSQN</a></li>
+                    <li><a ng-click="tabs=7" ng-class="{'active' : tabs==7}">IPI Devolvido</a></li>
+                    <li><a ng-click="tabs=8" ng-class="{'active' : tabs==8}">ICMS Ope. Interestaduais</a></li>
+                </ul>
+                <div class="tabs-container1">
+                    <div class="tab-content1" ng-show="tabs == 1">
+                        <div class="row">
+                            <div class="col-sm-4 ">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Regime</label>
+                                    <div class="row">
+                                        <ui-select ng-model="produto.produto.tributacao.imposto.icms.regime" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+                                            <ui-select-match placeholder="">{{$select.selected.descricao}}</ui-select-match>
+                                            <ui-select-choices repeat="item in regime | filter: $select.search">
+                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-10 ">
+                                <label for="exampleInputPassword1">ICMS - Situação Tributária</label>
+                                <div class="row">
+                                    <ui-select ng-model="produto.produto.tributacao.imposto.icms.sitTributaria" theme="bootstrap">
+                                        <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                        <ui-select-choices repeat="item in icmsST | filter: $select.search">
+                                            <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="produto.produto.tributacao.imposto.icms.icms00.situacaoTributaria.value == 00">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms00.situacaoTributaria"></div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS</label>
+                                        <div class="row">
+                                            <ui-select ng-model="produto.produto.tributacao.imposto.icms.icms00.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
+                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Aliquota do ICMS</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms00.percentualAliquota" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+                        <div ng-if="produto.produto.tributacao.imposto.icms.icms10.situacaoTributaria.value == 10">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms10.situacaoTributaria"></div>
+                            <div class="row" style="margin-top: 20px!important;"></div>
+                            <div role="tabpanel" class="tab-pane messages" id="messages">
+                                <div class="panel-group" id="accordion">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".icms">
+                                                ICMS
+                                                </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse in icms">
+                                            <div class="panel-body">
+                                                <div class="col-sm-6 ">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS</label>
+                                                        <div class="row">
+                                                            <ui-select ng-model="produto.produto.tributacao.imposto.icms.icms10.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+                                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                                <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
+                                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                                </ui-select-choices>
+                                                            </ui-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 ">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Aliquota do ICMS</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms10.percentualAliquota" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane messages" id="messages">
+                                <div class="panel-group" id="accordion">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".icmsst">
+                                                ST
+                                                </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse in icmsst">
+                                            <div class="panel-body">
+                                                <div class="col-sm-3 ">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS ST</label>
+                                                        <div class="row">
+                                                            <ui-select ng-model="produto.produto.tributacao.imposto.icms.icms10.modalidadeBCICMSST" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+                                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                                <ui-select-choices repeat="item in icmsMBCST | filter: $select.search">
+                                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                                </ui-select-choices>
+                                                            </ui-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 ">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Red. da BC ICMS ST</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms10.percentualReducaoBCICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 ">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Mar. de vr adic ICMS ST</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms10.percentualMargemValorICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 ">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Preço unit. Pauta ST</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">$</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms10.valorBCICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 ">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Aliq. do ICMS ST</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms10.percentualAliquotaImpostoICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+                        <div ng-if="produto.produto.tributacao.imposto.icms.icms11.situacaoTributaria.value == 11">
+                            <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms11.situacaoTributaria"></div>
+                            <div class="row" style="margin-top: 20px!important;"></div>
+                            <div role="tabpanel" class="tab-pane messages" id="messages">
+                                <div class="panel-group" id="accordion">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".icms">
+                                                ICMS
+                                                </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse in icms">
+                                            <div class="panel-body">
+                                                <div class="col-sm-10 ">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS</label>
+                                                        <div class="row">
+                                                            <ui-select ng-model="produto.produto.tributacao.imposto.icms.icms11.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+                                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                                <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
+                                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                                </ui-select-choices>
+                                                            </ui-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 ">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">BC ICMS</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms11.redBase" name="classeCigarrosBebidas"  placeholder="Redução base calc. (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 ">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Redução da BC ICMS</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms11.aliqICMS" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 ">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Aliquota do ICMS</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms11.aliqICMS" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 ">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">ICMS</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms11.aliqICMS" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 ">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">BC da operação própria</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms11.aliqICMS" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane messages" id="messages">
+                                <div class="panel-group" id="accordion">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".icms">
+                                                ST
+                                                </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse in icms">
+                                            <div class="panel-body">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS ST</label>
+                                                        <div class="row">
+                                                            <ui-select ng-model="produto.produto.tributacao.imposto.icms.icms11.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+                                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                                <ui-select-choices repeat="item in icmsMBCST | filter: $select.search">
+                                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                                </ui-select-choices>
+                                                            </ui-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 ">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Redução da BC ICMS ST</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms11.aliqICMS" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Margem de valor adic ICMS ST</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms11.aliqICMS" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Aliquota do ICMS ST</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms11.aliqICMS" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">UF do ICMS ST devido na operaçao</label>
+                                                        <div class="row ">
+                                                            <span class="ui-select">
+                                                                <select ng-model="produto.produto.tributacao.imposto.icms.icms11.uf">
+                                                                    <option value="1" selected="selected">Simples Nacional</option>
+                                                                    <option value="2">Tributação Normal</option>
+                                                                </select>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+                        <div ng-if="produto.produto.tributacao.imposto.icms.icms20.situacaoTributaria.value == 20">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms20.situacaoTributaria"></div>
+                            <div class="row">
+                                <div class="col-sm-6 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS</label>
+                                        <div class="row ">
+                                            <ui-select ng-model="produto.produto.tributacao.imposto.icms.icms20.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
+                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Redução da BC ICMS</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms20.percentualReducaoBC" name="classeCigarrosBebidas"  placeholder="Redução base calc. (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Aliquota do ICMS</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms20.percentualAliquota" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Desoneracao ICMS</label>
+                                        <div class="row ">
+                                            <ui-select ng-model="produto.produto.tributacao.imposto.icms.icms20.desoneracao" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                <ui-select-choices repeat="item in icmsMD | filter: $select.search">
+                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+                        <div ng-if="produto.produto.tributacao.imposto.icms.icms30.situacaoTributaria.value  == 30">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms30.situacaoTributaria"></div>
+                            <div class="row">
+                                <div class="col-sm-6 ">
+                                    <label for="exampleInputPassword1">Motivo desoneração</label>
+                                    <div class="row">
+                                        <ui-select ng-model="produto.produto.tributacao.imposto.icms.icms30.desoneracao" theme="bootstrap">
+                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                            <ui-select-choices repeat="item in icmsMD | filter: $select.search">
+                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Modalidade da BC ST</label>
+                                        <div class="row ">
+                                            <ui-select ng-model="produto.produto.tributacao.imposto.icms.icms30.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
+                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Redução da BC ICMS</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms30.percentualReducaoBCICMSST" name="classeCigarrosBebidas"  placeholder="Redução base calc. (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Margem de Valor adic. do ICMS ST</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms30.percentualMargemValorAdicionadoICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Preço unit. Pauta ST</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms30.valorBCICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Aliquota ICMS ST</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms30.percentualAliquotaImpostoICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+                        <div ng-if="produto.produto.tributacao.imposto.icms.icms40.situacaoTributaria.value == 40">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms40.situacaoTributaria"></div>
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Motivo da desoneração ICMS</label>
+                                        <div class="row">
+                                            <ui-select ng-model="produto.produto.tributacao.imposto.icms.icms40.motivoDesoneracaoICMS" theme="bootstrap">
+                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                <ui-select-choices repeat="item in icmsMD | filter: $select.search">
+                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+                        <div ng-if="produto.produto.tributacao.imposto.icms.icms41.situacaoTributaria.value == 41">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms41.situacaoTributaria"></div>
+                            <div class="row">
+                                <div class="col-sm-10 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Motivo da desoneração ICMS</label>
+                                        <div class="row">
+                                            <ui-select ng-model="produto.produto.tributacao.imposto.icms.icms41.motivoDesoneracaoICMS" theme="bootstrap">
+                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                <ui-select-choices repeat="item in icmsMD | filter: $select.search">
+                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+                        <div ng-if="produto.produto.tributacao.imposto.icms.icms42.situacaoTributaria.value == 42">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms42.situacaoTributaria"></div>
+                            <div class="row">
+                            </div>
+                        </div>
+                        <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+                        <div ng-if="produto.produto.tributacao.imposto.icms.icms50.situacaoTributaria.value == 50">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms50.situacaoTributaria"></div>
+                            <div class="row">
+                                <div class="col-sm-10 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Motivo da desoneração ICMS</label>
+                                        <div class="row ">
+                                            <ui-select ng-model="produto.produto.tributacao.imposto.icms.icms50.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
+                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+                        <div ng-if="produto.produto.tributacao.imposto.icms.icms51.situacaoTributaria.value== 51">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms50.situacaoTributaria"></div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS</label>
+                                        <div class="row ">
+                                            <ui-select ng-model="produto.produto.tributacao.imposto.icms.icms51.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
+                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Perc. Red. da BC ICMS</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms51.percentualReducaoBC" name="classeCigarrosBebidas"  placeholder="Redução base calc. (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Aliquota do ICMS</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms51.valorBCICMS" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+                        <div ng-if="produto.produto.tributacao.imposto.icms.icms60.situacaoTributaria.value == 60">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms60.situacaoTributaria"></div>
+                        </div>
+                        <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+                        <div ng-if="produto.produto.tributacao.imposto.icms.icms70.situacaoTributaria.value == 70">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms70.situacaoTributaria"></div>
+                            <div class="row" style="margin-top: 20px!important;"></div>
+                            <div role="tabpanel" class="tab-pane messages" id="messages">
+                                <div class="panel-group" id="accordion">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".icms">
+                                                ICMS
+                                                </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse in icms">
+                                            <div class="panel-body">
+                                                <div class="col-sm-4 ">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS</label>
+                                                        <div class="row ">
+                                                            <ui-select ng-model="produto.produto.tributacao.imposto.icms.icms70.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+                                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                                <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
+                                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                                </ui-select-choices>
+                                                            </ui-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 ">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Redução da BC ICMS</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms70.percentualReducaoBC" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 ">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Aliquota do ICMS</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms70.percentualAliquota" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Motivo desoneração</label>
+                                                        <div class="row ">
+                                                            <ui-select ng-model="produto.produto.tributacao.imposto.icms.icms70.desoneracao" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+                                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                                <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
+                                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                                </ui-select-choices>
+                                                            </ui-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane messages" id="messages">
+                                <div class="panel-group" id="accordion">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".icms">
+                                                ICMS
+                                                </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse in icms">
+                                            <div class="panel-body">
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Modalidade da BC ST</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms70.modalidadeBCICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Margem de valor adic ICMS ST</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms70.percentualMargemValorAdicionadoICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Aliquota do ICMS ST</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms70.valorBCST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Redução Base Calc ST</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms70.percentualAliquotaImpostoICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Preço unit. Pauta ST</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms70.valorICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+                        <div ng-if="produto.produto.tributacao.imposto.icms.icms90.situacaoTributaria.value == 90">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms90.situacaoTributaria"></div>
+                            <div class="row" style="margin-top: 20px!important;"></div>
+                            <div role="tabpanel" class="tab-pane messages" id="messages">
+                                <div class="panel-group" id="accordion">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".icms">
+                                                ICMS
+                                                </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse in icms">
+                                            <div class="panel-body">
+                                                <div class="col-sm-4 ">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS</label>
+                                                        <div class="row ">
+                                                            <ui-select ng-model="produto.produto.tributacao.imposto.icms.icms90.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+                                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                                <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
+                                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                                </ui-select-choices>
+                                                            </ui-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 ">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Redução da BC ICMS</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms90.percentualReducaoBC" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 ">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Aliquota do ICMS</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms90.percentualAliquota" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Motivo desoneração</label>
+                                                        <div class="row ">
+                                                            <ui-select ng-model="produto.produto.tributacao.imposto.icms.icms90.desoneracao" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+                                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                                <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
+                                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                                </ui-select-choices>
+                                                            </ui-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane messages" id="messages">
+                                <div class="panel-group" id="accordion">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".icms">
+                                                ST
+                                                </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse in icms">
+                                            <div class="panel-body">
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Modalidade da BC ST</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms90.modalidadeBCICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Margem de valor adic ICMS ST</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms90.percentualMargemValorAdicionadoICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Aliquota do ICMS ST</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms90.valorBCST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Redução Base Calc ST</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms90.percentualAliquotaImpostoICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Preço unit. Pauta ST</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">%</span>
+                                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icms90.valorICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+                        <div ng-if="produto.produto.tributacao.imposto.icms.sitTributaria.value == 91">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms10.situacaoTributaria"></div>
+                            <div class="row">
+                                <div class="col-sm-6 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS</label>
+                                        <div class="row">
+                                            <ui-select ng-model="produto.produto.tributacao.imposto.icms.icms00.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
+                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Redução da BC ICMS</label>
+                                        <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.aliqICMS" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Aliquota do ICMS</label>
+                                        <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.aliqICMS" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS ST</label>
+                                        <div class="row">
+                                            <ui-select ng-model="produto.produto.tributacao.imposto.icms.icms00.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                <ui-select-choices repeat="item in icmsMBCST | filter: $select.search">
+                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Redução da BC ICMS ST</label>
+                                        <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.aliqICMS" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Margem de valor adic ICMS ST</label>
+                                        <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.aliqICMS" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Aliquota do ICMS ST</label>
+                                        <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.aliqICMS" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Preço unit. Pauta ST</label>
+                                        <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.aliqICMS" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Perc. BC op. própria</label>
+                                        <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.aliqICMS" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">UF pgto ICMS ST</label>
+                                        <div class="row ">
+                                            <span class="ui-select">
+                                                <select ng-model="notaFiscal.info.identificacao.finalidade.id">
+                                                    <option value="1" selected="selected">Simples Nacional</option>
+                                                    <option value="2">Tributação Normal</option>
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+                        <div ng-if="produto.produto.tributacao.imposto.icms.sitTributaria.value == icmsPartilhado">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms10.situacaoTributaria"></div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label for="exampleInputPassword1">ICMS - Origem</label>
+                                    <div class="row">
+                                        <ui-select ng-model="produto.produto.tributacao.imposto.icms.icmsPartilhado.origem" theme="bootstrap">
+                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                            <ui-select-choices repeat="item in icmsOri | filter: $select.search">
+                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+                        <div ng-if="produto.produto.tributacao.imposto.icms.sitTributaria.value == icmsst">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms10.situacaoTributaria"></div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label for="exampleInputPassword1">ICMS - Origem</label>
+                                    <div class="row">
+                                        <ui-select ng-model="produto.produto.tributacao.imposto.icms.icmsst.origem" theme="bootstrap">
+                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                            <ui-select-choices repeat="item in icmsOri | filter: $select.search">
+                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="exampleInputPassword1">valorBCICMSSTRetidoUFRemetente</label>
+                                    <div class="row">
+                                        <ui-select ng-model="produto.produto.tributacao.imposto.icms.icmsst.valorBCICMSSTRetidoUFRemetente" theme="bootstrap">
+                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                            <ui-select-choices repeat="item in icmsOri | filter: $select.search">
+                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">valorICMSSTRetidoUFRemetente</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">$</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmsst.valorICMSSTRetidoUFRemetente" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">valorBCICMSSTUFDestino</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">$</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmsst.valorBCICMSSTUFDestino" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">valorICMSSTUFDestino</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">$</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmsst.valorICMSSTUFDestino" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+                        <div ng-if="produto.produto.tributacao.imposto.icms.sitTributaria.value == 101">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms10.situacaoTributaria"></div>
+                            <div class="row">
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Alíq. cálc. crédito</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn101.percentualAliquotaAplicavelCalculoCreditoSN" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+                        <div ng-if="produto.produto.tributacao.imposto.icms.sitTributaria.value == 102">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms10.situacaoTributaria"></div>
+                        </div>
+                        <div ng-if="produto.produto.tributacao.imposto.icms.sitTributaria.value == 103">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms10.situacaoTributaria"></div>
+                        </div>
+                        <div ng-if="produto.produto.tributacao.imposto.icms.sitTributaria.value == 201">
+                            <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms10.situacaoTributaria"></div>
+                            <div class="row">
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label for="exampleInputPassword1">Modalidade BC ST</label>
+                                    <div class="row">
+                                        <ui-select ng-model="produto.produto.tributacao.imposto.icms.icmssn201.modalidadeBCICMSST" theme="bootstrap">
+                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                            <ui-select-choices repeat="item in icmsOri | filter: $select.search">
+                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Alíq. cálc. crédito</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn201.percentualAliquotaAplicavelCalculoCreditoSN" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Margem valor adic.</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn201.percentualMargemValorAdicionadoICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Redução Base Calc ST</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn201.percentualReducaoBCICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Preço unit. Pauta ST</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn201.valorBCICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Alíq. do ICMS ST</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn201.percentualAliquotaImpostoICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+                        <div ng-if="produto.produto.tributacao.imposto.icms.sitTributaria.value == 202">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms10.situacaoTributaria"></div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label for="exampleInputPassword1">Modalidade BC ST</label>
+                                    <div class="row">
+                                        <ui-select ng-model="produto.produto.tributacao.imposto.icms.icmssn202.modalidadeBCICMSST" theme="bootstrap">
+                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                            <ui-select-choices repeat="item in icmsOri | filter: $select.search">
+                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Margem valor adic.</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn202.percentualMargemValorAdicionadoICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Redução Base Calc ST</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn202.percentualReducaoBCICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Preço unit. Pauta ST</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn202.valorBCICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Alíq. do ICMS ST</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn202.percentualAliquotaImpostoICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="produto.produto.tributacao.imposto.icms.sitTributaria.value == 203">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms10.situacaoTributaria"></div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label for="exampleInputPassword1">Modalidade BC ST</label>
+                                    <div class="row">
+                                        <ui-select ng-model="produto.produto.tributacao.imposto.icms.icmssn203.modalidadeBCICMSST" theme="bootstrap">
+                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                            <ui-select-choices repeat="item in icmsOri | filter: $select.search">
+                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Margem valor adic.</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn203.percentualMargemValorAdicionadoICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Redução Base Calc ST</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn203.percentualReducaoBCICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Preço unit. Pauta ST</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn203.valorBCICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Alíq. do ICMS ST</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn203.percentualAliquotaImpostoICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+                        <div ng-if="produto.produto.tributacao.imposto.icms.sitTributaria.value == 300"><div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms10.situacaoTributaria"></div></div>
+                        <div ng-if="produto.produto.tributacao.imposto.icms.sitTributaria.value == 400"><div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms10.situacaoTributaria"></div></div>
+                        <div ng-if="produto.produto.tributacao.imposto.icms.sitTributaria.value == 500">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms10.situacaoTributaria"></div>
+                        </div>
+                        <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+                        <div ng-if="produto.produto.tributacao.imposto.icms.sitTributaria.value == 900">
+                        <div class="ng-cloak hide" ng-init="produto.produto.tributacao.imposto.icms.sitTributaria = produto.produto.tributacao.imposto.icms.icms10.situacaoTributaria"></div>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Modalidade BC</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn900.modalidadeBCICMS" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">percentualReducaoBC</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn900.percentualReducaoBC" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">percentualAliquotaImposto</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn900.percentualAliquotaImposto" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">valorICMS</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn900.valorICMS" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">modalidadeBCICMSST</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn900.modalidadeBCICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">percentualMargemValorAdicionadoICMSST</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn900.percentualMargemValorAdicionadoICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">percentualReducaoBCICMSST</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn900.percentualReducaoBCICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">valorBCICMSST</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn900.valorBCICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">percentualAliquotaImpostoICMSST</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn900.percentualAliquotaImpostoICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">valorICMSST</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn900.valorICMSST" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">percentualAliquotaAplicavelCalculoCreditoSN</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icms.icmssn900.percentualAliquotaAplicavelCalculoCreditoSN" name="alig"  placeholder="Alíq. do ICMS (%)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content1" ng-show="tabs == 2">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label for="exampleInputPassword1">IPI - Situação tributária</label>
+                                <div class="row">
+                                    <ui-select ng-model="produto.produto.tributacao.imposto.ipi.sitTributaria" theme="bootstrap" on-select="getInputsIPI($item, $model)">
+                                        <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                        <ui-select-choices repeat="item in iPISitTributaria | filter: $select.search">
+                                            <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4" id="Classe-cigarros-bebidas">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Classe cigarros/bebidas</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">N°</span>
+                                        <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.ipi.classeEnquadramento" name="classeEnquadramento"  placeholder="Classe cigarros e bebidas">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 " id="cnpj-produtor">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">CNPJ Produtor</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">N°</span>
+                                        <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.ipi.cnpjProdutor" name="cNPJProdutor"  placeholder="CNPJ Produtor">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2" id="cod-selo">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Cod. selo controle IPI</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">N°</span>
+                                        <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.ipi.codigoSelo" name="codControleIPI"  placeholder="Cod. selo controle IPI">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2 " id="quant-selo">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Qtd. selo IPI</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">N°</span>
+                                        <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.ipi.quantidadeSelo" name="quantidadeSelo"  placeholder="Qtd. selo IPI">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2" id="cod-enquadramento">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Cod Enquadramento</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">N°</span>
+                                        <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.ipi.codigoEnquadramento" name="codigoEnquadramento"  placeholder="Classe cigarros e bebidas">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2" id="ipi-tipo-calc">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Tipo de cálculo</label>
+                                    <ui-select ng-model="produto.produto.tributacao.imposto.ipi.tipoCalculo" theme="bootstrap">
+                                        <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                        <ui-select-choices repeat="item in tipoCalc | filter: $select.search">
+                                            <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                            <div ng-if="produto.produto.tributacao.imposto.ipi.tipoCalculo.value == 1" id="ipi-aliq">
+                                <div class="col-sm-2" >
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Aliquota</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">N°</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.ipi.percentualAliquota" name="percentualAliquota"  placeholder="Qtd. selo IPI">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="produto.produto.tributacao.imposto.ipi.tipoCalculo.value == 2" id="ipi-valor">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Vr do IPI</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">$</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.ipi.valorTributo" name="valorTributo"  placeholder="Qtd. selo IPI">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content1" ng-show="tabs == 3">
+                        <div class="row">
+                            <div class="col-sm-4 ">
+                                <label for="exampleInputPassword1">PIS - Situação tributária</label>
+                                <div class="row">
+                                    <ui-select ng-model="produto.produto.tributacao.imposto.pis.pISSituaTributaria" theme="bootstrap" on-select="getInputsPIS($item, $model)">
+                                        <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                        <ui-select-choices repeat="item in pisST | filter: $select.search">
+                                            <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 " id="pis-Aliquota">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Aliquota</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">%</span>
+                                        <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.pis.percentualAliquota" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 " id="pis-Aliquota-unid">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Valor PIS/unidade</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">%</span>
+                                        <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.pis.valorUnidade" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 " id="pis-tipo-calc">
+                                <label for="exampleInputPassword1">Tipo de cálculo ST</label>
+                                <div class="row">
+                                    <ui-select ng-model="produto.produto.tributacao.imposto.pis.tipocalculoSubstTrib" theme="bootstrap">
+                                        <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                        <ui-select-choices repeat="item in tipoCalc | filter: $select.search">
+                                            <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                            <div ng-if="produto.produto.tributacao.imposto.pis.tipocalculoSubstTrib.value == 1" id="pis-por-Aliq-st">
+                                <div class="col-sm-4 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Aliquota (ST)</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.pisst.percentualAliquota" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="produto.produto.tributacao.imposto.pis.tipocalculoSubstTrib.value == 2" id="pis-val-aliq-st">
+                                <div class="col-sm-4 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Aliquota (ST)</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">$</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.pisst.valorAliquota" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content1" ng-show="tabs == 4">
+                        <div class="row">
+                            <div class="col-sm-6 ">
+                                <label for="exampleInputPassword1">COFINS - Situação tributária</label>
+                                <div class="row">
+                                    <ui-select ng-model="produto.produto.tributacao.imposto.cofins.pISSituaTributaria" theme="bootstrap" on-select="getInputsCOFINS($item, $model)">
+                                        <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                        <ui-select-choices repeat="item in pisST | filter: $select.search">
+                                            <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 " id="cofins-por-aliq">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Aliquota</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">%</span>
+                                        <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.cofins.percentualAliquota" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 " id="cofins-val-aliq">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Valor COFINS/unidade</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.cofins.valorAliquota" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 ">
+                                <label for="exampleInputPassword1">Tipo de cálculo (ST)</label>
+                                <div class="row">
+                                    <ui-select ng-model="produto.produto.tributacao.imposto.cofins.tipocalculoSubstTrib" theme="bootstrap">
+                                        <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                        <ui-select-choices repeat="item in tipoCalc | filter: $select.search">
+                                            <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                            <div ng-if="produto.produto.tributacao.imposto.cofins.tipocalculoSubstTrib.value == 1" id="cofins-val-aliq-st">
+                                <div class="col-sm-4 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Aliquota (ST)</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.cofinsst.percentualAliquota" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="produto.produto.tributacao.imposto.cofins.tipocalculoSubstTrib.value == 2" id="cofins-val-aliq-st">
+                                <div class="col-sm-4 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Aliquota (ST)</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">$</span>
+                                            <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.cofinsst.valorAliquotaCOFINS" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content1" ng-show="tabs == 5">
+                        <div class="row">
+                            <div class="col-sm-3 ">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Vr Base Calc.</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.impostoImportacao.valorBaseCalculo" name="valorBaseCalculo"  placeholder="Qtd. selo IPI">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 ">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Vr despesas Arduaneiras</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.impostoImportacao.valorDespesaAduaneira" name="valorDespesaAduaneira"  placeholder="Qtd. selo IPI">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 ">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">IOF</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.impostoImportacao.valorIOF" name="valorIOF"  placeholder="Qtd. selo IPI">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 ">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Vr Imposto Impot.</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.impostoImportacao.valorImpostoImportacao" name="valorImpostoImportacao"  placeholder="Qtd. selo IPI">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content1" ng-show="tabs == 6">
+                    <h1>testes 6</h1>
+                </div>
+                <div class="tab-content1" ng-show="tabs == 7">
+                    <div class="row">
+                        <div class="col-sm-6 ">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Perc. da Merc. Devolvida</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.impostoDevolvido.percentualDevolucao" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 ">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Vr IPI Devolvido</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.impostoDevolvido.informacaoIPIDevolvido" name="qtdSeloIPI"  placeholder="Qtd. selo IPI">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content1" ng-show="tabs == 8">
+                    <div class="row">
+                        <div class="col-sm-3 ">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Percentual ICMS Relativo ao FCP na UF de Destino">Per ICMS Rel UF Dest.</label>
+                                <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icmsUfDestino.valorRelativoFundoCombatePobrezaDestino" name="perICMSUFDest"  placeholder="Per ICMS UF Dest">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 ">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Valor da base de  cálculo na UF destinatário">Vr da base de  cálc UF dest.</label>
+                                <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icmsUfDestino.valorBaseCalculoDestino" name="vrBaseCalcUFDest"  placeholder="Vr Base Calc UF Dest">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 ">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Aliquota interna da UF do destinatario">Aliq interna da UF dest.</label>
+                                <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icmsUfDestino.percentualAliquotaInternaDestino" name="aliqIntUFDest"  placeholder="Aliq Int UF Dest">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 ">
+                            <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Aliquota interestadual">Aliq interestadual</label>
+                            <div class="row">
+                                <ui-select ng-model="produto.produto.tributacao.imposto.icmsUfDestino.percentualInterestadual" theme="bootstrap">
+                                    <ui-select-match placeholder="Aliq Inter Estadual...">{{$select.selected.descricao}}</ui-select-match>
+                                    <ui-select-choices repeat="item in pisST | filter: $select.search">
+                                        <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 ">
+                            <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Percental provisório de partilha">Perc prov partilha</label>
+                            <div class="row">
+                                <ui-select ng-model="produto.produto.tributacao.imposto.icmsUfDestino.percentualProvisorioPartilha" theme="bootstrap">
+                                    <ui-select-match placeholder="Perc Prov Part...">{{$select.selected.descricao}}</ui-select-match>
+                                    <ui-select-choices repeat="item in tipoCalc | filter: $select.search">
+                                        <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 ">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Valor ICMS de partilha para UF do destinatário">Vr ICMS de part UF do dest.</label>
+                                <input type="text" class="form-control" ng-model="produto.produto.tributacao.imposto.icmsUfDestino.valorICMSInterestadualDestino" name="vrICMSPartUFDest"  placeholder="Vr ICMS Part UF Dest">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 ">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Valor ICMS de partilha para UF do remetente">Vr ICMS de part UF do remet.</label>
+                                <input type="text" class="form-control " ng-model="produto.produto.tributacao.imposto.icmsUfDestino.valorICMSInterestadualRemetente" name="vrICMSPartUFReme"  placeholder="Vr ICMS Part UF Reme">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 ">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Valor ICMS relativo ao FCP da UF de destino">Vr ICMS rel FCP UF dest.</label>
+                                <input type="text" class="form-control " ng-model="produto.produto.tributacao.imposto.icmsUfDestino.percentualRelativoFundoCombatePobrezaDestino" name="vrICMSRelFCPUFDest"  placeholder="Vr ICMS Rel FCP UF Dest">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <div class="panel-footer" style="background: #DDDDDD">
+        <div class="row">
+            <div class="col-sm-3">Total</div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3">${{totals}}</div>
+        </div>
+    </div>
+</div>

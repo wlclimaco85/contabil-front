@@ -556,7 +556,7 @@ angular.module('wdApp.apps.produto.select', ['ngSanitize', 'ui.select'])
   };
 }).controller('ProdutoSelectController', produtoSelectController);
 
-    function produtoSelectController($scope, $http, $timeout, $interval) {
+    function produtoSelectController($scope, $http, $timeout, $interval,doisValorFactory) {
         var vm = this;
 
 
@@ -567,7 +567,10 @@ angular.module('wdApp.apps.produto.select', ['ngSanitize', 'ui.select'])
 
         };
 
+        doisValorFactory.tributacao($scope);
+
         $scope.fnTelefoneType = function(type){
+
 
         var typeEnum
             switch (new Date().getDay()) {
@@ -675,8 +678,7 @@ angular.module('wdApp.apps.produto.select', ['ngSanitize', 'ui.select'])
 
   vm.onSelectCallback = function (item, model)
   {
-        debugger;
-        $scope
+    console.log(item);
   }
 
 
@@ -1013,7 +1015,7 @@ angular.module('wdApp.apps.produto.selects', ['ngSanitize', 'ui.select'])
         var planos = "";
 
 
-debugger
+
        if(res.operationSuccess == true)
        {
             for(var x=0;x<res.doisValoresList.length;x++)

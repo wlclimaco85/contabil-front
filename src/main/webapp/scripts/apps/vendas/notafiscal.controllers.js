@@ -137,7 +137,7 @@
 
 (function() {
     angular.module('wdApp.apps.nfSaida.insert',['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter','angucomplete','inputactions'])
-        .controller('NfSaidaInsertController', function(localStorageService,$rootScope,$scope,fModels,SysMgmtData,fProduto,fNotaFiscal,validationFactory,doisValorFactory) {
+        .controller('NfSaidaInsertController', function(localStorageService,$rootScope,$scope,fModels,SysMgmtData,fProduto,fNotaFiscal,validationFactory,doisValorFactory,fCalcProduto) {
 
             var vm = this;
             $scope.slotDisplayName = "teste00";
@@ -202,6 +202,8 @@
             $scope.createForm2 = function(){
 
                 $scope.produtos.push({ nome : 'form1' + ($scope.produtos.length + 1),produto :{}});
+                fCalcProduto.fnCalcTributo($scope);
+
             };
 
             $scope.createForm3 = function () {
