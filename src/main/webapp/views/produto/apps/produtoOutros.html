@@ -1,4 +1,5 @@
 
+
     <style>
         .select2 > .select2-choice.ui-select-match {
             /* Because of the inclusion of Bootstrap */
@@ -20,34 +21,139 @@
           z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
         }
     </style>
-
-<div class="row">
-        <div class="hide">
+  <!-- Veiculos -->
+    <div class="row">
+       <div class="col-sm-3">
             <div class="form-group">
-                <label for="exampleInputPassword1"></label>
-                <input type="text" class="form-control col-sm-8 hide" ng-model="produto.id" name="id"  placeholder="id">
+                <label for="exampleInputPassword1">Tipo Operação</label>
+                <input type="text" class="form-control " ng-model="produtoEmpresa.prodId.veiculo.tipoOperacao" name="codigo"  placeholder="Tipo Operação">
             </div>
         </div>
-
-        <div class="col-sm-8 ">
+        <div class="col-sm-3">
             <div class="form-group">
-                <label for="exampleInputPassword1">Produto</label>
-                  <div class="padded-row">
-                  <angucomplete id="ex1" placeholder="Search countries" pause="100" ng-model="produto.produto" selectedobject="selectedCountry" localdata="countries" searchfields="name" titlefield="name" minlength="1" inputclass="form-control form-control-small" matchclass="highlight" />
-                  </div>
-                </div>
-                <div class="" ng-show="selectedCountry">
+                <label for="exampleInputPassword1">Chassi</label>
+                <input type="text" class="form-control " ng-model="produtoEmpresa.prodId.veiculo.chassi" name="codigo"  placeholder="Chassi">
             </div>
         </div>
-        <div class="col-sm-4 ">
+        <div class="col-sm-3">
             <div class="form-group">
-                <label for="exampleInputPassword1">Código personalizado</label>
-                <input type="text" class="form-control " ng-model="produtoEmpresa.codigo" name="codigo"  placeholder="Código Interno">
+                <label for="exampleInputPassword1">Código Cor</label>
+                <input type="text" class="form-control " ng-model="produtoEmpresa.prodId.veiculo.codigoCor" name="codigo"  placeholder="Código Cor">
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Descrição Cor</label>
+                <input type="text" class="form-control " ng-model="produtoEmpresa.prodId.veiculo.descricaoCor" name="codigo"  placeholder="Descrição Cor">
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-3 ">
+       <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Potencia</label>
+                <input type="text" class="form-control " ng-model="produtoEmpresa.prodId.veiculo.potencia" name="codigo"  placeholder="Potencia">
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Cilindrada</label>
+                <input type="text" class="form-control " ng-model="produtoEmpresa.prodId.veiculo.cilindrada" name="codigo"  placeholder="Cilindrada">
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Peso Liquido</label>
+                <input type="text" class="form-control " ng-model="produtoEmpresa.prodId.veiculo.pesoLiquido" name="codigo"  placeholder="Peso Liquido">
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Peso Bruto</label>
+                <input type="text" class="form-control " ng-model="produtoEmpresa.prodId.veiculo.pesoBruto" name="codigo"  placeholder="Peso Bruto">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+            <div class="col-sm-6 " >
+                    <label for="exampleInputPassword1">Unid. Medida <small ng-click="ctrl.addUniMed()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
+                    <div class="row">
+                      <ui-select ng-model="produtoEmpresa.prodId.veiculo.tipoCombustivel" theme="bootstrap">
+                        <ui-select-match placeholder="...">{{$select.selected.sigla}}</ui-select-match>
+                        <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
+                          <div ng-bind-html="item.sigla | highlight: $select.search"></div>
+                          <small ng-bind-html="item.unimed | highlight: $select.search"></small>
+                        </ui-select-choices>
+                      </ui-select>
+                    </div>
+
+            </div>
+
+
+
+       <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Tipo Combustivel </label>
+                <input type="text" class="form-control " ng-model="produtoEmpresa.prodId.veiculo.tipoCombustivel" name="codigo"  placeholder="Tipo Combustivel">
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Numero de Serie</label>
+                <input type="text" class="form-control " ng-model="produtoEmpresa.prodId.veiculo.numeroSerie" name="codigo"  placeholder="Numero de Serie">
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Numero Motor</label>
+                <input type="text" class="form-control " ng-model="produtoEmpresa.prodId.veiculo.numeroMotor" name="codigo"  placeholder="Código Interno">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Medicamentos -->
+    <div class="row">
+       <div class="col-sm-4">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Lote</label>
+                <input type="text" class="form-control " ng-model="produtoEmpresa.prodId.medicamento.codigo" name="codigo"  placeholder="Código Interno">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Quantidade</label>
+                <input type="text" class="form-control " ng-model="produtoEmpresa.prodId.medicamento.codigo" name="codigo"  placeholder="Código Interno">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Preço Maximo</label>
+                <input type="text" class="form-control " ng-model="produtoEmpresa.prodId.medicamento.codigo" name="codigo"  placeholder="Código Interno">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+       <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Data Fabricação</label>
+                <input type="text" class="form-control " ng-model="produtoEmpresa.prodId.medicamento.codigo" name="codigo"  placeholder="Código Interno">
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Data Validade</label>
+                <input type="text" class="form-control " ng-model="produtoEmpresa.prodId.medicamento.codigo" name="codigo"  placeholder="Código Interno">
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="col-sm-3">
             <div class="form-group">
                 <label for="exampleInputPassword1">NCM</label>
                 <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
@@ -62,7 +168,7 @@
         <div class="col-sm-2 ">
             <div class="form-group">
                 <label for="exampleInputPassword1">Data Cadastro</label>
-                <input type="text" class="form-control  " ng-model="produtoEmpresa.dataCreate" name="dataCadastro"  placeholder="Data Cadastro">
+                <input type="text" class="form-control  " ng-model="produtoEmpresa.prodId.prodId.dataCreate" name="dataCadastro"  placeholder="Data Cadastro">
             </div>
         </div>
         <div class="col-sm-2 ">
@@ -82,13 +188,13 @@
         <div class="col-sm-6 ">
             <div class="form-group">
                 <label for="exampleInputPassword1">Inform. adicionais para a NFe</label>
-                <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.informAdicionaisParaNFe" name="informAdicionaisParaNFe"  placeholder="Informações Adicionais Para NFe"></textarea>
+                <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.prodId.prodId.informAdicionaisParaNFe" name="informAdicionaisParaNFe"  placeholder="Informações Adicionais Para NFe"></textarea>
             </div>
         </div>
         <div class="col-sm-6 ">
             <div class="form-group">
                 <label for="exampleInputPassword1">Anotações internas</label>
-                <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.anotainternas" name="anotainternas"  placeholder="Anotaçoes Internas"></textarea>
+                <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.prodId.prodId.anotainternas" name="anotainternas"  placeholder="Anotaçoes Internas"></textarea>
             </div>
         </div>
     </div>
@@ -118,7 +224,7 @@
             <div class="col-sm-4 ">
                     <label for="exampleInputPassword1">Categoria <small ng-click="ctrl.addCategoria()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
                     <div class="row">
-                        <ui-select ng-model="produtoEmpresa.categoria" theme="bootstrap">
+                        <ui-select ng-model="produtoEmpresa.prodId.categoria" theme="bootstrap">
                         <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.categoria}}</ui-select-match>
                         <ui-select-choices repeat="item in ctrl.categoria | filter: $select.search">
                           <div ng-bind-html="item.categoria | highlight: $select.search"></div>
