@@ -1,60 +1,57 @@
 <div class="nav-wrapper">
-    <ul id="nav"
-        class="nav"
-        data-ng-controller="NavController"
-		data-slim-scroll
-        data-collapse-nav
-        data-highlight-active>
-        <li><a href="#/dashboard"> <i class="fa fa-dashboard"></i><span data-i18n="pagina inicial"></span> </a></li>
+    <ul id="nav" class="nav" data-ng-controller="NavController" data-slim-scroll data-collapse-nav data-highlight-active>
+        <li>
+            <a href="#/dashboard"> <i class="fa fa-dashboard"></i><span data-i18n="pagina inicial"></span> </a>
+        </li>
         <li class="Advocacia" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA')">
             <a href="#/mail"><i class="fa fa-envelope-o"></i><span data-i18n="Advocacia"></span></a>
             <ul>
                 <li><a href="#/advogado/tables/processo"><i class="fa fa-caret-right"></i><span data-i18n="Processo"></span></a></li>
-                <li><a href="#/advocacia/forms/advogadoAgenda"><i class="fa fa-caret-right"></i><span data-i18n="Status Processo"></span></a></li>
-                <li><a href="#/advogado/forms/advogadoAgenda"><i class="fa fa-caret-right"></i><span data-i18n="Agenda"></span></a></li>
+                <li><a href="#/advocacia/forms/advogadoAgenda2"><i class="fa fa-caret-right"></i><span data-i18n="Status Processo"></span></a></li>
+                <li><a href="#/advogado/forms/advogadoAgenda2"><i class="fa fa-caret-right"></i><span data-i18n="Agenda"></span></a></li>
             </ul>
         </li>
         <li class="fiscal" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA')">
             <a href="#/fiscal"><i class="fa fa-magic"></i><span data-i18n="Fiscal"></span></a>
             <ul>
                 <li><a href="#/fiscal/tables/regime"><i class="fa fa-caret-right"></i><span data-i18n="Regime"></span></a></li>
-				<li class="fiscal-cfop"><a href="#/fiscal/tables/cfop"><i class="fa fa-caret-right"></i><span data-i18n="Cfop"></span></a></li>
-				<li class="fiscal-cnae"><a href="#/fiscal/tables/cnae"><i class="fa fa-caret-right"></i><span data-i18n="Cnae"></span></a></li>
+                <li class="fiscal-cfop"><a href="#/fiscal/tables/cfop"><i class="fa fa-caret-right"></i><span data-i18n="Cfop"></span></a></li>
+                <li class="fiscal-cnae"><a href="#/fiscal/tables/cnae"><i class="fa fa-caret-right"></i><span data-i18n="Cnae"></span></a></li>
             </ul>
         </li>
-		<li class="vendas" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_EMPRESA')">
-			<a href="#/vendas"><i class="fa fa-magic"></i><span data-i18n="Vendas"></span></a>
+        <li class="vendas" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_EMPRESA')">
+            <a href="#/vendas"><i class="fa fa-magic"></i><span data-i18n="Vendas"></span></a>
             <ul>
                 <li class="vendas-pedidos"><a href="#/vendas/tables/pedidoVendas"><i class="fa fa-caret-right"></i><span data-i18n="Pedidos de Vendas"></span>
                 <span class="badge badge-danger main-badge"
                       data-ng-show="taskRemainingCount > 0">{{taskRemainingCount}}</span></a></li>
-				<li class="vendas-orcamento"><a href="#/vendas/tables/orcamento"><i class="fa fa-caret-right"></i><span data-i18n="Orcamento"></span></a></li>
-				<li class="vendas-nf-saida"><a href="#/vendas/tables/notaFiscalSaida"><i class="fa fa-caret-right"></i><span data-i18n="Nota Fiscal Saida"></span></a></li>
-				<li class="vendas-OS" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM')"><a href="#/vendas/tables/ordemServico"><i class="fa fa-caret-right"></i><span data-i18n="Ordem Servico"></span></a></li>
+                <li class="vendas-orcamento"><a href="#/vendas/tables/orcamento"><i class="fa fa-caret-right"></i><span data-i18n="Orcamento"></span></a></li>
+                <li class="vendas-nf-saida"><a href="#/vendas/tables/notaFiscalSaida"><i class="fa fa-caret-right"></i><span data-i18n="Nota Fiscal Saida"></span></a></li>
+                <li class="vendas-OS" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM')"><a href="#/vendas/tables/ordemServico"><i class="fa fa-caret-right"></i><span data-i18n="Ordem Servico"></span></a></li>
             </ul>
         </li>
-		<li ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA') || hasRole('ROLE_EMPRESA')">
-			<a href="#/compras"><i class="fa fa-magic"></i><span data-i18n="Compras"></span></a>
+        <li ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA') || hasRole('ROLE_EMPRESA')">
+            <a href="#/compras"><i class="fa fa-magic"></i><span data-i18n="Compras"></span></a>
             <ul>
-				<li class="compras-nf-entrada" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA') || hasRole('ROLE_EMPRESA')"><a href="#/compras/tables/nfEntrada"><i class="fa fa-caret-right"></i><span data-i18n="Nota Fiscal Entrada"></span></a></li>
-				<li class="compras-pd-compra" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA') || hasRole('ROLE_EMPRESA')"><a href="#/compras/tables/pedCompras"><i class="fa fa-caret-right"></i><span data-i18n="Pedido de Compra"></span></a></li>
+                <li class="compras-nf-entrada" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA') || hasRole('ROLE_EMPRESA')"><a href="#/compras/tables/nfEntrada"><i class="fa fa-caret-right"></i><span data-i18n="Nota Fiscal Entrada"></span></a></li>
+                <li class="compras-pd-compra" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA') || hasRole('ROLE_EMPRESA')"><a href="#/compras/tables/pedCompras"><i class="fa fa-caret-right"></i><span data-i18n="Pedido de Compra"></span></a></li>
                 <li class="compras-orcamento" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA')"><a href="#/compras/tables/cotacao"><i class="fa fa-caret-right"></i><span data-i18n="cotacao"></span></a></li>
             </ul>
         </li>
         <li ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA') || hasRole('ROLE_EMPRESA')">
             <a href="#/financeiro"><i class="fa fa-table"></i><span data-i18n="Financeiro"></span></a>
             <ul>
-				<li><a href="#/financeiro/tables/contasPagar"><i class="fa fa-caret-right"></i><span data-i18n="Contas Pagar"></span></a></li>
-				<li><a href="#/financeiro/tables/contasReceber"><i class="fa fa-caret-right"></i><span data-i18n="Contas Receber"></span></a></li>
-				<li><a href="#/financeiro/tables/formaPg"><i class="fa fa-caret-right"></i><span data-i18n="Forma Pagamento"></span></a></li>
-				<li><a href="#/financeiro/tables/banco"><i class="fa fa-caret-right"></i><span data-i18n="Banco"></span></a></li>
+                <li><a href="#/financeiro/tables/contasPagar"><i class="fa fa-caret-right"></i><span data-i18n="Contas Pagar"></span></a></li>
+                <li><a href="#/financeiro/tables/contasReceber"><i class="fa fa-caret-right"></i><span data-i18n="Contas Receber"></span></a></li>
+                <li><a href="#/financeiro/tables/formaPg"><i class="fa fa-caret-right"></i><span data-i18n="Forma Pagamento"></span></a></li>
+                <li><a href="#/financeiro/tables/banco"><i class="fa fa-caret-right"></i><span data-i18n="Banco"></span></a></li>
                 <li><a href="#/financeiro/tables/agencia"><i class="fa fa-caret-right"></i><span data-i18n="Agencia"></span></a></li>
-				<li><a href="#/financeiro/tables/contaCC"><i class="fa fa-caret-right"></i><span data-i18n="Conta Corrente"></span></a></li>
-				<li><a href="#/financeiro/tables/caixa"><i class="fa fa-caret-right"></i><span data-i18n="Caixa"></span></a></li>
-				<li><a href="#/financeiro/tables/conta"><i class="fa fa-caret-right"></i><span data-i18n="Conta"></span></a></li>
+                <li><a href="#/financeiro/tables/contaCC"><i class="fa fa-caret-right"></i><span data-i18n="Conta Corrente"></span></a></li>
+                <li><a href="#/financeiro/tables/caixa"><i class="fa fa-caret-right"></i><span data-i18n="Caixa"></span></a></li>
+                <li><a href="#/financeiro/tables/conta"><i class="fa fa-caret-right"></i><span data-i18n="Conta"></span></a></li>
                 <li><a href="#/financeiro/tables/tipoDocumentos"><i class="fa fa-caret-right"></i><span data-i18n="Tipo Documento"></span></a></li>
                 <li><a href="#/financeiro/tables/categoria"><i class="fa fa-caret-right"></i><span data-i18n="Categoria"></span></a></li>
-                <li><a href="#/financeiro/tables/situacao"><i class="fa fa-caret-right"></i><span data-i18n="Situação"></span></a></li>
+                <li><a href="#/financeiro/tables/situacao"><i class="fa fa-caret-right"></i><span data-i18n="Situaï¿½ï¿½o"></span></a></li>
             </ul>
         </li>
         <li ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA')">
@@ -66,8 +63,7 @@
         <li class="nav-task" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA')">
             <a href="#/ordemServico/tables/ordemServico">
                 <i class="fa fa-check-square-o"></i><span data-i18n="Ordem de Servico"></span>
-                <span class="badge badge-danger main-badge"
-                      data-ng-show="taskRemainingCount > 0">{{taskRemainingCount}}</span>
+                <span class="badge badge-danger main-badge" data-ng-show="taskRemainingCount > 0">{{taskRemainingCount}}</span>
             </a>
         </li>
         <li class="clinica" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_DOMAIN_USERS') || hasRole('ROLE_PACIENTE')">
@@ -90,23 +86,23 @@
         <li ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA') || hasRole('ROLE_EMPRESA')">
             <a href="#/mail"><i class="fa fa-envelope-o"></i><span data-i18n="Cadastros"></span></a>
             <ul>
-			    <li><a href="#/cadastros/tables/cliente"><i class="fa fa-caret-right"></i><span data-i18n="Cliente"></span></a></li>
+                <li><a href="#/cadastros/tables/cliente"><i class="fa fa-caret-right"></i><span data-i18n="Cliente"></span></a></li>
                 <li><a href="#/cadastros/tables/fornecedor"><i class="fa fa-caret-right"></i><span data-i18n="Fornecedor"></span></a></li>
-				<li><a href="#/cadastros/tables/transportador"><i class="fa fa-caret-right"></i><span data-i18n="Transportador"></span></a></li>
+                <li><a href="#/cadastros/tables/transportador"><i class="fa fa-caret-right"></i><span data-i18n="Transportador"></span></a></li>
                 <li><a href="#/cadastros/tables/filial" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM')"><i class="fa fa-caret-right"></i><span data-i18n="Filial"></span></a></li>
-				<li><a href="#/cadastros/tables/almoxarifado" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM')"><i class="fa fa-caret-right"></i><span data-i18n="Almoxarifado"></span></a></li>
-				<li><a href="#/cadastros/tables/convenio" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM')"><i class="fa fa-caret-right"></i><span data-i18n="Convenio"></span></a></li>
-				<li><a href="#/cadastros/tables/cidade" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM')"><i class="fa fa-caret-right"></i><span data-i18n="Cidade"></span></a></li>
-				<li><a href="#/cadastros/tables/estado" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM')"><i class="fa fa-caret-right"></i><span data-i18n="Estado"></span></a></li>
+                <li><a href="#/cadastros/tables/almoxarifado" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM')"><i class="fa fa-caret-right"></i><span data-i18n="Almoxarifado"></span></a></li>
+                <li><a href="#/cadastros/tables/convenio" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM')"><i class="fa fa-caret-right"></i><span data-i18n="Convenio"></span></a></li>
+                <li><a href="#/cadastros/tables/cidade" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM')"><i class="fa fa-caret-right"></i><span data-i18n="Cidade"></span></a></li>
+                <li><a href="#/cadastros/tables/estado" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM')"><i class="fa fa-caret-right"></i><span data-i18n="Estado"></span></a></li>
             </ul>
         </li>
         <li ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA') || hasRole('ROLE_EMPRESA')">
             <a href="#/apps"><i class="fa fa-wrench"></i><span data-i18n="Produto"></span></a>
             <ul>
-            	<li><a href="#/produto/tables/produto"><i class="fa fa-caret-right"></i><span data-i18n="Produto"></span></a></li>
-				<li><a href="#/produto/tables/marca"><i class="fa fa-caret-right"></i><span data-i18n="Marca"></span></a></li>
-				<li><a href="#/produto/tables/categoria"><i class="fa fa-caret-right"></i><span data-i18n="Categoria"></span></a></li>
-				<li><a href="#/produto/tables/uniMed"><i class="fa fa-caret-right"></i><span data-i18n="Unidade Medida"></span></a></li>
+                <li><a href="#/produto/tables/produto"><i class="fa fa-caret-right"></i><span data-i18n="Produto"></span></a></li>
+                <li><a href="#/produto/tables/marca"><i class="fa fa-caret-right"></i><span data-i18n="Marca"></span></a></li>
+                <li><a href="#/produto/tables/categoria"><i class="fa fa-caret-right"></i><span data-i18n="Categoria"></span></a></li>
+                <li><a href="#/produto/tables/uniMed"><i class="fa fa-caret-right"></i><span data-i18n="Unidade Medida"></span></a></li>
             </ul>
         </li>
         <li ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA')">
@@ -124,13 +120,13 @@
             </ul>
         </li>
         <li ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA') || hasRole('ROLE_EMPRESA')">
-            <a href="#/apps"><i class="fa fa-wrench"></i><span data-i18n="Configuração"></span></a>
+            <a href="#/apps"><i class="fa fa-wrench"></i><span data-i18n="Configuraï¿½ï¿½o"></span></a>
             <ul>
                 <li ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA') || hasRole('ROLE_EMPRESA')"><a href="#/gerencia/tables/empresa"><i class="fa fa-caret-right"></i><span data-i18n="Empresa"></span></a></li>
-                <li ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA') || hasRole('ROLE_EMPRESA')"><a href="#/gerencia/tables/tributacao"><i class="fa fa-caret-right"></i><span data-i18n="Tributação"></span></a></li>
+                <li ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA') || hasRole('ROLE_EMPRESA')"><a href="#/gerencia/tables/tributacao"><i class="fa fa-caret-right"></i><span data-i18n="Tributaï¿½ï¿½o"></span></a></li>
                 <li ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA')"><a href="#/gerencia/tables/site"><i class="fa fa-caret-right"></i><span data-i18n="Site"></span></a></li>
                 <li ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA')"><a href="#/gerencia/tables/plano"><i class="fa fa-caret-right"></i><span data-i18n="Planos"></span></a></li>
-                <li ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA')"><a href="#/gerencia/tables/servico"><i class="fa fa-caret-right"></i><span data-i18n="Serviços"></span></a></li>
+                <li ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA')"><a href="#/gerencia/tables/servico"><i class="fa fa-caret-right"></i><span data-i18n="Serviï¿½os"></span></a></li>
                 <li ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA')"><a href="#/gerencia/tables/usuarios"><i class="fa fa-caret-right"></i><span data-i18n="Usuarios Online"></span></a></li>
                 <li ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA')"><a href="#/gerencia/tables/contatos"><i class="fa fa-caret-right"></i><span data-i18n="Contatos"></span></a></li>
                 <li ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_SISTEM') || hasRole('ROLE_ADVOCACIA')"><a href="#/gerencia/tables/historico"><i class="fa fa-caret-right"></i><span data-i18n="Historicos"></span></a></li>
@@ -155,7 +151,7 @@
                 <li><a href="#/notaFiscal/tables/notaFiscalEntrada"><i class="fa fa-caret-right"></i><span data-i18n="Lista de Notas Entrada"></span></a></li>
                 <li><a href="#/dicionario/tables/tela"><i class="fa fa-caret-right"></i><span data-i18n="Carregar XML"></span></a></li>
                 <li><a href="#/dicionario/tables/relatorios"><i class="fa fa-caret-right"></i><span data-i18n="Download das Notas"></span></a></li>
-                <li><a href="#/dicionario/tables/relatorios"><i class="fa fa-caret-right"></i><span data-i18n="Configuração"></span></a></li>
+                <li><a href="#/dicionario/tables/relatorios"><i class="fa fa-caret-right"></i><span data-i18n="Configuraï¿½ï¿½o"></span></a></li>
 
             </ul>
         </li>

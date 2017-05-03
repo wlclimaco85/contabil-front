@@ -39,7 +39,7 @@ var WebDaptiveAppConfig = {
 
 (function() {
     'use strict';
-    var wdApp = angular.module('wdApp', ['xeditable', 'ngRoute', 'ngAnimate', 'ngSanitize', 'angucomplete-alt', 'ngTouch', 'hl.sticky','mwl.calendar', 'ui.bootstrap', 'easypiechart', 'textAngular', 'ui.mask',
+    var wdApp = angular.module('wdApp', ['xeditable', 'ngRoute', 'ngAnimate', 'ngSanitize', 'angucomplete-alt', 'ngTouch', 'hl.sticky', 'mwl.calendar', 'colorpicker.module', 'ui.bootstrap', 'easypiechart', 'textAngular', 'ui.mask',
         'mgcrea.ngStrap', 'ui.tree', 'ngMap', 'ui.toggle', 'ngTagsInput', 'toastr', 'angular-loading-bar', 'chart.js', 'ngecharts',
         'agGrid', 'base64', 'LocalStorageModule', 'jcs-autoValidate', 'wdApp.controllers', 'wdApp.directives', 'wdApp.httpint',
         'wdApp.localization', 'wdApp.ui.controllers', 'wdApp.forms.controllers',
@@ -188,7 +188,7 @@ var WebDaptiveAppConfig = {
                 'cadastros/tables/almoxarifado', 'cadastros/tables/cidade', 'cadastros/tables/cliente', 'cadastros/tables/convenio',
                 'cadastros/tables/estado', 'cadastros/tables/filial', 'cadastros/tables/fornecedor', 'cadastros/tables/transportador',
                 'produto/tables/categoria', 'produto/tables/marca', 'produto/tables/uniMed', 'produto/tables/servico',
-                'produto/forms/CadCategoria', 'produto/forms/CadMarca', 'produto/forms/CadUniMed', 'produto/forms/CadProduto', 'advogado/tables/processo', 'advogado/details/processo', 'compras/details/cotacao', 'advogado/forms/advogadoAgenda', 'clinica/cadConsulta', 'clinica/cadMedico', 'clinica/cadPaciente', 'clinica/cadPlanoSaude', 'gerencia/tables/empresa', 'gerencia/tables/site', 'gerencia/tables/plano', 'gerencia/tables/servico', 'gerencia/tables/usuarios', 'gerencia/tables/contatos', 'gerencia/tables/historico', 'gerencia/tables/permissoes', 'dicionario/tables/tabelas', 'dicionario/tables/campos', 'dicionario/tables/tela', 'dicionario/tables/relatorios', 'gerencia/details/empresa', 'gerencia/tables/tributacao', 'fiscal/tables/regime', 'historico/tables/historico', 'financeiro/tables/tipoDocumentos', 'financeiro/tables/categoria', 'financeiro/tables/situacao', 'notaFiscal/tables/notaFiscalSaida', 'notaFiscal/tables/notaFiscalEntrada'
+                'produto/forms/CadCategoria', 'produto/forms/CadMarca', 'produto/forms/CadUniMed', 'produto/forms/CadProduto', 'advogado/tables/processo', 'advogado/details/processo', 'compras/details/cotacao', 'advogado/forms/advogadoAgenda', 'advogado/forms/advogadoAgenda2', 'clinica/cadConsulta', 'clinica/cadMedico', 'clinica/cadPaciente', 'clinica/cadPlanoSaude', 'gerencia/tables/empresa', 'gerencia/tables/site', 'gerencia/tables/plano', 'gerencia/tables/servico', 'gerencia/tables/usuarios', 'gerencia/tables/contatos', 'gerencia/tables/historico', 'gerencia/tables/permissoes', 'dicionario/tables/tabelas', 'dicionario/tables/campos', 'dicionario/tables/tela', 'dicionario/tables/relatorios', 'gerencia/details/empresa', 'gerencia/tables/tributacao', 'fiscal/tables/regime', 'historico/tables/historico', 'financeiro/tables/tipoDocumentos', 'financeiro/tables/categoria', 'financeiro/tables/situacao', 'notaFiscal/tables/notaFiscalSaida', 'notaFiscal/tables/notaFiscalEntrada'
 
 
 
