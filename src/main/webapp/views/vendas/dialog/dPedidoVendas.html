@@ -1,72 +1,54 @@
 <div class="modal fade">
-	<div class="modal-dialog" style="width : 80%">
-		<div class="modal-content">
+    <div class="modal-dialog" style="width : 80%">
+        <div class="modal-content">
 
-			<div class="modal-header">
-				<button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Cadastro Pedido Venda</h4>
-			</div>
-			<div class="modal-body">
-					<div class="panel panel-default" style="background:#EEEEEE">
-						<div class="panel-body">
-							<div class="col-sm-12">
-								<div class="col-sm-6">
-									<label for="exampleInputPassword1">Cliente</label>
-									<div angucomplete-alt id="ex1"
-										placeholder="Buscar Clientes"
-										maxlength="50"
-										pause="100"
-										selected-object="countrySelected"
-										local-data="cliente"
-										search-fields="nome"
-										title-field="nome"
-										minlength="1"
-										hover="popovers"
-										input-class="form-control form-control-small"
-										match-class="highlight" required></div>
-								</div>
-								<div class="col-sm-3">
-									<div class="form-group">
-										<label for="exampleInputPassword1">Data Emissão</label>
-										<div class="input-group">
-											<input type="text" class="form-control" required
-												ng-model="notaFiscalSaida.dataEmissao" is-open="popup1.opened"
-												datepicker-options="dateOptions" ng-required="true"
-												close-text="Close" uib-datepicker-popup="{{format}}" /> <span
-												class="input-group-btn">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Cadastro Pedido Venda</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel panel-default" style="background:#EEEEEE">
+                    <div class="panel-body">
+                        <div class="col-sm-12">
+                            <div class="col-sm-6">
+                                <label for="exampleInputPassword1">Cliente</label>
+                                <div angucomplete-alt id="ex1" placeholder="Buscar Clientes" maxlength="50" pause="100" selected-object="countrySelected" local-data="cliente" search-fields="nome" title-field="nome" minlength="1" hover="popovers" input-class="form-control form-control-small"
+                                    match-class="highlight" required></div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Data EmissÃ£o</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" required ng-model="notaFiscalSaida.dataEmissao" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" uib-datepicker-popup="{{format}}" />                                        <span class="input-group-btn">
 											<button type="button" class="btn btn-default" ng-click="open1()">
 											<i class="glyphicon glyphicon-calendar"></i>
 											</button>
 											</span>
-										</div>
-									</div>
-								</div>
-								<div class="form-group col-sm-3">
-								<a href="#" editable-text="user.name" e-label="User Name">{{ user.name || 'empty' }}</a>
-									<label for="exampleInputPassword1">Consumidor Final</label>
-									<div class="row">
-										<toggle ng-model="titulo.pagarAgora"
-											ng-init="titulo.pagarAgora = false" style="android2" on="Sim" required
-											off="Não" onstyle="btn-success" offstyle="btn-danger"
-											ng-true-value="'2'" ng-false-value="'1'"></toggle>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<h4>Carrinho</h4>
-					</div>
-					<div class="panel panel-default" style="background:#EEEEEE">
-						<div class="panel-body">
-							<div class="col-sm-12">
-								<div ng-repeat="produto in produtos">
-									<div class="teste">
-										<div class="row" style="margin-top:3%">
-											<div class="ng-cloak" ng-controller="ProdutoSelectController as ctrl">
-												<div class="col-sm-5" style="margin-top:2.5%">
-													<div class="col-sm-3" style="background: #EEEEEE">
-														<select class="selectpicker" style="cursor: pointer;background-image: none;border: 1px solid #FFF;
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label for="exampleInputPassword1">Consumidor Final</label>
+                                <div class="row">
+                                    <toggle ng-model="titulo.pagarAgora" ng-init="titulo.pagarAgora = false" style="android2" on="Sim" required off="Nï¿½o" onstyle="btn-success" offstyle="btn-danger" ng-true-value="'2'" ng-false-value="'1'"></toggle>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <h4>Carrinho</h4>
+                </div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                    <div class="panel-body">
+                        <div class="col-sm-12">
+                            <div ng-repeat="produto in produtos">
+                                <div class="teste">
+                                    <div class="row" style="margin-top:3%">
+                                        <div class="ng-cloak" ng-controller="ProdutoSelectController as ctrl">
+                                            <div class="col-sm-5" style="margin-top:2.5%">
+                                                <div class="col-sm-3" style="background: #EEEEEE">
+                                                    <select class="selectpicker" style="cursor: pointer;background-image: none;border: 1px solid #FFF;
 															white-space: nowrap;
 															padding: 6px 12px;
 															font-size: 14px;
@@ -74,206 +56,199 @@
 															background-color : #EEEEEE;
 															border-radius: 4px;">
 															<option><i class="fa fa-cubes"></i> Produto</option>
-															<option><i class="fa fa-wrench"></i> Serviço</option>
+															<option><i class="fa fa-wrench"></i> Serviï¿½o</option>
 														</select>
-													</div>
-													<div class="col-sm-8" style="margin-left: 2%">
-														<ui-select ng-model="produto.produto" theme="bootstrap" required on-select="ctrl.onSelectCallback($item, $model)">
-															<ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.prodId.produto}}</ui-select-match>
-															<ui-select-choices repeat="item in ctrl.produto | filter: $select.search">
-																<div ng-bind-html="item.prodId.produto | highlight: $select.search"></div>
-																<small ng-bind-html="item.codigo | highlight: $select.search"></small> -
-															</ui-select-choices>
-														</ui-select>
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-1">
-												<div class="form-group">
-													<label for="exampleInputPassword1">Quant.</label>
-													<div class="input-group">
-														<input type="text" class="form-control nome-socio" ng-init="produto.produto.quantidade=1" ng-model="produto.produto.quantidade" name="book[0].quantidade" placeholder="0.00" />
-														<span class="input-group-addon">.00</span>
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-2">
-												<div class="form-group">
-													<label for="exampleInputPassword1">Valor Unitario </label>
-													<div class="input-group">
-														<span class="input-group-addon">$</span>
-														<input type="text" class="form-control cota-socio" ng-init="produto.produto.precoList[0].valor=0" name="book[0].vlUnitario"  ng-model="produto.produto.precoList[0].valor" name="book[0].vlUnitario" placeholder="R$0,00" />
-														<span class="input-group-addon">.00</span>
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-2">
-												<div class="form-group">
-													<label for="exampleInputPassword1">Desconto </label>
-													<div class="input-group">
-														<span class="input-group-addon">$</span>
-														<input type="text" class="form-control cota-socio" ng-init="produto.produto.desconto=0" name="book[0].vlUnitario"  ng-model="produto.produto.desconto" name="book[0].vlUnitario2" placeholder="R$0,00" />
-														<span class="input-group-addon">.00</span>
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-1">
-												<div class="form-group">
-													<label for="exampleInputPassword1">Total prod.</label>
-													<div class="input-group">
-														<label for="exampleInputPassword1">{{(produto.produto.quantidade * produto.produto.precoList[0].valor) - produto.produto.desconto}}</label>
-													</div>
-												</div>
-											</div>
-											<div class="col-xs-1" style="margin-top:20px">
-												<button type="button" ng-click="createForm2()" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="panel-footer" style="background: #DDDDDD">
-							<div class="row">
-								<div class="col-sm-3">Total</div>
-								<div class="col-sm-3"></div>
-								<div class="col-sm-3"></div>
-								<div class="col-sm-3">${{totals}}</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<h4>Financeiro</h4>
-					</div>
-					<div style="margin-bottom: 20px"></div>
-					<div class="row">
-						<div class="ng-cloak" ng-controller="FormaPgSelectControllerss as ctrl">
-							<div class="col-sm-3 ">
-								<div class="form-group">
-									<label for="exampleInputPassword1">Forma Pagamento <small ng-click="ctrl.addCfop()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
-									<div class="row">
-										<ui-select ng-model="notaFiscalSaida.formapg" theme="bootstrap">
-											<ui-select-match placeholder="Formas de Pagamento">{{$select.selected.descricao}}</ui-select-match>
-											<ui-select-choices repeat="item in ctrl.people | filter: $select.search">
-												<div ng-bind-html="item.descricao | highlight: $select.search"></div>
-												<small ng-bind-html="item.observacao | highlight: $select.search"></small> -
-											</ui-select-choices>
-										</ui-select>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-2 ">
-							<div class="form-group">
-								<label for="exampleInputPassword1">Tipo Frete </label>
-								<div class="row">
-									<ui-select class="col-sm-12" ng-model="notaFiscalSaida.frete.tipoFrete" theme="bootstrap">
-										<ui-select-match placeholder="Tipo de Frete">{{$select.selected.nome}}</ui-select-match>
-										<ui-select-choices repeat="item in tipoFrete | filter: $select.search">
-											<div ng-bind-html="item.nome | highlight: $select.search"></div>
-										</ui-select-choices>
-									</ui-select>
-								</div>
-							</div>
-						</div>
-						<div class="form-group col-sm-2">
-							<label for="exampleInputPassword1">Valor Frete</label>
-							<div class="input-group">
-								<span class="input-group-addon">$</span>
-								<input type="text" class="form-control" ng-init="notaFiscalSaida.frete.vrFrete=0" ng-model="notaFiscalSaida.frete.vrFrete" name="password" placeholder="0.00">
-								<span class="input-group-addon">.00</span>
-							</div>
-						</div>
-						<div class="form-group col-sm-2">
-							<label for="exampleInputPassword1">Desconto</label>
-							<div class="input-group">
-								<span class="input-group-addon">$</span>
-								<input type="text" class="form-control" ng-init="notaFiscalSaida.vrDesconto=0" ng-model="notaFiscalSaida.vrDesconto" name="password" placeholder="0.00">
-								<span class="input-group-addon">.00</span>
-							</div>
-						</div>
-						<div class="form-group col-sm-2">
-							<label for="exampleInputPassword1">Valor Total</label>
-							<div class="input-group">
-								<span class="input-group-addon">$</span>
-								<input type="text" class="form-control" ng-init="notaFiscalSaida.vrtotal=0" ng-model="notaFiscalSaida.vrtotal" name="password" placeholder="0.00">
-								<span class="input-group-addon">.00</span>
-							</div>
-						</div>
-					</div>
-					<div class="row " style="margin-top : 20px"></div>
-					<div class="panel panel-default" style="background:#EEEEEE">
-						<div class="panel-heading" style="background: #DDDDDD">
-							<div class="row">
-								<div class="col-sm-2">Parcela</div>
-								<div class="col-sm-2">Valor</div>
-								<div class="col-sm-2">Dt. pag.</div>
-								<div class="col-sm-3">Forma pg.</div>
-								<div class="col-sm-2"></div>
-								<div class="col-sm-1"></div>
-							</div>
-						</div>
-						<div class="panel-body">
-							<div class="col-sm-12">
-								<div ng-repeat="financeiro in financeiros">
-									<div class="col-sm-2">{{$index +1 }} / {{financeiros.length}}</div>
-									<div class="col-sm-2">
-										<div class="inputClass input-group"><span class="InputSign input-group-addon" target="vendas_finValor1"><span title="Valor monetário" class="fa fa-usd"></span></span><input type="text" ng-model="financeiro.financeiro.valor" id="vendas_finValor1" class="vendas_finValor form-control InputNum" value="" autocomplete="off" name="finValor[]" especialtype="money" data-thousands="." data-decimal="," data-precision="2"></div>
-									</div>
-									<div class="col-sm-2">
-										<div class="form-group">
-											<div class="input-group">
-												<input type="text" class="form-control"
-													ng-model="financeiro.financeiro.dataVencimento" is-open="popup2.opened"
-													datepicker-options="dateOptions" ng-required="true"
-													close-text="Close" uib-datepicker-popup="{{format}}" /> <span
-													class="input-group-btn">
+                                                </div>
+                                                <div class="col-sm-8" style="margin-left: 2%">
+                                                    <ui-select ng-model="produto.produto" theme="bootstrap" required on-select="ctrl.onSelectCallback($item, $model)">
+                                                        <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.prodId.produto}}</ui-select-match>
+                                                        <ui-select-choices repeat="item in ctrl.produto | filter: $select.search">
+                                                            <div ng-bind-html="item.prodId.produto | highlight: $select.search"></div>
+                                                            <small ng-bind-html="item.codigo | highlight: $select.search"></small> -
+                                                        </ui-select-choices>
+                                                    </ui-select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Quant.</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control nome-socio" ng-init="produto.produto.quantidade=1" ng-model="produto.produto.quantidade" name="book[0].quantidade" placeholder="0.00" />
+                                                    <span class="input-group-addon">.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Valor Unitario </label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">$</span>
+                                                    <input type="text" class="form-control cota-socio" ng-init="produto.produto.precoList[0].valor=0" name="book[0].vlUnitario" ng-model="produto.produto.precoList[0].valor" name="book[0].vlUnitario" placeholder="R$0,00" />
+                                                    <span class="input-group-addon">.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Desconto </label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">$</span>
+                                                    <input type="text" class="form-control cota-socio" ng-init="produto.produto.desconto=0" name="book[0].vlUnitario" ng-model="produto.produto.desconto" name="book[0].vlUnitario2" placeholder="R$0,00" />
+                                                    <span class="input-group-addon">.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Total prod.</label>
+                                                <div class="input-group">
+                                                    <label for="exampleInputPassword1">{{(produto.produto.quantidade * produto.produto.precoList[0].valor) - produto.produto.desconto}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-1" style="margin-top:20px">
+                                            <button type="button" ng-click="createForm2()" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer" style="background: #DDDDDD">
+                        <div class="row">
+                            <div class="col-sm-3">Total</div>
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-3">${{totals}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <h4>Financeiro</h4>
+                </div>
+                <div style="margin-bottom: 20px"></div>
+                <div class="row">
+                    <div class="ng-cloak" ng-controller="FormaPgSelectControllerss as ctrl">
+                        <div class="col-sm-3 ">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Forma Pagamento <small ng-click="ctrl.addCfop()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
+                                <div class="row">
+                                    <ui-select ng-model="notaFiscalSaida.formapg" theme="bootstrap">
+                                        <ui-select-match placeholder="Formas de Pagamento">{{$select.selected.descricao}}</ui-select-match>
+                                        <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
+                                            <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                            <small ng-bind-html="item.observacao | highlight: $select.search"></small> -
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Tipo Frete </label>
+                            <div class="row">
+                                <ui-select class="col-sm-12" ng-model="notaFiscalSaida.frete.tipoFrete" theme="bootstrap">
+                                    <ui-select-match placeholder="Tipo de Frete">{{$select.selected.nome}}</ui-select-match>
+                                    <ui-select-choices repeat="item in tipoFrete | filter: $select.search">
+                                        <div ng-bind-html="item.nome | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label for="exampleInputPassword1">Valor Frete</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control" ng-init="notaFiscalSaida.frete.vrFrete=0" ng-model="notaFiscalSaida.frete.vrFrete" name="password" placeholder="0.00">
+                            <span class="input-group-addon">.00</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label for="exampleInputPassword1">Desconto</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control" ng-init="notaFiscalSaida.vrDesconto=0" ng-model="notaFiscalSaida.vrDesconto" name="password" placeholder="0.00">
+                            <span class="input-group-addon">.00</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label for="exampleInputPassword1">Valor Total</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control" ng-init="notaFiscalSaida.vrtotal=0" ng-model="notaFiscalSaida.vrtotal" name="password" placeholder="0.00">
+                            <span class="input-group-addon">.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row " style="margin-top : 20px"></div>
+                <div class="panel panel-default" style="background:#EEEEEE">
+                    <div class="panel-heading" style="background: #DDDDDD">
+                        <div class="row">
+                            <div class="col-sm-2">Parcela</div>
+                            <div class="col-sm-2">Valor</div>
+                            <div class="col-sm-2">Dt. pag.</div>
+                            <div class="col-sm-3">Forma pg.</div>
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-1"></div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-sm-12">
+                            <div ng-repeat="financeiro in financeiros">
+                                <div class="col-sm-2">{{$index +1 }} / {{financeiros.length}}</div>
+                                <div class="col-sm-2">
+                                    <div class="inputClass input-group"><span class="InputSign input-group-addon" target="vendas_finValor1"><span title="Valor monetï¿½rio" class="fa fa-usd"></span></span><input type="text" ng-model="financeiro.financeiro.valor" id="vendas_finValor1" class="vendas_finValor form-control InputNum"
+                                            value="" autocomplete="off" name="finValor[]" especialtype="money" data-thousands="." data-decimal="," data-precision="2"></div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" ng-model="financeiro.financeiro.dataVencimento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" uib-datepicker-popup="{{format}}" />                                            <span class="input-group-btn">
 												<button type="button" class="btn btn-default" ng-click="open2()">
 												<i class="glyphicon glyphicon-calendar"></i>
 												</button>
 												</span>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-3">
-										<ui-select ng-model="financeiro.financeiro.tipoDoc" theme="bootstrap">
-											<ui-select-match placeholder="">{{$select.selected.descricao}}</ui-select-match>
-											<ui-select-choices
-												repeat="item in tipoDocumento | filter: $select.search">
-												<div ng-bind-html="item.descricao | highlight: $select.search"></div>
-											</ui-select-choices>
-										</ui-select>
-									</div>
-									<div class="form-group col-sm-2">
-										<div class="row">
-											<toggle ng-model="financeiro.financeiro.pagarAgora"
-												ng-init="financeiro.pagarAgora = false" style="android" on="A Receber"
-												off="Recebido" onstyle="btn-default" offstyle="btn-info"
-												ng-true-value="'2'" ng-false-value="'1'"></toggle>
-										</div>
-									</div>
-									<div class="col-xs-1">
-										<button type="button" ng-click="createForm3()" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="panel-footer" style="background: #DDDDDD">
-							<div class="row">
-								<div class="col-sm-3">Total</div>
-								<div class="col-sm-3"></div>
-								<div class="col-sm-3"></div>
-								<div class="col-sm-3">${{total}}</div>
-							</div>
-						</div>
-					</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <ui-select ng-model="financeiro.financeiro.tipoDoc" theme="bootstrap">
+                                        <ui-select-match placeholder="">{{$select.selected.descricao}}</ui-select-match>
+                                        <ui-select-choices repeat="item in tipoDocumento | filter: $select.search">
+                                            <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <div class="row">
+                                        <toggle ng-model="financeiro.financeiro.pagarAgora" ng-init="financeiro.pagarAgora = false" style="android" on="A Receber" off="Recebido" onstyle="btn-default" offstyle="btn-info" ng-true-value="'2'" ng-false-value="'1'"></toggle>
+                                    </div>
+                                </div>
+                                <div class="col-xs-1">
+                                    <button type="button" ng-click="createForm3()" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer" style="background: #DDDDDD">
+                        <div class="row">
+                            <div class="col-sm-3">Total</div>
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-3">${{total}}</div>
+                        </div>
+                    </div>
+                </div>
 
-			</div>
-			<div class="modal-footer">
-				<button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-				<button type="submit"  ng-click="savePedidoVenda()" class="btn btn-primary">Gravar</button>
-			</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="submit" ng-click="savePedidoVenda()" class="btn btn-primary">Gravar</button>
+            </div>
 
-		</div>
-	</div>
+        </div>
+    </div>
 </div>

@@ -1,141 +1,183 @@
 <div class="panel panel-default" style="background:#EEEEEE">
-                        <div class="panel-body">
-                            <div class="col-sm-12">
-    <div id="dadosBasicos" class="bottomSpace">
-        <div class="row">
-            <div class="col-sm-2 ">
-                <div class="form-group">
-                    <div ng-repeat="documento in empresa.documentos">
-                        <div ng-if="documento.documentoTypeEnumValue == 2">
-                            <label for="exampleInputPassword1">CPF:</label>
-                            <label for="exampleInputPassword1">{{documento.numero}}</label>
-                        </div>
-                        <div ng-if="documento.documentoTypeEnumValue == 1">
-                            <label for="exampleInputPassword1">CNPJ:</label>
-                            <label for="exampleInputPassword1">{{documento.numero}}</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="panel-body">
+        <div class="col-sm-12">
+            <div id="dadosBasicos" class="bottomSpace">
+                <div class="row">
+                    <div class="col-sm-2 ">
+                        <div class="form-group">
+                            <div ng-repeat="documento in empresa.documentos">
+                                <div ng-if="documento.documentoTypeEnumValue == 2">
+                                    <div class="form-group col-sm-6">
+                                        <label for="exampleInputPassword1">CPF:</label>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <div ng-repeat="produto in empresa.documentos | filter:{ documentoType: 'CPF' || 'CPF' } ">
+                                            <a href="#" editable-text="produto.numero" onaftersave="updateEmpresa()" e-style="color: green" e-required e-formclass="class1 class2">{{ produto.numero || 'Não Cadastrado' }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-if="documento.documentoTypeEnumValue == 1">
+                                    <label for="exampleInputPassword1">CNPJ:</label>
+                                    <div class="form-group col-sm-6">
+                                        <div ng-repeat="produto in empresa.documentos | filter:{ documentoType: 'CNPJ' || 'CNPJ' } ">
+                                            <a href="#" editable-text="produto.numero" onaftersave="updateEmpresa()" e-style="color: green" e-required e-formclass="class1 class2">{{ produto.numero || 'Não Cadastrado' }}</a>
+                                        </div>
+                                    </div>
+                                </div>
 
-                <div class="col-sm-2 ">
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Razão Social:</label>
-                        <label for="exampleInputPassword1">{{empresa.razao}}</label>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-2 ">
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Nome fantasia:</label>
-                        <label for="exampleInputPassword1">{{empresa.nome}}</label>
+                    <div class="col-sm-2 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Razão Social:</label>
+                            <a href="#" editable-text="empresa.razao" onaftersave="updateEmpresa()" e-style="color: green" e-required e-formclass="class1 class2">
+                              {{ empresa.razao || 'Não Cadastrado' }}</a>
+                        </div>
                     </div>
-                </div>
-            <div ng-repeat="documento in empresa.documentos">
-                <div ng-if="documento.documentoTypeEnumValue == 10">
+                    <div class="col-sm-2 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Nome fantasia:</label>
+                            <label for="exampleInputPassword1">{{empresa.nome}}</label>
+                            <a href="#" editable-text="empresa.razao" onaftersave="updateEmpresa()" e-style="color: green" e-required e-formclass="class1 class2">
+                              {{ empresa.razao || 'Não Cadastrado' }}</a>
+                        </div>
+                    </div>
+
                     <div class="col-sm-2 ">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Inscr. Est.:</label>
                             <label for="exampleInputPassword1">{{documento.numero}}</label>
+                            <div ng-repeat="produto in empresa.documentos | filter:{ documentoTypeEnumValue: '10' } ">
+                                <a href="#" editable-text="produto.numero" onaftersave="updateEmpresa()" e-style="color: green" e-required e-formclass="class1 class2">{{ produto.numero || 'Não Cadastrado' }}</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div ng-if="documento.documentoTypeEnumValue == 3">
                     <div class="col-sm-2 ">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Inscr. Mun.:</label>
                             <label for="exampleInputPassword1">{{documento.numero}}</label>
+                            <div ng-repeat="produto in empresa.documentos | filter:{ documentoTypeEnumValue: '3' } ">
+                                <a href="#" editable-text="produto.numero" onaftersave="updateEmpresa()" e-style="color: green" e-required e-formclass="class1 class2">{{ produto.numero || 'Não Cadastrado' }}</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 ">
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label for="exampleInputPassword1">CNAE:</label></div>
+                            <div ng-repeat="cnae in empresa.cnaes">
+                                <div class="col-sm-9">
+                                    <a href="#" editable-select="cnae.idCnae.id" onaftersave="updateEmpresa()" e-ng-options="se.id as se.cnae for se in cnaes">{{ showStatus() }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Telefone:</label>
+                            <div ng-repeat="telefone in empresa.telefones">
+                                <a href="#" editable-text="telefone.numero" onaftersave="updateEmpresa()">{{ telefone.numero || 'Não Cadastrado' }}</a><br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Endereço:</label>
+                            <a href="#" editable-text="empresa.enderecos[0].logradouro" onaftersave="updateEmpresa()">{{ empresa.enderecos[0].logradouro || 'Não Cadastrado' }}</a>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-2 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Bairro:</label>
+                            <a href="#" editable-text="empresa.enderecos[0].bairro" onaftersave="updateEmpresa()">{{ empresa.enderecos[0].bairro || 'Não Cadastrado' }}</a>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-2 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Cidade/UF:</label>
+                            <a href="#" editable-text="empresa.enderecos[0].cidade.name" onaftersave="updateEmpresa()">{{ empresa.enderecos[0].cidade.name || 'Não Cadastrado' }}</a>
+                            <a href="#" editable-text="empresa.enderecos[0].cidade.estado.uf" onaftersave="updateEmpresa()">{{ empresa.enderecos[0].cidade.estado.uf || 'Não Cadastrado' }}</a>
+
+
+                        </div>
+                    </div>
+                    <div class="col-sm-2 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Local fato gerador:</label>
+                            <a href="#" editable-text="empresa.enderecos[0].cidade.cdIBGE" onaftersave="updateEmpresa()">{{ empresa.enderecos[0].cidade.nome - empresa.enderecos[0].cidade.cdIBGE || 'Não Cadastrado' }}</a>
+
+
+                        </div>
+                    </div>
+                    <div class="col-sm-2 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">CEP:</label>
+                            <a href="#" editable-text="empresa.enderecos[0].cep" onaftersave="updateEmpresa()">{{ empresa.enderecos[0].cep || 'Não Cadastrado' }}</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-2 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">CNAE:</label>
-                    <div ng-repeat="cnae in empresa.cnaes">
-                        <label for="exampleInputPassword1">{{cnae.idCnae.cnae}}</label>
-                    </div>
-                </div>
-            </div>
         </div>
-         <div class="row">
-            <div class="col-sm-2 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Telefone:</label>
-                    <div ng-repeat="telefone in empresa.telefones">
-                        <label for="exampleInputPassword1">{{telefone.numero}}</label>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Endereço:</label>
-                    <label for="exampleInputPassword1">{{empresa.enderecos[0].logradouro}}</label>
-
-                </div>
-            </div>
-            <div class="col-sm-2 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Bairro:</label>
-                    <label for="exampleInputPassword1">{{empresa.enderecos[0].bairro}}</label>
-
-                </div>
-            </div>
-            <div class="col-sm-2 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Cidade/UF:</label>
-                    <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.uf = empresa.enderecos[0].estado">{{empresa.enderecos[0].cidade.nome}}/{{empresa.enderecos[0].estado.sigla}}</label>
-
-                </div>
-            </div>
-            <div class="col-sm-2 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Local fato gerador:</label>
-                    <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.codigomunicipio = empresa.enderecos[0].cidade.cdIBGE">{{empresa.enderecos[0].cidade.nome}}</label>
-
-                </div>
-            </div>
-            <div class="col-sm-2 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">CEP:</label>
-                    <label for="exampleInputPassword1">{{empresa.enderecos[0].cep}}</label>
-                </div>
-            </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        <div class="panel panel-default" style="background:#EEEEEE">
-                        <div class="panel-body">
-                            <div class="col-sm-12">
-        <div class="row">
-            <div ng-if="empresa.configuracao.confNFe != null">
+    </div>
+</div>
+<div class="panel panel-default" style="background:#EEEEEE">
+    <div class="panel-body">
+        <div class="col-sm-12">
+            <div class="row">
+                <div ng-if="empresa.configuracao.confNFe != null">
                     <div class="col-sm-2 ">
                         <div class="form-group">
                             <label for="exampleInputPassword1">CRT:</label>
-                            <label for="exampleInputPassword1">{{empresa.configuracao.confNFe.idCSC}}</label>
+                            <a href="#" editable-text="empresa.configuracao.confNFe.idCSC" onaftersave="updateEmpresa()">{{ empresa.configuracao.confNFe.idCSC || 'Não Cadastrado' }}</a>
 
                         </div>
                     </div>
                     <div class="col-sm-2 ">
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Modelo nota:</label>
-                            <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.modelo = empresa.configuracao.confNFe.modelo">{{empresa.configuracao.confNFe.modelo.value}}</label>
-
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="exampleInputPassword1">Modelo:</label>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <a href="#" ng-init="notaFiscal.info.identificacao.modelo = empresa.configuracao.confNFe.modelo" editable-select="empresa.configuracao.confNFe.modelo.id" e-ng-options="s.id as s.descricao for s in MODELO" onaftersave="updateEmpresa()">{{ showModelo() }}</a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-2 ">
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Série nota:</label>
-                            <label for="exampleInputPassword1" name="nome" ng-init="notaFiscal.info.identificacao.serie.id = empresa.configuracao.confNFe.serieEnvio.id">{{empresa.configuracao.confNFe.serieEnvio.value}}</label>
+                        <div class="row" style="background : #FFF">
+                            <div class="form-group col-sm-6">
+                                <label for="exampleInputPassword1">Série nota:</label>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <a href="#" ng-init="notaFiscal.info.identificacao.serie.id = empresa.configuracao.confNFe.serieEnvio.id" editable-select="empresa.configuracao.confNFe.serieEnvio.id" e-ng-options="s.id as s.descricao for s in SERIE" onaftersave="updateEmpresa()">{{ showSerie() }}</a>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="col-sm-2 ">
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="exampleInputPassword1">Ambiente de envio:</label>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <a href="#" ng-init="notaFiscal.info.identificacao.ambiente = empresa.configuracao.confNFe.ambienteEnvio" editable-select="empresa.configuracao.confNFe.ambienteEnvio.id" onaftersave="updateEmpresa()" e-ng-options="ss.id as ss.descricao for ss in AMBIENTE">{{ showAmbiente() }}</a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-2 ">
-                        <div class="form-group">
-                            <label for="exampleInputPassword1" title="As notas enviadas em ambiente de testes não tem validade jurídica e servem para o aprendizado sobre os processos de criação, envio e armazenamento das notas.">Ambiente envio:</label>
-                            <div ng-if="empresa.configuracao.confNFe.ambienteEnvio != null">
-                                <label for="exampleInputPassword1" ng-init="notaFiscal.info.identificacao.ambiente = empresa.configuracao.confNFe.ambienteEnvio">{{empresa.configuracao.confNFe.ambienteEnvio.descricao}}</label>
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="exampleInputPassword1">Anexar XML no e-mail?</label>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <a href="#" editable-checkbox="empresa.configuracao.confNFe.anexarXmlEmail" onaftersave="updateEmpresa()">
+									    {{ empresa.configuracao.confNFe.anexarXmlEmail && "Sim" || "Não" }}
+									</a>
                             </div>
                         </div>
                     </div>
@@ -143,126 +185,121 @@
                         <div class="form-group">
                             <label for="exampleInputPassword1">Tipo Impressão:</label>
                             <label for="exampleInputPassword1" name="email" ng-init="notaFiscal.info.identificacao.serie = empresa.configuracao.confNFe.serieEnvio">{{empresa.configuracao.confNFe.serieEnvio.value}}</label>
-
+                            <a href="#" editable-text="empresa.enderecos[0].cep" onaftersave="updateEmpresa()">{{ empresa.enderecos[0].cep || 'Não Cadastrado' }}</a>
+                            <a href="#" ng-init="notaFiscal.info.identificacao.ambiente = empresa.configuracao.confNFe.ambienteEnvio" editable-select="empresa.configuracao.confNFe.ambienteEnvio.id" onaftersave="updateEmpresa()" e-ng-options="ss.id as ss.descricao for ss in AMBIENTE">{{ showAmbiente() }}</a>
                         </div>
                     </div>
                     <div class="col-sm-2 ">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Tipo Emissão:</label>
                             <label for="exampleInputPassword1" name="texto" ng-init="notaFiscal.info.identificacao.serie = empresa.configuracao.confNFe.serieEnvio">{{empresa.configuracao.confNFe.serieEnvio.value}}</label>
-
+                            <a href="#" ng-init="notaFiscal.info.identificacao.ambiente = empresa.configuracao.confNFe.ambienteEnvio" editable-select="empresa.configuracao.confNFe.ambienteEnvio.id" onaftersave="updateEmpresa()" e-ng-options="ss.id as ss.descricao for ss in AMBIENTE">{{ showAmbiente() }}</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
-        </div>
+    </div>
+</div>
 <nr>
-<div class="panel panel-default" style="background:#EEEEEE">
-                        <div class="panel-body">
-                            <div class="col-sm-12">
-    <div class="row">
-            <div class="col-sm-2 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Número da NFe:</label>
-                    <input type="text" id="nfnumber" class="form-control " ng-model="notaFiscal.info.identificacao.numeronota" name="valorTribCOFINS"  placeholder="">
-                </div>
-            </div>
-            <div class="ng-cloak" ng-controller="CfopSelectController as ctrl">
-                <div class="col-sm-4 ">
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Natureza da operação <small ng-click="ctrl.addCfop()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
-                        <div class="row">
-                            <ui-select ng-model="notaFiscal.info.identificacao.naturezaoperacao" theme="bootstrap">
-                                <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.cfop}}</ui-select-match>
-                                <ui-select-choices repeat="item in ctrl.cfop | filter: $select.search">
-                                  <div ng-bind-html="item.cfop | highlight: $select.search"></div>
-                                  <small ng-bind-html="item.natureza | highlight: $select.search"></small> -
-                                </ui-select-choices>
-                              </ui-select>
+    <div class="panel panel-default" style="background:#EEEEEE">
+        <div class="panel-body">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-2 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Número da NFe:</label>
+                            <input type="text" id="nfnumber" class="form-control " ng-model="notaFiscal.info.identificacao.numeronota" name="valorTribCOFINS" placeholder="">
+                        </div>
+                    </div>
+                    <div class="ng-cloak" ng-controller="CfopSelectController as ctrl">
+                        <div class="col-sm-4 ">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Natureza da operação <small ng-click="ctrl.addCfop()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
+                                <div class="row">
+                                    <ui-select ng-model="notaFiscal.info.identificacao.naturezaoperacao" theme="bootstrap">
+                                        <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.cfop}}</ui-select-match>
+                                        <ui-select-choices repeat="item in ctrl.cfop | filter: $select.search">
+                                            <div ng-bind-html="item.cfop | highlight: $select.search"></div>
+                                            <small ng-bind-html="item.natureza | highlight: $select.search"></small> -
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 ">
+                        <div class="form-group">
+                            <label for="BindFinal"><span>Destinado a consumidor final</span></label>
+                            <toggle ng-model="notaFiscal.info.identificacao.operacaoconsumidorfinal.id" ng-init="financeiro.pagarAgora = '2'" style="android" on="Sim" off="Não" onstyle="btn-default" offstyle="btn-info" ng-true-value="'2'" ng-false-value="'1'"></toggle>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Tipo de operação</label>
+                            <div class="row ">
+                                <ui-select ng-model="notaFiscal.info.identificacao.tipo" theme="bootstrap">
+                                    <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                    <ui-select-choices repeat="item in TIPO | filter: $select.search">
+                                        <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-3 ">
-                <div class="form-group">
-                    <label for="BindFinal"><span>Destinado a consumidor final</span></label>
-                <toggle ng-model="notaFiscal.info.identificacao.operacaoconsumidorfinal.id"
-                                                ng-init="financeiro.pagarAgora = '2'" style="android" on="Sim"
-                                                off="Não" onstyle="btn-default" offstyle="btn-info"
-                                                ng-true-value="'2'" ng-false-value="'1'"></toggle>
 
-                </div>
-            </div>
-            <div class="col-sm-3">
+                <div class="row">
+                    <div class="col-sm-4 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Finalidade da emissão:</label>
+                            <div class="row ">
+                                <ui-select ng-model="notaFiscal.info.identificacao.finalidade" theme="bootstrap">
+                                    <ui-select-match placeholder="">{{$select.selected.descricao}}</ui-select-match>
+                                    <ui-select-choices repeat="item in FINALIDADE | filter: $select.search">
+                                        <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Destino da operação:</label>
+                            <div class="row ">
+                                <ui-select ng-model="notaFiscal.info.identificacao.identificadorlocaldestinooperacao" theme="bootstrap">
+                                    <ui-select-match placeholder="">{{$select.selected.descricao}}</ui-select-match>
+                                    <ui-select-choices repeat="item in IDENTIFICADOR_LOCAL_DESTINO_OPERACAO | filter: $select.search">
+                                        <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Tipo de operação</label>
-                    <div class="row ">
-                        <ui-select ng-model="notaFiscal.info.identificacao.tipo" theme="bootstrap">
-                            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
-                            <ui-select-choices repeat="item in TIPO | filter: $select.search">
-                              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <div class="form-group">
+                            <label for="BindFinal"><span>Possui NF referenciada</span></label>
+                            <div class="row">
+                                <toggle ng-model="notaFiscal.nfReferenciada" ng-init="financeiro.pagarAgora = '1'" style="android" on="Sim" off="Não" onstyle="btn-default" offstyle="btn-info" ng-true-value="'2'" ng-false-value="'1'"></toggle>
 
-                            </ui-select-choices>
-                          </ui-select>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-4 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Finalidade da emissão:</label>
-                    <div class="row ">
-                        <ui-select ng-model="notaFiscal.info.identificacao.finalidade" theme="bootstrap">
-                            <ui-select-match placeholder="">{{$select.selected.descricao}}</ui-select-match>
-                            <ui-select-choices repeat="item in FINALIDADE | filter: $select.search">
-                              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-
-                            </ui-select-choices>
-                        </ui-select>
-                     </div>
-                </div>
-            </div>
-            <div class="col-sm-4 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Destino da operação:</label>
-                    <div class="row ">
-                        <ui-select ng-model="notaFiscal.info.identificacao.identificadorlocaldestinooperacao" theme="bootstrap">
-                            <ui-select-match placeholder="">{{$select.selected.descricao}}</ui-select-match>
-                            <ui-select-choices repeat="item in IDENTIFICADOR_LOCAL_DESTINO_OPERACAO | filter: $select.search">
-                              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-
-                            </ui-select-choices>
-                        </ui-select>
-                     </div>
-                </div>
-            </div>
-            <div class="col-sm-4 ">
-                                <div class="form-group">
-                    <label for="BindFinal"><span>Possui NF referenciada</span></label>
+                <div ng-if="notaFiscal.nfReferenciada == 1">
                     <div class="row">
-                <toggle ng-model="notaFiscal.nfReferenciada"
-                                                ng-init="financeiro.pagarAgora = '1'" style="android" on="Sim"
-                                                off="Não" onstyle="btn-default" offstyle="btn-info"
-                                                ng-true-value="'2'" ng-false-value="'1'"></toggle>
-
-                </div>
-                 </div>
-
-            </div>
-        </div>
-        <div ng-if="notaFiscal.nfReferenciada == 1">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Tipo de nota a ser referenciada</label>
-                        <div class="row ">
-                           <span class="ui-select">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Tipo de nota a ser referenciada</label>
+                                <div class="row ">
+                                    <span class="ui-select">
                                 <select ng-model="notaFiscal.tipoNFeReferenciada">
                                     <option value="1">NF eletrônica</option>
                                     <option value="2">NF impressa</option>
@@ -271,265 +308,271 @@
                                     <option value="5">Cupom Fiscal</option>
                                 </select>
                             </span>
-                         </div>
-                    </div>
-                </div>
-                <div ng-if="notaFiscal.tipoNFeReferenciada == 1">
-                    <div class="col-sm-6 ">
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Chave de acesso da NFe</label>
-                            <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="notaFiscal.tipoNFeReferenciada == 1">
+                            <div class="col-sm-6 ">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Chave de acesso da NFe</label>
+                                    <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm" placeholder="NCM">
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="notaFiscal.tipoNFeReferenciada == 4">
+                            <div class="col-sm-6 ">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Chave de acesso da NFe</label>
+                                    <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm" placeholder="NCM">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div ng-if="notaFiscal.tipoNFeReferenciada == 4">
-                    <div class="col-sm-6 ">
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Chave de acesso da NFe</label>
-                            <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
+                    <div ng-if="notaFiscal.tipoNFeReferenciada == 2">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">UF emitente da nota ref.</label>
+                                    <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm" placeholder="NCM">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Ano e mês da emissão (AAMM)</label>
+                                    <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm" placeholder="NCM">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">CNPJ / CPF do emitente</label>
+                                    <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm" placeholder="NCM">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Série da nota fiscal</label>
+                                    <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm" placeholder="NCM">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Número da nota fiscal</label>
+                                    <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm" placeholder="NCM">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="notaFiscal.tipoNFeReferenciada == 3">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">UF emitente da nota ref.</label>
+                                    <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm" placeholder="NCM">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Ano e mês da emissão (AAMM)</label>
+                                    <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm" placeholder="NCM">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">CNPJ / CPF do emitente</label>
+                                    <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm" placeholder="NCM">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Inscr. Est. do emitente</label>
+                                    <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm" placeholder="NCM">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Modelo da nota fiscal</label>
+                                    <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm" placeholder="NCM">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Série da nota fiscal</label>
+                                    <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm" placeholder="NCM">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Número da nota fiscal</label>
+                                    <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm" placeholder="NCM">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="notaFiscal.tipoNFeReferenciada == 5">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Modelo do Cupom Fiscal</label>
+                                    <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm" placeholder="NCM">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Número sequencial do ECF</label>
+                                    <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm" placeholder="NCM">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Núm. Contador Ordem de Operação - COO</label>
+                                    <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm" placeholder="NCM">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-                <div ng-if="notaFiscal.tipoNFeReferenciada == 2">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">UF emitente da nota ref.</label>
-                                <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Ano e mês da emissão (AAMM)</label>
-                                <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">CNPJ / CPF do emitente</label>
-                                <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Série da nota fiscal</label>
-                                <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Número da nota fiscal</label>
-                                <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div ng-if="notaFiscal.tipoNFeReferenciada == 3">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">UF emitente da nota ref.</label>
-                                <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Ano e mês da emissão (AAMM)</label>
-                                <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">CNPJ / CPF do emitente</label>
-                                <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Inscr. Est. do emitente</label>
-                                <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Modelo da nota fiscal</label>
-                                <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Série da nota fiscal</label>
-                                <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Número da nota fiscal</label>
-                                <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div ng-if="notaFiscal.tipoNFeReferenciada == 5">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Modelo do Cupom Fiscal</label>
-                                <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Número sequencial do ECF</label>
-                                <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Núm. Contador Ordem de Operação - COO</label>
-                                <input type="text" class="form-control  " ng-model="produto.nCM" name="ncm"  placeholder="NCM">
-                            </div>
-                        </div>
-                    </div>
-                </div>
         </div>
-        </div>
-        </div>
-        </div>
-        <div class="panel panel-default" style="background:#EEEEEE">
-                        <div class="panel-body">
-                            <div class="col-sm-12">
-        <div class="row">
+    </div>
+    <div class="panel panel-default" style="background:#EEEEEE">
+        <div class="panel-body">
+            <div class="col-sm-12">
+                <div class="row">
 
-        </div>
+                </div>
 
-        <div class="row">
-            <div class="col-sm-3 " style="margin-top:1%">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Data emissão NF /Hora Emissao</label>
-                <div class="input-group">
-                  <input type="text" class="form-control" ng-model="notaFiscal.info.identificacao.datahoraemissao1" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"   uib-datepicker-popup="{{format}}"/>
-                  <span class="input-group-btn">
+                <div class="row">
+                    <div class="col-sm-3 " style="margin-top:1%">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Data emissão NF /Hora Emissao</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" ng-model="notaFiscal.info.identificacao.datahoraemissao1" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" uib-datepicker-popup="{{format}}" />
+                                <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
                   </span>
-                </div>
-                </div>
-            </div>
-            <div class="col-sm-3 ">
-                <div class="form-group">
-                    <div uib-timepicker ng-model="notaFiscal.info.identificacao.datahoraemissao2" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
-                </div>
-            </div>
-            <div class="col-sm-3 " style="margin-top:1%">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Data saída/entrada:</label>
-                    <div class="input-group">
-                  <input type="text" class="form-control" ng-model="notaFiscal.info.identificacao.datahorasaidaouentrada1" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"   uib-datepicker-popup="{{format}}"/>
-                  <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
-                  </span>
-                </div>
-            </div>
-            </div>
-            <div class="col-sm-3 ">
-                <div class="form-group">
-                    <div uib-timepicker ng-model="notaFiscal.info.identificacao.datahoraemissao2" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-4 ">
-                <div class="ng-cloak" ng-controller="FormaPgSelectControllerss as ctrl">
-                    <div class="col-sm-12 ">
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Forma Pagamento <small ng-click="ctrl.addCfop()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
-                            <div class="row">
-                                <ui-select ng-model="notaFiscal.info.identificacao.formapagamento" theme="bootstrap">
-                                    <ui-select-match placeholder="Formas de Pagamento">{{$select.selected}}</ui-select-match>
-                                    <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
-                                      <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-                                      <small ng-bind-html="item.observacao | highlight: $select.search"></small> -
-                                    </ui-select-choices>
-                                  </ui-select>
                             </div>
                         </div>
                     </div>
+                    <div class="col-sm-3 ">
+                        <div class="form-group">
+                            <div uib-timepicker ng-model="notaFiscal.info.identificacao.datahoraemissao2" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 " style="margin-top:1%">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Data saída/entrada:</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" ng-model="notaFiscal.info.identificacao.datahorasaidaouentrada1" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" uib-datepicker-popup="{{format}}" />
+                                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 ">
+                        <div class="form-group">
+                            <div uib-timepicker ng-model="notaFiscal.info.identificacao.datahoraemissao2" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4 ">
+                        <div class="ng-cloak" ng-controller="FormaPgSelectControllerss as ctrl">
+                            <div class="col-sm-12 ">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Forma Pagamento <small ng-click="ctrl.addCfop()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
+                                    <div class="row">
+                                        <ui-select ng-model="notaFiscal.info.identificacao.formapagamento" theme="bootstrap">
+                                            <ui-select-match placeholder="Formas de Pagamento">{{$select.selected}}</ui-select-match>
+                                            <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
+                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                <small ng-bind-html="item.observacao | highlight: $select.search"></small> -
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Presença do comprador:</label>
+                            <div class="row ">
+                                <ui-select ng-model="notaFiscal.info.identificacao.indicadorpresencacomprador" theme="bootstrap">
+                                    <ui-select-match placeholder="">{{$select.selected.descricao}}</ui-select-match>
+                                    <ui-select-choices repeat="item in INDICADOR_PRESENCA_COMPRADOR | filter: $select.search">
+                                        <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 ">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Ins. Est. Subst. Trib.:</label>
+                            <input type="text" class="form-control " ng-model="tributacao.cofins.valorTribCOFINS" name="valorTribCOFINS" placeholder="Valor unid trib COFINS">
+                        </div>
+                    </div>
+
                 </div>
             </div>
-            <div class="col-sm-4 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Presença do comprador:</label>
-                    <div class="row ">
-                        <ui-select ng-model="notaFiscal.info.identificacao.indicadorpresencacomprador" theme="bootstrap">
-                            <ui-select-match placeholder="">{{$select.selected.descricao}}</ui-select-match>
-                            <ui-select-choices repeat="item in INDICADOR_PRESENCA_COMPRADOR | filter: $select.search">
-                              <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-
-                            </ui-select-choices>
-                        </ui-select>
-                     </div>
-                </div>
-            </div>
-
-            <div class="col-sm-4 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Ins. Est. Subst. Trib.:</label>
-                    <input type="text" class="form-control " ng-model="tributacao.cofins.valorTribCOFINS" name="valorTribCOFINS"  placeholder="Valor unid trib COFINS">
-                </div>
-            </div>
-
         </div>
-</div>
-</div>
-</div>
-
-<div class="panel panel-default" style="background:#EEEEEE">
-                        <div class="panel-body">
-                            <div class="col-sm-12">
-    <div id="quadroReferenciadas" class="invisible bottomSpace NFCeHide" style="display: none;">
-        <h2>Dados da Nota Fiscal referenciada</h2>
-        <div class="alerta">Esta informação será automaticamente impressa nas Informações Complementares, no DANFE.</div>
-        <table>
-            <tbody>
-                <tr>
-                    <td class="boxField" id="meuTipoNotaRef_rcpt"><label for="meuTipoNotaRef"> <span>Tipo de nota a ser referenciada</span></label><select id="meuTipoNotaRef" class="undefined ui-widget-content ui-corner-all" name="meuTipoNotaRef" autocomplete="off"><option value="1">NF eletrônica</option><option value="2">NF impressa</option><option value="3">NF produtor rural</option><option value="4">CTe</option><option value="5">Cupom Fiscal</option></select></td>
-                    <td class="boxField" id="BrefNFe_rcpt"><label for="BrefNFe"> <span>Chave de acesso da NFe</span></label><input type="text" id="BrefNFe" class="requiredField ui-widget-content ui-corner-all" name="BrefNFe" autocomplete="off" especialtype="integer" exactsize="44"></td>
-                    <td class="boxField" id="BrefCTe_rcpt"><label for="BrefCTe"> <span>Chave de acesso do CT-e</span></label><input type="text" id="BrefCTe" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefCTe" autocomplete="off" especialtype="integer" exactsize="44"></td>
-                </tr>
-            </tbody>
-        </table>
-        <table id="quadroRefNF" class="invisible">
-            <tbody>
-                <tr>
-                    <td class="boxField" id="BrefcUF_rcpt"><label for="BrefcUF"> <span>UF emitente da nota ref.</span></label><select id="BrefcUF" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefcUF" autocomplete="off"><option value=""></option><option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option><option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option><option value="MT">MT</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option><option value="PI">PI</option><option value="PR">PR</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RO">RO</option><option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option><option value="SE">SE</option><option value="SP">SP</option><option value="TO">TO</option></select></td>
-                    <td class="boxField" id="BrefAAMM_rcpt"><label for="BrefAAMM"> <span>Ano e mês da emissão (AAMM)</span></label><input type="text" id="BrefAAMM" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefAAMM" autocomplete="off" especialtype="integer" exactsize="4"></td>
-                    <td class="boxField" id="BrefCNPJ_rcpt"><label for="BrefCNPJ"> <span>CNPJ / CPF do emitente</span></label><input type="text" id="BrefCNPJ" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefCNPJ" autocomplete="off" especialtype="cpfcnpj"></td>
-                    <td class="boxField" id="BrefIE_rcpt"><label for="BrefIE"> <span>Inscr. Est. do emitente</span></label><input type="text" id="BrefIE" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefIE" autocomplete="off" especialtype="string" minsize="2" maxsize="14"></td>
-                </tr>
-                <tr>
-                    <td class="boxField" id="Brefmod_rcpt"><label for="Brefmod"> <span>Modelo da nota fiscal</span></label><select id="Brefmod" class="undefined ui-widget-content ui-corner-all requiredField" name="Brefmod" autocomplete="off"><option value="01">NF avulsa</option><option value="04">NF produtor rural</option></select></td>
-                    <td class="boxField" id="Brefserie_rcpt"><label for="Brefserie"> <span>Série da nota fiscal</span></label><input type="text" id="Brefserie" class="undefined ui-widget-content ui-corner-all requiredField" name="Brefserie" autocomplete="off" especialtype="integer" maxsize="3"></td>
-                    <td class="boxField" id="BrefnNF_rcpt"><label for="BrefnNF"> <span>Número da nota fiscal</span></label><input type="text" id="BrefnNF" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefnNF" autocomplete="off" especialtype="integer" maxsize="9"></td>
-                </tr>
-            </tbody>
-        </table>
-        <table id="quadroRefCF" class="invisible">
-            <tbody>
-                <tr>
-                    <td class="boxField" id="BrefCFmod_rcpt"><label for="BrefCFmod"> <span>Modelo do Cupom Fiscal</span></label><select id="BrefCFmod" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefCFmod" autocomplete="off"><option value="2B">Máquina registradora</option><option value="2C">Cupom Fiscal PDV</option><option value="2D">Cupom Fiscal ECF</option></select></td>
-                    <td class="boxField" id="BrefnECF_rcpt"><label for="BrefnECF"> <span>Número sequencial do ECF</span></label><input type="text" id="BrefnECF" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefnECF" autocomplete="off" especialtype="integer" exactsize="3"></td>
-                    <td class="boxField" id="BrefnCOO_rcpt"><label for="BrefnCOO"> <span>Núm. Contador Ordem de Operação - COO</span></label><input type="text" id="BrefnCOO" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefnCOO" autocomplete="off" especialtype="integer" exactsize="6"></td>
-                </tr>
-            </tbody>
-        </table>
     </div>
 
-    </div>
-    </div>
+    <div class="panel panel-default" style="background:#EEEEEE">
+        <div class="panel-body">
+            <div class="col-sm-12">
+                <div id="quadroReferenciadas" class="invisible bottomSpace NFCeHide" style="display: none;">
+                    <h2>Dados da Nota Fiscal referenciada</h2>
+                    <div class="alerta">Esta informação será automaticamente impressa nas Informações Complementares, no DANFE.</div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="boxField" id="meuTipoNotaRef_rcpt"><label for="meuTipoNotaRef"> <span>Tipo de nota a ser referenciada</span></label><select id="meuTipoNotaRef" class="undefined ui-widget-content ui-corner-all" name="meuTipoNotaRef" autocomplete="off"><option value="1">NF eletrônica</option><option value="2">NF impressa</option><option value="3">NF produtor rural</option><option value="4">CTe</option><option value="5">Cupom Fiscal</option></select></td>
+                                <td class="boxField" id="BrefNFe_rcpt"><label for="BrefNFe"> <span>Chave de acesso da NFe</span></label><input type="text" id="BrefNFe" class="requiredField ui-widget-content ui-corner-all" name="BrefNFe" autocomplete="off" especialtype="integer" exactsize="44"></td>
+                                <td class="boxField" id="BrefCTe_rcpt"><label for="BrefCTe"> <span>Chave de acesso do CT-e</span></label><input type="text" id="BrefCTe" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefCTe" autocomplete="off" especialtype="integer"
+                                        exactsize="44"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table id="quadroRefNF" class="invisible">
+                        <tbody>
+                            <tr>
+                                <td class="boxField" id="BrefcUF_rcpt"><label for="BrefcUF"> <span>UF emitente da nota ref.</span></label><select id="BrefcUF" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefcUF" autocomplete="off"><option value=""></option><option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option><option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option><option value="MT">MT</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option><option value="PI">PI</option><option value="PR">PR</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RO">RO</option><option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option><option value="SE">SE</option><option value="SP">SP</option><option value="TO">TO</option></select></td>
+                                <td class="boxField" id="BrefAAMM_rcpt"><label for="BrefAAMM"> <span>Ano e mês da emissão (AAMM)</span></label><input type="text" id="BrefAAMM" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefAAMM" autocomplete="off" especialtype="integer"
+                                        exactsize="4"></td>
+                                <td class="boxField" id="BrefCNPJ_rcpt"><label for="BrefCNPJ"> <span>CNPJ / CPF do emitente</span></label><input type="text" id="BrefCNPJ" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefCNPJ" autocomplete="off" especialtype="cpfcnpj"></td>
+                                <td class="boxField" id="BrefIE_rcpt"><label for="BrefIE"> <span>Inscr. Est. do emitente</span></label><input type="text" id="BrefIE" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefIE" autocomplete="off" especialtype="string" minsize="2"
+                                        maxsize="14"></td>
+                            </tr>
+                            <tr>
+                                <td class="boxField" id="Brefmod_rcpt"><label for="Brefmod"> <span>Modelo da nota fiscal</span></label><select id="Brefmod" class="undefined ui-widget-content ui-corner-all requiredField" name="Brefmod" autocomplete="off"><option value="01">NF avulsa</option><option value="04">NF produtor rural</option></select></td>
+                                <td class="boxField" id="Brefserie_rcpt"><label for="Brefserie"> <span>Série da nota fiscal</span></label><input type="text" id="Brefserie" class="undefined ui-widget-content ui-corner-all requiredField" name="Brefserie" autocomplete="off" especialtype="integer"
+                                        maxsize="3"></td>
+                                <td class="boxField" id="BrefnNF_rcpt"><label for="BrefnNF"> <span>Número da nota fiscal</span></label><input type="text" id="BrefnNF" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefnNF" autocomplete="off" especialtype="integer" maxsize="9"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table id="quadroRefCF" class="invisible">
+                        <tbody>
+                            <tr>
+                                <td class="boxField" id="BrefCFmod_rcpt"><label for="BrefCFmod"> <span>Modelo do Cupom Fiscal</span></label><select id="BrefCFmod" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefCFmod" autocomplete="off"><option value="2B">Máquina registradora</option><option value="2C">Cupom Fiscal PDV</option><option value="2D">Cupom Fiscal ECF</option></select></td>
+                                <td class="boxField" id="BrefnECF_rcpt"><label for="BrefnECF"> <span>Número sequencial do ECF</span></label><input type="text" id="BrefnECF" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefnECF" autocomplete="off" especialtype="integer"
+                                        exactsize="3"></td>
+                                <td class="boxField" id="BrefnCOO_rcpt"><label for="BrefnCOO"> <span>Núm. Contador Ordem de Operação - COO</span></label><input type="text" id="BrefnCOO" class="undefined ui-widget-content ui-corner-all requiredField" name="BrefnCOO" autocomplete="off" especialtype="integer"
+                                        exactsize="6"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
     </div>

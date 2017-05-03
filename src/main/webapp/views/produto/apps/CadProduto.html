@@ -1,123 +1,123 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-                <div class="container1" ng-app ng-init="tabs=4">
-                    <ul class="tabs-nav">
-                        <li><a ng-click="tabs=4" ng-class="{'active' : tabs==4}">Detalhes</a></li>
-                        <li><a ng-click="tabs=5" ng-class="{'active' : tabs==5}">Outras</a></li>
-                        <li><a ng-click="tabs=6" ng-class="{'active' : tabs==6}">Estoque/Custo</a></li>
-                    </ul>
-                    <div class="tabs-container1">
-                        <div class="tab-content1" ng-show="tabs == 4">
-                            <div ng-include="'views/produto/apps/produto.html'"></div>
-                        </div>
-                        <div class="tab-content1" ng-show="tabs == 5">
-                            <div ng-include="'views/produto/apps/produtoOutros.html'"></div>
-                        </div>
-                            <div class="tab-content1" ng-show="tabs == 6">
-                                <div role="tabpanel" class="tab-pane messages" id="messages">
-                                    <div class="panel-group" id="accordion">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".peso">
+<div class="container1" ng-app ng-init="tabs=4">
+    <ul class="tabs-nav">
+        <li><a ng-click="tabs=4" ng-class="{'active' : tabs==4}">Detalhes</a></li>
+        <li><a ng-click="tabs=5" ng-class="{'active' : tabs==5}">Outras</a></li>
+        <li><a ng-click="tabs=6" ng-class="{'active' : tabs==6}">Estoque/Custo</a></li>
+    </ul>
+    <div class="tabs-container1">
+        <div class="tab-content1" ng-show="tabs == 4">
+            <div ng-include="'views/produto/apps/produto.html'"></div>
+        </div>
+        <div class="tab-content1" ng-show="tabs == 5">
+            <div ng-include="'views/produto/apps/produtoOutros.html'"></div>
+        </div>
+        <div class="tab-content1" ng-show="tabs == 6">
+            <div role="tabpanel" class="tab-pane messages" id="messages">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".peso">
                                                     Pesos
                                                     </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseOne" class="panel-collapse collapse in peso">
-                                                <div class="panel-body">
-                                                    <div class="row">
-                                                        <div class="col-sm-4 ">
-                                                            <div class="form-group">
-                                                                <label for="exampleInputPassword1">Peso unitário líquido (kg)</label>
-                                                                <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.pesoliquido" name="pesoLiquido"  placeholder="Peso unitário líquido (kg)">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-4 ">
-                                                            <div class="form-group">
-                                                                <label for="exampleInputPassword1">Peso unitário bruto (kg)</label>
-                                                                <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.pesobruto" name="pesobruto"  placeholder="Peso unitário bruto (kg)">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in peso">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-4 ">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Peso unitário líquido (kg)</label>
+                                            <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.pesoliquido" name="pesoLiquido" placeholder="Peso unitário líquido (kg)">
                                         </div>
                                     </div>
-                                    <div class="panel-group" id="accordion">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".estoque">
+                                    <div class="col-sm-4 ">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Peso unitário bruto (kg)</label>
+                                            <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.pesobruto" name="pesobruto" placeholder="Peso unitário bruto (kg)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".estoque">
                                                     ESTOQUE
                                                     </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseOne" class="panel-collapse collapse in estoque">
-                                                <div class="panel-body">
-                                                    <div class="row">
-                                                        <div class="col-sm-3 ">
-                                                            <div class="form-group">
-                                                                <label for="exampleInputPassword1">Estoque Minimo</label>
-                                                                <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.estoqueList[1].quant"  name="estMinimo"  placeholder="Estoque Minimo">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-3 ">
-                                                            <div class="form-group">
-                                                                <label for="exampleInputPassword1">Estoque Atual</label>
-                                                                <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.estoqueList[0].quant" name="estAtual"  placeholder="Estoque Atual">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-3 ">
-                                                            <div class="form-group">
-                                                                <label for="exampleInputPassword1">Estoque Maximo</label>
-                                                                <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.estoqueList[2].quant" name="estMaximo"  placeholder="Estoque Maximo">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in estoque">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-3 ">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Estoque Minimo</label>
+                                            <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.estoqueList[1].quant" name="estMinimo" placeholder="Estoque Minimo">
                                         </div>
                                     </div>
-                                    <div role="tabpanel" class="tab-pane messages" id="messages">
-                                        <div class="panel-group" id="accordion">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".preco">
+                                    <div class="col-sm-3 ">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Estoque Atual</label>
+                                            <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.estoqueList[0].quant" name="estAtual" placeholder="Estoque Atual">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 ">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Estoque Maximo</label>
+                                            <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.estoqueList[2].quant" name="estMaximo" placeholder="Estoque Maximo">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane messages" id="messages">
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".preco">
                                                         Preços
                                                         </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapseOne" class="panel-collapse collapse in preco">
-                                                    <div class="panel-body">
-                                                        <div class="row">
-                                                            <div class="col-sm-3 ">
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputPassword1">Margem de lucro</label>
-                                                                    <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.margemLucro" name="margemLucro"  placeholder="Margem de lucro">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-3 ">
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputPassword1">Preço de custo</label>
-                                                                    <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.custoList[0].valor" name="precoCusto"  placeholder="Preço de custo">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-3 ">
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputPassword1">Preço de venda</label>
-                                                                    <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.precoList[0].valor" name="precoVenda"  placeholder="modoUso">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in preco">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-3 ">
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Margem de lucro</label>
+                                                <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.margemLucro" name="margemLucro" placeholder="Margem de lucro">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 ">
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Preço de custo</label>
+                                                <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.custoList[0].valor" name="precoCusto" placeholder="Preço de custo">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 ">
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Preço de venda</label>
+                                                <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.precoList[0].valor" name="precoVenda" placeholder="modoUso">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                    </div>
-                    </div>
+    </div>
+</div>

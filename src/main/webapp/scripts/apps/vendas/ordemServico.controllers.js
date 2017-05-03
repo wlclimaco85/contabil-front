@@ -1,200 +1,473 @@
 (function() {
-'use strict';
-angular.module('wdApp.apps.ordemServico', ['datatables'])
-.controller('OrdemServicoController', RowSelect);
+    angular.module('wdApp.apps.ordemServico', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('OrdemServicoController', ordemServicoController);
 
-function RowSelect($compile, $scope, DTOptionsBuilder, DTColumnBuilder) {
-    var vm = this;
-    vm.selected = {};
-    vm.selectAll = false;
-    vm.toggleAll = toggleAll;
-    vm.toggleOne = toggleOne;
-     vm.message = '';
-    vm.edit = edit;
-    vm.delete = deleteRow;
-    vm.dtInstance = {};
-    vm.persons = {};
-    vm.selected = {};
-    vm.selectAll = false;
+    function ordemServicoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory, tableColumnsFactory, tableOptionsFactory, FiltersFactory) {
+        var vm = this;
+        vm.selected = {};
+        vm.selectAll = false;
+        vm.toggleAll = toggleAll;
+        vm.toggleOne = toggleOne;
+        vm.status = status;
+        vm.message = '';
+        vm.edit = edit;
+        vm.delete = deleteRow;
+        vm.dtInstanceOrdemServico = {};
+        vm.persons = {};
 
-    var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
-        'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
+        $scope.ordemServico = {
+            tipoPessoa: 2
+        };
 
+        $scope.toggle = function() {
+            $scope.state = !$scope.state;
+        };
+        var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
+            'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
 
+        function reloadData() {
+            var resetPaging = false;
+            vm.dtInstanceOrdemServico.reloadData(callback, resetPaging);
+        }
 
+        function callback(json) {
+            console.log(json);
+        }
 
-    vm.dtOptions = DTOptionsBuilder.fromSource('ordemServico.json')
-        .withOption('createdRow', function(row, data, dataIndex) {
+        var reloadData = function() {
+
+            var resetPaging = false;
+            vm.dtInstanceOrdemServico.reloadData(callback, resetPaging);
+        }
+
+        $rootScope.reloadDataSit = function(_callback) {
+
+            var resetPaging = false;
+            vm.dtInstanceOrdemServico.reloadData(_callback, resetPaging);
+        }
+
+        function rCallback(nRow, aData) {
+            // console.log('row');
+        }
+
+        function recompile(row, data, dataIndex) {
+            $compile(angular.element(row).contents())($scope);
+        }
+        var fnDataSRC = function(json) {
+            console.log(json)
+            json['recordsTotal'] = json.ordemServicoList.length
+            json['recordsFiltered'] = json.ordemServicoList.length
+            json['draw'] = 1
+            console.log(json)
+            return json.ordemServicoList;
+        }
+
+        Datatablessss.getTable('/vendas/api/ordemServico/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.ordemServico(vm, createdRow, $scope, FiltersFactory.ordemServico(), reloadData), tableColumnsFactory.ordemServico(vm, titleHtml, actionsHtml));
+
+        function edit(person) {
+            $rootScope.ordemServico = person;
+            dialogFactory.dialog('views/vendas/dialog/dOrdemServico.html', "OrdemServicoUpdateController", openDialogUpdateCreate);
+        }
+
+        function deleteRow(person) {
+            $rootScope.ordemServico = person;
+            dialogFactory.dialog('views/vendas/dialog/dOrdemServico.html', "OrdemServicoDeleteController", openDialogUpdateCreate);
+        }
+
+        function createdRow(row, data, dataIndex) {
             // Recompiling so we can bind Angular directive to the DT
             $compile(angular.element(row).contents())($scope);
-        })
-        .withOption('headerCallback', function(header) {
-            if (!vm.headerCompiled) {
-                // Use this headerCompiled field to only compile header once
-                vm.headerCompiled = true;
-                $compile(angular.element(header).contents())($scope);
-            }
-        })
-        .withDOM('<"row tablealign"<"col-xs-6 col-md-4" C> <"col-xs-6  col-md-4" f>>t<\'row\'<\'col-xs-5\'i><\'col-xs-3\'l><\'col-xs-4\'p>>')
-        //.withDOM('frtip')
-        .withPaginationType('full_numbers')
-        .withOption('createdRow', createdRow)
-            //.withDataProp('data')
-            .withOption('serverSide', true)
-            .withOption('processing', true)
-            .withOption('language',{
-                paginate : {            // Set up pagination text
-                    first: "&laquo;",
-                    last: "&raquo;",
-                    next: "&rarr;",
-                    previous: "&larr;"
-                },
-                lengthMenu: "_MENU_ records per page" 
-            })
-        .withButtons([
-    {
-        extend: "pdfHtml5",
-        fileName:  "Data_Analysis",
-        exportOptions: {
-            columns: ':visible'
-        },
-        exportData: {decodeEntities:true}
-    },
-    {
-        extend: "copy",
-        fileName:  "Data_Analysis",
-        title:"Data Analysis Report",
-        exportOptions: {
-            columns: ':visible'
-        },
-        exportData: {decodeEntities:true}
-    },
-    {
-        extend: "print",
-        //text: 'Print current page',
-        autoPrint: false,
-        exportOptions: {
-            columns: ':visible'
         }
-    },
-    {
-        extend: "csvHtml5"
-        
-    }
-]);
 
-    vm.dtColumns = [
-        DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
-            .renderWith(function(data, type, full, meta) {
-                vm.selected[full.id] = false;
-                return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
-            }),
-
-        DTColumnBuilder.newColumn('id').withTitle('ID'),  
-        DTColumnBuilder.newColumn('codigo').withTitle('codigo'),   
-        DTColumnBuilder.newColumn('cliente').withTitle('cliente'),
-        DTColumnBuilder.newColumn('servico').withTitle('servico'),
-        DTColumnBuilder.newColumn('data').withTitle('data'),
-         DTColumnBuilder.newColumn(null).withTitle('executado').notSortable()
-            .renderWith(function(data, type, full, meta) {
-                return '<span> '+ data.executado +' '+data.dataExecucao+' á '+data.finalizado+' </span>';
-            }),
-       // DTColumnBuilder.newColumn('qntProd').withTitle('qntProd'),
-        DTColumnBuilder.newColumn('valor').withTitle('valor'),
-        DTColumnBuilder.newColumn('custo').withTitle('custo'),
-        DTColumnBuilder.newColumn('observacao').withTitle('observacao'),
-        DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
-        DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-        DTColumnBuilder.newColumn('status').withTitle('status'),
-        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml)
-    ];
-
-    function edit(person) {
-        vm.message = 'You are trying to edit the row: ' + JSON.stringify(person);
-        // Edit some data and call server to make changes...
-        // Then reload the data so that DT is refreshed
-        vm.dtInstance.reloadData();
-    }
-    function deleteRow(person) {
-        vm.message = 'You are trying to remove the row: ' + JSON.stringify(person);
-        // Delete some data and call server to make changes...
-        // Then reload the data so that DT is refreshed
-        vm.dtInstance.reloadData();
-    }
-    function createdRow(row, data, dataIndex) {
-        // Recompiling so we can bind Angular directive to the DT
-        $compile(angular.element(row).contents())($scope);
-    }
-    function actionsHtml(data, type, full, meta) {
-        vm.persons[data.id] = data;
-
-
-        return ' <div class="dropdown">'+
-          '<button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">'+
-           ' Açoes'+
-            '<span class="caret"></span>'+
-          '</button>'+
-          '<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">'+
-            '<li><a href="#">Deletar</a></li>'+
-            '<li><a href="javaScript:;" ng-click="showCase.edit(showCase.persons[' + data.id + '])">Alterar</a></li>'+
-            '<li role="separator" class="divider"></li>'+
-            '<li><a href="#">Transformar Em NF-e</a></li>'+
-          '</ul>'+
-        '</div>'
-     /*   return '<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
-            '   <i class="fa fa-edit"></i>' +
-            '</button>&nbsp;' +
-            '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
-            '   <i class="fa fa-trash-o"></i>' +
-            '</button>';*/
-    }
-
-    function toggleAll (selectAll, selectedItems) {
-        for (var id in selectedItems) {
-            if (selectedItems.hasOwnProperty(id)) {
-                selectedItems[id] = selectAll;
-            }
+        function actionsHtml(data, type, full, meta) {
+            vm.persons[data.id] = data;
+            return '<button class="btn btn-info" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
+                '   <i class="glyphicon glyphicon-save"></i>' +
+                '</button> ' +
+                '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
+                '   <i class="fa fa-trash-o"></i>' +
+                '</button>';
         }
-    }
-    function toggleOne (selectedItems) {
-        for (var id in selectedItems) {
-            if (selectedItems.hasOwnProperty(id)) {
-                if(!selectedItems[id]) {
-                    vm.selectAll = false;
-                    return;
+
+        function toggleAll(selectAll, selectedItems) {
+            for (var id in selectedItems) {
+                if (selectedItems.hasOwnProperty(id)) {
+                    selectedItems[id] = selectAll;
                 }
             }
         }
-        vm.selectAll = true;
+
+        $scope.user = {
+            name: 'awesome user'
+        };
+
+        function status() {}
+
+        function toggleOne(selectedItems) {
+            for (var id in selectedItems) {
+                if (selectedItems.hasOwnProperty(id)) {
+                    if (!selectedItems[id]) {
+                        vm.selectAll = false;
+                        return;
+                    }
+                }
+            }
+            vm.selectAll = true;
+        }
+
+        function toggle() {
+            $scope.state = !$scope.state;
+        };
     }
+})();
+(function() {
+    angular.module('wdApp.apps.ordemServico.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('OrdemServicoInsertController', function(localStorageService, $rootScope, $scope, fModels, SysMgmtData, doisValorFactory, fNotaFiscal) {
+            var vm = this;
+
+            $scope.notaFiscalSaida = {
+
+            };
+
+            $scope.cliente = {};
+            $scope.formaPg = {};
+            $scope.endereco = null;
+            $scope.pessoa = {};
 
 
-  $scope.oneAtATime = true;
+            $scope.visibled = false
 
-  $scope.groups = [
-    {
-      title: 'Dynamic Group Header - 1',
-      content: 'Dynamic Group Body - 1'
-    },
-    {
-      title: 'Dynamic Group Header - 2',
-      content: 'Dynamic Group Body - 2'
-    }
-  ];
+            $scope.countrySelected = function(selected) {
 
-  $scope.items = ['Item 1', 'Item 2', 'Item 3'];
+                if (selected) {
 
-  $scope.addItem = function() {
-    var newItemNo = $scope.items.length + 1;
-    $scope.items.push('Item ' + newItemNo);
-  };
+                    $scope.pessoa = selected.originalObject;
+                    $scope.visibled = true;
 
-  $scope.status = {
-    isCustomHeaderOpen: false,
-    isFirstOpen: true,
-    isFirstDisabled: false
-  };
+                    $scope.popovers = {
+                        "html": "<div>Hello Popover<br />This is a multiline message!</div>",
+                        "title": "Informação",
+                        "animation": 'am-flip-x',
+                        "content": " " + $scope.pessoa.nome + " " +
+                            " " + $scope.pessoa.nome + " " +
+                            " " + $scope.pessoa.nome + " " +
+                            " " + $scope.pessoa.nome + " " +
+                            " " + $scope.pessoa.nome + " " +
+                            " " + $scope.pessoa.nome + " "
+                    };
 
-}
+                } else {
+                    console.log('cleared');
+                }
+            };
 
+            SysMgmtData.processPostPageData("main/api/request", {
+                url: "pessoa/api/cliente/fetchPage",
+                token: $rootScope.authToken,
+                request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
+            }, function(res) {
+                //  debugger
+                $scope.cliente = res.clienteList;
+            });
+
+            $scope.notaFiscalSaida = {
+                frete: {
+                    vrFrete: 0
+                },
+                vrDesconto: 0,
+                vrtotal: 0
+            }
+
+            $scope.produtosSelect = "";
+
+            $scope.produto = {};
+
+            $scope.produtos = [{
+                form: 'form',
+                produto: {}
+            }];
+
+
+            $scope.contasReceber = {};
+
+            $scope.financeiros = [{
+                form: 'formFinc',
+                financeiro: {
+                    valor: parseFloat($scope.notaFiscalSaida.vrtotal) / (1)
+                }
+            }];
+
+            $scope.clientes = [];
+
+            $scope.total = 0;
+
+            $scope.calcProd = function(quant, valor) {
+                return quant * valor;
+            }
+
+            $scope.$watch("financeiros", function() {
+                var cout = 0
+                for (var x = 0; x < $scope.financeiros.length; x++) {
+                    cout = parseFloat(cout, 10) + parseFloat($scope.financeiros[x].financeiro.valor)
+                }
+                $scope.total = cout;
+            }, true);
+
+            function teste() {
+                var cout = 0
+                for (var x = 0; x < $scope.produtos.length; x++) {
+                    cout = parseFloat(cout, 10) + parseFloat(($scope.produtos[x].produto.quantidade * $scope.produtos[x].produto.precoList[0].valor) - $scope.produtos[x].produto.desconto)
+                }
+                $scope.totals = cout;
+                $scope.notaFiscalSaida.vrtotal = (cout + parseFloat($scope.notaFiscalSaida.frete.vrFrete)) - parseFloat($scope.notaFiscalSaida.vrDesconto)
+                $scope.financeiros[0].financeiro.valor = (cout + parseFloat($scope.notaFiscalSaida.frete.vrFrete)) - parseFloat($scope.notaFiscalSaida.vrDesconto);
+            }
+
+            $scope.$watch("produtos", function() {
+                teste();
+            }, true);
+
+            $scope.$watch("notaFiscalSaida.frete.vrFrete", function() {
+                teste();
+            }, true);
+
+            $scope.$watch("notaFiscalSaida.vrDesconto", function() {
+                teste();
+            }, true);
+
+            $scope.calcProdTotal = function() {
+                var total = 0
+
+                for (var x = 0; x < $scope.financeiros.length; x++) {
+
+                }
+
+                return total
+
+            }
+
+
+            $scope.createForm2 = function() {
+
+                $scope.produtos.push({
+                    nome: 'form1' + ($scope.produtos.length + 1),
+                    produto: {
+                        quantidade: 0,
+                        desconto: 0
+                    }
+                });
+
+            };
+
+            $scope.createForm3 = function() {
+
+                $scope.financeiros.push({
+                    nome: 'formFinc' + ($scope.financeiros.length + 1),
+                    financeiro: {
+                        valor: 0
+                    }
+                });
+
+                for (var x = 0; x < $scope.financeiros.length; x++) {
+                    $scope.financeiros[x].financeiro.valor = parseFloat($scope.notaFiscalSaida.vrtotal) / (parseFloat($scope.financeiros.length));
+                }
+
+            };
+
+
+            $scope.forms = [{
+                id: 0,
+                produto: "",
+                ddd: 'form1',
+                notaFiscalSaidaItens: {}
+            }];
+            $scope.count = 0;
+
+
+            $scope.changeProd = function(form) {
+                debugger
+                console.log(form);
+
+                for (var x = 0; $scope.produtos.length > x; x++) {
+                    if ($scope.produtos[x].id == form.produto) {
+                        form.quantidade = 100;
+                    }
+                }
+            }
+
+            var fnFunction = function() {
+                debugger
+            }
+            $inputaction = $('#teste')
+            $inputaction.inputaction({
+                confirmAction: fnFunction,
+                model: $scope.cliente,
+                fullData: {},
+                propertyName: 'name'
+            });
+
+
+            doisValorFactory.pedidoVendas($scope);
+
+
+            $scope.deleteForm = function(formScope) {
+
+
+                delete $scope.forms(formScope);
+            }
+
+            $scope.formatterDate = function(iDate) {
+                return $filter('date')(new Date(iDate), 'dd/MM/yyyy');
+            };
+
+            $scope.today = function() {
+                $scope.dt = new Date();
+            };
+            $scope.today();
+
+            $scope.clear = function() {
+                $scope.dt = null;
+            };
+
+            $scope.inlineOptions = {
+                customClass: getDayClass,
+                minDate: new Date(),
+                showWeeks: true
+            };
+
+            $scope.dateOptions = {
+                dateDisabled: disabled,
+                formatYear: 'yy',
+                maxDate: new Date(2020, 5, 22),
+                minDate: new Date(),
+                startingDay: 1
+            };
+
+            // Disable weekend selection
+            function disabled(data) {
+                var date = data.date,
+                    mode = data.mode;
+                return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+            }
+
+            $scope.toggleMin = function() {
+                $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
+                $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+            };
+
+            $scope.toggleMin();
+
+            $scope.open1 = function() {
+
+                $scope.popup1.opened = true;
+            };
+
+            $scope.open2 = function() {
+
+                $scope.popup2.opened = true;
+            };
+
+            $scope.open3 = function() {
+
+                $scope.popup3.opened = true;
+            };
+
+            $scope.setDate = function(year, month, day) {
+                $scope.dt = new Date(year, month, day);
+            };
+
+            $scope.formats = ['dd-MMMM-yyyy', 'dd/MM/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+            $scope.format = $scope.formats[1];
+            $scope.altInputFormats = ['M!/d!/yyyy'];
+
+            $scope.popup1 = {
+                opened: false
+            };
+
+            $scope.popup2 = {
+                opened: false
+            };
+
+            $scope.popup3 = {
+                opened: false
+            };
+
+            var tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            var afterTomorrow = new Date();
+            afterTomorrow.setDate(tomorrow.getDate() + 1);
+            $scope.events = [{
+                date: tomorrow,
+                status: 'full'
+            }, {
+                date: afterTomorrow,
+                status: 'partially'
+            }];
+
+            function getDayClass(data) {
+                var date = data.date,
+                    mode = data.mode;
+                if (mode === 'day') {
+                    var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
+
+                    for (var i = 0; i < $scope.events.length; i++) {
+                        var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
+
+                        if (dayToCheck === currentDay) {
+                            return $scope.events[i].status;
+                        }
+                    }
+                }
+
+                return '';
+            }
+
+
+            $scope.saveOrdemServico = function() {
+
+                fNotaFiscal.fnCreateObjectOrdemServicoOrdemServico(localStorageService.get('empresa'), $scope.pessoa, $scope.endereco, $scope.produtos, $scope.formaPg, $scope.notaFiscalSaida, 1, 'INSERT', 1001, $scope.financeiros);
+            };
+
+
+        });
+})();
+(function() {
+    angular.module('wdApp.apps.ordemServico.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('OrdemServicoUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+            var vm = this;
+            $scope.ordemServico = {};
+            $scope.ordemServico = $rootScope.ordemServico;
+            console.log($rootScope.ordemServico)
+            $scope.saveOrdemServico = function() {
+                fPessoa.fnMontaObjeto($scope.ordemServico, $scope.endereco, 'UPDATE', "site/api/ordemServico/update/", fnCallBack);
+            }
+        });
+})();
+(function() {
+    angular.module('wdApp.apps.ordemServico.delete', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('OrdemServicoDeleteController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+            var vm = this;
+            $scope.ordemServico = {};
+            $scope.ordemServico = $rootScope.ordemServico;
+            console.log($rootScope.ordemServico)
+            $scope.saveOrdemServico = function() {
+                fPessoa.fnDelete($scope.ordemServico, "site/api/ordemServico/update/", function() {
+                    console.log('ddda   aqui')
+                });
+            }
+        });
+})();
+(function() {
+    angular.module('wdApp.apps.ordemServico.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+        .controller('OrdemServicoViewController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+            var vm = this;
+            $scope.ordemServico = {};
+            $scope.ordemServico = $rootScope.ordemServico;
+            console.log($rootScope.ordemServico)
+            $scope.saveOrdemServico = function() {
+                fPessoa.fnOpenView($scope.ordemServico, "site/api/ordemServico/update/", function() {
+                    console.log('aqui')
+                });
+            }
+        });
 })();
