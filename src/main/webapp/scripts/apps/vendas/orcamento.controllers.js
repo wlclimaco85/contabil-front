@@ -62,7 +62,7 @@
             return json.nfnotaList;
         }
 
-        Datatablessss.getTable('/vendas/api/orcamento/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.orcamento(vm, createdRow, $scope, FiltersFactory.orcamento(), reloadData), tableColumnsFactory.orcamento(vm, titleHtml, actionsHtml));
+        Datatablessss.getTable('/vendas/api/nfSaidas/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.orcamento(vm, createdRow, $scope, FiltersFactory.orcamento(), reloadData), tableColumnsFactory.orcamento(vm, titleHtml, actionsHtml));
 
         function edit(person) {
             $rootScope.orcamento = person;

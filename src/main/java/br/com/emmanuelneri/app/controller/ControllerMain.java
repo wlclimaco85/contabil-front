@@ -78,7 +78,8 @@ public class ControllerMain {
 
 //	private static final String URL = "http://prod001.mybluemix.net/";
 	//private static final String URL = "http://prod00001.mybluemix.net/qat-sysmgmt-controller-rest/";
-	private static final String URL = "http://localhost:8080/qat-sysmgmt-controller-rest/";
+    private static final String URL = "https://back.eu-gb.mybluemix.net/";
+	//private static final String URL = "http://localhost:8080/qat-sysmgmt-controller-rest/";
 	//private CEPService buscaCEP;
 
 	private FileManager fileManager = new FileManager();
