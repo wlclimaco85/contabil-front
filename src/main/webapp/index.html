@@ -2,20 +2,23 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-<head>
-  <meta charset="utf-8"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>E-Contábil</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
-  <link rel="icon" type="image/png" href="favicon.png">
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
 
-  <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/font-awesome-animation/dist/font-awesome-animation.min.css">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>E-Contábil</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/font-awesome-animation/dist/font-awesome-animation.min.css">
     <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="thirdparty/jquery-ui-1.12.0/jquery-ui.min.css">
-<!--
+    <!--
   <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/bootstrap/dist/css/bootstrap.min.css">
    Bootstrap Css
     <link href="views/template-assets/bootstrap-assets/css/bootstrap.min.css" rel="stylesheet">
@@ -39,8 +42,8 @@
     <link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload.css">
     <link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload-ui.css">
 
-    <link rel="stylesheet" href="dist/css/formValidation.css"/>
-    <link rel="stylesheet" href="dist/css/select2.css"/>
+    <link rel="stylesheet" href="dist/css/formValidation.css" />
+    <link rel="stylesheet" href="dist/css/select2.css" />
     <link rel="stylesheet" href="thirdparty/aaPrincipal/css/select2_3_4_8.css">
     <link href="thirdparty/twitter-bootstrap-wizard-master/prettify.css" rel="stylesheet">
     <link href="thirdparty/twitter-bootstrap-wizard-master/prettify.css" rel="stylesheet">
@@ -48,365 +51,408 @@
     <link href="thirdparty/bootstrap-fileinput-master/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
 
     <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="thirdparty/aaPrincipal/css/Bootstrap_v3_3_6.css">
+    <link rel="stylesheet" href="thirdparty/aaPrincipal/css/Bootstrap_v3_3_6.css">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="thirdparty/aaPrincipal/css/bootstrap-theme.min.css">
-<link href="views/template-assets/css/main.css" rel="stylesheet">
-        <style type="text/css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="thirdparty/aaPrincipal/css/bootstrap-theme.min.css">
+    <link href="views/template-assets/css/main.css" rel="stylesheet">
+    <style type="text/css">
+        .ui-radio {
+            position: relative;
+            margin: 0 20px 10px 20px;
+            font-size: 14px;
+            line-height: 20px;
+            height: 20px;
+        }
 
-  .ui-radio {
-  position: relative;
-  margin: 0 20px 10px 20px;
-  font-size: 14px;
-  line-height: 20px;
-  height: 20px;
-}
-.ui-radio:hover {
-  cursor: pointer;
-}
-.ui-radio input[type="radio"] {
-  display: none;
-}
-.ui-radio input[type="radio"] + span {
-  padding-left: 10px;
-  font-weight: normal;
-}
-.ui-radio input[type="radio"] + span:before {
-  content: "";
-  width: 20px;
-  height: 20px;
-  display: inline-block;
-  vertical-align: middle;
-  position: absolute;
-  left: -20px;
-  top: 0;
-  background: white;
-  border-radius: 50%;
-  border: 1px solid #ccc;
-}
-.ui-radio input[type="radio"]:disabled + span:before {
-  opacity: .65;
-  border: 1px solid #ccc;
-  cursor: no-drop;
-}
-.ui-radio input[type="radio"]:checked + span:after {
-  content: "";
-  width: 8px;
-  height: 8px;
-  position: absolute;
-  top: 6px;
-  left: -14px;
-  background-color: #00475b;
-  border-radius: 50%;
-  display: block;
-}
-.ui-radio input[type="radio"]:disabled:checked + span:after {
-  opacity: .65;
-  cursor: no-drop;
-  background-color: #ccc;
-}
-.ui-checkbox {
-  position: relative;
-  margin: 0 20px 10px 20px;
-}
-.ui-checkbox:hover {
-  cursor: pointer;
-}
-.ui-checkbox input[type="checkbox"] {
-  display: none;
-}
-.ui-checkbox input[type="checkbox"] + span {
-  font-weight: normal;
-}
-.ui-checkbox input[type="checkbox"] + span:before {
-  content: "";
-  width: 18px;
-  height: 18px;
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 10px;
-  margin-left: -20px;
-  background-color: transparent;
-  border-radius: 2px;
-  border: 1px solid #ccc;
-}
-.ui-checkbox input[type="checkbox"]:disabled + span:before {
-  opacity: .65;
-  border: 1px solid #ccc;
-  cursor: no-drop;
-}
-.ui-checkbox input[type="checkbox"]:checked + span:before {
-  background-color: #00475b;
-  border: 1px solid #00475b;
-}
-.ui-checkbox input[type="checkbox"]:checked + span:after {
-  content: "";
-  width: 8px;
-  height: 8px;
-  position: absolute;
-  top: 7px;
-  left: -15px;
-  background: url("../images/checkmark.png") no-repeat center center;
-  background-size: 14px 14px;
-  display: block;
-}
-.ui-checkbox input[type="checkbox"]:disabled:checked + span:before {
-  opacity: .65;
-  background-color: #ccc;
-  border: 1px solid #ccc;
-}
-.ui-checkbox input[type="checkbox"]:disabled:checked + span:after {
-  opacity: .65;
-  cursor: no-drop;
-  background: url("../images/checkmark.png") no-repeat center center;
-}
+        .ui-radio:hover {
+            cursor: pointer;
+        }
 
-.mbr-plan__header {
-    background: #444 none repeat scroll 0 0;
-    color: #fff;
-    overflow: hidden;
-    padding: 20px 15px;
-}
-.mbr-plan__box {
-    background: #fff none repeat scroll 0 0;
-}
-.mbr-number {
-    display: inline-block;
-    margin-top: -0.12em;
-}
-.mbr-plan__details {
-    padding-bottom: 41px;
-}
-.mbr-plan__buttons {
-    overflow: hidden;
-    padding: 0 15px 41px;
-}
-.mbr-plan {
-    padding-bottom: 41px;
-    padding-left: 1px;
-    padding-right: 0;
-    position: relative;
-}
-.mbr-number__caption {
-    display: block;
-    font-size: 0.19em;
-    line-height: 1em;
-    opacity: 0.5;
-    padding-top: 0.5em;
-    text-align: center;
-}
-.mbr-plan__number {
-    color: #333;
-    font-size: 20px;
-    line-height: 0;
-    text-align: center;
-}
-.mbr-number__group {
-    display: table-cell;
-    font-weight: bold;
-    position: relative;
-    vertical-align: middle;
-}
-.navbar-default {
-    background-color: #000000;
-}
+        .ui-radio input[type="radio"] {
+            display: none;
+        }
+
+        .ui-radio input[type="radio"]+span {
+            padding-left: 10px;
+            font-weight: normal;
+        }
+
+        .ui-radio input[type="radio"]+span:before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            vertical-align: middle;
+            position: absolute;
+            left: -20px;
+            top: 0;
+            background: white;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+        }
+
+        .ui-radio input[type="radio"]:disabled+span:before {
+            opacity: .65;
+            border: 1px solid #ccc;
+            cursor: no-drop;
+        }
+
+        .ui-radio input[type="radio"]:checked+span:after {
+            content: "";
+            width: 8px;
+            height: 8px;
+            position: absolute;
+            top: 6px;
+            left: -14px;
+            background-color: #00475b;
+            border-radius: 50%;
+            display: block;
+        }
+
+        .ui-radio input[type="radio"]:disabled:checked+span:after {
+            opacity: .65;
+            cursor: no-drop;
+            background-color: #ccc;
+        }
+
+        .ui-checkbox {
+            position: relative;
+            margin: 0 20px 10px 20px;
+        }
+
+        .ui-checkbox:hover {
+            cursor: pointer;
+        }
+
+        .ui-checkbox input[type="checkbox"] {
+            display: none;
+        }
+
+        .ui-checkbox input[type="checkbox"]+span {
+            font-weight: normal;
+        }
+
+        .ui-checkbox input[type="checkbox"]+span:before {
+            content: "";
+            width: 18px;
+            height: 18px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+            margin-left: -20px;
+            background-color: transparent;
+            border-radius: 2px;
+            border: 1px solid #ccc;
+        }
+
+        .ui-checkbox input[type="checkbox"]:disabled+span:before {
+            opacity: .65;
+            border: 1px solid #ccc;
+            cursor: no-drop;
+        }
+
+        .ui-checkbox input[type="checkbox"]:checked+span:before {
+            background-color: #00475b;
+            border: 1px solid #00475b;
+        }
+
+        .ui-checkbox input[type="checkbox"]:checked+span:after {
+            content: "";
+            width: 8px;
+            height: 8px;
+            position: absolute;
+            top: 7px;
+            left: -15px;
+            background: url("../images/checkmark.png") no-repeat center center;
+            background-size: 14px 14px;
+            display: block;
+        }
+
+        .ui-checkbox input[type="checkbox"]:disabled:checked+span:before {
+            opacity: .65;
+            background-color: #ccc;
+            border: 1px solid #ccc;
+        }
+
+        .ui-checkbox input[type="checkbox"]:disabled:checked+span:after {
+            opacity: .65;
+            cursor: no-drop;
+            background: url("../images/checkmark.png") no-repeat center center;
+        }
+
+        .mbr-plan__header {
+            background: #444 none repeat scroll 0 0;
+            color: #fff;
+            overflow: hidden;
+            padding: 20px 15px;
+        }
+
+        .mbr-plan__box {
+            background: #fff none repeat scroll 0 0;
+        }
+
+        .mbr-number {
+            display: inline-block;
+            margin-top: -0.12em;
+        }
+
+        .mbr-plan__details {
+            padding-bottom: 41px;
+        }
+
+        .mbr-plan__buttons {
+            overflow: hidden;
+            padding: 0 15px 41px;
+        }
+
+        .mbr-plan {
+            padding-bottom: 41px;
+            padding-left: 1px;
+            padding-right: 0;
+            position: relative;
+        }
+
+        .mbr-number__caption {
+            display: block;
+            font-size: 0.19em;
+            line-height: 1em;
+            opacity: 0.5;
+            padding-top: 0.5em;
+            text-align: center;
+        }
+
+        .mbr-plan__number {
+            color: #333;
+            font-size: 20px;
+            line-height: 0;
+            text-align: center;
+        }
+
+        .mbr-number__group {
+            display: table-cell;
+            font-weight: bold;
+            position: relative;
+            vertical-align: middle;
+        }
+
+        .navbar-default {
+            background-color: #000000;
+        }
+
+        .mbr-plan {
+            padding-bottom: 41px;
+            padding-left: 1px;
+            padding-right: 0;
+            position: relative;
+        }
+
+        .mbr-plan--first,
+        .mbr-plan:first-child {
+            padding-left: 0;
+        }
+
+        .mbr-plan--last,
+        .mbr-plan:last-child {
+            padding-bottom: 93px;
+        }
+
+        .mbr-plan__box {
+            background: #fff;
+        }
+
+        .mbr-plan__header {
+            background: #444;
+            overflow: hidden;
+            padding: 20px 15px;
+            color: #fff;
+        }
+
+        .mbr-plan__number {
+            border-bottom: 1px dotted #ddd;
+            color: #333;
+            font-size: 50px;
+            line-height: 0;
+            margin: 0px 10px;
+            padding: 41px 0;
+            text-align: center;
+            margin-bottom: 41px;
+        }
+
+        .mbr-plan__details {
+            padding-bottom: 41px;
+        }
+
+        .mbr-plan__details ul,
+        .mbr-plan__list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .mbr-plan__details li,
+        .mbr-plan__item {
+            line-height: 40px;
+            padding: 0 15px;
+            text-align: center;
+        }
+
+        .mbr-plan__buttons {
+            overflow: hidden;
+            padding: 0 15px 41px;
+        }
+
+        .mbr-plan--favorite {
+            margin-right: -1px;
+            margin-top: -30px;
+            padding-left: 0;
+            top: 15px;
+            z-index: 5;
+        }
+
+        .mbr-plan--favorite .mbr-plan__number:before {
+            content: "";
+            display: block;
+            height: 15px;
+        }
+
+        .mbr-plan--favorite .mbr-plan__box {
+            padding-bottom: 15px;
+            box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .mbr-plan--primary .mbr-plan__header {
+            background: #4c6972;
+        }
+
+        .mbr-plan--success .mbr-plan__header {
+            background: #7ac673;
+        }
+
+        .mbr-plan--info .mbr-plan__header {
+            background: #27aae0;
+        }
+
+        .mbr-plan--warning .mbr-plan__header {
+            background: #faaf40;
+        }
+
+        .mbr-plan--danger .mbr-plan__header {
+            background: #f97352;
+        }
+
+        @media (max-width: 767px) {
+            .mbr-plan,
+            .mbr-plan--first,
+            .mbr-plan:first-child {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            .mbr-plan__number {
+                font-size: 79px;
+            }
+            .mbr-plan__details {
+                font-size: 17px;
+            }
+            .mbr-plan--favorite {
+                margin: 0;
+                top: 0;
+            }
+        }
+
+        .mbr-number {
+            display: inline-block;
+            margin-top: -0.12em;
+        }
+
+        .mbr-number__num {
+            display: inline-table;
+            height: 1em;
+        }
+
+        .mbr-number__group {
+            display: table-cell;
+            font-weight: bold;
+            position: relative;
+            vertical-align: middle;
+        }
+
+        .mbr-number__left {
+            display: none;
+            font-size: 0.34em;
+            line-height: 0;
+            padding: 0px 5px;
+            vertical-align: super;
+        }
+
+        .mbr-number__right {
+            display: none;
+            font-size: 0.25em;
+            padding: 0px 5px;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        .mbr-number__caption {
+            display: block;
+            font-size: 0.19em;
+            line-height: 1em;
+            opacity: 0.5;
+            padding-top: 0.5em;
+            text-align: center;
+        }
+
+        .mbr-number--price .mbr-number__value {
+            padding-right: 0.28em;
+        }
+
+        .mbr-number--price .mbr-number__left {
+            display: inline;
+        }
+
+        .mbr-number--short-price .mbr-number__left,
+        .mbr-number--short-price .mbr-number__right {
+            display: inline;
+        }
+
+        .mbr-number--short-price .mbr-number__caption {
+            display: none;
+        }
+
+        .mbr-number--inverse-price .mbr-number__group {
+            top: 0.1em;
+        }
+
+        .mbr-number--inverse-price .mbr-number__left {
+            display: none;
+        }
+
+        .mbr-number--inverse-price .mbr-number__value {
+            padding-left: 0.28em;
+        }
+
+        .mbr-number--inverse-price .mbr-number__right {
+            display: inline;
+        }
+    </style>
 
 
 
 
-
-.mbr-plan {
-  padding-bottom: 41px;
-  padding-left: 1px;
-  padding-right: 0;
-  position: relative;
-}
-.mbr-plan--first,
-.mbr-plan:first-child {
-  padding-left: 0;
-}
-.mbr-plan--last,
-.mbr-plan:last-child {
-  padding-bottom: 93px;
-}
-.mbr-plan__box {
-  background: #fff;
-}
-.mbr-plan__header {
-  background: #444;
-  overflow: hidden;
-  padding: 20px 15px;
-  color: #fff;
-}
-.mbr-plan__number {
-  border-bottom: 1px dotted #ddd;
-  color: #333;
-  font-size: 50px;
-  line-height: 0;
-  margin: 0px 10px;
-  padding: 41px 0;
-  text-align: center;
-  margin-bottom: 41px;
-}
-.mbr-plan__details {
-  padding-bottom: 41px;
-}
-.mbr-plan__details ul,
-.mbr-plan__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.mbr-plan__details li,
-.mbr-plan__item {
-  line-height: 40px;
-  padding: 0 15px;
-  text-align: center;
-}
-.mbr-plan__buttons {
-  overflow: hidden;
-  padding: 0 15px 41px;
-}
-.mbr-plan--favorite {
-  margin-right: -1px;
-  margin-top: -30px;
-  padding-left: 0;
-  top: 15px;
-  z-index: 5;
-}
-.mbr-plan--favorite .mbr-plan__number:before {
-  content: "";
-  display: block;
-  height: 15px;
-}
-.mbr-plan--favorite .mbr-plan__box {
-  padding-bottom: 15px;
-  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.1);
-}
-.mbr-plan--primary .mbr-plan__header {
-  background: #4c6972;
-}
-.mbr-plan--success .mbr-plan__header {
-  background: #7ac673;
-}
-.mbr-plan--info .mbr-plan__header {
-  background: #27aae0;
-}
-.mbr-plan--warning .mbr-plan__header {
-  background: #faaf40;
-}
-.mbr-plan--danger .mbr-plan__header {
-  background: #f97352;
-}
-@media (max-width: 767px) {
-  .mbr-plan,
-  .mbr-plan--first,
-  .mbr-plan:first-child {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-  .mbr-plan__number {
-    font-size: 79px;
-  }
-  .mbr-plan__details {
-    font-size: 17px;
-  }
-  .mbr-plan--favorite {
-    margin: 0;
-    top: 0;
-  }
-}
-.mbr-number {
-  display: inline-block;
-  margin-top: -0.12em;
-}
-.mbr-number__num {
-  display: inline-table;
-  height: 1em;
-}
-.mbr-number__group {
-  display: table-cell;
-  font-weight: bold;
-  position: relative;
-  vertical-align: middle;
-}
-.mbr-number__left {
-  display: none;
-  font-size: 0.34em;
-  line-height: 0;
-  padding: 0px 5px;
-  vertical-align: super;
-}
-.mbr-number__right {
-  display: none;
-  font-size: 0.25em;
-  padding: 0px 5px;
-  vertical-align: middle;
-  white-space: nowrap;
-}
-.mbr-number__caption {
-  display: block;
-  font-size: 0.19em;
-  line-height: 1em;
-  opacity: 0.5;
-  padding-top: 0.5em;
-  text-align: center;
-}
-.mbr-number--price .mbr-number__value {
-  padding-right: 0.28em;
-}
-.mbr-number--price .mbr-number__left {
-  display: inline;
-}
-.mbr-number--short-price .mbr-number__left,
-.mbr-number--short-price .mbr-number__right {
-  display: inline;
-}
-.mbr-number--short-price .mbr-number__caption {
-  display: none;
-}
-.mbr-number--inverse-price .mbr-number__group {
-  top: 0.1em;
-}
-.mbr-number--inverse-price .mbr-number__left {
-  display: none;
-}
-.mbr-number--inverse-price .mbr-number__value {
-  padding-left: 0.28em;
-}
-.mbr-number--inverse-price .mbr-number__right {
-  display: inline;
-}
-
-
-
-
-
-
-
-
-
-
-        </style>
-
-
-
-
-    </head>
-  <div class="loader" ng-hide="initialized">
+</head>
+<div class="loader" ng-hide="initialized">
     Carregando...
-  </div>
+</div>
 
 
-          <body ng-app="wdApp" ng-controller="PrincipalController as cc">
+<body ng-app="wdApp" ng-controller="PrincipalController as cc">
     <!-- Preloader
     ============================================= -->
 
     <!-- Header
     ============================================= -->
 
-        <section class="main-header">
+    <section class="main-header">
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -443,10 +489,7 @@
             <div class="item" style="background-image: url(views/template-assets/img/sliders/Slide2.jpg)">
                 <div class="caption">
                     <h6>O SISTEMA DE GESTÃO FÁCIL E ONLINE</h6>
-                    <h1>Financeiro,
-Vendas,
-Nota Fiscal Eletrônica,
-Controle de Estoque</h1>
+                    <h1>Financeiro, Vendas, Nota Fiscal Eletrônica, Controle de Estoque</h1>
                     <a class="btn btn-transparent" href="#">Learn More</a><a class="btn btn-light" href="#">Experimente <span>Grátis</span></a>
                 </div>
             </div>
@@ -503,32 +546,34 @@ Controle de Estoque</h1>
 
                     </div>
                 </div>
-                    <div class="row wow fadeInUp" data-wow-delay=".6s">
-                        <div class="col-md-4">
-                            <div class="media-left"><span class="icon-adjustments"></span></div>
-                            <div class="media-body">
-                                <h3>Entenda onde está seu dinheiro</h3>
-                                <p>Concilie seus lançamentos financeiros e saiba exatamente pra onde foi e de onde vem o seu dinheiro. A conciliação apresenta uma sugestão entre os lançamentos vindos do banco e os cadastrados no E-Contábil e ainda permite opções como cadastrar um novo lançamento ou adicionar uma transferência.</p>
-                            </div>
-
+                <div class="row wow fadeInUp" data-wow-delay=".6s">
+                    <div class="col-md-4">
+                        <div class="media-left"><span class="icon-adjustments"></span></div>
+                        <div class="media-body">
+                            <h3>Entenda onde está seu dinheiro</h3>
+                            <p>Concilie seus lançamentos financeiros e saiba exatamente pra onde foi e de onde vem o seu dinheiro. A conciliação apresenta uma sugestão entre os lançamentos vindos do banco e os cadastrados no E-Contábil e ainda permite opções
+                                como cadastrar um novo lançamento ou adicionar uma transferência.</p>
                         </div>
-                        <div class="col-md-4">
-                            <div class="media-left"><span class="icon-tools"></span></div>
-                            <div class="media-body">
-                                <h3>Comece seu dia com as informações essenciais</h3>
-                                <p>A Visão Geral traz dados importantes como vendas, fluxo de caixa diário e saldos bancários. Nessa tela você organiza o que é prioridade, ou seja, pode ordenar as informações como quiser.</p>
-                            </div>
 
-                        </div>
-                        <div class="col-md-4">
-                            <div class="media-left"><span class="icon-wallet"></span></div>
-                            <div class="media-body">
-                                <h3>Emissão de nota fiscal eletrônica integrada</h3>
-                                <p>Com o emissor de nota fiscal online do E-Contábil você economiza tempo e trabalho, pois nosso sistema de emissão de NF-e é totalmente integrado com o processo de vendas. Você nunca mais vai precisar informar duas vezes os dados de um pedido. Envie notas fiscais eletrônicas e Danfe (documento auxiliar de nota fiscal eletrônica) para seus clientes por e-mail.</p>
-                            </div>
-
-                        </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="media-left"><span class="icon-tools"></span></div>
+                        <div class="media-body">
+                            <h3>Comece seu dia com as informações essenciais</h3>
+                            <p>A Visão Geral traz dados importantes como vendas, fluxo de caixa diário e saldos bancários. Nessa tela você organiza o que é prioridade, ou seja, pode ordenar as informações como quiser.</p>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="media-left"><span class="icon-wallet"></span></div>
+                        <div class="media-body">
+                            <h3>Emissão de nota fiscal eletrônica integrada</h3>
+                            <p>Com o emissor de nota fiscal online do E-Contábil você economiza tempo e trabalho, pois nosso sistema de emissão de NF-e é totalmente integrado com o processo de vendas. Você nunca mais vai precisar informar duas vezes os dados
+                                de um pedido. Envie notas fiscais eletrônicas e Danfe (documento auxiliar de nota fiscal eletrônica) para seus clientes por e-mail.</p>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -540,53 +585,53 @@ Controle de Estoque</h1>
             <h2>Venha ser nosso parceiro</h2>
             <hr class="sep">
             <p>Se indicar para mais de 10 empresa o sistema e gratis </p>
-            <p>•    Folha de Pagamento •    SPPED; •    Sintegra; •    NF-e; •    Dap; •    Controle de estoque;</p>
+            <p>• Folha de Pagamento • SPPED; • Sintegra; • NF-e; • Dap; • Controle de estoque;</p>
             <div class="row">
 
- <div class="center">
-                <h2>Tabelas de Preço</h2>
-            </div>
-            <div class="pricing-area text-center">
-                <div class="row">
-                    <div ng-repeat="plano in cc.site.planoList">
+                <div class="center">
+                    <h2>Tabelas de Preço</h2>
+                </div>
+                <div class="pricing-area text-center">
+                    <div class="row">
+                        <div ng-repeat="plano in cc.site.planoList">
 
-                    <div ng-if="cc.functionTest($index + 1) =='0'">
-                          <div class="row">
-                          <div class="col-sm-4 plan price-one wow fadeInDown">
-                              <ul>
-                                  <li class="heading-one" style="background: #000000">
-                                      <h1>{{plano.titulo}}</h1>
-                                      <span>R$ {{plano.precoList[0].valor}}</span>
-                                  </li>
-                                  <div ng-repeat="itens in plano.itensList">
-                                  <li>{{itens.value}}</li>
-                                  </div>
-                                  <li class="plan-action">
-                                      <a href="" class="btn btn-primary">Assinar</a>
-                                  </li>
-                              </ul>
-                          </div>
-                          </div>
-                          </div>
-                          <div ng-if="cc.functionTest($index + 1) !='0'">
-                    <div class="col-sm-4 plan price-one wow fadeInDown">
-                        <ul>
-                            <li class="heading-one">
-                                <h1>{{plano.titulo}}</h1>
-                                <span>R$ {{plano.precoList[0].valor}}</span>
-                            </li>
-                            <div ng-repeat="itens in plano.itensList">
-                            <li>{{itens.value}}</li>
+                            <div ng-if="cc.functionTest($index + 1) =='0'">
+                                <div class="row">
+                                    <div class="col-sm-4 plan price-one wow fadeInDown">
+                                        <ul>
+                                            <li class="heading-one" style="background: #000000">
+                                                <h1>{{plano.titulo}}</h1>
+                                                <span>R$ {{plano.precoList[0].valor}}</span>
+                                            </li>
+                                            <div ng-repeat="itens in plano.itensList">
+                                                <li>{{itens.value}}</li>
+                                            </div>
+                                            <li class="plan-action">
+                                                <a href="" class="btn btn-primary">Assinar</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                            <li class="plan-action">
-                                <a href="" class="btn btn-primary">Assinar</a>
-                            </li>
-                        </ul>
-                    </div>
+                            <div ng-if="cc.functionTest($index + 1) !='0'">
+                                <div class="col-sm-4 plan price-one wow fadeInDown">
+                                    <ul>
+                                        <li class="heading-one">
+                                            <h1>{{plano.titulo}}</h1>
+                                            <span>R$ {{plano.precoList[0].valor}}</span>
+                                        </li>
+                                        <div ng-repeat="itens in plano.itensList">
+                                            <li>{{itens.value}}</li>
+                                        </div>
+                                        <li class="plan-action">
+                                            <a href="" class="btn btn-primary">Assinar</a>
+                                        </li>
+                                    </ul>
+                                </div>
 
-                  </div>
-                  </div>
-<!--
+                            </div>
+                        </div>
+                        <!--
                     <div class="col-sm-4 plan price-two wow fadeInDown">
                         <ul>
                             <li class="heading-two">
@@ -684,11 +729,12 @@ Controle de Estoque</h1>
                     </div>
 
                 </div> -->
-            </div><!--/pricing-area -->
+                    </div>
+                    <!--/pricing-area -->
+
+                </div>
 
             </div>
-
-        </div>
         </div>
     </section>
     <!-- Work Process
@@ -774,8 +820,8 @@ Controle de Estoque</h1>
     </section>
 
 
-        <section style="margin-top : 100px" id="wizard" style="background-color : #000000" ng-controller="NewEmpresaInsertController" >
-        <div class='container' >
+    <section style="margin-top : 100px" id="wizard" style="background-color : #000000" ng-controller="NewEmpresaInsertController">
+        <div class='container'>
             <div id="rootwizard" class="agilContabil">
                 <div class="navbar">
                     <div class="navbar-inner">
@@ -913,13 +959,14 @@ Controle de Estoque</h1>
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane tab4 col-sm-12" id="tab4"> <!-- data-ng-controller="SiteController as cc"> -->
+                        <div class="tab-pane tab4 col-sm-12" id="tab4">
+                            <!-- data-ng-controller="SiteController as cc"> -->
                             <div class="col-sm-8">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href=".collapseThree">1 - Planos</a>
-                                    </h4>
+                                            <a data-toggle="collapse" data-parent="#accordion" href=".collapseThree">1 - Planos</a>
+                                        </h4>
                                     </div>
 
                                     <div id="collapseThree" class="panel-collapse collapse collapseThree">
@@ -966,7 +1013,7 @@ Controle de Estoque</h1>
                                         </div>
                                     </div>
                                 </div>
-                            <!--    <div class="panel panel-default">
+                                <!--    <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href=".collapseFour">2 - Serviços</a>
@@ -1046,12 +1093,12 @@ Controle de Estoque</h1>
                             </div>
                         </div>
                         <div class="tab-pane tab5" id="tab5" style="height:500px;">
-                          <div id="Layer1" style="overflow:auto;height:400px;left:10px; top:20px;">
-                            <div ng-include="'views/empresa/apps/contrato.html'"></div>
+                            <div id="Layer1" style="overflow:auto;height:400px;left:10px; top:20px;">
+                                <div ng-include="'views/empresa/apps/contrato.html'"></div>
 
                             </div>
                             <div>
-                            <button class="btn btn-primary" ng-click="cc.generatePDF()"><i class="fa fa-save"></i> Save as PDF</button>
+                                <button class="btn btn-primary" ng-click="cc.generatePDF()"><i class="fa fa-save"></i> Save as PDF</button>
                             </div>
                             <!--
 
@@ -1084,9 +1131,9 @@ Controle de Estoque</h1>
 
             </div>
 
- </div>
+        </div>
 
-        </section>
+    </section>
     <!-- Testimonials
     =============================================
     <section id="testimonials">
@@ -1142,7 +1189,7 @@ Controle de Estoque</h1>
 
 
 
-<!--
+    <!--
 <script type="text/javascript">
     head.load(
         "http://maps.googleapis.com/maps/api/js?v=3&libraries=visualization",
@@ -1163,27 +1210,25 @@ Controle de Estoque</h1>
 );
 </script>-->
 
-        <!-- thirdparty libraries-->
-        <!-- thirdparty libraries-->
-        <script src="http://maps.googleapis.com/maps/api/js?v=3&libraries=visualization"></script>
-        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
-        <script src="thirdparty/aaPrincipal/js/jquery-3.1.1.min.js"></script>
-        <script src="thirdparty/jquery-ui-1.12.0/jquery-ui.min.js"></script>
-        <script src="thirdparty/bootstrap-fileinput-master/js/fileinput.js" type="text/javascript"></script>
-        <script src="thirdparty/bootstrap-fileinput-master/js/fileinput_locale_fr.js" type="text/javascript"></script>
-        <script src="thirdparty/bootstrap-fileinput-master/js/fileinput_locale_es.js" type="text/javascript"></script>
-        <script src="thirdparty/angular-datatables/vendor/datatables/media/js/jquery.dataTables.js"></script>
+    <!-- thirdparty libraries-->
+    <!-- thirdparty libraries-->
+    <script src="http://maps.googleapis.com/maps/api/js?v=3&libraries=visualization"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+    <script src="thirdparty/aaPrincipal/js/jquery-3.1.1.min.js"></script>
+    <script src="thirdparty/jquery-ui-1.12.0/jquery-ui.min.js"></script>
+    <script src="thirdparty/bootstrap-fileinput-master/js/fileinput.js" type="text/javascript"></script>
+    <script src="thirdparty/angular-datatables/vendor/datatables/media/js/jquery.dataTables.js"></script>
 
 
-<!-- Optional theme -->
+    <!-- Optional theme -->
 
 
-<!-- Latest compiled and minified JavaScript -->
+    <!-- Latest compiled and minified JavaScript -->
     <script src="thirdparty/aaPrincipal/js/bootstrap.min.js"></script>
     <script src="thirdparty/aaPrincipal/js/angular.js"></script>
     <script src="thirdparty/aaPrincipal/js/angular-modal-service.js"></script>
     <script src="thirdparty/aaPrincipal/js/angular-sanitize.js"></script>
-  <!--  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <!--  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
     <script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-sanitize.js"></script>-->
     <!--<script src="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.js"></script> -->
@@ -1194,58 +1239,58 @@ Controle de Estoque</h1>
     <script src="thirdparty/aaPrincipal/js/jquery.inputaction.js"></script>
     <script src="thirdparty/aaPrincipal/js/numeral.min.js"></script>
 
+    <script src="thirdparty/aaPrincipal/js/jquery.bootstrap.wizard.min.js"></script>
 
-  <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+    <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 -->
-        <script src="thirdparty/angular-route/angular-route.min.js"></script>
-        <script src="thirdparty/angular-animate/angular-animate.min.js"></script>
-        <script src="thirdparty/angular-bootstrap/ui-bootstrap-tpls-2.0.0.min.js"></script>
-        <script src="thirdparty/ui-mask-master/mask.min.js"></script>
+    <script src="thirdparty/angular-route/angular-route.min.js"></script>
+    <script src="thirdparty/angular-animate/angular-animate.min.js"></script>
+    <script src="thirdparty/angular-bootstrap/ui-bootstrap-tpls-2.0.0.min.js"></script>
+    <script src="thirdparty/ui-mask-master/mask.min.js"></script>
 
-        <script src="thirdparty/angular-textangular/textAngular-rangy.min.js"></script>
-        <script src="thirdparty/angular-textangular/textAngular-sanitize.min.js"></script>
-        <script src="thirdparty/angular-textangular/textAngular.min.js"></script>
-        <script src="thirdparty/angular-ui-tree/angular-ui-tree.min.js"></script>
-        <script src="thirdparty/angular-ngmaps/ng-map.min.js"></script>
-        <script src="thirdparty/angular-ng-tags-input/ng-tags-input.min.js"></script>
-        <script src="thirdparty/angular-loading/loading-bar.min.js"></script>
-        <script src="thirdparty/angular-ngmaps/ng-map.min.js"></script>
-        <script src="thirdparty/angular-ag/ag-grid.js"></script>
-        <script src="thirdparty/angular-toastr/angular-toastr.tpls.min.js"></script>
-        <script src="thirdparty/angular-local-storage/angular-local-storage.min.js"></script>
-        <script src="thirdparty/angular-base64/angular-base64.min.js"></script>
-        <script src="thirdparty/jquery-spinner/jquery.spinner.min.js"></script>
-        <script src="thirdparty/seiyria-bootstrap-slider/bootstrap-slider.min.js"></script>
-        <script src="thirdparty/jquery-steps/jquery.steps.min.js"></script>
-        <script src="thirdparty/bootstrap-file-input/bootstrap.file-input.js"></script>
-        <script src="thirdparty/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-        <script src="thirdparty/raphael/raphael-min.js"></script>
-        <script src="thirdparty/morrisjs/morris.js"></script>
-        <script src="thirdparty/jquery-sparkline/jquery.sparkline.min.js"></script>
-        <script src="thirdparty/flot/jquery.flot.js"></script>
-        <script src="thirdparty/flot/jquery.flot.resize.js"></script>
-        <script src="thirdparty/flot/jquery.flot.pie.js"></script>
-        <script src="thirdparty/flot/jquery.flot.orderBars.js"></script>
-        <script src="thirdparty/flot/jquery.flot.stack.js"></script>
-        <script src="thirdparty/flot-tooltip/jquery.flot.tooltip.min.js"></script>
-        <script src="thirdparty/flot/jquery.flot.time.js"></script>
-        <script src="thirdparty/flot/jquery.flot.animator.min.js"></script>
-        <script src="thirdparty/jquery-easy-pie-chart/angular.easypiechart.min.js"></script>
-        <script src="thirdparty/angular-chartjs/Chart.min.js"></script>
-        <script src="thirdparty/angular-chartjs/angular-chart.min.js"></script>
-        <script src="thirdparty/angular-echarts/echarts-all.js"></script>
-        <script src="thirdparty/angular-echarts/ngecharts.js"></script>
-        <script src="thirdparty/aaPrincipal/js/angular-touch.js"></script>
-        <script src="thirdparty/bootstrap-bower-master/ui-bootstrap.js"></script>
-        <script src="thirdparty/bootstrap-bower-master/ui-bootstrap-tpls.js"></script>
+    <script src="thirdparty/angular-textangular/textAngular-rangy.min.js"></script>
+    <script src="thirdparty/angular-textangular/textAngular-sanitize.min.js"></script>
+    <script src="thirdparty/angular-textangular/textAngular.min.js"></script>
+    <script src="thirdparty/angular-ui-tree/angular-ui-tree.min.js"></script>
+    <script src="thirdparty/angular-ngmaps/ng-map.min.js"></script>
+    <script src="thirdparty/angular-ng-tags-input/ng-tags-input.min.js"></script>
+    <script src="thirdparty/angular-loading/loading-bar.min.js"></script>
+    <script src="thirdparty/angular-ngmaps/ng-map.min.js"></script>
+    <script src="thirdparty/angular-ag/ag-grid.js"></script>
+    <script src="thirdparty/angular-toastr/angular-toastr.tpls.min.js"></script>
+    <script src="thirdparty/angular-local-storage/angular-local-storage.min.js"></script>
+    <script src="thirdparty/angular-base64/angular-base64.min.js"></script>
+    <script src="thirdparty/jquery-spinner/jquery.spinner.min.js"></script>
+    <script src="thirdparty/seiyria-bootstrap-slider/bootstrap-slider.min.js"></script>
+    <script src="thirdparty/jquery-steps/jquery.steps.min.js"></script>
+    <script src="thirdparty/bootstrap-file-input/bootstrap.file-input.js"></script>
+    <script src="thirdparty/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="thirdparty/raphael/raphael-min.js"></script>
+    <script src="thirdparty/morrisjs/morris.js"></script>
+    <script src="thirdparty/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="thirdparty/flot/jquery.flot.js"></script>
+    <script src="thirdparty/flot/jquery.flot.resize.js"></script>
+    <script src="thirdparty/flot/jquery.flot.pie.js"></script>
+    <script src="thirdparty/flot/jquery.flot.orderBars.js"></script>
+    <script src="thirdparty/flot/jquery.flot.stack.js"></script>
+    <script src="thirdparty/flot-tooltip/jquery.flot.tooltip.min.js"></script>
+    <script src="thirdparty/flot/jquery.flot.time.js"></script>
+    <script src="thirdparty/flot/jquery.flot.animator.min.js"></script>
+    <script src="thirdparty/jquery-easy-pie-chart/angular.easypiechart.min.js"></script>
+    <script src="thirdparty/angular-chartjs/Chart.min.js"></script>
+    <script src="thirdparty/angular-chartjs/angular-chart.min.js"></script>
+    <script src="thirdparty/angular-echarts/echarts-all.js"></script>
+    <script src="thirdparty/angular-echarts/ngecharts.js"></script>
+    <script src="thirdparty/aaPrincipal/js/angular-touch.js"></script>
 
 
 
 
-        <!-- datatables -->
+    <!-- datatables -->
     <script src="thirdparty/angular-datatables-master/vendor/highlightjs/highlight.pack.js"></script>
 
     <script src="thirdparty/angular-datatables-master/vendor/backtotop/backtotop.min.js"></script>
@@ -1255,68 +1300,69 @@ Controle de Estoque</h1>
     <script src="thirdparty/angular-datatables-master/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
 
     <script src="thirdparty/angular-datatables-master/vendor/datatables/media/js/jquery.dataTables.js"></script>
-      <script src="thirdparty/angular-datatables-master/vendor/datatables-colreorder/js/dataTables.colReorder.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
-      <script src="thirdparty/angular-datatables-master/vendor/datatables-colvis/js/dataTables.colVis.js"></script>
-      <script src="thirdparty/angular-datatables-master/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
-      <script src="thirdparty/angular-datatables-master/vendor/datatables-responsive/js/dataTables.responsive.js"></script>
-      <script src="thirdparty/angular-datatables-master/vendor/datatables-scroller/js/dataTables.scroller.js"></script>
-      <script src="thirdparty/angular-datatables-master/vendor/datatables-columnfilter/js/dataTables.columnFilter.js"></script>
-      <script src="thirdparty/angular-datatables-master/vendor/datatables-light-columnfilter/dist/dataTables.lightColumnFilter.min.js"></script>
-      <script src="thirdparty/angular-datatables-master/vendor/datatables-fixedcolumns/js/dataTables.fixedColumns.js"></script>
-      <script src="thirdparty/angular-datatables-master/vendor/datatables-fixedheader/js/dataTables.fixedHeader.js"></script>
-      <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/dataTables.buttons.js"></script>
-      <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.colVis.js"></script>
-      <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.flash.js"></script>
-      <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.html5.js"></script>
-      <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.print.js"></script>
-      <script src="thirdparty/angular-datatables-master/vendor/datatables-select/js/dataTables.select.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-colreorder/js/dataTables.colReorder.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-responsive/js/dataTables.responsive.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-scroller/js/dataTables.scroller.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-columnfilter/js/dataTables.columnFilter.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-light-columnfilter/dist/dataTables.lightColumnFilter.min.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-fixedcolumns/js/dataTables.fixedColumns.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-fixedheader/js/dataTables.fixedHeader.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/dataTables.buttons.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.colVis.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.flash.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.html5.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.print.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/datatables-select/js/dataTables.select.js"></script>
 
-      <script src="thirdparty/angular-datatables-master/vendor/angular-translate/angular-translate.min.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/angular-datatables.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/angular-datatables.util.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/angular-datatables.options.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/angular-datatables.instances.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/angular-datatables.factory.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/angular-datatables.renderer.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/angular-datatables.directive.js"></script>
+    <script src="thirdparty/angular-datatables-master/vendor/angular-translate/angular-translate.min.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/angular-datatables.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/angular-datatables.util.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/angular-datatables.options.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/angular-datatables.instances.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/angular-datatables.factory.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/angular-datatables.renderer.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/angular-datatables.directive.js"></script>
     <!--   bootstrap
     <script src="thirdparty/bootstrap-4.0.0-alpha.2/dist/js/bootstrap.js"></script>
     <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js" integrity="sha384-XXXXXXXX" crossorigin="anonymous"></script>-->
 
-   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>-->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>-->
 
-      <script src="thirdparty/aaPrincipal/js/bootstrap.min.js"></script>
+    <script src="thirdparty/aaPrincipal/js/bootstrap.min.js"></script>
 
-      <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.options.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.colvis.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.tabletools.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/plugins/colvis/angular-datatables.colvis.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/plugins/colreorder/angular-datatables.colreorder.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/plugins/tabletools/angular-datatables.tabletools.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/plugins/scroller/angular-datatables.scroller.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/plugins/light-columnfilter/angular-datatables.light-columnfilter.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/plugins/fixedheader/angular-datatables.fixedheader.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/plugins/buttons/angular-datatables.buttons.js"></script>
-      <script src="thirdparty/angular-datatables-master/src/plugins/select/angular-datatables.select.js"></script>
-      <script src="thirdparty/angular-datatables-master/vendor/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js"></script>
-
+    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.options.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.colvis.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.tabletools.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/colvis/angular-datatables.colvis.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/colreorder/angular-datatables.colreorder.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/tabletools/angular-datatables.tabletools.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/scroller/angular-datatables.scroller.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/light-columnfilter/angular-datatables.light-columnfilter.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/fixedheader/angular-datatables.fixedheader.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/buttons/angular-datatables.buttons.js"></script>
+    <script src="thirdparty/angular-datatables-master/src/plugins/select/angular-datatables.select.js"></script>
 
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="thirdparty/aaPrincipal/js/bootstrap.min.js"></script>
 
+    <script src="thirdparty/aaPrincipal/js/angular-strap.min.js"></script>
+    <script src="thirdparty/aaPrincipal/js/angular-strap.tpl.min.js"></script>
+    <script src="thirdparty/aaPrincipal/js/jcs-auto-validate.js"></script>
+
     <!-- JS PLUGINS -->
     <script src="views/template-assets/plugins/owl-carousel/owl.carousel.min.js"></script>
     <script src="views/template-assets/js/jquery.easing.min.js"></script>
-    <script src="views/template-assets/plugins/waypoints/jquery.waypoints.min.js"></script>
     <script src="views/template-assets/plugins/countTo/jquery.countTo.js"></script>
-    <script src="views/template-assets/plugins/inviews/jquery.inview.min.js"></script>
     <script src="views/template-assets/plugins/Lightbox/dist/js/lightbox.min.js"></script>
     <script src="views/template-assets/plugins/WOW/dist/wow.min.js"></script>
     <!-- GOOGLE MAP -->
@@ -1334,151 +1380,168 @@ Controle de Estoque</h1>
     <script src="dist/js/framework/bootstrap.js"></script>
 
 
-        <!--webdaptive -->
-        <script src="scripts/wdapp.js"></script>
-
-        <script src="scripts/commons/wdapp.controllers.js"></script>
-        <script src="scripts/commons/wdapp.directives.js"></script>
-        <script src="scripts/commons/wdapp.localization.all.js"></script>
-        <script src="scripts/commons/wdapp.demodata.factory.js"></script>
-        <script src="scripts/commons/wdapp.authentication.factory.js"></script>
-        <script src="scripts/commons/wdapp.httpinterceptors.factory.js"></script>
-        <script src="scripts/factory/wdapp.commons.factory.js"></script>
-        <script src="scripts/factory/wdapp.table.create.factory.js"></script>
-        <script src="scripts/factory/wdapp.validations.factory.js"></script>
-        <script src="scripts/factory/wdapp.columns.factory.js"></script>
-        <script src="scripts/factory/wdapp.options.factory.js"></script>
-        <script src="scripts/factory/wdapp.table.ajax.factory.js"></script>
-        <script src="scripts/factory/wdapp.table.filters.factory.js"></script>
-        <script src="scripts/factory/wdapp.dialog.delete.factory.js"></script>
-        <script src="scripts/factory/notaFiscal/notaFiscal.factory.js"></script>
-        <script src="scripts/models/domain.objects.js"></script>
-        <script src="scripts/models/request.objects.js"></script>
-        <script src="scripts/models/domain.selects.js"></script>
+    <script src="https://unpkg.com/moment@2.17.1"></script>
+    <script src="https://unpkg.com/interactjs@1"></script>
+    <script src="https://unpkg.com/angular@1.6.4/angular.js"></script>
+    <script src="https://unpkg.com/angular-animate@1.6.4/angular-animate.js"></script>
+    <script src="https://unpkg.com/angular-ui-bootstrap@2/dist/ui-bootstrap-tpls.js"></script>
+    <script src="https://unpkg.com/rrule@2"></script>
+    <script src="https://unpkg.com/angular-bootstrap-colorpicker@3"></script>
+    <script src="https://unpkg.com/angular-bootstrap-calendar"></script>
+    <link href="https://unpkg.com/bootstrap@3/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="https://unpkg.com/angular-bootstrap-colorpicker@3/css/colorpicker.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css" rel="stylesheet">
 
 
-        <script src="scripts/ui/ui.controllers.js"></script>
-        <script src="scripts/forms/forms.directives.js"></script>
-        <script src="scripts/forms/forms.controllers.js"></script>
-        <script src="scripts/tables/tables.controllers.js"></script>
-        <script src="scripts/tasks/tasks.all.js"></script>
-        <script src="scripts/charts/charts.chartjs.controllers.js"></script>
-        <script src="scripts/charts/charts.flot.controllers.js"></script>
-        <script src="scripts/charts/charts.morris.controllers.js"></script>
-        <script src="scripts/charts/charts.other.controllers.js"></script>
-        <script src="scripts/charts/charts.echarts.controllers.js"></script>
-        <script src="select.js"></script>
-        <script src="scripts/charts/charts.directives.js"></script>
-        <script src="scripts/apps/util/util.controllers.js"></script>
-        <script src="scripts/pages/pages.controllers.js"></script>
-        <script src="scripts/apps/stocks.controllers.js"></script>
-        <script src="scripts/apps/stocks.factory.js"></script>
-        <script src="scripts/apps/counties.controllers.js"></script>
-        <script src="scripts/models/validation.objects.js"></script>
-        <script src="scripts/directive/angucomplete-alt.js"></script>
-        <script src="scripts/directive/inputaction.directive.js"></script>
-        <script src="scripts/apps/procedures.controllers.js"></script>
-        <script src="scripts/apps/sysmgmt.data.factory.js"></script>
-        <script src="scripts/apps/site.controllers.js"></script>
-        <script src="scripts/apps/empresa.controllers.js"></script>
-        <script src="scripts/apps/produto/produto.controllers.js"></script>
-        <script src="scripts/apps/notafiscal/notafiscal.controllers.js"></script>
 
-      <script src="scripts/apps/fiscal/cfop.controllers.js"></script>
-        <script src="scripts/apps/fiscal/cnae.controllers.js"></script>
-        <script src="scripts/apps/fiscal/regime.controllers.js"></script>
-        <script src="scripts/apps/vendas/pdVendas.controllers.js"></script>
-        <script src="scripts/apps/vendas/notafiscal.controllers.js"></script>
-        <script src="scripts/apps/vendas/orcamento.controllers.js"></script>
-        <script src="scripts/apps/ordemServico/ordemServico.controllers.js"></script>
-        <script src="scripts/apps/compras/nfEntrada.controllers.js"></script>
-        <script src="scripts/apps/compras/pdCompras.controllers.js"></script>
-        <script src="scripts/apps/compras/cotacao.controllers.js"></script>
-        <script src="scripts/apps/financeiro/contasPagar.controllers.js"></script>
-        <script src="scripts/apps/financeiro/contasReceber.controllers.js"></script>
-        <script src="scripts/apps/financeiro/formaPg.controllers.js"></script>
-        <script src="scripts/apps/financeiro/banco.controllers.js"></script>
-        <script src="scripts/apps/financeiro/agencia.controllers.js"></script>
-        <script src="scripts/apps/financeiro/conta.controllers.js"></script>
-        <script src="scripts/apps/financeiro/situacao.controllers.js"></script>
-        <script src="scripts/apps/financeiro/categoria.controllers.js"></script>
-        <script src="scripts/apps/financeiro/tipoDocumentos.controllers.js"></script>
-        <script src="scripts/apps/Dp/funcionario.controllers.js"></script>
-        <script src="scripts/apps/cadastros/cliente.controllers.js"></script>
-        <script src="scripts/apps/cadastros/fornecedor.controllers.js"></script>
-        <script src="scripts/apps/cadastros/transportador.controllers.js"></script>
-        <script src="scripts/apps/cadastros/convenio.controllers.js"></script>
-        <script src="scripts/apps/cadastros/deposito.controllers.js"></script>
-        <script src="scripts/apps/cadastros/estado.controllers.js"></script>
-        <script src="scripts/apps/cadastros/filial.controllers.js"></script>
-        <script src="scripts/apps/produto/categoria.controllers.js"></script>
-        <script src="scripts/apps/produto/unimed.controllers.js"></script>
-        <script src="scripts/apps/produto/marca.controllers.js"></script>
-        <script src="scripts/apps/produto/servico.controllers.js"></script>
-        <script src="scripts/apps/controleProducao/ordemProducao.controllers.js"></script>
-        <script src="scripts/apps/cadastros/convenio.controllers.js"></script>
-        <script src="scripts/apps/cadastros/cidade.controllers.js"></script>
-        <script src="scripts/apps/cadastros/filial.controllers.js"></script>
-        <script src="scripts/apps/cadastros/almoxarifado.controllers.js"></script>
-        <script src="scripts/apps/advogado/processo.controllers.js"></script>
-
-        <script src="scripts/apps/gerencia/cadEmpresa.controllers.js"></script>
-        <script src="scripts/apps/gerencia/site.controllers.js"></script>
-        <script src="scripts/apps/gerencia/plano.controllers.js"></script>
-        <script src="scripts/apps/gerencia/servicos.controllers.js"></script>
-        <script src="scripts/apps/gerencia/usuarios.controllers.js"></script>
-        <script src="scripts/apps/gerencia/contatos.controllers.js"></script>
-        <script src="scripts/apps/gerencia/historico.controllers.js"></script>
-
-
-        <script src="scripts/apps/dicionario/field.controllers.js"></script>
-        <script src="scripts/apps/dicionario/help.controllers.js"></script>
-        <script src="scripts/apps/dicionario/menu.controllers.js"></script>
-        <script src="scripts/apps/dicionario/pagina.controllers.js"></script>
-        <script src="scripts/apps/dicionario/validacao.controllers.js"></script>
-        <script src="scripts/apps/gerencia/roles.controllers.js"></script>
-        <script src="scripts/apps/gerencia/socio.controllers.js"></script>
-        <script src="scripts/apps/gerencia/tributacao.controllers.js"></script>
-
-        <script src="scripts/apps/gerencia/permissoes.controllers.js"></script>
-
-        <script src="scripts/apps/util/telefone.controllers.js"></script>
-        <script src="scripts/util/email.controllers.js"></script>
-        <script src="scripts/apps/util/select.controller.js"></script>
-        <script src="scripts/apps/util/cnae.select.controller.js"></script>
-        <script src="scripts/apps/util/formaPg.select.controller.js"></script>
-
-        <script src="scripts/factory/empresa/empresa.factory.js"></script>
-        <script src="scripts/factory/site/site.factory.js"></script>
-        <script src="scripts/factory/pessoa/pessoa.factory.js"></script>
-        <script src="scripts/factory/produto/produto.factory.js"></script>
-        <script src="scripts/factory/produto/tributacao.factory.js"></script>
-        <script src="scripts/factory/wdapp.datatables.factory.js"></script>
-        <script src="scripts/factory/wdapp.initPage.factory.js"></script>
-        <script src="scripts/models/domain.factory.js"></script>
-        <script src="scripts/util/ngAutocomplete.js"></script>
-        <script src="scripts/factory/wdapp.doisValor.util.factory.js"></script>
-
-        <script src="scripts/apps/entidade/empresa.controllers.js"></script>
-        <script src="scripts/apps/principal.controller.js"></script>
-         <script src="scripts/util/endereco.controllers.js"></script>
-
-
-            <script src="vendor/bootstrap/js/bootstrap.js"></script>
     <script src="dist/js/select2.min.js"></script>
     <script src="dist/js/formValidation.js"></script>
     <script src="dist/js/framework/bootstrap.js"></script>
-    <script src="thirdparty/twitter-bootstrap-wizard-master/jquery.bootstrap.wizard.js"></script>
-    <script src="thirdparty/twitter-bootstrap-wizard-master/prettify.js"></script>
+
+    <script src="thirdparty/angular-xeditable/js/xeditable.js"></script>
+    <script src="thirdparty/aaPrincipal/js/angular-sticky.js"></script>
+    <script src="thirdparty/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.min.js"></script>
+    <!--webdaptive -->
+    <script src="scripts/wdapp.js"></script>
+
+    <script src="scripts/commons/wdapp.controllers.js"></script>
+    <script src="scripts/commons/wdapp.directives.js"></script>
+    <script src="scripts/commons/wdapp.localization.all.js"></script>
+    <script src="scripts/commons/wdapp.demodata.factory.js"></script>
+    <script src="scripts/commons/wdapp.authentication.factory.js"></script>
+    <script src="scripts/commons/wdapp.httpinterceptors.factory.js"></script>
+    <script src="scripts/factory/wdapp.commons.factory.js"></script>
+    <script src="scripts/factory/wdapp.table.create.factory.js"></script>
+    <script src="scripts/factory/wdapp.validations.factory.js"></script>
+    <script src="scripts/factory/wdapp.columns.factory.js"></script>
+    <script src="scripts/factory/wdapp.options.factory.js"></script>
+    <script src="scripts/factory/wdapp.table.ajax.factory.js"></script>
+    <script src="scripts/factory/wdapp.table.filters.factory.js"></script>
+    <script src="scripts/factory/wdapp.dialog.delete.factory.js"></script>
+    <script src="scripts/factory/notaFiscal/notaFiscal.factory.js"></script>
+    <script src="scripts/models/domain.objects.js"></script>
+    <script src="scripts/models/request.objects.js"></script>
+    <script src="scripts/models/domain.selects.js"></script>
 
 
-        <!-- JS PLUGINS -->
+    <script src="scripts/ui/ui.controllers.js"></script>
+    <script src="scripts/forms/forms.directives.js"></script>
+    <script src="scripts/forms/forms.controllers.js"></script>
+    <script src="scripts/tables/tables.controllers.js"></script>
+    <script src="scripts/tasks/tasks.all.js"></script>
+    <script src="scripts/charts/charts.chartjs.controllers.js"></script>
+    <script src="scripts/charts/charts.flot.controllers.js"></script>
+    <script src="scripts/charts/charts.morris.controllers.js"></script>
+    <script src="scripts/charts/charts.other.controllers.js"></script>
+    <script src="scripts/charts/charts.echarts.controllers.js"></script>
+    <script src="select.js"></script>
+    <script src="scripts/charts/charts.directives.js"></script>
+    <script src="scripts/apps/util/util.controllers.js"></script>
+    <script src="scripts/pages/pages.controllers.js"></script>
+    <script src="scripts/apps/stocks.controllers.js"></script>
+    <script src="scripts/apps/stocks.factory.js"></script>
+    <script src="scripts/apps/counties.controllers.js"></script>
+    <script src="scripts/models/validation.objects.js"></script>
+    <script src="scripts/directive/angucomplete-alt.js"></script>
+    <script src="scripts/directive/inputaction.directive.js"></script>
+    <script src="scripts/apps/procedures.controllers.js"></script>
+    <script src="scripts/apps/sysmgmt.data.factory.js"></script>
+    <script src="scripts/apps/site.controllers.js"></script>
+    <script src="scripts/apps/empresa.controllers.js"></script>
+    <script src="scripts/apps/produto/produto.controllers.js"></script>
+    <script src="scripts/apps/notafiscal/notafiscal.controllers.js"></script>
+    <script src="scripts/apps/notafiscal/notafiscalEntrada.controllers.js"></script>
+
+    <script src="scripts/apps/fiscal/cfop.controllers.js"></script>
+    <script src="scripts/apps/fiscal/cnae.controllers.js"></script>
+    <script src="scripts/apps/fiscal/regime.controllers.js"></script>
+    <script src="scripts/apps/vendas/pdVendas.controllers.js"></script>
+    <script src="scripts/apps/vendas/cartaCorrecao.controllers.js"></script>
+    <script src="scripts/apps/vendas/notafiscal.controllers.js"></script>
+    <script src="scripts/apps/vendas/orcamento.controllers.js"></script>
+    <script src="scripts/apps/vendas/ordemServico.controllers.js"></script>
+    <script src="scripts/apps/compras/nfEntrada.controllers.js"></script>
+    <script src="scripts/apps/compras/pdCompras.controllers.js"></script>
+    <script src="scripts/apps/compras/cotacao.controllers.js"></script>
+    <script src="scripts/apps/compras/notafiscal.controllers.js"></script>
+    <script src="scripts/apps/financeiro/contasPagar.controllers.js"></script>
+    <script src="scripts/apps/financeiro/contasReceber.controllers.js"></script>
+    <script src="scripts/apps/financeiro/formaPg.controllers.js"></script>
+    <script src="scripts/apps/financeiro/banco.controllers.js"></script>
+    <script src="scripts/apps/financeiro/agencia.controllers.js"></script>
+    <script src="scripts/apps/financeiro/conta.controllers.js"></script>
+    <script src="scripts/apps/financeiro/situacao.controllers.js"></script>
+    <script src="scripts/apps/financeiro/categoria.controllers.js"></script>
+    <script src="scripts/apps/financeiro/tipoDocumentos.controllers.js"></script>
+    <script src="scripts/apps/financeiro/caixa.controllers.js"></script>
+    <script src="scripts/apps/Dp/funcionario.controllers.js"></script>
+    <script src="scripts/apps/cadastros/cliente.controllers.js"></script>
+    <script src="scripts/apps/cadastros/fornecedor.controllers.js"></script>
+    <script src="scripts/apps/cadastros/transportador.controllers.js"></script>
+    <script src="scripts/apps/cadastros/convenio.controllers.js"></script>
+    <script src="scripts/apps/cadastros/deposito.controllers.js"></script>
+    <script src="scripts/apps/cadastros/estado.controllers.js"></script>
+    <script src="scripts/apps/cadastros/filial.controllers.js"></script>
+    <script src="scripts/apps/produto/categoria.controllers.js"></script>
+    <script src="scripts/apps/produto/unimed.controllers.js"></script>
+    <script src="scripts/apps/produto/marca.controllers.js"></script>
+    <script src="scripts/apps/produto/servico.controllers.js"></script>
+    <script src="scripts/apps/controleProducao/ordemProducao.controllers.js"></script>
+    <script src="scripts/apps/cadastros/convenio.controllers.js"></script>
+    <script src="scripts/apps/cadastros/cidade.controllers.js"></script>
+    <script src="scripts/apps/cadastros/filial.controllers.js"></script>
+    <script src="scripts/apps/cadastros/almoxarifado.controllers.js"></script>
+    <script src="scripts/apps/advogado/processo.controllers.js"></script>
+    <script src="scripts/apps/advogado/advogado.controllers.js"></script>
+
+
+    <script src="scripts/apps/gerencia/cadEmpresa.controllers.js"></script>
+    <script src="scripts/apps/gerencia/site.controllers.js"></script>
+    <script src="scripts/apps/gerencia/plano.controllers.js"></script>
+    <script src="scripts/apps/gerencia/servicos.controllers.js"></script>
+    <script src="scripts/apps/gerencia/usuarios.controllers.js"></script>
+    <script src="scripts/apps/gerencia/contatos.controllers.js"></script>
+    <script src="scripts/apps/gerencia/historico.controllers.js"></script>
+
+
+    <script src="scripts/apps/dicionario/field.controllers.js"></script>
+    <script src="scripts/apps/dicionario/help.controllers.js"></script>
+    <script src="scripts/apps/dicionario/menu.controllers.js"></script>
+    <script src="scripts/apps/dicionario/pagina.controllers.js"></script>
+    <script src="scripts/apps/dicionario/validacao.controllers.js"></script>
+    <script src="scripts/apps/gerencia/roles.controllers.js"></script>
+    <script src="scripts/apps/gerencia/socio.controllers.js"></script>
+    <script src="scripts/apps/gerencia/tributacao.controllers.js"></script>
+
+    <script src="scripts/apps/gerencia/permissoes.controllers.js"></script>
+
+    <script src="scripts/apps/util/telefone.controllers.js"></script>
+    <script src="scripts/util/email.controllers.js"></script>
+    <script src="scripts/apps/util/select.controller.js"></script>
+    <script src="scripts/apps/util/cnae.select.controller.js"></script>
+    <script src="scripts/apps/util/formaPg.select.controller.js"></script>
+
+    <script src="scripts/factory/empresa/empresa.factory.js"></script>
+    <script src="scripts/factory/site/site.factory.js"></script>
+    <script src="scripts/factory/pessoa/pessoa.factory.js"></script>
+    <script src="scripts/factory/produto/produto.factory.js"></script>
+    <script src="scripts/factory/produto/tributacao.factory.js"></script>
+    <script src="scripts/factory/produto/calcTributos.factory.js"></script>
+    <script src="scripts/factory/wdapp.datatables.factory.js"></script>
+    <script src="scripts/factory/wdapp.initPage.factory.js"></script>
+    <script src="scripts/models/domain.factory.js"></script>
+    <script src="scripts/util/ngAutocomplete.js"></script>
+    <script src="scripts/factory/wdapp.doisValor.util.factory.js"></script>
+
+    <script src="scripts/apps/entidade/empresa.controllers.js"></script>
+    <script src="scripts/apps/principal.controller.js"></script>
+    <script src="scripts/util/endereco.controllers.js"></script>
+    <!-- JS PLUGINS -->
+
     <script src="views/template-assets/js/custom.js"></script>
     <script src="views/template-assets/plugins/owl-carousel/owl.carousel.min.js"></script>
     <script src="views/template-assets/js/jquery.easing.min.js"></script>
-    <script src="views/template-assets/plugins/waypoints/jquery.waypoints.min.js"></script>
     <script src="views/template-assets/plugins/countTo/jquery.countTo.js"></script>
-    <script src="views/template-assets/plugins/inviews/jquery.inview.min.js"></script>
     <script src="views/template-assets/plugins/Lightbox/dist/js/lightbox.min.js"></script>
     <script src="views/template-assets/plugins/WOW/dist/wow.min.js"></script>
 
@@ -1492,275 +1555,281 @@ Controle de Estoque</h1>
 
 
 
-<style>
+    <style>
         /*
             Use the DejaVu Sans font for display and embedding in the PDF file.
             The standard PDF fonts have no support for Unicode characters.
         */
+
         .pdf-page {
             font-family: "DejaVu Sans", "Arial", sans-serif;
         }
     </style>
-         <!---->
-<script>
-
-
-
+    <!---->
+    <script>
         // Import DejaVu Sans font for embedding
 
         // NOTE: Only required if the Kendo UI stylesheets are loaded
         // from a different origin, e.g. cdn.kendostatic.com
         kendo.pdf.defineFont({
-            "DejaVu Sans"             : "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans.ttf",
-            "DejaVu Sans|Bold"        : "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-            "DejaVu Sans|Bold|Italic" : "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-            "DejaVu Sans|Italic"      : "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+            "DejaVu Sans": "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans.ttf",
+            "DejaVu Sans|Bold": "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold|Italic": "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Italic": "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
         });
 
 
 
-    $('#file-fr').fileinput({
-        language: 'fr',
-        uploadUrl: '#',
-        allowedFileExtensions : ['jpg', 'png','gif'],
-    });
-    $('#file-es').fileinput({
-        language: 'es',
-        uploadUrl: '#',
-        allowedFileExtensions : ['jpg', 'png','gif'],
-    });
-    $("#file-0").fileinput({
-        'allowedFileExtensions' : ['jpg', 'png','gif'],
-    });
-    $("#file-1").fileinput({
-        uploadUrl: '#', // you must set a valid URL here else you will get an error
-        allowedFileExtensions : ['jpg', 'png','gif'],
-        overwriteInitial: false,
-        maxFileSize: 1000,
-        maxFilesNum: 10,
-        //allowedFileTypes: ['image', 'video', 'flash'],
-        slugCallback: function(filename) {
-            return filename.replace('(', '_').replace(']', '_');
-        }
-    });
-    /*
-    $(".file").on('fileselect', function(event, n, l) {
-        alert('File Selected. Name: ' + l + ', Num: ' + n);
-    });
-    */
-    $("#file-3").fileinput({
-        showUpload: false,
-        showCaption: false,
-        browseClass: "btn btn-primary btn-lg",
-        fileType: "any",
-        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>"
-    });
-    $("#file-4").fileinput({
-        uploadExtraData: {kvId: '10'}
-    });
-    $(".btn-warning").on('click', function() {
-        if ($('#file-4').attr('disabled')) {
-            $('#file-4').fileinput('enable');
-        } else {
-            $('#file-4').fileinput('disable');
-        }
-    });
-    $(".btn-info").on('click', function() {
-        $('#file-4').fileinput('refresh', {previewClass:'bg-info'});
-    });
-    /*
-    $('#file-4').on('fileselectnone', function() {
-        alert('Huh! You selected no files.');
-    });
-    $('#file-4').on('filebrowse', function() {
-        alert('File browse clicked for #file-4');
-    });
-    */
-    $(document).ready(function() {
-
-
-
-
-
-        $("#test-upload").fileinput({
-            'showPreview' : false,
-            'allowedFileExtensions' : ['jpg', 'png','gif'],
-            'elErrorContainer': '#errorBlock'
+        $('#file-fr').fileinput({
+            language: 'fr',
+            uploadUrl: '#',
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
         });
-
-        bookIndex = 0;
-
-    $('.empresaForm')
-        .formValidation({
-            framework: 'bootstrap',
-            icon: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-
-            'book[0].cpf': notEmptyStringMinMaxRegexp,
-            'book[0].nome': notEmptyStringMinMax,
-            'book[0].cota': integerNotEmptyValidation,
-             nome: notEmptyStringMinMax,
-             nunFunc: integerNotEmptyValidation,
-            razao:notEmptyStringMinMax,
-            logradouro:notEmptyStringMinMax,
-            cpf: notEmptyStringMinMaxRegexp,
-            cep: notEmptyStringMinMax,
-            cnpj: notEmptyStringMinMax,
-            email: emailValidation,
-            telefone: telefoneValidation,
-            phone: telefoneValidation,
-            cep: cepNotEmptyValidation,
-            password: {
-                validators: {
-                    notEmpty: {
-                        message: 'The password is required and can\'t be empty'
-                    }
-                }
-            },
-            confirmPassword: {
-                validators: {
-                    notEmpty: {
-                        message: 'The confirm password is required and can\'t be empty'
-                    },
-                    identical: {
-                        field: 'password',
-                        message: 'The password and its confirm are not the same'
-                    }
-                }
+        $('#file-es').fileinput({
+            language: 'es',
+            uploadUrl: '#',
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+        });
+        $("#file-0").fileinput({
+            'allowedFileExtensions': ['jpg', 'png', 'gif'],
+        });
+        $("#file-1").fileinput({
+            uploadUrl: '#', // you must set a valid URL here else you will get an error
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+            overwriteInitial: false,
+            maxFileSize: 1000,
+            maxFilesNum: 10,
+            //allowedFileTypes: ['image', 'video', 'flash'],
+            slugCallback: function(filename) {
+                return filename.replace('(', '_').replace(']', '_');
             }
-
-        }
-        })
-
-        $("select").select2({
-          placeholder: "Select a state",
-          allowClear: true
         });
+        /*
+        $(".file").on('fileselect', function(event, n, l) {
+            alert('File Selected. Name: ' + l + ', Num: ' + n);
+        });
+        */
+        $("#file-3").fileinput({
+            showUpload: false,
+            showCaption: false,
+            browseClass: "btn btn-primary btn-lg",
+            fileType: "any",
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>"
+        });
+        $("#file-4").fileinput({
+            uploadExtraData: {
+                kvId: '10'
+            }
+        });
+        $(".btn-warning").on('click', function() {
+            if ($('#file-4').attr('disabled')) {
+                $('#file-4').fileinput('enable');
+            } else {
+                $('#file-4').fileinput('disable');
+            }
+        });
+        $(".btn-info").on('click', function() {
+            $('#file-4').fileinput('refresh', {
+                previewClass: 'bg-info'
+            });
+        });
+        /*
+        $('#file-4').on('fileselectnone', function() {
+            alert('Huh! You selected no files.');
+        });
+        $('#file-4').on('filebrowse', function() {
+            alert('File browse clicked for #file-4');
+        });
+        */
+        $(document).ready(function() {
 
-        $('#rootwizard').bootstrapWizard({onNext: function(tab, navigation, index) {
-            /*  if(index==2) {
-                    // Make sure we entered the name
-                    if(!$('#name').val()) {
-                        alert('You must enter your name');
-                        $('#name').focus();
+
+
+
+
+            $("#test-upload").fileinput({
+                'showPreview': false,
+                'allowedFileExtensions': ['jpg', 'png', 'gif'],
+                'elErrorContainer': '#errorBlock'
+            });
+
+            bookIndex = 0;
+
+            $('.empresaForm')
+                .formValidation({
+                    framework: 'bootstrap',
+                    icon: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+
+                        'book[0].cpf': notEmptyStringMinMaxRegexp,
+                        'book[0].nome': notEmptyStringMinMax,
+                        'book[0].cota': integerNotEmptyValidation,
+                        nome: notEmptyStringMinMax,
+                        nunFunc: integerNotEmptyValidation,
+                        razao: notEmptyStringMinMax,
+                        logradouro: notEmptyStringMinMax,
+                        cpf: notEmptyStringMinMaxRegexp,
+                        cep: notEmptyStringMinMax,
+                        cnpj: notEmptyStringMinMax,
+                        email: emailValidation,
+                        telefone: telefoneValidation,
+                        phone: telefoneValidation,
+                        cep: cepNotEmptyValidation,
+                        password: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'The password is required and can\'t be empty'
+                                }
+                            }
+                        },
+                        confirmPassword: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'The confirm password is required and can\'t be empty'
+                                },
+                                identical: {
+                                    field: 'password',
+                                    message: 'The password and its confirm are not the same'
+                                }
+                            }
+                        }
+
+                    }
+                })
+
+            $("select").select2({
+                placeholder: "Select a state",
+                allowClear: true
+            });
+
+            $('#rootwizard').bootstrapWizard({
+                onNext: function(tab, navigation, index) {
+                    /*  if(index==2) {
+                            // Make sure we entered the name
+                            if(!$('#name').val()) {
+                                alert('You must enter your name');
+                                $('#name').focus();
+                                return false;
+                            }
+                        }
+
+                        // Set the name for the next tab
+                        $('#tab3').html('Hello, ' + $('#name').val());
+                    */
+                },
+                onTabShow: function(tab, navigation, index) {
+
+                    var $total = navigation.find('li').length;
+                    var $current = index + 1;
+                    var $percent = ($current / $total) * 100;
+                    $('#rootwizard .progress-bar').css({
+                        width: $percent + '%'
+                    });
+                    if ($percent == 100) {
+                        $('.save-empresa').removeClass('hide');
+                    } else {
+                        $('.save-empresa').addClass('hide');
+                    }
+                },
+                onNext: function(tab, navigation, index) {
+                    var numTabs = $('.empresaForm').find('.tab-pane').length,
+                        isValidTab = validateTab(index - 1);
+                    if (!isValidTab) {
                         return false;
                     }
-                }
 
-                // Set the name for the next tab
-                $('#tab3').html('Hello, ' + $('#name').val());
-            */
-            }, onTabShow: function(tab, navigation, index) {
+                    if (index === numTabs) {
+                        alert('agora');
+                        // We are at the last tab
 
-                var $total = navigation.find('li').length;
-                var $current = index+1;
-                var $percent = ($current/$total) * 100;
-                $('#rootwizard .progress-bar').css({width:$percent+'%'});
-                if($percent == 100)
-                {
-                    $('.save-empresa').removeClass('hide');
-                }else{
-                    $('.save-empresa').addClass('hide');
+                        // Uncomment the following line to submit the form using the defaultSubmit() method
+                        // $('#installationForm').formValidation('defaultSubmit');
+
+                        // For testing purpose
+                        $('#completeModal').modal();
+                    }
+
+                    return true;
                 }
-            },
-            onNext: function(tab, navigation, index) {
-                var numTabs    = $('.empresaForm').find('.tab-pane').length,
-                    isValidTab = validateTab(index - 1);
-                if (!isValidTab) {
+            });
+
+            window.prettyPrint && prettyPrint();
+
+
+            //============================= Email fim
+            function validateTab(index) {
+                var fv = $('.empresaForm').data('formValidation'), // FormValidation instance
+                    // The current tab
+                    $tab = $('.empresaForm').find('.tab-pane').eq(index);
+
+                // Validate the container
+                fv.validateContainer($tab);
+
+                var isValidStep = fv.isValidContainer($tab);
+                if (isValidStep === false || isValidStep === null) {
+                    // Do not jump to the target tab
                     return false;
                 }
 
-                if (index === numTabs) {
-                    alert('agora');
-                    // We are at the last tab
-
-                    // Uncomment the following line to submit the form using the defaultSubmit() method
-                    // $('#installationForm').formValidation('defaultSubmit');
-
-                    // For testing purpose
-                    $('#completeModal').modal();
-                }
-
                 return true;
-            }});
-
-        window.prettyPrint && prettyPrint();
-
-
-        //============================= Email fim
-         function validateTab(index) {
-            var fv   = $('.empresaForm').data('formValidation'), // FormValidation instance
-                // The current tab
-                $tab = $('.empresaForm').find('.tab-pane').eq(index);
-
-            // Validate the container
-            fv.validateContainer($tab);
-
-            var isValidStep = fv.isValidContainer($tab);
-            if (isValidStep === false || isValidStep === null) {
-                // Do not jump to the target tab
-                return false;
             }
 
-            return true;
-        }
+            //Tab 1
+            $('.empresaForm').find('[name="nome"]').val('099.099.099.099');
+            $('.empresaForm').find('[name="cpf"]').val('099.099.099.099');
+            $('.empresaForm').find('[name="telefone"]').val('34988406670');
+            $('.empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
+            $('.empresaForm').find('[name="password"]').val('099.099.099.099');
+            $('.empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
 
+            //Tab 2
+            $('.empresaForm').find('[name="cnpj"]').val('099.099.099.099');
+            $('.empresaForm').find('[name="numfunc"]').val('8');
+            $('.empresaForm').find('[name="razao"]').val('34988406670');
+            $('.empresaForm').find('[name="cep"]').val('38082243');
+            $('.empresaForm').find('[name="numero"]').val('686');
+            $('.empresaForm').find('[name="complemento"]').val('complemento');
+            $('.empresaForm').find('[name="logradouro"]').val('logradouro');
+            $('.empresaForm').find('[name="book[0].nome"]').val('joao das coves');
+            $('.empresaForm').find('[name="book[0].cpf"]').val('05790167659');
+            $('.empresaForm').find('[name="book[0].cpf"]').val('10');
+
+        });
+        //prencher form
+        /*
         //Tab 1
-$('.empresaForm').find('[name="nome"]').val('099.099.099.099');
-$('.empresaForm').find('[name="cpf"]').val('099.099.099.099');
-$('.empresaForm').find('[name="telefone"]').val('34988406670');
-$('.empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
-$('.empresaForm').find('[name="password"]').val('099.099.099.099');
-$('.empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
+        $('.empresaForm').find('[name="nome"]').val('099.099.099.099');
+        $('.empresaForm').find('[name="cpf"]').val('099.099.099.099');
+        $('.empresaForm').find('[name="telefone"]').val('34988406670');
+        $('.empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
+        $('.empresaForm').find('[name="password"]').val('099.099.099.099');
+        $('.empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
 
-//Tab 2
-$('.empresaForm').find('[name="cnpj"]').val('099.099.099.099');
-$('.empresaForm').find('[name="numfunc"]').val('8');
-$('.empresaForm').find('[name="razao"]').val('34988406670');
-$('.empresaForm').find('[name="cep"]').val('38082243');
-$('.empresaForm').find('[name="numero"]').val('686');
-$('.empresaForm').find('[name="complemento"]').val('complemento');
-$('.empresaForm').find('[name="logradouro"]').val('logradouro');
-$('.empresaForm').find('[name="book[0].nome"]').val('joao das coves');
-$('.empresaForm').find('[name="book[0].cpf"]').val('05790167659');
-$('.empresaForm').find('[name="book[0].cpf"]').val('10');
-
-    });
-//prencher form
-/*
-//Tab 1
-$('.empresaForm').find('[name="nome"]').val('099.099.099.099');
-$('.empresaForm').find('[name="cpf"]').val('099.099.099.099');
-$('.empresaForm').find('[name="telefone"]').val('34988406670');
-$('.empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
-$('.empresaForm').find('[name="password"]').val('099.099.099.099');
-$('.empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
-
-//Tab 2
-$('.empresaForm').find('[name="cnpj"]').val('099.099.099.099');
-$('.empresaForm').find('[name="nunfunc"]').val('8');
-$('.empresaForm').find('[name="razao"]').val('34988406670');
-$('.empresaForm').find('[name="cep"]').val('38082243');
-$('.empresaForm').find('[name="numero"]').val('686');
-$('.empresaForm').find('[name="complemento"]').val('complemento');
+        //Tab 2
+        $('.empresaForm').find('[name="cnpj"]').val('099.099.099.099');
+        $('.empresaForm').find('[name="nunfunc"]').val('8');
+        $('.empresaForm').find('[name="razao"]').val('34988406670');
+        $('.empresaForm').find('[name="cep"]').val('38082243');
+        $('.empresaForm').find('[name="numero"]').val('686');
+        $('.empresaForm').find('[name="complemento"]').val('complemento');
 
 
 
-//Tab 3
-$('.empresaForm').find('[name="nome"]').val('099.099.099.099');
-$('.empresaForm').find('[name="cpf"]').val('099.099.099.099');
-$('.empresaForm').find('[name="telefone"]').val('34988406670');
-$('.empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
-$('.empresaForm').find('[name="password"]').val('099.099.099.099');
-$('.empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
-*/
+        //Tab 3
+        $('.empresaForm').find('[name="nome"]').val('099.099.099.099');
+        $('.empresaForm').find('[name="cpf"]').val('099.099.099.099');
+        $('.empresaForm').find('[name="telefone"]').val('34988406670');
+        $('.empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
+        $('.empresaForm').find('[name="password"]').val('099.099.099.099');
+        $('.empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
+        */
     </script>
 
-    </body>
+</body>
 
 
 </html>

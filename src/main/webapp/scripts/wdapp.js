@@ -7,10 +7,10 @@ var WebDaptiveAppConfig = {
      * environments and is still secure when using https. */
     useAuthTokenHeader: true,
     //string to check for rest calls to jDpative Back-end so the angular http provider can inject x-auth token
-    restAuthBase: 'qat-sysmgmt-controller-rest',
-    authenticationURL: 'http://localhost:8080/springmvc-angularjs/api/authenticate',
-    base_county_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/county/api',
-    base_procedure_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/procedure/api',
+    restAuthBase: '',
+    authenticationURL: '/api/authenticate',
+    base_county_url: 'http://front01.eu-gb.mybluemix.net/county/api',
+    base_procedure_url: 'http://front01.eu-gb.mybluemix.net/procedure/api',
     fetch_url: '/fetchPage',
     refresh_url: '/refresh',
     create_url: '/insert',
@@ -18,7 +18,7 @@ var WebDaptiveAppConfig = {
     delete_url: '/delete',
 
     //site
-    base_site_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/site/api',
+    base_site_url: 'https://back.eu-gb.mybluemix.net/site/api',
     fetch_url: '/fetchPage',
     refresh_url: '/refresh',
     create_url: '/insert',
@@ -26,14 +26,14 @@ var WebDaptiveAppConfig = {
     delete_url: '/delete',
 
     //produto
-    base_site_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/produto/api',
+    base_site_url: 'https://back.eu-gb.mybluemix.net/produto/api',
     fetch_url: '/fetchPage',
     refresh_url: '/refresh',
     create_url: '/insert',
     update_url: '/update',
     delete_url: '/delete',
 
-    base_empresa_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/entidade/api',
+    base_empresa_url: 'https://back.eu-gb.mybluemix.net/entidade/api',
 
 };
 
