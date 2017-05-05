@@ -67,7 +67,7 @@ public class Autentication {
 		    paramss.set("password", password);
 		   /// URI tgtUrl = rest.postForLocation("http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate", paramss, Collections.emptyMap());
 
-		    ResponseEntity<String> st = rest.postForEntity("http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate", paramss, String.class);
+		    ResponseEntity<String> st = rest.postForEntity("https://back.eu-gb.mybluemix.net/auth/api/authenticate", paramss, String.class);
 		    System.out.println("[" + st.getBody() + "]");
 		    System.out.println("[" + st + "]");
 		    String tk = st.getBody();
@@ -99,7 +99,7 @@ public class Autentication {
 		    paramss.set("password", "devil");
 		   /// URI tgtUrl = rest.postForLocation("http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate", paramss, Collections.emptyMap());
 
-		    ResponseEntity<String> st = rest.postForEntity("http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate", paramss, String.class);
+		    ResponseEntity<String> st = rest.postForEntity("https://back.eu-gb.mybluemix.net/auth/api/authenticate", paramss, String.class);
 		    System.out.println("[" + st.getBody() + "]");
 		    System.out.println("[" + st + "]");
 		    String tk = st.getBody();
