@@ -1,18 +1,62 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="dist/css/select2.css"/>
-<script src="dist/js/select2.min.js"></script>
 
-<div ng-controller="MarcaController as showCase">
-	<table datatable dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" class="row-border hover">
-		<tfoot>
-			<tr>
-				<th>ID
-				</th>
-				<th>Marca
-				</th>
-				<th>Fabricante
-				</th>
-			</tr>
-		</tfoot>
-	</table>
+<div ng-controller="MarcaController">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-2" style="margin-top : 1%;margin-bottom : 1%"><button type="button" class="btn btn-default" ng-click="addUser()"><i class="glyphicon glyphicon-plus"></i> Adiconar Marca</button> </div>
+    </div>
+    <table class="table table-bordered table-hover table-condensed">
+        <tr style="font-weight: bold">
+            <td style="width:35%">Marca</td>
+            <td style="width:30%">Fabricante</td>
+            <td style="width:20%">SAC</td>
+            <td style="width:20%">Email</td>
+            <td style="width:25%"></td>
+        </tr>
+
+        <tr ng-repeat="marca in marcas">
+            <td>
+                <!-- editable username (text with validation) -->
+                <span editable-text="marca.marca" e-name="marca" e-form="rowform" onbeforesave="checkName($data, marca.id)">
+          {{ marca.marca || '' }}
+        </span>
+            </td>
+            <td>
+                <!-- editable status (select-local) -->
+                <span editable-text="marca.fabricante" e-name="fabricante" e-form="rowform">
+          {{ marca.fabricante || '' }}
+        </span>
+            </td>
+            <td>
+                <span editable-text="marca.telefoneList[0].numero" e-name="numero" e-form="rowform">
+          {{ marca.telefoneList[0].numero || '' }}
+        </span>
+            </td>
+            <td>
+                <span editable-text="marca.emailList[0].email" e-name="email" e-form="rowform">
+          {{ marca.emailList[0].email }}
+        </span>
+            </td>
+
+
+            <td style="white-space: nowrap">
+                <!-- form -->
+                <form editable-form name="rowform" onbeforesave="saveUser($data, marca)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == marca">
+                    <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+            save
+          </button>
+                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+            cancel
+          </button>
+                </form>
+                <div class="buttons" ng-show="!rowform.$visible">
+                    <button type="button" class="btn btn-primary" ng-click="rowform.$show()"><i class="fa fa-edit"></i></button>
+                    <button type="button" class="btn btn-danger" ng-click="removeUser(marca)"><i class="fa fa-trash-o"></i></button>
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>

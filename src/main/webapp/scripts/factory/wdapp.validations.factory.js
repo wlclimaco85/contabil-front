@@ -34,6 +34,21 @@
                         }
                     });
                 },
+                produtoEmpresa: function() {
+                    $('.ProdutoEmpresaForm').formValidation({
+                        framework: 'bootstrap',
+                        icon: {
+                            valid: 'glyphicon glyphicon-ok',
+                            invalid: 'glyphicon glyphicon-remove',
+                            validating: 'glyphicon glyphicon-refresh'
+                        },
+                        fields: {
+                            'nome': notEmptyStringMinMaxRegexp,
+                            'email': integerNotEmptyValidation,
+                            'texto': integerNotEmptyValidation,
+                        }
+                    });
+                },
                 cfop: function() {
                     $('.cfopForm').formValidation({
                         framework: 'bootstrap',

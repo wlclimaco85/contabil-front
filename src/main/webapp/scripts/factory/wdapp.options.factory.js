@@ -118,19 +118,21 @@
             .withOption('deferRender', true)
                 // Do not forget to add the scorllY option!!!
                 .withOption('scrollY', 380)
-                .withOption('initComplete', function() {
-                    $('.dataTables_filter input').unbind();
-                    $('<button/>').text('search').attr('id', 'new-search').appendTo('.dataTables_filter');
-                    $('#new-search').on('click', function() {
-                        vm.dtInstance.DataTable.search($('.dataTables_filter input').val()).draw();
-                    })
+                .withOption('initComplete', function(settings, json) {
+                    $('.dt-buttons').find('.dt-button:eq(1)').before(
+                        '<select class="form-control col-sm-3 btn btn-primary dropdown-toggle" data-ng-options="t.name for t in vm.types"' +
+                        'data-ng-model="vm.object.type" style="height: 32px;margin-left: 8px;margin-right: 6px;width: 200px !important;">' +
+                        '<option><a href="#">Ações <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>' +
+                        '<option><a href="#">Remover Todos <span class="badge selected badge-danger main-badge"  data-ng-show="{{showCase.countSeleted()}}"></span></a></option>' +
+                        '</select>'
+                    )
                 })
                 .withPaginationType('full_numbers')
 
             .withBootstrap()
                 .withOption('responsive', true)
                 .withLanguage({
-                    "sEmptyTable": "No hay información disponible",
+                    "sEmptyTable": "Não tem nenhum registro cadastrado",
                     "sInfo": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
                     "sInfoEmpty": "Mostrando 0 a 0 de 0 entradas",
                     "sInfoFiltered": "(filtrada de _MAX_ entradas totales)",
@@ -234,6 +236,20 @@
                 })
 
                 return oOptions;
+            },
+            produtoEmpresa: function(vm, createdRow, scope, _callback, _function) {
+
+                var buttons = [];
+                buttons.push({
+                    text: 'Novo Produto',
+                    key: '4',
+                    action: function(e, dt, node, config) {
+                        dialogFactory.dialog('views/produto/dialog/dProduto.html', "ProdutoInsertController", validationFactory.produtoEmpresa, _function);
+                    }
+                })
+
+                return padrao(vm, createdRow, scope, _callback, buttons, 2, _function);
+
             },
             pdVendas: function(vm, createdRow, scope, _callback, _function) {
 

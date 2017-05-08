@@ -8,7 +8,7 @@ var WebDaptiveAppConfig = {
     useAuthTokenHeader: true,
     //string to check for rest calls to jDpative Back-end so the angular http provider can inject x-auth token
     restAuthBase: '',
-    authenticationURL: '/api/authenticate',
+    authenticationURL: '/springmvc-angularjs/api/authenticate',
     base_county_url: 'http://front01.eu-gb.mybluemix.net/county/api',
     base_procedure_url: 'http://front01.eu-gb.mybluemix.net/procedure/api',
     fetch_url: '/fetchPage',
