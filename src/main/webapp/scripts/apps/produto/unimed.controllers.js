@@ -2,20 +2,19 @@
     angular.module('wdApp.apps.uniMed', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('UniMedController', uniMedController);
 
-    function uniMedController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory) {
-
-        Datatablessss.getTable('/produto/api/uniMed/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, oOptions, aColumns);
+    function uniMedController($scope, fModels, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory, $filter, toastr) {
 
         var vm = this;
         $scope.uniMeds = [];
 
         SysMgmtData.processPostPageData("main/api/request", {
-            url: 'produto/api/uniMed/fetchPage',
+            url: 'produto/api/unimed/fetchPage',
             token: $rootScope.authToken,
             request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
         }, function(res) {
+
             if (res.operationSuccess == true) {
-                $scope.uniMeds = res.uniMedList;
+                $scope.uniMeds = res.unimedList;
                 console.log($scope.uniMeds);
             }
         });
@@ -26,22 +25,26 @@
             }
         };
 
+        $scope.fnShow = function(date) {
+
+            return moment(date.modifyDateUTC).format('DD/MM/YYYY');
+
+        }
+
         $scope.saveUser = function(data, uniMed) {
             //$scope.user not updated yet
-            debugger
+
             var sUrl = "";
             if (uniMed.id) {
-                sUrl = "produto/api/uniMed/update"
+                sUrl = "produto/api/unimed/update"
             } else {
-                sUrl = "produto/api/uniMed/insert"
+                sUrl = "produto/api/unimed/insert"
             }
             //angular.extend(data, new qat.model.UniMed(fModels.amont(data, 'INSERT'), 'INSERT', $rootScope.user.user));
             var uniMed = {
                 id: uniMed.id ? uniMed.id : null,
-                uniMed: data.uniMed,
-                fabricante: data.fabricante,
-                emailList: [{ id: uniMed.emailList ? uniMed.emailList[0].id : null, email: data.email }],
-                telefoneList: [{ id: uniMed.telefoneList ? uniMed.telefoneList[0].id : null, numero: data.numero }]
+                unimed: data.unimed,
+                sigla: data.sigla
             }
             var oObject = new qat.model.UniMed(fModels.amont(uniMed, uniMed.id ? 'UPDATE' : 'INSERT'), uniMed.id ? 'UPDATE' : 'INSERT', $rootScope.user.user);
 
@@ -50,8 +53,8 @@
                 token: $rootScope.authToken,
                 request: new qat.model.reqUniMed(oObject, true, true)
             }, function(res) {
-                debugger
-                $scope.uniMeds = res.uniMedList;
+
+                $scope.uniMeds = res.unimedList;
             });
         };
 
@@ -60,26 +63,27 @@
             var oObject = new qat.model.UniMed(fModels.amont(uniMed, 'DELETE'), 'DELETE', $rootScope.user.user);
 
             SysMgmtData.processPostPageData("main/api/request", {
-                url: "produto/api/uniMed/delete",
+                url: "produto/api/unimed/delete",
                 token: $rootScope.authToken,
                 request: new qat.model.reqUniMed(oObject, true, true)
             }, function(res) {
                 debugger
-                $scope.uniMeds = res.uniMedList;
+                $scope.uniMeds = res.unimedList;
             });
         };
 
         // add user
         $scope.addUser = function() {
-
+            debugger
             $scope.inserted = new qat.model.UniMed({}, 'INSERT', $rootScope.user.user);
             var test = [];
             test[0] = $scope.inserted
 
-            for (var x = 0; x < $scope.uniMeds.length; x++) {
-                test.push($scope.uniMeds[x]);
+            if ($scope.uniMeds) {
+                for (var x = 0; x < $scope.uniMeds.length; x++) {
+                    test.push($scope.uniMeds[x]);
+                }
             }
-
             $scope.uniMeds = [];
             $scope.uniMeds = test;
 

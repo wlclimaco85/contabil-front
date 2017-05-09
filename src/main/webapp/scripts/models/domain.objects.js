@@ -705,8 +705,8 @@ qat.model.fnNFNotaInfoItemImpostoIcmsUfDest = function(_IcmsUfDest,
         valorBaseCalculoDestino: _IcmsUfDest.valorBaseCalculoDestino,
         percentualRelativoFundoCombatePobrezaDestino: _IcmsUfDest.percentualRelativoFundoCombatePobrezaDestino,
         percentualAliquotaInternaDestino: _IcmsUfDest.percentualAliquotaInternaDestino,
-        percentualInterestadual: _IcmsUfDest.percentualInterestadual.value,
-        percentualProvisorioPartilha: _IcmsUfDest.percentualProvisorioPartilha.value,
+        percentualInterestadual: _IcmsUfDest.percentualInterestadual ? _IcmsUfDest.percentualInterestadual.value : null,
+        percentualProvisorioPartilha: _IcmsUfDest.percentualProvisorioPartilha ? _IcmsUfDest.percentualProvisorioPartilha.value : null,
         valorRelativoFundoCombatePobrezaDestino: _IcmsUfDest.valorRelativoFundoCombatePobrezaDestino,
         valorICMSInterestadualDestino: _IcmsUfDest.valorICMSInterestadualDestino,
         valorICMSInterestadualRemetente: _IcmsUfDest.valorICMSInterestadualRemetente,
@@ -1402,7 +1402,7 @@ qat.model.NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao = function(_oObjet, _m
 }
 
 qat.model.Marca = function(_oObjet, _modelAction, _user) {
-    debugger
+
     this.id = _oObjet.id;
     this.marca = _oObjet.marca
     this.fabricante = _oObjet.fabricante
@@ -1412,6 +1412,36 @@ qat.model.Marca = function(_oObjet, _modelAction, _user) {
     this.enderecoList.push(qat.model.fnEndereco(_oObjet.enderecoList ? _oObjet.enderecoList[0] : {}, (_oObjet.enderecoList && _oObjet.emailList[0].id) ? _modelAction : 'INSERT', _user));
     this.telefoneList = [];
     this.telefoneList.push(qat.model.fnTelefones(_oObjet.telefoneList ? _oObjet.telefoneList[0] : {}, (_oObjet.telefoneList && _oObjet.telefoneList[0].id) ? _modelAction : 'INSERT', _user));
+    this.parentId = _oObjet.parentId;
+    this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    this.processId = _oObjet.processId;
+    this.tableEnumValue = _oObjet.tableEnumValue;
+    this.modelAction = _modelAction;
+    this.createUser = _user;
+    this.createDateUTC = (new Date()).getTime();
+    this.modifyUser = _user;
+    this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.UniMed = function(_oObjet, _modelAction, _user) {
+    this.id = _oObjet.id;
+    this.unimed = _oObjet.unimed;
+    this.sigla = _oObjet.sigla;
+    this.parentId = _oObjet.parentId;
+    this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    this.processId = _oObjet.processId;
+    this.tableEnumValue = _oObjet.tableEnumValue;
+    this.modelAction = _modelAction;
+    this.createUser = _user;
+    this.createDateUTC = (new Date()).getTime();
+    this.modifyUser = _user;
+    this.modifyDateUTC = (new Date()).getTime();
+}
+
+qat.model.Categoria = function(_oObjet, _modelAction, _user) {
+    this.id = _oObjet.id;
+    this.categoria = _oObjet.categoria;
+    this.margem = _oObjet.margem;
     this.parentId = _oObjet.parentId;
     this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
     this.processId = _oObjet.processId;

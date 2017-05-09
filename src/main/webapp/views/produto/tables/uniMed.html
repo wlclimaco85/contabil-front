@@ -5,58 +5,49 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-2"></div>
         <div class="col-sm-2"></div>
-        <div class="col-sm-4"></div>
-        <div class="col-sm-2" style="margin-top : 1%;margin-bottom : 1%"><button type="button" class="btn btn-default" ng-click="addUser()"><i class="glyphicon glyphicon-plus"></i> Adiconar Unidade Medida</button> </div>
+        <div class="col-sm-3"></div>
+        <div class="col-sm-3" style="margin-top : 1%;margin-bottom : 1%"><button type="button" class="btn btn-default" ng-click="addUser()"><i class="glyphicon glyphicon-plus"></i> Adiconar Unidade Medida</button> </div>
     </div>
 
     <table class="table table-bordered table-hover table-condensed">
         <tr style="font-weight: bold">
-            <td style="width:35%">#</td>
+            <td style="width:10%">#</td>
             <td style="width:35%">Nome</td>
-            <td style="width:30%">Abreviação</td>
-            <td style="width:20%">Criado por</td>
-            <td style="width:20%">Data</td>
+            <td style="width:15%">Abreviação</td>
+            <td style="width:15%">Criado por</td>
+            <td style="width:15%">Data</td>
             <td style="width:25%"></td>
         </tr>
 
-        <tr ng-repeat="unimed in unimeds">
+        <tr ng-repeat="unimed in uniMeds">
             <td>
                 <!-- editable username (text with validation) -->
-                <span editable-text="unimed.id" e-name="id" e-form="rowform" onbeforesave="checkName($data, marca.id)">
+                <span>
           {{ unimed.id || '' }}
         </span>
             </td>
             <td>
                 <!-- editable status (select-local) -->
-                <span editable-text="unimed.nome" e-name="nome" e-form="rowform">
-          {{ unimed.nome || '' }}
+                <span editable-text="unimed.unimed" e-name="unimed" e-form="rowform">
+          {{ unimed.unimed || '' }}
         </span>
             </td>
             <td>
-                <span editable-text="unimed.abreviacao" e-name="abreviacao" e-form="rowform">
-          {{ unimed.abreviacao || '' }}
-        </span>
-            </td>
-            <td ng-show="unimed.createUser != 'null' && unimed.modifyUser == 'null'" ng-hide="unimed.createUser == 'null' && unimed.modifyUser != 'null'">
-                <span editable-text="unimed.createUser" e-name="email" e-form="rowform">
-          {{ unimed.createUser }}
-        </span>
-            </td>
-            <td ng-show="unimed.createDateUTC != 'null' && unimed.modifyDateUTC == 'null'" ng-hide="unimed.createDateUTC == 'null' && unimed.modifyDateUTC != 'null'">
-                <span editable-text="unimed.createDateUTC" e-name="email" e-form="rowform">
-          {{ unimed.createDateUTC }}
+                <span editable-text="unimed.sigla" e-name="sigla" e-form="rowform">
+          {{ unimed.sigla || '' }}
         </span>
             </td>
 
-            <td ng-show="unimed.modifyUser != 'null'" ng-hide="unimed.modifyUser == 'null'">
-                <span editable-text="unimed.modifyUser" e-name="email" e-form="rowform">
+
+            <td ng-show="unimed.modifyUser != null" ng-hide="unimed.modifyUser == null">
+                <span>
           {{ unimed.modifyUser }}
         </span>
             </td>
 
-            <td ng-show="unimed.modifyDateUTC != 'null'" ng-hide="unimed.modifyDateUTC == 'null'">
-                <span editable-text="unimed.modifyDateUTC" e-name="email" e-form="rowform">
-          {{ unimed.modifyDateUTC }}
+            <td ng-show="unimed.modifyDateUTC != null" ng-hide="unimed.modifyDateUTC == null">
+                <span>
+          {{ fnShow(unimed) }}
         </span>
             </td>
 

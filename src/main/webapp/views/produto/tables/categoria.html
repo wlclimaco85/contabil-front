@@ -5,46 +5,56 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-2"></div>
         <div class="col-sm-2"></div>
-        <div class="col-sm-4"></div>
-        <div class="col-sm-2" style="margin-top : 1%;margin-bottom : 1%"><button type="button" class="btn btn-default" ng-click="addUser()"><i class="glyphicon glyphicon-plus"></i> Adiconar Marca</button> </div>
+        <div class="col-sm-3"></div>
+        <div class="col-sm-3" style="margin-top : 1%;margin-bottom : 1%"><button type="button" class="btn btn-default" ng-click="addUser()"><i class="glyphicon glyphicon-plus"></i> Adiconar Categoria</button> </div>
     </div>
+
     <table class="table table-bordered table-hover table-condensed">
         <tr style="font-weight: bold">
-            <td style="width:35%">Marca</td>
-            <td style="width:30%">Fabricante</td>
-            <td style="width:20%">SAC</td>
-            <td style="width:20%">Email</td>
+            <td style="width:10%">#</td>
+            <td style="width:35%">Categoria</td>
+            <td style="width:15%">Margem</td>
+            <td style="width:15%">Criado por</td>
+            <td style="width:15%">Data</td>
             <td style="width:25%"></td>
         </tr>
 
-        <tr ng-repeat="marca in marcas">
+        <tr ng-repeat="categoria in categorias">
             <td>
                 <!-- editable username (text with validation) -->
-                <span editable-text="marca.marca" e-name="marca" e-form="rowform" onbeforesave="checkName($data, marca.id)">
-          {{ marca.marca || '' }}
+                <span>
+          {{ categoria.id || '' }}
         </span>
             </td>
             <td>
                 <!-- editable status (select-local) -->
-                <span editable-text="marca.fabricante" e-name="fabricante" e-form="rowform">
-          {{ marca.fabricante || '' }}
+                <span editable-text="categoria.categoria" e-name="categoria" e-form="rowform">
+          {{ categoria.categoria || '' }}
         </span>
             </td>
             <td>
-                <span editable-text="marca.telefoneList[0].numero" e-name="numero" e-form="rowform">
-          {{ marca.telefoneList[0].numero || '' }}
+                <span editable-text="categoria.margem" e-name="margem" e-form="rowform">
+          {{ categoria.margem || '' }}
         </span>
             </td>
-            <td>
-                <span editable-text="marca.emailList[0].email" e-name="email" e-form="rowform">
-          {{ marca.emailList[0].email }}
+
+
+            <td ng-show="categoria.modifyUser != null" ng-hide="categoria.modifyUser == null">
+                <span>
+          {{ categoria.modifyUser }}
+        </span>
+            </td>
+
+            <td ng-show="categoria.modifyDateUTC != null" ng-hide="categoria.modifyDateUTC == null">
+                <span>
+          {{ fnShow(categoria) }}
         </span>
             </td>
 
 
             <td style="white-space: nowrap">
                 <!-- form -->
-                <form editable-form name="rowform" onbeforesave="saveUser($data, marca)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == marca">
+                <form editable-form name="rowform" onbeforesave="saveUser($data, categoria)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == categoria">
                     <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
             save
           </button>
@@ -54,7 +64,7 @@
                 </form>
                 <div class="buttons" ng-show="!rowform.$visible">
                     <button type="button" class="btn btn-primary" ng-click="rowform.$show()"><i class="fa fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger" ng-click="removeUser(marca)"><i class="fa fa-trash-o"></i></button>
+                    <button type="button" class="btn btn-danger" ng-click="removeUser(categoria)"><i class="fa fa-trash-o"></i></button>
                 </div>
             </td>
         </tr>
