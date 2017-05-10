@@ -23,14 +23,9 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qat.framework.model.BaseModel.PersistenceActionEnum;
-import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
-import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
-import com.qat.samples.sysmgmt.nf.model.response.NotaFiscalSaidaResponse;
-import com.qat.samples.sysmgmt.nf.model.response.OrcamentoResponse;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.response.OrdemServicoResponse;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
-import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
 import br.com.emmanuelneri.app.model.ModelToken;
 

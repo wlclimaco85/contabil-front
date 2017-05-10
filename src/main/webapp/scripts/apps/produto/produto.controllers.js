@@ -35,15 +35,14 @@
          }
 
          function fnEdit(person) {
+             $rootScope.produto = person;
 
-             $rootScope.doisValor = person;
-
-             dialogFactory.dialog('views/financeiro/dialog/dSituacao.html', "SituacaoUpdateController", validationFactory.contasPagar(), reloadData());
+             dialogFactory.dialog('views/produto/dialog/dProduto.html', "ProdutoUpdateController", validationFactory.contasPagar(), reloadData());
          }
 
          function fnDelete(person) {
-             $rootScope.doisValor = person;
-             dialogFactory.dialog('views/util/dialog/dDelete.html', "SituacaoDeleteController", validationFactory.contasPagar(), reloadData());
+             $rootScope.produto = person;
+             dialogFactory.dialog('views/produto/dialog/dProduto.html', "ProdutoDeleteController", validationFactory.contasPagar(), reloadData());
          }
 
          function actionsHtml(data, type, full, meta) {
@@ -118,7 +117,7 @@
 
              return out;
          };
-     }).controller('ProdutoInsertController', function($rootScope, $scope, fModels, SysMgmtData, fProduto, $templateCache, $http, $timeout, $interval) {
+     }).controller('ProdutoInsertController', function($rootScope, $scope, fModels, SysMgmtData, toastr, $element, close, fProduto, $templateCache, $http, $timeout, $interval) {
          var vm = this;
 
 
@@ -199,29 +198,6 @@
 
          $scope.icmsST = [];
 
-
-         $scope.updateSlotName = function(updatedModel) {
-
-             /* var tgbMaintenanceRequest = {
-                  tgbId: vm.towerSelected,
-                  slotName: updatedModel.slotDisplayName,
-                  slotId: updatedModel.slotChannelId
-              };
-
-              $http({
-                  headers: {'Content-Type': 'application/json; charset=utf-8'},
-                  url: "bandplan/updateslotname",
-                  method: "POST",
-                  data: JSON.stringify(tgbMaintenanceRequest)
-              }).then(function(oResponse){
-
-                  submitTower($scope.filterForm);
-              });*/
-         }
-
-
-
-
          $scope.today = function() {
              return $scope.dt = new Date();
          };
@@ -240,9 +216,13 @@
          };
          $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
          $scope.format = $scope.formats[1];
-         var fnCallBack = function(oResponse) {
-
-             console.log(oResponse)
+         var fnCallBack = function(res) {
+             if (res.operationSuccess == true) {
+                 $element.modal('hide');
+                 close(null, 500);
+                 toastr.success('Deu Certo seu tanga.', 'Sucess');
+                 $rootScope.reloadDataSit(function(data) { debugger })
+             }
          }
          $scope.saveProduto = function() {
              fProduto.fnMontaObjeto($scope.produto, $scope.tributacao, $scope.produtoEmpresa, 'INSERT', "produto/api/produtoParent/insert/", fnCallBack);
@@ -253,9 +233,11 @@
      angular.module('wdApp.apps.produto.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
          .controller('ProdutoUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fProduto) {
              var vm = this;
-             $scope.produto = {};
-             $scope.produto = $rootScope.produto;
-             console.log($rootScope.produto)
+             debugger
+             $scope.produtoEmpresa = {};
+             $scope.produtoEmpresa = $rootScope.produto;
+             $scope.produto = $rootScope.produto.prodId;
+             console.log($rootScope.produtoEmpresa)
              $scope.saveProduto = function() {
                  fProduto.fnMontaObjeto($scope.produto, $scope.endereco, 'UPDATE', "site/api/produto/update/", fnCallBack);
              }

@@ -25,7 +25,7 @@
 
         $scope.saveUser = function(data, marca) {
             //$scope.user not updated yet
-            debugger
+
             var sUrl = "";
             if (marca.id) {
                 sUrl = "produto/api/marca/update"
@@ -37,8 +37,8 @@
                 id: marca.id ? marca.id : null,
                 marca: data.marca,
                 fabricante: data.fabricante,
-                emailList: [{ id: marca.emailList ? marca.emailList[0].id : null, email: data.email }],
-                telefoneList: [{ id: marca.telefoneList ? marca.telefoneList[0].id : null, numero: data.numero }]
+                emailList: [{ id: (marca.emailList.length > 0 ? marca.emailList[0].id : null), email: data.email }],
+                telefoneList: [{ id: (marca.telefoneList.length > 0 ? marca.telefoneList[0].id : null), numero: data.numero }]
             }
             var oObject = new qat.model.Marca(fModels.amont(marca, marca.id ? 'UPDATE' : 'INSERT'), marca.id ? 'UPDATE' : 'INSERT', $rootScope.user.user);
 
@@ -47,8 +47,11 @@
                 token: $rootScope.authToken,
                 request: new qat.model.reqMarca(oObject, true, true)
             }, function(res) {
-                debugger
-                $scope.marcas = res.marcaList;
+                if (res.operationSuccess == true) {
+                    toastr.success('Deu Certo seu tanga.', 'Sucess');
+                    $scope.marcas = res.marcaList;
+                }
+
             });
         };
 
@@ -61,7 +64,7 @@
                 token: $rootScope.authToken,
                 request: new qat.model.reqMarca(oObject, true, true)
             }, function(res) {
-                debugger
+                toastr.success('Deu Certo seu tanga.', 'Sucess');
                 $scope.marcas = res.marcaList;
             });
         };

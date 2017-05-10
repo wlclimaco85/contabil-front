@@ -1401,6 +1401,52 @@ qat.model.NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao = function(_oObjet, _m
     this.modifyDateUTC = (new Date()).getTime();
 }
 
+qat.model.fnDoisValores = function(id, _value, _nome, _tabela, modelAction, _user, _descricao, _type, _page) {
+
+    telefones = {
+        id: id,
+        value: _value,
+        descricao: _descricao,
+        nome: _nome,
+        parentId: 0,
+        emprId: JSON.parse(localStorage.getItem('empresa')).id,
+        processId: 0,
+        doisValorType: {
+            id: _type
+        },
+        pagina: {
+            id: _page
+        },
+        modelAction: 0,
+        modelAction: modelAction,
+        createUser: _user,
+        createDateUTC: (new Date()).getTime(),
+        modifyUser: _user,
+        modifyDateUTC: (new Date()).getTime()
+    }
+
+    return telefones;
+}
+
+qat.model.fnDoisValor1 = function(_oObjet, _modelAction, _user) {
+
+    this.id = _oObjet ? _oObjet.id : null;
+    /*    this.value = _oObjet.value;
+        this.descricao = _oObjet.descricao;
+        this.nome = _oObjet.nome;
+        this.doisValorType = _oObjet.doisValorType;
+        this.pagina = _oObjet.pagina;
+        this.parentId = _oObjet.parentId;
+        this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+        this.processId = _oObjet.processId;
+        this.tableEnumValue = _oObjet.tableEnumValue;
+        this.modelAction = _modelAction;
+        this.createUser = _user;
+        this.createDateUTC = (new Date()).getTime();
+        this.modifyUser = _user;
+        this.modifyDateUTC = (new Date()).getTime();*/
+}
+
 qat.model.Marca = function(_oObjet, _modelAction, _user) {
 
     this.id = _oObjet.id;

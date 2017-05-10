@@ -20,7 +20,7 @@
         <tr ng-repeat="marca in marcas">
             <td>
                 <!-- editable username (text with validation) -->
-                <span editable-text="marca.marca" e-name="marca" e-form="rowform" onbeforesave="checkName($data, marca.id)">
+                <span editable-text="marca.marca" e-name="marca" e-form="rowform">
           {{ marca.marca || '' }}
         </span>
             </td>

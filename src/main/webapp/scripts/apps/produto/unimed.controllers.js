@@ -14,6 +14,7 @@
         }, function(res) {
 
             if (res.operationSuccess == true) {
+                $scope.uniMeds = [];
                 $scope.uniMeds = res.unimedList;
                 console.log($scope.uniMeds);
             }
@@ -27,7 +28,7 @@
 
         $scope.fnShow = function(date) {
 
-            return moment(date.modifyDateUTC).format('DD/MM/YYYY');
+            return moment(date.modifyDateUTC).format('DD/MM/YYYY - HH:mm:s');
 
         }
 
@@ -53,7 +54,8 @@
                 token: $rootScope.authToken,
                 request: new qat.model.reqUniMed(oObject, true, true)
             }, function(res) {
-
+                toastr.success('Deu Certo seu tanga.', 'Sucess');
+                $scope.uniMeds = [];
                 $scope.uniMeds = res.unimedList;
             });
         };
@@ -67,14 +69,14 @@
                 token: $rootScope.authToken,
                 request: new qat.model.reqUniMed(oObject, true, true)
             }, function(res) {
-                debugger
+                toastr.success('Deu Certo seu tanga.', 'Sucess');
+                $scope.uniMeds = [];
                 $scope.uniMeds = res.unimedList;
             });
         };
 
         // add user
         $scope.addUser = function() {
-            debugger
             $scope.inserted = new qat.model.UniMed({}, 'INSERT', $rootScope.user.user);
             var test = [];
             test[0] = $scope.inserted

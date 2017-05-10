@@ -53,7 +53,7 @@
                 token: $rootScope.authToken,
                 request: new qat.model.reqCategoria(oObject, true, true)
             }, function(res) {
-
+                toastr.success('Deu Certo seu tanga.', 'Sucess');
                 $scope.categorias = res.categoriaList;
             });
         };
@@ -67,14 +67,14 @@
                 token: $rootScope.authToken,
                 request: new qat.model.reqCategoria(oObject, true, true)
             }, function(res) {
-                debugger
+                toastr.success('Deu Certo seu tanga.', 'Sucess');
                 $scope.categorias = res.categoriaList;
             });
         };
 
         // add user
         $scope.addUser = function() {
-            debugger
+
             $scope.inserted = new qat.model.Categoria({}, 'INSERT', $rootScope.user.user);
             var test = [];
             test[0] = $scope.inserted

@@ -175,7 +175,7 @@
                         <label for="exampleInputPassword1">Regime</label>
                         <div class="row">
                             <ui-select ng-model="tributacao.imposto.icms.regime" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
-                                <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                 <ui-select-choices repeat="item in regime | filter: $select.search">
                                     <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
@@ -190,7 +190,7 @@
                     <label for="exampleInputPassword1">ICMS - Situação Tributária</label>
                     <div class="row">
                         <ui-select ng-model="tributacao.imposto.icms.sitTributaria" theme="bootstrap">
-                            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                             <ui-select-choices repeat="item in icmsST | filter: $select.search">
                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
@@ -206,7 +206,7 @@
                             <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS</label>
                             <div class="row">
                                 <ui-select ng-model="tributacao.imposto.icms.icms00.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
-                                    <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                     <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
                                         <div ng-bind-html="item.descricao | highlight: $select.search"></div>
                                     </ui-select-choices>
@@ -246,8 +246,8 @@
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS</label>
                                             <div class="row">
-                                                <ui-select ng-model="tributacao.imposto.icms.icms10.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
-                                                    <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                                <ui-select ng-model="tributacao.imposto.icms.icms10.modalidadeBCICMS" theme="bootstrap">
+                                                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                                     <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
                                                         <div ng-bind-html="item.descricao | highlight: $select.search"></div>
                                                     </ui-select-choices>
@@ -286,7 +286,7 @@
                                             <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS ST</label>
                                             <div class="row">
                                                 <ui-select ng-model="tributacao.imposto.icms.icms10.modalidadeBCICMSST" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
-                                                    <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                                     <ui-select-choices repeat="item in icmsMBCST | filter: $select.search">
                                                         <div ng-bind-html="item.descricao | highlight: $select.search"></div>
                                                     </ui-select-choices>
@@ -359,7 +359,7 @@
                                             <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS</label>
                                             <div class="row">
                                                 <ui-select ng-model="tributacao.imposto.icms.icms00.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
-                                                    <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                                     <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
                                                         <div ng-bind-html="item.descricao | highlight: $select.search"></div>
                                                     </ui-select-choices>
@@ -435,7 +435,7 @@
                                             <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS ST</label>
                                             <div class="row">
                                                 <ui-select ng-model="tributacao.imposto.icms.icms00.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
-                                                    <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                                     <ui-select-choices repeat="item in icmsMBCST | filter: $select.search">
                                                         <div ng-bind-html="item.descricao | highlight: $select.search"></div>
                                                     </ui-select-choices>
@@ -499,7 +499,7 @@
                             <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS</label>
                             <div class="row ">
                                 <ui-select ng-model="tributacao.imposto.icms.icms20.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
-                                    <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                     <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
                                         <div ng-bind-html="item.descricao | highlight: $select.search"></div>
                                     </ui-select-choices>
@@ -533,7 +533,7 @@
                             <label for="exampleInputPassword1">Desoneracao ICMS</label>
                             <div class="row ">
                                 <ui-select ng-model="tributacao.imposto.icms.icms20.desoneracao" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
-                                    <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                     <ui-select-choices repeat="item in icmsMD | filter: $select.search">
                                         <div ng-bind-html="item.descricao | highlight: $select.search"></div>
                                     </ui-select-choices>
@@ -553,7 +553,7 @@
                         <label for="exampleInputPassword1">Motivo desoneração</label>
                         <div class="row">
                             <ui-select ng-model="tributacao.imposto.icms.icms30.desoneracao" theme="bootstrap">
-                                <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                 <ui-select-choices repeat="item in icmsMD | filter: $select.search">
                                     <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
@@ -566,7 +566,7 @@
                             <label for="exampleInputPassword1">Modalidade da BC ST</label>
                             <div class="row ">
                                 <ui-select ng-model="tributacao.imposto.icms.icms30.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
-                                    <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                     <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
                                         <div ng-bind-html="item.descricao | highlight: $select.search"></div>
                                     </ui-select-choices>
@@ -625,7 +625,7 @@
                             <label for="exampleInputPassword1">Motivo da desoneração ICMS</label>
                             <div class="row">
                                 <ui-select ng-model="tributacao.imposto.icms.icms40.motivoDesoneracaoICMS" theme="bootstrap">
-                                    <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                     <ui-select-choices repeat="item in icmsMD | filter: $select.search">
                                         <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
@@ -647,7 +647,7 @@
                             <label for="exampleInputPassword1">Motivo da desoneração ICMS</label>
                             <div class="row">
                                 <ui-select ng-model="tributacao.imposto.icms.icms41.motivoDesoneracaoICMS" theme="bootstrap">
-                                    <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                     <ui-select-choices repeat="item in icmsMD | filter: $select.search">
                                         <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
@@ -675,7 +675,7 @@
                             <label for="exampleInputPassword1">Motivo da desoneração ICMS</label>
                             <div class="row ">
                                 <ui-select ng-model="tributacao.imposto.icms.icms50.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
-                                    <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                     <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
                                         <div ng-bind-html="item.descricao | highlight: $select.search"></div>
                                     </ui-select-choices>
@@ -695,7 +695,7 @@
                             <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS</label>
                             <div class="row ">
                                 <ui-select ng-model="tributacao.imposto.icms.icms51.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
-                                    <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                     <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
                                         <div ng-bind-html="item.descricao | highlight: $select.search"></div>
                                     </ui-select-choices>
@@ -750,7 +750,7 @@
                                             <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS</label>
                                             <div class="row ">
                                                 <ui-select ng-model="tributacao.imposto.icms.icms70.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
-                                                    <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                                     <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
                                                         <div ng-bind-html="item.descricao | highlight: $select.search"></div>
                                                     </ui-select-choices>
@@ -781,7 +781,7 @@
                                             <label for="exampleInputPassword1">Motivo desoneração</label>
                                             <div class="row ">
                                                 <ui-select ng-model="tributacao.imposto.icms.icms70.desoneracao" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
-                                                    <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                                     <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
                                                         <div ng-bind-html="item.descricao | highlight: $select.search"></div>
                                                     </ui-select-choices>
@@ -882,7 +882,7 @@
                                             <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS</label>
                                             <div class="row ">
                                                 <ui-select ng-model="tributacao.imposto.icms.icms90.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
-                                                    <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                                     <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
                                                         <div ng-bind-html="item.descricao | highlight: $select.search"></div>
                                                     </ui-select-choices>
@@ -913,7 +913,7 @@
                                             <label for="exampleInputPassword1">Motivo desoneração</label>
                                             <div class="row ">
                                                 <ui-select ng-model="tributacao.imposto.icms.icms90.desoneracao" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
-                                                    <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                                     <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
                                                         <div ng-bind-html="item.descricao | highlight: $select.search"></div>
                                                     </ui-select-choices>
@@ -999,7 +999,7 @@
                             <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS</label>
                             <div class="row">
                                 <ui-select ng-model="tributacao.imposto.icms.icms00.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
-                                    <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                     <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
                                         <div ng-bind-html="item.descricao | highlight: $select.search"></div>
                                     </ui-select-choices>
@@ -1026,7 +1026,7 @@
                             <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS ST</label>
                             <div class="row">
                                 <ui-select ng-model="tributacao.imposto.icms.icms00.modalidadeBCICMS" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
-                                    <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                     <ui-select-choices repeat="item in icmsMBCST | filter: $select.search">
                                         <div ng-bind-html="item.descricao | highlight: $select.search"></div>
                                     </ui-select-choices>
@@ -1090,7 +1090,7 @@
                         <label for="exampleInputPassword1">ICMS - Origem</label>
                         <div class="row">
                             <ui-select ng-model="tributacao.imposto.icms.icmsPartilhado.origem" theme="bootstrap">
-                                <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                 <ui-select-choices repeat="item in icmsOri | filter: $select.search">
                                     <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
@@ -1110,7 +1110,7 @@
                         <label for="exampleInputPassword1">ICMS - Origem</label>
                         <div class="row">
                             <ui-select ng-model="tributacao.imposto.icms.icmsst.origem" theme="bootstrap">
-                                <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                 <ui-select-choices repeat="item in icmsOri | filter: $select.search">
                                     <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
@@ -1122,7 +1122,7 @@
                         <label for="exampleInputPassword1">valorBCICMSSTRetidoUFRemetente</label>
                         <div class="row">
                             <ui-select ng-model="tributacao.imposto.icms.icmsst.valorBCICMSSTRetidoUFRemetente" theme="bootstrap">
-                                <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                 <ui-select-choices repeat="item in icmsOri | filter: $select.search">
                                     <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
@@ -1203,7 +1203,7 @@
                         <label for="exampleInputPassword1">Modalidade BC ST</label>
                         <div class="row">
                             <ui-select ng-model="tributacao.imposto.icms.icmssn201.modalidadeBCICMSST" theme="bootstrap">
-                                <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                 <ui-select-choices repeat="item in icmsOri | filter: $select.search">
                                     <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
@@ -1279,7 +1279,7 @@
                         <label for="exampleInputPassword1">Modalidade BC ST</label>
                         <div class="row">
                             <ui-select ng-model="tributacao.imposto.icms.icmssn202.modalidadeBCICMSST" theme="bootstrap">
-                                <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                 <ui-select-choices repeat="item in icmsOri | filter: $select.search">
                                     <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
@@ -1336,7 +1336,7 @@
                         <label for="exampleInputPassword1">Modalidade BC ST</label>
                         <div class="row">
                             <ui-select ng-model="tributacao.imposto.icms.icmssn203.modalidadeBCICMSST" theme="bootstrap">
-                                <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                 <ui-select-choices repeat="item in icmsOri | filter: $select.search">
                                     <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
@@ -1513,7 +1513,7 @@
                     <label for="exampleInputPassword1">IPI - Situação tributária</label>
                     <div class="row">
                         <ui-select ng-model="tributacao.imposto.ipi.sitTributaria" theme="bootstrap" on-select="getInputsIPI($item, $model)">
-                            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                             <ui-select-choices repeat="item in iPISitTributaria | filter: $select.search">
                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
@@ -1573,7 +1573,7 @@
                     <div class="form-group">
                         <label for="exampleInputPassword1">Tipo de cálculo</label>
                         <ui-select ng-model="tributacao.imposto.ipi.tipoCalculo" theme="bootstrap">
-                            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                             <ui-select-choices repeat="item in tipoCalc | filter: $select.search">
                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
@@ -1612,7 +1612,7 @@
                     <label for="exampleInputPassword1">PIS - Situação tributária</label>
                     <div class="row">
                         <ui-select ng-model="tributacao.imposto.pis.pISSituaTributaria" theme="bootstrap" on-select="getInputsPIS($item, $model)">
-                            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                             <ui-select-choices repeat="item in pisST | filter: $select.search">
                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
@@ -1644,7 +1644,7 @@
                     <label for="exampleInputPassword1">Tipo de cálculo ST</label>
                     <div class="row">
                         <ui-select ng-model="tributacao.imposto.pis.tipocalculoSubstTrib" theme="bootstrap">
-                            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                             <ui-select-choices repeat="item in tipoCalc | filter: $select.search">
                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
@@ -1684,7 +1684,7 @@
                     <label for="exampleInputPassword1">COFINS - Situação tributária</label>
                     <div class="row">
                         <ui-select ng-model="tributacao.imposto.cofins.pISSituaTributaria" theme="bootstrap" on-select="getInputsCOFINS($item, $model)">
-                            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                             <ui-select-choices repeat="item in pisST | filter: $select.search">
                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
@@ -1717,7 +1717,7 @@
                     <label for="exampleInputPassword1">Tipo de cálculo (ST)</label>
                     <div class="row">
                         <ui-select ng-model="tributacao.imposto.cofins.tipocalculoSubstTrib" theme="bootstrap">
-                            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.descricao}}</ui-select-match>
+                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                             <ui-select-choices repeat="item in tipoCalc | filter: $select.search">
                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 

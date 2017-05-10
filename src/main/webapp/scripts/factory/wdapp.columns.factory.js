@@ -1127,68 +1127,111 @@
                         }).withOption('width', '100px'),
                         DTColumnBuilder.newColumn(null).withTitle('NCM').renderWith(function(data, type, full, meta) {
 
-                            return '<p>' + data.prodId.ncm + '</p>';
+                            return '<p>' + data.prodId.ncm ? data.prodId.ncm : "" + '</p>';
                         }).withOption('width', '50px'),
                         DTColumnBuilder.newColumn(null).withTitle('Cod Barra').renderWith(function(data, type, full, meta) {
 
-                            return '<p>' + data.prodId.cdBarras + '</p>';
+                            return '<p>' + data.prodId.cdBarras ? data.prodId.cdBarras : "" + '</p>';
                         }).withOption('width', '100px'),
                         DTColumnBuilder.newColumn(null).withTitle('Data Cadastro').renderWith(function(data, type, full, meta) {
 
                             return '<p>' + data.prodId.dataCreate + '</p>';
-                        }).withOption('width', '100px'),
+                        }).withOption('width', '100px').notVisible(),
                         DTColumnBuilder.newColumn(null).withTitle('Estoque Atual').renderWith(function(data, type, full, meta) {
                             var estoqueList = "0";
+
                             if (data.estoqueList.length > 0) {
                                 for (var x = 0; x < data.estoqueList.length; x++) {
                                     if (data.estoqueList[x].estoqueTypeEnum == "ATUAL") {
-                                        estoqueList = data.estoqueList[x].quant + "<br><small>" + data.estoqueList[x].ultimoMov + "</small>"
+                                        estoqueList = (data.estoqueList[x].quant ? data.estoqueList[x].quant : 0) + " " + " <br><small>" + data.estoqueList[x].ultimoMov ? moment(data.estoqueList[x].ultimoMov).format('DD/MM/YYYY H:hh') : "" + "</small>"
                                     }
                                 }
                             }
                             return '<p>' + estoqueList + '</p>';
                         }).withOption('width', '100px'),
-                        DTColumnBuilder.newColumn('status').withTitle('Status'),
-                        DTColumnBuilder.newColumn(null).withTitle('Nome Produto').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Tributação').renderWith(function(data, type, full, meta) {
 
-                            return '<p>' + data.prodId.produto + '</p>';
+                            return '<p>' + data.tributacao ? data.tributacao.descricao : '' + '</p>';
                         }).withOption('width', '100px'),
-                        DTColumnBuilder.newColumn('cEST').withTitle('cEST').notVisible(),
-                        DTColumnBuilder.newColumn('exceçãoIPI').withTitle('exceçãoIPI').notVisible(),
                         DTColumnBuilder.newColumn('informAdicionaisParaNFe').withTitle('informAdicionaisParaNFe').notVisible(),
                         DTColumnBuilder.newColumn('anotainternas').withTitle('anotainternas').notVisible(),
-                        DTColumnBuilder.newColumn('unidTributada').withTitle('unidTributada').notVisible(),
-                        DTColumnBuilder.newColumn('categoria').withTitle('Categoria').notVisible(),
-                        DTColumnBuilder.newColumn('marca').withTitle('marca').notVisible(),
-                        DTColumnBuilder.newColumn('pesolíquido').withTitle('pesolíquido').notVisible(),
-                        DTColumnBuilder.newColumn('pesobruto').withTitle('pesobruto').notVisible(),
-                        DTColumnBuilder.newColumn('cFOPPadraoNFe').withTitle('cFOPPadraoNFe').notVisible(),
-                        DTColumnBuilder.newColumn('IcmsSitTributaria').withTitle('IcmsSitTributaria').notVisible(),
-                        DTColumnBuilder.newColumn('iCMSOrigem').withTitle('iCMSOrigem').notVisible(),
-                        DTColumnBuilder.newColumn('iPISitTributaria').withTitle('iPISitTributaria').notVisible(),
-                        DTColumnBuilder.newColumn('classeCigarrosBebidas').withTitle('classeCigarrosBebidas').notVisible(),
-                        DTColumnBuilder.newColumn('cNPJProdutor').withTitle('cNPJProdutor').notVisible(),
-                        DTColumnBuilder.newColumn('codControleIPI').withTitle('codControleIPI').notVisible(),
-                        DTColumnBuilder.newColumn('qtdSeloIPI').withTitle('qtdSeloIPI').notVisible(),
-                        DTColumnBuilder.newColumn('codEnquadramento').withTitle('codEnquadramento').notVisible(),
-                        DTColumnBuilder.newColumn('tipoCalculo').withTitle('tipoCalculo').notVisible(),
-                        DTColumnBuilder.newColumn('aliquotaIPI').withTitle('aliquotaIPI').notVisible(),
-                        DTColumnBuilder.newColumn('pISSituaTributaria').withTitle('pISSituaTributaria').notVisible(),
-                        DTColumnBuilder.newColumn('valorUnidtribPIS').withTitle('valorUnidtribPIS').notVisible(),
-                        DTColumnBuilder.newColumn('tipocalculoSubstTrib').withTitle('tipocalculoSubstTrib').notVisible(),
-                        DTColumnBuilder.newColumn('valorTribPISST').withTitle('valorTribPISST').notVisible(),
-                        DTColumnBuilder.newColumn('cOFINSSituatributaria').withTitle('cOFINSSituatributaria').notVisible(),
-                        DTColumnBuilder.newColumn('valorTribCOFINS').withTitle('valorTribCOFINS').notVisible(),
-                        DTColumnBuilder.newColumn('tipoCalculoSubstTrib').withTitle('tipoCalculoSubstTrib').notVisible(),
-                        DTColumnBuilder.newColumn('aliquotaCOFINSST').withTitle('aliquotaCOFINSST').notVisible(),
-                        DTColumnBuilder.newColumn('estMinimo').withTitle('estMinimo').notVisible(),
-                        DTColumnBuilder.newColumn('estMaximo').withTitle('estMaximo').notVisible(),
-                        DTColumnBuilder.newColumn('margemLucro').withTitle('margemLucro').notVisible(),
-                        DTColumnBuilder.newColumn('precoVenda').withTitle('precoVenda'),
-                        DTColumnBuilder.newColumn('precoCusto').withTitle('precoCusto').notVisible(),
+                        DTColumnBuilder.newColumn(null).withTitle('unidTributada').renderWith(function(data, type, full, meta) {
+
+                            return '<p>' + data.prodId ? (data.prodId.uniMed ? data.prodId.uniMed.sigla : "") : "" + '</p>';
+
+                        }).withOption('width', '100px').notVisible(),
+                        DTColumnBuilder.newColumn(null).withTitle('Categoria').renderWith(function(data, type, full, meta) {
+
+                            return '<p>' + data.categoria ? (data.categoria.categoria ? data.categoria.categoria : "") : "" + '</p>';
+                        }).withOption('width', '100px').notVisible(),
+                        DTColumnBuilder.newColumn(null).withTitle('Marca').renderWith(function(data, type, full, meta) {
+
+                            return '<p>' + data.prodId ? (data.prodId.marca ? data.prodId.marca.marca : "") : "" + '</p>';
+                        }).withOption('width', '100px').notVisible(),
+                        DTColumnBuilder.newColumn('pesoLiquido').withTitle('Peso Líquido').notVisible(),
+                        DTColumnBuilder.newColumn('pesoBruto').withTitle('pesobruto').notVisible(),
+                        DTColumnBuilder.newColumn(null).withTitle("Estoque Min.").renderWith(function(data, type, full, meta) {
+
+                            var sHtml = "";
+                            for (var x = 0; x < data.estoqueList; x++) {
+                                if (data.estoqueList[x].estoqueTypeEnumValue == 2) {
+                                    sHtml = '<p>' + data.estoqueList[x].quant ? data.estoqueList[x].quant : 0 + '</p>';
+                                }
+                            }
+
+                            return sHtml;
+                        }).withOption('width', '100px').notVisible(),
+                        DTColumnBuilder.newColumn(null).withTitle('Estoque. Max').renderWith(function(data, type, full, meta) {
+
+                            var sHtml = "";
+                            for (var x = 0; x < data.estoqueList; x++) {
+                                if (data.estoqueList[x].estoqueTypeEnumValue == 3) {
+                                    sHtml = '<p>' + data.estoqueList[x].quant ? data.estoqueList[x].quant : 0 + '</p>';
+                                }
+                            }
+
+                            return sHtml;
+                        }).withOption('width', '100px').notVisible(),
+                        DTColumnBuilder.newColumn(null).withTitle('Estoque. Inicial').renderWith(function(data, type, full, meta) {
+
+                            var sHtml = "";
+                            for (var x = 0; x < data.estoqueList; x++) {
+                                if (datdata.estoqueList[x].estoqueTypeEnumValue == 1) {
+                                    sHtml = '<p>' + data.estoqueList[x].quant ? data.estoqueList[x].quant : 0 + '</p>';
+                                }
+                            }
+
+                            return sHtml;
+                        }).withOption('width', '100px').notVisible(),
+                        DTColumnBuilder.newColumn(null).withTitle('Margem Lucro').renderWith(function(data, type, full, meta) {
+
+                            return '<p>' + data.margemLucro ? data.margemLucro : 0 + '</p>';
+
+                        }).withOption('width', '100px').notVisible(),
+                        DTColumnBuilder.newColumn(null).withTitle('Preco Venda').renderWith(function(data, type, full, meta) {
+
+                            var sHtml = "";
+                            for (var x = 0; x < data.precoList; x++) {
+                                if (datdata.precoList[x].precoTypeEnumValue == 3) {
+                                    sHtml = '<p>' + data.precoList[x].valor ? data.precoList[x].valor : 0 + '</p>';
+                                }
+                            }
+
+                            return sHtml;
+                        }).withOption('width', '100px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Preco Custo').renderWith(function(data, type, full, meta) {
+
+                            var sHtml = "";
+                            for (var x = 0; x < data.precoList; x++) {
+                                if (datdata.precoList[x].precoTypeEnumValue == 2) {
+                                    sHtml = '<p>' + data.precoList[x].valor ? data.precoList[x].valor : 0 + '</p>';
+                                }
+                            }
+
+                            return sHtml;
+                        }).withOption('width', '100px').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn('status').withTitle('status'),
                         DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '100px')
                     ];
                 },
