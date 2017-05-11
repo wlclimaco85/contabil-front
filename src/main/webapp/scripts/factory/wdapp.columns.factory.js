@@ -1151,7 +1151,7 @@
                         }).withOption('width', '100px'),
                         DTColumnBuilder.newColumn(null).withTitle('Tributação').renderWith(function(data, type, full, meta) {
 
-                            return '<p>' + data.tributacao ? data.tributacao.descricao : '' + '</p>';
+                            return '<p>' + (data.tributacao ? data.tributacao.descricao : ' ') + '</p>';
                         }).withOption('width', '100px'),
                         DTColumnBuilder.newColumn('informAdicionaisParaNFe').withTitle('informAdicionaisParaNFe').notVisible(),
                         DTColumnBuilder.newColumn('anotainternas').withTitle('anotainternas').notVisible(),

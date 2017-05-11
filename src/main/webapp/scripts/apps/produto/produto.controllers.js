@@ -225,21 +225,56 @@
              }
          }
          $scope.saveProduto = function() {
+             debugger
              fProduto.fnMontaObjeto($scope.produto, $scope.tributacao, $scope.produtoEmpresa, 'INSERT', "produto/api/produtoParent/insert/", fnCallBack);
          };
      });
  })();
  (function() {
      angular.module('wdApp.apps.produto.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-         .controller('ProdutoUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fProduto) {
+         .controller('ProdutoUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fProduto, toastr, $element, close) {
              var vm = this;
-             debugger
+
+             $scope.selectedCountry = function(selected) {
+                 console.log(selected)
+                 if (selected) {
+                     debugger
+                     $scope.produto = selected.originalObject;
+                     $scope.visibled = true;
+                 } else {
+                     console.log('cleared');
+                 }
+             };
+
+             var callbackBanco = function(res) {
+                 var planos = "";
+
+                 if (res.operationSuccess == true) {
+
+                     $scope.countries = res.produtoList;
+
+                 }
+             }
+
+             //  qat.model.select.anonimo("fiscal/api/cnae/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, null),callbackBanco);
+             qat.model.select.util("produto/api/fetchPage", true, new qat.model.planoInquiryRequest(100 / 20, true, null), callbackBanco);
+
+             var fnCallBack = function(res) {
+                 if (res.operationSuccess == true) {
+                     $element.modal('hide');
+                     close(null, 500);
+                     toastr.success('Deu Certo seu tanga.', 'Sucess');
+                     $rootScope.reloadDataSit(function(data) { debugger })
+                 }
+             }
              $scope.produtoEmpresa = {};
              $scope.produtoEmpresa = $rootScope.produto;
              $scope.produto = $rootScope.produto.prodId;
              console.log($rootScope.produtoEmpresa)
              $scope.saveProduto = function() {
-                 fProduto.fnMontaObjeto($scope.produto, $scope.endereco, 'UPDATE', "site/api/produto/update/", fnCallBack);
+                 debugger
+                 fProduto.fnMontaObjeto($scope.produto, $scope.produtoEmpresa.tributacao, $scope.produtoEmpresa, 'UPDATE', "produto/api/produtoParent/update/", fnCallBack);
+                 //fProduto.fnMontaObjeto($scope.produto, $scope.endereco, 'UPDATE', "site/api/produto/update/", fnCallBack);
              }
          });
  })();

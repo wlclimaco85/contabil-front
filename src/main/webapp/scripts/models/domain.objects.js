@@ -794,10 +794,12 @@ qat.model.fnServicoAndPlano = function(_campo, _modelAction) {
 
 
 qat.model.fnProduto = function(_produto, _modelAction, _userId) {
-    //////debugger
+    debugger
     var _id = null;
-    if (_produto.id != "" || _produto.id == " ") {
+    if (_produto.id == "" || _produto.id == " " || _produto.id == null) {
         _id = null;
+    } else {
+        _id = _produto.id;
     }
     var _emprId = null;
     if (localStorage.getItem('empresa') == null ||
@@ -812,7 +814,6 @@ qat.model.fnProduto = function(_produto, _modelAction, _userId) {
         ncm: _produto.ncm,
         cdBarras: _produto.cdBarras,
         dataCreate: _produto.dataCreate,
-        //    produto        :_produto.produto,
         excTabIPI: _produto.excTabIPI,
         cEST: _produto.cEST,
         quant: _produto.quant,
@@ -1445,6 +1446,40 @@ qat.model.fnDoisValor1 = function(_oObjet, _modelAction, _user) {
         this.createDateUTC = (new Date()).getTime();
         this.modifyUser = _user;
         this.modifyDateUTC = (new Date()).getTime();*/
+}
+
+qat.model.EmpresaProduto = function(_oObjet, _modelAction, _user) {
+
+    this.id = _oObjet.id;
+    this.prodId = _oObjet.prodId;
+    this.codigo = _oObjet.codigo;
+    this.informAdicionaisParaNFe = _oObjet.informAdicionaisParaNFe;
+    this.anotainternas = _oObjet.anotainternas;
+    this.dataCadastro = _oObjet.dataCadastro;
+    this.margemLucro = _oObjet.margemLucro;
+    this.estoqueList = _oObjet.estoqueList;
+    this.tributacao = _oObjet.tributacao;
+    this.precoList = _oObjet.precoList;
+    this.custoList = _oObjet.custoList;
+    this.porcaoList = _oObjet.porcaoList;
+    this.rentabilidadeList = _oObjet.rentabilidadeList;
+    this.aplicacao = _oObjet.aplicacao;
+    this.fracao = _oObjet.fracao;
+    this.pesoBruto = _oObjet.pesoBruto;
+    this.pesoLiquido = _oObjet.pesoLiquido;
+    this.modoUso = _oObjet.modoUso;
+    this.InfaddNFe = _oObjet.InfaddNFe;
+    this.AnotInt = _oObjet.AnotInt;
+    this.categoria = _oObjet.categoriaid;
+    this.parentId = _oObjet.parentId;
+    this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+    this.processId = _oObjet.processId;
+    this.tableEnumValue = _oObjet.tableEnumValue;
+    this.modelAction = _modelAction;
+    this.createUser = _user;
+    this.createDateUTC = (new Date()).getTime();
+    this.modifyUser = _user;
+    this.modifyDateUTC = (new Date()).getTime();
 }
 
 qat.model.Marca = function(_oObjet, _modelAction, _user) {
