@@ -123,39 +123,12 @@
 
          $scope.produto = {};
          $scope.tributacao = {};
-         $scope.produtoEmpresa = {};
+         $scope.produtoEmpresa = {
+             precoList: []
+         };
          $scope.details = 0;
          $scope.teste = 1;
-
-
-         $scope.produto.produto = "Coca Cola";
-         $scope.produto.nCM = "ncm";
-         $scope.produto.cdBarras = "cd barras";
-         $scope.produto.excTabIPI = "excecaoIPI";
-         $scope.produto.cEST = "cEST";
-         $scope.produto.quant = 2;
-         $scope.produto.unidTributada = {};
-         $scope.produto.unidTributada.id = 1;
-         $scope.produto.marca = {};
-         $scope.produto.marca.id = 1;
-
          $scope.produtoEmpresa.dataCreate = (new Date()).getTime();
-         $scope.produtoEmpresa.InfaddNFe = "informAdicionaisParaNFe";
-         $scope.produtoEmpresa.AnotInt = "anotainternas";
-
-         $scope.produtoEmpresa.categoria = {};
-         $scope.produtoEmpresa.categoria.id = 1;
-
-         $scope.produtoEmpresa.codigo = "0004575"
-         $scope.produtoEmpresa.pesoliquido = "1.96"
-         $scope.produtoEmpresa.pesobruto = "0.09"
-         $scope.produtoEmpresa.margemLucro = "5"
-         $scope.produtoEmpresa.custoList = [{ valor: 10 }];
-         $scope.produtoEmpresa.custoList[0].valor = 1.99
-         $scope.produtoEmpresa.precoList = [{ valor: 0 }];
-         $scope.produtoEmpresa.precoList[0].valor = 2.39;
-         $scope.produtoEmpresa.precoList[0].dataMarcacao = (new Date()).getTime();
-         $scope.produtoEmpresa.precoList[0].precoTypeEnumValue = 3;
          $scope.produtoEmpresa.estoqueList = [{
                  estoqueTypeEnumValue: 1,
                  quant: 0,
@@ -224,6 +197,17 @@
                  $rootScope.reloadDataSit(function(data) { debugger })
              }
          }
+         $scope.selectedCountry = function(selected) {
+             debugger
+             console.log(selected)
+             if (selected) {
+                 debugger
+                 $scope.produto = selected.originalObject;
+                 $scope.visibled = true;
+             } else {
+                 console.log('cleared');
+             }
+         };
          $scope.saveProduto = function() {
              debugger
              fProduto.fnMontaObjeto($scope.produto, $scope.tributacao, $scope.produtoEmpresa, 'INSERT', "produto/api/produtoParent/insert/", fnCallBack);
@@ -235,17 +219,6 @@
          .controller('ProdutoUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fProduto, toastr, $element, close) {
              var vm = this;
 
-             $scope.selectedCountry = function(selected) {
-                 console.log(selected)
-                 if (selected) {
-                     debugger
-                     $scope.produto = selected.originalObject;
-                     $scope.visibled = true;
-                 } else {
-                     console.log('cleared');
-                 }
-             };
-
              var callbackBanco = function(res) {
                  var planos = "";
 
@@ -256,7 +229,6 @@
                  }
              }
 
-             //  qat.model.select.anonimo("fiscal/api/cnae/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, null),callbackBanco);
              qat.model.select.util("produto/api/fetchPage", true, new qat.model.planoInquiryRequest(100 / 20, true, null), callbackBanco);
 
              var fnCallBack = function(res) {
@@ -272,9 +244,7 @@
              $scope.produto = $rootScope.produto.prodId;
              console.log($rootScope.produtoEmpresa)
              $scope.saveProduto = function() {
-                 debugger
                  fProduto.fnMontaObjeto($scope.produto, $scope.produtoEmpresa.tributacao, $scope.produtoEmpresa, 'UPDATE', "produto/api/produtoParent/update/", fnCallBack);
-                 //fProduto.fnMontaObjeto($scope.produto, $scope.endereco, 'UPDATE', "site/api/produto/update/", fnCallBack);
              }
          });
  })();

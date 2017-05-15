@@ -817,11 +817,11 @@ qat.model.fnProduto = function(_produto, _modelAction, _userId) {
         excTabIPI: _produto.excTabIPI,
         cEST: _produto.cEST,
         quant: _produto.quant,
-        uniMed: _produto.uniMed,
-        marca: _produto.marca,
+        uniMed: _produto.unidTributada ? { id: _produto.unidTributada.id } : {},
+        marca: _produto.marca ? { id: _produto.marca.id } : {},
         parentId: 0,
         emprId: _emprId,
-        prodId: _produto.prodId,
+        produto: _produto.produto,
         processId: 0,
         tableEnumValue: 0,
         userId: _userId,
@@ -977,6 +977,8 @@ qat.model.fnPrecoProd = function(_estoque, _modelAction, _userId) {
     var _id = null;
     if (_estoque.id == "" || _estoque.id == " ") {
         _id = null;
+    } else {
+        _id = _estoque.id;
     }
     var _emprId = null;
     if (localStorage.getItem('empresa') == null ||
@@ -1449,7 +1451,7 @@ qat.model.fnDoisValor1 = function(_oObjet, _modelAction, _user) {
 }
 
 qat.model.EmpresaProduto = function(_oObjet, _modelAction, _user) {
-
+    debugger
     this.id = _oObjet.id;
     this.prodId = _oObjet.prodId;
     this.codigo = _oObjet.codigo;
@@ -1458,7 +1460,7 @@ qat.model.EmpresaProduto = function(_oObjet, _modelAction, _user) {
     this.dataCadastro = _oObjet.dataCadastro;
     this.margemLucro = _oObjet.margemLucro;
     this.estoqueList = _oObjet.estoqueList;
-    this.tributacao = _oObjet.tributacao;
+    this.tributacao = _oObjet.tributacao ? { id: _oObjet.tributacao.id } : {};
     this.precoList = _oObjet.precoList;
     this.custoList = _oObjet.custoList;
     this.porcaoList = _oObjet.porcaoList;
@@ -1470,7 +1472,7 @@ qat.model.EmpresaProduto = function(_oObjet, _modelAction, _user) {
     this.modoUso = _oObjet.modoUso;
     this.InfaddNFe = _oObjet.InfaddNFe;
     this.AnotInt = _oObjet.AnotInt;
-    this.categoria = _oObjet.categoriaid;
+    this.categoria = _oObjet.categoria;
     this.parentId = _oObjet.parentId;
     this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
     this.processId = _oObjet.processId;

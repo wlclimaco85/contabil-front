@@ -1161,8 +1161,7 @@
 
                         }).withOption('width', '100px').notVisible(),
                         DTColumnBuilder.newColumn(null).withTitle('Categoria').renderWith(function(data, type, full, meta) {
-
-                            return '<p>' + data.categoria ? (data.categoria.categoria ? data.categoria.categoria : "") : "" + '</p>';
+                            return '<p>' + (data.categoria ? (data.categoria.categoria ? data.categoria.categoria : "") : "") + '</p>';
                         }).withOption('width', '100px').notVisible(),
                         DTColumnBuilder.newColumn(null).withTitle('Marca').renderWith(function(data, type, full, meta) {
 
@@ -1173,7 +1172,7 @@
                         DTColumnBuilder.newColumn(null).withTitle("Estoque Min.").renderWith(function(data, type, full, meta) {
 
                             var sHtml = "";
-                            for (var x = 0; x < data.estoqueList; x++) {
+                            for (var x = 0; x < data.estoqueList.length; x++) {
                                 if (data.estoqueList[x].estoqueTypeEnumValue == 2) {
                                     sHtml = '<p>' + data.estoqueList[x].quant ? data.estoqueList[x].quant : 0 + '</p>';
                                 }
@@ -1184,7 +1183,7 @@
                         DTColumnBuilder.newColumn(null).withTitle('Estoque. Max').renderWith(function(data, type, full, meta) {
 
                             var sHtml = "";
-                            for (var x = 0; x < data.estoqueList; x++) {
+                            for (var x = 0; x < data.estoqueList.length; x++) {
                                 if (data.estoqueList[x].estoqueTypeEnumValue == 3) {
                                     sHtml = '<p>' + data.estoqueList[x].quant ? data.estoqueList[x].quant : 0 + '</p>';
                                 }
@@ -1195,8 +1194,8 @@
                         DTColumnBuilder.newColumn(null).withTitle('Estoque. Inicial').renderWith(function(data, type, full, meta) {
 
                             var sHtml = "";
-                            for (var x = 0; x < data.estoqueList; x++) {
-                                if (datdata.estoqueList[x].estoqueTypeEnumValue == 1) {
+                            for (var x = 0; x < data.estoqueList.length; x++) {
+                                if (data.estoqueList[x].estoqueTypeEnumValue == 1) {
                                     sHtml = '<p>' + data.estoqueList[x].quant ? data.estoqueList[x].quant : 0 + '</p>';
                                 }
                             }
@@ -1211,8 +1210,8 @@
                         DTColumnBuilder.newColumn(null).withTitle('Preco Venda').renderWith(function(data, type, full, meta) {
 
                             var sHtml = "";
-                            for (var x = 0; x < data.precoList; x++) {
-                                if (datdata.precoList[x].precoTypeEnumValue == 3) {
+                            for (var x = 0; x < data.precoList.length; x++) {
+                                if (data.precoList[x].precoTypeEnumValue == 3) {
                                     sHtml = '<p>' + data.precoList[x].valor ? data.precoList[x].valor : 0 + '</p>';
                                 }
                             }
@@ -1222,8 +1221,8 @@
                         DTColumnBuilder.newColumn(null).withTitle('Preco Custo').renderWith(function(data, type, full, meta) {
 
                             var sHtml = "";
-                            for (var x = 0; x < data.precoList; x++) {
-                                if (datdata.precoList[x].precoTypeEnumValue == 2) {
+                            for (var x = 0; x < data.precoList.length; x++) {
+                                if (data.precoList[x].precoTypeEnumValue == 2) {
                                     sHtml = '<p>' + data.precoList[x].valor ? data.precoList[x].valor : 0 + '</p>';
                                 }
                             }

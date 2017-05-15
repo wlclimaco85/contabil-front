@@ -28,25 +28,20 @@
         <div class="form-group">
             <label for="exampleInputPassword1"></label>
             <input type="text" class="form-control col-sm-8 hide" ng-model="produto.id" name="id" placeholder="id">
+            <input type="text" class="form-control col-sm-8 hide" ng-model="produto.produto" name="id" placeholder="id">
         </div>
     </div>
 
     <div class="col-sm-8 ">
         <div class="form-group">
             <label for="exampleInputPassword1">Produto</label>
-            <div class="padded-row">
-
-                <div angucomplete-alt id="ex1" placeholder="Buscar produtos" maxlength="500" pause="100" selected-object="selectedCountry" local-data="countries" search-fields="produto,cdBarras" title-field="produto" minlength="1" input-class="form-control form-control-small"
-                    match-class="highlight" initial-value="produto" input-changed="produto.produto" field-required="true"></div>
-            </div>
-        </div>
-        <div class="" ng-show="selectedCountry">
+            <input type="text" class="form-control " ng-model="produto.produto" name="codigo" placeholder="Produto">
         </div>
     </div>
     <div class="col-sm-4 ">
         <div class="form-group">
             <label for="exampleInputPassword1">Código personalizado</label>
-            <input type="text" class="form-control " ng-model="produtoEmpresa.codigo" name="codigo" placeholder="C�digo Interno">
+            <input type="text" class="form-control " ng-model="produtoEmpresa.codigo" name="codigo" placeholder="Código Interno">
         </div>
     </div>
 </div>
