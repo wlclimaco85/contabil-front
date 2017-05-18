@@ -32,7 +32,7 @@
                                             <label for="exampleInputPassword1">Peso unitário líquido (kg)</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">,</span>
-                                                <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.pesoliquido" name="pesoLiquido" placeholder="Peso unitário líquido (kg)">
+                                                <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.pesoLiquido" name="pesoLiquido" placeholder="Peso unitário líquido (kg)">
                                             </div>
 
                                         </div>
@@ -42,7 +42,7 @@
                                             <label for="exampleInputPassword1">Peso unitário bruto (kg)</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">,</span>
-                                                <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.pesobruto" name="pesobruto" placeholder="Peso unitário bruto (kg)">
+                                                <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.pesoBruto" name="pesobruto" placeholder="Peso unitário bruto (kg)">
                                             </div>
                                         </div>
                                     </div>
@@ -66,64 +66,70 @@
                                     <div class="col-sm-3 ">
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Estoque Minimo</label>
-                                            <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.estoqueList[1].quant" name="estMinimo" placeholder="Estoque Minimo">
+                                            <div ng-repeat="estoque in produtoEmpresa.estoqueList | filter:{ estoqueTypeEnumValue: 1 } ">
+                                                <input type="text" class="form-control col-sm-8 " ng-model="estoque.quant" name="estMinimo" placeholder="Estoque Minimo">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-3 ">
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Estoque Atual</label>
-                                            <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.estoqueList[0].quant" name="estAtual" placeholder="Estoque Atual">
+                                            <div ng-repeat="estoque in produtoEmpresa.estoqueList | filter:{ estoqueTypeEnumValue: 4 }">
+                                                <input type="text" class="form-control col-sm-8 " ng-model="estoque.quant" name="estAtual" placeholder="Estoque Atual">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-3 ">
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Estoque Maximo</label>
-                                            <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.estoqueList[2].quant" name="estMaximo" placeholder="Estoque Maximo">
+                                            <div ng-repeat="estoque in produtoEmpresa.estoqueList | filter:{ estoqueTypeEnumValue: 3 } ">
+                                                <input type="text" class="form-control col-sm-8 " ng-model="estoque.quant" name="estMaximo" placeholder="Estoque Maximo">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div role="tabpanel" class="tab-pane messages" id="messages">
-                    <div class="panel-group" id="accordion">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".preco">
+                    <div role="tabpanel" class="tab-pane messages" id="messages">
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".preco">
                                                         Preços
                                                         </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                                </h4>
-                            </div>
-                            <div id="collapseOne" class="panel-collapse collapse in preco">
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-sm-3 ">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Margem de lucro</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">%</span>
-                                                    <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.margemLucro" name="margemLucro" placeholder="Margem de lucro">
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in preco">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-sm-3 ">
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1">Margem de lucro</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">%</span>
+                                                        <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.margemLucro" name="margemLucro" placeholder="Margem de lucro">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-3 ">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Preço de custo</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">$</span>
-                                                    <input type="text" class="form-control col-sm-8 " ng-init="produtoEmpresa.precoList[0].precoTypeEnumValue = '2'" ng-model="produtoEmpresa.precoList[0].valor" name="precoCusto" placeholder="Preço de custo">
-                                                </div>
+                                            <div class="col-sm-3 ">
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1">Preço de custo</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">$</span>
+                                                        <input type="text" class="form-control col-sm-8 " ng-init="produtoEmpresa.precoList[0].precoTypeEnumValue = '2'" ng-model="produtoEmpresa.precoList[0].valor" name="precoCusto" placeholder="Preço de custo">
+                                                    </div>
 
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-3 ">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Preço de venda</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">$</span>
-                                                    <input type="text" class="form-control col-sm-8 " ng-init="produtoEmpresa.precoList[1].precoTypeEnumValue = '3'" ng-model="produtoEmpresa.precoList[1].valor" name="precoVenda" placeholder="modoUso">
+                                            <div class="col-sm-3 ">
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1">Preço de venda</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">$</span>
+                                                        <input type="text" class="form-control col-sm-8 " ng-init="produtoEmpresa.precoList[1].precoTypeEnumValue = '3'" ng-model="produtoEmpresa.precoList[1].valor" name="precoVenda" placeholder="modoUso">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -134,7 +140,6 @@
                     </div>
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
-</div>

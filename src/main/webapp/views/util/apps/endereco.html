@@ -1,142 +1,98 @@
 <div ng-controller="EnderecoControllers as ctrl">
-<div class="row">
-    <div class="col-sm-6">
-        <label for="exampleInputPassword1">CEP</label>
-        <div class="input-group">
-            <div class="form-group">
-                <input type="text" class="form-control" name="cep" ng-model="enderecos[0].cep" ui-mask="99999-999"  ui-mask-placeholder ui-mask-placeholder-char="_">
-            </div>
-            <span class="input-group-btn">
+    <div class="row">
+        <div class="col-sm-6">
+            <label for="exampleInputPassword1">CEP</label>
+            <div class="input-group">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="cep" ng-model="enderecos[0].cep" ui-mask="99999-999" ui-mask-placeholder ui-mask-placeholder-char="_">
+                </div>
+                <span class="input-group-btn">
 
              <button class="btn btn-default" type="button" ng-click="ctrl.buscaRCep(enderecos[0].cep)"><i class="glyphicon glyphicon-search"> </i></button>
          </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Logradouro</label>
+                <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="enderecos[0].logradouro" placeholder="Logradouro">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Numero</label>
+                <input type="text" class="form-control col-sm-4" name="numero" ng-model="enderecos[0].numero" placeholder="Numero">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Lat.</label>
+                <input type="text" class="form-control col-sm-4" name="latitude" ng-model="enderecos[0].latitude" placeholder="Latitude">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Lon.</label>
+                <input type="text" class="form-control col-sm-4" name="longitude" ng-model="enderecos[0].longitude" placeholder="Longitude">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <label for="exampleInputPassword1">Complemento</label>
+            <input type="text" class="form-control col-sm-8" name="complemento" ng-model="enderecos[0].complemento" placeholder="Complemento">
+        </div>
+        <div class="col-sm-2">
+            <label for="exampleInputPassword1">Bairro</label>
+            <input type="text" class="form-control col-sm-4" name="bairro" ng-model="enderecos[0].bairro" placeholder="Bairro">
+        </div>
+        <div class="col-sm-2 ">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Estado</label>
+                <div class="row">
+                    <ui-select ng-model="enderecos[0].estado" theme="bootstrap" on-select="ctrl.countrySelected($item, $model)">
+                        <ui-select-match placeholder="Estados...">{{$select.selected.abreviacao}}</ui-select-match>
+                        <ui-select-choices repeat="item in ctrl.estados | filter: $select.search">
+                            <div ng-bind-html="item.abreviacao | highlight: $select.search"></div>
+                            <small ng-bind-html="item.nome | highlight: $select.search"></small>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2 ">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Municipio</label>
+                <div class="row">
+                    <ui-select ng-model="enderecos[0].cidade" theme="bootstrap">
+                        <ui-select-match placeholder="Municipios...">{{$select.selected.descricao}}</ui-select-match>
+                        <ui-select-choices repeat="item in ctrl.cidades | filter: $select.search">
+                            <div ng-bind-html="item.nome | highlight: $select.search"></div>
+                            <small ng-bind-html="item.estado.abreviacao | highlight: $select.search"></small>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <label for="exampleInputPassword1">Codigo IBGE</label>
+            <input type="text" class="form-control col-sm-4" name="ibge" ng-model="enderecos[0].codIbge" placeholder="Codigo IBGE">
+        </div>
+        <div class="col-sm-2 ">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Pais</label>
+                <div class="row">
+                    <ui-select ng-model="enderecos[0].cidade" theme="bootstrap">
+                        <ui-select-match placeholder="Paises...">{{$select.selected.descricao}}</ui-select-match>
+                        <ui-select-choices repeat="item in ctrl.pais | filter: $select.search">
+                            <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-sm-6">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Logradouro</label>
-            <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="enderecos[0].logradouro" placeholder="Logradouro">
-        </div>
-    </div>
-    <div class="col-sm-2">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Numero</label>
-            <input type="text" class="form-control col-sm-4" name="numero" ng-model="enderecos[0].numero" placeholder="Numero">
-        </div>
-    </div>
-    <div class="col-sm-2">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Lat.</label>
-            <input type="text" class="form-control col-sm-4" name="latitude" ng-model="enderecos[0].latitude" placeholder="Latitude">
-        </div>
-    </div>
-    <div class="col-sm-2">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Lon.</label>
-            <input type="text" class="form-control col-sm-4" name="longitude" ng-model="enderecos[0].longitude" placeholder="Longitude">
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-2">
-        <label for="exampleInputPassword1">Complemento</label>
-        <input type="text" class="form-control col-sm-8" name="complemento" ng-model="enderecos[0].complemento" placeholder="Complemento">
-    </div>
-    <div class="col-sm-2">
-        <label for="exampleInputPassword1">Bairro</label>
-        <input type="text" class="form-control col-sm-4" name="bairro" ng-model="enderecos[0].bairro" placeholder="Bairro">
-    </div>
-    <div class="col-sm-2">
-        <label for="exampleInputPassword1">Estado</label>
-            <div class="row ">
-                <select name="estado" ng-model="enderecos[0].estado.abreviacao" class=" form-group col-sm-12 select-estado estado">
-                </select>
-             </div>
-    </div>
-    <div class="col-sm-2">
-        <label for="exampleInputPassword1">Municipio</label>
-        <div class="row ">
-                <select name="cidade" ng-model="enderecos[0].cidade.id" class=" form-group col-sm-12 cidade select-cidade">
-                </select>
-             </div>
-    </div>
-
-    <div class="col-sm-2">
-        <label for="exampleInputPassword1">Codigo IBGE</label>
-        <input type="text" class="form-control col-sm-4" name="ibge" ng-model="enderecos[0].codIbge" placeholder="Codigo IBGE">
-    </div>
-    <div class="col-sm-2">
-        <label for="exampleInputPassword1">Pais</label>
-        <input type="text" class="form-control col-sm-4" name="pais" ng-model="enderecos[0].pais" placeholder="Pais">
-    </div>
-</div>
-</div>
-<script>
-    $(document).ready(function() {
-
-        var callbackEstado = function(res){
-                var planos = "";
-
-               if(res.operationSuccess == true)
-               {
-
-                   for(var x = 0 ;x < res.estadoList.length;x++)
-                   {
-                       planos = planos + "<option value='"+res.estadoList[x].id+"'> "+res.estadoList[x].abreviacao+" </option>";
-                   }
-                    planos = planos + "<option class='options' style='background-color : rebeccapurple'> Cadastrar Novo ESTADO </option>";
-
-                    $('.estado').empty();
-                    $('.estado').append(planos);
-
-                    $(".select-estado").select2({
-                          placeholder: "Selecione o ESTADO",
-                          allowClear: true
-                        });
-
-
-               }
-
-            }
-
-            qat.model.select.anonimo("cadastros/api/estado/fetchPage",true,new qat.model.estadoInquiryRequest( 100/20, true,null),callbackEstado);
-
-            $('.select-estado').on("select2-selecting", function(e) {
-               console.log($(this).val())
-
-                qat.model.select.anonimo("cadastros/api/cidade/fetchPage",true,new qat.model.cidadeInquiryRequest( 100/20, true,$(this).val),callbackCidade);
-            });
-
-
-
-
-            var callbackCidade = function(res){
-                var planos = "";
-
-               if(res.operationSuccess == true)
-               {
-
-                   for(var x = 0 ;x < res.cidadeList.length;x++)
-                   {
-
-                       planos = planos + "<option value='"+res.cidadeList[x].id+"'> "+res.cidadeList[x].nome+" </option>";
-                   }
-                    planos = planos + "<option class='options'> Cadastrar Nova Cidade </option>";
-
-                    $('.cidade').append(planos);
-
-                    $(".select-cidade").select2({
-                          placeholder: "Selecione a Cidade",
-                          allowClear: true
-                        });
-               }
-
-            }
-
-
-
-
-    });
-</script>

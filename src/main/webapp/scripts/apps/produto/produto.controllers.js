@@ -42,7 +42,7 @@
 
          function fnDelete(person) {
              $rootScope.produto = person;
-             dialogFactory.dialog('views/produto/dialog/dProduto.html', "ProdutoDeleteController", validationFactory.contasPagar(), reloadData());
+             dialogFactory.dialog('views/util/dialog/dDelete.html', "ProdutoDeleteController", validationFactory.contasPagar(), reloadData());
          }
 
          function actionsHtml(data, type, full, meta) {
@@ -194,14 +194,14 @@
                  $element.modal('hide');
                  close(null, 500);
                  toastr.success('Deu Certo seu tanga.', 'Sucess');
-                 $rootScope.reloadDataSit(function(data) { debugger })
+                 $rootScope.reloadDataSit(function(data) {})
              }
          }
          $scope.selectedCountry = function(selected) {
-             debugger
+
              console.log(selected)
              if (selected) {
-                 debugger
+
                  $scope.produto = selected.originalObject;
                  $scope.visibled = true;
              } else {
@@ -209,7 +209,6 @@
              }
          };
          $scope.saveProduto = function() {
-             debugger
              fProduto.fnMontaObjeto($scope.produto, $scope.tributacao, $scope.produtoEmpresa, 'INSERT', "produto/api/produtoParent/insert/", fnCallBack);
          };
      });
@@ -236,9 +235,10 @@
                      $element.modal('hide');
                      close(null, 500);
                      toastr.success('Deu Certo seu tanga.', 'Sucess');
-                     $rootScope.reloadDataSit(function(data) { debugger })
+                     $rootScope.reloadDataSit(function(data) {})
                  }
              }
+
              $scope.produtoEmpresa = {};
              $scope.produtoEmpresa = $rootScope.produto;
              $scope.produto = $rootScope.produto.prodId;
@@ -250,13 +250,31 @@
  })();
  (function() {
      angular.module('wdApp.apps.produto.delete', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-         .controller('ProdutoDeleteController', function($rootScope, $scope, fModels, SysMgmtData, fProduto) {
+         .controller('ProdutoDeleteController', function($rootScope, $scope, fModels, SysMgmtData, fProduto, toastr, $element, close) {
              var vm = this;
-             $scope.produto = {};
-             $scope.produto = $rootScope.produto;
-             console.log($rootScope.produto)
-             $scope.saveProduto = function() {
-                 fProduto.fnDelete($scope.produto, "site/api/produto/update/", function() { console.log('ddda   aqui') });
+             var em = " "
+
+             $scope.produtoEmpresa = {};
+             $scope.produtoEmpresa = $rootScope.produto;
+             $scope.produto = $rootScope.produto.prodId;
+             $scope.deleteMessage = 'Deseja Realmente Deletar o produto #' + ($scope.produtoEmpresa.codigo ? $scope.produtoEmpresa.codigo : em) + ' ' + ($scope.produto.produto ? $scope.produto.produto : em) + '.';
+             var sHtml = '<div class="container-fluid"><p> Deseja Realmente Deletar o produto #' + $scope.produto.codigo + ' ' + $scope.produto.produto + '.</p></div>'
+             $('#delete').append(sHtml);
+             $scope.delete = function() {
+                 var oObject = fModels.amont(new qat.model.EmpresaProduto({ id: $scope.produtoEmpresa.id, prodId: $rootScope.produto.prodId.id }, 'DELETE', $rootScope.user.user), 'DELETE');
+                 SysMgmtData.processPostPageData("main/api/request", {
+                     url: "produto/api/produtoParent/delete",
+                     token: $rootScope.authToken,
+                     request: new qat.model.reqProduto(oObject, true, true)
+                 }, function(res) {
+                     if (res.operationSuccess == true) {
+                         $element.modal('hide');
+                         close(null, 500);
+                         toastr.success('Deu Certo seu tanga.', 'Sucess');
+                         $rootScope.reloadDataSit(function(data) {})
+                     }
+
+                 });
              }
          });
  })();

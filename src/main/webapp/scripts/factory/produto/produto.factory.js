@@ -71,7 +71,7 @@
             }
 
             var oObject = fModels.amont(new qat.model.EmpresaProduto(produtoEmpresa, action, $rootScope.user.user), action);
-            debugger
+
             SysMgmtData.processPostPageData("main/api/request", {
                 url: url,
                 token: $rootScope.authToken,

@@ -32,22 +32,21 @@ qat.model.procedure = function(_procId, _procCode, _procDesc, _procPrice,
 
 //Servico Object
 qat.model.Servico = function(_oObjet) {
-    this.id = _oObjet.id;
-    this.nome = _oObjet.nome;
-    this.descricao = _oObjet.descricao;
-    this.preco = _oObjet.preco;
-    this.parentId = _oObjet.parentId;
-    this.emprId = _oObjet.emprId;
-    this.processId = _oObjet.processId;
-    this.tableEnumValue = _oObjet.tableEnumValue;
-    this.modelAction = _oObjet.modelAction;
-    this.createUser = 'sysrem'; //$rootScope.user;
-    this.createDateUTC = (new Date()).getTime();
-    this.modifyUser = 'sysrem'; //$rootScope.user;
-    this.modifyDateUTC = (new Date()).getTime();
-}
-
-/** create by system gera-java version 1.0.0 19/05/2016 15:9 : 2*/
+        this.id = _oObjet.id;
+        this.nome = _oObjet.nome;
+        this.descricao = _oObjet.descricao;
+        this.preco = _oObjet.preco;
+        this.parentId = _oObjet.parentId;
+        this.emprId = _oObjet.emprId;
+        this.processId = _oObjet.processId;
+        this.tableEnumValue = _oObjet.tableEnumValue;
+        this.modelAction = _oObjet.modelAction;
+        this.createUser = 'sysrem'; //$rootScope.user;
+        this.createDateUTC = (new Date()).getTime();
+        this.modifyUser = 'sysrem'; //$rootScope.user;
+        this.modifyDateUTC = (new Date()).getTime();
+    }
+    /** create by system gera-java version 1.0.0 19/05/2016 15:9 : 2*/
 
 //ServicoByPlano Object
 qat.model.ServicoByPlano = function(_oObjet) {
@@ -794,7 +793,7 @@ qat.model.fnServicoAndPlano = function(_campo, _modelAction) {
 
 
 qat.model.fnProduto = function(_produto, _modelAction, _userId) {
-    debugger
+    //debugger
     var _id = null;
     if (_produto.id == "" || _produto.id == " " || _produto.id == null) {
         _id = null;
@@ -817,7 +816,7 @@ qat.model.fnProduto = function(_produto, _modelAction, _userId) {
         excTabIPI: _produto.excTabIPI,
         cEST: _produto.cEST,
         quant: _produto.quant,
-        uniMed: _produto.unidTributada ? { id: _produto.unidTributada.id } : {},
+        uniMed: _produto.uniMed ? { id: _produto.uniMed.id } : {},
         marca: _produto.marca ? { id: _produto.marca.id } : {},
         parentId: 0,
         emprId: _emprId,
@@ -908,6 +907,8 @@ qat.model.fnEstoque = function(_estoque, _modelAction, _userId) {
     var _id = null;
     if (_estoque.id == "" || _estoque.id == " ") {
         _id = null;
+    } else {
+        _id = _estoque.id;
     }
     var _emprId = null;
     if (localStorage.getItem('empresa') == null ||
@@ -1451,7 +1452,7 @@ qat.model.fnDoisValor1 = function(_oObjet, _modelAction, _user) {
 }
 
 qat.model.EmpresaProduto = function(_oObjet, _modelAction, _user) {
-    debugger
+    //debugger
     this.id = _oObjet.id;
     this.prodId = _oObjet.prodId;
     this.codigo = _oObjet.codigo;
@@ -2185,7 +2186,7 @@ qat.model.boleto = function(_oObjet, _modelAction, _user) {
 }
 
 qat.model.configuracao = function(_oObjet, _modelAction, _user) {
-    debugger
+    //debugger
     this.id = _oObjet.id;
     this.confCabecalho = _oObjet.confCabecalho;
     this.confGeral = _oObjet.confGeral ? new qat.model.confGeral(_oObjet.confGeral, _oObjet.confGeral.id ? _modelAction : "INSERT", _user) : {};

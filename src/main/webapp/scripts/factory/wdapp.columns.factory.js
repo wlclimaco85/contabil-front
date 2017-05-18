@@ -1139,15 +1139,44 @@
                         }).withOption('width', '100px').notVisible(),
                         DTColumnBuilder.newColumn(null).withTitle('Estoque Atual').renderWith(function(data, type, full, meta) {
                             var estoqueList = "0";
-
+                            var html = "";
+                            var stqAtual = 0;
+                            var stqMin = 0;
+                            var stqMax = 0;
+                            var porEsto = 0;
+                            var sClass = "";
                             if (data.estoqueList.length > 0) {
                                 for (var x = 0; x < data.estoqueList.length; x++) {
-                                    if (data.estoqueList[x].estoqueTypeEnum == "ATUAL") {
-                                        estoqueList = (data.estoqueList[x].quant ? data.estoqueList[x].quant : 0) + " " + " <br><small>" + data.estoqueList[x].ultimoMov ? moment(data.estoqueList[x].ultimoMov).format('DD/MM/YYYY H:hh') : "" + "</small>"
+                                    if (data.estoqueList[x].estoqueTypeEnumValue == 1) {
+                                        stqMin = (data.estoqueList[x].quant ? data.estoqueList[x].quant : 0);
+                                    }
+                                    if (data.estoqueList[x].estoqueTypeEnumValue == 4) {
+                                        stqAtual = (data.estoqueList[x].quant ? data.estoqueList[x].quant : 0);
+                                    }
+                                    if (data.estoqueList[x].estoqueTypeEnumValue == 3) {
+                                        stqMax = (data.estoqueList[x].quant ? data.estoqueList[x].quant : 0);
                                     }
                                 }
                             }
-                            return '<p>' + estoqueList + '</p>';
+
+                            if (stqAtual < stqMin) {
+                                sClass = "progress-bar-danger"
+                            } else if (stqAtual > stqMin && stqAtual < stqMax) {
+                                sClass = "progress-bar-success"
+                            } else if (stqAtual > stqMax) {
+                                sClass = "progress-bar-warning"
+                            } else {
+                                sClass = "progress-bar-info"
+                            }
+                            porEsto = (stqAtual * 100) / stqMax;
+                            html = html + '<div class="progress">'
+                            html = html + '<div class="progress-bar ' + sClass + ' " role="progressbar" style="width: ' + (porEsto - 100) + '%" aria-valuenow="' + (porEsto - 100) + '" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;" ></div>'
+                            html = html + '' + stqAtual + '%</div>'
+
+
+
+                            return html;
+
                         }).withOption('width', '100px'),
                         DTColumnBuilder.newColumn(null).withTitle('Tributação').renderWith(function(data, type, full, meta) {
 
