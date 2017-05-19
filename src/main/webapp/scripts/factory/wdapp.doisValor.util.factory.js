@@ -271,8 +271,7 @@
 
                     }
                 }
-
-                qat.model.select.util("entidade/api/doisValores/fetchPage", true, new qat.model.doisValoresInquiryRequest(6, 100 / 20, true, JSON.parse(localStorage.getItem("empresa")).id), fnCallbackDoisValor);
+                qat.model.select.anonimo("entidade/api/doisValores/fetchPage", true, new qat.model.doisValoresInquiryRequest(8, 100 / 20, true, null), fnCallbackDoisValor);
                 return scope;
             },
 

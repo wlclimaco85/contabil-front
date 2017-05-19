@@ -12,11 +12,9 @@
     <title>E-Contábil</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <link rel="icon" type="image/png" href="favicon.png">
 
     <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/font-awesome-animation/dist/font-awesome-animation.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="thirdparty/jquery-ui-1.12.0/jquery-ui.min.css">
     <!--
   <link rel="stylesheet" href="thirdparty/angular-datatables-master/vendor/bootstrap/dist/css/bootstrap.min.css">
@@ -878,11 +876,12 @@
                         <div class="tab-pane tab2" id="tab2">
                             <div class="panel-body">
 
-                                <div ng-include="'views/empresa/apps/cadEmpresa.html'"></div>
+                                <div ng-controller="EnderecoControllers as endereco">
+                                    <div ng-include="'views/empresa/apps/cadEmpresa.html'"></div>
 
-                                <!-- email -->
-                                <div ng-include="'views/util/apps/endereco.html'"></div>
-
+                                    <!-- email -->
+                                    <div ng-include="'views/util/apps/endereco.html'"></div>
+                                </div>
                                 <!-- telefone -->
                                 <div ng-include="'views/util/apps/telefone.html'"></div>
 

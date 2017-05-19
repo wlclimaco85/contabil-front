@@ -33,7 +33,7 @@
                 <div class="row">
                     <ui-select ng-model="documento" theme="bootstrap">
                         <ui-select-match placeholder="Indicador de IE ...">{{$select.selected.descricao}}</ui-select-match>
-                        <ui-select-choices repeat="item in indicadorIE | filter: $select.search">
+                        <ui-select-choices repeat="item in endereco.indicadorIE | filter: $select.search">
                             <div ng-bind-html="item.descricao | highlight: $select.search"></div>
                         </ui-select-choices>
                     </ui-select>

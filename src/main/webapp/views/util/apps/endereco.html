@@ -1,4 +1,4 @@
-<div ng-controller="EnderecoControllers as ctrl">
+<div>
     <div class="row">
         <div class="col-sm-6">
             <label for="exampleInputPassword1">CEP</label>
@@ -8,7 +8,7 @@
                 </div>
                 <span class="input-group-btn">
 
-             <button class="btn btn-default" type="button" ng-click="ctrl.buscaRCep(enderecos[0].cep)"><i class="glyphicon glyphicon-search"> </i></button>
+             <button class="btn btn-default" type="button" ng-click="endereco.buscaRCep(enderecos[0].cep)"><i class="glyphicon glyphicon-search"> </i></button>
          </span>
             </div>
         </div>
@@ -52,9 +52,9 @@
             <div class="form-group">
                 <label for="exampleInputPassword1">Estado</label>
                 <div class="row">
-                    <ui-select ng-model="enderecos[0].estado" theme="bootstrap" on-select="ctrl.countrySelected($item, $model)">
+                    <ui-select ng-model="enderecos[0].estado" theme="bootstrap" on-select="endereco.countrySelected($item, $model)">
                         <ui-select-match placeholder="Estados...">{{$select.selected.abreviacao}}</ui-select-match>
-                        <ui-select-choices repeat="item in ctrl.estados | filter: $select.search">
+                        <ui-select-choices repeat="item in endereco.estados | filter: $select.search">
                             <div ng-bind-html="item.abreviacao | highlight: $select.search"></div>
                             <small ng-bind-html="item.nome | highlight: $select.search"></small>
                         </ui-select-choices>
@@ -68,7 +68,7 @@
                 <div class="row">
                     <ui-select ng-model="enderecos[0].cidade" theme="bootstrap">
                         <ui-select-match placeholder="Municipios...">{{$select.selected.descricao}}</ui-select-match>
-                        <ui-select-choices repeat="item in ctrl.cidades | filter: $select.search">
+                        <ui-select-choices repeat="item in endereco.cidades | filter: $select.search">
                             <div ng-bind-html="item.nome | highlight: $select.search"></div>
                             <small ng-bind-html="item.estado.abreviacao | highlight: $select.search"></small>
                         </ui-select-choices>
@@ -84,9 +84,9 @@
             <div class="form-group">
                 <label for="exampleInputPassword1">Pais</label>
                 <div class="row">
-                    <ui-select ng-model="enderecos[0].cidade" theme="bootstrap">
+                    <ui-select ng-model="enderecos[0].pais" theme="bootstrap">
                         <ui-select-match placeholder="Paises...">{{$select.selected.descricao}}</ui-select-match>
-                        <ui-select-choices repeat="item in ctrl.pais | filter: $select.search">
+                        <ui-select-choices repeat="item in endereco.pais | filter: $select.search">
                             <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
                         </ui-select-choices>

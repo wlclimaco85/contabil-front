@@ -2,7 +2,7 @@
     angular.module('wdApp.apps.endereco', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('EnderecoControllers', enderecoController);
 
-    function enderecoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, $http, $q) {
+    function enderecoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, $http, $q, doisValorFactory) {
         var vm = this;
 
         $scope.enderecos[0] = {
@@ -35,7 +35,7 @@
 
         }
 
-        doisValorFactory.empresa(101, $scope);
+        doisValorFactory.empresa(vm);
 
         qat.model.select.anonimo("cadastros/api/estado/fetchPage", true, new qat.model.estadoInquiryRequest(100 / 20, true, null), callbackEstado);
 

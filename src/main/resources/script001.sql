@@ -192,6 +192,23 @@ INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, 
     ('5', 'MICROEMPRESARIO_INDIVIDUAL_MEI','Microempresario individual MEI',110,10, 1477075035443, 'System'),
     ('6', 'MICROEMPRESARIO_E_EMPRESA_PEQUENOPORTE','Microempresario e empresa de pequeno porte',110,10, 1477075035443, 'System');
 
+INSERT INTO pagina(id ,pagina,parentid, tabelaenumvalue, create_date, create_user)
+    VALUES (8,'Empresa', 0, 100, 1477075035443, 'System');
+
+    INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
+    VALUES (1,'PAIS', 'PAIS', 1477075035443, 'System'),
+		   (2,'INDICADOR IE', 'INDICADOR IE' , 1477075035443, 'System');
+
+
+	INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+
+('1', 'Brasil','Brasil',1,8, 1477075035443, 'System'),
+('2', 'Argentina','Argentina',1,8, 1477075035443, 'System'),
+('1', ' ',' ',151,8, 1477075035443, 'System'),
+('2', 'Contribuinte ICMS','Contribuinte ICMS',2,8, 1477075035443, 'System'),
+('3', 'Isento de cadastro','Isento de cadastro',2,8, 1477075035443, 'System'),
+('4', 'Não contribuinte','Não contribuinte',2,8, 1477075035443, 'System');
 
 
 INSERT INTO pagina(id ,pagina,parentid, tabelaenumvalue, create_date, create_user)
