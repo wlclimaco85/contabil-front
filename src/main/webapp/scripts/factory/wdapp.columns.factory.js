@@ -1143,6 +1143,9 @@
                             var stqAtual = 0;
                             var stqMin = 0;
                             var stqMax = 0;
+                            var pstqAtual = 0;
+                            var pstqMin = 0;
+                            var pstqMax = 0;
                             var porEsto = 0;
                             var sClass = "";
                             if (data.estoqueList.length > 0) {
@@ -1158,20 +1161,27 @@
                                     }
                                 }
                             }
+                            if ((stqAtual) && (stqAtual > 0)) {
+                                pstqAtual = 100 - (((stqMax - stqAtual) / stqMax) * 100)
+                            }
 
-                            if (stqAtual < stqMin) {
+                            if ((stqMin) && (stqMin > 0)) {
+                                pstqMin = ((((stqMax - stqMin) / stqMax) * 100) - 100) * -1;
+                            }
+                            if (pstqAtual < pstqMin) {
                                 sClass = "progress-bar-danger"
-                            } else if (stqAtual > stqMin && stqAtual < stqMax) {
+                            } else if (pstqAtual > pstqMin && pstqAtual < stqMax) {
                                 sClass = "progress-bar-success"
-                            } else if (stqAtual > stqMax) {
+                            } else if (pstqAtual > stqMax) {
                                 sClass = "progress-bar-warning"
                             } else {
                                 sClass = "progress-bar-info"
                             }
                             porEsto = (stqAtual * 100) / stqMax;
                             html = html + '<div class="progress">'
-                            html = html + '<div class="progress-bar ' + sClass + ' " role="progressbar" style="width: ' + (porEsto - 100) + '%" aria-valuenow="' + (porEsto - 100) + '" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;" ></div>'
-                            html = html + '' + stqAtual + '%</div>'
+                            html = html + '<div class="progress-bar ' + sClass + ' " role="progressbar" style="width: ' +
+                                pstqAtual + '%" aria-valuenow="' + pstqAtual + '" aria-valuemin="0" aria-valuemax="100" >' + pstqAtual + '%</div>'
+                            html = html + '</div>'
 
 
 
