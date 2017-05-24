@@ -29,12 +29,12 @@
                         tributacao.imposto.icms.icms10.modalidadeBCICMS = tributacao.imposto.icms.icms10.modalidadeBCICMS ? new qat.model.fnDoisValor1(tributacao.imposto.icms.icms10.modalidadeBCICMS, action, $rootScope.user.user) : {};
                         tributacao.imposto.icms.icms10.modalidadeBCICMSST = tributacao.imposto.icms.icms10.modalidadeBCICMSST ? new qat.model.fnDoisValor1(tributacao.imposto.icms.icms10.modalidadeBCICMSST, action, $rootScope.user.user) : {};
                     } else if (tributacao.imposto.icms.sitTributaria.value == "20") {
-                        tributacao.imposto.icms.icms20.situacaoTributaria = new qat.model.fnDoisValor1(tributacao.imposto.icms.icms10.modalidadeBCICMS, action, $rootScope.user.user);
+                        tributacao.imposto.icms.icms20.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
                         tributacao.imposto.icms.icms20.modalidadeBCICMS = new qat.model.fnDoisValor1(tributacao.imposto.icms.icms20.modalidadeBCICMS, action, $rootScope.user.user)
                         tributacao.imposto.icms.icms20.desoneracao = new qat.model.fnDoisValor1(tributacao.imposto.icms.icms20.desoneracao, action, $rootScope.user.user)
                         tributacao.imposto.icms.icms20 = fModels.amont(tributacao.imposto.icms.icms20, action);
                     } else if (tributacao.imposto.icms.sitTributaria.value == "30") {
-                        tributacao.imposto.icms.icms30.situacaoTributaria = new qat.model.fnDoisValor1(tributacao.imposto.icms.icms10.modalidadeBCICMS, action, $rootScope.user.user);
+                        tributacao.imposto.icms.icms30.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
                         tributacao.imposto.icms.icms30.modalidadeBCICMS = new qat.model.fnDoisValor1(tributacao.imposto.icms.icms30.modalidadeBCICMS, action, $rootScope.user.user)
                         tributacao.imposto.icms.icms30.desoneracao = new qat.model.fnDoisValor1(tributacao.imposto.icms.icms30.desoneracao, action, $rootScope.user.user)
                         tributacao.imposto.icms.icms30 = fModels.amont(tributacao.imposto.icms.icms30, action);
@@ -100,7 +100,7 @@
                         tributacao.imposto.icms.icmssn900.situacaoTributaria = tributacao.imposto.icms.sitTributaria
                         tributacao.imposto.icms.icmssn900 = fModels.amont(tributacao.imposto.icms.icmssn900, action);
                     }
-
+                    debugger
                     tributacao.imposto.icms.modelAction = action;
                     tributacao.imposto.icms.createUser = $rootScope.user.user;
                     tributacao.imposto.icms.createDateUTC = (new Date()).getTime();

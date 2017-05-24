@@ -15,7 +15,7 @@
                             return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
                         }).withOption('width', '10px'),
                         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('Nome ou Razão social').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Nome ou Raz達o social').renderWith(function(data, type, full, meta) {
 
                             return '<p>' + data.nome + '</p>';
                         }).withOption('width', '100px'),
@@ -69,7 +69,7 @@
                             }
                             return '<p>' + documentos + '</p>';
                         }).withOption('width', '100px').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Inscrição Estadual').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Inscri巽達o Estadual').renderWith(function(data, type, full, meta) {
                             var documentos = "";
                             if ((data != null) && (data != undefined) && (type == "display")) {
                                 if ((data.documentos != undefined) && (data.documentos.length > 0)) {
@@ -83,7 +83,7 @@
                             }
 
                         }).withOption('width', '100px').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Inscrição Municipal').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Inscri巽達o Municipal').renderWith(function(data, type, full, meta) {
                             var documentos = "";
                             if ((data != null) && (data != undefined) && (type == "display")) {
                                 if ((data.documentos != undefined) && (data.documentos.length > 0)) {
@@ -97,7 +97,7 @@
                             }
 
                         }).withOption('width', '100px').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Inscrição Suframa').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Inscri巽達o Suframa').renderWith(function(data, type, full, meta) {
                             var documentos = "";
                             if ((data != null) && (data != undefined) && (type == "display")) {
                                 if ((data.documentos != undefined) && (data.documentos.length > 0)) {
@@ -186,10 +186,10 @@
                         }).withOption('width', '50px'),
                         DTColumnBuilder.newColumn('dtNasc').withTitle('Data Nascimento').notVisible(),
                         DTColumnBuilder.newColumn('dataCadastro').withTitle('Data Cadastro').notVisible(),
-                        DTColumnBuilder.newColumn('obs').withTitle('Observação').notVisible(),
+                        DTColumnBuilder.newColumn('obs').withTitle('Observa巽達o').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
                 pdVendas: function(vm, _html, _actions) {
@@ -318,7 +318,7 @@
                         }).withOption('width', '200px').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
                 orcamento: function(vm, _html, _actions) {
@@ -447,7 +447,7 @@
                         }).withOption('width', '200px').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
                 ordemServico: function(vm, _html, _actions) {
@@ -576,7 +576,7 @@
                         }).withOption('width', '200px').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
                 nfSaida: function(vm, _html, _actions) {
@@ -705,7 +705,7 @@
                         }).withOption('width', '200px').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
                 tributacao: function(vm, _html, _actions) {
@@ -717,8 +717,8 @@
                             return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
                         }).withOption('width', '3px'),
                         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
-                        DTColumnBuilder.newColumn('descricao').withTitle('descrição').withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('Icms').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn('descricao').withTitle('descri巽達o').withOption('width', '10px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Cfop').renderWith(function(data, type, full, meta) {
                             var sline = "";
 
                             if (data.cfop != undefined) {
@@ -743,15 +743,15 @@
                                                 } else if (keys[i] == "icms10") {
                                                     sline = dialogFactory.icms10(data.imposto.icms[keys[i]]);
                                                 } else if (keys[i] == "icms11") {
-                                                    sline = dialogFactory.icms20(data.imposto.icms[keys[i]]);
+                                                    sline = dialogFactory.icms11(data.imposto.icms[keys[i]]);
                                                 } else if (keys[i] == "icms20") {
-                                                    sline = dialogFactory.icms30(data.imposto.icms[keys[i]]);
+                                                    sline = dialogFactory.icms20(data.imposto.icms[keys[i]]);
                                                 } else if (keys[i] == "icms30") {
-                                                    sline = dialogFactory.icms40(data.imposto.icms[keys[i]]);
+                                                    sline = dialogFactory.icms30(data.imposto.icms[keys[i]]);
                                                 } else if (keys[i] == "icms40") {
-                                                    sline = dialogFactory.icms50(data.imposto.icms[keys[i]]);
+                                                    sline = dialogFactory.icms40(data.imposto.icms[keys[i]]);
                                                 } else if (keys[i] == "icms50") {
-                                                    sline = dialogFactory.icms60(data.imposto.icms[keys[i]]);
+                                                    sline = dialogFactory.icms50(data.imposto.icms[keys[i]]);
                                                 }
                                             }
 
@@ -771,17 +771,18 @@
 
 
                                     if (data.imposto.ipi.tributado != undefined) {
-                                        retorno = retorno + "<tr><td>IPI - Situação tributária</td><td>" + data.imposto.ipi.tributado.situacaoTributaria.descricao + "</td></tr>"
-                                        retorno = retorno + "<tr><td>Classe cigarros/bebidas</td><td>" + data.imposto.ipi.classeEnquadramento + "</td></tr>"
-                                        retorno = retorno + "<tr><td>CNPJ Produtor</td><td>" + data.imposto.ipi.cnpjProdutor + "</td></tr>"
-                                        retorno = retorno + "<tr><td>Cod. selo controle IPI</td><td>" + data.imposto.ipi.codigoSelo + "</td></tr>"
-                                        retorno = retorno + "<tr><td>Qtd. selo IPI</td><td>" + data.imposto.ipi.quantidadeSelo + "</td></tr>"
-                                        retorno = retorno + "<tr><td>Cod Enquadramento</td><td>" + data.imposto.ipi.codigoEnquadramento + "</td></tr>"
-                                        retorno = retorno + "<tr><td>Aliquota</td><td>" + data.imposto.ipi.tributado.percentualAliquota + "</td></tr>"
-                                        retorno = retorno + "<tr><td>Vr do IPI</td><td>" + data.imposto.ipi.tributado.valorTributo + "</td></tr>"
+                                        debugger
+                                        retorno = retorno + (data.imposto.ipi.tributado.situacaoTributaria ? "<tr><td>IPI - Situa巽達o tribut叩ria : " + (data.imposto.ipi.tributado.situacaoTributaria.descricao) + "</td></tr>" : "")
+                                        retorno = retorno + (data.imposto.ipi.classeEnquadramento ? "<tr><td>Classe cigarros/bebidas" + data.imposto.ipi.classeEnquadramento + "</td></tr>" : "")
+                                        retorno = retorno + (data.imposto.ipi.cnpjProdutor ? "<tr><td>CNPJ Produtor" + data.imposto.ipi.cnpjProdutor + "</td></tr>" : "")
+                                        retorno = retorno + (data.imposto.ipi.codigoSelo ? "<tr><td>Cod. selo controle IPI" + data.imposto.ipi.codigoSelo + "</td></tr>" : "")
+                                        retorno = retorno + (data.imposto.ipi.quantidadeSelo ? "<tr><td>Qtd. selo IPI" + data.imposto.ipi.quantidadeSelo + "</td></tr>" : "")
+                                        retorno = retorno + (data.imposto.ipi.codigoEnquadramento ? "<tr><td>Cod Enquadramento" + data.imposto.ipi.codigoEnquadramento + "</td></tr>" : "")
+                                        retorno = retorno + (data.imposto.ipi.tributado.percentualAliquota ? "<tr><td>Aliquota" + data.imposto.ipi.tributado.percentualAliquota + "</td></tr>" : "")
+                                        retorno = retorno + (data.imposto.ipi.tributado.valorTributo ? "<tr><td>Vr do IPI" + data.imposto.ipi.tributado.valorTributo + "</td></tr>" : "")
 
                                     } else if (data.imposto.ipi.naotributado != undefined) {
-                                        retorno = retorno + "<tr><td>IPI - Situação tributária</td><td>" + data.imposto.ipi.naotributado.situacaoTributaria.descricao + "</td></tr>"
+                                        retorno = retorno + "<tr><td>IPI - Situa巽達o tribut叩ria</td><td>" + data.imposto.ipi.naotributado.situacaoTributaria.descricao + "</td></tr>"
                                         retorno = retorno + "<tr><td>Classe cigarros/bebidas</td><td>" + data.imposto.ipi.classeEnquadramento + "</td></tr>"
                                         retorno = retorno + "<tr><td>CNPJ Produtor</td><td>" + data.imposto.ipi.cnpjProdutor + "</td></tr>"
                                         retorno = retorno + "<tr><td>Cod. selo controle IPI</td><td>" + data.imposto.ipi.codigoSelo + "</td></tr>"
@@ -803,7 +804,7 @@
 
 
                                     if (data.imposto.pis.aliquota != undefined) {
-                                        retorno = retorno + "<tr><td>PIS - Situação tributária</td><td>" + data.imposto.pis.aliquota.situacaoTributaria.descricao + "</td></tr>"
+                                        retorno = retorno + "<tr><td>PIS - Situa巽達o tribut叩ria</td><td>" + data.imposto.pis.aliquota.situacaoTributaria.descricao + "</td></tr>"
                                         retorno = retorno + "<tr><td>Aliquota</td><td>" + data.imposto.pis.aliquota.percentualAliquota + "</td></tr>"
                                         retorno = retorno + "<tr><td>Valor PIS/unidade</td><td>" + data.imposto.pis.aliquota.valorUnidade + "</td></tr>"
                                         if (data.imposto.pisst.percentualAliquota != undefined) {
@@ -814,7 +815,7 @@
 
 
                                     } else if (data.imposto.pis.quantidade != undefined) {
-                                        retorno = retorno + "<tr><td>PIS - Situação tributária</td><td>" + data.imposto.pis.quantidade.situacaoTributaria.descricao + "</td></tr>"
+                                        retorno = retorno + "<tr><td>PIS - Situa巽達o tribut叩ria</td><td>" + data.imposto.pis.quantidade.situacaoTributaria.descricao + "</td></tr>"
                                         retorno = retorno + "<tr><td>Aliquota</td><td>" + data.imposto.pis.quantidade.percentualAliquota + "</td></tr>"
                                         retorno = retorno + "<tr><td>Valor PIS/unidade</td><td>" + data.imposto.pis.quantidade.valorUnidade + "</td></tr>"
                                         if (data.imposto.pisst.percentualAliquota != undefined) {
@@ -823,7 +824,7 @@
                                             retorno = retorno + "<tr><td>Aliquota (ST) $ </td><td>" + data.imposto.pisst.valorAliquota + "</td></tr>"
                                         }
                                     } else if (data.imposto.pis.naoTributavel != undefined) {
-                                        retorno = retorno + "<tr><td>PIS - Situação tributária</td><td>" + data.imposto.pis.naoTributavel.situacaoTributaria.descricao + "</td></tr>"
+                                        retorno = retorno + "<tr><td>PIS - Situa巽達o tribut叩ria</td><td>" + data.imposto.pis.naoTributavel.situacaoTributaria.descricao + "</td></tr>"
                                         retorno = retorno + "<tr><td>Aliquota</td><td>" + data.imposto.pis.naoTributavel.percentualAliquota + "</td></tr>"
                                         retorno = retorno + "<tr><td>Valor PIS/unidade</td><td>" + data.imposto.pis.naoTributavel.valorUnidade + "</td></tr>"
                                         if (data.imposto.pisst.percentualAliquota != undefined) {
@@ -832,7 +833,7 @@
                                             retorno = retorno + "<tr><td>Aliquota (ST) $ </td><td>" + data.imposto.pisst.valorAliquota + "</td></tr>"
                                         }
                                     } else if (data.imposto.pis.outrasOperacoes != undefined) {
-                                        retorno = retorno + "<tr><td>PIS - Situação tributária</td><td>" + data.imposto.pis.outrasOperacoes.situacaoTributaria.descricao + "</td></tr>"
+                                        retorno = retorno + "<tr><td>PIS - Situa巽達o tribut叩ria</td><td>" + data.imposto.pis.outrasOperacoes.situacaoTributaria.descricao + "</td></tr>"
                                         retorno = retorno + "<tr><td>Aliquota</td><td>" + data.imposto.pis.outrasOperacoes.percentualAliquota + "</td></tr>"
                                         retorno = retorno + "<tr><td>Valor PIS/unidade</td><td>" + data.imposto.pis.outrasOperacoes.valorUnidade + "</td></tr>"
                                         if (data.imposto.pisst.percentualAliquota != undefined) {
@@ -856,7 +857,7 @@
 
 
                                     if (data.imposto.cofins.aliquota != undefined) {
-                                        retorno = retorno + "<tr><td>COFINS - Situação tributária</td><td>" + data.imposto.cofins.aliquota.situacaoTributaria.descricao + "</td></tr>"
+                                        retorno = retorno + "<tr><td>COFINS - Situa巽達o tribut叩ria</td><td>" + data.imposto.cofins.aliquota.situacaoTributaria.descricao + "</td></tr>"
                                         retorno = retorno + "<tr><td>Aliquota</td><td>" + data.imposto.cofins.aliquota.percentualAliquota + "</td></tr>"
                                         retorno = retorno + "<tr><td>Valor COFINS/unidade</td><td>" + data.imposto.cofins.aliquota.valorUnidade + "</td></tr>"
                                         if (data.imposto.cofinsst.percentualAliquota != undefined) {
@@ -867,7 +868,7 @@
 
 
                                     } else if (data.imposto.cofins.quantidade != undefined) {
-                                        retorno = retorno + "<tr><td>COFINS - Situação tributária</td><td>" + data.imposto.cofins.quantidade.situacaoTributaria.descricao + "</td></tr>"
+                                        retorno = retorno + "<tr><td>COFINS - Situa巽達o tribut叩ria</td><td>" + data.imposto.cofins.quantidade.situacaoTributaria.descricao + "</td></tr>"
                                         retorno = retorno + "<tr><td>Aliquota</td><td>" + data.imposto.cofins.quantidade.percentualAliquota + "</td></tr>"
                                         retorno = retorno + "<tr><td>Valor COFINS/unidade</td><td>" + data.imposto.cofins.quantidade.valorUnidade + "</td></tr>"
                                         if (data.imposto.cofinsst.percentualAliquota != undefined) {
@@ -876,7 +877,7 @@
                                             retorno = retorno + "<tr><td>Aliquota (ST) $ </td><td>" + data.imposto.cofinsst.valorAliquota + "</td></tr>"
                                         }
                                     } else if (data.imposto.cofins.naoTributavel != undefined) {
-                                        retorno = retorno + "<tr><td>COFINS - Situação tributária</td><td>" + data.imposto.cofins.naoTributavel.situacaoTributaria.descricao + "</td></tr>"
+                                        retorno = retorno + "<tr><td>COFINS - Situa巽達o tribut叩ria</td><td>" + data.imposto.cofins.naoTributavel.situacaoTributaria.descricao + "</td></tr>"
                                         retorno = retorno + "<tr><td>Aliquota</td><td>" + data.imposto.cofins.naoTributavel.percentualAliquota + "</td></tr>"
                                         retorno = retorno + "<tr><td>Valor COFINS/unidade</td><td>" + data.imposto.cofins.naoTributavel.valorUnidade + "</td></tr>"
                                         if (data.imposto.cofinsst.percentualAliquota != undefined) {
@@ -885,7 +886,7 @@
                                             retorno = retorno + "<tr><td>Aliquota (ST) $ </td><td>" + data.imposto.cofinsst.valorAliquota + "</td></tr>"
                                         }
                                     } else if (data.imposto.cofins.outrasOperacoes != undefined) {
-                                        retorno = retorno + "<tr><td>COFINS - Situação tributária</td><td>" + data.imposto.cofins.outrasOperacoes.situacaoTributaria.descricao + "</td></tr>"
+                                        retorno = retorno + "<tr><td>COFINS - Situa巽達o tribut叩ria</td><td>" + data.imposto.cofins.outrasOperacoes.situacaoTributaria.descricao + "</td></tr>"
                                         retorno = retorno + "<tr><td>Aliquota</td><td>" + data.imposto.cofins.outrasOperacoes.percentualAliquota + "</td></tr>"
                                         retorno = retorno + "<tr><td>Valor COFINS/unidade</td><td>" + data.imposto.cofins.outrasOperacoes.valorUnidade + "</td></tr>"
                                         if (data.imposto.cofinsst.percentualAliquota != undefined) {
@@ -901,7 +902,7 @@
 
                             return retorno + '</tbody></table>';
                         }).withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('Imposto Importação').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Imposto Importa巽達o').renderWith(function(data, type, full, meta) {
 
                             var retorno = '<table class="table"><thead></thead><tbody>';
                             if (data.imposto != undefined) {
@@ -937,7 +938,7 @@
                                 if (data.imposto.icmsUfDestino != undefined) {
 
                                     retorno = retorno + "<tr><td>Per ICMS Rel UF Dest.</td><td>" + data.imposto.icmsUfDestino.valorRelativoFundoCombatePobrezaDestino + "</td></tr>"
-                                    retorno = retorno + "<tr><td>Vr da base de  cálc UF dest.</td><td>" + data.imposto.icmsUfDestino.valorBaseCalculoDestino + "</td></tr>"
+                                    retorno = retorno + "<tr><td>Vr da base de  c叩lc UF dest.</td><td>" + data.imposto.icmsUfDestino.valorBaseCalculoDestino + "</td></tr>"
                                     retorno = retorno + "<tr><td>Aliq interna da UF dest.</td><td>" + data.imposto.icmsUfDestino.percentualAliquotaInternaDestino + "</td></tr>"
                                     if (data.imposto.icmsUfDestino.percentualInterestadual != undefined) {
                                         retorno = retorno + "<tr><td>Aliq interestadual</td><td>" + data.imposto.icmsUfDestino.percentualInterestadual.descricao + "</td></tr>"
@@ -956,7 +957,7 @@
                         }).withOption('width', '10px').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
                 doisValores: function(vm, _html, _actions) {
@@ -968,10 +969,10 @@
                         }).withOption('width', '3px'),
                         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
                         DTColumnBuilder.newColumn('nome').withTitle('Nome'),
-                        DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
+                        DTColumnBuilder.newColumn('descricao').withTitle('Descri巽達o'),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
                 regime: function(vm, _html, _actions) {
@@ -983,10 +984,10 @@
                         }).withOption('width', '3px'),
                         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
                         DTColumnBuilder.newColumn('nome').withTitle('Nome'),
-                        DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
+                        DTColumnBuilder.newColumn('descricao').withTitle('Descri巽達o'),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
                 cfop: function(vm, _html, _actions) {
@@ -1009,7 +1010,7 @@
                         DTColumnBuilder.newColumn('observacao').withTitle('observacao').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '100px')
+                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '100px')
                     ];
                 },
                 contasPagar: function(vm, _html, _actions) {
@@ -1029,7 +1030,7 @@
 
                             return shtml;
                         }).withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('Descrição').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Descri巽達o').renderWith(function(data, type, full, meta) {
                             var shtml = "";
                             if (data.descricao) {
                                 shtml = '<span>' + data.descricao + '</span>';
@@ -1057,7 +1058,7 @@
 
                             return shtml;
                         }).withOption('width', '10px').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Data Emissão').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Data Emiss達o').renderWith(function(data, type, full, meta) {
                             var shtml = "";
                             if (data.dataEmissao) {
                                 var date = new Date();
@@ -1075,7 +1076,7 @@
 
                             return shtml;
                         }).withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('Situação').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Situa巽達o').renderWith(function(data, type, full, meta) {
                             var shtml = "";
                             if (data.situacao) {
                                 shtml = '<span>' + data.situacao.descricao + '</span>';
@@ -1108,7 +1109,7 @@
                         DTColumnBuilder.newColumn('observacao').withTitle('observacao').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '100px')
+                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '100px')
                     ];
                 },
                 produtoEmpresa: function(vm, _html, _actions) {
@@ -1188,7 +1189,7 @@
                             return html;
 
                         }).withOption('width', '100px'),
-                        DTColumnBuilder.newColumn(null).withTitle('Tributação').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Tributa巽達o').renderWith(function(data, type, full, meta) {
 
                             return '<p>' + (data.tributacao ? data.tributacao.descricao : ' ') + '</p>';
                         }).withOption('width', '100px'),
@@ -1206,7 +1207,7 @@
 
                             return '<p>' + data.prodId ? (data.prodId.marca ? data.prodId.marca.marca : "") : "" + '</p>';
                         }).withOption('width', '100px').notVisible(),
-                        DTColumnBuilder.newColumn('pesoLiquido').withTitle('Peso Líquido').notVisible(),
+                        DTColumnBuilder.newColumn('pesoLiquido').withTitle('Peso L鱈quido').notVisible(),
                         DTColumnBuilder.newColumn('pesoBruto').withTitle('pesobruto').notVisible(),
                         DTColumnBuilder.newColumn(null).withTitle("Estoque Min.").renderWith(function(data, type, full, meta) {
 
@@ -1270,7 +1271,7 @@
                         }).withOption('width', '100px').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '100px')
+                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '100px')
                     ];
                 },
                 contasReceber: function(vm, _html, _actions) {
@@ -1290,7 +1291,7 @@
 
                             return shtml;
                         }).withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('Descrição').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Descri巽達o').renderWith(function(data, type, full, meta) {
                             var shtml = "";
                             if (data.descricao) {
                                 shtml = '<span>' + data.descricao + '</span>';
@@ -1318,7 +1319,7 @@
 
                             return shtml;
                         }).withOption('width', '10px').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Data Emissão').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Data Emiss達o').renderWith(function(data, type, full, meta) {
                             var shtml = "";
                             if (data.dataEmissao) {
                                 var date = new Date();
@@ -1336,7 +1337,7 @@
 
                             return shtml;
                         }).withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('Situação').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Situa巽達o').renderWith(function(data, type, full, meta) {
                             var shtml = "";
                             if (data.situacao) {
                                 shtml = '<span>' + data.situacao.descricao + '</span>';
@@ -1372,10 +1373,10 @@
                         DTColumnBuilder.newColumn(null).withTitle('Pagar').notSortable().renderWith(function(data, type, full, meta) {
                             return "<toggle style='width : 10px' ng-model='titulo.pagarAgora" + data.id + "' " +
                                 'ng-change="showCase.fnPagarAgora(showCase.persons[' + data.id + '])"  style="android" on="Sim"' +
-                                'off="Não" onstyle="btn-success" offstyle="btn-danger"' +
+                                'off="N達o" onstyle="btn-success" offstyle="btn-danger"' +
                                 'ng-true-value="true" ng-false-value="false"></toggle>'
                         }).withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '100px')
+                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '100px')
                     ];
                 },
                 conta: function(vm, _html, _actions) {
@@ -1386,7 +1387,7 @@
                             return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
                         }).withOption('width', '3px'),
                         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px').notVisible(),
-                        DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
+                        DTColumnBuilder.newColumn('descricao').withTitle('Descri巽達o'),
                         DTColumnBuilder.newColumn(null).withTitle('Saldo').renderWith(function(data, type, full, meta) {
                             var shtml = "";
                             if (data.saldo) {
@@ -1395,7 +1396,7 @@
 
                             return shtml;
                         }).withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('Ultima Transação').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Ultima Transa巽達o').renderWith(function(data, type, full, meta) {
                             var shtml = "";
                             if (data.dataUltLanc) {
                                 var date = new Date();
@@ -1405,8 +1406,8 @@
 
                             return shtml;
                         }).withOption('width', '10px'),
-                        DTColumnBuilder.newColumn('numeroConta').withTitle('N° Conta'),
-                        DTColumnBuilder.newColumn('observacao').withTitle('Observação'),
+                        DTColumnBuilder.newColumn('numeroConta').withTitle('N属 Conta'),
+                        DTColumnBuilder.newColumn('observacao').withTitle('Observa巽達o'),
                         DTColumnBuilder.newColumn(null).withTitle('Baixas').renderWith(function(data, type, full, meta) {
                             var shtml = "";
                             var dValor = 0;
@@ -1424,7 +1425,7 @@
                         }).withOption('width', '10px'),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
                 formaPg: function(vm, _html, _actions) {
@@ -1453,10 +1454,10 @@
                         DTColumnBuilder.newColumn('qntIntervalo').withTitle('Tempo Intervalo').notVisible(),
                         DTColumnBuilder.newColumn('intervalo').withTitle('Intervalo').notVisible(),
                         DTColumnBuilder.newColumn('entrada').withTitle('Entrada'),
-                        DTColumnBuilder.newColumn('observacao').withTitle('Observação').notVisible(),
+                        DTColumnBuilder.newColumn('observacao').withTitle('Observa巽達o').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
                 nfEntrada: function(vm, _html, _actions) {
@@ -1469,7 +1470,7 @@
                         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
 

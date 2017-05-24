@@ -5,7 +5,7 @@
         padding: 0;
         margin: 0;
     }
-
+    
     .tabs-was {
         float: left;
         border: 1px solid #000;
@@ -15,7 +15,7 @@
         background-color: #CCC;
         color: ##3767B9;
     }
-
+    
     .selection {
         border: 1px solid #000;
         border-bottom-width: 0;
@@ -24,32 +24,32 @@
         background-color: #CCC;
         color: ##3767B9;
     }
-
+    
     #mainView {
         border: 1px solid black;
         clear: both;
     }
-
+    
     .active {
         background-color: #FFF;
         color: #000;
     }
-
+    
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
-
+    
     .tabs-nav {
         padding: 20px 0 0;
         list-style: none;
     }
-
+    
     .tabs-nav li {
         display: inline;
     }
-
+    
     .tabs-nav a {
         display: inline-block;
         border: 1px solid #ddd;
@@ -61,75 +61,75 @@
         color: #fff;
         background: #1B3975;
     }
-
+    
     .tabs-nav .active {
         background: #fff;
         color: #000;
         border-bottom: 1px solid #fff;
         margin-bottom: -1px;
     }
-
+    
     .tab-content {
         border: 1px solid #ddd;
         padding: 20px;
     }
-
+    
     .tab-content1 {
         border: 1px solid #ddd;
         padding: 20px;
     }
-
+    
     p {
         margin-bottom: 15px;
     }
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-
+    
     .row.content {
         height: 550px
     }
     /* Set gray background color and 100% height */
-
+    
     .sidenav {
         background-color: #f1f1f1;
         height: 100%;
     }
     /* On small screens, set height to 'auto' for the grid */
-
+    
     @media screen and (max-width: 767px) {
         .row.content {
             height: auto;
         }
     }
-
+    
     div.show-image {
         position: relative;
         float: left;
         margin: 5px;
     }
-
+    
     div.show-image:hover img {
         opacity: 0.5;
     }
-
+    
     div.show-image:hover input {
         display: block;
     }
-
+    
     div.show-image input {
         position: absolute;
         display: none;
     }
-
+    
     div.show-image input.update {
         top: 0;
         left: 0;
     }
-
+    
     div.show-image input.delete {
         top: 0;
         left: 79%;
     }
-
+    
     .vis {
         height: 100px;
         display: none;
@@ -530,7 +530,7 @@
                     </div>
                     <div class="col-sm-6 ">
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Desoneracao ICMS</label>
+                            <label for="exampleInputPassword1">Desoneração ICMS</label>
                             <div class="row ">
                                 <ui-select ng-model="tributacao.imposto.icms.icms20.desoneracao" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
                                     <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>

@@ -494,72 +494,80 @@ qat.model.fnPreco = function(id, _value, _tabela, modelAction) {
 
 qat.model.fnTelefones = function(_telefone, modelAction, _user) {
     var _id = null;
-    if (_telefone.id == "" || _telefone.id == " ") {
-        _id = null;
-    } else {
-        _id = _telefone.id;
-    }
-    var _emprId = null;
-    if (localStorage.getItem('empresa') == null ||
-        localStorage.getItem('empresa') == "") {
-        _emprId = null;
-    } else {
-        _emprId = JSON.parse(localStorage.getItem('empresa')).id;
-    }
+    if (_telefone) {
+        if (_telefone.id == "" || _telefone.id == " ") {
+            _id = null;
+        } else {
+            _id = _telefone.id;
+        }
+        var _emprId = null;
+        if (localStorage.getItem('empresa') == null ||
+            localStorage.getItem('empresa') == "") {
+            _emprId = null;
+        } else {
+            _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+        }
 
-    telefones = {
-        id: _id,
-        typeValue: _telefone.typeValue,
-        ddd: '',
-        numero: _telefone.numero,
-        telefoneTypeEnumValue: _telefone.telefoneTypeEnumValue,
-        parentId: 0,
-        emprId: 0,
-        processId: 0,
-        tableEnumValue: 0,
-        modelAction: 0,
-        modelAction: modelAction,
-        createUser: _user ? _user : "System",
-        createDateUTC: (new Date()).getTime(),
-        modifyUser: _user ? _user : "System",
-        modifyDateUTC: (new Date()).getTime()
-    }
+        telefones = {
+            id: _id,
+            typeValue: _telefone.typeValue,
+            ddd: '',
+            numero: _telefone.numero,
+            telefoneTypeEnumValue: _telefone.telefoneTypeEnumValue,
+            parentId: 0,
+            emprId: 0,
+            processId: 0,
+            tableEnumValue: 0,
+            modelAction: 0,
+            modelAction: modelAction,
+            createUser: _user ? _user : "System",
+            createDateUTC: (new Date()).getTime(),
+            modifyUser: _user ? _user : "System",
+            modifyDateUTC: (new Date()).getTime()
+        }
 
-    return telefones;
+        return telefones;
+    } else {
+        return {};
+    }
 }
 
 qat.model.fnEmails = function(_email, modelAction, _user) {
 
-    var _id = null;
-    if (_email.id == "" || _email.id == " ") {
-        _id = null;
-    } else {
-        _id = _email.id;
-    }
-    var _emprId = null;
-    if (localStorage.getItem('empresa') == null ||
-        localStorage.getItem('empresa') == "") {
-        _emprId = null;
-    } else {
-        _emprId = JSON.parse(localStorage.getItem('empresa')).id;
-    }
-    emails = {
-        id: _id,
-        typeValue: 0,
-        email: _email.email,
-        emailTypeEnumValue: _email.emailTypeEnumValue,
-        parentId: 0,
-        emprId: 0,
-        processId: 0,
-        tableEnumValue: 0,
-        modelAction: modelAction,
-        createUser: _user ? _user : "System",
-        createDateUTC: (new Date()).getTime(),
-        modifyUser: _user ? _user : "System",
-        modifyDateUTC: (new Date()).getTime()
+    if (_email) {
+        var _id = null;
+        if (_email.id == "" || _email.id == " ") {
+            _id = null;
+        } else {
+            _id = _email.id;
+        }
+        var _emprId = null;
+        if (localStorage.getItem('empresa') == null ||
+            localStorage.getItem('empresa') == "") {
+            _emprId = null;
+        } else {
+            _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+        }
+        emails = {
+            id: _id,
+            typeValue: 0,
+            email: _email.email,
+            emailTypeEnumValue: _email.emailTypeEnumValue,
+            parentId: 0,
+            emprId: 0,
+            processId: 0,
+            tableEnumValue: 0,
+            modelAction: modelAction,
+            createUser: _user ? _user : "System",
+            createDateUTC: (new Date()).getTime(),
+            modifyUser: _user ? _user : "System",
+            modifyDateUTC: (new Date()).getTime()
 
+        }
+        return emails;
+    } else {
+        return {};
     }
-    return emails;
 }
 
 qat.model.fnSocios = function(_cota, _por, _adm, _nome, _cpf, id, type,
@@ -1491,11 +1499,11 @@ qat.model.Marca = function(_oObjet, _modelAction, _user) {
     this.marca = _oObjet.marca
     this.fabricante = _oObjet.fabricante
     this.emailList = [];
-    this.emailList.push(qat.model.fnEmails(_oObjet.emailList ? _oObjet.emailList[0] : {}, (_oObjet.emailList && _oObjet.emailList[0].id) ? _modelAction : 'INSERT', _user));
+    this.emailList.push(qat.model.fnEmails(_oObjet.emailList ? _oObjet.emailList[0] : {}, (_oObjet.emailList[0] && _oObjet.emailList[0].id) ? _modelAction : 'INSERT', _user));
     this.enderecoList = [];
     this.enderecoList.push(qat.model.fnEndereco(_oObjet.enderecoList ? _oObjet.enderecoList[0] : {}, (_oObjet.enderecoList && _oObjet.emailList[0].id) ? _modelAction : 'INSERT', _user));
     this.telefoneList = [];
-    this.telefoneList.push(qat.model.fnTelefones(_oObjet.telefoneList ? _oObjet.telefoneList[0] : {}, (_oObjet.telefoneList && _oObjet.telefoneList[0].id) ? _modelAction : 'INSERT', _user));
+    this.telefoneList.push(qat.model.fnTelefones(_oObjet.telefoneList ? _oObjet.telefoneList[0] : {}, (_oObjet.telefoneList[0] && _oObjet.telefoneList[0].id) ? _modelAction : 'INSERT', _user));
     this.parentId = _oObjet.parentId;
     this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
     this.processId = _oObjet.processId;
