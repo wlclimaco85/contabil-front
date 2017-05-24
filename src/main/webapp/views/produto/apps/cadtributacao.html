@@ -5,7 +5,7 @@
         padding: 0;
         margin: 0;
     }
-    
+
     .tabs-was {
         float: left;
         border: 1px solid #000;
@@ -15,7 +15,7 @@
         background-color: #CCC;
         color: ##3767B9;
     }
-    
+
     .selection {
         border: 1px solid #000;
         border-bottom-width: 0;
@@ -24,32 +24,32 @@
         background-color: #CCC;
         color: ##3767B9;
     }
-    
+
     #mainView {
         border: 1px solid black;
         clear: both;
     }
-    
+
     .active {
         background-color: #FFF;
         color: #000;
     }
-    
+
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
-    
+
     .tabs-nav {
         padding: 20px 0 0;
         list-style: none;
     }
-    
+
     .tabs-nav li {
         display: inline;
     }
-    
+
     .tabs-nav a {
         display: inline-block;
         border: 1px solid #ddd;
@@ -61,75 +61,75 @@
         color: #fff;
         background: #1B3975;
     }
-    
+
     .tabs-nav .active {
         background: #fff;
         color: #000;
         border-bottom: 1px solid #fff;
         margin-bottom: -1px;
     }
-    
+
     .tab-content {
         border: 1px solid #ddd;
         padding: 20px;
     }
-    
+
     .tab-content1 {
         border: 1px solid #ddd;
         padding: 20px;
     }
-    
+
     p {
         margin-bottom: 15px;
     }
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    
+
     .row.content {
         height: 550px
     }
     /* Set gray background color and 100% height */
-    
+
     .sidenav {
         background-color: #f1f1f1;
         height: 100%;
     }
     /* On small screens, set height to 'auto' for the grid */
-    
+
     @media screen and (max-width: 767px) {
         .row.content {
             height: auto;
         }
     }
-    
+
     div.show-image {
         position: relative;
         float: left;
         margin: 5px;
     }
-    
+
     div.show-image:hover img {
         opacity: 0.5;
     }
-    
+
     div.show-image:hover input {
         display: block;
     }
-    
+
     div.show-image input {
         position: absolute;
         display: none;
     }
-    
+
     div.show-image input.update {
         top: 0;
         left: 0;
     }
-    
+
     div.show-image input.delete {
         top: 0;
         left: 79%;
     }
-    
+
     .vis {
         height: 100px;
         display: none;
@@ -690,7 +690,7 @@
 
             <div ng-if="tributacao.imposto.icms.sitTributaria.value == 51">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS</label>
                             <div class="row ">
@@ -704,27 +704,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Perc. Red. da BC ICMS</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">%</span>
-                                <input type="text" class="form-control" ng-model="tributacao.imposto.icms.icms51.percentualReducaoBC" name="classeCigarrosBebidas" placeholder="Redução base calc. (%)">
-                            </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Perc. Red. da BC ICMS</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">%</span>
+                            <input type="text" class="form-control" ng-model="tributacao.imposto.icms.icms51.percentualReducaoBC" name="classeCigarrosBebidas" placeholder="Redução base calc. (%)">
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Aliquota do ICMS</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">%</span>
-                                <input type="text" class="form-control" ng-model="tributacao.imposto.icms.icms51.valorBCICMS" name="alig" placeholder="Alíq. do ICMS (%)">
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Aliquota do ICMS</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">%</span>
+                            <input type="text" class="form-control" ng-model="tributacao.imposto.icms.icms51.valorBCICMS" name="alig" placeholder="Alíq. do ICMS (%)">
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
             <div ng-if="tributacao.imposto.icms.sitTributaria.value == 60">
@@ -760,10 +758,10 @@
                                     </div>
                                     <div class="col-sm-2 ">
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Redução da BC ICMS</label>
+                                            <label for="exampleInputPassword1">Red. da BC ICMS</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">%</span>
-                                                <input type="text" class="form-control" ng-model="tributacao.imposto.icms.icms70.percentualReducaoBC" name="alig" placeholder="Alíq. do ICMS (%)">
+                                                <input type="text" class="form-control" ng-model="tributacao.imposto.icms.icms70.percentualReducaoBC" name="alig" placeholder="Red. da BC ICMS">
                                             </div>
                                         </div>
                                     </div>
@@ -806,25 +804,29 @@
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in icms">
                                 <div class="panel-body">
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Modalidade da BC ST</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">%</span>
-                                                <input type="text" class="form-control" ng-model="tributacao.imposto.icms.icms70.modalidadeBCICMSST" name="alig" placeholder="Alíq. do ICMS (%)">
+                                            <label for="exampleInputPassword1">Modalidade de determ. da BC ICMS</label>
+                                            <div class="row ">
+                                                <ui-select ng-model="tributacao.imposto.icms.icms70.modalidadeBCICMSST" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+                                                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                    <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
+                                                        <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                    </ui-select-choices>
+                                                </ui-select>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Margem de valor adic ICMS ST</label>
+                                            <label for="exampleInputPassword1">Margem vlr adic ICMS ST</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">%</span>
                                                 <input type="text" class="form-control" ng-model="tributacao.imposto.icms.icms70.percentualMargemValorAdicionadoICMSST" name="alig" placeholder="Alíq. do ICMS (%)">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Aliquota do ICMS ST</label>
                                             <div class="input-group">
@@ -837,7 +839,7 @@
 
                                     <div class="col-sm-2">
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Redução Base Calc ST</label>
+                                            <label for="exampleInputPassword1">Red. Base Calc ST</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">%</span>
                                                 <input type="text" class="form-control" ng-model="tributacao.imposto.icms.icms70.percentualAliquotaImpostoICMSST" name="alig" placeholder="Alíq. do ICMS (%)">
@@ -938,25 +940,29 @@
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in icms">
                                 <div class="panel-body">
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Modalidade da BC ST</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">%</span>
-                                                <input type="text" class="form-control" ng-model="tributacao.imposto.icms.icms90.modalidadeBCICMSST" name="alig" placeholder="Alíq. do ICMS (%)">
+                                            <div class="row ">
+                                                <ui-select ng-model="tributacao.imposto.icms.icms90.modalidadeBCICMSST" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+                                                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                    <ui-select-choices repeat="item in icmsMBC | filter: $select.search">
+                                                        <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                    </ui-select-choices>
+                                                </ui-select>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Margem de valor adic ICMS ST</label>
+                                            <label for="exampleInputPassword1">Mar. Vr. adic ICMS ST</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">%</span>
                                                 <input type="text" class="form-control" ng-model="tributacao.imposto.icms.icms90.percentualMargemValorAdicionadoICMSST" name="alig" placeholder="Alíq. do ICMS (%)">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Aliquota do ICMS ST</label>
                                             <div class="input-group">
@@ -969,7 +975,7 @@
 
                                     <div class="col-sm-2">
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Redução Base Calc ST</label>
+                                            <label for="exampleInputPassword1">Red. Base Calc ST</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">%</span>
                                                 <input type="text" class="form-control" ng-model="tributacao.imposto.icms.icms90.percentualAliquotaImpostoICMSST" name="alig" placeholder="Alíq. do ICMS (%)">
@@ -1082,7 +1088,7 @@
                 </div>
 
             </div>
-            <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--------------------------------------------------------------------------------------------------------------------------------------------------------
 
             <div ng-if="tributacao.imposto.icms.sitTributaria.value == icmsPartilhado">
                 <div class="row">

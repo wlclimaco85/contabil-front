@@ -5,7 +5,7 @@
     commonAuth.factory('fTributacao', ['$rootScope', 'fModels', 'SysMgmtData', function($rootScope, fModels, SysMgmtData) {
         var factory = {};
 
-        factory.fnMontaObjeto = function(tributacao, action, url, callBack) {
+        factory.fnMontaObjeto = function(tributacao, action, sUrl, callBack) {
 
 
             var oObject = fModels.amont(tributacao, action);
@@ -39,68 +39,94 @@
                         tributacao.imposto.icms.icms30.desoneracao = new qat.model.fnDoisValor1(tributacao.imposto.icms.icms30.desoneracao, action, $rootScope.user.user)
                         tributacao.imposto.icms.icms30 = fModels.amont(tributacao.imposto.icms.icms30, action);
                     } else if (tributacao.imposto.icms.sitTributaria.value == "40") {
-                        tributacao.imposto.icms.icms40.situacaoTributaria = new qat.model.fnDoisValor1(tributacao.imposto.icms.icms10.modalidadeBCICMS, action, $rootScope.user.user);
+                        tributacao.imposto.icms.icms40.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
                         tributacao.imposto.icms.icms40.motivoDesoneracaoICMS = new qat.model.fnDoisValor1(tributacao.imposto.icms.icms40.motivoDesoneracaoICMS, action, $rootScope.user.user)
                         tributacao.imposto.icms.icms40 = fModels.amont(tributacao.imposto.icms.icms40, action);
                     } else if (tributacao.imposto.icms.sitTributaria.value == "41") {
-                        tributacao.imposto.icms.icms41.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+                        tributacao.imposto.icms.icms41.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
                         tributacao.imposto.icms.icms41 = fModels.amont(tributacao.imposto.icms.icms41, action);
                     } else if (tributacao.imposto.icms.sitTributaria.value == "50") {
-                        tributacao.imposto.icms.icms50.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+                        tributacao.imposto.icms.icms50.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
                         tributacao.imposto.icms.icms50 = fModels.amont(tributacao.imposto.icms.icms50, action);
                     } else if (tributacao.imposto.icms.sitTributaria.value == "51") {
-                        tributacao.imposto.icms.icms51.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+                        tributacao.imposto.icms.icms51.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
+                        tributacao.imposto.icms.icms51.modalidadeBCICMS = new qat.model.fnDoisValor1(tributacao.imposto.icms.icms51.modalidadeBCICMS, action, $rootScope.user.user)
                         tributacao.imposto.icms.icms51 = fModels.amont(tributacao.imposto.icms.icms51, action);
                     } else if (tributacao.imposto.icms.sitTributaria.value == "60") {
-                        tributacao.imposto.icms.icms60.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+                        tributacao.imposto.icms.icms60.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
                         tributacao.imposto.icms.icms60 = fModels.amont(tributacao.imposto.icms.icms60, action);
+
                     } else if (tributacao.imposto.icms.sitTributaria.value == "70") {
-                        tributacao.imposto.icms.icms70.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+                        tributacao.imposto.icms.icms70.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
+                        tributacao.imposto.icms.icms70.desoneracao = new qat.model.fnDoisValor1(tributacao.imposto.icms.icms70.desoneracao, action, $rootScope.user.user)
+                        tributacao.imposto.icms.icms70.modalidadeBCICMSST = new qat.model.fnDoisValor1(tributacao.imposto.icms.icms70.modalidadeBCICMSST, action, $rootScope.user.user)
+                        tributacao.imposto.icms.icms70.modalidadeBCICMS = new qat.model.fnDoisValor1(tributacao.imposto.icms.icms70.modalidadeBCICMS, action, $rootScope.user.user)
                         tributacao.imposto.icms.icms70 = fModels.amont(tributacao.imposto.icms.icms70, action);
+
                     } else if (tributacao.imposto.icms.sitTributaria.value == "90") {
-                        tributacao.imposto.icms.icms90.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+                        tributacao.imposto.icms.icms90.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
+                        tributacao.imposto.icms.icms90.desoneracao = new qat.model.fnDoisValor1(tributacao.imposto.icms.icms90.desoneracao, action, $rootScope.user.user)
+                        tributacao.imposto.icms.icms90.modalidadeBCICMSST = new qat.model.fnDoisValor1(tributacao.imposto.icms.icms90.modalidadeBCICMSST, action, $rootScope.user.user)
+                        tributacao.imposto.icms.icms90.modalidadeBCICMS = new qat.model.fnDoisValor1(tributacao.imposto.icms.icms90.modalidadeBCICMS, action, $rootScope.user.user)
                         tributacao.imposto.icms.icms90 = fModels.amont(tributacao.imposto.icms.icms90, action);
                     } else if (tributacao.imposto.icms.sitTributaria.value == "10Part") {
-                        tributacao.imposto.icms.icmsPartilhado.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+
+                        tributacao.imposto.icms.icmsPartilhado.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
+                        tributacao.imposto.icms.icmsPartilhado.desoneracao = new qat.model.fnDoisValor1(tributacao.imposto.icms.icmsPartilhado.desoneracao, action, $rootScope.user.user)
+                        tributacao.imposto.icms.icmsPartilhado.modalidadeBCICMSST = new qat.model.fnDoisValor1(tributacao.imposto.icms.icmsPartilhado.modalidadeBCICMSST, action, $rootScope.user.user)
+                        tributacao.imposto.icms.icmsPartilhado.modalidadeBCICMS = new qat.model.fnDoisValor1(tributacao.imposto.icms.icmsPartilhado.modalidadeBCICMS, action, $rootScope.user.user)
                         tributacao.imposto.icms.icmsPartilhado = fModels.amont(tributacao.imposto.icms.icmsPartilhado, action);
+
                     } else if (tributacao.imposto.icms.sitTributaria.value == "90Part") {
-                        tributacao.imposto.icms.icmsPartilhado.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+
+                        tributacao.imposto.icms.icmsPartilhado.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
+                        tributacao.imposto.icms.icmsPartilhado.desoneracao = new qat.model.fnDoisValor1(tributacao.imposto.icms.icmsPartilhado.desoneracao, action, $rootScope.user.user)
+                        tributacao.imposto.icms.icmsPartilhado.modalidadeBCICMSST = new qat.model.fnDoisValor1(tributacao.imposto.icms.icmsPartilhado.modalidadeBCICMSST, action, $rootScope.user.user)
+                        tributacao.imposto.icms.icmsPartilhado.modalidadeBCICMS = new qat.model.fnDoisValor1(tributacao.imposto.icms.icmsPartilhado.modalidadeBCICMS, action, $rootScope.user.user)
                         tributacao.imposto.icms.icmsPartilhado = fModels.amont(tributacao.imposto.icms.icmsPartilhado, action);
+
                     } else if (tributacao.imposto.icms.sitTributaria.value == "41ST") {
-                        tributacao.imposto.icms.icmsst.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+                        tributacao.imposto.icms.icmsst.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
                         tributacao.imposto.icms.icmsst = fModels.amont(tributacao.imposto.icms.icmsst, action);
                     } else if (tributacao.imposto.icms.sitTributaria.value == "101") {
-                        tributacao.imposto.icms.icmssn101.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+                        tributacao.imposto.icms.icmssn101.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
                         tributacao.imposto.icms.icmssn101 = fModels.amont(tributacao.imposto.icms.icmssn101, action);
                     } else if (tributacao.imposto.icms.sitTributaria.value == "102") {
-                        tributacao.imposto.icms.icmssn102.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+                        tributacao.imposto.icms.icmssn102.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
                         tributacao.imposto.icms.icmssn102 = fModels.amont(tributacao.imposto.icms.icmssn102, action);
                     } else if (tributacao.imposto.icms.sitTributaria.value == "103") {
-                        tributacao.imposto.icms.icmssn103.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+                        tributacao.imposto.icms.icmssn103.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
                         tributacao.imposto.icms.icmssn103 = fModels.amont(tributacao.imposto.icms.icmssn103, action);
                     } else if (tributacao.imposto.icms.sitTributaria.value == "201") {
-                        tributacao.imposto.icms.icmssn201.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+                        tributacao.imposto.icms.icmssn201.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
+                        tributacao.imposto.icms.icmssn201.modalidadeBCICMSST = new qat.model.fnDoisValor1(tributacao.imposto.icms.icmssn201.modalidadeBCICMSST, action, $rootScope.user.user)
                         tributacao.imposto.icms.icmssn201 = fModels.amont(tributacao.imposto.icms.icmssn201, action);
+
                     } else if (tributacao.imposto.icms.sitTributaria.value == "202") {
-                        tributacao.imposto.icms.icmssn202.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+                        tributacao.imposto.icms.icmssn202.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
+                        tributacao.imposto.icms.icmssn202.modalidadeBCICMSST = new qat.model.fnDoisValor1(tributacao.imposto.icms.icmssn202.modalidadeBCICMSST, action, $rootScope.user.user)
                         tributacao.imposto.icms.icmssn202 = fModels.amont(tributacao.imposto.icms.icmssn202, action);
+
                     } else if (tributacao.imposto.icms.sitTributaria.value == "203") {
-                        tributacao.imposto.icms.icmssn203.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+                        tributacao.imposto.icms.icmssn203.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
+                        tributacao.imposto.icms.icmssn203.modalidadeBCICMSST = new qat.model.fnDoisValor1(tributacao.imposto.icms.icmssn203.modalidadeBCICMSST, action, $rootScope.user.user)
                         tributacao.imposto.icms.icmssn203 = fModels.amont(tributacao.imposto.icms.icmssn203, action);
                     } else if (tributacao.imposto.icms.sitTributaria.value == "300") {
-                        tributacao.imposto.icms.icmssn300.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+                        tributacao.imposto.icms.icmssn300.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
                         tributacao.imposto.icms.icmssn300 = fModels.amont(tributacao.imposto.icms.icmssn300, action);
+
                     } else if (tributacao.imposto.icms.sitTributaria.value == "400") {
-                        tributacao.imposto.icms.icmssn400.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+                        tributacao.imposto.icms.icmssn400.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
                         tributacao.imposto.icms.icmssn400 = fModels.amont(tributacao.imposto.icms.icmssn400, action);
                     } else if (tributacao.imposto.icms.sitTributaria.value == "500") {
-                        tributacao.imposto.icms.icmssn500.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+                        tributacao.imposto.icms.icmssn500.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
                         tributacao.imposto.icms.icmssn500 = fModels.amont(tributacao.imposto.icms.icmssn500, action);
                     } else if (tributacao.imposto.icms.sitTributaria.value == "900") {
-                        tributacao.imposto.icms.icmssn900.situacaoTributaria = tributacao.imposto.icms.sitTributaria
+                        tributacao.imposto.icms.icmssn900.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
+                        tributacao.imposto.icms.icmssn900.modalidadeBCICMS = new qat.model.fnDoisValor1(tributacao.imposto.icms.icmssn900.modalidadeBCICMS, action, $rootScope.user.user)
+                        tributacao.imposto.icms.icmssn900.modalidadeBCICMSST = new qat.model.fnDoisValor1(tributacao.imposto.icms.icmssn203.modalidadeBCICMSST, action, $rootScope.user.user)
                         tributacao.imposto.icms.icmssn900 = fModels.amont(tributacao.imposto.icms.icmssn900, action);
                     }
-                    debugger
                     tributacao.imposto.icms.modelAction = action;
                     tributacao.imposto.icms.createUser = $rootScope.user.user;
                     tributacao.imposto.icms.createDateUTC = (new Date()).getTime();
@@ -264,7 +290,7 @@
             var oObject = fModels.amont(tributacao, action);
 
             SysMgmtData.processPostPageData("main/api/request", {
-                url: 'produto/api/tributacao/insert',
+                url: sUrl,
                 token: $rootScope.authToken,
                 request: new qat.model.reqTributacao(oObject, true, true)
             }, function(res) {

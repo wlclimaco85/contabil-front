@@ -15,7 +15,7 @@
                             return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
                         }).withOption('width', '10px'),
                         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('Nome ou Raz達o social').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Nome ou Razão social').renderWith(function(data, type, full, meta) {
 
                             return '<p>' + data.nome + '</p>';
                         }).withOption('width', '100px'),
@@ -69,7 +69,7 @@
                             }
                             return '<p>' + documentos + '</p>';
                         }).withOption('width', '100px').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Inscri巽達o Estadual').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Inscrição Estadual').renderWith(function(data, type, full, meta) {
                             var documentos = "";
                             if ((data != null) && (data != undefined) && (type == "display")) {
                                 if ((data.documentos != undefined) && (data.documentos.length > 0)) {
@@ -83,7 +83,7 @@
                             }
 
                         }).withOption('width', '100px').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Inscri巽達o Municipal').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Inscrição Municipal').renderWith(function(data, type, full, meta) {
                             var documentos = "";
                             if ((data != null) && (data != undefined) && (type == "display")) {
                                 if ((data.documentos != undefined) && (data.documentos.length > 0)) {
@@ -97,7 +97,7 @@
                             }
 
                         }).withOption('width', '100px').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('Inscri巽達o Suframa').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Inscrição Suframa').renderWith(function(data, type, full, meta) {
                             var documentos = "";
                             if ((data != null) && (data != undefined) && (type == "display")) {
                                 if ((data.documentos != undefined) && (data.documentos.length > 0)) {
@@ -186,10 +186,10 @@
                         }).withOption('width', '50px'),
                         DTColumnBuilder.newColumn('dtNasc').withTitle('Data Nascimento').notVisible(),
                         DTColumnBuilder.newColumn('dataCadastro').withTitle('Data Cadastro').notVisible(),
-                        DTColumnBuilder.newColumn('obs').withTitle('Observa巽達o').notVisible(),
+                        DTColumnBuilder.newColumn('obs').withTitle('Observação').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
                 pdVendas: function(vm, _html, _actions) {
@@ -318,7 +318,7 @@
                         }).withOption('width', '200px').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
                 orcamento: function(vm, _html, _actions) {
@@ -447,7 +447,7 @@
                         }).withOption('width', '200px').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
                 ordemServico: function(vm, _html, _actions) {
@@ -576,7 +576,7 @@
                         }).withOption('width', '200px').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
                 nfSaida: function(vm, _html, _actions) {
@@ -705,7 +705,7 @@
                         }).withOption('width', '200px').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
                 tributacao: function(vm, _html, _actions) {
@@ -717,7 +717,7 @@
                             return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
                         }).withOption('width', '3px'),
                         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
-                        DTColumnBuilder.newColumn('descricao').withTitle('descri巽達o').withOption('width', '10px'),
+                        DTColumnBuilder.newColumn('descricao').withTitle('Descrição').withOption('width', '10px'),
                         DTColumnBuilder.newColumn(null).withTitle('Cfop').renderWith(function(data, type, full, meta) {
                             var sline = "";
 
@@ -752,6 +752,38 @@
                                                     sline = dialogFactory.icms40(data.imposto.icms[keys[i]]);
                                                 } else if (keys[i] == "icms50") {
                                                     sline = dialogFactory.icms50(data.imposto.icms[keys[i]]);
+                                                } else if (keys[i] == "icms51") {
+                                                    sline = dialogFactory.icms51(data.imposto.icms[keys[i]]);
+                                                } else if (keys[i] == "icms60") {
+                                                    sline = dialogFactory.icms60(data.imposto.icms[keys[i]]);
+                                                } else if (keys[i] == "icms70") {
+                                                    sline = dialogFactory.icms70(data.imposto.icms[keys[i]]);
+                                                } else if (keys[i] == "icms90") {
+                                                    sline = dialogFactory.icms90(data.imposto.icms[keys[i]]);
+                                                } else if (keys[i] == "icmsPartilhado") {
+                                                    sline = dialogFactory.icmsPartilhado(data.imposto.icms[keys[i]]);
+                                                } else if (keys[i] == "icmsst") {
+                                                    sline = dialogFactory.icmsst(data.imposto.icms[keys[i]]);
+                                                } else if (keys[i] == "icmssn101") {
+                                                    sline = dialogFactory.icmssn101(data.imposto.icms[keys[i]]);
+                                                } else if (keys[i] == "icmssn102") {
+                                                    sline = dialogFactory.icmssn102(data.imposto.icms[keys[i]]);
+                                                } else if (keys[i] == "icmssn103") {
+                                                    sline = dialogFactory.icmssn103(data.imposto.icms[keys[i]]);
+                                                } else if (keys[i] == "icmssn201") {
+                                                    sline = dialogFactory.icmssn201(data.imposto.icms[keys[i]]);
+                                                } else if (keys[i] == "icmssn202") {
+                                                    sline = dialogFactory.icmssn202(data.imposto.icms[keys[i]]);
+                                                } else if (keys[i] == "icmssn203") {
+                                                    sline = dialogFactory.icmssn203(data.imposto.icms[keys[i]]);
+                                                } else if (keys[i] == "icmssn300") {
+                                                    sline = dialogFactory.icmssn300(data.imposto.icms[keys[i]]);
+                                                } else if (keys[i] == "icmssn400") {
+                                                    sline = dialogFactory.icmssn400(data.imposto.icms[keys[i]]);
+                                                } else if (keys[i] == "icmssn500") {
+                                                    sline = dialogFactory.icmssn500(data.imposto.icms[keys[i]]);
+                                                } else if (keys[i] == "icmssn900") {
+                                                    sline = dialogFactory.icmssn900(data.imposto.icms[keys[i]]);
                                                 }
                                             }
 
@@ -957,7 +989,7 @@
                         }).withOption('width', '10px').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
                 doisValores: function(vm, _html, _actions) {
@@ -969,10 +1001,10 @@
                         }).withOption('width', '3px'),
                         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
                         DTColumnBuilder.newColumn('nome').withTitle('Nome'),
-                        DTColumnBuilder.newColumn('descricao').withTitle('Descri巽達o'),
+                        DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
                 regime: function(vm, _html, _actions) {
@@ -984,10 +1016,10 @@
                         }).withOption('width', '3px'),
                         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
                         DTColumnBuilder.newColumn('nome').withTitle('Nome'),
-                        DTColumnBuilder.newColumn('descricao').withTitle('Descri巽達o'),
+                        DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
                 cfop: function(vm, _html, _actions) {
@@ -1010,7 +1042,7 @@
                         DTColumnBuilder.newColumn('observacao').withTitle('observacao').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '100px')
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '100px')
                     ];
                 },
                 contasPagar: function(vm, _html, _actions) {
@@ -1030,7 +1062,7 @@
 
                             return shtml;
                         }).withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('Descri巽達o').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Descrição').renderWith(function(data, type, full, meta) {
                             var shtml = "";
                             if (data.descricao) {
                                 shtml = '<span>' + data.descricao + '</span>';
@@ -1109,7 +1141,7 @@
                         DTColumnBuilder.newColumn('observacao').withTitle('observacao').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '100px')
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '100px')
                     ];
                 },
                 produtoEmpresa: function(vm, _html, _actions) {
@@ -1271,7 +1303,7 @@
                         }).withOption('width', '100px').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '100px')
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '100px')
                     ];
                 },
                 contasReceber: function(vm, _html, _actions) {
@@ -1291,7 +1323,7 @@
 
                             return shtml;
                         }).withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('Descri巽達o').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Descrição').renderWith(function(data, type, full, meta) {
                             var shtml = "";
                             if (data.descricao) {
                                 shtml = '<span>' + data.descricao + '</span>';
@@ -1376,7 +1408,7 @@
                                 'off="N達o" onstyle="btn-success" offstyle="btn-danger"' +
                                 'ng-true-value="true" ng-false-value="false"></toggle>'
                         }).withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '100px')
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '100px')
                     ];
                 },
                 conta: function(vm, _html, _actions) {
@@ -1387,7 +1419,7 @@
                             return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
                         }).withOption('width', '3px'),
                         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px').notVisible(),
-                        DTColumnBuilder.newColumn('descricao').withTitle('Descri巽達o'),
+                        DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
                         DTColumnBuilder.newColumn(null).withTitle('Saldo').renderWith(function(data, type, full, meta) {
                             var shtml = "";
                             if (data.saldo) {
@@ -1406,8 +1438,8 @@
 
                             return shtml;
                         }).withOption('width', '10px'),
-                        DTColumnBuilder.newColumn('numeroConta').withTitle('N属 Conta'),
-                        DTColumnBuilder.newColumn('observacao').withTitle('Observa巽達o'),
+                        DTColumnBuilder.newColumn('numeroConta').withTitle('Nº Conta'),
+                        DTColumnBuilder.newColumn('observacao').withTitle('Observação'),
                         DTColumnBuilder.newColumn(null).withTitle('Baixas').renderWith(function(data, type, full, meta) {
                             var shtml = "";
                             var dValor = 0;
@@ -1425,7 +1457,7 @@
                         }).withOption('width', '10px'),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
                 formaPg: function(vm, _html, _actions) {
@@ -1454,10 +1486,10 @@
                         DTColumnBuilder.newColumn('qntIntervalo').withTitle('Tempo Intervalo').notVisible(),
                         DTColumnBuilder.newColumn('intervalo').withTitle('Intervalo').notVisible(),
                         DTColumnBuilder.newColumn('entrada').withTitle('Entrada'),
-                        DTColumnBuilder.newColumn('observacao').withTitle('Observa巽達o').notVisible(),
+                        DTColumnBuilder.newColumn('observacao').withTitle('Observação').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
                 nfEntrada: function(vm, _html, _actions) {
@@ -1470,7 +1502,7 @@
                         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('A巽探es').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
                 },
 

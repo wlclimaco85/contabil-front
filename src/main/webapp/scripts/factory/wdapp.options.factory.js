@@ -372,7 +372,7 @@
                     key: '1',
                     action: function(e, dt, node, config) {
 
-                        dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html', "ContasPagarInsertController", validationFactory.contasPagar, _function);
+                        dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html', "TributacaoDeleteController", validationFactory.contasPagar, _function);
 
                     }
                 }, {

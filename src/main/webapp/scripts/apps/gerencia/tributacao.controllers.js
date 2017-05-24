@@ -38,14 +38,14 @@
 
         function fnEdit(person) {
 
-            $rootScope.doisValor = person;
+            $rootScope.tributacao = person;
 
-            dialogFactory.dialog('views/financeiro/dialog/dSituacao.html', "SituacaoUpdateController", validationFactory.contasPagar(), reloadData());
+            dialogFactory.dialog('views/gerencia/dialog/dTributacao.html', "TributacaoUpdateController", validationFactory.contasPagar(), reloadData());
         }
 
         function fnDelete(person) {
-            $rootScope.doisValor = person;
-            dialogFactory.dialog('views/util/dialog/dDelete.html', "SituacaoDeleteController", validationFactory.contasPagar(), reloadData());
+            $rootScope.tributacao = person;
+            dialogFactory.dialog('views/util/dialog/dDelete.html', "TributacaoDeleteController", validationFactory.contasPagar(), reloadData());
         }
 
         var url = '/entidade/api/doisValores/fetchPage'; // 'financeiro/api/contasReceber/fetchPage'// '/entidade/api/doisValores/fetchPage'; qat.model.doisValoresInquiryRequest = function (_page, _iStartPage, _bCount,_emprId,_doisValorType)
@@ -346,7 +346,7 @@
                 }
             }
             $scope.saveTributacao = function() {
-                fTributacao.fnMontaObjeto($scope.tributacao, 'INSERT', '', fnFunction);
+                fTributacao.fnMontaObjeto($scope.tributacao, 'INSERT', 'produto/api/tributacao/insert', fnFunction);
             };
         });
 })();
@@ -354,11 +354,11 @@
     angular.module('wdApp.apps.tributacao.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('TributacaoUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa, toastr, $element, close) {
             var vm = this;
-            $scope.pedidoVenda = {};
-            $scope.pedidoVenda = $rootScope.pedidoVenda;
-            console.log($rootScope.pedidoVenda)
+            $scope.tributacao = {};
+            $scope.tributacao = $rootScope.tributacao;
+            console.log($rootScope.tributacao)
             $scope.saveTributacao = function() {
-                fPessoa.fnMontaObjeto($scope.pedidoVenda, $scope.endereco, 'UPDATE', "site/api/pedidoVenda/update/", fnCallBack);
+                fTributacao.fnMontaObjeto($scope.tributacao, 'UPDATE', 'produto/api/tributacao/update', fnFunction);
             }
         });
 })();
@@ -370,7 +370,7 @@
             $scope.pedidoVenda = $rootScope.pedidoVenda;
             console.log($rootScope.pedidoVenda)
             $scope.saveTributacao = function() {
-                fPessoa.fnDelete($scope.pedidoVenda, "site/api/pedidoVenda/update/", function() { console.log('ddda   aqui') });
+                fPessoa.fnMontaObjeto($scope.pedidoVenda, "site/api/pedidoVenda/update/", function() { console.log('ddda   aqui') });
             }
         });
 })();
@@ -378,11 +378,11 @@
     angular.module('wdApp.apps.tributacao.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('TributacaoViewController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
             var vm = this;
-            $scope.pedidoVenda = {};
-            $scope.pedidoVenda = $rootScope.pedidoVenda;
-            console.log($rootScope.pedidoVenda)
+            $scope.tributacao = {};
+            $scope.tributacao = $rootScope.tributacao;
+            console.log($rootScope.tributacao)
             $scope.saveTributacao = function() {
-                fPessoa.fnOpenView($scope.pedidoVenda, "site/api/pedidoVenda/update/", function() { console.log('aqui') });
+                fTributacao.fnMontaObjeto($scope.tributacao, 'DELETE', 'produto/api/tributacao/delete', fnFunction);
             }
         });
 })();
