@@ -1,13 +1,10 @@
 package br.com.emmanuelneri.app.controller;
 
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Properties;
 
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.FormHttpMessageConverter;
@@ -20,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -67,7 +63,7 @@ public class Autentication {
 		    paramss.set("password", password);
 		   /// URI tgtUrl = rest.postForLocation("http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate", paramss, Collections.emptyMap());
 
-		    ResponseEntity<String> st = rest.postForEntity("https://back.eu-gb.mybluemix.net/auth/api/authenticate", paramss, String.class);
+		    ResponseEntity<String> st = rest.postForEntity("http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate", paramss, String.class);
 		    System.out.println("[" + st.getBody() + "]");
 		    System.out.println("[" + st + "]");
 		    String tk = st.getBody();
@@ -99,7 +95,7 @@ public class Autentication {
 		    paramss.set("password", "devil");
 		   /// URI tgtUrl = rest.postForLocation("http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate", paramss, Collections.emptyMap());
 
-		    ResponseEntity<String> st = rest.postForEntity("https://back.eu-gb.mybluemix.net/auth/api/authenticate", paramss, String.class);
+		    ResponseEntity<String> st = rest.postForEntity("http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate", paramss, String.class);
 		    System.out.println("[" + st.getBody() + "]");
 		    System.out.println("[" + st + "]");
 		    String tk = st.getBody();

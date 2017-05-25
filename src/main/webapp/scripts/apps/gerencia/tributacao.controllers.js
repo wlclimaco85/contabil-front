@@ -37,15 +37,14 @@
         }
 
         function fnEdit(person) {
-
+            debugger
             $rootScope.tributacao = person;
-
-            dialogFactory.dialog('views/gerencia/dialog/dTributacao.html', "TributacaoUpdateController", validationFactory.contasPagar(), reloadData());
+            dialogFactory.dialog('views/gerencia/dialog/dTributacao.html', "TributacaoUpdateController", validationFactory.tributacao(), reloadData());
         }
 
         function fnDelete(person) {
             $rootScope.tributacao = person;
-            dialogFactory.dialog('views/util/dialog/dDelete.html', "TributacaoDeleteController", validationFactory.contasPagar(), reloadData());
+            dialogFactory.dialog('views/util/dialog/dDelete.html', "TributacaoDeleteController", validationFactory.tributacao(), reloadData());
         }
 
         var url = '/entidade/api/doisValores/fetchPage'; // 'financeiro/api/contasReceber/fetchPage'// '/entidade/api/doisValores/fetchPage'; qat.model.doisValoresInquiryRequest = function (_page, _iStartPage, _bCount,_emprId,_doisValorType)
@@ -352,11 +351,100 @@
 })();
 (function() {
     angular.module('wdApp.apps.tributacao.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('TributacaoUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa, toastr, $element, close) {
+        .controller('TributacaoUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa, toastr, $element, close, fTributacao, doisValorFactory) {
             var vm = this;
-            $scope.tributacao = {};
+            debugger
+            $scope.tributacao = null;
             $scope.tributacao = $rootScope.tributacao;
-            console.log($rootScope.tributacao)
+
+
+            var fnFunction = function() {
+                if ($scope.tributacao.imposto != undefined) {
+                    if ($scope.tributacao.imposto.icms != undefined) {
+                        var keys = Object.keys($scope.tributacao.imposto.icms);
+
+                        for (var i = 0, len = keys.length; i < len; i++) {
+                            if (keys[i].includes('icms')) {
+                                if ($scope.tributacao.imposto.icms[keys[i]] != null) {
+                                    if (keys[i] == "icms00") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[0];
+                                    } else if (keys[i] == "icms10") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[0];
+                                    } else if (keys[i] == "icms11") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[0];
+                                    } else if (keys[i] == "icms20") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[0];
+                                    } else if (keys[i] == "icms30") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[0];
+                                    } else if (keys[i] == "icms40") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[0];
+                                    } else if (keys[i] == "icms50") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[0];
+                                    } else if (keys[i] == "icms51") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[0];
+                                    } else if (keys[i] == "icms60") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[0];
+                                    } else if (keys[i] == "icms70") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[0];
+                                    } else if (keys[i] == "icms90") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[0];
+                                    } else if (keys[i] == "icmsPartilhado") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[0];
+                                    } else if (keys[i] == "icmsst") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[0];
+                                    } else if (keys[i] == "icmssn101") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[1];
+                                    } else if (keys[i] == "icmssn102") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[1];
+                                    } else if (keys[i] == "icmssn103") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[1];
+                                    } else if (keys[i] == "icmssn201") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[1];
+                                    } else if (keys[i] == "icmssn202") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[1];
+                                    } else if (keys[i] == "icmssn203") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[1];
+                                    } else if (keys[i] == "icmssn300") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[1];
+                                    } else if (keys[i] == "icmssn400") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[1];
+                                    } else if (keys[i] == "icmssn500") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[1];
+                                    } else if (keys[i] == "icmssn900") {
+                                        $scope.tributacao.imposto.icms.sitTributaria = $scope.tributacao.imposto.icms[keys[i]].situacaoTributaria;
+                                        $scope.tributacao.imposto.icms.regime = $scope.regime[1];
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+            doisValorFactory.tributacao($scope, fnFunction);
+            console.log($scope.tributacao)
             $scope.saveTributacao = function() {
                 fTributacao.fnMontaObjeto($scope.tributacao, 'UPDATE', 'produto/api/tributacao/update', fnFunction);
             }

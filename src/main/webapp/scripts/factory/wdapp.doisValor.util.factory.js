@@ -102,7 +102,7 @@
                         }
                     });
             },
-            tributacao: function(scope) {
+            tributacao: function(scope, fnCallback) {
 
                 scope.regime = [];
                 scope.icmsOri = [];
@@ -117,7 +117,7 @@
 
                 var fnCallbackDoisValor = function(res) {
                     var planos = "";
-
+                    debugger
                     //ICMS - MODALIDADE BC
 
                     if (res.operationSuccess == true) {
@@ -159,7 +159,7 @@
                             }
                         }
 
-
+                        fnCallback();
                     }
                 }
 

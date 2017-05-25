@@ -804,7 +804,7 @@
 
                                     if (data.imposto.ipi.tributado != undefined) {
                                         debugger
-                                        retorno = retorno + (data.imposto.ipi.tributado.situacaoTributaria ? "<tr><td>IPI - Situa巽達o tribut叩ria : " + (data.imposto.ipi.tributado.situacaoTributaria.descricao) + "</td></tr>" : "")
+                                        retorno = retorno + (data.imposto.ipi.tributado.situacaoTributaria ? "<tr><td>IPI - Situação Tributária : " + (data.imposto.ipi.tributado.situacaoTributaria.descricao) + "</td></tr>" : "")
                                         retorno = retorno + (data.imposto.ipi.classeEnquadramento ? "<tr><td>Classe cigarros/bebidas" + data.imposto.ipi.classeEnquadramento + "</td></tr>" : "")
                                         retorno = retorno + (data.imposto.ipi.cnpjProdutor ? "<tr><td>CNPJ Produtor" + data.imposto.ipi.cnpjProdutor + "</td></tr>" : "")
                                         retorno = retorno + (data.imposto.ipi.codigoSelo ? "<tr><td>Cod. selo controle IPI" + data.imposto.ipi.codigoSelo + "</td></tr>" : "")
@@ -814,7 +814,7 @@
                                         retorno = retorno + (data.imposto.ipi.tributado.valorTributo ? "<tr><td>Vr do IPI" + data.imposto.ipi.tributado.valorTributo + "</td></tr>" : "")
 
                                     } else if (data.imposto.ipi.naotributado != undefined) {
-                                        retorno = retorno + "<tr><td>IPI - Situa巽達o tribut叩ria</td><td>" + data.imposto.ipi.naotributado.situacaoTributaria.descricao + "</td></tr>"
+                                        retorno = retorno + "<tr><td>IPI - Situação Tributária</td><td>" + data.imposto.ipi.naotributado.situacaoTributaria.descricao + "</td></tr>"
                                         retorno = retorno + "<tr><td>Classe cigarros/bebidas</td><td>" + data.imposto.ipi.classeEnquadramento + "</td></tr>"
                                         retorno = retorno + "<tr><td>CNPJ Produtor</td><td>" + data.imposto.ipi.cnpjProdutor + "</td></tr>"
                                         retorno = retorno + "<tr><td>Cod. selo controle IPI</td><td>" + data.imposto.ipi.codigoSelo + "</td></tr>"
@@ -836,7 +836,7 @@
 
 
                                     if (data.imposto.pis.aliquota != undefined) {
-                                        retorno = retorno + "<tr><td>PIS - Situa巽達o tribut叩ria</td><td>" + data.imposto.pis.aliquota.situacaoTributaria.descricao + "</td></tr>"
+                                        retorno = retorno + "<tr><td>PIS - Situação Tributária</td><td>" + data.imposto.pis.aliquota.situacaoTributaria.descricao + "</td></tr>"
                                         retorno = retorno + "<tr><td>Aliquota</td><td>" + data.imposto.pis.aliquota.percentualAliquota + "</td></tr>"
                                         retorno = retorno + "<tr><td>Valor PIS/unidade</td><td>" + data.imposto.pis.aliquota.valorUnidade + "</td></tr>"
                                         if (data.imposto.pisst.percentualAliquota != undefined) {
@@ -847,7 +847,7 @@
 
 
                                     } else if (data.imposto.pis.quantidade != undefined) {
-                                        retorno = retorno + "<tr><td>PIS - Situa巽達o tribut叩ria</td><td>" + data.imposto.pis.quantidade.situacaoTributaria.descricao + "</td></tr>"
+                                        retorno = retorno + "<tr><td>PIS - Situação Tributária</td><td>" + data.imposto.pis.quantidade.situacaoTributaria.descricao + "</td></tr>"
                                         retorno = retorno + "<tr><td>Aliquota</td><td>" + data.imposto.pis.quantidade.percentualAliquota + "</td></tr>"
                                         retorno = retorno + "<tr><td>Valor PIS/unidade</td><td>" + data.imposto.pis.quantidade.valorUnidade + "</td></tr>"
                                         if (data.imposto.pisst.percentualAliquota != undefined) {
@@ -856,7 +856,7 @@
                                             retorno = retorno + "<tr><td>Aliquota (ST) $ </td><td>" + data.imposto.pisst.valorAliquota + "</td></tr>"
                                         }
                                     } else if (data.imposto.pis.naoTributavel != undefined) {
-                                        retorno = retorno + "<tr><td>PIS - Situa巽達o tribut叩ria</td><td>" + data.imposto.pis.naoTributavel.situacaoTributaria.descricao + "</td></tr>"
+                                        retorno = retorno + "<tr><td>PIS - Situação Tributária</td><td>" + data.imposto.pis.naoTributavel.situacaoTributaria.descricao + "</td></tr>"
                                         retorno = retorno + "<tr><td>Aliquota</td><td>" + data.imposto.pis.naoTributavel.percentualAliquota + "</td></tr>"
                                         retorno = retorno + "<tr><td>Valor PIS/unidade</td><td>" + data.imposto.pis.naoTributavel.valorUnidade + "</td></tr>"
                                         if (data.imposto.pisst.percentualAliquota != undefined) {
@@ -865,7 +865,7 @@
                                             retorno = retorno + "<tr><td>Aliquota (ST) $ </td><td>" + data.imposto.pisst.valorAliquota + "</td></tr>"
                                         }
                                     } else if (data.imposto.pis.outrasOperacoes != undefined) {
-                                        retorno = retorno + "<tr><td>PIS - Situa巽達o tribut叩ria</td><td>" + data.imposto.pis.outrasOperacoes.situacaoTributaria.descricao + "</td></tr>"
+                                        retorno = retorno + "<tr><td>PIS - Situação Tributária</td><td>" + data.imposto.pis.outrasOperacoes.situacaoTributaria.descricao + "</td></tr>"
                                         retorno = retorno + "<tr><td>Aliquota</td><td>" + data.imposto.pis.outrasOperacoes.percentualAliquota + "</td></tr>"
                                         retorno = retorno + "<tr><td>Valor PIS/unidade</td><td>" + data.imposto.pis.outrasOperacoes.valorUnidade + "</td></tr>"
                                         if (data.imposto.pisst.percentualAliquota != undefined) {
@@ -889,7 +889,7 @@
 
 
                                     if (data.imposto.cofins.aliquota != undefined) {
-                                        retorno = retorno + "<tr><td>COFINS - Situa巽達o tribut叩ria</td><td>" + data.imposto.cofins.aliquota.situacaoTributaria.descricao + "</td></tr>"
+                                        retorno = retorno + "<tr><td>COFINS - Situação Tributária</td><td>" + data.imposto.cofins.aliquota.situacaoTributaria.descricao + "</td></tr>"
                                         retorno = retorno + "<tr><td>Aliquota</td><td>" + data.imposto.cofins.aliquota.percentualAliquota + "</td></tr>"
                                         retorno = retorno + "<tr><td>Valor COFINS/unidade</td><td>" + data.imposto.cofins.aliquota.valorUnidade + "</td></tr>"
                                         if (data.imposto.cofinsst.percentualAliquota != undefined) {
@@ -900,7 +900,7 @@
 
 
                                     } else if (data.imposto.cofins.quantidade != undefined) {
-                                        retorno = retorno + "<tr><td>COFINS - Situa巽達o tribut叩ria</td><td>" + data.imposto.cofins.quantidade.situacaoTributaria.descricao + "</td></tr>"
+                                        retorno = retorno + "<tr><td>COFINS - Situação Tributária</td><td>" + data.imposto.cofins.quantidade.situacaoTributaria.descricao + "</td></tr>"
                                         retorno = retorno + "<tr><td>Aliquota</td><td>" + data.imposto.cofins.quantidade.percentualAliquota + "</td></tr>"
                                         retorno = retorno + "<tr><td>Valor COFINS/unidade</td><td>" + data.imposto.cofins.quantidade.valorUnidade + "</td></tr>"
                                         if (data.imposto.cofinsst.percentualAliquota != undefined) {
@@ -909,7 +909,7 @@
                                             retorno = retorno + "<tr><td>Aliquota (ST) $ </td><td>" + data.imposto.cofinsst.valorAliquota + "</td></tr>"
                                         }
                                     } else if (data.imposto.cofins.naoTributavel != undefined) {
-                                        retorno = retorno + "<tr><td>COFINS - Situa巽達o tribut叩ria</td><td>" + data.imposto.cofins.naoTributavel.situacaoTributaria.descricao + "</td></tr>"
+                                        retorno = retorno + "<tr><td>COFINS - Situação Tributária</td><td>" + data.imposto.cofins.naoTributavel.situacaoTributaria.descricao + "</td></tr>"
                                         retorno = retorno + "<tr><td>Aliquota</td><td>" + data.imposto.cofins.naoTributavel.percentualAliquota + "</td></tr>"
                                         retorno = retorno + "<tr><td>Valor COFINS/unidade</td><td>" + data.imposto.cofins.naoTributavel.valorUnidade + "</td></tr>"
                                         if (data.imposto.cofinsst.percentualAliquota != undefined) {
@@ -918,7 +918,7 @@
                                             retorno = retorno + "<tr><td>Aliquota (ST) $ </td><td>" + data.imposto.cofinsst.valorAliquota + "</td></tr>"
                                         }
                                     } else if (data.imposto.cofins.outrasOperacoes != undefined) {
-                                        retorno = retorno + "<tr><td>COFINS - Situa巽達o tribut叩ria</td><td>" + data.imposto.cofins.outrasOperacoes.situacaoTributaria.descricao + "</td></tr>"
+                                        retorno = retorno + "<tr><td>COFINS - Situação Tributária</td><td>" + data.imposto.cofins.outrasOperacoes.situacaoTributaria.descricao + "</td></tr>"
                                         retorno = retorno + "<tr><td>Aliquota</td><td>" + data.imposto.cofins.outrasOperacoes.percentualAliquota + "</td></tr>"
                                         retorno = retorno + "<tr><td>Valor COFINS/unidade</td><td>" + data.imposto.cofins.outrasOperacoes.valorUnidade + "</td></tr>"
                                         if (data.imposto.cofinsst.percentualAliquota != undefined) {
@@ -934,7 +934,7 @@
 
                             return retorno + '</tbody></table>';
                         }).withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('Imposto Importa巽達o').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Imposto Importação').renderWith(function(data, type, full, meta) {
 
                             var retorno = '<table class="table"><thead></thead><tbody>';
                             if (data.imposto != undefined) {
@@ -970,7 +970,7 @@
                                 if (data.imposto.icmsUfDestino != undefined) {
 
                                     retorno = retorno + "<tr><td>Per ICMS Rel UF Dest.</td><td>" + data.imposto.icmsUfDestino.valorRelativoFundoCombatePobrezaDestino + "</td></tr>"
-                                    retorno = retorno + "<tr><td>Vr da base de  c叩lc UF dest.</td><td>" + data.imposto.icmsUfDestino.valorBaseCalculoDestino + "</td></tr>"
+                                    retorno = retorno + "<tr><td>Vr da base de  cálc UF dest.</td><td>" + data.imposto.icmsUfDestino.valorBaseCalculoDestino + "</td></tr>"
                                     retorno = retorno + "<tr><td>Aliq interna da UF dest.</td><td>" + data.imposto.icmsUfDestino.percentualAliquotaInternaDestino + "</td></tr>"
                                     if (data.imposto.icmsUfDestino.percentualInterestadual != undefined) {
                                         retorno = retorno + "<tr><td>Aliq interestadual</td><td>" + data.imposto.icmsUfDestino.percentualInterestadual.descricao + "</td></tr>"
@@ -1108,7 +1108,7 @@
 
                             return shtml;
                         }).withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('Situa巽達o').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Situação').renderWith(function(data, type, full, meta) {
                             var shtml = "";
                             if (data.situacao) {
                                 shtml = '<span>' + data.situacao.descricao + '</span>';
@@ -1369,7 +1369,7 @@
 
                             return shtml;
                         }).withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('Situa巽達o').renderWith(function(data, type, full, meta) {
+                        DTColumnBuilder.newColumn(null).withTitle('Situação').renderWith(function(data, type, full, meta) {
                             var shtml = "";
                             if (data.situacao) {
                                 shtml = '<span>' + data.situacao.descricao + '</span>';

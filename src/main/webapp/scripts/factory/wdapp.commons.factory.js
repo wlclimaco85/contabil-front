@@ -11,7 +11,8 @@
                     controller: _controller
                 }).then(function(modal) {
                     modal.element.modal();
-                    _callback();
+                    if (_callback)
+                        _callback();
                     modal.close.then(function(result) {
                         if ((_close != null) && (_close != undefined))
                             _close();
@@ -176,7 +177,7 @@
                 retorno = retorno + "<tr><td>Modalidade BC ICMS</td><td>" + (oObject.motivoDesoneracaoICMS ? oObject.motivoDesoneracaoICMS.descricao : "") + "</td></tr>"
                 retorno = retorno + "<tr><td>Redução da BC ICMS</td><td>" + oObject.percentualReducaoBC + "</td></tr>"
                 retorno = retorno + "<tr><td>Aliquota</td><td>" + oObject.percentualAliquota + "</td></tr>"
-                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + oObject.desoneracao.descricao + "</td></tr>"
+                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + (oObject.desoneracao ? oObject.desoneracao.descricao : "") + "</td></tr>"
                 retorno = retorno + "<tr><td>Modalidade da BC ST</td><td>" + oObject.modalidadeBCICMSST + "</td></tr>"
                 retorno = retorno + "<tr><td>Margem de valor adic ICMS ST</td><td>" + oObject.percentualMargemValorAdicionadoICMSST + "</td></tr>"
                 retorno = retorno + "<tr><td>Aliquota do ICMS ST</td><td>" + oObject.valorBCST + "</td></tr>"
@@ -191,7 +192,7 @@
                 retorno = retorno + "<tr><td>Modalidade BC ICMS</td><td>" + (oObject.motivoDesoneracaoICMS ? oObject.motivoDesoneracaoICMS.descricao : "") + "</td></tr>"
                 retorno = retorno + "<tr><td>Redução da BC ICMS</td><td>" + oObject.percentualReducaoBC + "</td></tr>"
                 retorno = retorno + "<tr><td>Aliquota</td><td>" + oObject.percentualAliquota + "</td></tr>"
-                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + oObject.desoneracao.descricao + "</td></tr>"
+                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + (oObject.desoneracao ? oObject.desoneracao.descricao : "") + "</td></tr>"
                 retorno = retorno + "<tr><td>Modalidade da BC ST</td><td>" + oObject.modalidadeBCICMSST + "</td></tr>"
                 retorno = retorno + "<tr><td>Margem de valor adic ICMS ST</td><td>" + oObject.percentualMargemValorAdicionadoICMSST + "</td></tr>"
                 retorno = retorno + "<tr><td>Aliquota do ICMS ST</td><td>" + oObject.valorBCST + "</td></tr>"
@@ -206,7 +207,7 @@
                 retorno = retorno + "<tr><td>Modalidade BC ICMS</td><td>" + (oObject.motivoDesoneracaoICMS ? oObject.motivoDesoneracaoICMS.descricao : "") + "</td></tr>"
                 retorno = retorno + "<tr><td>Redução da BC ICMS</td><td>" + oObject.percentualReducaoBC + "</td></tr>"
                 retorno = retorno + "<tr><td>Aliquota</td><td>" + oObject.percentualAliquota + "</td></tr>"
-                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + oObject.desoneracao.descricao + "</td></tr>"
+                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + (oObject.desoneracao ? oObject.desoneracao.descricao : "") + "</td></tr>"
                 retorno = retorno + "<tr><td>Modalidade da BC ST</td><td>" + oObject.modalidadeBCICMSST + "</td></tr>"
                 retorno = retorno + "<tr><td>Margem de valor adic ICMS ST</td><td>" + oObject.percentualMargemValorAdicionadoICMSST + "</td></tr>"
                 retorno = retorno + "<tr><td>Aliquota do ICMS ST</td><td>" + oObject.valorBCST + "</td></tr>"
@@ -221,7 +222,7 @@
                 retorno = retorno + "<tr><td>Modalidade BC ICMS</td><td>" + (oObject.motivoDesoneracaoICMS ? oObject.motivoDesoneracaoICMS.descricao : "") + "</td></tr>"
                 retorno = retorno + "<tr><td>Redução da BC ICMS</td><td>" + oObject.percentualReducaoBC + "</td></tr>"
                 retorno = retorno + "<tr><td>Aliquota</td><td>" + oObject.percentualAliquota + "</td></tr>"
-                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + oObject.desoneracao.descricao + "</td></tr>"
+                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + (oObject.desoneracao ? oObject.desoneracao.descricao : "") + "</td></tr>"
                 retorno = retorno + "<tr><td>Modalidade da BC ST</td><td>" + oObject.modalidadeBCICMSST + "</td></tr>"
                 retorno = retorno + "<tr><td>Margem de valor adic ICMS ST</td><td>" + oObject.percentualMargemValorAdicionadoICMSST + "</td></tr>"
                 retorno = retorno + "<tr><td>Aliquota do ICMS ST</td><td>" + oObject.valorBCST + "</td></tr>"
@@ -236,7 +237,7 @@
                 retorno = retorno + "<tr><td>Modalidade BC ICMS</td><td>" + (oObject.motivoDesoneracaoICMS ? oObject.motivoDesoneracaoICMS.descricao : "") + "</td></tr>"
                 retorno = retorno + "<tr><td>Redução da BC ICMS</td><td>" + oObject.percentualReducaoBC + "</td></tr>"
                 retorno = retorno + "<tr><td>Aliquota</td><td>" + oObject.percentualAliquota + "</td></tr>"
-                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + oObject.desoneracao.descricao + "</td></tr>"
+                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + (oObject.desoneracao ? oObject.desoneracao.descricao : "") + "</td></tr>"
                 retorno = retorno + "<tr><td>Modalidade da BC ST</td><td>" + oObject.modalidadeBCICMSST + "</td></tr>"
                 retorno = retorno + "<tr><td>Margem de valor adic ICMS ST</td><td>" + oObject.percentualMargemValorAdicionadoICMSST + "</td></tr>"
                 retorno = retorno + "<tr><td>Aliquota do ICMS ST</td><td>" + oObject.valorBCST + "</td></tr>"
@@ -251,7 +252,7 @@
                 retorno = retorno + "<tr><td>Modalidade BC ICMS</td><td>" + (oObject.motivoDesoneracaoICMS ? oObject.motivoDesoneracaoICMS.descricao : "") + "</td></tr>"
                 retorno = retorno + "<tr><td>Redução da BC ICMS</td><td>" + oObject.percentualReducaoBC + "</td></tr>"
                 retorno = retorno + "<tr><td>Aliquota</td><td>" + oObject.percentualAliquota + "</td></tr>"
-                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + oObject.desoneracao.descricao + "</td></tr>"
+                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + (oObject.desoneracao ? oObject.desoneracao.descricao : "") + "</td></tr>"
                 retorno = retorno + "<tr><td>Modalidade da BC ST</td><td>" + oObject.modalidadeBCICMSST + "</td></tr>"
                 retorno = retorno + "<tr><td>Margem de valor adic ICMS ST</td><td>" + oObject.percentualMargemValorAdicionadoICMSST + "</td></tr>"
                 retorno = retorno + "<tr><td>Aliquota do ICMS ST</td><td>" + oObject.valorBCST + "</td></tr>"
@@ -266,7 +267,7 @@
                 retorno = retorno + "<tr><td>Modalidade BC ICMS</td><td>" + (oObject.motivoDesoneracaoICMS ? oObject.motivoDesoneracaoICMS.descricao : "") + "</td></tr>"
                 retorno = retorno + "<tr><td>Redução da BC ICMS</td><td>" + oObject.percentualReducaoBC + "</td></tr>"
                 retorno = retorno + "<tr><td>Aliquota</td><td>" + oObject.percentualAliquota + "</td></tr>"
-                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + oObject.desoneracao.descricao + "</td></tr>"
+                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + (oObject.desoneracao ? oObject.desoneracao.descricao : "") + "</td></tr>"
                 retorno = retorno + "<tr><td>Modalidade da BC ST</td><td>" + oObject.modalidadeBCICMSST + "</td></tr>"
                 retorno = retorno + "<tr><td>Margem de valor adic ICMS ST</td><td>" + oObject.percentualMargemValorAdicionadoICMSST + "</td></tr>"
                 retorno = retorno + "<tr><td>Aliquota do ICMS ST</td><td>" + oObject.valorBCST + "</td></tr>"
@@ -281,7 +282,7 @@
                 retorno = retorno + "<tr><td>Modalidade BC ICMS</td><td>" + (oObject.motivoDesoneracaoICMS ? oObject.motivoDesoneracaoICMS.descricao : "") + "</td></tr>"
                 retorno = retorno + "<tr><td>Redução da BC ICMS</td><td>" + oObject.percentualReducaoBC + "</td></tr>"
                 retorno = retorno + "<tr><td>Aliquota</td><td>" + oObject.percentualAliquota + "</td></tr>"
-                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + oObject.desoneracao.descricao + "</td></tr>"
+                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + (oObject.desoneracao ? oObject.desoneracao.descricao : "") + "</td></tr>"
                 retorno = retorno + "<tr><td>Modalidade da BC ST</td><td>" + oObject.modalidadeBCICMSST + "</td></tr>"
                 retorno = retorno + "<tr><td>Margem de valor adic ICMS ST</td><td>" + oObject.percentualMargemValorAdicionadoICMSST + "</td></tr>"
                 retorno = retorno + "<tr><td>Aliquota do ICMS ST</td><td>" + oObject.valorBCST + "</td></tr>"
@@ -296,7 +297,7 @@
                 retorno = retorno + "<tr><td>Modalidade BC ICMS</td><td>" + (oObject.motivoDesoneracaoICMS ? oObject.motivoDesoneracaoICMS.descricao : "") + "</td></tr>"
                 retorno = retorno + "<tr><td>Redução da BC ICMS</td><td>" + oObject.percentualReducaoBC + "</td></tr>"
                 retorno = retorno + "<tr><td>Aliquota</td><td>" + oObject.percentualAliquota + "</td></tr>"
-                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + oObject.desoneracao.descricao + "</td></tr>"
+                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + (oObject.desoneracao ? oObject.desoneracao.descricao : "") + "</td></tr>"
                 retorno = retorno + "<tr><td>Modalidade da BC ST</td><td>" + oObject.modalidadeBCICMSST + "</td></tr>"
                 retorno = retorno + "<tr><td>Margem de valor adic ICMS ST</td><td>" + oObject.percentualMargemValorAdicionadoICMSST + "</td></tr>"
                 retorno = retorno + "<tr><td>Aliquota do ICMS ST</td><td>" + oObject.valorBCST + "</td></tr>"
@@ -311,7 +312,35 @@
                 retorno = retorno + "<tr><td>Modalidade BC ICMS</td><td>" + (oObject.motivoDesoneracaoICMS ? oObject.motivoDesoneracaoICMS.descricao : "") + "</td></tr>"
                 retorno = retorno + "<tr><td>Redução da BC ICMS</td><td>" + oObject.percentualReducaoBC + "</td></tr>"
                 retorno = retorno + "<tr><td>Aliquota</td><td>" + oObject.percentualAliquota + "</td></tr>"
-                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + oObject.desoneracao.descricao + "</td></tr>"
+                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + (oObject.desoneracao ? oObject.desoneracao.descricao : "") + "</td></tr>"
+                retorno = retorno + "<tr><td>Modalidade da BC ST</td><td>" + oObject.modalidadeBCICMSST + "</td></tr>"
+                retorno = retorno + "<tr><td>Margem de valor adic ICMS ST</td><td>" + oObject.percentualMargemValorAdicionadoICMSST + "</td></tr>"
+                retorno = retorno + "<tr><td>Aliquota do ICMS ST</td><td>" + oObject.valorBCST + "</td></tr>"
+                retorno = retorno + "<tr><td>Redução Base Calc ST</td><td>" + oObject.percentualAliquotaImpostoICMSST + "</td></tr>"
+                retorno = retorno + "<tr><td>Preço unit. Pauta ST</td><td>" + oObject.valorICMSST + "</td></tr>"
+                return retorno + '</tbody></table>';
+            },
+            tributado: function(oObject) {
+                var retorno = '<table class="table"><thead></thead><tbody>';
+                retorno = retorno + "<tr><td>CST</td><td>" + (oObject.situacaoTributaria ? oObject.situacaoTributaria.descricao : "") + "</td></tr>"
+                retorno = retorno + "<tr><td>Modalidade BC ICMS</td><td>" + (oObject.motivoDesoneracaoICMS ? oObject.motivoDesoneracaoICMS.descricao : "") + "</td></tr>"
+                retorno = retorno + "<tr><td>Redução da BC ICMS</td><td>" + oObject.percentualReducaoBC + "</td></tr>"
+                retorno = retorno + "<tr><td>Aliquota</td><td>" + oObject.percentualAliquota + "</td></tr>"
+                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + (oObject.desoneracao ? oObject.desoneracao.descricao : "") + "</td></tr>"
+                retorno = retorno + "<tr><td>Modalidade da BC ST</td><td>" + oObject.modalidadeBCICMSST + "</td></tr>"
+                retorno = retorno + "<tr><td>Margem de valor adic ICMS ST</td><td>" + oObject.percentualMargemValorAdicionadoICMSST + "</td></tr>"
+                retorno = retorno + "<tr><td>Aliquota do ICMS ST</td><td>" + oObject.valorBCST + "</td></tr>"
+                retorno = retorno + "<tr><td>Redução Base Calc ST</td><td>" + oObject.percentualAliquotaImpostoICMSST + "</td></tr>"
+                retorno = retorno + "<tr><td>Preço unit. Pauta ST</td><td>" + oObject.valorICMSST + "</td></tr>"
+                return retorno + '</tbody></table>';
+            },
+            tributados: function(oObject) {
+                var retorno = '<table class="table"><thead></thead><tbody>';
+                retorno = retorno + "<tr><td>CST</td><td>" + (oObject.situacaoTributaria ? oObject.situacaoTributaria.descricao : "") + "</td></tr>"
+                retorno = retorno + "<tr><td>Modalidade BC ICMS</td><td>" + (oObject.motivoDesoneracaoICMS ? oObject.motivoDesoneracaoICMS.descricao : "") + "</td></tr>"
+                retorno = retorno + "<tr><td>Redução da BC ICMS</td><td>" + oObject.percentualReducaoBC + "</td></tr>"
+                retorno = retorno + "<tr><td>Aliquota</td><td>" + oObject.percentualAliquota + "</td></tr>"
+                retorno = retorno + "<tr><td>Motivo desoneração</td><td>" + (oObject.desoneracao ? oObject.desoneracao.descricao : "") + "</td></tr>"
                 retorno = retorno + "<tr><td>Modalidade da BC ST</td><td>" + oObject.modalidadeBCICMSST + "</td></tr>"
                 retorno = retorno + "<tr><td>Margem de valor adic ICMS ST</td><td>" + oObject.percentualMargemValorAdicionadoICMSST + "</td></tr>"
                 retorno = retorno + "<tr><td>Aliquota do ICMS ST</td><td>" + oObject.valorBCST + "</td></tr>"
@@ -319,6 +348,7 @@
                 retorno = retorno + "<tr><td>Preço unit. Pauta ST</td><td>" + oObject.valorICMSST + "</td></tr>"
                 return retorno + '</tbody></table>';
             }
+
         };
     }]);
 })();

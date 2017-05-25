@@ -24,10 +24,10 @@
                         tributacao.imposto.icms.icms00.modalidadeBCICMS = new qat.model.fnDoisValor1(tributacao.imposto.icms.icms00.modalidadeBCICMS, $rootScope.user.user);
                         tributacao.imposto.icms.icms00 = fModels.amont(tributacao.imposto.icms.icms00, action);
                     } else if (tributacao.imposto.icms.sitTributaria.value == "10") {
-                        tributacao.imposto.icms.icms10.situacaoTributaria.id = tributacao.imposto.icms.sitTributaria.id
-                        tributacao.imposto.icms.icms10 = fModels.amont(tributacao.imposto.icms.icms10, action);
+                        tributacao.imposto.icms.icms10.situacaoTributaria = new qat.model.fnDoisValor1(tributacao.imposto.icms.sitTributaria, action, $rootScope.user.user)
                         tributacao.imposto.icms.icms10.modalidadeBCICMS = tributacao.imposto.icms.icms10.modalidadeBCICMS ? new qat.model.fnDoisValor1(tributacao.imposto.icms.icms10.modalidadeBCICMS, action, $rootScope.user.user) : {};
                         tributacao.imposto.icms.icms10.modalidadeBCICMSST = tributacao.imposto.icms.icms10.modalidadeBCICMSST ? new qat.model.fnDoisValor1(tributacao.imposto.icms.icms10.modalidadeBCICMSST, action, $rootScope.user.user) : {};
+                        tributacao.imposto.icms.icms10 = fModels.amont(tributacao.imposto.icms.icms10, action);
                     } else if (tributacao.imposto.icms.sitTributaria.value == "20") {
                         tributacao.imposto.icms.icms20.situacaoTributaria = { id: tributacao.imposto.icms.sitTributaria.id };
                         tributacao.imposto.icms.icms20.modalidadeBCICMS = new qat.model.fnDoisValor1(tributacao.imposto.icms.icms20.modalidadeBCICMS, action, $rootScope.user.user)
@@ -134,14 +134,15 @@
                     tributacao.imposto.icms.modifyDateUTC = (new Date()).getTime();
                 }
             }
-
+            debugger
             if ((tributacao.imposto.ipi != undefined) && (tributacao.imposto.ipi.sitTributaria != undefined)) {
+
                 if ((tributacao.imposto.ipi.sitTributaria.value == "00") || (tributacao.imposto.ipi.sitTributaria.value == "49") || (tributacao.imposto.ipi.sitTributaria.value == "50") || (tributacao.imposto.ipi.sitTributaria.value == "99")) {
                     tributacao.imposto.ipi.tributado = {
                         percentualAliquota: tributacao.imposto.ipi.percentualAliquota,
                         quantidade: tributacao.imposto.ipi.valorTributo,
                         situacaoTributaria: new qat.model.fnDoisValor1(tributacao.imposto.ipi.sitTributaria, action, $rootScope.user.user),
-                        modelAction: action,
+                        modelAction: tributacao.imposto.ipi.tributado ? action : "INSERT",
                         createUser: $rootScope.user.user,
                         createDateUTC: (new Date()).getTime(),
                         modifyUser: $rootScope.user.user,
@@ -151,7 +152,7 @@
                 } else {
                     tributacao.imposto.ipi.naoTributado = {
                         situacaoTributaria: new qat.model.fnDoisValor1(tributacao.imposto.ipi.sitTributaria, action),
-                        modelAction: action,
+                        modelAction: tributacao.imposto.ipi.naoTributado ? action : "INSERT",
                         createUser: $rootScope.user.user,
                         createDateUTC: (new Date()).getTime(),
                         modifyUser: $rootScope.user.user,
@@ -160,7 +161,7 @@
                     }
                 }
 
-                tributacao.imposto.ipi = qat.model.fnNFNotaInfoItemImpostoIPI(tributacao.imposto.ipi, action);
+                tributacao.imposto.ipi = qat.model.fnNFNotaInfoItemImpostoIPI(tributacao.imposto.ipi, tributacao.imposto.ipi.id ? action : "INSERT");
             }
 
 
@@ -228,51 +229,52 @@
             }
 
             //COFINS
-            if (tributacao.imposto.cofins.pISSituaTributaria) {
-                if ((tributacao.imposto.cofins.pISSituaTributaria.value == "01") || (tributacao.imposto.cofins.pISSituaTributaria.value == "02")) {
-                    tributacao.imposto.cofins.aliquota = {
-                        situacaoTributaria: new qat.model.fnDoisValor1(tributacao.imposto.cofins.pISSituaTributaria, action),
-                        percentualAliquota: tributacao.imposto.cofins.percentualAliquota,
+            if ((tributacao.imposto.cofins) && (tributacao.imposto.cofins.pISSituaTributaria)) {
+                if (tributacao.imposto.cofins.pISSituaTributaria) {
+                    if ((tributacao.imposto.cofins.pISSituaTributaria.value == "01") || (tributacao.imposto.cofins.pISSituaTributaria.value == "02")) {
+                        tributacao.imposto.cofins.aliquota = {
+                            situacaoTributaria: new qat.model.fnDoisValor1(tributacao.imposto.cofins.pISSituaTributaria, action),
+                            percentualAliquota: tributacao.imposto.cofins.percentualAliquota,
 
-                    }
-                    tributacao.imposto.cofins.aliquota = fModels.amont(tributacao.imposto.cofins.aliquota, action);
-                }
-
-                //private NFNotaInfoItemImpostoPISQuantidade quantidade;
-                if (tributacao.imposto.cofins.pISSituaTributaria.value == "03") {
-                    tributacao.imposto.cofins.quantidade = {
-                        situacaoTributaria: new qat.model.fnDoisValor1(tributacao.imposto.cofins.pISSituaTributaria, action),
-                        valorAliquota: tributacao.imposto.cofins.valorUnidade,
+                        }
+                        tributacao.imposto.cofins.aliquota = fModels.amont(tributacao.imposto.cofins.aliquota, action);
                     }
 
-                    tributacao.imposto.cofins.quantidade = fModels.amont(tributacao.imposto.cofins.quantidade, action);
-                }
+                    //private NFNotaInfoItemImpostoPISQuantidade quantidade;
+                    if (tributacao.imposto.cofins.pISSituaTributaria.value == "03") {
+                        tributacao.imposto.cofins.quantidade = {
+                            situacaoTributaria: new qat.model.fnDoisValor1(tributacao.imposto.cofins.pISSituaTributaria, action),
+                            valorAliquota: tributacao.imposto.cofins.valorUnidade,
+                        }
 
-                //NFNotaInfoItemImpostoPISNaoTributado naoTributado
-                if ((tributacao.imposto.cofins.pISSituaTributaria.value == "04") || (tributacao.imposto.cofins.pISSituaTributaria.value == "05") || (tributacao.imposto.cofins.pISSituaTributaria.value == "06") ||
-                    (tributacao.imposto.cofins.pISSituaTributaria.value == "07") || (tributacao.imposto.cofins.pISSituaTributaria.value == "08") || (tributacao.imposto.cofins.pISSituaTributaria.value == "09")) {
-                    tributacao.imposto.cofins.naoTributavel = {
-                        situacaoTributaria: new qat.model.fnDoisValor1(tributacao.imposto.cofins.pISSituaTributaria, action),
+                        tributacao.imposto.cofins.quantidade = fModels.amont(tributacao.imposto.cofins.quantidade, action);
                     }
 
-                    tributacao.imposto.cofins.naoTributavel = fModels.amont(tributacao.imposto.cofins.naoTributavel, action);
-                }
+                    //NFNotaInfoItemImpostoPISNaoTributado naoTributado
+                    if ((tributacao.imposto.cofins.pISSituaTributaria.value == "04") || (tributacao.imposto.cofins.pISSituaTributaria.value == "05") || (tributacao.imposto.cofins.pISSituaTributaria.value == "06") ||
+                        (tributacao.imposto.cofins.pISSituaTributaria.value == "07") || (tributacao.imposto.cofins.pISSituaTributaria.value == "08") || (tributacao.imposto.cofins.pISSituaTributaria.value == "09")) {
+                        tributacao.imposto.cofins.naoTributavel = {
+                            situacaoTributaria: new qat.model.fnDoisValor1(tributacao.imposto.cofins.pISSituaTributaria, action),
+                        }
 
-                //NFNotaInfoItemImpostoPISOutrasOperacoes outrasOperacoes
-                if (tributacao.imposto.cofins.pISSituaTributaria.value == "99") {
-                    tributacao.imposto.cofins.outrasOperacoes = {
-                        situacaoTributaria: new qat.model.fnDoisValor1(tributacao.imposto.cofins.pISSituaTributaria, action),
-                        percentualAliquota: tributacao.imposto.cofins.percentualAliquota,
-                        valorAliquota: tributacao.imposto.cofins.valorUnidade,
+                        tributacao.imposto.cofins.naoTributavel = fModels.amont(tributacao.imposto.cofins.naoTributavel, action);
                     }
 
+                    //NFNotaInfoItemImpostoPISOutrasOperacoes outrasOperacoes
+                    if (tributacao.imposto.cofins.pISSituaTributaria.value == "99") {
+                        tributacao.imposto.cofins.outrasOperacoes = {
+                            situacaoTributaria: new qat.model.fnDoisValor1(tributacao.imposto.cofins.pISSituaTributaria, action),
+                            percentualAliquota: tributacao.imposto.cofins.percentualAliquota,
+                            valorAliquota: tributacao.imposto.cofins.valorUnidade,
+                        }
 
 
-                    tributacao.imposto.cofins.outrasOperacoes = fModels.amont(tributacao.imposto.cofins.outrasOperacoes, action);
+
+                        tributacao.imposto.cofins.outrasOperacoes = fModels.amont(tributacao.imposto.cofins.outrasOperacoes, action);
+                    }
+
+                    tributacao.imposto.cofins = qat.model.fnNFNotaInfoItemImpostoCOFINS(tributacao.imposto.cofins, action);
                 }
-
-                tributacao.imposto.cofins = qat.model.fnNFNotaInfoItemImpostoCOFINS(tributacao.imposto.cofins, action);
-
                 tributacao.imposto.cofinsst = fModels.amont(tributacao.imposto.cofinsst, action);
             }
 
