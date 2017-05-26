@@ -1,45 +1,47 @@
 console.log("angular object", angular); //used for debugging and training only do not put in production
 var WebDaptiveAppConfig = {
-    //Main area for config URLs for WebDaptive
+	//Main area for config URLs for WebDaptive
 
-    /* When set to false a query parameter is used to pass on the auth token.
-     * This might be desirable if headers don't work correctly in some
-     * environments and is still secure when using https. */
-    useAuthTokenHeader: true,
-    //string to check for rest calls to jDpative Back-end so the angular http provider can inject x-auth token
-    restAuthBase: '',
-    authenticationURL: '/springmvc-angularjs/api/authenticate',
-    base_county_url: 'http://front01.eu-gb.mybluemix.net/county/api',
-    base_procedure_url: 'http://front01.eu-gb.mybluemix.net/procedure/api',
-    fetch_url: '/fetchPage',
-    refresh_url: '/refresh',
-    create_url: '/insert',
-    update_url: '/update',
-    delete_url: '/delete',
+	/* When set to false a query parameter is used to pass on the auth token.
+	 * This might be desirable if headers don't work correctly in some
+	 * environments and is still secure when using https. */
+	useAuthTokenHeader: true,
+	//string to check for rest calls to jDpative Back-end so the angular http provider can inject x-auth token
+	restAuthBase: '',
+	authenticationURL: '/springmvc-angularjs/api/authenticate',
+	base_county_url: 'http://front01.eu-gb.mybluemix.net/county/api',
+	base_procedure_url: 'http://front01.eu-gb.mybluemix.net/procedure/api',
+	fetch_url: '/fetchPage',
+	refresh_url: '/refresh',
+	create_url: '/insert',
+	update_url: '/update',
+	delete_url: '/delete',
 
-    //site
-    base_site_url: 'https://back.eu-gb.mybluemix.net/site/api',
-    fetch_url: '/fetchPage',
-    refresh_url: '/refresh',
-    create_url: '/insert',
-    update_url: '/update',
-    delete_url: '/delete',
+	//site
+	base_site_url: 'https://back.eu-gb.mybluemix.net/site/api',
+	fetch_url: '/fetchPage',
+	refresh_url: '/refresh',
+	create_url: '/insert',
+	update_url: '/update',
+	delete_url: '/delete',
 
-    //produto
-    base_site_url: 'https://back.eu-gb.mybluemix.net/produto/api',
-    fetch_url: '/fetchPage',
-    refresh_url: '/refresh',
-    create_url: '/insert',
-    update_url: '/update',
-    delete_url: '/delete',
+	//produto
+	base_site_url: 'https://back.eu-gb.mybluemix.net/produto/api',
+	fetch_url: '/fetchPage',
+	refresh_url: '/refresh',
+	create_url: '/insert',
+	update_url: '/update',
+	delete_url: '/delete',
 
-    base_empresa_url: 'https://back.eu-gb.mybluemix.net/entidade/api',
+	base_empresa_url: 'https://back.eu-gb.mybluemix.net/entidade/api',
 
 };
 
-(function() {
-    'use strict';
-    var wdApp = angular.module('wdApp', ['xeditable', 'ngRoute', 'ngAnimate', 'ngSanitize', 'angucomplete-alt', 'ngTouch', 'hl.sticky', 'mwl.calendar', 'colorpicker.module', 'ui.bootstrap', 'easypiechart', 'textAngular', 'ui.mask',
+(function()
+{
+	'use strict';
+	var wdApp = angular.module('wdApp', ['xeditable', 'ngRoute', 'ngAnimate', 'ngSanitize', 'angucomplete-alt', 'ngTouch', 'hl.sticky', 'mwl.calendar', 'colorpicker.module',
+		'ui.bootstrap', 'easypiechart', 'textAngular', 'ui.mask',
         'mgcrea.ngStrap', 'ui.tree', 'ngMap', 'ui.toggle', 'ngTagsInput', 'toastr', 'angular-loading-bar', 'chart.js', 'ngecharts',
         'agGrid', 'base64', 'LocalStorageModule', 'jcs-autoValidate', 'wdApp.controllers', 'wdApp.directives', 'wdApp.httpint',
         'wdApp.localization', 'wdApp.ui.controllers', 'wdApp.forms.controllers',
@@ -47,15 +49,21 @@ var WebDaptiveAppConfig = {
         'wdApp.charts.flot.controllers', 'wdApp.charts.morris.controllers', 'wdApp.charts.chartjs.controllers',
         'wdApp.charts.other.controllers', 'wdApp.charts.echarts.controllers', 'wdApp.charts.directives', 'wdApp.authentication',
         'wdApp.pages.controllers', 'wdApp.demodata', 'wdApp.apps.stocks', 'wdApp.apps.stocksdata',
-        'wdApp.apps.counties', 'datatables', 'datatables.bootstrap', 'wdApp.apps.procedures', 'wdApp.apps.sysmgmt.data', 'wdApp.apps.site', 'wdApp.apps.empresa', 'wdApp.apps.produtos', 'wdApp.apps.produtoss', 'wdApp.apps.produto', 'wdApp.apps.notaFiscal',
+        'wdApp.apps.counties', 'datatables', 'datatables.bootstrap', 'wdApp.apps.procedures', 'wdApp.apps.sysmgmt.data', 'wdApp.apps.site', 'wdApp.apps.empresa',
+		'wdApp.apps.produtos', 'wdApp.apps.produtoss', 'wdApp.apps.produto', 'wdApp.apps.notaFiscal',
         'wdApp.apps.cotacao', 'wdApp.apps.pdVendas', 'wdApp.apps.funcionario',
-        'wdApp.ajaxCall', 'inputactions', 'wdApp.apps.cliente', 'wdApp.apps.cliente.insert', 'wdApp.apps.cliente.update', 'wdApp.apps.cliente.delete', 'wdApp.apps.cliente.view', 'wdApp.apps.fornecedor', 'wdApp.apps.fornecedor.insert', 'wdApp.apps.fornecedor.update', 'wdApp.apps.fornecedor.delete', 'wdApp.apps.fornecedor.view', 'wdApp.apps.convenio', 'wdApp.apps.deposito', 'wdApp.apps.filial', 'wdApp.apps.transportador.table', 'wdApp.apps.transportador.insert', 'wdApp.apps.transportador.update', 'wdApp.apps.transportador.delete', 'wdApp.apps.transportador.view'
+        'wdApp.ajaxCall', 'inputactions', 'wdApp.apps.cliente', 'wdApp.apps.cliente.insert', 'wdApp.apps.cliente.update', 'wdApp.apps.cliente.delete', 'wdApp.apps.cliente.view',
+		'wdApp.apps.fornecedor', 'wdApp.apps.fornecedor.insert', 'wdApp.apps.fornecedor.update', 'wdApp.apps.fornecedor.delete', 'wdApp.apps.fornecedor.view', 'wdApp.apps.convenio',
+		'wdApp.apps.deposito', 'wdApp.apps.filial', 'wdApp.apps.transportador.table', 'wdApp.apps.transportador.insert', 'wdApp.apps.transportador.update',
+		'wdApp.apps.transportador.delete', 'wdApp.apps.transportador.view'
 
         , 'wdApp.apps.ordemProducao'
 
         , 'wdApp.apps.telefone'
 
-        , 'wdApp.apps.funcionarios', 'wdApp.apps.compras', 'wdApp.apps.convenio', 'wdApp.apps.util', 'wdApp.apps.cidade', 'wdApp.apps.filial', 'wdApp.apps.almoxarifado', 'wdApp.apps.processo', 'wdApp.apps.cadempresa', 'wdApp.apps.site', 'wdApp.apps.sites', 'wdApp.apps.plano', 'wdApp.apps.contasPagar.view3', 'wdApp.apps.contasPagar.view2', 'wdApp.apps.contasPagar.view1'
+        , 'wdApp.apps.funcionarios', 'wdApp.apps.compras', 'wdApp.apps.convenio', 'wdApp.apps.util', 'wdApp.apps.cidade', 'wdApp.apps.filial', 'wdApp.apps.almoxarifado',
+		'wdApp.apps.processo', 'wdApp.apps.cadempresa', 'wdApp.apps.site', 'wdApp.apps.sites', 'wdApp.apps.plano', 'wdApp.apps.contasPagar.view3', 'wdApp.apps.contasPagar.view2',
+		'wdApp.apps.contasPagar.view1'
 
         , 'wdApp.apps.usuarios', 'wdApp.apps.contatos', 'wdApp.apps.historico', 'wdApp.apps.permissoes'
         /*   ,'wdApp.apps.tabelas'
@@ -71,7 +79,8 @@ var WebDaptiveAppConfig = {
         , 'wdApp.apps.regime', 'wdApp.apps.regime.insert', 'wdApp.apps.regime.update', 'wdApp.apps.regime.delete', 'wdApp.apps.regime.view'
 
 
-        , 'wdApp.apps.contato.insert', 'wdApp.apps.contato.update', 'wdApp.ajaxCall.empresa', 'wdApp.ajaxCall.pessoa', 'wdApp.ajaxCalls', 'wdApp.apps.produto.insert', 'wdApp.apps.produto.update', 'wdApp.apps.produto.delete', 'wdApp.apps.produto.view', 'wdApp.apps.produto.select', 'wdApp.apps.produto.selects', 'wdApp.ajaxCall.produto'
+        , 'wdApp.apps.contato.insert', 'wdApp.apps.contato.update', 'wdApp.ajaxCall.empresa', 'wdApp.ajaxCall.pessoa', 'wdApp.ajaxCalls', 'wdApp.apps.produto.insert',
+		'wdApp.apps.produto.update', 'wdApp.apps.produto.delete', 'wdApp.apps.produto.view', 'wdApp.apps.produto.select', 'wdApp.apps.produto.selects', 'wdApp.ajaxCall.produto'
 
         , 'wdApp.apps.agencia', 'wdApp.apps.agencia.insert', 'wdApp.apps.agencia.update', 'wdApp.apps.agencia.delete', 'wdApp.apps.agencia.view'
 
@@ -109,14 +118,16 @@ var WebDaptiveAppConfig = {
 
         , 'wdApp.apps.estado', 'wdApp.apps.estado.insert', 'wdApp.apps.estado.update', 'wdApp.apps.estado.delete', 'wdApp.apps.estado.view'
 
-        , 'wdApp.apps.contasPagar', 'wdApp.apps.contasPagar.insert', 'wdApp.apps.contasPagar.update', 'wdApp.apps.contasPagar.delete', 'wdApp.apps.contasPagar.view', 'wdApp.apps.contasPagar.Baixa', 'wdApp.apps.contasPagar.baixas', 'wdApp.apps.contasPagar.Recibo'
+        , 'wdApp.apps.contasPagar', 'wdApp.apps.contasPagar.insert', 'wdApp.apps.contasPagar.update', 'wdApp.apps.contasPagar.delete', 'wdApp.apps.contasPagar.view',
+		'wdApp.apps.contasPagar.Baixa', 'wdApp.apps.contasPagar.baixas', 'wdApp.apps.contasPagar.Recibo'
 
 
         , 'wdApp.apps.formaPg', , 'wdApp.apps.formaPg.insert', 'wdApp.apps.formaPg.update', 'wdApp.apps.formaPg.delete', 'wdApp.apps.formaPg.view'
 
         , 'wdApp.apps.nfSaida', 'wdApp.apps.nfSaida.insert', 'wdApp.apps.nfSaida.update', 'wdApp.apps.nfSaida.delete', 'wdApp.apps.nfSaida.view'
 
-        , 'wdApp.apps.contasReceber', 'wdApp.apps.contasReceber.insert', 'wdApp.apps.contasReceber.update', 'wdApp.apps.contasReceber.delete', 'wdApp.apps.contasReceber.view', 'wdApp.apps.contasReceber.Baixa', 'wdApp.apps.contasReceber.baixas', 'wdApp.apps.contasReceber.Recibo', 'wdApp.apps.contasReceber.copiar'
+        , 'wdApp.apps.contasReceber', 'wdApp.apps.contasReceber.insert', 'wdApp.apps.contasReceber.update', 'wdApp.apps.contasReceber.delete', 'wdApp.apps.contasReceber.view',
+		'wdApp.apps.contasReceber.Baixa', 'wdApp.apps.contasReceber.baixas', 'wdApp.apps.contasReceber.Recibo', 'wdApp.apps.contasReceber.copiar'
 
         , 'wdApp.apps.conta', 'wdApp.apps.conta.insert', 'wdApp.apps.conta.update', 'wdApp.apps.conta.delete', 'wdApp.apps.conta.view'
 
@@ -146,29 +157,34 @@ var WebDaptiveAppConfig = {
 
         , 'wdApp.apps.select.formaPg', 'wdApp.apps.uniMed.select', 'wdApp.apps.categoria.select', 'wdApp.apps.marca.select'
 
-        , 'wdApp.apps.cfop.insert', 'wdApp.apps.cfop.update', 'wdApp.apps.cfop.delete', 'wdApp.apps.cfop.view', 'wdApp.apps.cfop.select', 'wdApp.ajaxCalls.validation', 'wdApp.ajaxCalls.dialog.delete'
+        , 'wdApp.apps.cfop.insert', 'wdApp.apps.cfop.update', 'wdApp.apps.cfop.delete', 'wdApp.apps.cfop.view', 'wdApp.apps.cfop.select', 'wdApp.ajaxCalls.validation',
+		'wdApp.ajaxCalls.dialog.delete'
 
-        , 'wdApp.apps.email', 'wdApp.ajaxCalls.table.columns', 'wdapp.table.Ajax.factory', 'wdApp.ajaxCalls.table.option', 'wdApp.ajaxCall.table.create', 'wdApp.ajaxCalls.filters', 'wdApp.apps.cliente.search', 'wdApp.apps.formaPg.select', 'wdApp.apps.endereco', 'wdApp.ajaxCalls.doisValores', 'wdApp.ajaxCall.notaFiscal'
+        , 'wdApp.apps.email', 'wdApp.ajaxCalls.table.columns', 'wdapp.table.Ajax.factory', 'wdApp.ajaxCalls.table.option', 'wdApp.ajaxCall.table.create', 'wdApp.ajaxCalls.filters',
+		'wdApp.apps.cliente.search', 'wdApp.apps.formaPg.select', 'wdApp.apps.endereco', 'wdApp.ajaxCalls.doisValores', 'wdApp.ajaxCall.notaFiscal'
 
-        , 'wdApp.apps.tributacao', 'wdApp.apps.tributacao.insert', 'wdApp.apps.tributacao.update', 'wdApp.apps.tributacao.delete', 'wdApp.apps.tributacao.view', 'wdApp.ajaxCall.tributacao', 'wdApp.apps.tributacao.select'
+        , 'wdApp.apps.tributacao', 'wdApp.apps.tributacao.insert', 'wdApp.apps.tributacao.update', 'wdApp.apps.tributacao.delete', 'wdApp.apps.tributacao.view',
+		'wdApp.ajaxCall.tributacao', 'wdApp.apps.tributacao.select'
 
         , 'wdApp.apps.cartaCorrecao', 'wdApp.apps.cartaCorrecao.insert', 'wdApp.apps.cartaCorrecao.update', 'wdApp.apps.cartaCorrecao.delete'
 
         , 'wdApp.apps.situacao', 'wdApp.apps.situacao.insert', 'wdApp.apps.situacao.update', 'wdApp.apps.situacao.delete', 'wdApp.apps.caixa'
 
-        , 'wdApp.apps.notaFiscalEntrada', 'wdApp.apps.notaFiscalEntrada.insert', 'wdApp.apps.notaFiscalEntrada.update', 'wdApp.apps.notaFiscalEntrada.delete', 'wdApp.apps.notaFiscalEntrada.upload', 'wdApp.ajaxCall.calcTributos'
+        , 'wdApp.apps.notaFiscalEntrada', 'wdApp.apps.notaFiscalEntrada.insert', 'wdApp.apps.notaFiscalEntrada.update', 'wdApp.apps.notaFiscalEntrada.delete',
+		'wdApp.apps.notaFiscalEntrada.upload', 'wdApp.ajaxCall.calcTributos'
 
 
 
 
     ]);
 
-    wdApp.config(['$routeProvider',
-        function($routeProvider) {
-            var routes, setRoutes;
-            //all available routes
+	wdApp.config(['$routeProvider',
+        function($routeProvider)
+		{
+			var routes, setRoutes;
+			//all available routes
 
-            routes = ['dashboard', 'principal', 'ui/typography', 'ui/buttons', 'index3',
+			routes = ['dashboard', 'principal', 'ui/typography', 'ui/buttons', 'index3',
                 'ui/icons', 'ui/grids', 'ui/widgets', 'ui/components',
                 'ui/timeline', 'ui/tree', 'ui/pricing-tables', 'ui/maps',
                 'tables/static', 'tables/dynamic', 'tables/responsive',
@@ -182,115 +198,135 @@ var WebDaptiveAppConfig = {
                 'compras/forms/CadCotacao', 'compras/forms/CadNfEntrada', 'compras/forms/CadPedCompras', 'compras/forms/CadAprovPedidoCompra',
                 'compras/tables/aprovarPedCompras', 'compras/tables/cotacao', 'compras/tables/nfEntrada', 'compras/tables/pedCompras',
                 'financeiro/tables/baixaTitulo', 'financeiro/tables/banco', 'financeiro/tables/caixa', 'vendas/tables/notaFiscalSaida',
-                'financeiro/tables/contaCC', 'financeiro/tables/conta', 'financeiro/tables/contasPagar', 'financeiro/tables/contasReceber', 'financeiro/tables/formaPg', 'financeiro/tables/agencia',
+                'financeiro/tables/contaCC', 'financeiro/tables/conta', 'financeiro/tables/contasPagar', 'financeiro/tables/contasReceber', 'financeiro/tables/formaPg',
+				'financeiro/tables/agencia',
                 'funcionario/tables/folhaPonto', 'funcionario/tables/funcionario', 'funcionario/forms/CadFolhaPonto', 'funcionario/forms/funcionario',
                 'ordemServico/tables/ordemServico', 'ordemServico/forms/CadOrdemServico',
                 'cadastros/tables/almoxarifado', 'cadastros/tables/cidade', 'cadastros/tables/cliente', 'cadastros/tables/convenio',
                 'cadastros/tables/estado', 'cadastros/tables/filial', 'cadastros/tables/fornecedor', 'cadastros/tables/transportador',
                 'produto/tables/categoria', 'produto/tables/marca', 'produto/tables/uniMed', 'produto/tables/servico',
-                'produto/forms/CadCategoria', 'produto/forms/CadMarca', 'produto/forms/CadUniMed', 'produto/forms/CadProduto', 'advogado/tables/processo', 'advogado/details/processo', 'compras/details/cotacao', 'advogado/forms/advogadoAgenda', 'advogado/forms/advogadoAgenda2', 'clinica/cadConsulta', 'clinica/cadMedico', 'clinica/cadPaciente', 'clinica/cadPlanoSaude', 'gerencia/tables/empresa', 'gerencia/tables/site', 'gerencia/tables/plano', 'gerencia/tables/servico', 'gerencia/tables/usuarios', 'gerencia/tables/contatos', 'gerencia/tables/historico', 'gerencia/tables/permissoes', 'dicionario/tables/tabelas', 'dicionario/tables/campos', 'dicionario/tables/tela', 'dicionario/tables/relatorios', 'gerencia/details/empresa', 'gerencia/tables/tributacao', 'fiscal/tables/regime', 'historico/tables/historico', 'financeiro/tables/tipoDocumentos', 'financeiro/tables/categoria', 'financeiro/tables/situacao', 'notaFiscal/tables/notaFiscalSaida', 'notaFiscal/tables/notaFiscalEntrada'
+                'produto/forms/CadCategoria', 'produto/forms/CadMarca', 'produto/forms/CadUniMed', 'produto/forms/CadProduto', 'advogado/tables/processo',
+				'advogado/details/processo', 'compras/details/cotacao', 'advogado/forms/advogadoAgenda', 'advogado/forms/advogadoAgenda2', 'clinica/cadConsulta', 'clinica/cadMedico',
+				'clinica/cadPaciente', 'clinica/cadPlanoSaude', 'gerencia/tables/empresa', 'gerencia/tables/site', 'gerencia/tables/plano', 'gerencia/tables/servico',
+				'gerencia/tables/usuarios', 'gerencia/tables/contatos', 'gerencia/tables/historico', 'gerencia/tables/permissoes', 'dicionario/tables/tabelas', 'dicionario/tables/campos',
+				'dicionario/tables/tela', 'dicionario/tables/relatorios', 'gerencia/details/empresa', 'gerencia/tables/tributacao', 'fiscal/tables/regime', 'historico/tables/historico',
+				'financeiro/tables/tipoDocumentos', 'financeiro/tables/categoria', 'financeiro/tables/situacao', 'notaFiscal/tables/notaFiscalSaida', 'notaFiscal/tables/notaFiscalEntrada'
 
 
 
             ];
 
-            //geeric routeine for building route from array
-            setRoutes = function(route) {
-                var config, url;
-                url = '/' + route;
-                config = {
-                    templateUrl: 'views/' + route + '.html'
-                };
-                $routeProvider.when(url, config);
-                return $routeProvider;
-            };
+			//geeric routeine for building route from array
+			setRoutes = function(route)
+			{
+				var config, url;
+				url = '/' + route;
+				config = {
+					templateUrl: 'views/' + route + '.html'
+				};
+				$routeProvider.when(url, config);
+				return $routeProvider;
+			};
 
-            //build routes for this application
-            routes.forEach(function(route) {
-                return setRoutes(route);
-            });
+			//build routes for this application
+			routes.forEach(function(route)
+			{
+				return setRoutes(route);
+			});
 
-            //routes not automatically built specified here
-            return $routeProvider.when('/', {
-                templateUrl: 'views/login/login.html'
-            }).when('/404', {
-                templateUrl: 'views/pages/404.html'
-            }).otherwise({
-                redirectTo: '/404'
-            });
+			//routes not automatically built specified here
+			return $routeProvider.when('/',
+			{
+				templateUrl: 'views/login/login.html'
+			}).when('/404',
+			{
+				templateUrl: 'views/pages/404.html'
+			}).otherwise(
+			{
+				redirectTo: '/404'
+			});
 
         }
     ]);
 
-    //config
-    wdApp.config(['localStorageServiceProvider', function(localStorageServiceProvider) {
-        //sets local storage application prefix for all keys
-        localStorageServiceProvider.setPrefix('wdAppLS');
+	//config
+	wdApp.config(['localStorageServiceProvider', function(localStorageServiceProvider)
+	{
+		//sets local storage application prefix for all keys
+		localStorageServiceProvider.setPrefix('wdAppLS');
     }]);
 
-    //config
-    wdApp.config(['$httpProvider', function($httpProvider) {
-        //register WebDaptive interceptor factory
-        $httpProvider.interceptors.push('WDHttpInterceptors');
+	//config
+	wdApp.config(['$httpProvider', function($httpProvider)
+	{
+		//register WebDaptive interceptor factory
+		$httpProvider.interceptors.push('WDHttpInterceptors');
     }]);
 
-    //run each time angular app comes up (runs only once)
-    wdApp.run(function($rootScope, $location, localStorageService, editableOptions, validator) {
+	//run each time angular app comes up (runs only once)
+	wdApp.run(function($rootScope, $location, localStorageService, editableOptions, validator)
+	{
+		//debugger
+		validator.setValidElementStyling(false);
+		validator.setInvalidElementStyling(false);
 
-        validator.setValidElementStyling(false);
-        validator.setInvalidElementStyling(false);
+		editableOptions.theme = 'bs3'; // bootstrap
+        console.log(JSON.parse(localStorage.getItem('empresa')))
+		$rootScope.main = {
+			brand: (JSON.parse(localStorage.getItem('empresa')) ? (JSON.parse(localStorage.getItem('empresa')).nome ? JSON.parse(localStorage.getItem('empresa')).razao : '') :'E-Contábil'),
+			name: ''
+		};
 
-        editableOptions.theme = 'bs3'; // bootstrap
+		/* Reset error when a new view is loaded */
+		$rootScope.$on('$viewContentLoaded', function()
+		{
+			delete $rootScope.error;
+		});
 
-        $rootScope.main = {
-            brand: 'E-Contábil',
-            name: ''
-        };
+		//the hasRole method that drives the hide/show of html
+		$rootScope.hasRole = function(role)
+		{
 
-        /* Reset error when a new view is loaded */
-        $rootScope.$on('$viewContentLoaded', function() {
-            delete $rootScope.error;
-        });
+			if ($rootScope.user === undefined)
+			{
+				return false;
+			}
 
-        //the hasRole method that drives the hide/show of html
-        $rootScope.hasRole = function(role) {
+			if ($rootScope.user.roles[role] === undefined)
+			{
+				return false;
+			}
 
-            if ($rootScope.user === undefined) {
-                return false;
-            }
+			return $rootScope.user.roles[role];
+		};
 
-            if ($rootScope.user.roles[role] === undefined) {
-                return false;
-            }
-
-            return $rootScope.user.roles[role];
-        };
-
-        //logout function clears all relevant presistent storage
-        $rootScope.logout = function() {
-            delete $rootScope.user;
-            delete $rootScope.authToken;
-            delete $rootScope.callingPath;
-            delete $rootScope.displayRoles;
-            $rootScope.main.name = "";
-            localStorageService.clearAll();
-        };
+		//logout function clears all relevant presistent storage
+		$rootScope.logout = function()
+		{
+			delete $rootScope.user;
+			delete $rootScope.authToken;
+			delete $rootScope.callingPath;
+			delete $rootScope.displayRoles;
+			$rootScope.main.name = "";
+			localStorageService.clearAll();
+		};
 
 
-        /* Try getting valid user from localStorage */
-        if (localStorageService.get('authToken') !== null) {
-            $rootScope.authToken = localStorageService.get('authToken');
-            $rootScope.user = localStorageService.get('currentUser');
-            if ($rootScope.user != undefined)
-                $rootScope.main.name = $rootScope.user.user;
-            else
-                $rootScope.main.name = "Anonimo";
-            $rootScope.displayRoles = localStorageService.get('displayRoles');
-        }
-        //flag to let us know everything is full initialized can be referenced anywhere
-        $rootScope.initialized = true;
-        $rootScope.empresa_type = 0;
-        localStorageService.set('empresaType', 0);
-    });
+		/* Try getting valid user from localStorage */
+		if (localStorageService.get('authToken') !== null)
+		{
+			$rootScope.authToken = localStorageService.get('authToken');
+			$rootScope.user = localStorageService.get('currentUser');
+			if ($rootScope.user != undefined)
+				$rootScope.main.name = $rootScope.user.user;
+			else
+				$rootScope.main.name = "Anonimo";
+			$rootScope.displayRoles = localStorageService.get('displayRoles');
+		}
+		//flag to let us know everything is full initialized can be referenced anywhere
+		$rootScope.initialized = true;
+		$rootScope.empresa_type = 0;
+		localStorageService.set('empresaType', 0);
+	});
 
 })();

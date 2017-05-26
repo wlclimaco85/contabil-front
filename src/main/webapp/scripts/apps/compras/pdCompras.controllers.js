@@ -1,482 +1,574 @@
-(function() {
-    angular.module('wdApp.apps.pdCompras', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('PdComprasController', pdComprasController);
+(function()
+{
+	angular.module('wdApp.apps.pdCompras', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+		.controller('PdComprasController', pdComprasController);
 
-    function pdComprasController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory, tableColumnsFactory, tableOptionsFactory, FiltersFactory) {
-        var vm = this;
-        vm.selected = {};
-        vm.selectAll = false;
-        vm.toggleAll = toggleAll;
-        vm.toggleOne = toggleOne;
-        vm.status = status;
-        vm.message = '';
-        vm.edit = edit;
-        vm.delete = deleteRow;
-        vm.dtInstancePdCompras = {};
-        vm.persons = {};
+	function pdComprasController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory, tableColumnsFactory,
+		tableOptionsFactory, FiltersFactory)
+	{
+		var vm = this;
+		vm.selected = {};
+		vm.selectAll = false;
+		vm.toggleAll = toggleAll;
+		vm.toggleOne = toggleOne;
+		vm.status = status;
+		vm.message = '';
+		vm.edit = edit;
+		vm.delete = deleteRow;
+		vm.dtInstancePdCompras = {};
+		vm.persons = {};
 
-        $scope.pdCompras = {
-            tipoPessoa: 2
-        };
+		$scope.pdCompras = {
+			tipoPessoa: 2
+		};
 
-        $scope.toggle = function() {
-            $scope.state = !$scope.state;
-        };
-        var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
-            'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
+		$scope.toggle = function()
+		{
+			$scope.state = !$scope.state;
+		};
+		var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
+			'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
 
-        function reloadData() {
-            var resetPaging = false;
-            vm.dtInstancePdCompras.reloadData(callback, resetPaging);
-        }
+		function reloadData()
+		{
+			var resetPaging = false;
+			vm.dtInstancePdCompras.reloadData(callback, resetPaging);
+		}
 
-        function callback(json) {
-            console.log(json);
-        }
+		function callback(json)
+		{
+			console.log(json);
+		}
 
-        var reloadData = function() {
+		var reloadData = function()
+		{
 
-            var resetPaging = false;
-            vm.dtInstancePdCompras.reloadData(callback, resetPaging);
-        }
+			var resetPaging = false;
+			vm.dtInstancePdCompras.reloadData(callback, resetPaging);
+		}
 
-        $rootScope.reloadDataSit = function(_callback) {
+		$rootScope.reloadDataSit = function(_callback)
+		{
 
-            var resetPaging = false;
-            vm.dtInstancePdCompras.reloadData(_callback, resetPaging);
-        }
+			var resetPaging = false;
+			vm.dtInstancePdCompras.reloadData(_callback, resetPaging);
+		}
 
-        function rCallback(nRow, aData) {
-            // console.log('row');
-        }
+		function rCallback(nRow, aData)
+		{
+			// console.log('row');
+		}
 
-        function recompile(row, data, dataIndex) {
-            $compile(angular.element(row).contents())($scope);
-        }
-        var fnDataSRC = function(json) {
-                console.log(json)
-                json['recordsTotal'] = json.nfnotaList.length
-                json['recordsFiltered'] = json.nfnotaList.length
-                json['draw'] = 1
-                console.log(json)
-                return json.nfnotaList;
-            }
-            //  Datatablessss.getTable('/vendas/api/nfSaidas/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cliente(vm,createdRow,$scope,FiltersFactory.cliente()), tableColumnsFactory.cliente(vm,titleHtml,actionsHtml));
-        Datatablessss.getTable('/vendas/api/nfSaidas/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.pdVendas(vm, createdRow, $scope, FiltersFactory.pdVendas(), reloadData), tableColumnsFactory.pdVendas(vm, titleHtml, actionsHtml));
+		function recompile(row, data, dataIndex)
+		{
+			$compile(angular.element(row).contents())($scope);
+		}
+		var fnDataSRC = function(json)
+		{
+			console.log(json)
+			json['recordsTotal'] = json.nfnotaList.length
+			json['recordsFiltered'] = json.nfnotaList.length
+			json['draw'] = 1
+			console.log(json)
+			return json.nfnotaList;
+		}
+		//  Datatablessss.getTable('/vendas/api/nfSaidas/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cliente(vm,createdRow,$scope,FiltersFactory.cliente()), tableColumnsFactory.cliente(vm,titleHtml,actionsHtml));
+		Datatablessss.getTable('/vendas/api/nfSaidas/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile,
+			tableOptionsFactory.pdVendas(vm, createdRow, $scope, FiltersFactory.pdVendas(), reloadData), tableColumnsFactory.pdVendas(vm, titleHtml, actionsHtml));
 
-        function edit(person) {
-            $rootScope.pdCompras = person;
-            dialogFactory.dialog('views/vendas/dialog/dPdComprass.html', "PdComprassUpdateController", openDialogUpdateCreate);
-        }
+		function edit(person)
+		{
+			$rootScope.pdCompras = person;
+			dialogFactory.dialog('views/vendas/dialog/dPdComprass.html', "PdComprassUpdateController", openDialogUpdateCreate);
+		}
 
-        function deleteRow(person) {
-            $rootScope.pdCompras = person;
-            dialogFactory.dialog('views/vendas/dialog/dPdComprass.html', "PdComprassDeleteController", openDialogUpdateCreate);
-        }
+		function deleteRow(person)
+		{
+			$rootScope.pdCompras = person;
+			dialogFactory.dialog('views/vendas/dialog/dPdComprass.html', "PdComprassDeleteController", openDialogUpdateCreate);
+		}
 
-        function createdRow(row, data, dataIndex) {
-            // Recompiling so we can bind Angular directive to the DT
-            $compile(angular.element(row).contents())($scope);
-        }
+		function createdRow(row, data, dataIndex)
+		{
+			// Recompiling so we can bind Angular directive to the DT
+			$compile(angular.element(row).contents())($scope);
+		}
 
-        function actionsHtml(data, type, full, meta) {
-            vm.persons[data.id] = data;
-            return '<button class="btn btn-info" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
-                '   <i class="glyphicon glyphicon-save"></i>' +
-                '</button> ' +
-                '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
-                '   <i class="fa fa-trash-o"></i>' +
-                '</button>';
-        }
+		function actionsHtml(data, type, full, meta)
+		{
+			vm.persons[data.id] = data;
+			return '<button class="btn btn-info" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
+				'   <i class="glyphicon glyphicon-save"></i>' +
+				'</button> ' +
+				'<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
+				'   <i class="fa fa-trash-o"></i>' +
+				'</button>';
+		}
 
-        function toggleAll(selectAll, selectedItems) {
-            for (var id in selectedItems) {
-                if (selectedItems.hasOwnProperty(id)) {
-                    selectedItems[id] = selectAll;
-                }
-            }
-        }
+		function toggleAll(selectAll, selectedItems)
+		{
+			for (var id in selectedItems)
+			{
+				if (selectedItems.hasOwnProperty(id))
+				{
+					selectedItems[id] = selectAll;
+				}
+			}
+		}
 
-        $scope.user = {
-            name: 'awesome user'
-        };
+		$scope.user = {
+			name: 'awesome user'
+		};
 
-        function status() {}
+		function status()
+		{}
 
-        function toggleOne(selectedItems) {
-            for (var id in selectedItems) {
-                if (selectedItems.hasOwnProperty(id)) {
-                    if (!selectedItems[id]) {
-                        vm.selectAll = false;
-                        return;
-                    }
-                }
-            }
-            vm.selectAll = true;
-        }
+		function toggleOne(selectedItems)
+		{
+			for (var id in selectedItems)
+			{
+				if (selectedItems.hasOwnProperty(id))
+				{
+					if (!selectedItems[id])
+					{
+						vm.selectAll = false;
+						return;
+					}
+				}
+			}
+			vm.selectAll = true;
+		}
 
-        function toggle() {
-            $scope.state = !$scope.state;
-        };
-    }
+		function toggle()
+		{
+			$scope.state = !$scope.state;
+		};
+	}
 })();
-(function() {
-    angular.module('wdApp.apps.pdCompras.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('PdComprasInsertController', function(localStorageService, $rootScope, $scope, fModels, SysMgmtData, doisValorFactory, fNotaFiscal) {
-            var vm = this;
+(function()
+{
+	angular.module('wdApp.apps.pdCompras.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+		.controller('PdComprasInsertController', function(localStorageService, $rootScope, $scope, fModels, SysMgmtData, doisValorFactory, fNotaFiscal)
+		{
+			var vm = this;
 
-            $scope.notaFiscalSaida = {
+			$scope.notaFiscalSaida = {
 
-            };
+			};
 
-            $scope.user = {
-                name: 'awesome user'
-            };
-
-
-            $scope.cliente = {};
-            $scope.formaPg = {};
-            $scope.endereco = null;
-            $scope.pessoa = {};
+			$scope.user = {
+				name: 'awesome user'
+			};
 
 
-            $scope.visibled = false
-                //   $scope.cliente = [];
+			$scope.cliente = {};
+			$scope.formaPg = {};
+			$scope.endereco = null;
+			$scope.pessoa = {};
 
-            $scope.countrySelected = function(selected) {
 
-                if (selected) {
+			$scope.visibled = false
+			//   $scope.cliente = [];
 
-                    $scope.pessoa = selected.originalObject;
-                    $scope.visibled = true;
+			$scope.countrySelected = function(selected)
+			{
 
-                    $scope.popovers = {
-                        "html": "<div>Hello Popover<br />This is a multiline message!</div>",
-                        "title": "Informação",
-                        "animation": 'am-flip-x',
-                        "content": " " + $scope.pessoa.nome + " " +
-                            " " + $scope.pessoa.nome + " " +
-                            " " + $scope.pessoa.nome + " " +
-                            " " + $scope.pessoa.nome + " " +
-                            " " + $scope.pessoa.nome + " " +
-                            " " + $scope.pessoa.nome + " "
-                    };
+				if (selected)
+				{
 
-                } else {
-                    console.log('cleared');
-                }
-            };
+					$scope.pessoa = selected.originalObject;
+					$scope.visibled = true;
 
-            SysMgmtData.processPostPageData("main/api/request", {
-                url: "pessoa/api/cliente/fetchPage",
-                token: $rootScope.authToken,
-                request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
-            }, function(res) {
-                //  debugger
-                $scope.cliente = res.clienteList;
-            });
+					$scope.popovers = {
+						"html": "<div>Hello Popover<br />This is a multiline message!</div>",
+						"title": "Informação",
+						"animation": 'am-flip-x',
+						"content": " " + $scope.pessoa.nome + " " +
+							" " + $scope.pessoa.nome + " " +
+							" " + $scope.pessoa.nome + " " +
+							" " + $scope.pessoa.nome + " " +
+							" " + $scope.pessoa.nome + " " +
+							" " + $scope.pessoa.nome + " "
+					};
 
-            $scope.notaFiscalSaida = {
-                frete: {
-                    vrFrete: 0
-                },
-                vrDesconto: 0,
-                vrtotal: 0
-            }
+				}
+				else
+				{
+					console.log('cleared');
+				}
+			};
 
-            $scope.produtosSelect = "";
+			SysMgmtData.processPostPageData("main/api/request",
+			{
+				url: "pessoa/api/cliente/fetchPage",
+				token: $rootScope.authToken,
+				request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
+			}, function(res)
+			{
+				//  debugger
+				$scope.cliente = res.clienteList;
+			});
 
-            $scope.produto = {};
+			$scope.notaFiscalSaida = {
+				frete:
+				{
+					vrFrete: 0
+				},
+				vrDesconto: 0,
+				vrtotal: 0
+			}
 
-            $scope.produtos = [{
-                form: 'form',
-                produto: {}
+			$scope.produtosSelect = "";
+
+			$scope.produto = {};
+
+			$scope.produtos = [
+			{
+				form: 'form',
+				produto:
+				{}
             }];
 
 
-            $scope.contasReceber = {};
+			$scope.contasReceber = {};
 
-            $scope.financeiros = [{
-                form: 'formFinc',
-                financeiro: {
-                    valor: parseFloat($scope.notaFiscalSaida.vrtotal) / (1)
-                }
+			$scope.financeiros = [
+			{
+				form: 'formFinc',
+				financeiro:
+				{
+					valor: parseFloat($scope.notaFiscalSaida.vrtotal) / (1)
+				}
             }];
 
-            $scope.clientes = [];
+			$scope.clientes = [];
 
-            $scope.total = 0;
+			$scope.total = 0;
 
-            $scope.calcProd = function(quant, valor) {
-                return quant * valor;
-            }
+			$scope.calcProd = function(quant, valor)
+			{
+				return quant * valor;
+			}
 
-            $scope.$watch("financeiros", function() {
-                var cout = 0
-                for (var x = 0; x < $scope.financeiros.length; x++) {
-                    cout = parseFloat(cout, 10) + parseFloat($scope.financeiros[x].financeiro.valor)
-                }
-                $scope.total = cout;
-            }, true);
+			$scope.$watch("financeiros", function()
+			{
+				var cout = 0
+				for (var x = 0; x < $scope.financeiros.length; x++)
+				{
+					cout = parseFloat(cout, 10) + parseFloat($scope.financeiros[x].financeiro.valor)
+				}
+				$scope.total = cout;
+			}, true);
 
-            function teste() {
-                var cout = 0
-                for (var x = 0; x < $scope.produtos.length; x++) {
-                    cout = parseFloat(cout, 10) + parseFloat(($scope.produtos[x].produto.quantidade * $scope.produtos[x].produto.precoList[0].valor) - $scope.produtos[x].produto.desconto)
-                }
-                $scope.totals = cout;
-                $scope.notaFiscalSaida.vrtotal = (cout + parseFloat($scope.notaFiscalSaida.frete.vrFrete)) - parseFloat($scope.notaFiscalSaida.vrDesconto)
-                $scope.financeiros[0].financeiro.valor = (cout + parseFloat($scope.notaFiscalSaida.frete.vrFrete)) - parseFloat($scope.notaFiscalSaida.vrDesconto);
-            }
+			function teste()
+			{
+				var cout = 0
+				for (var x = 0; x < $scope.produtos.length; x++)
+				{
+					cout = parseFloat(cout, 10) + parseFloat(($scope.produtos[x].produto.quantidade * $scope.produtos[x].produto.precoList[0].valor) - $scope.produtos[x].produto.desconto)
+				}
+				$scope.totals = cout;
+				$scope.notaFiscalSaida.vrtotal = (cout + parseFloat($scope.notaFiscalSaida.frete.vrFrete)) - parseFloat($scope.notaFiscalSaida.vrDesconto)
+				$scope.financeiros[0].financeiro.valor = (cout + parseFloat($scope.notaFiscalSaida.frete.vrFrete)) - parseFloat($scope.notaFiscalSaida.vrDesconto);
+			}
 
-            $scope.$watch("produtos", function() {
-                teste();
-            }, true);
+			$scope.$watch("produtos", function()
+			{
+				teste();
+			}, true);
 
-            $scope.$watch("notaFiscalSaida.frete.vrFrete", function() {
-                teste();
-            }, true);
+			$scope.$watch("notaFiscalSaida.frete.vrFrete", function()
+			{
+				teste();
+			}, true);
 
-            $scope.$watch("notaFiscalSaida.vrDesconto", function() {
-                teste();
-            }, true);
+			$scope.$watch("notaFiscalSaida.vrDesconto", function()
+			{
+				teste();
+			}, true);
 
-            $scope.calcProdTotal = function() {
-                var total = 0
+			$scope.calcProdTotal = function()
+			{
+				var total = 0
 
-                for (var x = 0; x < $scope.financeiros.length; x++) {
+				for (var x = 0; x < $scope.financeiros.length; x++)
+				{
 
-                }
+				}
 
-                return total
+				return total
 
-            }
-
-
-            $scope.createForm2 = function() {
-
-                $scope.produtos.push({
-                    nome: 'form1' + ($scope.produtos.length + 1),
-                    produto: {
-                        quantidade: 0,
-                        desconto: 0
-                    }
-                });
-
-            };
-
-            $scope.createForm3 = function() {
-
-                $scope.financeiros.push({
-                    nome: 'formFinc' + ($scope.financeiros.length + 1),
-                    financeiro: {
-                        valor: 0
-                    }
-                });
-
-                for (var x = 0; x < $scope.financeiros.length; x++) {
-                    $scope.financeiros[x].financeiro.valor = parseFloat($scope.notaFiscalSaida.vrtotal) / (parseFloat($scope.financeiros.length));
-                }
-
-            };
+			}
 
 
-            $scope.forms = [{
-                id: 0,
-                produto: "",
-                ddd: 'form1',
-                notaFiscalSaidaItens: {}
+			$scope.createForm2 = function()
+			{
+
+				$scope.produtos.push(
+				{
+					nome: 'form1' + ($scope.produtos.length + 1),
+					produto:
+					{
+						quantidade: 0,
+						desconto: 0
+					}
+				});
+
+			};
+
+			$scope.createForm3 = function()
+			{
+
+				$scope.financeiros.push(
+				{
+					nome: 'formFinc' + ($scope.financeiros.length + 1),
+					financeiro:
+					{
+						valor: 0
+					}
+				});
+
+				for (var x = 0; x < $scope.financeiros.length; x++)
+				{
+					$scope.financeiros[x].financeiro.valor = parseFloat($scope.notaFiscalSaida.vrtotal) / (parseFloat($scope.financeiros.length));
+				}
+
+			};
+
+
+			$scope.forms = [
+			{
+				id: 0,
+				produto: "",
+				ddd: 'form1',
+				notaFiscalSaidaItens:
+				{}
             }];
-            $scope.count = 0;
+			$scope.count = 0;
 
 
-            $scope.changeProd = function(form) {
-                debugger
-                console.log(form);
+			$scope.changeProd = function(form)
+			{
+				//   debugger
+				console.log(form);
 
-                for (var x = 0; $scope.produtos.length > x; x++) {
-                    if ($scope.produtos[x].id == form.produto) {
-                        form.quantidade = 100;
-                    }
-                }
-            }
+				for (var x = 0; $scope.produtos.length > x; x++)
+				{
+					if ($scope.produtos[x].id == form.produto)
+					{
+						form.quantidade = 100;
+					}
+				}
+			}
 
-            var fnFunction = function() {
-                debugger
-            }
-            $inputaction = $('#teste')
-            $inputaction.inputaction({
-                confirmAction: fnFunction,
-                model: $scope.cliente,
-                fullData: {},
-                propertyName: 'name'
-            });
+			var fnFunction = function()
+			{
+				//   debugger
+			}
+			$inputaction = $('#teste')
+			$inputaction.inputaction(
+			{
+				confirmAction: fnFunction,
+				model: $scope.cliente,
+				fullData:
+				{},
+				propertyName: 'name'
+			});
 
 
-            doisValorFactory.pdComprass($scope);
+			doisValorFactory.pdComprass($scope);
 
 
-            $scope.deleteForm = function(formScope) {
+			$scope.deleteForm = function(formScope)
+			{
 
 
-                delete $scope.forms(formScope);
-            }
+				delete $scope.forms(formScope);
+			}
 
-            $scope.titulo.pagarAgora = false;
+			$scope.titulo.pagarAgora = false;
 
-            $scope.formatterDate = function(iDate) {
-                return $filter('date')(new Date(iDate), 'dd/MM/yyyy');
-            };
+			$scope.formatterDate = function(iDate)
+			{
+				return $filter('date')(new Date(iDate), 'dd/MM/yyyy');
+			};
 
-            $scope.today = function() {
-                $scope.dt = new Date();
-            };
-            $scope.today();
+			$scope.today = function()
+			{
+				$scope.dt = new Date();
+			};
+			$scope.today();
 
-            $scope.clear = function() {
-                $scope.dt = null;
-            };
+			$scope.clear = function()
+			{
+				$scope.dt = null;
+			};
 
-            $scope.inlineOptions = {
-                customClass: getDayClass,
-                minDate: new Date(),
-                showWeeks: true
-            };
+			$scope.inlineOptions = {
+				customClass: getDayClass,
+				minDate: new Date(),
+				showWeeks: true
+			};
 
-            $scope.dateOptions = {
-                dateDisabled: disabled,
-                formatYear: 'yy',
-                maxDate: new Date(2020, 5, 22),
-                minDate: new Date(),
-                startingDay: 1
-            };
+			$scope.dateOptions = {
+				dateDisabled: disabled,
+				formatYear: 'yy',
+				maxDate: new Date(2020, 5, 22),
+				minDate: new Date(),
+				startingDay: 1
+			};
 
-            // Disable weekend selection
-            function disabled(data) {
-                var date = data.date,
-                    mode = data.mode;
-                return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-            }
+			// Disable weekend selection
+			function disabled(data)
+			{
+				var date = data.date,
+					mode = data.mode;
+				return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+			}
 
-            $scope.toggleMin = function() {
-                $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
-                $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
-            };
+			$scope.toggleMin = function()
+			{
+				$scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
+				$scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+			};
 
-            $scope.toggleMin();
+			$scope.toggleMin();
 
-            $scope.open1 = function() {
+			$scope.open1 = function()
+			{
 
-                $scope.popup1.opened = true;
-            };
+				$scope.popup1.opened = true;
+			};
 
-            $scope.open2 = function() {
+			$scope.open2 = function()
+			{
 
-                $scope.popup2.opened = true;
-            };
+				$scope.popup2.opened = true;
+			};
 
-            $scope.open3 = function() {
+			$scope.open3 = function()
+			{
 
-                $scope.popup3.opened = true;
-            };
+				$scope.popup3.opened = true;
+			};
 
-            $scope.setDate = function(year, month, day) {
-                $scope.dt = new Date(year, month, day);
-            };
+			$scope.setDate = function(year, month, day)
+			{
+				$scope.dt = new Date(year, month, day);
+			};
 
-            $scope.formats = ['dd-MMMM-yyyy', 'dd/MM/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-            $scope.format = $scope.formats[1];
-            $scope.altInputFormats = ['M!/d!/yyyy'];
+			$scope.formats = ['dd-MMMM-yyyy', 'dd/MM/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+			$scope.format = $scope.formats[1];
+			$scope.altInputFormats = ['M!/d!/yyyy'];
 
-            $scope.popup1 = {
-                opened: false
-            };
+			$scope.popup1 = {
+				opened: false
+			};
 
-            $scope.popup2 = {
-                opened: false
-            };
+			$scope.popup2 = {
+				opened: false
+			};
 
-            $scope.popup3 = {
-                opened: false
-            };
+			$scope.popup3 = {
+				opened: false
+			};
 
-            var tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            var afterTomorrow = new Date();
-            afterTomorrow.setDate(tomorrow.getDate() + 1);
-            $scope.events = [{
-                date: tomorrow,
-                status: 'full'
-            }, {
-                date: afterTomorrow,
-                status: 'partially'
+			var tomorrow = new Date();
+			tomorrow.setDate(tomorrow.getDate() + 1);
+			var afterTomorrow = new Date();
+			afterTomorrow.setDate(tomorrow.getDate() + 1);
+			$scope.events = [
+			{
+				date: tomorrow,
+				status: 'full'
+            },
+			{
+				date: afterTomorrow,
+				status: 'partially'
             }];
 
-            function getDayClass(data) {
-                var date = data.date,
-                    mode = data.mode;
-                if (mode === 'day') {
-                    var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
+			function getDayClass(data)
+			{
+				var date = data.date,
+					mode = data.mode;
+				if (mode === 'day')
+				{
+					var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
 
-                    for (var i = 0; i < $scope.events.length; i++) {
-                        var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
+					for (var i = 0; i < $scope.events.length; i++)
+					{
+						var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
 
-                        if (dayToCheck === currentDay) {
-                            return $scope.events[i].status;
-                        }
-                    }
-                }
+						if (dayToCheck === currentDay)
+						{
+							return $scope.events[i].status;
+						}
+					}
+				}
 
-                return '';
-            }
-
-
-            $scope.savePdCompras = function() {
-
-                fNotaFiscal.fnCreateObjectPdVendasOrcamento(localStorageService.get('empresa'), $scope.pessoa, $scope.endereco, $scope.produtos, $scope.formaPg, $scope.notaFiscalSaida, 1, 'INSERT', 1001, $scope.financeiros);
-
-            };
+				return '';
+			}
 
 
-        });
+			$scope.savePdCompras = function()
+			{
+
+				fNotaFiscal.fnCreateObjectPdVendasOrcamento(localStorageService.get('empresa'), $scope.pessoa, $scope.endereco, $scope.produtos, $scope.formaPg, $scope.notaFiscalSaida, 1,
+					'INSERT', 1001, $scope.financeiros);
+
+			};
+
+
+		});
 })();
-(function() {
-    angular.module('wdApp.apps.pdCompras.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('PdComprasUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
-            var vm = this;
-            $scope.pdCompras = {};
-            $scope.pdCompras = $rootScope.pdCompras;
-            console.log($rootScope.pdCompras)
-            $scope.savePdCompras = function() {
-                fPessoa.fnMontaObjeto($scope.pdCompras, $scope.endereco, 'UPDATE', "site/api/pdCompras/update/", fnCallBack);
-            }
-        });
+(function()
+{
+	angular.module('wdApp.apps.pdCompras.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+		.controller('PdComprasUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa)
+		{
+			var vm = this;
+			$scope.pdCompras = {};
+			$scope.pdCompras = $rootScope.pdCompras;
+			console.log($rootScope.pdCompras)
+			$scope.savePdCompras = function()
+			{
+				fPessoa.fnMontaObjeto($scope.pdCompras, $scope.endereco, 'UPDATE', "site/api/pdCompras/update/", fnCallBack);
+			}
+		});
 })();
-(function() {
-    angular.module('wdApp.apps.pdCompras.delete', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('PdComprasDeleteController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
-            var vm = this;
-            $scope.pdCompras = {};
-            $scope.pdCompras = $rootScope.pdCompras;
-            console.log($rootScope.pdCompras)
-            $scope.savePdCompras = function() {
-                fPessoa.fnDelete($scope.pdCompras, "site/api/pdCompras/update/", function() {
-                    console.log('ddda   aqui')
-                });
-            }
-        });
+(function()
+{
+	angular.module('wdApp.apps.pdCompras.delete', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+		.controller('PdComprasDeleteController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa)
+		{
+			var vm = this;
+			$scope.pdCompras = {};
+			$scope.pdCompras = $rootScope.pdCompras;
+			console.log($rootScope.pdCompras)
+			$scope.savePdCompras = function()
+			{
+				fPessoa.fnDelete($scope.pdCompras, "site/api/pdCompras/update/", function()
+				{
+					console.log('ddda   aqui')
+				});
+			}
+		});
 })();
-(function() {
-    angular.module('wdApp.apps.pdCompras.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('PdComprasViewController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
-            var vm = this;
-            $scope.pdCompras = {};
-            $scope.pdCompras = $rootScope.pdCompras;
-            console.log($rootScope.pdCompras)
-            $scope.savePdCompras = function() {
-                fPessoa.fnOpenView($scope.pdCompras, "site/api/pdCompras/update/", function() {
-                    console.log('aqui')
-                });
-            }
-        });
+(function()
+{
+	angular.module('wdApp.apps.pdCompras.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+		.controller('PdComprasViewController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa)
+		{
+			var vm = this;
+			$scope.pdCompras = {};
+			$scope.pdCompras = $rootScope.pdCompras;
+			console.log($rootScope.pdCompras)
+			$scope.savePdCompras = function()
+			{
+				fPessoa.fnOpenView($scope.pdCompras, "site/api/pdCompras/update/", function()
+				{
+					console.log('aqui')
+				});
+			}
+		});
 })();

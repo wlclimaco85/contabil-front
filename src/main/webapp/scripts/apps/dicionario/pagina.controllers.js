@@ -14,7 +14,7 @@
         vm.delete = deleteRow;
         vm.dtInstance = {};
         vm.persons = {};
-        
+
         $scope.pagina = {
             tipoPessoa: 2
         };
@@ -73,7 +73,7 @@
                 $('.dt-buttons').find('.dt-button:eq(1)').before(
                     '<select class="form-control col-sm-3 btn btn-primary dropdown-toggle" data-ng-options="t.name for t in vm.types"' +
                     'data-ng-model="vm.object.type" style="height: 32px;margin-left: 8px;margin-right: 6px;width: 200px !important;">' +
-                    '<option><a href="#">Ações <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>' +
+                    '<option><a href="#">AÃ§Ãµes <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>' +
                     '<option><a href="#">Remover Todos <span class="badge selected badge-danger main-badge"  data-ng-show="{{showCase.countSeleted()}}"></span></a></option>' +
                     '</select>'
                 )
@@ -150,7 +150,7 @@
                 action: function(e, dt, node, config) {
 
                     dialogFactory.dialog('views/cadastros/dialog/dPagina.html',"PaginaInsertController",openDialogUpdateCreate);
-                   
+
                 }
             }]);
         var aColumns =  [
@@ -159,10 +159,10 @@
                 vm.selected[full.id] = false;
                 return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
         }).withOption('width', '10px'),
-        DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'), 
+        DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
         DTColumnBuilder.newColumn('banco').withTitle('Banco'),
-        DTColumnBuilder.newColumn('numPagina').withTitle('Nº Pagina'),
-        DTColumnBuilder.newColumn('cep').withTitle('Cep'),    
+        DTColumnBuilder.newColumn('numPagina').withTitle('NÂº Pagina'),
+        DTColumnBuilder.newColumn('cep').withTitle('Cep'),
         DTColumnBuilder.newColumn('logradouro').withTitle('Logradouro'),
         DTColumnBuilder.newColumn('numero').withTitle('Numero'),
         DTColumnBuilder.newColumn('cidade').withTitle('Cidade'),
@@ -170,10 +170,10 @@
         DTColumnBuilder.newColumn('pais').withTitle('Pais').notVisible(),
         DTColumnBuilder.newColumn('telefone').withTitle('Telefone'),
         DTColumnBuilder.newColumn('email').withTitle('Email').notVisible(),
-        DTColumnBuilder.newColumn('obs').withTitle('Observações').notVisible(),
+        DTColumnBuilder.newColumn('obs').withTitle('ObservaÃ§Ãµes').notVisible(),
         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '140px'), 
+        DTColumnBuilder.newColumn(null).withTitle('AÃ§Ãµes').notSortable().renderWith(actionsHtml).withOption('width', '140px'),
     ];
 
         function rCallback(nRow, aData) {
@@ -200,7 +200,7 @@
 
         function deleteRow(person) {
            dialogFactory.dialog('views/cadastros/dialog/dPagina.html',"PaginaDeleteController",openDialogUpdateCreate);
-        } 
+        }
 
         function createdRow(row, data, dataIndex) {
             // Recompiling so we can bind Angular directive to the DT
@@ -252,7 +252,7 @@
 
             $scope.pagina = {}
             $scope.enderecos = {}
-            
+
             $scope.today = function() {
                 return $scope.dt = new Date();
             };
@@ -272,11 +272,11 @@
             $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
             $scope.format = $scope.formats[1];
             var fnCallBack = function(oResponse) {
-                debugger
+             //   debugger
                 console.log(oResponse)
             }
             $scope.savePagina = function() {
-                
+
                 var oObject = fModels.amont(fPessoa.fnMontObject($scope.pagina,$scope.enderecos,"INSERT"),"INSERT");
 //var oObject = fModels.amont($scope.pagina,"INSERT");
 var bb = [];
@@ -294,7 +294,7 @@ console.log(oObject);
                     token: $rootScope.authToken,
                     request: new qat.model.reqPagina(oObject, true, true)
                 }, function(res) {
-                    debugger
+               //     debugger
                     fnCallBack(res);
                 });
               //  fPessoa.fnMontaObjeto($scope.pagina, null, 'INSERT', "financeiro/api/pagina/insert/", fnCallBack);
