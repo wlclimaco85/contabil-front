@@ -609,6 +609,18 @@
 							}
 						}
 					}
+					if ($scope.tributacao.imposto.ipi != undefined)
+					{
+						if($scope.tributacao.imposto.ipi.tributado != undefined)
+						{
+							$scope.tributacao.imposto.ipi.sitTributaria = $scope.tributacao.imposto.ipi.tributado.situacaoTributaria;
+						}
+						if($scope.tributacao.imposto.ipi.naoTributado != undefined)
+						{
+							$scope.tributacao.imposto.ipi.sitTributaria =  $scope.tributacao.imposto.ipi.naoTributado.situacaoTributaria;
+						}
+
+					}
 				}
 			}
 			doisValorFactory.tributacao($scope, fnFunction);

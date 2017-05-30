@@ -383,6 +383,14 @@
                         dialogFactory.dialog('views/gerencia/dialog/dTributacao.html', "TributacaoInsertController", validationFactory.tributacao, _function);
 
                     }
+                }, {
+                    text: 'Nova Tributação Serviço',
+                    key: '5',
+                    action: function(e, dt, node, config) {
+
+                        dialogFactory.dialog('views/gerencia/dialog/cadtributacaoServico.html', "TributacaoInsertController", validationFactory.tributacao, _function);
+
+                    }
                 })
 
                 return padrao(vm, createdRow, scope, _callback, buttons, 2, _function);

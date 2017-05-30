@@ -755,6 +755,7 @@ qat.model.fnNFNotaInfoItemImpostoIPI = function(_Ipi, _modelAction, _user)
 		codigoEnquadramento: _Ipi.codigoEnquadramento,
 		tributado: _Ipi.tributado,
 		naoTributado: _Ipi.naoTributado,
+		tipoCalculo : _oObjet.tipoCalculo ? _oObjet.tipoCalculo : null,
 		emprId: JSON.parse(localStorage.getItem('empresa')).id,
 		tableEnumValue: 53,
 		modelAction: _modelAction,
@@ -772,13 +773,14 @@ qat.model.fnNFNotaInfoItemImpostoPIS = function(_Pis, _modelAction, _user)
 	NFNotaInfoItemImpostoIPI = {
 		id: _Pis.id,
 		aliquota: _Pis.aliquota ? _Pis.aliquota :
-		{},
+		null,
 		quantidade: _Pis.quantidade ? _Pis.quantidade :
-		{},
+		null,
 		naoTributado: _Pis.naoTributado ? _Pis.naoTributado :
-		{},
+		null,
 		outrasOperacoes: _Pis.outrasOperacoes ? _Pis.outrasOperacoes :
-		{},
+		null,
+		tipoCalculo : _oObjet.tipoCalculo ? _oObjet.tipoCalculo : null,
 		emprId: JSON.parse(localStorage.getItem('empresa')).id,
 		tableEnumValue: 53,
 		modelAction: _modelAction,
@@ -796,13 +798,14 @@ qat.model.fnNFNotaInfoItemImpostoCOFINS = function(_Cofins, _modelAction, _user)
 	NFNotaInfoItemImpostoCOFINS = {
 		id: _Cofins.id,
 		aliquota: _Cofins.aliquota ? _Cofins.aliquota :
-		{},
+		null,
 		quantidade: _Cofins.quantidade ? _Cofins.quantidade :
-		{},
+		null,
 		naoTributado: _Cofins.naoTributado ? _Cofins.naoTributado :
-		{},
+		null,
 		outrasOperacoes: _Cofins.outrasOperacoes ? _Cofins.outrasOperacoes :
-		{},
+		null,
+		tipoCalculo : _oObjet.tipoCalculo ? _oObjet.tipoCalculo : null,
 		emprId: JSON.parse(localStorage.getItem('empresa')).id,
 		tableEnumValue: 53,
 		modelAction: _modelAction,

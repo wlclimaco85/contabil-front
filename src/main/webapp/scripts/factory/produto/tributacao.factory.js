@@ -271,7 +271,7 @@
 
 					}
 				}
-
+				tributacao.imposto.ipi.tipoCalculo = new qat.model.fnDoisValor1(tributacao.imposto.ipi.tipoCalculo, action),
 				tributacao.imposto.ipi = qat.model.fnNFNotaInfoItemImpostoIPI(tributacao.imposto.ipi, tributacao.imposto.ipi.id ? action : "INSERT",$rootScope.user.user);
 			}
 
@@ -282,7 +282,6 @@
 				{
 					tributacao.imposto.pis.aliquota = {
 						situacaoTributaria: new qat.model.fnDoisValor1(tributacao.imposto.pis.pISSituaTributaria, action),
-						percentualAliquota: tributacao.imposto.pis.percentualAliquota,
 						modelAction: action,
 						createUser: $rootScope.user.user,
 						createDateUTC: (new Date()).getTime(),
@@ -297,7 +296,6 @@
 				{
 					tributacao.imposto.pis.quantidade = {
 						situacaoTributaria: new qat.model.fnDoisValor1(tributacao.imposto.pis.pISSituaTributaria, action),
-						valorAliquota: tributacao.imposto.pis.valorUnidade,
 						modelAction: action,
 						createUser: $rootScope.user.user,
 						createDateUTC: (new Date()).getTime(),
@@ -308,10 +306,10 @@
 				}
 
 				//NFNotaInfoItemImpostoPISNaoTributado naoTributado
-				if ((tributacao.imposto.pis.pISSituaTributaria.value == "04") || (tributacao.imposto.pis.pISSituaTributaria.value == "05") || (tributacao.imposto.pis.pISSituaTributaria.value ==
-						"06") ||
-					(tributacao.imposto.pis.pISSituaTributaria.value == "07") || (tributacao.imposto.pis.pISSituaTributaria.value == "08") || (tributacao.imposto.pis.pISSituaTributaria.value ==
-						"09"))
+				if ((tributacao.imposto.pis.pISSituaTributaria.value == "04") || (tributacao.imposto.pis.pISSituaTributaria.value == "06") || (tributacao.imposto.pis.pISSituaTributaria.value ==
+						"07") || (tributacao.imposto.pis.pISSituaTributaria.value == "08") || (tributacao.imposto.pis.pISSituaTributaria.value == "09")  ||
+					(tributacao.imposto.pis.pISSituaTributaria.value == "49") || (tributacao.imposto.pis.pISSituaTributaria.value == "50") || (tributacao.imposto.pis.pISSituaTributaria.value ==
+						"51")|| (tributacao.imposto.pis.pISSituaTributaria.value == "52") || (tributacao.imposto.pis.pISSituaTributaria.value == "53")|| (tributacao.imposto.pis.pISSituaTributaria.value == "54")|| (tributacao.imposto.pis.pISSituaTributaria.value == "55")|| (tributacao.imposto.pis.pISSituaTributaria.value == "56")|| (tributacao.imposto.pis.pISSituaTributaria.value == "60")|| (tributacao.imposto.pis.pISSituaTributaria.value == "61")|| (tributacao.imposto.pis.pISSituaTributaria.value == "62")|| (tributacao.imposto.pis.pISSituaTributaria.value == "63")|| (tributacao.imposto.pis.pISSituaTributaria.value == "64")|| (tributacao.imposto.pis.pISSituaTributaria.value == "65")|| (tributacao.imposto.pis.pISSituaTributaria.value == "66")|| (tributacao.imposto.pis.pISSituaTributaria.value == "67")|| (tributacao.imposto.pis.pISSituaTributaria.value == "70")|| (tributacao.imposto.pis.pISSituaTributaria.value == "71")|| (tributacao.imposto.pis.pISSituaTributaria.value == "72")|| (tributacao.imposto.pis.pISSituaTributaria.value == "73")|| (tributacao.imposto.pis.pISSituaTributaria.value == "74")|| (tributacao.imposto.pis.pISSituaTributaria.value == "75"))
 				{
 					tributacao.imposto.pis.naoTributavel = {
 
@@ -329,8 +327,6 @@
 				{
 					tributacao.imposto.pis.outrasOperacoes = {
 						situacaoTributaria: new qat.model.fnDoisValor1(tributacao.imposto.pis.pISSituaTributaria, action),
-						percentualAliquota: tributacao.imposto.pis.percentualAliquota,
-						valorAliquota: tributacao.imposto.pis.valorUnidade,
 						modelAction: action,
 						createUser: $rootScope.user.user,
 						createDateUTC: (new Date()).getTime(),
@@ -339,7 +335,7 @@
 					}
 				}
 
-				tributacao.imposto.pis = qat.model.fnNFNotaInfoItemImpostoPIS(tributacao.imposto.pis, action);
+			tributacao.imposto.pis = qat.model.fnNFNotaInfoItemImpostoPIS(tributacao.imposto.pis, tributacao.imposto.pis.id ? action:"INSERT",$rootScope.user.user);
 			}
 
 			if (tributacao.imposto.pisst != undefined)
