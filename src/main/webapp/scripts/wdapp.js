@@ -37,6 +37,7 @@ var WebDaptiveAppConfig = {
 
 };
 
+
 (function()
 {
 	'use strict';
@@ -251,16 +252,16 @@ var WebDaptiveAppConfig = {
 
 	//config
 	wdApp.config(['localStorageServiceProvider', function(localStorageServiceProvider)
-	{
-		//sets local storage application prefix for all keys
-		localStorageServiceProvider.setPrefix('wdAppLS');
+		{
+			//sets local storage application prefix for all keys
+			localStorageServiceProvider.setPrefix('wdAppLS');
     }]);
 
 	//config
 	wdApp.config(['$httpProvider', function($httpProvider)
-	{
-		//register WebDaptive interceptor factory
-		$httpProvider.interceptors.push('WDHttpInterceptors');
+		{
+			//register WebDaptive interceptor factory
+			$httpProvider.interceptors.push('WDHttpInterceptors');
     }]);
 
 	//run each time angular app comes up (runs only once)
@@ -271,9 +272,10 @@ var WebDaptiveAppConfig = {
 		validator.setInvalidElementStyling(false);
 
 		editableOptions.theme = 'bs3'; // bootstrap
-        console.log(JSON.parse(localStorage.getItem('empresa')))
+		console.log(JSON.parse(localStorage.getItem('empresa')))
 		$rootScope.main = {
-			brand: (JSON.parse(localStorage.getItem('empresa')) ? (JSON.parse(localStorage.getItem('empresa')).nome ? JSON.parse(localStorage.getItem('empresa')).razao : '') :'E-Contábil'),
+			brand: (JSON.parse(localStorage.getItem('empresa')) ? (JSON.parse(localStorage.getItem('empresa')).nome ? JSON.parse(localStorage.getItem('empresa')).razao : '') :
+				'E-Contábil'),
 			name: ''
 		};
 

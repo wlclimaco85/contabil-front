@@ -388,7 +388,7 @@
                     key: '5',
                     action: function(e, dt, node, config) {
 
-                        dialogFactory.dialog('views/gerencia/dialog/cadtributacaoServico.html', "TributacaoInsertController", validationFactory.tributacao, _function);
+                        dialogFactory.dialog('views/gerencia/dialog/dTributacaoServico.html', "TributacaoInsertController", validationFactory.tributacao, _function);
 
                     }
                 })

@@ -780,7 +780,7 @@ qat.model.fnNFNotaInfoItemImpostoPIS = function(_Pis, _modelAction, _user)
 		null,
 		outrasOperacoes: _Pis.outrasOperacoes ? _Pis.outrasOperacoes :
 		null,
-		tipoCalculo : _oObjet.tipoCalculo ? _oObjet.tipoCalculo : null,
+		tipoCalculo : (_Pis.tipoCalculo ? _Pis.tipoCalculo : null),
 		emprId: JSON.parse(localStorage.getItem('empresa')).id,
 		tableEnumValue: 53,
 		modelAction: _modelAction,
@@ -805,7 +805,7 @@ qat.model.fnNFNotaInfoItemImpostoCOFINS = function(_Cofins, _modelAction, _user)
 		null,
 		outrasOperacoes: _Cofins.outrasOperacoes ? _Cofins.outrasOperacoes :
 		null,
-		tipoCalculo : _oObjet.tipoCalculo ? _oObjet.tipoCalculo : null,
+		tipoCalculo : _Cofins.tipoCalculo ? _Cofins.tipoCalculo : null,
 		emprId: JSON.parse(localStorage.getItem('empresa')).id,
 		tableEnumValue: 53,
 		modelAction: _modelAction,
@@ -2131,16 +2131,12 @@ qat.model.NFNotaInfoItemImpostoISSQN = function(_oObjet, _modelAction, _user)
 	{
 		id: _oObjet.indicadorExigibilidadeISS.id
 	} :
-	{};
+	null;
 	this.codigoServico = _oObjet.codigoServico;
 	this.codigoMunicipioIncidenciaImposto = _oObjet.codigoMunicipioIncidenciaImposto;
 	this.codigoPais = _oObjet.codigoPais;
 	this.numeroProcesso = _oObjet.numeroProcesso;
-	this.indicadorIncentivoFiscal = _oObjet.indicadorIncentivoFiscal ?
-	{
-		id: _oObjet.indicadorIncentivoFiscal.id
-	} :
-	{};
+	this.indicadorIncentivoFiscal = _oObjet.indicadorIncentivoFiscals;
 	this.parentId = _oObjet.parentId;
 	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
 	this.processId = _oObjet.processId;

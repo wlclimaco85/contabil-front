@@ -512,7 +512,24 @@ INSERT INTO pagina(id,pagina,parentid, tabelaenumvalue, create_date, create_user
 	   ('98','Outras Operações de Entrada','98: Outras Operações de Entrada',16,6, 1477075035443, 'System'),
 	   ('99','Outras operações','99: Outras operações',16,6, 1477075035443, 'System');
 
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
+    VALUES (17,'EXIGIBILIDADE DO ISS', 'EXIGIBILIDADE DO ISS', 1477075035443, 'System');
 
+
+
+	INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+
+
+    	/* MODALIDADE BC */
+
+    	('1', 'Exigível','Exigível',17,6, 1477075035443, 'System'),
+    	('2', 'Não incidência','Não incidência',17,6, 1477075035443, 'System'),
+    	('3', 'Isenção','Isenção',17,6, 1477075035443, 'System'),
+	('4', 'Exportação','Exportação',17,6, 1477075035443, 'System'),
+	('5', 'Imunidade','Imunidade',17,6, 1477075035443, 'System'),
+	('6', 'Exigibilidade Suspensa por Decisão Judicial','Exigibilidade Suspensa por Decisão Judicial',17,6, 1477075035443, 'System'),
+	('7', 'Exigib. Susp. por Processo Administrativo','Exigib. Susp. por Processo Administrativo',17,6, 1477075035443, 'System');
 
 
 INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )

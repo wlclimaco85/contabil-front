@@ -7,8 +7,6 @@
 	function RowSelect($q, $http, $scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate, Datatablessss, tableOptionsFactory,
 		tableColumnsFactory, FiltersFactory, validationFactory, $filter, dialogFactory)
 	{
-
-
 		var vm = this;
 		vm.selected = {};
 		vm.dtInstanceTrib = {};
@@ -133,86 +131,84 @@
 					icms:
 					{
 						icms00:
-						{},
+						null,
 						icms10:
 						{
 							situacaoTributaria:
-							{}
+							null
 						},
 						icms20:
-						{},
+						null,
 						icms30:
-						{},
+						null,
 						icms40:
-						{},
+						null,
 						icms51:
-						{},
+						null,
 						icms60:
-						{},
+						null,
 						icms70:
-						{},
+						null,
 						icms90:
-						{},
+						null,
 						icmsPartilhado:
-						{},
+						null,
 						icmsst:
-						{},
+						null,
 						icmssn101:
-						{},
+						null,
 						icmssn102:
-						{},
+						null,
 						icmssn201:
-						{},
+						null,
 						icmssn202:
-						{},
+						null,
 						icmssn500:
-						{},
+						null,
 						icmssn900:
-						{},
+						null,
 						sitTributaria:
-						{
-							value: "00"
-						}
+						null,
 					},
 
 					ipi:
 					{
 						tributado:
-						{},
+						null,
 						naoTributado:
-						{},
+						null,
 
 					},
 					pis:
 					{
 						aliquota:
-						{},
+						null,
 						quantidade:
-						{},
+						null,
 						naoTributado:
-						{},
+						null,
 						outrasOperacoes:
-						{}
+						null
 					},
 					cofins:
 					{
 						aliquota:
-						{},
+						null,
 						quantidade:
-						{},
+						null,
 						naoTributavel:
-						{},
+						null,
 						outrasOperacoes:
-						{}
+						null
 					},
 					impostoImportacao:
-					{},
+					null,
 					pisst:
-					{},
+					null,
 					cofinsst:
-					{},
+					null,
 					icmsUfDestino:
-					{}
+					null
 
 				},
 
@@ -336,10 +332,10 @@
 			$scope.produto = {};
 
 			$scope.produtos = [
-			{
-				form: 'form',
-				produto:
-				{}
+				{
+					form: 'form',
+					produto:
+					{}
 			}];
 
 			$scope.clientes = [];
@@ -365,12 +361,12 @@
 
 
 			$scope.forms = [
-			{
-				id: 0,
-				produto: "",
-				ddd: 'form1',
-				notaFiscalSaidaItens:
-				{}
+				{
+					id: 0,
+					produto: "",
+					ddd: 'form1',
+					notaFiscalSaidaItens:
+					{}
             }];
 			$scope.count = 0;
 
@@ -459,7 +455,7 @@
 				}
 			}
 			$scope.saveTributacao = function()
-			{
+			{debugger
 				fTributacao.fnMontaObjeto($scope.tributacao, 'INSERT', 'produto/api/tributacao/insert', fnFunction);
 			};
 		});
@@ -611,13 +607,13 @@
 					}
 					if ($scope.tributacao.imposto.ipi != undefined)
 					{
-						if($scope.tributacao.imposto.ipi.tributado != undefined)
+						if ($scope.tributacao.imposto.ipi.tributado != undefined)
 						{
 							$scope.tributacao.imposto.ipi.sitTributaria = $scope.tributacao.imposto.ipi.tributado.situacaoTributaria;
 						}
-						if($scope.tributacao.imposto.ipi.naoTributado != undefined)
+						if ($scope.tributacao.imposto.ipi.naoTributado != undefined)
 						{
-							$scope.tributacao.imposto.ipi.sitTributaria =  $scope.tributacao.imposto.ipi.naoTributado.situacaoTributaria;
+							$scope.tributacao.imposto.ipi.sitTributaria = $scope.tributacao.imposto.ipi.naoTributado.situacaoTributaria;
 						}
 
 					}

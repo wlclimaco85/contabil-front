@@ -136,6 +136,7 @@
 				scope.tipoCalc = [];
 				scope.pisST = [];
 				scope.cofinsST = [];
+				scope.ssqn = [];
 
 				var fnCallbackDoisValor = function(res)
 				{
@@ -181,6 +182,9 @@
 										break;
 									case 'COFINS - SITUAÇÃO TRIBUTARIA':
 										scope.cofinsST.push(planos)
+										break;
+									case 'EXIGIBILIDADE DO ISS':
+										scope.ssqn.push(planos)
 										break;
 								}
 							}
