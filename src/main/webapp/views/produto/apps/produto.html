@@ -21,6 +21,7 @@
         z-index: 10000;
         /* The select2 dropdown has a z-index of 9999 */
     }
+
 </style>
 
 <div class="row">
@@ -45,71 +46,9 @@
         </div>
     </div>
 </div>
-
 <div class="row">
-    <div class="col-sm-3 ">
-        <div class="form-group">
-            <label for="exampleInputPassword1">NCM</label>
-            <input type="text" class="form-control  " ng-model="produto.ncm" name="ncm" placeholder="NCM">
-        </div>
-    </div>
-    <div class="col-sm-3 ">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Código de barras (EAN):</label>
-            <input type="text" class="form-control  " ng-model="produto.cdBarras" name="cdBarras" placeholder="cdBarras">
-        </div>
-    </div>
-    <div class="col-sm-3 ">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Exceção tab IPI</label>
-            <input type="text" class="form-control  " ng-model="produto.excTabIPI" name="excecaoIPI" placeholder="Exceção IPI">
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="form-group">
-            <label for="exampleInputPassword1">CEST</label>
-            <input type="text" class="form-control col-sm-8 " ng-model="produto.cEST" name="cEST" placeholder="CEST">
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-6 ">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Inform. adicionais para a NFe</label>
-            <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.informAdicionaisParaNFe" name="informAdicionaisParaNFe" placeholder="Informações Adicionais Para NFe"></textarea>
-        </div>
-    </div>
-    <div class="col-sm-6 ">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Anotações internas</label>
-            <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.anotainternas" name="anotainternas" placeholder="Anota�oes Internas"></textarea>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-4 ">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Quant.</label>
-            <input type="text" class="form-control col-sm-8 " ng-model="produto.quant" name="cEST" placeholder="">
-        </div>
-    </div>
-    <div class="ng-cloak" ng-controller="UniMedSelectController as ctrl">
-        <div class="col-sm-4 ">
-            <label for="exampleInputPassword1">Unid. Medida <small ng-click="ctrl.addUniMed()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
-            <div class="row">
-                <ui-select ng-model="produto.uniMed" theme="bootstrap">
-                    <ui-select-match placeholder=". . .">{{$select.selected.sigla}}</ui-select-match>
-                    <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
-                        <div ng-bind-html="item.sigla | highlight: $select.search"></div>
-                        <small ng-bind-html="item.unimed | highlight: $select.search"></small>
-                    </ui-select-choices>
-                </ui-select>
-            </div>
-
-        </div>
-    </div>
-    <div class="ng-cloak" ng-controller="CategoriaSelectController as ctrl">
-        <div class="col-sm-4 ">
+    <div class="ng-cloak col-sm-5" ng-controller="CategoriaSelectController as ctrl">
+        <div>
             <label for="exampleInputPassword1">Categoria <small ng-click="ctrl.addCategoria()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
             <div class="row">
                 <ui-select ng-model="produtoEmpresa.categoria" theme="bootstrap">
@@ -122,24 +61,9 @@
             </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="ng-cloak" ng-controller="TributacaoSelectController as ctrl">
-        <div class="col-sm-6">
-            <label for="exampleInputPassword1">Tributação <small ng-click="ctrl.addMarca()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
-            <div class="row">
-                <ui-select ng-model="produtoEmpresa.tributacao" theme="bootstrap">
-                    <ui-select-match placeholder="lista de Tributação">{{$select.selected.descricao}}</ui-select-match>
-                    <ui-select-choices repeat="item in ctrl.tributacao | filter: $select.search">
-                        <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-                        <small ng-bind-html="item.cfop.cfop | highlight: $select.search"></small> -
-                    </ui-select-choices>
-                </ui-select>
-            </div>
-        </div>
-    </div>
-    <div class="ng-cloak" ng-controller="MarcaSelectController as ctrl">
-        <div class="col-sm-6">
+    <div class="col-sm-1"> </div>
+    <div class="ng-cloak col-sm-5" ng-controller="MarcaSelectController as ctrl">
+        <div>
             <label for="exampleInputPassword1">Marca <small ng-click="ctrl.addMarca()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
             <div class="row">
                 <ui-select ng-model="produto.marca" theme="bootstrap">
@@ -153,3 +77,105 @@
         </div>
     </div>
 </div>
+<div class="row" style="margin-bottom : 5%"> </div>
+<div class="row">
+<div role="tabpanel" class="tab-pane messages" id="messages">
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".preco">
+                                                        Valores unitários
+                                                        </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in preco">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-3 ">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Margem de lucro</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">%</span>
+                                    <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.margemLucro" name="margemLucro" placeholder="Margem de lucro">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 ">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Preço de custo</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    <input type="text" class="form-control col-sm-8 " ng-init="produtoEmpresa.precoList[0].precoTypeEnumValue = '2'" ng-model="produtoEmpresa.precoList[0].valor" name="precoCusto" placeholder="Preço de custo">
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-3 ">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Preço de venda</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    <input type="text" class="form-control col-sm-8 " ng-init="produtoEmpresa.precoList[1].precoTypeEnumValue = '3'" ng-model="produtoEmpresa.precoList[1].valor" name="precoVenda" placeholder="modoUso">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<div class="row">
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".estoque">
+                                                    ESTOQUE
+                                                    </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in estoque">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-3 ">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Estoque Minimo</label>
+                                <div ng-repeat="estoque in produtoEmpresa.estoqueList | filter:{ estoqueTypeEnumValue: 1 } ">
+                                    <input type="text" class="form-control col-sm-8 " ng-model="estoque.quant" name="estMinimo" placeholder="Estoque Minimo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 ">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Estoque Atual</label>
+                                <div ng-repeat="estoque in produtoEmpresa.estoqueList | filter:{ estoqueTypeEnumValue: 4 }">
+                                    <input type="text" class="form-control col-sm-8 " ng-model="estoque.quant" name="estAtual" placeholder="Estoque Atual">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 ">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Estoque Maximo</label>
+                                <div ng-repeat="estoque in produtoEmpresa.estoqueList | filter:{ estoqueTypeEnumValue: 3 } ">
+                                    <input type="text" class="form-control col-sm-8 " ng-model="estoque.quant" name="estMaximo" placeholder="Estoque Maximo">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-sm-12">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Anotações internas</label>
+            <textarea rows="5" type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.anotainternas" name="anotainternas" placeholder="Anota�oes Internas"></textarea>
+        </div>
+    </div>
+

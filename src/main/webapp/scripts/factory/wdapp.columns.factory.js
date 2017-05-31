@@ -257,7 +257,7 @@
                         DTColumnBuilder.newColumn('obs').withTitle('ObservaÃ§Ã£o').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('AÃ§Ãµes').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
 				},
 				pdVendas: function(vm, _html, _actions)
@@ -433,7 +433,7 @@
 						}).withOption('width', '200px').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('AÃ§Ãµes').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
 				},
 				orcamento: function(vm, _html, _actions)
@@ -609,7 +609,7 @@
 						}).withOption('width', '200px').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('AÃ§Ãµes').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
 				},
 				ordemServico: function(vm, _html, _actions)
@@ -785,7 +785,7 @@
 						}).withOption('width', '200px').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('AÃ§Ãµes').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
 				},
 				nfSaida: function(vm, _html, _actions)
@@ -961,7 +961,7 @@
 						}).withOption('width', '200px').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('AÃ§Ãµes').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
 				},
 				tributacao: function(vm, _html, _actions)
@@ -975,7 +975,7 @@
 							return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
 						}).withOption('width', '3px'),
                         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
-                        DTColumnBuilder.newColumn('descricao').withTitle('DescriÃ§Ã£o').withOption('width', '10px'),
+                        DTColumnBuilder.newColumn('descricao').withTitle('Descrição').withOption('width', '10px'),
                         DTColumnBuilder.newColumn(null).withTitle('Cfop').renderWith(function(data, type, full, meta)
 						{
 							var sline = "";
@@ -1380,7 +1380,7 @@
 						}).withOption('width', '10px').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('AÃ§Ãµes').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
 				},
 				doisValores: function(vm, _html, _actions)
@@ -1394,10 +1394,10 @@
 						}).withOption('width', '3px'),
                         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
                         DTColumnBuilder.newColumn('nome').withTitle('Nome'),
-                        DTColumnBuilder.newColumn('descricao').withTitle('DescriÃ§Ã£o'),
+                        DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('AÃ§Ãµes').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
 				},
 				regime: function(vm, _html, _actions)
@@ -1411,10 +1411,10 @@
 						}).withOption('width', '3px'),
                         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
                         DTColumnBuilder.newColumn('nome').withTitle('Nome'),
-                        DTColumnBuilder.newColumn('descricao').withTitle('DescriÃ§Ã£o'),
+                        DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('AÃ§Ãµes').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
 				},
 				cfop: function(vm, _html, _actions)
@@ -1439,7 +1439,7 @@
                         DTColumnBuilder.newColumn('observacao').withTitle('observacao').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('AÃ§Ãµes').notSortable().renderWith(_actions).withOption('width', '100px')
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '100px')
                     ];
 				},
 				contasPagar: function(vm, _html, _actions)
@@ -1463,7 +1463,7 @@
 
 							return shtml;
 						}).withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('DescriÃ§Ã£o').renderWith(function(data, type, full, meta)
+                        DTColumnBuilder.newColumn(null).withTitle('Descrição').renderWith(function(data, type, full, meta)
 						{
 							var shtml = "";
 							if (data.descricao)
@@ -1559,7 +1559,7 @@
                         DTColumnBuilder.newColumn('observacao').withTitle('observacao').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('AÃ§Ãµes').notSortable().renderWith(_actions).withOption('width', '100px')
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '100px')
                     ];
 				},
 				produtoEmpresa: function(vm, _html, _actions)
@@ -1762,7 +1762,7 @@
 						}).withOption('width', '100px').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('AÃ§Ãµes').notSortable().renderWith(_actions).withOption('width', '100px')
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '100px')
                     ];
 				},
 				contasReceber: function(vm, _html, _actions)
@@ -1786,7 +1786,7 @@
 
 							return shtml;
 						}).withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('DescriÃ§Ã£o').renderWith(function(data, type, full, meta)
+                        DTColumnBuilder.newColumn(null).withTitle('Descrição').renderWith(function(data, type, full, meta)
 						{
 							var shtml = "";
 							if (data.descricao)
@@ -1889,7 +1889,7 @@
 								'off="N???o" onstyle="btn-success" offstyle="btn-danger"' +
 								'ng-true-value="true" ng-false-value="false"></toggle>'
 						}).withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('AÃ§Ãµes').notSortable().renderWith(_actions).withOption('width', '100px')
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '100px')
                     ];
 				},
 				conta: function(vm, _html, _actions)
@@ -1902,7 +1902,7 @@
 							return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
 						}).withOption('width', '3px'),
                         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px').notVisible(),
-                        DTColumnBuilder.newColumn('descricao').withTitle('DescriÃ§Ã£o'),
+                        DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
                         DTColumnBuilder.newColumn(null).withTitle('Saldo').renderWith(function(data, type, full, meta)
 						{
 							var shtml = "";
@@ -1947,7 +1947,7 @@
 						}).withOption('width', '10px'),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('AÃ§Ãµes').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
 				},
 				formaPg: function(vm, _html, _actions)
@@ -1983,7 +1983,7 @@
                         DTColumnBuilder.newColumn('observacao').withTitle('ObservaÃ§Ã£o').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('AÃ§Ãµes').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
 				},
 				nfEntrada: function(vm, _html, _actions)
@@ -1998,7 +1998,7 @@
                         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('AÃ§Ãµes').notSortable().renderWith(_actions).withOption('width', '140px'),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
 				},
 

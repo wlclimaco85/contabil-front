@@ -90,7 +90,7 @@
 				$('.dt-buttons').find('.dt-button:eq(1)').before(
 					'<select class="form-control col-sm-3 btn btn-primary dropdown-toggle" data-ng-options="t.name for t in vm.types"' +
 					'data-ng-model="vm.object.type" style="height: 32px;margin-left: 8px;margin-right: 6px;width: 200px !important;">' +
-					'<option><a href="#">AÃ§Ãµes <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>' +
+					'<option><a href="#">Ações <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>' +
 					'<option><a href="#">Remover Todos <span class="badge selected badge-danger main-badge"  data-ng-show="{{showCase.countSeleted()}}"></span></a></option>' +
 					'</select>'
 				)
@@ -209,10 +209,10 @@
         DTColumnBuilder.newColumn('pais').withTitle('Pais').notVisible(),
         DTColumnBuilder.newColumn('telefone').withTitle('Telefone'),
         DTColumnBuilder.newColumn('email').withTitle('Email').notVisible(),
-        DTColumnBuilder.newColumn('obs').withTitle('ObservaÃ§Ãµes').notVisible(),
+        DTColumnBuilder.newColumn('obs').withTitle('ObservAções').notVisible(),
         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-        DTColumnBuilder.newColumn(null).withTitle('AÃ§Ãµes').notSortable().renderWith(actionsHtml).withOption('width', '140px'),
+        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '140px'),
     ];
 
 		function rCallback(nRow, aData)
