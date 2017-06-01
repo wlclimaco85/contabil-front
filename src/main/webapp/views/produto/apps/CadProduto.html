@@ -29,7 +29,7 @@
             </div>
             <div class="row">
                 <div class="ng-cloak" ng-controller="UniMedSelectController as ctrl">
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <label for="exampleInputPassword1">Unid. Medida <small ng-click="ctrl.addUniMed()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
                         <div class="row">
                             <ui-select ng-model="produto.uniMed" theme="bootstrap">
@@ -42,15 +42,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 ">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label for="exampleInputPassword1">NCM</label>
                         <input type="text" class="form-control  " ng-model="produto.ncm" name="ncm" placeholder="NCM">
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Peso unitário líquido (kg)</label>
+                        <label for="exampleInputPassword1">Peso unit. líquido (kg)</label>
                         <div class="input-group">
                             <span class="input-group-addon">,</span>
                             <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.pesoLiquido" name="pesoLiquido" placeholder="Peso unitário líquido (kg)">
@@ -58,9 +58,9 @@
 
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Peso unitário bruto (kg)</label>
+                        <label for="exampleInputPassword1">Peso unit. bruto (kg)</label>
                         <div class="input-group">
                             <span class="input-group-addon">,</span>
                             <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.pesoBruto" name="pesobruto" placeholder="Peso unitário bruto (kg)">
@@ -69,19 +69,27 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-3 ">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label for="exampleInputPassword1">Referência EAN/GTIN (cod barra):</label>
                         <input type="text" class="form-control  " ng-model="produto.cdBarras" name="cdBarras" placeholder="Cod de barras">
                     </div>
                 </div>
-                <div class="col-sm-3 ">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label for="exampleInputPassword1">Exceção tab IPI</label>
-                        <input type="text" class="form-control  " ng-model="produto.excTabIPI" name="excecaoIPI" placeholder="Exceção IPI">
+                        <div class="row">
+                            <ui-select ng-model="produto.excTabIPI" theme="bootstrap">
+                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                <ui-select-choices repeat="item in regime | filter: $select.search">
+                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label for="exampleInputPassword1">Código CEST</label>
                         <input type="text" class="form-control col-sm-8 " ng-model="produto.cEST" name="cEST" placeholder="Código CEST">

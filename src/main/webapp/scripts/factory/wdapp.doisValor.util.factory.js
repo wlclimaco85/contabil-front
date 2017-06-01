@@ -136,7 +136,6 @@
 				scope.tipoCalc = [];
 				scope.pisST = [];
 				scope.cofinsST = [];
-				scope.ssqn = [];
 
 				var fnCallbackDoisValor = function(res)
 				{
@@ -182,9 +181,6 @@
 										break;
 									case 'COFINS - SITUAÇÃO TRIBUTARIA':
 										scope.cofinsST.push(planos)
-										break;
-									case 'EXIGIBILIDADE DO ISS':
-										scope.ssqn.push(planos)
 										break;
 								}
 							}
@@ -256,6 +252,47 @@
 							fnCallback(res);
 						}
 						console.log(scope)
+					}
+				}
+
+				qat.model.select.util("entidade/api/doisValores/fetchPage", true, new qat.model.doisValoresInquiryRequest(pageId, 100 / 20, true, JSON.parse(localStorage.getItem(
+					"empresa")).id), fnCallbackDoisValor);
+
+
+			},
+			produto: function(pageId, scope, fnCallback)
+			{
+
+				scope.origem = [];
+				scope.exctabIPI = [];
+
+				var fnCallbackDoisValor = function(res)
+				{
+					var planos = "";
+
+					//ICMS - MODALIDADE BC
+
+					if (res.operationSuccess == true)
+					{
+						for (var x = 0; x < res.doisValoresList.length; x++)
+						{
+							planos = res.doisValoresList[x];
+							if (planos.doisValorType != null)
+							{
+								switch (planos.doisValorType.tipo)
+								{
+									case 'INDICADOR IE':
+										scope.indicadorIE.push(planos);
+										break;
+									case 'PAIS':
+										scope.pais.push(planos)
+										break;
+
+								}
+							}
+						}
+
+
 					}
 				}
 
