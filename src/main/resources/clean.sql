@@ -10,7 +10,7 @@ delete from banco;
 delete from beneficios  ;
 delete from boleto;
 delete from caixa;
-delete from categoria ;
+/*delete from categoria ;*/
 /*delete from cfop ;   */
 /*delete from cidade  ; */
 delete from classes ;
@@ -49,7 +49,7 @@ delete from county  ;
 delete from custo;
 delete from custoitens  ;
 delete from deposito ;
-delete from documento;
+delete from documento where parentid <> 4595;
 /*delete from doisvalor;   */
 /*delete from doisvalortype;  */
 delete from drug ;
@@ -190,9 +190,9 @@ delete from procedure;
 delete from processo ;
 /*delete from produto ;  */
 /*delete from produtoempresa; */
-delete from produtoparent;
+delete from produtoparent  where emprId <> 4595;
 delete from profissao;
-delete from regime  ;
+
 delete from rentabilidade;
 delete from rentabilidadeitens  ;
 /*delete from role  ;  */
@@ -202,7 +202,7 @@ delete from servicoandplano ;
 delete from servicobyplano  ;
 delete from sindico ;
 /*delete from site ;    */
-delete from socio;
+delete from socio  where emprId <> 4595;
 delete from status  ;
 delete from subgrupo ;
 delete from tarefa  ;
@@ -212,8 +212,13 @@ delete from titulo  ;
 delete from transaction ;
 delete from transportador;
 delete from tributacao;
-delete from unimed  ;
+/*delete from unimed  ; */
 /*delete from user_roles  ;   */
 /*delete from users;        */
 /*delete from usuario ;    */
 delete from validacao ;
+delete from nfnotainfoitemimpostoissqn ;
+delete from nfnotainfoitemimpostocofins ;
+delete from nfnotainfoitemimpostocofinsst  ;
+delete from nfnotainfoitemimpostoicmsufdestino ;
+delete from nfnotainfoitemimpostoicmsufdestino ;
