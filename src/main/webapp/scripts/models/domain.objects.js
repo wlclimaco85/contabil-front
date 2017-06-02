@@ -755,7 +755,7 @@ qat.model.fnNFNotaInfoItemImpostoIPI = function(_Ipi, _modelAction, _user)
 		codigoEnquadramento: _Ipi.codigoEnquadramento,
 		tributado: _Ipi.tributado,
 		naoTributado: _Ipi.naoTributado,
-		tipoCalculo : _oObjet.tipoCalculo ? _oObjet.tipoCalculo : null,
+		tipoCalculo : _Ipi.tipoCalculo ? _Ipi.tipoCalculo : null,
 		emprId: JSON.parse(localStorage.getItem('empresa')).id,
 		tableEnumValue: 53,
 		modelAction: _modelAction,

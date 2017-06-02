@@ -676,6 +676,126 @@ INSERT INTO doisvalor(id,value,nome, descricao, doisvalortype, pagina,create_dat
     VALUES (10,'Nota Fiscal', 0, 100, 1477075035443, 'System');
 
 
+    INSERT INTO pagina(id,pagina,parentid, tabelaenumvalue, create_date, create_user)
+    VALUES (2,'Produto', 0, 100, 1477075035443, 'System');
+
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
+    VALUES (131,'ORIGEM', 'ORIGEM', 1477075035443, 'System'),
+	(132,'EXCECAO TAB IPI', 'EXCECAO TAB IPI' , 1477075035443, 'System'),
+	(133,'TIPO OPERACAO', 'TIPO OPERACAO' , 1477075035443, 'System'),
+	(134,'TIPO COMBUSTIVEL', 'TIPO COMBUSTIVEL' , 1477075035443, 'System'),
+	(135,'TIPO VEICULO', 'TIPO VEICULO' , 1477075035443, 'System'),
+	(136,'ESPECIE VEICULO', 'ESPECIE VEICULO' , 1477075035443, 'System'),
+	(137,'CONDICAO CHASSI', 'CONDICAO CHASSI' , 1477075035443, 'System'),
+	(138,'CONDICAO', 'CONDICAO' , 1477075035443, 'System'),
+	(139,'COR DENATRAN', 'COR DENATRAN' , 1477075035443, 'System'),
+	(140,'RESTRICAO', 'RESTRICAO' , 1477075035443, 'System'),
+
+	(141,'TIPO ARMA', 'TIPO ARMA' , 1477075035443, 'System');
+
+
+	INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+    	('0', '0 - Nacional, exceto as indicadas nos códigos de 3, 4, 5 e 8','0 - Nacional, exceto as indicadas nos códigos de 3, 4, 5 e 8',131,2, 1477075035443, 'System'),
+    	('1', '1 - Estrangeira, importação direta, exceto a indicada no código 6','1 - Estrangeira, importação direta, exceto a indicada no código 6',131,2, 1477075035443, 'System'),
+    	('2', '2 - Estrangeira, adquirida no mercado interno, exceto a indicada no código 7','2 - Estrangeira, adquirida no mercado interno, exceto a indicada no código 7',131,2, 1477075035443, 'System'),
+    	('3', '3 - Nacional, mercadoria ou bem com Conteúdo de Importação maior que 40% e menor ou igual a 70%','3 - Nacional, mercadoria ou bem com Conteúdo de Importação maior que 40% e menor ou igual a 70%',131,2, 1477075035443, 'System'),
+	('4', '4 - Nacional, produção em conformidade com processos básicos que tratam as legisl. dos Ajustes','4 - Nacional, produção em conformidade com processos básicos que tratam as legisl. dos Ajustes',131,2, 1477075035443, 'System'),
+	('5', '5 - Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%','5 - Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%',131,2, 1477075035443, 'System'),
+	('6', '6 - Estrangeira, importação direta, sem similar nacional, constante na lista da CAMEX e gás natural','6 - Estrangeira, importação direta, sem similar nacional, constante na lista da CAMEX e gás natural',131,2, 1477075035443, 'System'),
+	('7', '7 - Estrangeira, adquir. merc. interno, sem similar nacional, na lista da CAMEX e gás natural','7 - Estrangeira, adquir. merc. interno, sem similar nacional, na lista da CAMEX e gás natural',131,2, 1477075035443, 'System'),
+	('8', '8 - Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70%','8 - Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70%',131,2, 1477075035443, 'System'),
+
+	('1', '01','01',132,2, 1477075035443, 'System'),
+	('2', '02','02',132,2, 1477075035443, 'System'),
+	('3', '03','03',132,2, 1477075035443, 'System'),
+	('4', '04','04',132,2, 1477075035443, 'System'),
+	('5', '05','05',132,2, 1477075035443, 'System'),
+	('6', '06','06',132,2, 1477075035443, 'System'),
+	('7', '07','07',132,2, 1477075035443, 'System'),
+
+	('01', 'Alcool','Alcool',134,2, 1477075035443, 'System'),
+	('02', 'Gasolina','Gasolina',134,2, 1477075035443, 'System'),
+	('03', 'Diesel','Diesel',134,2, 1477075035443, 'System'),
+	('04', 'Gasogéanio','Gasogéanio',134,2, 1477075035443, 'System'),
+	('05', 'Gas Metano','Gas Metano',134,2, 1477075035443, 'System'),
+	('06', 'Eletrico (fonte interna)','Eletrico (fonte interna)',134,2, 1477075035443, 'System'),
+	('07', 'Eletrico (fonte externa)','Eletrico (fonte externa)',134,2, 1477075035443, 'System'),
+	('08', 'Gasol/Gas natural/Combustivel','Gasol/Gas natural/Combustivel',134,2, 1477075035443, 'System'),
+	('09', 'Alcool/Gas natural','Alcool/Gas natural',134,2, 1477075035443, 'System'),
+	('10', 'Diesel/Gas natural','Diesel/Gas natural',134,2, 1477075035443, 'System'),
+	('11', 'Vide campo observaçao','Vide campo observaçao',134,2, 1477075035443, 'System'),
+	('12', 'Alcool/Gas natural veicular','Alcool/Gas natural veicular',134,2, 1477075035443, 'System'),
+	('13', 'Gasolina/Gas natural veicular','Gasolina/Gas natural veicular',134,2, 1477075035443, 'System'),
+	('14', 'Diesel/Gas natural veicular','Diesel/Gas natural veicular',134,2, 1477075035443, 'System'),
+	('15', 'Gas natural veicular','Gas natural veicular',134,2, 1477075035443, 'System'),
+	('16', 'Alcool/Gasolina','Alcool/Gasolina',134,2, 1477075035443, 'System'),
+	('17', 'Gasolina/Alcool/Gas natural','Gasolina/Alcool/Gas natural',134,2, 1477075035443, 'System'),
+	('18', 'Gasolina/Eletrico','Gasolina/Eletrico',134,2, 1477075035443, 'System'),
+
+	('0', 'Outros','Outros',133,2, 1477075035443, 'System'),
+	('1', 'Venda concessionária','Venda concessionária',133,2, 1477075035443, 'System'),
+	('2', 'Faturamento direto consumidor final','Faturamento direto consumidor final',133,2, 1477075035443, 'System'),
+	('3', 'Venda direta grandes consumidores','Venda direta grandes consumidores',133,2, 1477075035443, 'System'),
+
+	('06', 'Automóvel','Automóvel',135,2, 1477075035443, 'System'),
+	('14', 'Caminhão','Caminhão',135,2, 1477075035443, 'System'),
+	('13', 'Caminhoneta','Caminhoneta',135,2, 1477075035443, 'System'),
+	('24', 'Carga','Carga',135,2, 1477075035443, 'System'),
+	('02', 'Ciclomotor','Ciclomotor',135,2, 1477075035443, 'System'),
+	('22', 'Especial Ônibus','Especial Ônibus',135,2, 1477075035443, 'System'),
+	('07', 'Microonibus','Microonibus',135,2, 1477075035443, 'System'),
+	('23', 'Misto','Misto',135,2, 1477075035443, 'System'),
+	('04', 'Motociclo','Motociclo',135,2, 1477075035443, 'System'),
+	('03', 'Motoneta','Motoneta',135,2, 1477075035443, 'System'),
+	('08', 'Ônibus','Ônibus',135,2, 1477075035443, 'System'),
+	('10', 'Reboque','Reboque',135,2, 1477075035443, 'System'),
+	('05', 'Triciclo','Triciclo',135,2, 1477075035443, 'System'),
+	('17', 'Trator','Trator',135,2, 1477075035443, 'System'),
+
+	('1', 'Passageiro','Passageiro',136,2, 1477075035443, 'System'),
+	('2', 'Carga','Carga',136,2, 1477075035443, 'System'),
+	('3', 'Misto','Misto',136,2, 1477075035443, 'System'),
+	('4', 'Corrida','Corrida',136,2, 1477075035443, 'System'),
+	('5', 'Tração','Tração',136,2, 1477075035443, 'System'),
+	('6', 'Especial','Especial',136,2, 1477075035443, 'System'),
+	('7', 'Coleção','Coleção',136,2, 1477075035443, 'System'),
+
+	('N', 'Normal','Normal',137,2, 1477075035443, 'System'),
+	('R', 'Remarcado','Remarcado',137,2, 1477075035443, 'System'),
+
+	('1', 'Acabado','Acabado',138,2, 1477075035443, 'System'),
+	('2', 'Inacabado','Inacabado',138,2, 1477075035443, 'System'),
+	('3', 'Semi-acabado','Semi-acabado',138,2, 1477075035443, 'System'),
+
+	    ('01', 'Amarela','Amarela',138,2, 1477075035443, 'System'),
+	    ('02', 'Azul','Azul',138,2, 1477075035443, 'System'),
+	    ('03', 'Bege','Bege',138,2, 1477075035443, 'System'),
+	    ('04', 'Branca','Branca',138,2, 1477075035443, 'System'),
+	    ('05', 'Cinza','Cinza',138,2, 1477075035443, 'System'),
+	    ('06', 'Dourada','Dourada',138,2, 1477075035443, 'System'),
+	    ('07', 'Grená','Grená',138,2, 1477075035443, 'System'),
+	    ('08', 'Laranja','Laranja',138,2, 1477075035443, 'System'),
+	    ('09', 'Marrom','Marrom',138,2, 1477075035443, 'System'),
+	    ('10', 'Prata','Prata',138,2, 1477075035443, 'System'),
+	    ('11', 'Preta','Preta',138,2, 1477075035443, 'System'),
+	    ('12', 'Rosa','Rosa',138,2, 1477075035443, 'System'),
+	    ('13', 'Roxa','Roxa',138,2, 1477075035443, 'System'),
+	    ('14', 'Verde','Verde',138,2, 1477075035443, 'System'),
+	    ('15', 'Vermelha','Vermelha',138,2, 1477075035443, 'System'),
+	    ('16', 'Fantasia','Fantasia',138,2, 1477075035443, 'System'),
+
+('0', 'Não há','Não há',139,2, 1477075035443, 'System'),
+('1', 'Alienação fiduciária','Alienação fiduciária',139,2, 1477075035443, 'System'),
+('2', 'Arrendamento mercantil','Arrendamento mercantil',139,2, 1477075035443, 'System'),
+('3', 'Reserva dominio','Reserva dominio',139,2, 1477075035443, 'System'),
+('4', 'Penhor','Penhor',139,2, 1477075035443, 'System'),
+('9', 'Outras','Outras',139,2, 1477075035443, 'System'),
+
+('0', 'Permitido','Permitido',139,2, 1477075035443, 'System'),
+('1', 'Restrito','Restrito',139,2, 1477075035443, 'System');
+
 INSERT INTO doisvalor(id,value,nome, descricao, doisvalortype, pagina,create_date, create_user )
     VALUES
        (1001,'0', '0 - Pedido Vendas','0 - Pedido Vendas',1001,10, 1477075035443, 'System'),

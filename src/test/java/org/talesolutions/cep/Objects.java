@@ -5261,7 +5261,7 @@ public static NFNotaInfoItemImpostoISSQN insertNFNotaInfoItemImpostoISSQN(Intege
 	nfnotainfoitemimpostoissqn.setCodigoMunicipioIncidenciaImposto("NATIVE INSERT UPDATE");
 	nfnotainfoitemimpostoissqn.setCodigoPais("NATIVE INSERT UPDATE");
 	nfnotainfoitemimpostoissqn.setNumeroProcesso("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoissqn.setIndicadorIncentivoFiscal(insertDoisValor(id, tabela, action));
+	//nfnotainfoitemimpostoissqn.setIndicadorIncentivoFiscal(insertDoisValor(id, tabela, action));
 	nfnotainfoitemimpostoissqn.setParentId(id);
 	nfnotainfoitemimpostoissqn.setEmprId(1);
 	nfnotainfoitemimpostoissqn.setModifyDateUTC(a.getTime());
