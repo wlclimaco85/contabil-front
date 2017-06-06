@@ -189,21 +189,29 @@
 
 
             },
-            cliente: function(vm, createdRow, scope, _callback) {
+            cliente: function(vm, createdRow, scope, _callback, _function) {
 
-                var oOptions = padrao(vm, createdRow, scope, _callback);
-                console.log(oOptions)
-                oOptions.buttons.push({
-                    text: 'Novo Cliente',
+
+                var buttons = [];
+                buttons.push({
+                    text: '<span class="fa fa-trash"></span>',
                     key: '1',
                     action: function(e, dt, node, config) {
 
-                        dialogFactory.dialog('views/cadastros/dialog/dCliente.html', "ClienteInsertController", validationFactory.cliente, null);
+                        dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html', "TributacaoDeleteController", validationFactory.contasPagar, _function);
+
+                    }
+                }, {
+                    text: 'Novo Cliente',
+                    key: '4',
+                    action: function(e, dt, node, config) {
+
+                        dialogFactory.dialog('views/cadastros/dialog/dCliente.html', "ClienteInsertController", validationFactory.cliente, _function);
 
                     }
                 })
 
-                return oOptions;
+                return padrao(vm, createdRow, scope, _callback, buttons, 2, _function);
             },
             fornecedor: function(vm, createdRow, scope, _callback) {
 

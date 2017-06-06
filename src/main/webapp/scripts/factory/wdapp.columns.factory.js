@@ -19,15 +19,14 @@
 							return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
 						}).withOption('width', '10px'),
                         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('Nome ou RazÃ£o social').renderWith(function(data, type, full, meta)
+                        DTColumnBuilder.newColumn(null).withTitle('Nome ou Razão social').renderWith(function(data, type, full, meta)
 						{
-
 							return '<p>' + data.nome + '</p>';
 						}).withOption('width', '100px'),
-                        DTColumnBuilder.newColumn('nomeFantasia').withTitle('Nome Fantasia'),
+                        DTColumnBuilder.newColumn('nomeFantasia').withTitle('Nome Fantasia').notVisible(),
                         DTColumnBuilder.newColumn(null).withTitle('Tipo').renderWith(function(data, type, full, meta)
 						{
-							if ((data != null) && (data != undefined) && (type == "display"))
+							if ((data.tipoPessoa) && (data != null) && (data != undefined) && (type == "display"))
 							{
 								if ((data.tipoPessoa == 1))
 								{
@@ -37,6 +36,10 @@
 								{
 									return '<p>Juridica</p>';
 								}
+							}
+							else
+							{
+								return '<p>Fisica</p>'
 							}
 						}).withOption('width', '50px'),
                         DTColumnBuilder.newColumn(null).withTitle('CPF ou CNPJ').renderWith(function(data, type, full, meta)
@@ -57,6 +60,10 @@
 
 								return '<p>' + documentos + '</p>';
 							}
+							else
+							{
+								return '';
+							}
 						}).withOption('width', '100px'),
                         DTColumnBuilder.newColumn(null).withTitle('Inscr Est Subst Trib').renderWith(function(data, type, full, meta)
 						{
@@ -75,6 +82,10 @@
 								}
 								return '<p>' + documentos + '</p>';
 							}
+							else
+							{
+								return '';
+							}
 						}).withOption('width', '100px').notVisible(),
                         DTColumnBuilder.newColumn(null).withTitle('Indicador de IE').renderWith(function(data, type, full, meta)
 						{
@@ -92,9 +103,13 @@
 									}
 								}
 							}
+							else
+							{
+								return '';
+							}
 							return '<p>' + documentos + '</p>';
 						}).withOption('width', '100px').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('InscriÃ§Ã£o Estadual').renderWith(function(data, type, full, meta)
+                        DTColumnBuilder.newColumn(null).withTitle('Inscrição Estadual').renderWith(function(data, type, full, meta)
 						{
 							var documentos = "";
 							if ((data != null) && (data != undefined) && (type == "display"))
@@ -111,9 +126,13 @@
 								}
 								return '<p>' + documentos + '</p>';
 							}
+							else
+							{
+								return '';
+							}
 
 						}).withOption('width', '100px').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('InscriÃ§Ã£o Municipal').renderWith(function(data, type, full, meta)
+                        DTColumnBuilder.newColumn(null).withTitle('Inscrição Municipal').renderWith(function(data, type, full, meta)
 						{
 							var documentos = "";
 							if ((data != null) && (data != undefined) && (type == "display"))
@@ -130,9 +149,13 @@
 								}
 								return '<p>' + documentos + '</p>';
 							}
+							else
+							{
+								return '';
+							}
 
 						}).withOption('width', '100px').notVisible(),
-                        DTColumnBuilder.newColumn(null).withTitle('InscriÃ§Ã£o Suframa').renderWith(function(data, type, full, meta)
+                        DTColumnBuilder.newColumn(null).withTitle('Inscrição Suframa').renderWith(function(data, type, full, meta)
 						{
 							var documentos = "";
 							if ((data != null) && (data != undefined) && (type == "display"))
@@ -149,14 +172,24 @@
 								}
 								return '<p>' + documentos + '</p>';
 							}
+							else
+							{
+								return '';
+							}
 
 						}).withOption('width', '100px').notVisible(),
                         DTColumnBuilder.newColumn(null).withTitle('CEP').renderWith(function(data, type, full, meta)
 						{
 							if ((data != null) && (data != undefined) && (type == "display"))
 							{
-								if ((data.enderecos[0] != null) && (data.enderecos[0] != undefined))
-									return '<p>' + data.enderecos[0].cep + '</p>';
+								if ((data.enderecos) && (data.enderecos[0]))
+									return '<p>' + data.enderecos[0].cep + '</p>'
+								else
+									return '';
+							}
+							else
+							{
+								return '';
 							}
 						}).withOption('width', '50px').notVisible(),
                         DTColumnBuilder.newColumn(null).withTitle('Logradouro').renderWith(function(data, type, full, meta)
@@ -164,23 +197,35 @@
 
 							if ((data != null) && (data != undefined) && (type == "display"))
 							{
-								if ((data.enderecos[0] != null) && (data.enderecos[0] != undefined))
+								if ((data.enderecos) && (data.enderecos[0]))
 									return '<p>' + data.enderecos[0].logradouro + '</p>';
+								else
+									return '';
+							}
+							else
+							{
+								return '';
 							}
 						}).withOption('width', '50px'),
                         DTColumnBuilder.newColumn(null).withTitle('Numero').renderWith(function(data, type, full, meta)
 						{
 							if ((data != null) && (data != undefined) && (type == "display"))
 							{
-								if ((data.enderecos[0] != null) && (data.enderecos[0] != undefined))
+								if ((data.enderecos) && (data.enderecos[0]))
 									return '<p>' + data.enderecos[0].numero + '</p>';
+								else
+									return '';
+							}
+							else
+							{
+								return '';
 							}
 						}).withOption('width', '50px'),
                         DTColumnBuilder.newColumn(null).withTitle('Cidade').renderWith(function(data, type, full, meta)
 						{
 							if ((data != null) && (data != undefined) && (type == "display"))
 							{
-								if ((data.enderecos[0] != null) && (data.enderecos[0] != undefined))
+								if ((data.enderecos) && (data.enderecos[0]))
 								{
 									if ((data.enderecos[0].cidade != null) && (data.enderecos[0].cidade != undefined))
 									{
@@ -191,15 +236,23 @@
 										return ""
 									}
 								}
+								else
+								{
+									return ""
+								}
+							}
+							else
+							{
+								return '';
 							}
 						}).withOption('width', '50px'),
                         DTColumnBuilder.newColumn(null).withTitle('Estado').renderWith(function(data, type, full, meta)
 						{
 							if ((data != null) && (data != undefined) && (type == "display"))
 							{
-								if ((data.enderecos[0] != null) && (data.enderecos[0] != undefined))
+								if ((data.enderecos) && (data.enderecos[0]))
 								{
-									if ((data.enderecos[0].estado != null) && (data.enderecos[0].cidade != undefined))
+									if (data.enderecos[0].estado)
 									{
 										return '<p>' + data.enderecos[0].estado.sigla + '</p>';
 									}
@@ -208,14 +261,30 @@
 										return ""
 									}
 								}
+								else
+								{
+									return ""
+								}
+							}
+							else
+							{
+								return '';
 							}
 						}).withOption('width', '50px').notVisible(),
                         DTColumnBuilder.newColumn(null).withTitle('Pais').renderWith(function(data, type, full, meta)
 						{
 							if ((data != null) && (data != undefined) && (type == "display"))
 							{
-								if ((data.enderecos[0] != null) && (data.enderecos[0] != undefined))
+								if ((data.enderecos) && (data.enderecos[0]))
 									return '<p>' + data.enderecos[0].pais + '</p>';
+									else
+									{
+										return ""
+									}
+							}
+							else
+							{
+								return '';
 							}
 						}).withOption('width', '50px').notVisible(),
                         DTColumnBuilder.newColumn(null).withTitle('Telefone').renderWith(function(data, type, full, meta)
@@ -234,6 +303,10 @@
 								}
 								return '<p>' + telefones + '</p>';
 							}
+							else
+							{
+								return '';
+							}
 						}).withOption('width', '50px'),
                         DTColumnBuilder.newColumn(null).withTitle('Email').notVisible().renderWith(function(data, type, full, meta)
 						{
@@ -251,10 +324,18 @@
 								}
 								return '<p>' + emails + '</p>';
 							}
+							else
+							{
+								return '';
+							}
 						}).withOption('width', '50px'),
-                        DTColumnBuilder.newColumn('dtNasc').withTitle('Data Nascimento').notVisible(),
-                        DTColumnBuilder.newColumn('dataCadastro').withTitle('Data Cadastro').notVisible(),
-                        DTColumnBuilder.newColumn('obs').withTitle('ObservaÃ§Ã£o').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('Observação').renderWith(function(data, type, full, meta)
+						{
+							if (data.obs)
+								return '<p>' + data.obs + '</p>';
+							else
+								return "";
+						}).notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
                         DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
@@ -1108,7 +1189,7 @@
 								else
 								{
 									if (data.imposto.issqn != undefined)
-									{//debugger
+									{ //debugger
 										var retorno = '<table class="table"><thead></thead><tbody>';
 										retorno = retorno + "<tr><td>Aliq. ISSQN</td><td>" + data.imposto.issqn.valorAliquota + "</td></tr>"
 										retorno = retorno + "<tr><td>Exigibilidade do ISS</td><td>" + (data.imposto.issqn.indicadorExigibilidadeISS ? data.imposto.issqn.indicadorExigibilidadeISS.descricao :
@@ -1926,7 +2007,7 @@
 							return shtml;
 						}).withOption('width', '10px'),
                         DTColumnBuilder.newColumn('numeroConta').withTitle('NÂº Conta'),
-                        DTColumnBuilder.newColumn('observacao').withTitle('ObservaÃ§Ã£o'),
+                        DTColumnBuilder.newColumn('observacao').withTitle('Observação'),
                         DTColumnBuilder.newColumn(null).withTitle('Baixas').renderWith(function(data, type, full, meta)
 						{
 							var shtml = "";
@@ -1980,7 +2061,7 @@
                         DTColumnBuilder.newColumn('qntIntervalo').withTitle('Tempo Intervalo').notVisible(),
                         DTColumnBuilder.newColumn('intervalo').withTitle('Intervalo').notVisible(),
                         DTColumnBuilder.newColumn('entrada').withTitle('Entrada'),
-                        DTColumnBuilder.newColumn('observacao').withTitle('ObservaÃ§Ã£o').notVisible(),
+                        DTColumnBuilder.newColumn('observacao').withTitle('Observação').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
                         DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),

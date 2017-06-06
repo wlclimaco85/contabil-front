@@ -1,5 +1,5 @@
 (function() {
-    angular.module('wdApp.apps.cliente', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+    angular.module('wdApp.apps.cliente', ['datatables', 'ngResource', 'datatables.scroller', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
         .controller('ClienteController', clienteController);
 
     function clienteController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate,Datatablessss,tableOptionsFactory,tableColumnsFactory,FiltersFactory,validationFactory) {
@@ -18,7 +18,18 @@
             tipoPessoa: 2
         };
 
+        function reloadData() {
+            var resetPaging = false;
+            vm.dtInstance.reloadData(callback, resetPaging);
+        }
+        function callback(json) {
+            console.log(json);
+        }
+         $rootScope.reloadDataCliente = function(_callback) {
 
+            var resetPaging = false;
+            vm.dtInstance.reloadData(_callback, resetPaging);
+        }
 
 
         $scope.toggle = function() {
@@ -78,21 +89,7 @@
         }
 
 
-
-        Datatablessss.getTable('/pessoa/api/cliente/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cliente(vm,createdRow,$scope,FiltersFactory.cliente()), tableColumnsFactory.cliente(vm,titleHtml,actionsHtml));
-
-          //return vm;
-
-
-
-
-
-
-      //  Datatablessss.getTable('/pessoa/api/cliente/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cliente(vm,createdRow,$scope,filtes), tableColumnsFactory.cliente(vm,titleHtml,actionsHtml));
-
-
-
-     //   TableCreate.getCliente(vm,$scope);
+        Datatablessss.getTable('/pessoa/api/cliente/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cliente(vm, createdRow, $scope, FiltersFactory.cliente(), reloadData), tableColumnsFactory.cliente(vm, "", actionsHtml));
 
 
         function toggleAll(selectAll, selectedItems) {
@@ -125,7 +122,7 @@
 })();
 (function() {
     angular.module('wdApp.apps.cliente.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('ClienteInsertController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        .controller('ClienteInsertController', function($rootScope, $scope, fModels, SysMgmtData, toastr, $element, close, fPessoa) {
               var vm = this;
 
               $scope.today = function() {
@@ -348,10 +345,15 @@
 
 
             $scope.format = $scope.formats[1];
-            var fnCallBack = function(oResponse) {
+            var fnCallBack = function(res) {
+                    if (res.operationSuccess == true) {
+                        $element.modal('hide');
+                        close(null, 500);
+                        toastr.success('Deu Certo seu tanga.', 'Sucess');
+                        $rootScope.reloadDataCliente(function(data) { debugger })
+                    }
+                }
 
-                console.log(oResponse)
-            }
             $scope.saveCliente = function() {
 
                 fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos,$scope.emails,$scope.telefones, 'INSERT', "pessoa/api/cliente/insert", fnCallBack);
@@ -360,7 +362,7 @@
 })();
 (function() {
     angular.module('wdApp.apps.cliente.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('ClienteUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        .controller('ClienteUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa, toastr, $element, close) {
             var vm = this;
             $scope.cliente = {};
             $scope.cliente = $rootScope.cliente;
