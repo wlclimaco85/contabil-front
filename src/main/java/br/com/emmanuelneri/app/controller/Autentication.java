@@ -63,7 +63,7 @@ public class Autentication {
 		    paramss.set("password", password);
 		   /// URI tgtUrl = rest.postForLocation("http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate", paramss, Collections.emptyMap());
 
-		    ResponseEntity<String> st = rest.postForEntity("http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate", paramss, String.class);
+		    ResponseEntity<String> st = rest.postForEntity("http://191.243.199.205/qat-sysmgmt-controller-rest/auth/api/authenticate", paramss, String.class);
 		    System.out.println("[" + st.getBody() + "]");
 		    System.out.println("[" + st + "]");
 		    String tk = st.getBody();

@@ -32,19 +32,19 @@
             <input type="text" class="form-control col-sm-8 hide" ng-model="produto.produto" name="id" placeholder="id">
         </div>
     </div>
-
-    <div class="col-sm-8 ">
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Código personalizado</label>
+            <input type="text" class="form-control " ng-model="produtoEmpresa.codigo" name="codigo" placeholder="C��digo Interno">
+        </div>
+    </div>
+    <div class="col-sm-9">
         <div class="form-group">
             <label for="exampleInputPassword1">Produto</label>
             <input type="text" class="form-control " ng-model="produto.produto" name="codigo" placeholder="Produto">
         </div>
     </div>
-    <div class="col-sm-4 ">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Código personalizado</label>
-            <input type="text" class="form-control " ng-model="produtoEmpresa.codigo" name="codigo" placeholder="Código Interno">
-        </div>
-    </div>
+
 </div>
 <div class="row">
     <div class="ng-cloak col-sm-5" ng-controller="CategoriaSelectController as ctrl">

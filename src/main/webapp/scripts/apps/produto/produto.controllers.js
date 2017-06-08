@@ -117,7 +117,7 @@
 
              return out;
          };
-     }).controller('ProdutoInsertController', function($rootScope, $scope, fModels, SysMgmtData, toastr, $element, close, fProduto, $templateCache, $http, $timeout, $interval) {
+     }).controller('ProdutoInsertController', function($rootScope, $scope, fModels, SysMgmtData, toastr, $element, close, fProduto, $templateCache, $http, $timeout, $interval,doisValorFactory) {
          var vm = this;
 
 
@@ -146,7 +146,8 @@
              }
          ];
 
-
+         doisValorFactory.produto($scope);
+         console.log($scope)
          //
          $scope.tributacao = {}
 

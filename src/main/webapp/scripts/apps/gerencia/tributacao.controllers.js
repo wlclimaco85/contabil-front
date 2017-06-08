@@ -57,11 +57,6 @@
 
 		var url = '/entidade/api/doisValores/fetchPage'; // 'financeiro/api/contasReceber/fetchPage'// '/entidade/api/doisValores/fetchPage'; qat.model.doisValoresInquiryRequest = function (_page, _iStartPage, _bCount,_emprId,_doisValorType)
 		var request = new qat.model.doisValoresInquiryRequest(101, 0, true, null, 106); //new qat.model.doisValoresInquiryRequest(null, 0, null,null,null) //new qat.model.doisValoresInquiryRequest(101, 0, null,null,106)
-		//===================================
-
-
-		//========================================
-
 
 		vm.personsss = {}; //$resource($rootScope.getTableData());
 

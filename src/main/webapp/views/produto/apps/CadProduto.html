@@ -1,5 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<div class="container1" ng-app ng-init="tabs=4">
+<div class="container1" ng-app ng-init="tabs=3">
     <ul class="tabs-nav">
         <li><a ng-click="tabs=3" ng-class="{'active' : tabs==3}">Dados Produto</a></li>
         <li><a ng-click="tabs=4" ng-class="{'active' : tabs==4}">Dados Fiscais</a></li>
@@ -16,9 +16,9 @@
                     <div class="form-group">
                         <label for="exampleInputPassword1">Origem</label>
                         <div class="row">
-                            <ui-select ng-model="tributacao.imposto.icms.regime" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
+                            <ui-select ng-model="produto.origem" theme="bootstrap" on-select="getRegimeTriburario($item, $model)">
                                 <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                <ui-select-choices repeat="item in regime | filter: $select.search">
+                                <ui-select-choices repeat="item in origem | filter: $select.search">
                                     <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
                                 </ui-select-choices>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Peso unit. líquido (kg)</label>
+                        <label for="exampleInputPassword1">Peso unit. líq (kg)</label>
                         <div class="input-group">
                             <span class="input-group-addon">,</span>
                             <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.pesoLiquido" name="pesoLiquido" placeholder="Peso unitário líquido (kg)">
@@ -60,7 +60,7 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Peso unit. bruto (kg)</label>
+                        <label for="exampleInputPassword1">Peso unit. br. (kg)</label>
                         <div class="input-group">
                             <span class="input-group-addon">,</span>
                             <input type="text" class="form-control col-sm-8 " ng-model="produtoEmpresa.pesoBruto" name="pesobruto" placeholder="Peso unitário bruto (kg)">
@@ -81,7 +81,7 @@
                         <div class="row">
                             <ui-select ng-model="produto.excTabIPI" theme="bootstrap">
                                 <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                <ui-select-choices repeat="item in regime | filter: $select.search">
+                                <ui-select-choices repeat="item in exctabIPI | filter: $select.search">
                                     <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
                                 </ui-select-choices>

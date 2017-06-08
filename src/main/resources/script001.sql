@@ -695,7 +695,7 @@ INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
 	(141,'TIPO ARMA', 'TIPO ARMA' , 1477075035443, 'System');
 
 
-	INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
     VALUES
     	('0', '0 - Nacional, exceto as indicadas nos códigos de 3, 4, 5 e 8','0 - Nacional, exceto as indicadas nos códigos de 3, 4, 5 e 8',131,2, 1477075035443, 'System'),
     	('1', '1 - Estrangeira, importação direta, exceto a indicada no código 6','1 - Estrangeira, importação direta, exceto a indicada no código 6',131,2, 1477075035443, 'System'),
@@ -769,32 +769,32 @@ INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
 	('2', 'Inacabado','Inacabado',138,2, 1477075035443, 'System'),
 	('3', 'Semi-acabado','Semi-acabado',138,2, 1477075035443, 'System'),
 
-	    ('01', 'Amarela','Amarela',138,2, 1477075035443, 'System'),
-	    ('02', 'Azul','Azul',138,2, 1477075035443, 'System'),
-	    ('03', 'Bege','Bege',138,2, 1477075035443, 'System'),
-	    ('04', 'Branca','Branca',138,2, 1477075035443, 'System'),
-	    ('05', 'Cinza','Cinza',138,2, 1477075035443, 'System'),
-	    ('06', 'Dourada','Dourada',138,2, 1477075035443, 'System'),
-	    ('07', 'Grená','Grená',138,2, 1477075035443, 'System'),
-	    ('08', 'Laranja','Laranja',138,2, 1477075035443, 'System'),
-	    ('09', 'Marrom','Marrom',138,2, 1477075035443, 'System'),
-	    ('10', 'Prata','Prata',138,2, 1477075035443, 'System'),
-	    ('11', 'Preta','Preta',138,2, 1477075035443, 'System'),
-	    ('12', 'Rosa','Rosa',138,2, 1477075035443, 'System'),
-	    ('13', 'Roxa','Roxa',138,2, 1477075035443, 'System'),
-	    ('14', 'Verde','Verde',138,2, 1477075035443, 'System'),
-	    ('15', 'Vermelha','Vermelha',138,2, 1477075035443, 'System'),
-	    ('16', 'Fantasia','Fantasia',138,2, 1477075035443, 'System'),
+	    ('01', 'Amarela','Amarela',139,2, 1477075035443, 'System'),
+	    ('02', 'Azul','Azul',139,2, 1477075035443, 'System'),
+	    ('03', 'Bege','Bege',139,2, 1477075035443, 'System'),
+	    ('04', 'Branca','Branca',139,2, 1477075035443, 'System'),
+	    ('05', 'Cinza','Cinza',139,2, 1477075035443, 'System'),
+	    ('06', 'Dourada','Dourada',139,2, 1477075035443, 'System'),
+	    ('07', 'Grená','Grená',139,2, 1477075035443, 'System'),
+	    ('08', 'Laranja','Laranja',139,2, 1477075035443, 'System'),
+	    ('09', 'Marrom','Marrom',139,2, 1477075035443, 'System'),
+	    ('10', 'Prata','Prata',139,2, 1477075035443, 'System'),
+	    ('11', 'Preta','Preta',139,2, 1477075035443, 'System'),
+	    ('12', 'Rosa','Rosa',139,2, 1477075035443, 'System'),
+	    ('13', 'Roxa','Roxa',139,2, 1477075035443, 'System'),
+	    ('14', 'Verde','Verde',139,2, 1477075035443, 'System'),
+	    ('15', 'Vermelha','Vermelha',139,2, 1477075035443, 'System'),
+	    ('16', 'Fantasia','Fantasia',139,2, 1477075035443, 'System'),
 
-('0', 'Não há','Não há',139,2, 1477075035443, 'System'),
-('1', 'Alienação fiduciária','Alienação fiduciária',139,2, 1477075035443, 'System'),
-('2', 'Arrendamento mercantil','Arrendamento mercantil',139,2, 1477075035443, 'System'),
-('3', 'Reserva dominio','Reserva dominio',139,2, 1477075035443, 'System'),
-('4', 'Penhor','Penhor',139,2, 1477075035443, 'System'),
-('9', 'Outras','Outras',139,2, 1477075035443, 'System'),
+('0', 'Não há','Não há',140,2, 1477075035443, 'System'),
+('1', 'Alienação fiduciária','Alienação fiduciária',140,2, 1477075035443, 'System'),
+('2', 'Arrendamento mercantil','Arrendamento mercantil',140,2, 1477075035443, 'System'),
+('3', 'Reserva dominio','Reserva dominio',140,2, 1477075035443, 'System'),
+('4', 'Penhor','Penhor',140,2, 1477075035443, 'System'),
+('9', 'Outras','Outras',140,2, 1477075035443, 'System'),
 
-('0', 'Permitido','Permitido',139,2, 1477075035443, 'System'),
-('1', 'Restrito','Restrito',139,2, 1477075035443, 'System');
+('0', 'Permitido','Permitido',141,2, 1477075035443, 'System'),
+('1', 'Restrito','Restrito',141,2, 1477075035443, 'System');
 
 INSERT INTO doisvalor(id,value,nome, descricao, doisvalortype, pagina,create_date, create_user )
     VALUES

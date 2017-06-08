@@ -141,8 +141,8 @@
     <div class="col-sm-12">
         <div class="col-sm-8">
             <div class="form-group">
-                <label for="exampleInputPassword1">Descrição</label>
-                <input type="text" class="form-control" ng-model="tributacao.descricao" name="alig" placeholder="Descrição">
+                <label for="exampleInputPassword1">DescriÃ§Ã£o</label>
+                <input type="text" class="form-control" ng-model="tributacao.descricao" name="alig" placeholder="DescriÃ§Ã£o">
             </div>
         </div>
         <div class="ng-cloak" ng-controller="CfopSelectController as ctrl">
@@ -173,7 +173,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Alíquota ISSQN (%)</label>
+                        <label for="exampleInputPassword1">alíquota ISSQN (%)</label>
                         <div class="input-group">
                             <span class="input-group-addon">%</span>
                             <input type="text" class="form-control" ng-model="tributacao.imposto.issqn.valorAliquota" name="qtdSeloIPI" placeholder="Qtd. selo IPI">
@@ -185,7 +185,7 @@
                     <div class="row">
                         <ui-select ng-model="tributacao.imposto.issqn.indicadorExigibilidadeISS" theme="bootstrap" on-select="getInputsPIS($item, $model)">
                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                            <ui-select-choices repeat="item in ssqn | filter: $select.search">
+                            <ui-select-choices repeat="item in exigISS | filter: $select.search">
                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
                             </ui-select-choices>
@@ -196,8 +196,8 @@
                 <div class="form-group col-sm-3">
                     <label for="exampleInputPassword1">Possui incentivo fiscal</label>
                     <div class="row">
-                        <!--    <input type="checkbox" ng-model="titulo.pagarAgora" class="toggle-ones" data-width="155" data-toggle="toggle"  style="width: 100%!important;margin-left: 18px" data-on="Sim" data-off="Não" data-onstyle="success" data-offstyle="danger" ng-true-value="'2'" ng-false-value="'1'" ></div> -->
-                        <toggle ng-model="tributacao.imposto.issqn.indicadorIncentivoFiscal" ng-init="tributacao.imposto.issqn.indicadorIncentivoFiscal = false" style="android" on="Sim" off="Não" onstyle="btn-success" offstyle="btn-danger" ng-true-value="'2'" ng-false-value="'1'"></toggle>
+                        <!--    <input type="checkbox" ng-model="titulo.pagarAgora" class="toggle-ones" data-width="155" data-toggle="toggle"  style="width: 100%!important;margin-left: 18px" data-on="Sim" data-off="NÃ£o" data-onstyle="success" data-offstyle="danger" ng-true-value="'2'" ng-false-value="'1'" ></div> -->
+                        <toggle ng-model="tributacao.imposto.issqn.indicadorIncentivoFiscal" ng-init="tributacao.imposto.issqn.indicadorIncentivoFiscal = false" style="android" on="Sim" off="NÃ£o" onstyle="btn-success" offstyle="btn-danger" ng-true-value="'2'" ng-false-value="'1'"></toggle>
                     </div>
                 </div>
             </div>
@@ -206,7 +206,7 @@
         <div class="tab-content1" ng-show="tabs == 3">
             <div class="row">
                 <div class="col-sm-4 ">
-                    <label for="exampleInputPassword1">PIS - Situação tributação</label>
+                    <label for="exampleInputPassword1">PIS - SituaÃ§Ã£o tributaÃ§Ã£o</label>
                     <div class="row">
                         <ui-select ng-model="tributacao.imposto.pis.pISSituaTributaria" theme="bootstrap" on-select="getInputsPIS($item, $model)">
                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
@@ -232,7 +232,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6 " id="pis-tipo-calc">
-                        <label for="exampleInputPassword1">Tipo de cÃ¡lculo ST</label>
+                        <label for="exampleInputPassword1">Tipo de cÃƒÂ¡lculo ST</label>
                         <div class="row">
                             <ui-select ng-model="tributacao.imposto.pis.tipocalculoSubstTrib" theme="bootstrap">
                                 <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
@@ -280,7 +280,7 @@
                         </div>
                     </div>
                     <div class="col-sm-6 " id="pis-tipo-calc">
-                        <label for="exampleInputPassword1">Tipo de cÃ¡lculo ST</label>
+                        <label for="exampleInputPassword1">Tipo de cÃƒÂ¡lculo ST</label>
                         <div class="row">
                             <ui-select ng-model="tributacao.imposto.pis.tipocalculoSubstTrib" theme="bootstrap">
                                 <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
@@ -318,7 +318,7 @@
             <div ng-if="tributacao.imposto.pis.pISSituaTributaria.value == 04" || "tributacao.imposto.pis.pISSituaTributaria.value == 06" || "tributacao.imposto.pis.pISSituaTributaria.value == 07" || "tributacao.imposto.pis.pISSituaTributaria.value == 08" || "tributacao.imposto.pis.pISSituaTributaria.value == 09" || "tributacao.imposto.pis.pISSituaTributaria.value == 49" || "tributacao.imposto.pis.pISSituaTributaria.value == 50" || "tributacao.imposto.pis.pISSituaTributaria.value == 51" || "tributacao.imposto.pis.pISSituaTributaria.value == 52" || "tributacao.imposto.pis.pISSituaTributaria.value == 53" || "tributacao.imposto.pis.pISSituaTributaria.value == 54" || "tributacao.imposto.pis.pISSituaTributaria.value == 55" || "tributacao.imposto.pis.pISSituaTributaria.value == 56" || "tributacao.imposto.pis.pISSituaTributaria.value == 60" || "tributacao.imposto.pis.pISSituaTributaria.value == 61" || "tributacao.imposto.pis.pISSituaTributaria.value == 62" || "tributacao.imposto.pis.pISSituaTributaria.value == 63" || "tributacao.imposto.pis.pISSituaTributaria.value == 64" || "tributacao.imposto.pis.pISSituaTributaria.value == 65" || "tributacao.imposto.pis.pISSituaTributaria.value == 66" || "tributacao.imposto.pis.pISSituaTributaria.value == 67" || "tributacao.imposto.pis.pISSituaTributaria.value == 70" || "tributacao.imposto.pis.pISSituaTributaria.value == 71" || "tributacao.imposto.pis.pISSituaTributaria.value == 72" || "tributacao.imposto.pis.pISSituaTributaria.value == 73" || "tributacao.imposto.pis.pISSituaTributaria.value == 74" || "tributacao.imposto.pis.pISSituaTributaria.value == 75">
                 <div class="row">
                     <div class="col-sm-6 " id="pis-tipo-calc">
-                        <label for="exampleInputPassword1">Tipo de cÃ¡lculo ST</label>
+                        <label for="exampleInputPassword1">Tipo de cÃƒÂ¡lculo ST</label>
                         <div class="row">
                             <ui-select ng-model="tributacao.imposto.pis.tipocalculoSubstTrib" theme="bootstrap">
                                 <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
@@ -356,7 +356,7 @@
             <div ng-if="tributacao.imposto.pis.pISSituaTributaria.value == 99">
                 <div class="row">
                     <div class="col-sm-6 " id="pis-tipo-calc">
-                        <label for="exampleInputPassword1">Tipo de cÃ¡lculo</label>
+                        <label for="exampleInputPassword1">Tipo de cÃƒÂ¡lculo</label>
                         <div class="row">
                             <ui-select ng-model="tributacao.imposto.pis.tipocalculo" theme="bootstrap">
                                 <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
@@ -392,7 +392,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6 " id="pis-tipo-calc">
-                        <label for="exampleInputPassword1">Tipo de cÃ¡lculo ST</label>
+                        <label for="exampleInputPassword1">Tipo de cÃƒÂ¡lculo ST</label>
                         <div class="row">
                             <ui-select ng-model="tributacao.imposto.pis.tipocalculoSubstTrib" theme="bootstrap">
                                 <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
@@ -433,7 +433,7 @@
         <div class="tab-content1" ng-show="tabs == 4">
             <div class="row">
                 <div class="col-sm-6 ">
-                    <label for="exampleInputPassword1">COFINS - Situação tributação</label>
+                    <label for="exampleInputPassword1">COFINS - SituaÃ§Ã£o tributaÃ§Ã£o</label>
                     <div class="row">
                         <ui-select ng-model="tributacao.imposto.cofins.pISSituaTributaria" theme="bootstrap" on-select="getInputsCOFINS($item, $model)">
                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
@@ -457,7 +457,7 @@
                         </div>
                     </div>
                     <div class="col-sm-4 " id="cofins-tipo-calc">
-                        <label for="exampleInputPassword1">Tipo de cÃ¡lculo ST</label>
+                        <label for="exampleInputPassword1">Tipo de cÃƒÂ¡lculo ST</label>
                         <div class="row">
                             <ui-select ng-model="tributacao.imposto.cofins.tipocalculoSubstTrib" theme="bootstrap">
                                 <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
@@ -506,7 +506,7 @@
                         </div>
                     </div>
                     <div class="col-sm-4 " id="cofins-tipo-calc">
-                        <label for="exampleInputPassword1">Tipo de cÃ¡lculo ST</label>
+                        <label for="exampleInputPassword1">Tipo de cÃƒÂ¡lculo ST</label>
                         <div class="row">
                             <ui-select ng-model="tributacao.imposto.cofins.tipocalculoSubstTrib" theme="bootstrap">
                                 <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
@@ -554,7 +554,7 @@
                         </div>
                     </div>
                     <div class="col-sm-3 " id="cofins-tipo-calc">
-                        <label for="exampleInputPassword1">Tipo de cÃ¡lculo ST</label>
+                        <label for="exampleInputPassword1">Tipo de cÃƒÂ¡lculo ST</label>
                         <div class="row">
                             <ui-select ng-model="tributacao.imposto.cofins.tipocalculoSubstTrib" theme="bootstrap">
                                 <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
@@ -596,7 +596,7 @@
 
                 <div class="row">
                     <div class="col-sm-6 " id="cofins-tipo-calc">
-                        <label for="exampleInputPassword1">Tipo de cÃ¡lculo</label>
+                        <label for="exampleInputPassword1">Tipo de cÃƒÂ¡lculo</label>
                         <div class="row">
                             <ui-select ng-model="tributacao.imposto.cofins.tipocalculoSubstTrib" theme="bootstrap">
                                 <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
@@ -632,7 +632,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6 " id="cofins-tipo-calc">
-                        <label for="exampleInputPassword1">Tipo de cÃ¡lculo ST</label>
+                        <label for="exampleInputPassword1">Tipo de cÃƒÂ¡lculo ST</label>
                         <div class="row">
                             <ui-select ng-model="tributacao.imposto.cofins.tipocalculoSubstTrib" theme="bootstrap">
                                 <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
@@ -747,7 +747,7 @@
             </div>
             <div class="col-sm-3 ">
                 <div class="form-group">
-                    <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Valor da base de  cÃ¡lculo na UF destinatÃ¡rio">Vr da base de  cÃ¡lc UF dest.</label>
+                    <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Valor da base de  cÃƒÂ¡lculo na UF destinatÃƒÂ¡rio">Vr da base de  cÃƒÂ¡lc UF dest.</label>
                     <input type="text" class="form-control" ng-model="tributacao.imposto.icmsUfDestino.valorBaseCalculoDestino" name="vrBaseCalcUFDest" placeholder="Vr Base Calc UF Dest">
                 </div>
             </div>
@@ -772,7 +772,7 @@
         </div>
         <div class="row">
             <div class="col-sm-3 ">
-                <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Percental provisÃ³rio de partilha">Perc prov partilha</label>
+                <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Percental provisÃƒÂ³rio de partilha">Perc prov partilha</label>
                 <div class="row">
                     <ui-select ng-model="tributacao.imposto.icmsUfDestino.percentualProvisorioPartilha" theme="bootstrap">
                         <ui-select-match placeholder="Perc Prov Part...">{{$select.selected.descricao}}</ui-select-match>
@@ -785,7 +785,7 @@
             </div>
             <div class="col-sm-3 ">
                 <div class="form-group">
-                    <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Valor ICMS de partilha para UF do destinatÃ¡rio">Vr ICMS de part UF do dest.</label>
+                    <label for="exampleInputPassword1" data-toggle="tooltip" data-placement="left" title="Valor ICMS de partilha para UF do destinatÃƒÂ¡rio">Vr ICMS de part UF do dest.</label>
                     <input type="text" class="form-control" ng-model="tributacao.imposto.icmsUfDestino.valorICMSInterestadualDestino" name="vrICMSPartUFDest" placeholder="Vr ICMS Part UF Dest">
                 </div>
             </div>

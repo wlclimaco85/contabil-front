@@ -6,8 +6,9 @@ var WebDaptiveAppConfig = {
 	 * This might be desirable if headers don't work correctly in some
 	 * environments and is still secure when using https. */
 	useAuthTokenHeader: true,
-	//string to check for rest calls to jDpative Back-end so the angular http provider can inject x-auth token
+	//string to 191.243.199.158 10.100.18.176check for rest calls to jDpative Back-end so the angular http provider can inject x-auth token
 	restAuthBase: '',
+//	authenticationURL: 'http://env-8258850.jelastic.saveincloud.net/springmvc-angularjs/api/authenticate',
 	authenticationURL: '/springmvc-angularjs/api/authenticate',
 	base_county_url: 'http://front01.eu-gb.mybluemix.net/county/api',
 	base_procedure_url: 'http://front01.eu-gb.mybluemix.net/procedure/api',

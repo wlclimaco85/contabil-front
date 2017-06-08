@@ -123,7 +123,7 @@
 						}
 					});
 			},
-			tributacao: function(scope, fnCallback)
+			tributacao: function(scope)
 			{
 
 				scope.regime = [];
@@ -136,6 +136,7 @@
 				scope.tipoCalc = [];
 				scope.pisST = [];
 				scope.cofinsST = [];
+				scope.exigISS = [];
 
 				var fnCallbackDoisValor = function(res)
 				{
@@ -182,11 +183,12 @@
 									case 'COFINS - SITUAÇÃO TRIBUTARIA':
 										scope.cofinsST.push(planos)
 										break;
+									case 'EXIGIBILIDADE DO ISS':
+										scope.exigISS.push(planos)
+										break;
 								}
 							}
 						}
-
-						fnCallback();
 					}
 				}
 
@@ -260,11 +262,20 @@
 
 
 			},
-			produto: function(pageId, scope, fnCallback)
+			produto: function(scope)
 			{
 
 				scope.origem = [];
 				scope.exctabIPI = [];
+				scope.tipoOperacao = [];
+				scope.tipoCombustivel = [];
+				scope.tipoVeiculo = [];
+				scope.espVeiculo = [];
+				scope.condClassi = [];
+				scope.condicao = [];
+				scope.corDetran = [];
+				scope.resticao = [];
+				scope.tipoArma = [];
 
 				var fnCallbackDoisValor = function(res)
 				{
@@ -281,22 +292,48 @@
 							{
 								switch (planos.doisValorType.tipo)
 								{
-									case 'INDICADOR IE':
-										scope.indicadorIE.push(planos);
+									case 'ORIGEM':
+										scope.origem.push(planos);
 										break;
-									case 'PAIS':
-										scope.pais.push(planos)
+									case 'EXCECAO TAB IPI':
+										scope.exctabIPI.push(planos)
 										break;
-
+									case 'TIPO OPERACAO':
+										scope.tipoOperacao.push(planos)
+										break;
+									case 'TIPO COMBUSTIVEL':
+										scope.tipoCombustivel.push(planos)
+										break;
+									case 'TIPO VEICULO':
+										scope.tipoVeiculo.push(planos)
+										break;
+									case 'ESPECIE VEICULO':
+										scope.espVeiculo.push(planos)
+										break;
+									case 'CONDICAO CHASSI':
+										scope.condClassi.push(planos)
+										break;
+									case 'CONDICAO':
+										scope.condicao.push(planos)
+										break;
+									case 'COR DENATRAN':
+										scope.corDetran.push(planos)
+										break;
+									case 'RESTRICAO':
+										scope.resticao.push(planos)
+										break;
+									case 'TIPO ARMA':
+										scope.tipoArma.push(planos)
+										break;
 								}
 							}
 						}
 
-
+debugger
 					}
 				}
 
-				qat.model.select.util("entidade/api/doisValores/fetchPage", true, new qat.model.doisValoresInquiryRequest(pageId, 100 / 20, true, JSON.parse(localStorage.getItem(
+				qat.model.select.util("entidade/api/doisValores/fetchPage", true, new qat.model.doisValoresInquiryRequest(2, 100 / 20, true, JSON.parse(localStorage.getItem(
 					"empresa")).id), fnCallbackDoisValor);
 
 
