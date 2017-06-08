@@ -152,8 +152,8 @@ Buttons Styles
   text-decoration: none;
 }
 
-/* ==========================================================================
-Layout 
+/* ========================================================================== #1B3975
+Layout
 ========================================================================== */
 .dark-bg {
   background: #24242a;
@@ -197,7 +197,7 @@ Preloader Style
   margin-top: 120px
 }
 
-.pricing_heading h2, 
+.pricing_heading h2,
 .pricing_heading p {
   color:#4e4e4e;
 }
@@ -213,7 +213,7 @@ Preloader Style
   font-size: 18px;
 }
 
-.pricing-area h3, 
+.pricing-area h3,
 .pricing-area span  {
   color: #fff;
 }
@@ -240,37 +240,37 @@ Preloader Style
   background:#f5f5f5
 }
 
-.pricing-area .price-three img, 
+.pricing-area .price-three img,
 .pricing-area .price-six img {
   position: absolute;
   right: 15px;
   top: 0;
 }
 
-.pricing-area .heading-one, 
-.pricing-area .heading-two, 
+.pricing-area .heading-one,
+.pricing-area .heading-two,
 .pricing-area .heading-three {
   padding:17px 0;
   border-radius:2px 2px 0 0;
-} 
+}
 
-.pricing-area .heading-one, 
-.pricing-area .heading-two, 
-.pricing-area .heading-three, 
-.pricing-area .heading-four, 
-.pricing-area .heading-five, 
-.pricing-area .heading-six, 
+.pricing-area .heading-one,
+.pricing-area .heading-two,
+.pricing-area .heading-three,
+.pricing-area .heading-four,
+.pricing-area .heading-five,
+.pricing-area .heading-six,
 .pricing-area .heading-seven {
   margin-left: -10px
 }
 
 
-.pricing-area .heading-one, 
+.pricing-area .heading-one,
 .pricing-area .price-one .plan-action .btn-primary {
   background: #e24f43
 }
 
-.pricing-area .heading-two, 
+.pricing-area .heading-two,
 .pricing-area .price-two .plan-action .btn-primary {
   background:#27AE60;
 }
@@ -280,29 +280,29 @@ Preloader Style
   background: #f39c12;
 }
 
-.pricing-area .heading-four, 
+.pricing-area .heading-four,
 .pricing-area .price-four .plan-action .btn-primary {
   background: #5c5c5c
 }
 
-.pricing-area .heading-five, 
+.pricing-area .heading-five,
 .pricing-area .price-five .plan-action .btn-primary {
   background: #5c5c5c
 }
 
-.pricing-area .heading-six, 
+.pricing-area .heading-six,
 .pricing-area .price-six .plan-action .btn-primary {
   background: #e24f43
 ;
 }
 
-.pricing-area .heading-seven, 
+.pricing-area .heading-seven,
 .pricing-area .price-seven .plan-action .btn-primary {
   background: #5c5c5c
 }
 
 .pricing-area .bg{
- background: #fafafa 
+ background: #fafafa
 }
 
 .pricing-area .heading-one h3:before {
@@ -395,27 +395,27 @@ Preloader Style
   z-index: -1;
 }
 
-.pricing-area .price-two .plan-action .btn-primary:before, 
+.pricing-area .price-two .plan-action .btn-primary:before,
 .pricing-area .price-two .plan-action .btn-primary:after {
   border-color: #1f8c4d transparent transparent;
 }
 
-.pricing-area .price-three .plan-action .btn-primary:before, 
+.pricing-area .price-three .plan-action .btn-primary:before,
 .pricing-area .price-three .plan-action .btn-primary:after {
   border-color: #d4880f transparent transparent;
 }
 
-.pricing-area .price-four .plan-action .btn-primary:before, 
-.pricing-area .price-four .plan-action .btn-primary:after, 
-.pricing-area .price-five .plan-action .btn-primary:before, 
-.pricing-area .price-five .plan-action .btn-primary:after, 
-.pricing-area .price-seven .plan-action .btn-primary:before, 
+.pricing-area .price-four .plan-action .btn-primary:before,
+.pricing-area .price-four .plan-action .btn-primary:after,
+.pricing-area .price-five .plan-action .btn-primary:before,
+.pricing-area .price-five .plan-action .btn-primary:after,
+.pricing-area .price-seven .plan-action .btn-primary:before,
 .pricing-area .price-seven .plan-action .btn-primary:after  {
   border-color: #424242 transparent transparent;
   right: -9px;
 }
 
-.pricing-area .price-six .plan-action .btn-primary:before, 
+.pricing-area .price-six .plan-action .btn-primary:before,
 .pricing-area .price-six .plan-action .btn-primary:after {
   border-color: #bf4539 transparent transparent;
   right: -9px;
@@ -425,7 +425,7 @@ Preloader Style
 Navigation Style
 ========================================================================== */
 .navbar-default {
-  background: rgba(13, 13, 13, 0.6);
+  background: #1B3975;
   margin-bottom: 0;
   border: none;
 }
@@ -434,7 +434,7 @@ Navigation Style
   padding-right: 15px;
 }
 .navbar-default .nav-wrap {
-  width: 75%;
+  width: 85%;
 }
 .navbar-default .nav > li > a {
   font-size: 14px;
