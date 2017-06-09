@@ -99,7 +99,7 @@ public class ControllerMain {
     @RequestMapping(value = "/request", method = RequestMethod.POST)
     public String listar(@RequestBody UtilRequest request) {
 
-		System.out.println("AQUI BOSTA :: " + PropertiesLoader.propertiesLoader().getProperty("smtp").toString());
+	//	System.out.println("AQUI BOSTA :: " + PropertiesLoader.propertiesLoader().getProperty("smtp").toString());
         RestTemplate restTemplate = new RestTemplate();
         String result ="";
         HttpHeaders headers = new HttpHeaders();

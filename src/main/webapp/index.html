@@ -713,50 +713,60 @@
                         <div class="cadastro-padding">
                             <h3 class="titulo-login titulo-cadastro" id="titulo-cadastro">DADOS DE CONTATO</h3>
                             <form id="form-cadastro" class="form-login" method="post" action="">
+                                <div ng-if="cc.show == true">
                                 <div id="cadastro-passo1" style="display: block;">
                                     <div class="input-contato erro">
                                         <label for="nome">Nome ou Razão Social</label>
-                                        <input id="nome" type="text" name="nome" placeholder="">
+                                        <input id="nome" ng-model="empresa.razao" type="text" name="nome" placeholder="">
                                     </div>
                                     <div class="input-contato">
                                         <label for="fone1">Telefone fixo <span>(só números, com DDD)</span></label>
-                                        <input id="fone1" type="text" name="fone1" placeholder="">
+                                        <input id="fone1" type="text" ng-model="empresa.telefones[0].numero" name="fone1" placeholder="">
+                                        <input class="hide" type="text" ng-init="empresa.telefones[0].telefoneTypeEnumValue = 9" name="fone1" placeholder="">
                                     </div>
                                     <div class="input-contato">
                                         <label for="fone2">Telefone celular <span>(só números, com DDD)</span></label>
-                                        <input id="fone2" type="text" name="fone2" placeholder="">
+                                        <input id="fone1" type="text" ng-model="empresa.telefones[1].numero" name="fone1" placeholder="">
+                                        <input class="hide" type="text" ng-init="empresa.telefones[1].telefoneTypeEnumValue = 10" name="fone1" placeholder="">
                                     </div>
                                     <div class="input-contato">
                                         <label for="email">Seu e-mail profissional</label>
-                                        <input id="email" type="text" name="email" placeholder="">
+                                        <input id="email" type="text" ng-model="empresa.emails[0].email" name="email" placeholder="">
+                                        <input class="hide" type="text" ng-init="empresa.emails[0].emailTypeEnumValue = 9" name="fone1" placeholder="">
                                     </div>
-                                    <div class="clearfix">
-                                        <input class="botao-login width-100 transition" type="button" value="CONTINUAR CADASTRO" id="botao-cadastro-passo1">
+                                    <div class="clearfix" style="width:100%">
+                                        <input class="botao-login transition" ng-click="cc.shows(false)" type="button" value="CONTINUAR CADASTRO" id="botao-cadastro-passo1">
                                     </div>
                                 </div>
-                                <div id="cadastro-passo2" style="display: none;">
-                                    <a href="#" id="link-cadastro-passo1">Voltar</a>
-                                    <div class="input-contato">
-                                        <label for="subdominio">Escolha um endereço de acesso</label>
-                                        <div class="clearfix">
-                                            <div class="especial-email">
-                                                <input id="subdominio" name="subdominio" type="text" placeholder="">
-                                            </div>
-                                            <p class="especial-email-texto">.egestor.com.br</p>
-                                        </div>
+                                </div>
+                                <div ng-if="cc.show == false">
+                                <div id="cadastro-passo2" >
+                                    <div class="row">
+                                    <a ng-click="cc.shows(true)" id="link-cadastro-passo1">Voltar</a>
                                     </div>
+                                    <div class="row">
+                                    <label for="contato">Tipo Empresa</label>
+                                    </div>
+                                    <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="1" checked><span>Advocacia</span></label>
+                                    <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="2"><span>Condominio</span></label>
+                                    <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="3"><span>Contador</span></label>
+                                    <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="4" ><span>Clinicas</span></label>
+                                    <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="5" ><span>Empresarial</span></label>
+
+
+
                                     <div id="boxSobreDominio"></div>
                                     <div class="input-contato">
                                         <label for="contato">Seu nome</label>
-                                        <input id="contato" type="text" name="contato" placeholder="">
+                                        <input id="contato" type="text" name="contato" ng-model="empresa.usuarios[0].nome" placeholder="">
                                     </div>
                                     <div class="input-contato">
-                                        <label for="login">Nome de usuário (login)</label>
-                                        <input id="login" type="text" name="login" placeholder="">
+                                        <label for="login">Nome de usuário (Email)</label>
+                                        <input id="login" type="text" ng-model="empresa.usuarios[0].email" name="login" placeholder="">
                                     </div>
                                     <div class="input-contato">
                                         <label for="senha">Senha de acesso</label>
-                                        <input id="senha" type="password" name="senha" placeholder="">
+                                        <input id="senha" type="password" ng-model="empresa.usuarios[0].senha" name="senha" placeholder="">
                                     </div>
                                     <div class="input-contato">
                                         <label for="senha2">Confirme a senha</label>
@@ -772,6 +782,7 @@
                                     <div class="clearfix">
                                         <input class="botao-login width-100 transition" type="submit" value="COMEÇAR TESTE GRATUITO" id="botao-cadastro-passo2">
                                     </div>
+                                </div>
                                 </div>
                                 <div id="cadastro-aviso-espera"></div>
                             </form>

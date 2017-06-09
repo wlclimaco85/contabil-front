@@ -4,15 +4,20 @@
 
     function principalController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory) {
         var vm = this;
-
+        vm.show = true;
         vm.doc ="";
         vm.docTipo ="";
+
+        vm.shows = function(s)
+        {
+          vm.show = s;
+        }
         vm.functionTest = function(s)
         {
           return s%3;
         }
         vm.generatePDF = function() {
-        
+
         kendo.drawing.drawDOM($("#contrato")).then(function(group) {
           kendo.drawing.pdf.saveAs(group, "Converted PDF.pdf");
         });
