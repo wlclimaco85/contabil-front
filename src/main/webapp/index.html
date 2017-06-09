@@ -235,7 +235,7 @@
         }
 
         .navbar-default {
-            background-color:#1B3975;
+            background-color: #1B3975;
         }
 
         .mbr-plan {
@@ -607,14 +607,14 @@
 
         .navbar-default {
             background: #1B3975!Important;
-            color : #fff!Important;
+            color: #fff!Important;
             margin-bottom: 0;
             border: none;
-            border-color:#1B3975!Important;
+            border-color: #1B3975!Important;
         }
 
-        .navbar-default .navbar-nav > li > a {
-            color : #fff!Important;
+        .navbar-default .navbar-nav>li>a {
+            color: #fff!Important;
         }
 
         .header-topo {
@@ -624,7 +624,7 @@
         }
 
         .container-banner {
-            margin-top : 6%!Important;
+            margin-top: 6%!Important;
         }
 
         #services {
@@ -650,26 +650,26 @@
     ============================================= -->
 
     <section class="main-header">
-                <aside class="header-topo">
-                <div class="corpo clearfix">
-                    <div class="contato-header-topo clearfix">
-                        <a href="contato.php" class="contato-header-topo-1">
-                            <div class="transition"></div>
-                            <p class="transition">Entre em contato</p>
-                        </a>
-                        <a href="tel:08006033336" class="contato-header-topo-2">
-                            <div class="transition"></div>
-                            <p class="transition">0800-603-3336</p>
-                        </a>
-                        <a class="sociais-topo-face transition" href="https://pt-pt.facebook.com/EgestorERP" target="_blank" title="Facebook">
-                            <i class="fa fa-facebook-official"></i>
-                        </a>
-                        <a class="sociais-topo-youtube transition" href="https://www.youtube.com/channel/UCBhMHOJZU1UqIdkm9G8Xp_g" target="_blank" title="Youtube">
-							<i class="fa fa-youtube-play" aria-hidden="true"></i>
-						</a>
-                    </div>
+        <aside class="header-topo">
+            <div class="corpo clearfix">
+                <div class="contato-header-topo clearfix">
+                    <a href="contato.php" class="contato-header-topo-1">
+                        <div class="transition"></div>
+                        <p class="transition">Entre em contato</p>
+                    </a>
+                    <a href="tel:08006033336" class="contato-header-topo-2">
+                        <div class="transition"></div>
+                        <p class="transition">0800-603-3336</p>
+                    </a>
+                    <a class="sociais-topo-face transition" href="https://pt-pt.facebook.com/EgestorERP" target="_blank" title="Facebook">
+                        <i class="fa fa-facebook-official"></i>
+                    </a>
+                    <a class="sociais-topo-youtube transition" href="https://www.youtube.com/channel/UCBhMHOJZU1UqIdkm9G8Xp_g" target="_blank" title="Youtube">
+                        <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                    </a>
                 </div>
-            </aside>
+            </div>
+        </aside>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -700,7 +700,7 @@
                 </div>
             </div>
         </nav>
-        <section id= "owl-hero" class="back-banner comeca-anima-mac" style="background-image: url(views/template-assets/img/sliders/Slide.jpg);height : 100%">
+        <section id="owl-hero" class="back-banner comeca-anima-mac" style="background-image: url(views/template-assets/img/sliders/Slide.jpg);height : 100%">
 
             <div class="corpo clearfix height-100">
                 <div class="container-banner detalhe">
@@ -712,80 +712,76 @@
                         </div>
                         <div class="cadastro-padding">
                             <h3 class="titulo-login titulo-cadastro" id="titulo-cadastro">DADOS DE CONTATO</h3>
-                            <form id="form-cadastro" class="form-login" method="post" action="">
                                 <div ng-if="cc.show == true">
-                                <div id="cadastro-passo1" style="display: block;">
-                                    <div class="input-contato erro">
-                                        <label for="nome">Nome ou Razão Social</label>
-                                        <input id="nome" ng-model="empresa.razao" type="text" name="nome" placeholder="">
-                                    </div>
-                                    <div class="input-contato">
-                                        <label for="fone1">Telefone fixo <span>(só números, com DDD)</span></label>
-                                        <input id="fone1" type="text" ng-model="empresa.telefones[0].numero" name="fone1" placeholder="">
-                                        <input class="hide" type="text" ng-init="empresa.telefones[0].telefoneTypeEnumValue = 9" name="fone1" placeholder="">
-                                    </div>
-                                    <div class="input-contato">
-                                        <label for="fone2">Telefone celular <span>(só números, com DDD)</span></label>
-                                        <input id="fone1" type="text" ng-model="empresa.telefones[1].numero" name="fone1" placeholder="">
-                                        <input class="hide" type="text" ng-init="empresa.telefones[1].telefoneTypeEnumValue = 10" name="fone1" placeholder="">
-                                    </div>
-                                    <div class="input-contato">
-                                        <label for="email">Seu e-mail profissional</label>
-                                        <input id="email" type="text" ng-model="empresa.emails[0].email" name="email" placeholder="">
-                                        <input class="hide" type="text" ng-init="empresa.emails[0].emailTypeEnumValue = 9" name="fone1" placeholder="">
-                                    </div>
-                                    <div class="clearfix" style="width:100%">
-                                        <input class="botao-login transition" ng-click="cc.shows(false)" type="button" value="CONTINUAR CADASTRO" id="botao-cadastro-passo1">
-                                    </div>
-                                </div>
-                                </div>
-                                <div ng-if="cc.show == false">
-                                <div id="cadastro-passo2" >
-                                    <div class="row">
-                                    <a ng-click="cc.shows(true)" id="link-cadastro-passo1">Voltar</a>
-                                    </div>
-                                    <div class="row">
-                                    <label for="contato">Tipo Empresa</label>
-                                    </div>
-                                    <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="1" checked><span>Advocacia</span></label>
-                                    <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="2"><span>Condominio</span></label>
-                                    <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="3"><span>Contador</span></label>
-                                    <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="4" ><span>Clinicas</span></label>
-                                    <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="5" ><span>Empresarial</span></label>
-
-
-
-                                    <div id="boxSobreDominio"></div>
-                                    <div class="input-contato">
-                                        <label for="contato">Seu nome</label>
-                                        <input id="contato" type="text" name="contato" ng-model="empresa.usuarios[0].nome" placeholder="">
-                                    </div>
-                                    <div class="input-contato">
-                                        <label for="login">Nome de usuário (Email)</label>
-                                        <input id="login" type="text" ng-model="empresa.usuarios[0].email" name="login" placeholder="">
-                                    </div>
-                                    <div class="input-contato">
-                                        <label for="senha">Senha de acesso</label>
-                                        <input id="senha" type="password" ng-model="empresa.usuarios[0].senha" name="senha" placeholder="">
-                                    </div>
-                                    <div class="input-contato">
-                                        <label for="senha2">Confirme a senha</label>
-                                        <input id="senha2" type="password" name="senha2" placeholder="">
-                                    </div>
-                                    <div class="input-termos">
-                                        <p>Aceito os <a href="contrato_egestor.html" target="_blank"><span>termos de utilização</span></a> do sistema</p>
-                                        <div class="check-termos">
-                                            <div class="ativa-check-termos"></div>
-                                            <input class="clica-check-termos" type="checkbox" name="termos">
+                                    <div id="cadastro-passo1" style="display: block;">
+                                        <div class="input-contato erro">
+                                            <label for="nome">Nome ou Razão Social</label>
+                                            <input id="nome" ng-model="empresa.razao" type="text" name="nome" placeholder="">
+                                        </div>
+                                        <div class="input-contato">
+                                            <label for="fone1">Telefone fixo <span>(só números, com DDD)</span></label>
+                                            <input id="fone1" type="text" ng-model="empresa.telefones[0].numero" name="fone1" placeholder="">
+                                            <input class="hide" type="text" ng-init="empresa.telefones[0].telefoneTypeEnumValue = 9" name="fone1" placeholder="">
+                                        </div>
+                                        <div class="input-contato">
+                                            <label for="fone2">Telefone celular <span>(só números, com DDD)</span></label>
+                                            <input id="fone1" type="text" ng-model="empresa.telefones[1].numero" name="fone1" placeholder="">
+                                            <input class="hide" type="text" ng-init="empresa.telefones[1].telefoneTypeEnumValue = 10" name="fone1" placeholder="">
+                                        </div>
+                                        <div class="input-contato">
+                                            <label for="email">Seu e-mail profissional</label>
+                                            <input id="email" type="text" ng-model="empresa.emails[0].email" name="email" placeholder="">
+                                            <input class="hide" type="text" ng-init="empresa.emails[0].emailTypeEnumValue = 9" name="fone1" placeholder="">
+                                        </div>
+                                        <div class="clearfix">
+                                            <input class="botao-login transition" style="width:100%" ng-click="cc.shows(false)" type="button" value="CONTINUAR CADASTRO" id="botao-cadastro-passo1">
                                         </div>
                                     </div>
-                                    <div class="clearfix">
-                                        <input class="botao-login width-100 transition" type="submit" value="COMEÇAR TESTE GRATUITO" id="botao-cadastro-passo2">
+                                </div>
+                                <div ng-if="cc.show == false">
+                                    <div id="cadastro-passo2">
+                                        <div class="row">
+                                            <a ng-click="cc.shows(true)" id="link-cadastro-passo1">Voltar</a>
+                                        </div>
+                                        <div class="row">
+                                            <label for="contato">Tipo Empresa</label>
+                                        </div>
+                                        <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="1" checked><span>Advocacia</span></label>
+                                        <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="2"><span>Condominio</span></label>
+                                        <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="3"><span>Contador</span></label>
+                                        <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="4" ><span>Clinicas</span></label>
+                                        <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="5" ><span>Empresarial</span></label>
+                                        <div id="boxSobreDominio"></div>
+                                        <div class="input-contato">
+                                            <label for="contato">Seu nome</label>
+                                            <input id="contato" type="text" name="contato" ng-model="empresa.usuarios[0].nome" placeholder="">
+                                        </div>
+                                        <div class="input-contato">
+                                            <label for="login">Nome de usuário (Email)</label>
+                                            <input id="login" type="text" ng-model="empresa.usuarios[0].email" name="login" placeholder="">
+                                        </div>
+                                        <div class="input-contato">
+                                            <label for="senha">Senha de acesso</label>
+                                            <input id="senha" type="password" ng-model="empresa.usuarios[0].senha" name="senha" placeholder="">
+                                        </div>
+                                        <div class="input-contato">
+                                            <label for="senha2">Confirme a senha</label>
+                                            <input id="senha2" type="password" name="senha2" placeholder="">
+                                        </div>
+                                        <div class="input-termos">
+                                            <p>Aceito os <a href="contrato_egestor.html" target="_blank"><span>termos de utilização</span></a> do sistema</p>
+                                            <div class="check-termos">
+                                                <div class="ativa-check-termos"></div>
+                                                <input class="clica-check-termos" type="checkbox" name="termos">
+                                            </div>
+                                        </div>
+                                        <div class="clearfix">
+                                            <input class="botao-login width-100 transition" type="submit" value="COMEÇAR TESTE GRATUITO" ng-click="saveEmpresa()" id="botao-cadastro-passo2">
+                                        </div>
                                     </div>
                                 </div>
-                                </div>
                                 <div id="cadastro-aviso-espera"></div>
-                            </form>
+
                             <!-- Fim do script de integração com a RD Station -->
                         </div>
                     </div>

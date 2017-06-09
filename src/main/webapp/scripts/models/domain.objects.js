@@ -2695,20 +2695,19 @@ qat.model.Empresa = function(_oObjet, _modelAction, _user)
 		this.dtAbertura = _oObjet.dtAbertura;
 		this.entidadeId = _oObjet.entidadeId;
 		this.entidadeEnum = _oObjet.entidadeEnum;
-		this.configuracao = _oObjet.configuracao ? new qat.model.configuracao(_oObjet.configuracao, _modelAction, _user) :
-		{};
+		this.configuracao = _oObjet.configuracao ? new qat.model.configuracao(_oObjet.configuracao, _modelAction, _user) :null;
 		this.usuarios = _oObjet.usuarios;
 		this.bancos = _oObjet.bancos;
 		this.socios = _oObjet.socios;
-		//	this.siteList = _oObjet.siteList;
+		this.tipo = _oObjet.tipo;
+		this.primeiroAcesso = _oObjet.primeiroAcesso;
 		this.responsavel = _oObjet.responsavel;
 		this.notificacoes = _oObjet.notificacoes;
 		this.entidadeId = _oObjet.entidadeId;
 		this.numFunc = _oObjet.numFunc;
 		this.statusInicial = _oObjet.statusInicial;
 		this.entidadeEnumValue = _oObjet.entidadeEnumValue;
-		this.regime = _oObjet.regime ? qat.model.fnRegime(_oObjet.regime, _oObjet.regime.id ? _modelAction : "INSERT", _user) :
-		{};
+		this.regime = _oObjet.regime ? qat.model.fnRegime(_oObjet.regime, _oObjet.regime.id ? _modelAction : "INSERT", _user) : null;
 		this.documentos = _oObjet.documentos ? qat.model.fnDocumentos(_oObjet.documentos, _modelAction, _user) : [];
 		this.enderecos = _oObjet.enderecos ? qat.model.fnEnderecos(_oObjet.enderecos, _modelAction, _user) :
 		{};
