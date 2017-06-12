@@ -271,9 +271,7 @@ var WebDaptiveAppConfig = {
 		//debugger
 		validator.setValidElementStyling(false);
 		validator.setInvalidElementStyling(false);
-
 		editableOptions.theme = 'bs3'; // bootstrap
-		console.log(JSON.parse(localStorage.getItem('empresa')))
 		$rootScope.main = {
 			brand: (JSON.parse(localStorage.getItem('empresa')) ? (JSON.parse(localStorage.getItem('empresa')).nome ? JSON.parse(localStorage.getItem('empresa')).razao : '') :
 				'E-Contábil'),

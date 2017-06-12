@@ -1621,8 +1621,7 @@ qat.model.Emails = function(_oObjet, _modelAction, _user)
 {
 	var email = {};
 	var emails = [];
-	debugger
-	if(_oObjet[0])
+	if(_oObjet)
 	{
 		email = qat.model.Email(_oObjet[0], _oObjet[0].id ? _modelAction : "INSERT", _user)
 		emails.push(email)
@@ -1637,18 +1636,20 @@ qat.model.Telefones = function(_oObjet, _modelAction, _user)
 	//debugger
 	var email = {};
 	var emails = [];
+	if(_oObjet)
+	{
 //	for (var x = 0; x < _oObjet.length; x++)
 //	{
 		email = qat.model.Telefone(_oObjet[0], _oObjet[0].id ? _modelAction : "INSERT", _user)
 		emails.push(email)
 //	}
+	}
 
 	return emails;
 }
 
 qat.model.Cnaes = function(_oObjet, _modelAction, _user)
 {
-	debugger
 	var email = {};
 	var emails = [];
 	for (var x = 0; x < _oObjet.length; x++)

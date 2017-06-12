@@ -90,8 +90,8 @@
 
 	}]);
 
-	commonControllers.controller('LoginController', ['$scope', '$rootScope', '$location', 'localStorageService','WDAuthentication', 'SysMgmtData', 'toastr',
-		function($scope, $rootScope, $location, localStorageService, WDAuthentication,SysMgmtData, toastr) {
+	commonControllers.controller('LoginController', ['$scope', '$rootScope', '$location', 'localStorageService','WDAuthentication','SysMgmtData', 'toastr','ModalService',
+		function($scope, $rootScope, $location, localStorageService, WDAuthentication,SysMgmtData, toastr,ModalService) {
 
 			$scope.login = function() {
 				WDAuthentication.processLogin(WebDaptiveAppConfig.authenticationURL, $.param({username: $scope.username, password: $scope.password}), function(authenticationResult) {
@@ -109,8 +109,45 @@
 		                    request: new qat.model.empresaInquiryRequest( 100/20, true,currentUser.user,null,null)}, function(res){
 								if(res.operationSuccess == true)
 								{
+									debugger
 									localStorageService.set('empresa', res.empresaList[0]);
 									localStorage.setItem("empresa", JSON.stringify(res.empresaList[0]));
+									if(res.empresaList[0].primeiroAcesso == 0)
+									{
+											if(res.empresaList[0].tipo == 1)
+											{
+												dialogFactory.dialog('views/util/dialog/dPrimeiraAdvocacia.html', "ClienteInsertController", validationFactory.cliente, function(){});
+											}else if(res.empresaList[0].tipo == 2){
+												dialogFactory.dialog('views/cadastros/dialog/dPrimeiraClinica.html', "ClienteInsertController", validationFactory.cliente, function(){});
+											}
+											else if(res.empresaList[0].tipo == 3){
+												dialogFactory.dialog('views/cadastros/dialog/dPrimeiraCondominio.html', "ClienteInsertController", validationFactory.cliente, function(){});
+											}
+											else if(res.empresaList[0].tipo == 4){
+												dialogFactory.dialog('views/cadastros/dialog/dPrimeiraContador.html', "ClienteInsertController", validationFactory.cliente, function(){});
+											}
+											else if(res.empresaList[0].tipo == 5){
+												dialogFactory.dialog('views/cadastros/dialog/dPrimeiraEmpresa.html', "ClienteInsertController", validationFactory.cliente, function(){});
+											}
+											else if(res.empresaList[0].tipo == 6){
+											//	dialogFactory.dialog('views/util/dialog/dPrimeiraEmpresa.html', "ClienteInsertController", validationFactory.cliente, function(){});
+											 var _close = function(){console .log('close')};
+												 ModalService.showModal({
+													templateUrl: 'views/util/dialog/dPrimeiraEmpresa.html',
+													controller: "ClienteInsertController"
+													}).then(function(modal) {
+															modal.element.modal();
+															modal.close.then(function(result) {
+																	if ((_close != null) && (_close != undefined))
+																			_close();
+															});
+													});
+											}
+											else
+											{
+												dialogFactory.dialog('views/cadastros/dialog/dPrimeiraEmpresa.html', "ClienteInsertController", validationFactory.cliente, function(){});
+											}
+										}
 								}
 					          });
 
