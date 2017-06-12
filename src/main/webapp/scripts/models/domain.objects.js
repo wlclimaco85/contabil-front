@@ -38,7 +38,7 @@ qat.model.procedure = function(_procId, _procCode, _procDesc, _procPrice,
 /** create by system gera-java version 1.0.0 19/05/2016 15:9 : 2*/
 
 //Servico Object
-qat.model.Servico = function(_oObjet)
+qat.model.Servico = function(_oObjet,$log)
 {
 	this.id = _oObjet.id;
 	this.nome = _oObjet.nome;
@@ -53,11 +53,14 @@ qat.model.Servico = function(_oObjet)
 	this.createDateUTC = (new Date()).getTime();
 	this.modifyUser = 'sysrem'; //$rootScope.user;
 	this.modifyDateUTC = (new Date()).getTime();
+
+	if($log)
+		$log.info("add Serviço");
 }
 /** create by system gera-java version 1.0.0 19/05/2016 15:9 : 2*/
 
 //ServicoByPlano Object
-qat.model.ServicoByPlano = function(_oObjet)
+qat.model.ServicoByPlano = function(_oObjet,$log)
 {
 	this.id = _oObjet.id;
 	this.parentId = _oObjet.parentId;
@@ -71,12 +74,15 @@ qat.model.ServicoByPlano = function(_oObjet)
 	this.createDateUTC = (new Date()).getTime();
 	this.modifyUser = 'sysrem'; //$rootScope.user;
 	this.modifyDateUTC = (new Date()).getTime();
+
+	if($log)
+		$log.info("add Serviço");
 }
 
 /** create by system gera-java version 1.0.0 19/05/2016 15:9 : 2*/
 
 //Site Object
-qat.model.Site = function(_oObjet)
+qat.model.Site = function(_oObjet,$log)
 {
 
 	this.id = _oObjet ? _oObjet.id : null;
@@ -101,12 +107,15 @@ qat.model.Site = function(_oObjet)
 	this.createDateUTC = (new Date()).getTime();
 	this.modifyUser = 'sysrem'; //$rootScope.user;
 	this.modifyDateUTC = (new Date()).getTime();
+
+	if($log)
+		$log.info("add Serviço");
 }
 
 /** create by system gera-java version 1.0.0 19/05/2016 15:9 : 2*/
 
 //Contato Object
-qat.model.Contato = function(_oObjet)
+qat.model.Contato = function(_oObjet,$log)
 {
 	this.id = _oObjet.id;
 	this.parentId = _oObjet.parentId;
@@ -123,12 +132,15 @@ qat.model.Contato = function(_oObjet)
 	this.createDateUTC = (new Date()).getTime();
 	this.modifyUser = 'sysrem'; //$rootScope.user;
 	this.modifyDateUTC = (new Date()).getTime();
+
+	if($log)
+		$log.info("add Serviço");
 }
 
 /** create by system gera-java version 1.0.0 19/05/2016 15:9 : 2*/
 
 //ContatoItens Object
-qat.model.ContatoItens = function(_oObjet)
+qat.model.ContatoItens = function(_oObjet,$log)
 {
 	this.id = _oObjet.id;
 	this.dataAlt = _oObjet.dataAlt;
@@ -145,12 +157,15 @@ qat.model.ContatoItens = function(_oObjet)
 	this.createDateUTC = (new Date()).getTime();
 	this.modifyUser = 'sysrem'; //$rootScope.user;
 	this.modifyDateUTC = (new Date()).getTime();
+
+	if($log)
+		$log.info("add Serviço");
 }
 
 /** create by system gera-java version 1.0.0 19/05/2016 15:9 : 2*/
 
 //OrdemServico Object
-qat.model.OrdemServico = function(_oObjet)
+qat.model.OrdemServico = function(_oObjet,$log)
 {
 	this.id = _oObjet.id;
 	this.emprId = _oObjet.emprId;
@@ -169,12 +184,15 @@ qat.model.OrdemServico = function(_oObjet)
 	this.createDateUTC = (new Date()).getTime();
 	this.modifyUser = 'sysrem'; //$rootScope.user;
 	this.modifyDateUTC = (new Date()).getTime();
+
+	if($log)
+		$log.info("add Serviço");
 }
 
 /** create by system gera-java version 1.0.0 19/05/2016 15:9 : 2*/
 
 //OrdemServicoItens Object
-qat.model.OrdemServicoItens = function(_oObjet)
+qat.model.OrdemServicoItens = function(_oObjet,$log)
 {
 	this.id = _oObjet.id;
 	this.data = _oObjet.data;
@@ -189,12 +207,15 @@ qat.model.OrdemServicoItens = function(_oObjet)
 	this.createDateUTC = (new Date()).getTime();
 	this.modifyUser = 'sysrem'; //$rootScope.user;
 	this.modifyDateUTC = (new Date()).getTime();
+
+	if($log)
+		$log.info("add Serviço");
 }
 
 /** create by system gera-java version 1.0.0 19/05/2016 15:9 : 2*/
 
 //Plano Object
-qat.model.Plano = function(_oObjet)
+qat.model.Plano = function(_oObjet,$log)
 {
 	this.id = _oObjet.id;
 	this.dataInicio = _oObjet.dataInicio;
@@ -213,9 +234,12 @@ qat.model.Plano = function(_oObjet)
 	this.createDateUTC = (new Date()).getTime();
 	this.modifyUser = 'sysrem'; //$rootScope.user;
 	this.modifyDateUTC = (new Date()).getTime();
+
+	if($log)
+		$log.info("add Serviço");
 }
 
-qat.model.transaction = function(_user, _token, modelAction)
+qat.model.transaction = function(_user, _token, modelAction,$log)
 {
 
 	var _emprId = null;
@@ -228,6 +252,8 @@ qat.model.transaction = function(_user, _token, modelAction)
 	{
 		_emprId = JSON.parse(localStorage.getItem('empresa')).id;
 	}
+	if($log)
+		$log.info("add Serviço");
 	return {
 
 		token: _token,
@@ -243,8 +269,10 @@ qat.model.transaction = function(_user, _token, modelAction)
 	}
 }
 
-qat.model.fnCnae = function(_oObjet, _modelAction, _user)
+qat.model.fnCnae = function(_oObjet, _modelAction, _user,$log)
 {
+	if($log)
+		$log.info("add Serviço");
 	if (_oObjet)
 	{
 		return idCnae = {
@@ -264,8 +292,10 @@ qat.model.fnCnae = function(_oObjet, _modelAction, _user)
 	}
 
 }
-qat.model.fnRegime = function(_oObjet, modelAction)
+qat.model.fnRegime = function(_oObjet, modelAction,$log)
 {
+	if($log)
+		$log.info("add Serviço");
 	if (_oObjet.id)
 	{
 		return regime = {
@@ -287,7 +317,7 @@ qat.model.fnRegime = function(_oObjet, modelAction)
 
 }
 
-qat.model.fnCnaeEmpresa = function(_oObjet, modelAction, user)
+qat.model.fnCnaeEmpresa = function(_oObjet, modelAction, user,$log)
 {
 	var _emprId = null;
 	if (localStorage.getItem('empresa') == null ||
@@ -299,6 +329,8 @@ qat.model.fnCnaeEmpresa = function(_oObjet, modelAction, user)
 	{
 		_emprId = JSON.parse(localStorage.getItem('empresa')).id;
 	}
+	if($log)
+		$log.info("add Serviço");
 	return cnaes = {
 		idCnae: _oObjet,
 		emprId: _emprId,
@@ -310,7 +342,7 @@ qat.model.fnCnaeEmpresa = function(_oObjet, modelAction, user)
 	}
 }
 
-qat.model.fnFormaReceber = function(_oObjet, _action)
+qat.model.fnFormaReceber = function(_oObjet, _action,$log)
 {
 	var _emprId = null;
 	if (localStorage.getItem('empresa') == null ||
@@ -323,6 +355,8 @@ qat.model.fnFormaReceber = function(_oObjet, _action)
 		_emprId = JSON.parse(localStorage.getItem('empresa')).id;
 	}
 	var _fornecedor = {};
+	if($log)
+		$log.info("add Serviço");
 	if (_oObjet.cliente)
 	{
 		if (_oObjet.cliente.description)
@@ -334,6 +368,8 @@ qat.model.fnFormaReceber = function(_oObjet, _action)
 			_fornecedor = _oObjet.cliente;
 		}
 	}
+	if($log)
+		$log.info("add Serviço");
 	return cnaes = {
 		id: _oObjet.id ? _oObjet.id : null,
 		descricao: _oObjet.descricao,
@@ -377,10 +413,12 @@ qat.model.fnFormaReceber = function(_oObjet, _action)
 		createDateUTC: (new Date()).getTime(),
 		modifyUser: "System",
 		modifyDateUTC: (new Date()).getTime(),
+
+
 	}
 }
 
-qat.model.fnFormaPagar = function(_oObjet, _action)
+qat.model.fnFormaPagar = function(_oObjet, _action,$log)
 {
 	var _emprId = null;
 	if (localStorage.getItem('empresa') == null ||
@@ -681,9 +719,9 @@ qat.model.fnSocios = function(_cota, _por, _adm, _nome, _cpf, id, type,
 			nome: _nome,
 			pessoaTypeEnumValue: 6,
 			documentos: [
-			{
-				documentoTypeEnumValue: 2,
-				numero: _cpf
+				{
+					documentoTypeEnumValue: 2,
+					numero: _cpf
             }],
 			emprId: _emprId,
 			modelAction: modelAction,
@@ -755,7 +793,7 @@ qat.model.fnNFNotaInfoItemImpostoIPI = function(_Ipi, _modelAction, _user)
 		codigoEnquadramento: _Ipi.codigoEnquadramento,
 		tributado: _Ipi.tributado,
 		naoTributado: _Ipi.naoTributado,
-		tipoCalculo : _Ipi.tipoCalculo ? _Ipi.tipoCalculo : null,
+		tipoCalculo: _Ipi.tipoCalculo ? _Ipi.tipoCalculo : null,
 		emprId: JSON.parse(localStorage.getItem('empresa')).id,
 		tableEnumValue: 53,
 		modelAction: _modelAction,
@@ -772,15 +810,11 @@ qat.model.fnNFNotaInfoItemImpostoPIS = function(_Pis, _modelAction, _user)
 {
 	NFNotaInfoItemImpostoIPI = {
 		id: _Pis.id,
-		aliquota: _Pis.aliquota ? _Pis.aliquota :
-		null,
-		quantidade: _Pis.quantidade ? _Pis.quantidade :
-		null,
-		naoTributado: _Pis.naoTributado ? _Pis.naoTributado :
-		null,
-		outrasOperacoes: _Pis.outrasOperacoes ? _Pis.outrasOperacoes :
-		null,
-		tipoCalculo : (_Pis.tipoCalculo ? _Pis.tipoCalculo : null),
+		aliquota: _Pis.aliquota ? _Pis.aliquota : null,
+		quantidade: _Pis.quantidade ? _Pis.quantidade : null,
+		naoTributado: _Pis.naoTributado ? _Pis.naoTributado : null,
+		outrasOperacoes: _Pis.outrasOperacoes ? _Pis.outrasOperacoes : null,
+		tipoCalculo: (_Pis.tipoCalculo ? _Pis.tipoCalculo : null),
 		emprId: JSON.parse(localStorage.getItem('empresa')).id,
 		tableEnumValue: 53,
 		modelAction: _modelAction,
@@ -797,15 +831,11 @@ qat.model.fnNFNotaInfoItemImpostoCOFINS = function(_Cofins, _modelAction, _user)
 {
 	NFNotaInfoItemImpostoCOFINS = {
 		id: _Cofins.id,
-		aliquota: _Cofins.aliquota ? _Cofins.aliquota :
-		null,
-		quantidade: _Cofins.quantidade ? _Cofins.quantidade :
-		null,
-		naoTributado: _Cofins.naoTributado ? _Cofins.naoTributado :
-		null,
-		outrasOperacoes: _Cofins.outrasOperacoes ? _Cofins.outrasOperacoes :
-		null,
-		tipoCalculo : _Cofins.tipoCalculo ? _Cofins.tipoCalculo : null,
+		aliquota: _Cofins.aliquota ? _Cofins.aliquota : null,
+		quantidade: _Cofins.quantidade ? _Cofins.quantidade : null,
+		naoTributado: _Cofins.naoTributado ? _Cofins.naoTributado : null,
+		outrasOperacoes: _Cofins.outrasOperacoes ? _Cofins.outrasOperacoes : null,
+		tipoCalculo: _Cofins.tipoCalculo ? _Cofins.tipoCalculo : null,
 		emprId: JSON.parse(localStorage.getItem('empresa')).id,
 		tableEnumValue: 53,
 		modelAction: _modelAction,
@@ -945,19 +975,26 @@ qat.model.fnProduto = function(_produto, _modelAction, _userId)
 		ncm: _produto.ncm,
 		cdBarras: _produto.cdBarras,
 		dataCreate: _produto.dataCreate,
-		excTabIPI: _produto.excTabIPI,
+		excTabIPI: _produto.excTabIPI ? _produto.excTabIPI : null,
 		cEST: _produto.cEST,
 		quant: _produto.quant,
 		uniMed: _produto.uniMed ?
 		{
 			id: _produto.uniMed.id
-		} :
-		{},
+		} : null,
 		marca: _produto.marca ?
 		{
 			id: _produto.marca.id
-		} :
-		{},
+		} : null,
+		origem: _produto.origem ?
+		{
+			id: _produto.origem.id
+		} : null,
+		produtoTipo: _produto.produtoTipo ? _produto.produtoTipo : null,
+		veiculo: _produto.veiculo ? _produto.veiculo : null,
+		medicamento: _produto.medicamento ? _produto.medicamento : null,
+		armamento: _produto.armamento ? _produto.armamento : null,
+		combustivel: _produto.combustivel ? _produto.combustivel : null,
 		parentId: 0,
 		emprId: _emprId,
 		produto: _produto.produto,
@@ -1584,9 +1621,10 @@ qat.model.Emails = function(_oObjet, _modelAction, _user)
 {
 	var email = {};
 	var emails = [];
-	for (var x = 0; x < _oObjet.length; x++)
+	debugger
+	if(_oObjet[0])
 	{
-		email = qat.model.Email(_oObjet[x], _oObjet[x].id ? _modelAction : "INSERT", _user)
+		email = qat.model.Email(_oObjet[0], _oObjet[0].id ? _modelAction : "INSERT", _user)
 		emails.push(email)
 	}
 
@@ -1596,13 +1634,14 @@ qat.model.Emails = function(_oObjet, _modelAction, _user)
 
 qat.model.Telefones = function(_oObjet, _modelAction, _user)
 {
+	//debugger
 	var email = {};
 	var emails = [];
-	for (var x = 0; x < _oObjet.length; x++)
-	{
-		email = qat.model.Telefone(_oObjet[x], _oObjet[x].id ? _modelAction : "INSERT", _user)
+//	for (var x = 0; x < _oObjet.length; x++)
+//	{
+		email = qat.model.Telefone(_oObjet[0], _oObjet[0].id ? _modelAction : "INSERT", _user)
 		emails.push(email)
-	}
+//	}
 
 	return emails;
 }
@@ -2128,10 +2167,10 @@ qat.model.NFNotaInfoItemImpostoISSQN = function(_oObjet, _modelAction, _user)
 	this.valorDescontoCondicionado = _oObjet.valorDescontoCondicionado;
 	this.valorRetencaoISS = _oObjet.valorRetencaoISS;
 	this.indicadorExigibilidadeISS = _oObjet.indicadorExigibilidadeISS ?
-	{
-		id: _oObjet.indicadorExigibilidadeISS.id
-	} :
-	null;
+		{
+			id: _oObjet.indicadorExigibilidadeISS.id
+		} :
+		null;
 	this.codigoServico = _oObjet.codigoServico;
 	this.codigoMunicipioIncidenciaImposto = _oObjet.codigoMunicipioIncidenciaImposto;
 	this.codigoPais = _oObjet.codigoPais;
@@ -2666,7 +2705,7 @@ qat.model.configuracao = function(_oObjet, _modelAction, _user)
 	this.confBlueSoft = _oObjet.confBlueSoft ? new qat.model.confBlueSoft(_oObjet.confBlueSoft, _oObjet.confBlueSoft.id ? _modelAction : "INSERT", _user) :
 	{};
 	this.boletoList = [_oObjet.boletoList ? new qat.model.boleto(_oObjet.boletoList, _oObjet.boletoList.id ? _modelAction : "INSERT", _user) :
-	{}];
+		{}];
 	this.parentId = _oObjet.parentId;
 	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
 	this.processId = _oObjet.processId;
@@ -2683,7 +2722,7 @@ qat.model.configuracao = function(_oObjet, _modelAction, _user)
 /** create by system gera-java version 1.0.0 01/06/2016 14:44 : 36*/
 
 //Empresa Object
-qat.model.Empresa = function(_oObjet, _modelAction, _user)
+qat.model.Empresa = function(_oObjet, _modelAction, _user,$log)
 {
 
 	if (_oObjet != undefined)
@@ -2692,28 +2731,28 @@ qat.model.Empresa = function(_oObjet, _modelAction, _user)
 		this.nome = _oObjet.nome;
 		this.razao = _oObjet.razao;
 		this.statusEmpresa = _oObjet.statusEmpresa;
-		this.dtAbertura = _oObjet.dtAbertura;
-		this.entidadeId = _oObjet.entidadeId;
+		this.dtAbertura = _oObjet.dtAbertura ? _oObjet.dtAbertura : (new Date()).getTime();
+		this.entidadeId = JSON.parse(localStorage.getItem('empresa')) ? JSON.parse(localStorage.getItem('empresa')).id : null;
 		this.entidadeEnum = _oObjet.entidadeEnum;
-		this.configuracao = _oObjet.configuracao ? new qat.model.configuracao(_oObjet.configuracao, _modelAction, _user) :null;
-		this.usuarios = _oObjet.usuarios;
-		this.bancos = _oObjet.bancos;
-		this.socios = _oObjet.socios;
+		this.configuracao = _oObjet.configuracao ? new qat.model.configuracao(_oObjet.configuracao, _modelAction, _user) : null;
+		this.usuarios = [_oObjet.usuarios ? new qat.model.Usuario(_oObjet.usuarios[0], _modelAction, _user) : null];
+		this.bancos = _oObjet.bancos ? _oObjet.bancos : null;
+		this.socios = _oObjet.socios ? _oObjet.socios : null;
 		this.tipo = _oObjet.tipo;
-		this.primeiroAcesso = _oObjet.primeiroAcesso;
+		this.primeiroAcesso = _oObjet.primeiroAcesso ? _oObjet.primeiroAcesso : 0;
 		this.responsavel = _oObjet.responsavel;
 		this.notificacoes = _oObjet.notificacoes;
-		this.entidadeId = _oObjet.entidadeId;
-		this.numFunc = _oObjet.numFunc;
+		this.numFunc = _oObjet.numFunc ? _oObjet.numFunc : 0;
 		this.statusInicial = _oObjet.statusInicial;
 		this.entidadeEnumValue = _oObjet.entidadeEnumValue;
 		this.regime = _oObjet.regime ? qat.model.fnRegime(_oObjet.regime, _oObjet.regime.id ? _modelAction : "INSERT", _user) : null;
-		this.documentos = _oObjet.documentos ? qat.model.fnDocumentos(_oObjet.documentos, _modelAction, _user) : [];
+		this.documentos = _oObjet.documentos ? qat.model.fnDocumentos(_oObjet.documentos, _modelAction, _user) : null;
 		this.enderecos = _oObjet.enderecos ? qat.model.fnEnderecos(_oObjet.enderecos, _modelAction, _user) :
-		{};
-		this.emails = _oObjet.emails ? qat.model.Emails(_oObjet.emails, _modelAction, _user) : [];
-		this.telefones = _oObjet.telefones ? qat.model.Telefones(_oObjet.telefones, _modelAction, _user) : [];
-		this.cnaes = _oObjet.cnaes ? qat.model.Cnaes(_oObjet.cnaes, _modelAction, _user) : []
+		null;
+		this.emails = (qat.model.Emails(_oObjet.emails, _modelAction, _user))
+		this.telefones = (qat.model.Telefones(_oObjet.telefones, _modelAction, _user))
+
+		this.cnaes = _oObjet.cnaes ? qat.model.Cnaes(_oObjet.cnaes, _modelAction, _user) : null
 		this.statusList = _oObjet.statusList;
 		this.notes = _oObjet.notes;
 		this.parentId = _oObjet.parentId;
@@ -2725,33 +2764,36 @@ qat.model.Empresa = function(_oObjet, _modelAction, _user)
 		this.createDateUTC = (new Date()).getTime();
 		this.modifyUser = _user;
 		this.modifyDateUTC = (new Date()).getTime();
-	}
-	else
-	{
-		this.id = 0;
-		this.nome = '';
-		this.entidadeId = 0;
-		this.numFunc = 0;
-		this.statusInicial = null;
-		this.entidadeEnumValue = 1;
-		this.regime = [];
-		this.documentos = [];
-		this.enderecos = [];
-		this.emails = [];
-		this.telefones = [];
-		this.cnaes = [];
-		this.statusList = [];
-		this.notes = [];
-		this.parentId = 0;
-		this.emprId = 0;
-		this.processId = 0;
-		this.tableEnumValue = 1;
-		this.modelAction = 'NONE';
-		this.createUser = _user;
-		this.createDateUTC = (new Date()).getTime();
-		this.modifyUser = _user;
-		this.modifyDateUTC = (new Date()).getTime();
-	}
+
+		if($log)
+		$log.info("Domain Empresa","Teste");
+}
+else
+{
+	this.id = 0;
+	this.nome = '';
+	this.entidadeId = 0;
+	this.numFunc = 0;
+	this.statusInicial = null;
+	this.entidadeEnumValue = 1;
+	this.regime = [];
+	this.documentos = [];
+	this.enderecos = [];
+	this.emails = [];
+	this.telefones = [];
+	this.cnaes = [];
+	this.statusList = [];
+	this.notes = [];
+	this.parentId = 0;
+	this.emprId = 0;
+	this.processId = 0;
+	this.tableEnumValue = 1;
+	this.modelAction = 'NONE';
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+}
 }
 
 /** create by system gera-java version 1.0.0 01/06/2016 14:44 : 36*/
@@ -2817,7 +2859,7 @@ qat.model.Deposito = function(_oObjet)
 /** create by system gera-java version 1.0.0 01/06/2016 14:44 : 36*/
 
 //Usuario Object
-qat.model.Usuario = function(_oObjet, _user)
+qat.model.Usuario = function(_oObjet,  _modelAction,_user)
 {
 	this.id = _oObjet.id;
 	this.nome = _oObjet.nome;
@@ -2832,7 +2874,7 @@ qat.model.Usuario = function(_oObjet, _user)
 	this.emprId = _oObjet.emprId;
 	this.processId = _oObjet.processId;
 	this.tableEnumValue = _oObjet.tableEnumValue;
-	this.modelAction = _oObjet.modelAction;
+	this.modelAction = _modelAction;
 	this.createUser = _user;
 	this.createDateUTC = (new Date()).getTime();
 	this.modifyUser = _user;

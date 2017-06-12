@@ -3,12 +3,15 @@
 	angular.module('wdApp.apps.principal', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
 		.controller('PrincipalController', principalController);
 
-	function principalController( fModels,$scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory)
+	function principalController($location,$log, fModels,$scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory)
 	{
 		var vm = this;
 		vm.show = true;
 		vm.doc = "";
 		vm.docTipo = "";
+
+		var $window;
+            $window = $(window);
 
         $scope.empresa = {};
 
@@ -67,9 +70,18 @@
 		}
 		$scope.saveEmpresa = function()
 		{
+			$log.info("Insert empresa ","Teste");
+			if($scope.empresa.documentos[0].numero.length > 12)
+			{
+				$scope.empresa.documentos[0].documentoType = "CNPJ"
+			}
+			else
+			{
+				$scope.empresa.documentos[0].documentoType = "CPF"
+				$scope.empresa.nome = $scope.empresa.razao;
 
-			debugger
-			var oObject = fModels.amont( new qat.model.Empresa($scope.empresa, "INSERT", 'anonimo'), "INSERT");
+			}
+			var oObject = fModels.amont( new qat.model.Empresa($scope.empresa, "INSERT", 'anonimo',$log), "INSERT");
 
 			SysMgmtData.processPostPageData("main/api/anonimo",
 			{
@@ -77,11 +89,17 @@
 				request: new qat.model.reqEmpr(oObject, true, true)
 			}, function(res)
 			{
-				console.log(res)
-				debugger
+
+
 				if (res.operationSuccess == true)
 				{
-					debugger
+					window.location.href = "http://localhost:8080/springmvc-angularjs/index3.html#/pages/signin"
+			//		$location.path( "/pages/signin" );
+					$log.warn("Empresa foi inserida com sucesso ","Teste");
+				}
+				else
+				{
+					$log.error("Error ao inserir Empresa","Teste");
 				}
 
 			});

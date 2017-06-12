@@ -12,7 +12,6 @@
          vm.fnDelete = fnDelete;
          vm.fnEdit = fnEdit;
 
-
          function parseDate(input) {
              var parts = input.split('-');
              return new Date(parts[2], parts[1] - 1, parts[0]);
