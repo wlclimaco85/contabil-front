@@ -66,7 +66,6 @@
       }
 
       $scope.change = function() {
-       debugger
       };
 
       $scope.submit = function() {
@@ -109,7 +108,6 @@
 		                    request: new qat.model.empresaInquiryRequest( 100/20, true,currentUser.user,null,null)}, function(res){
 								if(res.operationSuccess == true)
 								{
-									debugger
 									localStorageService.set('empresa', res.empresaList[0]);
 									localStorage.setItem("empresa", JSON.stringify(res.empresaList[0]));
 									if(res.empresaList[0].primeiroAcesso == 0)

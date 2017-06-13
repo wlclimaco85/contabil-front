@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>E-Contábil</title>
+    <title>E-Contรกbil</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
@@ -36,14 +36,12 @@
     <link href="views/template-assets/plugins/Icons/et-line-font/style.css" rel="stylesheet">
     <link href="views/template-assets/plugins/animate.css/animate.css" rel="stylesheet">
 
-    <link href="thirdparty/twitter-bootstrap-wizard-master/prettify.css" rel="stylesheet">
     <link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload.css">
     <link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload-ui.css">
 
     <link rel="stylesheet" href="dist/css/formValidation.css" />
     <link rel="stylesheet" href="dist/css/select2.css" />
     <link rel="stylesheet" href="thirdparty/aaPrincipal/css/select2_3_4_8.css">
-    <link href="thirdparty/twitter-bootstrap-wizard-master/prettify.css" rel="stylesheet">
     <link href="thirdparty/twitter-bootstrap-wizard-master/prettify.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <link href="thirdparty/bootstrap-fileinput-master/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
@@ -691,10 +689,10 @@
                             <li><a href="#services" class="page-scroll">Clinicas Medicas</a></li>
                             <li><a href="#portfolio" class="page-scroll">Escritorio Advocacia</a></li>
                             <li><a href="#portfolio" class="page-scroll">Condominio</a></li>
-                            <li><a href="#services" class="page-scroll">Sistema de Gestão</a></li>
+                            <li><a href="#services" class="page-scroll">Sistema de Gestรฃo</a></li>
                             <li><a href="#contact" class="page-scroll">Contato</a></li>
                             <!--   <li><a href="#wizard" class="page-scroll">Migrar Empresa</a></li>  -->
-                            <!--  <li><a href="/springmvc-angularjs/index2.html#/pages/signin" class="page-scroll">Aréa Usuario</a></li> -->
+                            <!--  <li><a href="/springmvc-angularjs/index2.html#/pages/signin" class="page-scroll">Arรฉa Usuario</a></li> -->
                         </ul>
                     </div>
                 </div>
@@ -715,7 +713,7 @@
                                 <div ng-if="cc.show == true">
                                     <div id="cadastro-passo1" style="display: block;">
                                         <div class="input-contato erro">
-                                            <label for="nome">Nome ou Razão Social</label>
+                                            <label for="nome">Nome ou Razรฃo Social</label>
                                             <input id="nome" ng-model="empresa.razao" type="text" name="nome" placeholder="">
                                         </div>
                                         <div class="input-contato">
@@ -723,12 +721,12 @@
                                             <input id="email" type="text" ng-model="empresa.documentos[0].numero" name="numero" placeholder="">
                                         </div>
                                         <div class="input-contato">
-                                            <label for="fone1">Telefone fixo <span>(só números, com DDD)</span></label>
+                                            <label for="fone1">Telefone fixo <span>(sรณ nรบmeros, com DDD)</span></label>
                                             <input id="fone1" type="text" ng-model="empresa.telefones[0].numero" name="fone1" placeholder="">
                                             <input class="hide" type="text" ng-init="empresa.telefones[0].telefoneTypeEnumValue = 9" name="fone1" placeholder="">
                                         </div>
                                         <div class="input-contato">
-                                            <label for="fone2">Telefone celular <span>(só números, com DDD)</span></label>
+                                            <label for="fone2">Telefone celular <span>(sรณ nรบmeros, com DDD)</span></label>
                                             <input id="fone1" type="text" ng-model="empresa.telefones[1].numero" name="fone1" placeholder="">
                                             <input class="hide" type="text" ng-init="empresa.telefones[1].telefoneTypeEnumValue = 10" name="fone1" placeholder="">
                                         </div>
@@ -750,14 +748,14 @@
                                         <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="3"><span>Contador</span></label>
                                         <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="4" ><span>Clinicas</span></label>
                                         <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="5" ><span>Empresarial</span></label>
-                                        <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="6" ><span>Prestador Serviço</span></label>
+                                        <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="6" ><span>Prestador Serviรงo</span></label>
                                         <div id="boxSobreDominio"></div>
                                         <div class="input-contato">
                                             <label for="contato">Seu nome</label>
                                             <input id="contato" type="text" name="contato" ng-model="empresa.usuarios[0].nome" placeholder="">
                                         </div>
                                         <div class="input-contato">
-                                            <label for="login">Nome de usuário (Email)</label>
+                                            <label for="login">Nome de usuรกrio (Email)</label>
                                             <input id="login" type="text" ng-model="empresa.usuarios[0].email" name="login" placeholder="">
                                         </div>
                                         <div class="input-contato">
@@ -769,20 +767,20 @@
                                             <input id="senha2" type="password" name="senha2" placeholder="">
                                         </div>
                                         <div class="input-termos">
-                                            <p>Aceito os <a href="contrato_egestor.html" target="_blank"><span>termos de utilização</span></a> do sistema</p>
+                                            <p>Aceito os <a href="contrato_egestor.html" target="_blank"><span>termos de utilizaรงรฃo</span></a> do sistema</p>
                                             <div class="check-termos">
                                                 <div class="ativa-check-termos"></div>
                                                 <input class="clica-check-termos" type="checkbox" name="termos">
                                             </div>
                                         </div>
                                         <div class="clearfix">
-                                            <input class="botao-login width-100 transition" style="width:100%" type="submit" value="COMEÇAR TESTE GRATUITO" ng-click="saveEmpresa()" id="botao-cadastro-passo2">
+                                            <input class="botao-login width-100 transition" style="width:100%" type="submit" value="COMEร�AR TESTE GRATUITO" ng-click="saveEmpresa()" id="botao-cadastro-passo2">
                                         </div>
                                     </div>
                                 </div>
                                 <div id="cadastro-aviso-espera"></div>
 
-                            <!-- Fim do script de integração com a RD Station -->
+                            <!-- Fim do script de integraรงรฃo com a RD Station -->
                         </div>
                     </div>
                 </div>
@@ -791,24 +789,24 @@
         <!--   <div id="owl-hero" class="owl-carousel owl-theme">
             <div class="item" style="background-image: url(views/template-assets/img/sliders/Slide.jpg)">
                 <div class="caption">
-                         <h6>Sistema simples e eficiente para você ganhar tempo</h6>
-                    <h2>O <span>E-Contábil</span> é um sistema de gestão que irá facilitar o dia a dia da sua empresa</h2>
-                    <a class="btn btn-transparent" href="#">Learn More</a><a class="btn btn-light" href="#">Experimente <span>Grátis</span></a>
+                         <h6>Sistema simples e eficiente para vocรช ganhar tempo</h6>
+                    <h2>O <span>E-Contรกbil</span> รฉ um sistema de gestรฃo que irรก facilitar o dia a dia da sua empresa</h2>
+                    <a class="btn btn-transparent" href="#">Learn More</a><a class="btn btn-light" href="#">Experimente <span>Grรกtis</span></a>
 
                 </div>
             </div>
              <div class="item" style="background-image: url(views/template-assets/img/sliders/Slide2.jpg)">
                 <div class="caption">
-                    <h6>O SISTEMA DE GESTÃO FÁCIL E ONLINE</h6>
-                    <h1>Financeiro, Vendas, Nota Fiscal Eletrônica, Controle de Estoque</h1>
-                    <a class="btn btn-transparent" href="#">Learn More</a><a class="btn btn-light" href="#">Experimente <span>Grátis</span></a>
+                    <h6>O SISTEMA DE GESTร�O Fร�CIL E ONLINE</h6>
+                    <h1>Financeiro, Vendas, Nota Fiscal Eletrรดnica, Controle de Estoque</h1>
+                    <a class="btn btn-transparent" href="#">Learn More</a><a class="btn btn-light" href="#">Experimente <span>Grรกtis</span></a>
                 </div>
             </div>
             <div class="item" style="background-image: url(views/template-assets/img/sliders/Slide3.jpg)">
                 <div class="caption">
-                    <h6>Você Escritorio Contábil e Contador <span>Seja nosso Parceiro</span></h6>
-                    <h2>Não Sera preciso de outro sistema no E-Contábil tem tudo que voce precisa para fechar a contabilidade de qualquer empresa</h2>
-                    <a class="btn btn-transparent" href="#">Cadastre-se Agora</a><a class="btn btn-light" href="#">Experimente <span>Grátis</span></a>
+                    <h6>Vocรช Escritorio Contรกbil e Contador <span>Seja nosso Parceiro</span></h6>
+                    <h2>Nรฃo Sera preciso de outro sistema no E-Contรกbil tem tudo que voce precisa para fechar a contabilidade de qualquer empresa</h2>
+                    <a class="btn btn-transparent" href="#">Cadastre-se Agora</a><a class="btn btn-light" href="#">Experimente <span>Grรกtis</span></a>
                 </div>
             </div>
         </div>-->
@@ -818,10 +816,10 @@
     ============================================= -->
     <section id="welcome">
         <div class="container">
-            <h2>Bem Vindo ao <span>E-Contábil</span></h2>
-            <h3>O E-Contábil e um sistema web gratuito para pequenas e grandes empresa de varias areas.</span>
+            <h2>Bem Vindo ao <span>E-Contรกbil</span></h2>
+            <h3>O E-Contรกbil e um sistema web gratuito para pequenas e grandes empresa de varias areas.</span>
             </h3>
-            <h3>Onde voce paga apenas o que você usar mais. <a class="button-cta" href="http://br.sageone.com/experimente-gratis">Experimente grátis</a></span>
+            <h3>Onde voce paga apenas o que vocรช usar mais. <a class="button-cta" href="http://br.sageone.com/experimente-gratis">Experimente grรกtis</a></span>
             </h3>
             <hr class="sep">
             <div class="services-box">
@@ -830,14 +828,14 @@
                         <div class="media-left"><span class="icon-lightbulb"></span></div>
                         <div class="media-body">
                             <h3>OnLine</h3>
-                            <p>O E-Contábil é um sistema totalmente online, não precisa instalação, funciona diretamente no seu navegador e em qualquer sistema operacional. Também em celulares e tablets. Basta ter acesso a internet.</p>
+                            <p>O E-Contรกbil รฉ um sistema totalmente online, nรฃo precisa instalaรงรฃo, funciona diretamente no seu navegador e em qualquer sistema operacional. Tambรฉm em celulares e tablets. Basta ter acesso a internet.</p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="media-left"><span class="icon-mobile"></span></div>
                         <div class="media-body">
-                            <h3>Fácil</h3>
-                            <p>Com o E-Contábil você e sua equipe poderão começar a usar o sistema hoje mesmo, sem dificuldades. Mesmo assim, se tiver dúvidas, estamos prontos para atendê-lo.</p>
+                            <h3>Fรกcil</h3>
+                            <p>Com o E-Contรกbil vocรช e sua equipe poderรฃo comeรงar a usar o sistema hoje mesmo, sem dificuldades. Mesmo assim, se tiver dรบvidas, estamos prontos para atendรช-lo.</p>
                         </div>
 
                     </div>
@@ -845,7 +843,7 @@
                         <div class="media-left"><span class="icon-compass"></span></div>
                         <div class="media-body">
                             <h3>Acessivel</h3>
-                            <p>O E-Contábil é um software barato. Toda a infra-estrutura de servidores e sistema é mantida por nós e, dessa maneira, você não terá surpresas com o custo de sistema.</p>
+                            <p>O E-Contรกbil รฉ um software barato. Toda a infra-estrutura de servidores e sistema รฉ mantida por nรณs e, dessa maneira, vocรช nรฃo terรก surpresas com o custo de sistema.</p>
                         </div>
 
                     </div>
@@ -854,24 +852,24 @@
                     <div class="col-md-4">
                         <div class="media-left"><span class="icon-adjustments"></span></div>
                         <div class="media-body">
-                            <h3>Entenda onde está seu dinheiro</h3>
-                            <p>Concilie seus lançamentos financeiros e saiba exatamente pra onde foi e de onde vem o seu dinheiro. A conciliação apresenta uma sugestão entre os lançamentos vindos do banco e os cadastrados no E-Contábil e ainda permite opções como cadastrar um novo lançamento ou adicionar uma transferência.</p>
+                            <h3>Entenda onde estรก seu dinheiro</h3>
+                            <p>Concilie seus lanรงamentos financeiros e saiba exatamente pra onde foi e de onde vem o seu dinheiro. A conciliaรงรฃo apresenta uma sugestรฃo entre os lanรงamentos vindos do banco e os cadastrados no E-Contรกbil e ainda permite opรงรตes como cadastrar um novo lanรงamento ou adicionar uma transferรชncia.</p>
                         </div>
 
                     </div>
                     <div class="col-md-4">
                         <div class="media-left"><span class="icon-tools"></span></div>
                         <div class="media-body">
-                            <h3>Comece seu dia com as informações essenciais</h3>
-                            <p>A Visão Geral traz dados importantes como vendas, fluxo de caixa diário e saldos bancários. Nessa tela você organiza o que é prioridade, ou seja, pode ordenar as informações como quiser.</p>
+                            <h3>Comece seu dia com as informaรงรตes essenciais</h3>
+                            <p>A Visรฃo Geral traz dados importantes como vendas, fluxo de caixa diรกrio e saldos bancรกrios. Nessa tela vocรช organiza o que รฉ prioridade, ou seja, pode ordenar as informaรงรตes como quiser.</p>
                         </div>
 
                     </div>
                     <div class="col-md-4">
                         <div class="media-left"><span class="icon-wallet"></span></div>
                         <div class="media-body">
-                            <h3>Emissão de nota fiscal eletrônica integrada</h3>
-                            <p>Com o emissor de nota fiscal online do E-Contábil você economiza tempo e trabalho, pois nosso sistema de emissão de NF-e é totalmente integrado com o processo de vendas. Você nunca mais vai precisar informar duas vezes os dados de um pedido. Envie notas fiscais eletrônicas e Danfe (documento auxiliar de nota fiscal eletrônica) para seus clientes por e-mail.</p>
+                            <h3>Emissรฃo de nota fiscal eletrรดnica integrada</h3>
+                            <p>Com o emissor de nota fiscal online do E-Contรกbil vocรช economiza tempo e trabalho, pois nosso sistema de emissรฃo de NF-e รฉ totalmente integrado com o processo de vendas. Vocรช nunca mais vai precisar informar duas vezes os dados de um pedido. Envie notas fiscais eletrรดnicas e Danfe (documento auxiliar de nota fiscal eletrรดnica) para seus clientes por e-mail.</p>
                         </div>
 
                     </div>
@@ -886,12 +884,12 @@
         <div class="container">
             <header class="section-header text-center">
                 <h2 class="">
-                    E-Contábil: Software Médico Completo. Não Complexo.
+                    E-Contรกbil: Software Mรฉdico Completo. Nรฃo Complexo.
                 </h2>
             </header>
             <div class="section-content text-center">
                 <p>
-                    O E-Contábil é um software médico COMPLETO para gerenciamento de clínicas de todas as áreas e especialidades. Vamos além: podemos te ajudar a conseguir mais pacientes, aumentar o seu faturamento e fidelizar os pacientes que se consultam com você. Com o E-Contábil, você dá visibilidade para o seu negócio, otimiza sua organização e melhora seus processos, e ainda aumenta a fidelização e satisfação dos seus pacientes.
+                    O E-Contรกbil รฉ um software mรฉdico COMPLETO para gerenciamento de clรญnicas de todas as รกreas e especialidades. Vamos alรฉm: podemos te ajudar a conseguir mais pacientes, aumentar o seu faturamento e fidelizar os pacientes que se consultam com vocรช. Com o E-Contรกbil, vocรช dรก visibilidade para o seu negรณcio, otimiza sua organizaรงรฃo e melhora seus processos, e ainda aumenta a fidelizaรงรฃo e satisfaรงรฃo dos seus pacientes.
                 </p>
             </div>
             <hr class="light-sep">
@@ -900,15 +898,15 @@
                     <div class="col-md-6">
                         <div class="media-left"><span class="icon-lightbulb"></span></div>
                         <div class="media-body">
-                            <h3>Gerenciamento Completo de Clínicas</h3>
-                            <p>Com o E-Contábil, você tem todos os módulos básicos para fazer o gerencimento da sua clínica ou consultório. Acessa sua agenda, prontuário eletrônico de pacientes, módulos financeiros e estatísticas lançadas automaticamente.</p>
+                            <h3>Gerenciamento Completo de Clรญnicas</h3>
+                            <p>Com o E-Contรกbil, vocรช tem todos os mรณdulos bรกsicos para fazer o gerencimento da sua clรญnica ou consultรณrio. Acessa sua agenda, prontuรกrio eletrรดnico de pacientes, mรณdulos financeiros e estatรญsticas lanรงadas automaticamente.</p>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="media-left"><span class="icon-mobile"></span></div>
                         <div class="media-body">
-                            <h3>Gestão de relacionamento com pacientes</h3>
-                            <p>Através do E-Contábil, você consegue enviar sequências automáticas de e-mails com orientações para um paciente depois de uma consulta, antes de um pós-operatório ou por qualquer outro motivo que desejar. Pode enviar campanhas na páscoa, natal e usar à vontade como e-mail marketing.</p>
+                            <h3>Gestรฃo de relacionamento com pacientes</h3>
+                            <p>Atravรฉs do E-Contรกbil, vocรช consegue enviar sequรชncias automรกticas de e-mails com orientaรงรตes para um paciente depois de uma consulta, antes de um pรณs-operatรณrio ou por qualquer outro motivo que desejar. Pode enviar campanhas na pรกscoa, natal e usar ร� vontade como e-mail marketing.</p>
                         </div>
 
                     </div>
@@ -917,16 +915,16 @@
                     <div class="col-md-6">
                         <div class="media-left"><span class="icon-compass"></span></div>
                         <div class="media-body">
-                            <h3>Módulo de Marketing Integrado</h3>
-                            <p>O E-Contábil possui ferramentas para criação do seu site e blog, ferramentas para gestão de relacionamento e produção de conteúdo sem sair do sistema. Toda a gestão da sua clínica em um único lugar.</p>
+                            <h3>Mรณdulo de Marketing Integrado</h3>
+                            <p>O E-Contรกbil possui ferramentas para criaรงรฃo do seu site e blog, ferramentas para gestรฃo de relacionamento e produรงรฃo de conteรบdo sem sair do sistema. Toda a gestรฃo da sua clรญnica em um รบnico lugar.</p>
                         </div>
 
                     </div>
                     <div class="col-md-6">
                         <div class="media-left"><span class="icon-compass"></span></div>
                         <div class="media-body">
-                            <h3>Agenda Online, confirmações por email e SMS</h3>
-                            <p>O E-Contábil possui ferramenta de confirmação de agendamento online que já nasce integrada ao seu site também criado conosco. O paciente pode receber confirmações via SMS, por e-mail. Basta ativar sua conta e começar a usar.</p>
+                            <h3>Agenda Online, confirmaรงรตes por email e SMS</h3>
+                            <p>O E-Contรกbil possui ferramenta de confirmaรงรฃo de agendamento online que jรก nasce integrada ao seu site tambรฉm criado conosco. O paciente pode receber confirmaรงรตes via SMS, por e-mail. Basta ativar sua conta e comeรงar a usar.</p>
                         </div>
 
                     </div>
@@ -935,30 +933,30 @@
         </div>
     </section>
     <!-- Portfolio
-        <li id="cont1" class="">1 - Redução da possibilidade de perda de prazos e informações</li>
-                            <li id="cont2" class="">2 - Acesso às informações em qualquer tempo e lugar (limitado apenas pela disponibilidade da internet), pois os documentos e informações são armazenados e protegidos na nuvem</li>
-                            <li id="cont3" class="">3 - Economia de tempo com o cadastro de intimações, leitura e delegação de prazos, pois o sistema permite receber as intimações de forma eletrônica e integrada</li>
-                            <li id="cont4" class="">4 - Economia de tempo no cadastro manual, leitura de informações e no cálculo de prazos</li>
-                            <li id="cont5" class="">5 - Comunicação ágil na execução das atividades do escritório</li>
-                            <li id="cont6" class="">6 - Controle financeiro de atendimentos, processos e da operação do escritório</li>
-                            <li id="cont7" class="">7 - Redução de investimentos em infraestrutura de TI, o que inclui o uso de servidores e os serviços de manutenção decorrentes de seu uso</li>
+        <li id="cont1" class="">1 - Reduรงรฃo da possibilidade de perda de prazos e informaรงรตes</li>
+                            <li id="cont2" class="">2 - Acesso ร�s informaรงรตes em qualquer tempo e lugar (limitado apenas pela disponibilidade da internet), pois os documentos e informaรงรตes sรฃo armazenados e protegidos na nuvem</li>
+                            <li id="cont3" class="">3 - Economia de tempo com o cadastro de intimaรงรตes, leitura e delegaรงรฃo de prazos, pois o sistema permite receber as intimaรงรตes de forma eletrรดnica e integrada</li>
+                            <li id="cont4" class="">4 - Economia de tempo no cadastro manual, leitura de informaรงรตes e no cรกlculo de prazos</li>
+                            <li id="cont5" class="">5 - Comunicaรงรฃo รกgil na execuรงรฃo das atividades do escritรณrio</li>
+                            <li id="cont6" class="">6 - Controle financeiro de atendimentos, processos e da operaรงรฃo do escritรณrio</li>
+                            <li id="cont7" class="">7 - Reduรงรฃo de investimentos em infraestrutura de TI, o que inclui o uso de servidores e os serviรงos de manutenรงรฃo decorrentes de seu uso</li>
     ============================================= -->
     <section id="portfolio">
         <div class="container-fluid">
-            <h2>O QUE É O E-Contábil ADV</h2>
+            <h2>O QUE ร� O E-Contรกbil ADV</h2>
             <hr class="sep">
-            <p> O E-Contábil ADV é um software jurídico para gestão integrada, especialmente desenvolvido para escritórios de advocacia, que opera na nuvem. Ou seja, de qualquer lugar onde você estiver, é possível acessá-lo de seu computador ou dispositivo móvel e realizar tarefas, como por exemplo, o registro e acompanhamento de atendimentos e processos, gestão de tarefas e compromissos, controle de receitas e despesas, entre outras. </p>
+            <p> O E-Contรกbil ADV รฉ um software jurรญdico para gestรฃo integrada, especialmente desenvolvido para escritรณrios de advocacia, que opera na nuvem. Ou seja, de qualquer lugar onde vocรช estiver, รฉ possรญvel acessรก-lo de seu computador ou dispositivo mรณvel e realizar tarefas, como por exemplo, o registro e acompanhamento de atendimentos e processos, gestรฃo de tarefas e compromissos, controle de receitas e despesas, entre outras. </p>
             <p>
-                Fácil de usar, sua interface foi projetada com enfoque no conceito de usabilidade, tornando-o intuitivo e dispensando intermináveis horas de treinamento para aprender a usar a ferramenta.
+                Fรกcil de usar, sua interface foi projetada com enfoque no conceito de usabilidade, tornando-o intuitivo e dispensando interminรกveis horas de treinamento para aprender a usar a ferramenta.
             </p>
             <h2>O QUE EU GANHO COM ISSO?</h2>
-            <p> • 1 - Redução da possibilidade de perda de prazos e informações ;</p>
-            <p> • 2 - Acesso às informações em qualquer tempo e lugar (limitado apenas pela disponibilidade da internet), pois os documentos e informações são armazenados e protegidos na nuvem;</p>
-            <p> • 3 - Economia de tempo com o cadastro de intimações, leitura e delegação de prazos, pois o sistema permite receber as intimações de forma eletrônica e integrada;</p>
-            <p> • 4 - Economia de tempo no cadastro manual, leitura de informações e no cálculo de prazos</p>
-            <p> • 5 - Comunicação ágil na execução das atividades do escritório;</p>
-            <p> • 6 - Controle financeiro de atendimentos, processos e da operação do escritório;</p>
-            <p> • 7 - Redução de investimentos em infraestrutura de TI, o que inclui o uso de servidores e os serviços de manutenção decorrentes de seu uso;</p>
+            <p> โ�ข 1 - Reduรงรฃo da possibilidade de perda de prazos e informaรงรตes ;</p>
+            <p> โ�ข 2 - Acesso ร�s informaรงรตes em qualquer tempo e lugar (limitado apenas pela disponibilidade da internet), pois os documentos e informaรงรตes sรฃo armazenados e protegidos na nuvem;</p>
+            <p> โ�ข 3 - Economia de tempo com o cadastro de intimaรงรตes, leitura e delegaรงรฃo de prazos, pois o sistema permite receber as intimaรงรตes de forma eletrรดnica e integrada;</p>
+            <p> โ�ข 4 - Economia de tempo no cadastro manual, leitura de informaรงรตes e no cรกlculo de prazos</p>
+            <p> โ�ข 5 - Comunicaรงรฃo รกgil na execuรงรฃo das atividades do escritรณrio;</p>
+            <p> โ�ข 6 - Controle financeiro de atendimentos, processos e da operaรงรฃo do escritรณrio;</p>
+            <p> โ�ข 7 - Reduรงรฃo de investimentos em infraestrutura de TI, o que inclui o uso de servidores e os serviรงos de manutenรงรฃo decorrentes de seu uso;</p>
         </div>
     </section>
 
@@ -968,7 +966,7 @@
         <div class="container">
             <header class="section-header text-center">
                 <h2 class="">
-                    E-Contábil Condomínios foi criado por quem entende a rotina da sua administradora!
+                    E-Contรกbil Condomรญnios foi criado por quem entende a rotina da sua administradora!
                 </h2>
             </header>
             <hr class="light-sep">
@@ -978,21 +976,21 @@
                         <div class="media-left"><span class="icon-lightbulb"></span></div>
                         <div class="media-body">
                             <h3>Simplifique seus processos!</h3>
-                            <p>Otimize a rotina da sua administradora de condomínios com processos pensados para você agilizar suas tarefas diárias de forma simples, completa e inteligente.</p>
+                            <p>Otimize a rotina da sua administradora de condomรญnios com processos pensados para vocรช agilizar suas tarefas diรกrias de forma simples, completa e inteligente.</p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="media-left"><span class="icon-mobile"></span></div>
                         <div class="media-body">
-                            <h3>Amplie sua oferta de serviços</h3>
-                            <p>Economize tempo e dinheiro! Automatize o processo de envio de remessas e conciliação de cobranças através da <a href="javascript:void(0)" data-placement="top" title="" class="osc_tooltip " target="" data-original-title="PJBank Boletos é um serviço de meio de pagamentos integrado ao E-Contábil Condomínios">PJBank Boletos</a> onde você paga apenas por boleto liquidado.</p>
+                            <h3>Amplie sua oferta de serviรงos</h3>
+                            <p>Economize tempo e dinheiro! Automatize o processo de envio de remessas e conciliaรงรฃo de cobranรงas atravรฉs da <a href="javascript:void(0)" data-placement="top" title="" class="osc_tooltip " target="" data-original-title="PJBank Boletos รฉ um serviรงo de meio de pagamentos integrado ao E-Contรกbil Condomรญnios">PJBank Boletos</a> onde vocรช paga apenas por boleto liquidado.</p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="media-left"><span class="icon-mobile"></span></div>
                         <div class="media-body">
                             <h3>Reduza extremamente seus custos</h3>
-                            <p>Aumente o diferencial competitivo de sua administradora e conquiste mais Clientes através da Área do Condômino.</p>
+                            <p>Aumente o diferencial competitivo de sua administradora e conquiste mais Clientes atravรฉs da ร�rea do Condรดmino.</p>
                         </div>
 
                     </div>
@@ -1008,7 +1006,7 @@
             <div class="row">
 
                 <div class="center">
-                    <h2>Tabelas de Preço</h2>
+                    <h2>Tabelas de Preรงo</h2>
                 </div>
                 <div class="pricing-area text-center">
                     <div class="row">
@@ -1060,51 +1058,51 @@
     ============================================= -->
     <section id="work-process">
         <div class="container">
-            <h2>O que o E-Contábil faz para mudar sua vida!</h2>
+            <h2>O que o E-Contรกbil faz para mudar sua vida!</h2>
             <hr class="sep">
             <p>What Happen In The Background</p>
             <div class="row wow fadeInUp" data-wow-delay=".3s">
                 <div class="col-lg-3">
                     <span class="icon-chat"></span>
                     <h4>Sistema ERP</h4>
-                    <p>Integração dos processos de gestão em sua micro ou pequena empresa, das finanças às vendas, com cadastro de clientes, estoque e relatórios</p>
+                    <p>Integraรงรฃo dos processos de gestรฃo em sua micro ou pequena empresa, das finanรงas ร�s vendas, com cadastro de clientes, estoque e relatรณrios</p>
                 </div>
                 <div class="col-lg-3">
                     <span class="icon-circle-compass"></span>
                     <h4>Financeiro</h4>
-                    <p>Contas a pagar e a receber com integração bancária em seu controle financeiro. Contas em dia é saúde financeira para seus negócios</p>
+                    <p>Contas a pagar e a receber com integraรงรฃo bancรกria em seu controle financeiro. Contas em dia รฉ saรบde financeira para seus negรณcios</p>
                 </div>
                 <div class="col-lg-3">
                     <span class="icon-browser"></span>
                     <h4>Produto</h4>
-                    <p>Controle de propostas e vendas integrado a emissão de NF-e e boleto. Compras e estoque integrado ao cadastro de clientes e fornecedores</p>
+                    <p>Controle de propostas e vendas integrado a emissรฃo de NF-e e boleto. Compras e estoque integrado ao cadastro de clientes e fornecedores</p>
                 </div>
                 <div class="col-lg-3">
                     <span class="icon-global"></span>
                     <h4>Compras</h4>
-                    <p>Controle de cotação onde o sistema envia email para os fornecedores a relação de produtos a ser cotado com um link para o fornecedor lança os seu preços</p>
+                    <p>Controle de cotaรงรฃo onde o sistema envia email para os fornecedores a relaรงรฃo de produtos a ser cotado com um link para o fornecedor lanรงa os seu preรงos</p>
                 </div>
             </div>
             <div class="row wow fadeInUp" data-wow-delay=".3s">
                 <div class="col-lg-3">
                     <span class="icon-chat"></span>
                     <h4>Sistema para Escritorio de advocacia</h4>
-                    <p>Integração dos processos de gestão para escritorios de advocacia, das finanças às processos,agenda, com cadastro de clientes, advogados e relatórios</p>
+                    <p>Integraรงรฃo dos processos de gestรฃo para escritorios de advocacia, das finanรงas ร�s processos,agenda, com cadastro de clientes, advogados e relatรณrios</p>
                 </div>
                 <div class="col-lg-3">
                     <span class="icon-circle-compass"></span>
                     <h4>Sistema para Clinicas Medicas</h4>
-                    <p>Integração dos processos de gestão para clinicas de medicas, das finanças às processos,agenda, com cadastro de clientes, medicos,prontuario eletronico e relatórios</p>
+                    <p>Integraรงรฃo dos processos de gestรฃo para clinicas de medicas, das finanรงas ร�s processos,agenda, com cadastro de clientes, medicos,prontuario eletronico e relatรณrios</p>
                 </div>
                 <div class="col-lg-3">
                     <span class="icon-browser"></span>
                     <h4>Sistema para Condominios</h4>
-                    <p>Controle de propostas e gestão para Condominio com relação despesas,graficos e boleto. Compras,prestação serviços e cadastros despesas ao cadastro de inquilinos,sindico e fornecedores</p>
+                    <p>Controle de propostas e gestรฃo para Condominio com relaรงรฃo despesas,graficos e boleto. Compras,prestaรงรฃo serviรงos e cadastros despesas ao cadastro de inquilinos,sindico e fornecedores</p>
                 </div>
                 <div class="col-lg-3">
                     <span class="icon-global"></span>
-                    <h4>Integração com Contador</h4>
-                    <p>Ganhe tempo na troca de documentos e informações com o contador e melhore a qualidade da relação de sua empresa com a contabilidade</p>
+                    <h4>Integraรงรฃo com Contador</h4>
+                    <p>Ganhe tempo na troca de documentos e informaรงรตes com o contador e melhore a qualidade da relaรงรฃo de sua empresa com a contabilidade</p>
                 </div>
             </div>
         </div>
@@ -1118,12 +1116,12 @@
             <div class="row wow fadeInUp" data-wow-delay=".3s">
                 <div class="col-lg-4">
                     <span class="icon-happy"></span>
-                    <h2 class="number timer">Missão</h2>
+                    <h2 class="number timer">Missรฃo</h2>
                     <p>{{cc.site.missao}}</p>
                 </div>
                 <div class="col-lg-4">
                     <span class="icon-trophy"></span>
-                    <h2 class="number timer">Visão</h2>
+                    <h2 class="number timer">Visรฃo</h2>
                     <p>{{cc.site.visao}}</p>
                 </div>
                 <div class="col-lg-4">
@@ -1146,10 +1144,10 @@
                     <div class="navbar-inner">
                         <div class="container">
                             <ul>
-                                <li><a href=".tab1" data-toggle="tab">Informações do Usuario</a></li>
-                                <li><a href=".tab2" data-toggle="tab">Informações da Empresa</a></li>
-                                <li><a href=".tab3" data-toggle="tab">Informações de Socios</a></li>
-                                <li><a href=".tab4" data-toggle="tab">Informações Plano Serviçoes</a></li>
+                                <li><a href=".tab1" data-toggle="tab">Informaรงรตes do Usuario</a></li>
+                                <li><a href=".tab2" data-toggle="tab">Informaรงรตes da Empresa</a></li>
+                                <li><a href=".tab3" data-toggle="tab">Informaรงรตes de Socios</a></li>
+                                <li><a href=".tab4" data-toggle="tab">Informaรงรตes Plano Serviรงoes</a></li>
                                 <li><a href=".tab5" data-toggle="tab">Contrato Social</a></li>
                                 <li><a href=".tab6" data-toggle="tab">Pagamento</a></li>
                             </ul>
@@ -1337,7 +1335,7 @@
                                 <!--    <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href=".collapseFour">2 - Serviços</a>
+                                        <a data-toggle="collapse" data-parent="#accordion" href=".collapseFour">2 - Serviรงos</a>
                                     </h4>
                                     </div>
                                     <div id="collapseFour" class="panel-collapse collapse collapseFour">
@@ -1472,7 +1470,7 @@
         <div class="container">
             <h2>Contato</h2>
             <hr class="sep">
-            <p>Se estiver com duvida quiser saber mais sobre o E-Contábil. Teremos o prazer de vos Atender</p>
+            <p>Se estiver com duvida quiser saber mais sobre o E-Contรกbil. Teremos o prazer de vos Atender</p>
             <div class="col-md-6 col-md-offset-3 wow fadeInUp" data-wow-delay=".3s">
                 <form>
                     <div class="form-group">
@@ -1560,7 +1558,7 @@
     <script src="thirdparty/aaPrincipal/js/jquery.inputaction.js"></script>
     <script src="thirdparty/aaPrincipal/js/numeral.min.js"></script>
 
-    <script src="thirdparty/aaPrincipal/js/jquery.bootstrap.wizard.min.js"></script>
+
 
 
     <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
@@ -1866,291 +1864,7 @@
     <script src="views/template-assets/plugins/Lightbox/dist/js/lightbox.min.js"></script>
     <script src="views/template-assets/plugins/WOW/dist/wow.min.js"></script>
 
-    <script src="//kendo.cdn.telerik.com/2016.3.914/js/kendo.all.min.js"></script>
 
-
-
-
-
-
-
-
-
-    <style>
-        /*
-            Use the DejaVu Sans font for display and embedding in the PDF file.
-            The standard PDF fonts have no support for Unicode characters.
-        */
-
-        .pdf-page {
-            font-family: "DejaVu Sans", "Arial", sans-serif;
-        }
-
-    </style>
-    <!---->
-    <script>
-        // Import DejaVu Sans font for embedding
-
-        // NOTE: Only required if the Kendo UI stylesheets are loaded
-        // from a different origin, e.g. cdn.kendostatic.com
-        kendo.pdf.defineFont({
-            "DejaVu Sans": "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans.ttf",
-            "DejaVu Sans|Bold": "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-            "DejaVu Sans|Bold|Italic": "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-            "DejaVu Sans|Italic": "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
-        });
-
-
-
-        $('#file-fr').fileinput({
-            language: 'fr',
-            uploadUrl: '#',
-            allowedFileExtensions: ['jpg', 'png', 'gif'],
-        });
-        $('#file-es').fileinput({
-            language: 'es',
-            uploadUrl: '#',
-            allowedFileExtensions: ['jpg', 'png', 'gif'],
-        });
-        $("#file-0").fileinput({
-            'allowedFileExtensions': ['jpg', 'png', 'gif'],
-        });
-        $("#file-1").fileinput({
-            uploadUrl: '#', // you must set a valid URL here else you will get an error
-            allowedFileExtensions: ['jpg', 'png', 'gif'],
-            overwriteInitial: false,
-            maxFileSize: 1000,
-            maxFilesNum: 10,
-            //allowedFileTypes: ['image', 'video', 'flash'],
-            slugCallback: function(filename) {
-                return filename.replace('(', '_').replace(']', '_');
-            }
-        });
-        /*
-        $(".file").on('fileselect', function(event, n, l) {
-            alert('File Selected. Name: ' + l + ', Num: ' + n);
-        });
-        */
-        $("#file-3").fileinput({
-            showUpload: false,
-            showCaption: false,
-            browseClass: "btn btn-primary btn-lg",
-            fileType: "any",
-            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>"
-        });
-        $("#file-4").fileinput({
-            uploadExtraData: {
-                kvId: '10'
-            }
-        });
-        $(".btn-warning").on('click', function() {
-            if ($('#file-4').attr('disabled')) {
-                $('#file-4').fileinput('enable');
-            } else {
-                $('#file-4').fileinput('disable');
-            }
-        });
-        $(".btn-info").on('click', function() {
-            $('#file-4').fileinput('refresh', {
-                previewClass: 'bg-info'
-            });
-        });
-        /*
-        $('#file-4').on('fileselectnone', function() {
-            alert('Huh! You selected no files.');
-        });
-        $('#file-4').on('filebrowse', function() {
-            alert('File browse clicked for #file-4');
-        });
-        */
-        $(document).ready(function() {
-
-
-
-
-
-            $("#test-upload").fileinput({
-                'showPreview': false,
-                'allowedFileExtensions': ['jpg', 'png', 'gif'],
-                'elErrorContainer': '#errorBlock'
-            });
-
-            bookIndex = 0;
-
-            $('.empresaForm')
-                .formValidation({
-                    framework: 'bootstrap',
-                    icon: {
-                        valid: 'glyphicon glyphicon-ok',
-                        invalid: 'glyphicon glyphicon-remove',
-                        validating: 'glyphicon glyphicon-refresh'
-                    },
-                    fields: {
-
-                        'book[0].cpf': notEmptyStringMinMaxRegexp,
-                        'book[0].nome': notEmptyStringMinMax,
-                        'book[0].cota': integerNotEmptyValidation,
-                        nome: notEmptyStringMinMax,
-                        nunFunc: integerNotEmptyValidation,
-                        razao: notEmptyStringMinMax,
-                        logradouro: notEmptyStringMinMax,
-                        cpf: notEmptyStringMinMaxRegexp,
-                        cep: notEmptyStringMinMax,
-                        cnpj: notEmptyStringMinMax,
-                        email: emailValidation,
-                        telefone: telefoneValidation,
-                        phone: telefoneValidation,
-                        cep: cepNotEmptyValidation,
-                        password: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'The password is required and can\'t be empty'
-                                }
-                            }
-                        },
-                        confirmPassword: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'The confirm password is required and can\'t be empty'
-                                },
-                                identical: {
-                                    field: 'password',
-                                    message: 'The password and its confirm are not the same'
-                                }
-                            }
-                        }
-
-                    }
-                })
-
-            $("select").select2({
-                placeholder: "Select a state",
-                allowClear: true
-            });
-
-            $('#rootwizard').bootstrapWizard({
-                onNext: function(tab, navigation, index) {
-                    /*  if(index==2) {
-                            // Make sure we entered the name
-                            if(!$('#name').val()) {
-                                alert('You must enter your name');
-                                $('#name').focus();
-                                return false;
-                            }
-                        }
-
-                        // Set the name for the next tab
-                        $('#tab3').html('Hello, ' + $('#name').val());
-                    */
-                },
-                onTabShow: function(tab, navigation, index) {
-
-                    var $total = navigation.find('li').length;
-                    var $current = index + 1;
-                    var $percent = ($current / $total) * 100;
-                    $('#rootwizard .progress-bar').css({
-                        width: $percent + '%'
-                    });
-                    if ($percent == 100) {
-                        $('.save-empresa').removeClass('hide');
-                    } else {
-                        $('.save-empresa').addClass('hide');
-                    }
-                },
-                onNext: function(tab, navigation, index) {
-                    var numTabs = $('.empresaForm').find('.tab-pane').length,
-                        isValidTab = validateTab(index - 1);
-                    if (!isValidTab) {
-                        return false;
-                    }
-
-                    if (index === numTabs) {
-                        alert('agora');
-                        // We are at the last tab
-
-                        // Uncomment the following line to submit the form using the defaultSubmit() method
-                        // $('#installationForm').formValidation('defaultSubmit');
-
-                        // For testing purpose
-                        $('#completeModal').modal();
-                    }
-
-                    return true;
-                }
-            });
-
-            window.prettyPrint && prettyPrint();
-
-
-            //============================= Email fim
-            function validateTab(index) {
-                var fv = $('.empresaForm').data('formValidation'), // FormValidation instance
-                    // The current tab
-                    $tab = $('.empresaForm').find('.tab-pane').eq(index);
-
-                // Validate the container
-                fv.validateContainer($tab);
-
-                var isValidStep = fv.isValidContainer($tab);
-                if (isValidStep === false || isValidStep === null) {
-                    // Do not jump to the target tab
-                    return false;
-                }
-
-                return true;
-            }
-
-            //Tab 1
-            $('.empresaForm').find('[name="nome"]').val('099.099.099.099');
-            $('.empresaForm').find('[name="cpf"]').val('099.099.099.099');
-            $('.empresaForm').find('[name="telefone"]').val('34988406670');
-            $('.empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
-            $('.empresaForm').find('[name="password"]').val('099.099.099.099');
-            $('.empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
-
-            //Tab 2
-            $('.empresaForm').find('[name="cnpj"]').val('099.099.099.099');
-            $('.empresaForm').find('[name="numfunc"]').val('8');
-            $('.empresaForm').find('[name="razao"]').val('34988406670');
-            $('.empresaForm').find('[name="cep"]').val('38082243');
-            $('.empresaForm').find('[name="numero"]').val('686');
-            $('.empresaForm').find('[name="complemento"]').val('complemento');
-            $('.empresaForm').find('[name="logradouro"]').val('logradouro');
-            $('.empresaForm').find('[name="book[0].nome"]').val('joao das coves');
-            $('.empresaForm').find('[name="book[0].cpf"]').val('05790167659');
-            $('.empresaForm').find('[name="book[0].cpf"]').val('10');
-
-        });
-        //prencher form
-        /*
-        //Tab 1
-        $('.empresaForm').find('[name="nome"]').val('099.099.099.099');
-        $('.empresaForm').find('[name="cpf"]').val('099.099.099.099');
-        $('.empresaForm').find('[name="telefone"]').val('34988406670');
-        $('.empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
-        $('.empresaForm').find('[name="password"]').val('099.099.099.099');
-        $('.empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
-
-        //Tab 2
-        $('.empresaForm').find('[name="cnpj"]').val('099.099.099.099');
-        $('.empresaForm').find('[name="nunfunc"]').val('8');
-        $('.empresaForm').find('[name="razao"]').val('34988406670');
-        $('.empresaForm').find('[name="cep"]').val('38082243');
-        $('.empresaForm').find('[name="numero"]').val('686');
-        $('.empresaForm').find('[name="complemento"]').val('complemento');
-
-
-
-        //Tab 3
-        $('.empresaForm').find('[name="nome"]').val('099.099.099.099');
-        $('.empresaForm').find('[name="cpf"]').val('099.099.099.099');
-        $('.empresaForm').find('[name="telefone"]').val('34988406670');
-        $('.empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
-        $('.empresaForm').find('[name="password"]').val('099.099.099.099');
-        $('.empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
-        */
-
-    </script>
 
 </body>
 
