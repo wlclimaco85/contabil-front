@@ -698,8 +698,7 @@ qat.model.fnEmails = function(_email, modelAction, _user)
 	}
 }
 
-qat.model.fnSocios = function(_cota, _por, _adm, _nome, _cpf, id, type,
-	modelAction)
+qat.model.fnSocios = function(_socio,_modelAction,_user)
 {
 	var _emprId = null;
 	if (localStorage.getItem('empresa') == null ||
@@ -712,38 +711,32 @@ qat.model.fnSocios = function(_cota, _por, _adm, _nome, _cpf, id, type,
 		_emprId = JSON.parse(localStorage.getItem('empresa')).id;
 	}
 
-	socio = {
-		id: id,
-		pessoa:
+		this.id = _socio.id,
+		this.pessoa =
 		{
-			nome: _nome,
+			nome: _socio.pessoa.nome,
 			pessoaTypeEnumValue: 6,
 			documentos: [
 				{
 					documentoTypeEnumValue: 2,
-					numero: _cpf
+					numero: _socio.pessoa.documentos[0].numero
             }],
 			emprId: _emprId,
-			modelAction: modelAction,
-			createUser: "System",
+			modelAction: _modelAction,
+			createUser: _user,
 			createDateUTC: (new Date()).getTime(),
-			modifyUser: "System",
+			modifyUser: _user,
 			modifyDateUTC: (new Date()).getTime()
 		},
-		porcentagem: _por,
-		socioAdm: _adm,
-		parentId: 0,
-		emprId: 0,
-		processId: 0,
-		tableEnumValue: 0,
-		modelAction: modelAction,
-		createUser: "System",
-		createDateUTC: (new Date()).getTime(),
-		modifyUser: "System",
-		modifyDateUTC: (new Date()).getTime()
+		this.porcentagem = _socio.porcentagem,
+		this.socioAdm = _socio.socioAdm,
+		this.emprId = _emprId,
+		this.modelAction = _modelAction,
+		this.createUser = _user,
+		this.createDateUTC = (new Date()).getTime(),
+		this.modifyUser = _user,
+		this.modifyDateUTC = (new Date()).getTime()
 
-	}
-	return socio;
 }
 
 qat.model.fnPlanoByServico = function(_id, _modelAction)
