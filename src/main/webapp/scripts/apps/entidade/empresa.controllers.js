@@ -310,6 +310,74 @@
 			var $window;
 			$window = $(window);
 
+
+		buscaRCep = function(_cepValue)
+		{
+
+			var cepValue = _cepValue;
+			var formatedCep;
+
+			$.getJSON("//viacep.com.br/ws/" + _cepValue + "/json/?callback=?", function(res)
+			{
+
+				$scope.empresa.enderecos[0].bairro = res.bairro;
+				$scope.empresa.enderecos[0].complemento = res.complemento;
+				$scope.empresa.enderecos[0].codIbge = res.ibge;
+				$scope.empresa.enderecos[0].cidade = {
+					nome: res.localidade,
+					estado:
+					{
+						abreviacao: res.uf
+					}
+				};
+				$scope.empresa.enderecos[0].logradouro = res.logradouro;
+			});
+		}
+
+		//
+			var callbackEstado = function(res)
+		{
+
+			if (res.operationSuccess == true)
+			{
+				estados = res.estadoList;
+			}
+
+		}
+
+		var callbackCidade = function(res)
+		{
+			if (res.operationSuccess == true)
+			{
+				cidades = res.cidadeList
+			}
+
+		}
+
+		var callbackRoles = function(res)
+		{
+			if (res.operationSuccess == true)
+			{
+				roles = res.rolesList
+			}
+
+		}
+
+		qat.model.select.anonimo("entidade/api/userRoles/fetchPage", true, new qat.model.estadoInquiryRequest(100 / 20, true, null), callbackRoles);
+
+		doisValorFactory.empresa(vm);
+
+		qat.model.select.anonimo("cadastros/api/estado/fetchPage", true, new qat.model.estadoInquiryRequest(100 / 20, true, null), callbackEstado);
+
+		vm.countrySelected = function(selected)
+		{
+			if (selected)
+			{
+				qat.model.select.anonimo("cadastros/api/cidade/fetchPage", true, new qat.model.cidadeInquiryRequest(100 / 20, true, selected.id), callbackCidade);
+			}
+		}
+
+
 			$scope.doIfChecked = function(_ckecked, _value, _nome)
 			{
 

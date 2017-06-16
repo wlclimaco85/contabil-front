@@ -232,7 +232,7 @@
                                         </div>
                                         <span class="input-group-btn">
 
-                                            <button class="btn btn-default" type="button" ng-click="endereco.buscaRCep(enderecos[0].cep)"><i class="glyphicon glyphicon-search"> </i></button>
+                                            <button class="btn btn-default" type="button" ng-click="buscaRCep(empresa.enderecos[0].cep)"><i class="glyphicon glyphicon-search"> </i></button>
                                         </span>
                                     </div>
                                 </div>
@@ -277,8 +277,8 @@
                                         <label for="exampleInputPassword1">Estado</label>
                                         <div class="row">
                                             <ui-select ng-model="empresa.enderecos[0].estado" theme="bootstrap" on-select="endereco.countrySelected($item, $model)">
-                                                <ui-select-match placeholder="Estados...">{{$select.selected.abreviacao}}</ui-select-match>
-                                                <ui-select-choices repeat="item in endereco.estados | filter: $select.search">
+                                                <ui-select-match placeholder="...">{{$select.selected.abreviacao}}</ui-select-match>
+                                                <ui-select-choices repeat="item in estados | filter: $select.search">
                                                     <div ng-bind-html="item.abreviacao | highlight: $select.search"></div>
                                                     <small ng-bind-html="item.nome | highlight: $select.search"></small>
                                                 </ui-select-choices>
@@ -291,8 +291,8 @@
                                         <label for="exampleInputPassword1">Municipio</label>
                                         <div class="row">
                                             <ui-select ng-model="empresa.enderecos[0].cidade" theme="bootstrap">
-                                                <ui-select-match placeholder="Municipios...">{{$select.selected.descricao}}</ui-select-match>
-                                                <ui-select-choices repeat="item in endereco.cidades | filter: $select.search">
+                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                <ui-select-choices repeat="item in cidades | filter: $select.search">
                                                     <div ng-bind-html="item.nome | highlight: $select.search"></div>
                                                     <small ng-bind-html="item.estado.abreviacao | highlight: $select.search"></small>
                                                 </ui-select-choices>
@@ -309,8 +309,8 @@
                                         <label for="exampleInputPassword1">Pais</label>
                                         <div class="row">
                                             <ui-select ng-model="empresa.enderecos[0].pais" theme="bootstrap">
-                                                <ui-select-match placeholder="Paises...">{{$select.selected.descricao}}</ui-select-match>
-                                                <ui-select-choices repeat="item in endereco.pais | filter: $select.search">
+                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                <ui-select-choices repeat="item in pais | filter: $select.search">
                                                     <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
                                                 </ui-select-choices>
@@ -321,14 +321,9 @@
                             </div>
                             <!-- telefone -->
                             <!-- -------------------  TELEFONE ----------------- -->
-                            <div ng-controller="TelefoneControllers">
-                                <div ng-repeat="form in telefones">
+                                <div ng-repeat="telefone in empresa.telefones">
                                     <hr/>
-                                    <form name="myForm" ng-init="name = form.nome">
-                                        <div class="row">
 
-
-                                            <div ng-if="form.nome==='form1'">
                                                 <!-- code to render the regular video block -->
                                                 <div class="col-sm-4">
                                                     <label for="exampleInputPassword1" class="control-label">Telefone</label>
@@ -355,33 +350,15 @@
                                                 </div>
 
                                             </div>
-                                            <div ng-if="form.nome!=='form1'">
-                                                <div class="col-sm-4">
-                                                    <label for="exampleInputPassword1" class="control-label">{{form.telefone.telefoneTypeEnum}}</label>
 
-                                                    <div class="input-group">
-                                                        <span class="InputSign input-group-addon" target="contatos_fones"><span title="Apenas números" class="fa fa-phone"></span></span>
-                                                        <input type="text" class="form-control gugu" ng-model="form.telefone.numero" name="phone" ui-mask="(999) 99999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4" style="margin-top:25px">
-                                                    <button type="button" ng-click="deleteForm(form)" class="btn btn-link removeButton">deletar</button>
-                                                </div>
-                                            </div>
-                                    </form>
-                                    </div>
-                                </div>
+
 
                                 <!-- email -->
                                 <!-- -------------------  EMAIL ----------------- -->
-                                <div ng-controller="EmailControllers">
                                     <div ng-repeat="email in emails">
                                         <hr/>
-                                        <form name="myForm" ng-init="name = email.nome">
                                             <div class="row">
 
-
-                                                <div ng-if="email.nome==='form1'">
                                                     <!-- code to render the regular video block -->
                                                     <div class="col-sm-4">
                                                         <label for="exampleInputPassword1">Email</label>
@@ -409,22 +386,9 @@
                                                                 <li><a ng-click="createForm('OUTROS')" class="addEmailButton">Outros</a></li>
                                                             </ul>
                                                         </div>
-                                                    </div>
+
 
                                                 </div>
-                                                <div ng-if="email.nome!=='form1'">
-                                                    <div class="col-sm-4">
-                                                        <label for="exampleInputPassword1" class="control-label">{{email.email.emailTypeEnum}}</label>
-                                                        <div class="input-group">
-                                                            <span class="InputSign input-group-addon" target="contatos_emails"><span title="Apenas emails válidos" class="fa fa-envelope"></span></span>
-                                                            <input type="text" class="form-control" ng-model="email.email.email" placeholder="Recipient's username" aria-describedby="basic-addon2" ng-model="email.email.email">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4" style="margin-top:25px">
-                                                        <button type="button" ng-click="deleteForm(form)" class="btn btn-link removeButton">deletar</button>
-                                                    </div>
-                                                </div>
-                                        </form>
                                         </div>
                                     </div>
 
@@ -438,7 +402,7 @@
                                                     <label for="exampleInputPassword1">Atividade Primaria</label>
                                                     <div class="row">
                                                         <ui-select ng-model="cnae.cnae" theme="bootstrap">
-                                                            <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.codigo}}</ui-select-match>
+                                                            <ui-select-match placeholder="...">{{$select.selected.codigo}}</ui-select-match>
                                                             <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
                                                                 <div ng-bind-html="item.codigo | highlight: $select.search"></div>
                                                                 <small ng-bind-html="item.cnae | highlight: $select.search"></small>
@@ -454,9 +418,9 @@
     <span class="caret"></span>
   </button>
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                            <li><a ng-click="createcnae('RESIDENCIAL')" class="addPhoneButton">Residencial</a></li>
-                                                            <li><a ng-click="createcnae('CELULAR TIM')" class="addPhoneButton">Celular TIM</a></li>
-                                                            <li><a ng-click="createcnae('CELULAR OI')" class="addPhoneButton">Celular OI</a></li>
+                                                            <li><a ng-click="createcnae('RESIDENCIAL')" class="addPhoneButton">Secundario</a></li>
+                                                            <li><a ng-click="createcnae('CELULAR TIM')" class="addPhoneButton">Terceario</a></li>
+                                                            <li><a ng-click="createcnae('CELULAR OI')" class="addPhoneButton">Quartario</a></li>
                                                             <li role="separator" class="divider"></li>
                                                             <li><a ng-click="createcnae('OUTROS')" class="addPhoneButton">Outros</a></li>
                                                         </ul>
@@ -542,7 +506,7 @@
                                                 <div class="col-sm-2">
                                                     <ui-select multiple ng-model="multipleDemo" theme="bootstrap" close-on-select="true" title="Choose a color">
                                                         <ui-select-match placeholder="...">{{$item}}</ui-select-match>
-                                                        <ui-select-choices repeat="color in availableColors | filter:$select.search">
+                                                        <ui-select-choices repeat="color in roles | filter:$select.search">
                                                             {{color}}
                                                         </ui-select-choices>
                                                     </ui-select>

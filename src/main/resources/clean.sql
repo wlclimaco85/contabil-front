@@ -68,8 +68,7 @@ delete from formapg ;
 delete from fornecedor  ;
 delete from funcionario ;
 delete from grupo;
-delete from historico;
-delete from historicoitens  ;
+
 delete from horafunc ;
 delete from icms  ;
 delete from icmsopinter ;
@@ -80,6 +79,8 @@ delete from marca;
 delete from marcaproduto ;
 delete from medico  ;
 delete from menu  ;
+delete from historico;
+delete from historicoitens  ;
 delete from nfimpostodevolvido;
 delete from nfinfomodelo1por1areferenciada;
 delete from nfinfoprodutorruralreferenciada ;
@@ -164,6 +165,13 @@ delete from nfnotainfotransportador ;
 delete from nfnotainfotransporte  ;
 delete from nfnotainfoveiculo ;
 delete from nfpessoaautorizadadownloadnfe ;
+delete from validacao ;
+delete from nfnotainfoitemimpostoissqn ;
+delete from nfnotainfoitemimpostocofins ;
+delete from nfnotainfoitemimpostocofinsst  ;
+delete from nfnotainfoitemimpostoicmsufdestino ;
+delete from nfnotainfoitemimpostoicmsufdestino ;
+delete from transaction ;
 delete from notafiscal;
 delete from notafiscalentrada;
 delete from notafiscalitens ;
@@ -209,16 +217,10 @@ delete from tarefa  ;
 delete from telefone ;
 delete from tipobaixa;
 delete from titulo  ;
-delete from transaction ;
+
 delete from transportador;
 delete from tributacao;
 /*delete from unimed  ; */
 /*delete from user_roles  ;   */
 /*delete from users;        */
 /*delete from usuario ;    */
-delete from validacao ;
-delete from nfnotainfoitemimpostoissqn ;
-delete from nfnotainfoitemimpostocofins ;
-delete from nfnotainfoitemimpostocofinsst  ;
-delete from nfnotainfoitemimpostoicmsufdestino ;
-delete from nfnotainfoitemimpostoicmsufdestino ;
