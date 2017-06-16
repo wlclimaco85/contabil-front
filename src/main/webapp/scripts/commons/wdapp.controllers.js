@@ -132,7 +132,7 @@
 											 var _close = function(){console .log('close')};
 												 ModalService.showModal({
 													templateUrl: 'views/util/dialog/dPrimeiraEmpresa.html',
-													controller: "ClienteInsertController"
+													controller: "NewEmpresaUpdateController"
 													}).then(function(modal) {
 															modal.element.modal();
 															modal.close.then(function(result) {

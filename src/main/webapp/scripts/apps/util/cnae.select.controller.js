@@ -46,8 +46,6 @@
 	function cnaeSelectControllers($scope, $http, $timeout, $interval)
 	{
 		var vm = this;
-		debugger
-
 		// $scope.cnaes = [{ nome : 'cnae1' ,cnae :{id : 0}}];
 		$scope.createcnae = function(type)
 		{

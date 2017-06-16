@@ -90,7 +90,7 @@
 				$('.dt-buttons').find('.dt-button:eq(1)').before(
 					'<select class="form-control col-sm-3 btn btn-primary dropdown-toggle" data-ng-options="t.name for t in vm.types"' +
 					'data-ng-model="vm.object.type" style="height: 32px;margin-left: 8px;margin-right: 6px;width: 200px !important;">' +
-					'<option><a href="#">Ações <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>' +
+					'<option><a href="#">AÃ§Ãµes <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>' +
 					'<option><a href="#">Remover Todos <span class="badge selected badge-danger main-badge"  data-ng-show="{{showCase.countSeleted()}}"></span></a></option>' +
 					'</select>'
 				)
@@ -200,7 +200,7 @@
 			}).withOption('width', '10px'),
         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
         DTColumnBuilder.newColumn('banco').withTitle('Banco'),
-        DTColumnBuilder.newColumn('numAgencia').withTitle('Nº Agencia'),
+        DTColumnBuilder.newColumn('numAgencia').withTitle('NÂº Agencia'),
         DTColumnBuilder.newColumn('cep').withTitle('Cep'),
         DTColumnBuilder.newColumn('logradouro').withTitle('Logradouro'),
         DTColumnBuilder.newColumn('numero').withTitle('Numero'),
@@ -209,10 +209,10 @@
         DTColumnBuilder.newColumn('pais').withTitle('Pais').notVisible(),
         DTColumnBuilder.newColumn('telefone').withTitle('Telefone'),
         DTColumnBuilder.newColumn('email').withTitle('Email').notVisible(),
-        DTColumnBuilder.newColumn('obs').withTitle('Observações').notVisible(),
+        DTColumnBuilder.newColumn('obs').withTitle('ObservaÃ§Ãµes').notVisible(),
         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '140px'),
+        DTColumnBuilder.newColumn(null).withTitle('AÃ§Ãµes').notSortable().renderWith(actionsHtml).withOption('width', '140px'),
     ];
 
 		function rCallback(nRow, aData)
@@ -473,11 +473,6 @@
 			$scope.format = 'yyyy/MM/dd';
 			$scope.date = new Date();
 
-
-
-
-
-
 			$scope.today = function()
 			{
 				$scope.dt = new Date();
@@ -608,11 +603,16 @@
 (function()
 {
 	angular.module('wdApp.apps.newEmpresa.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-		.controller('NewEmpresaUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fEmpresa)
+		.controller('NewEmpresaUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fEmpresa,$log)
 		{
+
 			var vm = this;
 			var createForm3;
 			$scope.cnaes;
+			$scope.enderecos = [];
+			$scope.emails = [];
+			$scope.telefones = [];
+
 
 			createForm3 = function()
 			{
@@ -624,13 +624,15 @@
 
 			$scope.empresa = JSON.parse(localStorage.getItem('empresa'))
 
+			$scope.enderecos = $scope.empresa.enderecos;
+			$scope.emails = $scope.empresa.emails;
+			$scope.telefones = $scope.empresa.telefones;
 			if ($scope.empresa.socios.length == 0)
 				$scope.empresa.socios.push(
 				{
 					pessoa:
 					{}
 				})
-			debugger
 			if ($scope.empresa.cnaes.length > 0)
 				$scope.cnaes = $scope.empresa.cnaes;
 			else
@@ -789,7 +791,7 @@
 
 			var fnCallBack = function(oResponse)
 			{
-				debugger
+
 				//  $location.path("advogado/forms/advogadoAgenda");
 				window.location.href = "https://dev1.eu-gb.mybluemix.net/index3.html#/pages/signin"
 
@@ -797,7 +799,7 @@
 			}
 			$scope.saveEmpresa = function()
 			{
-				debugger
+				$log.info("init processo de add empresa");
 				$scope.empresa.dtInicio = (new Date($scope.empresa.dtInicio)).getTime();
 				$scope.empresa.dtAbertura = (new Date($scope.empresa.dtAbertura)).getTime();
 
@@ -898,7 +900,7 @@
 
 			function gravarNote()
 			{
-				debugger
+
 				SysMgmtData.processPostPageData("main/api/request",
 				{
 					url: "entidade/api/note/insert",
@@ -965,7 +967,7 @@
 
 			function addPlano()
 			{
-				debugger
+
 				ModalService.showModal(
 				{
 
@@ -989,7 +991,7 @@
 
 			function addSite()
 			{
-				debugger
+
 				ModalService.showModal(
 				{
 

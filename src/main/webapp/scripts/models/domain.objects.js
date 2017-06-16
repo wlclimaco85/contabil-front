@@ -76,7 +76,7 @@ qat.model.ServicoByPlano = function(_oObjet,$log)
 	this.modifyDateUTC = (new Date()).getTime();
 
 	if($log)
-		$log.info("add Serviço");
+		$log.info("add Serviรงo");
 }
 
 /** create by system gera-java version 1.0.0 19/05/2016 15:9 : 2*/
@@ -109,7 +109,7 @@ qat.model.Site = function(_oObjet,$log)
 	this.modifyDateUTC = (new Date()).getTime();
 
 	if($log)
-		$log.info("add Serviço");
+		$log.info("add Serviรงo");
 }
 
 /** create by system gera-java version 1.0.0 19/05/2016 15:9 : 2*/
@@ -134,7 +134,7 @@ qat.model.Contato = function(_oObjet,$log)
 	this.modifyDateUTC = (new Date()).getTime();
 
 	if($log)
-		$log.info("add Serviço");
+		$log.info("add Serviรงo");
 }
 
 /** create by system gera-java version 1.0.0 19/05/2016 15:9 : 2*/
@@ -159,7 +159,7 @@ qat.model.ContatoItens = function(_oObjet,$log)
 	this.modifyDateUTC = (new Date()).getTime();
 
 	if($log)
-		$log.info("add Serviço");
+		$log.info("add Serviรงo");
 }
 
 /** create by system gera-java version 1.0.0 19/05/2016 15:9 : 2*/
@@ -186,7 +186,7 @@ qat.model.OrdemServico = function(_oObjet,$log)
 	this.modifyDateUTC = (new Date()).getTime();
 
 	if($log)
-		$log.info("add Serviço");
+		$log.info("add Serviรงo");
 }
 
 /** create by system gera-java version 1.0.0 19/05/2016 15:9 : 2*/
@@ -209,7 +209,7 @@ qat.model.OrdemServicoItens = function(_oObjet,$log)
 	this.modifyDateUTC = (new Date()).getTime();
 
 	if($log)
-		$log.info("add Serviço");
+		$log.info("add Serviรงo");
 }
 
 /** create by system gera-java version 1.0.0 19/05/2016 15:9 : 2*/
@@ -236,7 +236,7 @@ qat.model.Plano = function(_oObjet,$log)
 	this.modifyDateUTC = (new Date()).getTime();
 
 	if($log)
-		$log.info("add Serviço");
+		$log.info("add Serviรงo");
 }
 
 qat.model.transaction = function(_user, _token, modelAction,$log)
@@ -253,7 +253,7 @@ qat.model.transaction = function(_user, _token, modelAction,$log)
 		_emprId = JSON.parse(localStorage.getItem('empresa')).id;
 	}
 	if($log)
-		$log.info("add Serviço");
+		$log.info("add Serviรงo");
 	return {
 
 		token: _token,
@@ -272,7 +272,7 @@ qat.model.transaction = function(_user, _token, modelAction,$log)
 qat.model.fnCnae = function(_oObjet, _modelAction, _user,$log)
 {
 	if($log)
-		$log.info("add Serviço");
+		$log.info("add Cnae");
 	if (_oObjet)
 	{
 		return idCnae = {
@@ -292,10 +292,10 @@ qat.model.fnCnae = function(_oObjet, _modelAction, _user,$log)
 	}
 
 }
-qat.model.fnRegime = function(_oObjet, modelAction,$log)
+qat.model.fnRegime = function(_oObjet, modelAction,user,$log)
 {
 	if($log)
-		$log.info("add Serviço");
+		$log.info("add Serviรงo");
 	if (_oObjet.id)
 	{
 		return regime = {
@@ -303,9 +303,9 @@ qat.model.fnRegime = function(_oObjet, modelAction,$log)
 			id: _oObjet.id,
 			nome: _oObjet.nome,
 			descricao: _oObjet.descricao,
-			createUser: "System",
+			createUser: user,
 			createDateUTC: (new Date()).getTime(),
-			modifyUser: "System",
+			modifyUser: user,
 			modifyDateUTC: (new Date()).getTime(),
 
 		}
@@ -317,7 +317,7 @@ qat.model.fnRegime = function(_oObjet, modelAction,$log)
 
 }
 
-qat.model.fnCnaeEmpresa = function(_oObjet, modelAction, user,$log)
+qat.model.fnCnaeEmpresa = function(_oObjet, _modelAction, _user,$log)
 {
 	var _emprId = null;
 	if (localStorage.getItem('empresa') == null ||
@@ -330,14 +330,14 @@ qat.model.fnCnaeEmpresa = function(_oObjet, modelAction, user,$log)
 		_emprId = JSON.parse(localStorage.getItem('empresa')).id;
 	}
 	if($log)
-		$log.info("add Serviço");
+		$log.info("add Cnae Empresa");
 	return cnaes = {
-		idCnae: _oObjet,
+		idCnae: qat.model.fnCnae(_oObjet, "NONE", _user,$log),
 		emprId: _emprId,
-		modelAction: modelAction,
-		createUser: user,
+		modelAction: _modelAction,
+		createUser: _user,
 		createDateUTC: (new Date()).getTime(),
-		modifyUser: user,
+		modifyUser: _user,
 		modifyDateUTC: (new Date()).getTime(),
 	}
 }
@@ -356,7 +356,7 @@ qat.model.fnFormaReceber = function(_oObjet, _action,$log)
 	}
 	var _fornecedor = {};
 	if($log)
-		$log.info("add Serviço");
+		$log.info("add Serviรงo");
 	if (_oObjet.cliente)
 	{
 		if (_oObjet.cliente.description)
@@ -369,7 +369,7 @@ qat.model.fnFormaReceber = function(_oObjet, _action,$log)
 		}
 	}
 	if($log)
-		$log.info("add Serviço");
+		$log.info("add Serviรงo");
 	return cnaes = {
 		id: _oObjet.id ? _oObjet.id : null,
 		descricao: _oObjet.descricao,
@@ -600,7 +600,7 @@ qat.model.fnPreco = function(id, _value, _tabela, modelAction)
 	return telefones;
 }
 
-qat.model.fnTelefones = function(_telefone, modelAction, _user)
+qat.model.fnTelefones = function(_telefone, modelAction, _user,$log)
 {
 	var _id = null;
 	if (_telefone)
@@ -622,6 +622,10 @@ qat.model.fnTelefones = function(_telefone, modelAction, _user)
 		else
 		{
 			_emprId = JSON.parse(localStorage.getItem('empresa')).id;
+		}
+
+		if($log){
+			$log.info("Cadastrando Telefone " + _telefone.numero);
 		}
 
 		telefones = {
@@ -650,7 +654,7 @@ qat.model.fnTelefones = function(_telefone, modelAction, _user)
 	}
 }
 
-qat.model.fnEmails = function(_email, modelAction, _user)
+qat.model.fnEmails = function(_email, modelAction, _user,$log)
 {
 
 	if (_email)
@@ -673,6 +677,11 @@ qat.model.fnEmails = function(_email, modelAction, _user)
 		else
 		{
 			_emprId = JSON.parse(localStorage.getItem('empresa')).id;
+		}
+
+		if($log)
+		{
+			$log.info("Add Email "+_email.email);
 		}
 		emails = {
 			id: _id,
@@ -729,7 +738,7 @@ qat.model.fnSocios = function(_socio,_modelAction,_user)
 			modifyDateUTC: (new Date()).getTime()
 		},
 		this.porcentagem = _socio.porcentagem,
-		this.socioAdm = _socio.socioAdm,
+		this.socioAdm = _socio.socioAdm ? 1 : 0,
 		this.emprId = _emprId,
 		this.modelAction = _modelAction,
 		this.createUser = _user,
@@ -1080,7 +1089,7 @@ qat.model.fnPessoaTipo = function(_pessoaTypeEnum, _modelAction, _userId)
 		modifyDateUTC: (new Date()).getTime()
 
 	}
-	//////debugger
+	////////debugger
 	return tributacao;
 }
 
@@ -1127,7 +1136,7 @@ qat.model.fnEstoque = function(_estoque, _modelAction, _userId)
 	return estoque;
 }
 
-qat.model.fnDocumento = function(_documento, _modelAction, _userId)
+qat.model.fnDocumento = function(_documento, _modelAction, _userId,$log)
 {
 	var _id = null;
 	if (_documento.id == "" || _documento.id == " ")
@@ -1143,6 +1152,9 @@ qat.model.fnDocumento = function(_documento, _modelAction, _userId)
 	else
 	{
 		_emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	}
+	if($log){
+		$log.info("Addcionando documento "+_documento.documentoType+" numero " +_documento.numero);
 	}
 	estoque = {
 		id: _id,
@@ -1462,42 +1474,43 @@ qat.model.fnEndereco = function(_oObjet, modelAction, user)
 	}
 }
 
-qat.model.fnUsuario = function(_oObjet, modelAction, user)
+qat.model.fnUsuario = function(_oObjet, modelAction, user,$log)
 {
 
-	return {
-		id: _oObjet.id,
-		email: _oObjet.email,
-		senha: _oObjet.senha,
-		cpf:
+		this.id = _oObjet.id;
+		this.email = _oObjet.email;
+		this.senha = _oObjet.senha;
+		this.nome  = _oObjet.nome;
+		this.cpf =
 		{
-			numero: _oObjet.numero,
+			numero: _oObjet.cpf ? _oObjet.cpf.numero : "00",
 			documentoTypeEnumValue: 2,
-			modelAction: modelAction,
+			modelAction: _oObjet.cpf ?_oObjet.cpf.id ? "UPDATE" :"INSERT" : "INSERT",
 			createUser: user,
 			createDateUTC: (new Date()).getTime(),
 			modifyUser: user,
 			modifyDateUTC: (new Date()).getTime()
-		},
-		pergunta: _oObjet.pergunta,
-		role: _oObjet.role,
-		telefone: _oObjet.telefone,
-		language: "pt-br",
-		parentId: _oObjet.parentId,
-		emprId: _oObjet.emprId,
-		processId: _oObjet.processId,
-		tableEnumValue: _oObjet.tableEnumValue,
-		modelAction: modelAction,
-		createUser: user,
-		createDateUTC: (new Date()).getTime(),
-		modifyUser: user,
-		modifyDateUTC: (new Date()).getTime()
-	}
-}
+		};
+		this.pergunta = _oObjet.pergunta;
+		this.role = _oObjet.role;
+		this.telefone = _oObjet.telefone;
+		this.language = "pt-br";
+		this.parentId = _oObjet.parentId;
+		this.emprId = _oObjet.emprId;
+		this.processId = _oObjet.processId;
+		this.tableEnumValue = _oObjet.tableEnumValue;
+		this.modelAction = modelAction;
+		this.createUser = user;
+		this.createDateUTC = (new Date()).getTime();
+		this.modifyUser = user;
+		this.modifyDateUTC = (new Date()).getTime();
 
+		if($log)
+			$log.info("add Usuario - " + _oObjet.email);
+
+}
 qat.model.fnDocumentos = function(_documentos, _modelAction, _userId)
 {
-	debugger
 	var _emprId = null;
 	var estoques = [];
 	if (localStorage.getItem('empresa') == null ||
@@ -1614,7 +1627,7 @@ qat.model.Emails = function(_oObjet, _modelAction, _user)
 {
 	var email = {};
 	var emails = [];
-	if(_oObjet)
+	if(_oObjet && _oObjet[0])
 	{
 		email = qat.model.Email(_oObjet[0], _oObjet[0].id ? _modelAction : "INSERT", _user)
 		emails.push(email)
@@ -1629,7 +1642,7 @@ qat.model.Telefones = function(_oObjet, _modelAction, _user)
 	//debugger
 	var email = {};
 	var emails = [];
-	if(_oObjet)
+	if(_oObjet && _oObjet[0])
 	{
 //	for (var x = 0; x < _oObjet.length; x++)
 //	{
@@ -1723,7 +1736,7 @@ qat.model.fnDoisValor1 = function(_oObjet, _modelAction, _user)
 	    this.modifyDateUTC = (new Date()).getTime();*/
 }
 
-qat.model.EmpresaProduto = function(_oObjet, _modelAction, _user)
+qat.model.EmpresaProduto = function(_oObjet, _modelAction, _user,$log)
 {
 	//debugger
 	this.id = _oObjet.id;
@@ -2716,7 +2729,7 @@ qat.model.configuracao = function(_oObjet, _modelAction, _user)
 /** create by system gera-java version 1.0.0 01/06/2016 14:44 : 36*/
 
 //Empresa Object
-qat.model.Empresa = function(_oObjet, _modelAction, _user,$log)
+qat.model.Empresa = function(_oObjet, _modelAction, _user, $log)
 {
 
 	if (_oObjet != undefined)
@@ -2729,7 +2742,7 @@ qat.model.Empresa = function(_oObjet, _modelAction, _user,$log)
 		this.entidadeId = JSON.parse(localStorage.getItem('empresa')) ? JSON.parse(localStorage.getItem('empresa')).id : null;
 		this.entidadeEnum = _oObjet.entidadeEnum;
 		this.configuracao = _oObjet.configuracao ? new qat.model.configuracao(_oObjet.configuracao, _modelAction, _user) : null;
-		this.usuarios = [_oObjet.usuarios ? new qat.model.Usuario(_oObjet.usuarios[0], _modelAction, _user) : null];
+		this.usuarios = _oObjet.usuarios ? _oObjet.usuarios : null;
 		this.bancos = _oObjet.bancos ? _oObjet.bancos : null;
 		this.socios = _oObjet.socios ? _oObjet.socios : null;
 		this.tipo = _oObjet.tipo;
@@ -2739,14 +2752,14 @@ qat.model.Empresa = function(_oObjet, _modelAction, _user,$log)
 		this.numFunc = _oObjet.numFunc ? _oObjet.numFunc : 0;
 		this.statusInicial = _oObjet.statusInicial;
 		this.entidadeEnumValue = _oObjet.entidadeEnumValue;
-		this.regime = _oObjet.regime ? qat.model.fnRegime(_oObjet.regime, _oObjet.regime.id ? _modelAction : "INSERT", _user) : null;
-		this.documentos = _oObjet.documentos ? qat.model.fnDocumentos(_oObjet.documentos, _modelAction, _user) : null;
-		this.enderecos = _oObjet.enderecos ? qat.model.fnEnderecos(_oObjet.enderecos, _modelAction, _user) :
+		this.regime = _oObjet.regime ? qat.model.fnRegime(_oObjet.regime, _oObjet.regime.id ? _modelAction : "INSERT", _user,$log) : null;
+		this.documentos = _oObjet.documentos ? _oObjet.documentos : null;
+		this.enderecos = _oObjet.enderecos ? qat.model.fnEnderecos(_oObjet.enderecos, _modelAction, _user,$log) :
 		null;
-		this.emails = (qat.model.Emails(_oObjet.emails, _modelAction, _user))
-		this.telefones = (qat.model.Telefones(_oObjet.telefones, _modelAction, _user))
+		this.emails = (qat.model.Emails(_oObjet.emails, _modelAction, _user,$log))
+		this.telefones = (qat.model.Telefones(_oObjet.telefones, _modelAction, _user,$log))
 
-		this.cnaes = _oObjet.cnaes ? qat.model.Cnaes(_oObjet.cnaes, _modelAction, _user) : null
+		this.cnaes = _oObjet.cnaes ? qat.model.Cnaes(_oObjet.cnaes, _modelAction, _user,$log) : null
 		this.statusList = _oObjet.statusList;
 		this.notes = _oObjet.notes;
 		this.parentId = _oObjet.parentId;

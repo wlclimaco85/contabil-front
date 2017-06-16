@@ -3,7 +3,7 @@
 	'use strict';
 	var commonAuth = angular.module('wdApp.ajaxCall.empresa', []);
 
-	commonAuth.factory('fEmpresa', ['$rootScope', 'fModels', 'SysMgmtData', 'toastr', function($rootScope, fModels, SysMgmtData, toastr)
+	commonAuth.factory('fEmpresa', ['$rootScope', 'fModels', 'SysMgmtData', 'toastr', '$log', function($rootScope, fModels, SysMgmtData, toastr, $log)
 		{
 			var factory = {};
 
@@ -231,11 +231,12 @@
 				empresa.emails = emailsAux;
 
 
-				var oObject = fModels.amont(empresa, "INSERT");
+
 				var oUsuario = fModels.amont(qat.model.fnUsuario(usuario, "INSERT", "system"), "INSERT");
 				oObject.usuarios = [];
 				oObject.usuarios.push(oUsuario);
 				debugger
+				var oObject = fModels.amont(new qat.model.Empresa(empresa, "UPDATE", user), "INSERT");
 				SysMgmtData.processPostPageData("main/api/anonimo",
 				{
 					url: "entidade/api/empresa" + WebDaptiveAppConfig.create_url,
@@ -306,59 +307,18 @@
 				var telefonesAux = [];
 				for (var x = 0; x < telefones.length; x++)
 				{
-					if (telefones[x].telefone == undefined || telefones[x].telefone == undefined)
-					{
-
-						if ((telefones[x].telefone.id != null) && (telefones[x].telefone.id != undefined))
-						{
-							telefonesAux.push(fModels.amont(qat.model.fnTelefones(telefones[x].telefone, "DELETE"), "DELETE"));
-						}
-						delete telefones[x].telefone
-					}
-					else
-					{
-						if ((telefones[x].telefone.id != null) && (telefones[x].telefone.id != undefined))
-						{
-							telefonesAux.push(fModels.amont(qat.model.fnTelefones(telefones[x].telefone, "UPDATE"), "UPDATE"));
-						}
-						else
-						{
-							telefonesAux.push(fModels.amont(qat.model.fnTelefones(telefones[x].telefone, "INSERT"), "INSERT"));
-						}
-
-					}
-
+					telefonesAux.push(qat.model.fnTelefones(telefones[x], telefones[x].id ? "UPDATE" :"INSERT")) ;
 				}
 				empresa.telefones = [];
 				empresa.telefones = telefonesAux;
 
 
 				//==================cnae==================================
+				debugger
 				var cnaesAux = [];
 				for (var x = 0; x < cnaes.length; x++)
 				{
-					if (cnaes[x].cnae == undefined || cnaes[x].cnae == undefined)
-					{
-
-						if ((cnaes[x].cnae.id != null) && (cnaes[x].cnae.id != undefined))
-						{
-							cnaesAux.push(fModels.amont(qat.model.fnCnaeEmpresa(cnaes[x].cnae, "DELETE"), "DELETE"));
-						}
-						delete cnaes[x].cnae
-					}
-					else
-					{
-						if ((cnaes[x].cnae.id != null) && (cnaes[x].cnae.id != undefined))
-						{
-							cnaesAux.push(fModels.amont(qat.model.fnCnaeEmpresa(cnaes[x].cnae, "UPDATE"), "UPDATE"));
-						}
-						else
-						{
-							cnaesAux.push(fModels.amont(qat.model.fnCnaeEmpresa(cnaes[x].cnae, "INSERT"), "INSERT"));
-						}
-
-					}
-
+					cnaesAux.push(qat.model.fnCnaeEmpresa(cnaes[x], cnaes[x].id ? "UPDATE" : "INSERT",user,$log));
 				}
 
 				empresa.cnaes = [];
@@ -369,42 +329,28 @@
 				var email = {};
 				for (var x = 0; x < emails.length; x++)
 				{
-					email = emails[x].email;
-
-					if (email == undefined || email == undefined)
-					{
-
-						if ((email.id != null) && (email.id != undefined))
-						{
-							emailsAux.push(fModels.amont(qat.model.fnEmails(email, "DELETE"), "DELETE"));
-						}
-						delete emails[x].email;
-					}
-					else
-					{
-						if ((email.id != null) && (email.id != undefined))
-						{
-							emailsAux.push(fModels.amont(qat.model.fnEmails(email, "UPDATE"), "UPDATE"));
-						}
-						else
-						{
-							emailsAux.push(fModels.amont(qat.model.fnEmails(email, "INSERT"), "INSERT"));
-						}
-
-					}
-
+					emailsAux.push(qat.model.fnEmails(emails[x], emails[x].id ? "UPDATE":"INSERT",user,$log));
 				}
 				empresa.emails = [];
 				empresa.emails = emailsAux;
 
-
-				var oObject = fModels.amont(empresa, "INSERT");
-
-				for (var x = 0; empresa.usuarios.length > x; x++)
+				var oDocumentos = [];
+				oDocumentos = empresa.documentos;
+				empresa.documentos = [];
+				for (var x = 0; oDocumentos.length > x; x++)
 				{
-					empresa.usuarios[x] = new qat.model.fnUsuario(empresa.usuarios[x], empresa.usuarios[x].id ? "INSERT" : "UPDATE", $rootScope.user.user)
+					empresa.documentos.push(new qat.model.fnDocumento(oDocumentos[x], oDocumentos[x].id ? "UPDATE" : "INSERT", $rootScope.user.user, $log));
+				}
+
+				var oUsuarios = [];
+				oUsuarios = empresa.usuarios;
+				empresa.usuarios = [];
+				for (var x = 0; oUsuarios.length > x; x++)
+				{
+					empresa.usuarios.push(new qat.model.fnUsuario(oUsuarios[x], oUsuarios[x].id ? "UPDATE" : "INSERT", $rootScope.user.user, $log));
 				}
 				debugger
+				var oObject = fModels.amont(new qat.model.Empresa(empresa, "UPDATE", user, $log), "UPDATE");
 				SysMgmtData.processPostPageData("main/api/anonimo",
 				{
 					url: "entidade/api/empresa" + WebDaptiveAppConfig.create_url,
