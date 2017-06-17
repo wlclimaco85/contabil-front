@@ -90,7 +90,7 @@
 				$('.dt-buttons').find('.dt-button:eq(1)').before(
 					'<select class="form-control col-sm-3 btn btn-primary dropdown-toggle" data-ng-options="t.name for t in vm.types"' +
 					'data-ng-model="vm.object.type" style="height: 32px;margin-left: 8px;margin-right: 6px;width: 200px !important;">' +
-					'<option><a href="#">AÃ§Ãµes <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>' +
+					'<option><a href="#">AÃƒÂ§ÃƒÂµes <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>' +
 					'<option><a href="#">Remover Todos <span class="badge selected badge-danger main-badge"  data-ng-show="{{showCase.countSeleted()}}"></span></a></option>' +
 					'</select>'
 				)
@@ -200,7 +200,7 @@
 			}).withOption('width', '10px'),
         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
         DTColumnBuilder.newColumn('banco').withTitle('Banco'),
-        DTColumnBuilder.newColumn('numAgencia').withTitle('NÂº Agencia'),
+        DTColumnBuilder.newColumn('numAgencia').withTitle('NÃ‚Âº Agencia'),
         DTColumnBuilder.newColumn('cep').withTitle('Cep'),
         DTColumnBuilder.newColumn('logradouro').withTitle('Logradouro'),
         DTColumnBuilder.newColumn('numero').withTitle('Numero'),
@@ -209,10 +209,10 @@
         DTColumnBuilder.newColumn('pais').withTitle('Pais').notVisible(),
         DTColumnBuilder.newColumn('telefone').withTitle('Telefone'),
         DTColumnBuilder.newColumn('email').withTitle('Email').notVisible(),
-        DTColumnBuilder.newColumn('obs').withTitle('ObservaÃ§Ãµes').notVisible(),
+        DTColumnBuilder.newColumn('obs').withTitle('ObservaÃƒÂ§ÃƒÂµes').notVisible(),
         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-        DTColumnBuilder.newColumn(null).withTitle('AÃ§Ãµes').notSortable().renderWith(actionsHtml).withOption('width', '140px'),
+        DTColumnBuilder.newColumn(null).withTitle('AÃƒÂ§ÃƒÂµes').notSortable().renderWith(actionsHtml).withOption('width', '140px'),
     ];
 
 		function rCallback(nRow, aData)
@@ -310,72 +310,8 @@
 			var $window;
 			$window = $(window);
 
+			debugger
 
-		buscaRCep = function(_cepValue)
-		{
-
-			var cepValue = _cepValue;
-			var formatedCep;
-
-			$.getJSON("//viacep.com.br/ws/" + _cepValue + "/json/?callback=?", function(res)
-			{
-
-				$scope.empresa.enderecos[0].bairro = res.bairro;
-				$scope.empresa.enderecos[0].complemento = res.complemento;
-				$scope.empresa.enderecos[0].codIbge = res.ibge;
-				$scope.empresa.enderecos[0].cidade = {
-					nome: res.localidade,
-					estado:
-					{
-						abreviacao: res.uf
-					}
-				};
-				$scope.empresa.enderecos[0].logradouro = res.logradouro;
-			});
-		}
-
-		//
-			var callbackEstado = function(res)
-		{
-
-			if (res.operationSuccess == true)
-			{
-				estados = res.estadoList;
-			}
-
-		}
-
-		var callbackCidade = function(res)
-		{
-			if (res.operationSuccess == true)
-			{
-				cidades = res.cidadeList
-			}
-
-		}
-
-		var callbackRoles = function(res)
-		{
-			if (res.operationSuccess == true)
-			{
-				roles = res.rolesList
-			}
-
-		}
-
-		qat.model.select.anonimo("entidade/api/userRoles/fetchPage", true, new qat.model.estadoInquiryRequest(100 / 20, true, null), callbackRoles);
-
-		doisValorFactory.empresa(vm);
-
-		qat.model.select.anonimo("cadastros/api/estado/fetchPage", true, new qat.model.estadoInquiryRequest(100 / 20, true, null), callbackEstado);
-
-		vm.countrySelected = function(selected)
-		{
-			if (selected)
-			{
-				qat.model.select.anonimo("cadastros/api/cidade/fetchPage", true, new qat.model.cidadeInquiryRequest(100 / 20, true, selected.id), callbackCidade);
-			}
-		}
 
 
 			$scope.doIfChecked = function(_ckecked, _value, _nome)
@@ -650,9 +586,6 @@
 
 			var fnCallBack = function(oResponse)
 			{
-				debugger
-				//  $location.path("advogado/forms/advogadoAgenda");
-				window.location.href = "https://dev1.eu-gb.mybluemix.net/index3.html#/pages/signin"
 
 				console.log(oResponse)
 			}
@@ -671,7 +604,7 @@
 (function()
 {
 	angular.module('wdApp.apps.newEmpresa.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-		.controller('NewEmpresaUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fEmpresa,$log)
+		.controller('NewEmpresaUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fEmpresa, $log,doisValorFactory)
 		{
 
 			var vm = this;
@@ -681,8 +614,76 @@
 			$scope.emails = [];
 			$scope.telefones = [];
 
+			$scope.buscaRCep = function(_cepValue)
+			{
+				debugger
+				var cepValue = _cepValue;
+				var formatedCep;
 
-			createForm3 = function()
+				$.getJSON("//viacep.com.br/ws/" + _cepValue + "/json/?callback=?", function(res)
+				{
+					debugger
+					$scope.empresa.enderecos[0].bairro = res.bairro;
+					$scope.empresa.enderecos[0].complemento = res.complemento;
+					$scope.empresa.enderecos[0].codIbge = res.ibge;
+					$scope.empresa.enderecos[0].cidade = {
+						nome: res.localidade,
+						estado:
+						{
+							abreviacao: res.uf
+						}
+					};
+					$scope.empresa.enderecos[0].logradouro = "";
+					$scope.empresa.enderecos[0].logradouro = res.logradouro;
+				});
+			}
+
+			//
+			var callbackEstado = function(res)
+			{
+debugger
+				if (res.operationSuccess == true)
+				{
+					$scope.estados = res.estadoList;
+				}
+
+			}
+
+			var callbackCidade = function(res)
+			{debugger
+				if (res.operationSuccess == true)
+				{
+					$scope.cidades = res.cidadeList
+				}
+
+			}
+
+			var callbackRoles = function(res)
+			{
+				debugger
+				if (res.operationSuccess == true)
+				{
+					$scope.roles = res.userRolesList;
+				}
+
+			}
+
+			qat.model.select.anonimo("entidade/api/userRoles/fetchPage", true, new qat.model.estadoInquiryRequest(100 / 20, true, null), callbackRoles);
+
+			doisValorFactory.empresa($scope);
+
+			qat.model.select.anonimo("cadastros/api/estado/fetchPage", true, new qat.model.estadoInquiryRequest(100 / 20, true, null), callbackEstado);
+
+			$scope.countrySelected = function(selected)
+			{
+				if (selected)
+				{
+					qat.model.select.anonimo("cadastros/api/cidade/fetchPage", true, new qat.model.cidadeInquiryRequest(100 / 20, true, selected.id), callbackCidade);
+				}
+			}
+
+
+			$scope.createForm3 = function()
 			{
 				$scope.empresa.usuarios.push(
 				{})
@@ -690,7 +691,142 @@
 			var $window;
 			$window = $(window);
 
-			$scope.empresa = JSON.parse(localStorage.getItem('empresa'))
+			$scope.empresa = JSON.parse(localStorage.getItem('empresa'));
+			debugger
+			var bCPF = false;
+			var bCNPJ = false;
+			var bIM = false;
+			var bIES = false;
+			var bIIE = false;
+			var bIE = false;
+			var bIF = false;
+			var bINSCRESTSUBSTTRIB = false;
+			var bINDICADORIE = false;
+			var bNUNINSJUNTCOMERCIAL = false;
+			for (var x = 0; x < $scope.empresa.documentos.length; x++)
+			{
+				if ($scope.empresa.documentos[x].documentoTypeEnumValue == 1)
+				{
+					bCNPJ = true;
+				}
+				if ($scope.empresa.documentos[x].documentoTypeEnumValue == 2)
+				{
+					bCPF = true;
+				}
+				if ($scope.empresa.documentos[x].documentoTypeEnumValue == 3)
+				{
+					bIM = true;
+				}
+				if ($scope.empresa.documentos[x].documentoTypeEnumValue == 8)
+				{
+					bIES = true;
+				}
+				if ($scope.empresa.documentos[x].documentoTypeEnumValue == 9)
+				{
+					bIIE = true;
+				}
+				if ($scope.empresa.documentos[x].documentoTypeEnumValue == 10)
+				{
+					bIE = true;
+				}
+				if ($scope.empresa.documentos[x].documentoTypeEnumValue == 11)
+				{
+					bIF = true;
+				}
+				if ($scope.empresa.documentos[x].documentoTypeEnumValue == 12)
+				{
+					bINSCRESTSUBSTTRIB = true;
+				}
+				if ($scope.empresa.documentos[x].documentoTypeEnumValue == 14)
+				{
+					bINDICADORIE = true;
+				}
+				if ($scope.empresa.documentos[x].documentoTypeEnumValue == 16)
+				{
+					bNUNINSJUNTCOMERCIAL = true;
+				}
+			}
+
+			if (!bCPF)
+			{
+				$scope.empresa.documentos.push(
+				{
+					documentoTypeEnumValue: 2,
+					numero: ""
+				})
+			};
+			if (!bCNPJ)
+			{
+				$scope.empresa.documentos.push(
+				{
+					documentoTypeEnumValue: 1,
+					numero: ""
+				})
+			};
+			if (!bIM)
+			{
+				$scope.empresa.documentos.push(
+				{
+					documentoTypeEnumValue: 3,
+					numero: ""
+				})
+			};
+			if (!bIES)
+			{
+				$scope.empresa.documentos.push(
+				{
+					documentoTypeEnumValue: 8,
+					numero: ""
+				})
+			};
+			if (!bIIE)
+			{
+				$scope.empresa.documentos.push(
+				{
+					documentoTypeEnumValue: 9,
+					numero: ""
+				})
+			};
+			if (!bIE)
+			{
+				$scope.empresa.documentos.push(
+				{
+					documentoTypeEnumValue: 10,
+					numero: ""
+				})
+			};
+			if (!bIF)
+			{
+				$scope.empresa.documentos.push(
+				{
+					documentoTypeEnumValue: 11,
+					numero: ""
+				})
+			};
+			if (!bINSCRESTSUBSTTRIB)
+			{
+				$scope.empresa.documentos.push(
+				{
+					documentoTypeEnumValue: 12,
+					numero: ""
+				})
+			};
+			if (!bINDICADORIE)
+			{
+				$scope.empresa.documentos.push(
+				{
+					documentoTypeEnumValue: 14,
+					numero: ""
+				})
+			};
+			if (!bNUNINSJUNTCOMERCIAL)
+			{
+				$scope.empresa.documentos.push(
+				{
+					documentoTypeEnumValue: 16,
+					numero: ""
+				})
+			};
 
 			$scope.enderecos = $scope.empresa.enderecos;
 			$scope.emails = $scope.empresa.emails;
@@ -701,11 +837,12 @@
 					pessoa:
 					{}
 				})
-			if ($scope.empresa.cnaes.length > 0)
-				$scope.cnaes = $scope.empresa.cnaes;
-			else
-				$scope.cnaes = [
-				{}];
+			if ($scope.empresa.cnaes.length == 0)
+				$scope.empresa.cnaes = [
+					{
+						idCnae:
+						{}
+					}];
 
 			if (!$scope.empresa.socios.length > 0)
 			{
@@ -861,7 +998,7 @@
 			{
 
 				//  $location.path("advogado/forms/advogadoAgenda");
-				window.location.href = "https://dev1.eu-gb.mybluemix.net/index3.html#/pages/signin"
+
 
 				console.log(oResponse)
 			}

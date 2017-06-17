@@ -332,7 +332,8 @@ qat.model.fnCnaeEmpresa = function(_oObjet, _modelAction, _user,$log)
 	if($log)
 		$log.info("add Cnae Empresa");
 	return cnaes = {
-		idCnae: qat.model.fnCnae(_oObjet, "NONE", _user,$log),
+		id : _oObjet.id,
+		idCnae: qat.model.fnCnae(_oObjet.idCnae, "NONE", _user,$log),
 		emprId: _emprId,
 		modelAction: _modelAction,
 		createUser: _user,
@@ -707,7 +708,7 @@ qat.model.fnEmails = function(_email, modelAction, _user,$log)
 	}
 }
 
-qat.model.fnSocios = function(_socio,_modelAction,_user)
+qat.model.fnSocios = function(_socio,_modelAction,_user,$log)
 {
 	var _emprId = null;
 	if (localStorage.getItem('empresa') == null ||
@@ -723,7 +724,7 @@ qat.model.fnSocios = function(_socio,_modelAction,_user)
 		this.id = _socio.id,
 		this.pessoa =
 		{
-			nome: _socio.pessoa.nome,
+			nome: _socio.pessoa ? _socio.pessoa.nome : "",
 			pessoaTypeEnumValue: 6,
 			documentos: [
 				{
@@ -731,7 +732,7 @@ qat.model.fnSocios = function(_socio,_modelAction,_user)
 					numero: _socio.pessoa.documentos[0].numero
             }],
 			emprId: _emprId,
-			modelAction: _modelAction,
+			modelAction: _socio.pessoa ? _socio.pessoa.id ? "UPDATE" : "INSERT"  :"INSERT",
 			createUser: _user,
 			createDateUTC: (new Date()).getTime(),
 			modifyUser: _user,
@@ -745,6 +746,9 @@ qat.model.fnSocios = function(_socio,_modelAction,_user)
 		this.createDateUTC = (new Date()).getTime(),
 		this.modifyUser = _user,
 		this.modifyDateUTC = (new Date()).getTime()
+
+		if($log)
+			$log.info("Adicionando Socio " + _socio.pessoa ? _socio.pessoa.nome : "");
 
 }
 
@@ -951,7 +955,7 @@ qat.model.fnServicoAndPlano = function(_campo, _modelAction)
 
 qat.model.fnProduto = function(_produto, _modelAction, _userId)
 {
-	//debugger
+
 	var _id = null;
 	if (_produto.id == "" || _produto.id == " " || _produto.id == null)
 	{
@@ -1034,7 +1038,7 @@ qat.model.fnTributacao = function(_tributacao, _modelAction, _userId)
 	{
 		_emprId = JSON.parse(localStorage.getItem('empresa')).id;
 	}
-	//  //////debugger
+
 	tributacao = {
 		id: _id,
 		prodId: _tributacao.prodId,
@@ -1055,7 +1059,7 @@ qat.model.fnTributacao = function(_tributacao, _modelAction, _userId)
 		modifyDateUTC: (new Date()).getTime()
 
 	}
-	//////debugger
+
 	return tributacao;
 }
 
@@ -1073,7 +1077,7 @@ qat.model.fnPessoaTipo = function(_pessoaTypeEnum, _modelAction, _userId)
 	{
 		_emprId = JSON.parse(localStorage.getItem('empresa')).id;
 	}
-	//  //////debugger
+
 	tributacao = {
 		id: _id,
 		pessoaTypeEnum: _pessoaTypeEnum,
@@ -1089,7 +1093,7 @@ qat.model.fnPessoaTipo = function(_pessoaTypeEnum, _modelAction, _userId)
 		modifyDateUTC: (new Date()).getTime()
 
 	}
-	////////debugger
+
 	return tributacao;
 }
 
@@ -1114,7 +1118,7 @@ qat.model.fnEstoque = function(_estoque, _modelAction, _userId)
 	{
 		_emprId = JSON.parse(localStorage.getItem('empresa')).id;
 	}
-	//  //////debugger
+
 	estoque = {
 		id: _id,
 		estoqueTypeEnumValue: _estoque.estoqueTypeEnumValue,
@@ -1132,7 +1136,7 @@ qat.model.fnEstoque = function(_estoque, _modelAction, _userId)
 		modifyDateUTC: (new Date()).getTime()
 
 	}
-	//////debugger
+
 	return estoque;
 }
 
@@ -1142,6 +1146,10 @@ qat.model.fnDocumento = function(_documento, _modelAction, _userId,$log)
 	if (_documento.id == "" || _documento.id == " ")
 	{
 		_id = null;
+	}
+	else
+	{
+		_id = _documento.id;
 	}
 	var _emprId = null;
 	if (localStorage.getItem('empresa') == null ||
@@ -1175,7 +1183,7 @@ qat.model.fnDocumento = function(_documento, _modelAction, _userId,$log)
 		modifyDateUTC: (new Date()).getTime()
 
 	}
-	//////debugger
+
 	return estoque;
 }
 
@@ -1200,7 +1208,7 @@ qat.model.fnPrecoProd = function(_estoque, _modelAction, _userId)
 	{
 		_emprId = JSON.parse(localStorage.getItem('empresa')).id;
 	}
-	//  //////debugger
+
 	estoque = {
 		id: _id,
 		precoTypeEnumValue: _estoque.precoTypeEnumValue,
@@ -1218,7 +1226,7 @@ qat.model.fnPrecoProd = function(_estoque, _modelAction, _userId)
 		modifyDateUTC: (new Date()).getTime()
 
 	}
-	//////debugger
+
 	return estoque;
 }
 
@@ -1239,7 +1247,7 @@ qat.model.fnCusto = function(_estoque, _modelAction, _userId)
 	{
 		_emprId = JSON.parse(localStorage.getItem('empresa')).id;
 	}
-	//  //////debugger
+
 	estoque = {
 		id: _id,
 		valor: _estoque.valor,
@@ -1256,7 +1264,7 @@ qat.model.fnCusto = function(_estoque, _modelAction, _userId)
 		modifyDateUTC: (new Date()).getTime()
 
 	}
-	//////debugger
+
 	return estoque;
 }
 
@@ -1555,7 +1563,7 @@ qat.model.fnDocumentos = function(_documentos, _modelAction, _userId)
 		}
 		estoques.push(estoque);
 	}
-	//////debugger
+
 	return estoques;
 }
 
@@ -1639,7 +1647,7 @@ qat.model.Emails = function(_oObjet, _modelAction, _user)
 
 qat.model.Telefones = function(_oObjet, _modelAction, _user)
 {
-	//debugger
+
 	var email = {};
 	var emails = [];
 	if(_oObjet && _oObjet[0])
@@ -1738,7 +1746,7 @@ qat.model.fnDoisValor1 = function(_oObjet, _modelAction, _user)
 
 qat.model.EmpresaProduto = function(_oObjet, _modelAction, _user,$log)
 {
-	//debugger
+
 	this.id = _oObjet.id;
 	this.prodId = _oObjet.prodId;
 	this.codigo = _oObjet.codigo;
@@ -2686,7 +2694,7 @@ qat.model.boleto = function(_oObjet, _modelAction, _user)
 
 qat.model.configuracao = function(_oObjet, _modelAction, _user)
 {
-	//debugger
+
 	this.id = _oObjet.id;
 	this.confCabecalho = _oObjet.confCabecalho;
 	this.confGeral = _oObjet.confGeral ? new qat.model.confGeral(_oObjet.confGeral, _oObjet.confGeral.id ? _modelAction : "INSERT", _user) :
@@ -2746,6 +2754,9 @@ qat.model.Empresa = function(_oObjet, _modelAction, _user, $log)
 		this.bancos = _oObjet.bancos ? _oObjet.bancos : null;
 		this.socios = _oObjet.socios ? _oObjet.socios : null;
 		this.tipo = _oObjet.tipo;
+		this.numFunc = _oObjet.numFunc;
+		this.tipoPessoa = _oObjet.tipoPessoa;
+		this.cpfResponsavel = _oObjet.cpfResponsavel;
 		this.primeiroAcesso = _oObjet.primeiroAcesso ? _oObjet.primeiroAcesso : 0;
 		this.responsavel = _oObjet.responsavel;
 		this.notificacoes = _oObjet.notificacoes;
@@ -2754,12 +2765,10 @@ qat.model.Empresa = function(_oObjet, _modelAction, _user, $log)
 		this.entidadeEnumValue = _oObjet.entidadeEnumValue;
 		this.regime = _oObjet.regime ? qat.model.fnRegime(_oObjet.regime, _oObjet.regime.id ? _modelAction : "INSERT", _user,$log) : null;
 		this.documentos = _oObjet.documentos ? _oObjet.documentos : null;
-		this.enderecos = _oObjet.enderecos ? qat.model.fnEnderecos(_oObjet.enderecos, _modelAction, _user,$log) :
-		null;
-		this.emails = (qat.model.Emails(_oObjet.emails, _modelAction, _user,$log))
-		this.telefones = (qat.model.Telefones(_oObjet.telefones, _modelAction, _user,$log))
-
-		this.cnaes = _oObjet.cnaes ? qat.model.Cnaes(_oObjet.cnaes, _modelAction, _user,$log) : null
+		this.enderecos = _oObjet.enderecos ? _oObjet.enderecos : null;
+		this.emails = _oObjet.emails,
+		this.telefones = _oObjet.telefones,
+		this.cnaes = _oObjet.cnaes ? _oObjet.cnaes : null
 		this.statusList = _oObjet.statusList;
 		this.notes = _oObjet.notes;
 		this.parentId = _oObjet.parentId;

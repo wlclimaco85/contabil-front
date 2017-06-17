@@ -140,11 +140,12 @@
                                                 <div class="row">
                                                     <ui-select ng-model="documento" theme="bootstrap">
                                                         <ui-select-match placeholder="Indicador de IE ...">{{$select.selected.descricao}}</ui-select-match>
-                                                        <ui-select-choices repeat="item in endereco.indicadorIE | filter: $select.search">
+                                                        <ui-select-choices repeat="item in indicadorIE | filter: $select.search">
                                                             <div ng-bind-html="item.descricao | highlight: $select.search"></div>
                                                         </ui-select-choices>
                                                     </ui-select>
                                                 </div>
+                                                <input type="text" ng-model="documento.documentoTypeEnumValue" name="incrEst2" value="10" class="form-control hide" ng-init="documento.documentoTypeEnumValue=14">
                                             </div>
                                         </div>
 
@@ -203,12 +204,16 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-sm-3">
-                                    <label for="exampleInputEmail1">Nº Inscr. Junta Comercial</label>
-                                    <div class="input-group">
-                                        <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas números" class="fa fa-credit-card"></span></span>
-                                        <input type="text" ng-model="documento.numero" name="cpf" class="form-control" ui-mask="999.999.999-99" ui-mask-placeholder ui-mask-placeholder-char="_">
-                                        <input type="text" ng-model="documento.documentoTypeEnumValue" name="cnpjs" value="4" class="form-control hide" placeholder="Nº Cart. Trab" ng-init="documento.documentoTypeEnumValue=2">
+                                <div ng-repeat="documento in empresa.documentos">
+                                    <div ng-if="documento.documentoTypeEnumValue =='16'">
+                                        <div class="form-group col-sm-3">
+                                            <label for="exampleInputEmail1">Nº Inscr. Junta Comercial</label>
+                                            <div class="input-group">
+                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas números" class="fa fa-credit-card"></span></span>
+                                                <input type="text" ng-model="documento.numero" name="cpf" class="form-control" ui-mask="999.999.999-99" ui-mask-placeholder ui-mask-placeholder-char="_">
+                                                <input type="text" ng-model="documento.documentoTypeEnumValue" name="cnpjs" value="4" class="form-control hide" placeholder="Nº Cart. Trab" ng-init="documento.documentoTypeEnumValue=16">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-3">
@@ -321,506 +326,506 @@
                             </div>
                             <!-- telefone -->
                             <!-- -------------------  TELEFONE ----------------- -->
-                                <div ng-repeat="telefone in empresa.telefones">
+                            <div ng-repeat="telefone in empresa.telefones">
+                                <hr/>
+                                <div class="row">
+                                    <!-- code to render the regular video block -->
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1" class="control-label">Telefone</label>
+                                        <div class="input-group">
+                                            <span class="InputSign input-group-addon" target="contatos_fones"><span title="Apenas nÃºmeros" class="fa fa-phone"></span></span>
+                                            <input type="text" class="form-control gugu" ng-model="form.telefone.numero" name="phone" ui-mask="(999) 99999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4" style="margin-top:18px">
+                                        <div class="dropdown">
+                                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
+    Adicionar
+    <span class="caret"></span>
+  </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li><a ng-click="createForm('RESIDENCIAL')" class="addPhoneButton">Residencial</a></li>
+                                                <li><a ng-click="createForm('CELULAR TIM')" class="addPhoneButton">Celular TIM</a></li>
+                                                <li><a ng-click="createForm('CELULAR OI')" class="addPhoneButton">Celular OI</a></li>
+                                                <li role="separator" class="divider"></li>
+                                                <li><a ng-click="createForm('OUTROS')" class="addPhoneButton">Outros</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- email -->
+                            <!-- -------------------  EMAIL ----------------- -->
+                            <div ng-repeat="email in empresa.emails">
+                                <hr/>
+                                <div class="row">
+
+                                    <!-- code to render the regular video block -->
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1">Email</label>
+                                        <input type="text" class="form-control col-sm-4 hide input-id" name="id" placeholder="Email">
+                                        <input type="text" class="form-control col-sm-4 hide input-type" name="type" value="1" placeholder="Email">
+                                        <div class="input-group">
+                                            <span class="InputSign input-group-addon" target="contatos_emails"><span title="Apenas emails vÃ¡lidos" class="fa fa-envelope"></span></span>
+                                            <input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2" ng-model="email.email.email">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-4" style="margin-top:18px">
+                                        <div class="dropdown">
+                                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
+    Adicionar
+    <span class="caret"></span>
+  </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li><a ng-click="createForm('PRINCIPAL')" class="addEmailButton">Principal</a></li>
+                                                <li><a ng-click="createForm('NFE')" class="addEmailButton">NF-e</a></li>
+                                                <li><a ng-click="createForm('COMPRAS')" class="addEmailButton">Compras</a></li>
+                                                <li><a ng-click="createForm('VENDAS')" class="addEmailButton">Vendas</a></li>
+                                                <li role="separator" class="divider"></li>
+                                                <li><a ng-click="createForm('OUTROS')" class="addEmailButton">Outros</a></li>
+                                            </ul>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Cnae -->
+                            <div class="ng-cloak" ng-controller="CnaeSelectControllers as ctrl">
+                                <div ng-repeat="cnae in empresa.cnaes">
                                     <hr/>
-
-                                                <!-- code to render the regular video block -->
-                                                <div class="col-sm-4">
-                                                    <label for="exampleInputPassword1" class="control-label">Telefone</label>
-                                                    <div class="input-group">
-                                                        <span class="InputSign input-group-addon" target="contatos_fones"><span title="Apenas nÃºmeros" class="fa fa-phone"></span></span>
-                                                        <input type="text" class="form-control gugu" ng-model="form.telefone.numero" name="phone" ui-mask="(999) 99999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4" style="margin-top:18px">
-                                                    <div class="dropdown">
-                                                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
-    Adicionar
-    <span class="caret"></span>
-  </button>
-                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                            <li><a ng-click="createForm('RESIDENCIAL')" class="addPhoneButton">Residencial</a></li>
-                                                            <li><a ng-click="createForm('CELULAR TIM')" class="addPhoneButton">Celular TIM</a></li>
-                                                            <li><a ng-click="createForm('CELULAR OI')" class="addPhoneButton">Celular OI</a></li>
-                                                            <li role="separator" class="divider"></li>
-                                                            <li><a ng-click="createForm('OUTROS')" class="addPhoneButton">Outros</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-
-
-                                <!-- email -->
-                                <!-- -------------------  EMAIL ----------------- -->
-                                    <div ng-repeat="email in emails">
-                                        <hr/>
-                                            <div class="row">
-
-                                                    <!-- code to render the regular video block -->
-                                                    <div class="col-sm-4">
-                                                        <label for="exampleInputPassword1">Email</label>
-                                                        <input type="text" class="form-control col-sm-4 hide input-id" name="id" placeholder="Email">
-                                                        <input type="text" class="form-control col-sm-4 hide input-type" name="type" value="1" placeholder="Email">
-                                                        <div class="input-group">
-                                                            <span class="InputSign input-group-addon" target="contatos_emails"><span title="Apenas emails vÃ¡lidos" class="fa fa-envelope"></span></span>
-                                                            <input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2" ng-model="email.email.email">
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="col-sm-4" style="margin-top:18px">
-                                                        <div class="dropdown">
-                                                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
-    Adicionar
-    <span class="caret"></span>
-  </button>
-                                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                                <li><a ng-click="createForm('PRINCIPAL')" class="addEmailButton">Principal</a></li>
-                                                                <li><a ng-click="createForm('NFE')" class="addEmailButton">NF-e</a></li>
-                                                                <li><a ng-click="createForm('COMPRAS')" class="addEmailButton">Compras</a></li>
-                                                                <li><a ng-click="createForm('VENDAS')" class="addEmailButton">Vendas</a></li>
-                                                                <li role="separator" class="divider"></li>
-                                                                <li><a ng-click="createForm('OUTROS')" class="addEmailButton">Outros</a></li>
-                                                            </ul>
-                                                        </div>
-
-
-                                                </div>
-                                        </div>
-                                    </div>
-
-
-                                    <!-- Cnae -->
-                                    <div class="ng-cloak" ng-controller="CnaeSelectControllers as ctrl">
-                                        <div ng-repeat="cnae in cnaes">
-                                            <hr/>
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <label for="exampleInputPassword1">Atividade Primaria</label>
-                                                    <div class="row">
-                                                        <ui-select ng-model="cnae.cnae" theme="bootstrap">
-                                                            <ui-select-match placeholder="...">{{$select.selected.codigo}}</ui-select-match>
-                                                            <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
-                                                                <div ng-bind-html="item.codigo | highlight: $select.search"></div>
-                                                                <small ng-bind-html="item.cnae | highlight: $select.search"></small>
-                                                            </ui-select-choices>
-                                                        </ui-select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4" style="margin-top:18px">
-                                                    <div class="dropdown">
-                                                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
-    Adicionar
-    <span class="caret"></span>
-  </button>
-                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                            <li><a ng-click="createcnae('RESIDENCIAL')" class="addPhoneButton">Secundario</a></li>
-                                                            <li><a ng-click="createcnae('CELULAR TIM')" class="addPhoneButton">Terceario</a></li>
-                                                            <li><a ng-click="createcnae('CELULAR OI')" class="addPhoneButton">Quartario</a></li>
-                                                            <li role="separator" class="divider"></li>
-                                                            <li><a ng-click="createcnae('OUTROS')" class="addPhoneButton">Outros</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                            <div class="tab-pane tab3" id="tab3">
-                                <div ng-repeat="socio in empresa.socios">
-                                    <div class="row socios">
-                                        <div class="col-sm-2">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">CPF Socio</label>
-                                                <input type="text" ng-model="socio.pessoa.documentos[0].numero" class="form-control cpf-socio" name="book[0].cpf" placeholder="CPF Socio" />
-                                            </div>
-                                        </div>
+                                    <div class="row">
                                         <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Nome Socio</label>
-                                                <input type="text" ng-model="socio.pessoa.nome" class="form-control nome-socio" name="book[0].nome" placeholder="Nome Socio" />
+                                            <label for="exampleInputPassword1">Atividade Primaria</label>
+                                            <div class="row">
+                                                <ui-select ng-model="cnae.idCnae" theme="bootstrap">
+                                                    <ui-select-match placeholder="...">{{$select.selected.codigo}}</ui-select-match>
+                                                    <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
+                                                        <div ng-bind-html="item.codigo | highlight: $select.search"></div>
+                                                        <small ng-bind-html="item.cnae | highlight: $select.search"></small>
+                                                    </ui-select-choices>
+                                                </ui-select>
                                             </div>
+                                        </div>
+
+                                        <div class="col-sm-4" style="margin-top:18px">
+                                            <div class="dropdown">
+                                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
+    Adicionar
+    <span class="caret"></span>
+  </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a ng-click="createcnae('RESIDENCIAL')" class="addPhoneButton">Secundario</a></li>
+                                                    <li><a ng-click="createcnae('CELULAR TIM')" class="addPhoneButton">Terceario</a></li>
+                                                    <li><a ng-click="createcnae('CELULAR OI')" class="addPhoneButton">Quartario</a></li>
+                                                    <li role="separator" class="divider"></li>
+                                                    <li><a ng-click="createcnae('OUTROS')" class="addPhoneButton">Outros</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="tab-pane tab3" id="tab3">
+                        <div ng-repeat="socio in empresa.socios">
+                            <div class="row socios">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">CPF Socio</label>
+                                        <input type="text" ng-model="socio.pessoa.documentos[0].numero" class="form-control cpf-socio" name="book[0].cpf" placeholder="CPF Socio" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Nome Socio</label>
+                                        <input type="text" ng-model="socio.pessoa.nome" class="form-control nome-socio" name="book[0].nome" placeholder="Nome Socio" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Porcentagem</label>
+                                        <input type="text" ng-model="socio.porcentagem" class="form-control cota-socio" name="book[0].cota" placeholder="%" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:18px">
+                                    <div class="checkbox">
+                                        <toggle ng-model="socio.socioAdm" ng-init="socio.socioAdm = false" style="android" on="A Receber" off="Recebido" onstyle="btn-default" offstyle="btn-info" ng-true-value="'2'" ng-false-value="'1'"></toggle>
+                                    </div>
+                                </div>
+                                <div class="col-xs-1" style="margin-top:17px">
+                                    <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                                </div>
+                                <div class="col-xs-1" style="margin-top:18px">
+                                    <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane tab4" id="tab4">
+                        <div class="panel panel-default" style="background:#EEEEEE">
+                            <div class="panel-heading" style="background: #DDDDDD">
+                                <div class="row">
+                                    <div class="col-sm-2">CPF</div>
+                                    <div class="col-sm-2">Nome</div>
+                                    <div class="col-sm-3">Login(Email)</div>
+                                    <div class="col-sm-2">Senha</div>
+                                    <div class="col-sm-2">Permissões</div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-11"></div>
+                                        <div class="col-sm-1">
+                                            <button type="button" ng-click="createForm3()" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                    <div ng-repeat="usuario in empresa.usuarios">
+
+                                        <div class="col-sm-2">
+                                            <input type="text" ng-model="usuario.cpf.numero" name="cpf" class="form-control" placeholder="CPF">
                                         </div>
                                         <div class="col-sm-2">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Porcentagem</label>
-                                                <input type="text" ng-model="socio.porcentagem" class="form-control cota-socio" name="book[0].cota" placeholder="%" />
-                                            </div>
+                                            <input type="text" ng-model="usuario.nome" name="nome" class="form-control" placeholder="Nome">
                                         </div>
-                                        <div class="col-sm-3" style="margin-top:18px">
-                                            <div class="checkbox">
-                                                <toggle ng-model="socio.socioAdm" ng-init="socio.socioAdm = false" style="android" on="A Receber" off="Recebido" onstyle="btn-default" offstyle="btn-info" ng-true-value="'2'" ng-false-value="'1'"></toggle>
-                                            </div>
+                                        <div class="col-sm-3">
+                                            <input type="text" ng-model="usuario.email" name="email" class="form-control" placeholder="Login(Email)">
                                         </div>
-                                        <div class="col-xs-1" style="margin-top:17px">
-                                            <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                                        <div class="col-sm-2">
+                                            <input type="text" ng-model="usuario.senha" name="senha" class="form-control" placeholder="Senha">
                                         </div>
-                                        <div class="col-xs-1" style="margin-top:18px">
-                                            <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+                                        <div class="col-sm-2">
+                                            <ui-select multiple ng-model="usuario.role" theme="bootstrap" close-on-select="true" title="Choose a color">
+                                                <ui-select-match placeholder="...">{{$item.role.role}}</ui-select-match>
+                                                <ui-select-choices repeat="color in roles | filter:$select.search">
+                                                    {{color.role.role}}
+                                                </ui-select-choices>
+                                            </ui-select>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane tab4" id="tab4">
-                                <div class="panel panel-default" style="background:#EEEEEE">
-                                    <div class="panel-heading" style="background: #DDDDDD">
-                                        <div class="row">
-                                            <div class="col-sm-2">CPF</div>
-                                            <div class="col-sm-2">Nome</div>
-                                            <div class="col-sm-3">Login(Email)</div>
-                                            <div class="col-sm-2">Senha</div>
-                                            <div class="col-sm-2">Permissões</div>
-                                            <div class="col-sm-1"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="panel-body">
-                                        <div class="col-sm-12">
-                                            <div class="row">
-                                                <div class="col-sm-11"></div>
-                                                <div class="col-sm-1">
-                                                    <button type="button" ng-click="createForm3()" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
-                                                </div>
-                                            </div>
-                                            <div ng-repeat="usuario in empresa.usuarios">
-
-                                                <div class="col-sm-2">
-                                                    <input type="text" ng-model="usuario.cpf.numero" name="cpf" class="form-control" placeholder="CPF">
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <input type="text" ng-model="usuario.nome" name="nome" class="form-control" placeholder="Nome">
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <input type="text" ng-model="usuario.email" name="email" class="form-control" placeholder="Login(Email)">
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <input type="text" ng-model="usuario.senha" name="senha" class="form-control" placeholder="Senha">
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <ui-select multiple ng-model="multipleDemo" theme="bootstrap" close-on-select="true" title="Choose a color">
-                                                        <ui-select-match placeholder="...">{{$item}}</ui-select-match>
-                                                        <ui-select-choices repeat="color in roles | filter:$select.search">
-                                                            {{color}}
-                                                        </ui-select-choices>
-                                                    </ui-select>
-                                                </div>
-                                                <div class="col-sm-1">
-                                                    <button type="button" ng-click="createForm3()" class="btn btn-default addButton"><i class="fa fa-minus"></i></button>
-                                                </div>
-                                            </div>
+                                        <div class="col-sm-1">
+                                            <button type="button" ng-click="createForm3()" class="btn btn-default addButton"><i class="fa fa-minus"></i></button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane tab5" id="tab5" style="height:500px;">
-                                <div id="Layer1" style="overflow:auto;height:400px;left:10px; top:20px;">
-                                    <div ng-include="'views/empresa/apps/contrato.html'"></div>
-
-                                </div>
-                                <div>
-                                    <button class="btn btn-primary" ng-click="cc.generatePDF()"><i class="fa fa-save"></i> Save as PDF</button>
-                                </div>
-
-                            </div>
-                            <ul class="pager wizard">
-                                <li class="previous first" style="display:none;"><a href="javascript:;">Primeira</a></li>
-                                <li class="previous"><a href="javascript:;">Anterior</a></li>
-                                <li class="next last" style="display:none;"><a href="javascript:;">Ultima</a></li>
-                                <li class="next"><a href="javascript:;">Proximo</a></li>
-                                <li class="hide save-empresa"><input type="submit" id="submit" value="Submit" ng-click="saveEmpresa()" /></li>
-                            </ul>
                         </div>
+                    </div>
+                    <div class="tab-pane tab5" id="tab5" style="height:500px;">
+                        <div id="Layer1" style="overflow:auto;height:400px;left:10px; top:20px;">
+                            <div ng-include="'views/empresa/apps/contrato.html'"></div>
+
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" ng-click="cc.generatePDF()"><i class="fa fa-save"></i> Save as PDF</button>
+                        </div>
+
+                    </div>
+                    <ul class="pager wizard">
+                        <li class="previous first" style="display:none;"><a href="javascript:;">Primeira</a></li>
+                        <li class="previous"><a href="javascript:;">Anterior</a></li>
+                        <li class="next last" style="display:none;"><a href="javascript:;">Ultima</a></li>
+                        <li class="next"><a href="javascript:;">Proximo</a></li>
+                        <li class="hide save-empresa"><input type="submit" id="submit" value="Submit" ng-click="saveEmpresa()" /></li>
+                    </ul>
+                </div>
             </form>
 
 
 
-            </div>
-
-            </div>
-
         </div>
 
-        <style>
-            /*
+    </div>
+
+</div>
+
+<style>
+    /*
             Use the DejaVu Sans font for display and embedding in the PDF file.
             The standard PDF fonts have no support for Unicode characters.
         */
 
-            .pdf-page {
-                font-family: "DejaVu Sans", "Arial", sans-serif;
-            }
+    .pdf-page {
+        font-family: "DejaVu Sans", "Arial", sans-serif;
+    }
 
-        </style>
-        <!---->
-        <script>
-            // Import DejaVu Sans font for embedding
+</style>
+<!---->
+<script>
+    // Import DejaVu Sans font for embedding
 
-            // NOTE: Only required if the Kendo UI stylesheets are loaded
-            // from a different origin, e.g. cdn.kendostatic.com
-            kendo.pdf.defineFont({
-                "DejaVu Sans": "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans.ttf",
-                "DejaVu Sans|Bold": "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-                "DejaVu Sans|Bold|Italic": "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-                "DejaVu Sans|Italic": "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
-            });
-
-
-
-            $('#file-fr').fileinput({
-                language: 'fr',
-                uploadUrl: '#',
-                allowedFileExtensions: ['jpg', 'png', 'gif'],
-            });
-            $('#file-es').fileinput({
-                language: 'es',
-                uploadUrl: '#',
-                allowedFileExtensions: ['jpg', 'png', 'gif'],
-            });
-            $("#file-0").fileinput({
-                'allowedFileExtensions': ['jpg', 'png', 'gif'],
-            });
-            $("#file-1").fileinput({
-                uploadUrl: '#', // you must set a valid URL here else you will get an error
-                allowedFileExtensions: ['jpg', 'png', 'gif'],
-                overwriteInitial: false,
-                maxFileSize: 1000,
-                maxFilesNum: 10,
-                //allowedFileTypes: ['image', 'video', 'flash'],
-                slugCallback: function(filename) {
-                    return filename.replace('(', '_').replace(']', '_');
-                }
-            });
-            /*
-            $(".file").on('fileselect', function(event, n, l) {
-                alert('File Selected. Name: ' + l + ', Num: ' + n);
-            });
-            */
-            $("#file-3").fileinput({
-                showUpload: false,
-                showCaption: false,
-                browseClass: "btn btn-primary btn-lg",
-                fileType: "any",
-                previewFileIcon: "<i class='glyphicon glyphicon-king'></i>"
-            });
-            $("#file-4").fileinput({
-                uploadExtraData: {
-                    kvId: '10'
-                }
-            });
-            $(".btn-warning").on('click', function() {
-                if ($('#file-4').attr('disabled')) {
-                    $('#file-4').fileinput('enable');
-                } else {
-                    $('#file-4').fileinput('disable');
-                }
-            });
-            $(".btn-info").on('click', function() {
-                $('#file-4').fileinput('refresh', {
-                    previewClass: 'bg-info'
-                });
-            });
-            /*
-            $('#file-4').on('fileselectnone', function() {
-                alert('Huh! You selected no files.');
-            });
-            $('#file-4').on('filebrowse', function() {
-                alert('File browse clicked for #file-4');
-            });
-            */
-            $(document).ready(function() {
+    // NOTE: Only required if the Kendo UI stylesheets are loaded
+    // from a different origin, e.g. cdn.kendostatic.com
+    kendo.pdf.defineFont({
+        "DejaVu Sans": "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans.ttf",
+        "DejaVu Sans|Bold": "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+        "DejaVu Sans|Bold|Italic": "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+        "DejaVu Sans|Italic": "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+    });
 
 
 
+    $('#file-fr').fileinput({
+        language: 'fr',
+        uploadUrl: '#',
+        allowedFileExtensions: ['jpg', 'png', 'gif'],
+    });
+    $('#file-es').fileinput({
+        language: 'es',
+        uploadUrl: '#',
+        allowedFileExtensions: ['jpg', 'png', 'gif'],
+    });
+    $("#file-0").fileinput({
+        'allowedFileExtensions': ['jpg', 'png', 'gif'],
+    });
+    $("#file-1").fileinput({
+        uploadUrl: '#', // you must set a valid URL here else you will get an error
+        allowedFileExtensions: ['jpg', 'png', 'gif'],
+        overwriteInitial: false,
+        maxFileSize: 1000,
+        maxFilesNum: 10,
+        //allowedFileTypes: ['image', 'video', 'flash'],
+        slugCallback: function(filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        }
+    });
+    /*
+    $(".file").on('fileselect', function(event, n, l) {
+        alert('File Selected. Name: ' + l + ', Num: ' + n);
+    });
+    */
+    $("#file-3").fileinput({
+        showUpload: false,
+        showCaption: false,
+        browseClass: "btn btn-primary btn-lg",
+        fileType: "any",
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>"
+    });
+    $("#file-4").fileinput({
+        uploadExtraData: {
+            kvId: '10'
+        }
+    });
+    $(".btn-warning").on('click', function() {
+        if ($('#file-4').attr('disabled')) {
+            $('#file-4').fileinput('enable');
+        } else {
+            $('#file-4').fileinput('disable');
+        }
+    });
+    $(".btn-info").on('click', function() {
+        $('#file-4').fileinput('refresh', {
+            previewClass: 'bg-info'
+        });
+    });
+    /*
+    $('#file-4').on('fileselectnone', function() {
+        alert('Huh! You selected no files.');
+    });
+    $('#file-4').on('filebrowse', function() {
+        alert('File browse clicked for #file-4');
+    });
+    */
+    $(document).ready(function() {
 
 
-                $("#test-upload").fileinput({
-                    'showPreview': false,
-                    'allowedFileExtensions': ['jpg', 'png', 'gif'],
-                    'elErrorContainer': '#errorBlock'
-                });
 
-                bookIndex = 0;
 
-                $('.empresaForm')
-                    .formValidation({
-                        framework: 'bootstrap',
-                        icon: {
-                            valid: 'glyphicon glyphicon-ok',
-                            invalid: 'glyphicon glyphicon-remove',
-                            validating: 'glyphicon glyphicon-refresh'
-                        },
-                        fields: {
 
-                            'book[0].cpfs': notEmptyStringMinMaxRegexp,
-                            'book[0].nomes': notEmptyStringMinMax,
-                            'book[0].cotas': integerNotEmptyValidation,
-                            nomes: notEmptyStringMinMax,
-                            nunFuncs: integerNotEmptyValidation,
-                            razaos: notEmptyStringMinMax,
-                            logradouros: notEmptyStringMinMax,
-                            cpfs: notEmptyStringMinMaxRegexp,
-                            ceps: notEmptyStringMinMax,
-                            cnpjs: notEmptyStringMinMax,
-                            emails: emailValidation,
-                            telefones: telefoneValidation,
-                            phones: telefoneValidation,
-                            ceps: cepNotEmptyValidation,
-                            password: {
-                                validators: {
-                                    notEmpty: {
-                                        message: 'The password is required and can\'t be empty'
-                                    }
-                                }
+        $("#test-upload").fileinput({
+            'showPreview': false,
+            'allowedFileExtensions': ['jpg', 'png', 'gif'],
+            'elErrorContainer': '#errorBlock'
+        });
+
+        bookIndex = 0;
+
+        $('.empresaForm')
+            .formValidation({
+                framework: 'bootstrap',
+                icon: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+
+                    'book[0].cpfs': notEmptyStringMinMaxRegexp,
+                    'book[0].nomes': notEmptyStringMinMax,
+                    'book[0].cotas': integerNotEmptyValidation,
+                    nomes: notEmptyStringMinMax,
+                    nunFuncs: integerNotEmptyValidation,
+                    razaos: notEmptyStringMinMax,
+                    logradouros: notEmptyStringMinMax,
+                    cpfs: notEmptyStringMinMaxRegexp,
+                    ceps: notEmptyStringMinMax,
+                    cnpjs: notEmptyStringMinMax,
+                    emails: emailValidation,
+                    telefones: telefoneValidation,
+                    phones: telefoneValidation,
+                    ceps: cepNotEmptyValidation,
+                    password: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The password is required and can\'t be empty'
+                            }
+                        }
+                    },
+                    confirmPassword: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The confirm password is required and can\'t be empty'
                             },
-                            confirmPassword: {
-                                validators: {
-                                    notEmpty: {
-                                        message: 'The confirm password is required and can\'t be empty'
-                                    },
-                                    identical: {
-                                        field: 'password',
-                                        message: 'The password and its confirm are not the same'
-                                    }
-                                }
+                            identical: {
+                                field: 'password',
+                                message: 'The password and its confirm are not the same'
                             }
-
                         }
-                    })
+                    }
 
-                $("select").select2({
-                    placeholder: "Select a state",
-                    allowClear: true
-                });
+                }
+            })
 
-                $('#rootwizard').bootstrapWizard({
-                    onNext: function(tab, navigation, index) {
-                        /*  if(index==2) {
-                                // Make sure we entered the name
-                                if(!$('#name').val()) {
-                                    alert('You must enter your name');
-                                    $('#name').focus();
-                                    return false;
-                                }
-                            }
+        $("select").select2({
+            placeholder: "Select a state",
+            allowClear: true
+        });
 
-                            // Set the name for the next tab
-                            $('#tab3').html('Hello, ' + $('#name').val());
-                        */
-                    },
-                    onTabShow: function(tab, navigation, index) {
-
-                        var $total = navigation.find('li').length;
-                        var $current = index + 1;
-                        var $percent = ($current / $total) * 100;
-                        $('#rootwizard .progress-bar').css({
-                            width: $percent + '%'
-                        });
-                        if ($percent == 100) {
-                            $('.save-empresa').removeClass('hide');
-                        } else {
-                            $('.save-empresa').addClass('hide');
-                        }
-                    },
-                    onNext: function(tab, navigation, index) {
-                        var numTabs = $('.empresaForm').find('.tab-pane').length,
-                            isValidTab = validateTab(index - 1);
-                        if (!isValidTab) {
+        $('#rootwizard').bootstrapWizard({
+            onNext: function(tab, navigation, index) {
+                /*  if(index==2) {
+                        // Make sure we entered the name
+                        if(!$('#name').val()) {
+                            alert('You must enter your name');
+                            $('#name').focus();
                             return false;
                         }
-
-                        if (index === numTabs) {
-                            alert('agora');
-                            // We are at the last tab
-
-                            // Uncomment the following line to submit the form using the defaultSubmit() method
-                            // $('#installationForm').formValidation('defaultSubmit');
-
-                            // For testing purpose
-                            $('#completeModal').modal();
-                        }
-
-                        return true;
                     }
+
+                    // Set the name for the next tab
+                    $('#tab3').html('Hello, ' + $('#name').val());
+                */
+            },
+            onTabShow: function(tab, navigation, index) {
+
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                $('#rootwizard .progress-bar').css({
+                    width: $percent + '%'
                 });
-
-                window.prettyPrint && prettyPrint();
-
-
-                //============================= Email fim
-                function validateTab(index) {
-                    var fv = $('.empresaForm').data('formValidation'), // FormValidation instance
-                        // The current tab
-                        $tab = $('.empresaForm').find('.tab-pane').eq(index);
-
-                    // Validate the container
-                    fv.validateContainer($tab);
-
-                    var isValidStep = fv.isValidContainer($tab);
-                    if (isValidStep === false || isValidStep === null) {
-                        // Do not jump to the target tab
-                        return false;
-                    }
-
-                    return true;
+                if ($percent == 100) {
+                    $('.save-empresa').removeClass('hide');
+                } else {
+                    $('.save-empresa').addClass('hide');
+                }
+            },
+            onNext: function(tab, navigation, index) {
+                var numTabs = $('.empresaForm').find('.tab-pane').length,
+                    isValidTab = validateTab(index - 1);
+                if (!isValidTab) {
+                    return false;
                 }
 
-                /*
-                //Tab 1
-                $('.empresaForm').find('[name="nome"]').val('099.099.099.099');
-                $('.empresaForm').find('[name="cpf"]').val('099.099.099.099');
-                $('.empresaForm').find('[name="telefone"]').val('34988406670');
-                $('.empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
-                $('.empresaForm').find('[name="password"]').val('099.099.099.099');
-                $('.empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
+                if (index === numTabs) {
+                    alert('agora');
+                    // We are at the last tab
 
-                //Tab 2
-                $('.empresaForm').find('[name="cnpj"]').val('099.099.099.099');
-                $('.empresaForm').find('[name="numfunc"]').val('8');
-                $('.empresaForm').find('[name="razao"]').val('34988406670');
-                $('.empresaForm').find('[name="cep"]').val('38082243');
-                $('.empresaForm').find('[name="numero"]').val('686');
-                $('.empresaForm').find('[name="complemento"]').val('complemento');
-                $('.empresaForm').find('[name="logradouro"]').val('logradouro');
-                $('.empresaForm').find('[name="book[0].nome"]').val('joao das coves');
-                $('.empresaForm').find('[name="book[0].cpf"]').val('05790167659');
-                $('.empresaForm').find('[name="book[0].cpf"]').val('10');
-                */
-            });
-            //prencher form
-            /*
-            //Tab 1
-            $('.empresaForm').find('[name="nome"]').val('099.099.099.099');
-            $('.empresaForm').find('[name="cpf"]').val('099.099.099.099');
-            $('.empresaForm').find('[name="telefone"]').val('34988406670');
-            $('.empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
-            $('.empresaForm').find('[name="password"]').val('099.099.099.099');
-            $('.empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
+                    // Uncomment the following line to submit the form using the defaultSubmit() method
+                    // $('#installationForm').formValidation('defaultSubmit');
 
-            //Tab 2
-            $('.empresaForm').find('[name="cnpj"]').val('099.099.099.099');
-            $('.empresaForm').find('[name="nunfunc"]').val('8');
-            $('.empresaForm').find('[name="razao"]').val('34988406670');
-            $('.empresaForm').find('[name="cep"]').val('38082243');
-            $('.empresaForm').find('[name="numero"]').val('686');
-            $('.empresaForm').find('[name="complemento"]').val('complemento');
+                    // For testing purpose
+                    $('#completeModal').modal();
+                }
+
+                return true;
+            }
+        });
+
+        window.prettyPrint && prettyPrint();
 
 
+        //============================= Email fim
+        function validateTab(index) {
+            var fv = $('.empresaForm').data('formValidation'), // FormValidation instance
+                // The current tab
+                $tab = $('.empresaForm').find('.tab-pane').eq(index);
 
-            //Tab 3
-            $('.empresaForm').find('[name="nome"]').val('099.099.099.099');
-            $('.empresaForm').find('[name="cpf"]').val('099.099.099.099');
-            $('.empresaForm').find('[name="telefone"]').val('34988406670');
-            $('.empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
-            $('.empresaForm').find('[name="password"]').val('099.099.099.099');
-            $('.empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
-            */
+            // Validate the container
+            fv.validateContainer($tab);
 
-        </script>
+            var isValidStep = fv.isValidContainer($tab);
+            if (isValidStep === false || isValidStep === null) {
+                // Do not jump to the target tab
+                return false;
+            }
+
+            return true;
+        }
+
+        /*
+        //Tab 1
+        $('.empresaForm').find('[name="nome"]').val('099.099.099.099');
+        $('.empresaForm').find('[name="cpf"]').val('099.099.099.099');
+        $('.empresaForm').find('[name="telefone"]').val('34988406670');
+        $('.empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
+        $('.empresaForm').find('[name="password"]').val('099.099.099.099');
+        $('.empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
+
+        //Tab 2
+        $('.empresaForm').find('[name="cnpj"]').val('099.099.099.099');
+        $('.empresaForm').find('[name="numfunc"]').val('8');
+        $('.empresaForm').find('[name="razao"]').val('34988406670');
+        $('.empresaForm').find('[name="cep"]').val('38082243');
+        $('.empresaForm').find('[name="numero"]').val('686');
+        $('.empresaForm').find('[name="complemento"]').val('complemento');
+        $('.empresaForm').find('[name="logradouro"]').val('logradouro');
+        $('.empresaForm').find('[name="book[0].nome"]').val('joao das coves');
+        $('.empresaForm').find('[name="book[0].cpf"]').val('05790167659');
+        $('.empresaForm').find('[name="book[0].cpf"]').val('10');
+        */
+    });
+    //prencher form
+    /*
+    //Tab 1
+    $('.empresaForm').find('[name="nome"]').val('099.099.099.099');
+    $('.empresaForm').find('[name="cpf"]').val('099.099.099.099');
+    $('.empresaForm').find('[name="telefone"]').val('34988406670');
+    $('.empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
+    $('.empresaForm').find('[name="password"]').val('099.099.099.099');
+    $('.empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
+
+    //Tab 2
+    $('.empresaForm').find('[name="cnpj"]').val('099.099.099.099');
+    $('.empresaForm').find('[name="nunfunc"]').val('8');
+    $('.empresaForm').find('[name="razao"]').val('34988406670');
+    $('.empresaForm').find('[name="cep"]').val('38082243');
+    $('.empresaForm').find('[name="numero"]').val('686');
+    $('.empresaForm').find('[name="complemento"]').val('complemento');
+
+
+
+    //Tab 3
+    $('.empresaForm').find('[name="nome"]').val('099.099.099.099');
+    $('.empresaForm').find('[name="cpf"]').val('099.099.099.099');
+    $('.empresaForm').find('[name="telefone"]').val('34988406670');
+    $('.empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
+    $('.empresaForm').find('[name="password"]').val('099.099.099.099');
+    $('.empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
+    */
+
+</script>
 
