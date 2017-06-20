@@ -271,14 +271,14 @@
 				// socios
 				for (var x = 0; empresa.socios.length > x; x++)
 				{
-					empresa.socios[x] = new qat.model.fnSocios(empresa.socios[x], empresa.socios[x].id ? "UPDATE" : "INSERT", $rootScope.user.user,$log)
+					empresa.socios[x] = new qat.model.fnSocios(empresa.socios[x], empresa.socios[x].id ? "UPDATE" : "INSERT", $rootScope.user.user, $log)
 				}
 
 				//==================Telefone==================================
 				var telefonesAux = [];
 				for (var x = 0; x < telefones.length; x++)
 				{
-					telefonesAux.push(qat.model.fnTelefones(telefones[x], telefones[x].id ? "UPDATE" :"INSERT",$log)) ;
+					telefonesAux.push(qat.model.fnTelefones(telefones[x], telefones[x].id ? "UPDATE" : "INSERT", user, $log));
 				}
 				empresa.telefones = [];
 				empresa.telefones = telefonesAux;
@@ -289,7 +289,7 @@
 				var cnaesAux = [];
 				for (var x = 0; x < empresa.cnaes.length; x++)
 				{
-					cnaesAux.push(qat.model.fnCnaeEmpresa(empresa.cnaes[x], empresa.cnaes[x].id ? "UPDATE" : "INSERT",user,$log));
+					cnaesAux.push(qat.model.fnCnaeEmpresa(empresa.cnaes[x], empresa.cnaes[x].id ? "UPDATE" : "INSERT", user, $log));
 				}
 
 				empresa.cnaes = [];
@@ -300,7 +300,7 @@
 				var email = {};
 				for (var x = 0; x < emails.length; x++)
 				{
-					emailsAux.push(qat.model.fnEmails(emails[x], emails[x].id ? "UPDATE":"INSERT",user,$log));
+					emailsAux.push(qat.model.fnEmails(emails[x], emails[x].id ? "UPDATE" : "INSERT", user, $log));
 				}
 				empresa.emails = [];
 				empresa.emails = emailsAux;
@@ -311,10 +311,10 @@
 				empresa.documentos = [];
 				for (var x = 0; oDocumentos.length > x; x++)
 				{
-					if(oDocumentos[x].numero && oDocumentos[x].numero != "" && oDocumentos[x].numero != " ")
+					if (oDocumentos[x].numero && oDocumentos[x].numero != "" && oDocumentos[x].numero != " ")
 						empresa.documentos.push(new qat.model.fnDocumento(oDocumentos[x], oDocumentos[x].id ? "UPDATE" : "INSERT", $rootScope.user.user, $log));
 				}
-
+				debugger
 				//==================USUARIOS==================================
 				var oUsuarios = [];
 				oUsuarios = empresa.usuarios;
@@ -349,9 +349,117 @@
 				});
 			}
 
-			factory.method2 = function()
+			factory.fnMontaObjeto3 = function(empresa, enderecos, emails, telefones, cnaes, action, fnCallBack)
 			{
-				//..
+
+						var $window;
+            $window = $(window);
+
+				var initLoad = true; //used to ensure not calling server multiple times
+				var user = "system";
+				if (($rootScope.user != null) && ($rootScope.user != undefined))
+				{
+					user = $rootScope.user.user;
+				}
+				// socios
+				if (empresa.socios)
+				{
+					for (var x = 0; empresa.socios.length > x; x++)
+					{
+						empresa.socios[x] = new qat.model.fnSocios(empresa.socios[x], empresa.socios[x].id ? "UPDATE" : "INSERT", $rootScope.user.user, $log)
+					}
+				}
+				//==================Telefone==================================
+				var telefonesAux = [];
+				if (empresa.telefones)
+				{
+					for (var x = 0; x < empresa.telefones.length; x++)
+					{
+						telefonesAux.push(qat.model.fnTelefones(empresa.telefones[x], empresa.telefones[x].id ? "UPDATE" : "INSERT", user, $log));
+					}
+					empresa.telefones = [];
+					empresa.telefones = telefonesAux;
+				}
+
+				//==================cnae==================================
+
+				var cnaesAux = [];
+				if (empresa.cnaes)
+				{
+					for (var x = 0; x < empresa.cnaes.length; x++)
+					{
+						cnaesAux.push(qat.model.fnCnaeEmpresa(empresa.cnaes[x], empresa.cnaes[x].id ? "UPDATE" : "INSERT", user, $log));
+					}
+
+					empresa.cnaes = [];
+					empresa.cnaes = cnaesAux;
+				}
+				//==================EMAIL==================================
+				var emailsAux = [];
+				var email = {};
+				if (empresa.emails)
+				{
+					for (var x = 0; x < empresa.emails.length; x++)
+					{
+						emailsAux.push(qat.model.fnEmails(empresa.emails[x], empresa.emails[x].id ? "UPDATE" : "INSERT", user, $log));
+					}
+					empresa.emails = [];
+					empresa.emails = emailsAux;
+				}
+				//==================DOCUMENTOS==================================
+				if (empresa.documentos)
+				{
+					var oDocumentos = [];
+					oDocumentos = empresa.documentos;
+					empresa.documentos = [];
+					for (var x = 0; oDocumentos.length > x; x++)
+					{
+						if (oDocumentos[x].numero && oDocumentos[x].numero != "" && oDocumentos[x].numero != " ")
+							empresa.documentos.push(new qat.model.fnDocumento(oDocumentos[x], oDocumentos[x].id ? "UPDATE" : "INSERT", user, $log));
+					}
+				}
+
+				//==================USUARIOS==================================
+				if (empresa.usuarios)
+				{
+					var oUsuarios = [];
+
+					for (var x = 0; empresa.usuarios.length > x; x++)
+					{
+						oUsuarios.push(new qat.model.fnUsuario(empresa.usuarios[x], empresa.usuarios[x].id ? "UPDATE" : "INSERT", user, $log));
+					}
+
+
+					empresa.usuarios = [];
+					empresa.usuarios = oUsuarios;
+				}
+
+				empresa.dtAbertura = (empresa.dtAbertura);
+				var oObject = new qat.model.Empresa(empresa, "INSERT", user, $log);
+				SysMgmtData.processPostPageData("main/api/anonimo",
+				{
+					url: "entidade/api/empresa" + WebDaptiveAppConfig.create_url,
+					request: new qat.model.reqEmpr(oObject, true, true)
+				}, function(res)
+				{
+
+					if (res.operationSuccess == true)
+					{
+						window.location.href = "http://localhost:8080/springmvc-angularjs/index3.html#/pages/signin"
+						//		$location.path( "/pages/signin" );
+						$log.warn("Empresa foi inserida com sucesso ", "Teste");
+						initLoad = true;
+						toastr.success('Deu Certo seu tanga.', 'Sucess');
+						//fnCallBack(res);
+						//$location.path("#/pages/signin");
+
+					}
+					else
+					{
+						toastr.error('County form error, please correct and resubmit.', 'Error');
+					}
+
+				});
 			}
 
 			return factory;

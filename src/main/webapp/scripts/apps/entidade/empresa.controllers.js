@@ -595,7 +595,7 @@
 				$scope.empresa.dtInicio = (new Date($scope.empresa.dtInicio)).getTime();
 				$scope.empresa.dtAbertura = (new Date($scope.empresa.dtAbertura)).getTime();
 
-				fEmpresa.fnMontaObjeto($scope.empresa, $scope.enderecos, $scope.emails, $scope.telefones, $scope.cnaes, $scope.usuario, "INSERT", fnCallBack)
+				fEmpresa.fnMontaObjeto2($scope.empresa, $scope.enderecos, $scope.emails, $scope.telefones, $scope.cnaes, $scope.usuario, "INSERT", fnCallBack)
 				// factory.fnMontaObjeto = function(empresa,enderecos,emails,telefones,cnaes,action){
 
 			};
@@ -616,32 +616,34 @@
 
 			$scope.buscaRCep = function(_cepValue)
 			{
-				debugger
 				var cepValue = _cepValue;
 				var formatedCep;
 
 				$.getJSON("//viacep.com.br/ws/" + _cepValue + "/json/?callback=?", function(res)
 				{
-					debugger
 					$scope.empresa.enderecos[0].bairro = res.bairro;
 					$scope.empresa.enderecos[0].complemento = res.complemento;
-					$scope.empresa.enderecos[0].codIbge = res.ibge;
 					$scope.empresa.enderecos[0].cidade = {
 						nome: res.localidade,
 						estado:
 						{
 							abreviacao: res.uf
-						}
+						},
+						codIbge : res.ibge
 					};
 					$scope.empresa.enderecos[0].logradouro = "";
 					$scope.empresa.enderecos[0].logradouro = res.logradouro;
 				});
 			}
 
+			$scope.createFormTelefone = function(sType){
+				$scope.empresa.telefones.push({telefoneTypeEnum : sType})
+			}
+
 			//
 			var callbackEstado = function(res)
 			{
-debugger
+
 				if (res.operationSuccess == true)
 				{
 					$scope.estados = res.estadoList;
@@ -650,7 +652,7 @@ debugger
 			}
 
 			var callbackCidade = function(res)
-			{debugger
+			{
 				if (res.operationSuccess == true)
 				{
 					$scope.cidades = res.cidadeList
@@ -660,7 +662,7 @@ debugger
 
 			var callbackRoles = function(res)
 			{
-				debugger
+
 				if (res.operationSuccess == true)
 				{
 					$scope.roles = res.userRolesList;
@@ -692,7 +694,7 @@ debugger
 			$window = $(window);
 
 			$scope.empresa = JSON.parse(localStorage.getItem('empresa'));
-			debugger
+
 			var bCPF = false;
 			var bCNPJ = false;
 			var bIM = false;

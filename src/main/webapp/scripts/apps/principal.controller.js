@@ -3,7 +3,7 @@
 	angular.module('wdApp.apps.principal', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
 		.controller('PrincipalController', principalController);
 
-	function principalController($location,$log, fModels,$scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory)
+	function principalController($location,$log, fModels,$scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory,fEmpresa)
 	{
 		var vm = this;
 		vm.show = true;
@@ -13,8 +13,9 @@
 		var $window;
             $window = $(window);
 
-        $scope.empresa = {};
+        $scope.empresa = {usuarios : []};
 
+		$scope.empresa.usuarios.push({parentId : 0});
 		vm.shows = function(s)
 		{
 			vm.show = s;
@@ -63,27 +64,30 @@
 		});
 
 
-		var fnCallBack = function(oResponse)
+		var fnCallBack = function(res)
 		{
-			debugger
-			console.log(oResponse)
+
 		}
 		$scope.saveEmpresa = function()
 		{
 			$log.info("Insert empresa ","Teste");
+			$scope.empresa.entidadeEnumValue = 1;
 			if($scope.empresa.documentos[0].numero.length > 12)
 			{
 				$scope.empresa.documentos[0].documentoType = "CNPJ"
+				$scope.empresa.tipoPessoa = 1
 			}
 			else
 			{
 				$scope.empresa.documentos[0].documentoType = "CPF"
 				$scope.empresa.nome = $scope.empresa.razao;
+				$scope.empresa.tipoPessoa = 2
 
 			}
-			var oObject = fModels.amont( new qat.model.Empresa($scope.empresa, "INSERT", 'anonimo',$log), "INSERT");
+			fEmpresa.fnMontaObjeto3($scope.empresa, $scope.enderecos, $scope.emails, $scope.telefones, $scope.cnaes, $scope.usuario, "INSERT", fnCallBack);
+	//		var oObject = fModels.amont( new qat.model.Empresa($scope.empresa, "INSERT", 'anonimo',$log), "INSERT");
 
-			SysMgmtData.processPostPageData("main/api/anonimo",
+	/*		SysMgmtData.processPostPageData("main/api/anonimo",
 			{
 				url: "entidade/api/empresa" + WebDaptiveAppConfig.create_url,
 				request: new qat.model.reqEmpr(oObject, true, true)
@@ -102,7 +106,7 @@
 					$log.error("Error ao inserir Empresa","Teste");
 				}
 
-			});
+			}); */
 		};
 
 
