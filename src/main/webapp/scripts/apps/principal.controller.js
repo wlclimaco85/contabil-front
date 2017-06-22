@@ -3,7 +3,8 @@
 	angular.module('wdApp.apps.principal', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
 		.controller('PrincipalController', principalController);
 
-	function principalController($location,$log, fModels,$scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory,fEmpresa)
+	function principalController($location, $log, fModels, $scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory,
+		fEmpresa)
 	{
 		var vm = this;
 		vm.show = true;
@@ -11,14 +12,20 @@
 		vm.docTipo = "";
 
 		var $window;
-            $window = $(window);
+		$window = $(window);
 
-        $scope.empresa = {usuarios : []};
-
-		$scope.empresa.usuarios.push({parentId : 0});
-		vm.shows = function(s)
+		$scope.empresa = {
+			usuarios: []
+		};
+		$scope.senha2 = "";
+		$scope.empresa.usuarios.push(
 		{
-			vm.show = s;
+			parentId: 0
+		});
+		vm.shows = function(s, v)
+		{
+			if (v)
+				vm.show = s;
 		}
 		vm.functionTest = function(s)
 		{
@@ -63,50 +70,58 @@
 			}
 		});
 
+		$scope.searchButtonText = "Search";
+		$scope.loading = false;
+		$scope.test = "false";
+		$scope.search = function()
+		{
+
+			// Do your searching here
+		}
+		$scope.searchButtonText = "COMEÇAR TESTE GRATUITO";
 
 		var fnCallBack = function(res)
 		{
-
+			$scope.test = "false";
+			$scope.loading = "false"
+			$scope.searchButtonText = "COMEÇAR TESTE GRATUITO";
 		}
-		$scope.saveEmpresa = function()
+
+		$scope.functionTest = function()
 		{
-			$log.info("Insert empresa ","Teste");
-			$scope.empresa.entidadeEnumValue = 1;
-			if($scope.empresa.documentos[0].numero.length > 12)
+			bReturn = false;
+			if ($scope.empresa.usuarios[0].senha == $scope.empresa.usuarios[0].senha2)
 			{
-				$scope.empresa.documentos[0].documentoType = "CNPJ"
-				$scope.empresa.tipoPessoa = 1
+				bReturn = true;
 			}
-			else
+			$scope.userForm.$valid = bReturn;
+			return bReturn;
+		}
+
+		$scope.submitForm = function(isValid)
+		{
+			if (isValid)
 			{
-				$scope.empresa.documentos[0].documentoType = "CPF"
-				$scope.empresa.nome = $scope.empresa.razao;
-				$scope.empresa.tipoPessoa = 2
+				$scope.test = "true";
+				$scope.loading = "true"
+				$scope.searchButtonText = "COMEÇAR TESTE GRATUITO";
 
-			}
-			fEmpresa.fnMontaObjeto3($scope.empresa, $scope.enderecos, $scope.emails, $scope.telefones, $scope.cnaes, $scope.usuario, "INSERT", fnCallBack);
-	//		var oObject = fModels.amont( new qat.model.Empresa($scope.empresa, "INSERT", 'anonimo',$log), "INSERT");
-
-	/*		SysMgmtData.processPostPageData("main/api/anonimo",
-			{
-				url: "entidade/api/empresa" + WebDaptiveAppConfig.create_url,
-				request: new qat.model.reqEmpr(oObject, true, true)
-			}, function(res)
-			{
-
-
-				if (res.operationSuccess == true)
+				$log.info("Insert empresa ", "Teste");
+				$scope.empresa.entidadeEnumValue = 1;
+				if ($scope.empresa.documentos[0].numero.length > 12)
 				{
-					window.location.href = "http://localhost:8080/springmvc-angularjs/index3.html#/pages/signin"
-			//		$location.path( "/pages/signin" );
-					$log.warn("Empresa foi inserida com sucesso ","Teste");
+					$scope.empresa.documentos[0].documentoType = "CNPJ"
+					$scope.empresa.tipoPessoa = 2
 				}
 				else
 				{
-					$log.error("Error ao inserir Empresa","Teste");
-				}
+					$scope.empresa.documentos[0].documentoType = "CPF"
+					$scope.empresa.nome = $scope.empresa.razao;
+					$scope.empresa.tipoPessoa = 1
 
-			}); */
+				}
+				fEmpresa.fnMontaObjeto3($scope.empresa, $scope.enderecos, $scope.emails, $scope.telefones, $scope.cnaes, $scope.usuario, "INSERT", fnCallBack);
+			}
 		};
 
 
@@ -122,22 +137,22 @@
 			var vm = this;
 
 			$scope.forms = [
-			{
-				nome: 'form1',
-				telefone:
-				{}
+				{
+					nome: 'form1',
+					telefone:
+					{}
 			}];
 			$scope.count = 0;
 
 			$scope.empresa = {
 				telefones: [],
 				enderecos: [
-				{
-					modelAction: "INSERT",
-					createUser: "System",
-					createDateUTC: (new Date()).getTime(),
-					modifyUser: "System",
-					modifyDateUTC: (new Date()).getTime(),
+					{
+						modelAction: "INSERT",
+						createUser: "System",
+						createDateUTC: (new Date()).getTime(),
+						modifyUser: "System",
+						modifyDateUTC: (new Date()).getTime(),
             }],
 				documentos: [
 					{

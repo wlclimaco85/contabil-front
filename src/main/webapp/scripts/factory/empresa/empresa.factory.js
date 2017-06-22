@@ -351,9 +351,9 @@
 
 			factory.fnMontaObjeto3 = function(empresa, enderecos, emails, telefones, cnaes, action, fnCallBack)
 			{
-
-						var $window;
-            $window = $(window);
+				debugger
+				var $window;
+				$window = $(window);
 
 				var initLoad = true; //used to ensure not calling server multiple times
 				var user = "system";
@@ -373,9 +373,23 @@
 				var telefonesAux = [];
 				if (empresa.telefones)
 				{
-					for (var x = 0; x < empresa.telefones.length; x++)
+					if (empresa.telefones.length)
 					{
-						telefonesAux.push(qat.model.fnTelefones(empresa.telefones[x], empresa.telefones[x].id ? "UPDATE" : "INSERT", user, $log));
+						for (var x = 0; x < empresa.telefones.length; x++)
+						{
+							telefonesAux.push(qat.model.fnTelefones(empresa.telefones[x], empresa.telefones[x].id ? "UPDATE" : "INSERT", user, $log));
+						}
+
+					}
+					else
+					{
+						for (var prop in empresa.telefones)
+						{
+							if (empresa.telefones.hasOwnProperty(prop))
+							{
+								telefonesAux.push(qat.model.fnTelefones(empresa.telefones[prop], empresa.telefones[prop].id ? "UPDATE" : "INSERT", user, $log));
+							}
+						}
 					}
 					empresa.telefones = [];
 					empresa.telefones = telefonesAux;
@@ -410,13 +424,26 @@
 				if (empresa.documentos)
 				{
 					var oDocumentos = [];
-					oDocumentos = empresa.documentos;
-					empresa.documentos = [];
-					for (var x = 0; oDocumentos.length > x; x++)
+					if (empresa.documentos.length)
 					{
-						if (oDocumentos[x].numero && oDocumentos[x].numero != "" && oDocumentos[x].numero != " ")
-							empresa.documentos.push(new qat.model.fnDocumento(oDocumentos[x], oDocumentos[x].id ? "UPDATE" : "INSERT", user, $log));
+						for (var x = 0; empresa.documentos.length > x; x++)
+						{
+							if (empresa.documentos[x].numero && empresa.documentos[x].numero != "" && empresa.documentos[x].numero != " ")
+								oDocumentos.push(new qat.model.fnDocumento(empresa.documentos[x], empresa.documentos[x].id ? "UPDATE" : "INSERT", user, $log));
+						}
 					}
+					else
+					{
+						for (var prop in empresa.documentos)
+						{
+							if (empresa.documentos.hasOwnProperty(prop))
+							{
+								oDocumentos.push(new qat.model.fnDocumento(empresa.documentos[prop], empresa.documentos[prop].id ? "UPDATE" : "INSERT", user, $log));
+							}
+						}
+					}
+					empresa.documentos = [];
+					empresa.documentos = oDocumentos;
 				}
 
 				//==================USUARIOS==================================
@@ -434,7 +461,7 @@
 					empresa.usuarios = oUsuarios;
 				}
 
-				empresa.dtAbertura = (empresa.dtAbertura);
+				empresa.dtAbertura = (empresa.dtAbertura ? empresa.dtAbertura : (new Date()).getTime());
 				var oObject = new qat.model.Empresa(empresa, "INSERT", user, $log);
 				SysMgmtData.processPostPageData("main/api/anonimo",
 				{
@@ -453,11 +480,7 @@
 						//fnCallBack(res);
 						//$location.path("#/pages/signin");
 
-					}
-					else
-					{
-						toastr.error('County form error, please correct and resubmit.', 'Error');
-					}
+					}else{if(fnCallBack) {fnCallBack(res)}}
 
 				});
 			}

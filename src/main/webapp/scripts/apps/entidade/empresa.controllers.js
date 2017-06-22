@@ -310,10 +310,6 @@
 			var $window;
 			$window = $(window);
 
-			debugger
-
-
-
 			$scope.doIfChecked = function(_ckecked, _value, _nome)
 			{
 

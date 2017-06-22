@@ -39,7 +39,6 @@
     <link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload.css">
     <link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload-ui.css">
 
-    <link rel="stylesheet" href="dist/css/formValidation.css" />
     <link rel="stylesheet" href="dist/css/select2.css" />
     <link rel="stylesheet" href="thirdparty/aaPrincipal/css/select2_3_4_8.css">
     <link href="thirdparty/twitter-bootstrap-wizard-master/prettify.css" rel="stylesheet">
@@ -629,6 +628,30 @@
             background: #1B3975!Important;
         }
 
+
+        .click-to-edit {
+            display: inline-block;
+        }
+
+
+        .glyphicon.spinning {
+            animation: spin 1s infinite linear;
+            -webkit-animation: spin2 1s infinite linear;
+        }
+
+        @keyframes spin {
+            from { transform: scale(1) rotate(0deg);}
+            to { transform: scale(1) rotate(360deg);}
+        }
+
+        @-webkit-keyframes spin2 {
+            from { -webkit-transform: rotate(0deg);}
+            to { -webkit-transform: rotate(360deg);}
+        }
+
+        .help-block {
+            color: #f30909!important;
+        }
     </style>
 
 
@@ -709,29 +732,35 @@
                             <h3 id="texto-cadastro" class="texto-internas">Cadastre-se e teste o Egestor gratuitamente agora</h3>
                         </div>
                         <div class="cadastro-padding">
+                            <form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
                             <h3 class="titulo-login titulo-cadastro" id="titulo-cadastro">DADOS DE CONTATO</h3>
                                 <div ng-if="cc.show == true">
                                     <div id="cadastro-passo1" style="display: block;">
                                         <div class="input-contato erro">
                                             <label for="nome">Nome ou Razão Social</label>
-                                            <input id="nome" ng-model="empresa.razao" type="text" name="nome" placeholder="">
+                                            <input id="nome" required ng-model="empresa.razao" type="text" name="nome" placeholder="">
+                                            <p ng-show="userForm.nome.$invalid" class="help-block">Campo Obrigatorio.</p>
                                         </div>
                                         <div class="input-contato">
                                             <label for="email">CNPJ/CPF</label>
-                                            <input id="email" type="text" ng-model="empresa.documentos[0].numero" name="numero" placeholder="">
+                                            <input id="email" type="number" number required name="cpfCnpj" ng-model="empresa.documentos[0].numero" name="numero" placeholder="" ng-minlength="11" ng-maxlength="14">
+                                            <p ng-show="userForm.cpfCnpj.$error.minlength" class="help-block">CPF/CNPJ INEXISTENTE.</p>
+                                            <p ng-show="userForm.cpfCnpj.$error.maxlength" class="help-block">CPF/CNPJ INEXISTENTE.</p>
+                                            <p ng-show="userForm.nome.$invalid" class="help-block">Campo Obrigatorio.</p>
                                         </div>
                                         <div class="input-contato">
                                             <label for="fone1">Telefone fixo <span>(só números, com DDD)</span></label>
-                                            <input id="fone1" type="text" ng-model="empresa.telefones[0].numero" name="fone1" placeholder="">
+                                            <input id="fone1" type="text" ui-mask="(99)9999-9999" ui-mask-placeholder ui-mask-placeholder-char="_" ng-model="empresa.telefones[0].numero" name="fone1" placeholder="">
                                             <input class="hide" type="text" ng-init="empresa.telefones[0].telefoneTypeEnumValue = 9" name="fone1" placeholder="">
                                         </div>
                                         <div class="input-contato">
                                             <label for="fone2">Telefone celular <span>(só números, com DDD)</span></label>
-                                            <input id="fone1" type="text" ng-model="empresa.telefones[1].numero" name="fone1" placeholder="">
+                                            <input id="fone1" required number name="telefone" type="text" ui-mask="(99)99999-9999" ui-mask-placeholder ui-mask-placeholder-char="_" ng-model="empresa.telefones[1].numero" name="fone1" placeholder="">
                                             <input class="hide" type="text" ng-init="empresa.telefones[1].telefoneTypeEnumValue = 10" name="fone1" placeholder="">
+                                            <p ng-show="userForm.telefone.$invalid && !userForm.telefone.$pristine" class="help-block">Campo Obrigatorio.</p>
                                         </div>
                                         <div class="clearfix">
-                                            <input class="botao-login transition" style="width:100%" ng-click="cc.shows(false)" type="button" value="CONTINUAR CADASTRO" id="botao-cadastro-passo1">
+                                            <input class="botao-login transition" style="width:100%" ng-click="cc.shows(false,userForm.$valid)" type="button" value="CONTINUAR CADASTRO" id="botao-cadastro-passo1">
                                         </div>
                                     </div>
                                 </div>
@@ -741,30 +770,36 @@
                                             <a ng-click="cc.shows(true)" id="link-cadastro-passo1">Voltar</a>
                                         </div>
                                         <div class="row">
-                                            <label for="contato">Tipo Empresa</label>
+                                            <label for="contato">Qual o Sistema ?</label>
                                         </div>
-                                        <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="1" checked><span>Advocacia</span></label>
-                                        <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="2"><span>Condominio</span></label>
-                                        <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="3"><span>Contador</span></label>
-                                        <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="4" ><span>Clinicas</span></label>
-                                        <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="5" ><span>Empresarial</span></label>
-                                        <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="6" ><span>Prestador Serviço</span></label>
+                                        <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="1" ng-true-value="'1'" ng-init="empresa.tipo=6"><span>Advocacia</span></label>
+                                        <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="2" ng-true-value="'2'"><span>Condominio</span></label>
+                                        <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="3" ng-true-value="'3'"><span>Contador</span></label>
+                                        <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="4" ng-true-value="'4'"><span>Clinicas</span></label>
+                                        <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="5" ng-true-value="'5'"><span>Empresarial</span></label>
+                                        <label class="ui-radio"><input ng-model="empresa.tipo" name="radio1" type="radio" value="6" ng-true-value="'6'"><span>Prestador Serviço</span></label>
                                         <div id="boxSobreDominio"></div>
                                         <div class="input-contato">
                                             <label for="contato">Seu nome</label>
-                                            <input id="contato" type="text" name="contato" ng-model="empresa.usuarios[0].nome" placeholder="">
+                                            <input id="contato" required type="text" name="contato" ng-model="empresa.usuarios[0].nome" placeholder="">
+                                            <p ng-show="userForm.contato.$invalid" class="help-block">Campo Obrigatorio.</p>
                                         </div>
                                         <div class="input-contato">
                                             <label for="login">Nome de usuário (Email)</label>
-                                            <input id="login" type="text" ng-model="empresa.usuarios[0].email" name="login" placeholder="">
+                                            <input id="login" required type="email" ng-model="empresa.usuarios[0].email" name="login" placeholder="">
+                                            <p ng-show="userForm.login.$invalid" class="help-block">Email Invalido.</p>
                                         </div>
                                         <div class="input-contato">
                                             <label for="senha">Senha de acesso</label>
-                                            <input id="senha" type="password" ng-model="empresa.usuarios[0].senha" name="senha" placeholder="">
+                                            <input id="senha" required type="password" ng-model="empresa.usuarios[0].senha" name="senha1" placeholder="" ng-minlength="6" ng-maxlength="20">
+                                            <p ng-show="userForm.senha1.$invalid" class="help-block">Campo Obrigatorio.</p>
+                                            <p ng-show="userForm.senha1.$error.minlength" class="help-block">A Senha nao Poder ter menos que 6 caracteres.</p>
+                                            <p ng-show="userForm.senha1.$error.maxlength" class="help-block">A Senha nao Poder ter mais que 20 caracteres.</p>
                                         </div>
                                         <div class="input-contato">
                                             <label for="senha2">Confirme a senha</label>
-                                            <input id="senha2" type="password" name="senha2" placeholder="">
+                                            <input id="senha2" type="password" name="senha" ng-model="empresa.usuarios[0].senha2" placeholder="" ng-class="{ 'has-error' : functionTest() }">
+                                            <p ng-show="!functionTest()" class="help-block">Senha Diferente da primeira.</p>
                                         </div>
                                         <div class="input-termos">
                                             <p>Aceito os <a href="contrato_egestor.html" target="_blank"><span>termos de utilização</span></a> do sistema</p>
@@ -774,12 +809,17 @@
                                             </div>
                                         </div>
                                         <div class="clearfix">
-                                            <input class="botao-login width-100 transition" style="width:100%" type="submit" value="COMEÇAR TESTE GRATUITO" ng-click="saveEmpresa()" id="botao-cadastro-passo2">
+                                         <!--   <input class="botao-login width-100 transition" style="width:100%" type="submit" ng-click="saveEmpresa()" value="COMEÇAR TESTE GRATUITO" ng-click="saveEmpresa()" id="botao-cadastro-passo2"> -->
+                                            <button type="submit" class=" botao-login width-100 transition btn btn-primary"  value="COMEÇAR TESTE GRATUITO" id="botao-cadastro-passo2">
+                                                    <span ng-show="loading"><i class="glyphicon glyphicon-refresh spinning"></i></span>
+                                                    {{ searchButtonText }}
+                                                </button>
                                         </div>
+
                                     </div>
                                 </div>
                                 <div id="cadastro-aviso-espera"></div>
-
+                            </form>
                             <!-- Fim do script de integração com a RD Station -->
                         </div>
                     </div>
@@ -1676,9 +1716,9 @@
 
     <script src="thirdparty/aaPrincipal/js/angular-strap.min.js"></script>
     <script src="thirdparty/aaPrincipal/js/angular-strap.tpl.min.js"></script>
-    <script src="thirdparty/aaPrincipal/js/jcs-auto-validate.js"></script>
+   <!-- <script src="thirdparty/aaPrincipal/js/jcs-auto-validate.js"></script>
 
-    <!-- JS PLUGINS -->
+     JS PLUGINS -->
     <script src="views/template-assets/plugins/owl-carousel/owl.carousel.min.js"></script>
     <script src="views/template-assets/js/jquery.easing.min.js"></script>
     <script src="views/template-assets/plugins/countTo/jquery.countTo.js"></script>
@@ -1695,7 +1735,7 @@
 
 
     <script src="dist/js/select2.min.js"></script>
-    <script src="dist/js/formValidation.js"></script>
+
     <script src="dist/js/framework/bootstrap.js"></script>
 
 
@@ -1714,7 +1754,7 @@
 
 
     <script src="dist/js/select2.min.js"></script>
-    <script src="dist/js/formValidation.js"></script>
+
     <script src="dist/js/framework/bootstrap.js"></script>
 
     <script src="thirdparty/angular-xeditable/js/xeditable.js"></script>

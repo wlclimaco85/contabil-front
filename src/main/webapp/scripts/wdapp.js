@@ -45,7 +45,7 @@ var WebDaptiveAppConfig = {
 	var wdApp = angular.module('wdApp', ['xeditable', 'ngRoute', 'ngAnimate', 'ngSanitize', 'angucomplete-alt', 'ngTouch', 'hl.sticky', 'mwl.calendar', 'colorpicker.module',
 		'ui.bootstrap', 'easypiechart', 'textAngular', 'ui.mask',
         'mgcrea.ngStrap', 'ui.tree', 'ngMap', 'ui.toggle', 'ngTagsInput', 'toastr', 'angular-loading-bar', 'chart.js', 'ngecharts',
-        'agGrid', 'base64', 'LocalStorageModule', 'jcs-autoValidate', 'wdApp.controllers', 'wdApp.directives', 'wdApp.httpint',
+        'agGrid', 'base64', 'LocalStorageModule', 'wdApp.controllers', 'wdApp.directives', 'wdApp.httpint',
         'wdApp.localization', 'wdApp.ui.controllers', 'wdApp.forms.controllers',
         'wdApp.forms.directives', 'wdApp.tables.controllers', 'wdApp.tasks',
         'wdApp.charts.flot.controllers', 'wdApp.charts.morris.controllers', 'wdApp.charts.chartjs.controllers',
@@ -266,11 +266,11 @@ var WebDaptiveAppConfig = {
     }]);
 
 	//run each time angular app comes up (runs only once)
-	wdApp.run(function($rootScope, $location, localStorageService, editableOptions, validator)
+	wdApp.run(function($rootScope, $location, localStorageService, editableOptions)
 	{
 		//debugger
-		validator.setValidElementStyling(false);
-		validator.setInvalidElementStyling(false);
+		//validator.setValidElementStyling(false);
+		//validator.setInvalidElementStyling(false);
 		editableOptions.theme = 'bs3'; // bootstrap
 		$rootScope.main = {
 			brand: (JSON.parse(localStorage.getItem('empresa')) ? (JSON.parse(localStorage.getItem('empresa')).nome ? JSON.parse(localStorage.getItem('empresa')).razao : '') :
