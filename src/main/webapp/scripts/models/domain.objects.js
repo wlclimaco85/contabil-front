@@ -1662,7 +1662,7 @@ qat.model.Telefones = function(_oObjet, _modelAction, _user)
 	return emails;
 }
 
-qat.model.Cnaes = function(_oObjet, _modelAction, _user)
+qat.model.Cnaes = function(_oObjet, _modelAction, _user,$log)
 {
 	var email = {};
 	var emails = [];
@@ -1670,7 +1670,11 @@ qat.model.Cnaes = function(_oObjet, _modelAction, _user)
 	{
 		email = qat.model.fnCnae(_oObjet[x], _oObjet[x].id ? _modelAction : "INSERT", _user)
 		emails.push(qat.model.fnCnaeEmpresa(email, email.id ? _modelAction : "INSERT", _user))
+		if($log)
+		$log.info("Cnaes "+ _oObjet[x].cnae);
 	}
+
+
 
 	return emails;
 }
@@ -2698,29 +2702,29 @@ qat.model.configuracao = function(_oObjet, _modelAction, _user)
 	this.id = _oObjet.id;
 	this.confCabecalho = _oObjet.confCabecalho;
 	this.confGeral = _oObjet.confGeral ? new qat.model.confGeral(_oObjet.confGeral, _oObjet.confGeral.id ? _modelAction : "INSERT", _user) :
-	{};
+	null;
 	this.confFiscal = _oObjet.confFiscal ? new qat.model.confFiscal(_oObjet.confFiscal, _oObjet.confFiscal.id ? _modelAction : "INSERT", _user) :
-	{};
+	null;
 	this.confProd = _oObjet.confProd ? new qat.model.confProd(_oObjet.confProd, _oObjet.confProd.id ? _modelAction : "INSERT", _user) :
-	{};
+	null;
 	this.confVendas = _oObjet.confVendas ? new qat.model.confVendas(_oObjet.confVendas, _oObjet.confVendas.id ? _modelAction : "INSERT", _user) :
-	{};
+	null;
 	this.confSMTP = _oObjet.confSMTP ? new qat.model.confSMTP(_oObjet.confSMTP, _oObjet.confSMTP.id ? _modelAction : "INSERT", _user) :
-	{};
+	null;
 	this.configOS = _oObjet.configOS ? new qat.model.configOS(_oObjet.configOS, _oObjet.configOS.id ? _modelAction : "INSERT", _user) :
-	{};
+	null;
 	this.confEntrada = _oObjet.confEntrada ? new qat.model.confEntrada(_oObjet.confEntrada, _oObjet.confEntrada.id ? _modelAction : "INSERT", _user) :
-	{};
+	null;
 	this.confCarne = _oObjet.confCarne ? new qat.model.confCarne(_oObjet.confCarne, _oObjet.confCarne.id ? _modelAction : "INSERT", _user) :
-	{};
+	null;
 	this.confNFe = _oObjet.confNFe ? new qat.model.confNFe(_oObjet.confNFe, _oObjet.confNFe.id ? _modelAction : "INSERT", _user) :
-	{};
+	null;
 	this.confAlertas = _oObjet.confAlertas ? new qat.model.confAlertas(_oObjet.confAlertas, _oObjet.confAlertas.id ? _modelAction : "INSERT", _user) :
-	{};
+	null;
 	this.confBlueSoft = _oObjet.confBlueSoft ? new qat.model.confBlueSoft(_oObjet.confBlueSoft, _oObjet.confBlueSoft.id ? _modelAction : "INSERT", _user) :
-	{};
+	null;
 	this.boletoList = [_oObjet.boletoList ? new qat.model.boleto(_oObjet.boletoList, _oObjet.boletoList.id ? _modelAction : "INSERT", _user) :
-		{}];
+		null];
 	this.parentId = _oObjet.parentId;
 	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
 	this.processId = _oObjet.processId;
@@ -2749,7 +2753,7 @@ qat.model.Empresa = function(_oObjet, _modelAction, _user, $log)
 		this.dtAbertura = _oObjet.dtAbertura ? _oObjet.dtAbertura : (new Date()).getTime();
 		this.entidadeId = JSON.parse(localStorage.getItem('empresa')) ? JSON.parse(localStorage.getItem('empresa')).id : null;
 		this.entidadeEnum = _oObjet.entidadeEnum;
-		this.configuracao = _oObjet.configuracao ? new qat.model.configuracao(_oObjet.configuracao, _modelAction, _user) : null;
+		this.configuracao = _oObjet.configuracao ? new qat.model.configuracao(_oObjet.configuracao, _oObjet.configuracao.id ? "UPDATE" : "INSERT", _user) : null;
 		this.usuarios = _oObjet.usuarios ? _oObjet.usuarios : null;
 		this.bancos = _oObjet.bancos ? _oObjet.bancos : null;
 		this.socios = _oObjet.socios ? _oObjet.socios : null;
@@ -2768,11 +2772,11 @@ qat.model.Empresa = function(_oObjet, _modelAction, _user, $log)
 		this.enderecos = _oObjet.enderecos ? _oObjet.enderecos : null;
 		this.emails = _oObjet.emails,
 		this.telefones = _oObjet.telefones,
-		this.cnaes = _oObjet.cnaes ? _oObjet.cnaes : null
+		this.cnaes = _oObjet.cnaes ?  qat.model.Cnaes(_oObjet.cnaes,_modelAction,_user,$log) : null
 		this.statusList = _oObjet.statusList;
 		this.notes = _oObjet.notes;
 		this.parentId = _oObjet.parentId;
-		this.emprId = _oObjet.emprId;
+		this.emprId = JSON.parse(localStorage.getItem('empresa')) ? JSON.parse(localStorage.getItem('empresa')).id : null;
 		this.processId = _oObjet.processId;
 		this.tableEnumValue = _oObjet.tableEnumValue;
 		this.modelAction = _modelAction;

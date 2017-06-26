@@ -78,6 +78,7 @@ delete from ipi ;
 delete from marca;
 delete from marcaproduto ;
 delete from medico  ;
+
 delete from menu  ;
 delete from historico;
 delete from historicoitens  ;

@@ -45,7 +45,7 @@
 			request: new qat.model.siteInquiryRequest(100 / 20, true, "http://localhost:8080/webSite/")
 		}, function(res)
 		{
-
+debugger
 			vm.site = new qat.model.Site(res.sites[0]);
 			console.log(res.sites[0].empresa)
 			if ((res.sites[0].empresa != undefined) && (res.sites[0].empresa != null))
