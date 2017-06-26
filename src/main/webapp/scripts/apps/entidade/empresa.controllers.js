@@ -21,6 +21,8 @@
 			tipoPessoa: 2
 		};
 
+
+
 		var openDialogUpdateCreate = function()
 		{
 			bookIndex = 0;
@@ -600,11 +602,17 @@
 (function()
 {
 	angular.module('wdApp.apps.newEmpresa.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-		.controller('NewEmpresaUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fEmpresa, $log,doisValorFactory)
+		.controller('NewEmpresaUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fEmpresa, $log, doisValorFactory)
 		{
 
 			var vm = this;
 			var createForm3;
+
+			var $window;
+			$window = $(window);
+
+			$scope.empresa = JSON.parse(localStorage.getItem('empresa'));
+
 			$scope.cnaes;
 			$scope.enderecos = [];
 			$scope.emails = [];
@@ -625,15 +633,19 @@
 						{
 							abreviacao: res.uf
 						},
-						codIbge : res.ibge
+						codIbge: res.ibge
 					};
 					$scope.empresa.enderecos[0].logradouro = "";
 					$scope.empresa.enderecos[0].logradouro = res.logradouro;
 				});
 			}
 
-			$scope.createFormTelefone = function(sType){
-				$scope.empresa.telefones.push({telefoneTypeEnum : sType})
+			$scope.createFormTelefone = function(sType)
+			{
+				$scope.empresa.telefones.push(
+				{
+					telefoneTypeEnum: sType
+				})
 			}
 
 			//
@@ -686,10 +698,7 @@
 				$scope.empresa.usuarios.push(
 				{})
 			}
-			var $window;
-			$window = $(window);
 
-			$scope.empresa = JSON.parse(localStorage.getItem('empresa'));
 
 			var bCPF = false;
 			var bCNPJ = false;
@@ -826,8 +835,31 @@
 				})
 			};
 
-			$scope.enderecos = $scope.empresa.enderecos;
-			$scope.emails = $scope.empresa.emails;
+			if (!($scope.empresa.enderecos && $scope.empresa.enderecos[0]))
+			{
+				$scope.empresa.enderecos.push(
+				{
+					bairro: "",
+					complemento: "",
+					cidade:
+					{
+						nome: "",
+						estado:
+						{
+							abreviacao: ""
+						},
+						codIbge: ""
+					},
+					logradouro: ""
+				})
+			}
+			if (!($scope.empresa.emails && $scope.empresa.emails[0]))
+			{
+				$scope.empresa.emails.push(
+				{
+					email: ""
+				});
+			}
 			$scope.telefones = $scope.empresa.telefones;
 			if ($scope.empresa.socios.length == 0)
 				$scope.empresa.socios.push(
@@ -849,6 +881,238 @@
 					emprId: $scope.empresa.id
 				})
 			}
+
+			$scope.validationNomeRazao = function() {}
+
+			//================
+
+			$scope.validationCPF = function(tipo, value)
+			{
+				console.log("empresa tipo = " + tipo);
+				if (value && tipo == 1)
+				{
+					var i;
+					s = value;
+					var c = s.substr(0, 9);
+					var dv = s.substr(9, 2);
+					var d1 = 0;
+					var v = false;
+
+					for (i = 0; i < 9; i++)
+					{
+						d1 += c.charAt(i) * (10 - i);
+					}
+					if (d1 == 0)
+					{
+
+						return true;
+					}
+					d1 = 11 - (d1 % 11);
+					if (d1 > 9) d1 = 0;
+					if (dv.charAt(0) != d1)
+					{
+						return true;
+					}
+
+					d1 *= 2;
+					for (i = 0; i < 9; i++)
+					{
+						d1 += c.charAt(i) * (11 - i);
+					}
+					d1 = 11 - (d1 % 11);
+					if (d1 > 9) d1 = 0;
+					if (dv.charAt(1) != d1)
+					{
+						return true;
+					}
+					if (!v)
+					{
+						return false;
+					}
+					return true;
+				}
+			}
+
+			$scope.validationDtNasc = function(tipo) {}
+
+			$scope.validationInscJunt = function() {}
+
+			//=====================
+
+			$scope.validationCNPJ = function(tipo, cnpj)
+			{
+				if(tipo && tipo == 2 && cnpj.length < 14)
+				{
+					return false;
+				}
+				if (tipo && tipo == 2)
+				{
+					console.log("Pessoa Tipo " + tipo);
+					cnpj = cnpj.replace(/[^\d]+/g, '');
+
+					if (cnpj == '') return false;
+
+					if (cnpj.length != 14)
+						return false;
+
+					// Elimina CNPJs invalidos conhecidos
+					if (cnpj == "00000000000000" ||
+						cnpj == "11111111111111" ||
+						cnpj == "22222222222222" ||
+						cnpj == "33333333333333" ||
+						cnpj == "44444444444444" ||
+						cnpj == "55555555555555" ||
+						cnpj == "66666666666666" ||
+						cnpj == "77777777777777" ||
+						cnpj == "88888888888888" ||
+						cnpj == "99999999999999")
+					{
+						return false;
+					}
+					// Valida DVs
+					tamanho = cnpj.length - 2
+					numeros = cnpj.substring(0, tamanho);
+					digitos = cnpj.substring(tamanho);
+					soma = 0;
+					pos = tamanho - 7;
+					for (i = tamanho; i >= 1; i--)
+					{
+						soma += numeros.charAt(tamanho - i) * pos--;
+						if (pos < 2)
+							pos = 9;
+					}
+					resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+					if (resultado != digitos.charAt(0))
+					{
+						return false;
+					}
+					tamanho = tamanho + 1;
+					numeros = cnpj.substring(0, tamanho);
+					soma = 0;
+					pos = tamanho - 7;
+					for (i = tamanho; i >= 1; i--)
+					{
+						soma += numeros.charAt(tamanho - i) * pos--;
+						if (pos < 2)
+							pos = 9;
+					}
+					resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+					if (resultado != digitos.charAt(1))
+					{
+						return false;
+					}
+					return true;
+				}
+				else
+				{
+					return true;
+				}
+			}
+			$scope.validationInsEst = function(tipo, value)
+			{
+				debugger
+				if (tipo && tipo == 2)
+				{
+					if (value)
+					{
+						return true
+
+					}
+					else
+					{
+						return false
+
+					}
+				}
+				else
+				{
+					return false
+				}
+			}
+			$scope.validationInsEstSubTrib = function(tipo, value)
+			{
+				if (tipo && tipo == 2)
+				{
+					if (value)
+					{
+						return false
+
+					}
+					else
+					{
+						return true
+
+					}
+				}
+				else
+				{
+					return true
+				}
+			}
+			$scope.validationIndIE = function(tipo, value)
+			{
+				if (tipo && tipo == 2)
+				{
+					if (value)
+					{
+						return false
+
+					}
+					else
+					{
+						return true
+
+					}
+				}
+				else
+				{
+					return true
+				}
+			}
+			$scope.validationIncriMun = function(tipo, value)
+			{
+				if (tipo && tipo == 2)
+				{
+					if (value)
+					{
+						return false
+
+					}
+					else
+					{
+						return true
+
+					}
+				}
+				else
+				{
+					return true
+				}
+			}
+			$scope.validationInsSuf = function(tipo, value)
+			{
+				if (tipo && tipo == 2)
+				{
+					if (value)
+					{
+						return false
+
+					}
+					else
+					{
+						return true
+
+					}
+				}
+				else
+				{
+					return true
+				}
+			}
+
+			//=====================
+			$scope.validationEstado = function() {}
+			$scope.validationMunicipio = function() {}
 
 			$scope.empresa.usuarios[0].multipleDemo = {
 				colors: []
@@ -1358,7 +1622,7 @@
 					$scope.empresa = res.empresaList[0];
 					$scope.enderecos = res.empresaList[0].enderecos;
 					$scope.configuracao = res.empresaList[0].configuracao;
-					debugger
+					//	debugger
 					if ((res.empresaList[0].documentos != null) && (res.empresaList[0].documentos.length == 0))
 					{
 						$scope.empresa.documentos = [

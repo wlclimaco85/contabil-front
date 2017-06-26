@@ -755,7 +755,7 @@
                                         </div>
                                         <div class="input-contato">
                                             <label for="fone2">Telefone celular <span>(só números, com DDD)</span></label>
-                                            <input id="fone1" required number name="telefone" type="text" ui-mask="(99)99999-9999" ui-mask-placeholder ui-mask-placeholder-char="_" ng-model="empresa.telefones[1].numero" name="fone1" placeholder="">
+                                            <input id="fone1" required number name="telefone" type="text" ui-mask="(99)9999-9999" ui-mask-placeholder ui-mask-placeholder-char="_" ng-model="empresa.telefones[1].numero" name="fone1" placeholder="">
                                             <input class="hide" type="text" ng-init="empresa.telefones[1].telefoneTypeEnumValue = 10" name="fone1" placeholder="">
                                             <p ng-show="userForm.telefone.$invalid && !userForm.telefone.$pristine" class="help-block">Campo Obrigatorio.</p>
                                         </div>
