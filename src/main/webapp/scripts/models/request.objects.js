@@ -263,14 +263,16 @@
 	    var _emprId = null;
 	    if (localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == "") {
 	        _emprId = null;
+			_permissaoType = 4;
 	    } else {
 	        _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+			_permissaoType = JSON.parse(localStorage.getItem('empresa')).permissaoTypeEnumValue;
 	    }
 	    this.pageSize = qat.model.pageSize;
 	    this.userId = _userId;
 	    this.id = _id;
 	    this.emprId = _emprId;
-	    //	this.permissaoTypeEnumValue = _permissaoType;
+	    this.permissaoTypeEnumValue = _permissaoType;
 	    this.startPage = _iStartPage;
 	    this.sortExpressions = null;
 	    this.preQueryCount = _bCount;
@@ -279,10 +281,12 @@
 
 	qat.model.contasPagarInquiryRequest = function(_descricao, _dataInicial, _dataFinal, _conta, _iStartPage, _bCount, _userId, _id, _emprId, _permissaoType) {
 	    var _emprId = null;
-	    if (localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == "") {
+	   if (localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == "") {
 	        _emprId = null;
+			_permissaoType = 4;
 	    } else {
 	        _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+			_permissaoType = JSON.parse(localStorage.getItem('empresa')).permissaoTypeEnumValue;
 	    }
 	    if (_descricao)
 	        this.descricao = _descricao
@@ -297,7 +301,7 @@
 	    this.userId = _userId;
 	    this.id = _id;
 	    this.emprId = _emprId;
-	    //	this.permissaoTypeEnumValue = _permissaoType;
+	    this.permissaoTypeEnumValue = _permissaoType;
 	    this.startPage = _iStartPage;
 	    this.sortExpressions = null;
 	    this.preQueryCount = _bCount;

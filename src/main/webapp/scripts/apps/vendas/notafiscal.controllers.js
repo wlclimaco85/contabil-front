@@ -458,28 +458,31 @@
 
         $scope.showRegime = function() {
           var sReturn = 'Not set';
-
-          for(var x = 0;x < $scope.regime.length;x++)
+          if($scope.regime)
           {
-              if( $scope.empresa.regime && $scope.regime[x].id == $scope.empresa.regime.id)
-              {
-                  sReturn =  $scope.regime[x].nome
-              }
+                for(var x = 0;x < $scope.regime.length;x++)
+                {
+                    if( $scope.empresa.regime && $scope.regime[x].id == $scope.empresa.regime.id)
+                    {
+                        sReturn =  $scope.regime[x].nome
+                    }
+                }
           }
-
           return sReturn;
         };
 
         $scope.showStatus = function() {
           var sReturn = 'Not set';
-
-          for(var x = 0;x < $scope.cnaes.length;x++)
+          if( $scope.cnaes)
           {
-              if($scope.cnaes[x].id == $scope.empresa.cnaes[0].idCnae.id)
-              {
-                  sReturn =  $scope.cnaes[x].cnae
-              }
-          }
+                for(var x = 0;x < $scope.cnaes.length;x++)
+                {
+                    if($scope.cnaes[x].id == $scope.empresa.cnaes[0].idCnae.id)
+                    {
+                        sReturn =  $scope.cnaes[x].cnae
+                    }
+                }
+            }
 
           return sReturn;
         };
@@ -546,6 +549,7 @@
 
         $scope.updateEmpresa = function() {
           console.log('dddd');
+          debugger
           var oObject = new qat.model.Empresa($scope.empresa,"UPDATE",$rootScope.user.user);
 
                 SysMgmtData.processPostPageData("main/api/request", {

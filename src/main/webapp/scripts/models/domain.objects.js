@@ -335,7 +335,7 @@ qat.model.fnCnaeEmpresa = function(_oObjet, _modelAction, _user,$log)
 		id : _oObjet.id,
 		idCnae: qat.model.fnCnae(_oObjet.idCnae, "NONE", _user,$log),
 		emprId: _emprId,
-		modelAction: _modelAction,
+		modelAction: _oObjet.id ? _modelAction :"INSERT",
 		createUser: _user,
 		createDateUTC: (new Date()).getTime(),
 		modifyUser: _user,
@@ -357,7 +357,7 @@ qat.model.fnFormaReceber = function(_oObjet, _action,$log)
 	}
 	var _fornecedor = {};
 	if($log)
-		$log.info("add Serviรงo");
+		$log.info("add Forma Receber");
 	if (_oObjet.cliente)
 	{
 		if (_oObjet.cliente.description)
@@ -370,7 +370,7 @@ qat.model.fnFormaReceber = function(_oObjet, _action,$log)
 		}
 	}
 	if($log)
-		$log.info("add Serviรงo");
+		$log.info("add Forma receber 2");
 	return cnaes = {
 		id: _oObjet.id ? _oObjet.id : null,
 		descricao: _oObjet.descricao,
@@ -390,19 +390,19 @@ qat.model.fnFormaReceber = function(_oObjet, _action,$log)
 		docId: _oObjet.docId,
 		tipoDoc: _oObjet.tipoDoc ? qat.model.fnDoisValor(
 			_oObjet.tipoDoc ? _oObjet.tipoDoc :
-			{}, _action) : null,
+			null, _action) : null,
 		formaCadastro: _oObjet.formaCadastro ? qat.model.fnDoisValor(
 			_oObjet.formaCadastro ? _oObjet.formaCadastro :
-			{}, _action) : null,
+			null, _action) : null,
 		intervalo: _oObjet.intervalo ? qat.model.fnDoisValor(
 			_oObjet.intervalo ? _oObjet.intervalo :
-			{}, _action) : null,
+			null, _action) : null,
 		categoria: _oObjet.categoria ? qat.model.fnDoisValor(
 			_oObjet.categoria ? _oObjet.categoria :
-			{}, _action) : null,
+			null, _action) : null,
 		situacao: _oObjet.situacao ? qat.model.fnDoisValor(
 			_oObjet.situacao ? _oObjet.situacao :
-			{}, _action) : null,
+			null, _action) : null,
 		listBaixa: _oObjet.listBaixa[0] ? [qat.model.fnBaixaTitulo(
 			_oObjet.listBaixa[0], _action)] : [],
 		observacao: _oObjet.observacao,
@@ -1662,19 +1662,21 @@ qat.model.Telefones = function(_oObjet, _modelAction, _user)
 	return emails;
 }
 
-qat.model.Cnaes = function(_oObjet, _modelAction, _user,$log)
+qat.model.Cnaes = function(_oObjet, _modelAction, _user, $log)
 {
+	debugger
+	if($log)
+	{
+		$log.info("Cadastro - Cnaes");
+	}
 	var email = {};
 	var emails = [];
 	for (var x = 0; x < _oObjet.length; x++)
 	{
-		email = qat.model.fnCnae(_oObjet[x], _oObjet[x].id ? _modelAction : "INSERT", _user)
-		emails.push(qat.model.fnCnaeEmpresa(email, email.id ? _modelAction : "INSERT", _user))
-		if($log)
-		$log.info("Cnaes "+ _oObjet[x].cnae);
+		email = qat.model.fnCnae(_oObjet[x].idCnae,  "NONE", _user, $log);
+		_oObjet[x].idCnae = email;
+		emails.push(qat.model.fnCnaeEmpresa(_oObjet[x], _oObjet[x].id ? _modelAction : "INSERT", _user, $log))
 	}
-
-
 
 	return emails;
 }
@@ -2298,8 +2300,13 @@ qat.model.itens = function(_oObjet, _modelAction, _user)
 
 }
 
-qat.model.confGeral = function(_oObjet, _modelAction, _user)
+qat.model.confGeral = function(_oObjet, _modelAction, _user,$log)
 {
+
+	if($log)
+	{
+		$log.info("Cadastro ("+_modelAction+") Conf Geral");
+	}
 	this.id = _oObjet.id;
 	this.fusoHorario = _oObjet.fusoHorario;
 	this.casasDecimais = _oObjet.casasDecimais;
@@ -2321,8 +2328,13 @@ qat.model.confGeral = function(_oObjet, _modelAction, _user)
 	this.modifyDateUTC = (new Date()).getTime();
 }
 
-qat.model.confFiscal = function(_oObjet, _modelAction, _user)
+qat.model.confFiscal = function(_oObjet, _modelAction, _user,$log)
 {
+
+	if($log)
+	{
+		$log.info("Cadastro ("+_modelAction+") Configuração Fiscal");
+	}
 	this.id = _oObjet.id;
 	this.princAtividade = _oObjet.princAtividade ?
 	{
@@ -2351,8 +2363,13 @@ qat.model.confFiscal = function(_oObjet, _modelAction, _user)
 	this.modifyDateUTC = (new Date()).getTime();
 }
 
-qat.model.confProd = function(_oObjet, _modelAction, _user)
+qat.model.confProd = function(_oObjet, _modelAction, _user,$log)
 {
+
+	if($log)
+	{
+		$log.info("Cadastro ("+_modelAction+") Configuração Produto");
+	}
 	this.id = _oObjet.id;
 	this.cfop = _oObjet.cfop ?
 	{
@@ -2445,8 +2462,13 @@ qat.model.confProd = function(_oObjet, _modelAction, _user)
 	this.modifyDateUTC = (new Date()).getTime();
 }
 
-qat.model.confVendas = function(_oObjet, _modelAction, _user)
+qat.model.confVendas = function(_oObjet, _modelAction, _user,$log)
 {
+
+	if($log)
+	{
+		$log.info("Cadastro ("+_modelAction+") Configuração Vendas");
+	}
 	this.id = _oObjet.id;
 	this.descontoMaxVenda = _oObjet.descontoMaxVenda;
 	this.observacao = _oObjet.observacao;
@@ -2469,8 +2491,13 @@ qat.model.confVendas = function(_oObjet, _modelAction, _user)
 	this.modifyDateUTC = (new Date()).getTime();
 }
 
-qat.model.confSMTP = function(_oObjet, _modelAction, _user)
+qat.model.confSMTP = function(_oObjet, _modelAction, _user,$log)
 {
+
+	if($log)
+	{
+		$log.info("Cadastro ("+_modelAction+") Configuração SMTP");
+	}
 	this.id = _oObjet.id;
 	this.ativSMTP = _oObjet.ativSMTP;
 	this.servSMTP = _oObjet.servSMTP;
@@ -2492,8 +2519,13 @@ qat.model.confSMTP = function(_oObjet, _modelAction, _user)
 	this.modifyDateUTC = (new Date()).getTime();
 }
 
-qat.model.configOS = function(_oObjet, _modelAction, _user)
+qat.model.configOS = function(_oObjet, _modelAction, _user,$log)
 {
+
+	if($log)
+	{
+		$log.info("Cadastro ("+_modelAction+") Configuração OS");
+	}
 	this.id = _oObjet.id;
 	this.impr2Via = _oObjet.impr2Via;
 	this.imprAss = _oObjet.imprAss;
@@ -2512,8 +2544,13 @@ qat.model.configOS = function(_oObjet, _modelAction, _user)
 	this.modifyDateUTC = (new Date()).getTime();
 }
 
-qat.model.confEntrada = function(_oObjet, _modelAction, _user)
+qat.model.confEntrada = function(_oObjet, _modelAction, _user,$log)
 {
+
+	if($log)
+	{
+		$log.info("Cadastro ("+_modelAction+") Configuração Entrada");
+	}
 	this.id = _oObjet.id;
 	this.valorTotalFixo = _oObjet.valorTotalFixo;
 	this.manterPrecoVendaProd = _oObjet.manterPrecoVendaProd;
@@ -2528,8 +2565,13 @@ qat.model.confEntrada = function(_oObjet, _modelAction, _user)
 	this.modifyDateUTC = (new Date()).getTime();
 }
 
-qat.model.confCarne = function(_oObjet, _modelAction, _user)
+qat.model.confCarne = function(_oObjet, _modelAction, _user,$log)
 {
+
+	if($log)
+	{
+		$log.info("Cadastro ("+_modelAction+") Configuração Carne");
+	}
 	this.id = _oObjet.id;
 	this.carneBotelo = _oObjet.carneBotelo;
 	this.carneNormal = _oObjet.carneNormal;
@@ -2549,8 +2591,13 @@ qat.model.confCarne = function(_oObjet, _modelAction, _user)
 	this.modifyDateUTC = (new Date()).getTime();
 }
 
-qat.model.confNFe = function(_oObjet, _modelAction, _user)
+qat.model.confNFe = function(_oObjet, _modelAction, _user,$log)
 {
+
+	if($log)
+	{
+		$log.info("Cadastro ("+_modelAction+") Configuração NF-e");
+	}
 	this.id = _oObjet.id;
 	this.presCompr = _oObjet.presCompr ?
 	{
@@ -2627,8 +2674,13 @@ qat.model.confNFe = function(_oObjet, _modelAction, _user)
 	this.modifyDateUTC = (new Date()).getTime();
 }
 
-qat.model.confAlertas = function(_oObjet, _modelAction, _user)
+qat.model.confAlertas = function(_oObjet, _modelAction, _user,$log)
 {
+
+	if($log)
+	{
+		$log.info("Cadastro ("+_modelAction+") Configuração Alertas");
+	}
 	this.id = _oObjet.id;
 	this.estoqMin = _oObjet.estoqMin;
 	this.estoqMax = _oObjet.estoqMax;
@@ -2647,8 +2699,13 @@ qat.model.confAlertas = function(_oObjet, _modelAction, _user)
 	this.modifyDateUTC = (new Date()).getTime();
 }
 
-qat.model.confBlueSoft = function(_oObjet, _modelAction, _user)
+qat.model.confBlueSoft = function(_oObjet, _modelAction, _user,$log)
 {
+
+	if($log)
+	{
+		$log.info("Cadastro ("+_modelAction+") Configuração Blue Soft");
+	}
 	this.id = _oObjet.id;
 	this.ativBlue = _oObjet.ativBlue;
 	this.url = _oObjet.url;
@@ -2664,8 +2721,13 @@ qat.model.confBlueSoft = function(_oObjet, _modelAction, _user)
 	this.modifyDateUTC = (new Date()).getTime();
 }
 
-qat.model.boleto = function(_oObjet, _modelAction, _user)
+qat.model.boleto = function(_oObjet, _modelAction, _user,$log)
 {
+
+	if($log)
+	{
+		$log.info("Cadastro ("+_modelAction+") Configuração Boleto");
+	}
 	this.id = _oObjet.id;
 	this.ativarBolOnLine = _oObjet.ativarBolOnLine;
 	this.tipoBoleto = _oObjet.tipoBoleto ?
@@ -2696,34 +2758,38 @@ qat.model.boleto = function(_oObjet, _modelAction, _user)
 	this.modifyDateUTC = (new Date()).getTime();
 }
 
-qat.model.configuracao = function(_oObjet, _modelAction, _user)
+qat.model.configuracao = function(_oObjet, _modelAction, _user,$log)
 {
 
+	if($log)
+	{
+		$log.info("Cadastro ("+_modelAction+") Configuração");
+	}
 	this.id = _oObjet.id;
 	this.confCabecalho = _oObjet.confCabecalho;
-	this.confGeral = _oObjet.confGeral ? new qat.model.confGeral(_oObjet.confGeral, _oObjet.confGeral.id ? _modelAction : "INSERT", _user) :
+	this.confGeral = _oObjet.confGeral ? new qat.model.confGeral(_oObjet.confGeral, _oObjet.confGeral.id ? _modelAction : "INSERT", _user,$log) :
 	null;
-	this.confFiscal = _oObjet.confFiscal ? new qat.model.confFiscal(_oObjet.confFiscal, _oObjet.confFiscal.id ? _modelAction : "INSERT", _user) :
+	this.confFiscal = _oObjet.confFiscal ? new qat.model.confFiscal(_oObjet.confFiscal, _oObjet.confFiscal.id ? _modelAction : "INSERT", _user,$log) :
 	null;
-	this.confProd = _oObjet.confProd ? new qat.model.confProd(_oObjet.confProd, _oObjet.confProd.id ? _modelAction : "INSERT", _user) :
+	this.confProd = _oObjet.confProd ? new qat.model.confProd(_oObjet.confProd, _oObjet.confProd.id ? _modelAction : "INSERT", _user,$log) :
 	null;
-	this.confVendas = _oObjet.confVendas ? new qat.model.confVendas(_oObjet.confVendas, _oObjet.confVendas.id ? _modelAction : "INSERT", _user) :
+	this.confVendas = _oObjet.confVendas ? new qat.model.confVendas(_oObjet.confVendas, _oObjet.confVendas.id ? _modelAction : "INSERT", _user,$log) :
 	null;
-	this.confSMTP = _oObjet.confSMTP ? new qat.model.confSMTP(_oObjet.confSMTP, _oObjet.confSMTP.id ? _modelAction : "INSERT", _user) :
+	this.confSMTP = _oObjet.confSMTP ? new qat.model.confSMTP(_oObjet.confSMTP, _oObjet.confSMTP.id ? _modelAction : "INSERT", _user,$log) :
 	null;
-	this.configOS = _oObjet.configOS ? new qat.model.configOS(_oObjet.configOS, _oObjet.configOS.id ? _modelAction : "INSERT", _user) :
+	this.configOS = _oObjet.configOS ? new qat.model.configOS(_oObjet.configOS, _oObjet.configOS.id ? _modelAction : "INSERT", _user,$log) :
 	null;
-	this.confEntrada = _oObjet.confEntrada ? new qat.model.confEntrada(_oObjet.confEntrada, _oObjet.confEntrada.id ? _modelAction : "INSERT", _user) :
+	this.confEntrada = _oObjet.confEntrada ? new qat.model.confEntrada(_oObjet.confEntrada, _oObjet.confEntrada.id ? _modelAction : "INSERT", _user,$log) :
 	null;
-	this.confCarne = _oObjet.confCarne ? new qat.model.confCarne(_oObjet.confCarne, _oObjet.confCarne.id ? _modelAction : "INSERT", _user) :
+	this.confCarne = _oObjet.confCarne ? new qat.model.confCarne(_oObjet.confCarne, _oObjet.confCarne.id ? _modelAction : "INSERT", _user,$log) :
 	null;
-	this.confNFe = _oObjet.confNFe ? new qat.model.confNFe(_oObjet.confNFe, _oObjet.confNFe.id ? _modelAction : "INSERT", _user) :
+	this.confNFe = _oObjet.confNFe ? new qat.model.confNFe(_oObjet.confNFe, _oObjet.confNFe.id ? _modelAction : "INSERT", _user,$log) :
 	null;
-	this.confAlertas = _oObjet.confAlertas ? new qat.model.confAlertas(_oObjet.confAlertas, _oObjet.confAlertas.id ? _modelAction : "INSERT", _user) :
+	this.confAlertas = _oObjet.confAlertas ? new qat.model.confAlertas(_oObjet.confAlertas, _oObjet.confAlertas.id ? _modelAction : "INSERT", _user,$log) :
 	null;
-	this.confBlueSoft = _oObjet.confBlueSoft ? new qat.model.confBlueSoft(_oObjet.confBlueSoft, _oObjet.confBlueSoft.id ? _modelAction : "INSERT", _user) :
+	this.confBlueSoft = _oObjet.confBlueSoft ? new qat.model.confBlueSoft(_oObjet.confBlueSoft, _oObjet.confBlueSoft.id ? _modelAction : "INSERT", _user,$log) :
 	null;
-	this.boletoList = [_oObjet.boletoList ? new qat.model.boleto(_oObjet.boletoList, _oObjet.boletoList.id ? _modelAction : "INSERT", _user) :
+	this.boletoList = [_oObjet.boletoList ? new qat.model.boleto(_oObjet.boletoList, _oObjet.boletoList.id ? _modelAction : "INSERT", _user,$log) :
 		null];
 	this.parentId = _oObjet.parentId;
 	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
@@ -2753,11 +2819,12 @@ qat.model.Empresa = function(_oObjet, _modelAction, _user, $log)
 		this.dtAbertura = _oObjet.dtAbertura ? _oObjet.dtAbertura : (new Date()).getTime();
 		this.entidadeId = JSON.parse(localStorage.getItem('empresa')) ? JSON.parse(localStorage.getItem('empresa')).id : null;
 		this.entidadeEnum = _oObjet.entidadeEnum;
-		this.configuracao = _oObjet.configuracao ? new qat.model.configuracao(_oObjet.configuracao, _oObjet.configuracao.id ? "UPDATE" : "INSERT", _user) : null;
+		this.configuracao = _oObjet.configuracao ? new qat.model.configuracao(_oObjet.configuracao, _oObjet.configuracao.id ? _modelAction : "INSERT", _user,$log) : null;
 		this.usuarios = _oObjet.usuarios ? _oObjet.usuarios : null;
 		this.bancos = _oObjet.bancos ? _oObjet.bancos : null;
 		this.socios = _oObjet.socios ? _oObjet.socios : null;
 		this.tipo = _oObjet.tipo;
+		this.permissaoTypeEnum = _oObjet.permissaoTypeEnum ? _oObjet.permissaoTypeEnum : "NORMAL";
 		this.numFunc = _oObjet.numFunc;
 		this.tipoPessoa = _oObjet.tipoPessoa;
 		this.cpfResponsavel = _oObjet.cpfResponsavel;
@@ -2772,11 +2839,11 @@ qat.model.Empresa = function(_oObjet, _modelAction, _user, $log)
 		this.enderecos = _oObjet.enderecos ? _oObjet.enderecos : null;
 		this.emails = _oObjet.emails,
 		this.telefones = _oObjet.telefones,
-		this.cnaes = _oObjet.cnaes ?  qat.model.Cnaes(_oObjet.cnaes,_modelAction,_user,$log) : null
+		this.cnaes = _oObjet.cnaes ? qat.model.Cnaes(_oObjet.cnaes, _modelAction, _user,$log) : null;
 		this.statusList = _oObjet.statusList;
 		this.notes = _oObjet.notes;
 		this.parentId = _oObjet.parentId;
-		this.emprId = JSON.parse(localStorage.getItem('empresa')) ? JSON.parse(localStorage.getItem('empresa')).id : null;
+		this.emprId = _oObjet.emprId;
 		this.processId = _oObjet.processId;
 		this.tableEnumValue = _oObjet.tableEnumValue;
 		this.modelAction = _modelAction;
@@ -3608,11 +3675,11 @@ qat.model.fnNFNotaInfoTotal = function(_NFNotaInfoTotal, modelAction, _user)
 	NFNotaInfoTotal = {
 		id: _id,
 		icmsTotal: _NFNotaInfoTotal.icmsTotal ? qat.model.fnNFNotaInfoICMSTotal(_NFNotaInfoTotal.icmsTotal, modelAction, _user) :
-		{},
+		null,
 		issqnTotal: _NFNotaInfoTotal.issqnTotal ? qat.model.fnNFNotaInfoISSQNTotal(_NFNotaInfoTotal.issqnTotal, modelAction, _user) :
-		{},
+		null,
 		retencoesTributos: _NFNotaInfoTotal.retencoesTributos ? qat.model.fnNFNotaInfoRetencoesTributos(_NFNotaInfoTotal.retencoesTributos, modelAction, _user) :
-		{},
+		null,
 		parentId: 0,
 		emprId: _emprId,
 		processId: 0,
