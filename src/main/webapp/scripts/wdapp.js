@@ -273,7 +273,7 @@ var WebDaptiveAppConfig = {
 		//validator.setInvalidElementStyling(false);
 		editableOptions.theme = 'bs3'; // bootstrap
 		$rootScope.main = {
-			brand: (JSON.parse(localStorage.getItem('empresa')) ? (JSON.parse(localStorage.getItem('empresa')).nome ? JSON.parse(localStorage.getItem('empresa')).razao : '') :
+			brand: (localStorage.getItem('empresa') && localStorage.getItem('empresa') !="undefined" ? (JSON.parse(localStorage.getItem('empresa')).nome ? JSON.parse(localStorage.getItem('empresa')).razao : '') :
 				'E-Contábil'),
 			name: ''
 		};

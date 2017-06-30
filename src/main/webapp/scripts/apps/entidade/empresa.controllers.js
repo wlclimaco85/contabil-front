@@ -752,6 +752,10 @@
 				{
 					bNUNINSJUNTCOMERCIAL = true;
 				}
+				if ($scope.empresa.documentos[x].documentoTypeEnumValue == 17)
+				{
+					bCRC = true;
+				}
 			}
 
 			if (!bCPF)
@@ -831,6 +835,14 @@
 				$scope.empresa.documentos.push(
 				{
 					documentoTypeEnumValue: 16,
+					numero: ""
+				})
+			};
+			if (!bCRC)
+			{
+				$scope.empresa.documentos.push(
+				{
+					documentoTypeEnumValue: 17,
 					numero: ""
 				})
 			};
@@ -1010,7 +1022,6 @@
 			}
 			$scope.validationInsEst = function(tipo, value)
 			{
-				debugger
 				if (tipo && tipo == 2)
 				{
 					if (value)
@@ -1274,6 +1285,18 @@
 				// factory.fnMontaObjeto = function(empresa,enderecos,emails,telefones,cnaes,action){
 
 			};
+
+			$scope.saveContador = function()
+			{
+				$log.info("init processo de add Contador");
+				$scope.empresa.dtInicio = (new Date($scope.empresa.dtInicio)).getTime();
+				$scope.empresa.dtAbertura = (new Date($scope.empresa.dtAbertura)).getTime();
+				$scope.empresa.permissaoTypeEnumValue = ($scope.empresa.tipoContabil == 1 ? 3 : 2 );
+
+				fEmpresa.fnMontaObjeto2($scope.empresa, $scope.enderecos, $scope.emails, $scope.telefones, $scope.cnaes, "INSERT", fnCallBack)
+				// factory.fnMontaObjeto = function(empresa,enderecos,emails,telefones,cnaes,action){
+
+			};
 		});
 })();
 (function()
@@ -1482,7 +1505,6 @@
 
 			function addColaborador()
 			{
-				debugger
 				ModalService.showModal(
 				{
 
@@ -1506,7 +1528,6 @@
 
 			function addPlanoContas()
 			{
-				debugger
 				ModalService.showModal(
 				{
 
@@ -1530,7 +1551,6 @@
 
 			function addFilial()
 			{
-				debugger
 				ModalService.showModal(
 				{
 
@@ -1595,7 +1615,6 @@
 				$scope.state2 = !$scope.state2;
 			};
 
-			//   debugger
 			var searchObject = $location.search();
 			var _emprId = null;
 			if ((localStorage.getItem('empresa') !== undefined) && (localStorage.getItem('empresa') !== null))
@@ -1622,7 +1641,6 @@
 					$scope.empresa = res.empresaList[0];
 					$scope.enderecos = res.empresaList[0].enderecos;
 					$scope.configuracao = res.empresaList[0].configuracao;
-					//	debugger
 					if ((res.empresaList[0].documentos != null) && (res.empresaList[0].documentos.length == 0))
 					{
 						$scope.empresa.documentos = [

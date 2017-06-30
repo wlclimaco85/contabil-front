@@ -45,7 +45,7 @@
 			request: new qat.model.siteInquiryRequest(100 / 20, true, "http://localhost:8080/webSite/")
 		}, function(res)
 		{
-debugger
+
 			vm.site = new qat.model.Site(res.sites[0]);
 			console.log(res.sites[0].empresa)
 			if ((res.sites[0].empresa != undefined) && (res.sites[0].empresa != null))
@@ -248,13 +248,13 @@ debugger
 			$scope.format = $scope.formats[1];
 			var fnCallBack = function(oResponse)
 			{
-				debugger
+
 				console.log(oResponse)
 			}
 			$scope.saveEmpresa = function()
 			{
 
-				debugger
+
 				var oObject = fModels.amont(qat.model.Empresa($scope.empresa, "INSERT", $rootScope.user.user), "INSERT");
 
 				SysMgmtData.processPostPageData("main/api/anonimo",
@@ -264,10 +264,10 @@ debugger
 				}, function(res)
 				{
 					console.log(res)
-					debugger
+
 					if (res.operationSuccess == true)
 					{
-						debugger
+
 					}
 
 				});

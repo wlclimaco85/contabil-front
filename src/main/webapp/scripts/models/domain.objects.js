@@ -236,7 +236,7 @@ qat.model.Plano = function(_oObjet,$log)
 	this.modifyDateUTC = (new Date()).getTime();
 
 	if($log)
-		$log.info("add Serviรงo");
+		$log.info("add Plano");
 }
 
 qat.model.transaction = function(_user, _token, modelAction,$log)
@@ -244,7 +244,7 @@ qat.model.transaction = function(_user, _token, modelAction,$log)
 
 	var _emprId = null;
 	if (localStorage.getItem('empresa') == null ||
-		localStorage.getItem('empresa') == "")
+		localStorage.getItem('empresa') == "" || localStorage.getItem('empresa') == "undefined")
 	{
 		_emprId = null;
 	}
@@ -253,7 +253,7 @@ qat.model.transaction = function(_user, _token, modelAction,$log)
 		_emprId = JSON.parse(localStorage.getItem('empresa')).id;
 	}
 	if($log)
-		$log.info("add Serviรงo");
+		$log.info("add transaction");
 	return {
 
 		token: _token,
