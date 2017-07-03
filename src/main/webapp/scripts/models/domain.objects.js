@@ -1798,14 +1798,14 @@ qat.model.Marca = function(_oObjet, _modelAction, _user)
 	this.marca = _oObjet.marca
 	this.fabricante = _oObjet.fabricante
 	this.emailList = [];
-	this.emailList.push(qat.model.fnEmails(_oObjet.emailList ? _oObjet.emailList[0] :
-	{}, (_oObjet.emailList[0] && _oObjet.emailList[0].id) ? _modelAction : 'INSERT', _user));
+	_oObjet.emailList ? this.emailList.push(qat.model.fnEmails(_oObjet.emailList ? _oObjet.emailList[0] :
+	{}, (_oObjet.emailList[0] && _oObjet.emailList[0].id) ? _modelAction : 'INSERT', _user)) : null;
 	this.enderecoList = [];
-	this.enderecoList.push(qat.model.fnEndereco(_oObjet.enderecoList ? _oObjet.enderecoList[0] :
-	{}, (_oObjet.enderecoList && _oObjet.emailList[0].id) ? _modelAction : 'INSERT', _user));
+	_oObjet.enderecoList ? this.enderecoList.push(qat.model.fnEndereco(_oObjet.enderecoList ? _oObjet.enderecoList[0] :
+	{}, (_oObjet.enderecoList && _oObjet.emailList[0].id) ? _modelAction : 'INSERT', _user)) : null;
 	this.telefoneList = [];
-	this.telefoneList.push(qat.model.fnTelefones(_oObjet.telefoneList ? _oObjet.telefoneList[0] :
-	{}, (_oObjet.telefoneList[0] && _oObjet.telefoneList[0].id) ? _modelAction : 'INSERT', _user));
+	_oObjet.telefoneList ? this.telefoneList.push(qat.model.fnTelefones(_oObjet.telefoneList ? _oObjet.telefoneList[0] :
+	{}, (_oObjet.telefoneList[0] && _oObjet.telefoneList[0].id) ? _modelAction : 'INSERT', _user)):null;
 	this.parentId = _oObjet.parentId;
 	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
 	this.processId = _oObjet.processId;

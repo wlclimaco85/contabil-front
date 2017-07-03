@@ -189,6 +189,7 @@
 
 
             },
+
             cliente: function(vm, createdRow, scope, _callback, _function) {
 
 
@@ -213,38 +214,57 @@
 
                 return padrao(vm, createdRow, scope, _callback, buttons, 2, _function);
             },
-            fornecedor: function(vm, createdRow, scope, _callback) {
 
-                var oOptions = padrao(vm, createdRow, scope, _callback);
-                console.log(oOptions)
-                oOptions.buttons.push({
+            fornecedor: function(vm, createdRow, scope, _callback,_function) {
+
+                var buttons = [];
+                buttons.push({
+                    text: '<span class="fa fa-trash"></span>',
+                    key: '1',
+                    action: function(e, dt, node, config) {
+
+                        dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html', "TributacaoDeleteController", validationFactory.contasPagar, _function);
+
+                    }
+                }, {
                     text: 'Novo Fornecedor',
-                    key: '1',
+                    key: '4',
                     action: function(e, dt, node, config) {
 
-                        dialogFactory.dialog('views/cadastros/dialog/dFornecedor.html', "FornecedorInsertController", validationFactory.fornecedor, null);
+                        dialogFactory.dialog('views/cadastros/dialog/dFornecedor.html', "FornecedorInsertController", validationFactory.fornecedor, _function);
 
                     }
                 })
 
-                return oOptions;
-            },
-            transportador: function(vm, createdRow, scope, _callback) {
+                return padrao(vm, createdRow, scope, _callback, buttons, 2, _function);
 
-                var oOptions = padrao(vm, createdRow, scope, _callback);
-                console.log(oOptions)
-                oOptions.buttons.push({
+            },
+
+            transportador: function(vm, createdRow, scope, _callback,_function) {
+
+                 var buttons = [];
+                buttons.push({
+                    text: '<span class="fa fa-trash"></span>',
+                    key: '1',
+                    action: function(e, dt, node, config) {
+
+                        dialogFactory.dialog('views/financeiro/dialog/dContasPagar.html', "TributacaoDeleteController", validationFactory.contasPagar, _function);
+
+                    }
+                }, {
                     text: 'Novo Transportador',
-                    key: '1',
+                    key: '4',
                     action: function(e, dt, node, config) {
 
-                        dialogFactory.dialog('views/cadastros/dialog/dTransportador.html', "TransportadorInsertController", validationFactory.transportador, null);
+                        dialogFactory.dialog('views/cadastros/dialog/dTransportador.html', "TransportadorInsertController", validationFactory.fornecedor, _function);
 
                     }
                 })
 
-                return oOptions;
+                return padrao(vm, createdRow, scope, _callback, buttons, 2, _function);
+
             },
+
             produtoEmpresa: function(vm, createdRow, scope, _callback, _function) {
 
                 var buttons = [];
@@ -259,6 +279,7 @@
                 return padrao(vm, createdRow, scope, _callback, buttons, 2, _function);
 
             },
+
             pdVendas: function(vm, createdRow, scope, _callback, _function) {
 
                 var buttons = [];
