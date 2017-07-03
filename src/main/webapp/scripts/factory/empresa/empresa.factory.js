@@ -274,6 +274,16 @@
 					empresa.socios[x] = new qat.model.fnSocios(empresa.socios[x], empresa.socios[x].id ? "UPDATE" : "INSERT", $rootScope.user.user, $log)
 				}
 
+				//==================Endereco==================================
+				debugger
+				var enderecoAux = [];
+				for (var x = 0; x < empresa.enderecos.length; x++)
+				{
+					enderecoAux.push(qat.model.fnEndereco( empresa.enderecos[x],  empresa.enderecos[x].id ? "UPDATE" : "INSERT", user, $log));
+				}
+				empresa.enderecos = [];
+				empresa.enderecos = enderecoAux;
+
 				//==================Telefone==================================
 				var telefonesAux = [];
 				for (var x = 0; x < telefones.length; x++)
@@ -341,10 +351,7 @@
 						//$location.path("#/pages/signin");
 
 					}
-					else
-					{
-						toastr.error('County form error, please correct and resubmit.', 'Error');
-					}
+
 
 				});
 			}

@@ -40,7 +40,10 @@ public class Autentication {
 //	}
 
 
-    @ResponseBody
+    private static final String URL = "http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate";
+
+   // private static final String URL = "http://191.243.199.205/qat-sysmgmt-controller-rest/auth/api/authenticate";
+	@ResponseBody
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ModelToken fetchtoken(@RequestParam("username") String username,
 			@RequestParam("password") String password) throws JsonParseException, JsonMappingException, IOException {
@@ -63,7 +66,7 @@ public class Autentication {
 		    paramss.set("password", password);
 		  //  URI tgtUrl = rest.postForLocation("http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate", paramss, Collections.emptyMap());
 
-		    ResponseEntity<String> st = rest.postForEntity("http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate", paramss, String.class);
+		    ResponseEntity<String> st = rest.postForEntity(URL, paramss, String.class);
 
 		//    ResponseEntity<String> st = rest.postForEntity("http://191.243.199.205/qat-sysmgmt-controller-rest/auth/api/authenticate", paramss, String.class);
 		    System.out.println("[" + st.getBody() + "]");
@@ -97,7 +100,7 @@ public class Autentication {
 		    paramss.set("password", "devil");
 		   /// URI tgtUrl = rest.postForLocation("http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate", paramss, Collections.emptyMap());
 
-		    ResponseEntity<String> st = rest.postForEntity("http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate", paramss, String.class);
+		    ResponseEntity<String> st = rest.postForEntity(URL, paramss, String.class);
 		    System.out.println("[" + st.getBody() + "]");
 		    System.out.println("[" + st + "]");
 		    String tk = st.getBody();
@@ -129,7 +132,7 @@ public class Autentication {
 		    paramss.set("password", "devil");
 		   /// URI tgtUrl = rest.postForLocation("http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate", paramss, Collections.emptyMap());
 
-		    ResponseEntity<String> st = rest.postForEntity("http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate", paramss, String.class);
+		    ResponseEntity<String> st = rest.postForEntity(URL, paramss, String.class);
 		    System.out.println("[" + st.getBody() + "]");
 		    System.out.println("[" + st + "]");
 		    String tk = st.getBody();

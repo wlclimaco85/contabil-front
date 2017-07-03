@@ -1078,7 +1078,7 @@ public class Objects {
 		usuario.setId(id);
 
 		usuario.setCpf(insertDocumento(id, TabelaEnum.USUARIO, action));
-		usuario.setEmail("econtabilsistemas@gmail.com");
+		usuario.setEmail("wlclimaco@gmail.com");
 		usuario.setSenha("senha_4 - " + action.toString());
 		usuario.setPergunta("pergunta_5 - " + action.toString());
 		//usuario.setRole("role_6 - " + action.toString());

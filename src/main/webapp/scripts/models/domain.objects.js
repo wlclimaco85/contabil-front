@@ -1428,10 +1428,12 @@ qat.model.fnIPI = function(_cfop, _modelAction, _userId)
 }
 
 //Endereco Object
-qat.model.fnEndereco = function(_oObjet, modelAction, user)
+qat.model.fnEndereco = function(_oObjet, modelAction, user,$log)
 {
 	var _emprId = null;
 
+	if($log)
+		$log.info(" "+modelAction+" endereco --> "+_oObjet.logradouro);
 	if (localStorage.getItem('empresa') == null ||
 		localStorage.getItem('empresa') == "")
 	{
@@ -1569,7 +1571,7 @@ qat.model.fnDocumentos = function(_documentos, _modelAction, _userId)
 
 
 //Endereco Object
-qat.model.fnEnderecos = function(_oObjets, _modelAction, _user)
+qat.model.fnEnderecos = function(_oObjets, _modelAction, _user, $log)
 {
 	var _emprId = null;
 	var endereco = {}
@@ -2499,7 +2501,7 @@ qat.model.confSMTP = function(_oObjet, _modelAction, _user,$log)
 		$log.info("Cadastro ("+_modelAction+") Configuração SMTP");
 	}
 	this.id = _oObjet.id;
-	this.ativSMTP = _oObjet.ativSMTP;
+	this.ativSMTP = _oObjet.ativSMTP == true ? 1 : 0;
 	this.servSMTP = _oObjet.servSMTP;
 	this.porta = _oObjet.porta;
 	this.endEmail = _oObjet.endEmail;

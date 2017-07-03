@@ -143,7 +143,7 @@
                                             <div class="row col-sm-3">
                                                 <label for="exampleInputPassword1">Indicador de IE <SUP class="help-block5">(*)</SUP></label>
                                                 <div class="row">
-                                                    <ui-select name="IndicIE"  ng-model="documento.numero" theme="bootstrap" ng-class="{ 'has-error' : validationIndIE(empresa.tipoPessoa,documento.numero)}">
+                                                    <ui-select name="IndicIE"  ng-model="documento.numeros" on-select="getIndicadorIE($item, documento)" theme="bootstrap" ng-class="{ 'has-error' : validationIndIE(empresa.tipoPessoa,documento.numero)}">
                                                         <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                                         <ui-select-choices repeat="item in indicadorIE | filter: $select.search">
                                                             <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -744,8 +744,8 @@
                 }
             },
             onNext: function(tab, navigation, index) {
-                var numTabs = $('.empresaForm').find('.tab-pane').length,
-                    isValidTab = validateTab(index - 1);
+                var numTabs = $('.empresaForm').find('.tab-pane').length
+            /*        isValidTab = validateTab(index - 1);
                 if (!isValidTab) {
                     return false;
                 }
@@ -760,8 +760,8 @@
                     // For testing purpose
                     $('#completeModal').modal();
                 }
-
-                return true;
+*/
+               // return true;
             }
         });
 
@@ -769,7 +769,7 @@
 
 
         //============================= Email fim
-        function validateTab(index) {
+     /*   function validateTab(index) {
             var fv = $('.empresaForm').data('formValidation'), // FormValidation instance
                 // The current tab
                 $tab = $('.empresaForm').find('.tab-pane').eq(index);
@@ -786,7 +786,7 @@
             return true;
         }
 
-        /*
+
         //Tab 1
         $('.empresaForm').find('[name="nome"]').val('099.099.099.099');
         $('.empresaForm').find('[name="cpf"]').val('099.099.099.099');
