@@ -13898,3 +13898,8 @@ div.show-image input.delete {
 .has-success .form-control-feedback {
     color: #3c763d;
 }
+
+  .css-form input.ng-invalid.ng-touched {
+    border-color: #FA787E;
+    color: #a94442;
+  }

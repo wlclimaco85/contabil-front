@@ -261,6 +261,15 @@ public class PessoaTest {
 				ClienteResponse.class);
 	//	Assert.assertEquals(result.isOperationSuccess(), true);
 
+		System.out.println("==================================FetchALL==============================================");
+		jsonInString = mapper.writeValueAsString(new ClienteInquiryRequest());
+		System.out.println(jsonInString);
+		entitys = new HttpEntity<String>(jsonInString, headers);
+		result = restTemplate.postForObject(REST_SERVICE_URI + "pessoa/api/cliente/fetchPage/", entitys,
+				ClienteResponse.class);
+		//Assert.assertEquals(result.isOperationSuccess(), true);
+		count = result.getClienteList().size();
+
 		// =========== Update
 		// ================================================================
 		System.out.println("==================================UPDATE==============================================");

@@ -3,6 +3,7 @@ package org.talesolutions.cep;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.samples.sysmgmt.advocacia.Advocacia;
@@ -280,7 +281,8 @@ public class Objects {
 		cliente.setNomeMae("nomeMae_3 - " + action.toString());
 		cliente.setNomeConjugue("nomeConjugue_4 - " + action.toString());
 		cliente.setEstadoCivil(1005);
-	//	cliente.setTipoPessoa(1006);
+		List<PessoaTipo> tipoPessoa = new ArrayList<PessoaTipo>();
+		//cliente.setPessoaTipo(tipoPessoa);
 		cliente.setDatanasc(a.getTime());
 		cliente.setFoto("foto_8 - " + action.toString());
 	//	cliente.setPessoaTypeEnumValue(1);
@@ -302,8 +304,10 @@ public class Objects {
 		cliente.setContatoList(new ArrayList<Contato>());
 		cliente.getContatoList().add(insertContato(null, TabelaEnum.CLIENTE, action));
 		cliente.setTabelaEnum(tabela);
-		cliente.setPessoaTipo(new ArrayList<PessoaTipo>());
-		cliente.getPessoaTipo().add(insertPessoaTipo(id,PessoaTypeEnum.CLIENTE,action));
+		tipoPessoa.add(insertPessoaTipo(null,PessoaTypeEnum.CLIENTE,action));
+		tipoPessoa.add(insertPessoaTipo(null,PessoaTypeEnum.FORNECEDOR,action));
+		tipoPessoa.add(insertPessoaTipo(null,PessoaTypeEnum.TRANSPORTADOR,action));
+		cliente.setPessoaTipo(tipoPessoa);
 		cliente.setParentId(id);
 		cliente.setEmprId(EMPID);
 		cliente.setModifyDateUTC(a.getTime());
