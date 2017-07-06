@@ -255,20 +255,135 @@
             }
           })
         },
-        empresa: function () {
-          $('.ClienteForm').formValidation({
-            framework: 'bootstrap',
-            icon: {
-              valid: 'glyphicon glyphicon-ok',
-              invalid: 'glyphicon glyphicon-remove',
-              validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-              'nome': notEmptyStringMinMaxRegexp,
-              'email': integerNotEmptyValidation,
-              'texto': integerNotEmptyValidation
+        empresa: function (vm,scope) {
+
+          scope.validationNomeRazao = function() {}
+
+          //================
+
+          scope.validationDtNasc = function(tipo) {}
+
+          scope.validationInscJunt = function() {}
+
+          //=====================
+
+          scope.validationCNPJ = function(tipo, cnpj)
+          {
+
+            if (tipo && tipo == 2)
+            {
+              validationFactory.cnpj(cnpj);
             }
-          })
+            else
+            {
+              return true;
+            }
+          }
+          scope.validationInsEst = function(tipo, value)
+          {
+            if (tipo && tipo == 2)
+            {
+              if (value)
+              {
+                return true
+
+              }
+              else
+              {
+                return false
+
+              }
+            }
+            else
+            {
+              return false
+            }
+          }
+          scope.validationInsEstSubTrib = function(tipo, value)
+          {
+            if (tipo && tipo == 2)
+            {
+              if (value)
+              {
+                return false
+
+              }
+              else
+              {
+                return true
+
+              }
+            }
+            else
+            {
+              return true
+            }
+          }
+          scope.validationIndIE = function(tipo, value)
+          {
+            if (tipo && tipo == 2)
+            {
+              if (value)
+              {
+                return false
+
+              }
+              else
+              {
+                return true
+
+              }
+            }
+            else
+            {
+              return true
+            }
+          }
+          scope.validationIncriMun = function(tipo, value)
+          {
+            if (tipo && tipo == 2)
+            {
+              if (value)
+              {
+                return false
+
+              }
+              else
+              {
+                return true
+
+              }
+            }
+            else
+            {
+              return true
+            }
+          }
+          scope.validationInsSuf = function(tipo, value)
+          {
+            if (tipo && tipo == 2)
+            {
+              if (value)
+              {
+                return false
+
+              }
+              else
+              {
+                return true
+
+              }
+            }
+            else
+            {
+              return true
+            }
+          }
+
+          //=====================
+          scope.validationEstado = function() {}
+          scope.validationMunicipio = function() {}
+          
         },
         tributacao: function () {
           $('.tributacaoForm').formValidation({

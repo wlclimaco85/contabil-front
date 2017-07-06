@@ -41,10 +41,10 @@
 				},
 				link: function($scope, $elem, $attrs, modelCtrl)
 				{
-
+					
 						var check = function(cpf)
 						{
-
+					
 					if ($attrs.tipopessoa == 1)
 					{
 							if (!cpf)
@@ -87,8 +87,8 @@
 							return	true;
 						}
 					}
-
-
+					
+					
 
 					//For DOM -> model validation
 					modelCtrl.$parsers.unshift(function(value)
@@ -122,10 +122,10 @@
 				},
 				link: function($scope, $elem, $attrs, modelCtrl)
 				{
-
+					
 						var validcnpjs = function(cnpj)
 						{
-
+							
 					if ($attrs.tipopessoa == 2)
 					{
 							if (!cnpj)

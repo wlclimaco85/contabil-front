@@ -3,7 +3,7 @@
 	'use strict';
 	var commonAuth = angular.module('wdApp.ajaxCall.empresa', []);
 
-	commonAuth.factory('fEmpresa', ['$rootScope', 'fModels', 'SysMgmtData', 'toastr', '$log', function($rootScope, fModels, SysMgmtData, toastr, $log)
+	commonAuth.factory('fEmpresa', ['$rootScope', 'fModels', 'SysMgmtData', 'toastr', '$log', 'doisValorFactory','validationFactory','fDatas','fEmail','fTelefone','fDocumento','fEndereco', function($rootScope, fModels, SysMgmtData, toastr, $log, doisValorFactory,validationFactory,	fDatas,fEmail,fTelefone,fDocumento,fEndereco)
 		{
 			var factory = {};
 
@@ -258,6 +258,129 @@
 					}
 
 				});
+			}
+			factory.fnViewDialog = function(vm,scope)
+			{
+
+				var createForm3;
+
+				var $window;
+				$window = $(window);
+
+				scope.cnaes;
+				scope.enderecos = [];
+				scope.emails = [];
+				scope.telefones = [];
+
+				//cria instancia endereco
+				try { 
+					fEndereco.fnMontaEnderecoEmpresa(vm,scope);
+				}
+				catch(err) {
+					$log.error("Erro ao instanciar endereço");
+				}
+				finally {
+					$log.warn("Inicializando endereço");
+				}
+				
+
+				//cria instancia documentos
+				try { 
+					fDocumento.fnMontaDocumentosEmpresa(vm,scope);
+				}
+				catch(err) {
+					$log.error("Erro ao instanciar documentos -> " + err);
+				}
+				finally {
+					$log.warn("Inicializando documentos");
+				}
+				
+
+				//CRIA INSTANCIA TELEFONE
+				try { 
+					fTelefone.fnMontaTelefones(vm,scope);
+				}
+				catch(err) {
+					$log.error("Erro ao instanciar telefone -> " + err);
+				}
+				finally {
+					$log.warn("Inicializando telefone");
+				}
+
+				//CRIA INSTANCIA EMAIL
+				try { 
+					fEmail.fnMontaEmails(vm,scope);
+				}
+				catch(err) {
+					$log.error("Erro ao instanciar emails -> " + err);
+				}
+				finally {
+					$log.warn("Inicializando emails");
+				}
+
+				//Datas 
+				try { 
+					fDatas.fnMontaDatas(vm,scope);
+				}
+				catch(err) {
+					$log.error("Erro ao instanciar datas -> " + err);
+				}
+				finally {
+					$log.warn("Inicializando datas");
+				}
+
+				//Validation
+				try { 
+					validationFactory.empresa(vm,scope);
+				}
+				catch(err) {
+					$log.error("Erro ao instanciar Validação -> " + err);
+				}
+				finally {
+					$log.warn("Inicializando Validaçoes");
+				}
+				
+			
+			//Socios
+			if (scope.empresa.socios.length == 0)
+				scope.empresa.socios.push(
+				{
+					pessoa:
+					{}
+				})
+
+			if (!scope.empresa.socios.length > 0)
+			{
+				scope.empresa.socios.push(
+				{
+					emprId: scope.empresa.id
+				})
+			}
+			
+			//cnae
+			if (scope.empresa.cnaes.length == 0)
+				scope.empresa.cnaes = [
+					{
+						idCnae:
+						{}
+					}];
+
+			
+
+			// Usuarios
+			scope.createForm3 = function()
+			{
+				scope.empresa.usuarios.push(
+				{})
+			}
+
+			scope.empresa.usuarios[0].multipleDemo = {
+				colors: []
+			};
+
+			scope.availableColors = ['Red', 'Green', 'Blue', 'Yellow', 'Magenta', 'Maroon', 'Umbra', 'Turquoise'];
+
+			
 			}
 			factory.fnMontaObjeto2 = function(empresa, enderecos, emails, telefones, cnaes, action, fnCallBack)
 			{

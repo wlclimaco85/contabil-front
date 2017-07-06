@@ -146,9 +146,9 @@
       var vm = this
       $scope.cliente = {}
       $scope.cliente = $rootScope.cliente
-
+      
       fPessoa.fnOpenView(vm,$scope);
-
+      
      // ===========================================
       var fnCallBack = function (res) {
         if (res.operationSuccess == true) {

@@ -121,213 +121,93 @@
 
 	factory.fnOpenView = function(vm,scope) {
 
+      //cria instancia endereco
+				try { 
+					fEndereco.fnMontaEnderecoEmpresa(vm,scope);
+				}
+				catch(err) {
+					$log.error("Erro ao instanciar endereço");
+				}
+				finally {
+					$log.warn("Inicializando endereço");
+				}
+				
 
-      scope.today = function () {
-        scope.dt = new Date()
-      }
-      scope.today()
+				//cria instancia documentos
+				try { 
+					fDocumento.fnMontaDocumentosEmpresa(vm,scope);
+				}
+				catch(err) {
+					$log.error("Erro ao instanciar documentos -> " + err);
+				}
+				finally {
+					$log.warn("Inicializando documentos");
+				}
+				
 
-      scope.clear = function () {
-        scope.dt = null
-      }
+				//CRIA INSTANCIA TELEFONE
+				try { 
+					fTelefone.fnMontaTelefones(vm,scope);
+				}
+				catch(err) {
+					$log.error("Erro ao instanciar telefone -> " + err);
+				}
+				finally {
+					$log.warn("Inicializando telefone");
+				}
 
-      scope.inlineOptions = {
-        customClass: getDayClass,
-        minDate: new Date(),
-        showWeeks: true
-      }
+				//CRIA INSTANCIA EMAIL
+				try { 
+					fEmail.fnMontaEmails(vm,scope);
+				}
+				catch(err) {
+					$log.error("Erro ao instanciar emails -> " + err);
+				}
+				finally {
+					$log.warn("Inicializando emails");
+				}
 
-      scope.dateOptions = {
-        dateDisabled: disabled,
-        formatYear: 'yy',
-        maxDate: new Date(2020, 5, 22),
-        minDate: new Date(),
-        startingDay: 1
-      }
+				//Datas 
+				try { 
+					fDatas.fnMontaDatas(vm,scope);
+				}
+				catch(err) {
+					$log.error("Erro ao instanciar datas -> " + err);
+				}
+				finally {
+					$log.warn("Inicializando datas");
+				}
 
-      // Disable weekend selection
-      function disabled (data) {
-        var date = data.date,
-          mode = data.mode
-        return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6)
-      }
+				//Validation
+				try { 
+					validationFactory.empresa(vm,scope);
+				}
+				catch(err) {
+					$log.error("Erro ao instanciar Validação -> " + err);
+				}
+				finally {
+					$log.warn("Inicializando Validaçoes");
+				}
 
-      scope.toggleMin = function () {
-        scope.inlineOptions.minDate = scope.inlineOptions.minDate ? null : new Date()
-        scope.dateOptions.minDate = scope.inlineOptions.minDate
-      }
-
-      scope.toggleMin()
-
-      scope.open1 = function () {
-        scope.popup1.opened = true
-      }
-
-      scope.open2 = function () {
-        scope.popup2.opened = true
-      }
-
-      scope.setDate = function (year, month, day) {
-        scope.dt = new Date(year, month, day)
-      }
-
-      scope.formats = ['dd-MMMM-yyyy', 'dd/MM/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate']
-      scope.format = scope.formats[1]
-      scope.altInputFormats = ['M!/d!/yyyy']
-
-      scope.popup1 = {
-        opened: false
-      }
-
-      scope.popup2 = {
-        opened: false
-      }
-
-      var tomorrow = new Date()
-      tomorrow.setDate(tomorrow.getDate() + 1)
-      var afterTomorrow = new Date()
-      afterTomorrow.setDate(tomorrow.getDate() + 1)
-      scope.events = [
-        {
-          date: tomorrow,
-          status: 'full'
-        },
-        {
-          date: afterTomorrow,
-          status: 'partially'
+        scope.cliente = {
+          pessoaTipos: [
+            {
+              pessoaTypeEnum: 'CLIENTE',
+              label: 'Cliente'
+            },
+            {
+              pessoaTypeEnum: 'FORNECEDOR',
+              label: 'Fornecedor'
+            },
+            {
+              pessoaTypeEnum: 'TRANSPORTADOR',
+              label: 'Transportador'
+            },
+            {
+              pessoaTypeEnum: 'CONSFINAL',
+              label: 'Consumidor Final'
+            }]
         }
-      ]
-
-      function getDayClass (data) {
-        var date = data.date,
-          mode = data.mode
-        if (mode === 'day') {
-          var dayToCheck = new Date(date).setHours(0, 0, 0, 0)
-
-          for (var i = 0; i < scope.events.length; i++) {
-            var currentDay = new Date(scope.events[i].date).setHours(0, 0, 0, 0)
-
-            if (dayToCheck === currentDay) {
-              return scope.events[i].status
-            }
-          }
-        }
-
-        return ''
-      }
-
-      scope.emails = [
-        {
-          nome: 'form1',
-          email: {
-            emailTypeEnum: 1
-          }
-        }]
-      scope.telefones = [
-        {
-          nome: 'form1',
-          telefone: {
-            telefoneTypeEnum: 1
-          }
-        }]
-      scope.confirmed = ''
-      scope.empresa = {
-        tipoPessoa: 1,
-        pessoaTipo: [],
-        documentos: [
-          {
-            documentoTypeEnumValue: 1,
-            tableEnumValue: 1,
-            createUser: 'System',
-            createDateUTC: (new Date()).getTime(),
-            modifyUser: 'System',
-            modifyDateUTC: (new Date()).getTime()
-
-          },
-          {
-            documentoTypeEnumValue: 2,
-            tableEnumValue: 1,
-            createUser: 'System',
-            createDateUTC: (new Date()).getTime(),
-            modifyUser: 'System',
-            modifyDateUTC: (new Date()).getTime()
-
-          },
-          {
-            documentoTypeEnumValue: 12,
-            tableEnumValue: 1,
-            createUser: 'System',
-            createDateUTC: (new Date()).getTime(),
-            modifyUser: 'System',
-            modifyDateUTC: (new Date()).getTime()
-
-          },
-          {
-            documentoTypeEnumValue: 4,
-            tableEnumValue: 1,
-            createUser: 'System',
-            createDateUTC: (new Date()).getTime(),
-            modifyUser: 'System',
-            modifyDateUTC: (new Date()).getTime()
-
-          },
-          {
-            documentoTypeEnumValue: 14,
-            tableEnumValue: 1,
-            createUser: 'System',
-            createDateUTC: (new Date()).getTime(),
-            modifyUser: 'System',
-            modifyDateUTC: (new Date()).getTime()
-
-          },
-          {
-            documentoTypeEnumValue: 10,
-            tableEnumValue: 1,
-            createUser: 'System',
-            createDateUTC: (new Date()).getTime(),
-            modifyUser: 'System',
-            modifyDateUTC: (new Date()).getTime()
-
-          },
-          {
-            documentoTypeEnumValue: 3,
-            tableEnumValue: 1,
-            createUser: 'System',
-            createDateUTC: (new Date()).getTime(),
-            modifyUser: 'System',
-            modifyDateUTC: (new Date()).getTime()
-
-          },
-          {
-            documentoTypeEnumValue: 11,
-            tableEnumValue: 1,
-            createUser: 'System',
-            createDateUTC: (new Date()).getTime(),
-            modifyUser: 'System',
-            modifyDateUTC: (new Date()).getTime()
-
-          }]
-      }
-
-      scope.cliente = {
-        pessoaTipos: [
-          {
-            pessoaTypeEnum: 'CLIENTE',
-            label: 'Cliente'
-          },
-          {
-            pessoaTypeEnum: 'FORNECEDOR',
-            label: 'Fornecedor'
-          },
-          {
-            pessoaTypeEnum: 'TRANSPORTADOR',
-            label: 'Transportador'
-          },
-          {
-            pessoaTypeEnum: 'CONSFINAL',
-            label: 'Consumidor Final'
-          }]
-      }
 
       scope.changes = function ($event, id) {
         var checkbox = $event.target
@@ -405,7 +285,7 @@
 				}
         else
           return true;
-
+          
 			}
 
 			scope.validationCNPJ = function(tipo, cnpj)

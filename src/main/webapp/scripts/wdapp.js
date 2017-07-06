@@ -162,6 +162,7 @@ var WebDaptiveAppConfig = {
         , 'wdApp.apps.cfop.insert', 'wdApp.apps.cfop.update', 'wdApp.apps.cfop.delete', 'wdApp.apps.cfop.view', 'wdApp.apps.cfop.select', 'wdApp.ajaxCalls.validation',
 		'wdApp.ajaxCalls.dialog.delete'
 
+		,'wdApp.ajaxCall.endereco','wdApp.ajaxCall.datas','wdApp.ajaxCall.documento','wdApp.ajaxCall.email','wdApp.ajaxCall.telefone'
         , 'wdApp.apps.email', 'wdApp.ajaxCalls.table.columns', 'wdapp.table.Ajax.factory', 'wdApp.ajaxCalls.table.option', 'wdApp.ajaxCall.table.create', 'wdApp.ajaxCalls.filters',
 		'wdApp.apps.cliente.search', 'wdApp.apps.formaPg.select', 'wdApp.apps.endereco', 'wdApp.ajaxCalls.doisValores', 'wdApp.ajaxCall.notaFiscal'
 

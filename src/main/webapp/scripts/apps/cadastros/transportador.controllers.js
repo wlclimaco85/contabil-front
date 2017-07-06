@@ -112,7 +112,7 @@
       var vm = this
 
        fPessoa.fnOpenView(vm,$scope);
-
+      
      // ===========================================
       var fnCallBack = function (res) {
         if (res.operationSuccess == true) {
@@ -138,7 +138,7 @@
       $scope.transportador = {}
 
        fPessoa.fnOpenView(vm,$scope);
-
+      
      // ===========================================
       var fnCallBack = function (res) {
         if (res.operationSuccess == true) {

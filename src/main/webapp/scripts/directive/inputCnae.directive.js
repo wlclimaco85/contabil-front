@@ -24,6 +24,8 @@ debugger
         return directive;
     }
 
+    
+
     dCnaeController.$inject = ['$scope', '$timeout'];
 
     function dCnaeController($scope, $timeout) {
