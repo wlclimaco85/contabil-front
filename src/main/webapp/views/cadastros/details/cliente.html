@@ -1,484 +1,6 @@
-<!--
-
-
-<div class="container">
-    <style type="text/css">
-        .wash {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        }
-        .tabs-was {
-        float: left;
-        border: 1px solid #000;
-        border-bottom-width: 0;
-        margin: 3px 3px 0px 3px;
-        padding: 5px 5px 0px 5px;
-        background-color: #CCC;
-        color: ##3767B9;
-        }
-        #mainView {
-        border: 1px solid black;
-        clear: both;
-        }
-        .active {
-        background-color: #FFF;
-        color: #000;
-        }
-        * {margin: 0; padding: 0; box-sizing: border-box;}
-        .tabs-nav {padding: 20px 0 0; list-style: none;}
-        .tabs-nav li {display: inline;}
-        .tabs-nav a {
-        display:inline-block;
-        border: 1px solid #ddd;
-        border-bottom: none;
-        padding: 15px;
-        cursor: pointer;
-        border-radius: 5px 5px 0 0;
-        font-size: 14px;
-        color: #fff;
-        background: #1B3975;
-        }
-        .tabs-nav .active {
-        background: #fff;
-        color: #000;
-        border-bottom: 1px solid #fff;
-        margin-bottom: -1px;
-        }
-        .tab-content {
-        border: 1px solid #ddd;
-        padding: 20px;
-        }
-        .tab-content1 {
-        border: 1px solid #ddd;
-        padding: 20px;
-        }
-        p {
-        margin-bottom: 15px;
-        }
-    </style>
-        <div class="modal fade">
-         <div class="modal-dialog" style="width : 80%">
-           <div class="modal-content">
-             <div class="modal-header">
-               <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-               <h4 class="modal-title">Cadastro Cliente</h4>
-             </div>
-             <div class="modal-body">
-               <form  id="empresaForm">
-                   <div class="container1" ng-app ng-init="tabs=4">
-                     <ul class="tabs-nav">
-                     <li><a ng-click="tabs=4" ng-class="{'active' : tabs==4}">Cliente</a></li>
-                     <li class="hide"><a ng-click="tabs=5" ng-class="{'active' : tabs==5}">Compras</a></li>
-                     <li class="hide"><a ng-click="tabs=6" ng-class="{'active' : tabs==6}">Financeiro</a></li>
-                     <li class="hide"><a ng-click="tabs=7" ng-class="{'active' : tabs==7}">Graficos</a></li>
-                     </ul>
-                     <div class="tabs-container1">
-                     <div class="tab-content1" ng-show="tabs == 4">
-                       <div class="row">
-                           <div class="col-sm-3" style="margin-top:18px">
-                                 <div class="checkbox">
-                                     <label>
-                                         <input type="checkbox" name="receiver" class="check-socio" value="1" /> Cliente
-                                     </label>
-                                 </div>
-                             </div>
-                             <div class="col-sm-3" style="margin-top:18px">
-                                 <div class="checkbox">
-                                     <label>
-                                         <input type="checkbox" name="receiver" class="check-socio" value="1" /> Fornecedor
-                                     </label>
-                                 </div>
-                             </div>
-                             <div class="col-sm-3" style="margin-top:18px">
-                                 <div class="checkbox">
-                                     <label>
-                                         <input type="checkbox" name="receiver" class="check-socio" value="1" /> Transportador
-                                     </label>
-                                 </div>
-                             </div>
-                             <div class="col-sm-3" style="margin-top:18px">
-                                 <div class="checkbox">
-                                     <label>
-                                         <input type="checkbox" name="receiver" class="check-socio" value="1" /> Consumidor final
-                                     </label>
-                                 </div>
-                             </div>
-                       </div>
-                       <div class="row">
-                           <div class="form-group col-sm-6">
-                               <label for="exampleInputEmail1">Nome ou Razão social</label>
-                               <input type="text"  ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Nome ou Razão social">
-                           </div>
-
-                           <div class="form-group col-sm-6">
-                               <label for="exampleInputEmail1">Nome Fantasia</label>
-                               <input type="text"  ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Nome Fantasia">
-                           </div>
-                        </div>
-                        <div class="row">
-                           <div class="form-group col-sm-3">
-                               <label for="exampleInputEmail1">CPF ou CNPJ</label>
-                               <input type="text"  ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Nº Cart. Trab">
-                           </div>
-
-                           <div class="form-group col-sm-3">
-                               <label for="exampleInputEmail1">Inscr Est Subst Trib</label>
-                               <input type="text"  ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="DD/MM/AAAA">
-                           </div>
-                           <div class="form-group col-sm-3">
-                               <label for="exampleInputEmail1">Indicador de IE</label>
-                               <div class="row">
-                                   <select id="contatos_indIE" class="col-sm-12" name="contatos_indIE" autocomplete="off">
-                                         <option value="0"></option>
-                                         <option value="1">Contribuinte ICMS</option>
-                                         <option value="2">Isento de cadastro</option>
-                                         <option value="9">Não contribuinte</option>
-                                    </select>
-                                 </div>
-                           </div>
-                           <div class="form-group col-sm-3">
-                               <label for="exampleInputEmail1">Inscrição Estadual</label>
-                                     <input type="text" class="form-control" ng-model="cfop.descricao" name="descricao" placeholder="Entrada">
-                           </div>
-                        </div>
-                        <div class="row">
-                           <div class="form-group col-sm-3">
-                               <label for="exampleInputEmail1">Inscrição Municipal</label>
-                                     <input type="text" class="form-control col-sm-3" ng-model="cfop.descricao" name="descricao" placeholder="Entrada">
-                           </div>
-                           <div class="form-group col-sm-3">
-                               <label for="exampleInputEmail1">Inscrição Suframa</label>
-                                     <input type="text" class="form-control col-sm-3" ng-model="cfop.descricao" name="descricao" placeholder="Entrada">
-                           </div>
-
-                           <div class="form-group col-sm-3">
-                               <label for="exampleInputEmail1">Nome do responsável</label>
-                               <input type="text" class="form-control col-sm-3" ng-model="cfop.descricao" name="descricao" placeholder="Entrada">
-                           </div>
-
-                           <div class="form-group col-sm-3">
-                               <label for="exampleInputEmail1">Data nascimento</label>
-                               <input type="text"  ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Jornada Trabalho">
-                           </div>
-                        </div>
-
-                         <div class="row">
-                             <div class="col-sm-6">
-                             <label for="exampleInputPassword1">CEP</label>
-                                 <div class="input-group">
-                                     <div class="form-group">
-                                         <input type="text" class="form-control" name="cep" ng-model="empresa.enderecos[0].cep">
-                                     </div>
-                                     <span class="input-group-btn">
-
-                                         <button class="btn btn-default" type="button" ng-click="cc.buscaRCep('38082243')"><i class="glyphicon glyphicon-search"> </i></button>
-                                     </span>
-                                 </div>
-                             </div>
-                         </div>
-                         <div class="row">
-                             <div class="col-sm-9">
-                                 <div class="form-group">
-                                     <label for="exampleInputPassword1">Logradouro</label>
-                                     <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="empresa.enderecos[0].logradouro" placeholder="Logradouro">
-                                 </div>
-                             </div>
-                             <div class="col-sm-3">
-                                 <div class="form-group">
-                                     <label for="exampleInputPassword1">Numero</label>
-                                     <input type="text" class="form-control col-sm-4" name="numero" ng-model="empresa.enderecos[0].numero" placeholder="Numero">
-                                 </div>
-                             </div>
-                         </div>
-                         <div class="row">
-                             <div class="col-sm-4">
-                                 <label for="exampleInputPassword1">Complemento</label>
-                                 <input type="text" class="form-control col-sm-8" name="complemento" ng-model="empresa.enderecos[0].complemento" placeholder="Complemento">
-                             </div>
-                             <div class="col-sm-2">
-                                 <label for="exampleInputPassword1">Bairro</label>
-                                 <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].bairro" placeholder="Bairro">
-                             </div>
-                             <div class="col-sm-2">
-                                 <label for="exampleInputPassword1">Estado</label>
-                                 <input type="text" class="form-control col-sm-8" ng-model="empresa.enderecos[0].estado.abreviacao" placeholder="Estado">
-                             </div>
-                             <div class="col-sm-2">
-                                 <label for="exampleInputPassword1">Municipio</label>
-                                 <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].cidade.nome" placeholder="Municipio">
-                             </div>
-
-                             <div class="col-sm-2">
-                                 <label for="exampleInputPassword1">Codigo IBGE</label>
-                                 <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].codIbge" placeholder="Codigo IBGE">
-                             </div>
-                         </div>
-                         <!-- -------------------  TELEFONE ----------------- -->
- <!--                        <div class="row">
-
-                             <div class="col-sm-4" style="margin-top:25px">
-                                 <div class="btn-group">
-                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Adicionar <span class="caret"></span></button>
-                                     <ul class="dropdown-menu" role="menu">
-                                         <li><a href="javascript:;" class="addPhoneButton" data-name="phone_home">Residencial</a></li>
-                                         <li><a href="javascript:;" class="addPhoneButton" data-name="phone_office">Celular TIM</a></li>
-                                         <li><a href="javascript:;" class="addPhoneButton" data-name="phone_office">Celular OI</a></li>
-                                     </ul>
-                                 </div>
-                             </div>
-                             <div class="col-sm-4">
-                                 <label for="exampleInputPassword1" class="control-label" >Telefone</label>
-                                 <input type="text" class="form-control col-sm-4 gugu" name="phone" placeholder="Telefone">
-                             </div>
-                         </div>
-                         <!-- Template for dynamic field -->
-<!--                         <div class="row" id="template" style="display: none;">
-
-                             <div class="col-sm-4" style="margin-top:25px">
-                                 <button type="button" class="btn btn-link removeButton">deletar</button>
-                             </div>
-                             <div class="col-sm-4">
-                             <label  for="exampleInputPassword1" class="control-label">Telefone</label>
-                                 <input id='gugu' type="text" class="form-control col-sm-4 gugu"  placeholder="Telefone">
-                             </div>
-                         </div>
-
-                         <!-- ------------------------------------- --><!-- ------------------------------------- -->
-
-                         <!-- -------------------  Email Empresa ----------------- -->
-<!--                         <div class="row">
-                             <div class="col-sm-4">
-                             <label for="exampleInputPassword1">Email</label>
-                                 <input type="text" class="form-control col-sm-4 input-email" name="email" placeholder="Email">
-                             </div>
-                             <div class="col-sm-4" style="margin-top:25px">
-                                 <div class="btn-group">
-                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Adicionar <span class="caret"></span></button>
-                                     <ul class="dropdown-menu" role="menu">
-                                         <li><a href="javascript:;" class="addEmailButton" data-name="email_princ">Principal</a></li>
-                                         <li><a href="javascript:;" class="addEmailButton" data-name="email_home">Outro</a></li>
-                                         <li><a href="javascript:;" class="addEmailButton" data-name="email_office">Trabalho</a></li>
-                                     </ul>
-                                 </div>
-                             </div>
-                         </div>
-
-                         <!-- Template for dynamic field -->
- <!--                        <div class="row" id="template-email" style="display: none;">
-                             <div class="col-sm-4">
-                             <label for="exampleInputPassword1" class="control-label">Email</label>
-                                 <input type="email" class="form-control col-sm-4 input-email"  placeholder="Email">
-                             </div>
-                             <div class="col-sm-4" style="margin-top:25px">
-                                 <button type="button" class="btn btn-link removeButton">deletar</button>
-                             </div>
-                         </div>
-</div>
-<div class="tab-content1" ng-show="tabs == 5">
-<div ng-controller="ComprasController as showCase">
-<table datatable dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" class="row-border hover">
-<tfoot>
-<tr>
-<th>ID
-</th><th>First Name
-</th><th>Last Name
-</th><th>Last Name
-</th><th>Last Name
-</th><th>Last Name
-</th><th>Last Name
-</th><th>Last Name
-</th><th>Last Name
-</th></tr>
-</tfoot>
-</table>
-</div>
-</div>
-<div class="tab-content1" ng-show="tabs == 6">
-<div ng-controller="PagamentosController as showCase">
-<table datatable dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" class="row-border hover">
-<tfoot>
-<tr>
-<th>ID
-</th><th>First Name
-</th><th>Last Name
-</th><th>Last Name
-</th><th>Last Name
-</th><th>Last Name
-</th><th>Last Name
-</th><th>Last Name
-</th><th>Last Name
-</th></tr>
-</tfoot>
-</table>
-</div>
-</div>
-<div class="tab-content1" ng-show="tabs == 7">
-<div class="row" ng-controller="EChartsController as ec">
-<div class="col-md-6">
-<div class="panel panel-default panel-minimal">
-<div class="divider divider-md"></div>
-<div class="panel-heading">Produtos mais Vendidos</div>
-<div class="panel-body">
-<div data-echarts data-options="ec.pie1.options" style="height: 350px;"></div>
-</div>
-</div>
-</div>
-<div class="col-md-6">
-<div class="panel panel-default panel-minimal">
-<div class="divider divider-md"></div>
-<div class="panel-heading">Estoque Vendas e Compras</div>
-<div class="panel-body">
-<div data-echarts data-options="ec.line3.options" style="height: 350px;"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</form>
-</div>
-<div class="modal-footer">
-<button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-<button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Gravar</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-
-
-
-
-
--->
-
-
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="dist/css/formValidation.css" />
-<link rel="stylesheet" href="dist/css/select2.css" />
-<script src="dist/js/select2.min.js"></script>
-<script src="dist/js/formValidation.js"></script>
-<script src="dist/js/framework/bootstrap.js"></script>
-<style type="text/css">
-    .wash {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    .tabs-was {
-        float: left;
-        border: 1px solid #000;
-        border-bottom-width: 0;
-        margin: 3px 3px 0px 3px;
-        padding: 5px 5px 0px 5px;
-        background-color: #CCC;
-        color: ##3767B9;
-    }
-    #mainView {
-        border: 1px solid black;
-        clear: both;
-    }
-    .active {
-        background-color: #FFF;
-        color: #000;
-    }
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    .tabs-nav {
-        padding: 20px 0 0;
-        list-style: none;
-    }
-    .tabs-nav li {
-        display: inline;
-    }
-    .tabs-nav a {
-        display: inline-block;
-        border: 1px solid #ddd;
-        border-bottom: none;
-        padding: 15px;
-        cursor: pointer;
-        border-radius: 5px 5px 0 0;
-        font-size: 14px;
-        color: #fff;
-        background: #1B3975;
-    }
-    .tabs-nav .active {
-        background: #fff;
-        color: #000;
-        border-bottom: 1px solid #fff;
-        margin-bottom: -1px;
-    }
-    .tab-content {
-        border: 1px solid #ddd;
-        padding: 20px;
-    }
-    .tab-content1 {
-        border: 1px solid #ddd;
-        padding: 20px;
-    }
-    p {
-        margin-bottom: 15px;
-    }
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-
-    .row.content {
-        height: 550px
-    }
-    /* Set gray background color and 100% height */
-
-    .sidenav {
-        background-color: #f1f1f1;
-        height: 100%;
-    }
-    /* On small screens, set height to 'auto' for the grid */
-
-    @media screen and (max-width: 767px) {
-        .row.content {
-            height: auto;
-        }
-    }
-    div.show-image {
-        position: relative;
-        float: left;
-        margin: 5px;
-    }
-    div.show-image:hover img {
-        opacity: 0.5;
-    }
-    div.show-image:hover input {
-        display: block;
-    }
-    div.show-image input {
-        position: absolute;
-        display: none;
-    }
-    div.show-image input.update {
-        top: 0;
-        left: 0;
-    }
-    div.show-image input.delete {
-        top: 0;
-        left: 79%;
-    }
-    .vis {
-        height: 100px;
-        display: none;
-    }
-
-
-</style>
 <div class="container1" ng-app ng-init="tabs=4">
     <ul class="tabs-nav">
-        <li><a ng-click="tabs=4" ng-class="{'active' : tabs==4}">Processo</a>
-        </li>
-        <li><a ng-click="tabs=5" ng-class="{'active' : tabs==5}">Arquivos Anexos</a>
+        <li><a ng-click="tabs=4" ng-class="{'active' : tabs==4}">Vendas</a>
         </li>
         <li><a ng-click="tabs=6" ng-class="{'active' : tabs==6}">Financeiro</a>
         </li>
@@ -490,7 +12,7 @@
             <div class="container-fluid">
                 <div class="row content">
                     <br>
-                    <div class="col-sm-9" ng-controller="ProcessoController as pc">
+                    <div class="col-sm-9" ng-controller="ClienteViewController">
                         <div class="row col-sm-12 well">
                             <div class="col-sm-2">
                                 <label for="exampleInputEmail1"> Status: </label>
@@ -504,396 +26,246 @@
                                 <button class="btn btn-warning" ng-click="pc.status(10)"><i class="fa fa-edit"></i>
                                 </button>
                             </div>
-                            <div class="col-sm-4">
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                        60%
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <br>
                         <div class="row"></div>
                         <div class="well">
-                            <a href="javaScript:;" ng-click="toggle()">Editar Processo</a>
-                            <div ng-show="state">
-                                <div>
-                                    <form id="empresaForm">
-                                        <div class="row">
-                                            <div class="form-group col-sm-6">
-                                                <label for="exampleInputEmail1">Assunto</label>
-                                                <input type="text" ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="CFOP">
-                                            </div>
-                                            <div class="form-group col-sm-6">
-                                                <label for="exampleInputEmail1">Status</label>
+                            <div class="col-sm-12">
+                                        <div class="row " style="margin-top : 20px"></div>
+                                        <div class="panel panel-default" style="background:#EFEFEF">
+                                            <div class="panel-heading" style="background: #EFEFEF">
                                                 <div class="row">
-                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                        <option></option>
-                                                        <option value="4">Arquivado</option>
-                                                        <option value="1" selected="selected">Ativo</option>
-                                                        <option value="5">Em grau de recurso</option>
-                                                        <option value="3">Encerrado</option>
-                                                        <option value="2">Suspenso</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row col-sm-12">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Descri��o</label>
-                                                <input type="text" class="form-control" ng-model="cfop.descricao" name="descricao" placeholder="Descri��o">
-                                            </div>
-                                        </div>
-                                        <div class="row col-sm-12">
-                                            <div class="form-group col-sm-4">
-                                                <label for="exampleInputEmail1">Responsáveis</label>
-                                                <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="Responsáveis">
-                                            </div>
-                                            <div class="form-group col-sm-4">
-                                                <label for="exampleInputPassword1">Grupos de trabalho</label>
-                                                <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="Grupos de trabalho">
-                                            </div>
-                                        </div>
-                                        <div class="panel-group" id="accordion">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
-                                                        Dados do processo
-                                                        </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapseOne" class="panel-collapse collapse in collapseFour">
-                                                    <div class="panel-body">
-                                                        <div class="row">
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputPassword1">Processo</label>
-                                                                <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="0.00">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group col-sm-3">
+                                                            <label for="exampleInputPassword1">Razão Social:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-5">
+                                                            <a href="#" editable-text="cliente.razao" onaftersave="updateEmpresa()" >{{ cliente.razao || '' }}</a>
+                                                        </div>
+                                                        <div class="form-group col-sm-4">
+                                                            <div class="form-group col-sm-6">
+                                                                <label for="exampleInputPassword1">Código:</label>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group col-sm-4">
-                                                            <label for="exampleInputEmail1">Situação</label>
-                                                            <div class="row">
-                                                                <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                    <option></option>
-                                                                    <option value="2">Conselho Nacional de Justiça</option>
-                                                                    <option value="8" selected="selected">Justiça dos Estados e do Distrito Federal e Territórios</option>
-                                                                    <option value="5">Justiça do Trabalho</option>
-                                                                    <option value="6">Justiça Eleitoral</option>
-                                                                    <option value="4">Justiça Federal</option>
-                                                                    <option value="7">Justiça Militar da União</option>
-                                                                    <option value="9">Justiça Militar Estadual</option>
-                                                                    <option value="3">Superior Tribunal de Justiça</option>
-                                                                    <option value="1">Supremo Tribunal Federal</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group col-sm-4">
-                                                            <label for="exampleInputEmail1">Instância</label>
-                                                            <div class="row">
-                                                                <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                    <option></option>
-                                                                    <option value="PRIMEIRA_INSTANCIA" selected="selected">1ª Instância</option>
-                                                                    <option value="SEGUNDA_INSTANCIA">2ª Instância</option>
-                                                                    <option value="TERCEIRA_INSTANCIA">3ª Instância</option>
-                                                                    <option value="QUARTA_INSTANCIA">4ª Instância</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group col-sm-4">
-                                                            <label for="exampleInputPassword1">Órgão</label>
-                                                            <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="0.00">
-                                                        </div>
-                                                        <div class="form-group col-sm-4">
-                                                            <label for="exampleInputPassword1">Numeração Padrão CNJ</label>
-                                                            <input type="password" class="form-control" ng-model="cfop.classFiscal" name="password" placeholder="0.00">
-                                                        </div>
-                                                        <div class="form-group col-sm-4">
-                                                            <label for="exampleInputPassword1">Numeração Outro Padrão</label>
-                                                            <input type="password" class="form-control" ng-model="cfop.classFiscal" name="password" placeholder="0.00">
-                                                        </div>
-                                                        <div class="col-sm-3" style="margin-top:18px">
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="receiver" class="check-socio" value="1" /> Agendar captura no tribunal
-                                                                </label>
+                                                            <div class="col-sm-6">
+                                                                <a href="#" editable-select="cliente.codigo" onaftersave="updateEmpresa()" >{{ cliente.codigo || '' }}</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row col-sm-12">
-                                                <div class="form-group col-sm-4">
-                                                    <label for="exampleInputPassword1">Distribuído</label>
-                                                    <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="0.00">
+                                                <div class="row">
+                                                    <div class="form-group col-sm-9">
+                                                        <label for="exampleInputEmail1">Nome Fantasia</label>
+                                                        <a href="#" editable-text="cliente.nome" onaftersave="updateEmpresa()" >{{ cliente.nome || 'Vazio' }}</a>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group col-sm-4">
-                                                    <label for="exampleInputPassword1">Valor da ação</label>
-                                                    <input type="password" class="form-control" ng-model="cfop.classFiscal" name="password" placeholder="0.00">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="exampleInputPassword1">CNPJ ou CPF:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <div ng-repeat="cpfCnpj in cliente.documentos | filter:{ documentoType: 'CNPJ' || 'CPF' } ">
+                                                                <a href="#" editable-text="cpfCnpj.numero" onaftersave="updateEmpresa()" >{{ cpfCnpj.numero || 'empty' }}</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="exampleInputPassword1">Inscr. Est.:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <div ng-repeat="produto in cliente.documentos | filter:{ documentoType: 'IE' } ">
+                                                                <a href="#" editable-text="produto.numero" onaftersave="updateEmpresa()" >{{ produto.numero || 'empty' }}</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row col-sm-12">
-                                                <div class="form-group">
-                                                    <label for="exampleInputPassword1">Observação</label>
-                                                    <input type="password" class="form-control" ng-model="cfop.observacao" name="password" placeholder="Observação">
+                                                <div class="row">
+                                                    <div class="form-group col-sm-6">
+                                                        <label for="exampleInputPassword1">Inscr. Municipal:</label>
+                                                    </div>
+                                                    <div class="form-group col-sm-6">
+                                                        <div ng-repeat="produto in cliente.documentos | filter:{ documentoType: 'IM' } ">
+                                                            <a href="#" editable-text="produto.numero" onaftersave="updateEmpresa()" >{{ produto.numero || 'empty' }}</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="exampleInputPassword1">N° Funcionarios:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <a href="#" editable-text="cliente.numFunc" onaftersave="updateEmpresa()" >{{ cliente.numFunc || '' }}</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="exampleInputPassword1">Dt. Abertura:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <a href="#" editable-text="cliente.dtAbertura" onaftersave="updateEmpresa()" >{{ cliente.dtAbertura || '' }}</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="exampleInputPassword1">Código Regime Tribut.:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <a href="#" editable-select="cliente.regime.id" onaftersave="updateEmpresa()" e-ng-options="sa.id as sa.nome for sa in regime">{{ showRegime() }}</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="exampleInputPassword1">Responsavel:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <a href="#" editable-text="cliente.Responsavel" onaftersave="updateEmpresa()" >{{ cliente.Responsavel || '' }}</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="panel-group" id="accordion">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
-                                                        PARÂMETROS DA CAPTURA
-                                                        </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapseOne" class="panel-collapse collapse in collapseFour">
-                                                    <div class="panel-body">
-                                                        <div class="row">
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputEmail1">Justiça</label>
-                                                                <div class="row">
-                                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                        <option></option>
-                                                                        <option value=""></option>
-                                                                        <option value="1">Supremo Tribunal Federal</option>
-                                                                        <option value="3">Superior Tribunal de Justiça</option>
-                                                                        <option value="4">Justiça Federal</option>
-                                                                        <option value="5">Justiça do Trabalho</option>
-                                                                        <option value="8" selected="selected">Justica dos Estados e do Distrito Federal e Territórios</option>
-                                                                    </select>
-                                                                </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="row " style="margin-top : 20px"></div>
+                                        <div class="panel panel-default" style="background:#EEEEEE">
+                                            <div class="panel-heading" style="background: #DDDDDD">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group col-sm-3">
+                                                            <label for="exampleInputPassword1">CEP:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <a href="#" editable-text="cliente.enderecos[0].cep" onaftersave="updateEmpresa()" >{{ cliente.enderecos[0].cep || '' }}</a>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <div class="form-group col-sm-3">
+                                                                <label for="exampleInputPassword1">Logradouro:</label>
                                                             </div>
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputEmail1">Tribunal</label>
-                                                                <div class="row">
-                                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                        <option value="" selected="selected"></option>
-                                                                        <option value="5">Tribunal de Justiça do Acre</option>
-                                                                        <option value="7">Tribunal de Justiça de Alagoas</option>
-                                                                        <option value="8">Tribunal de Justiça do Amazonas</option>
-                                                                        <option value="11">Tribunal de Justiça da Bahia</option>
-                                                                        <option value="16">Tribunal de Justiça do Ceará</option>
-                                                                        <option value="53">Tribunal de Justiça do Distrito Federal e dos Territórios - DF</option>
-                                                                        <option value="19">Tribunal de Justiça do Espírito Santo</option>
-                                                                        <option value="20">Tribunal de Justiça de Goiás</option>
-                                                                        <option value="22">Tribunal de Justiça do Maranhão</option>
-                                                                        <option value="29">Tribunal de Justiça de Mato Grosso</option>
-                                                                        <option value="26">Tribunal de Justiça de Mato Grosso do Sul</option>
-                                                                        <option value="24">Tribunal de Justiça de Minas Gerais</option>
-                                                                        <option value="34">Tribunal de Justiça do Paraná</option>
-                                                                        <option value="51">Tribunal de Justiça do Pará - PA</option>
-                                                                        <option value="33">Tribunal de Justiça do Piauí</option>
-                                                                        <option value="40">Tribunal de Justiça do Rio Grande do Norte</option>
-                                                                        <option value="43">Tribunal de Justiça de Rio Grande do Sul</option>
-                                                                        <option value="37">Tribunal de Justiça do Rio de Janeiro</option>
-                                                                        <option value="42">Tribunal de Justiça de Rondônia</option>
-                                                                        <option value="45">Tribunal de Justiça de Santa Catarina</option>
-                                                                        <option value="4">Tribunal de Justiça de São Paulo</option>
-                                                                    </select>
-                                                                </div>
+                                                            <div class="col-sm-5">
+                                                                <a href="#" editable-text="cliente.enderecos[0].logradouro" onaftersave="updateEmpresa()" >{{ cliente.enderecos[0].logradouro || '' }}</a>
                                                             </div>
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputEmail1">Instância</label>
-                                                                <div class="row">
-                                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                        <option></option>
-                                                                        <option value="PRIMEIRA_INSTANCIA" selected="selected">1ª Instância</option>
-                                                                        <option value="SEGUNDA_INSTANCIA">2ª Instância</option>
-                                                                        <option value="TERCEIRA_INSTANCIA">3ª Instância</option>
-                                                                        <option value="QUARTA_INSTANCIA">4ª Instância</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputEmail1">Localidade</label>
-                                                                <div class="row">
-                                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                        <option></option>
-                                                                        <option value="PRIMEIRA_INSTANCIA" selected="selected">1ª Instância</option>
-                                                                        <option value="SEGUNDA_INSTANCIA">2ª Instância</option>
-                                                                        <option value="TERCEIRA_INSTANCIA">3ª Instância</option>
-                                                                        <option value="QUARTA_INSTANCIA">4ª Instância</option>
-                                                                    </select>
-                                                                </div>
+                                                            <div class="col-sm-5">
+                                                                <a href="#" editable-text="cliente.enderecos[0].numero" onaftersave="updateEmpresa()" >{{ cliente.enderecos[0].numero || '' }}</a>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group col-sm-2">
+                                                            <label for="exampleInputPassword1">Bairro:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <a href="#" editable-text="cliente.enderecos[0].bairro" onaftersave="updateEmpresa()" >{{ cliente.enderecos[0].bairro || '' }}</a>
+                                                        </div>
+                                                        <div class="form-group col-sm-4">
                                                             <div class="form-group col-sm-4">
-                                                                <label for="exampleInputEmail1">Capturar por</label>
-                                                                <div class="row">
-                                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                        <option></option>
-                                                                        <option value="PRIMEIRA_INSTANCIA" selected="selected">1ª Instância</option>
-                                                                        <option value="SEGUNDA_INSTANCIA">2ª Instância</option>
-                                                                        <option value="TERCEIRA_INSTANCIA">3ª Instância</option>
-                                                                        <option value="QUARTA_INSTANCIA">4ª Instância</option>
-                                                                    </select>
-                                                                </div>
+                                                                <label for="exampleInputPassword1">Cidade:</label>
                                                             </div>
-                                                            <div class="row col-sm-4">
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputPassword1">Número do Processo</label>
-                                                                    <input type="password" class="form-control" ng-model="cfop.observacao" name="password" placeholder="Número do Processo">
-                                                                </div>
+                                                            <div class="col-sm-8">
+                                                                <a href="#" editable-text="cliente.enderecos[0].cidade.nome" onaftersave="updateEmpresa()" >{{ cliente.enderecos[0].cidade.nome || '' }}</a>
                                                             </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <div class="form-group col-sm-6">
+                                                                <label for="exampleInputPassword1">Estado:</label>
+                                                            </div>
+                                                            <div class="form-group col-sm-6">
+                                                                <a href="#" editable-text="cliente.enderecos[0].cidade.estado.sigla" onaftersave="updateEmpresa()" >{{ cliente.enderecos[0].cidade.estado.sigla || '' }}</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group col-sm-2">
+                                                            <label for="exampleInputPassword1">Cod. IBGE:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <a href="#" editable-text="cliente.enderecos[0].codIbge" onaftersave="updateEmpresa()" >{{ cliente.enderecos[0].bairro || '' }}</a>
+                                                        </div>
+                                                        <div class="form-group col-sm-4">
                                                             <div class="form-group col-sm-4">
-                                                                <label for="exampleInputEmail1">Captura automática de andamentos</label>
-                                                                <div class="row">
-                                                                    <select id="unidTributada" name="unidTributada" ng-model="cfop.natureza" class="col-sm-12">
-                                                                        <option value="NAO_CAPTURAR">Não capturar</option>
-                                                                        <option value="DIARIA">Diária</option>
-                                                                        <option value="SEMANAL">Semanal</option>
-                                                                        <option value="MENSAL">Mensal</option>
-                                                                    </select>
-                                                                </div>
+                                                                <label for="exampleInputPassword1">Latitude:</label>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <a href="#" editable-text="cliente.enderecos[0].latitude" onaftersave="updateEmpresa()" >{{ cliente.enderecos[0].cidade.nome || '' }}</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <div class="form-group col-sm-6">
+                                                                <label for="exampleInputPassword1">Longitude:</label>
+                                                            </div>
+                                                            <div class="form-group col-sm-6">
+                                                                <a href="#" editable-text="cliente.enderecos[0].longitude" onaftersave="updateEmpresa()" >{{ cliente.enderecos[0].cidade.estado.sigla || '' }}</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row " style="margin-top : 10px"></div>
-                                        <div class="row ">
-                                            <div class="col-sm-10"> </div>
-                                            <div class="col-sm-2">
-                                                <button type="submit" class="btn btn-primary">Gravar</button>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="row " style="margin-top : 20px"></div>
+                                        <div class="panel panel-default" style="background:#EEEEEE">
+                                            <div class="panel-heading" style="background: #DDDDDD">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group col-sm-3">
+                                                            <label for="exampleInputPassword1">Tipo Email:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <a href="#" editable-select="cliente.regime.id" onaftersave="updateEmpresa()" e-ng-options="sa.id as sa.nome for sa in regime">{{ showRegime() }}</a>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <div class="form-group col-sm-3">
+                                                                <label for="exampleInputPassword1">Email:</label>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <a href="#" editable-text="cliente.enderecos[0].logradouro" onaftersave="updateEmpresa()" >{{ cliente.enderecos[0].logradouro || '' }}</a>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <button type="button" ng-click="deleteForm(form)" class="btn btn-link removeButton">deletar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                </div>
-                            </div>
-                            </form>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <div class="">
-                                    <h4><a ng-click="pc.envolvidos()">Adicionar Envolvidos</a></h4>
-                                </div>
-                            </div>
-                            <div class="col-sm-3 well" style="margin-right:2px">
-                                <div class="show-image">
-                                    <div>
-                                        <p>Nome : Washington Luis</p>
-                                        <p>Tipo Envolvimento : Parte Ativa</p>
-                                        <p>Envolvimento : Acusador</p>
-                                        <p>Cliente : Sim</p>
-                                    </div>
-                                    <input class="btn btn-primary update" type="button" value="Alterar" />
-                                    <input class="btn btn-primary delete" type="button" value="Deletar" />
-                                </div>
-                            </div>
-                            <div class="col-sm-3 well">
-                                <div class="show-image">
-                                    <div>
-                                        <p>Nome : Washington Luis</p>
-                                        <p>Tipo Envolvimento : Parte Ativa</p>
-                                        <p>Envolvimento : Acusador</p>
-                                        <p>Cliente : Sim</p>
-                                    </div>
-                                    <input class="btn btn-primary update" type="button" value="Alterar" />
-                                    <input class="btn btn-primary delete" type="button" value="Deletar" />
-                                </div>
-                            </div>
-                            <div class="col-sm-3 well">
-                                <div class="show-image">
-                                    <div>
-                                        <p>Nome : Washington Luis</p>
-                                        <p>Tipo Envolvimento : Parte Ativa</p>
-                                        <p>Envolvimento : Acusador</p>
-                                        <p>Cliente : Sim</p>
-                                    </div>
-                                    <input class="btn btn-primary update" type="button" value="Alterar" />
-                                    <input class="btn btn-primary delete" type="button" value="Deletar" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="">
-                                    <h4><a>Adicionar Advogado</a></h4>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="well">
-                                    <p>Nome : Livia Miziara</p>
-                                    <p>OAB : 54145.65</p>
-                                    <p>Email : liviaMiziara@econtabil.com.br</p>
-                                    <p>Telefone : (34) 99999-8888</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="well">
-                                    <p>Nome : Livia Miziara</p>
-                                    <p>OAB : 54145.65</p>
-                                    <p>Email : liviaMiziara@econtabil.com.br</p>
-                                    <p>Telefone : (34) 99999-8888</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row well">
-                            <div class="col-sm-12">
-                                <p>Desdobramentos</p>
-                            </div>
-                        </div>
-                        <div class="row well">
-                            <div class="col-sm-12">
-                                <div class="col-sm-12">
-                                    <div class="col-sm-3">
-                                        <p>Data : 07/07/2016</p>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <p>Numero : 124.5214.3452</p>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <p>Foro : 347ª ZonaEleitoral de Minas Gerais - Água Comprida</p>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <p>Fase : Administrativa</p>
                                     </div>
                                     <div class="col-sm-12">
-                                        <p>Nota </p>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <p>TESTE TESTE TESTE TESTE TESTE TESTE TESTE TESTE TESTE TESTE TESTE TESTE TESTE TESTE TESTE </p>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="col-sm-8"></div>
-                                        <div class="col-sm-4"><a>Detalhes       </a><a>Editar       </a><a>Excluir</a>
+                                        <div class="row " style="margin-top : 20px"></div>
+                                        <div class="panel panel-default" style="background:#EEEEEE">
+                                            <div class="panel-heading" style="background: #DDDDDD">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group col-sm-3">
+                                                            <label for="exampleInputPassword1">Tipo Telefone:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-3">
+                                                            <a href="#" editable-select="cliente.regime.id" onaftersave="updateEmpresa()" e-ng-options="sa.id as sa.nome for sa in regime">{{ showRegime() }}</a>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <div class="form-group col-sm-3">
+                                                                <label for="exampleInputPassword1">Telefone:</label>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <a href="#" editable-text="cliente.enderecos[0].logradouro" onaftersave="updateEmpresa()" >{{ cliente.enderecos[0].logradouro || '' }}</a>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <button type="button" ng-click="deleteForm(form)" class="btn btn-link removeButton">deletar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row well">
-                            <div class="col-sm-12">
-                                <div class="col-sm-12">
-                                    <div class="col-sm-3">
-                                        <p>Data : 17/07/2016</p>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <p>Numero : 124.5214.3452</p>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <p>Foro : 347ª ZonaEleitoral de Minas Gerais - Água Comprida</p>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <p>Fase : Apelação</p>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <p>Nota </p>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <p>TESTE TESTE TESTE TESTE TESTE TESTE TESTE TESTE TESTE TESTE TESTE TESTE TESTE TESTE TESTE </p>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="col-sm-8"></div>
-                                        <div class="col-sm-4"><a>Detalhes       </a><a>Editar       </a><a>Excluir</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="col-sm-3 sidenav hidden-xs">
                         <div class="list-group">
@@ -1288,8 +660,8 @@
                                                 </div>
                                             </div>
                                             <div class="form-group col-sm-6">
-                                                <label for="exampleInputEmail1">Descri��o</label>
-                                                <input type="text"  ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Descri��o">
+                                                <label for="exampleInputEmail1">Descri��o</label>
+                                                <input type="text"  ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Descri��o">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -1322,8 +694,8 @@
                                                 <input type="text"  ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="Data do lançamento">
                                             </div>
                                             <div class="form-group col-sm-6">
-                                                <label for="exampleInputEmail1">ObservA��es</label>
-                                                <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="ObservA��es">
+                                                <label for="exampleInputEmail1">ObservA��es</label>
+                                                <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="ObservA��es">
                                             </div>
 
                                          </div>

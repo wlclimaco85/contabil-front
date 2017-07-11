@@ -1,53 +1,48 @@
 <!-- -------------------  TELEFONE ----------------- -->
-<div ng-controller="TelefoneControllers">
-<div ng-repeat="form in telefones">
-        <hr/>
-        <form name="myForm" ng-init="name = form.nome">
-            <div class="row">
-
-
-    <div ng-if="form.nome==='form1'">
-    <!-- code to render the regular video block -->
-    <div class="col-sm-4">
-        <label for="exampleInputPassword1" class="control-label">Telefone</label>
-        <div class="input-group">
-                <span class="InputSign input-group-addon" target="contatos_fones"><span title="Apenas nÃºmeros" class="fa fa-phone"></span></span>
-                <input type="text" class="form-control gugu" ng-model="form.telefone.numero" name="phone" ui-mask="(999) 99999-9999"  ui-mask-placeholder ui-mask-placeholder-char="_">
-                </div>
-    </div>
-
-    <div class="col-sm-4" style="margin-top:18px">
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
-    Adicionar
-    <span class="caret"></span>
-  </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a ng-click="createForm('RESIDENCIAL')" class="addPhoneButton">Residencial</a></li>
-                <li><a ng-click="createForm('CELULAR TIM')" class="addPhoneButton">Celular TIM</a></li>
-                <li><a ng-click="createForm('CELULAR OI')" class="addPhoneButton">Celular OI</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a ng-click="createForm('OUTROS')" class="addPhoneButton">Outros</a></li>
-            </ul>
-        </div>
-    </div>
-
-    </div>
-    <div ng-if="form.nome!=='form1'">
-         <div class="col-sm-4">
-            <label for="exampleInputPassword1" class="control-label">{{form.telefone.telefoneTypeEnum}}</label>
-
+<div ng-repeat="telefone in telefones">
+    <hr/>
+    <div class="row">
+        <div ng-if="telefone.telefoneTypeEnum == 'PRINCIPAL'">
+        <!-- code to render the regular video block -->
+        <div class="col-sm-4">
+            <label for="exampleInputPassword1" class="control-label">Telefone</label>
             <div class="input-group">
-                <span class="InputSign input-group-addon" target="contatos_fones"><span title="Apenas nÃºmeros" class="fa fa-phone"></span></span>
-                <input type="text" class="form-control gugu" ng-model="form.telefone.numero" name="phone" ui-mask="(999) 99999-9999"  ui-mask-placeholder ui-mask-placeholder-char="_">
+                    <span class="InputSign input-group-addon" target="contatos_fones"><span title="Apenas números" class="fa fa-phone"></span></span>
+                    <input type="text" class="form-control gugu" ng-model="telefone.numero" name="phone" ui-mask="(99)99999-9999"  ui-mask-placeholder ui-mask-placeholder-char="_">
+                    </div>
+        </div>
+
+        <div class="col-sm-4" style="margin-top:18px">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
+        Adicionar
+        <span class="caret"></span>
+    </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a ng-click="createFormTelefone('RESIDENCIAL')" class="addPhoneButton">Residencial</a></li>
+                    <li><a ng-click="createFormTelefone('CELULAR TIM')" class="addPhoneButton">Celular TIM</a></li>
+                    <li><a ng-click="createFormTelefone('CELULAR OI')" class="addPhoneButton">Celular OI</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a ng-click="createFormTelefone('OUTROS')" class="addPhoneButton">Outros</a></li>
+                </ul>
             </div>
         </div>
-        <div class="col-sm-4" style="margin-top:25px">
-            <button type="button" ng-click="deleteForm(form)" class="btn btn-link removeButton">deletar</button>
+
+        </div>
+        <div ng-if="telefone.telefoneTypeEnum != 'PRINCIPAL'">
+            <div class="col-sm-4">
+                <label for="exampleInputPassword1" class="control-label">{{telefone.telefoneTypeEnum}}</label>
+
+                <div class="input-group">
+                    <span class="InputSign input-group-addon" target="contatos_fones"><span title="Apenas números" class="fa fa-phone"></span></span>
+                    <input type="text" class="form-control gugu" ng-model="telefone.numero" name="phone" ui-mask="(99)99999-9999"  ui-mask-placeholder ui-mask-placeholder-char="_">
+                </div>
+            </div>
+            <div class="col-sm-4" style="margin-top:25px">
+                <button type="button" ng-click="deleteForm(telefone)" class="btn btn-link removeButton">deletar</button>
+            </div>
         </div>
     </div>
-    </form>
-</div>
 </div>
 
 

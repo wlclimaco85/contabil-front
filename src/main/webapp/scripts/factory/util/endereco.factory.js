@@ -9,9 +9,9 @@
 
 			factory.fnMontaEnderecoEmpresa = function(vm,scope)
 			{
-                if (!(scope.empresa.enderecos && scope.empresa.enderecos[0]))
+                if (!(scope.enderecos && scope.enderecos[0]))
                 {
-                    scope.empresa.enderecos.push(
+                    scope.enderecos.push(
                     {
                         bairro: "",
                         complemento: "",
@@ -29,25 +29,26 @@
 			    }
                 scope.buscaRCep = function(_cepValue)
 			    {
-				var cepValue = _cepValue;
-				var formatedCep;
+					debugger
+					var cepValue = _cepValue;
+					var formatedCep;
 
-				$.getJSON("//viacep.com.br/ws/" + _cepValue + "/json/?callback=?", function(res)
-				{
-					scope.empresa.enderecos[0].bairro = res.bairro;
-					scope.empresa.enderecos[0].complemento = res.complemento;
-					scope.empresa.enderecos[0].cidade = {
-						nome: res.localidade,
-						estado:
-						{
-							abreviacao: res.uf
-						},
-						codIbge: res.ibge
-					};
-					scope.empresa.enderecos[0].logradouro = "";
-					scope.empresa.enderecos[0].logradouro = res.logradouro;
-				});
-			}
+					$.getJSON("//viacep.com.br/ws/" + _cepValue + "/json/?callback=?", function(res)
+					{
+						scope.enderecos[0].bairro = res.bairro;
+						scope.enderecos[0].complemento = res.complemento;
+						scope.enderecos[0].cidade = {
+							nome: res.localidade,
+							estado:
+							{
+								abreviacao: res.uf
+							},
+							codIbge: res.ibge
+						};
+						scope.enderecos[0].logradouro = "";
+						scope.enderecos[0].logradouro = res.logradouro;
+					});
+				}
 
 			scope.createFormTelefone = function(sType)
 			{
@@ -101,7 +102,7 @@
 				}
 			}
             }
-       
+
 		return factory;
 	}]);
 })();

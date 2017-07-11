@@ -10,9 +10,13 @@
                         <div class="row">
                             <dl class="dl-horizontal">
                                 <dd>
+                                    <input type="checkbox" name="cliente" id="cliente" ng-model="cliente" ng-disabled="true" ng-true-value="true" ng-false-value="false" ng-init='cliente=true' ng-checked='true' >
+                                    <label class="ui-checkbox" type="checkbox"  for="{{song.label}}">Cliente</label>
                                     <label ng-repeat="song in cliente.pessoaTipos">
-                                        <input type="checkbox" name="{{song.label}}" id="{{song.label}}" ng-model="confirmed" ng-click="changes($event,song)">
-                                        <label class="ui-checkbox" type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'" for="{{song.label}}">{{song.label}}</label>
+                                        <div ng-if="song.pessoaTypeEnum != 'CLIENTE'">
+                                            <input type="checkbox" name="{{song.label}}" id="{{song.label}}" ng-model="confirmed" ng-click="changes($event,song)">
+                                            <label class="ui-checkbox" type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'" for="{{song.label}}">{{song.label}}</label>
+                                        </div>
                                     </label>
                                 </dd>
                             </dl>
@@ -20,34 +24,34 @@
                         <div class="row">
                             <dl class="dl-horizontal">
                                 <dd>
-                                    <label class="ui-radio"><input name="radio5" type="radio"  ng-model="empresa.tipoPessoa" ng-init="empresa.tipoPessoa=true" value="1" checked ><span>Pessoa Fisica </span></label>
-                                    <label class="ui-radio"><input name="radio6" type="radio" ng-model="empresa.tipoPessoa" value="2" ><span>Pessoa Juridica </span></label>
+                                    <label class="ui-radio"><input name="radio5" type="radio"  ng-model="cliente.tipoPessoa" ng-init="cliente.tipoPessoa=true" value="1" checked ><span>Pessoa Fisica </span></label>
+                                    <label class="ui-radio"><input name="radio6" type="radio" ng-model="cliente.tipoPessoa" value="2" ><span>Pessoa Juridica </span></label>
                                 </dd>
                             </dl>
                         </div>
                         <div class="row">
                             <div class="form-group col-sm-12">
-                                <label for="exampleInputEmail1" ng-show="empresa.tipoPessoa == 1" ng-hide="empresa.tipoPessoa == 2">Nome <SUP class="help-block5">(*)</SUP></label>
-                                <label for="exampleInputEmail1" ng-show="empresa.tipoPessoa == 2" ng-hide="empresa.tipoPessoa == 1">Raz√£o social <SUP class="help-block5">(*)</SUP></label>
-                                <input type="text" required ng-model="empresa.nome" name="razao" class="form-control" placeholder="Nome">
+                                <label for="exampleInputEmail1" ng-show="cliente.tipoPessoa == 1" ng-hide="cliente.tipoPessoa == 2">Nome <SUP class="help-block5">(*)</SUP></label>
+                                <label for="exampleInputEmail1" ng-show="cliente.tipoPessoa == 2" ng-hide="cliente.tipoPessoa == 1">Raz„o social <SUP class="help-block5">(*)</SUP></label>
+                                <input type="text" required ng-model="cliente.nome" name="razao" class="form-control" placeholder="Nome">
                                 <p ng-show="clienteForm.razao.$invalid" class="help-block">Campo de preenchimento Obrigatorio.</p>
                             </div>
                         </div>
-                    
-                        <div ng-show="empresa.tipoPessoa == 1" ng-hide="empresa.tipoPessoa == 2">
+
+                        <div ng-show="cliente.tipoPessoa == 1" ng-hide="cliente.tipoPessoa == 2">
                             <div class="row">
-                                <div ng-repeat="documento in empresa.documentos">
+                                <div ng-repeat="documento in cliente.documentos">
                                     <div ng-if="documento.documentoTypeEnumValue == 2">
                                         <div class="form-group col-sm-4">
 
                                             <label for="exampleInputEmail1">CPF <SUP class="help-block5">(*)</SUP></label>
 
                                             <div class="input-group">
-                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas N√∫meros" class="fa fa-credit-card"></span></span>
-                                                <input type="text" ng-model="documento.numero" validcpf="cpf" tipoPessoa="{{empresa.tipoPessoa}}"  name="cpf" class="form-control" ui-mask="999.999.999-99" ui-mask-placeholder ui-mask-placeholder-char="_">
-                                                <input type="text" ng-model="documento.documentoTypeEnumValue" name="cnpjs" value="2" class="form-control hide" placeholder="N¬∫ Cart. Trab" ng-init="documento.documentoTypeEnumValue=2">
+                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas N˙meros" class="fa fa-credit-card"></span></span>
+                                                <input type="text" ng-model="documento.numero" validcpf="cpf" tipoPessoa="{{cliente.tipoPessoa}}"  name="cpf" class="form-control" ui-mask="999.999.999-99" ui-mask-placeholder ui-mask-placeholder-char="_">
+                                                <input type="text" ng-model="documento.documentoTypeEnumValue" name="cnpjs" value="2" class="form-control hide" placeholder="N∫ Cart. Trab" ng-init="documento.documentoTypeEnumValue=2">
                                             </div>
-                                            <p ng-show="clienteForm.cpf.$invalid" class="help-block">CPF Inv√°lido.</p>
+                                            <p ng-show="clienteForm.cpf.$invalid" class="help-block">CPF Inv·lido.</p>
                                         </div>
                                     </div>
                                     <div ng-if="documento.documentoTypeEnumValue ==4">
@@ -55,9 +59,9 @@
 
                                             <label for="exampleInputEmail1">RG </label>
                                             <div class="input-group">
-                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas N√∫meros" class="fa fa-credit-card"></span></span>
+                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas N˙meros" class="fa fa-credit-card"></span></span>
                                                 <input type="text" ng-model="documento.numero" name="IEST" class="form-control">
-                                                <input type="text" ng-model="documento.documentoTypeEnumValue" name="IEST2" value="4" class="form-control hide" placeholder="N¬∫ Cart. Trab" ng-init="documento.documentoTypeEnumValue=4">
+                                                <input type="text" ng-model="documento.documentoTypeEnumValue" name="IEST2" value="4" class="form-control hide" placeholder="N∫ Cart. Trab" ng-init="documento.documentoTypeEnumValue=4">
                                             </div>
                                         </div>
                                     </div>
@@ -66,7 +70,7 @@
                                     <label for="exampleInputEmail1">Data Nascimento</label>
 
                                     <div class="input-group">
-                                        <input type="text" class="form-control" ng-model="empresa.dtInicio" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="false" close-text="Close" uib-datepicker-popup="{{format}}" />
+                                        <input type="text" class="form-control" ng-model="cliente.dtInicio" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="false" close-text="Close" uib-datepicker-popup="{{format}}" />
                                         <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" ng-click="open1()"><i class="fa fa-calendar"></i></button>
                                     </span>
@@ -76,34 +80,34 @@
                         </div>
 
                         <!-- Documentos -->
-                        <div ng-show="empresa.tipoPessoa == 2" ng-hide="empresa.tipoPessoa == 1">
+                        <div ng-show="cliente.tipoPessoa == 2" ng-hide="cliente.tipoPessoa == 1">
                             <div class="row">
                                 <div class="form-group col-sm-12">
                                     <label for="exampleInputEmail1">Nome Fantasia</label>
-                                    <input type="text" ng-model="empresa.nomeFantasia" name="fantasia" class="form-control" placeholder="Nome Fantasia">
+                                    <input type="text" ng-model="cliente.nomeFantasia" name="fantasia" class="form-control" placeholder="Nome Fantasia">
                                 </div>
 
                             </div>
                             <div class="row">
-                                <div ng-repeat="documento in empresa.documentos">
+                                <div ng-repeat="documento in cliente.documentos">
                                     <div ng-if="documento.documentoTypeEnumValue =='1'">
                                         <div class="form-group col-sm-3">
                                             <label for="exampleInputEmail1">CNPJ <SUP class="help-block5">(*)</SUP></label>
                                             <div class="input-group">
-                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas N√∫meros" class="fa fa-credit-card"></span></span>
-                                                <input type="text" ng-model="documento.numero"  validcnpj="cnpj"   tipoPessoa="{{empresa.tipoPessoa}}" class="form-control" name="cnpj" ui-mask="99.999.999/9999-99" ui-mask-placeholder ui-mask-placeholder-char="_" ng-class="{ 'has-error' : !clienteForm.cnpj.$invalid}">
-                                                <input type="text" ng-model="documento.documentoTypeEnumValue" name="cnpjs" value="1" class="form-control hide" placeholder="N¬∫ Cart. Trab" ng-init="documento.documentoTypeEnumValue=1">
+                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas N˙meros" class="fa fa-credit-card"></span></span>
+                                                <input type="text" ng-model="documento.numero"  validcnpj="cnpj"   tipoPessoa="{{cliente.tipoPessoa}}" class="form-control" name="cnpj" ui-mask="99.999.999/9999-99" ui-mask-placeholder ui-mask-placeholder-char="_" ng-class="{ 'has-error' : !clienteForm.cnpj.$invalid}">
+                                                <input type="text" ng-model="documento.documentoTypeEnumValue" name="cnpjs" value="1" class="form-control hide" placeholder="N∫ Cart. Trab" ng-init="documento.documentoTypeEnumValue=1">
                                             </div>
-                                            <p ng-show="clienteForm.cnpj.$invalid" class="help-block">CNPJ Inv√°lido.</p>
+                                            <p ng-show="clienteForm.cnpj.$invalid" class="help-block">CNPJ Inv·lido.</p>
                                         </div>
                                     </div>
                                     <div ng-if="documento.documentoTypeEnumValue =='12'">
                                         <div class="form-group col-sm-3">
                                             <label for="exampleInputEmail1">Inscr Est Subst Trib </label>
                                             <div class="input-group">
-                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas N√∫meros" class="fa fa-credit-card"></span></span>
+                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas N˙meros" class="fa fa-credit-card"></span></span>
                                                 <input type="text" ng-model="documento.numero" name="IEST" class="form-control">
-                                                <input type="text" ng-model="documento.documentoTypeEnumValue" name="IEST2" value="12" class="form-control hide" placeholder="N¬∫ Cart. Trab" ng-init="documento.documentoTypeEnumValue=12">
+                                                <input type="text" ng-model="documento.documentoTypeEnumValue" name="IEST2" value="12" class="form-control hide" placeholder="N∫ Cart. Trab" ng-init="documento.documentoTypeEnumValue=12">
                                             </div>
                                         </div>
                                     </div>
@@ -123,36 +127,36 @@
 
                                     <div ng-if="documento.documentoTypeEnumValue =='10'">
                                         <div class="form-group col-sm-3">
-                                            <label for="exampleInputEmail1">Inscri√ß√£o Estadual <SUP class="help-block5">(*)</SUP></label>
+                                            <label for="exampleInputEmail1">InscriÁ„o Estadual <SUP class="help-block5">(*)</SUP></label>
                                             <div class="input-group">
-                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas N√∫meros" class="fa fa-credit-card"></span></span>
-                                                <input type="text" ng-model="documento.numero" name="incrEst" class="form-control" ng-class="{ 'has-error' : validationInsEst(empresa.tipoPessoa,documento.numero)}">
+                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas N˙meros" class="fa fa-credit-card"></span></span>
+                                                <input type="text" ng-model="documento.numero" name="incrEst" class="form-control" ng-class="{ 'has-error' : validationInsEst(cliente.tipoPessoa,documento.numero)}">
                                                 <input type="text" ng-model="documento.documentoTypeEnumValue" name="incrEst2" value="10" class="form-control hide" ng-init="documento.documentoTypeEnumValue=10">
                                             </div>
-                                            <p ng-show="validationInsEst(empresa.tipoPessoa,documento.numero)" class="help-block">Campo de preenchimento Obrigatorio.</p>
+                                            <p ng-show="validationInsEst(cliente.tipoPessoa,documento.numero)" class="help-block">Campo de preenchimento Obrigatorio.</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div ng-repeat="documento in empresa.documentos">
+                                <div ng-repeat="documento in cliente.documentos">
                                     <div ng-if="documento.documentoTypeEnumValue =='3'">
                                         <div class="form-group col-sm-3">
-                                            <label for="exampleInputEmail1">Inscri√ß√£o Municipal <SUP class="help-block5">(*)</SUP></label>
+                                            <label for="exampleInputEmail1">InscriÁ„o Municipal <SUP class="help-block5">(*)</SUP></label>
                                             <div class="input-group">
-                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas N√∫meros" class="fa fa-credit-card"></span></span>
-                                                <input type="text" ng-model="documento.numero" name="incrMun" class="form-control" ng-class="{ 'has-error' : validationInsMun(empresa.tipoPessoa,documento.numero)}">
+                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas N˙meros" class="fa fa-credit-card"></span></span>
+                                                <input type="text" ng-model="documento.numero" name="incrMun" class="form-control" ng-class="{ 'has-error' : validationInsMun(cliente.tipoPessoa,documento.numero)}">
                                                 <input type="text" ng-model="documento.documentoTypeEnumValue" name="incrMun2" value="3" class="form-control hide" ng-init="documento.documentoTypeEnumValue=3">
                                             </div>
-                                            <p ng-show="validationInsMun(empresa.tipoPessoa,documento.numero)" class="help-block">Campo de preenchimento Obrigatorio.</p>
+                                            <p ng-show="validationInsMun(cliente.tipoPessoa,documento.numero)" class="help-block">Campo de preenchimento Obrigatorio.</p>
                                         </div>
 
                                     </div>
                                     <div ng-if="documento.documentoTypeEnumValue =='11'">
                                         <div class="form-group col-sm-3">
-                                            <label for="exampleInputEmail1">Inscri√ß√£o Suframa</label>
+                                            <label for="exampleInputEmail1">InscriÁ„o Suframa</label>
                                             <div class="input-group">
-                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas N√∫meros" class="fa fa-credit-card"></span></span>
+                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas N˙meros" class="fa fa-credit-card"></span></span>
                                                 <input type="text" ng-model="documento.numero" name="suframa" class="form-control">
                                                 <input type="text" ng-model="documento.documentoTypeEnumValue" name="suframa2" value="11" class="form-control hide" ng-init="documento.documentoTypeEnumValue=11">
                                             </div>
@@ -163,15 +167,15 @@
                                 <div class="form-group col-sm-3">
                                     <label for="exampleInputEmail1">Data Abertura</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" ng-model="empresa.dtAbertura" is-open="popup2.opened" datepicker-options="dateOptions" close-text="Close" uib-datepicker-popup="{{format}}" />
+                                        <input type="text" class="form-control" ng-model="cliente.dtAbertura" is-open="popup2.opened" datepicker-options="dateOptions" close-text="Close" uib-datepicker-popup="{{format}}" />
                                         <span class="input-group-btn">
             <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
           </span>
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-3">
-                                    <label for="exampleInputEmail1">N¬∫ Funcionarios</label>
-                                    <input type="text" ng-model="empresa.numFunc" name="numFunc" class="form-control" placeholder="N¬∫ Func">
+                                    <label for="exampleInputEmail1">N∫ Funcionarios</label>
+                                    <input type="text" ng-model="cliente.numFunc" name="numFunc" class="form-control" placeholder="N∫ Func">
                                 </div>
                             </div>
 

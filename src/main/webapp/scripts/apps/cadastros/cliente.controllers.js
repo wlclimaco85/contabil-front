@@ -3,7 +3,7 @@
     .controller('ClienteController', clienteController)
 
   function clienteController ($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate, Datatablessss, tableOptionsFactory,
-    tableColumnsFactory, FiltersFactory, validationFactory) {
+    tableColumnsFactory, FiltersFactory, validationFactory,dialogFactory) {
     var vm = this
     vm.selected = {}
     vm.selectAll = false
@@ -36,10 +36,11 @@
       $scope.state = !$scope.state
     }
 
-    vm.edit = edit
-    vm.delete = deleteRow
-    vm.dtInstance = {}
-    vm.persons = {}
+    vm.edit = edit;
+    vm.view = view;
+    vm.delete = deleteRow;
+    vm.dtInstance = {};
+    vm.persons = {};
 
     function rCallback (nRow, aData) {
       // console.log('row')
@@ -67,8 +68,10 @@
       'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">'
 
     var actionsHtml = function (data, type, full, meta) {
-      return '<button class="btn btn-info" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
-        '   <i class="glyphicon glyphicon-save"></i>' +
+      vm.persons[data.id] = data;
+      return '<a href="#/cadastros/details/cliente?id=' + data.id + '"  class="btn btn-info"><i class="fa fa-eye"></i></a>&nbsp;' +
+        '<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
+        '   <i class="fa fa-pencil-square-o"></i>' +
         '</button>&nbsp;' +
         '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
         '   <i class="fa fa-trash-o"></i>' +
@@ -76,6 +79,10 @@
     }
 
     function edit (person) {
+      $rootScope.cliente = person
+      dialogFactory.dialog('views/cadastros/dialog/dCliente.html', 'ClienteUpdateController', validationFactory.cliente())
+    }
+    function view (person) {
       $rootScope.cliente = person
       //  Datatablessss.reloadData(vm)
       dialogFactory.dialog('views/cadastros/dialog/dCliente.html', 'ClienteUpdateController', validationFactory.cliente())
@@ -118,10 +125,43 @@
 })()
 ;(function () {
   angular.module('wdApp.apps.cliente.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-    .controller('ClienteInsertController', function ($rootScope, $scope, fModels, SysMgmtData, toastr, $element, close, fPessoa, doisValorFactory,validationFactory) {
+    .controller('ClienteInsertController', function ($rootScope, $scope, fModels, SysMgmtData, toastr, $element, close, fPessoa, doisValorFactory,validationFactory,fDocumentos) {
       var vm = this
 
+      $scope.cliente.documentos = [];
+      $scope.cliente.enderecos = [];
+      $scope.cliente.emails = [];
+      $scope.documentos = [];
+      $scope.enderecos = [];
+      $scope.telefones = [];
+      $scope.emails = [];
+      $scope.telefones.push({numero : "",telefoneTypeEnum : "PRINCIPAL"});
+      $scope.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+      fDocumentos.fnInitDocumentos(vm,$scope);
+      $scope.cliente = {
+          pessoaTipos: [
+            {
+              pessoaTypeEnum: 'CLIENTE',
+              label: 'Cliente'
+            },
+            {
+              pessoaTypeEnum: 'FORNECEDOR',
+              label: 'Fornecedor'
+            },
+            {
+              pessoaTypeEnum: 'TRANSPORTADOR',
+              label: 'Transportador'
+            },
+            {
+              pessoaTypeEnum: 'CONSFINAL',
+              label: 'Consumidor Final'
+            }]
+        }
+        $scope.cliente.pessoaTipos.push(qat.model.fnPessoaTipo("CLIENTE", 'INSERT', 'System'))
+
       fPessoa.fnOpenView(vm,$scope);
+
+      $scope.cliente.documentos = $scope.documentos;
 
       var fnCallBack = function (res) {
         if (res.operationSuccess == true) {
@@ -145,10 +185,15 @@
     .controller('ClienteUpdateController', function ($rootScope, $scope, fModels, SysMgmtData, fPessoa, toastr, $element, close,validationFactory) {
       var vm = this
       $scope.cliente = {}
-      $scope.cliente = $rootScope.cliente
-      
+
+      $scope.cliente = $rootScope.cliente;
+      $scope.enderecos =  $scope.cliente.enderecos;
+      $scope.telefones = $scope.cliente.telefones;
+      $scope.emails = $scope.cliente.emails;
+      $scope.documentos = $scope.cliente.documentos;
+
       fPessoa.fnOpenView(vm,$scope);
-      
+
      // ===========================================
       var fnCallBack = function (res) {
         if (res.operationSuccess == true) {
@@ -163,7 +208,7 @@
 
       $scope.saveCliente = function (bValidate,b) {
         if(bValidate)
-            fPessoa.fnMontaObjeto($scope.cliente, $scope.endereco, $scope.emails, $scope.telefones, 'UPDATE', 'pessoa/api/cliente/update', fnCallBack)
+            fPessoa.fnMontaObjeto($scope.cliente, $scope.enderecos, $scope.emails, $scope.telefones, 'UPDATE', 'pessoa/api/cliente/update', fnCallBack)
       }
     })
 })()
@@ -183,11 +228,28 @@
 })()
 ;(function () {
   angular.module('wdApp.apps.cliente.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-    .controller('ClienteViewController', function ($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+    .controller('ClienteViewController', function ($rootScope, $scope, fModels, SysMgmtData, fPessoa, $location) {
       var vm = this
-      $scope.cliente = {}
-      $scope.cliente = $rootScope.cliente
-      console.log($rootScope.cliente)
+
+      var searchObject = $location.search();
+			var _emprId = null;
+			if ((localStorage.getItem('empresa') !== undefined) && (localStorage.getItem('empresa') !== null))
+			{
+				_emprId = JSON.parse(localStorage.getItem('empresa')).id;
+			}
+
+			SysMgmtData.processPostPageData("main/api/request",
+			{
+				url: "pessoa/api/cliente/fetchPage",
+				token: $rootScope.authToken,
+				request: new qat.model.empresaInquiryRequest(0, true, null, parseInt(searchObject.id, 10), null, null)
+			}, function(res)
+			{
+        debugger
+        $scope.cliente = {}
+        $scope.cliente = res.clienteList[0];
+        console.log($rootScope.cliente)
+      });
       $scope.saveCliente = function () {
         fPessoa.fnOpenView($scope.cliente, 'pessoa/api/cliente/update/', function () {
           console.log('aqui')

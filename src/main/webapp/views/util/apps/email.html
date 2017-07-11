@@ -1,117 +1,47 @@
-<!-- -------------------  EMAIL ----------------- -->
-<div ng-controller="EmailControllers">
 <div ng-repeat="email in emails">
-        <hr/>
-        <form name="myForm" ng-init="name = email.nome">
-            <div class="row">
+    <hr/>
+    <div class="row">
 
 
-    <div ng-if="email.nome==='form1'">
-    <!-- code to render the regular video block -->
-    <div class="col-sm-4">
-        <label for="exampleInputPassword1">Email</label>
-        <input type="text" class="form-control col-sm-4 hide input-id" name="id" placeholder="Email">
-        <input type="text" class="form-control col-sm-4 hide input-type" name="type" value="1" placeholder="Email">
-        <div class="input-group">
-          <span class="InputSign input-group-addon" target="contatos_emails"><span title="Apenas emails vÃ¡lidos" class="fa fa-envelope"></span></span>
-          <input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2" ng-model="email.email.email">
+        <div ng-if="email.emailTypeEnum == 'PRINCIPAL'">
+            <!-- code to render the regular video block -->
+            <div class="col-sm-4">
+                <label for="exampleInputPassword1">Email</label>
+                <input type="text" class="form-control col-sm-4 hide input-id" name="id" placeholder="Email">
+                <input type="text" class="form-control col-sm-4 hide input-type" name="type" value="1" placeholder="Email">
+                <div class="input-group">
+                    <span class="InputSign input-group-addon" target="contatos_emails"><span title="Apenas emails válidos" class="fa fa-envelope"></span></span>
+                    <input type="email" class="form-control" placeholder="" aria-describedby="basic-addon2" ng-model="email.email.email">
+                </div>
+
+            </div>
+
+            <div class="col-sm-4" style="margin-top:18px">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="true" style="margin-top: 7px;">Adicionar<span class="caret"></span></button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a ng-click="createFormEmail('NFE')" class="addEmailButton">NF-e</a></li>
+                        <li><a ng-click="createFormEmail('COMPRAS')" class="addEmailButton">Compras</a></li>
+                        <li><a ng-click="createFormEmail('VENDAS')" class="addEmailButton">Vendas</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a ng-click="createFormEmail('OUTROS')" class="addEmailButton">Outros</a></li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
-
-    </div>
-
-    <div class="col-sm-4" style="margin-top:18px">
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
-    Adicionar
-    <span class="caret"></span>
-  </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a ng-click="createForm('PRINCIPAL')" class="addEmailButton">Principal</a></li>
-                <li><a ng-click="createForm('NFE')" class="addEmailButton">NF-e</a></li>
-                <li><a ng-click="createForm('COMPRAS')" class="addEmailButton">Compras</a></li>
-                <li><a ng-click="createForm('VENDAS')" class="addEmailButton">Vendas</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a ng-click="createForm('OUTROS')" class="addEmailButton">Outros</a></li>
-            </ul>
-        </div>
-    </div>
-
-    </div>
-    <div ng-if="email.nome!=='form1'">
-         <div class="col-sm-4">
-            <label for="exampleInputPassword1" class="control-label">{{email.email.emailTypeEnum}}</label>
-            <div class="input-group">
-              <span class="InputSign input-group-addon" target="contatos_emails"><span title="Apenas emails vÃ¡lidos" class="fa fa-envelope"></span></span>
-              <input type="text" class="form-control" ng-model="email.email.email" placeholder="Recipient's username" aria-describedby="basic-addon2" ng-model="email.email.email">
+        <div ng-if="email.emailTypeEnum != 'PRINCIPAL'">
+            <div class="col-sm-4">
+                <label for="exampleInputPassword1" class="control-label">{{email.emailTypeEnum}}</label>
+                <div class="input-group">
+                    <span class="InputSign input-group-addon" target="contatos_emails"><span title="Apenas emails válidos" class="fa fa-envelope"></span></span>
+                    <input type="text" class="form-control" ng-model="email.email" placeholder="" aria-describedby="basic-addon2">
+                </div>
+            </div>
+            <div class="col-sm-4" style="margin-top:25px">
+                <button type="button" ng-click="deleteFormEmail(email)" class="btn btn-link removeButton">deletar</button>
             </div>
         </div>
-        <div class="col-sm-4" style="margin-top:25px">
-            <button type="button" ng-click="deleteForm(form)" class="btn btn-link removeButton">deletar</button>
-        </div>
-    </div>
-    </form>
-</div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- ------------------------------------- -->
-<!-- ------------------------------------- -->
-
-<!-- -------------------  Email Empresa -----------------
-<div class="row emails">
-    <div class="col-sm-4">
-        <label for="exampleInputPassword1">Email</label>
-        <input type="text" class="form-control col-sm-4 hide input-id" name="id" placeholder="Email">
-        <input type="text" class="form-control col-sm-4 hide input-type" name="type" value="1" placeholder="Email">
-        <input type="text" class="form-control col-sm-4 input-email" name="email" placeholder="Email">
-    </div>
-    <div class="col-sm-4" style="margin-top:25px">
-
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: 7px;">
-    Adicionar
-    <span class="caret"></span>
-  </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="javascript:;" class="addEmailButton">Principal</a></li>
-                <li><a href="javascript:;" class="addEmailButton">NF-e</a></li>
-                <li><a href="javascript:;" class="addEmailButton">Compras</a></li>
-                <li><a href="javascript:;" class="addEmailButton">Vendas</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="javascript:;" class="addEmailButton">Outros</a></li>
-            </ul>
-        </div>
     </div>
 </div>
--->
-<!-- Template for dynamic field
-<div class="row emails" id="template-email" style="display: none;">
-    <div class="col-sm-4">
-        <label for="exampleInputPassword1" class="control-label input-type">Email</label>
-        <input type="email" class="form-control col-sm-4 input-email" placeholder="Email">
-    </div>
-    <div class="col-sm-4" style="margin-top:25px">
-        <button type="button" class="btn btn-link removeButton">deletar</button>
-    </div>
-</div>
--->
