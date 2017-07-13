@@ -125,9 +125,11 @@
 })()
 ;(function () {
   angular.module('wdApp.apps.cliente.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-    .controller('ClienteInsertController', function ($rootScope, $scope, fModels, SysMgmtData, toastr, $element, close, fPessoa, doisValorFactory,validationFactory,fDocumentos) {
+    .controller('ClienteInsertController', function ($rootScope, $scope, fModels, SysMgmtData, toastr, $element, close, fPessoa, doisValorFactory,validationFactory) {
       var vm = this
 
+      $scope.cliente ={};
+      $scope.cliente.tipoPessoa = 1;
       $scope.cliente.documentos = [];
       $scope.cliente.enderecos = [];
       $scope.cliente.emails = [];
@@ -137,7 +139,7 @@
       $scope.emails = [];
       $scope.telefones.push({numero : "",telefoneTypeEnum : "PRINCIPAL"});
       $scope.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
-      fDocumentos.fnInitDocumentos(vm,$scope);
+
       $scope.cliente = {
           pessoaTipos: [
             {
@@ -176,7 +178,7 @@
 
       $scope.saveCliente = function (bValidate) {
           if(bValidate)
-              fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos, $scope.emails, $scope.telefones, 'INSERT', 'pessoa/api/cliente/insert', fnCallBack)
+              fPessoa.fnMontaObjeto($scope.cliente, $scope.enderecos, $scope.emails, $scope.telefones, 'INSERT', 'pessoa/api/cliente/insert', fnCallBack)
       }
     })
 })()
@@ -191,6 +193,12 @@
       $scope.telefones = $scope.cliente.telefones;
       $scope.emails = $scope.cliente.emails;
       $scope.documentos = $scope.cliente.documentos;
+debugger
+      if(($scope.telefones.length == 0))
+          $scope.telefones.push({numero : "",telefoneTypeEnum : "PRINCIPAL"});
+
+      if(($scope.emails.length == 0))
+          $scope.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
 
       fPessoa.fnOpenView(vm,$scope);
 
@@ -245,15 +253,26 @@
 				request: new qat.model.empresaInquiryRequest(0, true, null, parseInt(searchObject.id, 10), null, null)
 			}, function(res)
 			{
-        debugger
+
         $scope.cliente = {}
         $scope.cliente = res.clienteList[0];
         console.log($rootScope.cliente)
+        debugger
       });
+
+      var fnCallBack = function (res) {
+        if (res.operationSuccess == true) {
+            $scope.cliente = res.clienteList[0];
+        }
+      }
+
       $scope.saveCliente = function () {
-        fPessoa.fnOpenView($scope.cliente, 'pessoa/api/cliente/update/', function () {
-          console.log('aqui')
-        })
+            $scope.enderecos  =  $scope.cliente.enderecos;
+            $scope.telefones  = $scope.cliente.telefones;
+            $scope.emails     = $scope.cliente.emails;
+            $scope.documentos = $scope.cliente.documentos;
+
+            fPessoa.fnMontaObjeto($scope.cliente, $scope.enderecos, $scope.emails, $scope.telefones, 'UPDATE', 'pessoa/api/cliente/update', fnCallBack)
       }
     })
 })()

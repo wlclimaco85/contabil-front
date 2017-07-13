@@ -90,51 +90,55 @@
                 var bINDICADORIE = false;
                 var bNUNINSJUNTCOMERCIAL = false;
                 var bCRC = false;
-                for (var x = 0; x < scope.documentos.length; x++)
+
+                if(scope.documentos)
                 {
-                    if (scope.documentos[x].documentoTypeEnumValue == 1)
+                    for (var x = 0; x < scope.documentos.length; x++)
                     {
-                        bCNPJ = true;
-                    }
-                    if (scope.documentos[x].documentoTypeEnumValue == 2)
-                    {
-                        bCPF = true;
-                    }
-                    if (scope.documentos[x].documentoTypeEnumValue == 3)
-                    {
-                        bIM = true;
-                    }
-                    if (scope.documentos[x].documentoTypeEnumValue == 8)
-                    {
-                        bIES = true;
-                    }
-                    if (scope.documentos[x].documentoTypeEnumValue == 9)
-                    {
-                        bIIE = true;
-                    }
-                    if (scope.documentos[x].documentoTypeEnumValue == 10)
-                    {
-                        bIE = true;
-                    }
-                    if (scope.documentos[x].documentoTypeEnumValue == 11)
-                    {
-                        bIF = true;
-                    }
-                    if (scope.documentos[x].documentoTypeEnumValue == 12)
-                    {
-                        bINSCRESTSUBSTTRIB = true;
-                    }
-                    if (scope.documentos[x].documentoTypeEnumValue == 14)
-                    {
-                        bINDICADORIE = true;
-                    }
-                    if (scope.documentos[x].documentoTypeEnumValue == 16)
-                    {
-                        bNUNINSJUNTCOMERCIAL = true;
-                    }
-                    if (scope.documentos[x].documentoTypeEnumValue == 17)
-                    {
-                        bCRC = true;
+                        if (scope.documentos[x].documentoTypeEnumValue == 1)
+                        {
+                            bCNPJ = true;
+                        }
+                        if (scope.documentos[x].documentoTypeEnumValue == 2)
+                        {
+                            bCPF = true;
+                        }
+                        if (scope.documentos[x].documentoTypeEnumValue == 3)
+                        {
+                            bIM = true;
+                        }
+                        if (scope.documentos[x].documentoTypeEnumValue == 8)
+                        {
+                            bIES = true;
+                        }
+                        if (scope.documentos[x].documentoTypeEnumValue == 9)
+                        {
+                            bIIE = true;
+                        }
+                        if (scope.documentos[x].documentoTypeEnumValue == 10)
+                        {
+                            bIE = true;
+                        }
+                        if (scope.documentos[x].documentoTypeEnumValue == 11)
+                        {
+                            bIF = true;
+                        }
+                        if (scope.documentos[x].documentoTypeEnumValue == 12)
+                        {
+                            bINSCRESTSUBSTTRIB = true;
+                        }
+                        if (scope.documentos[x].documentoTypeEnumValue == 14)
+                        {
+                            bINDICADORIE = true;
+                        }
+                        if (scope.documentos[x].documentoTypeEnumValue == 16)
+                        {
+                            bNUNINSJUNTCOMERCIAL = true;
+                        }
+                        if (scope.documentos[x].documentoTypeEnumValue == 17)
+                        {
+                            bCRC = true;
+                        }
                     }
                 }
 

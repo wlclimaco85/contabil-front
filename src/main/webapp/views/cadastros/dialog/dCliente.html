@@ -10,7 +10,7 @@
                         <div class="row">
                             <dl class="dl-horizontal">
                                 <dd>
-                                    <input type="checkbox" name="cliente" id="cliente" ng-model="cliente" ng-disabled="true" ng-true-value="true" ng-false-value="false" ng-init='cliente=true' ng-checked='true' >
+                                    <input type="checkbox" name="cliente" id="clientes" ng-model="clientes" ng-disabled="true" ng-true-value="true" ng-false-value="false" ng-init='clientes=true' ng-checked='true' >
                                     <label class="ui-checkbox" type="checkbox"  for="{{song.label}}">Cliente</label>
                                     <label ng-repeat="song in cliente.pessoaTipos">
                                         <div ng-if="song.pessoaTypeEnum != 'CLIENTE'">
@@ -24,17 +24,24 @@
                         <div class="row">
                             <dl class="dl-horizontal">
                                 <dd>
-                                    <label class="ui-radio"><input name="radio5" type="radio"  ng-model="cliente.tipoPessoa" ng-init="cliente.tipoPessoa=true" value="1" checked ><span>Pessoa Fisica </span></label>
-                                    <label class="ui-radio"><input name="radio6" type="radio" ng-model="cliente.tipoPessoa" value="2" ><span>Pessoa Juridica </span></label>
+                                    <label class="ui-radio"><input name="radio5" type="radio"  ng-model="cliente.tipoPessoa" ng-init="cliente.tipoPessoa=1" value="1" ng-true-value="1" checked ><span>Pessoa Fisica </span></label>
+                                    <label class="ui-radio"><input name="radio6" type="radio" ng-model="cliente.tipoPessoa" value="2" ng-true-value="2"><span>Pessoa Juridica </span></label>
                                 </dd>
                             </dl>
                         </div>
                         <div class="row">
-                            <div class="form-group col-sm-12">
+                            <div class="form-group col-sm-8">
                                 <label for="exampleInputEmail1" ng-show="cliente.tipoPessoa == 1" ng-hide="cliente.tipoPessoa == 2">Nome <SUP class="help-block5">(*)</SUP></label>
                                 <label for="exampleInputEmail1" ng-show="cliente.tipoPessoa == 2" ng-hide="cliente.tipoPessoa == 1">Razão social <SUP class="help-block5">(*)</SUP></label>
                                 <input type="text" required ng-model="cliente.nome" name="razao" class="form-control" placeholder="Nome">
                                 <p ng-show="clienteForm.razao.$invalid" class="help-block">Campo de preenchimento Obrigatorio.</p>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label for="exampleInputEmail1">Codigo Interno</label>
+                                <div class="input-group">
+                                    <input type="text" required ng-model="cliente.codigo" name="codigo" class="form-control" placeholder="Codigo">
+                                </div>
+                                <p ng-show="clienteForm.cnpj.$invalid" class="help-block">CNPJ Inválido.</p>
                             </div>
                         </div>
 

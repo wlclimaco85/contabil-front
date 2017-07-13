@@ -11,23 +11,14 @@
          var documentos = [];
          for(var x=0;x < empresa.documentos.length;x++)
          {
-            if(empresa.documentos[x].numero == undefined || empresa.documentos[x].numero == undefined )
+            if((empresa.documentos[x]) && (empresa.documentos[x].id))
             {
-                delete empresa.documentos[x]
+                documentos.push(fModels.amont(qat.model.fnDocumento(empresa.documentos[x],"UPDATE",$rootScope.user.user),"UPDATE"));
             }
             else
             {
-                if((empresa.documentos[x].id != null)&&(empresa.documentos[x].id != undefined))
-                {
-                    documentos.push(fModels.amont(qat.model.fnDocumento(empresa.documentos[x],"UPDATE",$rootScope.user.user),"UPDATE"));
-                }
-                else
-                {
-                    documentos.push(fModels.amont(qat.model.fnDocumento(empresa.documentos[x],"INSERT",$rootScope.user.user),"INSERT"));
-                }
-
+                documentos.push(fModels.amont(qat.model.fnDocumento(empresa.documentos[x],"INSERT",$rootScope.user.user),"INSERT"));
             }
-
          }
          empresa.documentos =[];
          empresa.documentos = documentos;
@@ -40,13 +31,9 @@
          var telefonesAux = [];
          for(var x=0;x < telefones.length;x++)
          {
-            if(telefones[x].telefone != undefined)
+            if((telefones[x].telefone)&&(telefones[x].telefone.id))
             {
-
-                if((telefones[x].telefone.id != null)&&(telefones[x].telefone.id != undefined))
-                {
-                    telefonesAux.push(fModels.amont(qat.model.fnTelefones(telefones[x].telefone,"UPDATE"),"UPDATE"));
-                }
+                telefonesAux.push(fModels.amont(qat.model.fnTelefones(telefones[x].telefone,"UPDATE"),"UPDATE"));
             }
             else
             {
@@ -62,12 +49,9 @@
          for(var x=0;x < emails.length;x++)
          {
             email = emails[x].email;
-            if(email != undefined)
+            if((email) && (email.id))
             {
-                if((email.id != null)&&(email.id != undefined))
-                {
-                    emailsAux.push(fModels.amont(qat.model.fnEmails(email,"UPDATE"),"UPDATE"));
-                }
+                emailsAux.push(fModels.amont(qat.model.fnEmails(email,"UPDATE"),"UPDATE"));
             }
             else
             {
@@ -96,11 +80,17 @@
 
 	factory.fnOpenView = function(vm,scope) {
 
+        if((!scope.documentos)&&(scope.documentos.length == 0))
+        {
+               fDocumentos.fnInitDocumentos(vm,$scope);
+        }
+
         fEndereco.fnMontaEnderecoEmpresa(vm,scope);
         fDocumento.fnMontaDocumentosEmpresa(vm,scope);
         fTelefone.fnMontaTelefones(vm,scope);
         fEmail.fnMontaEmails(vm,scope);
         fDatas.fnMontaDatas(vm,scope);
+        validationFactory.empresa(vm,scope);
 
       //cria instancia endereco fEndereco,fDocumento,fTelefone,fEmail,fDatas
 
@@ -159,7 +149,7 @@
         finally {
             $log.warn("Inicializando datas");
         }
-*/
+
         //Validation
         try {
             validationFactory.empresa(vm,scope);
@@ -170,7 +160,7 @@
         finally {
             $log.warn("Inicializando Validaçoes");
         }
-
+*/
         scope.changes = function ($event, id) {
           var checkbox = $event.target;
           var bValid = true;
