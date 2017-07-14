@@ -17,6 +17,70 @@ var qat = {
 	}
 };
 
+qat.model.Cliente = function(_oObjet, _modelAction,_user,$log)
+{
+	if (_oObjet != undefined)
+	{
+		debugger
+		this.id = _oObjet.id;
+		this.nome = _oObjet.nome;
+		this.razao = _oObjet.razao;
+		this.statusEmpresa = _oObjet.statusEmpresa;
+		this.dtAbertura = _oObjet.dtAbertura ? _oObjet.dtAbertura : (new Date()).getTime();
+		this.entidadeId = JSON.parse(localStorage.getItem('empresa')) ? JSON.parse(localStorage.getItem('empresa')).id : null;
+		this.entidadeEnum = _oObjet.entidadeEnum;
+		this.configuracao = _oObjet.configuracao ? new qat.model.configuracao(_oObjet.configuracao, _oObjet.configuracao.id ? _modelAction : "INSERT", _user,$log) : null;
+		this.usuarios = _oObjet.usuarios ? _oObjet.usuarios : null;
+		this.bancos = _oObjet.bancos ? _oObjet.bancos : null;
+		this.socios = _oObjet.socios ? _oObjet.socios : null;
+		this.tipo = _oObjet.tipo;
+		this.permissaoTypeEnum = _oObjet.permissaoTypeEnum ? _oObjet.permissaoTypeEnum : "NORMAL";
+		this.numFunc = _oObjet.numFunc;
+		this.tipoPessoa = _oObjet.tipoPessoa;
+		this.cpfResponsavel = _oObjet.cpfResponsavel;
+		this.primeiroAcesso = _oObjet.primeiroAcesso ? _oObjet.primeiroAcesso : 0;
+		this.responsavel = _oObjet.responsavel;
+		this.notificacoes = _oObjet.notificacoes;
+		this.numFunc = _oObjet.numFunc ? _oObjet.numFunc : 0;
+		this.statusInicial = _oObjet.statusInicial;
+		this.entidadeEnumValue = _oObjet.entidadeEnumValue;
+		this.regime = _oObjet.regime ? qat.model.fnRegime(_oObjet.regime, _oObjet.regime.id ? _modelAction : "INSERT", _user,$log) : null;
+		this.documentos = _oObjet.documentos ? _oObjet.documentos : null;
+		this.enderecos = _oObjet.enderecos ? _oObjet.enderecos : null;
+		this.emails = _oObjet.emails,
+		this.telefones = _oObjet.telefones,
+		this.cnaes = _oObjet.cnaes ? qat.model.Cnaes(_oObjet.cnaes, _modelAction, _user,$log) : null;
+		this.statusList = _oObjet.statusList;
+		this.notes = _oObjet.notes;
+		this.codigo = _oObjet.notes;
+		this.nomePai = _oObjet.notes;
+		this.nomeMae = _oObjet.notes;
+		this.nomeConjugue = _oObjet.notes;
+		this.estadoCivil = _oObjet.notes;
+		this.datanasc = _oObjet.notes;
+		this.foto = _oObjet.notes;
+		this.sexo = _oObjet.notes;
+		this.pessoaTipo = _oObjet.pessoaTipo ? _oObjet.pessoaTipo : null;
+		this.tipoContribuinte = _oObjet.tipoContribuinte ? _oObjet.tipoContribuinte : null;
+		this.bancos = _oObjet.bancos ? _oObjet.bancos : null;
+		this.formaPagamentoList = _oObjet.formaPagamentoList ? _oObjet.formaPagamentoList : null;
+		this.condPagList = _oObjet.condPagList ? _oObjet.condPagList : null;
+		this.contatoList = _oObjet.contatoList ? _oObjet.contatoList : null;
+		this.parentId = _oObjet.parentId;
+		this.emprId = _oObjet.emprId;
+		this.processId = _oObjet.processId;
+		this.tableEnumValue = _oObjet.tableEnumValue;
+		this.modelAction = _modelAction;
+		this.createUser = _user;
+		this.createDateUTC = (new Date()).getTime();
+		this.modifyUser = _user;
+		this.modifyDateUTC = (new Date()).getTime();
+
+		if($log)
+		$log.info("Domain Empresa","Teste");
+	}
+}
+
 //County Object
 qat.model.county = function(_countyId, _countyDesc)
 {
@@ -1063,7 +1127,7 @@ qat.model.fnTributacao = function(_tributacao, _modelAction, _userId)
 	return tributacao;
 }
 
-qat.model.fnPessoaTipo = function(_pessoaTypeEnum, _modelAction, _userId)
+qat.model.fnPessoaTipo = function(_pessoaTypeEnum, _modelAction, _userId,$log)
 {
 	var _id = null;
 
@@ -1093,7 +1157,8 @@ qat.model.fnPessoaTipo = function(_pessoaTypeEnum, _modelAction, _userId)
 		modifyDateUTC: (new Date()).getTime()
 
 	}
-
+	if($log)
+		$log.info('add --> '+_pessoaTypeEnum);
 	return tributacao;
 }
 

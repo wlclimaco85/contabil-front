@@ -61,11 +61,14 @@
         }
         empresa.emails =[];
         empresa.emails = emailsAux;
+
         var oObject = fModels.amont(empresa,action);
+        var _oObject = new qat.model.Cliente(oObject, action,$rootScope.user.user,$log);
+
             SysMgmtData.processPostPageData("main/api/request", {
                 url: url,
                 token: $rootScope.authToken,
-                request: new qat.model.reqCliente(oObject, true, true)
+                request: new qat.model.reqCliente(_oObject, true, true)
             }, function(res) {
                 callBack(res);
             });
@@ -164,25 +167,25 @@
         scope.changes = function ($event, id) {
           var checkbox = $event.target;
           var bValid = true;
-          for (x = 0; x < scope.cliente.pessoaTipos.length; x++) {
-              if(scope.cliente.pessoaTipos == id.pessoaTypeEnum)
+          for (x = 0; x < scope.cliente.pessoaTipo.length; x++) {
+              if(scope.cliente.pessoaTipo == id.pessoaTypeEnum)
               {
                 bValid = false;
               }
           }
           if (checkbox.checked && bValid) {
-              for (x = 0; x < scope.cliente.pessoaTipos.length; x++) {
-                scope.cliente.pessoaTipos.push(qat.model.fnPessoaTipo(id.pessoaTypeEnum, 'INSERT', 'System'))
+              for (x = 0; x < scope.cliente.pessoaTipo.length; x++) {
+                scope.cliente.pessoaTipo.push(qat.model.fnPessoaTipo(id.pessoaTypeEnum, 'INSERT', 'System'))
               }
           }else {
-            for (x = 0; x < scope.cliente.pessoaTipos.length; x++) {
-              if (scope.cliente.pessoaTipos[x].pessoaTypeEnum == id.pessoaTypeEnum) {
-                scope.cliente.pessoaTipos.splice(x, 1)
+            for (x = 0; x < scope.cliente.pessoaTipo.length; x++) {
+              if (scope.cliente.pessoaTipo[x].pessoaTypeEnum == id.pessoaTypeEnum) {
+                scope.cliente.pessoaTipo.splice(x, 1)
               }
             }
           //  scope.empresa.pessoaTipos.remove(qat.model.fnPessoaTipo(id.pessoaTypeEnum,"INSERT","System"))
           }
-          console.log(scope.cliente.pessoaTipos)
+          console.log(scope.cliente.pessoaTipo)
         }
 
       doisValorFactory.empresa(scope)

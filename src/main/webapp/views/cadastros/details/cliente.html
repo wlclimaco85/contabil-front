@@ -40,14 +40,14 @@
                                                             <label for="exampleInputPassword1">Razão Social:</label>
                                                         </div>
                                                         <div class="form-group col-sm-5">
-                                                            <a href="#" editable-text="cliente.razao" onaftersave="updateCliente()" >{{ cliente.razao || '' }}</a>
+                                                            <a href="#" editable-text="cliente.razao" onaftersave="updateCliente()" >{{ cliente.razao || 'Vazio' }}</a>
                                                         </div>
                                                         <div class="form-group col-sm-4">
                                                             <div class="form-group col-sm-6">
                                                                 <label for="exampleInputPassword1">Código:</label>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                                <a href="#" editable-select="cliente.codigo" onaftersave="updateCliente()" >{{ cliente.codigo || '' }}</a>
+                                                                <a href="#" editable-text="cliente.codigo" onaftersave="updateCliente()" >{{ cliente.codigo || 'Vazio' }}</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -65,7 +65,7 @@
                                                         </div>
                                                         <div class="form-group col-sm-6">
                                                             <div ng-repeat="cpfCnpj in cliente.documentos | filter:{ documentoType: 'CNPJ' || 'CPF' } ">
-                                                                <a href="#" editable-text="cpfCnpj.numero" onaftersave="updateCliente()" >{{ cpfCnpj.numero || 'empty' }}</a>
+                                                                <a href="#" editable-text="cpfCnpj.numero" onaftersave="updateCliente()" >{{ cpfCnpj.numero || 'Vazio' }}</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -75,7 +75,7 @@
                                                         </div>
                                                         <div class="form-group col-sm-6">
                                                             <div ng-repeat="produto in cliente.documentos | filter:{ documentoType: 'IE' } ">
-                                                                <a href="#" editable-text="produto.numero" onaftersave="updateCliente()" >{{ produto.numero || 'empty' }}</a>
+                                                                <a href="#" editable-text="produto.numero" onaftersave="updateCliente()" >{{ produto.numero || 'Vazio' }}</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -86,7 +86,7 @@
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                         <div ng-repeat="produto in cliente.documentos | filter:{ documentoType: 'IM' } ">
-                                                            <a href="#" editable-text="produto.numero" onaftersave="updateCliente()" >{{ produto.numero || 'empty' }}</a>
+                                                            <a href="#" editable-text="produto.numero" onaftersave="updateCliente()" >{{ produto.numero || 'Vazio' }}</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -96,7 +96,7 @@
                                                             <label for="exampleInputPassword1">N° Funcionarios:</label>
                                                         </div>
                                                         <div class="form-group col-sm-6">
-                                                            <a href="#" editable-text="cliente.numFunc" onaftersave="updateCliente()" >{{ cliente.numFunc || '' }}</a>
+                                                            <a href="#" editable-text="cliente.numFunc" onaftersave="updateCliente()" >{{ cliente.numFunc || 'Vazio' }}</a>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
@@ -104,7 +104,7 @@
                                                             <label for="exampleInputPassword1">Dt. Abertura:</label>
                                                         </div>
                                                         <div class="form-group col-sm-6">
-                                                            <a href="#" editable-text="cliente.dtAbertura" onaftersave="updateCliente()" >{{ cliente.dtAbertura || '' }}</a>
+                                                            <a href="#" editable-text="cliente.dtAbertura" onaftersave="updateCliente()" >{{ cliente.dtAbertura || 'Vazio' }}</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -122,7 +122,7 @@
                                                             <label for="exampleInputPassword1">Responsavel:</label>
                                                         </div>
                                                         <div class="form-group col-sm-6">
-                                                            <a href="#" editable-text="cliente.Responsavel" onaftersave="updateCliente()" >{{ cliente.Responsavel || '' }}</a>
+                                                            <a href="#" editable-text="cliente.Responsavel" onaftersave="updateCliente()" >{{ cliente.Responsavel || 'Vazio' }}</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -139,17 +139,17 @@
                                                             <label for="exampleInputPassword1">CEP:</label>
                                                         </div>
                                                         <div class="form-group col-sm-3">
-                                                            <a href="#" editable-text="cliente.enderecos[0].cep" onaftersave="updateCliente()" >{{ cliente.enderecos[0].cep || '' }}</a>
+                                                            <a href="#" editable-text="cliente.enderecos[0].cep" onaftersave="updateCliente()" >{{ cliente.enderecos[0].cep || 'Vazio' }}</a>
                                                         </div>
                                                         <div class="form-group col-sm-6">
                                                             <div class="form-group col-sm-3">
                                                                 <label for="exampleInputPassword1">Logradouro:</label>
                                                             </div>
                                                             <div class="col-sm-5">
-                                                                <a href="#" editable-text="cliente.enderecos[0].logradouro" onaftersave="updateCliente()" >{{ cliente.enderecos[0].logradouro || '' }}</a>
+                                                                <a href="#" editable-text="cliente.enderecos[0].logradouro" onaftersave="updateCliente()" >{{ cliente.enderecos[0].logradouro || 'Vazio' }}</a>
                                                             </div>
                                                             <div class="col-sm-5">
-                                                                <a href="#" editable-text="cliente.enderecos[0].numero" onaftersave="updateCliente()" >{{ cliente.enderecos[0].numero || '' }}</a>
+                                                                <a href="#" editable-text="cliente.enderecos[0].numero" onaftersave="updateCliente()" >{{ cliente.enderecos[0].numero || 'Vazio' }}</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -160,14 +160,14 @@
                                                             <label for="exampleInputPassword1">Bairro:</label>
                                                         </div>
                                                         <div class="form-group col-sm-3">
-                                                            <a href="#" editable-text="cliente.enderecos[0].bairro" onaftersave="updateCliente()" >{{ cliente.enderecos[0].bairro || '' }}</a>
+                                                            <a href="#" editable-text="cliente.enderecos[0].bairro" onaftersave="updateCliente()" >{{ cliente.enderecos[0].bairro || 'Vazio' }}</a>
                                                         </div>
                                                         <div class="form-group col-sm-4">
                                                             <div class="form-group col-sm-4">
                                                                 <label for="exampleInputPassword1">Cidade:</label>
                                                             </div>
                                                             <div class="col-sm-8">
-                                                                <a href="#" editable-text="cliente.enderecos[0].cidade.nome" onaftersave="updateCliente()" >{{ cliente.enderecos[0].cidade.nome || '' }}</a>
+                                                                <a href="#" editable-text="cliente.enderecos[0].cidade.nome" onaftersave="updateCliente()" >{{ cliente.enderecos[0].cidade.nome || 'Vazio' }}</a>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-3">
@@ -175,7 +175,7 @@
                                                                 <label for="exampleInputPassword1">Estado:</label>
                                                             </div>
                                                             <div class="form-group col-sm-6">
-                                                                <a href="#" editable-text="cliente.enderecos[0].cidade.estado.sigla" onaftersave="updateCliente()" >{{ cliente.enderecos[0].cidade.estado.sigla || '' }}</a>
+                                                                <a href="#" editable-text="cliente.enderecos[0].cidade.estado.sigla" onaftersave="updateCliente()" >{{ cliente.enderecos[0].cidade.estado.sigla || 'Vazio' }}</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -186,14 +186,14 @@
                                                             <label for="exampleInputPassword1">Cod. IBGE:</label>
                                                         </div>
                                                         <div class="form-group col-sm-3">
-                                                            <a href="#" editable-text="cliente.enderecos[0].codIbge" onaftersave="updateCliente()" >{{ cliente.enderecos[0].bairro || '' }}</a>
+                                                            <a href="#" editable-text="cliente.enderecos[0].codIbge" onaftersave="updateCliente()" >{{ cliente.enderecos[0].bairro || 'Vazio' }}</a>
                                                         </div>
                                                         <div class="form-group col-sm-4">
                                                             <div class="form-group col-sm-4">
                                                                 <label for="exampleInputPassword1">Latitude:</label>
                                                             </div>
                                                             <div class="col-sm-8">
-                                                                <a href="#" editable-text="cliente.enderecos[0].latitude" onaftersave="updateCliente()" >{{ cliente.enderecos[0].cidade.nome || '' }}</a>
+                                                                <a href="#" editable-text="cliente.enderecos[0].latitude" onaftersave="updateCliente()" >{{ cliente.enderecos[0].cidade.nome || 'Vazio' }}</a>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-3">
@@ -201,7 +201,7 @@
                                                                 <label for="exampleInputPassword1">Longitude:</label>
                                                             </div>
                                                             <div class="form-group col-sm-6">
-                                                                <a href="#" editable-text="cliente.enderecos[0].longitude" onaftersave="updateCliente()" >{{ cliente.enderecos[0].cidade.estado.sigla || '' }}</a>
+                                                                <a href="#" editable-text="cliente.enderecos[0].longitude" onaftersave="updateCliente()" >{{ cliente.enderecos[0].cidade.estado.sigla || 'Vazio' }}</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -254,7 +254,7 @@
                                                                 <label for="exampleInputPassword1">Telefone:</label>
                                                             </div>
                                                             <div class="col-sm-8">
-                                                                <a href="#" editable-text="cliente.enderecos[0].logradouro" onaftersave="updateCliente()" >{{ cliente.enderecos[0].logradouro || '' }}</a>
+                                                                <a href="#" editable-text="cliente.enderecos[0].logradouro" onaftersave="updateCliente()" >{{ cliente.enderecos[0].logradouro || 'Vazio' }}</a>
                                                             </div>
                                                             <div class="col-sm-2">
                                                                 <button type="button" ng-click="deleteForm(form)" class="btn btn-link removeButton">deletar</button>

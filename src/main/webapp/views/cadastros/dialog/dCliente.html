@@ -12,7 +12,7 @@
                                 <dd>
                                     <input type="checkbox" name="cliente" id="clientes" ng-model="clientes" ng-disabled="true" ng-true-value="true" ng-false-value="false" ng-init='clientes=true' ng-checked='true' >
                                     <label class="ui-checkbox" type="checkbox"  for="{{song.label}}">Cliente</label>
-                                    <label ng-repeat="song in cliente.pessoaTipos">
+                                    <label ng-repeat="song in pessoaTipos">
                                         <div ng-if="song.pessoaTypeEnum != 'CLIENTE'">
                                             <input type="checkbox" name="{{song.label}}" id="{{song.label}}" ng-model="confirmed" ng-click="changes($event,song)">
                                             <label class="ui-checkbox" type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'" for="{{song.label}}">{{song.label}}</label>

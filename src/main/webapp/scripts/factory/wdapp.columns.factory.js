@@ -23,7 +23,7 @@
 						{
 							return '<p>' + data.nome + '</p>';
 						}).withOption('width', '100px'),
-                        DTColumnBuilder.newColumn('nomeFantasia').withTitle('Nome Fantasia').notVisible(),
+                        DTColumnBuilder.newColumn('nome').withTitle('Nome Fantasia').notVisible(),
                         DTColumnBuilder.newColumn(null).withTitle('Tipo').renderWith(function(data, type, full, meta)
 						{
 							if ((data.tipoPessoa) && (data != null) && (data != undefined) && (type == "display"))
@@ -212,7 +212,7 @@
 							if ((data != null) && (data != undefined) && (type == "display"))
 							{
 								if ((data.enderecos) && (data.enderecos[0]))
-									return '<p>' + data.enderecos[0].numero + '</p>';
+									return '<p>' + data.enderecos[0].numero ? data.enderecos[0].numero : "" + '</p>';
 								else
 									return '';
 							}
@@ -227,9 +227,9 @@
 							{
 								if ((data.enderecos) && (data.enderecos[0]))
 								{
-									if ((data.enderecos[0].cidade != null) && (data.enderecos[0].cidade != undefined))
+									if ((data.enderecos[0].cidade))
 									{
-										return '<p>' + data.enderecos[0].cidade.nome + '</p>';
+										return '<p>' + data.enderecos[0].cidade.nome ? data.enderecos[0].cidade.nome : "" + '</p>';
 									}
 									else
 									{
@@ -254,7 +254,7 @@
 								{
 									if (data.enderecos[0].estado)
 									{
-										return '<p>' + data.enderecos[0].estado.sigla + '</p>';
+										return '<p>' + data.enderecos[0].estado.sigla ? data.enderecos[0].estado.sigla : "" + '</p>';
 									}
 									else
 									{
@@ -276,7 +276,7 @@
 							if ((data != null) && (data != undefined) && (type == "display"))
 							{
 								if ((data.enderecos) && (data.enderecos[0]))
-									return '<p>' + data.enderecos[0].pais + '</p>';
+									return '<p>' + data.enderecos[0].pais ? data.enderecos[0].pais :""+ '</p>';
 									else
 									{
 										return ""
@@ -290,18 +290,18 @@
                         DTColumnBuilder.newColumn(null).withTitle('Telefone').renderWith(function(data, type, full, meta)
 						{
 							var telefones = "";
-							if ((data != null) && (data != undefined) && (type == "display"))
+							if ((data) && (type == "display"))
 							{
-								if ((data.telefones != undefined) && (data.telefones.length > 0))
+								if ((data.telefones) && (data.telefones.length > 0))
 								{
 									for (var x = 0; x < data.telefones.length; x++)
 									{
-
-										telefones = telefones + '<br>' + data.telefones[x].numero;
+debugger
+										telefones = telefones + '<br>' + data.telefones[x].numero ? data.telefones[x].numero : "";
 
 									}
 								}
-								return '<p>' + telefones + '</p>';
+								return '<p>' + telefones ? telefones : "" + '</p>';
 							}
 							else
 							{
@@ -318,11 +318,11 @@
 									for (var x = 0; x < data.emails.length; x++)
 									{
 
-										emails = emails + '<br>' + data.emails[x].email;
+										emails = emails + '<br>' + data.emails[x].email ? data.emails[x].email : "";
 
 									}
 								}
-								return '<p>' + emails + '</p>';
+								return '<p>' + emails ? emails : "" + '</p>';
 							}
 							else
 							{

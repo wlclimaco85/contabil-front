@@ -128,11 +128,10 @@
     .controller('ClienteInsertController', function ($rootScope, $scope, fModels, SysMgmtData, toastr, $element, close, fPessoa, doisValorFactory,validationFactory) {
       var vm = this
 
-      $scope.cliente ={};
-      $scope.cliente.tipoPessoa = 1;
       $scope.cliente.documentos = [];
       $scope.cliente.enderecos = [];
       $scope.cliente.emails = [];
+      $scope.cliente.pessoaTipo = [];
       $scope.documentos = [];
       $scope.enderecos = [];
       $scope.telefones = [];
@@ -140,8 +139,7 @@
       $scope.telefones.push({numero : "",telefoneTypeEnum : "PRINCIPAL"});
       $scope.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
 
-      $scope.cliente = {
-          pessoaTipos: [
+      $scope.pessoaTipos= [
             {
               pessoaTypeEnum: 'CLIENTE',
               label: 'Cliente'
@@ -158,10 +156,13 @@
               pessoaTypeEnum: 'CONSFINAL',
               label: 'Consumidor Final'
             }]
-        }
-        $scope.cliente.pessoaTipos.push(qat.model.fnPessoaTipo("CLIENTE", 'INSERT', 'System'))
+
+
 
       fPessoa.fnOpenView(vm,$scope);
+
+
+      $scope.cliente.pessoaTipo.push(qat.model.fnPessoaTipo("CLIENTE", 'INSERT', 'System'));
 
       $scope.cliente.documentos = $scope.documentos;
 
@@ -193,12 +194,6 @@
       $scope.telefones = $scope.cliente.telefones;
       $scope.emails = $scope.cliente.emails;
       $scope.documentos = $scope.cliente.documentos;
-debugger
-      if(($scope.telefones.length == 0))
-          $scope.telefones.push({numero : "",telefoneTypeEnum : "PRINCIPAL"});
-
-      if(($scope.emails.length == 0))
-          $scope.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
 
       fPessoa.fnOpenView(vm,$scope);
 
@@ -236,7 +231,7 @@ debugger
 })()
 ;(function () {
   angular.module('wdApp.apps.cliente.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-    .controller('ClienteViewController', function ($rootScope, $scope, fModels, SysMgmtData, fPessoa, $location) {
+    .controller('ClienteViewController', function ($rootScope, $scope, fModels, SysMgmtData, fPessoa, $location, toastr) {
       var vm = this
 
       var searchObject = $location.search();
@@ -253,26 +248,18 @@ debugger
 				request: new qat.model.empresaInquiryRequest(0, true, null, parseInt(searchObject.id, 10), null, null)
 			}, function(res)
 			{
-
         $scope.cliente = {}
         $scope.cliente = res.clienteList[0];
-        console.log($rootScope.cliente)
-        debugger
+        console.log($scope.cliente);
       });
-
       var fnCallBack = function (res) {
         if (res.operationSuccess == true) {
-            $scope.cliente = res.clienteList[0];
+          toastr.success('Deu Certo seu tanga.', 'Sucess')
         }
       }
+      $scope.updateCliente = function () {
 
-      $scope.saveCliente = function () {
-            $scope.enderecos  =  $scope.cliente.enderecos;
-            $scope.telefones  = $scope.cliente.telefones;
-            $scope.emails     = $scope.cliente.emails;
-            $scope.documentos = $scope.cliente.documentos;
-
-            fPessoa.fnMontaObjeto($scope.cliente, $scope.enderecos, $scope.emails, $scope.telefones, 'UPDATE', 'pessoa/api/cliente/update', fnCallBack)
+        fPessoa.fnMontaObjeto($scope.cliente, $scope.cliente.enderecos, $scope.cliente.emails, $scope.cliente.telefones, 'UPDATE', 'pessoa/api/cliente/update', fnCallBack);
       }
     })
 })()
