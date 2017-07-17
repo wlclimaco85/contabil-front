@@ -103,7 +103,7 @@
 						$rootScope.user = currentUser;
 
 						SysMgmtData.processPostPageData("main/api/request",{
-		                    url: "entidade/api/empresa/fetchPage",
+		                    url: "entidade/api/empresa/fetchUser",
 							token : authToken,
 		                    request: new qat.model.empresaInquiryRequest( 100/20, true,currentUser.user,null,null)}, function(res){
 								if(res.operationSuccess == true)

@@ -104,6 +104,18 @@
 	    this.returnListPaged = _bPagedList;
 	};
 
+	qat.model.reqNote = function(_oCounty, _bList, _bPagedList) {
+	    this.note = _oCounty;
+	    this.returnList = _bList;
+	    this.returnListPaged = _bPagedList;
+	};
+
+	qat.model.reqStatus = function(_oCounty, _bList, _bPagedList) {
+	    this.status = _oCounty;
+	    this.returnList = _bList;
+	    this.returnListPaged = _bPagedList;
+	};
+
 	qat.model.reqFormaPg = function(_oCounty, _bList, _bPagedList) {
 	    this.formaPg = _oCounty;
 	    this.returnList = _bList;
@@ -268,7 +280,8 @@
 	        _emprId = JSON.parse(localStorage.getItem('empresa')).id;
 			_permissaoType = JSON.parse(localStorage.getItem('empresa')).permissaoTypeEnumValue;
 	    }
-	    this.pageSize = qat.model.pageSize;
+		this.pageSize = qat.model.pageSize;
+		this.permissaoTypeEnumValue = _permissaoType;
 	    this.userId = _userId;
 	    this.id = _id;
 	    this.emprId = _emprId;

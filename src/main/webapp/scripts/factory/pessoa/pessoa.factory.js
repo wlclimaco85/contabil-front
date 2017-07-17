@@ -32,12 +32,16 @@
          empresa.enderecos.push(fModels.amont(qat.model.fnEndereco(enderecos[0],action,$rootScope.user.user),action));
 
          //==================Telefone==================================
+         debugger
          var telefonesAux = [];
          for(var x=0;x < telefones.length;x++)
          {
             if((telefones[x])&&(telefones[x].id))
             {
-                telefonesAux.push(fModels.amont(qat.model.fnTelefones(telefones[x],"UPDATE"),"UPDATE"));
+                if(telefones[x].modelAction == "DELETE")
+                    telefonesAux.push(fModels.amont(qat.model.fnTelefones(telefones[x],"DELETE"),"DELETE"));
+                else
+                   telefonesAux.push(fModels.amont(qat.model.fnTelefones(telefones[x],"UPDATE"),"UPDATE"));
             }
             else
             {
@@ -57,7 +61,10 @@
             {
                 if((email) && (email.id))
                 {
-                    emailsAux.push(fModels.amont(qat.model.fnEmails(email,"UPDATE"),"UPDATE"));
+                    if(email.modelAction == "DELETE")
+                        emailsAux.push(fModels.amont(qat.model.fnEmails(email,"DELETE"),"DELETE"));
+                    else
+                        emailsAux.push(fModels.amont(qat.model.fnEmails(email,"UPDATE"),"UPDATE"));
                 }
                 else
                 {

@@ -1,4 +1,4 @@
-<div ng-repeat="email in emails">
+<div ng-repeat="email in emails  | filter:{ modelAction : 'INSERT',modelAction : 'UPDATE',modelAction : 'NONE' }">
     <hr/>
     <div class="row">
 
@@ -10,10 +10,9 @@
                 <input type="text" class="form-control col-sm-4 hide input-id" name="id" placeholder="Email">
                 <input type="text" class="form-control col-sm-4 hide input-type" name="type" value="1" placeholder="Email">
                 <div class="input-group">
-                    <span class="InputSign input-group-addon" target="contatos_emails"><span title="Apenas emails válidos" class="fa fa-envelope"></span></span>
-                    <input type="email" class="form-control" placeholder="" aria-describedby="basic-addon2" ng-model="email.email.email">
+                    <span class="InputSign input-group-addon" target="contatos_emails"><span title="Apenas emails Validos" class="fa fa-envelope"></span></span>
+                    <input type="email" class="form-control" placeholder="" aria-describedby="basic-addon2" ng-model="email.email">
                 </div>
-
             </div>
 
             <div class="col-sm-4" style="margin-top:18px">
@@ -35,7 +34,7 @@
             <div class="col-sm-4">
                 <label for="exampleInputPassword1" class="control-label">{{email.emailTypeEnum}}</label>
                 <div class="input-group">
-                    <span class="InputSign input-group-addon" target="contatos_emails"><span title="Apenas emails válidos" class="fa fa-envelope"></span></span>
+                    <span class="InputSign input-group-addon" target="contatos_emails"><span title="Apenas emails Validos" class="fa fa-envelope"></span></span>
                     <input type="text" class="form-control" ng-model="email.email" placeholder="" aria-describedby="basic-addon2">
                 </div>
             </div>

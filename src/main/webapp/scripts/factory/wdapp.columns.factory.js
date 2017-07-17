@@ -21,7 +21,7 @@
                         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
                         DTColumnBuilder.newColumn(null).withTitle('Nome ou Razão social').renderWith(function(data, type, full, meta)
 						{
-							return '<p>' + data.nome + '</p>';
+							return '<p>' + data.razao + '</p>';
 						}).withOption('width', '100px'),
                         DTColumnBuilder.newColumn('nome').withTitle('Nome Fantasia').notVisible(),
                         DTColumnBuilder.newColumn(null).withTitle('Tipo').renderWith(function(data, type, full, meta)

@@ -67,6 +67,7 @@ qat.model.Cliente = function(_oObjet, _modelAction,_user,$log)
 		this.condPagList = _oObjet.condPagList ? _oObjet.condPagList : null;
 		this.contatoList = _oObjet.contatoList ? _oObjet.contatoList : null;
 		this.parentId = _oObjet.parentId;
+
 		this.emprId = _oObjet.emprId;
 		this.processId = _oObjet.processId;
 		this.tableEnumValue = _oObjet.tableEnumValue;
@@ -668,6 +669,7 @@ qat.model.fnPreco = function(id, _value, _tabela, modelAction)
 qat.model.fnTelefones = function(_telefone, modelAction, _user,$log)
 {
 	var _id = null;
+	debugger
 	if (_telefone)
 	{
 		if (_telefone.id == "" || _telefone.id == " ")
@@ -695,7 +697,7 @@ qat.model.fnTelefones = function(_telefone, modelAction, _user,$log)
 
 		telefones = {
 			id: _id,
-			typeValue: _telefone.typeValue,
+			telefoneTypeEnum: _telefone.telefoneTypeEnum,
 			ddd: '',
 			numero: _telefone.numero,
 			telefoneTypeEnumValue: _telefone.telefoneTypeEnumValue,

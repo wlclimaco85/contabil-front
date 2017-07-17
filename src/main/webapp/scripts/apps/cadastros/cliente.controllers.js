@@ -241,6 +241,25 @@
 				_emprId = JSON.parse(localStorage.getItem('empresa')).id;
       }
 
+      SysMgmtData.processPostPageData("main/api/request",
+			{
+				url: "pessoa/api/cliente/fetchPage",
+				token: $rootScope.authToken,
+				request: new qat.model.empresaInquiryRequest(0, true, null, parseInt(searchObject.id, 10), null, null)
+			}, function(res)
+			{
+        $scope.cliente = {}
+        $scope.cliente = res.clienteList[0];
+        console.log($scope.cliente);
+
+        if($scope.cliente.emails.length === 0 )
+        {
+          $scope.cliente.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+        }
+
+        $scope.status = $scope.cliente.statusList[$scope.cliente.statusList.length - 1];
+        console.log($scope.cliente);
+      });
       $scope.showEmailType = function() {
         var sReturn = 'Not set';
         if($scope.regime)
@@ -256,6 +275,40 @@
         return sReturn;
       };
 
+
+
+      $scope.insertFormTelefone = function(email) {
+        $scope.cliente.telefones.push({numero : "",telefoneTypeEnum : "EMPRESA"});
+      };
+
+      $scope.deleteFormTelefone = function(email) {
+
+        for(var x=0;x < $scope.cliente.telefones.length;x++)
+        {
+          if($scope.cliente.telefones[x].id == email.id || $scope.cliente.telefones[x].numero == email.numero)
+          {
+            $scope.cliente.telefones[x].modelAction = "DELETE";
+          }
+        }
+        $scope.updateCliente();
+      };
+
+      $scope.insertFormEmail = function(email) {
+        $scope.cliente.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+      };
+
+      $scope.deleteFormEmailsdddd = function(email) {
+
+        for(var x=0;x < $scope.cliente.emails.length;x++)
+        {
+          if($scope.cliente.emails[x].id == email.id || $scope.cliente.emails[x].email == email.email)
+          {
+            $scope.cliente.emails[x].modelAction = "DELETE";
+          }
+        }
+        $scope.updateCliente();
+      };
+
       $scope.emailType = [
         {nome : '1',label : 'Principal'},
         {nome : '2',label : 'NFe'},
@@ -264,8 +317,31 @@
         {nome : '5',label : 'Outros'}
       ];
 
+      $scope.statusType = [
+        {nome : 'ATIVO',label : 'Ativo'},
+        {nome : 'INATIVO',label : 'Inativo'},
+        {nome : 'DELETADO',label : 'Deletado'},
+        {nome : 'SUSPENSO',label : 'Suspenso'},
+        {nome : 'NEGATIVADO',label : 'Negativado'},
+        {nome : 'ANALISANDO',label : 'Analisando'}
+      ];
+
+      $scope.telefoneType = [
+        {nome : '1',label : 'Particular'},
+        {nome : '2',label : 'Vendas'},
+        {nome : '3',label : 'Compras'},
+        {nome : '4',label : 'NF-e'},
+        {nome : '5',label : 'Sac'},
+        {nome : '6',label : 'Representante'},
+        {nome : '7',label : 'Diretor'},
+        {nome : '8',label : 'Gerente'},
+        {nome : '9',label : 'Empresa'},
+        {nome : '10',label : 'Celular'}
+      ];
+
+
       $scope.showEmailType = function(value) {
-        var sReturn = 'Not set';
+        var sReturn = 'Vazio';
         if($scope.emailType)
         {
               for(var x = 0;x < $scope.emailType.length;x++)
@@ -279,22 +355,143 @@
         return sReturn;
       };
 
+      $scope.showTelefoneType = function(value) {
+        console.log(value)
+        var sReturn = 'Vazio';
+        if($scope.telefoneType)
+        {
+              for(var x = 0;x < $scope.telefoneType.length;x++)
+              {
+                  if( value && $scope.telefoneType[x].nome == value)
+                  {
+                      sReturn =  $scope.telefoneType[x].label
+                  }
+              }
+        }
+        return sReturn;
+      };
 
-			SysMgmtData.processPostPageData("main/api/request",
-			{
-				url: "pessoa/api/cliente/fetchPage",
-				token: $rootScope.authToken,
-				request: new qat.model.empresaInquiryRequest(0, true, null, parseInt(searchObject.id, 10), null, null)
-			}, function(res)
-			{
-        $scope.cliente = {}
-        $scope.cliente = res.clienteList[0];
-        console.log($scope.cliente);
-      });
+      $scope.showStatusType = function(value) {
+
+        var sReturn = 'Vazio';
+
+        if($scope.statusType)
+        {
+              for(var x = 0;x < $scope.statusType.length;x++)
+              {
+                  if( value && $scope.statusType[x].nome == value)
+                  {
+                      sReturn =  $scope.statusType[x].label
+                  }
+              }
+        }
+
+        return sReturn;
+      };
+
       var fnCallBack = function (res) {
         if (res.operationSuccess == true) {
+          for (var a = 0; a < res.clienteList.length;a++)
+          {
+              if( res.clienteList[a].id === $scope.cliente.id)
+              {
+                $scope.cliente = res.clienteList[a];
+                if($scope.cliente.emails.length === 0 )
+                {
+                  $scope.cliente.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+                }
+                return;
+              }
+
+          }
+
           toastr.success('Deu Certo seu tanga.', 'Sucess')
         }
+      }
+
+      $scope.formatterDate = function (value) {
+        return moment(value).format('DD/MM/YYYY H:MM')
+      }
+      $scope.updateStatus = function () {
+
+          var oObject = {
+            dataStatus: (new Date()).getTime(),
+            status : $scope.status.status,
+            acaoEnumValue : 0,
+            tabelaEnumValue : 17,
+            parentId : $scope.cliente.id,
+            note: $scope.status.note
+          }
+
+          SysMgmtData.processPostPageData("main/api/request", {
+              url: "entidade/api/status/insert",
+              token: $rootScope.authToken,
+              request: new qat.model.reqStatus(oObject, true, true)
+          }, function(res) {
+              if (res.operationSuccess == true) {
+                SysMgmtData.processPostPageData("main/api/request",
+                {
+                  url: "pessoa/api/cliente/fetchPage",
+                  token: $rootScope.authToken,
+                  request: new qat.model.empresaInquiryRequest(0, true, null, parseInt($scope.cliente.id, 10), null, null)
+                }, function(res)
+                {
+                  $scope.cliente = {}
+                  $scope.cliente = res.clienteList[0];
+                  console.log($scope.cliente);
+
+                  if($scope.cliente.emails.length === 0 )
+                  {
+                    $scope.cliente.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+                  }
+
+                  $scope.status = $scope.cliente.statusList[$scope.cliente.statusList.length - 1];
+                });
+                toastr.success('Deu Certo seu tanga.', 'Sucess')
+              }
+          });
+      }
+
+      $scope.insertNote = function () {
+debugger
+          var oObject = {
+            dataStatus: (new Date()).getTime(),
+            noteText : $scope.noteText,
+            acaoEnumValue : 0,
+            tabelaEnumValue : 17,
+            parentId : $scope.cliente.id,
+            emprId : $scope.cliente.emprId,
+            createUser : $rootScope.user.user,
+            createDateUTC : (new Date()).getTime()
+          }
+
+          SysMgmtData.processPostPageData("main/api/request", {
+              url: "entidade/api/note/insert",
+              token: $rootScope.authToken,
+              request: new qat.model.reqNote(oObject, true, true)
+          }, function(res) {
+              if (res.operationSuccess == true) {
+                SysMgmtData.processPostPageData("main/api/request",
+                {
+                  url: "pessoa/api/cliente/fetchPage",
+                  token: $rootScope.authToken,
+                  request: new qat.model.empresaInquiryRequest(0, true, null, parseInt($scope.cliente.id, 10), null, null)
+                }, function(res)
+                {
+                  $scope.cliente = {}
+                  $scope.cliente = res.clienteList[0];
+                  console.log($scope.cliente);
+
+                  if($scope.cliente.emails.length === 0 )
+                  {
+                    $scope.cliente.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+                  }
+
+                  $scope.status = $scope.cliente.statusList[$scope.cliente.statusList.length - 1];
+                });
+                toastr.success('Deu Certo seu tanga.', 'Sucess')
+              }
+          });
       }
       $scope.updateCliente = function () {
 
