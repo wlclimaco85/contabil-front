@@ -257,28 +257,6 @@
         },
         empresa: function (vm,scope) {
 
-          scope.validationNomeRazao = function() {}
-
-          //================
-
-          scope.validationDtNasc = function(tipo) {}
-
-          scope.validationInscJunt = function() {}
-
-          //=====================
-
-          scope.validationCNPJ = function(tipo, cnpj)
-          {
-
-            if (tipo && tipo == 2)
-            {
-              validationFactory.cnpj(cnpj);
-            }
-            else
-            {
-              return true;
-            }
-          }
           scope.validationInsEst = function(tipo, value)
           {
             if (tipo && tipo == 2)
@@ -383,7 +361,7 @@
           //=====================
           scope.validationEstado = function() {}
           scope.validationMunicipio = function() {}
-          
+
         },
         tributacao: function () {
           $('.tributacaoForm').formValidation({

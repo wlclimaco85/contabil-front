@@ -13,50 +13,44 @@
                 <div class="row content">
                     <br>
                     <div class="col-sm-9" ng-controller="ClienteViewController">
-                        <div class="row col-sm-12 well">
-                            <div class="col-sm-2">
+                        <div class="row well">
+                            <div class="col-sm-3">
                                 <label for="exampleInputEmail1"> Status: </label>
                             </div>
-                            <div class="col-sm-2"> <span class="label label-info">Ativo</span> </div>
-                            <div class="col-sm-2">
-                                <button class="btn btn-warning" ng-click="pc.status(10)"><i class="fa fa-edit"></i>
-                                </button>
-                            </div>
-                            <div class="col-sm-2">
-                                <button class="btn btn-warning" ng-click="pc.status(10)"><i class="fa fa-edit"></i>
-                                </button>
+                            <div class="col-sm-9">
+                                <a href="#" editable-select="email.emailTypeEnumValue" onaftersave="updateCliente()" e-ng-options="sa.nome as sa.label for sa in emailType">{{ showEmailType(email.emailTypeEnumValue) || 'Vazio' }}</a>
                             </div>
                         </div>
                         <br>
                         <div class="row"></div>
-                        <div class="well">
+                        <div class="">
                             <div class="col-sm-12">
                                         <div class="row " style="margin-top : 20px"></div>
                                         <div class="panel panel-default" style="background:#EFEFEF">
                                             <div class="panel-heading" style="background: #EFEFEF">
                                                 <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group col-sm-3">
-                                                            <label for="exampleInputPassword1">Razão Social:</label>
-                                                        </div>
-                                                        <div class="form-group col-sm-5">
-                                                            <a href="#" editable-text="cliente.razao" onaftersave="updateCliente()" >{{ cliente.razao || 'Vazio' }}</a>
-                                                        </div>
+                                                    <div class="form-group col-sm-3">
+                                                        <label for="exampleInputPassword1">Razão Social:</label>
+                                                    </div>
+                                                    <div class="form-group col-sm-5">
+                                                        <a href="#" editable-text="cliente.razao" onaftersave="updateCliente()" >{{ cliente.razao || 'Vazio' }}</a>
+                                                    </div>
+                                                    <div class="form-group col-sm-4">
                                                         <div class="form-group col-sm-4">
-                                                            <div class="form-group col-sm-6">
-                                                                <label for="exampleInputPassword1">Código:</label>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <a href="#" editable-text="cliente.codigo" onaftersave="updateCliente()" >{{ cliente.codigo || 'Vazio' }}</a>
-                                                            </div>
+                                                            <label for="exampleInputPassword1">Código:</label>
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            <a href="#" editable-text="cliente.codigo" onaftersave="updateCliente()" >{{ cliente.codigo || 'Vazio' }}</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="form-group col-sm-9">
+                                                    <div class="form-group col-sm-3">
                                                         <label for="exampleInputEmail1">Nome Fantasia</label>
-                                                        <a href="#" editable-text="cliente.nome" onaftersave="updateCliente()" >{{ cliente.nome || 'Vazio' }}</a>
                                                     </div>
+                                                    <div class="form-group col-sm-7">
+                                                            <a href="#" editable-text="cliente.nome" onaftersave="updateCliente()" >{{ cliente.nome || 'Vazio' }}</a>
+                                                        </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-sm-6">
@@ -81,16 +75,16 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="form-group col-sm-6">
-                                                        <label for="exampleInputPassword1">Inscr. Municipal:</label>
-                                                    </div>
-                                                    <div class="form-group col-sm-6">
-                                                        <div ng-repeat="produto in cliente.documentos | filter:{ documentoType: 'IM' } ">
-                                                            <a href="#" editable-text="produto.numero" onaftersave="updateCliente()" >{{ produto.numero || 'Vazio' }}</a>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="exampleInputPassword1">Inscr. Municipal:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <div ng-repeat="produto in cliente.documentos | filter:{ documentoType: 'IM' } ">
+                                                                <a href="#" editable-text="produto.numero" onaftersave="updateCliente()" >{{ produto.numero || 'Vazio' }}</a>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
                                                     <div class="col-sm-6">
                                                         <div class="form-group col-sm-6">
                                                             <label for="exampleInputPassword1">N° Funcionarios:</label>
@@ -99,6 +93,8 @@
                                                             <a href="#" editable-text="cliente.numFunc" onaftersave="updateCliente()" >{{ cliente.numFunc || 'Vazio' }}</a>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="row">
                                                     <div class="col-sm-6">
                                                         <div class="form-group col-sm-6">
                                                             <label for="exampleInputPassword1">Dt. Abertura:</label>
@@ -108,24 +104,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group col-sm-6">
-                                                            <label for="exampleInputPassword1">Código Regime Tribut.:</label>
-                                                        </div>
-                                                        <div class="form-group col-sm-6">
-                                                            <a href="#" editable-select="cliente.regime.id" onaftersave="updateCliente()" e-ng-options="sa.id as sa.nome for sa in regime">{{ showRegime() }}</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group col-sm-6">
-                                                            <label for="exampleInputPassword1">Responsavel:</label>
-                                                        </div>
-                                                        <div class="form-group col-sm-6">
-                                                            <a href="#" editable-text="cliente.Responsavel" onaftersave="updateCliente()" >{{ cliente.Responsavel || 'Vazio' }}</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -135,73 +113,77 @@
                                             <div class="panel-heading" style="background: #DDDDDD">
                                                 <div class="row">
                                                     <div class="col-sm-12">
-                                                        <div class="form-group col-sm-3">
-                                                            <label for="exampleInputPassword1">CEP:</label>
-                                                        </div>
-                                                        <div class="form-group col-sm-3">
-                                                            <a href="#" editable-text="cliente.enderecos[0].cep" onaftersave="updateCliente()" >{{ cliente.enderecos[0].cep || 'Vazio' }}</a>
-                                                        </div>
-                                                        <div class="form-group col-sm-6">
+                                                        <div class="form-group col-sm-4">
                                                             <div class="form-group col-sm-3">
+                                                                <label for="exampleInputPassword1">CEP:</label>
+                                                            </div>
+                                                            <div class="form-group col-sm-9">
+                                                                <a href="#" editable-text="cliente.enderecos[0].cep" onaftersave="updateCliente()" >{{ cliente.enderecos[0].cep || 'Vazio' }}</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            <div class="col-sm-3">
                                                                 <label for="exampleInputPassword1">Logradouro:</label>
                                                             </div>
-                                                            <div class="col-sm-5">
+                                                            <div class="col-sm-6">
                                                                 <a href="#" editable-text="cliente.enderecos[0].logradouro" onaftersave="updateCliente()" >{{ cliente.enderecos[0].logradouro || 'Vazio' }}</a>
                                                             </div>
-                                                            <div class="col-sm-5">
+                                                            <div class="col-sm-3">
                                                                 <a href="#" editable-text="cliente.enderecos[0].numero" onaftersave="updateCliente()" >{{ cliente.enderecos[0].numero || 'Vazio' }}</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group col-sm-2">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group col-sm-4">
                                                             <label for="exampleInputPassword1">Bairro:</label>
                                                         </div>
-                                                        <div class="form-group col-sm-3">
+                                                        <div class="form-group col-sm-8">
                                                             <a href="#" editable-text="cliente.enderecos[0].bairro" onaftersave="updateCliente()" >{{ cliente.enderecos[0].bairro || 'Vazio' }}</a>
                                                         </div>
+                                                    </div>
+                                                    <div class="form-group col-sm-4">
                                                         <div class="form-group col-sm-4">
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputPassword1">Cidade:</label>
-                                                            </div>
-                                                            <div class="col-sm-8">
-                                                                <a href="#" editable-text="cliente.enderecos[0].cidade.nome" onaftersave="updateCliente()" >{{ cliente.enderecos[0].cidade.nome || 'Vazio' }}</a>
-                                                            </div>
+                                                            <label for="exampleInputPassword1">Cidade:</label>
                                                         </div>
-                                                        <div class="col-sm-3">
-                                                            <div class="form-group col-sm-6">
-                                                                <label for="exampleInputPassword1">Estado:</label>
-                                                            </div>
-                                                            <div class="form-group col-sm-6">
-                                                                <a href="#" editable-text="cliente.enderecos[0].cidade.estado.sigla" onaftersave="updateCliente()" >{{ cliente.enderecos[0].cidade.estado.sigla || 'Vazio' }}</a>
-                                                            </div>
+                                                        <div class="col-sm-8">
+                                                            <a href="#" editable-text="cliente.enderecos[0].cidade.nome" onaftersave="updateCliente()" >{{ cliente.enderecos[0].cidade.nome || 'Vazio' }}</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="exampleInputPassword1">Estado:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <a href="#" editable-text="cliente.enderecos[0].cidade.estado.sigla" onaftersave="updateCliente()" >{{ cliente.enderecos[0].cidade.estado.sigla || 'Vazio' }}</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-sm-12">
-                                                        <div class="form-group col-sm-2">
-                                                            <label for="exampleInputPassword1">Cod. IBGE:</label>
-                                                        </div>
-                                                        <div class="form-group col-sm-3">
-                                                            <a href="#" editable-text="cliente.enderecos[0].codIbge" onaftersave="updateCliente()" >{{ cliente.enderecos[0].bairro || 'Vazio' }}</a>
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group col-sm-4">
+                                                                <label for="exampleInputPassword1">Cod. IBGE:</label>
+                                                            </div>
+                                                            <div class="form-group col-sm-8">
+                                                                <a href="#" editable-text="cliente.enderecos[0].codIbge" onaftersave="updateCliente()" >{{ cliente.enderecos[0].codIbge || 'Vazio' }}</a>
+                                                            </div>
                                                         </div>
                                                         <div class="form-group col-sm-4">
-                                                            <div class="form-group col-sm-4">
+                                                            <div class="form-group col-sm-6">
                                                                 <label for="exampleInputPassword1">Latitude:</label>
                                                             </div>
-                                                            <div class="col-sm-8">
-                                                                <a href="#" editable-text="cliente.enderecos[0].latitude" onaftersave="updateCliente()" >{{ cliente.enderecos[0].cidade.nome || 'Vazio' }}</a>
+                                                            <div class="col-sm-6">
+                                                                <a href="#" editable-text="cliente.enderecos[0].latitude" onaftersave="updateCliente()" >{{ cliente.enderecos[0].latitude || 'Vazio' }}</a>
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-3">
+                                                        <div class="col-sm-4">
                                                             <div class="form-group col-sm-6">
                                                                 <label for="exampleInputPassword1">Longitude:</label>
                                                             </div>
                                                             <div class="form-group col-sm-6">
-                                                                <a href="#" editable-text="cliente.enderecos[0].longitude" onaftersave="updateCliente()" >{{ cliente.enderecos[0].cidade.estado.sigla || 'Vazio' }}</a>
+                                                                <a href="#" editable-text="cliente.enderecos[0].longitude" onaftersave="updateCliente()" >{{ cliente.enderecos[0].longitude || 'Vazio' }}</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -213,24 +195,27 @@
                                         <div class="row " style="margin-top : 20px"></div>
                                         <div class="panel panel-default" style="background:#EEEEEE">
                                             <div class="panel-heading" style="background: #DDDDDD">
-                                                <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group col-sm-3">
-                                                            <label for="exampleInputPassword1">Tipo Email:</label>
+                                                <div ng-repeat="email in cliente.emails">
+                                                    <div class="row">
+                                                        <div class="col-sm-5">
+                                                            <div class="form-group col-sm-3">
+                                                                <label for="exampleInputPassword1">Tipo Email:</label>
+                                                            </div>
+                                                            <div class="form-group col-sm-3">
+                                                                <a href="#" editable-select="email.emailTypeEnumValue" onaftersave="updateCliente()" e-ng-options="sa.nome as sa.label for sa in emailType">{{ showEmailType(email.emailTypeEnumValue) || 'Vazio' }}</a>
+                                                            </div>
                                                         </div>
-                                                        <div class="form-group col-sm-3">
-                                                            <a href="#" editable-select="cliente.regime.id" onaftersave="updateCliente()" e-ng-options="sa.id as sa.nome for sa in regime">{{ showRegime() }}</a>
-                                                        </div>
-                                                        <div class="form-group col-sm-6">
+                                                        <div class="form-group col-sm-5">
                                                             <div class="form-group col-sm-3">
                                                                 <label for="exampleInputPassword1">Email:</label>
                                                             </div>
-                                                            <div class="col-sm-8">
-                                                                <a href="#" editable-text="cliente.enderecos[0].logradouro" onaftersave="updateCliente()" >{{ cliente.enderecos[0].logradouro || '' }}</a>
+                                                            <div class="col-sm-8 popover-wrapper">
+                                                                <a href="#" editable-text="email.email" onaftersave="updateCliente()" >{{ email.email || 'Vazio' }}</a>
                                                             </div>
-                                                            <div class="col-sm-2">
-                                                                <button type="button" ng-click="deleteForm(form)" class="btn btn-link removeButton">deletar</button>
-                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                                                            <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -242,23 +227,26 @@
                                         <div class="panel panel-default" style="background:#EEEEEE">
                                             <div class="panel-heading" style="background: #DDDDDD">
                                                 <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group col-sm-3">
-                                                            <label for="exampleInputPassword1">Tipo Telefone:</label>
+                                                    <div ng-repeat="telefone in cliente.telefones">
+                                                        <div class="col-sm-5">
+                                                            <div class="form-group col-sm-5">
+                                                                <label for="exampleInputPassword1">Tipo:</label>
+                                                            </div>
+                                                            <div class="form-group col-sm-7">
+                                                                <a href="#" editable-select="telefone.telefoneTypeEnum" onaftersave="updateCliente()" e-ng-options="sa.id as sa.nome for sa in regime">{{ showRegime() }}</a>
+                                                            </div>
                                                         </div>
-                                                        <div class="form-group col-sm-3">
-                                                            <a href="#" editable-select="cliente.regime.id" onaftersave="updateCliente()" e-ng-options="sa.id as sa.nome for sa in regime">{{ showRegime() }}</a>
-                                                        </div>
-                                                        <div class="form-group col-sm-6">
-                                                            <div class="form-group col-sm-3">
+                                                        <div class="form-group col-sm-5">
+                                                            <div class="form-group col-sm-4">
                                                                 <label for="exampleInputPassword1">Telefone:</label>
                                                             </div>
-                                                            <div class="col-sm-8">
-                                                                <a href="#" editable-text="cliente.enderecos[0].logradouro" onaftersave="updateCliente()" >{{ cliente.enderecos[0].logradouro || 'Vazio' }}</a>
+                                                            <div class="col-sm-8 popover-wrapper">
+                                                                <a href="#" editable-text="telefone.numero" onaftersave="updateCliente()" >{{ telefone.numero || 'Vazio' }}</a>
                                                             </div>
-                                                            <div class="col-sm-2">
-                                                                <button type="button" ng-click="deleteForm(form)" class="btn btn-link removeButton">deletar</button>
-                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                                                            <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
                                                         </div>
                                                     </div>
                                                 </div>

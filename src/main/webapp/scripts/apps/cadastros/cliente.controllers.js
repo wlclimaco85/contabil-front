@@ -239,7 +239,46 @@
 			if ((localStorage.getItem('empresa') !== undefined) && (localStorage.getItem('empresa') !== null))
 			{
 				_emprId = JSON.parse(localStorage.getItem('empresa')).id;
-			}
+      }
+
+      $scope.showEmailType = function() {
+        var sReturn = 'Not set';
+        if($scope.regime)
+        {
+              for(var x = 0;x < $scope.regime.length;x++)
+              {
+                  if( $scope.empresa.regime && $scope.regime[x].id == $scope.empresa.regime.id)
+                  {
+                      sReturn =  $scope.regime[x].nome
+                  }
+              }
+        }
+        return sReturn;
+      };
+
+      $scope.emailType = [
+        {nome : '1',label : 'Principal'},
+        {nome : '2',label : 'NFe'},
+        {nome : '3',label : 'Compras'},
+        {nome : '4',label : 'Vendas'},
+        {nome : '5',label : 'Outros'}
+      ];
+
+      $scope.showEmailType = function(value) {
+        var sReturn = 'Not set';
+        if($scope.emailType)
+        {
+              for(var x = 0;x < $scope.emailType.length;x++)
+              {
+                  if( value && $scope.emailType[x].nome == value)
+                  {
+                      sReturn =  $scope.emailType[x].label
+                  }
+              }
+        }
+        return sReturn;
+      };
+
 
 			SysMgmtData.processPostPageData("main/api/request",
 			{

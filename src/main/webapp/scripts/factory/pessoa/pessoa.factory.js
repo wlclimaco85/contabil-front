@@ -8,16 +8,20 @@
 	factory.fnMontaObjeto = function(empresa,enderecos,emails,telefones,action,url,callBack){
 
          //===============Documentos====================
+
          var documentos = [];
          for(var x=0;x < empresa.documentos.length;x++)
          {
-            if((empresa.documentos[x]) && (empresa.documentos[x].id))
+            if((empresa.documentos[x].numero)&&(empresa.documentos[x].numero != ""))
             {
-                documentos.push(fModels.amont(qat.model.fnDocumento(empresa.documentos[x],"UPDATE",$rootScope.user.user),"UPDATE"));
-            }
-            else
-            {
-                documentos.push(fModels.amont(qat.model.fnDocumento(empresa.documentos[x],"INSERT",$rootScope.user.user),"INSERT"));
+                if((empresa.documentos[x]) && (empresa.documentos[x].id))
+                {
+                    documentos.push(fModels.amont(qat.model.fnDocumento(empresa.documentos[x],"UPDATE",$rootScope.user.user),"UPDATE"));
+                }
+                else
+                {
+                    documentos.push(fModels.amont(qat.model.fnDocumento(empresa.documentos[x],"INSERT",$rootScope.user.user),"INSERT"));
+                }
             }
          }
          empresa.documentos =[];
@@ -31,13 +35,13 @@
          var telefonesAux = [];
          for(var x=0;x < telefones.length;x++)
          {
-            if((telefones[x].telefone)&&(telefones[x].telefone.id))
+            if((telefones[x])&&(telefones[x].id))
             {
-                telefonesAux.push(fModels.amont(qat.model.fnTelefones(telefones[x].telefone,"UPDATE"),"UPDATE"));
+                telefonesAux.push(fModels.amont(qat.model.fnTelefones(telefones[x],"UPDATE"),"UPDATE"));
             }
             else
             {
-                telefonesAux.push(fModels.amont(qat.model.fnTelefones(telefones[x].telefone,"INSERT"),"INSERT"));
+                telefonesAux.push(fModels.amont(qat.model.fnTelefones(telefones[x],"INSERT"),"INSERT"));
             }
          }
          empresa.telefones =[];
@@ -48,14 +52,17 @@
          var email = {};
          for(var x=0;x < emails.length;x++)
          {
-            email = emails[x].email;
-            if((email) && (email.id))
+            email = emails[x];
+            if(email.email && email.email.trim() != "")
             {
-                emailsAux.push(fModels.amont(qat.model.fnEmails(email,"UPDATE"),"UPDATE"));
-            }
-            else
-            {
-                emailsAux.push(fModels.amont(qat.model.fnEmails(email,"INSERT"),"INSERT"));
+                if((email) && (email.id))
+                {
+                    emailsAux.push(fModels.amont(qat.model.fnEmails(email,"UPDATE"),"UPDATE"));
+                }
+                else
+                {
+                    emailsAux.push(fModels.amont(qat.model.fnEmails(email,"INSERT"),"INSERT"));
+                }
             }
 
         }

@@ -26,7 +26,7 @@
                         DTColumnBuilder.newColumn('nome').withTitle('Nome Fantasia').notVisible(),
                         DTColumnBuilder.newColumn(null).withTitle('Tipo').renderWith(function(data, type, full, meta)
 						{
-							if ((data.tipoPessoa) && (data != null) && (data != undefined) && (type == "display"))
+							if ((data) && (type == "display"))
 							{
 								if ((data.tipoPessoa == 1))
 								{
@@ -39,7 +39,7 @@
 							}
 							else
 							{
-								return '<p>Fisica</p>'
+								return '';
 							}
 						}).withOption('width', '50px'),
                         DTColumnBuilder.newColumn(null).withTitle('CPF ou CNPJ').renderWith(function(data, type, full, meta)
@@ -296,7 +296,6 @@
 								{
 									for (var x = 0; x < data.telefones.length; x++)
 									{
-debugger
 										telefones = telefones + '<br>' + data.telefones[x].numero ? data.telefones[x].numero : "";
 
 									}
@@ -1189,7 +1188,7 @@ debugger
 								else
 								{
 									if (data.imposto.issqn != undefined)
-									{ //debugger
+									{
 										var retorno = '<table class="table"><thead></thead><tbody>';
 										retorno = retorno + "<tr><td>Aliq. ISSQN</td><td>" + data.imposto.issqn.valorAliquota + "</td></tr>"
 										retorno = retorno + "<tr><td>Exigibilidade do ISS</td><td>" + (data.imposto.issqn.indicadorExigibilidadeISS ? data.imposto.issqn.indicadorExigibilidadeISS.descricao :
@@ -1216,7 +1215,6 @@ debugger
 
 									if (data.imposto.ipi.tributado != undefined)
 									{
-										//debugger
 										retorno = retorno + (data.imposto.ipi.tributado.situacaoTributaria ? "<tr><td>IPI - Situação Tributaria : " + (data.imposto.ipi.tributado.situacaoTributaria.descricao) +
 											"</td></tr>" : "")
 										retorno = retorno + (data.imposto.ipi.classeEnquadramento ? "<tr><td>Classe cigarros/bebidas" + data.imposto.ipi.classeEnquadramento + "</td></tr>" : "")
