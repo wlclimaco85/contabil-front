@@ -70,7 +70,7 @@
 		};
 
 		//initial data load
-		//debugger
+		////debugger
 		processPostData("main/api/request/", {url : "county/api/fetchPage", token :$rootScope.authToken, request : new qat.model.pagedInquiryRequest()}, false);
 
 		//reusable data methods

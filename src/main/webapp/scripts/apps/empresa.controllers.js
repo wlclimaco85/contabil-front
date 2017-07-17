@@ -162,7 +162,7 @@
 				}, function(res)
 				{
 					console.log(res)
-					//   debugger
+					//   //debugger
 					if (res.operationSuccess == true)
 					{
 						window.location.assign("index5.html")
@@ -407,7 +407,7 @@
 
 			$('#dashboard-header').hide();
 			$('#header').hide();
-			//    debugger
+			//    //debugger
 			pvm.team = 'test'; // $scope.$location.search().keyword
 			// pvm.empresa = new qat.model.Empresa();
 			pvm.buscaRCep = function(cepValue)
@@ -432,7 +432,7 @@
 				$http.get(viaCepUrl, config).then(function(response)
 				{
 					var raw;
-					//debugger
+					////debugger
 					raw = response.data;
 					console.log(raw)
 					$scope.empresa.enderecos[0].cep = raw.cep;
@@ -590,7 +590,7 @@
 			         var viaCepUrl = 'https://cosmos.bluesoft.com.br/api/gtins/7891910000197/json/';
 			         $http.get(viaCepUrl,config).then(function(response) {
 			           var raw;
-			           debugger
+			           //debugger
 			           raw = response.data;
 			           if (raw.erro) {
 			             return deferred.reject('CEP not found');

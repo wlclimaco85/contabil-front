@@ -97,7 +97,7 @@
 			"active": 1,
 			"flagValue": -1
 			},
-		"no_debugger": {
+		"no_//debugger": {
 			"active": 1,
 			"flagValue": -1
 			},
@@ -714,7 +714,7 @@
 			"active": 0,
 			"flagValue": -1
 			},
-		"drop_debugger": {
+		"drop_//debugger": {
 			"active": 1,
 			"flagValue": -1
 			},

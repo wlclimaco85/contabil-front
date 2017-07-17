@@ -42,7 +42,7 @@
         }
 
         $scope.deleteForm = function(formScope){
-debugger
+//debugger
             delete $scope.emails(formScope);
         }
 

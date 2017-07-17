@@ -647,7 +647,7 @@ angular.module('xeditable').directive('editableTextarea', ['editableDirectiveFac
 
 //textarea
 angular.module('xeditable').directive('editableTextFile', ['editableDirectiveFactory',
-  function(editableDirectiveFactory) { debugger
+  function(editableDirectiveFactory) { //debugger
     return editableDirectiveFactory({
       directiveName: 'editableTextFile',
       inputTpl: '<input type="file" id="exampleInputFile"><p class="help-block">Example block-level help text here.</p>',

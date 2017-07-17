@@ -266,7 +266,7 @@
             }
             $scope.saveSociod = function() {
                 var socios = []
-debugger
+//debugger
                 var oObject = fModels.amont($scope.socio,"INSERT");
                 socios.push(oObject);
                 oObject = {};
@@ -276,7 +276,7 @@ debugger
                     token: $rootScope.authToken,
                     request: new qat.model.reqSocio(oObject, true, true)
                 }, function(res) {
-                    debugger
+                    //debugger
                     fnCallBack(res);
                 });
               //  fPessoa.fnMontaObjeto($scope.socio, null, 'INSERT', "financeiro/api/socio/insert/", fnCallBack);
@@ -293,7 +293,7 @@ debugger
             console.log($rootScope.socio)
             function saveSocio() {
 
-                debugger
+                //debugger
                 fPessoa.fnMontaObjeto($scope.socio, null, 'UPDATE', "site/api/socio/update/", fnCallBack);
             }
         });

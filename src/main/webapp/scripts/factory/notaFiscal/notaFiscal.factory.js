@@ -379,7 +379,7 @@
 		}
 
 		factory.fnCreateObjectNFSaida = function (_emitente,_notaFiscal,_produtos,_financeiros,_endereco, _action) {
-			debugger
+			//debugger
 
 
             _action = "INSERT";

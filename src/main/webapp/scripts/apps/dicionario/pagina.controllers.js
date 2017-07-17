@@ -272,7 +272,7 @@
             $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
             $scope.format = $scope.formats[1];
             var fnCallBack = function(oResponse) {
-             //   debugger
+             //   //debugger
                 console.log(oResponse)
             }
             $scope.savePagina = function() {
@@ -294,7 +294,7 @@ console.log(oObject);
                     token: $rootScope.authToken,
                     request: new qat.model.reqPagina(oObject, true, true)
                 }, function(res) {
-               //     debugger
+               //     //debugger
                     fnCallBack(res);
                 });
               //  fPessoa.fnMontaObjeto($scope.pagina, null, 'INSERT', "financeiro/api/pagina/insert/", fnCallBack);

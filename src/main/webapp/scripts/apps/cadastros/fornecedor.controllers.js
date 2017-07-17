@@ -121,7 +121,7 @@
           close(null, 500)
           toastr.success('Deu Certo seu tanga.', 'Sucess')
           $rootScope.reloadDataFornecedor(function (data) {
-            debugger
+            //debugger
           })
         }
       }

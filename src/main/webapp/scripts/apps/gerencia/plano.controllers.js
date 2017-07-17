@@ -380,7 +380,7 @@
         }
 
         function status() {
-            debugger
+            //debugger
 
         }
 
@@ -458,7 +458,7 @@
         }
 
         function toggle() {
-            debugger
+            //debugger
             $scope.state = !$scope.state;
         };
     }
@@ -485,7 +485,7 @@
 
         $scope.removeForm= function(type){
 
-            debugger
+            //debugger
 
         };
 
@@ -556,7 +556,7 @@
 
   vm.counter = 0;
   vm.onSelectCallback = function (item, model){
-  //  debugger
+  //  //debugger
     vm.counter++;
   //  $scope.plano.servicoList.push(item)
     vm.eventResult = {item: item, model: model};
@@ -599,7 +599,7 @@
   vm.person.selectedSingle = 'Samantha';
   vm.person.selectedSingleKey = '5';
   // To run the demos with a preselected person object, uncomment the line below.
-//  debugger
+//  //debugger
  // vm.person.selected = vm.person.selectedValue;
 
   vm.servico = [
@@ -615,7 +615,7 @@
        //   cfop : {"id":"10"}
        // }
     }, function(res) {
-     //   debugger
+     //   //debugger
         vm.servico = res.servicoList;
         console.log(res)
     });
@@ -634,7 +634,7 @@
        //   cfop : {"id":"10"}
        // }
     }, function(res) {
-       // debugger
+       // //debugger
         vm.site = res.sites;
         console.log(res)
     });
@@ -696,7 +696,7 @@
                 return vm.dt = null;
             };
             vm.open = function($event) {
-                debugger
+                //debugger
                 $event.preventDefault();
                 $event.stopPropagation();
                 return vm.opened = true;
@@ -709,7 +709,7 @@
             vm.format = vm.formats[1];
 
             $scope.savessssS = function() {
-                debugger
+                //debugger
 
                 var array = [];
 
@@ -774,7 +774,7 @@
                            //   cfop : {"id":"10"}
                            // }
                         }, function(res) {
-                            debugger
+                            //debugger
                             console.log(res)
                         });
                     };

@@ -129,7 +129,7 @@ angular
         };
 
         $scope.deleteForm = function(formScope){
-debugger
+//debugger
         	delete $scope.forms(formScope);
         }
 
@@ -182,7 +182,7 @@ debugger
         };
 
         $scope.deleteForm = function(formScope){
-debugger
+//debugger
         	delete $scope.forms(formScope);
         }
 
@@ -203,7 +203,7 @@ debugger
     ['$scope', function telefoneController($scope) {
         var vm = this;
 
-debugger
+//debugger
 
         $scope.createForm = function(type){
 
@@ -240,7 +240,7 @@ debugger
         }
 
         $scope.deleteForm = function(formScope){
-debugger
+//debugger
             delete $scope.forms(formScope);
         }
 

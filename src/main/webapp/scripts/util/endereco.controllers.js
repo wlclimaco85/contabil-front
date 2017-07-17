@@ -122,7 +122,7 @@
 			            var viaCepUrl = "https://viacep.com.br/ws/" + formatedCep + "/json/";
 			            $http.get(viaCepUrl,config).then(function(response) {
 			                var raw;
-			                debugger
+			                //debugger
 			                raw = response.data;
 			                console.log(raw)
 			                $scope.enderecos[0].cep = raw.cep;

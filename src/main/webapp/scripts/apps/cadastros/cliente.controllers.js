@@ -172,7 +172,7 @@
           close(null, 500)
           toastr.success('Deu Certo seu tanga.', 'Sucess')
           $rootScope.reloadDataCliente(function (data) {
-            debugger
+            //debugger
           })
         }
       }
@@ -204,7 +204,7 @@
           close(null, 500)
           toastr.success('Deu Certo seu tanga.', 'Sucess')
           $rootScope.reloadDataCliente(function (data) {
-            debugger
+            //debugger
           })
         }
       }
@@ -453,7 +453,7 @@
       }
 
       $scope.insertNote = function () {
-debugger
+//debugger
           var oObject = {
             dataStatus: (new Date()).getTime(),
             noteText : $scope.noteText,
@@ -507,7 +507,7 @@ debugger
       //   $scope.cliente = []
 
       $scope.countrySelected = function (selected) {
-        // debugger
+        // //debugger
         if (selected) {
           $scope.pessoa = selected.originalObject
           $scope.visibled = true
@@ -522,7 +522,7 @@ debugger
           token: $rootScope.authToken,
           request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
         }, function (res) {
-          //  debugger
+          //  //debugger
           $scope.cliente = res.clienteList
         })
     })

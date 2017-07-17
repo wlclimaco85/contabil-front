@@ -291,7 +291,7 @@
 				{
 					params: function()
 					{
-						//          debugger
+						//          //debugger
 						console.log('value passed to modal:');
 						console.log(scope.value);
 						return scope.value;
@@ -300,7 +300,7 @@
 			}).then(function(modal)
 			{
 				console.log('wwww')
-				//  debugger
+				//  //debugger
 				modal.element.modal();
 				modal.close.then(function(result)
 				{

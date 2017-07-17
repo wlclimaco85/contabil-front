@@ -305,7 +305,7 @@
         }
 
         function status() {
-            debugger
+            //debugger
 
         }
 
@@ -383,7 +383,7 @@
         }
 
         function toggle() {
-            debugger
+            //debugger
             $scope.state = !$scope.state;
         };
     }
@@ -398,7 +398,7 @@
         $scope.servico = {};
         $scope.valor = 0;
         $scope.savessss = function() {
- debugger
+ //debugger
                         var oObject = fModels.amont($scope.servico,'INSERT');
                         oObject.preco = [];
                         oObject.preco.push({ valor : parseFloat($scope.valor)});
@@ -444,7 +444,7 @@
                            //   cfop : {"id":"10"}
                            // }
                         }, function(res) {
-                            debugger
+                            //debugger
                             console.log(res)
                         });
                     };
@@ -483,8 +483,8 @@
     angular.module('wdApp.apps.servicoSelect', ['ngSanitize', 'ui.select'])
         .controller('SelectServico', function ($scope, $http, $timeout, $interval) {
   var vm = this;
-debugger
-debugger
+//debugger
+//debugger
   vm.disabled = undefined;
   vm.searchEnabled = undefined;
 

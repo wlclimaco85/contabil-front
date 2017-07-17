@@ -97,7 +97,7 @@
                 // +----------------------------------------------------------------------+
                 // |                         CALCULA O PIS                                |
                 // +----------------------------------------------------------------------+
-                debugger
+                //debugger
                 var _notaFiscal = scope.notaFiscal;
                 var _produtos = scope.produtos;
                 var _produto = {};

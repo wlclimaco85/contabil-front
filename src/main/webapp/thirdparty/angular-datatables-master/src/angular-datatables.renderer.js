@@ -126,7 +126,7 @@ function dtDefaultRenderer($q, DTRenderer, DTRendererService, DTInstanceFactory)
         }
 
         function rerender() {
-            debugger
+            //debugger
             try{
                 _oTable.destroy();
             }catch(e){

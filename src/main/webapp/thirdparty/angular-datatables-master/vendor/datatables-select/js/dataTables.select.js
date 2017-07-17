@@ -27,7 +27,7 @@
 var factory = function( $, DataTable ) {
 "use strict";
 
-// Version information for debugger
+// Version information for //debugger
 DataTable.select = {};
 DataTable.select.version = '1.0.1';
 

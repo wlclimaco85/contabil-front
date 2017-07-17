@@ -44,7 +44,7 @@
 
 		function fnEdit(person)
 		{
-			//debugger
+			////debugger
 			$rootScope.tributacao = person;
 			dialogFactory.dialog('views/gerencia/dialog/dTributacao.html', "TributacaoUpdateController", validationFactory.tributacao(), reloadData());
 		}
@@ -298,7 +298,7 @@
 
 			$scope.countrySelected = function(selected)
 			{
-				// //debugger
+				// ////debugger
 				if (selected)
 				{
 
@@ -318,7 +318,7 @@
 				request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
 			}, function(res)
 			{
-				//  //debugger
+				//  ////debugger
 				$scope.cliente = res.clienteList;
 			});
 
@@ -388,7 +388,7 @@
 
 			$scope.changeProd = function(form)
 			{
-				//debugger
+				////debugger
 				console.log(form);
 
 				for (var x = 0; $scope.produtos.length > x; x++)
@@ -402,7 +402,7 @@
 
 			var fnFunction = function()
 			{
-				//debugger
+				////debugger
 			}
 
 
@@ -445,12 +445,12 @@
 					toastr.success('Deu Certo seu tanga.', 'Sucess');
 					$rootScope.reloadDataSit(function(data)
 					{
-						//debugger
+						////debugger
 					})
 				}
 			}
 			$scope.saveTributacao = function()
-			{debugger
+			{//debugger
 				fTributacao.fnMontaObjeto($scope.tributacao, 'INSERT', 'produto/api/tributacao/insert', fnFunction);
 			};
 		});
@@ -461,7 +461,7 @@
 		.controller('TributacaoUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa, toastr, $element, close, fTributacao, doisValorFactory)
 		{
 			var vm = this;
-			//debugger
+			////debugger
 			$scope.tributacao = null;
 			$scope.tributacao = $rootScope.tributacao;
 

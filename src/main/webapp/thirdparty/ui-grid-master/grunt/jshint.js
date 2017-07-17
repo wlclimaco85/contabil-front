@@ -14,7 +14,7 @@ module.exports = {
     boss: true,
     eqnull: true,
     browser: true,
-    debug: true, // debugger statements allowed
+    debug: true, // //debugger statements allowed
     globals: {
       angular: false,
 
@@ -49,7 +49,7 @@ module.exports = {
       it: false,
       fit: false,
       module: false,
-      debugger: false,
+      //debugger: false,
       DocumentTouch: false,
       runs: false,
       waits: false,

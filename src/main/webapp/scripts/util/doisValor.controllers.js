@@ -225,11 +225,11 @@
             $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
             $scope.format = $scope.formats[1];
             var fnCallBack = function(oResponse) {
-                debugger
+                //debugger
                 console.log(oResponse)
             }
             $scope.saveCliente = function() {
-                debugger
+                //debugger
                 console.log($scope.emails);
                 fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos,$scope.emails,$scope.telefones, 'INSERT', "pessoa/api/cliente/insert", fnCallBack);
             };
@@ -278,9 +278,9 @@
             $scope.cliente = [];
             $scope.pessoa =null
             $scope.countrySelected = function(selected) {
-             // debugger
+             // //debugger
               if (selected) {
-                debugger
+                //debugger
                 $scope.pessoa = selected.originalObject;
               } else {
                 console.log('cleared');
@@ -292,7 +292,7 @@
                     token: $rootScope.authToken,
                     request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
                 }, function(res) {
-                  //  debugger
+                  //  //debugger
                     $scope.cliente = res.clienteList;
                 });
           });

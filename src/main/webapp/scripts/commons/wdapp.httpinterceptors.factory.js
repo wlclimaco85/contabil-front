@@ -44,7 +44,7 @@
 							config.url = config.url + "?token=" + authToken;
 						}
 					}
-				//	debugger
+				//	//debugger
 					return config || $q.when(config);
 				}
 			};

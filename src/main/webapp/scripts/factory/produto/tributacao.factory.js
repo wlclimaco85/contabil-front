@@ -230,7 +230,7 @@
 						tributacao.imposto.icms.icmssn900.modalidadeBCICMSST = new qat.model.fnDoisValor1(tributacao.imposto.icms.icmssn203.modalidadeBCICMSST, action, $rootScope.user.user)
 						tributacao.imposto.icms.icmssn900 = fModels.amont(tributacao.imposto.icms.icmssn900, action);
 					}
-                  //  debugger;
+                  //  //debugger;
 					tributacao.imposto.icms.modelAction = tributacao.imposto.icms.id ? action : "INSERT";
 					tributacao.imposto.icms.createUser = $rootScope.user.user;
 					tributacao.imposto.icms.createDateUTC = (new Date()).getTime();

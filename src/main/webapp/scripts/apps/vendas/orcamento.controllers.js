@@ -172,7 +172,7 @@
                 token: $rootScope.authToken,
                 request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
             }, function(res) {
-                //  debugger
+                //  //debugger
                 $scope.cliente = res.clienteList;
             });
 
@@ -291,7 +291,7 @@
 
 
             $scope.changeProd = function(form) {
-                debugger
+                //debugger
                 console.log(form);
 
                 for (var x = 0; $scope.produtos.length > x; x++) {
@@ -302,7 +302,7 @@
             }
 
             var fnFunction = function() {
-                debugger
+                //debugger
             }
             $inputaction = $('#teste')
             $inputaction.inputaction({

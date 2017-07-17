@@ -194,7 +194,7 @@
                 }
             }
             $scope.saveConta = function() {
-              debugger
+              //debugger
                 var oObject = fModels.amont(qat.model.fnConta($scope.conta,"INSERT"),"INSERT");
 
                 SysMgmtData.processPostPageData("main/api/request", {

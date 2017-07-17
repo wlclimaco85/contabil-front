@@ -61,7 +61,7 @@
       $scope.empresaType = 1
 
       function visible(){
-      	debugger
+      	//debugger
       	return true
       }
 

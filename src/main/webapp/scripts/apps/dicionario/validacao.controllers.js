@@ -333,7 +333,7 @@
 			$scope.format = $scope.formats[1];
 			var fnCallBack = function(oResponse)
 			{
-				//     debugger
+				//     //debugger
 				console.log(oResponse)
 			}
 			$scope.saveValidacao = function()
@@ -360,7 +360,7 @@
 					request: new qat.model.reqValidacao(oObject, true, true)
 				}, function(res)
 				{
-					//           debugger
+					//           //debugger
 					fnCallBack(res);
 				});
 				//  fPessoa.fnMontaObjeto($scope.validacao, null, 'INSERT', "financeiro/api/validacao/insert/", fnCallBack);

@@ -115,7 +115,7 @@
             $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
             $scope.format = $scope.formats[1];
             $scope.close = function(result) {
-                debugger
+                //debugger
                 close(result, 500); // close, but give 500ms for bootstrap to animate
             };
             var fnCallBack = function(oResponse) {
@@ -135,7 +135,7 @@
                     token: $rootScope.authToken,
                     request: new qat.model.reqMarca(oObject, true, true)
                 }, function(res) {
-                    debugger
+                    //debugger
                     fnCallBack(res);
                     $scope.close();
                 });

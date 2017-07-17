@@ -548,7 +548,7 @@
         }
 
         function status() {
-            debugger
+            //debugger
 
         }
 
@@ -626,7 +626,7 @@
         }
 
         function toggle() {
-            debugger
+            //debugger
             $scope.state = !$scope.state;
         };
     }
@@ -685,7 +685,7 @@
                            //   cfop : {"id":"10"}
                            // }
                         }, function(res) {
-                            debugger
+                            //debugger
                             console.log(res)
                         });
                     };

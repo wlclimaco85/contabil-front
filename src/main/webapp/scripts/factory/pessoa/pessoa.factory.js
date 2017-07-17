@@ -32,7 +32,7 @@
          empresa.enderecos.push(fModels.amont(qat.model.fnEndereco(enderecos[0],action,$rootScope.user.user),action));
 
          //==================Telefone==================================
-         debugger
+         //debugger
          var telefonesAux = [];
          for(var x=0;x < telefones.length;x++)
          {

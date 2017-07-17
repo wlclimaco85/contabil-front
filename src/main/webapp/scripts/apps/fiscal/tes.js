@@ -57,7 +57,7 @@ angular.module('wdApp.apps.produto', ['datatables'])
 
 function DataReloadWithAjaxCtrl(DTOptionsBuilder, DTColumnBuilder) {
     var vm = this;
-    debugger
+    //debugger
     vm.dtOptions = DTOptionsBuilder.fromSource('data.json')
         .withOption('stateSave', true)
         .withPaginationType('full_numbers');
@@ -348,7 +348,7 @@ function WithButtonsCtrl($scope, $compile, DTOptionsBuilder, DTColumnBuilder) {
         $scope.currentTab = tab.url;
     }
     $scope.onClickTabb = function (tab) {
-       debugger
+       //debugger
     }
 
     $scope.isActiveTab = function(tabUrl) {
@@ -358,7 +358,7 @@ function WithButtonsCtrl($scope, $compile, DTOptionsBuilder, DTColumnBuilder) {
 	$scope.submitt = function() {
 
 		console.log($scope.produto)
-		debugger
+		//debugger
 		//fnMontaObjeto();
 		//console.log($scope.empresa)
 		//processPostData(create_url, new qat.model.reqEmpr($scope.empresa ,true, true), true);

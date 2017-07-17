@@ -21,7 +21,7 @@ qat.model.Cliente = function(_oObjet, _modelAction,_user,$log)
 {
 	if (_oObjet != undefined)
 	{
-		debugger
+		//debugger
 		this.id = _oObjet.id;
 		this.nome = _oObjet.nome;
 		this.razao = _oObjet.razao;
@@ -669,7 +669,7 @@ qat.model.fnPreco = function(id, _value, _tabela, modelAction)
 qat.model.fnTelefones = function(_telefone, modelAction, _user,$log)
 {
 	var _id = null;
-	debugger
+	//debugger
 	if (_telefone)
 	{
 		if (_telefone.id == "" || _telefone.id == " ")
@@ -1733,7 +1733,7 @@ qat.model.Telefones = function(_oObjet, _modelAction, _user)
 
 qat.model.Cnaes = function(_oObjet, _modelAction, _user, $log)
 {
-	debugger
+	//debugger
 	if($log)
 	{
 		$log.info("Cadastro - Cnaes");

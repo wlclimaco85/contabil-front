@@ -120,7 +120,7 @@
           close(null, 500)
           toastr.success('Deu Certo seu tanga.', 'Sucess')
           $rootScope.reloadDataTransportador(function (data) {
-            debugger
+            //debugger
           })
         }
       }
@@ -146,7 +146,7 @@
           close(null, 500)
           toastr.success('Deu Certo seu tanga.', 'Sucess')
           $rootScope.reloadDataTransportador(function (data) {
-            debugger
+            //debugger
           })
         }
       }
@@ -464,9 +464,9 @@
       $scope.transportador = []
       $scope.pessoa = null
       $scope.countrySelected = function (selected) {
-        // debugger
+        // //debugger
         if (selected) {
-          // debugger
+          // //debugger
           $scope.pessoa = selected.originalObject
         }else {
           console.log('cleared')
@@ -479,7 +479,7 @@
           token: $rootScope.authToken,
           request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
         }, function (res) {
-          //  debugger
+          //  //debugger
           $scope.transportador = res.transportadorList
         })
     })

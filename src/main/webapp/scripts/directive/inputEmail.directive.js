@@ -6,7 +6,7 @@
     commonAuth.directive('inputactions', inputaction);
 
     function inputaction($window) {
-debugger
+//debugger
         var directive = {
             restrict: "E",
             templateUrl: "views/util/apps/inputaction-template.html",

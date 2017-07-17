@@ -32,7 +32,7 @@ function utilControllers($scope,ModalService,SysMgmtData) {
                 if(res != undefined && res != '')
                 {
                     var raw;
-                    //debugger
+                    ////debugger
                     raw = res.data;
                    // $scope.enderecos[0].cep = raw.cep;
                     $scope.enderecos[0].bairro = raw.bairro;

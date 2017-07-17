@@ -178,7 +178,7 @@
          //   $scope.regime = [];
 
             $scope.countrySelected = function(selected) {
-             // debugger
+             // //debugger
               if (selected) {
 
                 $scope.pessoa = selected.originalObject;
@@ -193,7 +193,7 @@
                     token: $rootScope.authToken,
                     request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
                 }, function(res) {
-                  //  debugger
+                  //  //debugger
                     $scope.regime = res.regimeList;
                 });
           });

@@ -188,7 +188,7 @@ var WebDaptiveAppConfig = {
 	//run each time angular app comes up (runs only once)
 	wdApp.run(function($rootScope, $location, localStorageService)
 	{
-		debugger
+		//debugger
 		$rootScope.main = {
 			brand: 'E-Contábil',
 			name: ''

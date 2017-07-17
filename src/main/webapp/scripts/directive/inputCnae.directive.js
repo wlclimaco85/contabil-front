@@ -6,7 +6,7 @@
     commonAuth.directive('dCnae', dCnae);
 
     function dCnae($window) {
-debugger
+//debugger
         var directive = {
             restrict: "E",
             templateUrl: "views/fiscal/apps/cnae.html",
@@ -64,14 +64,14 @@ debugger
         };
 
         $scope.deleteForm = function(formScope){
-debugger
+//debugger
             delete $scope.forms(formScope);
         }
 
 
         var callbackBanco = function(res){
                 var planos = "";
-debugger
+//debugger
                if(res.operationSuccess == true)
                {
 

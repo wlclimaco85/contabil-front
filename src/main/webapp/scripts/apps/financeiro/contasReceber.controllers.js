@@ -437,11 +437,11 @@
                     $element.modal('hide');
                     close(null, 500);
                     toastr.success('Deu Certo seu tanga.', 'Sucess');
-                    $rootScope.reloadDataCR(function(data){debugger})
+                    $rootScope.reloadDataCR(function(data){//debugger})
                 }
             }
             $scope.saveContasReceber = function() {
-debugger
+//debugger
                 if($scope.titulo.pagarAgora)
                 {
                     $scope.titulo.listBaixa[0].dataBaixa = $scope.titulo ? $scope.titulo.dataPagamento.getTime() : (new Date()).getTime();
@@ -662,7 +662,7 @@ debugger
                     $element.modal('hide');
                     close(null, 500);
                     toastr.success('Deu Certo seu tanga.', 'Sucess');
-                    $rootScope.reloadDataCR(function(data){debugger})
+                    $rootScope.reloadDataCR(function(data){//debugger})
                   }
 
                 });
@@ -779,7 +779,7 @@ $('#delete').append(sHtml);
   	                  $element.modal('hide');
                       close(null, 500);
                       toastr.success('Deu Certo seu tanga.', 'Sucess');
-                      $rootScope.reloadDataCR(function(data){debugger})
+                      $rootScope.reloadDataCR(function(data){//debugger})
 	                }
                 });
             }
@@ -899,7 +899,7 @@ $('#delete').append(sHtml);
             dataVencimento =   moment($scope.titulo.dataVencimento).format('DD/MM/YYYY');
             $scope.dataPagamento =   moment(new Date()).format('DD/MM/YYYY');
             $scope.saveBaixaContasPagar = function() {
-debugger
+//debugger
                 $scope.titulo.listBaixa[0].id = null;
                 $scope.titulo.listBaixa[0].dataBaixa = (new Date()).getTime();
                 $scope.titulo.listBaixa[0].dataVencimento = $scope.titulo.dataVencimento
@@ -915,7 +915,7 @@ debugger
                       $element.modal('hide');
                       close(null, 500);
                       toastr.success('Deu Certo seu tanga.', 'Sucess');
-                      $rootScope.reloadDataCR(function(data){debugger})
+                      $rootScope.reloadDataCR(function(data){//debugger})
                   }
                 });
             }
@@ -1128,7 +1128,7 @@ debugger
                     $element.modal('hide');
                     close(null, 500);
                     toastr.success('Deu Certo seu tanga.', 'Sucess');
-                    $rootScope.reloadDataCR(function(data){debugger})
+                    $rootScope.reloadDataCR(function(data){//debugger})
                   }
 
                 });

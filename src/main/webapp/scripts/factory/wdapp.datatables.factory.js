@@ -15,7 +15,7 @@
         vm.dtOptions = oOption;
         vm.dtColumns = oColluns;
         // _vm = vm;
-        // debugger;
+        // //debugger;
         // _scope = scope;
          vm.dtOptions.withOption('ajax', {
                 dataSrc: dataSrc,
@@ -36,7 +36,7 @@
         vm.dtOptions.withOption('rowCallback', rCallback)
         vm.dtOptions.withOption('fnRowCallback', cCallback)
         rowCallback = rCallback;
-        // debugger;
+        // //debugger;
         // $interval(_this.reloadData(vm), 3000);
 
     //    $rootScope.$on('$translateChangeSuccess', function (event, lang) {

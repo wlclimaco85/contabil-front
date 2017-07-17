@@ -99,7 +99,7 @@
 						count = count + 1;
 					}
 				}); //(_Valor,_planoServicoId,_type,_modelAction)
-				debugger
+				//debugger
 				oPlanoByEmpresa.planoServicoList = oServicoAndPlano;
 				oPlanoByEmpresa.valor = parseFloat(parseFloat($('#total-plano').text()).toFixed(2));
 				empresa.planosServicos = qat.model.fnServicoAndPlano(oPlanoByEmpresa, action);
@@ -235,7 +235,7 @@
 				var oUsuario = fModels.amont(qat.model.fnUsuario(usuario, "INSERT", "system"), "INSERT");
 				oObject.usuarios = [];
 				oObject.usuarios.push(oUsuario);
-				debugger
+				//debugger
 				var oObject = fModels.amont(new qat.model.Empresa(empresa, "UPDATE", user), "INSERT");
 				SysMgmtData.processPostPageData("main/api/anonimo",
 				{
@@ -398,7 +398,7 @@
 				}
 
 				//==================Endereco==================================
-				debugger
+				//debugger
 				var enderecoAux = [];
 				for (var x = 0; x < empresa.enderecos.length; x++)
 				{
@@ -447,7 +447,7 @@
 					if (oDocumentos[x].numero && oDocumentos[x].numero != "" && oDocumentos[x].numero != " ")
 						empresa.documentos.push(new qat.model.fnDocumento(oDocumentos[x], oDocumentos[x].id ? "UPDATE" : "INSERT", $rootScope.user.user, $log));
 				}
-				debugger
+				//debugger
 				//==================USUARIOS==================================
 				var oUsuarios = [];
 				oUsuarios = empresa.usuarios;
@@ -456,7 +456,7 @@
 				{
 					empresa.usuarios.push(new qat.model.fnUsuario(oUsuarios[x], oUsuarios[x].id ? "UPDATE" : "INSERT", $rootScope.user.user, $log));
 				}
-				debugger
+				//debugger
 				empresa.dtAbertura = (empresa.dtAbertura);
 				var oObject = fModels.amont(new qat.model.Empresa(empresa, "UPDATE", user, $log), "UPDATE");
 				SysMgmtData.processPostPageData("main/api/anonimo",
@@ -481,7 +481,7 @@
 
 			factory.fnMontaObjeto3 = function(empresa, enderecos, emails, telefones, cnaes, action, fnCallBack)
 			{
-				debugger
+				//debugger
 				var $window;
 				$window = $(window);
 

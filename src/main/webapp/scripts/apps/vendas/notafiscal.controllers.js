@@ -162,7 +162,7 @@
          //   $scope.cliente = [];
 
             $scope.countrySelected = function(selected) {
-             // debugger
+             // //debugger
               if (selected) {
 
                 $scope.pessoa = selected.originalObject;
@@ -182,7 +182,7 @@
                 token: $rootScope.authToken,
                 request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
             }, function(res) {
-              //  debugger
+              //  //debugger
                 $scope.cliente = res.clienteList;
             });
 
@@ -191,7 +191,7 @@
                 token: $rootScope.authToken,
                 request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
             }, function(res) {
-              //  debugger
+              //  //debugger
                 $scope.estado = res.estadoList;
             });
 
@@ -408,7 +408,7 @@
                            //   cfop : {"id":"10"}
                            // }
                         }, function(res) {
-                            debugger
+                            //debugger
                             console.log(res)
                         });
                     };
@@ -549,7 +549,7 @@
 
         $scope.updateEmpresa = function() {
           console.log('dddd');
-          debugger
+          //debugger
           var oObject = new qat.model.Empresa($scope.empresa,"UPDATE",$rootScope.user.user);
 
                 SysMgmtData.processPostPageData("main/api/request", {
@@ -557,7 +557,7 @@
                     token: $rootScope.authToken,
                     request: new qat.model.reqEmpr(oObject, true, true)
                 }, function(res) {
-                  debugger
+                  //debugger
                     if(res.operationSuccess == true){
                       for(var x = 0; x < res.empresaList.length;x++)
                       {
@@ -570,7 +570,7 @@
                     //  $element.modal('hide');
                     //  close(null, 500);
                       toastr.success('Deu Certo seu tanga.', 'Sucess');
-                     // $rootScope.reloadDataSit(function(data){debugger})
+                     // $rootScope.reloadDataSit(function(data){//debugger})
                     }
 
                 });

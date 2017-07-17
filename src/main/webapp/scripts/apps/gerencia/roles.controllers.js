@@ -253,7 +253,7 @@
             $scope.roles = {}
 
             var fnCallBack = function(oResponse) {
-                debugger
+                //debugger
                 console.log(oResponse)
             }
             $scope.saveRoles = function() {
@@ -265,7 +265,7 @@
                     token: $rootScope.authToken,
                     request: new qat.model.reqRoles(oObject, true, true)
                 }, function(res) {
-                    debugger
+                    //debugger
                     fnCallBack(res);
                 });
               //  fPessoa.fnMontaObjeto($scope.roles, null, 'INSERT', "financeiro/api/roles/insert/", fnCallBack);

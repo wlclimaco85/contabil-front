@@ -118,11 +118,11 @@
             $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
             $scope.format = $scope.formats[1];
             var fnCallBack = function(oResponse) {
-                debugger
+                //debugger
                 console.log(oResponse)
             }
             $scope.saveUniMed = function() {
-                debugger
+                //debugger
                 fPessoa.fnMontaObjeto($scope.uniMed, $scope.enderecos, 'INSERT', "produto/api/uniMed/insert", fnCallBack);
             };
         });

@@ -333,7 +333,7 @@
 			$scope.format = $scope.formats[1];
 			var fnCallBack = function(oResponse)
 			{
-				//   debugger
+				//   //debugger
 				console.log(oResponse)
 			}
 			$scope.saveField = function()
@@ -360,7 +360,7 @@
 					request: new qat.model.reqField(oObject, true, true)
 				}, function(res)
 				{
-					//     debugger
+					//     //debugger
 					fnCallBack(res);
 				});
 				//  fPessoa.fnMontaObjeto($scope.field, null, 'INSERT', "financeiro/api/field/insert/", fnCallBack);

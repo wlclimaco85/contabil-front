@@ -121,7 +121,7 @@
                       $element.modal('hide');
                       close(null, 500);
                       toastr.success('Deu Certo seu tanga.', 'Sucess');
-                      $rootScope.reloadDataSit(function(data){debugger})
+                      $rootScope.reloadDataSit(function(data){//debugger})
                     }
 
                 });
@@ -147,7 +147,7 @@
                       $element.modal('hide');
                       close(null, 500);
                       toastr.success('Deu Certo seu tanga.', 'Sucess');
-                      $rootScope.reloadDataSit(function(data){debugger})
+                      $rootScope.reloadDataSit(function(data){//debugger})
                     }
 
                 });
@@ -174,7 +174,7 @@
                       $element.modal('hide');
                       close(null, 500);
                       toastr.success('Deu Certo seu tanga.', 'Sucess');
-                      $rootScope.reloadDataSit(function(data){debugger})
+                      $rootScope.reloadDataSit(function(data){//debugger})
                     }
 
                 });

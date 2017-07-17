@@ -166,7 +166,7 @@
 	};
 
 	qat.model.reqDoisValor = function(_oCounty, _bList, _bPagedList) {
-	    debugger
+	    //debugger
 	    this.doisValor = _oCounty;
 	    this.returnList = _bList;
 	    this.returnListPaged = _bPagedList;

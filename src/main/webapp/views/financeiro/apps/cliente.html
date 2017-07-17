@@ -20,10 +20,10 @@
 
         var callbackBanco = function(res){
                 var planos = "";
-debugger
+//debugger
                if(res.operationSuccess == true)
                {
-                debugger
+                //debugger
                    for(var x = 0 ;x < res.clienteList.length;x++)
                    {
                        planos = planos + "<option value='"+res.clienteList[x].id+"'> "+res.clienteList[x].nome+" </option>";
@@ -39,7 +39,7 @@ debugger
                }
 
             }
-debugger
+//debugger
 
             qat.model.select.util("pessoa/api/cliente/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),callbackBanco);
 

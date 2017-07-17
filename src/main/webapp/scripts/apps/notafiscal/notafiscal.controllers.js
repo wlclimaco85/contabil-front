@@ -183,7 +183,7 @@ function notaFiscalController($scope, $compile, DTOptionsBuilder, DTColumnBuilde
     }
 
     function deleteRowAll(person) {
-        debugger
+        //debugger
         ModalService.showModal({
             templateUrl: 'cfopAllDelete.html',
             controller: "CfopController"

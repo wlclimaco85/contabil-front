@@ -141,7 +141,7 @@
 				var fnCallbackDoisValor = function(res)
 				{
 					var planos = "";
-					//  debugger
+					//  //debugger
 					//ICMS - MODALIDADE BC
 
 					if (res.operationSuccess == true)
@@ -329,7 +329,7 @@
 							}
 						}
 
-debugger
+//debugger
 					}
 				}
 

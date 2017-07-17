@@ -77,7 +77,7 @@
        vm.dtOptions = DTOptionsBuilder.newOptions()
           .withFnServerData(
                 function (sSource, aoData, fnCallback, oSettings) {
-                    debugger
+                    //debugger
                     for(var x = 0; x < aoData.length;x++)
                     {
                         if(aoData[x].name == "order")
@@ -119,7 +119,7 @@
                         }
                     })
                     .then(function(result) {
-debugger
+//debugger
                             var records = {
                                 'draw': result.data.resultsSetInfo.startPage,
                                 'recordsTotal': result.data.resultsSetInfo.totalRowsAvailable,
@@ -222,7 +222,7 @@ debugger
         vm.dtColumns = [
 
                     DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
-                    .renderWith(function(data, type, full, meta) {debugger
+                    .renderWith(function(data, type, full, meta) {//debugger
                         vm.selected[full.id] = false;
                         return '<input type="checkbox" ng-model="vm.selected[' + data.id + ']" ng-click="vm.toggleOne(vm.selected)"/>';
                     }).withOption('width', '10px'),
@@ -623,7 +623,7 @@ function DataReloadWithAjaxCtrl($rootScope,DTOptionsBuilder, DTColumnBuilder) {
 
                 dataSrc: function(json) {
                     console.log(json)
-                    debugger
+                    //debugger
                     json['recordsTotal'] = json.cfopList.length
                     json['recordsFiltered'] = json.cfopList.length
                     json['draw'] = 1
@@ -733,7 +733,7 @@ function ServerSideProcessingCtrl($http,$rootScope,DTOptionsBuilder, DTColumnBui
     
 .withFnServerData(
                 function (sSource, aoData, fnCallback, oSettings) {
-                    debugger
+                    //debugger
                     for(var x = 0; x < aoData.length;x++)
                     {
                         if(aoData[x].name == "order")
@@ -775,7 +775,7 @@ function ServerSideProcessingCtrl($http,$rootScope,DTOptionsBuilder, DTColumnBui
                         }
                     })
                     .then(function(result) {
-debugger
+//debugger
                             var records = {
                                 'draw': result.data.resultsSetInfo.startPage,
                                 'recordsTotal': result.data.resultsSetInfo.totalRowsAvailable,
@@ -793,7 +793,7 @@ debugger
 
                 dataSrc: function(json) {
                     console.log(json)
-                    debugger
+                    //debugger
                     json['recordsTotal'] = json.cfopList.length
                     json['recordsFiltered'] = json.cfopList.length
                     json['draw'] = 1

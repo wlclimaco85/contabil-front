@@ -167,7 +167,7 @@
             // Recompiling so we can bind Angular directive to the DT
             $compile(angular.element(row).contents())($scope);
         }
-        var fnDataSRC = function(json) {debugger
+        var fnDataSRC = function(json) {//debugger
             console.log(json)
             json['recordsTotal'] = json.contasPagarList.length
             json['recordsFiltered'] = json.contasPagarList.length
@@ -339,7 +339,7 @@
     }
 
     function buscarField(){
-debugger
+//debugger
    //   request = new qat.model.contasPagarInquiryRequest(null,$scope.filter.inicial.getTime(),$scope.filter.final.getTime(),$scope.filter.conta,0, true, null, null, null)
 
 vm.dtInstance.changeData(aaaa);
@@ -364,7 +364,7 @@ vm.dtInstance.rerender()
             var resetPaging = false;
             vm.dtInstance.reloadData(callback, resetPaging);
         }
-        debugger
+        //debugger
        // qat.model.contasPagarInquiryRequest = function (_descricao,_dataInicial,_dataFinal,_conta, _iStartPage, _bCount,_userId,_id,_emprId,_permissaoType)
         Datatablessss.getTable('/financeiro/api/contasPagar/fetchPage', fnDataSRC, request, this, rCallback, null, recompile, tableOptionsFactory.contasPagar(vm,createdRow,$scope,FiltersFactory.contasPagar()) , tableColumnsFactory.contasPagar(vm,"",actionsHtml));
       //  Datatablessss.getTable('/fiscal/api/cfop/fetchPage           ', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cfop(vm,createdRow,$scope,FiltersFactory.cfop()), tableColumnsFactory.cfop(vm,titleHtml,actionsHtml));

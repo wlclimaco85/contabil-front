@@ -506,19 +506,19 @@
 
 
 $scope.submit = function() {
-    debugger
+    //debugger
     console.log($scope.empresa);
     console.log($scope.enderecos);
     fEmpresa.fnMontaObjeto($scope.empresa,$scope.enderecos,"INSERT")
  //   fnMontaObjeto();
-    debugger
+    //debugger
     console.log($scope.empresa)
 
     SysMgmtData.processPostPageData("main/api/anonimo",{
             url: "entidade/api/empresa"+   WebDaptiveAppConfig.create_url,
             request: new qat.model.reqEmpr($scope.empresa ,true, true)}, function(res){
        console.log(res)
-       debugger
+       //debugger
        if(res.operationSuccess == true)
        {
            $('#dialogs').hide();
@@ -569,7 +569,7 @@ fnMontaObjeto = function(action){
         }
 
         function edit(person) {
-            debugger
+            //debugger
             ModalService.showModal({
                 templateUrl: 'almoxarifadoDelete.html',
                 controller: "ContasPagarController"

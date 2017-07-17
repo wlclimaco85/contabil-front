@@ -265,11 +265,11 @@
             $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
             $scope.format = $scope.formats[1];
             var fnCallBack = function(oResponse) {
-                debugger
+                //debugger
                 console.log(oResponse)
             }
             $scope.saveUsuario = function() {
-                debugger
+                //debugger
                 fPessoa.fnMontaObjeto($scope.usuario, $scope.enderecos, 'INSERT', "empresa/api/usuario/insert", fnCallBack);
             };
         });

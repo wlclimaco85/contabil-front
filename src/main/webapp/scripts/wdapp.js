@@ -269,7 +269,7 @@ var WebDaptiveAppConfig = {
 	//run each time angular app comes up (runs only once)
 	wdApp.run(function($rootScope, $location, localStorageService, editableOptions)
 	{
-		//debugger
+		////debugger
 		//validator.setValidElementStyling(false);
 		//validator.setInvalidElementStyling(false);
 		editableOptions.theme = 'bs3'; // bootstrap

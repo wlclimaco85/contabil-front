@@ -45,7 +45,7 @@
           var viaCepUrl = "https://viacep.com.br/ws/" + formatedCep + "/json/";
           $http.get(viaCepUrl).then(function(response) {
             var raw;
-            //debugger
+            ////debugger
             raw = response.data;
           });
 
@@ -70,7 +70,7 @@
           var viaCepUrl = 'https://cosmos.bluesoft.com.br/api/gtins/7891910000197/json/';
           $http.get(viaCepUrl,config).then(function(response) {
             var raw;
-            debugger
+            //debugger
             raw = response.data;
             if (raw.erro) {
               return deferred.reject('CEP not found');
