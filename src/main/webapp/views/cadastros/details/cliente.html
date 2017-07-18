@@ -7,18 +7,54 @@
         <li><a ng-click="tabs=7" ng-class="{'active' : tabs==7}">Contatos</a>
         </li>
     </ul>
-    <div class="tabs-container1">
+    <div class="tabs-container1" ng-controller="ClienteViewController">
         <div class="tab-content1" ng-show="tabs == 4">
             <div class="container-fluid">
                 <div class="row content">
                     <br>
-                    <div class="col-sm-9" ng-controller="ClienteViewController">
+                    <div class="col-sm-9" >
                         <div class="row well">
-                            <div class="col-sm-3">
+                            <div class="col-sm-1">
                                 <label for="exampleInputEmail1"> Status: </label>
                             </div>
-                            <div class="col-sm-9">
-                                <a href="#" editable-select="email.emailTypeEnumValue" onaftersave="updateCliente()" e-ng-options="sa.nome as sa.label for sa in emailType">{{ showEmailType(email.emailTypeEnumValue) || 'Vazio' }}</a>
+                             <div class="col-sm-3">
+                                <!-- editable username (text with validation) -->
+                                <span class="title">Data Ultima Alteração: </span>
+                                <span>{{ formatterDate(status.dataStatus) || 'vazio' }}</span>
+                            </div>
+                            <div class="col-sm-8">
+                                <form editable-form name="editableForm" onaftersave="updateStatus()">
+                                    <div class="col-sm-3">
+                                    <!-- editable status (select-local) -->
+                                    <span class="title">Status: </span>
+                                    <span editable-select="status.status" e-name="status" e-ng-options="sa.nome as sa.label for sa in statusType">
+                                        {{ showStatusType(status.status) || 'vazio' }}
+                                    </span>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                    <!-- editable group (select-remote) -->
+                                    <span class="title">Justificativa: </span>
+                                    <span editable-text="status.note" e-name="name" onbeforesave="checkName($data)" e-required>{{ status.note || 'vazio' }}</span>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                    <!-- button to show form -->
+                                    <button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+                                        Edit
+                                    </button>
+                                    <!-- buttons to submit / cancel form -->
+                                    <span ng-show="editableForm.$visible">
+                                        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+                                        Save
+                                        </button>
+                                        <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="updateStatus">
+                                        Cancel
+                                        </button>
+                                    </span>
+                                    </div>
+                                </form>
+                            <!--    <a href="#" editable-select="statusEnum" onaftersave="updateStatus()" e-ng-options="sa.nome as sa.label for sa in statusType">{{ showStatusType(cliente.statusList) || 'Vazio' }}</a> -->
                             </div>
                         </div>
                         <br>
@@ -44,9 +80,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="row">
                                                     <div class="form-group col-sm-3">
-                                                        <label for="exampleInputEmail1">Nome Fantasia</label>
+                                                        <label for="exampleInputEmail1">Nome Fantasia:</label>
                                                     </div>
                                                     <div class="form-group col-sm-7">
                                                             <a href="#" editable-text="cliente.nome" onaftersave="updateCliente()" >{{ cliente.nome || 'Vazio' }}</a>
@@ -112,25 +149,23 @@
                                         <div class="panel panel-default" style="background:#EEEEEE">
                                             <div class="panel-heading" style="background: #DDDDDD">
                                                 <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group col-sm-4">
-                                                            <div class="form-group col-sm-3">
-                                                                <label for="exampleInputPassword1">CEP:</label>
-                                                            </div>
-                                                            <div class="form-group col-sm-9">
-                                                                <a href="#" editable-text="cliente.enderecos[0].cep" onaftersave="updateCliente()" >{{ cliente.enderecos[0].cep || 'Vazio' }}</a>
-                                                            </div>
+                                                    <div class="form-group col-sm-4">
+                                                        <div class="form-group col-sm-3">
+                                                            <label for="exampleInputPassword1">CEP:</label>
                                                         </div>
-                                                        <div class="col-sm-8">
-                                                            <div class="col-sm-3">
-                                                                <label for="exampleInputPassword1">Logradouro:</label>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <a href="#" editable-text="cliente.enderecos[0].logradouro" onaftersave="updateCliente()" >{{ cliente.enderecos[0].logradouro || 'Vazio' }}</a>
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <a href="#" editable-text="cliente.enderecos[0].numero" onaftersave="updateCliente()" >{{ cliente.enderecos[0].numero || 'Vazio' }}</a>
-                                                            </div>
+                                                        <div class="form-group col-sm-9">
+                                                            <a href="#" editable-text="cliente.enderecos[0].cep" onaftersave="updateCliente()" >{{ cliente.enderecos[0].cep || 'Vazio' }}</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <div class="col-sm-3">
+                                                            <label for="exampleInputPassword1">Logradouro:</label>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <a href="#" editable-text="cliente.enderecos[0].logradouro" onaftersave="updateCliente()" >{{ cliente.enderecos[0].logradouro || 'Vazio' }}</a>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <a href="#" editable-text="cliente.enderecos[0].numero" onaftersave="updateCliente()" >{{ cliente.enderecos[0].numero || 'Vazio' }}</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -161,30 +196,28 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <div class="col-sm-4">
-                                                            <div class="form-group col-sm-4">
-                                                                <label for="exampleInputPassword1">Cod. IBGE:</label>
-                                                            </div>
-                                                            <div class="form-group col-sm-8">
-                                                                <a href="#" editable-text="cliente.enderecos[0].codIbge" onaftersave="updateCliente()" >{{ cliente.enderecos[0].codIbge || 'Vazio' }}</a>
-                                                            </div>
-                                                        </div>
+                                                    <div class="col-sm-4">
                                                         <div class="form-group col-sm-4">
-                                                            <div class="form-group col-sm-6">
-                                                                <label for="exampleInputPassword1">Latitude:</label>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <a href="#" editable-text="cliente.enderecos[0].latitude" onaftersave="updateCliente()" >{{ cliente.enderecos[0].latitude || 'Vazio' }}</a>
-                                                            </div>
+                                                            <label for="exampleInputPassword1">Cod. IBGE:</label>
                                                         </div>
-                                                        <div class="col-sm-4">
-                                                            <div class="form-group col-sm-6">
-                                                                <label for="exampleInputPassword1">Longitude:</label>
-                                                            </div>
-                                                            <div class="form-group col-sm-6">
-                                                                <a href="#" editable-text="cliente.enderecos[0].longitude" onaftersave="updateCliente()" >{{ cliente.enderecos[0].longitude || 'Vazio' }}</a>
-                                                            </div>
+                                                        <div class="form-group col-sm-8">
+                                                            <a href="#" editable-text="cliente.enderecos[0].codIbge" onaftersave="updateCliente()" >{{ cliente.enderecos[0].codIbge || 'Vazio' }}</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-sm-4">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="exampleInputPassword1">Latitude:</label>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <a href="#" editable-text="cliente.enderecos[0].latitude" onaftersave="updateCliente()" >{{ cliente.enderecos[0].latitude || 'Vazio' }}</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="exampleInputPassword1">Longitude:</label>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <a href="#" editable-text="cliente.enderecos[0].longitude" onaftersave="updateCliente()" >{{ cliente.enderecos[0].longitude || 'Vazio' }}</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -214,8 +247,8 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
-                                                            <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+                                                            <button type="button" class="btn btn-default addButton" ng-click="insertFormEmail(email)"><i class="fa fa-plus"></i></button>
+                                                            <button type="button" class="btn btn-default removeButton" ng-click="deleteFormEmailsdddd(email)"><i class="fa fa-minus"></i></button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -233,7 +266,7 @@
                                                                 <label for="exampleInputPassword1">Tipo:</label>
                                                             </div>
                                                             <div class="form-group col-sm-7">
-                                                                <a href="#" editable-select="telefone.telefoneTypeEnum" onaftersave="updateCliente()" e-ng-options="sa.id as sa.nome for sa in regime">{{ showRegime() }}</a>
+                                                                <a href="#" editable-select="telefone.telefoneTypeEnumValue" onaftersave="updateCliente()" e-ng-options="sa.nome as sa.label for sa in telefoneType">{{ showTelefoneType(telefone.telefoneTypeEnumValue) || 'Vazio' }}</a>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-sm-5">
@@ -245,8 +278,8 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
-                                                            <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+                                                            <button type="button" class="btn btn-default addButton" ng-click="insertFormTelefone(telefone)"><i class="fa fa-plus"></i></button>
+                                                            <button type="button" class="btn btn-default removeButton" ng-click="deleteFormTelefone(telefone)"><i class="fa fa-minus"></i></button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -260,18 +293,16 @@
                             <a href="javaScript:;" class="list-group-item active">
                                 <div class="form-group">
                                     <h4 class="list-group-item-heading">Observação:</h4>
-                                    <textarea class="form-control" rows="5" id="Observação"></textarea>
-                                    <button type="submit" class="btn btn-primary">Gravar</button>
+                                    <textarea class="form-control" ng-model="noteText" rows="5" id="Observação"></textarea>
+                                    <button type="submit" ng-click="insertNote()" class="btn btn-primary">Gravar</button>
                                 </div>
                             </a>
-                            <a href="javaScript:;" class="list-group-item">
-                                <h4 class="list-group-item-heading">Washington  17/07/2016 8:00</h4>
-                                <p>Processo observação 01012 </p>
-                            </a>
-                            <a href="javaScript:;" class="list-group-item">
-                                <h4 class="list-group-item-heading">Washington  17/07/2016 8:00</h4>
-                                <p>Processo observação 01012 </p>
-                            </a>
+                            <div ng-repeat="note in cliente.notes">
+                                <a href="javaScript:;" class="list-group-item">
+                                    <h4 class="list-group-item-heading">{{note.createUser}}  {{formatterDate(note.createDateUTC)}}</h4>
+                                    <p>{{note.noteText}}</p>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
