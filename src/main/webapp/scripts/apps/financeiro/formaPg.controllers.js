@@ -38,7 +38,7 @@
         $rootScope.reloadDataFormaPg = function(_callback) {
 
             var resetPaging = false;
-            vm.dtInstance.reloadData(_callback, resetPaging);
+            vm.dtInstanceFormaPg.reloadData(_callback, resetPaging);
         }
 
         $scope.toggle = function() {
@@ -48,14 +48,24 @@
             'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
 
 
-        function actionsHtml(data, type, full, meta) {
+        var actionsHtml = function (data, type, full, meta) {
             vm.persons[data.id] = data;
-            return '<button class="btn btn-warning" ng-click="showCase.fnEdit(showCase.persons[' + data.id + '])">' +
-                '   <i class="fa fa-edit"></i>' +
+            return '<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
+                '   <i class="fa fa-pencil-square-o"></i>' +
                 '</button>&nbsp;' +
-                '<button class="btn btn-danger" ng-click="showCase.fnDelete(showCase.persons[' + data.id + '])">' +
+                '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
                 '   <i class="fa fa-trash-o"></i>' +
-                '</button>';
+                '</button>'
+        }
+
+        function edit (person) {
+        $rootScope.formaPg = person
+        dialogFactory.dialog('views/financeiro/dialog/dFormaPg.html', 'FormaPgUpdateController', validationFactory.cliente())
+        }
+
+        function deleteRow (person) {
+        $rootScope.formaPg = person
+        dialogFactory.dialog('views/util/dialog/dDelete.html', 'FormaPgDeleteController', validationFactory.cliente())
         }
 
         function rCallback(nRow, aData) {
@@ -66,31 +76,18 @@
             $compile(angular.element(row).contents())($scope);
         }
         var fnDataSRC = function(json) {
-            console.log(json)
             json['recordsTotal'] = json.formaPgList.length
             json['recordsFiltered'] = json.formaPgList.length
             json['draw'] = 1
-            console.log(json)
             return json.formaPgList;
         }
 
         Datatablessss.getTable('/financeiro/api/formaPg/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.formaPg(vm,createdRow,$scope,FiltersFactory.formaPg(),reloadData) , tableColumnsFactory.formaPg(vm,"",actionsHtml));
 
-        function edit(person) {
-            $rootScope.formaPg = person;
-            dialogFactory.dialog('views/financeiro/dialog/dFormaPg.html',"FormaPgUpdateController",openDialogUpdateCreate);
-        }
-
-        function deleteRow(person) {
-           $rootScope.formaPg = person;
-           dialogFactory.dialog('views/financeiro/dialog/dFormaPg.html',"FormaPgDeleteController",openDialogUpdateCreate);
-        }
-
         function createdRow(row, data, dataIndex) {
             // Recompiling so we can bind Angular directive to the DT
             $compile(angular.element(row).contents())($scope);
         }
-
 
         function toggleAll(selectAll, selectedItems) {
             for (var id in selectedItems) {
@@ -122,7 +119,7 @@
 })();
 (function() {
     angular.module('wdApp.apps.formaPg.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('FormaPgInsertController', function($rootScope, $scope, fModels, SysMgmtData,doisValorFactory,toastr,$element, close) {
+        .controller('FormaPgInsertController', function($rootScope, $scope, fModels, SysMgmtData,doisValorFactory, toastr, $element, close,validationFactory,$log) {
             var vm = this;
 
 
@@ -153,7 +150,7 @@
             $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
             $scope.format = $scope.formats[1];
 
-                        var fnFunctionCallback = function (res){
+            var fnFunctionCallback = function (res){
                $scope.categoria = [];
                $scope.tipoDocumento = [];
                $scope.cadastro = [];
@@ -195,43 +192,122 @@
 
             $scope.saveFormaPg = function() {
 
-                var oObject = fModels.amont($scope.formaPg.conta,"INSERT");
+                debugger
+       /*         var oObject = fModels.amont($scope.formaPg.conta,"INSERT");
                 $scope.formaPg.conta = oObject;
                 var oObject = fModels.amont($scope.formaPg.tipoDoc,"INSERT");
-                $scope.formaPg.tipoDoc = oObject;
-                var oObject = fModels.amont($scope.formaPg,"INSERT");
+                $scope.formaPg.tipoDoc = oObject;*/
+                var oObject = new   qat.model.FormaPg(fModels.amont($scope.formaPg,"INSERT"), "INSERT",$rootScope.user.user,$log);
 
                 SysMgmtData.processPostPageData("main/api/request", {
                     url: "financeiro/api/formaPg/insert",
                     token: $rootScope.authToken,
                     request: new qat.model.reqFormaPg(oObject, true, true)
                 }, function(res) {
-
+                    if (res.operationSuccess == true) {
+                        $element.modal('hide')
+                        close(null, 500)
+                        toastr.success('Deu Certo seu tanga.', 'Sucess')
+                        $rootScope.reloadDataFormaPg(function (data) {
+                            //debugger
+                        })
+                    }
                 });
             };
         });
 })();
 (function() {
     angular.module('wdApp.apps.formaPg.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('FormaPgUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        .controller('FormaPgUpdateController', function($rootScope, $scope, fModels, SysMgmtData,doisValorFactory, toastr, $element, close,validationFactory,$log) {
             var vm = this;
             $scope.formaPg = {};
             $scope.formaPg = $rootScope.formaPg;
-            console.log($rootScope.formaPg)
+
+            var fnFunctionCallback = function (res){
+               $scope.categoria = [];
+               $scope.tipoDocumento = [];
+               $scope.cadastro = [];
+               $scope.intervalo = [];
+               $scope.situacao = [];
+
+               if(res.operationSuccess == true)
+                   {
+                        for(var x=0;x<res.doisValoresList.length;x++)
+                        {
+                            planos = res.doisValoresList[x] ;
+                            if(planos.doisValorType != null)
+                            {
+                                switch (planos.doisValorType.tipo)
+                                {
+                                    case 'TIPO DOCUMENTO':
+                                        $scope.tipoDocumento.push(planos);
+                                        break;
+                                    case 'CATEGORIA':
+                                        $scope.categoria.push(planos);
+                                        break;
+                                    case 'CADASTROMAIS':
+                                        $scope.cadastro.push(planos);
+                                        break;
+                                    case 'INTERVALO':
+                                        $scope.intervalo.push(planos);
+                                        break;
+                                    case 'SITUACAO':
+                                        $scope.situacao.push(planos);
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                console.log(res);
+            }
+
+            doisValorFactory.financeiro(101,$scope,fnFunctionCallback);
+
+
             $scope.saveFormaPg = function() {
-                fPessoa.fnMontaObjeto($scope.formaPg, $scope.endereco, 'UPDATE', "financeiro/api/formaPg/update/", fnCallBack);
+
+                var oObject = new   qat.model.FormaPg(fModels.amont($scope.formaPg,"UPDATE"), "UPDATE",$rootScope.user.user,$log);
+                SysMgmtData.processPostPageData("main/api/request", {
+                    url: "financeiro/api/formaPg/update",
+                    token: $rootScope.authToken,
+                    request: new qat.model.reqFormaPg(oObject, true, true)
+                }, function(res) {
+                    if (res.operationSuccess == true) {
+                        $element.modal('hide')
+                        close(null, 500)
+                        toastr.success('Deu Certo seu tanga.', 'Sucess')
+                        $rootScope.reloadDataFormaPg(function (data) {
+                            //debugger
+                        })
+                    }
+                });
             }
         });
 })();
 (function() {
     angular.module('wdApp.apps.formaPg.delete', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('FormaPgDeleteController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        .controller('FormaPgDeleteController', function($rootScope, $scope, fModels, SysMgmtData,doisValorFactory, toastr, $element, close,validationFactory,$log) {
             var vm = this;
             $scope.formaPg = {};
             $scope.formaPg = $rootScope.formaPg;
             console.log($rootScope.formaPg)
-            $scope.saveFormaPg = function() {
-                fPessoa.fnDelete($scope.formaPg, "financeiro/api/formaPg/update/", function(){console.log('ddda   aqui')});
+            $scope.deleteMessage = 'Deseja Deletar a Forma de pagamento '+$scope.formaPg.id+' ' +$scope.formaPg.descricao+ "?"
+            $scope.delete = function() {
+                var oObject = new   qat.model.FormaPg(fModels.amont($scope.formaPg,"DELETE"), "DELETE",$rootScope.user.user,$log);
+                    SysMgmtData.processPostPageData("main/api/request", {
+                        url: "financeiro/api/formaPg/delete",
+                        token: $rootScope.authToken,
+                        request: new qat.model.reqFormaPg(oObject, true, true)
+                    }, function(res) {
+                        if (res.operationSuccess == true) {
+                            $element.modal('hide')
+                            close(null, 500)
+                            toastr.success('Deu Certo seu tanga.', 'Sucess')
+                            $rootScope.reloadDataFormaPg(function (data) {
+                                //debugger
+                            })
+                        }
+                    });
             }
         });
 })();

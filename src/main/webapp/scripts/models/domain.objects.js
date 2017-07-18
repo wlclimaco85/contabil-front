@@ -17,6 +17,39 @@ var qat = {
 	}
 };
 
+qat.model.FormaPg = function(_oObjet, _modelAction,_user,$log)
+{
+	if (_oObjet != undefined)
+	{
+		this.id = _oObjet.id;
+		this.descricao = _oObjet.descricao;
+		this.observacao = _oObjet.observacao;
+		this.diasPg = _oObjet.diasPg;
+		this.parcelamentoMax = _oObjet.parcelamentoMax? { id : _oObjet.parcelamentoMax.id}: null;
+		this.parcelamentoSemJuros = _oObjet.parcelamentoSemJuros? { id : _oObjet.parcelamentoSemJuros.id}: null;
+		this.juros = _oObjet.juros;
+		this.taxaFixa = _oObjet.taxaFixa;
+		this.descAvista = _oObjet.descAvista;
+		this.conta = _oObjet.conta ? { id : _oObjet.conta.id}: null;
+		this.tipoDoc = _oObjet.tipoDoc ?  { id : _oObjet.tipoDoc.id} : null;
+		this.qntIntervalo = _oObjet.qntIntervalo ?  { id : _oObjet.intervalo.id} : null;
+		this.intervalo = _oObjet.intervalo ?  { id : _oObjet.intervalo.id} : null;
+		this.entrada = _oObjet.entrada;
+		this.parentId = _oObjet.parentId;
+		this.emprId = _oObjet.emprId;
+		this.processId = _oObjet.processId;
+		this.tableEnumValue = _oObjet.tableEnumValue;
+		this.modelAction = _modelAction;
+		this.createUser = _user;
+		this.createDateUTC = (new Date()).getTime();
+		this.modifyUser = _user;
+		this.modifyDateUTC = (new Date()).getTime();
+
+		if($log)
+		$log.info("add Forma pagamento --> " +  _oObjet.descricao,"Teste");
+	}
+}
+
 qat.model.Cliente = function(_oObjet, _modelAction,_user,$log)
 {
 	if (_oObjet != undefined)
@@ -67,7 +100,6 @@ qat.model.Cliente = function(_oObjet, _modelAction,_user,$log)
 		this.condPagList = _oObjet.condPagList ? _oObjet.condPagList : null;
 		this.contatoList = _oObjet.contatoList ? _oObjet.contatoList : null;
 		this.parentId = _oObjet.parentId;
-
 		this.emprId = _oObjet.emprId;
 		this.processId = _oObjet.processId;
 		this.tableEnumValue = _oObjet.tableEnumValue;
