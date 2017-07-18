@@ -437,7 +437,8 @@
                     $element.modal('hide');
                     close(null, 500);
                     toastr.success('Deu Certo seu tanga.', 'Sucess');
-                    $rootScope.reloadDataCR(function(data){//debugger})
+                    $rootScope.reloadDataCR(function(data){//debugger
+                    })
                 }
             }
             $scope.saveContasReceber = function() {
@@ -662,7 +663,8 @@
                     $element.modal('hide');
                     close(null, 500);
                     toastr.success('Deu Certo seu tanga.', 'Sucess');
-                    $rootScope.reloadDataCR(function(data){//debugger})
+                    $rootScope.reloadDataCR(function(data){//debugger
+                    })
                   }
 
                 });
@@ -779,7 +781,8 @@ $('#delete').append(sHtml);
   	                  $element.modal('hide');
                       close(null, 500);
                       toastr.success('Deu Certo seu tanga.', 'Sucess');
-                      $rootScope.reloadDataCR(function(data){//debugger})
+                      $rootScope.reloadDataCR(function(data){//debugger
+                    })
 	                }
                 });
             }
@@ -915,7 +918,8 @@ $('#delete').append(sHtml);
                       $element.modal('hide');
                       close(null, 500);
                       toastr.success('Deu Certo seu tanga.', 'Sucess');
-                      $rootScope.reloadDataCR(function(data){//debugger})
+                      $rootScope.reloadDataCR(function(data){//debugger
+                    })
                   }
                 });
             }
@@ -1128,7 +1132,8 @@ $('#delete').append(sHtml);
                     $element.modal('hide');
                     close(null, 500);
                     toastr.success('Deu Certo seu tanga.', 'Sucess');
-                    $rootScope.reloadDataCR(function(data){//debugger})
+                    $rootScope.reloadDataCR(function(data){//debugger
+                    })
                   }
 
                 });

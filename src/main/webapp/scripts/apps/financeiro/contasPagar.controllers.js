@@ -413,7 +413,7 @@ vm.dtInstance.rerender()
 })();
 (function() {
     angular.module('wdApp.apps.contasPagar.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('ContasPagarInsertController', function($rootScope, $scope, fModels, SysMgmtData,doisValorFactory,toastr,$element, close) {
+        .controller('ContasPagarInsertController', function($rootScope, $scope, fModels, SysMgmtData,doisValorFactory,toastr,$element, close,$sce) {
             var vm = this;
 
             $scope.formatterDate = function(iDate) {
@@ -443,6 +443,10 @@ vm.dtInstance.rerender()
                 startingDay: 1
               };
 
+              $scope.teste = function(value) {
+                  console.log(value)
+                 return '<b style="color: red">I can</b> have <div class="label label-success">'+value.title+'</div> content';
+              }
               // Disable weekend selection
               function disabled(data) {
                 var date = data.date,
