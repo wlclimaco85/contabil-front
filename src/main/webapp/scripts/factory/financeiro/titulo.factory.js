@@ -5,87 +5,133 @@
 	commonAuth.factory('fTitulo', ['$rootScope', 'fModels', 'SysMgmtData', 'toastr', 'doisValorFactory','validationFactory','fEndereco','fDocumento','fTelefone','fEmail','fDatas' ,'$log',function($rootScope, fModels, SysMgmtData, toastr, doisValorFactory,validationFactory,fEndereco,fDocumento,fTelefone,fEmail,fDatas,$log){
 		var factory = {};
 //fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos,scope.emails,scope.telefones, 'INSERT', "pessoa/api/cliente/insert", fnCallBack);
-	factory.fnMontaObjeto = function(empresa,enderecos,emails,telefones,action,url,callBack){
+	factory.fnMontaAgencia = function(scope,vm,action,url,callBack){
 
-         //===============Documentos====================
+        scope.agencia = { numeroConta : []}
+        scope.enderecos = [];
+        scope.telefones = [];
+        scope.emails = [];
+        scope.telefones.push({numero : "",telefoneTypeEnum : "PRINCIPAL"});
+        scope.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
 
-         var documentos = [];
-         for(var x=0;x < empresa.documentos.length;x++)
-         {
-            if((empresa.documentos[x].numero)&&(empresa.documentos[x].numero != ""))
-            {
-                if((empresa.documentos[x]) && (empresa.documentos[x].id))
-                {
-                    documentos.push(fModels.amont(qat.model.fnDocumento(empresa.documentos[x],"UPDATE",$rootScope.user.user),"UPDATE"));
-                }
-                else
-                {
-                    documentos.push(fModels.amont(qat.model.fnDocumento(empresa.documentos[x],"INSERT",$rootScope.user.user),"INSERT"));
-                }
-            }
-         }
-         empresa.documentos =[];
-         empresa.documentos = documentos;
-
-         //=================== ENDERECO
-         empresa.enderecos =[];
-         empresa.enderecos.push(fModels.amont(qat.model.fnEndereco(enderecos[0],action,$rootScope.user.user),action));
-
-         //==================Telefone==================================
-         //debugger
-         var telefonesAux = [];
-         for(var x=0;x < telefones.length;x++)
-         {
-            if((telefones[x])&&(telefones[x].id))
-            {
-                if(telefones[x].modelAction == "DELETE")
-                    telefonesAux.push(fModels.amont(qat.model.fnTelefones(telefones[x],"DELETE"),"DELETE"));
-                else
-                   telefonesAux.push(fModels.amont(qat.model.fnTelefones(telefones[x],"UPDATE"),"UPDATE"));
-            }
-            else
-            {
-                telefonesAux.push(fModels.amont(qat.model.fnTelefones(telefones[x],"INSERT"),"INSERT"));
-            }
-         }
-         empresa.telefones =[];
-         empresa.telefones = telefonesAux;
-
-         //==================EMAIL==================================
-         var emailsAux = [];
-         var email = {};
-         for(var x=0;x < emails.length;x++)
-         {
-            email = emails[x];
-            if(email.email && email.email.trim() != "")
-            {
-                if((email) && (email.id))
-                {
-                    if(email.modelAction == "DELETE")
-                        emailsAux.push(fModels.amont(qat.model.fnEmails(email,"DELETE"),"DELETE"));
-                    else
-                        emailsAux.push(fModels.amont(qat.model.fnEmails(email,"UPDATE"),"UPDATE"));
-                }
-                else
-                {
-                    emailsAux.push(fModels.amont(qat.model.fnEmails(email,"INSERT"),"INSERT"));
-                }
-            }
-
+        if(scope.agencia.numeroConta && scope.agencia.numeroConta.length > 0)
+        {
+            console.log("teste")
         }
-        empresa.emails =[];
-        empresa.emails = emailsAux;
+        else
+        {
+            scope.agencia.numeroConta.push({});
+        }
 
-        var oObject = fModels.amont(empresa,action);
-        var _oObject = new qat.model.Cliente(oObject, action,$rootScope.user.user,$log);
+        fEndereco.fnMontaEnderecoEmpresa(vm,scope);
+        fTelefone.fnMontaTelefones(vm,scope);
+        fEmail.fnMontaEmails(vm,scope);
+        fDatas.fnMontaDatas(vm,scope);
+
+        var fnCallbackBanco = function(res){
+            var planos = "";
+
+        if(res.operationSuccess == true)
+        {
+                scope.banco = res.bancoList
+        }
+        }
+        qat.model.select.util("financeiro/api/banco/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackBanco);
+        
+        var fnCallbackConta = function(res){
+            if(res.operationSuccess == true)
+            {
+                    scope.contaC = res.bancoList
+            }
+        }
+        qat.model.select.util("financeiro/api/conta/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackConta);
+       
+        var fnFunctionCallbacks = function (res)
+        {
+            scope.tipoConta = [];
+            if(res.operationSuccess == true)
+            {
+                for(var x=0;x<res.doisValoresList.length;x++)
+                {
+                    var planos = res.doisValoresList[x] ;
+                    if(planos.doisValorType != null)
+                    {
+                        switch (planos.doisValorType.tipo)
+                        {
+                            case 'TIPO CONTA':
+                                scope.tipoConta.push(planos);
+                                break;
+                        }
+                    }
+                }
+            }
+            console.log(res);
+        }
+
+        doisValorFactory.financeiro(102,scope,fnFunctionCallbacks);
+
+        scope.saveAgencia = function() {
+            debugger
+            //=================== ENDERECO
+            scope.agencia.enderecos =[];
+            scope.agencia.enderecos.push(fModels.amont(qat.model.fnEndereco(scope.enderecos[0],action,$rootScope.user.user),action));
+
+            //==================Telefone==================================
+            var telefonesAux = [];
+            for(var x=0;x < scope.telefones.length;x++)
+            {
+                if((scope.telefones[x])&&(scope.telefones[x].id))
+                {
+                    if(scope.telefones[x].modelAction == "DELETE")
+                        telefonesAux.push(fModels.amont(qat.model.fnTelefones(scope.telefones[x],"DELETE"),"DELETE"));
+                    else
+                    telefonesAux.push(fModels.amont(qat.model.fnTelefones(scope.telefones[x],"UPDATE"),"UPDATE"));
+                }
+                else
+                {
+                    telefonesAux.push(fModels.amont(qat.model.fnTelefones(scope.telefones[x],"INSERT"),"INSERT"));
+                }
+            }
+            scope.agencia.telefones =[];
+            scope.agencia.telefones = telefonesAux;
+
+            //==================EMAIL==================================
+            var emailsAux = [];
+            var email = {};
+            for(var x=0;x < scope.emails.length;x++)
+            {
+                email = scope.emails[x];
+                if(email.email && email.email.trim() != "")
+                {
+                    if((email) && (email.id))
+                    {
+                        if(email.modelAction == "DELETE")
+                            emailsAux.push(fModels.amont(qat.model.fnEmails(email,"DELETE"),"DELETE"));
+                        else
+                            emailsAux.push(fModels.amont(qat.model.fnEmails(email,"UPDATE"),"UPDATE"));
+                    }
+                    else
+                    {
+                        emailsAux.push(fModels.amont(qat.model.fnEmails(email,"INSERT"),"INSERT"));
+                    }
+                }
+
+            }
+            scope.agencia.emails =[];
+            scope.agencia.emails = emailsAux;
+            var oObject = fModels.amont(scope.agencia,action);
+            var _oObject = new qat.model.Agencia(oObject, action,$rootScope.user.user,$log);
 
             SysMgmtData.processPostPageData("main/api/request", {
                 url: url,
                 token: $rootScope.authToken,
                 request: new qat.model.reqCliente(_oObject, true, true)
             }, function(res) {
-                callBack(res);
-            });
+                if(fnCallBack)
+                    fnCallBack(res);
+            });  
+        };
+        
     }
 	factory.fnDelete = function() {
 			//..

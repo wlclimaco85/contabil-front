@@ -36,7 +36,7 @@ qat.model.FormaPg = function(_oObjet, _modelAction,_user,$log)
 		this.intervalo = _oObjet.intervalo ?  { id : _oObjet.intervalo.id} : null;
 		this.entrada = _oObjet.entrada;
 		this.parentId = _oObjet.parentId;
-		this.emprId = _oObjet.emprId;
+		this.emprId = JSON.parse(localStorage.getItem('empresa')) ? JSON.parse(localStorage.getItem('empresa')).id : null;;
 		this.processId = _oObjet.processId;
 		this.tableEnumValue = _oObjet.tableEnumValue;
 		this.modelAction = _modelAction;
@@ -47,6 +47,72 @@ qat.model.FormaPg = function(_oObjet, _modelAction,_user,$log)
 
 		if($log)
 		$log.info("add Forma pagamento --> " +  _oObjet.descricao,"Teste");
+	}
+}
+
+qat.model.Agencia = function(_oObjet, _modelAction,_user,$log)
+{
+	var aObject = [];
+	if (_oObjet != undefined)
+	{
+		this.id = _oObjet.id;
+		this.nome  = _oObjet.nome;
+		this.enderecos  = _oObjet.enderecos ? _oObjet.enderecos : null;
+		this.emails  = _oObjet.emails ? _oObjet.emails : null
+		this.telefones  = _oObjet.telefones ? _oObjet.telefones : null;
+		this.gerente  = _oObjet.gerente;
+		this.responsavelConta  = _oObjet.responsavelConta;
+		if(_oObjet.numeroConta && _oObjet.numeroConta.length > 0)
+		{
+			for(var x = 0;x<_oObjet.numeroConta.length;x++)
+			{
+				aObject.push(qat.model.Conta(_oObjet.numeroConta[x], _modelAction,_user,$log));
+			}
+		}
+		this.numeroConta  = aObject;
+		this.banco  = _oObjet.banco ? {id : _oObjet.banco.id} : null;
+		this.parentId = _oObjet.parentId;
+		this.emprId = JSON.parse(localStorage.getItem('empresa')) ? JSON.parse(localStorage.getItem('empresa')).id : null;;
+		this.processId = _oObjet.processId;
+		this.tableEnumValue = _oObjet.tableEnumValue;
+		this.modelAction = _modelAction;
+		this.createUser = _user;
+		this.createDateUTC = (new Date()).getTime();
+		this.modifyUser = _user;
+		this.modifyDateUTC = (new Date()).getTime();
+
+		if($log)
+			$log.info("add Agencia --> " +  _oObjet.nome,"Teste");
+	}
+}
+
+qat.model.Conta = function(_oObjet, _modelAction,_user,$log)
+{
+	if (_oObjet != undefined)
+	{
+		this.id = _oObjet.id;
+		this.descricao = _oObjet.descricao;
+		this.numeroConta = _oObjet.numeroConta;
+		this.nossoNumero = _oObjet.nossoNumero;
+		this.statusConta = _oObjet.statusConta;
+		this.emiteBoleto = _oObjet.emiteBoleto;
+		this.saldo = _oObjet.saldo;
+		this.dataUltLanc = _oObjet.dataUltLanc;
+		this.listBaixa = _oObjet.listBaixa ? _oObjet.listBaixa : null;
+		this.tipoConta = _oObjet.tipoConta ?{ id:  _oObjet.tipoConta.id} : null;
+		this.observacao = _oObjet.observacao;
+		this.parentId = _oObjet.parentId;
+		this.emprId = JSON.parse(localStorage.getItem('empresa')) ? JSON.parse(localStorage.getItem('empresa')).id : null;;
+		this.processId = _oObjet.processId;
+		this.tableEnumValue = _oObjet.tableEnumValue;
+		this.modelAction = _modelAction;
+		this.createUser = _user;
+		this.createDateUTC = (new Date()).getTime();
+		this.modifyUser = _user;
+		this.modifyDateUTC = (new Date()).getTime();
+
+		if($log)
+			$log.info("add Conta --> " +  _oObjet.descricao,"Teste");
 	}
 }
 
@@ -100,7 +166,7 @@ qat.model.Cliente = function(_oObjet, _modelAction,_user,$log)
 		this.condPagList = _oObjet.condPagList ? _oObjet.condPagList : null;
 		this.contatoList = _oObjet.contatoList ? _oObjet.contatoList : null;
 		this.parentId = _oObjet.parentId;
-		this.emprId = _oObjet.emprId;
+		this.emprId = JSON.parse(localStorage.getItem('empresa')) ? JSON.parse(localStorage.getItem('empresa')).id : null;;
 		this.processId = _oObjet.processId;
 		this.tableEnumValue = _oObjet.tableEnumValue;
 		this.modelAction = _modelAction;

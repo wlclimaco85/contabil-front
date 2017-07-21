@@ -1,97 +1,66 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<form ng-submit="submit()" id="contaForm">
-    <div>
-    <div class="row numeroConta">
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label for="exampleInputPassword1">Numero Conta</label>
-                <input type="text" class="form-control numero" name="book[0].numeroCC" placeholder="Numero Conta" />
-                <input type="text" class="form-control id hide" name="book[0].numeroCC" placeholder="Numero Conta" />
+<div class="col-sm-12">
+    <div class="row " style="margin-top : 20px"></div>
+    <div class="panel panel-default" style="background:#EEEEEE">
+        <div class="panel-heading" style="background: #DDDDDD">
+            <div ng-repeat="conta in agencia.numeroConta">
+            <div class="col-sm-10">
+                <div class="col-sm-12">
+                    <div class="form-group col-sm-12">
+                        <label for="exampleInputEmail1">Descrição</label>
+                        <input type="text"  ng-model="conta.descricao" name="nome" class="form-control" placeholder="Descrição">
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="col-sm-4">
+                        <label for="exampleInputPassword1">Tipo Conta</label>
+                        <div class="row">
+                            <ui-select ng-model="conta.tipoConta" theme="bootstrap">
+                                <ui-select-match placeholder="Escolha o Tipo de documento ...">{{$select.selected.descricao}}</ui-select-match>
+                                <ui-select-choices repeat="item in tipoConta | filter: $select.search">
+                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Saldo</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control cota-socio" ng-model="conta.saldo" name="desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon">,00</span>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div ng-show="conta.tipoConta.value == 2" ng-hide="conta.tipoConta.value != 2">
+                        <div class="row col-sm-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Nº Conta</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">Nº</span>
+                                <input type="text" class="form-control cota-socio" ng-model="conta.numeroConta" name="desconto" placeholder="R$0,00" aria-label="Amount (to the nearest dollar)">
+                                
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-sm-12">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Observação</label>
+                        <textarea class="form-control" rows="5" ng-model="conta.observacao" id="Observacao"></textarea>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="exampleInputPassword1">Saldo</label>
-                <input type="text" class="form-control saldo" name="book[0].saldo" placeholder="Saldo" />
-            </div>
-        </div>
-        
-        <div class="col-sm-4" style="margin-top:18px">
-            <div class="checkbox">
-                <label>
-                <input type="checkbox" name="receiver" class="check-socio" /> Conta Ativa?
-            </label>
-            </div>
-        </div>
-        <div class="col-xs-1" style="margin-top:18px">
-            <button type="button" class="btn btn-default addButton-socios"><i class="fa fa-plus"></i></button>
-        </div>
-    </div>
-    <div class="form-group hide numeroConta" id="bookTemplate">
-        <div class="row socios">
-            <div class="col-sm-4">
-            <div class="form-group">
-                <label for="exampleInputPassword1">Numero Conta</label>
-                <input type="text" class="form-control cpf-socio" name="book[0].numeroCC" placeholder="Numero Conta" />
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="exampleInputPassword1">Saldo</label>
-                <input type="text" class="form-control cpf-socio" name="book[0].saldo" placeholder="Saldo" />
-            </div>
-        </div>
-        <div class="col-sm-4" style="margin-top:18px">
-            <div class="checkbox">
-                <label>
-                <input type="checkbox" name="receiver" class="check-socio" value="1" /> Conta Ativa?
-            </label>
-            </div>
-        </div>
-            <div class="col-xs-1" style="margin-top:18px">
+            <div class="col-sm-2" style="margin-top:10%">
+                <button type="button" class="btn btn-default addButton-socios"><i class="fa fa-plus"></i></button>
                 <button type="button" class="btn btn-default removeButton-socios"><i class="fa fa-minus"></i></button>
             </div>
         </div>
     </div>
-</form>
-<script>
-    $(document).ready(function() {
-        $('#contaForm')
-            .formValidation({
-                framework: 'bootstrap',
-                icon: {
-                    valid: 'glyphicon glyphicon-ok',
-                    invalid: 'glyphicon glyphicon-remove',
-                    validating: 'glyphicon glyphicon-refresh'
-                },
-                fields: {
+</div>
+</div>
 
-                    'book[0].cpf': notEmptyStringMinMaxRegexp,
-                    'book[0].saldo': notEmptyStringMinMaxRegexp,
-
-
-                }
-            }).on('click', '.addButton-socios', function() {
-                bookIndex++;
-                var $template = $('#bookTemplate'),
-                    $clone = $template
-                    .clone()
-                    .removeClass('hide')
-                    .removeAttr('id')
-                    .attr('data-book-index', bookIndex)
-                    .insertBefore($template);
-
-                // Update the name attributes
-                $clone
-                    .find('[name="cpf-socio"]').attr('name', 'book[' + bookIndex + '].numeroCC').end()
-                    .find('[name="cpf-saldo"]').attr('name', 'book[' + bookIndex + '].saldo').end()
-
-                // Add new fields
-                // Note that we also pass the validator rules for new field as the third parameter
-                $('#contaForm')
-                    .formValidation('addField', 'book[' + bookIndex + '].numeroCC', notEmptyStringMinMaxRegexp)
-                    .formValidation('addField', 'book[' + bookIndex + '].numeroCC', notEmptyStringMinMaxRegexp)
-
-            });
-    });
-</script>

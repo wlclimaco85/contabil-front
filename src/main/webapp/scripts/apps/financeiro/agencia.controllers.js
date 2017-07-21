@@ -247,58 +247,17 @@
 })();
 (function() {
     angular.module('wdApp.apps.agencia.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('AgenciaInsertController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        .controller('AgenciaInsertController', function($rootScope, $scope, fModels, SysMgmtData,fTitulo) {
+
             var vm = this;
 
-            $scope.agencia = {}
-            $scope.enderecos = {}
-            
-            $scope.today = function() {
-                return $scope.dt = new Date();
-            };
-            $scope.today();
-            $scope.clear = function() {
-                return $scope.dt = null;
-            };
-            $scope.open = function($event) {
-                $event.preventDefault();
-                $event.stopPropagation();
-                return $scope.opened = true;
-            };
-            $scope.dateOptions = {
-                'year-format': "'yy'",
-                'starting-day': 0
-            };
-            $scope.formats = ['MMMM-dd-yyyy', 'MM/dd/yyyy', 'yyyy/MM/dd'];
-            $scope.format = $scope.formats[1];
             var fnCallBack = function(oResponse) {
                 //debugger
                 console.log(oResponse)
             }
-            $scope.saveAgencia = function() {
-                
-                var oObject = fModels.amont(fPessoa.fnMontObject($scope.agencia,$scope.enderecos,"INSERT"),"INSERT");
-//var oObject = fModels.amont($scope.agencia,"INSERT");
-var bb = [];
-                $('.numeroConta:visible').each(function() {
-                if($(this).length > 0)
-                {
-                    //.fnContaCC =function(_numero,_id,_statusConta,_saldo,modelAction)
-                    bb.push(fModels.amont(qat.model.fnContaCC($(this).find('.numero').val(),$(this).find('.id').val(),$(this).find('.check-socio').prop('checked'),$(this).find('.saldo').val(),"INSERT"),"INSERT"));
-                }
-            });
-            oObject.numeroConta = bb;
-console.log(oObject);
-                SysMgmtData.processPostPageData("main/api/request", {
-                    url: "financeiro/api/agencia/insert/",
-                    token: $rootScope.authToken,
-                    request: new qat.model.reqAgencia(oObject, true, true)
-                }, function(res) {
-                    //debugger
-                    fnCallBack(res);
-                });
-              //  fPessoa.fnMontaObjeto($scope.agencia, null, 'INSERT', "financeiro/api/agencia/insert/", fnCallBack);
-            };
+
+            fTitulo.fnMontaAgencia($scope,vm,"INSERT","site/api/agencia/insert",fnCallBack)
+           
         });
 })();
 (function() {
