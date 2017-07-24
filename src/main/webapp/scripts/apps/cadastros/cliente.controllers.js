@@ -19,6 +19,7 @@
       tipoPessoa: 2
     }
 
+    
     function reloadData () {
       var resetPaging = false
       vm.dtInstance.reloadData(callback, resetPaging)

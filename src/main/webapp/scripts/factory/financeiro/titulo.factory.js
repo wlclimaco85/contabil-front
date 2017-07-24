@@ -11,7 +11,7 @@
         scope.enderecos = [];
         scope.telefones = [];
         scope.emails = [];
-        scope.telefones.push({numero : "",telefoneTypeEnum : "PRINCIPAL"});
+        scope.telefones.push({numero : "",telefoneTypeEnum : "CELULAR"});
         scope.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
 
         if(scope.agencia.numeroConta && scope.agencia.numeroConta.length > 0)
@@ -125,7 +125,7 @@
             SysMgmtData.processPostPageData("main/api/request", {
                 url: url,
                 token: $rootScope.authToken,
-                request: new qat.model.reqCliente(_oObject, true, true)
+                request: new qat.model.reqAgencia(_oObject, true, true)
             }, function(res) {
                 if(fnCallBack)
                     fnCallBack(res);

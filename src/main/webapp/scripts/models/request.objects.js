@@ -104,6 +104,12 @@
 	    this.returnListPaged = _bPagedList;
 	};
 
+	qat.model.reqAgencia = function(_oCounty, _bList, _bPagedList) {
+	    this.agencia = _oCounty;
+	    this.returnList = _bList;
+	    this.returnListPaged = _bPagedList;
+	};
+
 	qat.model.reqNote = function(_oCounty, _bList, _bPagedList) {
 	    this.note = _oCounty;
 	    this.returnList = _bList;

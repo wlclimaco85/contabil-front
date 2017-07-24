@@ -215,6 +215,31 @@
                 return padrao(vm, createdRow, scope, _callback, buttons, 2, _function);
             },
 
+            agencia: function(vm, createdRow, scope, _callback, _function) {
+
+
+                var buttons = [];
+                buttons.push({
+                    text: '<span class="fa fa-trash"></span>',
+                    key: '1',
+                    action: function(e, dt, node, config) {
+
+                        dialogFactory.dialog('views/financeiro/dialog/dAgencia.html', "AgenciaDeleteController", validationFactory.agencia, _function);
+
+                    }
+                }, {
+                    text: 'Nova Agência',
+                    key: '4',
+                    action: function(e, dt, node, config) {
+
+                        dialogFactory.dialog('views/cadastros/dialog/dAgencia.html', "AgenciaInsertController", validationFactory.agencia, _function);
+
+                    }
+                })
+
+                return padrao(vm, createdRow, scope, _callback, buttons, 2, _function);
+            },
+
             fornecedor: function(vm, createdRow, scope, _callback,_function) {
 
                 var buttons = [];
