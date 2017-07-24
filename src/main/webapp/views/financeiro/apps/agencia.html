@@ -5,7 +5,7 @@
           <div class="row">
               <div class="input-group">
                 <ui-select ng-model="agencia.banco" theme="bootstrap">
-                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                <ui-select-match placeholder="...">{{$select.selected.nome}}</ui-select-match>
                 <ui-select-choices
                     repeat="item in banco | filter: $select.search">
                 <div ng-bind-html="item.nome | highlight: $select.search"></div>

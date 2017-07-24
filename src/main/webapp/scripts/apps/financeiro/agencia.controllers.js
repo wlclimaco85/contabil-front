@@ -252,11 +252,10 @@
             var vm = this;
 
             var fnCallBack = function(oResponse) {
-                //debugger
                 console.log(oResponse)
             }
 
-            fTitulo.fnMontaAgencia($scope,vm,"INSERT","site/api/agencia/insert",fnCallBack)
+            fTitulo.fnMontaAgencia($scope,vm,"INSERT","financeiro/api/agencia/insert",fnCallBack)
            
         });
 })();

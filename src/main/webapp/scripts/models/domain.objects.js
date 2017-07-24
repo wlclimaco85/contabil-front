@@ -62,11 +62,12 @@ qat.model.Agencia = function(_oObjet, _modelAction,_user,$log)
 		this.telefones  = _oObjet.telefones ? _oObjet.telefones : null;
 		this.gerente  = _oObjet.gerente;
 		this.responsavelConta  = _oObjet.responsavelConta;
+		debugger
 		if(_oObjet.numeroConta && _oObjet.numeroConta.length > 0)
 		{
 			for(var x = 0;x<_oObjet.numeroConta.length;x++)
 			{
-				aObject.push(qat.model.Conta(_oObjet.numeroConta[x], _modelAction,_user,$log));
+				aObject.push( new qat.model.Conta(_oObjet.numeroConta[x], _modelAction,_user,$log));
 			}
 		}
 		this.numeroConta  = aObject;

@@ -5,7 +5,7 @@
 	commonAuth.factory('fTitulo', ['$rootScope', 'fModels', 'SysMgmtData', 'toastr', 'doisValorFactory','validationFactory','fEndereco','fDocumento','fTelefone','fEmail','fDatas' ,'$log',function($rootScope, fModels, SysMgmtData, toastr, doisValorFactory,validationFactory,fEndereco,fDocumento,fTelefone,fEmail,fDatas,$log){
 		var factory = {};
 //fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos,scope.emails,scope.telefones, 'INSERT', "pessoa/api/cliente/insert", fnCallBack);
-	factory.fnMontaAgencia = function(scope,vm,action,url,callBack){
+	factory.fnMontaAgencia = function(scope,vm,action,url,fnCallBack){
 
         scope.agencia = { numeroConta : []}
         scope.enderecos = [];

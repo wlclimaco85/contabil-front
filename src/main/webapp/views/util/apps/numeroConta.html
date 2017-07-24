@@ -1,11 +1,13 @@
 <div class="col-sm-12">
-    <div class="row " style="margin-top : 20px"></div>
     <div class="panel panel-default" style="background:#EEEEEE">
-        <div class="panel-heading" style="background: #DDDDDD">
+        <div class="panel-heading" >
+        Conta Corrente
+        </div>
+        <div class="panel-body sidebar-nav">
             <div ng-repeat="conta in agencia.numeroConta">
-            <div class="col-sm-10">
+            <div class="col-sm-10"  style="background: #DDDDDD">
                 <div class="col-sm-12">
-                    <div class="form-group col-sm-12">
+                    <div class="form-group">
                         <label for="exampleInputEmail1">Descrição</label>
                         <input type="text"  ng-model="conta.descricao" name="nome" class="form-control" placeholder="Descrição">
                     </div>
@@ -48,14 +50,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="row col-sm-12">
+                <div class="col-sm-12">
                     <div class="form-group">
                         <label for="exampleInputPassword1">Observação</label>
                         <textarea class="form-control" rows="5" ng-model="conta.observacao" id="Observacao"></textarea>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-2" style="margin-top:10%">
+            <div class="col-sm-2" style="margin-top:15%;background:#EEEEEE">
                 <button type="button" class="btn btn-default addButton-socios"><i class="fa fa-plus"></i></button>
                 <button type="button" class="btn btn-default removeButton-socios"><i class="fa fa-minus"></i></button>
             </div>
