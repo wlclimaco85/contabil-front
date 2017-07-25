@@ -30,6 +30,7 @@ angular.module('wdApp.apps.sysmgmt.data', [])
 				}
 				toastr.warning(msgOut, 'Warning');		
 				_resp = "";  
+				
 				_callback(_resp);			
 		};		
 		

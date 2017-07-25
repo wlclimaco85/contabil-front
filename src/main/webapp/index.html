@@ -663,7 +663,7 @@
 </div>
 
 
-<body ng-app="wdApp" ng-controller="PrincipalController as cc">
+<body ng-app="wdAppSite" ng-controller="PrincipalController as cc">
     <!-- Preloader
     ============================================= -->
 
@@ -1176,323 +1176,6 @@
     =============================================-->
     </section>
 
-
-    <section style="margin-top : 100px" id="wizard" style="background-color : #000000" ng-controller="NewEmpresaInsertController">
-        <div class='container'>
-            <div id="rootwizard" class="agilContabil">
-                <div class="navbar">
-                    <div class="navbar-inner">
-                        <div class="container">
-                            <ul>
-                                <li><a href=".tab1" data-toggle="tab">Informações do Usuario</a></li>
-                                <li><a href=".tab2" data-toggle="tab">Informações da Empresa</a></li>
-                                <li><a href=".tab3" data-toggle="tab">Informações de Socios</a></li>
-                                <li><a href=".tab4" data-toggle="tab">Informações Plano Serviçoes</a></li>
-                                <li><a href=".tab5" data-toggle="tab">Contrato Social</a></li>
-                                <li><a href=".tab6" data-toggle="tab">Pagamento</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div id="bar" class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;background : red"></div>
-                </div>
-                <form ng-submit="submit()" class="empresaForm">
-                    <div class="tab-content">
-                        <div class="tab-pane tab1" id="tab1">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-8 col-md-offset-2">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Nome Completo</label>
-                                            <input type="text" ng-model="usuario.nome" name="nome" class="form-control" placeholder="Nome Completo">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">CPF</label>
-                                            <input type="text" id="cpf" class="form-control" name="cpf" ng-model="usuario.cpf.numero" placeholder="CPF">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Telefone</label>
-                                            <input type="text" class="form-control" ng-model="usuario.telefone" name="telefone" placeholder="Telefone">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Email</label>
-                                            <input type="email" id='email' class="form-control" ng-model="usuario.email" name="email" placeholder="Email">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Senha</label>
-                                            <input type="password" class="form-control" ng-model="usuario.senha" name="password" placeholder="Senha">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Confirmar Senha</label>
-                                            <input type="password" class="form-control" ng-model="senha" name="confirmPassword" placeholder="Confirmar Senha">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="tab-pane tab2" id="tab2">
-                            <div class="panel-body">
-
-                                <div ng-controller="EnderecoControllers as endereco">
-                                    <div ng-include="'views/empresa/apps/cadEmpresa.html'"></div>
-
-                                    <!-- email -->
-                                    <div ng-include="'views/util/apps/endereco.html'"></div>
-                                </div>
-                                <!-- telefone -->
-                                <div ng-include="'views/util/apps/telefone.html'"></div>
-
-                                <!-- email -->
-                                <div ng-include="'views/util/apps/email.html'"></div>
-
-
-                                <!-- Cnae -->
-                                <div ng-include="'views/fiscal/apps/cnae.html'"></div>
-
-
-                            </div>
-                        </div>
-                        <div class="tab-pane tab3" id="tab3">
-                            <div class="row socios">
-                                <div class="col-sm-2">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">CPF Socio</label>
-                                        <input type="text" class="form-control cpf-socio" name="book[0].cpf" placeholder="CPF Socio" />
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Nome Socio</label>
-                                        <input type="text" class="form-control nome-socio" name="book[0].nome" placeholder="Nome Socio" />
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Porcentagem</label>
-                                        <input type="text" class="form-control cota-socio" name="book[0].cota" placeholder="%" />
-                                    </div>
-                                </div>
-                                <div class="col-sm-3" style="margin-top:18px">
-                                    <div class="checkbox">
-                                        <label>
-                                                <input type="checkbox" name="receiver" class="check-socio" value="1" /> Socio Administrador ?
-                                            </label>
-                                    </div>
-                                </div>
-                                <div class="col-xs-1" style="margin-top:18px">
-                                    <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
-                            <div class="form-group hide" id="bookTemplate">
-                                <div class="row socios">
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">CPF Socio</label>
-                                            <input type="text" class="form-control cpf-socio" name="cpf-socio" placeholder="CPF Socio" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Nome Socio</label>
-                                            <input type="text" class="form-control nome-socio" name="nome-socio" placeholder="Nome Socio" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Porcentagem</label>
-                                            <input type="text" class="form-control cota-socio" name="cota-socio" placeholder="%" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3" style="margin-top:18px">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="receiver" class="check-socio" value="1" /> Socio Administrador ?
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-1" style="margin-top:18px">
-                                        <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane tab4 col-sm-12" id="tab4">
-                            <!-- data-ng-controller="SiteController as cc"> -->
-                            <div class="col-sm-8">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href=".collapseThree">1 - Planos</a>
-                                        </h4>
-                                    </div>
-
-                                    <div id="collapseThree" class="panel-collapse collapse collapseThree">
-                                        <div class="panel-body">
-                                            <section class="mbr-section mbr-section--relative mbr-section--fixed-size " id="pricing-table1-11" style="background-color: rgb(240, 240, 240);">
-                                                <div class="mbr-section__container mbr-section__container--std-top-padding  container" style="padding-top: 93px; margin-bottom: 0px;width:100%">
-                                                    <div class="row">
-                                                        <div class="mbr-plan col-xs-12 mbr-plan--first col-md-3 col-sm-6" ng-repeat="plano in cc.site.planoList">
-                                                            <div class="mbr-plan__box planos">
-                                                                <div class="plano-id hide">{{plano.id}}</div>
-                                                                <div class="plano-type hide">1</div>
-                                                                <div class="mbr-plan__header">
-                                                                    <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
-                                                                        <h3 class="mbr-header__text">{{plano.titulo}}</h3>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="mbr-plan__number">
-                                                                    <div class="mbr-number mbr-number--price">
-                                                                        <div class="mbr-number__num">
-                                                                            <div class="{{plano.id}} hide id"></div>
-                                                                            <div class="hide type plano"></div>
-                                                                            <div class="mbr-number__group">
-                                                                                <sup class="mbr-number__left">$</sup><span class="mbr-number__value mbr-plan__number1 valor">{{plano.precoList[0].valor || 0}}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mbr-number__caption">Mensal</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="mbr-plan__details">
-                                                                    <ul ng-repeat="servico in plano.servicoList">
-                                                                        <li><strong>{{servico.servico.nome}}</strong> {{servico.servico.descricao}}</li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="mbr-plan__buttons">
-                                                                    <div class="mbr-buttons mbr-buttons--center">
-                                                                        <label>Contratar - <input type='checkbox' class="plano" ng-init='checkStatus=false' ng-model='checkStatus' ng-click='doIfChecked(checkStatus)'></label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </section>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--    <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href=".collapseFour">2 - Serviços</a>
-                                    </h4>
-                                    </div>
-                                    <div id="collapseFour" class="panel-collapse collapse collapseFour">
-                                        <div class="panel-body">
-                                            <section class="mbr-section mbr-section--relative mbr-section--fixed-size planos" id="pricing-table1-11" style="background-color: rgb(240, 240, 240);">
-                                                <div class="mbr-section__container mbr-section__container--std-top-padding container" style="padding-top: 93px; margin-bottom: 0px;">
-                                                    <div class="row">
-                                                        <div class="mbr-plan col-xs-8 mbr-plan--first col-md-3 col-sm-6" ng-repeat="servico in cc.site.servicoList">
-                                                            <div class="plano-id hide">{{servico.id}}</div>
-                                                            <div class="plano-type hide">2</div>
-                                                            <div class="mbr-plan__box">
-                                                                <div class="mbr-plan__header">
-                                                                    <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
-                                                                        <h3 class="mbr-header__text">{{servico.nome}}</h3>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="mbr-plan__number">
-                                                                    <div class="{{servico.id}} hide id"></div>
-                                                                    <div class="hide type servico"></div>
-                                                                    <div class="mbr-number mbr-number--price">
-                                                                        <div class="mbr-number__num">
-                                                                            <div class="mbr-number__group">
-                                                                                <sup class="mbr-number__left">$</sup><span class="mbr-number__value mbr-plan__number1 valor" style="font-size:40%">{{servico.precoList[0].valor || 0}}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mbr-number__caption">Mensal</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="mbr-plan__details">
-                                                                    <ul>
-                                                                        <li><strong>{{servico.servico.descricao}}</strong></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="mbr-plan__buttons">
-                                                                    <div class="mbr-buttons mbr-buttons--center">
-                                                                        <label>Contratar - <input type='checkbox' class="plano" ng-init='checkStatus=false' ng-model='checkStatus' ng-click='doIfChecked(checkStatus,10,nome)'></label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </section>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                 -->
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href=".collapseten" style="font-size:24px">Total</a>
-                                    </h4>
-                                </div>
-
-                                <div class="panel-body">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Plano</th>
-                                                <th>Valor</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id='table-plano'>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-
-
-
-                            </div>
-                        </div>
-                        <div class="tab-pane tab5" id="tab5" style="height:500px;">
-                            <div id="Layer1" style="overflow:auto;height:400px;left:10px; top:20px;">
-                                <div ng-include="'views/empresa/apps/contrato.html'"></div>
-
-                            </div>
-                            <div>
-                                <button class="btn btn-primary" ng-click="cc.generatePDF()"><i class="fa fa-save"></i> Save as PDF</button>
-                            </div>
-                            <!--
-
-                            <div class="container kv-main">
-
-                                <form enctype="multipart/form-data">
-                                    <input id="file-0a" class="file" type="file" multiple data-min-file-count="1">
-                                    <br>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <button type="reset" class="btn btn-default">Reset</button>
-                                </form>
-                                <hr>
-                              </div> -->
-
-                        </div>
-                        <div class="tab-pane" id="tab6">
-                            6
-                        </div>
-                        <ul class="pager wizard">
-                            <li class="previous first" style="display:none;"><a href="javascript:;">Primeira</a></li>
-                            <li class="previous"><a href="javascript:;">Anterior</a></li>
-                            <li class="next last" style="display:none;"><a href="javascript:;">Ultima</a></li>
-                            <li class="next"><a href="javascript:;">Proximo</a></li>
-                            <li class="hide save-empresa"><input type="submit" id="submit" value="Submit" ng-click="saveEmpresa()" /></li>
-                        </ul>
-                    </div>
-                </form>
-
-
-
-            </div>
-
-        </div>
-
-    </section>
     <!-- Testimonials
     =============================================
     <section id="testimonials">
@@ -1548,64 +1231,19 @@
 
 
 
-    <!--
-<script type="text/javascript">
-    head.load(
-        "http://maps.googleapis.com/maps/api/js?v=3&libraries=visualization",
-        "thirdparty/aaPrincipal/js/jquery-3.1.1.min.js",
-        "thirdparty/jquery-ui-1.12.0/jquery-ui.min.js",
-        "thirdparty/bootstrap-fileinput-master/js/fileinput.js" ,
-        "thirdparty/bootstrap-fileinput-master/js/fileinput_locale_fr.js" ,
-        "thirdparty/bootstrap-fileinput-master/js/fileinput_locale_es.js",
-        "thirdparty/angular-datatables/vendor/datatables/media/js/jquery.dataTables.js",
-        "thirdparty/aaPrincipal/js/bootstrap.min.js",
-        "thirdparty/aaPrincipal/js/angular.js",
-        "thirdparty/aaPrincipal/js/angular-modal-service.js",
-        "thirdparty/aaPrincipal/js/angular-sanitize.js",
-        "thirdparty/aaPrincipal/js/select2.min.js",
-        "thirdparty/aaPrincipal/js/bootstrap-datepicker.min.js",
-        "thirdparty/aaPrincipal/js/moment.js",
-        "thirdparty/aaPrincipal/js/jquery.inputaction.js"
-);
-</script>-->
-
-    <!-- thirdparty libraries-->
-    <!-- thirdparty libraries-->
     <script src="http://maps.googleapis.com/maps/api/js?v=3&libraries=visualization"></script>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
     <script src="thirdparty/aaPrincipal/js/jquery-3.1.1.min.js"></script>
     <script src="thirdparty/jquery-ui-1.12.0/jquery-ui.min.js"></script>
-    <script src="thirdparty/bootstrap-fileinput-master/js/fileinput.js" type="text/javascript"></script>
-    <script src="thirdparty/angular-datatables/vendor/datatables/media/js/jquery.dataTables.js"></script>
-
-
-    <!-- Optional theme -->
-
-
-    <!-- Latest compiled and minified JavaScript -->
     <script src="thirdparty/aaPrincipal/js/bootstrap.min.js"></script>
     <script src="thirdparty/aaPrincipal/js/angular.js"></script>
     <script src="thirdparty/aaPrincipal/js/angular-modal-service.js"></script>
     <script src="thirdparty/aaPrincipal/js/angular-sanitize.js"></script>
-    <!--  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
-    <script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-sanitize.js"></script>-->
-    <!--<script src="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.js"></script> -->
-
     <script src="thirdparty/aaPrincipal/js/select2.min.js"></script>
     <script src="thirdparty/aaPrincipal/js/bootstrap-datepicker.min.js"></script>
     <script src="thirdparty/aaPrincipal/js/moment.js"></script>
     <script src="thirdparty/aaPrincipal/js/jquery.inputaction.js"></script>
     <script src="thirdparty/aaPrincipal/js/numeral.min.js"></script>
-
-
-
-
-    <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-    <script src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
--->
     <script src="thirdparty/angular-route/angular-route.min.js"></script>
     <script src="thirdparty/angular-animate/angular-animate.min.js"></script>
     <script src="thirdparty/angular-bootstrap/ui-bootstrap-tpls-2.0.0.min.js"></script>
@@ -1647,72 +1285,8 @@
     <script src="thirdparty/aaPrincipal/js/angular-touch.js"></script>
 
 
-
-
-    <!-- datatables -->
-    <script src="thirdparty/angular-datatables-master/vendor/highlightjs/highlight.pack.js"></script>
-
-    <script src="thirdparty/angular-datatables-master/vendor/backtotop/backtotop.min.js"></script>
-
-    <script src="thirdparty/angular-datatables-master/vendor/angular-highlightjs/angular-highlightjs.min.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/angular-resource/angular-resource.min.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
-
-    <script src="thirdparty/angular-datatables-master/vendor/datatables/media/js/jquery.dataTables.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-colreorder/js/dataTables.colReorder.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-colvis/js/dataTables.colVis.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-responsive/js/dataTables.responsive.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-scroller/js/dataTables.scroller.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-columnfilter/js/dataTables.columnFilter.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-light-columnfilter/dist/dataTables.lightColumnFilter.min.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-fixedcolumns/js/dataTables.fixedColumns.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-fixedheader/js/dataTables.fixedHeader.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/dataTables.buttons.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.colVis.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.flash.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.html5.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-buttons/js/buttons.print.js"></script>
-    <script src="thirdparty/angular-datatables-master/vendor/datatables-select/js/dataTables.select.js"></script>
-
-    <script src="thirdparty/angular-datatables-master/vendor/angular-translate/angular-translate.min.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/angular-datatables.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/angular-datatables.util.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/angular-datatables.options.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/angular-datatables.instances.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/angular-datatables.factory.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/angular-datatables.renderer.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/angular-datatables.directive.js"></script>
-    <!--   bootstrap
-    <script src="thirdparty/bootstrap-4.0.0-alpha.2/dist/js/bootstrap.js"></script>
-    <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js" integrity="sha384-XXXXXXXX" crossorigin="anonymous"></script>-->
-
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>-->
-
     <script src="thirdparty/aaPrincipal/js/bootstrap.min.js"></script>
 
-    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.options.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.colvis.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.tabletools.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/colvis/angular-datatables.colvis.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/colreorder/angular-datatables.colreorder.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/tabletools/angular-datatables.tabletools.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/scroller/angular-datatables.scroller.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/light-columnfilter/angular-datatables.light-columnfilter.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/fixedheader/angular-datatables.fixedheader.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/buttons/angular-datatables.buttons.js"></script>
-    <script src="thirdparty/angular-datatables-master/src/plugins/select/angular-datatables.select.js"></script>
-
-
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="thirdparty/aaPrincipal/js/bootstrap.min.js"></script>
 
     <script src="thirdparty/aaPrincipal/js/angular-strap.min.js"></script>
     <script src="thirdparty/aaPrincipal/js/angular-strap.tpl.min.js"></script>
@@ -1735,33 +1309,14 @@
 
 
     <script src="dist/js/select2.min.js"></script>
+    <script src="dist/js/formValidation.js"></script>
 
     <script src="dist/js/framework/bootstrap.js"></script>
 
-
-    <script src="https://unpkg.com/moment@2.17.1"></script>
-    <script src="https://unpkg.com/interactjs@1"></script>
-    <script src="https://unpkg.com/angular@1.6.4/angular.js"></script>
-    <script src="https://unpkg.com/angular-animate@1.6.4/angular-animate.js"></script>
-    <script src="https://unpkg.com/angular-ui-bootstrap@2/dist/ui-bootstrap-tpls.js"></script>
-    <script src="https://unpkg.com/rrule@2"></script>
-    <script src="https://unpkg.com/angular-bootstrap-colorpicker@3"></script>
-    <script src="https://unpkg.com/angular-bootstrap-calendar"></script>
-    <link href="https://unpkg.com/bootstrap@3/dist/css/bootstrap.css" rel="stylesheet">
-    <link href="https://unpkg.com/angular-bootstrap-colorpicker@3/css/colorpicker.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css" rel="stylesheet">
-
-
-
-    <script src="dist/js/select2.min.js"></script>
-
-    <script src="dist/js/framework/bootstrap.js"></script>
-
-    <script src="thirdparty/angular-xeditable/js/xeditable.js"></script>
     <script src="thirdparty/aaPrincipal/js/angular-sticky.js"></script>
     <script src="thirdparty/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.min.js"></script>
     <!--webdaptive -->
-    <script src="scripts/wdapp.js"></script>
+    <script src="scripts/wdappSite.js"></script>
 
     <script src="scripts/commons/wdapp.controllers.js"></script>
     <script src="scripts/commons/wdapp.directives.js"></script>
@@ -1771,130 +1326,42 @@
     <script src="scripts/commons/wdapp.httpinterceptors.factory.js"></script>
     <script src="scripts/factory/wdapp.commons.factory.js"></script>
     <script src="scripts/factory/wdapp.table.create.factory.js"></script>
-    <script src="scripts/factory/wdapp.validations.factory.js"></script>
-    <script src="scripts/factory/wdapp.columns.factory.js"></script>
-    <script src="scripts/factory/wdapp.options.factory.js"></script>
-    <script src="scripts/factory/wdapp.table.ajax.factory.js"></script>
-    <script src="scripts/factory/wdapp.table.filters.factory.js"></script>
-    <script src="scripts/factory/wdapp.dialog.delete.factory.js"></script>
-    <script src="scripts/factory/notaFiscal/notaFiscal.factory.js"></script>
     <script src="scripts/models/domain.objects.js"></script>
     <script src="scripts/models/request.objects.js"></script>
     <script src="scripts/models/domain.selects.js"></script>
-
+    <script src="scripts/models/domain.factory.js"></script>
+    <script src="scripts/factory/empresa/empresa.factory.js"></script>
+    <script src="scripts/factory/wdapp.validations.factory.js"></script>
+    <script src="scripts/factory/wdapp.doisValor.util.factory.js"></script>
+    <script src="scripts/factory/util/endereco.factory.js"></script>
+    <script src="scripts/factory/util/datas.factory.js"></script>
+    <script src="scripts/factory/util/documento.factory.js"></script>
+    <script src="scripts/factory/util/email.factory.js"></script>
+    <script src="scripts/factory/util/telefone.factory.js"></script>
 
     <script src="scripts/ui/ui.controllers.js"></script>
     <script src="scripts/forms/forms.directives.js"></script>
     <script src="scripts/forms/forms.controllers.js"></script>
-    <script src="scripts/tables/tables.controllers.js"></script>
-    <script src="scripts/tasks/tasks.all.js"></script>
-    <script src="scripts/charts/charts.chartjs.controllers.js"></script>
-    <script src="scripts/charts/charts.flot.controllers.js"></script>
-    <script src="scripts/charts/charts.morris.controllers.js"></script>
-    <script src="scripts/charts/charts.other.controllers.js"></script>
-    <script src="scripts/charts/charts.echarts.controllers.js"></script>
+   
     <script src="select.js"></script>
     <script src="scripts/charts/charts.directives.js"></script>
-    <script src="scripts/apps/util/util.controllers.js"></script>
     <script src="scripts/pages/pages.controllers.js"></script>
     <script src="scripts/apps/stocks.controllers.js"></script>
     <script src="scripts/apps/stocks.factory.js"></script>
     <script src="scripts/apps/counties.controllers.js"></script>
-    <script src="scripts/models/validation.objects.js"></script>
-    <script src="scripts/directive/angucomplete-alt.js"></script>
-    <script src="scripts/directive/inputaction.directive.js"></script>
-    <script src="scripts/apps/procedures.controllers.js"></script>
+    <script src="scripts/apps/principal.controller.js"></script>
     <script src="scripts/apps/sysmgmt.data.factory.js"></script>
+    
     <script src="scripts/apps/site.controllers.js"></script>
-    <script src="scripts/apps/empresa.controllers.js"></script>
-    <script src="scripts/apps/produto/produto.controllers.js"></script>
-    <script src="scripts/apps/notafiscal/notafiscal.controllers.js"></script>
-    <script src="scripts/apps/notafiscal/notafiscalEntrada.controllers.js"></script>
-
-    <script src="scripts/apps/fiscal/cfop.controllers.js"></script>
-    <script src="scripts/apps/fiscal/cnae.controllers.js"></script>
-    <script src="scripts/apps/fiscal/regime.controllers.js"></script>
-    <script src="scripts/apps/vendas/pdVendas.controllers.js"></script>
-    <script src="scripts/apps/vendas/cartaCorrecao.controllers.js"></script>
-    <script src="scripts/apps/vendas/notafiscal.controllers.js"></script>
-    <script src="scripts/apps/vendas/orcamento.controllers.js"></script>
-    <script src="scripts/apps/vendas/ordemServico.controllers.js"></script>
-    <script src="scripts/apps/compras/nfEntrada.controllers.js"></script>
-    <script src="scripts/apps/compras/pdCompras.controllers.js"></script>
-    <script src="scripts/apps/compras/cotacao.controllers.js"></script>
-    <script src="scripts/apps/compras/notafiscal.controllers.js"></script>
-    <script src="scripts/apps/financeiro/contasPagar.controllers.js"></script>
-    <script src="scripts/apps/financeiro/contasReceber.controllers.js"></script>
-    <script src="scripts/apps/financeiro/formaPg.controllers.js"></script>
-    <script src="scripts/apps/financeiro/banco.controllers.js"></script>
-    <script src="scripts/apps/financeiro/agencia.controllers.js"></script>
-    <script src="scripts/apps/financeiro/conta.controllers.js"></script>
-    <script src="scripts/apps/financeiro/situacao.controllers.js"></script>
-    <script src="scripts/apps/financeiro/categoria.controllers.js"></script>
-    <script src="scripts/apps/financeiro/tipoDocumentos.controllers.js"></script>
-    <script src="scripts/apps/financeiro/caixa.controllers.js"></script>
-    <script src="scripts/apps/Dp/funcionario.controllers.js"></script>
-    <script src="scripts/apps/cadastros/cliente.controllers.js"></script>
-    <script src="scripts/apps/cadastros/fornecedor.controllers.js"></script>
-    <script src="scripts/apps/cadastros/transportador.controllers.js"></script>
-    <script src="scripts/apps/cadastros/convenio.controllers.js"></script>
-    <script src="scripts/apps/cadastros/deposito.controllers.js"></script>
-    <script src="scripts/apps/cadastros/estado.controllers.js"></script>
-    <script src="scripts/apps/cadastros/filial.controllers.js"></script>
-    <script src="scripts/apps/produto/categoria.controllers.js"></script>
-    <script src="scripts/apps/produto/unimed.controllers.js"></script>
-    <script src="scripts/apps/produto/marca.controllers.js"></script>
-    <script src="scripts/apps/produto/servico.controllers.js"></script>
-    <script src="scripts/apps/controleProducao/ordemProducao.controllers.js"></script>
-    <script src="scripts/apps/cadastros/convenio.controllers.js"></script>
-    <script src="scripts/apps/cadastros/cidade.controllers.js"></script>
-    <script src="scripts/apps/cadastros/filial.controllers.js"></script>
-    <script src="scripts/apps/cadastros/almoxarifado.controllers.js"></script>
-    <script src="scripts/apps/advogado/processo.controllers.js"></script>
-    <script src="scripts/apps/advogado/advogado.controllers.js"></script>
-
-
-    <script src="scripts/apps/gerencia/cadEmpresa.controllers.js"></script>
     <script src="scripts/apps/gerencia/site.controllers.js"></script>
     <script src="scripts/apps/gerencia/plano.controllers.js"></script>
     <script src="scripts/apps/gerencia/servicos.controllers.js"></script>
     <script src="scripts/apps/gerencia/usuarios.controllers.js"></script>
     <script src="scripts/apps/gerencia/contatos.controllers.js"></script>
     <script src="scripts/apps/gerencia/historico.controllers.js"></script>
-
-
-    <script src="scripts/apps/dicionario/field.controllers.js"></script>
-    <script src="scripts/apps/dicionario/help.controllers.js"></script>
-    <script src="scripts/apps/dicionario/menu.controllers.js"></script>
-    <script src="scripts/apps/dicionario/pagina.controllers.js"></script>
-    <script src="scripts/apps/dicionario/validacao.controllers.js"></script>
-    <script src="scripts/apps/gerencia/roles.controllers.js"></script>
-    <script src="scripts/apps/gerencia/socio.controllers.js"></script>
-    <script src="scripts/apps/gerencia/tributacao.controllers.js"></script>
-
-    <script src="scripts/apps/gerencia/permissoes.controllers.js"></script>
-
-    <script src="scripts/apps/util/telefone.controllers.js"></script>
-    <script src="scripts/util/email.controllers.js"></script>
-    <script src="scripts/apps/util/select.controller.js"></script>
-    <script src="scripts/apps/util/cnae.select.controller.js"></script>
-    <script src="scripts/apps/util/formaPg.select.controller.js"></script>
-
-    <script src="scripts/factory/empresa/empresa.factory.js"></script>
-    <script src="scripts/factory/site/site.factory.js"></script>
-    <script src="scripts/factory/pessoa/pessoa.factory.js"></script>
-    <script src="scripts/factory/produto/produto.factory.js"></script>
-    <script src="scripts/factory/produto/tributacao.factory.js"></script>
-    <script src="scripts/factory/produto/calcTributos.factory.js"></script>
-    <script src="scripts/factory/wdapp.datatables.factory.js"></script>
-    <script src="scripts/factory/wdapp.initPage.factory.js"></script>
-    <script src="scripts/models/domain.factory.js"></script>
-    <script src="scripts/util/ngAutocomplete.js"></script>
-    <script src="scripts/factory/wdapp.doisValor.util.factory.js"></script>
-
-    <script src="scripts/apps/entidade/empresa.controllers.js"></script>
-    <script src="scripts/apps/principal.controller.js"></script>
+    
     <script src="scripts/util/endereco.controllers.js"></script>
+    
     <!-- JS PLUGINS -->
 
     <script src="views/template-assets/js/custom.js"></script>

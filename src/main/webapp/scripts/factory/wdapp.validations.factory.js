@@ -1,8 +1,8 @@
 ;(function () {
   'use strict'
-  var commonAuth = angular.module('wdApp.ajaxCalls.validation', ['angularModalService'])
+  var commonAuth = angular.module('wdApp.ajaxCalls.validation', [])
 
-  commonAuth.factory('validationFactory', ['ModalService',
+  commonAuth.factory('validationFactory', [
     function (ModalService) {
       return {
         cpf: function (value) {

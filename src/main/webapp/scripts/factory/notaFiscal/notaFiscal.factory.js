@@ -2,7 +2,7 @@
 	'use strict';
 	var commonAuth = angular.module('wdApp.ajaxCall.notaFiscal', []);
 
-	commonAuth.factory('fNotaFiscal', ['$rootScope', 'fModels', 'SysMgmtData', 'toastr', function ($rootScope, fModels, SysMgmtData, toastr) {
+	commonAuth.factory('fNotaFiscal', ['$rootScope', 'fModels', 'SysMgmtData', 'toastr','$log', function ($rootScope, fModels, SysMgmtData, toastr,$log) {
 		var factory = {};
 
         //function padrao(vm,createdRow,scope, filters,aButtons,sPosition,functionReload){
@@ -278,10 +278,10 @@
 
 			var oNFNotaInfoIdentificacao = {
 				id: null,
-				uf: emitente.enderecos[0].cidade ? emitente.enderecos[0].cidade.estado : "MG",
+				uf: emitente.enderecos[0] ? emitente.enderecos[0].cidade ? emitente.enderecos[0].cidade.estado : "MG" : null,
 				codigoRandomico: 555,
 				naturezaOperacao: '5011', //emitente.configuracao.confNFe.cfopPadrao.cfop,
-				formaPagamento: notaFiscal.formapg,
+				formaPagamento: new qat.model.FormaPg(notaFiscal.formapg, _action,$rootScope.userId.userId,$log),
 				modelo: {
 					id: 1
 				}, //emitente.configuracao.confNFe.modelo.value,
@@ -297,7 +297,7 @@
 				identificadorLocalDestinoOperacao: {
 					value: 1
 				},
-				codigoMunicipio: emitente.enderecos[0].cidade ? emitente.enderecos[0].cidade.codIbge : "",
+				codigoMunicipio: emitente.enderecos[0] ? emitente.enderecos[0].cidade ? emitente.enderecos[0].cidade.codIbge : "" : "",
 				tipoImpressao: {
 					value: 1
 				},

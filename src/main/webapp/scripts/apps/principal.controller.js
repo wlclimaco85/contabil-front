@@ -1,9 +1,9 @@
 (function()
 {
-	angular.module('wdApp.apps.principal', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+	angular.module('wdApp.apps.principal', [])
 		.controller('PrincipalController', principalController);
 
-	function principalController($location, $log, fModels, $scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory,
+	function principalController($location, $log,  $scope, $compile, $rootScope, SysMgmtData,
 		fEmpresa)
 	{
 		var vm = this;
@@ -131,8 +131,8 @@
 })();
 (function()
 {
-	angular.module('wdApp.apps.principal.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-		.controller('PrincipalInsertController', function($rootScope, $scope, fModels, SysMgmtData, fEmpresa)
+	angular.module('wdApp.apps.principal.insert', [])
+		.controller('PrincipalInsertController', function($rootScope, $scope,  SysMgmtData, fEmpresa)
 		{
 			var vm = this;
 
@@ -255,7 +255,7 @@
 			{
 
 
-				var oObject = fModels.amont(qat.model.Empresa($scope.empresa, "INSERT", $rootScope.user.user), "INSERT");
+				//var oObject = fModels.amont(qat.model.Empresa($scope.empresa, "INSERT", $rootScope.user.user), "INSERT");
 
 				SysMgmtData.processPostPageData("main/api/anonimo",
 				{
@@ -276,8 +276,8 @@
 })();
 (function()
 {
-	angular.module('wdApp.apps.principal.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-		.controller('PrincipalUpdateController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa)
+	angular.module('wdApp.apps.principal.update', [])
+		.controller('PrincipalUpdateController', function($rootScope, $scope,  SysMgmtData, fPessoa)
 		{
 			var vm = this;
 			$scope.principal = {};
@@ -291,8 +291,8 @@
 })();
 (function()
 {
-	angular.module('wdApp.apps.principal.delete', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-		.controller('PrincipalDeleteController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa)
+	angular.module('wdApp.apps.principal.delete', [])
+		.controller('PrincipalDeleteController', function($rootScope, $scope,  SysMgmtData, fPessoa)
 		{
 			var vm = this;
 			$scope.principal = {};
@@ -309,8 +309,8 @@
 })();
 (function()
 {
-	angular.module('wdApp.apps.principal.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-		.controller('PrincipalViewController', function($rootScope, $scope, fModels, SysMgmtData, fPessoa)
+	angular.module('wdApp.apps.principal.view', [])
+		.controller('PrincipalViewController', function($rootScope, $scope,  SysMgmtData, fPessoa)
 		{
 			var vm = this;
 			$scope.principal = {};
