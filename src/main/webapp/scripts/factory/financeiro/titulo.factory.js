@@ -7,13 +7,6 @@
 //fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos,scope.emails,scope.telefones, 'INSERT', "pessoa/api/cliente/insert", fnCallBack);
 	factory.fnMontaAgencia = function(scope,vm,action,url,fnCallBack){
 
-        scope.agencia = { numeroConta : []}
-        scope.enderecos = [];
-        scope.telefones = [];
-        scope.emails = [];
-        scope.telefones.push({numero : "",telefoneTypeEnum : "CELULAR"});
-        scope.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
-
         if(scope.agencia.numeroConta && scope.agencia.numeroConta.length > 0)
         {
             console.log("teste")
@@ -37,7 +30,7 @@
         }
         }
         qat.model.select.util("financeiro/api/banco/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackBanco);
-        
+
         var fnCallbackConta = function(res){
             if(res.operationSuccess == true)
             {
@@ -45,7 +38,7 @@
             }
         }
         qat.model.select.util("financeiro/api/conta/fetchPage",true,new qat.model.planoInquiryRequest( 100/20, true, JSON.parse(localStorage.getItem("empresa")).id),fnCallbackConta);
-       
+
         var fnFunctionCallbacks = function (res)
         {
             scope.tipoConta = [];
@@ -129,9 +122,9 @@
             }, function(res) {
                 if(fnCallBack)
                     fnCallBack(res);
-            });  
+            });
         };
-        
+
     }
 	factory.fnDelete = function() {
 			//..

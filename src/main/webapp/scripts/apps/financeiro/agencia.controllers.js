@@ -15,22 +15,21 @@
         vm.delete = deleteRow;
         vm.dtInstance = {};
         vm.persons = {};
-        
-        $scope.agencia = {
+                $scope.agencia = {
             tipoPessoa: 2
         };
 
-        function reloadData () 
+        function reloadData ()
         {
             var resetPaging = false
             vm.dtInstance.reloadData(callback, resetPaging)
         }
 
-        function callback (json) 
+        function callback (json)
         {
             console.log(json)
         }
-        $rootScope.reloadDataAgencia = function (_callback) 
+        $rootScope.reloadDataAgencia = function (_callback)
         {
             var resetPaging = false
             vm.dtInstance.reloadData(_callback, resetPaging)
@@ -40,18 +39,18 @@
         // console.log('row')
         }
 
-        function recompile (row, data, dataIndex) 
+        function recompile (row, data, dataIndex)
         {
             $compile(angular.element(row).contents())($scope)
         }
 
-        var createdRow = function (row, data, dataIndex) 
+        var createdRow = function (row, data, dataIndex)
         {
             // Recompiling so we can bind Angular directive to the DT
             $compile(angular.element(row).contents())($scope)
         }
 
-        var fnDataSRC = function(json) 
+        var fnDataSRC = function(json)
         {
             console.log(json)
             json['recordsTotal'] = json.agenciaList.length
@@ -64,7 +63,7 @@
         $scope.toggle = function() {
             $scope.state = !$scope.state;
         };
-        
+
         //   dialogFactory.dialog('views/cadastros/dialog/dAgencia.html',"AgenciaInsertController",openDialogUpdateCreate);
 
         var titleHtml = null;
@@ -127,7 +126,14 @@
 
             var vm = this;
 
-            var fnCallBack = function (res) 
+            $scope.agencia = { numeroConta : []}
+            $scope.enderecos = [];
+            $scope.telefones = [];
+            $scope.emails = [];
+            $scope.telefones.push({numero : "",telefoneTypeEnum : "CELULAR"});
+            $scope.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+
+            var fnCallBack = function (res)
             {
                 if (res.operationSuccess == true) {
                 $element.modal('hide')
@@ -140,7 +146,7 @@
             }
 
             fTitulo.fnMontaAgencia($scope,vm,"INSERT","financeiro/api/agencia/insert",fnCallBack)
-           
+
         });
 })();
 (function() {
@@ -150,9 +156,25 @@
             debugger
             $scope.agencia = {};
             $scope.agencia = $rootScope.agencia;
+            $scope.enderecos = $rootScope.agencia.enderecos;
+            if($rootScope.agencia.telefones)
+            {
+                $scope.telefones = $rootScope.agencia.telefones;
+            }
+            else
+            {
+                $scope.telefones = [];
+                $scope.telefones.push({numero : "",telefoneTypeEnum : "CELULAR"});
+            }
+            if($rootScope.agencia.emails)  {
+                $scope.emails = $rootScope.agencia.emails;
+            }else{
+                $scope.emails = [];
+                $scope.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+            }
             console.log($rootScope.agencia)
 
-            var fnCallBack = function (res) 
+            var fnCallBack = function (res)
             {
                 if (res.operationSuccess == true) {
                 $element.modal('hide')
@@ -164,7 +186,7 @@
                 }
             }
 
-            fTitulo.fnMontaAgencia($scope,vm,"INSERT","financeiro/api/agencia/update",fnCallBack)
+            fTitulo.fnMontaAgencia($scope,vm,"UPDATE","financeiro/api/agencia/update",fnCallBack)
         });
 })();
 (function() {

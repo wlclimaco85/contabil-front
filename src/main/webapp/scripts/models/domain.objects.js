@@ -67,7 +67,10 @@ qat.model.Agencia = function(_oObjet, _modelAction,_user,$log)
 		{
 			for(var x = 0;x<_oObjet.numeroConta.length;x++)
 			{
-				aObject.push( new qat.model.Conta(_oObjet.numeroConta[x], _modelAction,_user,$log));
+				if(_oObjet.numeroConta[x].id)
+					aObject.push( new qat.model.Conta(_oObjet.numeroConta[x], "UPDATE",_user,$log));
+				else
+					aObject.push( new qat.model.Conta(_oObjet.numeroConta[x], "INSERT",_user,$log));
 			}
 		}
 		this.numeroConta  = aObject;
@@ -99,7 +102,7 @@ qat.model.Conta = function(_oObjet, _modelAction,_user,$log)
 		this.emiteBoleto = _oObjet.emiteBoleto;
 		this.saldo = _oObjet.saldo;
 		this.dataUltLanc = _oObjet.dataUltLanc;
-		this.listBaixa = _oObjet.listBaixa ? _oObjet.listBaixa : null;
+	//	this.listBaixa = _oObjet.listBaixa ? _oObjet.listBaixa : null;
 		this.tipoConta = _oObjet.tipoConta ?{ id:  _oObjet.tipoConta.id} : null;
 		this.observacao = _oObjet.observacao;
 		this.parentId = _oObjet.parentId;
