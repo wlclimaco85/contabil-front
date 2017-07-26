@@ -2,7 +2,7 @@
 	'use strict';
 	var commonAuth = angular.module('wdApp.ajaxCall.notaFiscal', []);
 
-	commonAuth.factory('fNotaFiscal', ['$rootScope', 'fModels', 'SysMgmtData', 'toastr','$log', function ($rootScope, fModels, SysMgmtData, toastr,$log) {
+	commonAuth.factory('fNotaFiscal', ['$rootScope', 'fModels', 'SysMgmtData', 'toastr','$log','localStorageService', 'doisValorFactory', function ($rootScope, fModels, SysMgmtData, toastr,$log,localStorageService, doisValorFactory) {
 		var factory = {};
 
         //function padrao(vm,createdRow,scope, filters,aButtons,sPosition,functionReload){
@@ -19,6 +19,342 @@
                     toastr.success('Deu Certo seu tanga.', 'Sucess');
                 }
             });
+
+        }
+        factory.fnCreateObjectPdVendas = function (scope,vm,url,_action,_fnCallBack) {
+
+            scope.countrySelected = function (selected) {
+
+				if (selected) {
+
+					scope.pessoa = selected.originalObject;
+					scope.visibled = true;
+
+					scope.popovers = {
+						"html": "<div>Hello Popover<br />This is a multiline message!</div>",
+						"title": "Informação",
+						"animation": 'am-flip-x',
+						"content": " " + scope.pessoa.nome + " " +
+							" " + scope.pessoa.nome + " " +
+							" " + scope.pessoa.nome + " " +
+							" " + scope.pessoa.nome + " " +
+							" " + scope.pessoa.nome + " " +
+							" " + scope.pessoa.nome + " "
+					};
+
+				} else {
+					console.log('cleared');
+				}
+			};
+
+			SysMgmtData.processPostPageData("main/api/request", {
+				url: "pessoa/api/cliente/fetchPage",
+				token: $rootScope.authToken,
+				request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
+			}, function (res) {
+				//  //debugger
+				scope.cliente = res.clienteList;
+            });
+            
+            scope.calcProd = function (quant, valor) {
+				return quant * valor;
+			}
+
+			scope.$watch("financeiros", function () {
+				var cout = 0
+				for (var x = 0; x < scope.financeiros.length; x++) {
+					cout = parseFloat(cout, 10) + parseFloat(scope.financeiros[x].financeiro.valor)
+				}
+				scope.total = cout;
+			}, true);
+
+			function teste() {
+				var cout = 0
+				for (var x = 0; x < scope.produtos.length; x++) {
+					cout = parseFloat(cout, 10) + parseFloat((scope.produtos[x].produto.quantidade * scope.produtos[x].produto.precoList[0].valor) - scope.produtos[x].produto.desconto)
+				}
+				scope.totals = cout;
+				scope.notaFiscalSaida.vrtotal = (cout + parseFloat(scope.notaFiscalSaida.frete.vrFrete)) - parseFloat(scope.notaFiscalSaida.vrDesconto)
+				scope.financeiros[0].valor = (cout + parseFloat(scope.notaFiscalSaida.frete.vrFrete)) - parseFloat(scope.notaFiscalSaida.vrDesconto);
+			}
+
+			scope.$watch("produtos", function () {
+				teste();
+			}, true);
+
+			scope.$watch("notaFiscalSaida.frete.vrFrete", function () {
+				teste();
+			}, true);
+
+			scope.$watch("notaFiscalSaida.vrDesconto", function () {
+				teste();
+			}, true);
+
+			scope.calcProdTotal = function () {
+				var total = 0
+
+				for (var x = 0; x < scope.financeiros.length; x++) {
+
+				}
+
+				return total
+
+			}
+
+
+			scope.createForm2 = function () {
+
+				scope.produtos.push({
+					nome: 'form1' + (scope.produtos.length + 1),
+					produto: {
+						quantidade: 0,
+						desconto: 0
+					}
+				});
+
+			};
+
+			scope.createForm3 = function () {
+
+				scope.financeiros.push({
+					nome: 'formFinc' + (scope.financeiros.length + 1),
+					financeiro: {
+						valor: 0
+					}
+				});
+
+				for (var x = 0; x < scope.financeiros.length; x++) {
+					scope.financeiros[x].financeiro.valor = parseFloat(scope.notaFiscalSaida.vrtotal) / (parseFloat(scope.financeiros.length));
+				}
+
+			};
+			scope.somarValorParcela = function(parcela,parcelaSemJ,juros,valor)
+			{
+				if(parcela < parcelaSemJ)
+					return valor
+				else
+				{
+					return valor + ((valor * juros)/100)
+				}
+			}
+
+			scope.somarDtVenciParcela = function(parcela,intervalo,tempo,entrada,carencia)
+			{
+				debugger
+				if(intervalo && tempo)
+				{
+					if(intervalo.toLowerCase() == "dias")
+					{
+						return (new Date()).setDate( new Date().getDate() + (parcela * tempo))
+					}
+					else if(intervalo.toLowerCase() == "quinzena")
+					{
+
+					}
+					else if(intervalo.toLowerCase() == "meses")
+					{
+						return (new Date()).setMonth( new Date().getMonth() + (parcela * tempo))
+					}
+					else if(intervalo.toLowerCase() == "ano")
+					{
+						
+					}
+				}
+			}
+
+			scope.getFormaPagamento = function(item,model)
+			{
+				debugger
+				scope.notaFiscalSaida.vrtotal
+				var iParcelas = parseInt(item.parcelamentoMax.value,10);
+				scope.financeiros =[];
+				var dVrParcela = scope.notaFiscalSaida.vrtotal /iParcelas;
+				for(var x = 0;x< iParcelas;x++)
+				{
+					scope.financeiros.push({valor: scope.somarValorParcela(x,item.parcelamentoSemJuros.value,item.juros,dVrParcela), dataVencimento : scope.somarDtVenciParcela((x+1),item.intervalo.descricao,item.qntIntervalo,item.entrada,item.diasPg),tipoDoc : {id : 10},pagarAgora:true})
+				}
+				console.log(scope.financeiros)
+			}
+
+			scope.forms = [{
+				id: 0,
+				produto: "",
+				ddd: 'form1',
+				notaFiscalSaidaItens: {}
+			}];
+			scope.count = 0;
+
+
+			scope.changeProd = function (form) {
+				//debugger
+				console.log(form);
+
+				for (var x = 0; scope.produtos.length > x; x++) {
+					if (scope.produtos[x].id == form.produto) {
+						form.quantidade = 100;
+					}
+				}
+			}
+
+			var fnFunction = function () {
+				//debugger
+			}
+		/*	$inputaction = $('#teste')
+			$inputaction.inputaction({
+				confirmAction: fnFunction,
+				model: scope.cliente,
+				fullData: {},
+				propertyName: 'name'
+			});
+
+*/
+			doisValorFactory.pedidoVendas(scope);
+
+
+			scope.deleteForm = function (formScope) {
+
+
+				delete scope.forms(formScope);
+			}
+
+			scope.titulo.pagarAgora = false;
+
+			scope.formatterDate = function (iDate) {
+				return $filter('date')(new Date(iDate), 'dd/MM/yyyy');
+			};
+
+			scope.today = function () {
+				scope.dt = new Date();
+			};
+			scope.today();
+
+			scope.clear = function () {
+				scope.dt = null;
+			};
+
+			scope.inlineOptions = {
+				customClass: getDayClass,
+				minDate: new Date(),
+				showWeeks: true
+			};
+
+			scope.dateOptions = {
+				dateDisabled: disabled,
+				formatYear: 'yy',
+				maxDate: new Date(2020, 5, 22),
+				minDate: new Date(),
+				startingDay: 1
+			};
+
+			// Disable weekend selection
+			function disabled(data) {
+				var date = data.date,
+					mode = data.mode;
+				return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+			}
+
+			scope.toggleMin = function () {
+				scope.inlineOptions.minDate = scope.inlineOptions.minDate ? null : new Date();
+				scope.dateOptions.minDate = scope.inlineOptions.minDate;
+			};
+
+			scope.toggleMin();
+
+			scope.open1 = function () {
+
+				scope.popup1.opened = true;
+			};
+
+			scope.open2 = function () {
+
+				scope.popup2.opened = true;
+			};
+
+			scope.open3 = function () {
+
+				scope.popup3.opened = true;
+			};
+
+			scope.setDate = function (year, month, day) {
+				scope.dt = new Date(year, month, day);
+			};
+
+			scope.formats = ['dd-MMMM-yyyy', 'dd/MM/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+			scope.format = scope.formats[1];
+			scope.altInputFormats = ['M!/d!/yyyy'];
+
+			scope.popup1 = {
+				opened: false
+			};
+
+			scope.popup2 = {
+				opened: false
+			};
+
+			scope.popup3 = {
+				opened: false
+			};
+
+			var tomorrow = new Date();
+			tomorrow.setDate(tomorrow.getDate() + 1);
+			var afterTomorrow = new Date();
+			afterTomorrow.setDate(tomorrow.getDate() + 1);
+			scope.events = [{
+				date: tomorrow,
+				status: 'full'
+			}, {
+				date: afterTomorrow,
+				status: 'partially'
+			}];
+
+			function getDayClass(data) {
+				var date = data.date,
+					mode = data.mode;
+				if (mode === 'day') {
+					var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
+
+					for (var i = 0; i < scope.events.length; i++) {
+						var currentDay = new Date(scope.events[i].date).setHours(0, 0, 0, 0);
+
+						if (dayToCheck === currentDay) {
+							return scope.events[i].status;
+						}
+					}
+				}
+
+				return '';
+            }
+            
+            scope.savePedidoVenda = function () {
+
+
+            /*    if(scope.financeiro.pagarAgora)
+                    {
+                        scope.financeiro.listBaixa[0].dataBaixa = scope.titulo ? scope.titulo.dataPagamento.getTime() : (new Date()).getTime();
+                        scope.financeiro.listBaixa[0].observacao = "";
+                        scope.financeiro.listBaixa[0].juros  = 0;
+                        scope.financeiro.listBaixa[0].multa = 0;
+                        scope.financeiro.listBaixa[0].desconto = 0;
+
+                        fModels.amont(scope.financeiro.listBaixa[0],"INSERT");
+                    }
+
+                    scope.financeiro.situacao = { id : 392}
+                    var oObject = fModels.amont(qat.model.fnFormaReceber(scope.financeiro,"INSERT"),"INSERT");
+
+
+                    SysMgmtData.processPostPageData("main/api/request", {
+                        url: "financeiro/api/contasReceber/insert",
+                        token: $rootScope.authToken,
+                        request: new qat.model.reqContasReceber(oObject, true, true)
+                    }, function(res) {
+                        fnCallBack(res,scope);
+                    }); */
+
+            factory.fnCreateObjectPdVendasOrcamento(localStorageService.get('empresa'), scope.pessoa, scope.endereco, scope.produtos, scope.formaPg, scope.notaFiscalSaida, 1, 'INSERT', 1001, scope.financeiros);
+			};
+
+
         }
 
 		factory.fnCreateObjectPdVendasOrcamento = function (emitente, remetente, endereco, produtos, formaPg, notaFiscal, type, _action, _tipo, financeiros) {
@@ -281,7 +617,7 @@
 				uf: emitente.enderecos[0] ? emitente.enderecos[0].cidade ? emitente.enderecos[0].cidade.estado : "MG" : null,
 				codigoRandomico: 555,
 				naturezaOperacao: '5011', //emitente.configuracao.confNFe.cfopPadrao.cfop,
-				formaPagamento: new qat.model.FormaPg(notaFiscal.formapg, _action,$rootScope.userId.userId,$log),
+				formaPagamento: new qat.model.FormaPg(notaFiscal.formapg, _action,$rootScope.user.user,$log),
 				modelo: {
 					id: 1
 				}, //emitente.configuracao.confNFe.modelo.value,
@@ -305,7 +641,7 @@
 					value: 1
 				},
 				digitoVerificador: 0,
-				ambiente: emitente.configuracao.confNFe.ambienteEnvio,
+				ambiente: {id : emitente.configuracao.confNFe.ambienteEnvio ? emitente.configuracao.confNFe.ambienteEnvio.id : null},
 				finalidade: {
 					value: 1
 				},
@@ -614,5 +950,8 @@
 		}
 
 		return factory;
-	}]);
+    }
+
+]);
+    
 })();

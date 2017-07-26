@@ -134,7 +134,7 @@
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Forma Pagamento <small ng-click="ctrl.addCfop()" class="adcionar">(Adicionar <i class="glyphicon glyphicon-plus"></i>)</small></label>
                                 <div class="row">
-                                    <ui-select ng-model="notaFiscalSaida.formapg" theme="bootstrap">
+                                    <ui-select ng-model="notaFiscalSaida.formapg" theme="bootstrap" on-select="getFormaPagamento($item, $model)">
                                         <ui-select-match placeholder="Formas de Pagamento">{{$select.selected.descricao}}</ui-select-match>
                                         <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
                                             <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -200,13 +200,13 @@
                             <div ng-repeat="financeiro in financeiros">
                                 <div class="col-sm-2">{{$index +1 }} / {{financeiros.length}}</div>
                                 <div class="col-sm-2">
-                                    <div class="inputClass input-group"><span class="InputSign input-group-addon" target="vendas_finValor1"><span title="Valor monet�rio" class="fa fa-usd"></span></span><input type="text" ng-model="financeiro.financeiro.valor" id="vendas_finValor1" class="vendas_finValor form-control InputNum"
+                                    <div class="inputClass input-group"><span class="InputSign input-group-addon" target="vendas_finValor1"><span title="Valor monet�rio" class="fa fa-usd"></span></span><input type="text" ng-model="financeiro.valor" id="vendas_finValor1" class="vendas_finValor form-control InputNum"
                                             value="" autocomplete="off" name="finValor[]" especialtype="money" data-thousands="." data-decimal="," data-precision="2"></div>
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" ng-model="financeiro.financeiro.dataVencimento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" uib-datepicker-popup="{{format}}" />                                            <span class="input-group-btn">
+                                            <input type="text" class="form-control" ng-model="financeiro.dataVencimento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" uib-datepicker-popup="{{format}}" />                                            <span class="input-group-btn">
 												<button type="button" class="btn btn-default" ng-click="open2()">
 												<i class="glyphicon glyphicon-calendar"></i>
 												</button>
@@ -215,7 +215,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
-                                    <ui-select ng-model="financeiro.financeiro.tipoDoc" theme="bootstrap">
+                                    <ui-select ng-model="financeiro.tipoDoc" theme="bootstrap">
                                         <ui-select-match placeholder="">{{$select.selected.descricao}}</ui-select-match>
                                         <ui-select-choices repeat="item in tipoDocumento | filter: $select.search">
                                             <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -224,7 +224,7 @@
                                 </div>
                                 <div class="form-group col-sm-2">
                                     <div class="row">
-                                        <toggle ng-model="financeiro.financeiro.pagarAgora" ng-init="financeiro.pagarAgora = false" style="android" on="A Receber" off="Recebido" onstyle="btn-default" offstyle="btn-info" ng-true-value="'2'" ng-false-value="'1'"></toggle>
+                                        <toggle ng-model="financeiro.pagarAgora" ng-init="financeiro.pagarAgora = false" style="android" on="A Receber" off="Recebido" onstyle="btn-default" offstyle="btn-info" ng-true-value="'2'" ng-false-value="'1'"></toggle>
                                     </div>
                                 </div>
                                 <div class="col-xs-1">

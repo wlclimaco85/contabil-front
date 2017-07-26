@@ -1,10 +1,19 @@
 
 <div class="col-sm-12">
-    <div class="form-group col-sm-8">
+    <div class="form-group col-sm-12">
         <label for="exampleInputEmail1">Descrição</label>
         <input type="text" ng-model="formaPg.descricao" name="descricao" class="form-control" placeholder="Descrição">
     </div>
-    <div class="col-sm-4">
+</div>
+<div class="col-sm-12">
+    <div class="form-group col-sm-3">
+        <label for="exampleInputEmail1">Tempo Intervalo</label>
+        <div class="input-group">
+            <input type="number" class="form-control" ng-model="formaPg.qntIntervalo" name="juros" placeholder="0">
+        </div>
+
+    </div>
+    <div class="col-sm-3">
         <label for="exampleInputPassword1">Intervalo</label>
         <div class="row">
             <ui-select ng-model="formaPg.intervalo" theme="bootstrap">
@@ -15,9 +24,7 @@
             </ui-select-choices> </ui-select>
         </div>
     </div>
-</div>
-<div class="col-sm-12">
-    <div class="col-sm-5">
+    <div class="col-sm-3">
         <label for="exampleInputEmail1">Parcelamento máx.</label>
         <div class="row">
             <ui-select ng-model="formaPg.parcelamentoMax" theme="bootstrap">
@@ -28,8 +35,7 @@
             </ui-select>
         </div>
     </div>
-    <div class="col-sm-1"></div>
-    <div class="form-group col-sm-5">
+    <div class="form-group col-sm-3">
         <label for="exampleInputEmail1">Parcelas sem juros</label>
         <div class="row">
             <ui-select ng-model="formaPg.parcelamentoSemJuros" theme="bootstrap">
@@ -42,7 +48,21 @@
     </div>
 </div>
 <div class="col-sm-12">
-    <div class="form-group col-sm-4">
+
+    <div class="form-group col-sm-2">
+        <label for="exampleInputEmail1">Carencia</label>
+        <div class="input-group">
+            <input type="number" class="form-control" ng-model="formaPg.diasPg" name="juros" placeholder="0">
+        </div>
+
+    </div>
+    <div class="form-group col-sm-1">
+        <label for="exampleInputPassword1">Entrada</label>
+        <div class="row">
+            <toggle ng-model="titulo.pagarAgora" ng-init="formaPg.entrada = false" style="android2" on="Sim" required off="Não" onstyle="btn-success" offstyle="btn-danger" ng-true-value="'2'" ng-false-value="'1'"></toggle>
+        </div>
+    </div>
+    <div class="form-group col-sm-3">
         <label for="exampleInputEmail1">Juros (%)</label>
         <div class="input-group">
             <span class="input-group-addon">%</span>
@@ -51,7 +71,7 @@
         </div>
 
     </div>
-    <div class="form-group col-sm-4">
+    <div class="form-group col-sm-3">
         <label for="exampleInputPassword1">Taxa fixa ($)</label>
         <div class="input-group">
             <span class="input-group-addon">$</span>
@@ -60,7 +80,7 @@
         </div>
 
     </div>
-    <div class="form-group col-sm-4">
+    <div class="form-group col-sm-3">
         <label for="exampleInputPassword1">Desconto a vista (%)</label>
         <div class="input-group">
             <span class="input-group-addon">%</span>
