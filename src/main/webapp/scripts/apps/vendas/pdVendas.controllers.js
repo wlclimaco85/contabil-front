@@ -2,7 +2,7 @@
 	angular.module('wdApp.apps.pdVendas', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
 		.controller('PdVendasController', pdVendasController);
 
-	function pdVendasController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory, tableColumnsFactory, tableOptionsFactory, FiltersFactory) {
+	function pdVendasController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, Datatablessss, dialogFactory, tableColumnsFactory, tableOptionsFactory, FiltersFactory, validationFactory) {
 		var vm = this;
 		vm.selected = {};
 		vm.selectAll = false;
@@ -61,17 +61,37 @@
 				console.log(json)
 				return json.nfnotaList;
 			}
+
+		var actionsHtml = function (data, type, full, meta) {
+			vm.persons[data.id] = data;
+			return 	'<button class="btn btn-defauld" ng-click="showCase.edit(showCase.persons[' + data.id + '])"><img src="images/eletronica-48.png" alt="" >' +
+				'<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
+				'   <i class="fa fa-pencil-square-o"></i>' +
+				'</button>&nbsp;' +
+				'<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
+				'   <i class="fa fa-trash-o"></i>' +
+				'</button>'
+		}
+
 			//  Datatablessss.getTable('/vendas/api/nfSaidas/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cliente(vm,createdRow,$scope,FiltersFactory.cliente()), tableColumnsFactory.cliente(vm,titleHtml,actionsHtml));
 		Datatablessss.getTable('/vendas/api/nfSaidas/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.pdVendas(vm, createdRow, $scope, FiltersFactory.pdVendas(), reloadData), tableColumnsFactory.pdVendas(vm, titleHtml, actionsHtml));
 
-		function edit(person) {
-			$rootScope.pedidoVenda = person;
-			dialogFactory.dialog('views/vendas/dialog/dPedidoVendas.html', "PedidoVendasUpdateController", openDialogUpdateCreate);
+
+
+
+		function edit (person) {
+			$rootScope.cliente = person
+			dialogFactory.dialog('views/vendas/dialog/dPedidoVendas.html', 'PedidoVendaUpdateController', validationFactory.cliente())
+		}
+		function view (person) {
+			$rootScope.cliente = person
+			//  Datatablessss.reloadData(vm)
+			dialogFactory.dialog('views/vendas/dialog/dPedidoVendas.html', 'PedidoVendaUpdateController', validationFactory.cliente())
 		}
 
-		function deleteRow(person) {
-			$rootScope.pedidoVenda = person;
-			dialogFactory.dialog('views/vendas/dialog/dPedidoVendas.html', "PedidoVendasDeleteController", openDialogUpdateCreate);
+		function deleteRow (person) {
+			$rootScope.cliente = person
+			dialogFactory.dialog('views/util/dialog/dDelete.html', 'PedidoVendaDeleteController', validationFactory.cliente())
 		}
 
 		function createdRow(row, data, dataIndex) {
@@ -79,15 +99,7 @@
 			$compile(angular.element(row).contents())($scope);
 		}
 
-		function actionsHtml(data, type, full, meta) {
-			vm.persons[data.id] = data;
-			return '<button class="btn btn-info" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
-				'   <i class="glyphicon glyphicon-save"></i>' +
-				'</button> ' +
-				'<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
-				'   <i class="fa fa-trash-o"></i>' +
-				'</button>';
-		}
+
 
 		function toggleAll(selectAll, selectedItems) {
 			for (var id in selectedItems) {
@@ -122,7 +134,7 @@
 })();
 (function () {
 	angular.module('wdApp.apps.pedidoVenda.insert', [])
-	.controller('PedidoVendaInsertController', function ($rootScope, $scope,fNotaFiscal) {
+	.controller('PedidoVendaInsertController', function ($rootScope, $scope,fNotaFiscal, toastr, $element, close) {
 			var vm = this;
 
 			$scope.notaFiscalSaida = {
@@ -158,9 +170,15 @@
 			}];
 			$scope.total = 0;
 
-			fnCallBack = function(res)
-			{
-				console.log(res)
+			var fnCallBack = function (res) {
+				if (res.operationSuccess == true) {
+				$element.modal('hide')
+				close(null, 500)
+				toastr.success('Deu Certo seu tanga.', 'Sucess')
+				$rootScope.reloadDataSit(function (data) {
+					//debugger
+				})
+				}
 			}
 			
 			fNotaFiscal.fnCreateObjectPdVendas($scope,vm,'','INSERT',fnCallBack)
@@ -174,7 +192,33 @@
 			var vm = this;
 			$scope.pedidoVenda = {};
 			$scope.pedidoVenda = $rootScope.pedidoVenda;
-			console.log($rootScope.pedidoVenda)
+			debugger 
+			$scope.notaFiscalSaida = $scope.pedidoVenda;
+
+			 $scope.user = {
+				name: 'awesome user'
+			};
+			$scope.cliente = {};
+			$scope.clientes = [];
+			$scope.formaPg = {};
+			$scope.endereco = null;
+			$scope.pessoa = {};
+			$scope.visibled = false
+			$scope.produtosSelect = "";
+			$scope.produto = {};
+			$scope.produtos = [{
+				form: 'form',
+				produto: {}
+			}];
+			$scope.contasReceber = {};
+
+			$scope.financeiros = [{
+				form: 'formFinc',
+				financeiro: {
+					valor: parseFloat($scope.notaFiscalSaida.vrtotal) / (1)
+				}
+			}];
+			$scope.total = 0;
 			$scope.savePedidoVenda = function () {
 				fPessoa.fnMontaObjeto($scope.pedidoVenda, $scope.endereco, 'UPDATE', "site/api/pedidoVenda/update/", fnCallBack);
 			}

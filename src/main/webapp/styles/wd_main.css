@@ -13903,3 +13903,9 @@ div.show-image input.delete {
     border-color: #FA787E;
     color: #a94442;
   }
+
+  .nfe {
+    size:medium ;
+    style:solid;
+    background: url("../images/eletronica-48.png") no-repeat center center;
+}

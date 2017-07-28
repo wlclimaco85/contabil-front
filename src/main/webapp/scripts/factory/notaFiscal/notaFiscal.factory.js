@@ -6,18 +6,22 @@
 		var factory = {};
 
         //function padrao(vm,createdRow,scope, filters,aButtons,sPosition,functionReload){
-        function ajaxCall (_request) {
+        function ajaxCall (_request,_fnCallBack) {
             var initLoad = true; //used to ensure not calling server multiple times
             SysMgmtData.processPostPageData("main/api/request", {
                 url: "vendas/api/nfSaidas/insert",
                 token: $rootScope.authToken,
                 request: _request
             }, function (res) {
-
-                if (res.operationSuccess == true) {
-                    initLoad = true;
-                    toastr.success('Deu Certo seu tanga.', 'Sucess');
-                }
+				if(_fnCallBack)
+					_fnCallBack(res)
+				else
+				{
+					if (res.operationSuccess == true) {
+						initLoad = true;
+						toastr.success('Deu Certo seu tanga.', 'Sucess');
+					}
+				}
             });
 
         }
@@ -171,7 +175,7 @@
 				var dVrParcela = scope.notaFiscalSaida.vrtotal /iParcelas;
 				for(var x = 0;x< iParcelas;x++)
 				{
-					scope.financeiros.push({valor: scope.somarValorParcela(x,item.parcelamentoSemJuros.value,item.juros,dVrParcela), dataVencimento : scope.somarDtVenciParcela((x+1),item.intervalo.descricao,item.qntIntervalo,item.entrada,item.diasPg),tipoDoc : {id : 10},pagarAgora:true})
+					scope.financeiros.push({valor: scope.somarValorParcela(x,item.parcelamentoSemJuros.value,item.juros,dVrParcela), dataVencimento : scope.somarDtVenciParcela((x+1),item.intervalo.descricao,item.qntIntervalo,item.entrada,item.diasPg),tipoDoc : item.tipoDoc ,pagarAgora:true})
 				}
 				console.log(scope.financeiros)
 			}
@@ -351,13 +355,13 @@
                         fnCallBack(res,scope);
                     }); */
 
-            factory.fnCreateObjectPdVendasOrcamento(localStorageService.get('empresa'), scope.pessoa, scope.endereco, scope.produtos, scope.formaPg, scope.notaFiscalSaida, 1, 'INSERT', 1001, scope.financeiros);
+            factory.fnCreateObjectPdVendasOrcamento(localStorageService.get('empresa'), scope.pessoa, scope.endereco, scope.produtos, scope.formaPg, scope.notaFiscalSaida, 1, 'INSERT', 1001, scope.financeiros,_fnCallBack);
 			};
 
 
         }
 
-		factory.fnCreateObjectPdVendasOrcamento = function (emitente, remetente, endereco, produtos, formaPg, notaFiscal, type, _action, _tipo, financeiros) {
+		factory.fnCreateObjectPdVendasOrcamento = function (emitente, remetente, endereco, produtos, formaPg, notaFiscal, type, _action, _tipo, financeiros,_fnCallBack) {
 
 			_action = "INSERT";
 			var oEmitente = {
@@ -376,21 +380,22 @@
 
 			}
 
-
-			for (var x = 0; x < emitente.documentos.length; x++) {
-				if (emitente.documentos[x].documentoTypeEnumValue == 1) {
-					oEmitente.cnpj = emitente.documentos[x].numero;
-				} else if (emitente.documentos[x].documentoTypeEnumValue == 2) {
-					oEmitente.cpf = emitente.documentos[x].numero;
-				} else if (emitente.documentos[x].documentoTypeEnumValue == 10) {
-					oEmitente.inscricaoestadual = emitente.documentos[x].numero;
-				} else if (emitente.documentos[x].documentoTypeEnumValue == 12) {
-					oEmitente.inscricaoestadualsubstituicaotributaria = emitente.documentos[x].numero;
-				} else if (emitente.documentos[x].documentoTypeEnumValue == 3) {
-					oEmitente.inscricaomunicipal = emitente.documentos[x].numero;
+			if(emitente.documentos)
+			{
+				for (var x = 0; x < emitente.documentos.length; x++) {
+					if (emitente.documentos[x].documentoTypeEnumValue == 1) {
+						oEmitente.cnpj = emitente.documentos[x].numero;
+					} else if (emitente.documentos[x].documentoTypeEnumValue == 2) {
+						oEmitente.cpf = emitente.documentos[x].numero;
+					} else if (emitente.documentos[x].documentoTypeEnumValue == 10) {
+						oEmitente.inscricaoestadual = emitente.documentos[x].numero;
+					} else if (emitente.documentos[x].documentoTypeEnumValue == 12) {
+						oEmitente.inscricaoestadualsubstituicaotributaria = emitente.documentos[x].numero;
+					} else if (emitente.documentos[x].documentoTypeEnumValue == 3) {
+						oEmitente.inscricaomunicipal = emitente.documentos[x].numero;
+					}
 				}
 			}
-
 
 			var oDestinatario = {
 				id: null,
@@ -406,25 +411,27 @@
 				inscricaoSuframa: null,
 				inscricaoMunicipal: null,
 				modelAction: _action,
-				email: remetente.emails[0].email
+				email: remetente.emails ? remetente.emails[0].email : null
 			}
 
-			for (var x = 0; x < remetente.documentos.length; x++) {
-				if (remetente.documentos[x].documentoTypeEnumValue == 1) {
-					oDestinatario.cnpj = remetente.documentos[x].numero;
-				} else if (remetente.documentos[x].documentoTypeEnumValue == 2) {
-					oDestinatario.cpf = remetente.documentos[x].numero;
-				} else if (remetente.documentos[x].documentoTypeEnumValue == 15) {
-					oDestinatario.idEstrangeiro = remetente.documentos[x].numero;
-				} else if (remetente.documentos[x].documentoTypeEnumValue == 10) {
-					oDestinatario.inscricaoEstadual = remetente.documentos[x].numero;
-				} else if (remetente.documentos[x].documentoTypeEnumValue == 11) {
-					oDestinatario.inscricaoSuframa = remetente.documentos[x].numero;
-				} else if (remetente.documentos[x].documentoTypeEnumValue == 3) {
-					oDestinatario.inscricaoMunicipal = remetente.documentos[x].numero;
+			if(remetente.documentos)
+			{
+				for (var x = 0; x < remetente.documentos.length; x++) {
+					if (remetente.documentos[x].documentoTypeEnumValue == 1) {
+						oDestinatario.cnpj = remetente.documentos[x].numero;
+					} else if (remetente.documentos[x].documentoTypeEnumValue == 2) {
+						oDestinatario.cpf = remetente.documentos[x].numero;
+					} else if (remetente.documentos[x].documentoTypeEnumValue == 15) {
+						oDestinatario.idEstrangeiro = remetente.documentos[x].numero;
+					} else if (remetente.documentos[x].documentoTypeEnumValue == 10) {
+						oDestinatario.inscricaoEstadual = remetente.documentos[x].numero;
+					} else if (remetente.documentos[x].documentoTypeEnumValue == 11) {
+						oDestinatario.inscricaoSuframa = remetente.documentos[x].numero;
+					} else if (remetente.documentos[x].documentoTypeEnumValue == 3) {
+						oDestinatario.inscricaoMunicipal = remetente.documentos[x].numero;
+					}
 				}
 			}
-
 			var oEndEntrega = null;
 			if ((endereco == null) || (endereco == undefined)) {
 				oEndEntrega = remetente.enderecos[0];
@@ -710,7 +717,7 @@
 				user = $rootScope.user.user;
 			}
 
-            ajaxCall(new qat.model.reqNotaFiscal(fModels.amont(oNFNote, _action), true, true));
+            ajaxCall(new qat.model.reqNotaFiscal(fModels.amont(oNFNote, _action), true, true),_fnCallBack);
 
 		}
 
