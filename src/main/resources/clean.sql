@@ -225,3 +225,37 @@ delete from tributacao;
 /*delete from user_roles  ;   */
 /*delete from users;        */
 /*delete from usuario ;    */
+
+
+
+CREATE SEQUENCE nfHistorico_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE nfHistorico_id_seq
+  OWNER TO qat;
+
+
+CREATE TABLE nfHistorico
+(
+  id integer NOT NULL DEFAULT nextval('nfHistorico_id_seq'::regclass),
+  DateAlter bigint,
+  userId  character varying(50),
+  tipoNFEnumValue integer,
+  parentId integer,
+tabelaEnumValue integer,
+emprId integer,
+processId integer,
+  create_date bigint,
+  create_user character varying(50),
+  modify_date bigint,
+  modify_user character varying(50),
+  CONSTRAINT nfHistorico_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE nfHistorico
+  OWNER TO postgres;
