@@ -1,9 +1,9 @@
-<div ng-repeat="email in emails  | filter:{ modelAction : 'INSERT',modelAction : 'UPDATE',modelAction : 'NONE' }">
+<div ng-repeat="email in emails">
     <hr/>
     <div class="row">
 
 
-        <div ng-if="email.emailTypeEnum == 'PRINCIPAL'">
+        <div ng-if="email.emailTypeEnum == CELULAR">
             <!-- code to render the regular video block -->
             <div class="col-sm-4">
                 <label for="exampleInputPassword1">Email</label>
@@ -30,7 +30,7 @@
             </div>
 
         </div>
-        <div ng-if="email.emailTypeEnum != 'PRINCIPAL'">
+        <div ng-if="email.emailTypeEnum != CELULAR">
             <div class="col-sm-4">
                 <label for="exampleInputPassword1" class="control-label">{{email.emailTypeEnum}}</label>
                 <div class="input-group">

@@ -19,7 +19,7 @@
       tipoPessoa: 2
     }
 
-    
+
     function reloadData () {
       var resetPaging = false
       vm.dtInstance.reloadData(callback, resetPaging)
@@ -137,7 +137,7 @@
       $scope.enderecos = [];
       $scope.telefones = [];
       $scope.emails = [];
-      $scope.telefones.push({numero : "",telefoneTypeEnum : "PRINCIPAL"});
+      $scope.telefones.push({numero : "",telefoneTypeEnum : "CELULAR"});
       $scope.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
 
       $scope.pessoaTipos= [

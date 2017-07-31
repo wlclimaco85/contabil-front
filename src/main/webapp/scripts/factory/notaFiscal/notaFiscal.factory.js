@@ -59,7 +59,7 @@
 				//  //debugger
 				scope.cliente = res.clienteList;
             });
-            
+
             scope.calcProd = function (quant, valor) {
 				return quant * valor;
 			}
@@ -67,7 +67,7 @@
 			scope.$watch("financeiros", function () {
 				var cout = 0
 				for (var x = 0; x < scope.financeiros.length; x++) {
-					cout = parseFloat(cout, 10) + parseFloat(scope.financeiros[x].financeiro.valor)
+					cout = parseFloat(cout, 10) + parseFloat(scope.financeiros[x].valor)
 				}
 				scope.total = cout;
 			}, true);
@@ -161,7 +161,7 @@
 					}
 					else if(intervalo.toLowerCase() == "ano")
 					{
-						
+
 					}
 				}
 			}
@@ -328,7 +328,7 @@
 
 				return '';
             }
-            
+
             scope.savePedidoVenda = function () {
 
 
@@ -529,7 +529,7 @@
                         ncm:  produtos[x].produto.prodId.ncm ? produtos[x].produto.prodId.ncm : "1111111",
                         nomeclaturaValorAduaneiroEstatistica:  null,
                         codigoEspecificadorSituacaoTributaria:  null,
-                        extipi :  produtos[x].produto.prodId.excTabIPI,
+                        extipi :  produtos[x].produto.prodId.excTabIPI ? produtos[x].produto.prodId.excTabIPI.descricao : null,
                         cfop :  produtos[x].tributacao ? produtos[x].tributacao.cfop : "5400",
                         unidadeComercial :  produtos[x].produto.prodId.uniMed ? produtos[x].produto.prodId.uniMed.sigla : "UN",
                         quantidadeComercial :  produtos[x].produto.quantidade,
@@ -856,7 +856,7 @@
                         ncm:  _produtos[x].produto.prodId.ncm ? _produtos[x].produto.prodId.ncm : "1111111",
                         nomeclaturaValorAduaneiroEstatistica:  null,
                         codigoEspecificadorSituacaoTributaria:  null,
-                        extipi :  _produtos[x].produto.prodId.excTabIPI,
+                        extipi :  _produtos[x].produto.prodId.excTabIPI ?  _produtos[x].produto.prodId.excTabIPI.descricao : "",
                         cfop :  _produtos[x].tributacao ? _produtos[x].tributacao.cfop : "5400",
                         unidadeComercial :  _produtos[x].produto.prodId.uniMed ? _produtos[x].produto.prodId.uniMed.sigla : "UN",
                         quantidadeComercial :  _produtos[x].produto.quantidade,
@@ -932,7 +932,8 @@
                 },
                 tipo: {
                     id: 1001
-                },
+				},
+				historico : [ new qat.model.NFHistorico({tipoNFEnum : "PEDIDOVENDAS"}, "INSERT",$rootScope.user.user,$log)],
                 modelAction: _action
             };
 
@@ -960,5 +961,5 @@
     }
 
 ]);
-    
+
 })();
