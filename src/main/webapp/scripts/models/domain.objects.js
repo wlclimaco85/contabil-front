@@ -55,7 +55,7 @@ qat.model.NFHistorico = function(_oObjet, _modelAction,_user,$log)
 	if (_oObjet != undefined)
 	{
 		this.id = _oObjet.id ? _oObjet.id : null;
-		this.DateAlter = (new Date()).getTime();
+		this.dateAlter = (new Date()).getTime();
 		this.user = _user;
 		this.tipoNFEnum = _oObjet.tipoNFEnum;
 		this.parentId = _oObjet.parentId;
@@ -69,7 +69,7 @@ qat.model.NFHistorico = function(_oObjet, _modelAction,_user,$log)
 		this.modifyDateUTC = (new Date()).getTime();
 
 		if($log)
-		$log.info("add Forma pagamento --> " +  _oObjet.descricao,"Teste");
+		$log.info("add Historico --> " +  _oObjet.tipoNFEnum," Teste");
 	}
 }
 

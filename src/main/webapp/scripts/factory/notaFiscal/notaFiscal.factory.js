@@ -708,7 +708,8 @@
 				tipo: {
 					id: 1003
 				},
-				modelAction: _action
+				modelAction: _action,
+				historico : [ new qat.model.NFHistorico({tipoNFEnum : "PEDIDOVENDAS"}, "INSERT",$rootScope.user.user,$log)]
 			};
 
 
@@ -936,7 +937,6 @@
 				historico : [ new qat.model.NFHistorico({tipoNFEnum : "PEDIDOVENDAS"}, "INSERT",$rootScope.user.user,$log)],
                 modelAction: _action
             };
-
 
             ajaxCall(new qat.model.reqNotaFiscal(fModels.amont(oNFNote, _action), true, true));
 
