@@ -192,7 +192,7 @@
 
             $scope.saveFormaPg = function() {
 
-                debugger
+            //    debugger
        /*         var oObject = fModels.amont($scope.formaPg.conta,"INSERT");
                 $scope.formaPg.conta = oObject;
                 var oObject = fModels.amont($scope.formaPg.tipoDoc,"INSERT");

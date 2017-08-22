@@ -278,14 +278,44 @@
 
 	//empresaInquryRequest
 	qat.model.empresaInquiryRequest = function(_iStartPage, _bCount, _userId, _id, _emprId, _permissaoType) {
-	    var _emprId = null;
+		var _emprId = null;
+		//	debugger
 	    if (localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == "" || localStorage.getItem('empresa') == "undefined"){
 	        _emprId = null;
 			_permissaoType = 4;
+			_emprIds = null;
 	    } else {
 	        _emprId = JSON.parse(localStorage.getItem('empresa')).id;
 			_permissaoType = JSON.parse(localStorage.getItem('empresa')).permissaoTypeEnumValue;
-	    }
+			_emprIds = JSON.parse(localStorage.getItem('empresa')).emprIds;;
+		}
+		this.emprIds = _emprIds;
+		this.pageSize = qat.model.pageSize;
+		this.permissaoTypeEnumValue = _permissaoType;
+	    this.userId = _userId;
+	    this.id = _id;
+	    this.emprId = _emprId;
+	    this.startPage = _iStartPage;
+	    this.sortExpressions = null;
+	    this.preQueryCount = _bCount;
+	    this.maxPreQueryCount = 0;
+	};
+
+	//empresaInquryRequest
+	qat.model.notaFiscalInquiryRequest = function(_iStartPage, _bCount, _userId, _id, _emprId, _permissaoType,_notaType) {
+		var _emprId = null;
+		//	debugger
+	    if (localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == "" || localStorage.getItem('empresa') == "undefined"){
+	        _emprId = null;
+			_permissaoType = 4;
+			_emprIds = null;
+	    } else {
+	        _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+			_permissaoType = JSON.parse(localStorage.getItem('empresa')).permissaoTypeEnumValue;
+			_emprIds = JSON.parse(localStorage.getItem('empresa')).emprIds;;
+		}
+		this.parentId = _notaType;
+		this.emprIds = _emprIds;
 		this.pageSize = qat.model.pageSize;
 		this.permissaoTypeEnumValue = _permissaoType;
 	    this.userId = _userId;

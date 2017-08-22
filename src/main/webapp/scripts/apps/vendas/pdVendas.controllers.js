@@ -72,9 +72,9 @@
 				'   <i class="fa fa-trash-o"></i>' +
 				'</button>'
 		}
-
+									//_iStartPage, _bCount, _userId, _id, _emprId, _permissaoType,_notaType
 			//  Datatablessss.getTable('/vendas/api/nfSaidas/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.cliente(vm,createdRow,$scope,FiltersFactory.cliente()), tableColumnsFactory.cliente(vm,titleHtml,actionsHtml));
-		Datatablessss.getTable('/vendas/api/nfSaidas/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile, tableOptionsFactory.pdVendas(vm, createdRow, $scope, FiltersFactory.pdVendas(), reloadData), tableColumnsFactory.pdVendas(vm, titleHtml, actionsHtml));
+		Datatablessss.getTable('/vendas/api/nfSaidas/fetchPage', fnDataSRC, new qat.model.notaFiscalInquiryRequest(0, true, null, null, null,null,6), this, rCallback, null, recompile, tableOptionsFactory.pdVendas(vm, createdRow, $scope, FiltersFactory.pdVendas(), reloadData), tableColumnsFactory.pdVendas(vm, titleHtml, actionsHtml));
 
 
 
@@ -180,7 +180,7 @@
 				})
 				}
 			}
-			
+
 			fNotaFiscal.fnCreateObjectPdVendas($scope,vm,'','INSERT',fnCallBack)
 	//	fNotaFiscal.fnCreateObjectPdVendasOrcamento(localStorageService.get('empresa'), $scope.pessoa, $scope.endereco, $scope.produtos, $scope.formaPg, $scope.notaFiscalSaida, 1, 'INSERT', 1001, $scope.financeiros);
 
@@ -192,7 +192,7 @@
 			var vm = this;
 			$scope.pedidoVenda = {};
 			$scope.pedidoVenda = $rootScope.pedidoVenda;
-			debugger 
+		//	debugger
 			$scope.notaFiscalSaida = $scope.pedidoVenda;
 
 			 $scope.user = {

@@ -64,7 +64,7 @@
         doisValorFactory.financeiro(102,scope,fnFunctionCallbacks);
 
         scope.saveAgencia = function() {
-            debugger
+        //    debugger
             //=================== ENDERECO
             scope.agencia.enderecos =[];
             scope.agencia.enderecos.push(fModels.amont(qat.model.fnEndereco(scope.enderecos[0],action,$rootScope.user.user),action));

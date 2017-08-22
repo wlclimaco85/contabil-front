@@ -144,7 +144,7 @@
 
 			scope.somarDtVenciParcela = function(parcela,intervalo,tempo,entrada,carencia)
 			{
-				debugger
+		//		debugger
 				if(intervalo && tempo)
 				{
 					if(intervalo.toLowerCase() == "dias")
@@ -168,7 +168,7 @@
 
 			scope.getFormaPagamento = function(item,model)
 			{
-				debugger
+			//	debugger
 				scope.notaFiscalSaida.vrtotal
 				var iParcelas = parseInt(item.parcelamentoMax.value,10);
 				scope.financeiros =[];
@@ -670,7 +670,7 @@
 
 
 			//NFNote
-
+			debugger
 			var oNFNotaInfo = {
 				id: null,
 				identificador: '10',

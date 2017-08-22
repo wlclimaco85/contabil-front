@@ -85,7 +85,7 @@ qat.model.Agencia = function(_oObjet, _modelAction,_user,$log)
 		this.telefones  = _oObjet.telefones ? _oObjet.telefones : null;
 		this.gerente  = _oObjet.gerente;
 		this.responsavelConta  = _oObjet.responsavelConta;
-		debugger
+	//	debugger
 		if(_oObjet.numeroConta && _oObjet.numeroConta.length > 0)
 		{
 			for(var x = 0;x<_oObjet.numeroConta.length;x++)
@@ -147,7 +147,7 @@ qat.model.Cliente = function(_oObjet, _modelAction,_user,$log)
 {
 	if (_oObjet != undefined)
 	{
-		//debugger
+		debugger
 		this.id = _oObjet.id;
 		this.nome = _oObjet.nome;
 		this.razao = _oObjet.razao;

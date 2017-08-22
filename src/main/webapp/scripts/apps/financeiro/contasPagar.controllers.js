@@ -655,8 +655,6 @@ vm.dtInstance.rerender()
                 }
             }
             $scope.saveContasPagar = function() {
-
-debugger
                 if($scope.titulo.pagarAgora)
                 {
                     $scope.titulo.listBaixa[0].dataBaixa = $scope.titulo ? $scope.titulo.dataPagamento.getTime() : (new Date()).getTime();
