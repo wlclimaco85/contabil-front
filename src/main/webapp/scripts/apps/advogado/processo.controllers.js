@@ -1,652 +1,478 @@
-(function() {
-    angular.module('wdApp.apps.processo', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('ProcessoController', processoController);
-
-    function processoController($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService) {
-        var vm = this;
-        vm.selected = {};
-        vm.selectAll = false;
-        vm.toggleAll = toggleAll;
-        vm.toggleOne = toggleOne;
-        vm.status = status;
-
-        vm.message = '';
-        vm.edit = edit;
-        vm.delete = deleteRow;
-        vm.dtInstance = {};
-        vm.persons = {};
-
-        vm.alterStatus = alterStatus;
-        vm.historico = historico;
-        vm.addAdvogado = addAdvogado;
-        vm.envolvidos = envolvidos;
-        vm.desdobramento = desdobramento;
-
-
-        $scope.toggle = function() {
-            $scope.state = !$scope.state;
-        };
-
-        $scope.toggle1 = function() {
-            $scope.state1 = !$scope.state1;
-        };
-
-
-        var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
-            'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
-
-        vm.dtOptions = DTOptionsBuilder.fromSource('processo.json')
-            .withDOM('frtip')
-            .withPaginationType('full_numbers')
-            .withOption('createdRow', createdRow)
-            .withOption('headerCallback', function(header) {
-                if (!vm.headerCompiled) {
-                    // Use this headerCompiled field to only compile header once
-                    vm.headerCompiled = true;
-                    $compile(angular.element(header).contents())($scope);
-                }
-            })
-            .withPaginationType('full_numbers')
-            .withColumnFilter({
-                aoColumns: [{
-                    type: 'number'
-                }, {
-                    type: 'number',
-                }, {
-                    type: 'select',
-                    values: ['Entrada', 'Saida']
-                }, {
-                    type: 'text'
-                }, {
-                    type: 'text'
-                }, {
-                    type: 'text'
-                }]
-            })
-            .withOption('initComplete', function(settings, json) {
-
-                $('.dt-buttons').find('.dt-button:eq(1)').before(
-
-                    '<select class="form-control col-sm-3 btn btn-primary dropdown-toggle" data-ng-options="t.name for t in vm.types"' +
-                    'data-ng-model="vm.object.type" style="height: 32px;margin-left: 8px;margin-right: 6px;width: 200px !important;">' +
-
-                    '<option><a href="#">Ações <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>' +
-                    '<option><a href="#">Remover Todos <span class="badge selected badge-danger main-badge"  data-ng-show="{{showCase.countSeleted()}}"></span></a></option>' +
-                    '</select>'
-
-                )
-            })
-            .withOption('processing', true)
-            .withOption('language', {
-                paginate: { // Set up pagination text
-                    first: "&laquo;",
-                    last: "&raquo;",
-                    next: "&rarr;",
-                    previous: "&larr;"
-                },
-                lengthMenu: "_MENU_ records per page"
-            })
-            .withButtons([{
-                extend: "colvis",
-                fileName: "Data_Analysis",
-                exportOptions: {
-                    columns: ':visible'
-                },
-                exportData: {
-                    decodeEntities: true
-                }
-            }, {
-                extend: "csvHtml5",
-                fileName: "Data_Analysis",
-                exportOptions: {
-                    columns: ':visible'
-                },
-                exportData: {
-                    decodeEntities: true
-                }
-            }, {
-                extend: "pdfHtml5",
-                fileName: "Data_Analysis",
-                title: "Data Analysis Report",
-                exportOptions: {
-                    columns: ':visible'
-                },
-                exportData: {
-                    decodeEntities: true
-                }
-            }, {
-                extend: "copy",
-                fileName: "Data_Analysis",
-                title: "Data Analysis Report",
-                exportOptions: {
-                    columns: ':visible'
-                },
-                exportData: {
-                    decodeEntities: true
-                }
-            }, {
-                extend: "print",
-                //text: 'Print current page',
-                autoPrint: true,
-                exportOptions: {
-                    columns: ':visible'
-                }
-            }, {
-                extend: "excelHtml5",
-                filename: "Data_Analysis",
-                title: "Data Analysis Report",
-                exportOptions: {
-                    columns: ':visible'
-                },
-                //CharSet: "utf8",
-                exportData: {
-                    decodeEntities: true
-                }
-
-            }, {
-                text: 'Novo Processo',
-                key: '1',
-                action: function(e, dt, node, config) {
-                    ModalService.showModal({
-                        templateUrl: 'cadProcesso.html',
-                        controller: "ContasPagarController"
-                    }).then(function(modal) {
-
-
-                        modal.element.modal();
-                        openDialogUpdateCreate();
-                        modal.close.then(function(result) {
-                            $scope.message = "You said " + result;
-                        });
-                    });
-                }
-            }]);
-
-            vm.dtColumns = [
-            DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
-            .renderWith(function(data, type, full, meta) {
-                vm.selected[full.id] = false;
-                return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
-            }).withOption('width', '10px'),
-            DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
-            DTColumnBuilder.newColumn('assunto').withTitle('Assunto'),
-            DTColumnBuilder.newColumn('status').withTitle('Situação'),
-            DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
-            DTColumnBuilder.newColumn('responsavel').withTitle('Responsavel'),
-            DTColumnBuilder.newColumn('grupoTrabalho').withTitle('Grupo Trabalho').notVisible(),
-            DTColumnBuilder.newColumn('processo').withTitle('Processo').notVisible(),
-            DTColumnBuilder.newColumn('situacao').withTitle('Situação').notVisible(),
-            DTColumnBuilder.newColumn('instancia').withTitle('Instancia').notVisible(),
-            DTColumnBuilder.newColumn('orgao').withTitle('Orgão').notVisible(),
-            DTColumnBuilder.newColumn('numCnj').withTitle('Numeração Padrão CNJ').notVisible(),
-            DTColumnBuilder.newColumn('numOut').withTitle('Numeração Outro Padrão').notVisible(),
-            DTColumnBuilder.newColumn('ageCapTrib').withTitle('Agendar captura no tribunal').notVisible(),
-            DTColumnBuilder.newColumn('observacao').withTitle('Observação').notVisible(),
-            DTColumnBuilder.newColumn('valor').withTitle('Valor').notVisible(),
-            DTColumnBuilder.newColumn('formaPg').withTitle('Forma de Pagamento').notVisible(),
-            DTColumnBuilder.newColumn('justica').withTitle('Justiça').notVisible(),
-            DTColumnBuilder.newColumn('tribunal').withTitle('Tribunal').notVisible(),
-            DTColumnBuilder.newColumn('instancia2').withTitle('Instancia').notVisible(),
-            DTColumnBuilder.newColumn('localidade').withTitle('Localidade').notVisible(),
-            DTColumnBuilder.newColumn('capPor').withTitle('Capturar Por').notVisible(),
-            DTColumnBuilder.newColumn('numProcesso').withTitle('Numero Processo').notVisible(),
-            DTColumnBuilder.newColumn('capalt').withTitle('Captura automática de andamentos').notVisible(),
-            DTColumnBuilder.newColumn(null).withTitle('Envolvidos').renderWith(function(data, type, full, meta) {
-                var sText = "";
-                if (data.pessoa != undefined) {
-                    for (var x = 0; x < data.pessoa.length; x++) {
-                        sText = sText + " " + data.pessoa[x].cliente + " " + data.pessoa[x].tipEnvolv + " " + data.pessoa[x].envolvimento + "<br> ";
-                    }
-                }
-
-                return '<span>' + sText + '</span>';
-            }),
-            DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
-            DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtmlProcesso).withOption('width', '140px'),
-        ];
-
-
-
-
-
-
-        //Contato
-        vm.dtOptionsContato = DTOptionsBuilder.fromSource('contatoProcesso.json')
-            .withDOM('frtip')
-            .withPaginationType('full_numbers')
-            .withOption('createdRow', createdRow)
-            .withOption('headerCallback', function(header) {
-                if (!vm.headerCompiled) {
-                    // Use this headerCompiled field to only compile header once
-                    vm.headerCompiled = true;
-                    $compile(angular.element(header).contents())($scope);
-                }
-            })
-            .withPaginationType('full_numbers')
-            .withColumnFilter({
-                aoColumns: [{
-                    type: 'number'
-                }, {
-                    type: 'number',
-                }, {
-                    type: 'select',
-                    values: ['Entrada', 'Saida']
-                }, {
-                    type: 'text'
-                }, {
-                    type: 'text'
-                }, {
-                    type: 'text'
-                }]
-            })
-            .withOption('initComplete', function(settings, json) {
-
-                $('.dt-buttons').find('.dt-button:eq(1)').before(
-
-                    '<select class="form-control col-sm-3 btn btn-primary dropdown-toggle" data-ng-options="t.name for t in vm.types"' +
-                    'data-ng-model="vm.object.type" style="height: 32px;margin-left: 8px;margin-right: 6px;width: 200px !important;">' +
-
-                    '<option><a href="#">Ações <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>' +
-                    '<option><a href="#">Remover Todos <span class="badge selected badge-danger main-badge"  data-ng-show="{{showCase.countSeleted()}}"></span></a></option>' +
-                    '</select>'
-
-                )
-            })
-            .withOption('processing', true)
-            .withOption('language', {
-                paginate: { // Set up pagination text
-                    first: "&laquo;",
-                    last: "&raquo;",
-                    next: "&rarr;",
-                    previous: "&larr;"
-                },
-                lengthMenu: "_MENU_ records per page"
-            })
-            .withButtons([{
-                extend: "print",
-                //text: 'Print current page',
-                autoPrint: true,
-                exportOptions: {
-                    columns: ':visible'
-                }
-            }, {
-                extend: "excelHtml5",
-                filename: "Data_Analysis",
-                title: "Data Analysis Report",
-                exportOptions: {
-                    columns: ':visible'
-                },
-                //CharSet: "utf8",
-                exportData: {
-                    decodeEntities: true
-                }
-            },{
-                text: 'Incluir Novo Arquivo',
-                key: '1',
-                action: function(e, dt, node, config) {
-                    ModalService.showModal({
-                        templateUrl: 'cadProcesso.html',
-                        controller: "ContasPagarController"
-                    }).then(function(modal) {
-
-
-                        modal.element.modal();
-                        openDialogUpdateCreate();
-                        modal.close.then(function(result) {
-                            $scope.message = "You said " + result;
-                        });
-                    });
-                }
-            }]);
-
-        vm.dtColumnsContato = [
-            DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
-            .renderWith(function(data, type, full, meta) {
-                vm.selected[full.id] = false;
-                return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
-            }).withOption('width', '10px'),
-            DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
-            DTColumnBuilder.newColumn('contato').withTitle('Contato'),
-            DTColumnBuilder.newColumn('motivo').withTitle('Motivo Contato'),
-            DTColumnBuilder.newColumn('tipo').withTitle('Tipo Contato'),
-            DTColumnBuilder.newColumn('contatado').withTitle('Contatado'),
-            DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
-            DTColumnBuilder.newColumn('data').withTitle('Data'),
-            DTColumnBuilder.newColumn('responsavel').withTitle('Contatado Por'),
-            DTColumnBuilder.newColumn('protocolo').withTitle('Nº Protocolo'),
-            DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
-            DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '140px'),
-        ];
-
-
-        //arquivo
-        vm.dtOptionsArquivo = DTOptionsBuilder.fromSource('arquivoProcesso.json')
-            .withDOM('frtip')
-            .withPaginationType('full_numbers')
-            .withOption('createdRow', createdRow)
-            .withOption('headerCallback', function(header) {
-                if (!vm.headerCompiled) {
-                    // Use this headerCompiled field to only compile header once
-                    vm.headerCompiled = true;
-                    $compile(angular.element(header).contents())($scope);
-                }
-            })
-            .withPaginationType('full_numbers')
-            .withColumnFilter({
-                aoColumns: [{
-                    type: 'number'
-                }, {
-                    type: 'number',
-                }, {
-                    type: 'select',
-                    values: ['Entrada', 'Saida']
-                }, {
-                    type: 'text'
-                }, {
-                    type: 'text'
-                }, {
-                    type: 'text'
-                }]
-            })
-            .withOption('initComplete', function(settings, json) {
-
-                $('.dt-buttons').find('.dt-button:eq(1)').before(
-
-                    '<select class="form-control col-sm-3 btn btn-primary dropdown-toggle" data-ng-options="t.name for t in vm.types"' +
-                    'data-ng-model="vm.object.type" style="height: 32px;margin-left: 8px;margin-right: 6px;width: 200px !important;">' +
-
-                    '<option><a href="#">Ações <span class="badge selected badge-danger main-badge" data-ng-show="{{showCase.countSeleted()}}"</span></a></option>' +
-                    '<option><a href="#">Remover Todos <span class="badge selected badge-danger main-badge"  data-ng-show="{{showCase.countSeleted()}}"></span></a></option>' +
-                    '</select>'
-
-                )
-            })
-            .withOption('processing', true)
-            .withOption('language', {
-                paginate: { // Set up pagination text
-                    first: "&laquo;",
-                    last: "&raquo;",
-                    next: "&rarr;",
-                    previous: "&larr;"
-                },
-                lengthMenu: "_MENU_ records per page"
-            })
-            .withButtons([{
-                extend: "print",
-                //text: 'Print current page',
-                autoPrint: true,
-                exportOptions: {
-                    columns: ':visible'
-                }
-            }, {
-                extend: "excelHtml5",
-                filename: "Data_Analysis",
-                title: "Data Analysis Report",
-                exportOptions: {
-                    columns: ':visible'
-                },
-                //CharSet: "utf8",
-                exportData: {
-                    decodeEntities: true
-                }
-            },{
-                text: 'Incluir Novo Arquivo',
-                key: '1',
-                action: function(e, dt, node, config) {
-                    ModalService.showModal({
-                        templateUrl: 'cadProcesso.html',
-                        controller: "ContasPagarController"
-                    }).then(function(modal) {
-
-
-                        modal.element.modal();
-                        openDialogUpdateCreate();
-                        modal.close.then(function(result) {
-                            $scope.message = "You said " + result;
-                        });
-                    });
-                }
-            }]);
-
-        vm.dtColumnsArquivo = [
-            DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
-            .renderWith(function(data, type, full, meta) {
-                vm.selected[full.id] = false;
-                return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
-            }).withOption('width', '10px'),
-            DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
-            DTColumnBuilder.newColumn('nome').withTitle('Nome'),
-            DTColumnBuilder.newColumn('tamanho').withTitle('Situação'),
-            DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
-            DTColumnBuilder.newColumn('data').withTitle('Data'),
-            DTColumnBuilder.newColumn('responsavel').withTitle('Anexado Por'),
-            DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
-            DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
-            DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(actionsHtml).withOption('width', '140px'),
-        ];
-
-
-        function edit(person) {
-            ModalService.showModal({
-                templateUrl: 'almoxarifadoDelete.html',
-                controller: "ContasPagarController"
-            }).then(function(modal) {
-
-                modal.element.modal();
-                openDialogUpdateCreate();
-                modal.close.then(function(result) {
-                    $scope.message = "You said " + result;
-                });
-            });
-        }
-
-        function deleteRow(person) {
-            ModalService.showModal({
-                templateUrl: 'deleteCidade.html',
-                controller: "ContasPagarController"
-            }).then(function(modal) {
-                modal.element.modal();
-                modal.close.then(function(result) {
-                    $scope.message = "You said " + result;
-                });
-            });
-        }
-
-        function view(person) {
-            ModalService.showModal({
-                templateUrl: 'deleteCidade.html',
-                controller: "ContasPagarController"
-            }).then(function(modal) {
-                modal.element.modal();
-                modal.close.then(function(result) {
-                    $scope.message = "You said " + result;
-                });
-            });
-        }
-
-        function openDialogUpdateCreate() {
-            bookIndex = 0;
-            $('#pdVendasForm')
-                .formValidation({
-                    framework: 'bootstrap',
-                    icon: {
-                        valid: 'glyphicon glyphicon-ok',
-                        invalid: 'glyphicon glyphicon-remove',
-                        validating: 'glyphicon glyphicon-refresh'
-                    },
-                    fields: {
-
-                        'book[0].produto': notEmptyStringMinMaxRegexp,
-                        'book[0].quantidade': integerNotEmptyValidation,
-                        'book[0].vlUnitario': integerNotEmptyValidation,
-
-
-                    }
-                })
-                // Add button click handler
-                .on('click', '.addButton', function() {
-                    bookIndex++;
-                    var $template = $('#bookTemplate'),
-                        $clone = $template
-                        .clone()
-                        .removeClass('hide')
-                        .removeAttr('id')
-                        .attr('data-book-index', bookIndex)
-                        .insertBefore($template);
-
-                    // Update the name attributes
-                    $clone
-                        .find('[name="produto"]').attr('name', 'book[' + bookIndex + '].produto').end()
-                        .find('[name="quantidade"]').attr('name', 'book[' + bookIndex + '].quantidade').end()
-                        .find('[name="vlUnitario"]').attr('name', 'book[' + bookIndex + '].vlUnitario').end()
-                        .find('[name="desconto"]').attr('name', 'book[' + bookIndex + '].desconto').end();
-
-                    // Add new fields
-                    // Note that we also pass the validator rules for new field as the third parameter
-                    $('#pdVendasForm')
-                        .formValidation('addField', 'book[' + bookIndex + '].produto', notEmptyStringMinMaxRegexp)
-                        .formValidation('addField', 'book[' + bookIndex + '].quantidade', integerNotEmptyValidation)
-                        .formValidation('addField', 'book[' + bookIndex + '].vlUnitario', integerNotEmptyValidation);
-                }) // Remove button click handler
-                .on('click', '.removeButton', function() {
-                    var $row = $(this).parents('.form-group'),
-                        index = $row.attr('data-book-index');
-
-                    // Remove fields
-                    $('#bookForm')
-                        .formValidation('removeField', $row.find('[name="book[' + index + '].produto"]'))
-                        .formValidation('removeField', $row.find('[name="book[' + index + '].quantidade"]'))
-                        .formValidation('removeField', $row.find('[name="book[' + index + '].vlUnitario"]'))
-                        .formValidation('removeField', $row.find('[name="book[' + index + '].desconto"]'));
-
-                    // Remove element containing the fields
-                    $row.remove();
-                });
-            $("select").select2({
-                placeholder: "Select a state",
-                allowClear: true
-            });
-
-
-        }
-
-        function createdRow(row, data, dataIndex) {
-            // Recompiling so we can bind Angular directive to the DT
-            $compile(angular.element(row).contents())($scope);
-        }
-
-        function actionsHtml(data, type, full, meta) {
-            vm.persons[data.id] = data;
-            return '<button class="btn btn-info" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
-                '   <i class="glyphicon glyphicon-save"></i>' +
-                '</button>&nbsp;' +
-                '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
-                '   <i class="fa fa-trash-o"></i>' +
-                '</button>';
-        }
-
-         function actionsHtmlProcesso(data, type, full, meta) {
+;(function () {
+    angular.module('wdApp.apps.processo', ['datatables', 'ngResource', 'datatables.scroller', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+      .controller('ProcessoController', processoController)
+  
+    function processoController ($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate, Datatablessss, tableOptionsFactory,
+      tableColumnsFactory, FiltersFactory, validationFactory,dialogFactory) {
+      var vm = this
+      vm.selected = {}
+      vm.selectAll = false
+      vm.toggleAll = toggleAll
+      vm.toggleOne = toggleOne
+      vm.status = status
+      vm.message = ''
+  
+      vm.dtInstance = {}
+      vm.persons = {}
+  
+      $scope.processo = {
+        tipoPessoa: 2
+      }
+  
+  
+      function reloadData () {
+        var resetPaging = false
+        vm.dtInstance.reloadData(callback, resetPaging)
+      }
+  
+      function callback (json) {
+        console.log(json)
+      }
+      $rootScope.reloadDataProcesso = function (_callback) {
+        var resetPaging = false
+        vm.dtInstance.reloadData(_callback, resetPaging)
+      }
+  
+      $scope.toggle = function () {
+        $scope.state = !$scope.state
+      }
+  
+      vm.edit = edit;
+      vm.view = view;
+      vm.delete = deleteRow;
+      vm.dtInstance = {};
+      vm.persons = {};
+  
+      function rCallback (nRow, aData) {
+        // console.log('row')
+      }
+  
+      function recompile (row, data, dataIndex) {
+        $compile(angular.element(row).contents())($scope)
+      }
+  
+      var createdRow = function (row, data, dataIndex) {
+        // Recompiling so we can bind Angular directive to the DT
+        $compile(angular.element(row).contents())($scope)
+      }
+  
+      var fnDataSRC = function (json) {
+        console.log(json)
+        json['recordsTotal'] = json.processoList.length
+        json['recordsFiltered'] = json.processoList.length
+        json['draw'] = 1
+        console.log(json)
+        return json.processoList
+      }
+  
+      var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
+        'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">'
+  
+      var actionsHtml = function (data, type, full, meta) {
         vm.persons[data.id] = data;
         return '<a href="#/advogado/details/processo" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i></a>&nbsp;' +
-            '<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
-            '   <i class="fa fa-edit"></i>' +
-            '</button>&nbsp;' +
-            '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
-            '   <i class="fa fa-trash-o"></i>' +
-            '</button>';
-    }
-
-        function toggleAll(selectAll, selectedItems) {
-            for (var id in selectedItems) {
-                if (selectedItems.hasOwnProperty(id)) {
-                    selectedItems[id] = selectAll;
-                }
+        '<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
+        '   <i class="fa fa-edit"></i>' +
+        '</button>&nbsp;' +
+        '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
+        '   <i class="fa fa-trash-o"></i>' +
+        '</button>'
+      }
+  
+      function edit (person) {
+        $rootScope.processo = person
+        dialogFactory.dialog('views/advogado/dialog/dProcesso.html', 'ProcessoUpdateController', validationFactory.processo())
+      }
+      function view (person) {
+        $rootScope.processo = person
+        //  Datatablessss.reloadData(vm)
+        dialogFactory.dialog('views/advogado/dialog/dProcesso.html', 'ProcessoUpdateController', validationFactory.processo())
+      }
+  
+      function deleteRow (person) {
+        $rootScope.processo = person
+        dialogFactory.dialog('views/advogado/dialog/dProcesso.html', 'ProcessoDeleteController', validationFactory.processo())
+      }
+  
+      Datatablessss.getTable('/advocacia/api/processo/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile,
+        tableOptionsFactory.processo(vm, createdRow, $scope, FiltersFactory.processo(), reloadData), tableColumnsFactory.processo(vm, '', actionsHtml))
+  
+      function toggleAll (selectAll, selectedItems) {
+        for (var id in selectedItems) {
+          if (selectedItems.hasOwnProperty(id)) {
+            selectedItems[id] = selectAll
+          }
+        }
+      }
+  
+      function status () {}
+  
+      function toggleOne (selectedItems) {
+        for (var id in selectedItems) {
+          if (selectedItems.hasOwnProperty(id)) {
+            if (!selectedItems[id]) {
+              vm.selectAll = false
+              return
             }
+          }
         }
-
-        function status() {
+        vm.selectAll = true
+      }
+  
+      function toggle () {
+        $scope.state = !$scope.state
+      }
+    }
+  })()
+  ;(function () {
+    angular.module('wdApp.apps.processo.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+      .controller('ProcessoInsertController', function ($rootScope, $scope, fModels, SysMgmtData, toastr, $element, close,  doisValorFactory,validationFactory) {
+        var vm = this
+  
       
-
+      })
+  })()
+  ;(function () {
+    angular.module('wdApp.apps.processo.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+      .controller('ProcessoUpdateController', function ($rootScope, $scope, fModels, SysMgmtData, fPessoa, toastr, $element, close,validationFactory) {
+        var vm = this
+        $scope.processo = {}
+  
+        $scope.processo = $rootScope.processo;
+        $scope.enderecos =  $scope.processo.enderecos;
+        $scope.telefones = $scope.processo.telefones;
+        $scope.emails = $scope.processo.emails;
+        $scope.documentos = $scope.processo.documentos;
+  
+        fPessoa.fnOpenView(vm,$scope);
+  
+       // ===========================================
+        var fnCallBack = function (res) {
+          if (res.operationSuccess == true) {
+            $element.modal('hide')
+            close(null, 500)
+            toastr.success('Deu Certo seu tanga.', 'Sucess')
+            $rootScope.reloadDataProcesso(function (data) {
+              //debugger
+            })
+          }
         }
-
-        function alterStatus() {
-            ModalService.showModal({
-                templateUrl: 'alterStatus.html',
-                controller: "ContasPagarController"
-            }).then(function(modal) {
-                modal.element.modal();
-                modal.close.then(function(result) {
-                    $scope.message = "You said " + result;
-                });
-            });
+  
+        $scope.saveProcesso = function (bValidate,b) {
+          if(bValidate)
+              fPessoa.fnMontaObjeto($scope.processo, $scope.enderecos, $scope.emails, $scope.telefones, 'UPDATE', 'pessoa/api/processo/update', fnCallBack)
         }
-
-        function historico() {
-            ModalService.showModal({
-                templateUrl: 'historico.html',
-                controller: "ContasPagarController"
-            }).then(function(modal) {
-                modal.element.modal();
-                modal.close.then(function(result) {
-                    $scope.message = "You said " + result;
-                });
-            });
+      })
+  })()
+  ;(function () {
+    angular.module('wdApp.apps.processo.delete', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+      .controller('ProcessoDeleteController', function ($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        var vm = this
+        $scope.processo = {}
+        $scope.processo = $rootScope.processo
+        console.log($rootScope.processo)
+        $scope.saveProcesso = function () {
+          fPessoa.fnDelete($scope.processo, 'pessoa/api/processo/update/', function () {
+            console.log('ddda   aqui')
+          })
         }
-
-        function addAdvogado() {
-            ModalService.showModal({
-                templateUrl: 'addAdvogado.html',
-                controller: "ContasPagarController"
-            }).then(function(modal) {
-                modal.element.modal();
-                modal.close.then(function(result) {
-                    $scope.message = "You said " + result;
-                });
-            });
+      })
+  })()
+  ;(function () {
+    angular.module('wdApp.apps.processo.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+      .controller('ProcessoViewController', function ($rootScope, $scope, fModels, SysMgmtData, fPessoa, $location, toastr) {
+        var vm = this
+  
+        var searchObject = $location.search();
+              var _emprId = null;
+              if ((localStorage.getItem('empresa') !== undefined) && (localStorage.getItem('empresa') !== null))
+              {
+                  _emprId = JSON.parse(localStorage.getItem('empresa')).id;
         }
-
-        function envolvidos() {
-            ModalService.showModal({
-                templateUrl: 'envolvidos.html',
-                controller: "ContasPagarController"
-            }).then(function(modal) {
-                modal.element.modal();
-                openDialogUpdateCreate();
-                modal.close.then(function(result) {
-                    $scope.message = "You said " + result;
-                });
-            });
-        }
-
-        function desdobramento() {
-            ModalService.showModal({
-                templateUrl: 'desdobramento.html',
-                controller: "ContasPagarController"
-            }).then(function(modal) {
-                modal.element.modal();
-                modal.close.then(function(result) {
-                    $scope.message = "You said " + result;
-                });
-            });
-        }
-
-        function toggleOne(selectedItems) {
-            for (var id in selectedItems) {
-                if (selectedItems.hasOwnProperty(id)) {
-                    if (!selectedItems[id]) {
-                        vm.selectAll = false;
-                        return;
+  
+        SysMgmtData.processPostPageData("main/api/request",
+              {
+                  url: "pessoa/api/processo/fetchPage",
+                  token: $rootScope.authToken,
+                  request: new qat.model.empresaInquiryRequest(0, true, null, parseInt(searchObject.id, 10), null, null)
+              }, function(res)
+              {
+          $scope.processo = {}
+          $scope.processo = res.processoList[0];
+          console.log($scope.processo);
+  
+          if($scope.processo.emails.length === 0 )
+          {
+            $scope.processo.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+          }
+  
+          $scope.status = $scope.processo.statusList[$scope.processo.statusList.length - 1];
+          console.log($scope.processo);
+        });
+        $scope.showEmailType = function() {
+          var sReturn = 'Not set';
+          if($scope.regime)
+          {
+                for(var x = 0;x < $scope.regime.length;x++)
+                {
+                    if( $scope.empresa.regime && $scope.regime[x].id == $scope.empresa.regime.id)
+                    {
+                        sReturn =  $scope.regime[x].nome
                     }
                 }
-            }
-            vm.selectAll = true;
-        }
-
-        function toggle() {
-          
-            $scope.state = !$scope.state;
+          }
+          return sReturn;
         };
-    }
-})();
+  
+  
+  
+        $scope.insertFormTelefone = function(email) {
+          $scope.processo.telefones.push({numero : "",telefoneTypeEnum : "EMPRESA"});
+        };
+  
+        $scope.deleteFormTelefone = function(email) {
+  
+          for(var x=0;x < $scope.processo.telefones.length;x++)
+          {
+            if($scope.processo.telefones[x].id == email.id || $scope.processo.telefones[x].numero == email.numero)
+            {
+              $scope.processo.telefones[x].modelAction = "DELETE";
+            }
+          }
+          $scope.updateProcesso();
+        };
+  
+        $scope.insertFormEmail = function(email) {
+          $scope.processo.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+        };
+  
+        $scope.deleteFormEmailsdddd = function(email) {
+  
+          for(var x=0;x < $scope.processo.emails.length;x++)
+          {
+            if($scope.processo.emails[x].id == email.id || $scope.processo.emails[x].email == email.email)
+            {
+              $scope.processo.emails[x].modelAction = "DELETE";
+            }
+          }
+          $scope.updateProcesso();
+        };
+  
+        $scope.emailType = [
+          {nome : '1',label : 'Principal'},
+          {nome : '2',label : 'NFe'},
+          {nome : '3',label : 'Compras'},
+          {nome : '4',label : 'Vendas'},
+          {nome : '5',label : 'Outros'}
+        ];
+  
+        $scope.statusType = [
+          {nome : 'ATIVO',label : 'Ativo'},
+          {nome : 'INATIVO',label : 'Inativo'},
+          {nome : 'DELETADO',label : 'Deletado'},
+          {nome : 'SUSPENSO',label : 'Suspenso'},
+          {nome : 'NEGATIVADO',label : 'Negativado'},
+          {nome : 'ANALISANDO',label : 'Analisando'}
+        ];
+  
+        $scope.telefoneType = [
+          {nome : '1',label : 'Particular'},
+          {nome : '2',label : 'Vendas'},
+          {nome : '3',label : 'Compras'},
+          {nome : '4',label : 'NF-e'},
+          {nome : '5',label : 'Sac'},
+          {nome : '6',label : 'Representante'},
+          {nome : '7',label : 'Diretor'},
+          {nome : '8',label : 'Gerente'},
+          {nome : '9',label : 'Empresa'},
+          {nome : '10',label : 'Celular'}
+        ];
+  
+  
+        $scope.showEmailType = function(value) {
+          var sReturn = 'Vazio';
+          if($scope.emailType)
+          {
+                for(var x = 0;x < $scope.emailType.length;x++)
+                {
+                    if( value && $scope.emailType[x].nome == value)
+                    {
+                        sReturn =  $scope.emailType[x].label
+                    }
+                }
+          }
+          return sReturn;
+        };
+  
+        $scope.showTelefoneType = function(value) {
+          console.log(value)
+          var sReturn = 'Vazio';
+          if($scope.telefoneType)
+          {
+                for(var x = 0;x < $scope.telefoneType.length;x++)
+                {
+                    if( value && $scope.telefoneType[x].nome == value)
+                    {
+                        sReturn =  $scope.telefoneType[x].label
+                    }
+                }
+          }
+          return sReturn;
+        };
+  
+        $scope.showStatusType = function(value) {
+  
+          var sReturn = 'Vazio';
+  
+          if($scope.statusType)
+          {
+                for(var x = 0;x < $scope.statusType.length;x++)
+                {
+                    if( value && $scope.statusType[x].nome == value)
+                    {
+                        sReturn =  $scope.statusType[x].label
+                    }
+                }
+          }
+  
+          return sReturn;
+        };
+  
+        var fnCallBack = function (res) {
+          if (res.operationSuccess == true) {
+            for (var a = 0; a < res.processoList.length;a++)
+            {
+                if( res.processoList[a].id === $scope.processo.id)
+                {
+                  $scope.processo = res.processoList[a];
+                  if($scope.processo.emails.length === 0 )
+                  {
+                    $scope.processo.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+                  }
+                  return;
+                }
+  
+            }
+  
+            toastr.success('Deu Certo seu tanga.', 'Sucess')
+          }
+        }
+  
+        $scope.formatterDate = function (value) {
+          return moment(value).format('DD/MM/YYYY H:MM')
+        }
+        $scope.updateStatus = function () {
+  
+            var oObject = {
+              dataStatus: (new Date()).getTime(),
+              status : $scope.status.status,
+              acaoEnumValue : 0,
+              tabelaEnumValue : 17,
+              parentId : $scope.processo.id,
+              note: $scope.status.note
+            }
+  
+            SysMgmtData.processPostPageData("main/api/request", {
+                url: "entidade/api/status/insert",
+                token: $rootScope.authToken,
+                request: new qat.model.reqStatus(oObject, true, true)
+            }, function(res) {
+                if (res.operationSuccess == true) {
+                  SysMgmtData.processPostPageData("main/api/request",
+                  {
+                    url: "pessoa/api/processo/fetchPage",
+                    token: $rootScope.authToken,
+                    request: new qat.model.empresaInquiryRequest(0, true, null, parseInt($scope.processo.id, 10), null, null)
+                  }, function(res)
+                  {
+                    $scope.processo = {}
+                    $scope.processo = res.processoList[0];
+                    console.log($scope.processo);
+  
+                    if($scope.processo.emails.length === 0 )
+                    {
+                      $scope.processo.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+                    }
+  
+                    $scope.status = $scope.processo.statusList[$scope.processo.statusList.length - 1];
+                  });
+                  toastr.success('Deu Certo seu tanga.', 'Sucess')
+                }
+            });
+        }
+  
+        $scope.insertNote = function () {
+  //debugger
+            var oObject = {
+              dataStatus: (new Date()).getTime(),
+              noteText : $scope.noteText,
+              acaoEnumValue : 0,
+              tabelaEnumValue : 17,
+              parentId : $scope.processo.id,
+              emprId : $scope.processo.emprId,
+              createUser : $rootScope.user.user,
+              createDateUTC : (new Date()).getTime()
+            }
+  
+            SysMgmtData.processPostPageData("main/api/request", {
+                url: "entidade/api/note/insert",
+                token: $rootScope.authToken,
+                request: new qat.model.reqNote(oObject, true, true)
+            }, function(res) {
+                if (res.operationSuccess == true) {
+                  SysMgmtData.processPostPageData("main/api/request",
+                  {
+                    url: "pessoa/api/processo/fetchPage",
+                    token: $rootScope.authToken,
+                    request: new qat.model.empresaInquiryRequest(0, true, null, parseInt($scope.processo.id, 10), null, null)
+                  }, function(res)
+                  {
+                    $scope.processo = {}
+                    $scope.processo = res.processoList[0];
+                    console.log($scope.processo);
+  
+                    if($scope.processo.emails.length === 0 )
+                    {
+                      $scope.processo.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+                    }
+  
+                    $scope.status = $scope.processo.statusList[$scope.processo.statusList.length - 1];
+                  });
+                  toastr.success('Deu Certo seu tanga.', 'Sucess')
+                }
+            });
+        }
+        $scope.updateProcesso = function () {
+  
+          fPessoa.fnMontaObjeto($scope.processo, $scope.processo.enderecos, $scope.processo.emails, $scope.processo.telefones, 'UPDATE', 'pessoa/api/processo/update', fnCallBack);
+        }
+      })
+  })()
+  ;(function () {
+    angular.module('wdApp.apps.processo.search', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+      .controller('ProcessoSearchController', function ($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        var vm = this
+        $scope.visibled = false
+        //   $scope.processo = []
+  
+        $scope.countrySelected = function (selected) {
+          // debugger
+          if (selected) {
+            $scope.pessoa = selected.originalObject
+            $scope.visibled = true
+          }else {
+            console.log('cleared')
+          }
+        }
+  
+        SysMgmtData.processPostPageData('main/api/request',
+          {
+            url: 'pessoa/api/processo/fetchPage',
+            token: $rootScope.authToken,
+            request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
+          }, function (res) {
+            //  debugger
+            $scope.processo = res.processoList
+          })
+      })
+  })()

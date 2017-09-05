@@ -152,6 +152,20 @@
             }
           })
         },
+        processo: function () {
+          $('.cfopForm').formValidation({
+            framework: 'bootstrap',
+            icon: {
+              valid: 'glyphicon glyphicon-ok',
+              invalid: 'glyphicon glyphicon-remove',
+              validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+              'firstName': notEmptyStringMinMaxRegexp,
+              'lastName': integerNotEmptyValidation
+            }
+          })
+        },
         cliente: function () {
           $('.clienteForm').formValidation({
             framework: 'bootstrap',

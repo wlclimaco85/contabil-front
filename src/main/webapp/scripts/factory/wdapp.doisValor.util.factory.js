@@ -123,9 +123,95 @@
 						}
 					});
 			},
+			processo: function(scope)
+			{
+				scope.status = [];
+				scope.tipoEnvolv = [];
+				scope.envolv = [];
+				scope.situacao = [];
+				scope.instancia = [];
+				scope.justica = [];
+				scope.tribunal = [];
+				scope.localidade = [];
+				scope.capiturPor = [];
+				scope.capiturAut = [];
+
+				var fnCallbackDoisValor = function(res)
+				{
+					var planos = "";
+					//  //debugger
+					//ICMS - MODALIDADE BC
+
+					if (res.operationSuccess == true)
+					{
+						for (var x = 0; x < res.doisValoresList.length; x++)
+						{
+							planos = res.doisValoresList[x];
+							if (planos.doisValorType != null)
+							{
+								switch (planos.doisValorType.tipo)
+								{
+									case 'STATUS':
+										scope.status.push(planos);
+										break;
+									case 'TIPO ENVOLVIMENTO':
+										scope.tipoEnvolv.push(planos)
+										break;
+									case 'ENVOLVIMENTO':
+										scope.envolv.push(planos)
+										break;
+									case 'SITUACAO':
+										scope.situacao.push(planos)
+										break;
+									case 'INSTANCIA':
+										scope.instancia.push(planos)
+										break;
+									case 'JUSTICA':
+										scope.justica.push(planos)
+										break;
+									case 'TRIBUNAL':
+										scope.tribunal.push(planos)
+										break;
+									case 'LOCALIDADE':
+										scope.localidade.push(planos)
+										break;
+									case 'CAPITUR POR':
+										scope.capiturPor.push(planos)
+										break;
+									case 'CAPTURA AUTOMATICA':
+										scope.capiturAut.push(planos)
+										break;
+									
+								}
+							}
+						}
+					}
+				}
+
+				qat.model.select.util("entidade/api/doisValores/fetchPage", true, new qat.model.doisValoresInquiryRequest(6, 100 / 20, true, JSON.parse(localStorage.getItem("empresa")).id),
+					fnCallbackDoisValor);
+
+
+				scope.getRegimeTriburario = function(oObject)
+				{
+
+					var iType = 0;
+					if (oObject.value == "10")
+						iType = 21
+					else
+						iType = 22
+
+					qat.model.select.util("entidade/api/doisValores/fetchPage", true, new qat.model.doisValoresInquiryRequest(null, 100 / 20, true, JSON.parse(localStorage.getItem(
+						"empresa")).id, iType), function(res)
+					{
+						scope.icmsST = [];
+						scope.icmsST = res.doisValoresList;
+					});
+				}
+				return scope;
+			},
 			tributacao: function(scope)
 			{
-
 				scope.regime = [];
 				scope.icmsOri = [];
 				scope.icmsMBC = [];

@@ -970,3 +970,119 @@ INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
 
 INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)
     VALUES (1001,'TIPO NOTA FISCAL', 'TIPO NOTA FISCAL', 1477075035443, 'System');
+
+
+
+    INSERT INTO pagina(id ,pagina,parentid, tabelaenumvalue, create_date, create_user)
+    VALUES (103,'Processo', 0, 100, 1477075035443, 'System');
+
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user)VALUES
+(142,'STATUS', 'STATUS' , 1477075035443, 'System'),
+(143,'TIPO ENVOLVIMENTO', 'TIPO ENVOLVIMENTO' , 1477075035443, 'System'),
+(144,'ENVOLVIMENTO', 'ENVOLVIMENTO' , 1477075035443, 'System'),
+(145,'SITUACAO', 'SITUACAO' , 1477075035443, 'System'),
+(146,'INSTANCIA', 'INSTANCIA' , 1477075035443, 'System'),
+(147,'JUSTICA', 'JUSTICA' , 1477075035443, 'System'),
+(148,'TRIBUNAL', 'TRIBUNAL' , 1477075035443, 'System'),
+(149,'LOCALIDADE', 'LOCALIDADE' , 1477075035443, 'System'),
+(150,'CAPITUR POR', 'CAPITUR POR' , 1477075035443, 'System'),
+(151,'CAPTURA AUTOMATICA', 'CAPTURA AUTOMATICA' , 1477075035443, 'System');
+
+
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+('4', 'Arquivado','Arquivado',142,103, 1477075035443, 'System'),
+('1', 'Ativo','Ativo',142,103, 1477075035443, 'System'),
+('5', 'Em grau de recurso','Em grau de recurso',142,103, 1477075035443, 'System'),
+('3', 'Encerrado','Encerrado',142,103, 1477075035443, 'System'),
+('2', 'Suspenso','Suspenso',142,103, 1477075035443, 'System'),
+
+('PARTE_ATIVA', 'Parte Ativa','Parte Ativa',143,103, 1477075035443, 'System'),
+('PARTE_PASSIVA', 'Parte Passiva','Parte Passiva',143,103, 1477075035443, 'System'),
+('TERCEIRO', 'Terceiro','Terceiro',143,103, 1477075035443, 'System'),
+('ASSISTENTE', 'Assistente','Assistente',143,103, 1477075035443, 'System'),
+('FISCAL', 'Fiscal','Fiscal',143,103, 1477075035443, 'System'),
+('TESTEMUNHA', 'Testemunha','Testemunha',143,103, 1477075035443, 'System'),
+('VITIMA', 'Vítima','Vítima',143,103, 1477075035443, 'System'),
+('OUTROS', 'Outros','Outros',143,103, 1477075035443, 'System'),
+
+('63', 'Acusador','Acusador',144,103, 1477075035443, 'System'),
+('2', 'Agravante','Agravante',144,103, 1477075035443, 'System'),
+('3', 'Apelante','Apelante',144,103, 1477075035443, 'System'),
+('1', 'Autor','Autor',144,103, 1477075035443, 'System'),
+('4', 'Embargante','Embargante',144,103, 1477075035443, 'System'),
+('5', 'Excipiente','Excipiente',144,103, 1477075035443, 'System'),
+('6', 'Exequente','Exequente',144,103, 1477075035443, 'System'),
+('7', 'Impetrante','Impetrante',144,103, 1477075035443, 'System'),
+('8', 'Impugnante','Impugnante',144,103, 1477075035443, 'System'),
+('9', 'Interpelante','Interpelante',144,103, 1477075035443, 'System'),
+('10', 'Inventariante','Inventariante',144,103, 1477075035443, 'System'),
+('11', 'Notificante','Notificante',144,103, 1477075035443, 'System'),
+('12', 'Opoente','Opoente',144,103, 1477075035443, 'System'),
+('13', 'Reclamante','Reclamante',144,103, 1477075035443, 'System'),
+('14', 'Reconvinte','Reconvinte',144,103, 1477075035443, 'System'),
+('15', 'Recorrente','Recorrente',144,103, 1477075035443, 'System'),
+('61', 'Requerente','Requerente',144,103, 1477075035443, 'System'),
+('16', 'Sujeito Ativo','Sujeito Ativo',144,103, 1477075035443, 'System'),
+
+('2', 'Conselho Nacional de Justiça','Conselho Nacional de Justiça',145,103, 1477075035443, 'System'),
+('8', 'Justiça dos Estados e do Distrito Federal e Territórios','Justiça dos Estados e do Distrito Federal e Territórios',143,103, 1477075035443, 'System'),
+('5', 'Justiça do Trabalho','Justiça do Trabalho',145,103, 1477075035443, 'System'),
+('6', 'Justiça Eleitoral','Justiça Eleitoral',145,103, 1477075035443, 'System'),
+('4', 'Justiça Federal','Justiça Federal',145,103, 1477075035443, 'System'),
+('7', 'Justiça Militar da União','Justiça Militar da União',145,103, 1477075035443, 'System'),
+('9', 'Justiça Militar Estadual','Justiça Militar Estadual',145,103, 1477075035443, 'System'),
+('3', 'Superior Tribunal de Justiça','Superior Tribunal de Justiça',145,103, 1477075035443, 'System'),
+('1', 'Supremo Tribunal Federal','Supremo Tribunal Federal',145,103, 1477075035443, 'System'),
+
+('PRIMEIRA_INSTANCIA', '1ª Instância','1ª Instância',146,103, 1477075035443, 'System'),
+('SEGUNDA_INSTANCIA', '2ª Instância','2ª Instância',146,103, 1477075035443, 'System'),
+('TERCEIRA_INSTANCIA', '3ª Instância','3ª Instância',146,103, 1477075035443, 'System'),
+('QUARTA_INSTANCIA', '4ª Instância','4ª Instância',146,103, 1477075035443, 'System'),
+
+('1', 'Supremo Tribunal Federal','Supremo Tribunal Federal',147,103, 1477075035443, 'System'),
+('3', 'Superior Tribunal de Justiça','Superior Tribunal de Justiça',147,103, 1477075035443, 'System'),
+('4', 'Justiça Federal','Justiça Federal',147,103, 1477075035443, 'System'),
+('5', 'Justiça do Trabalho','Justiça do Trabalho',147,103, 1477075035443, 'System'),
+('8', 'Justica dos Estados e do Distrito Federal e Territórios','Justica dos Estados e do Distrito Federal e Territórios',147,103, 1477075035443, 'System'),
+
+('1', 'Tribunal de Justiça do Acre','Tribunal de Justiça do Acre',148,103, 1477075035443, 'System'),
+('7', 'Tribunal de Justiça de Alagoas','Tribunal de Justiça de Alagoas',148,103, 1477075035443, 'System'),
+('8', 'Tribunal de Justiça do Amazonas','Tribunal de Justiça do Amazonas',148,103, 1477075035443, 'System'),
+('11', 'Tribunal de Justiça da Bahia','Tribunal de Justiça da Bahia',148,103, 1477075035443, 'System'),
+('16', 'Tribunal de Justiça do Ceará','Tribunal de Justiça do Ceará',148,103, 1477075035443, 'System'),
+('53', 'Tribunal de Justiça do Distrito Federal e dos Territórios - DF','Tribunal de Justiça do Distrito Federal e dos Territórios - DF',148,103, 1477075035443, 'System'),
+('19', 'Tribunal de Justiça do Espírito Santo','Tribunal de Justiça do Espírito Santo',148,103, 1477075035443, 'System'),
+('20', 'Tribunal de Justiça de Goiás','Tribunal de Justiça de Goiás',148,103, 1477075035443, 'System'),
+('22', 'Tribunal de Justiça do Maranhão','Tribunal de Justiça do Maranhão',148,103, 1477075035443, 'System'),
+('29', 'Tribunal de Justiça de Mato Grosso','Tribunal de Justiça de Mato Grosso',148,103, 1477075035443, 'System'),
+('26', 'Tribunal de Justiça de Mato Grosso do Sul','Tribunal de Justiça de Mato Grosso do Sul',148,103, 1477075035443, 'System'),
+('24', 'Tribunal de Justiça de Minas Gerais','Tribunal de Justiça de Minas Gerais',148,103, 1477075035443, 'System'),
+('34', 'Tribunal de Justiça do Paraná','Tribunal de Justiça do Paraná',148,103, 1477075035443, 'System'),
+('51', 'Tribunal de Justiça do Pará - PA','Tribunal de Justiça do Pará - PA',148,103, 1477075035443, 'System'),
+('33', 'Tribunal de Justiça do Piauí','Tribunal de Justiça do Piauí',148,103, 1477075035443, 'System'),
+('40', 'Tribunal de Justiça do Rio Grande do Norte','Tribunal de Justiça do Rio Grande do Norte',148,103, 1477075035443, 'System'),
+('43', 'Tribunal de Justiça de Rio Grande do Sul','Tribunal de Justiça de Rio Grande do Sul',148,103, 1477075035443, 'System'),
+('37', 'Tribunal de Justiça do Rio de Janeiro','Tribunal de Justiça do Rio de Janeiro',148,103, 1477075035443, 'System'),
+('42', 'Tribunal de Justiça de Rondônia','Tribunal de Justiça de Rondônia',148,103, 1477075035443, 'System'),
+('45', 'Tribunal de Justiça de Santa Catarina','Tribunal de Justiça de Santa Catarina',148,103, 1477075035443, 'System'),
+('4', 'Tribunal de Justiça de São Paulo','Tribunal de Justiça de São Paulo',148,103, 1477075035443, 'System'),
+
+('PRIMEIRA_INSTANCIA', '1ª Instância','1ª Instância',149,103, 1477075035443, 'System'),
+('SEGUNDA_INSTANCIA', '2ª Instância','2ª Instância',149,103, 1477075035443, 'System'),
+('TERCEIRA_INSTANCIA', '3ª Instância','3ª Instância',149,103, 1477075035443, 'System'),
+('QUARTA_INSTANCIA', '4ª Instância','4ª Instância',149,103, 1477075035443, 'System'),
+
+('PRIMEIRA_INSTANCIA', '1ª Instância','1ª Instância',150,103, 1477075035443, 'System'),
+('SEGUNDA_INSTANCIA', '2ª Instância','2ª Instância',150,103, 1477075035443, 'System'),
+('TERCEIRA_INSTANCIA', '3ª Instância','3ª Instância',150,103, 1477075035443, 'System'),
+('QUARTA_INSTANCIA', '4ª Instância','4ª Instância',150,103, 1477075035443, 'System'),
+
+('NAO_CAPTURAR', 'Não capturar','Não capturar',151,103, 1477075035443, 'System'),
+('DIARIA', 'Diária','Diária',151,103, 1477075035443, 'System'),
+('SEMANAL', 'Semanal','Semanal',151,103, 1477075035443, 'System'),
+('MENSAL', 'Mensal','Mensal',151,103, 1477075035443, 'System');
+
+
+

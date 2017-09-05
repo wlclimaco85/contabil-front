@@ -175,7 +175,9 @@ var WebDaptiveAppConfig = {
 
         , 'wdApp.apps.notaFiscalEntrada', 'wdApp.apps.notaFiscalEntrada.insert', 'wdApp.apps.notaFiscalEntrada.update', 'wdApp.apps.notaFiscalEntrada.delete',
 		'wdApp.apps.notaFiscalEntrada.upload', 'wdApp.ajaxCall.calcTributos'
-		,'wdApp.ajaxCall.conta','wdApp.ajaxCall.titulo'
+		,'wdApp.ajaxCall.conta','wdApp.ajaxCall.titulo',
+
+		'wdApp.apps.processo.insert','wdApp.apps.processo.update','wdApp.apps.processo.delete'
 
 
 

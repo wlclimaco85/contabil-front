@@ -535,6 +535,53 @@
                         DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
                     ];
 				},
+				processo: function(vm, _html, _actions)
+				{
+					return [
+                        DTColumnBuilder.newColumn(null).withTitle(_html).notSortable()
+                        .renderWith(function(data, type, full, meta)
+						{
+							vm.selected[full.id] = false;
+							return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
+						}).withOption('width', '10px'),
+                        DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
+                        DTColumnBuilder.newColumn('assunto').withTitle('Assunto'),
+						DTColumnBuilder.newColumn('status').withTitle('Situação'),
+						DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
+						DTColumnBuilder.newColumn('responsavel').withTitle('Responsavel'),
+						DTColumnBuilder.newColumn('grupoTrabalho').withTitle('Grupo Trabalho').notVisible(),
+						DTColumnBuilder.newColumn('processo').withTitle('Processo').notVisible(),
+						DTColumnBuilder.newColumn('situacao').withTitle('Situação').notVisible(),
+						DTColumnBuilder.newColumn('instancia').withTitle('Instancia').notVisible(),
+						DTColumnBuilder.newColumn('orgao').withTitle('Orgão').notVisible(),
+						DTColumnBuilder.newColumn('numCnj').withTitle('Numeração Padrão CNJ').notVisible(),
+						DTColumnBuilder.newColumn('numOut').withTitle('Numeração Outro Padrão').notVisible(),
+						DTColumnBuilder.newColumn('ageCapTrib').withTitle('Agendar captura no tribunal').notVisible(),
+						DTColumnBuilder.newColumn('observacao').withTitle('Observação').notVisible(),
+						DTColumnBuilder.newColumn('valor').withTitle('Valor').notVisible(),
+						DTColumnBuilder.newColumn('formaPg').withTitle('Forma de Pagamento').notVisible(),
+						DTColumnBuilder.newColumn('justica').withTitle('Justiça').notVisible(),
+						DTColumnBuilder.newColumn('tribunal').withTitle('Tribunal').notVisible(),
+						DTColumnBuilder.newColumn('instancia2').withTitle('Instancia').notVisible(),
+						DTColumnBuilder.newColumn('localidade').withTitle('Localidade').notVisible(),
+						DTColumnBuilder.newColumn('capPor').withTitle('Capturar Por').notVisible(),
+						DTColumnBuilder.newColumn('numProcesso').withTitle('Numero Processo').notVisible(),
+						DTColumnBuilder.newColumn('capalt').withTitle('Captura automática de andamentos').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('Envolvidos').renderWith(function(data, type, full, meta) {
+							var sText = "";
+							if (data.pessoa != undefined) {
+								for (var x = 0; x < data.pessoa.length; x++) {
+									sText = sText + " " + data.pessoa[x].processo + " " + data.pessoa[x].tipEnvolv + " " + data.pessoa[x].envolvimento + "<br> ";
+								}
+							}
+			
+							return '<span>' + sText + '</span>';
+						}),
+                        DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
+                        DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
+                        DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
+                    ];
+				},
 				pdVendas: function(vm, _html, _actions)
 				{
 					return [
