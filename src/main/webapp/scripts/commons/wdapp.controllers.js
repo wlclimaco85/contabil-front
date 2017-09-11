@@ -110,6 +110,13 @@
 								{
 									localStorageService.set('empresa', res.empresaList[0]);
 									localStorage.setItem("empresa", JSON.stringify(res.empresaList[0]));
+									qat.model.select.util("entidade/api/doisValores/fetchPage", true, new qat.model.doisValoresInquiryRequest(null, 100 / 20, true, JSON.parse(localStorage.getItem("empresa")).id),
+									function(ress){
+										localStorageService.set('doisValores', ress.doisValoresList);
+									});
+
+
+
 									if(res.empresaList[0].primeiroAcesso == 0)
 									{
 											if(res.empresaList[0].tipo == 1)

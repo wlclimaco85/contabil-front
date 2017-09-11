@@ -1,7 +1,7 @@
 ;(function () {
     angular.module('wdApp.apps.processo', ['datatables', 'ngResource', 'datatables.scroller', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
       .controller('ProcessoController', processoController)
-  
+
     function processoController ($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate, Datatablessss, tableOptionsFactory,
       tableColumnsFactory, FiltersFactory, validationFactory,dialogFactory) {
       var vm = this
@@ -11,20 +11,20 @@
       vm.toggleOne = toggleOne
       vm.status = status
       vm.message = ''
-  
+
       vm.dtInstance = {}
       vm.persons = {}
-  
+
       $scope.processo = {
         tipoPessoa: 2
       }
-  
-  
+
+
       function reloadData () {
         var resetPaging = false
         vm.dtInstance.reloadData(callback, resetPaging)
       }
-  
+
       function callback (json) {
         console.log(json)
       }
@@ -32,30 +32,30 @@
         var resetPaging = false
         vm.dtInstance.reloadData(_callback, resetPaging)
       }
-  
+
       $scope.toggle = function () {
         $scope.state = !$scope.state
       }
-  
+
       vm.edit = edit;
       vm.view = view;
       vm.delete = deleteRow;
       vm.dtInstance = {};
       vm.persons = {};
-  
+
       function rCallback (nRow, aData) {
         // console.log('row')
       }
-  
+
       function recompile (row, data, dataIndex) {
         $compile(angular.element(row).contents())($scope)
       }
-  
+
       var createdRow = function (row, data, dataIndex) {
         // Recompiling so we can bind Angular directive to the DT
         $compile(angular.element(row).contents())($scope)
       }
-  
+
       var fnDataSRC = function (json) {
         console.log(json)
         json['recordsTotal'] = json.processoList.length
@@ -64,10 +64,10 @@
         console.log(json)
         return json.processoList
       }
-  
+
       var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
         'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">'
-  
+
       var actionsHtml = function (data, type, full, meta) {
         vm.persons[data.id] = data;
         return '<a href="#/advogado/details/processo" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i></a>&nbsp;' +
@@ -78,7 +78,7 @@
         '   <i class="fa fa-trash-o"></i>' +
         '</button>'
       }
-  
+
       function edit (person) {
         $rootScope.processo = person
         dialogFactory.dialog('views/advogado/dialog/dProcesso.html', 'ProcessoUpdateController', validationFactory.processo())
@@ -88,15 +88,15 @@
         //  Datatablessss.reloadData(vm)
         dialogFactory.dialog('views/advogado/dialog/dProcesso.html', 'ProcessoUpdateController', validationFactory.processo())
       }
-  
+
       function deleteRow (person) {
         $rootScope.processo = person
         dialogFactory.dialog('views/advogado/dialog/dProcesso.html', 'ProcessoDeleteController', validationFactory.processo())
       }
-  
+
       Datatablessss.getTable('/advocacia/api/processo/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile,
         tableOptionsFactory.processo(vm, createdRow, $scope, FiltersFactory.processo(), reloadData), tableColumnsFactory.processo(vm, '', actionsHtml))
-  
+
       function toggleAll (selectAll, selectedItems) {
         for (var id in selectedItems) {
           if (selectedItems.hasOwnProperty(id)) {
@@ -104,9 +104,9 @@
           }
         }
       }
-  
+
       function status () {}
-  
+
       function toggleOne (selectedItems) {
         for (var id in selectedItems) {
           if (selectedItems.hasOwnProperty(id)) {
@@ -118,7 +118,7 @@
         }
         vm.selectAll = true
       }
-  
+
       function toggle () {
         $scope.state = !$scope.state
       }
@@ -128,8 +128,9 @@
     angular.module('wdApp.apps.processo.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
       .controller('ProcessoInsertController', function ($rootScope, $scope, fModels, SysMgmtData, toastr, $element, close,  doisValorFactory,validationFactory) {
         var vm = this
-  
-      
+
+        doisValorFactory.processo($scope);
+
       })
   })()
   ;(function () {
@@ -137,15 +138,15 @@
       .controller('ProcessoUpdateController', function ($rootScope, $scope, fModels, SysMgmtData, fPessoa, toastr, $element, close,validationFactory) {
         var vm = this
         $scope.processo = {}
-  
+
         $scope.processo = $rootScope.processo;
         $scope.enderecos =  $scope.processo.enderecos;
         $scope.telefones = $scope.processo.telefones;
         $scope.emails = $scope.processo.emails;
         $scope.documentos = $scope.processo.documentos;
-  
+
         fPessoa.fnOpenView(vm,$scope);
-  
+
        // ===========================================
         var fnCallBack = function (res) {
           if (res.operationSuccess == true) {
@@ -157,7 +158,7 @@
             })
           }
         }
-  
+
         $scope.saveProcesso = function (bValidate,b) {
           if(bValidate)
               fPessoa.fnMontaObjeto($scope.processo, $scope.enderecos, $scope.emails, $scope.telefones, 'UPDATE', 'pessoa/api/processo/update', fnCallBack)
@@ -182,14 +183,14 @@
     angular.module('wdApp.apps.processo.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
       .controller('ProcessoViewController', function ($rootScope, $scope, fModels, SysMgmtData, fPessoa, $location, toastr) {
         var vm = this
-  
+
         var searchObject = $location.search();
               var _emprId = null;
               if ((localStorage.getItem('empresa') !== undefined) && (localStorage.getItem('empresa') !== null))
               {
                   _emprId = JSON.parse(localStorage.getItem('empresa')).id;
         }
-  
+
         SysMgmtData.processPostPageData("main/api/request",
               {
                   url: "pessoa/api/processo/fetchPage",
@@ -200,12 +201,12 @@
           $scope.processo = {}
           $scope.processo = res.processoList[0];
           console.log($scope.processo);
-  
+
           if($scope.processo.emails.length === 0 )
           {
             $scope.processo.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
           }
-  
+
           $scope.status = $scope.processo.statusList[$scope.processo.statusList.length - 1];
           console.log($scope.processo);
         });
@@ -223,15 +224,15 @@
           }
           return sReturn;
         };
-  
-  
-  
+
+
+
         $scope.insertFormTelefone = function(email) {
           $scope.processo.telefones.push({numero : "",telefoneTypeEnum : "EMPRESA"});
         };
-  
+
         $scope.deleteFormTelefone = function(email) {
-  
+
           for(var x=0;x < $scope.processo.telefones.length;x++)
           {
             if($scope.processo.telefones[x].id == email.id || $scope.processo.telefones[x].numero == email.numero)
@@ -241,13 +242,13 @@
           }
           $scope.updateProcesso();
         };
-  
+
         $scope.insertFormEmail = function(email) {
           $scope.processo.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
         };
-  
+
         $scope.deleteFormEmailsdddd = function(email) {
-  
+
           for(var x=0;x < $scope.processo.emails.length;x++)
           {
             if($scope.processo.emails[x].id == email.id || $scope.processo.emails[x].email == email.email)
@@ -257,7 +258,7 @@
           }
           $scope.updateProcesso();
         };
-  
+
         $scope.emailType = [
           {nome : '1',label : 'Principal'},
           {nome : '2',label : 'NFe'},
@@ -265,7 +266,7 @@
           {nome : '4',label : 'Vendas'},
           {nome : '5',label : 'Outros'}
         ];
-  
+
         $scope.statusType = [
           {nome : 'ATIVO',label : 'Ativo'},
           {nome : 'INATIVO',label : 'Inativo'},
@@ -274,7 +275,7 @@
           {nome : 'NEGATIVADO',label : 'Negativado'},
           {nome : 'ANALISANDO',label : 'Analisando'}
         ];
-  
+
         $scope.telefoneType = [
           {nome : '1',label : 'Particular'},
           {nome : '2',label : 'Vendas'},
@@ -287,8 +288,8 @@
           {nome : '9',label : 'Empresa'},
           {nome : '10',label : 'Celular'}
         ];
-  
-  
+
+
         $scope.showEmailType = function(value) {
           var sReturn = 'Vazio';
           if($scope.emailType)
@@ -303,7 +304,7 @@
           }
           return sReturn;
         };
-  
+
         $scope.showTelefoneType = function(value) {
           console.log(value)
           var sReturn = 'Vazio';
@@ -319,11 +320,11 @@
           }
           return sReturn;
         };
-  
+
         $scope.showStatusType = function(value) {
-  
+
           var sReturn = 'Vazio';
-  
+
           if($scope.statusType)
           {
                 for(var x = 0;x < $scope.statusType.length;x++)
@@ -334,10 +335,10 @@
                     }
                 }
           }
-  
+
           return sReturn;
         };
-  
+
         var fnCallBack = function (res) {
           if (res.operationSuccess == true) {
             for (var a = 0; a < res.processoList.length;a++)
@@ -351,18 +352,18 @@
                   }
                   return;
                 }
-  
+
             }
-  
+
             toastr.success('Deu Certo seu tanga.', 'Sucess')
           }
         }
-  
+
         $scope.formatterDate = function (value) {
           return moment(value).format('DD/MM/YYYY H:MM')
         }
         $scope.updateStatus = function () {
-  
+
             var oObject = {
               dataStatus: (new Date()).getTime(),
               status : $scope.status.status,
@@ -371,7 +372,7 @@
               parentId : $scope.processo.id,
               note: $scope.status.note
             }
-  
+
             SysMgmtData.processPostPageData("main/api/request", {
                 url: "entidade/api/status/insert",
                 token: $rootScope.authToken,
@@ -388,19 +389,19 @@
                     $scope.processo = {}
                     $scope.processo = res.processoList[0];
                     console.log($scope.processo);
-  
+
                     if($scope.processo.emails.length === 0 )
                     {
                       $scope.processo.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
                     }
-  
+
                     $scope.status = $scope.processo.statusList[$scope.processo.statusList.length - 1];
                   });
                   toastr.success('Deu Certo seu tanga.', 'Sucess')
                 }
             });
         }
-  
+
         $scope.insertNote = function () {
   //debugger
             var oObject = {
@@ -413,7 +414,7 @@
               createUser : $rootScope.user.user,
               createDateUTC : (new Date()).getTime()
             }
-  
+
             SysMgmtData.processPostPageData("main/api/request", {
                 url: "entidade/api/note/insert",
                 token: $rootScope.authToken,
@@ -430,12 +431,12 @@
                     $scope.processo = {}
                     $scope.processo = res.processoList[0];
                     console.log($scope.processo);
-  
+
                     if($scope.processo.emails.length === 0 )
                     {
                       $scope.processo.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
                     }
-  
+
                     $scope.status = $scope.processo.statusList[$scope.processo.statusList.length - 1];
                   });
                   toastr.success('Deu Certo seu tanga.', 'Sucess')
@@ -443,7 +444,7 @@
             });
         }
         $scope.updateProcesso = function () {
-  
+
           fPessoa.fnMontaObjeto($scope.processo, $scope.processo.enderecos, $scope.processo.emails, $scope.processo.telefones, 'UPDATE', 'pessoa/api/processo/update', fnCallBack);
         }
       })
@@ -454,7 +455,7 @@
         var vm = this
         $scope.visibled = false
         //   $scope.processo = []
-  
+
         $scope.countrySelected = function (selected) {
           // debugger
           if (selected) {
@@ -464,7 +465,7 @@
             console.log('cleared')
           }
         }
-  
+
         SysMgmtData.processPostPageData('main/api/request',
           {
             url: 'pessoa/api/processo/fetchPage',

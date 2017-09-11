@@ -155,7 +155,7 @@ var WebDaptiveAppConfig = {
 
         , 'wdApp.apps.select.cnae', 'wdApp.apps.servicoSelect', 'wdApp.apps.plano.teste'
 
-        , 'wdApp.apps.conta.select'
+        , 'wdApp.apps.conta.select','wdApp.ajaxCall.processo'
 
         , 'wdApp.apps.select.formaPg', 'wdApp.apps.uniMed.select', 'wdApp.apps.categoria.select', 'wdApp.apps.marca.select'
 
