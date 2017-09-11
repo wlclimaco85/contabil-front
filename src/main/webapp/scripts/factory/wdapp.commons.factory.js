@@ -22,8 +22,8 @@
             icms00: function(oObject) {
                 var retorno = '<table class="table"><thead></thead><tbody>';
                 retorno = retorno + "<tr><td>CST</td><td>" + (oObject.situacaoTributaria ? oObject.situacaoTributaria.descricao : "") + "</td></tr>"
-                retorno = retorno + "<tr><td>Modalidade BC ICMS</td><td>" + (oObject.modalidadeBCICMS ? oObject.modalidadeBCICMS.descricao : "") + "</td></tr>"
-                retorno = retorno + "<tr><td>Aliquota</td><td>" + (oObject ? oObject.percentualAliquota : "") + "</td></tr>"
+                retorno = oObject.modalidadeBCICMS ?  retorno + "<tr><td>Modalidade BC ICMS</td><td>" + (oObject.modalidadeBCICMS ? oObject.modalidadeBCICMS.descricao : "") + "</td></tr>" : "";
+                retorno = oObject.percentualAliquota ? retorno + "<tr><td>Aliquota</td><td>" + (oObject ? oObject.percentualAliquota : "") + "</td></tr>" : ""
                 return retorno + '</tbody></table>';
             },
             icms10: function(oObject) {
@@ -295,6 +295,7 @@
                 retorno = retorno + "<tr><td>Preço unit. Pauta ST</td><td>" + oObject.valorICMSST + "</td></tr>"
                 return retorno + '</tbody></table>';
             },
+
             tributados: function(oObject) {
                 var retorno = '<table class="table"><thead></thead><tbody>';
                 retorno = retorno + "<tr><td>CST</td><td>" + (oObject.situacaoTributaria ? oObject.situacaoTributaria.descricao : "") + "</td></tr>"
