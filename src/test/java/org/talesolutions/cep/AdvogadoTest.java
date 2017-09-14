@@ -176,7 +176,7 @@ public class AdvogadoTest extends NFeConfig {
 		 		//	System.out.println(estados.getCodigo());
 			 		System.out.println(retorno.getStatus());
 			 		System.out.println(retorno.getMotivo());
-			 		
+
 	//}
 		 		//}
 
@@ -509,7 +509,7 @@ public class AdvogadoTest extends NFeConfig {
 		// ================================================================
 		System.out.println("==================================INSERT==============================================");
 		jsonInString = mapper
-				.writeValueAsString(Objects.insertProcesso(id, TabelaEnum.PROCESSO, PersistenceActionEnum.INSERT));
+				.writeValueAsString(Objects.insertProcesso(null, TabelaEnum.PROCESSO, PersistenceActionEnum.INSERT));
 		System.out.println(jsonInString);
 		String requestJson = "{\"processo\":" + jsonInString + "}";
 		entitys = new HttpEntity<String>(requestJson, headers);
