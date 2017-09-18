@@ -703,7 +703,7 @@ public class Objects {
 		processo.setOrgao("orgao");
 		processo.setNpadraocnj("npadraocnj");
 		processo.setNpadrao("npadrao");
-		processo.setAgendarCap(1);
+		processo.setAgendarCap(insertDoisValor(id, tabela, action));
 		processo.setDistribuido("distribuido");
 		processo.setValorAcao(new Float(1.99));
 		processo.setObservacaoProc("observacaoProc");
@@ -715,10 +715,10 @@ public class Objects {
 		processo.setNumeroprocesso("1001");
 		processo.setCapautomatica(insertDoisValor(id, tabela, action));
 		processo.setPasta("1001");
-		processo.setAdvogadoList(new ArrayList<Advogado>());
-		processo.getAdvogadoList().add(insertAdvogado(id, TabelaEnum.PROCESSO, action));
-		processo.setAudienciaList(new ArrayList<Audiencia>());
-		processo.getAudienciaList().add(insertAudiencia(id, TabelaEnum.PROCESSO, action));
+//		processo.setAdvogadoList(new ArrayList<Advogado>());
+//		processo.getAdvogadoList().add(insertAdvogado(id, TabelaEnum.PROCESSO, action));
+//		processo.setAudienciaList(new ArrayList<Audiencia>());
+//		processo.getAudienciaList().add(insertAudiencia(id, TabelaEnum.PROCESSO, action));
 		processo.setTabelaEnum(tabela);
 		processo.setParentId(id);
 		processo.setEmprId(EMPID);

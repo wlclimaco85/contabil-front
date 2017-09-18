@@ -1,25 +1,42 @@
-
 <div class="container1" ng-app ng-init="tabs=3">
     <ul class="tabs-nav">
-        <li><a ng-click="tabs=3" ng-class="{'active' : tabs==3}">Principais</a></li>
-        <li><a ng-click="tabs=4" ng-class="{'active' : tabs==4}">Processo</a></li>
-        <li><a ng-click="tabs=5" ng-class="{'active' : tabs==5}">Outras</a></li>
+        <li><a ng-click="tabs=3" ng-class="{'active' : tabs==3}">PRINCIPAL</a></li>
+        <li><a ng-click="tabs=4" ng-class="{'active' : tabs==4}">DADOS DO PROCESSO</a></li>
+        <li><a ng-click="tabs=5" ng-class="{'active' : tabs==5}">DADOS CAPTURA</a></li>
+        <li><a ng-click="tabs=6" ng-class="{'active' : tabs==6}">MONITORAMENTO DE PROCESSO</a></li>
+        <li><a ng-click="tabs=7" ng-class="{'active' : tabs==7}">Outras</a></li>
     </ul>
 
     <div class="tabs-container1">
         <div class="tab-content1" ng-show="tabs == 3">
-            <div class="row">
-                <div class="form-group col-sm-6">
+            <div class="col-sm-12">
+                <div class="col-sm-2">
+                    <label for="exampleInputEmail1">N° Pasta</label>
+                    <input type="text" ng-model="processo.pasta" name="pasta" class="form-control" placeholder="Nº Pasta">
+                </div>
+                <div class="col-sm-6">
                     <label for="exampleInputEmail1">Assunto</label>
-                    <input type="text" ng-model="cfop.cfop" name="cfop" class="form-control" placeholder="CFOP">
+                    <input type="text" ng-model="processo.assunto" name="assunto" class="form-control" placeholder="Assunto">
                 </div>
 
-                <div class="form-group col-sm-6">
-                    <label for="exampleInputPassword1">Status</label>
+                <div class="col-sm-2">
+                    <label for="exampleInputtext1">Natureza</label>
                     <div class="row">
-                        <ui-select ng-model="tributacao.imposto.icms.sitTributaria" theme="bootstrap">
+                        <ui-select ng-model="processo.natureza" theme="bootstrap">
                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                            <ui-select-choices repeat="item in status | filter: $select.search">
+                            <ui-select-choices repeat="item in natureza | filter: $select.search">
+                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <label for="exampleInputtext1">Status</label>
+                    <div class="row">
+                        <ui-select ng-model="processo.statusProc" theme="bootstrap">
+                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                            <ui-select-choices repeat="item in statusProc | filter: $select.search">
                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
                             </ui-select-choices>
@@ -27,46 +44,75 @@
                     </div>
                 </div>
             </div>
-            <div class="row col-sm-12">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Descrição</label>
-                    <input type="text" class="form-control" ng-model="cfop.descricao" name="descricao" placeholder="Descrição">
-                </div>
-            </div>
-            <div class="row col-sm-12">
-                <div class="form-group col-sm-4">
-                    <label for="exampleInputEmail1">Responsáveis</label>
-                    <input type="email" id='email' class="form-control" ng-model="cfop.icms" name="email" placeholder="Responsáveis">
-                </div>
-                <div class="form-group col-sm-4">
-                    <label for="exampleInputPassword1">Grupos de trabalho</label>
-                    <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="Grupos de trabalho">
-                </div>
-            </div>
+            <div class="col-sm-12">
+                <div class="col-sm-9">
+                    <div class="col-sm-12">
 
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Descrição</label>
+                            <textarea class="form-control" rows="7" ng-model="processo.descricao" id="descricao"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="col-sm-12">
+                        <label for="exampleInputEmail1">Senha</label>
+                        <input type="text" class="form-control" ng-model="processo.senha" name="descricao" placeholder="Descrição">
+                    </div>
+                    <div class="col-sm-12">
+                        <label for="exampleInputtext1">Grupos de trabalho</label>
+                        <div class="row">
+                            <ui-select ng-model="processo.grupoTrabalho" theme="bootstrap">
+                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                <ui-select-choices repeat="item in grupoTrabalho | filter: $select.search">
+                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label for="exampleInputtext1">Limitar Usuarios</label>
+                        <div class="row">
+                            <ui-select ng-model="processo.usuariosRestricaoProc" theme="bootstrap">
+                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                <ui-select-choices repeat="item in usuarios | filter: $select.search">
+                                    <div ng-bind-html="item.login | highlight: $select.search"></div>
+
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
             <div class="row " style="margin-top : 10px"></div>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Envolvidos</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="row socios">
-                        <div class="col-sm-4">
-                            <label for="exampleInputPassword1">Pessoa</label>
-                            <div class="row ">
-                                <select name="book[0].produto" class="col-sm-12">
-                            <option value="0">1010 - Rick Grimes</option>
-                            <option value="1">1011 - Daryl Dixon</option>
-                            <option value="1">1012 - Carl Grimes</option>
-                            <option value="1">1013 - Glenn Rhee</option>
-                            <option value="2">Cadastrar novo Cliente</option>
-                        </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                                <label for="exampleInputPassword1">Tipo Envolvimento</label>
+                    <div ng-repeat="envolvList in processo.envolvList">
+                        <div class="col-sm-12">
+                            <div class="col-sm-5">
+                                <label for="exampleInputtext1">Pessoa</label>
                                 <div class="row">
-                                    <ui-select ng-model="tributacao.imposto.icms.sitTributaria" theme="bootstrap">
+                                    <ui-select ng-model="envolvList.cliente" theme="bootstrap">
+                                        <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                        <ui-select-choices repeat="item in cliente | filter: $select.search">
+                                            <div ng-bind-html="item.nome | highlight: $select.search"></div>
+
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <label for="exampleInputtext1">Tipo Envolvimento</label>
+                                <div class="row">
+                                    <ui-select ng-model="envolvList.tipoEnvolvido" theme="bootstrap">
                                         <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                         <ui-select-choices repeat="item in tipoEnvolv | filter: $select.search">
                                             <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -75,11 +121,10 @@
                                     </ui-select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-2">
-                                <label for="exampleInputPassword1">Envolvimento</label>
+                            <div class="col-sm-2">
+                                <label for="exampleInputtext1">Envolvimento</label>
                                 <div class="row">
-                                    <ui-select ng-model="tributacao.imposto.icms.sitTributaria" theme="bootstrap">
+                                    <ui-select ng-model="envolvList.envolvimento" theme="bootstrap">
                                         <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                         <ui-select-choices repeat="item in envolv | filter: $select.search">
                                             <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -87,16 +132,43 @@
                                         </ui-select-choices>
                                     </ui-select>
                                 </div>
-                        </div>
-                        <div class="col-sm-2" style="margin-top:18px">
-                            <div class="checkbox">
-                                <label>
-                         <input type="checkbox" name="receiver" class="check-socio" value="1" /> Cliente
-                     </label>
+                            </div>
+                            <div class="col-sm-1" style="margin-top:18px">
+                                <label for="exampleInputtext1">Cliente</label>
+                                <div class="row">
+                                    <toggle ng-model="envolvList.bCliente" ng-init="envolvList. = false" style="android" on="Sim" off="Não" onstyle="btn-success"
+                                        offstyle="btn-danger" ng-true-value="'true'" ng-false-value="'false'"></toggle>
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                                <button type="button" class="btn btn-default addButton" style="margin-top:18px"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
-                        <div class="col-xs-1" style="margin-top:18px">
-                            <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row " style="margin-top : 10px"></div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Outras Informações</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <div class="col-sm-12">
+                            <label for="exampleInputtext1">FUNDAMENTAÇÃO JURÍDICA</label>
+                            <textarea class="form-control" rows="5" ng-model="processo.fundamentacaoJuridica" id="observacao"></textarea>
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="exampleInputtext1">FATOS</label>
+                            <textarea class="form-control" rows="5" ng-model="processo.fatos" id="observacao"></textarea>
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="exampleInputtext1">PRETENSÕES DO CLIENTE</label>
+                            <textarea class="form-control" rows="5" ng-model="processo.pretensoesCliente" id="observacao"></textarea>
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="exampleInputtext1">ESTRATÉGIA</label>
+                            <textarea class="form-control" rows="5" ng-model="processo.estrategia" id="observacao"></textarea>
                         </div>
                     </div>
                 </div>
@@ -114,28 +186,30 @@
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in collapseFour">
                         <div class="panel-body">
-                            <div class="row">
+                            <div class="col-sm-12">
                                 <div class="form-group col-sm-4">
-                                    <label for="exampleInputPassword1">Processo</label>
-                                    <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="0.00">
+                                    <label for="exampleInputtext1">Processo</label>
+                                    <div class="row">
+                                        <toggle ng-model="processo.processo" ng-init="processo.processo = false" style="android" on="Judicial" off="Extrajudial"
+                                            onstyle="btn-success" offstyle="btn-danger" ng-true-value="'true'" ng-false-value="'false'"></toggle>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group col-sm-4">
-                                <label for="exampleInputEmail1">Situação</label>
-                                <div class="row">
-                                        <ui-select ng-model="tributacao.imposto.icms.sitTributaria" theme="bootstrap">
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail1">Justiça</label>
+                                    <div class="row">
+                                        <ui-select ng-model="processo.justica" theme="bootstrap">
                                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                            <ui-select-choices repeat="item in situacao | filter: $select.search">
+                                            <ui-select-choices repeat="item in justica | filter: $select.search">
                                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
                                             </ui-select-choices>
                                         </ui-select>
                                     </div>
-                            </div>
-                            <div class="form-group col-sm-4">
-                                <label for="exampleInputEmail1">Instância</label>
-                                <div class="row">
-                                        <ui-select ng-model="tributacao.imposto.icms.sitTributaria" theme="bootstrap">
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail1">Instáncia</label>
+                                    <div class="row">
+                                        <ui-select ng-model="processo.instancia" theme="bootstrap">
                                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                             <ui-select-choices repeat="item in instancia | filter: $select.search">
                                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -143,138 +217,70 @@
                                             </ui-select-choices>
                                         </ui-select>
                                     </div>
-                            </div>
-                            <div class="form-group col-sm-4">
-                                <label for="exampleInputPassword1">Órgão</label>
-                                <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="0.00">
-                            </div>
-                            <div class="form-group col-sm-4">
-                                <label for="exampleInputPassword1">Numeração Padrão CNJ</label>
-                                <input type="password" class="form-control" ng-model="cfop.classFiscal" name="password" placeholder="0.00">
-                            </div>
-                            <div class="form-group col-sm-4">
-                                <label for="exampleInputPassword1">Numeração Outro Padrão</label>
-                                <input type="password" class="form-control" ng-model="cfop.classFiscal" name="password" placeholder="0.00">
-                            </div>
-                            <div class="col-sm-3" style="margin-top:18px">
-                                <div class="checkbox">
-                                    <label>
-                 <input type="checkbox" name="receiver" class="check-socio" value="1" /> Agendar captura no tribunal
-             </label>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row col-sm-12">
-                    <div class="form-group col-sm-4">
-                        <label for="exampleInputPassword1">Distribuído</label>
-                        <input type="password" class="form-control" ng-model="cfop.icmsReduzido" name="password" placeholder="0.00">
-                    </div>
-                    <div class="form-group col-sm-4">
-                        <label for="exampleInputPassword1">Valor da ação</label>
-                        <input type="password" class="form-control" ng-model="cfop.classFiscal" name="password" placeholder="0.00">
-                    </div>
-                </div>
-                <div class="row col-sm-12">
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Observação</label>
-                        <input type="password" class="form-control" ng-model="cfop.observacao" name="password" placeholder="Observação">
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel-group" id="accordion">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
-                            PARÂMETROS DA CAPTURA
-                            </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                        </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse in collapseFour">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="form-group col-sm-4">
-                                    <label for="exampleInputEmail1">Justiça</label>
+                            <div class="col-sm-12">
+                                <div class="form-group col-sm-6">
+                                    <label for="exampleInputEmail1">Órgão</label>
                                     <div class="row">
-                                            <ui-select ng-model="tributacao.imposto.icms.sitTributaria" theme="bootstrap">
-                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                                <ui-select-choices repeat="item in justica | filter: $select.search">
-                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                        <ui-select ng-model="processo.orgao" theme="bootstrap">
+                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                            <ui-select-choices repeat="item in orgao | filter: $select.search">
+                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
-                                                </ui-select-choices>
-                                            </ui-select>
-                                        </div>
-                                </div>
-                                <div class="form-group col-sm-4">
-                                    <label for="exampleInputEmail1">Tribunal</label>
-                                    <div class="row">
-                                            <ui-select ng-model="tributacao.imposto.icms.sitTributaria" theme="bootstrap">
-                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                                <ui-select-choices repeat="item in tribunal | filter: $select.search">
-                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-
-                                                </ui-select-choices>
-                                            </ui-select>
-                                        </div>
-                                </div>
-                                <div class="form-group col-sm-4">
-                                    <label for="exampleInputEmail1">Instância</label>
-                                    <div class="row">
-                                            <ui-select ng-model="tributacao.imposto.icms.sitTributaria" theme="bootstrap">
-                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                                <ui-select-choices repeat="item in instancia | filter: $select.search">
-                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-
-                                                </ui-select-choices>
-                                            </ui-select>
-                                        </div>
-                                </div>
-                                <div class="form-group col-sm-4">
-                                    <label for="exampleInputEmail1">Localidade</label>
-                                    <div class="row">
-                                            <ui-select ng-model="tributacao.imposto.icms.sitTributaria" theme="bootstrap">
-                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                                <ui-select-choices repeat="item in localidade | filter: $select.search">
-                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-
-                                                </ui-select-choices>
-                                            </ui-select>
-                                        </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-sm-4">
-                                    <label for="exampleInputEmail1">Capturar por</label>
-                                    <div class="row">
-                                            <ui-select ng-model="tributacao.imposto.icms.sitTributaria" theme="bootstrap">
-                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                                <ui-select-choices repeat="item in capiturPor | filter: $select.search">
-                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-
-                                                </ui-select-choices>
-                                            </ui-select>
-                                        </div>
-                                </div>
-                                <div class="row col-sm-4">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Número do Processo</label>
-                                        <input type="password" class="form-control" ng-model="cfop.observacao" name="password" placeholder="Número do Processo">
+                                            </ui-select-choices>
+                                        </ui-select>
                                     </div>
                                 </div>
-                                <div class="form-group col-sm-4">
-                                    <label for="exampleInputEmail1">Captura automática de andamentos</label>
+                                <div class="form-group col-sm-6">
+                                    <label for="exampleInputEmail1">Situação</label>
                                     <div class="row">
-                                            <ui-select ng-model="tributacao.imposto.icms.sitTributaria" theme="bootstrap">
-                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                                <ui-select-choices repeat="item in capiturAut | filter: $select.search">
-                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                        <ui-select ng-model="processo.situacao" theme="bootstrap">
+                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                            <ui-select-choices repeat="item in situacao | filter: $select.search">
+                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
-                                                </ui-select-choices>
-                                            </ui-select>
-                                        </div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputtext1">Numeração Padrão CNJ</label>
+                                    <input type="text" class="form-control" ng-model="processo.npadraocnj" name="text" placeholder="0.00">
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputtext1">Numeração Outro Padrão</label>
+                                    <input type="text" class="form-control" ng-model="processo.npadrao" name="text" placeholder="0.00">
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputtext1">Agendar Captura</label>
+                                    <div class="row">
+                                        <toggle ng-model="processo.agendarCap" ng-init="processo.agendarCap = false" style="android" on="Sim" off="Não" onstyle="btn-success"
+                                            offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputtext1">Distribuido</label>
+                                    <input type="text" class="form-control" ng-model="processo.distribuido" name="text" placeholder="0.00">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputtext1">Valor da ação</label>
+                                    <input type="text" class="form-control" ng-model="processo.valorAcao" name="text" placeholder="0.00">
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputtext1">Valor provisionado</label>
+                                    <input type="text" class="form-control" ng-model="processo.valorProvisionado" name="text" placeholder="0.00">
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputtext1">Segredo Justiça</label>
+                                    <div class="row">
+                                        <toggle ng-model="processo.segJustica" ng-init="processo.segJustica = false" style="android" on="Sim" off="Não" onstyle="btn-success"
+                                            offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -283,6 +289,125 @@
             </div>
         </div>
         <div class="tab-content1" ng-show="tabs == 5">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
+                            PARÁMETROS DA CAPTURA
+                            </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in collapseFour">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail1">Justiça</label>
+                                    <div class="row">
+                                        <ui-select ng-model="processo.justica" theme="bootstrap">
+                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                            <ui-select-choices repeat="item in justica | filter: $select.search">
+                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail1">Tribunal</label>
+                                    <div class="row">
+                                        <ui-select ng-model="processo.tribunal" theme="bootstrap">
+                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                            <ui-select-choices repeat="item in tribunal | filter: $select.search">
+                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail1">Instáncia</label>
+                                    <div class="row">
+                                        <ui-select ng-model="processo.instancia1" theme="bootstrap">
+                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                            <ui-select-choices repeat="item in instancia | filter: $select.search">
+                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail1">Localidade</label>
+                                    <div class="row">
+                                        <ui-select ng-model="processo.localidade" theme="bootstrap">
+                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                            <ui-select-choices repeat="item in localidade | filter: $select.search">
+                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail1">Capturar por</label>
+                                    <div class="row">
+                                        <ui-select ng-model="processo.capturpor" theme="bootstrap">
+                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                            <ui-select-choices repeat="item in capiturPor | filter: $select.search">
+                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                                <div class="row col-sm-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputtext1">Número do Processo</label>
+                                        <input type="text" class="form-control" ng-model="processo.numeroprocesso" name="text" placeholder="Número do Processo">
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputtext1">Captura automática de andamentos</label>
+                                    <div class="row">
+                                        <toggle ng-model="processo.capautomatica" ng-init="processo.capautomatica = false" style="android" on="Sim" off="Não" onstyle="btn-success"
+                                            offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content1" ng-show="tabs == 6">
+            <div class="col-sm-12">
+                <div class="col-sm-12">
+                    <label for="exampleInputtext1">Monitorar</label>
+                    <div class="row">
+                        <toggle ng-model="processo.agendarCap" ng-init="processo.agendarCap = false" style="android" on="Sim" off="Não" onstyle="btn-success"
+                            offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <label for="exampleInputtext1">Enviar Movimentação EMAIL/SMS Cliente</label>
+                    <div class="row">
+                        <toggle ng-model="processo.agendarCap" ng-init="processo.agendarCap = false" style="android" on="Sim" off="Não" onstyle="btn-success"
+                            offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <label for="exampleInputtext1">Sim, desejo receber todos as movimentações automáticos por e-mail.</label>
+                    <div class="row">
+                        <toggle ng-model="processo.agendarCap" ng-init="processo.agendarCap = false" style="android" on="Sim" off="Não" onstyle="btn-success"
+                            offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content1" ng-show="tabs == 7">
             <div ng-include="'views/produto/apps/produtoOutros.html'"></div>
         </div>
     </div>
