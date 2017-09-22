@@ -126,12 +126,14 @@
   })()
   ;(function () {
     angular.module('wdApp.apps.processo.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-      .controller('ProcessoInsertController', function ($rootScope, $scope, fModels, SysMgmtData, toastr, $element, close,  doisValorFactory,validationFactory) {
+      .controller('ProcessoInsertController', function ($rootScope, $scope, fModels, SysMgmtData, toastr, $element, close,fProcesso) {
         var vm = this
         $scope.processo = {};
         $scope.processo.envolvList = [];
         $scope.processo.envolvList.push({});
-        doisValorFactory.processo($scope);
+
+        fProcesso.fnOpenView(vm, $scope);
+
 
       })
   })()

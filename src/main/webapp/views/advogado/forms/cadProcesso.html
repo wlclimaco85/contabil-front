@@ -63,7 +63,7 @@
                         <div class="row">
                             <ui-select class="wdapp-ui-select" ng-model="processo.grupoTrabalho" theme="bootstrap">
                                 <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                <ui-select-choices repeat="item in grupoTrabalho | filter: $select.search">
+                                <ui-select-choices repeat="item in grupoTrabalhoList | filter: $select.search">
                                     <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
                                 </ui-select-choices>
@@ -75,9 +75,9 @@
                         <div class="row">
                             <ui-select class="wdapp-ui-select" ng-model="processo.usuariosRestricaoProc" theme="bootstrap">
                                 <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                <ui-select-choices repeat="item in usuarios | filter: $select.search">
-                                    <div ng-bind-html="item.login | highlight: $select.search"></div>
-
+                                <ui-select-choices repeat="item in usuarioList | filter: $select.search">
+                                    <div ng-bind-html="item.email | highlight: $select.search"></div>
+                                    <div ng-bind-html="item.nome | highlight: $select.search"></div>
                                 </ui-select-choices>
                             </ui-select>
                         </div>
@@ -98,7 +98,7 @@
                                 <div class="row">
                                     <ui-select ng-model="envolvList.cliente" theme="bootstrap">
                                         <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                        <ui-select-choices repeat="item in cliente | filter: $select.search">
+                                        <ui-select-choices repeat="item in clienteList | filter: $select.search">
                                             <div ng-bind-html="item.nome | highlight: $select.search"></div>
 
                                         </ui-select-choices>
@@ -144,6 +144,29 @@
                 </div>
             </div>
         </div>
+
+        <div class="row " style="margin-top : 10px"></div>
+        <hr>
+        <a href="javascript:void(0)" ng-model="collapseds" ng-click="collapseds=!collapseds">Adicionar <strong>Advogados</strong></a>
+        <div class="row " style="margin-top : 10px"></div>
+        <div ng-show="collapseds">
+            <div ng-repeat="advogados in processo.advogados">
+                <div class="col-sm-12">
+                    <label for="exampleInputtext1">Advogado</label>
+                    <div class="row">
+                        <ui-select ng-model="envolvList.cliente" theme="bootstrap">
+                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                            <ui-select-choices repeat="item in advogadoList | filter: $select.search">
+                                <div ng-bind-html="item.nome | highlight: $select.search"></div>
+
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+
             <div class="row " style="margin-top : 10px"></div>
             <hr>
             <a href="javascript:void(0)" ng-model="collapsed" ng-click="collapsed=!collapsed">Outras <strong>Informações</strong></a>

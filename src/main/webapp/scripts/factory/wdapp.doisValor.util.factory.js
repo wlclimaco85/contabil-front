@@ -114,6 +114,7 @@
         scope.localidade = []
         scope.capiturPor = []
         scope.capiturAut = []
+        scope.natureza = []
 
         var planos = ''
         //  //debugger
@@ -153,6 +154,9 @@
                 break
               case 'CAPTURA AUTOMATICA':
                 scope.capiturAut.push(planos)
+                break
+              case 'NATUREZA':
+                scope.natureza.push(planos)
                 break
 
             }
