@@ -697,7 +697,6 @@ public class Objects {
 		processo.setDescricaoProc("Descricao");;
 		processo.setEnvolvList(new ArrayList<>());
 		processo.getEnvolvList().add(insertEnvolvidos(id, tabela, action));
-		processo.setProcesso("processo");
 		processo.setSituacao(insertDoisValor(id, tabela, action));
 		processo.setInstancia(insertDoisValor(id, tabela, action));
 		processo.setOrgao("orgao");

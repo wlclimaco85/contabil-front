@@ -9,10 +9,11 @@
 
     <div class="tabs-container1">
         <div class="tab-content1" ng-show="tabs == 3">
+
             <div class="col-sm-12">
                 <div class="col-sm-2">
                     <label for="exampleInputEmail1">N° Pasta</label>
-                    <input type="text" ng-model="processo.pasta" name="pasta" class="form-control" placeholder="Nº Pasta">
+                    <input type="text" ng-model="processo.pasta" name="pasta" class="form-control" placeholder="N° Pasta">
                 </div>
                 <div class="col-sm-6">
                     <label for="exampleInputEmail1">Assunto</label>
@@ -22,7 +23,7 @@
                 <div class="col-sm-2">
                     <label for="exampleInputtext1">Natureza</label>
                     <div class="row">
-                        <ui-select ng-model="processo.natureza" theme="bootstrap">
+                        <ui-select class="wdapp-ui-select" ng-model="processo.natureza" theme="bootstrap">
                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                             <ui-select-choices repeat="item in natureza | filter: $select.search">
                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -34,7 +35,7 @@
                 <div class="col-sm-2">
                     <label for="exampleInputtext1">Status</label>
                     <div class="row">
-                        <ui-select ng-model="processo.statusProc" theme="bootstrap">
+                        <ui-select class="wdapp-ui-select" ng-model="processo.statusProc" theme="bootstrap">
                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                             <ui-select-choices repeat="item in statusProc | filter: $select.search">
                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -46,15 +47,10 @@
             </div>
             <div class="col-sm-12">
                 <div class="col-sm-9">
-                    <div class="col-sm-12">
-
-                    </div>
-                    <div class="col-sm-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Descrição</label>
                             <textarea class="form-control" rows="7" ng-model="processo.descricao" id="descricao"></textarea>
                         </div>
-                    </div>
                 </div>
 
                 <div class="col-sm-3">
@@ -65,7 +61,7 @@
                     <div class="col-sm-12">
                         <label for="exampleInputtext1">Grupos de trabalho</label>
                         <div class="row">
-                            <ui-select ng-model="processo.grupoTrabalho" theme="bootstrap">
+                            <ui-select class="wdapp-ui-select" ng-model="processo.grupoTrabalho" theme="bootstrap">
                                 <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                 <ui-select-choices repeat="item in grupoTrabalho | filter: $select.search">
                                     <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -77,7 +73,7 @@
                     <div class="col-sm-12">
                         <label for="exampleInputtext1">Limitar Usuarios</label>
                         <div class="row">
-                            <ui-select ng-model="processo.usuariosRestricaoProc" theme="bootstrap">
+                            <ui-select class="wdapp-ui-select" ng-model="processo.usuariosRestricaoProc" theme="bootstrap">
                                 <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                 <ui-select-choices repeat="item in usuarios | filter: $select.search">
                                     <div ng-bind-html="item.login | highlight: $select.search"></div>
@@ -90,15 +86,15 @@
                 </div>
             </div>
             <div class="row " style="margin-top : 10px"></div>
+            <a href="javascript:void(0)" ng-model="collapseds" ng-click="collapseds=!collapseds"><strong>Envolvidos</strong></a>
+            <div class="row " style="margin-top : 10px"></div>
+            <div ng-show="collapseds">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Envolvidos</h3>
-                </div>
                 <div class="panel-body">
                     <div ng-repeat="envolvList in processo.envolvList">
                         <div class="col-sm-12">
-                            <div class="col-sm-5">
-                                <label for="exampleInputtext1">Pessoa</label>
+                            <div class="col-sm-4">
+                                <label for="exampleInputtext1">Cliente</label>
                                 <div class="row">
                                     <ui-select ng-model="envolvList.cliente" theme="bootstrap">
                                         <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
@@ -109,10 +105,10 @@
                                     </ui-select>
                                 </div>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <label for="exampleInputtext1">Tipo Envolvimento</label>
                                 <div class="row">
-                                    <ui-select ng-model="envolvList.tipoEnvolvido" theme="bootstrap">
+                                    <ui-select style="margin-left:10px" ng-model="envolvList.tipoEnvolvido" theme="bootstrap">
                                         <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                         <ui-select-choices repeat="item in tipoEnvolv | filter: $select.search">
                                             <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -124,7 +120,7 @@
                             <div class="col-sm-2">
                                 <label for="exampleInputtext1">Envolvimento</label>
                                 <div class="row">
-                                    <ui-select ng-model="envolvList.envolvimento" theme="bootstrap">
+                                    <ui-select style="margin-left:10px" ng-model="envolvList.envolvimento" theme="bootstrap">
                                         <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                         <ui-select-choices repeat="item in envolv | filter: $select.search">
                                             <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -133,29 +129,31 @@
                                     </ui-select>
                                 </div>
                             </div>
-                            <div class="col-sm-1" style="margin-top:18px">
+                            <div class="col-sm-1">
                                 <label for="exampleInputtext1">Cliente</label>
                                 <div class="row">
-                                    <toggle ng-model="envolvList.bCliente" ng-init="envolvList. = false" style="android" on="Sim" off="Não" onstyle="btn-success"
+                                    <toggle style="width:24px;margin-left:24px;margin-top:25px;" ng-model="envolvList.bCliente" ng-init="envolvList.bCliente = false" style="android" on="Sim" off="Não" onstyle="btn-success"
                                         offstyle="btn-danger" ng-true-value="'true'" ng-false-value="'false'"></toggle>
                                 </div>
                             </div>
                             <div class="col-sm-1">
-                                <button type="button" class="btn btn-default addButton" style="margin-top:18px"><i class="fa fa-plus"></i></button>
+                                <button type="button" class="btn btn-default addButton" style="margin-top:24px"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
             <div class="row " style="margin-top : 10px"></div>
+            <hr>
+            <a href="javascript:void(0)" ng-model="collapsed" ng-click="collapsed=!collapsed">Outras <strong>Informações</strong></a>
+            <div class="row " style="margin-top : 10px"></div>
+            <div ng-show="collapsed">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Outras Informações</h3>
-                </div>
                 <div class="panel-body">
                     <div class="col-sm-12">
                         <div class="col-sm-12">
-                            <label for="exampleInputtext1">FUNDAMENTAÇÃO JURÍDICA</label>
+                            <label for="exampleInputtext1">FUNDAMENTAÇÂO JURÚDICA</label>
                             <textarea class="form-control" rows="5" ng-model="processo.fundamentacaoJuridica" id="observacao"></textarea>
                         </div>
                         <div class="col-sm-12">
@@ -163,7 +161,7 @@
                             <textarea class="form-control" rows="5" ng-model="processo.fatos" id="observacao"></textarea>
                         </div>
                         <div class="col-sm-12">
-                            <label for="exampleInputtext1">PRETENSÕES DO CLIENTE</label>
+                            <label for="exampleInputtext1">PRETENSES DO CLIENTE</label>
                             <textarea class="form-control" rows="5" ng-model="processo.pretensoesCliente" id="observacao"></textarea>
                         </div>
                         <div class="col-sm-12">
@@ -173,6 +171,8 @@
                     </div>
                 </div>
             </div>
+            </div>
+            <hr />
         </div>
         <div class="tab-content1" ng-show="tabs == 4">
             <div class="panel-group" id="accordion">
@@ -187,7 +187,7 @@
                     <div id="collapseOne" class="panel-collapse collapse in collapseFour">
                         <div class="panel-body">
                             <div class="col-sm-12">
-                                <div class="form-group col-sm-4">
+                                <div class="form-group col-sm-3">
                                     <label for="exampleInputtext1">Processo</label>
                                     <div class="row">
                                         <toggle ng-model="processo.processo" ng-init="processo.processo = false" style="android" on="Judicial" off="Extrajudial"
@@ -197,7 +197,7 @@
                                 <div class="form-group col-sm-4">
                                     <label for="exampleInputEmail1">Justiça</label>
                                     <div class="row">
-                                        <ui-select ng-model="processo.justica" theme="bootstrap">
+                                        <ui-select style="margin-left:10px" ng-model="processo.justica" theme="bootstrap">
                                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                             <ui-select-choices repeat="item in justica | filter: $select.search">
                                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -209,7 +209,7 @@
                                 <div class="form-group col-sm-4">
                                     <label for="exampleInputEmail1">Instáncia</label>
                                     <div class="row">
-                                        <ui-select ng-model="processo.instancia" theme="bootstrap">
+                                        <ui-select style="margin-left:10px" ng-model="processo.instancia" theme="bootstrap">
                                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                             <ui-select-choices repeat="item in instancia | filter: $select.search">
                                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -223,7 +223,7 @@
                                 <div class="form-group col-sm-6">
                                     <label for="exampleInputEmail1">Órgão</label>
                                     <div class="row">
-                                        <ui-select ng-model="processo.orgao" theme="bootstrap">
+                                        <ui-select style="margin-left:10px" ng-model="processo.orgao" theme="bootstrap">
                                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                             <ui-select-choices repeat="item in orgao | filter: $select.search">
                                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -235,7 +235,7 @@
                                 <div class="form-group col-sm-6">
                                     <label for="exampleInputEmail1">Situação</label>
                                     <div class="row">
-                                        <ui-select ng-model="processo.situacao" theme="bootstrap">
+                                        <ui-select style="margin-left:10px" ng-model="processo.situacao" theme="bootstrap">
                                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                             <ui-select-choices repeat="item in situacao | filter: $select.search">
                                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -304,7 +304,7 @@
                                 <div class="form-group col-sm-3">
                                     <label for="exampleInputEmail1">Justiça</label>
                                     <div class="row">
-                                        <ui-select ng-model="processo.justica" theme="bootstrap">
+                                        <ui-select style="margin-left:10px" ng-model="processo.justica" theme="bootstrap">
                                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                             <ui-select-choices repeat="item in justica | filter: $select.search">
                                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -316,7 +316,7 @@
                                 <div class="form-group col-sm-3">
                                     <label for="exampleInputEmail1">Tribunal</label>
                                     <div class="row">
-                                        <ui-select ng-model="processo.tribunal" theme="bootstrap">
+                                        <ui-select style="margin-left:10px" ng-model="processo.tribunal" theme="bootstrap">
                                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                             <ui-select-choices repeat="item in tribunal | filter: $select.search">
                                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -328,7 +328,7 @@
                                 <div class="form-group col-sm-3">
                                     <label for="exampleInputEmail1">Instáncia</label>
                                     <div class="row">
-                                        <ui-select ng-model="processo.instancia1" theme="bootstrap">
+                                        <ui-select style="margin-left:10px" ng-model="processo.instancia1" theme="bootstrap">
                                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                             <ui-select-choices repeat="item in instancia | filter: $select.search">
                                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -340,7 +340,7 @@
                                 <div class="form-group col-sm-3">
                                     <label for="exampleInputEmail1">Localidade</label>
                                     <div class="row">
-                                        <ui-select ng-model="processo.localidade" theme="bootstrap">
+                                        <ui-select style="margin-left:10px" ng-model="processo.localidade" theme="bootstrap">
                                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                             <ui-select-choices repeat="item in localidade | filter: $select.search">
                                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -354,7 +354,7 @@
                                 <div class="form-group col-sm-4">
                                     <label for="exampleInputEmail1">Capturar por</label>
                                     <div class="row">
-                                        <ui-select ng-model="processo.capturpor" theme="bootstrap">
+                                        <ui-select style="margin-left:10px" ng-model="processo.capturpor" theme="bootstrap">
                                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                                             <ui-select-choices repeat="item in capiturPor | filter: $select.search">
                                                 <div ng-bind-html="item.descricao | highlight: $select.search"></div>
@@ -365,14 +365,14 @@
                                 </div>
                                 <div class="row col-sm-4">
                                     <div class="form-group">
-                                        <label for="exampleInputtext1">Número do Processo</label>
-                                        <input type="text" class="form-control" ng-model="processo.numeroprocesso" name="text" placeholder="Número do Processo">
+                                        <label for="exampleInputtext1">N° do Processo</label>
+                                        <input style="margin-left:10px" type="text" class="form-control" ng-model="processo.numeroprocesso" name="text" placeholder="N°mero do Processo">
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-4">
                                     <label for="exampleInputtext1">Captura automática de andamentos</label>
                                     <div class="row">
-                                        <toggle ng-model="processo.capautomatica" ng-init="processo.capautomatica = false" style="android" on="Sim" off="Não" onstyle="btn-success"
+                                        <toggle style="margin-left:30px;width:100%"  ng-model="processo.capautomatica" ng-init="processo.capautomatica = false" style="android" on="Sim" off="Não" onstyle="btn-success"
                                             offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
                                     </div>
                                 </div>
@@ -382,8 +382,8 @@
                 </div>
             </div>
         </div>
-        <div class="tab-content1" ng-show="tabs == 6">
-            <div class="col-sm-12">
+        <div class="tab-content1" ng-show="tabs == 6" style="height : 250px">
+            <div class="col-sm-12" >
                 <div class="col-sm-12">
                     <label for="exampleInputtext1">Monitorar</label>
                     <div class="row">

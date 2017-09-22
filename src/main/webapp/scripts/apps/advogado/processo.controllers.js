@@ -1,5 +1,5 @@
 ;(function () {
-    angular.module('wdApp.apps.processo', ['datatables', 'ngResource', 'datatables.scroller', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+    angular.module('wdApp.apps.processo', ['datatables', 'ngResource', 'datatables.scroller','ui.bootstrap', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
       .controller('ProcessoController', processoController)
 
     function processoController ($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate, Datatablessss, tableOptionsFactory,
@@ -128,7 +128,9 @@
     angular.module('wdApp.apps.processo.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
       .controller('ProcessoInsertController', function ($rootScope, $scope, fModels, SysMgmtData, toastr, $element, close,  doisValorFactory,validationFactory) {
         var vm = this
-
+        $scope.processo = {};
+        $scope.processo.envolvList = [];
+        $scope.processo.envolvList.push({});
         doisValorFactory.processo($scope);
 
       })

@@ -13909,3 +13909,10 @@ div.show-image input.delete {
     style:solid;
     background: url("../images/eletronica-48.png") no-repeat center center;
 }
+
+.wdapp-ui-select {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
