@@ -16,6 +16,76 @@ var qat = {
 		{}
 	}
 };
+/** create by system gera-java version 1.0.0 05/10/2017 10:17 : 9*/
+qat.model.Processo = function(_oObjet, _modelAction, _user, $log)
+{
+     if (_oObjet != undefined)
+     {
+		this.id = _oObjet.id;
+		this.dataProcess = _oObjet.dataProcess,
+		this.dataFim = _oObjet.dataFim,
+		this.valor = _oObjet.valor,
+		this.senha = _oObjet.senha,
+		this.assunto = _oObjet.assunto,
+		this.descricaoProc = _oObjet.descricaoProc,
+		this.processo = _oObjet.processo,
+		this.npadraocnj = _oObjet.npadraocnj,
+		this.npadrao = _oObjet.npadrao,
+		this.agendarCap = _oObjet.agendarCap,
+		this.distribuido = _oObjet.distribuido,
+		this.valorProvisionado = _oObjet.valorProvisionado,
+		this.valorAcao = _oObjet.valorAcao,
+		this.observacaoProc = _oObjet.observacaoProc,
+		this.capturpor = _oObjet.capturpor,
+		this.numeroprocesso = _oObjet.numeroprocesso,
+		this.capautomatica = _oObjet.capautomatica,
+		this.pasta = _oObjet.pasta,
+		this.enviarEmail = _oObjet.enviarEmail,
+		this.enviarMdgTelefone = _oObjet.enviarMdgTelefone,
+		this.quando = _oObjet.quando,
+		this.processo = _oObjet.processo,
+		this.fundamentacaoJuridica = _oObjet.fundamentacaoJuridica,
+		this.fatos = _oObjet.fatos,
+		this.pretensoesCliente = _oObjet.pretensoesCliente,
+		this.estrategia = _oObjet.estrategia,
+		this.retringirProcesso = _oObjet.retringirProcesso,
+		// dois valores
+		this.acao = _oObjet.acao ? { id : _oObjet.acao.id} : null,
+		this.natureza =  _oObjet.natureza ? { id : _oObjet.natureza.id} : null,
+		this.statusProc =  _oObjet.statusProc ? { id : _oObjet.statusProc.id} : null,
+		this.grupoTrabalho =  _oObjet.grupoTrabalho ? { id : _oObjet.grupoTrabalho.id} : null,
+		this.situacao = _oObjet.situacao ? { id : _oObjet.situacao.id} : null,
+		this.instancia =  _oObjet.instancia ? { id : _oObjet.instancia.id} : null,
+		this.orgao =  _oObjet.orgao ? { id : _oObjet.orgao.id} : null,
+		this.justica =  _oObjet.justica ? { id : _oObjet.justica.id} : null,
+		this.tribunal =  _oObjet.tribunal ? { id : _oObjet.tribunal.id} : null,
+		this.instancia1 =  _oObjet.instancia1 ? { id : _oObjet.instancia1.id} : null,
+		this.localidade =  _oObjet.localidade ? { id : _oObjet.localidade.id} : null,
+
+		//Object
+		this.usuariosRestricaoProc = _oObjet.usuariosRestricaoProc,
+		this.tituloList = _oObjet.tituloList,
+		this.clienteList = _oObjet.clienteList,
+		this.advogadoList = _oObjet.advogadoList,
+		this.audienciaList = _oObjet.audienciaList,
+		this.processoStatusList = _oObjet.processoStatusList,
+		this.envolvList = _oObjet.envolvList,
+		this.arquivos = _oObjet.arquivos,
+		this.envolvidosExterno = _oObjet.envolvidosExterno,
+		this.parentId = _oObjet.parentId;
+		this.emprId = JSON.parse(localStorage.getItem('empresa')) ? JSON.parse(localStorage.getItem('empresa')).id : null;
+		this.processId = _oObjet.processId;
+		this.tableEnumValue = _oObjet.tableEnumValue;
+		this.modelAction = _modelAction;
+		this.createUser = _user;
+		this.createDateUTC = (new Date()).getTime();
+		this.modifyUser = _user;
+		this.modifyDateUTC = (new Date()).getTime();
+
+		if($log)
+				$log.info("add Processo --> " +  _oObjet.id,"Teste");
+     }
+}
 
 qat.model.FormaPg = function(_oObjet, _modelAction,_user,$log)
 {

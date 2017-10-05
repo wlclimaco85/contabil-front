@@ -699,7 +699,7 @@ public class Objects {
 		processo.getEnvolvList().add(insertEnvolvidos(id, tabela, action));
 		processo.setSituacao(insertDoisValor(id, tabela, action));
 		processo.setInstancia(insertDoisValor(id, tabela, action));
-		processo.setOrgao("orgao");
+		processo.setOrgao(insertDoisValor(id, tabela, action));
 		processo.setNpadraocnj("npadraocnj");
 		processo.setNpadrao("npadrao");
 		processo.setAgendarCap(insertDoisValor(id, tabela, action));

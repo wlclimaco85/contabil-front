@@ -127,6 +127,7 @@
     angular.module('wdApp.apps.processo.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
       .controller('ProcessoInsertController', function ($rootScope, $scope, fModels, SysMgmtData, toastr, $element, close,fProcesso) {
         var vm = this
+        debugger
         $scope.processo = {};
         $scope.processo.envolvList = [];
         $scope.processo.envolvList.push({});
@@ -136,7 +137,11 @@
 
         fProcesso.fnOpenView(vm, $scope);
 
-
+        $scope.saveProcesso = function (bValidate,b) {
+          debugger
+     //     if(bValidate)
+            fProcesso.fnMontaObjeto($scope.processo, 'INSERT', 'advocacia/api/processo/insert');
+        }
       })
   })()
   ;(function () {
