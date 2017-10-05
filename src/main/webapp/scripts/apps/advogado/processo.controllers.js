@@ -131,6 +131,9 @@
         $scope.processo.envolvList = [];
         $scope.processo.envolvList.push({});
 
+        $scope.processo.advogados = [];
+        $scope.processo.advogados.push({});
+
         fProcesso.fnOpenView(vm, $scope);
 
 

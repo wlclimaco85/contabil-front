@@ -52,7 +52,6 @@
                             <textarea class="form-control" rows="7" ng-model="processo.descricao" id="descricao"></textarea>
                         </div>
                 </div>
-
                 <div class="col-sm-3">
                     <div class="col-sm-12">
                         <label for="exampleInputEmail1">Senha</label>
@@ -61,25 +60,26 @@
                     <div class="col-sm-12">
                         <label for="exampleInputtext1">Grupos de trabalho</label>
                         <div class="row">
-                            <ui-select class="wdapp-ui-select" ng-model="processo.grupoTrabalho" theme="bootstrap">
-                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                <ui-select-choices repeat="item in grupoTrabalhoList | filter: $select.search">
-                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                            <ui-select multiple ng-model="processo.grupoTrabalho" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false" title="Choose a person">
 
-                                </ui-select-choices>
-                            </ui-select>
+                                    <ui-select-match placeholder="...">{{$item.descricao}}&gt;</ui-select-match>
+                                    <ui-select-choices repeat="item in grupoTrabalhoList | filter: $select.search">
+                                        <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                    </ui-select-choices>
+
+                                </ui-select>
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <label for="exampleInputtext1">Limitar Usuarios</label>
                         <div class="row">
-                            <ui-select class="wdapp-ui-select" ng-model="processo.usuariosRestricaoProc" theme="bootstrap">
-                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                <ui-select-choices repeat="item in usuarioList | filter: $select.search">
-                                    <div ng-bind-html="item.email | highlight: $select.search"></div>
-                                    <div ng-bind-html="item.nome | highlight: $select.search"></div>
-                                </ui-select-choices>
-                            </ui-select>
+                                <ui-select multiple ng-model="processo.usuariosRestricaoProc" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false" title="Choose a person">
+                                    <ui-select-match placeholder="...">{{$item.nome}} &lt;{{$item.email}}&gt;</ui-select-match>
+                                    <ui-select-choices repeat="item in usuarioList | filter: $select.search">
+                                        <div ng-bind-html="item.email | highlight: $select.search"></div>
+                                        <div ng-bind-html="item.nome | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
                         </div>
                     </div>
 
@@ -97,7 +97,7 @@
                                 <label for="exampleInputtext1">Cliente</label>
                                 <div class="row">
                                     <ui-select ng-model="envolvList.cliente" theme="bootstrap">
-                                        <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                        <ui-select-match placeholder="...">{{$select.selected.nome}}</ui-select-match>
                                         <ui-select-choices repeat="item in clienteList | filter: $select.search">
                                             <div ng-bind-html="item.nome | highlight: $select.search"></div>
 
@@ -147,23 +147,21 @@
 
         <div class="row " style="margin-top : 10px"></div>
         <hr>
-        <a href="javascript:void(0)" ng-model="collapseds" ng-click="collapseds=!collapseds">Adicionar <strong>Advogados</strong></a>
+        <a href="javascript:void(0)" ng-model="collapsedsd" ng-click="collapsedsd=!collapsedsd">Adicionar <strong>Advogados</strong></a>
         <div class="row " style="margin-top : 10px"></div>
-        <div ng-show="collapseds">
-            <div ng-repeat="advogados in processo.advogados">
+        <div ng-show="collapsedsd">
                 <div class="col-sm-12">
                     <label for="exampleInputtext1">Advogado</label>
                     <div class="row">
-                        <ui-select ng-model="envolvList.cliente" theme="bootstrap">
-                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                        <ui-select multiple ng-model="processo.usuariosRestricaoProc" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false" title="Choose a person">
+                            <ui-select-match placeholder="...">{{$item.nome}} &lt;{{$item.nome}}&gt;</ui-select-match>
                             <ui-select-choices repeat="item in advogadoList | filter: $select.search">
                                 <div ng-bind-html="item.nome | highlight: $select.search"></div>
-
+                                <div ng-bind-html="item.nome | highlight: $select.search"></div>
                             </ui-select-choices>
                         </ui-select>
                     </div>
                 </div>
-            </div>
         </div>
         <hr/>
 

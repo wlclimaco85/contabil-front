@@ -104,7 +104,7 @@
             })
       },
       processo: function (scope) {
-        scope.status = []
+        scope.statusProc = []
         scope.tipoEnvolv = []
         scope.envolv = []
         scope.situacao = []
@@ -126,7 +126,7 @@
           if (planos.doisValorType != null) {
             switch (planos.doisValorType.tipo) {
               case 'STATUS':
-                scope.status.push(planos)
+                scope.statusProc.push(planos)
                 break
               case 'TIPO ENVOLVIMENTO':
                 scope.tipoEnvolv.push(planos)

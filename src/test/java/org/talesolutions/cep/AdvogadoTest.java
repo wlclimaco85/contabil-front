@@ -171,11 +171,11 @@ public class AdvogadoTest extends NFeConfig {
 		 	//	{
 		 		//	if(!estados.equals(NFUnidadeFederativa.AM))
 		 		//	{
-		 			NFStatusServicoConsultaRetorno retorno = new WSFacade(config).consultaStatus(NFUnidadeFederativa.MG, NFModelo.NFE);
+		 	//		NFStatusServicoConsultaRetorno retorno = new WSFacade(config).consultaStatus(NFUnidadeFederativa.MG, NFModelo.NFE);
 
 		 		//	System.out.println(estados.getCodigo());
-			 		System.out.println(retorno.getStatus());
-			 		System.out.println(retorno.getMotivo());
+			 //		System.out.println(retorno.getStatus());
+			 	//	System.out.println(retorno.getMotivo());
 
 	//}
 		 		//}
