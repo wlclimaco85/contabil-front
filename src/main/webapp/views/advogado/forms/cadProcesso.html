@@ -153,7 +153,7 @@
                 <div class="col-sm-12">
                     <label for="exampleInputtext1">Advogado</label>
                     <div class="row">
-                        <ui-select multiple ng-model="processo.usuariosRestricaoProc" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false" title="Choose a person">
+                        <ui-select multiple ng-model="processo.advogadoList" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false" title="Choose a person">
                             <ui-select-match placeholder="...">{{$item.nome}} &lt;{{$item.nome}}&gt;</ui-select-match>
                             <ui-select-choices repeat="item in advogadoList | filter: $select.search">
                                 <div ng-bind-html="item.nome | highlight: $select.search"></div>
@@ -415,14 +415,14 @@
                 <div class="col-sm-12">
                     <label for="exampleInputtext1">Enviar Movimentação EMAIL/SMS Cliente</label>
                     <div class="row">
-                        <toggle ng-model="processo.agendarCap" ng-init="processo.agendarCap = false" style="android" on="Sim" off="Não" onstyle="btn-success"
+                        <toggle ng-model="processo.enviarMdgTelefone" ng-init="processo.enviarMdgTelefone = false" style="android" on="Sim" off="Não" onstyle="btn-success"
                             offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
                     </div>
                 </div>
                 <div class="col-sm-12">
                     <label for="exampleInputtext1">Sim, desejo receber todos as movimentações automáticos por e-mail.</label>
                     <div class="row">
-                        <toggle ng-model="processo.agendarCap" ng-init="processo.agendarCap = false" style="android" on="Sim" off="Não" onstyle="btn-success"
+                        <toggle ng-model="processo.enviarEmail" ng-init="processo.enviarEmail = false" style="android" on="Sim" off="Não" onstyle="btn-success"
                             offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
                     </div>
                 </div>

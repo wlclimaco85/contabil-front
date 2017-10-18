@@ -136,7 +136,7 @@
         $scope.processo.advogados.push({});
 
         fProcesso.fnOpenView(vm, $scope);
-
+        fProcesso.fnCreateMock($scope);
         $scope.saveProcesso = function (bValidate,b) {
           debugger
      //     if(bValidate)

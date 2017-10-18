@@ -134,6 +134,12 @@
 	    this.returnListPaged = _bPagedList;
 	};
 
+	qat.model.reqProcesso = function(_id, _bList, _bPagedList) {
+	    this.processo = _oCounty;
+	    this.returnList = _bList;
+	    this.returnListPaged = _bPagedList;
+	};
+
 	qat.model.reqMarca = function(_oCounty, _bList, _bPagedList) {
 	    this.marca = _oCounty;
 	    this.returnList = _bList;
