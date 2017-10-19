@@ -86,8 +86,32 @@ debugger
 
 			factory.fnVerificaPrivacidade = function(oData)
 			{
-				debugger
-				return false;
+				if($rootScope.user.user === oData.createUser)
+				{
+					return true;
+				}
+				//work
+				else if(oData.advogadoList.indexOf($rootScope.user.user) !== -1)
+				{
+					return true;
+				}
+				else if(oData.usuariosRestricaoProc.indexOf($rootScope.user.user) !== -1)
+				{
+
+				}
+				else if(!oData.senha && !oData.grupoTrabalho)
+				{
+					return true;
+				}
+				else
+				{
+					//work
+					for(var x = 0 ; x < oData.grupoTrabalho.length;x++)
+					{
+
+					}
+					return false;
+				}
 			}
 
 			factory.fnDelete = function()
