@@ -9,73 +9,87 @@
 			var factory = {};
 			////fPessoa.fnMontaObjeto($scope.empresa, $scope.enderecos,scope.emails,scope.telefones, 'INSERT', "pessoa/api/cliente/insert", fnCallBack);
 			factory.fnMontaObjeto = function(processo, action, url, callBack) {
+debugger
 
-				var fnCallBack = function (res) {
-					if (res.operationSuccess == true) {
-					  $element.modal('hide')
-					  close(null, 500)
-					  toastr.success('Deu Certo seu tanga.', 'Sucess')
-					  $rootScope.reloadDataCliente(function (data) {
-						//debugger
-					  })
-					}
-				}
 
 				var oObject = fModels.amont(processo,action);
 				var _oObject = new qat.model.Processo(oObject, action,$rootScope.user.user,$log);
+				var aUsuariosRestricaoProc = _oObject.usuariosRestricaoProc;
+debugger
+				_oObject.usuariosRestricaoProc = aUsuariosRestricaoProc;
 
 				SysMgmtData.processPostPageData("main/api/request", {
 					url: url,
 					token: $rootScope.authToken,
 					request: new qat.model.reqProcesso(_oObject, true, true)
 				}, function(res) {
-					fnCallBack(res);
+					callBack(res);
 				});
 
 			}
 			factory.fnCreateMock = function(scope)
 			{
-				scope.processo.pasta="000001";
-				scope.processo.assunto="assunto";
-				scope.processo.natureza= {id:1141};
-				scope.processo.statusProc = {id:1052};
-				scope.processo.descricao ="descricao";
-				scope.processo.senha ="descricao";
-				scope.processo.grupoTrabalho = {id:1052};
-				scope.processo.usuariosRestricaoProc = {id:1052};
-				scope.processo.envolvList[0].cliente = {id:1052};
-				scope.processo.envolvList[0].tipoEnvolvido = {id:1052};
-				scope.processo.envolvList[0].envolvimento = {id:1052};
-				scope.processo.envolvList[0].bCliente= 1
-				scope.processo.advogadoList=[{id:1001},{id:1002}];
-				scope.processo.fundamentacaoJuridica="observacao";
-				scope.processo.fatos="observacao";
-				scope.processo.pretensoesCliente="observacao";
-				scope.processo.estrategia="observacao";
-				scope.processo.tipoProcesso = {id:1052};
-				scope.processo.justica = {id:1052};
-				scope.processo.instancia = {id:1052};
-				scope.processo.orgao = {id:1052};
-				scope.processo.situacao = {id:1052};
-				scope.processo.npadraocnj="11111111111"
-				scope.processo.npadrao="222222222222"
-				scope.processo.agendarCap = {id:1052};
-				scope.processo.distribuido="distribuido"
-				scope.processo.valorAcao="1001"
-				scope.processo.valorProvisionado="111001"
-				scope.processo.segJustica=1
-				scope.processo.justica = {id:1052};
-				scope.processo.tribunal = {id:1052};
-				scope.processo.instancia1 = {id:1052};
-				scope.processo.localidade = {id:1052};
-				scope.processo.capturpor = {id:1052};
-				scope.processo.numeroprocesso="101010"
-				scope.processo.capautomatica = {id:1052};
-				scope.processo.agendarCap = {id:1052};
-				scope.processo.enviarMdgTelefone=1
-				scope.processo.enviarEmail=1
-				scope.processo.monitorar=1
+				 	//private Integer id;
+					scope.processo.dataProcess = (new Date()).getTime();
+					scope.processo.dataFim = (new Date()).getTime();
+					scope.processo.valor = 1.99;
+					scope.processo.descricaoProc="descricaoProc";
+					scope.processo.senha="senha";
+					scope.processo.assunto="assunto";
+					scope.processo.porcValorAcao="porcValorAcao";
+					scope.processo.processo="processo";
+					scope.processo.npadraocnj="npadraocnj";
+					scope.processo.npadrao="npadrao";
+					scope.processo.agendarCap=1
+					scope.processo.distribuido="distribuido";
+					scope.processo.valorAcao=2.99
+					scope.processo.valorProvisionado=9.99
+					scope.processo.segJustica=0
+					scope.processo.observacaoProc="observacaoProc";
+					scope.processo.numeroprocesso="numeroprocesso";
+					scope.processo.capautomatica=0;
+					scope.processo.pasta="pasta";
+					scope.processo.enviarEmail=0;
+					scope.processo.enviarMdgTelefone=1;
+					scope.processo.monitorar=0;
+					scope.processo.fundamentacaoJuridica="fundamentacaoJuridica";
+					scope.processo.fatos="fatos";
+					scope.processo.pretensoesCliente="pretensoesCliente";
+					scope.processo.estrategia="estrategia";
+					scope.processo.retringirProcesso=0;
+
+					scope.processo.statusProc = {id:1052};
+					scope.processo.grupoTrabalho = {id:1052};
+					scope.processo.acao = {id:1052};
+					scope.processo.natureza = {id:1052};
+					scope.processo.situacao = {id:1052};
+					scope.processo.instancia = {id:1052};
+					scope.processo.orgao = {id:1052};
+					scope.processo.justica = {id:1052};
+					scope.processo.tribunal = {id:1052};
+					scope.processo.instancia1 = {id:1052};
+					scope.processo.localidade = {id:1052};
+					scope.processo.capturpor = {id:1052};
+					scope.processo.quando = {id:1052};
+
+				//	scope.processo.tituloList = [{id:10,modelAction:"INSERT"}];
+					scope.processo.clienteList = [{id:10,modelAction:"INSERT"}];
+				//	scope.processo.advogadoList = [{id:10,modelAction:"INSERT"}];
+				//	scope.processo.audienciaList = [{id:10,modelAction:"INSERT"}];
+				//	scope.processo.processoStatusList =[{id:10,modelAction:"INSERT"}];
+					scope.processo.envolvList = [{cliente : {id:1052},tipoEnvolvido : {id:1052},envolvimento : {id:1052},bCliente: 1,modelAction:"INSERT"}];
+				//	scope.processo.arquivos =[{id:10,modelAction:"INSERT"}];
+				//	scope.processo.envolvidosExterno = [{id:10,modelAction:"INSERT"}];
+					scope.processo.usuariosRestricaoProc = [{modelAction:"INSERT"}];
+
 			}
+
+			factory.fnVerificaPrivacidade = function(oData)
+			{
+				debugger
+				return false;
+			}
+
 			factory.fnDelete = function()
 			{
 				//..

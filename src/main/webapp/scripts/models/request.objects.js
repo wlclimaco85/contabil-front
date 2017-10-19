@@ -128,13 +128,13 @@
 	    this.returnListPaged = _bPagedList;
 	};
 
-	qat.model.reqEmpresa = function(_id, _bList, _bPagedList) {
+	qat.model.reqEmpresa = function(_oCounty, _bList, _bPagedList) {
 	    this.formaPg = _oCounty;
 	    this.returnList = _bList;
 	    this.returnListPaged = _bPagedList;
 	};
 
-	qat.model.reqProcesso = function(_id, _bList, _bPagedList) {
+	qat.model.reqProcesso = function(_oCounty, _bList, _bPagedList) {
 	    this.processo = _oCounty;
 	    this.returnList = _bList;
 	    this.returnListPaged = _bPagedList;

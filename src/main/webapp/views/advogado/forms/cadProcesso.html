@@ -4,7 +4,7 @@
         <li><a ng-click="tabs=4" ng-class="{'active' : tabs==4}">DADOS DO PROCESSO</a></li>
         <li><a ng-click="tabs=5" ng-class="{'active' : tabs==5}">DADOS CAPTURA</a></li>
         <li><a ng-click="tabs=6" ng-class="{'active' : tabs==6}">MONITORAMENTO DE PROCESSO</a></li>
-        <li><a ng-click="tabs=7" ng-class="{'active' : tabs==7}">Outras</a></li>
+        <li><a ng-click="tabs=7" ng-class="{'active' : tabs==7}">PRIVACIDADE</a></li>
     </ul>
 
     <div class="tabs-container1">
@@ -46,43 +46,9 @@
                 </div>
             </div>
             <div class="col-sm-12">
-                <div class="col-sm-9">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Descrição</label>
-                            <textarea class="form-control" rows="7" ng-model="processo.descricao" id="descricao"></textarea>
-                        </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="col-sm-12">
-                        <label for="exampleInputEmail1">Senha</label>
-                        <input type="text" class="form-control" ng-model="processo.senha" name="descricao" placeholder="Descrição">
-                    </div>
-                    <div class="col-sm-12">
-                        <label for="exampleInputtext1">Grupos de trabalho</label>
-                        <div class="row">
-                            <ui-select multiple ng-model="processo.grupoTrabalho" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false" title="Choose a person">
-
-                                    <ui-select-match placeholder="...">{{$item.descricao}}&gt;</ui-select-match>
-                                    <ui-select-choices repeat="item in grupoTrabalhoList | filter: $select.search">
-                                        <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-                                    </ui-select-choices>
-
-                                </ui-select>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <label for="exampleInputtext1">Limitar Usuarios</label>
-                        <div class="row">
-                                <ui-select multiple ng-model="processo.usuariosRestricaoProc" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false" title="Choose a person">
-                                    <ui-select-match placeholder="...">{{$item.nome}} &lt;{{$item.email}}&gt;</ui-select-match>
-                                    <ui-select-choices repeat="item in usuarioList | filter: $select.search">
-                                        <div ng-bind-html="item.email | highlight: $select.search"></div>
-                                        <div ng-bind-html="item.nome | highlight: $select.search"></div>
-                                    </ui-select-choices>
-                                </ui-select>
-                        </div>
-                    </div>
-
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Descrição</label>
+                    <textarea class="form-control" rows="7" ng-model="processo.descricao" id="descricao"></textarea>
                 </div>
             </div>
             <div class="row " style="margin-top : 10px"></div>
@@ -132,8 +98,8 @@
                             <div class="col-sm-1">
                                 <label for="exampleInputtext1">Cliente</label>
                                 <div class="row">
-                                    <toggle style="width:24px;margin-left:24px;margin-top:25px;" ng-model="envolvList.bCliente" ng-init="envolvList.bCliente = false" style="android" on="Sim" off="Não" onstyle="btn-success"
-                                        offstyle="btn-danger" ng-true-value="'true'" ng-false-value="'false'"></toggle>
+                                    <toggle style="width:24px;margin-left:24px;margin-top:25px;" ng-model="envolvList.bCliente" ng-init="envolvList.bCliente = 1" style="android" on="Sim" off="Não" onstyle="btn-success"
+                                        offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'0'"></toggle>
                                 </div>
                             </div>
                             <div class="col-sm-1">
@@ -393,7 +359,7 @@
                                 <div class="form-group col-sm-4">
                                     <label for="exampleInputtext1">Captura automática de andamentos</label>
                                     <div class="row">
-                                        <toggle style="margin-left:30px;width:100%"  ng-model="processo.capautomatica" ng-init="processo.capautomatica = false" style="android" on="Sim" off="Não" onstyle="btn-success"
+                                        <toggle style="margin-left:30px;width:100%"  ng-model="processo.capautomatica" ng-init="processo.capautomatica = 1" style="android" on="Sim" off="Não" onstyle="btn-success"
                                             offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
                                     </div>
                                 </div>
@@ -429,7 +395,37 @@
             </div>
         </div>
         <div class="tab-content1" ng-show="tabs == 7">
-            <div ng-include="'views/produto/apps/produtoOutros.html'"></div>
-        </div>
+                <div class="col-sm-12">
+            <div class="col-sm-12">
+                <label for="exampleInputEmail1">Senha</label>
+                <input type="text" class="form-control" ng-model="processo.senha" name="descricao" placeholder="Descrição">
+            </div>
+            <div class="col-sm-12">
+                <label for="exampleInputtext1">Grupos de trabalho</label>
+                <div class="row">
+                    <ui-select multiple ng-model="processo.grupoTrabalho" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false" title="Choose a person">
+
+                            <ui-select-match placeholder="...">{{$item.descricao}}&gt;</ui-select-match>
+                            <ui-select-choices repeat="item in grupoTrabalhoList | filter: $select.search">
+                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                            </ui-select-choices>
+
+                        </ui-select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label for="exampleInputtext1">Limitar Usuarios</label>
+                <div class="row">
+                        <ui-select multiple ng-model="processo.usuariosRestricaoProc" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false" title="Choose a person">
+                            <ui-select-match placeholder="...">{{$item.nome}} &lt;{{$item.email}}&gt;</ui-select-match>
+                            <ui-select-choices repeat="item in usuarioList | filter: $select.search">
+                                <div ng-bind-html="item.email | highlight: $select.search"></div>
+                                <div ng-bind-html="item.nome | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                </div>
+            </div>
+            </div>
+    </div>
     </div>
 </div>

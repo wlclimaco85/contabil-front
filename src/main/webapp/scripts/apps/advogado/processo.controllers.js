@@ -135,12 +135,25 @@
         $scope.processo.advogados = [];
         $scope.processo.advogados.push({});
 
+        var fnCallBack = function (res) {
+					debugger
+					if (res.operationSuccess == true) {
+					  $element.modal('hide')
+					  close(null, 500)
+					  toastr.success('Deu Certo seu tanga.', 'Sucess')
+					  $rootScope.reloadDataCliente(function (data) {
+						//debugger
+					  })
+					}
+				}
+
         fProcesso.fnOpenView(vm, $scope);
         fProcesso.fnCreateMock($scope);
         $scope.saveProcesso = function (bValidate,b) {
           debugger
      //     if(bValidate)
-            fProcesso.fnMontaObjeto($scope.processo, 'INSERT', 'advocacia/api/processo/insert');
+
+            fProcesso.fnMontaObjeto($scope.processo, 'INSERT', 'advocacia/api/processo/insert',fnCallBack);
         }
       })
   })()

@@ -3,8 +3,8 @@
 	'use strict';
 
 	var commonAuth = angular.module('wdApp.ajaxCalls.table.columns', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter']);
-	commonAuth.factory('tableColumnsFactory', ['$rootScope', 'DTOptionsBuilder', 'DTColumnBuilder', '$log', '$compile', 'dialogFactory', 'validationFactory',
-        function($rootScope, DTOptionsBuilder, DTColumnBuilder, $log, $compile, dialogFactory, validationFactory)
+	commonAuth.factory('tableColumnsFactory', ['$rootScope', 'DTOptionsBuilder', 'DTColumnBuilder', '$log', '$compile', 'dialogFactory', 'validationFactory','fProcesso',
+        function($rootScope, DTOptionsBuilder, DTColumnBuilder, $log, $compile, dialogFactory, validationFactory,fProcesso)
 		{
 
 			return {
@@ -537,6 +537,7 @@
 				},
 				processo: function(vm, _html, _actions)
 				{
+
 					return [
                         DTColumnBuilder.newColumn(null).withTitle(_html).notSortable()
                         .renderWith(function(data, type, full, meta)
@@ -544,43 +545,696 @@
 							vm.selected[full.id] = false;
 							return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
 						}).withOption('width', '10px'),
-                        DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
-                        DTColumnBuilder.newColumn('assunto').withTitle('Assunto'),
-						DTColumnBuilder.newColumn('status').withTitle('Situação'),
-						DTColumnBuilder.newColumn('descricao').withTitle('Descrição'),
-						DTColumnBuilder.newColumn('responsavel').withTitle('Responsavel'),
-						DTColumnBuilder.newColumn('grupoTrabalho').withTitle('Grupo Trabalho').notVisible(),
-						DTColumnBuilder.newColumn('processo').withTitle('Processo').notVisible(),
-						DTColumnBuilder.newColumn('situacao').withTitle('Situação').notVisible(),
-						DTColumnBuilder.newColumn('instancia').withTitle('Instancia').notVisible(),
-						DTColumnBuilder.newColumn('orgao').withTitle('Orgão').notVisible(),
-						DTColumnBuilder.newColumn('numCnj').withTitle('Numeração Padrão CNJ').notVisible(),
-						DTColumnBuilder.newColumn('numOut').withTitle('Numeração Outro Padrão').notVisible(),
-						DTColumnBuilder.newColumn('ageCapTrib').withTitle('Agendar captura no tribunal').notVisible(),
-						DTColumnBuilder.newColumn('observacao').withTitle('Observação').notVisible(),
-						DTColumnBuilder.newColumn('valor').withTitle('Valor').notVisible(),
-						DTColumnBuilder.newColumn('formaPg').withTitle('Forma de Pagamento').notVisible(),
-						DTColumnBuilder.newColumn('justica').withTitle('Justiça').notVisible(),
-						DTColumnBuilder.newColumn('tribunal').withTitle('Tribunal').notVisible(),
-						DTColumnBuilder.newColumn('instancia2').withTitle('Instancia').notVisible(),
-						DTColumnBuilder.newColumn('localidade').withTitle('Localidade').notVisible(),
-						DTColumnBuilder.newColumn('capPor').withTitle('Capturar Por').notVisible(),
-						DTColumnBuilder.newColumn('numProcesso').withTitle('Numero Processo').notVisible(),
-						DTColumnBuilder.newColumn('capalt').withTitle('Captura automática de andamentos').notVisible(),
-						DTColumnBuilder.newColumn(null).withTitle('Envolvidos').renderWith(function(data, type, full, meta) {
-							var sText = "";
-							if (data.pessoa != undefined) {
-								for (var x = 0; x < data.pessoa.length; x++) {
-									sText = sText + " " + data.pessoa[x].processo + " " + data.pessoa[x].tipEnvolv + " " + data.pessoa[x].envolvimento + "<br> ";
+						DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
+						DTColumnBuilder.newColumn(null).withTitle('dataProcess').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.dataProcess)
+								{
+									shtml = '<span>' + data.dataProcess + '</span>';
+								}
+								else
+								{
+									shtml = "";
 								}
 							}
-			
-							return '<span>' + sText + '</span>';
-						}),
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('dataFim').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('valor').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.valor)
+								{
+									shtml = '<span>' + data.valor + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('senha').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.senha)
+								{
+									shtml = '<span>' + data.senha + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('assunto').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.assunto)
+								{
+									shtml = '<span>' + data.assunto + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px'),
+						DTColumnBuilder.newColumn(null).withTitle('porcValorAcao').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.porcValorAcao)
+								{
+									shtml = '<span>' + data.porcValorAcao + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('descricaoProc').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.descricaoProc)
+								{
+									shtml = '<span>' + data.descricaoProc + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('processo').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.processo)
+								{
+									shtml = '<span>' + data.processo + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px'),
+						DTColumnBuilder.newColumn(null).withTitle('npadraocnj').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.npadraocnj)
+								{
+									shtml = '<span>' + data.npadraocnj + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('npadrao').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.npadrao)
+								{
+									shtml = '<span>' + data.npadrao + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('agendarCap').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.agendarCap)
+								{
+									shtml = '<span>' + data.agendarCap + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('distribuido').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.distribuido)
+								{
+									shtml = '<span>' + data.distribuido + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('valorAcao').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.valorAcao)
+								{
+									shtml = '<span>' + data.valorAcao + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('valorProvisionado').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.valorProvisionado)
+								{
+									shtml = '<span>' + data.valorProvisionado + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('segJustica').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.segJustica)
+								{
+									shtml = '<span>' + data.segJustica + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('observacaoProc').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.observacaoProc)
+								{
+									shtml = '<span>' + data.observacaoProc + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('numeroprocesso').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.numeroprocesso)
+								{
+									shtml = '<span>' + data.numeroprocesso + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('capautomatica').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.capautomatica)
+								{
+									shtml = '<span>' + data.capautomatica + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('pasta').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.pasta)
+								{
+									shtml = '<span>' + data.pasta + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px'),
+						DTColumnBuilder.newColumn(null).withTitle('enviarEmail').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.enviarEmail)
+								{
+									shtml = '<span>' + data.enviarEmail + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('enviarMdgTelefone').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.enviarMdgTelefone)
+								{
+									shtml = '<span>' + data.enviarMdgTelefone + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('monitorar').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.monitorar)
+								{
+									shtml = '<span>' + data.monitorar + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('fundamentacaoJuridica').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.fundamentacaoJuridica)
+								{
+									shtml = '<span>' + data.fundamentacaoJuridica + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('fatos').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.fatos)
+								{
+									shtml = '<span>' + data.fatos + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('pretensoesCliente').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.pretensoesCliente)
+								{
+									shtml = '<span>' + data.pretensoesCliente + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('estrategia').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.estrategia)
+								{
+									shtml = '<span>' + data.estrategia + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('retringirProcesso').renderWith(function(data, type, full, meta)
+						{debugger
+							var shtml = "Confidencial";
+							if(fProcesso.fnVerificaPrivacidade(data))
+							{
+								if (data.retringirProcesso)
+								{
+									shtml = '<span>' + data.retringirProcesso + '</span>';
+								}
+								else
+								{
+									shtml = "";
+								}
+							}
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('acao').renderWith(function(data, type, full, meta)
+						{ //fProcesso
+							var shtml = "";
+							if (data.descricao)
+							{
+								shtml = '<span>' + data.descricao + '</span>';
+							}
+
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('natureza').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "";
+							if (data.descricao)
+							{
+								shtml = '<span>' + data.descricao + '</span>';
+							}
+
+							return shtml;
+						}).withOption('width', '10px').notVisible(),
+						DTColumnBuilder.newColumn(null).withTitle('statusProc').renderWith(function(data, type, full, meta)
+						{
+							var shtml = "";
+							if (data.descricao)
+							{
+								shtml = '<span>' + data.descricao + '</span>';
+							}
+
+							return shtml;
+						}).withOption('width', '10px'),
+
+					DTColumnBuilder.newColumn(null).withTitle('grupoTrabalho').renderWith(function(data, type, full, meta)
+					{
+						var shtml = "";
+						if (data.descricao)
+						{
+							shtml = '<span>' + data.descricao + '</span>';
+						}
+
+						return shtml;
+					}).withOption('width', '10px').notVisible(),
+
+					DTColumnBuilder.newColumn(null).withTitle('situacao').renderWith(function(data, type, full, meta)
+					{
+						var shtml = "";
+						if (data.descricao)
+						{
+							shtml = '<span>' + data.descricao + '</span>';
+						}
+
+						return shtml;
+					}).withOption('width', '10px').notVisible(),
+
+					DTColumnBuilder.newColumn(null).withTitle('instancia').renderWith(function(data, type, full, meta)
+					{
+						var shtml = "";
+						if (data.descricao)
+						{
+							shtml = '<span>' + data.descricao + '</span>';
+						}
+
+						return shtml;
+					}).withOption('width', '10px').notVisible(),
+
+					DTColumnBuilder.newColumn(null).withTitle('orgao').renderWith(function(data, type, full, meta)
+					{
+						var shtml = "";
+						if (data.descricao)
+						{
+							shtml = '<span>' + data.descricao + '</span>';
+						}
+
+						return shtml;
+					}).withOption('width', '10px').notVisible(),
+
+					DTColumnBuilder.newColumn(null).withTitle('justica').renderWith(function(data, type, full, meta)
+					{
+						var shtml = "";
+						if (data.descricao)
+						{
+							shtml = '<span>' + data.descricao + '</span>';
+						}
+
+						return shtml;
+					}).withOption('width', '10px').notVisible(),
+
+					DTColumnBuilder.newColumn(null).withTitle('tribunal').renderWith(function(data, type, full, meta)
+					{
+						var shtml = "";
+						if (data.descricao)
+						{
+							shtml = '<span>' + data.descricao + '</span>';
+						}
+
+						return shtml;
+					}).withOption('width', '10px').notVisible(),
+
+					DTColumnBuilder.newColumn(null).withTitle('instancia1').renderWith(function(data, type, full, meta)
+					{
+						var shtml = "";
+						if (data.descricao)
+						{
+							shtml = '<span>' + data.descricao + '</span>';
+						}
+
+						return shtml;
+					}).withOption('width', '10px').notVisible(),
+
+					DTColumnBuilder.newColumn(null).withTitle('localidade').renderWith(function(data, type, full, meta)
+					{
+						var shtml = "";
+						if (data.descricao)
+						{
+							shtml = '<span>' + data.descricao + '</span>';
+						}
+
+						return shtml;
+					}).withOption('width', '10px').notVisible(),
+
+					DTColumnBuilder.newColumn(null).withTitle('capturpor').renderWith(function(data, type, full, meta)
+					{
+						var shtml = "";
+						if (data.descricao)
+						{
+							shtml = '<span>' + data.descricao + '</span>';
+						}
+
+						return shtml;
+					}).withOption('width', '10px').notVisible(),
+
+					DTColumnBuilder.newColumn(null).withTitle('quando').renderWith(function(data, type, full, meta)
+					{
+						var shtml = "";
+						if (data.id)
+						{
+							shtml = '<span>' + data.id + '</span>';
+						}
+
+						return shtml;
+					}).withOption('width', '10px').notVisible(),
+					DTColumnBuilder.newColumn(null).withTitle('usuariosRestricaoProc').renderWith(function(data, type, full, meta)
+					{
+						var shtml = "";
+						if(data.usuariosRestricaoProc)
+						{
+							for(var x = 0; data.usuariosRestricaoProc.length > x;x++)
+							{
+								var oData = data.usuariosRestricaoProc[x];
+								if (oData.id)
+								{
+									shtml += '<span>' + oData.id + '</span>';
+								}
+							}
+						}
+						return shtml;
+					}).withOption('width', '10px').notVisible(),
+					DTColumnBuilder.newColumn(null).withTitle('tituloList').renderWith(function(data, type, full, meta)
+					{
+						var shtml = "";
+						if(data.tituloList)
+						{
+							for(var x = 0; data.tituloList.length > x;x++)
+							{
+								var oData = data.tituloList[x];
+								if (oData.id)
+								{
+									shtml += '<span>' + oData.id + '</span>';
+								}
+							}
+						}
+						return shtml;
+					}).withOption('width', '10px').notVisible(),
+					DTColumnBuilder.newColumn(null).withTitle('clienteList').renderWith(function(data, type, full, meta)
+					{
+						var shtml = "";
+						if(data.clienteList)
+						{
+							for(var x = 0; data.clienteList.length > x;x++)
+							{
+								var oData = data.clienteList[x];
+								if (oData.id)
+								{
+									shtml += '<span>' + oData.id + '</span>';
+								}
+							}
+						}
+						return shtml;
+					}).withOption('width', '10px').notVisible(),
+					DTColumnBuilder.newColumn(null).withTitle('advogadoList').renderWith(function(data, type, full, meta)
+					{
+						var shtml = "";
+						if(data.advogadoList)
+						{
+							for(var x = 0; data.advogadoList.length > x;x++)
+							{
+								var oData = data.advogadoList[x];
+								if (oData.id)
+								{
+									shtml += '<span>' + oData.id + '</span>';
+								}
+							}
+						}
+						return shtml;
+					}).withOption('width', '10px').notVisible(),
+					DTColumnBuilder.newColumn(null).withTitle('processoStatusList').renderWith(function(data, type, full, meta)
+					{
+						var shtml = "";
+						if(data.processoStatusList)
+						{
+							for(var x = 0; data.processoStatusList.length > x;x++)
+							{
+								var oData = data.processoStatusList[x];
+								if (oData.id)
+								{
+									shtml += '<span>' + oData.id + '</span>';
+								}
+							}
+						}
+						return shtml;
+					}).withOption('width', '10px').notVisible(),
+					DTColumnBuilder.newColumn(null).withTitle('envolvList').renderWith(function(data, type, full, meta)
+					{
+						var shtml = "";
+						if(data.envolvList)
+						{
+							for(var x = 0; data.envolvList.length > x;x++)
+							{
+								var oData = data.envolvList[x];
+								if (oData.id)
+								{
+									shtml += '<span>' + oData.id + '</span>';
+								}
+							}
+						}
+						return shtml;
+					}).withOption('width', '10px').notVisible(),
+					DTColumnBuilder.newColumn(null).withTitle('arquivos').renderWith(function(data, type, full, meta)
+					{
+						var shtml = "";
+						if(data.arquivos)
+						{
+							for(var x = 0; data.arquivos.length > x;x++)
+							{
+								var oData = data.arquivos[x];
+								if (oData.id)
+								{
+									shtml += '<span>' + oData.id + '</span>';
+								}
+							}
+						}
+						return shtml;
+					}).withOption('width', '10px').notVisible(),
+					DTColumnBuilder.newColumn(null).withTitle('envolvidosExterno').renderWith(function(data, type, full, meta)
+					{
+						var shtml = "";
+						if(data.envolvidosExterno)
+						{
+							for(var x = 0; data.envolvidosExterno.length > x;x++)
+							{
+								var oData = data.envolvidosExterno[x];
+								if (oData.id)
+								{
+									shtml += '<span>' + oData.id + '</span>';
+								}
+							}
+						}
+						return shtml;
+					}).withOption('width', '10px').notVisible(),
                         DTColumnBuilder.newColumn('modifyUser').withTitle('modifyUser').notVisible(),
                         DTColumnBuilder.newColumn('modifyDateUTC').withTitle('modifyDateUTC').notVisible(),
                         DTColumnBuilder.newColumn(null).withTitle('Ações').notSortable().renderWith(_actions).withOption('width', '140px'),
-                    ];
+					];
 				},
 				pdVendas: function(vm, _html, _actions)
 				{
