@@ -1,274 +1,512 @@
-(function() {
-    angular.module('wdApp.apps.counties', []).controller('CountiesController', ['$scope', 'SysMgmtData', 'toastr', 'toastrConfig',
-        function($scope, SysMgmtData, toastr, toastrConfig) {
-            var cvm = this;
-            var initLoad = true; //used to ensure not calling server multiple times
-            var fetch_url = WebDaptiveAppConfig.base_county_url + WebDaptiveAppConfig.fetch_url;
-            var refresh_url = WebDaptiveAppConfig.base_county_url + WebDaptiveAppConfig.refresh_url;
-            var create_url = WebDaptiveAppConfig.base_county_url + WebDaptiveAppConfig.create_url;
-            var update_url = WebDaptiveAppConfig.base_county_url + WebDaptiveAppConfig.update_url;
-            var delete_url = WebDaptiveAppConfig.base_county_url + WebDaptiveAppConfig.delete_url;
-            cvm.isActive = false;
-            toastrConfig.closeButton = true;
+;(function () {
+    angular.module('wdApp.apps.advogado', ['datatables', 'ngResource', 'datatables.scroller','ui.bootstrap', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+      .controller('AdvogadoController', advogadoController)
 
-            //form model data
-            cvm.county = {
-                id: '',
-                description: ''
-            };
+    function advogadoController ($scope, $compile, DTOptionsBuilder, DTColumnBuilder, ModalService, $rootScope, SysMgmtData, TableCreate, Datatablessss, tableOptionsFactory,
+      tableColumnsFactory, FiltersFactory, validationFactory,dialogFactory) {
+      var vm = this
+      vm.selected = {}
+      vm.selectAll = false
+      vm.toggleAll = toggleAll
+      vm.toggleOne = toggleOne
+      vm.status = status
+      vm.message = ''
 
-            //grid column defs
-            var countyColumnDefs = [
-                { headerName: "County Id", field: "id", width: 270 },
-                { headerName: "County Description", field: "description", width: 450 }
-            ];
+      vm.dtInstance = {}
+      vm.persons = {}
 
-            //grid row select function
-            function rowSelectedFunc(event) {
-                cvm.county.id = event.node.data.id;
-                cvm.county.description = event.node.data.description;
-            };
+      $scope.advogado = {
+        tipoPessoa: 2
+      }
 
-            //grid options
-            cvm.countyGridOptions = {
-                columnDefs: countyColumnDefs,
-                rowSelection: 'single',
-                onRowSelected: rowSelectedFunc,
-                rowHeight: 30,
-                headerHeight: 30,
-                enableColResize: true
-            };
+      function reloadData () {
+        var resetPaging = false
+        vm.dtInstance.reloadData(callback, resetPaging)
+      }
 
-            //reusable paging datasource grid
-            function createNewDatasource(resIn) {
-                var countyDataSource = {
-                    pageSize: 20, //using default paging of 20
-                    getRows: function(params) {
-                        if (initLoad) {
-                            //console.log("getRows() initLoad=true: " + resIn);
-                            initLoad = false;
-                            cvm.isActive = false;
-                            var dataThisPage = resIn.counties;
-                            cvm.gList = dataThisPage;
-                            var lastRow = (resIn) ? resIn.resultsSetInfo.totalRowsAvailable : 0;
-                            params.successCallback(dataThisPage, lastRow);
+      function callback (json) {
+        console.log(json)
+      }
+      $rootScope.reloadDataAdvogado = function (_callback) {
+        var resetPaging = false
+        vm.dtInstance.reloadData(_callback, resetPaging)
+      }
 
-                        } else {
-                            //console.log('asking for ' + params.startRow + ' to ' + params.endRow);
-                            SysMgmtData.processPostPageData(fetch_url, new qat.model.pagedInquiryRequest(params.startRow / 20, true), function(res) {
-                                var dataThisPage = res.counties;
-                                cvm.gList = dataThisPage;
-                                var lastRow = res.resultsSetInfo.totalRowsAvailable;
-                                params.successCallback(dataThisPage, lastRow);
-                            });
-                        }
-                    }
-                };
-                cvm.countyGridOptions.api.setDatasource(countyDataSource);
-            };
+      $scope.toggle = function () {
+        $scope.state = !$scope.state
+      }
 
-            //initial data load
-            processPostData(fetch_url, new qat.model.pagedInquiryRequest(0, true), false);
+      vm.edit = edit;
+      vm.view = view;
+      vm.delete = deleteRow;
+      vm.dtInstance = {};
+      vm.persons = {};
 
-            //reusable data methods
-            //reusable processGetData (refresh,delete)
-            function processGetData(_url) {
-                //console.log(_url);
-                cvm.countyGridOptions.api.showLoadingOverlay(true);
-                SysMgmtData.processGetPageData(_url, function(res) {
-                    if (res) {
-                        initLoad = true;
-                        createNewDatasource(res); //send Data
-                    } else {
-                        cvm.countyGridOptions.api.hideOverlay();
-                    }
+      function rCallback (nRow, aData) {
+        // console.log('row')
+      }
 
-                });
-            };
+      function recompile (row, data, dataIndex) {
+        $compile(angular.element(row).contents())($scope)
+      }
 
-            //reusable processGetData (insert, update, pagedFetch)
-            function processPostData(_url, _req, _bLoading) {
-                //console.log(_url);
-                if (_bLoading) {
-                    cvm.countyGridOptions.api.showLoadingOverlay(true);
-                }
-                SysMgmtData.processPostPageData(_url, _req, function(res) {
-                    if (res) {
-                        initLoad = true;
-                        createNewDatasource(res); //send Data
-                    } else {
-                        cvm.countyGridOptions.api.hideOverlay();
-                    }
-                });
-            };
+      var createdRow = function (row, data, dataIndex) {
+        // Recompiling so we can bind Angular directive to the DT
+        $compile(angular.element(row).contents())($scope)
+      }
 
-            //refresh county function
-            cvm.refreshCounties = function(refreshCount) {
-                cvm.isActive = !cvm.isActive;
-                //clear form data
-                cvm.clearForm();
-                var send_url = refresh_url + "?refreshInt=" + refreshCount + "&retList=true&retPaged=true";
-                processGetData(send_url);
-            };
+      var fnDataSRC = function (json) {
+        console.log(json)
+        json['recordsTotal'] = json.advogadoList.length
+        json['recordsFiltered'] = json.advogadoList.length
+        json['draw'] = 1
+        console.log(json)
+        return json.advogadoList
+      }
 
-            //form methods
-            //reusable clear form logic
-            cvm.clearForm = function() {
-                //clear data
-                cvm.county.id = "";
-                cvm.county.description = "";
-                //clear grid selection
-                cvm.countyGridOptions.api.deselectAll();
-                //set form to pristine
-                cvm.form_county.$setPristine();
-            };
+      var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll"' +
+        'ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">'
 
-            //reusable button form logic
-            cvm.processButtons = function(_btnType) {
-                //console.log(_btnType);
-                if (cvm.form_county.$valid) {
-                    switch (_btnType) {
-                        //Add Button
-                        case 'A':
-                            processPostData(create_url, new qat.model.reqCounty(new qat.model.county(cvm.county.id, cvm.county.description), true, true), true);
-                            break;
-                            //Update Button
-                        case 'U':
-                            processPostData(update_url, new qat.model.reqCounty(new qat.model.county(cvm.county.id, cvm.county.description), true, true), true);
-                            break;
-                            //Delete Button
-                        case 'D':
-                            var send_url = delete_url + "?countyId=" + cvm.county.id + "&retList=true&retPaged=true";
-                            processGetData(send_url);
-                            break;
-                            //List Button
-                        case 'L':
-                            processPostData(fetch_url, new qat.model.pagedInquiryRequest(0, true), true);
-                            break;
-                        default:
-                            console.log('Invalid button type: ' + _btnType);
-                    };
-                    //clear the form
-                    cvm.clearForm();
-                } else {
-                    if (_btnType == 'L') {
-                        processPostData(fetch_url, new qat.model.pagedInquiryRequest(0, true), true);
-                        //clear the form
-                        cvm.clearForm();
-                    } else {
-                        toastr.error('County form error, please correct and resubmit.', 'Error');
-                    }
-                }
-            };
+      var actionsHtml = function (data, type, full, meta) {
+        vm.persons[data.id] = data;
+        return '<a href="#/advogado/details/advogado" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i></a>&nbsp;' +
+        '<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
+        '   <i class="fa fa-edit"></i>' +
+        '</button>&nbsp;' +
+        '<button class="btn btn-danger" ng-click="showCase.delete(showCase.persons[' + data.id + '])">' +
+        '   <i class="fa fa-trash-o"></i>' +
+        '</button>'
+      }
 
+      function edit (person) {
+        $rootScope.advogado = person
+        dialogFactory.dialog('views/advogado/dialog/dAdvogado.html', 'AdvogadoUpdateController', validationFactory.advogado())
+      }
+      function view (person) {
+        $rootScope.advogado = person
+        //  Datatablessss.reloadData(vm)
+        dialogFactory.dialog('views/advogado/dialog/dAdvogado.html', 'AdvogadoUpdateController', validationFactory.advogado())
+      }
+
+      function deleteRow (person) {
+        $rootScope.advogado = person
+        dialogFactory.dialog('views/advogado/dialog/dAdvogado.html', 'AdvogadoDeleteController', validationFactory.advogado())
+      }
+
+      Datatablessss.getTable('/pessoa/api/advogado/fetchPage', fnDataSRC, new qat.model.empresaInquiryRequest(0, true, null, null, null), this, rCallback, null, recompile,
+        tableOptionsFactory.advogado(vm, createdRow, $scope, FiltersFactory.advogado(), reloadData), tableColumnsFactory.advogado(vm, '', actionsHtml))
+
+      function toggleAll (selectAll, selectedItems) {
+        for (var id in selectedItems) {
+          if (selectedItems.hasOwnProperty(id)) {
+            selectedItems[id] = selectAll
+          }
         }
-    ]);
-}).call(this);
+      }
 
-(function() {
-    angular.module('wdApp.apps.pdCompras.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-        .controller('KitchenSinkCtrl', function($rootScope, $scope, fModels, SysMgmtData, fPessoa, moment, calendarConfig) {
+      function status () {}
 
+      function toggleOne (selectedItems) {
+        for (var id in selectedItems) {
+          if (selectedItems.hasOwnProperty(id)) {
+            if (!selectedItems[id]) {
+              vm.selectAll = false
+              return
+            }
+          }
+        }
+        vm.selectAll = true
+      }
 
+      function toggle () {
+        $scope.state = !$scope.state
+      }
+    }
+  })()
+  ;(function () {
+    angular.module('wdApp.apps.advogado.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+      .controller('AdvogadoInsertController', function ($rootScope, $scope, fModels, SysMgmtData, toastr, $element, close,fAdvogado) {
+        var vm = this
+        debugger
+        $scope.advogado = {};
+        //advogado.horasTrabalhos
+        $scope.advogado.horasTrabalhos = [];
+        $scope.advogado.horasTrabalhos.push({});
 
-            var vm = this;
+        $scope.advogado.advogados = [];
+        $scope.advogado.advogados.push({});
 
-            //These variables MUST be set as a minimum for the calendar to work
-            vm.calendarView = 'month';
-            vm.viewDate = new Date();
-            var actions = [{
-                label: '<i class=\'glyphicon glyphicon-pencil\'></i>',
-                onClick: function(args) {
-                    //    alert.show('Edited', args.calendarEvent);
-                }
-            }, {
-                label: '<i class=\'glyphicon glyphicon-remove\'></i>',
-                onClick: function(args) {
-                    //   alert.show('Deleted', args.calendarEvent);
-                }
-            }];
-            vm.events = [{
-                title: 'An event',
-                color: calendarConfig.colorTypes.warning,
-                startsAt: moment().startOf('week').subtract(2, 'days').add(8, 'hours').toDate(),
-                endsAt: moment().startOf('week').add(1, 'week').add(9, 'hours').toDate(),
-                draggable: true,
-                resizable: true,
-                actions: actions
-            }, {
-                title: '<i class="glyphicon glyphicon-asterisk"></i> <span class="text-primary">Another event</span>, with a <i>html</i> title',
-                color: calendarConfig.colorTypes.info,
-                startsAt: moment().subtract(1, 'day').toDate(),
-                endsAt: moment().add(5, 'days').toDate(),
-                draggable: true,
-                resizable: true,
-                actions: actions
-            }, {
-                title: 'This is a really long event title that occurs on every year',
-                color: calendarConfig.colorTypes.important,
-                startsAt: moment().startOf('day').add(7, 'hours').toDate(),
-                endsAt: moment().startOf('day').add(19, 'hours').toDate(),
-                recursOn: 'year',
-                draggable: true,
-                resizable: true,
-                actions: actions
-            }];
+        $scope.createForm = function(type){ 
+            $scope.advogado.horasTrabalhos.push({});
+        };
 
-            vm.cellIsOpen = true;
+        $scope.deleteForm = function(type){ 
+            $scope.advogado.horasTrabalhos.push({});
+        };
 
-            vm.addEvent = function() {
-                vm.events.push({
-                    title: 'New event',
-                    startsAt: moment().startOf('day').toDate(),
-                    endsAt: moment().endOf('day').toDate(),
-                    color: calendarConfig.colorTypes.important,
-                    draggable: true,
-                    resizable: true
-                });
-            };
+        var fnCallBack = function (res) {
+            debugger
+            if (res.operationSuccess == true) {
+                $element.modal('hide')
+                close(null, 500)
+                toastr.success('Deu Certo seu tanga.', 'Sucess')
+                $rootScope.reloadDataCliente(function (data) {
+                //debugger
+                })
+            }
+        }
 
-            vm.eventClicked = function(event) {
-                //  alert.show('Clicked', event);
-            };
+        fAdvogado.fnOpenView(vm, $scope);
+        fAdvogado.fnCreateMock($scope);
+        $scope.saveAdvogado = function (bValidate,b) {
+          debugger
+     //     if(bValidate)
 
-            vm.eventEdited = function(event) {
-                // alert.show('Edited', event);
-            };
+            fAdvogado.fnMontaObjeto($scope.advogado, 'INSERT', 'advocacia/api/advogado/insert',fnCallBack);
+        }
+      })
+  })()
+  ;(function () {
+    angular.module('wdApp.apps.advogado.update', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+      .controller('AdvogadoUpdateController', function ($rootScope, $scope, fModels, SysMgmtData, fPessoa, toastr, $element, close,validationFactory) {
+        var vm = this
+        $scope.advogado = {}
 
-            vm.eventDeleted = function(event) {
-                //  alert.show('Deleted', event);
-            };
+        $scope.advogado = $rootScope.advogado;
+        $scope.enderecos =  $scope.advogado.enderecos;
+        $scope.telefones = $scope.advogado.telefones;
+        $scope.emails = $scope.advogado.emails;
+        $scope.documentos = $scope.advogado.documentos;
 
-            vm.eventTimesChanged = function(event) {
-                //   alert.show('Dropped or resized', event);
-            };
+        fPessoa.fnOpenView(vm,$scope);
 
-            vm.toggle = function($event, field, event) {
-                $event.preventDefault();
-                $event.stopPropagation();
-                event[field] = !event[field];
-            };
+       // ===========================================
+        var fnCallBack = function (res) {
+          if (res.operationSuccess == true) {
+            $element.modal('hide')
+            close(null, 500)
+            toastr.success('Deu Certo seu tanga.', 'Sucess')
+            $rootScope.reloadDataAdvogado(function (data) {
+              //debugger
+            })
+          }
+        }
 
-            vm.timespanClicked = function(date, cell) {
+        $scope.saveAdvogado = function (bValidate,b) {
+          if(bValidate)
+              fPessoa.fnMontaObjeto($scope.advogado, $scope.enderecos, $scope.emails, $scope.telefones, 'UPDATE', 'pessoa/api/advogado/update', fnCallBack)
+        }
+      })
+  })()
+  ;(function () {
+    angular.module('wdApp.apps.advogado.delete', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+      .controller('AdvogadoDeleteController', function ($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        var vm = this
+        $scope.advogado = {}
+        $scope.advogado = $rootScope.advogado
+        console.log($rootScope.advogado)
+        $scope.saveAdvogado = function () {
+          fPessoa.fnDelete($scope.advogado, 'pessoa/api/advogado/update/', function () {
+            console.log('ddda   aqui')
+          })
+        }
+      })
+  })()
+  ;(function () {
+    angular.module('wdApp.apps.advogado.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+      .controller('AdvogadoViewController', function ($rootScope, $scope, fModels, SysMgmtData, fPessoa, $location, toastr) {
+        var vm = this
 
-                if (vm.calendarView === 'month') {
-                    if ((vm.cellIsOpen && moment(date).startOf('day').isSame(moment(vm.viewDate).startOf('day'))) || cell.events.length === 0 || !cell.inMonth) {
-                        vm.cellIsOpen = false;
-                    } else {
-                        vm.cellIsOpen = true;
-                        vm.viewDate = date;
-                    }
-                } else if (vm.calendarView === 'year') {
-                    if ((vm.cellIsOpen && moment(date).startOf('month').isSame(moment(vm.viewDate).startOf('month'))) || cell.events.length === 0) {
-                        vm.cellIsOpen = false;
-                    } else {
-                        vm.cellIsOpen = true;
-                        vm.viewDate = date;
-                    }
-                }
+        var searchObject = $location.search();
+              var _emprId = null;
+              if ((localStorage.getItem('empresa') !== undefined) && (localStorage.getItem('empresa') !== null))
+              {
+                  _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+        }
 
-            };
+        SysMgmtData.processPostPageData("main/api/request",
+              {
+                  url: "pessoa/api/advogado/fetchPage",
+                  token: $rootScope.authToken,
+                  request: new qat.model.empresaInquiryRequest(0, true, null, parseInt(searchObject.id, 10), null, null)
+              }, function(res)
+              {
+          $scope.advogado = {}
+          $scope.advogado = res.advogadoList[0];
+          console.log($scope.advogado);
 
+          if($scope.advogado.emails.length === 0 )
+          {
+            $scope.advogado.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+          }
+
+          $scope.status = $scope.advogado.statusList[$scope.advogado.statusList.length - 1];
+          console.log($scope.advogado);
         });
+        $scope.showEmailType = function() {
+          var sReturn = 'Not set';
+          if($scope.regime)
+          {
+                for(var x = 0;x < $scope.regime.length;x++)
+                {
+                    if( $scope.empresa.regime && $scope.regime[x].id == $scope.empresa.regime.id)
+                    {
+                        sReturn =  $scope.regime[x].nome
+                    }
+                }
+          }
+          return sReturn;
+        };
 
-})();
+
+
+        $scope.insertFormTelefone = function(email) {
+          $scope.advogado.telefones.push({numero : "",telefoneTypeEnum : "EMPRESA"});
+        };
+
+        $scope.deleteFormTelefone = function(email) {
+
+          for(var x=0;x < $scope.advogado.telefones.length;x++)
+          {
+            if($scope.advogado.telefones[x].id == email.id || $scope.advogado.telefones[x].numero == email.numero)
+            {
+              $scope.advogado.telefones[x].modelAction = "DELETE";
+            }
+          }
+          $scope.updateAdvogado();
+        };
+
+        $scope.insertFormEmail = function(email) {
+          $scope.advogado.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+        };
+
+        $scope.deleteFormEmailsdddd = function(email) {
+
+          for(var x=0;x < $scope.advogado.emails.length;x++)
+          {
+            if($scope.advogado.emails[x].id == email.id || $scope.advogado.emails[x].email == email.email)
+            {
+              $scope.advogado.emails[x].modelAction = "DELETE";
+            }
+          }
+          $scope.updateAdvogado();
+        };
+
+        $scope.emailType = [
+          {nome : '1',label : 'Principal'},
+          {nome : '2',label : 'NFe'},
+          {nome : '3',label : 'Compras'},
+          {nome : '4',label : 'Vendas'},
+          {nome : '5',label : 'Outros'}
+        ];
+
+        $scope.statusType = [
+          {nome : 'ATIVO',label : 'Ativo'},
+          {nome : 'INATIVO',label : 'Inativo'},
+          {nome : 'DELETADO',label : 'Deletado'},
+          {nome : 'SUSPENSO',label : 'Suspenso'},
+          {nome : 'NEGATIVADO',label : 'Negativado'},
+          {nome : 'ANALISANDO',label : 'Analisando'}
+        ];
+
+        $scope.telefoneType = [
+          {nome : '1',label : 'Particular'},
+          {nome : '2',label : 'Vendas'},
+          {nome : '3',label : 'Compras'},
+          {nome : '4',label : 'NF-e'},
+          {nome : '5',label : 'Sac'},
+          {nome : '6',label : 'Representante'},
+          {nome : '7',label : 'Diretor'},
+          {nome : '8',label : 'Gerente'},
+          {nome : '9',label : 'Empresa'},
+          {nome : '10',label : 'Celular'}
+        ];
+
+
+        $scope.showEmailType = function(value) {
+          var sReturn = 'Vazio';
+          if($scope.emailType)
+          {
+                for(var x = 0;x < $scope.emailType.length;x++)
+                {
+                    if( value && $scope.emailType[x].nome == value)
+                    {
+                        sReturn =  $scope.emailType[x].label
+                    }
+                }
+          }
+          return sReturn;
+        };
+
+        $scope.showTelefoneType = function(value) {
+          console.log(value)
+          var sReturn = 'Vazio';
+          if($scope.telefoneType)
+          {
+                for(var x = 0;x < $scope.telefoneType.length;x++)
+                {
+                    if( value && $scope.telefoneType[x].nome == value)
+                    {
+                        sReturn =  $scope.telefoneType[x].label
+                    }
+                }
+          }
+          return sReturn;
+        };
+
+        $scope.showStatusType = function(value) {
+
+          var sReturn = 'Vazio';
+
+          if($scope.statusType)
+          {
+                for(var x = 0;x < $scope.statusType.length;x++)
+                {
+                    if( value && $scope.statusType[x].nome == value)
+                    {
+                        sReturn =  $scope.statusType[x].label
+                    }
+                }
+          }
+
+          return sReturn;
+        };
+
+        var fnCallBack = function (res) {
+          if (res.operationSuccess == true) {
+            for (var a = 0; a < res.advogadoList.length;a++)
+            {
+                if( res.advogadoList[a].id === $scope.advogado.id)
+                {
+                  $scope.advogado = res.advogadoList[a];
+                  if($scope.advogado.emails.length === 0 )
+                  {
+                    $scope.advogado.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+                  }
+                  return;
+                }
+
+            }
+
+            toastr.success('Deu Certo seu tanga.', 'Sucess')
+          }
+        }
+
+        $scope.formatterDate = function (value) {
+          return moment(value).format('DD/MM/YYYY H:MM')
+        }
+        $scope.updateStatus = function () {
+
+            var oObject = {
+              dataStatus: (new Date()).getTime(),
+              status : $scope.status.status,
+              acaoEnumValue : 0,
+              tabelaEnumValue : 17,
+              parentId : $scope.advogado.id,
+              note: $scope.status.note
+            }
+
+            SysMgmtData.processPostPageData("main/api/request", {
+                url: "entidade/api/status/insert",
+                token: $rootScope.authToken,
+                request: new qat.model.reqStatus(oObject, true, true)
+            }, function(res) {
+                if (res.operationSuccess == true) {
+                  SysMgmtData.processPostPageData("main/api/request",
+                  {
+                    url: "pessoa/api/advogado/fetchPage",
+                    token: $rootScope.authToken,
+                    request: new qat.model.empresaInquiryRequest(0, true, null, parseInt($scope.advogado.id, 10), null, null)
+                  }, function(res)
+                  {
+                    $scope.advogado = {}
+                    $scope.advogado = res.advogadoList[0];
+                    console.log($scope.advogado);
+
+                    if($scope.advogado.emails.length === 0 )
+                    {
+                      $scope.advogado.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+                    }
+
+                    $scope.status = $scope.advogado.statusList[$scope.advogado.statusList.length - 1];
+                  });
+                  toastr.success('Deu Certo seu tanga.', 'Sucess')
+                }
+            });
+        }
+
+        $scope.insertNote = function () {
+  //debugger
+            var oObject = {
+              dataStatus: (new Date()).getTime(),
+              noteText : $scope.noteText,
+              acaoEnumValue : 0,
+              tabelaEnumValue : 17,
+              parentId : $scope.advogado.id,
+              emprId : $scope.advogado.emprId,
+              createUser : $rootScope.user.user,
+              createDateUTC : (new Date()).getTime()
+            }
+
+            SysMgmtData.processPostPageData("main/api/request", {
+                url: "entidade/api/note/insert",
+                token: $rootScope.authToken,
+                request: new qat.model.reqNote(oObject, true, true)
+            }, function(res) {
+                if (res.operationSuccess == true) {
+                  SysMgmtData.processPostPageData("main/api/request",
+                  {
+                    url: "pessoa/api/advogado/fetchPage",
+                    token: $rootScope.authToken,
+                    request: new qat.model.empresaInquiryRequest(0, true, null, parseInt($scope.advogado.id, 10), null, null)
+                  }, function(res)
+                  {
+                    $scope.advogado = {}
+                    $scope.advogado = res.advogadoList[0];
+                    console.log($scope.advogado);
+
+                    if($scope.advogado.emails.length === 0 )
+                    {
+                      $scope.advogado.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+                    }
+
+                    $scope.status = $scope.advogado.statusList[$scope.advogado.statusList.length - 1];
+                  });
+                  toastr.success('Deu Certo seu tanga.', 'Sucess')
+                }
+            });
+        }
+        $scope.updateAdvogado = function () {
+
+          fPessoa.fnMontaObjeto($scope.advogado, $scope.advogado.enderecos, $scope.advogado.emails, $scope.advogado.telefones, 'UPDATE', 'pessoa/api/advogado/update', fnCallBack);
+        }
+      })
+  })()
+  ;(function () {
+    angular.module('wdApp.apps.advogado.search', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
+      .controller('AdvogadoSearchController', function ($rootScope, $scope, fModels, SysMgmtData, fPessoa) {
+        var vm = this
+        $scope.visibled = false
+        //   $scope.advogado = []
+
+        $scope.countrySelected = function (selected) {
+          // debugger
+          if (selected) {
+            $scope.pessoa = selected.originalObject
+            $scope.visibled = true
+          }else {
+            console.log('cleared')
+          }
+        }
+
+        SysMgmtData.processPostPageData('main/api/request',
+          {
+            url: 'pessoa/api/advogado/fetchPage',
+            token: $rootScope.authToken,
+            request: new qat.model.empresaInquiryRequest(0, true, null, null, null)
+          }, function (res) {
+            //  debugger
+            $scope.advogado = res.advogadoList
+          })
+      })
+  })()

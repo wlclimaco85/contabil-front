@@ -180,6 +180,20 @@
             }
           })
         },
+        advogado: function () {
+          $('.advogadoForm').formValidation({
+            framework: 'bootstrap',
+            icon: {
+              valid: 'glyphicon glyphicon-ok',
+              invalid: 'glyphicon glyphicon-remove',
+              validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+              'nomeResponsavel': notEmptyStringMinMaxRegexp,
+              'cpf': integerNotEmptyValidation
+            }
+          })
+        },
         pdVendas: function () {
           $('.nfSaidaForm').formValidation({
             framework: 'bootstrap',

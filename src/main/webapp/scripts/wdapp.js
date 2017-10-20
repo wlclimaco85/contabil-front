@@ -179,8 +179,11 @@ var WebDaptiveAppConfig = {
 
 		'wdApp.apps.processo.insert','wdApp.apps.processo.update','wdApp.apps.processo.delete'
 
+		,'wdApp.apps.advogado','wdApp.apps.advogado.insert','wdApp.apps.advogado.update','wdApp.apps.advogado.delete','wdApp.ajaxCall.advogado'
 
+		,'wdApp.apps.orgao','wdApp.apps.orgao.insert','wdApp.apps.orgao.update','wdApp.apps.orgao.delete'
 
+		,'wdApp.apps.especialidade'
 
 
     ]);
@@ -212,7 +215,7 @@ var WebDaptiveAppConfig = {
                 'cadastros/tables/almoxarifado', 'cadastros/tables/cidade', 'cadastros/tables/cliente', 'cadastros/tables/convenio',
                 'cadastros/tables/estado', 'cadastros/tables/filial', 'cadastros/tables/fornecedor', 'cadastros/tables/transportador',
                 'produto/tables/categoria', 'produto/tables/marca', 'produto/tables/uniMed', 'produto/tables/servico',
-                'produto/forms/CadCategoria', 'produto/forms/CadMarca', 'produto/forms/CadUniMed', 'produto/forms/CadProduto', 'advogado/tables/processo',
+                'produto/forms/CadCategoria', 'produto/forms/CadMarca', 'produto/forms/CadUniMed', 'produto/forms/CadProduto', 'advogado/tables/processo','advogado/tables/advogado','advogado/tables/orgao',
 				'advogado/details/processo', 'compras/details/cotacao', 'advogado/forms/advogadoAgenda', 'advogado/forms/advogadoAgenda2', 'clinica/cadConsulta', 'clinica/cadMedico',
 				'clinica/cadPaciente', 'clinica/cadPlanoSaude', 'gerencia/tables/empresa', 'gerencia/tables/site', 'gerencia/tables/plano', 'gerencia/tables/servico',
 				'gerencia/tables/usuarios', 'gerencia/tables/contatos', 'gerencia/tables/historico', 'gerencia/tables/permissoes', 'dicionario/tables/tabelas', 'dicionario/tables/campos',

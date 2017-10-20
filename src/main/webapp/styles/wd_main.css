@@ -13916,3 +13916,10 @@ div.show-image input.delete {
     padding-right: 15px;
     padding-left: 15px;
 }
+
+.advogado .btn span.glyphicon {    			
+	opacity: 0;				
+}
+.advogado .btn.active span.glyphicon {				
+	opacity: 1;				
+}

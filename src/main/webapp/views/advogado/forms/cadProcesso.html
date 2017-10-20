@@ -12,8 +12,8 @@
 
             <div class="col-sm-12">
                 <div class="col-sm-2">
-                    <label for="exampleInputEmail1">N∞ Pasta</label>
-                    <input type="text" ng-model="processo.pasta" name="pasta" class="form-control" placeholder="N∞ Pasta">
+                    <label for="exampleInputEmail1">N¬∞ Pasta</label>
+                    <input type="text" ng-model="processo.pasta" name="pasta" class="form-control" placeholder="N¬∞ Pasta">
                 </div>
                 <div class="col-sm-6">
                     <label for="exampleInputEmail1">Assunto</label>
@@ -47,7 +47,7 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">DescriÁ„o</label>
+                    <label for="exampleInputEmail1">Descri√ß√£o</label>
                     <textarea class="form-control" rows="7" ng-model="processo.descricao" id="descricao"></textarea>
                 </div>
             </div>
@@ -98,7 +98,7 @@
                             <div class="col-sm-1">
                                 <label for="exampleInputtext1">Cliente</label>
                                 <div class="row">
-                                    <toggle style="width:24px;margin-left:24px;margin-top:25px;" ng-model="envolvList.bCliente" ng-init="envolvList.bCliente = 1" style="android" on="Sim" off="N„o" onstyle="btn-success"
+                                    <toggle style="width:24px;margin-left:24px;margin-top:25px;" ng-model="envolvList.bCliente" ng-init="envolvList.bCliente = 1" style="android" on="Sim" off="N√£o" onstyle="btn-success"
                                         offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'0'"></toggle>
                                 </div>
                             </div>
@@ -133,14 +133,14 @@
 
             <div class="row " style="margin-top : 10px"></div>
             <hr>
-            <a href="javascript:void(0)" ng-model="collapsed" ng-click="collapsed=!collapsed">Outras <strong>InformaÁıes</strong></a>
+            <a href="javascript:void(0)" ng-model="collapsed" ng-click="collapsed=!collapsed">Outras <strong>Informa√ß√µes</strong></a>
             <div class="row " style="margin-top : 10px"></div>
             <div ng-show="collapsed">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="col-sm-12">
                         <div class="col-sm-12">
-                            <label for="exampleInputtext1">FUNDAMENTA«¬O JUR⁄DICA</label>
+                            <label for="exampleInputtext1">FUNDAMENTA√á√ÇO JUR√öDICA</label>
                             <textarea class="form-control" rows="5" ng-model="processo.fundamentacaoJuridica" id="observacao"></textarea>
                         </div>
                         <div class="col-sm-12">
@@ -152,7 +152,7 @@
                             <textarea class="form-control" rows="5" ng-model="processo.pretensoesCliente" id="observacao"></textarea>
                         </div>
                         <div class="col-sm-12">
-                            <label for="exampleInputtext1">ESTRAT…GIA</label>
+                            <label for="exampleInputtext1">ESTRAT√âGIA</label>
                             <textarea class="form-control" rows="5" ng-model="processo.estrategia" id="observacao"></textarea>
                         </div>
                     </div>
@@ -182,7 +182,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-4">
-                                    <label for="exampleInputEmail1">JustiÁa</label>
+                                    <label for="exampleInputEmail1">Justi√ßa</label>
                                     <div class="row">
                                         <ui-select style="margin-left:10px" ng-model="processo.justica" theme="bootstrap">
                                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
@@ -194,7 +194,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-4">
-                                    <label for="exampleInputEmail1">Inst·ncia</label>
+                                    <label for="exampleInputEmail1">Inst√°ncia</label>
                                     <div class="row">
                                         <ui-select style="margin-left:10px" ng-model="processo.instancia" theme="bootstrap">
                                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
@@ -208,7 +208,7 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group col-sm-6">
-                                    <label for="exampleInputEmail1">”rg„o</label>
+                                    <label for="exampleInputEmail1">√ìrg√£o</label>
                                     <div class="row">
                                         <ui-select style="margin-left:10px" ng-model="processo.orgao" theme="bootstrap">
                                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
@@ -220,7 +220,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-6">
-                                    <label for="exampleInputEmail1">SituaÁ„o</label>
+                                    <label for="exampleInputEmail1">Situa√ß√£o</label>
                                     <div class="row">
                                         <ui-select style="margin-left:10px" ng-model="processo.situacao" theme="bootstrap">
                                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
@@ -234,17 +234,17 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group col-sm-3">
-                                    <label for="exampleInputtext1">NumeraÁ„o Padr„o CNJ</label>
+                                    <label for="exampleInputtext1">Numera√ß√£o Padr√£o CNJ</label>
                                     <input type="text" class="form-control" ng-model="processo.npadraocnj" name="text" placeholder="0.00">
                                 </div>
                                 <div class="form-group col-sm-3">
-                                    <label for="exampleInputtext1">NumeraÁ„o Outro Padr„o</label>
+                                    <label for="exampleInputtext1">Numera√ß√£o Outro Padr√£o</label>
                                     <input type="text" class="form-control" ng-model="processo.npadrao" name="text" placeholder="0.00">
                                 </div>
                                 <div class="form-group col-sm-3">
                                     <label for="exampleInputtext1">Agendar Captura</label>
                                     <div class="row">
-                                        <toggle ng-model="processo.agendarCap" ng-init="processo.agendarCap = false" style="android" on="Sim" off="N„o" onstyle="btn-success"
+                                        <toggle ng-model="processo.agendarCap" ng-init="processo.agendarCap = false" style="android" on="Sim" off="N√£o" onstyle="btn-success"
                                             offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
                                     </div>
                                 </div>
@@ -255,7 +255,7 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group col-sm-4">
-                                    <label for="exampleInputtext1">Valor da aÁ„o</label>
+                                    <label for="exampleInputtext1">Valor da a√ß√£o</label>
                                     <input type="text" class="form-control" ng-model="processo.valorAcao" name="text" placeholder="0.00">
                                 </div>
                                 <div class="form-group col-sm-4">
@@ -263,9 +263,9 @@
                                     <input type="text" class="form-control" ng-model="processo.valorProvisionado" name="text" placeholder="0.00">
                                 </div>
                                 <div class="form-group col-sm-4">
-                                    <label for="exampleInputtext1">Segredo JustiÁa</label>
+                                    <label for="exampleInputtext1">Segredo Justi√ßa</label>
                                     <div class="row">
-                                        <toggle ng-model="processo.segJustica" ng-init="processo.segJustica = false" style="android" on="Sim" off="N„o" onstyle="btn-success"
+                                        <toggle ng-model="processo.segJustica" ng-init="processo.segJustica = false" style="android" on="Sim" off="N√£o" onstyle="btn-success"
                                             offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
                                     </div>
                                 </div>
@@ -281,7 +281,7 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
-                            PAR¡METROS DA CAPTURA
+                            PAR√ÅMETROS DA CAPTURA
                             </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
                         </h4>
                     </div>
@@ -289,7 +289,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="form-group col-sm-3">
-                                    <label for="exampleInputEmail1">JustiÁa</label>
+                                    <label for="exampleInputEmail1">Justi√ßa</label>
                                     <div class="row">
                                         <ui-select style="margin-left:10px" ng-model="processo.justica" theme="bootstrap">
                                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
@@ -313,7 +313,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-3">
-                                    <label for="exampleInputEmail1">Inst·ncia</label>
+                                    <label for="exampleInputEmail1">Inst√°ncia</label>
                                     <div class="row">
                                         <ui-select style="margin-left:10px" ng-model="processo.instancia1" theme="bootstrap">
                                             <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
@@ -352,14 +352,14 @@
                                 </div>
                                 <div class="row col-sm-4">
                                     <div class="form-group">
-                                        <label for="exampleInputtext1">N∞ do Processo</label>
-                                        <input style="margin-left:10px" type="text" class="form-control" ng-model="processo.numeroprocesso" name="text" placeholder="N∞mero do Processo">
+                                        <label for="exampleInputtext1">N¬∞ do Processo</label>
+                                        <input style="margin-left:10px" type="text" class="form-control" ng-model="processo.numeroprocesso" name="text" placeholder="N¬∞mero do Processo">
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-4">
-                                    <label for="exampleInputtext1">Captura autom·tica de andamentos</label>
+                                    <label for="exampleInputtext1">Captura autom√°tica de andamentos</label>
                                     <div class="row">
-                                        <toggle style="margin-left:30px;width:100%"  ng-model="processo.capautomatica" ng-init="processo.capautomatica = 1" style="android" on="Sim" off="N„o" onstyle="btn-success"
+                                        <toggle style="margin-left:30px;width:100%"  ng-model="processo.capautomatica" ng-init="processo.capautomatica = 1" style="android" on="Sim" off="N√£o" onstyle="btn-success"
                                             offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
                                     </div>
                                 </div>
@@ -374,21 +374,21 @@
                 <div class="col-sm-12">
                     <label for="exampleInputtext1">Monitorar</label>
                     <div class="row">
-                        <toggle ng-model="processo.agendarCap" ng-init="processo.agendarCap = false" style="android" on="Sim" off="N„o" onstyle="btn-success"
+                        <toggle ng-model="processo.agendarCap" ng-init="processo.agendarCap = false" style="android" on="Sim" off="N√£o" onstyle="btn-success"
                             offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
                     </div>
                 </div>
                 <div class="col-sm-12">
-                    <label for="exampleInputtext1">Enviar MovimentaÁ„o EMAIL/SMS Cliente</label>
+                    <label for="exampleInputtext1">Enviar Movimenta√ß√£o EMAIL/SMS Cliente</label>
                     <div class="row">
-                        <toggle ng-model="processo.enviarMdgTelefone" ng-init="processo.enviarMdgTelefone = false" style="android" on="Sim" off="N„o" onstyle="btn-success"
+                        <toggle ng-model="processo.enviarMdgTelefone" ng-init="processo.enviarMdgTelefone = false" style="android" on="Sim" off="N√£o" onstyle="btn-success"
                             offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
                     </div>
                 </div>
                 <div class="col-sm-12">
-                    <label for="exampleInputtext1">Sim, desejo receber todos as movimentaÁıes autom·ticos por e-mail.</label>
+                    <label for="exampleInputtext1">Sim, desejo receber todos as movimenta√ß√µes autom√°ticos por e-mail.</label>
                     <div class="row">
-                        <toggle ng-model="processo.enviarEmail" ng-init="processo.enviarEmail = false" style="android" on="Sim" off="N„o" onstyle="btn-success"
+                        <toggle ng-model="processo.enviarEmail" ng-init="processo.enviarEmail = false" style="android" on="Sim" off="N√£o" onstyle="btn-success"
                             offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
                     </div>
                 </div>
@@ -398,7 +398,7 @@
                 <div class="col-sm-12">
             <div class="col-sm-12">
                 <label for="exampleInputEmail1">Senha</label>
-                <input type="text" class="form-control" ng-model="processo.senha" name="descricao" placeholder="DescriÁ„o">
+                <input type="text" class="form-control" ng-model="processo.senha" name="descricao" placeholder="Descri√ß√£o">
             </div>
             <div class="col-sm-12">
                 <label for="exampleInputtext1">Grupos de trabalho</label>

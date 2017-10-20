@@ -239,6 +239,30 @@
                 return padrao(vm, createdRow, scope, function(){console.log("aaa")}, buttons, 2, _function);
             },
 
+            advogado: function(vm, createdRow, scope, _callback, _function) {
+                
+                    var buttons = [];
+                    buttons.push({
+                        text: '<span class="fa fa-trash"></span>',
+                        key: '1',
+                        action: function(e, dt, node, config) {
+    
+                            dialogFactory.dialog('views/advogado/dialog/dAdvogado.html', "AdvogadoInsertController", validationFactory.processo, _function);
+    
+                        }
+                    }, {
+                        text: 'Novo Advogado',
+                        key: '4',
+                        action: function(e, dt, node, config) {
+    
+                            dialogFactory.dialog('views/advogado/dialog/dAdvogado.html', "AdvogadoInsertController", validationFactory.cliente, _function);
+    
+                        }
+                    })
+    
+                    return padrao(vm, createdRow, scope, function(){console.log("aaa")}, buttons, 2, _function);
+                },
+
             agencia: function(vm, createdRow, scope, _callback, _function) {
 
 
