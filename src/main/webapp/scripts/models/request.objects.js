@@ -273,6 +273,19 @@
 	    this.maxPreQueryCount = 0;
 	};
 
+	//siteInquryRequest
+	qat.model.Especialidade = function(_oCounty, _user, _bCount, _emprId, _doisValorType, _id) {
+	    var _emprId = null;
+	    if (localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == "") {
+	        _emprId = null;
+	    } else {
+	        _emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	    }
+	    this.especialidade = _oCounty;
+	    this.emprId = _emprId;
+
+	};
+
 	qat.model.estadoInquiryRequest = function(_iStartPage, _bCount, _emprId) {
 	    this.pageSize = qat.model.pageSize;
 	    this.estadoId = _emprId;
@@ -435,6 +448,13 @@
 	    this.returnList = _bList;
 	    this.returnListPaged = _bPagedList;
 	};
+
+	qat.model.reqEspecialidade = function(_oEmpr, _bList, _bPagedList) {
+	    this.especialidade   = _oEmpr;
+	    this.returnList      = _bList;
+	    this.returnListPaged = _bPagedList;
+	};
+
 
 	//empresaInquryRequest
 	qat.model.transactionInquiryRequest = function(_transaction, _iStartPage, _bCount, _userId, _id, _emprId, _permissaoType) {

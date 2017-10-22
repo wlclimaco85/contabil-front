@@ -5,40 +5,42 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-2"></div>
         <div class="col-sm-2"></div>
-        <div class="col-sm-4"></div>
-        <div class="col-sm-2" style="margin-top : 1%;margin-bottom : 1%"><button type="button" class="btn btn-default" ng-click="addUser()"><i class="glyphicon glyphicon-plus"></i> Adiconar Marca</button> </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4" style="margin-top : 1%;margin-bottom : 1%"><button type="button" class="btn btn-default" ng-click="addUser()"><i class="glyphicon glyphicon-plus"></i> Adicionar Especialidade</button> </div>
     </div>
     <table class="table table-bordered table-hover table-condensed">
         <tr style="font-weight: bold">
+            <td style="width:10%">#</td>
             <td style="width:35%">Nome</td>
+            <td style="width:15%">Criado por</td>
+            <td style="width:15%">Data</td>
             <td style="width:25%"></td>
         </tr>
 
-        <tr ng-repeat="marca in marcas">
+        <tr ng-repeat="marca in especialidades">
             <td>
                 <!-- editable username (text with validation) -->
-                <span editable-text="marca.marca" e-name="marca" e-form="rowform">
-          {{ marca.marca || '' }}
+                <span>
+                  {{ marca.id || '' }}
+                </span>
+            </td>
+            <td>
+                <!-- editable username (text with validation) -->
+                <span editable-text="marca.nome" e-name="nome" e-form="rowform">
+          {{ marca.nome || '' }}
         </span>
             </td>
             <td>
-                <!-- editable status (select-local) -->
-                <span editable-text="marca.fabricante" e-name="fabricante" e-form="rowform">
-          {{ marca.fabricante || '' }}
-        </span>
-            </td>
-            <td>
-                <span editable-text="marca.telefoneList[0].numero" e-name="numero" e-form="rowform">
-          {{ marca.telefoneList[0].numero || '' }}
-        </span>
-            </td>
-            <td>
-                <span editable-text="marca.emailList[0].email" e-name="email" e-form="rowform">
-          {{ marca.emailList[0].email }}
-        </span>
+                <span>
+              {{ fnShow2(marca) }}
+            </span>
             </td>
 
-
+            <td>
+                    <span>
+                  {{ fnShow(marca) }}
+                </span>
+                </td>
             <td style="white-space: nowrap">
                 <!-- form -->
                 <form editable-form name="rowform" onbeforesave="saveUser($data, marca)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == marca">

@@ -2069,6 +2069,29 @@ qat.model.fnDoisValores = function(id, _value, _nome, _tabela, modelAction, _use
 	return telefones;
 }
 
+qat.model.fnDoisValor = function(_oObjet, _modelAction, _user,$log)
+{
+
+	this.id = _oObjet ? _oObjet.id : null;
+	this.value = _oObjet.value;
+	this.descricao = _oObjet.descricao;
+	this.nome = _oObjet.nome;
+	this.doisValorType = _oObjet.doisValorType;
+	this.pagina = _oObjet.pagina;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
+
+	if($log)
+		$log.info("add Processo --> " +  _oObjet.id,"Teste");
+}
+
 qat.model.fnDoisValor1 = function(_oObjet, _modelAction, _user)
 {
 
@@ -2088,6 +2111,7 @@ qat.model.fnDoisValor1 = function(_oObjet, _modelAction, _user)
 	    this.modifyUser = _user;
 	    this.modifyDateUTC = (new Date()).getTime();*/
 }
+
 
 qat.model.EmpresaProduto = function(_oObjet, _modelAction, _user,$log)
 {

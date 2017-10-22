@@ -70,7 +70,7 @@ INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, 
 ('2', 'Aberta','Aberta',106,101, 1477075035443, 'System'),
 ('3', 'Vencida','Vencida',106,101, 1477075035443, 'System'),
 ('4', 'Cancelada','Cancelada',106,101, 1477075035443, 'System');
-                                               
+
 
 
 INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
@@ -1773,4 +1773,22 @@ function NFNotaInfo() {
     OPERACAO_AQUISICAO_POR_SUBSTITUICAO_TRIBUTARIA("75", "Opera\u00e7\u00e3o aquisi\u00e7\u00e3o por substitui\u00e7\u00e3o tribut\u00e1ria"),
     OUTRAS_OPERACOES_ENTRADA("98", "Outras opera\u00e7\u00f5es de entrada"),
     OUTRAS_OPERACOES("99", "Outras opera\u00e7\u00f5es");
+
+
+
+    INSERT INTO pagina(id ,pagina,parentid, tabelaenumvalue, create_date, create_user)
+    VALUES (3,'Advocacia', 0, 100, 1477075035443, 'System');
+
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user,pagina)
+    VALUES (154,'TIPO OAB', 'TIPO OAB', 1477075035443, 'System',3);
+INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user,pagina)
+    VALUES (155,'ORGAO', 'ORGAO', 1477075035443, 'System',3);
+
+INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )
+    VALUES
+
+('1', 'Definitivo','Definitivo',154,3, 1477075035443, 'System'),
+('2', 'Estagiário','Estagiário',154,3, 1477075035443, 'System'),
+('3', 'Suplementar','Suplementar',154,3, 1477075035443, 'System'),
+('4', 'Transferência','Transferência',154,3, 1477075035443, 'System');
 
