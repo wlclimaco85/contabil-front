@@ -134,13 +134,27 @@
         $scope.advogado.horasTrabalhos.push({});
 
         $scope.advogado.advogados = [];
+        $scope.advogado.telefones = [];
         $scope.advogado.advogados.push({});
+        $scope.advogado.documentos = [];
+        $scope.advogado.enderecos = [];
+        $scope.advogado.emails = [];
 
-        $scope.createForm = function(type){ 
+        $scope.documentos = [];
+        $scope.enderecos = [];
+        $scope.telefones = [];
+        $scope.emails = [];
+        $scope.telefones.push({numero : "",telefoneTypeEnum : "CELULAR"});
+        $scope.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+
+        $scope.advogado.telefones.push({numero : "",telefoneTypeEnum : "CELULAR"});
+        $scope.advogado.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+
+        $scope.createForm = function(type){
             $scope.advogado.horasTrabalhos.push({});
         };
 
-        $scope.deleteForm = function(type){ 
+        $scope.deleteForm = function(type){
             $scope.advogado.horasTrabalhos.push({});
         };
 

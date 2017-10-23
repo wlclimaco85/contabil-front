@@ -127,7 +127,15 @@ debugger
 			factory.fnOpenView = function(vm, scope)
 			{
 
-                fDatas.fnMontaDatas(vm,scope);
+				fDatas.fnMontaDatas(vm,scope);
+
+				fEndereco.fnMontaEnderecoEmpresa(vm,scope);
+				fDocumento.fnMontaDocumentosEmpresa(vm,scope);
+				fTelefone.fnMontaTelefones(vm,scope);
+				fEmail.fnMontaEmails(vm,scope);
+				fDatas.fnMontaDatas(vm,scope);
+				validationFactory.empresa(vm,scope);
+
              /*   doisValorFactory.advogado(scope);
 
                 //Usuarios
