@@ -89,77 +89,62 @@ qat.model.Processo = function(_oObjet, _modelAction, _user, $log)
 }
 
 
-/** create by system gera-java version 1.0.0 05/10/2017 10:17 : 9*/
-qat.model.Advogado = function(_oObjet, _modelAction, _user, $log)
+qat.model.advogado = function(_oObjet, _modelAction, _user, $log)
 {
      if (_oObjet != undefined)
      {
-		this.id = _oObjet.id;
-		this.dataProcess = _oObjet.dataProcess,
-		this.dataFim = _oObjet.dataFim,
-		this.valor = _oObjet.valor,
-		this.senha = _oObjet.senha,
-		this.assunto = _oObjet.assunto,
-		this.descricaoProc = _oObjet.descricaoProc,
-		this.processo = _oObjet.processo,
-		this.npadraocnj = _oObjet.npadraocnj,
-		this.npadrao = _oObjet.npadrao,
-		this.agendarCap = _oObjet.agendarCap  == true ? 1 : 0,
-		this.distribuido = _oObjet.distribuido,
-		this.valorProvisionado = _oObjet.valorProvisionado,
-		this.valorAcao = _oObjet.valorAcao,
-		this.observacaoProc = _oObjet.observacaoProc,
-		this.capturpor = _oObjet.capturpor ? { id: _oObjet.capturpor.id} : null,
-		this.numeroprocesso = _oObjet.numeroprocesso,
-		this.capautomatica = _oObjet.capautomatica,
-		this.monitorar = _oObjet.monitorar,
-		this.pasta = _oObjet.pasta,
-		this.enviarEmail = _oObjet.enviarEmail == true ? 1 : 0,
-		this.enviarMdgTelefone = _oObjet.enviarMdgTelefone == true ? 1 : 0,
-		this.quando = _oObjet.quando,
-		this.processo = _oObjet.processo,
-		this.fundamentacaoJuridica = _oObjet.fundamentacaoJuridica,
-		this.fatos = _oObjet.fatos,
-		this.pretensoesCliente = _oObjet.pretensoesCliente,
-		this.estrategia = _oObjet.estrategia,
-		this.retringirProcesso = _oObjet.retringirProcesso,
-		// dois valores
-		this.acao = _oObjet.acao ? { id : _oObjet.acao.id} : null,
-		this.natureza =  _oObjet.natureza ? { id : _oObjet.natureza.id} : null,
-		this.statusProc =  _oObjet.statusProc ? { id : _oObjet.statusProc.id} : null,
-		this.grupoTrabalho =  _oObjet.grupoTrabalho ? { id : _oObjet.grupoTrabalho.id} : null,
-		this.situacao = _oObjet.situacao ? { id : _oObjet.situacao.id} : null,
-		this.instancia =  _oObjet.instancia ? { id : _oObjet.instancia.id} : null,
-		this.orgao =  _oObjet.orgao ? { id : _oObjet.orgao.id} : null,
-		this.justica =  _oObjet.justica ? { id : _oObjet.justica.id} : null,
-		this.tribunal =  _oObjet.tribunal ? { id : _oObjet.tribunal.id} : null,
-		this.instancia1 =  _oObjet.instancia1 ? { id : _oObjet.instancia1.id} : null,
-		this.localidade =  _oObjet.localidade ? { id : _oObjet.localidade.id} : null,
 
-		//Object
-	    this.usuariosRestricaoProc = _oObjet.usuariosRestricaoProc ? _oObjet.usuariosRestricaoProc :null,
-		this.tituloList = _oObjet.tituloList ? _oObjet.tituloList :null,
-		this.clienteList = _oObjet.clienteList ? _oObjet.clienteList :null,
-		this.advogadoList = _oObjet.advogadoList ? _oObjet.advogadoList :null,
-		this.audienciaList = _oObjet.audienciaList ? _oObjet.audienciaList :null,
-		this.processoStatusList = _oObjet.processoStatusList ? _oObjet.processoStatusList :null,
-		this.envolvList = _oObjet.envolvList ? _oObjet.envolvList :null,
-		this.arquivos = _oObjet.arquivos ? _oObjet.arquivos :null,
-		this.envolvidosExterno = _oObjet.envolvidosExterno ? _oObjet.envolvidosExterno :null,
-		this.parentId = _oObjet.parentId;
-		this.emprId = JSON.parse(localStorage.getItem('empresa')) ? JSON.parse(localStorage.getItem('empresa')).id : null;
-		this.processId = _oObjet.processId;
-		this.tableEnumValue = _oObjet.tableEnumValue;
-		this.modelAction = _modelAction;
-		this.createUser = _user;
-		this.createDateUTC = (new Date()).getTime();
-		this.modifyUser = _user;
-		this.modifyDateUTC = (new Date()).getTime();
+                  this.id = _oObjet.id;
+                  this.nome = _oObjet.nome,
+                  this.nomePai = _oObjet.nomePai,
+                  this.nomeMae = _oObjet.nomeMae,
+                  this.nomeConjugue = _oObjet.nomeConjugue,
+                  this.estadoCivil = _oObjet.estadoCivil,
+                  this.datanasc = _oObjet.datanasc,
+                  this.tipoPessoa = _oObjet.tipoPessoa,
+                  this.foto = _oObjet.foto,
+                  this.pessoaTypeEnum = _oObjet.pessoaTypeEnum,
+                  this.sexo = _oObjet.sexo,
+                  this.enderecos = _oObjet.enderecos,
+                  this.documentos = _oObjet.documentos,
+                  this.emails = _oObjet.emails,
+                  this.telefones = _oObjet.telefones,
+                  this.bancos = _oObjet.bancos,
+                  this.formaPagamentoList = _oObjet.formaPagamentoList,
+                  this.condPagList = _oObjet.condPagList,
+                  this.contatoList = _oObjet.contatoList,
+                  this.tempoAtendimento = _oObjet.tempoAtendimento,
+                  this.oab = _oObjet.oab,
+                  this.mediaAtendimento = _oObjet.mediaAtendimento,
+                  this.maxAtendimento = _oObjet.maxAtendimento,
+                  this.maxEncaixe = _oObjet.maxEncaixe,
+                  this.estado = _oObjet.estado,
+                  this.tipoOab = _oObjet.tipoOab,
+				  this.horasTrabalhos = _oObjet.horasTrabalhos,
+				  this.grupoTrabalho = _oObjet.grupoTrabalho,
+                  this.especialidades = _oObjet.especialidades,
+                  this.compromissos = _oObjet.compromissos,
+				  this.processos = _oObjet.processos,
+				  this.regime = _oObjet.regime ? qat.model.fnRegime(_oObjet.regime, _oObjet.regime.id ? _modelAction : "INSERT", _user,$log) : null;
+				  this.documentos = _oObjet.documentos ? _oObjet.documentos : null;
+				  this.enderecos = _oObjet.enderecos ? _oObjet.enderecos : null;
+				  this.emails = _oObjet.emails,
+				  this.telefones = _oObjet.telefones,
+                  this.parentId = _oObjet.parentId;
+                  this.emprId = JSON.parse(localStorage.getItem('empresa')) ? JSON.parse(localStorage.getItem('empresa')).id : null;
+                  this.processId = _oObjet.processId;
+                  this.tableEnumValue = _oObjet.tableEnumValue;
+                  this.modelAction = _modelAction;
+                  this.createUser = _user;
+                  this.createDateUTC = (new Date()).getTime();
+                  this.modifyUser = _user;
+                  this.modifyDateUTC = (new Date()).getTime();
 
-		if($log)
-				$log.info("add Processo --> " +  _oObjet.id,"Teste");
+                  if($log)
+                           $log.info("add advogado --> " +  _oObjet.id,"Teste");
      }
 }
+
 
 
 qat.model.FormaPg = function(_oObjet, _modelAction,_user,$log)
@@ -2069,29 +2054,6 @@ qat.model.fnDoisValores = function(id, _value, _nome, _tabela, modelAction, _use
 	return telefones;
 }
 
-qat.model.fnDoisValor = function(_oObjet, _modelAction, _user,$log)
-{
-
-	this.id = _oObjet ? _oObjet.id : null;
-	this.value = _oObjet.value;
-	this.descricao = _oObjet.descricao;
-	this.nome = _oObjet.nome;
-	this.doisValorType = _oObjet.doisValorType;
-	this.pagina = _oObjet.pagina;
-	this.parentId = _oObjet.parentId;
-	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
-	this.processId = _oObjet.processId;
-	this.tableEnumValue = _oObjet.tableEnumValue;
-	this.modelAction = _modelAction;
-	this.createUser = _user;
-	this.createDateUTC = (new Date()).getTime();
-	this.modifyUser = _user;
-	this.modifyDateUTC = (new Date()).getTime();
-
-	if($log)
-		$log.info("add Processo --> " +  _oObjet.id,"Teste");
-}
-
 qat.model.fnDoisValor1 = function(_oObjet, _modelAction, _user)
 {
 
@@ -2111,7 +2073,6 @@ qat.model.fnDoisValor1 = function(_oObjet, _modelAction, _user)
 	    this.modifyUser = _user;
 	    this.modifyDateUTC = (new Date()).getTime();*/
 }
-
 
 qat.model.EmpresaProduto = function(_oObjet, _modelAction, _user,$log)
 {

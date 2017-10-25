@@ -127,36 +127,9 @@
     angular.module('wdApp.apps.advogado.insert', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
       .controller('AdvogadoInsertController', function ($rootScope, $scope, fModels, SysMgmtData, toastr, $element, close,fAdvogado) {
         var vm = this
-        debugger
-        $scope.advogado = {};
-        //advogado.horasTrabalhos
-        $scope.advogado.horasTrabalhos = [];
-        $scope.advogado.horasTrabalhos.push({});
+        fAdvogado.fnOpenView(vm, $scope);
 
-        $scope.advogado.advogados = [];
-        $scope.advogado.telefones = [];
-        $scope.advogado.advogados.push({});
-        $scope.advogado.documentos = [];
-        $scope.advogado.enderecos = [];
-        $scope.advogado.emails = [];
-
-        $scope.documentos = [];
-        $scope.enderecos = [];
-        $scope.telefones = [];
-        $scope.emails = [];
-        $scope.telefones.push({numero : "",telefoneTypeEnum : "CELULAR"});
-        $scope.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
-
-        $scope.advogado.telefones.push({numero : "",telefoneTypeEnum : "CELULAR"});
-        $scope.advogado.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
-
-        $scope.createForm = function(type){
-            $scope.advogado.horasTrabalhos.push({});
-        };
-
-        $scope.deleteForm = function(type){
-            $scope.advogado.horasTrabalhos.push({});
-        };
+        fAdvogado.fnCreateMock($scope);
 
         var fnCallBack = function (res) {
             debugger
@@ -170,13 +143,11 @@
             }
         }
 
-        fAdvogado.fnOpenView(vm, $scope);
-        fAdvogado.fnCreateMock($scope);
         $scope.saveAdvogado = function (bValidate,b) {
-          debugger
+          //debugger
      //     if(bValidate)
 
-            fAdvogado.fnMontaObjeto($scope.advogado, 'INSERT', 'advocacia/api/advogado/insert',fnCallBack);
+            fAdvogado.fnMontaObjeto($scope.advogado, 'INSERT', 'pessoa/api/advogado/insert',fnCallBack);
         }
       })
   })()
