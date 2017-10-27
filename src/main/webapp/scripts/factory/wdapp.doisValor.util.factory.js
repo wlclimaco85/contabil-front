@@ -165,6 +165,70 @@
 
         return scope
       },
+
+      advogado: function (scope) {
+        scope.statusProc = []
+        scope.tipoEnvolv = []
+        scope.envolv = []
+        scope.situacao = []
+        scope.instancia = []
+        scope.justica = []
+        scope.tribunal = []
+        scope.localidade = []
+        scope.capiturPor = []
+        scope.capiturAut = []
+        scope.natureza = []
+
+        var planos = ''
+        //  //debugger
+		// ICMS - MODALIDADE BC
+
+		var processos = localStorageService.get('doisValores')
+        for (var x = 0; x < processos.length; x++) {
+          var planos = processos[x]
+          if (planos.doisValorType != null) {
+            switch (planos.doisValorType.tipo) {
+              case 'STATUS':
+                scope.statusProc.push(planos)
+                break
+              case 'TIPO ENVOLVIMENTO':
+                scope.tipoEnvolv.push(planos)
+                break
+              case 'ENVOLVIMENTO':
+                scope.envolv.push(planos)
+                break
+              case 'SITUACAO':
+                scope.situacao.push(planos)
+                break
+              case 'INSTANCIA':
+                scope.instancia.push(planos)
+                break
+              case 'JUSTICA':
+                scope.justica.push(planos)
+                break
+              case 'TRIBUNAL':
+                scope.tribunal.push(planos)
+                break
+              case 'LOCALIDADE':
+                scope.localidade.push(planos)
+                break
+              case 'CAPITUR POR':
+                scope.capiturPor.push(planos)
+                break
+              case 'CAPTURA AUTOMATICA':
+                scope.capiturAut.push(planos)
+                break
+              case 'NATUREZA':
+                scope.natureza.push(planos)
+                break
+
+            }
+          }
+        }
+
+        return scope
+      },
+
       tributacao: function (scope) {
         scope.regime = []
         scope.icmsOri = []

@@ -8,7 +8,7 @@
 		{
 			var factory = {};
 
-			factory.fnMontaObjeto = function(advogado, action, url, callBack) {
+			factory.fnMontaObjeto = function(enderecos, telefones, emails, advogado, action, url, callBack) {
 debugger
 				 //===============Documentos====================
 
@@ -80,7 +80,7 @@ debugger
 				advogado.emails = emailsAux;
 
 				var oObject = fModels.amont(advogado,action);
-				var _oObject = new qat.model.Advogado(oObject, action,$rootScope.user.user,$log);
+				var _oObject = new qat.model.advogado(oObject, action,$rootScope.user.user,$log);
 
 				SysMgmtData.processPostPageData("main/api/request", {
 					url: url,
@@ -113,8 +113,8 @@ debugger
 					numero : "numero",
 					enderecoTypeValue : 1,
 					cep : "38082243",
-					latitude : "latitude",
-					longitude : "longitude",
+					latitude : 1.55,
+					longitude : 1.558,
 					complemento : "complemento",
 					cidade : {id : 100,estado:{id:20}},
 					emprId : 4595,
@@ -223,8 +223,8 @@ debugger
 				scope.advogado.tipoOab = {id:1000},
 				scope.advogado.horasTrabalhos = [{
 					dia : [1,2,3],
-					horaInicio : "07:40",
-					horaFinal : "10:40",
+					horaInicio : (new Date()).getTime(),
+					horaFinal  : (new Date()).getTime(),
 					emprId : 4595,
 					modelAction : "INSERT",
 					createUser :  "system",
@@ -233,8 +233,8 @@ debugger
 					modifyDateUTC : (new Date()).getTime()
 				},{
 					dia : [1,2,3,4,5],
-					horaInicio : "12:40",
-					horaFinal : "17:40",
+					horaInicio : (new Date()).getTime(),
+					horaFinal  : (new Date()).getTime(),
 					emprId : 4595,
 					modelAction : "INSERT",
 					createUser :  "system",
@@ -294,13 +294,7 @@ debugger
 			factory.fnOpenView = function(vm, scope)
 			{
 
-				fDatas.fnMontaDatas(vm,scope);
-				fEndereco.fnMontaEnderecoEmpresa(vm,scope);
-				fDocumento.fnMontaDocumentosEmpresa(vm,scope);
-				fTelefone.fnMontaTelefones(vm,scope);
-				fEmail.fnMontaEmails(vm,scope);
-				fDatas.fnMontaDatas(vm,scope);
-				validationFactory.empresa(vm,scope);
+
 
 				scope.advogado = {};
 				scope.advogado.horasTrabalhos = [];
@@ -323,6 +317,15 @@ debugger
 
 				scope.advogado.telefones.push({numero : "",telefoneTypeEnum : "CELULAR"});
 				scope.advogado.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+
+
+				fDatas.fnMontaDatas(vm,scope);
+				fEndereco.fnMontaEnderecoEmpresa(vm,scope);
+				fDocumento.fnMontaDocumentosEmpresa(vm,scope);
+				fTelefone.fnMontaTelefones(vm,scope);
+				fEmail.fnMontaEmails(vm,scope);
+				fDatas.fnMontaDatas(vm,scope);
+				validationFactory.empresa(vm,scope);
 
 				scope.createForm = function(type){
 					scope.advogado.horasTrabalhos.push({});

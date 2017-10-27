@@ -147,7 +147,7 @@
           //debugger
      //     if(bValidate)
 
-            fAdvogado.fnMontaObjeto($scope.advogado, 'INSERT', 'pessoa/api/advogado/insert',fnCallBack);
+            fAdvogado.fnMontaObjeto($scope.enderecos, $scope.telefones, $scope.emails, $scope.advogado, 'INSERT', 'pessoa/api/advogado/insert',fnCallBack);
         }
       })
   })()
