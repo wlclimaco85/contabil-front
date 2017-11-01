@@ -223,6 +223,7 @@ var WebDaptiveAppConfig = {
 				'gerencia/tables/usuarios', 'gerencia/tables/contatos', 'gerencia/tables/historico', 'gerencia/tables/permissoes', 'dicionario/tables/tabelas', 'dicionario/tables/campos',
 				'dicionario/tables/tela', 'dicionario/tables/relatorios', 'cadastros/details/cliente', 'gerencia/details/empresa', 'gerencia/tables/tributacao', 'fiscal/tables/regime', 'historico/tables/historico',
 				'financeiro/tables/tipoDocumentos', 'financeiro/tables/categoria', 'financeiro/tables/situacao', 'notaFiscal/tables/notaFiscalSaida', 'notaFiscal/tables/notaFiscalEntrada'
+				, 'advogado/details/advogado'
 
 
 

@@ -2624,6 +2624,56 @@ qat.model.itens = function(_oObjet, _modelAction, _user)
 
 }
 
+/** create by system gera-java version 1.0.0 01/11/2017 15:6 : 37
+ *
+ *
+*/
+qat.model.diasHoras = function(_oObjet, _modelAction, _user, $log)
+{
+     if (_oObjet != undefined)
+     {
+
+                  this.id = _oObjet.id;
+                  this.diasSemanas = _oObjet.diasSemanas,
+                  this.horaInicio = _oObjet.horaInicio,
+                  this.horaFinal = _oObjet.horaFinal,
+                  this.parentId = _oObjet.parentId;
+                  this.emprId = JSON.parse(localStorage.getItem('empresa')) ? JSON.parse(localStorage.getItem('empresa')).id : null;
+                  this.processId = _oObjet.processId;
+                  this.tableEnumValue = _oObjet.tableEnumValue;
+                  this.modelAction = _modelAction;
+                  this.createUser = _user;
+                  this.createDateUTC = (new Date()).getTime();
+                  this.modifyUser = _user;
+                  this.modifyDateUTC = (new Date()).getTime();
+
+                  if($log)
+                           $log.info("add diasHoras --> " +  _oObjet.id,"Teste");
+     }
+}
+
+qat.model.doisValoresParent = function(_oObjet, _modelAction, _user, $log)
+{
+     if (_oObjet != undefined)
+     {
+
+                  this.id = _oObjet.id;
+                  this.doisvalor = _oObjet.doisvalor;
+                  this.parentId = _oObjet.parentId;
+                  this.emprId = JSON.parse(localStorage.getItem('empresa')) ? JSON.parse(localStorage.getItem('empresa')).id : null;
+                  this.processId = _oObjet.processId;
+                  this.tableEnumValue = _oObjet.tableEnumValue;
+                  this.modelAction = _modelAction;
+                  this.createUser = _user;
+                  this.createDateUTC = (new Date()).getTime();
+                  this.modifyUser = _user;
+                  this.modifyDateUTC = (new Date()).getTime();
+
+                  if($log)
+                           $log.info("add dois Valores Parent --> " +  _oObjet.id,"Teste");
+     }
+}
+
 qat.model.confGeral = function(_oObjet, _modelAction, _user,$log)
 {
 

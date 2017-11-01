@@ -9,7 +9,7 @@
 			var factory = {};
 
 			factory.fnMontaObjeto = function(enderecos, telefones, emails, advogado, action, url, callBack) {
-debugger
+
 				 //===============Documentos====================
 
 				 var documentos = [];
@@ -76,9 +76,33 @@ debugger
 					}
 
 				}
-				advogado.emails =[];
-				advogado.emails = emailsAux;
+				debugger
+				var dias = [];
+				for(var x = 0;x < advogado.horasTrabalhos.length;x++)
+				{
+					if(advogado.horasTrabalhos[x])
+					{
+						for(var y = 0;y < advogado.horasTrabalhos[x].dia.length;y++)
+						{
+							dias.push({id : advogado.horasTrabalhos[x].dia[y]})
+						}
+						advogado.horasTrabalhos[x].diasSemanas = dias;
+						dias = []
+						advogado.horasTrabalhos[x] = new qat.model.diasHoras(advogado.horasTrabalhos[x], "INSERT" ,$rootScope.user.user, $log);
+					}
+				}
 
+				for(var x = 0;x < advogado.especialidades.length;x++)
+				{
+					var a = new qat.model.doisValoresParent({ doisvalor :{id : advogado.especialidades[x].id}}, "INSERT" ,$rootScope.user.user, $log);
+					advogado.especialidades[x] = a;
+				}
+
+				for(var x = 0;x < advogado.grupoTrabalho.length;x++)
+				{
+					var a = new qat.model.doisValoresParent({ doisvalor :{id : advogado.grupoTrabalho[x].id}}, "INSERT" ,$rootScope.user.user, $log);
+					advogado.grupoTrabalho[x] = a;
+				}
 				var oObject = fModels.amont(advogado,action);
 				var _oObject = new qat.model.advogado(oObject, action,$rootScope.user.user,$log);
 

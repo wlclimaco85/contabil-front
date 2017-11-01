@@ -69,7 +69,7 @@
 
       var actionsHtml = function (data, type, full, meta) {
         vm.persons[data.id] = data;
-        return '<a href="#/advogado/details/advogado" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i></a>&nbsp;' +
+        return '<a href="#/advogado/details/advogado?id=' + data.id + '"  class="btn btn-info"><i class="fa fa-eye"></i></a>&nbsp;' +
         '<button class="btn btn-warning" ng-click="showCase.edit(showCase.persons[' + data.id + '])">' +
         '   <i class="fa fa-edit"></i>' +
         '</button>&nbsp;' +
@@ -137,7 +137,7 @@
                 $element.modal('hide')
                 close(null, 500)
                 toastr.success('Deu Certo seu tanga.', 'Sucess')
-                $rootScope.reloadDataCliente(function (data) {
+                $rootScope.reloadDataAdvogado(function (data) {
                 //debugger
                 })
             }

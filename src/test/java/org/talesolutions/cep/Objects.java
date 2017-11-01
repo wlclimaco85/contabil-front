@@ -1,6 +1,5 @@
 package org.talesolutions.cep;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,10 +7,14 @@ import java.util.List;
 import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.samples.sysmgmt.advocacia.Advocacia;
 import com.qat.samples.sysmgmt.advocacia.Advogado;
+import com.qat.samples.sysmgmt.advocacia.Advogados;
 import com.qat.samples.sysmgmt.advocacia.Audiencia;
 import com.qat.samples.sysmgmt.advocacia.Envolvidos;
+import com.qat.samples.sysmgmt.advocacia.GrupoTrabalho;
 import com.qat.samples.sysmgmt.advocacia.Processo;
+import com.qat.samples.sysmgmt.advocacia.ProcessoCliente;
 import com.qat.samples.sysmgmt.advocacia.ProcessoStatus;
+import com.qat.samples.sysmgmt.advocacia.ProcessoUsuarios;
 import com.qat.samples.sysmgmt.agencia.model.Agencia;
 import com.qat.samples.sysmgmt.arquivo.model.Arquivo;
 import com.qat.samples.sysmgmt.banco.model.Banco;
@@ -21,6 +24,8 @@ import com.qat.samples.sysmgmt.cfop.model.Cfop;
 import com.qat.samples.sysmgmt.cfop.model.CfopParentId;
 import com.qat.samples.sysmgmt.clinica.model.Clinica;
 import com.qat.samples.sysmgmt.clinica.model.Consulta;
+import com.qat.samples.sysmgmt.clinica.model.Especialidade;
+import com.qat.samples.sysmgmt.clinica.model.EspecialidadePessoa;
 import com.qat.samples.sysmgmt.clinica.model.Exame;
 import com.qat.samples.sysmgmt.clinica.model.ExamePessoa;
 import com.qat.samples.sysmgmt.clinica.model.PlanoSaudePessoa;
@@ -35,6 +40,7 @@ import com.qat.samples.sysmgmt.condpag.model.CondPagPessoa;
 import com.qat.samples.sysmgmt.condpag.model.FormaPg;
 import com.qat.samples.sysmgmt.condpag.model.FormaPgPessoa;
 import com.qat.samples.sysmgmt.condpag.model.TipoPag;
+import com.qat.samples.sysmgmt.conta.model.Conta;
 import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
 import com.qat.samples.sysmgmt.contato.model.Contato;
@@ -212,12 +218,17 @@ import com.qat.samples.sysmgmt.site.model.PlanoByEmpresa;
 import com.qat.samples.sysmgmt.site.model.ServicoAndPlano;
 import com.qat.samples.sysmgmt.site.model.Site;
 import com.qat.samples.sysmgmt.util.model.Cidade;
+import com.qat.samples.sysmgmt.util.model.ClienteCompromisso;
+import com.qat.samples.sysmgmt.util.model.Compromisso;
+import com.qat.samples.sysmgmt.util.model.DiasHoras;
 import com.qat.samples.sysmgmt.util.model.Documento;
 import com.qat.samples.sysmgmt.util.model.DoisValorType;
 import com.qat.samples.sysmgmt.util.model.DoisValores;
+import com.qat.samples.sysmgmt.util.model.DoisValoresParent;
 import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.Note;
+import com.qat.samples.sysmgmt.util.model.ParticipanteExterno;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.Tarefa;
@@ -233,15 +244,15 @@ public class Objects {
 		Advogado advogado = new Advogado();
 		Date a = new Date();
 		advogado.setId(id);
-		advogado.setNome("nome_1 - " + action.toString());
+		advogado.setNome("nome_1 - insert");
 		advogado.setNomePai("nomePai_2 - " + action.toString());
 		advogado.setNomeMae("nomeMae_3 - " + action.toString());
 		advogado.setNomeConjugue("nomeConjugue_4 - " + action.toString());
 		advogado.setEstadoCivil(1005);
-	//	advogado.setTipoPessoa(1006);
 		advogado.setDatanasc(a.getTime());
 		advogado.setFoto("foto_8 - " + action.toString());
-	//	advogado.setPessoaTypeEnumValue(1);
+		advogado.setPessoaTipo(new ArrayList<PessoaTipo>());
+		advogado.getPessoaTipo().add(new PessoaTipo(PessoaTypeEnum.ADVOGADO, id, action));
 		advogado.setSexo(1010);
 		advogado.setEnderecos(new ArrayList<Endereco>());
 		advogado.getEnderecos().add(insertEndereco(id, TabelaEnum.ADVOCACIA, action));
@@ -259,6 +270,14 @@ public class Objects {
 		advogado.getCondPagList().add(insertCondPagPessoa(id, TabelaEnum.ADVOCACIA, action));
 		advogado.setContatoList(new ArrayList<Contato>());
 		advogado.getContatoList().add(insertContato(id, TabelaEnum.ADVOCACIA, action));
+		advogado.setEspecialidades(new ArrayList<>());
+		advogado.getEspecialidades().add(insertDoisValoresParent(id, tabela, action));
+
+		advogado.setHorasTrabalhos(new ArrayList<>());
+		advogado.getHorasTrabalhos().add(insertDiasHoras(id, tabela, action));
+
+		advogado.setGrupoTrabalho(new ArrayList<>());
+		advogado.getGrupoTrabalho().add(insertDoisValoresParent(id, tabela, action));
 		advogado.setTabelaEnum(tabela);
 		advogado.setParentId(id);
 		advogado.setEmprId(EMPID);
@@ -272,8 +291,6 @@ public class Objects {
 		return advogado;
 	}
 
-
-
 	public static Cliente insertCliente(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Cliente cliente = new Cliente();
 		Date a = new Date();
@@ -283,11 +300,10 @@ public class Objects {
 		cliente.setNomeMae("nomeMae_3 - " + action.toString());
 		cliente.setNomeConjugue("nomeConjugue_4 - " + action.toString());
 		cliente.setEstadoCivil(1005);
-		List<PessoaTipo> tipoPessoa = new ArrayList<PessoaTipo>();
-		//cliente.setPessoaTipo(tipoPessoa);
 		cliente.setDatanasc(a.getTime());
 		cliente.setFoto("foto_8 - " + action.toString());
-	//	cliente.setPessoaTypeEnumValue(1);
+		cliente.setPessoaTipo(new ArrayList<PessoaTipo>());
+		cliente.getPessoaTipo().add(new PessoaTipo(PessoaTypeEnum.CLIENTE, id, action));
 		cliente.setSexo(1010);
 		cliente.setEnderecos(new ArrayList<Endereco>());
 		cliente.getEnderecos().add(insertEndereco(id, TabelaEnum.CLIENTE, action));
@@ -306,10 +322,6 @@ public class Objects {
 		cliente.setContatoList(new ArrayList<Contato>());
 		cliente.getContatoList().add(insertContato(null, TabelaEnum.CLIENTE, action));
 		cliente.setTabelaEnum(tabela);
-		tipoPessoa.add(insertPessoaTipo(null,PessoaTypeEnum.CLIENTE,action));
-		tipoPessoa.add(insertPessoaTipo(null,PessoaTypeEnum.FORNECEDOR,action));
-		tipoPessoa.add(insertPessoaTipo(null,PessoaTypeEnum.TRANSPORTADOR,action));
-		cliente.setPessoaTipo(tipoPessoa);
 		cliente.setParentId(id);
 		cliente.setEmprId(EMPID);
 		cliente.setModifyDateUTC(a.getTime());
@@ -322,23 +334,6 @@ public class Objects {
 		return cliente;
 	}
 
-	public static PessoaTipo insertPessoaTipo(Integer id, PessoaTypeEnum tabela, PersistenceActionEnum action) {
-		PessoaTipo pessoaTipo = new PessoaTipo();
-		Date a = new Date();
-		pessoaTipo.setId(id);
-		pessoaTipo.setPessoaTypeEnum(tabela);
-		pessoaTipo.setParentId(id);
-		pessoaTipo.setEmprId(EMPID);
-		pessoaTipo.setModifyDateUTC(a.getTime());
-		pessoaTipo.setCreateDateUTC(a.getTime());
-		pessoaTipo.setCreateUser("system");
-		pessoaTipo.setModifyUser("system");
-		pessoaTipo.setProcessId(1);
-		pessoaTipo.setModelAction(action);
-
-		return pessoaTipo;
-	}
-
 	public static Fornecedor insertFornecedor(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Fornecedor fornecedor = new Fornecedor();
 		Date a = new Date();
@@ -348,10 +343,10 @@ public class Objects {
 		fornecedor.setNomeMae("nomeMae_3 - " + action.toString());
 		fornecedor.setNomeConjugue("nomeConjugue_4 - " + action.toString());
 		fornecedor.setEstadoCivil(1005);
-	//	fornecedor.setTipoPessoa(1006);
 		fornecedor.setDatanasc(a.getTime());
 		fornecedor.setFoto("foto_8 - " + action.toString());
-	//	fornecedor.setPessoaTypeEnumValue(1);
+		fornecedor.setPessoaTipo(new ArrayList<PessoaTipo>());
+		fornecedor.getPessoaTipo().add(new PessoaTipo(PessoaTypeEnum.ADVOGADO, id, action));
 		fornecedor.setSexo(1010);
 		fornecedor.setEnderecos(new ArrayList<Endereco>());
 		fornecedor.getEnderecos().add(insertEndereco(id, TabelaEnum.FORNECEDOR, action));
@@ -391,9 +386,10 @@ public class Objects {
 		transportador.setNomeMae("nomeMae_3 - " + action.toString());
 		transportador.setNomeConjugue("nomeConjugue_4 - " + action.toString());
 		transportador.setEstadoCivil(1005);
-	//	transportador.setTipoPessoa(1006);
 		transportador.setDatanasc(a.getTime());
-	//	transportador.setPessoaTypeEnumValue(1);
+		transportador.setFoto("foto_8 - " + action.toString());
+		transportador.setPessoaTipo(new ArrayList<PessoaTipo>());
+		transportador.getPessoaTipo().add(new PessoaTipo(PessoaTypeEnum.ADVOGADO, id, action));
 		transportador.setSexo(1010);
 		transportador.setEnderecos(new ArrayList<Endereco>());
 		transportador.getEnderecos().add(insertEndereco(id, TabelaEnum.TRANSPORTADOR, action));
@@ -433,10 +429,10 @@ public class Objects {
 		medico.setNomeMae("nomeMae_3 - " + action.toString());
 		medico.setNomeConjugue("nomeConjugue_4 - " + action.toString());
 		medico.setEstadoCivil(1005);
-		//medico.setTipoPessoa(1006);
 		medico.setDatanasc(a.getTime());
 		medico.setFoto("foto_8 - " + action.toString());
-		//medico.setPessoaTypeEnumValue(1);
+		medico.setPessoaTipo(new ArrayList<PessoaTipo>());
+		medico.getPessoaTipo().add(new PessoaTipo(PessoaTypeEnum.MEDICO, id, action));
 		medico.setSexo(1010);
 		medico.setEnderecos(new ArrayList<Endereco>());
 		medico.getEnderecos().add(insertEndereco(id, TabelaEnum.MEDICO, action));
@@ -463,6 +459,22 @@ public class Objects {
 		medico.setModifyUser("system");
 		medico.setProcessId(1);
 		medico.setModelAction(action);
+		//=============
+		medico.setEspecialidadeList(new ArrayList<>());
+		medico.getEspecialidadeList().add(insertDoisValoresParent(id, tabela, action));
+		//============
+		List<DoisValores> dois = new ArrayList<DoisValores>();
+		dois.add(new DoisValores(1));
+		dois.add(new DoisValores(2));
+		dois.add(new DoisValores(3));
+		List<HorarioFunc> horarioFunc = new ArrayList<HorarioFunc>();
+		horarioFunc.add(new HorarioFunc(id,a.getTime(),a.getTime(),a.getTime(),"",action,dois));
+		medico.setHorarioList(horarioFunc);
+		//==========
+		List<Consulta> consultas = new ArrayList<Consulta>();
+		consultas.add(new Consulta(id, "Teste"));
+		medico.setConsultaList(consultas);
+
 
 		return medico;
 	}
@@ -476,10 +488,10 @@ public class Objects {
 		paciente.setNomeMae("nomeMae_3 - " + action.toString());
 		paciente.setNomeConjugue("nomeConjugue_4 - " + action.toString());
 		paciente.setEstadoCivil(1005);
-		//paciente.setTipoPessoa(1006);
 		paciente.setDatanasc(a.getTime());
 		paciente.setFoto("foto_8 - " + action.toString());
-		//paciente.setPessoaTypeEnumValue(1);
+		paciente.setPessoaTipo(new ArrayList<PessoaTipo>());
+		paciente.getPessoaTipo().add(new PessoaTipo(PessoaTypeEnum.ADVOGADO, id, action));
 		paciente.setSexo(1010);
 		paciente.setEnderecos(new ArrayList<Endereco>());
 		paciente.getEnderecos().add(insertEndereco(id, TabelaEnum.PACIENTE, action));
@@ -519,10 +531,10 @@ public class Objects {
 		sindico.setNomeMae("nomeMae_3 - " + action.toString());
 		sindico.setNomeConjugue("nomeConjugue_4 - " + action.toString());
 		sindico.setEstadoCivil(1005);
-	//	sindico.setTipoPessoa(1006);
 		sindico.setDatanasc(a.getTime());
 		sindico.setFoto("foto_8 - " + action.toString());
-	//	sindico.setPessoaTypeEnumValue(1);
+		sindico.setPessoaTipo(new ArrayList<PessoaTipo>());
+		sindico.getPessoaTipo().add(new PessoaTipo(PessoaTypeEnum.ADVOGADO, id, action));
 		sindico.setSexo(1010);
 		sindico.setEnderecos(new ArrayList<Endereco>());
 		sindico.getEnderecos().add(insertEndereco(id, TabelaEnum.SINDICO, action));
@@ -562,10 +574,10 @@ public class Objects {
 		inquilino.setNomeMae("nomeMae_3 - " + action.toString());
 		inquilino.setNomeConjugue("nomeConjugue_4 - " + action.toString());
 		inquilino.setEstadoCivil(1005);
-		//inquilino.setTipoPessoa(1006);
 		inquilino.setDatanasc(a.getTime());
 		inquilino.setFoto("foto_8 - " + action.toString());
-		//inquilino.setPessoaTypeEnumValue(1);
+		inquilino.setPessoaTipo(new ArrayList<PessoaTipo>());
+		inquilino.getPessoaTipo().add(new PessoaTipo(PessoaTypeEnum.ADVOGADO, id, action));
 		inquilino.setSexo(1010);
 		inquilino.setEnderecos(new ArrayList<Endereco>());
 		inquilino.getEnderecos().add(insertEndereco(id, TabelaEnum.INQUILINO, action));
@@ -605,10 +617,11 @@ public class Objects {
 		funcionario.setNomeMae("nomeMae_3 - " + action.toString());
 		funcionario.setNomeConjugue("nomeConjugue_4 - " + action.toString());
 		funcionario.setEstadoCivil(1005);
-		//funcionario.setTipoPessoa(1006);
+
 		funcionario.setDatanasc(a.getTime());
 		funcionario.setFoto("foto_8 - " + action.toString());
-		//funcionario.setPessoaTypeEnumValue(1);
+		funcionario.setPessoaTipo(new ArrayList<PessoaTipo>());
+		funcionario.getPessoaTipo().add(new PessoaTipo(PessoaTypeEnum.ADVOGADO, id, action));
 		funcionario.setSexo(1010);
 		funcionario.setEnderecos(new ArrayList<Endereco>());
 		funcionario.getEnderecos().add(insertEndereco(id, TabelaEnum.FUNCIONARIO, action));
@@ -639,7 +652,6 @@ public class Objects {
 		return funcionario;
 	}
 
-
 	public static Audiencia insertAudiencia(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Audiencia audiencia = new Audiencia();
 		Date a = new Date();
@@ -659,76 +671,6 @@ public class Objects {
 		audiencia.setModelAction(action);
 
 		return audiencia;
-	}
-
-	public static Envolvidos insertEnvolvidos(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
-		Envolvidos processo = new Envolvidos();
-		Date a = new Date();
-		processo.setId(id);
-		processo.setCliente(insertCliente(id, TabelaEnum.PROCESSO, action));
-		processo.setTipoEnvolvido(insertDoisValor(id, tabela, action));
-		processo.setEnvolvimento(insertDoisValor(id, tabela, action));
-		processo.setbCliente(0);
-		processo.setTabelaEnum(tabela);
-		processo.setParentId(id);
-		processo.setEmprId(EMPID);
-		processo.setModifyDateUTC(a.getTime());
-		processo.setCreateDateUTC(a.getTime());
-		processo.setCreateUser("system");
-		processo.setModifyUser("system");
-		processo.setProcessId(1);
-		processo.setModelAction(action);
-
-		return processo;
-	}
-
-	public static Processo insertProcesso(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
-		Processo processo = new Processo();
-		Date a = new Date();
-		processo.setId(id);
-		processo.setDataProcess(a.getTime());
-		processo.setValor(new Double(11.00));
-		processo.setDataFim(a.getTime());
-		processo.setAcao(insertDoisValor(id, tabela, action));
-		processo.setProcessoStatusList(new ArrayList<ProcessoStatus>());
-		processo.getProcessoStatusList().add(new ProcessoStatus(a.getTime(), "Teste", insertDoisValor(id, tabela, action)));
-		processo.setAssunto("ASSUNTO");;
-		processo.setStatusProc(insertDoisValor(id, tabela, action));
-		processo.setDescricaoProc("Descricao");;
-		processo.setEnvolvList(new ArrayList<>());
-		processo.getEnvolvList().add(insertEnvolvidos(id, tabela, action));
-		processo.setSituacao(insertDoisValor(id, tabela, action));
-		processo.setInstancia(insertDoisValor(id, tabela, action));
-		processo.setOrgao(insertDoisValor(id, tabela, action));
-		processo.setNpadraocnj("npadraocnj");
-		processo.setNpadrao("npadrao");
-		processo.setAgendarCap(0);
-		processo.setDistribuido("distribuido");
-		processo.setValorAcao(new Float(1.99));
-		processo.setObservacaoProc("observacaoProc");
-		processo.setJustica(insertDoisValor(id, tabela, action));
-		processo.setTribunal(insertDoisValor(id, tabela, action));
-		processo.setInstancia1(insertDoisValor(id, tabela, action));
-		processo.setLocalidade(insertDoisValor(id, tabela, action));
-		processo.setCapturpor(insertDoisValor(id, tabela, action));
-		processo.setNumeroprocesso("1001");
-		processo.setCapautomatica(1);
-		processo.setPasta("1001");
-//		processo.setAdvogadoList(new ArrayList<Advogado>());
-//		processo.getAdvogadoList().add(insertAdvogado(id, TabelaEnum.PROCESSO, action));
-//		processo.setAudienciaList(new ArrayList<Audiencia>());
-//		processo.getAudienciaList().add(insertAudiencia(id, TabelaEnum.PROCESSO, action));
-		processo.setTabelaEnum(tabela);
-		processo.setParentId(id);
-		processo.setEmprId(EMPID);
-		processo.setModifyDateUTC(a.getTime());
-		processo.setCreateDateUTC(a.getTime());
-		processo.setCreateUser("system");
-		processo.setModifyUser("system");
-		processo.setProcessId(1);
-		processo.setModelAction(action);
-
-		return processo;
 	}
 
 	public static Convenio insertConvenio(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
@@ -806,7 +748,6 @@ public class Objects {
 		return tarefa;
 	}
 
-
 	public static Consulta insertConsulta(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Consulta consulta = new Consulta();
 		Date a = new Date();
@@ -832,8 +773,6 @@ public class Objects {
 		return consulta;
 	}
 
-
-
 	public static Exame insertExame(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Exame exame = new Exame();
 		Date a = new Date();
@@ -850,7 +789,6 @@ public class Objects {
 
 		return exame;
 	}
-
 
 	public static NotaFiscalEntrada insertNotaFiscalEntrada(Integer id, TabelaEnum tabela,
 			PersistenceActionEnum action) {
@@ -904,7 +842,6 @@ public class Objects {
 		return cotacao;
 	}
 
-
 	public static Avisos insertAvisos(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Avisos avisos = new Avisos();
 		Date a = new Date();
@@ -921,7 +858,6 @@ public class Objects {
 
 		return avisos;
 	}
-
 
 	public static Eventos insertEventos(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Eventos eventos = new Eventos();
@@ -973,7 +909,6 @@ public class Objects {
 
 		return horafunc;
 	}
-
 
 	public static Empresa insertEmpresa(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Empresa empresa = new Empresa();
@@ -1046,8 +981,6 @@ public class Objects {
 
 		return empresa;
 	}
-
-
 
 	public static Filial insertFilial(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Filial filial = new Filial();
@@ -1129,10 +1062,10 @@ public class Objects {
 		usuario.setId(id);
 
 		usuario.setCpf(insertDocumento(id, TabelaEnum.USUARIO, action));
-		usuario.setEmail("wlclimaco@gmail.com");
+		usuario.setEmail("econtabilsistemas@gmail.com");
 		usuario.setSenha("senha_4 - " + action.toString());
 		usuario.setPergunta("pergunta_5 - " + action.toString());
-		//usuario.setRole("role_6 - " + action.toString());
+		usuario.setRoles(new ArrayList<Role>());
 		usuario.setLanguage("pt");
 		usuario.setUltAcesso(a.getTime());
 		usuario.setTabelaEnum(tabela);
@@ -1263,6 +1196,7 @@ public class Objects {
 		ContasPagar contaspagar = new ContasPagar();
 		Date a = new Date();
 		contaspagar.setId(id);
+		contaspagar.setFornecedor(insertFornecedor(id, tabela, action));
 		contaspagar.setNumero("numero_1 - " + action.toString());
 		contaspagar.setDataEmissao(a.getTime());
 		contaspagar.setDataVencimento(a.getTime());
@@ -1271,7 +1205,7 @@ public class Objects {
 		contaspagar.setObservacao("observacao_6 - " + action.toString());
 		contaspagar.setFinanceiroEnumValue(1007);
 		contaspagar.setListBaixa(new ArrayList<BaixaTitulo>());
-		contaspagar.getListBaixa().add(insertBaixaTitulo(id, TabelaEnum.CONTASPAGAR, action));
+		contaspagar.getListBaixa().add(insertBaixaTitulo(null, TabelaEnum.CONTASPAGAR, action));
 		contaspagar.setTabelaEnum(tabela);
 		contaspagar.setParentId(id);
 		contaspagar.setEmprId(EMPID);
@@ -1321,8 +1255,7 @@ public class Objects {
 		baixatitulo.setJuros(new Double(10.00));
 		baixatitulo.setMulta(new Double(10.00));
 		baixatitulo.setDesconto(new Double(10.00));
-		//baixatitulo.setTipoBaixaList(new ArrayList<TipoBaixa>());
-		//baixatitulo.getTipoBaixaList().add(insertTipoBaixa(id, TabelaEnum.BAIXATITULO, action));
+		baixatitulo.setConta(new Conta(1001));
 		baixatitulo.setTabelaEnum(tabela);
 		baixatitulo.setParentId(id);
 		baixatitulo.setEmprId(EMPID);
@@ -1359,6 +1292,7 @@ public class Objects {
 		ContasReceber contasreceber = new ContasReceber();
 		Date a = new Date();
 		contasreceber.setId(id);
+		contasreceber.setCliente(insertCliente(null, tabela, action));
 		contasreceber.setNumero("numero_1 - " + action.toString());
 		contasreceber.setDataEmissao(a.getTime());
 		contasreceber.setDataVencimento(a.getTime());
@@ -1404,10 +1338,6 @@ public class Objects {
 		return condpag;
 	}
 
-
-
-
-
 	public static FormaPg insertFormaPg(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		FormaPg formapg = new FormaPg();
 		Date a = new Date();
@@ -1452,10 +1382,11 @@ public class Objects {
 		contacorrente.setId(id);
 
 		contacorrente.setSaldo(new Double(10.00));
+		contacorrente.setStatusConta(10);
 		contacorrente.setNumeroConta("numeroConta_3 - " + action.toString());
 		contacorrente.setNossoNumero("nossoNumero_4 - " + action.toString());
 		contacorrente.setHistoricoList(new ArrayList<HistoricoMovimento>());
-		contacorrente.getHistoricoList().add(insertHistoricoMovimento(id, TabelaEnum.CONTACORRENTE, action));
+		contacorrente.getHistoricoList().add(insertHistoricoMovimento(null, TabelaEnum.CONTACORRENTE, action));
 		contacorrente.setTabelaEnum(tabela);
 		contacorrente.setParentId(id);
 		contacorrente.setEmprId(EMPID);
@@ -1468,9 +1399,6 @@ public class Objects {
 
 		return contacorrente;
 	}
-
-
-
 
 	public static Caixa insertCaixa(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Caixa caixa = new Caixa();
@@ -1541,8 +1469,7 @@ public class Objects {
 	public static Cnae insertCnae(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Cnae cnae = new Cnae();
 		Date a = new Date();
-		if(tabela == TabelaEnum.CNAE)
-		{
+		if (tabela == TabelaEnum.CNAE) {
 			cnae.setId(id);
 		}
 		cnae.setCodigo("codigo_1 - " + action.toString());
@@ -1579,14 +1506,13 @@ public class Objects {
 		return cnaeempresa;
 	}
 
-
 	public static ProdutoEmpresa insertProdutoParent(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		ProdutoEmpresa produtoparent = new ProdutoEmpresa();
 		Date a = new Date();
 		produtoparent.setId(id);
 		produtoparent.setProdId(insertProduto(id, TabelaEnum.PRODUTOPARENT, action));
 		produtoparent.setTransactionId(insertTransaction(id, TabelaEnum.PRODUTOPARENT, action).getId());
-		produtoparent.setTributacao(insertTributacao(id, TabelaEnum.PRODUTOPARENT, action));
+		produtoparent.setTributacao(insertTributacao(id, TabelaEnum.PRODUTOPARENT, action,10));
 		produtoparent.setEstoqueList(new ArrayList<Estoque>());
 		produtoparent.getEstoqueList().add(insertEstoque(id, TabelaEnum.PRODUTOPARENT, action));
 		produtoparent.setPrecoList(new ArrayList<Preco>());
@@ -1609,7 +1535,6 @@ public class Objects {
 		produtoparent.setAplicacao("aplicacao_5 - " + action.toString());
 		produtoparent.setFracao("fracao_6 - " + action.toString());
 
-
 		produtoparent.setPesoBruto(new Double(10.00));
 		produtoparent.setPesoLiquido(new Double(10.00));
 		produtoparent.setModoUso("modoUso_15 - " + action.toString());
@@ -1618,17 +1543,15 @@ public class Objects {
 		return produtoparent;
 	}
 
-
-
-
-
 	public static Produto insertProduto(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Produto produto = new Produto();
 		Date a = new Date();
 		produto.setId(id);
+
 		produto.setCdBarras("cdBarras_2 - " + action.toString());
 		produto.setProduto("produto_3 - " + action.toString());
 		produto.setDataCreate(a.getTime());
+
 		produto.setTabelaEnum(tabela);
 		produto.setParentId(id);
 		produto.setEmprId(EMPID);
@@ -1875,8 +1798,9 @@ public class Objects {
 		Rentabilidade rentabilidade = new Rentabilidade();
 		Date a = new Date();
 		rentabilidade.setId(id);
-		//rentabilidade.setRentabilidadeList(new ArrayList<Rentabilidade>());
-	//	rentabilidade.getRentabilidadeList().add(insertRentabilidadeList(id, TabelaEnum.RENTABILIDADE, action));
+		// rentabilidade.setRentabilidadeList(new ArrayList<Rentabilidade>());
+		// rentabilidade.getRentabilidadeList().add(insertRentabilidadeList(id,
+		// TabelaEnum.RENTABILIDADE, action));
 		rentabilidade.setTabelaEnum(tabela);
 		rentabilidade.setParentId(id);
 		rentabilidade.setEmprId(EMPID);
@@ -1911,8 +1835,6 @@ public class Objects {
 		return rentabilidadeitens;
 	}
 
-
-
 	public static Servico insertServicos(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Servico servico = new Servico();
 		Date a = new Date();
@@ -1938,7 +1860,8 @@ public class Objects {
 		PlanoByServico planobyservico = new PlanoByServico();
 		Date a = new Date();
 		planobyservico.setId(id);
-	//	planobyservico.setServico(insertServico(id, TabelaEnum.CUSTO, action));
+		// planobyservico.setServico(insertServico(id, TabelaEnum.CUSTO,
+		// action));
 		planobyservico.setTabelaEnum(tabela);
 		planobyservico.setParentId(id);
 		planobyservico.setEmprId(EMPID);
@@ -2082,8 +2005,9 @@ public class Objects {
 		plano.setCor("cor_6 - " + action.toString());
 		plano.setPrecoList(new ArrayList<Preco>());
 		plano.getPrecoList().add(insertPreco(id, TabelaEnum.PLANO, action));
-	//	plano.setServicoList(new ArrayList<PlanoByServico>());
-	//	plano.getServicoList().add(insertPlanoByServico(id, TabelaEnum.PLANO, action));
+		// plano.setServicoList(new ArrayList<PlanoByServico>());
+		// plano.getServicoList().add(insertPlanoByServico(id, TabelaEnum.PLANO,
+		// action));
 		plano.setTabelaEnum(tabela);
 		plano.setParentId(id);
 		plano.setEmprId(EMPID);
@@ -2118,7 +2042,6 @@ public class Objects {
 
 		return servicoandplano;
 	}
-
 
 	public static NotaFiscalSaida insertNotaFiscalSaida(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		NotaFiscalSaida notafiscalsaida = new NotaFiscalSaida();
@@ -2163,8 +2086,10 @@ public class Objects {
 		ordemservico.setData(a.getTime());
 		ordemservico.setAssunto("assunto_4 - " + action.toString());
 		ordemservico.setStatusValue(1005);
-		//ordemservico.setOrdemServicoItensList(new ArrayList<OrdemServicoItensList>());
-		//ordemservico.getOrdemServicoItensList().add(insertOrdemServicoItensList(id, TabelaEnum.ORDEMSERVICO, action));
+		// ordemservico.setOrdemServicoItensList(new
+		// ArrayList<OrdemServicoItensList>());
+		// ordemservico.getOrdemServicoItensList().add(insertOrdemServicoItensList(id,
+		// TabelaEnum.ORDEMSERVICO, action));
 		ordemservico.setTabelaEnum(tabela);
 		ordemservico.setParentId(id);
 		ordemservico.setEmprId(EMPID);
@@ -2178,12 +2103,10 @@ public class Objects {
 		return ordemservico;
 	}
 
-
-
 	public static Endereco insertEndereco(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Endereco endereco = new Endereco();
 		Date a = new Date();
-		//endereco.setId(id);
+		// endereco.setId(id);
 		endereco.setCodIbge("555555");
 		endereco.setLogradouro("logradouro_2 - " + action.toString());
 		endereco.setBairro("bairro_3 - " + action.toString());
@@ -2207,11 +2130,10 @@ public class Objects {
 		return endereco;
 	}
 
-
 	public static Email insertEmail(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Email email = new Email();
 		Date a = new Date();
-		//email.setId(id);
+		// email.setId(id);
 		email.setTypeValue(1001);
 		email.setEmail("econtabilsistemas@gmail.com");
 		email.setEmailTypeEnumValue(1003);
@@ -2227,8 +2149,6 @@ public class Objects {
 
 		return email;
 	}
-
-
 
 	public static Telefone insertTelefone(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Telefone telefone = new Telefone();
@@ -2251,8 +2171,6 @@ public class Objects {
 		return telefone;
 	}
 
-
-
 	public static Arquivo insertArquivo(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Arquivo arquivo = new Arquivo();
 		Date a = new Date();
@@ -2269,8 +2187,6 @@ public class Objects {
 
 		return arquivo;
 	}
-
-
 
 	public static Classificacao insertClassificacao(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Classificacao classificacao = new Classificacao();
@@ -2291,8 +2207,6 @@ public class Objects {
 		return classificacao;
 	}
 
-
-
 	public static Documento insertDocumento(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Documento documento = new Documento();
 		Date a = new Date();
@@ -2312,27 +2226,27 @@ public class Objects {
 		return documento;
 	}
 
-
-//	public static HistoricoUtil insertHistoricoUtil(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
-//		HistoricoUtil historicoutil = new HistoricoUtil();
-//		Date a = new Date();
-//		historicoutil.setId(id);
-//		historicoutil.setDataMovimento(a.getTime());
-//		historicoutil.setHistoricoUtilType(1002);
-//		historicoutil.setQuantidade(1003);
-//		historicoutil.setTabelaEnumValue(1004);
-//		historicoutil.setTabelaEnum(tabela);
-//		historicoutil.setParentId(id);
-//		historicoutil.setEmprId(EMPID);
-//		historicoutil.setModifyDateUTC(a.getTime());
-//		historicoutil.setCreateDateUTC(a.getTime());
-//		historicoutil.setCreateUser("system");
-//		historicoutil.setModifyUser("system");
-//		historicoutil.setProcessId(1);
-//		historicoutil.setModelAction(action);
-//
-//		return historicoutil;
-//	}
+	// public static HistoricoUtil insertHistoricoUtil(Integer id, TabelaEnum
+	// tabela, PersistenceActionEnum action) {
+	// HistoricoUtil historicoutil = new HistoricoUtil();
+	// Date a = new Date();
+	// historicoutil.setId(id);
+	// historicoutil.setDataMovimento(a.getTime());
+	// historicoutil.setHistoricoUtilType(1002);
+	// historicoutil.setQuantidade(1003);
+	// historicoutil.setTabelaEnumValue(1004);
+	// historicoutil.setTabelaEnum(tabela);
+	// historicoutil.setParentId(id);
+	// historicoutil.setEmprId(EMPID);
+	// historicoutil.setModifyDateUTC(a.getTime());
+	// historicoutil.setCreateDateUTC(a.getTime());
+	// historicoutil.setCreateUser("system");
+	// historicoutil.setModifyUser("system");
+	// historicoutil.setProcessId(1);
+	// historicoutil.setModelAction(action);
+	//
+	// return historicoutil;
+	// }
 
 	public static Historico insertHistorico(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Historico historico = new Historico();
@@ -2372,7 +2286,6 @@ public class Objects {
 		return historicoitens;
 	}
 
-
 	public static Note insertNotes(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Note notes = new Note();
 		Date a = new Date();
@@ -2389,8 +2302,6 @@ public class Objects {
 
 		return notes;
 	}
-
-
 
 	public static Socio insertSocio(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Socio socio = new Socio();
@@ -2411,7 +2322,6 @@ public class Objects {
 
 		return socio;
 	}
-
 
 	public static OrdemServico insertOrdemServico(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		OrdemServico ordemservico = new OrdemServico();
@@ -2437,22 +2347,23 @@ public class Objects {
 		return ordemservico;
 	}
 
-//	public static OrdemServicoType insertOrdemServicoType(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
-//		OrdemServicoType ordemservicotype = new OrdemServicoType();
-//		Date a = new Date();
-//		ordemservicotype.setId(id);
-//		ordemservicotype.setTabelaEnum(tabela);
-//		ordemservicotype.setParentId(id);
-//		ordemservicotype.setEmprId(EMPID);
-//		ordemservicotype.setModifyDateUTC(a.getTime());
-//		ordemservicotype.setCreateDateUTC(a.getTime());
-//		ordemservicotype.setCreateUser("system");
-//		ordemservicotype.setModifyUser("system");
-//		ordemservicotype.setProcessId(1);
-//		ordemservicotype.setModelAction(action);
-//
-//		return ordemservicotype;
-//	}
+	// public static OrdemServicoType insertOrdemServicoType(Integer id,
+	// TabelaEnum tabela, PersistenceActionEnum action) {
+	// OrdemServicoType ordemservicotype = new OrdemServicoType();
+	// Date a = new Date();
+	// ordemservicotype.setId(id);
+	// ordemservicotype.setTabelaEnum(tabela);
+	// ordemservicotype.setParentId(id);
+	// ordemservicotype.setEmprId(EMPID);
+	// ordemservicotype.setModifyDateUTC(a.getTime());
+	// ordemservicotype.setCreateDateUTC(a.getTime());
+	// ordemservicotype.setCreateUser("system");
+	// ordemservicotype.setModifyUser("system");
+	// ordemservicotype.setProcessId(1);
+	// ordemservicotype.setModelAction(action);
+	//
+	// return ordemservicotype;
+	// }
 
 	public static OrdemServicoStatus insertOrdemServicoStatus(Integer id, TabelaEnum tabela,
 			PersistenceActionEnum action) {
@@ -2493,7 +2404,6 @@ public class Objects {
 		return ordemservicoitens;
 	}
 
-
 	public static Status insertStatus(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Status status = new Status();
 		Date a = new Date();
@@ -2515,132 +2425,121 @@ public class Objects {
 		return status;
 	}
 
+	public static Tributacao insertTributacao(Integer id, TabelaEnum tabela, PersistenceActionEnum action,	Integer dd) {
 
-	public static Tributacao insertTributacao(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+		Tributacao tributacao = new Tributacao();
+		Date a = new Date();
+		tributacao.setId(id);
+		tributacao.setProdId(1001);
+		tributacao.setCfop(insertCfop(id, tabela, action));
+		tributacao.setImposto(insertNFNotaInfoItemImposto(id, tabela, action,dd));
+		tributacao.setImpostoDevolvido(insertNFImpostoDevolvido(id, tabela, action));
+		tributacao.setTabelaEnum(tabela);
+		tributacao.setParentId(id);
+		tributacao.setEmprId(EMPID);
+		tributacao.setModifyDateUTC(a.getTime());
+		tributacao.setCreateDateUTC(a.getTime());
+		tributacao.setCreateUser("system");
+		tributacao.setModifyUser("system");
+		tributacao.setProcessId(1);
+		tributacao.setModelAction(action);
 
-	Tributacao tributacao = new Tributacao();
-    Date a = new Date();
-    tributacao.setId(id);
-    tributacao.setProdId(1001);
-    tributacao.setCfop(insertCfop(id, tabela, action));
-    tributacao.setImposto(insertNFNotaInfoItemImposto(id, tabela, action));
-    tributacao.setImpostoDevolvido(insertNFImpostoDevolvido(id, tabela, action));
-    tributacao.setTabelaEnum(tabela);
-    tributacao.setParentId(id);
-    tributacao.setEmprId(EMPID);
-    tributacao.setModifyDateUTC(a.getTime());
-    tributacao.setCreateDateUTC(a.getTime());
-    tributacao.setCreateUser("system");
-    tributacao.setModifyUser("system");
-    tributacao.setProcessId(1);
-    tributacao.setModelAction(action);
+		return tributacao;
+	}
 
-    return tributacao;
-}
+	public static Icms insertIcms(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+		Icms icms = new Icms();
+		Date a = new Date();
+		icms.setId(id);
+		icms.setProdId(1001);
+		icms.setSitTributaria(insertDoisValor(id, tabela, action));
+		icms.setOrigem(insertDoisValor(id, tabela, action));
+		icms.setModalidadeBC(insertDoisValor(id, tabela, action));
+		icms.setRedBase("redBase_5 - " + action.toString());
+		icms.setAliqICMS("aliqICMS_6 - " + action.toString());
+		icms.setMotDesoneracao(insertDoisValor(id, tabela, action));
+		icms.setTabelaEnum(tabela);
+		icms.setParentId(id);
+		icms.setEmprId(EMPID);
+		icms.setModifyDateUTC(a.getTime());
+		icms.setCreateDateUTC(a.getTime());
+		icms.setCreateUser("system");
+		icms.setModifyUser("system");
+		icms.setProcessId(1);
+		icms.setModelAction(action);
 
+		return icms;
+	}
 
-public static Icms insertIcms(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-{
-    Icms icms = new Icms();
-    Date a = new Date();
-    icms.setId(id);
-    icms.setProdId(1001);
-    icms.setSitTributaria(insertDoisValor(id, tabela, action));
-    icms.setOrigem(insertDoisValor(id, tabela, action));
-    icms.setModalidadeBC(insertDoisValor(id, tabela, action));
-    icms.setRedBase( "redBase_5 - " + action.toString());
-    icms.setAliqICMS( "aliqICMS_6 - " + action.toString());
-    icms.setMotDesoneracao(insertDoisValor(id, tabela, action));
-    icms.setTabelaEnum(tabela);
-    icms.setParentId(id);
-    icms.setEmprId(EMPID);
-    icms.setModifyDateUTC(a.getTime());
-    icms.setCreateDateUTC(a.getTime());
-    icms.setCreateUser("system");
-    icms.setModifyUser("system");
-    icms.setProcessId(1);
-    icms.setModelAction(action);
+	public static Pis insertPis(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+		Pis pis = new Pis();
+		Date a = new Date();
+		pis.setId(id);
+		pis.setProdId(1001);
+		pis.setpISSituaTributaria(insertDoisValor(id, tabela, action));
+		pis.setValorUnidtribPIS(10.00);
+		pis.setTipocalculoSubstTrib(insertDoisValor(id, tabela, action));
+		pis.setValorTribPISST(10.00);
+		pis.setTabelaEnum(tabela);
+		pis.setParentId(id);
+		pis.setEmprId(EMPID);
+		pis.setModifyDateUTC(a.getTime());
+		pis.setCreateDateUTC(a.getTime());
+		pis.setCreateUser("system");
+		pis.setModifyUser("system");
+		pis.setProcessId(1);
+		pis.setModelAction(action);
 
-    return icms;
-}
+		return pis;
+	}
 
+	public static Ipi insertIpi(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+		Ipi ipi = new Ipi();
+		Date a = new Date();
+		ipi.setId(id);
+		ipi.setProdId(1001);
+		ipi.setSitTributaria(insertDoisValor(id, tabela, action));
+		ipi.setClasseCigarrosBebidas("classeCigarrosBebidas_3 - " + action.toString());
+		ipi.setcNPJProdutor("cNPJProdutor_4 - " + action.toString());
+		ipi.setCodControleIPI("codControleIPI_5 - " + action.toString());
+		ipi.setQtdSeloIPI("qtdSeloIPI_6 - " + action.toString());
+		ipi.setCodEnquadramento(insertDoisValor(id, tabela, action));
+		ipi.setTipoCalculo(insertDoisValor(id, tabela, action));
+		ipi.setAliquotaIPI(10.00);
+		ipi.setTabelaEnum(tabela);
+		ipi.setParentId(id);
+		ipi.setEmprId(EMPID);
+		ipi.setModifyDateUTC(a.getTime());
+		ipi.setCreateDateUTC(a.getTime());
+		ipi.setCreateUser("system");
+		ipi.setModifyUser("system");
+		ipi.setProcessId(1);
+		ipi.setModelAction(action);
 
-public static Pis insertPis(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-{
-    Pis pis = new Pis();
-    Date a = new Date();
-    pis.setId(id);
-    pis.setProdId(1001);
-    pis.setpISSituaTributaria(insertDoisValor(id, tabela, action));
-    pis.setValorUnidtribPIS(10.00);
-    pis.setTipocalculoSubstTrib(insertDoisValor(id, tabela, action));
-    pis.setValorTribPISST(10.00);
-    pis.setTabelaEnum(tabela);
-    pis.setParentId(id);
-    pis.setEmprId(EMPID);
-    pis.setModifyDateUTC(a.getTime());
-    pis.setCreateDateUTC(a.getTime());
-    pis.setCreateUser("system");
-    pis.setModifyUser("system");
-    pis.setProcessId(1);
-    pis.setModelAction(action);
+		return ipi;
+	}
 
-    return pis;
-}
+	public static Cofins insertCofins(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+		Cofins cofins = new Cofins();
+		Date a = new Date();
+		cofins.setId(id);
+		cofins.setProdId(1001);
+		cofins.setSitTributaria(insertDoisValor(id, tabela, action));
+		cofins.setValorTribCOFINS(10.00);
+		cofins.setTipoCalculoSubstTrib(insertDoisValor(id, tabela, action));
+		cofins.setAliquotaCOFINSST(10.00);
+		cofins.setTabelaEnum(tabela);
+		cofins.setParentId(id);
+		cofins.setEmprId(EMPID);
+		cofins.setModifyDateUTC(a.getTime());
+		cofins.setCreateDateUTC(a.getTime());
+		cofins.setCreateUser("system");
+		cofins.setModifyUser("system");
+		cofins.setProcessId(1);
+		cofins.setModelAction(action);
 
-
-public static Ipi insertIpi(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-{
-    Ipi ipi = new Ipi();
-    Date a = new Date();
-    ipi.setId(id);
-    ipi.setProdId(1001);
-    ipi.setSitTributaria(insertDoisValor(id, tabela, action));
-    ipi.setClasseCigarrosBebidas( "classeCigarrosBebidas_3 - " + action.toString());
-    ipi.setcNPJProdutor( "cNPJProdutor_4 - " + action.toString());
-    ipi.setCodControleIPI( "codControleIPI_5 - " + action.toString());
-    ipi.setQtdSeloIPI( "qtdSeloIPI_6 - " + action.toString());
-    ipi.setCodEnquadramento(insertDoisValor(id, tabela, action));
-    ipi.setTipoCalculo(insertDoisValor(id, tabela, action));
-    ipi.setAliquotaIPI(10.00);
-    ipi.setTabelaEnum(tabela);
-    ipi.setParentId(id);
-    ipi.setEmprId(EMPID);
-    ipi.setModifyDateUTC(a.getTime());
-    ipi.setCreateDateUTC(a.getTime());
-    ipi.setCreateUser("system");
-    ipi.setModifyUser("system");
-    ipi.setProcessId(1);
-    ipi.setModelAction(action);
-
-    return ipi;
-}
-
-
-public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-{
-    Cofins cofins = new Cofins();
-    Date a = new Date();
-    cofins.setId(id);
-    cofins.setProdId(1001);
-    cofins.setSitTributaria(insertDoisValor(id, tabela, action));
-    cofins.setValorTribCOFINS(10.00);
-    cofins.setTipoCalculoSubstTrib(insertDoisValor(id, tabela, action));
-    cofins.setAliquotaCOFINSST(10.00);
-    cofins.setTabelaEnum(tabela);
-    cofins.setParentId(id);
-    cofins.setEmprId(EMPID);
-    cofins.setModifyDateUTC(a.getTime());
-    cofins.setCreateDateUTC(a.getTime());
-    cofins.setCreateUser("system");
-    cofins.setModifyUser("system");
-    cofins.setProcessId(1);
-    cofins.setModelAction(action);
-
-    return cofins;
-}
-
-
+		return cofins;
+	}
 
 	public static Agencia insertAgencia(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Agencia agencia = new Agencia();
@@ -2649,7 +2548,7 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		agencia.setNome("nome_1 - " + action.toString());
 		agencia.setGerente("gerente_2 - " + action.toString());
 		agencia.setResponsavelConta("responsavelConta_3 - " + action.toString());
-		//agencia.setNumeroAgencia("numeroAgencia_4 - " + action.toString());
+		// agencia.setNumeroAgencia("numeroAgencia_4 - " + action.toString());
 		agencia.setParentId(1005);
 		agencia.setEnderecos(new ArrayList<Endereco>());
 		agencia.getEnderecos().add(insertEndereco(id, TabelaEnum.AGENCIA, action));
@@ -2657,8 +2556,9 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		agencia.getEmails().add(insertEmail(id, TabelaEnum.AGENCIA, action));
 		agencia.setTelefones(new ArrayList<Telefone>());
 		agencia.getTelefones().add(insertTelefone(id, TabelaEnum.AGENCIA, action));
-	//	agencia.setContaList(new ArrayList<Conta>());
-	//	agencia.getContaList().add(insertConta(id, TabelaEnum.AGENCIA, action));
+		// agencia.setContaList(new ArrayList<Conta>());
+		// agencia.getContaList().add(insertConta(id, TabelaEnum.AGENCIA,
+		// action));
 		agencia.setTabelaEnum(tabela);
 		agencia.setParentId(id);
 		agencia.setEmprId(EMPID);
@@ -2671,7 +2571,6 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 
 		return agencia;
 	}
-
 
 	public static Profissao insertProfissao(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Profissao profissao = new Profissao();
@@ -2727,7 +2626,6 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		return custo;
 	}
 
-
 	public static Estoque insertEstoque(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Estoque estoque = new Estoque();
 		Date a = new Date();
@@ -2768,7 +2666,6 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		return porcao;
 	}
 
-
 	public static Preco insertPreco(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Preco preco = new Preco();
 		Date a = new Date();
@@ -2790,7 +2687,6 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		return preco;
 	}
 
-
 	public static DoisValores insertDoisValor(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		DoisValores doisvalor = new DoisValores();
 		Date a = new Date();
@@ -2810,7 +2706,6 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 
 		return doisvalor;
 	}
-
 
 	public static Configuracao insertConfiguracao(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Configuracao configuracao = new Configuracao();
@@ -2908,7 +2803,8 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		ConfigFiscal configfiscal = new ConfigFiscal();
 		Date a = new Date();
 		configfiscal.setId(id);
-		//configfiscal.setPrincAtividade(insertDoisValor(id, TabelaEnum.CONFIGFISCAL, action));
+		// configfiscal.setPrincAtividade(insertDoisValor(id,
+		// TabelaEnum.CONFIGFISCAL, action));
 		configfiscal.setRegime(insertRegime(id, TabelaEnum.BOLETO, action));
 		configfiscal.setAliqSimples(new Double(10.00));
 		configfiscal.setTabelaEnum(tabela);
@@ -3064,7 +2960,8 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		configuracaonfe.setSenha("senha_16 - " + action.toString());
 		configuracaonfe.setSalvarSenha(1017);
 		configuracaonfe.setCfopPadrao(insertCfop(id, TabelaEnum.BOLETO, action));
-	//	configuracaonfe.setConfSMTP(insertConfigSMTP(id, TabelaEnum.BOLETO, action));
+		// configuracaonfe.setConfSMTP(insertConfigSMTP(id, TabelaEnum.BOLETO,
+		// action));
 		configuracaonfe.setTabelaEnum(tabela);
 		configuracaonfe.setParentId(id);
 		configuracaonfe.setEmprId(EMPID);
@@ -3105,13 +3002,14 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		return configvendas;
 	}
 
-
 	public static Rentabilidade insertRentabilidade(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Rentabilidade rentabilidade = new Rentabilidade();
 		Date a = new Date();
 		rentabilidade.setId(id);
-	//	rentabilidade.setRentabilidadeList(new ArrayList<RentabilidadeList>());
-	//	rentabilidade.getRentabilidadeList().add(insertRentabilidadeList(id, TabelaEnum.RENTABILIDADE, action));
+		// rentabilidade.setRentabilidadeList(new
+		// ArrayList<RentabilidadeList>());
+		// rentabilidade.getRentabilidadeList().add(insertRentabilidadeList(id,
+		// TabelaEnum.RENTABILIDADE, action));
 		rentabilidade.setTabelaEnum(tabela);
 		rentabilidade.setParentId(id);
 		rentabilidade.setEmprId(EMPID);
@@ -3124,7 +3022,6 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 
 		return rentabilidade;
 	}
-
 
 	public static Servico insertServico(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Servico servico = new Servico();
@@ -3147,7 +3044,6 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		return servico;
 	}
 
-
 	public static Classes insertClasses(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Classes classes = new Classes();
 		Date a = new Date();
@@ -3166,88 +3062,76 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		return classes;
 	}
 
-	public static Interface insertInterface(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	     {
-	         Interface interfaces = new Interface();
-	         Date a = new Date();
-	         interfaces.setId(id);
-	         interfaces.setNome( "nome_1 - " + action.toString());
-	         interfaces.setLocal( "local_2 - " + action.toString());
-	         interfaces.setTabelaEnum(tabela);
-	         interfaces.setParentId(id);
-	         interfaces.setEmprId(EMPID);
-	         interfaces.setModifyDateUTC(a.getTime());
-	         interfaces.setCreateDateUTC(a.getTime());
-	         interfaces.setCreateUser("system");
-	         interfaces.setModifyUser("system");
-	         interfaces.setProcessId(1);
-	         interfaces.setModelAction(action);
+	public static Interface insertInterface(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+		Interface interfaces = new Interface();
+		Date a = new Date();
+		interfaces.setId(id);
+		interfaces.setNome("nome_1 - " + action.toString());
+		interfaces.setLocal("local_2 - " + action.toString());
+		interfaces.setTabelaEnum(tabela);
+		interfaces.setParentId(id);
+		interfaces.setEmprId(EMPID);
+		interfaces.setModifyDateUTC(a.getTime());
+		interfaces.setCreateDateUTC(a.getTime());
+		interfaces.setCreateUser("system");
+		interfaces.setModifyUser("system");
+		interfaces.setProcessId(1);
+		interfaces.setModelAction(action);
 
-	         return interfaces;
-	     }
+		return interfaces;
+	}
 
+	public static ProdutoEmpresa insertProdutoEmpresa(Integer id, TabelaEnum tabela, PersistenceActionEnum action,Integer rr) {
+		ProdutoEmpresa ProdutoEmpresa = new ProdutoEmpresa();
+		Date a = new Date();
+		ProdutoEmpresa.setId(id);
+		ProdutoEmpresa.setParentId(id);
+		ProdutoEmpresa.setEmprId(100);
+		ProdutoEmpresa.setProdId(insertProduto(id, tabela, action));
+		ProdutoEmpresa.setInformAdicionaisParaNFe("NATIVE INSERT UPDATE");
+		ProdutoEmpresa.setTributacao(insertTributacao(id, tabela, action,rr));
+		ProdutoEmpresa.setEstoqueList(new ArrayList<Estoque>());
+		ProdutoEmpresa.getEstoqueList().add(insertEstoque(id, TabelaEnum.PRODUTOPARENT, action));
+		ProdutoEmpresa.setPrecoList(new ArrayList<Preco>());
+		ProdutoEmpresa.getPrecoList().add(insertPreco(id, TabelaEnum.PRODUTOPARENT, action));
+		ProdutoEmpresa.setCustoList(new ArrayList<Custo>());
+		ProdutoEmpresa.getCustoList().add(insertCusto(id, TabelaEnum.PRODUTOPARENT, action));
+		ProdutoEmpresa.setPorcaoList(new ArrayList<Porcao>());
+		ProdutoEmpresa.getPorcaoList().add(insertPorcao(id, TabelaEnum.PRODUTOPARENT, action));
+		ProdutoEmpresa.setRentabilidadeList(new ArrayList<Rentabilidade>());
+		ProdutoEmpresa.getRentabilidadeList().add(insertRentabilidade(id, TabelaEnum.PRODUTOPARENT, action));
 
-	public static ProdutoEmpresa insertProdutoEmpresa(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			ProdutoEmpresa ProdutoEmpresa = new ProdutoEmpresa();
-			Date a = new Date();
-			ProdutoEmpresa.setId(id);
-			ProdutoEmpresa.setParentId(id);
-			ProdutoEmpresa.setEmprId(100);
-			ProdutoEmpresa.setInformAdicionaisParaNFe("NATIVE INSERT UPDATE");
-			ProdutoEmpresa.setTributacao(insertTributacao(id, tabela, action));
-			ProdutoEmpresa.setEstoqueList(new ArrayList<Estoque>());
-			ProdutoEmpresa.getEstoqueList().add(insertEstoque(id,TabelaEnum.PRODUTOPARENT,action));
-			ProdutoEmpresa.setPrecoList(new ArrayList<Preco>());
-			ProdutoEmpresa.getPrecoList().add(insertPreco(id,TabelaEnum.PRODUTOPARENT,action));
-			ProdutoEmpresa.setCustoList(new ArrayList<Custo>());
-			ProdutoEmpresa.getCustoList().add(insertCusto(id,TabelaEnum.PRODUTOPARENT,action));
-			ProdutoEmpresa.setPorcaoList(new ArrayList<Porcao>());
-			ProdutoEmpresa.getPorcaoList().add(insertPorcao(id,TabelaEnum.PRODUTOPARENT,action));
-			ProdutoEmpresa.setRentabilidadeList(new ArrayList<Rentabilidade>());
-			ProdutoEmpresa.getRentabilidadeList().add(insertRentabilidade(id,TabelaEnum.PRODUTOPARENT,action));
+		ProdutoEmpresa.setParentId(id);
+		ProdutoEmpresa.setEmprId(1);
+		ProdutoEmpresa.setModifyDateUTC(a.getTime());
+		ProdutoEmpresa.setCreateDateUTC(a.getTime());
+		ProdutoEmpresa.setCreateUser("system");
+		ProdutoEmpresa.setModifyUser("system");
+		ProdutoEmpresa.setProcessId(1);
+		ProdutoEmpresa.setModelAction(action);
 
+		return ProdutoEmpresa;
+	}
 
-			ProdutoEmpresa.setParentId(id);
-			ProdutoEmpresa.setEmprId(1);
-			ProdutoEmpresa.setModifyDateUTC(a.getTime());
-			ProdutoEmpresa.setCreateDateUTC(a.getTime());
-			ProdutoEmpresa.setCreateUser("system");
-			ProdutoEmpresa.setModifyUser("system");
-			ProdutoEmpresa.setProcessId(1);
-			ProdutoEmpresa.setModelAction(action);
+	public static MarcaProduto insertMarcaProd(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+		MarcaProduto marcaproduto = new MarcaProduto();
+		Date a = new Date();
+		marcaproduto.setId(id);
+		marcaproduto.setParentId(id);
+		marcaproduto.setMarcaId(insertMarca(id, tabela, action));
+		marcaproduto.setParentId(id);
+		marcaproduto.setEmprId(1);
+		marcaproduto.setModifyDateUTC(a.getTime());
+		marcaproduto.setCreateDateUTC(a.getTime());
+		marcaproduto.setCreateUser("system");
+		marcaproduto.setModifyUser("system");
+		marcaproduto.setProcessId(1);
+		marcaproduto.setModelAction(action);
 
-			return ProdutoEmpresa;
-		}
+		return marcaproduto;
+	}
 
-
-
-
-
-
-
-
-	public static MarcaProduto insertMarcaProd(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			MarcaProduto marcaproduto = new MarcaProduto();
-			Date a = new Date();
-			marcaproduto.setId(id);
-			marcaproduto.setParentId(id);
-			marcaproduto.setMarcaId(insertMarca(id, tabela, action));
-			marcaproduto.setParentId(id);
-			marcaproduto.setEmprId(1);
-			marcaproduto.setModifyDateUTC(a.getTime());
-			marcaproduto.setCreateDateUTC(a.getTime());
-			marcaproduto.setCreateUser("system");
-			marcaproduto.setModifyUser("system");
-			marcaproduto.setProcessId(1);
-			marcaproduto.setModelAction(action);
-
-			return marcaproduto;
-		}
-
-	public static Transaction insertTransaction(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static Transaction insertTransaction(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Transaction transaction = new Transaction();
 		Date a = new Date();
 
@@ -3266,13 +3150,6 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		return transaction;
 	}
 
-
-
-
-
-
-
-
 	private static ExamePessoa insertExamePessoa(Integer id, TabelaEnum consulta, PersistenceActionEnum action) {
 		// TODO Auto-generated method stub
 		return null;
@@ -3282,6 +3159,7 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	private static CondPagPessoa insertCondPagPessoa(Integer id, TabelaEnum advocacia, PersistenceActionEnum action) {
 		// TODO Auto-generated method stub
 		return null;
@@ -3313,11 +3191,7 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		return null;
 	}
 
-
-
-
-	public static UserRoles insertUserRoles(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static UserRoles insertUserRoles(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		UserRoles userroles = new UserRoles();
 		Date a = new Date();
 		userroles.setUser_role_id(id);
@@ -3335,9 +3209,7 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		return userroles;
 	}
 
-
-public static Role insertRole(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static Role insertRole(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Role role = new Role();
 		Date a = new Date();
 		role.setId(id);
@@ -3356,17 +3228,15 @@ public static Role insertRole(Integer id,TabelaEnum tabela,PersistenceActionEnum
 		return role;
 	}
 
-
-public static Pagina insertPagina(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static Pagina insertPagina(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Pagina pagina = new Pagina();
 		Date a = new Date();
 		pagina.setId(id);
 		pagina.setPagina("NATIVE INSERT UPDATE");
 		pagina.setStatus(100);
-		//pagina.setMenu(insertMenu(id, tabela, action));
-		//pagina.setHelp(insertAjuda(id, tabela, action));
-		//pagina.setFilds(insertField(id, tabela, action));
+		// pagina.setMenu(insertMenu(id, tabela, action));
+		// pagina.setHelp(insertAjuda(id, tabela, action));
+		// pagina.setFilds(insertField(id, tabela, action));
 		pagina.setParentId(id);
 		pagina.setEmprId(1);
 		pagina.setModifyDateUTC(a.getTime());
@@ -3379,9 +3249,7 @@ public static Pagina insertPagina(Integer id,TabelaEnum tabela,PersistenceAction
 		return pagina;
 	}
 
-
-public static Validacao insertValidacao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static Validacao insertValidacao(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Validacao validacao = new Validacao();
 		Date a = new Date();
 		validacao.setId(id);
@@ -3399,9 +3267,7 @@ public static Validacao insertValidacao(Integer id,TabelaEnum tabela,Persistence
 		return validacao;
 	}
 
-
-public static Field insertField(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static Field insertField(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Field field = new Field();
 		Date a = new Date();
 		field.setId(id);
@@ -3416,8 +3282,8 @@ public static Field insertField(Integer id,TabelaEnum tabela,PersistenceActionEn
 		field.setHelp(insertAjuda(id, tabela, action));
 		field.setValidacao(new ArrayList<Validacao>());
 		field.getValidacao().add(insertValidacao(id, tabela, action));
-	//	field.setRole(new ArrayList<Role>());
-	//	field.getRole().add(insertRole(id, tabela, action));
+		// field.setRole(new ArrayList<Role>());
+		// field.getRole().add(insertRole(id, tabela, action));
 		field.setParentId(id);
 		field.setEmprId(1);
 		field.setModifyDateUTC(a.getTime());
@@ -3430,9 +3296,7 @@ public static Field insertField(Integer id,TabelaEnum tabela,PersistenceActionEn
 		return field;
 	}
 
-
-public static Ajuda insertAjuda(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static Ajuda insertAjuda(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Ajuda ajuda = new Ajuda();
 		Date a = new Date();
 		ajuda.setId(id);
@@ -3451,9 +3315,7 @@ public static Ajuda insertAjuda(Integer id,TabelaEnum tabela,PersistenceActionEn
 		return ajuda;
 	}
 
-
-public static Menu insertMenu(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static Menu insertMenu(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Menu menu = new Menu();
 		Date a = new Date();
 		menu.setId(id);
@@ -3461,8 +3323,8 @@ public static Menu insertMenu(Integer id,TabelaEnum tabela,PersistenceActionEnum
 		menu.setLabel("NATIVE INSERT UPDATE");
 		menu.setStatus(100);
 		menu.setNivel(100);
-		//menu.setPermissao(insertRole(id, tabela, action));
-		//menu.setHelp(insertAjuda(id, tabela, action));
+		// menu.setPermissao(insertRole(id, tabela, action));
+		// menu.setHelp(insertAjuda(id, tabela, action));
 		menu.setParentId(id);
 		menu.setEmprId(1);
 		menu.setModifyDateUTC(a.getTime());
@@ -3474,78 +3336,76 @@ public static Menu insertMenu(Integer id,TabelaEnum tabela,PersistenceActionEnum
 
 		return menu;
 	}
-public static NotaFiscalItens insertNotaFiscalItens(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-{
-	NotaFiscalItens notafiscalitens = new NotaFiscalItens();
-	Date a = new Date();
-	notafiscalitens.setId(id);
-	notafiscalitens.setDataInicio(a.getTime());
-	notafiscalitens.setValor(new Double(10.00));
-	notafiscalitens.setServicoPlanoEnumValue(100);
-//	notafiscalitens.setServicoList(10000);
-//	notafiscalitens.setPlanoList(10000);
-	notafiscalitens.setNumeroRegistro("NATIVE INSERT UPDATE");
-	notafiscalitens.setDataRegistro(a.getTime());
-	notafiscalitens.setLocalDesembaraco("NATIVE INSERT UPDATE");
-//		notafiscalitens.setUfDesembaraco(new Estado("MG"));
-	notafiscalitens.setDataDesembaraco(a.getTime());
-	notafiscalitens.setTransporteInternacional(100);
-	notafiscalitens.setValorAFRMM(new Double(10.00));
-	notafiscalitens.setTpIntermedio(100);
-	notafiscalitens.setCnpj("NATIVE INSERT UPDATE");
-	notafiscalitens.setUfTerceiro(100);
-	notafiscalitens.setCodigoExportador(100);
-	notafiscalitens.setDescricao("NATIVE INSERT UPDATE");
-//	notafiscalitens.setProduto(10000);
-//	notafiscalitens.setCfop(10000);
-	notafiscalitens.setValorUnitario(new Double(10.00));
-	notafiscalitens.setValorTotalBruto(new Double(10.00));
-	notafiscalitens.setValorFrete(new Double(10.00));
-	notafiscalitens.setValorSeguro(new Double(10.00));
-	notafiscalitens.setValorDesconto(new Double(10.00));
-	notafiscalitens.setValorOutrasDespesasAcessorias(new Double(10.00));
-	notafiscalitens.setNumeroRECOPI(100);
-	notafiscalitens.setParentId(id);
-	notafiscalitens.setEmprId(1);
-	notafiscalitens.setModifyDateUTC(a.getTime());
-	notafiscalitens.setCreateDateUTC(a.getTime());
-	notafiscalitens.setCreateUser("system");
-	notafiscalitens.setModifyUser("system");
-	notafiscalitens.setProcessId(1);
-	notafiscalitens.setModelAction(action);
 
-	return notafiscalitens;
-}
+	public static NotaFiscalItens insertNotaFiscalItens(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+		NotaFiscalItens notafiscalitens = new NotaFiscalItens();
+		Date a = new Date();
+		notafiscalitens.setId(id);
+		notafiscalitens.setDataInicio(a.getTime());
+		notafiscalitens.setValor(new Double(10.00));
+		notafiscalitens.setServicoPlanoEnumValue(100);
+		// notafiscalitens.setServicoList(10000);
+		// notafiscalitens.setPlanoList(10000);
+		notafiscalitens.setNumeroRegistro("NATIVE INSERT UPDATE");
+		notafiscalitens.setDataRegistro(a.getTime());
+		notafiscalitens.setLocalDesembaraco("NATIVE INSERT UPDATE");
+		// notafiscalitens.setUfDesembaraco(new Estado("MG"));
+		notafiscalitens.setDataDesembaraco(a.getTime());
+		notafiscalitens.setTransporteInternacional(100);
+		notafiscalitens.setValorAFRMM(new Double(10.00));
+		notafiscalitens.setTpIntermedio(100);
+		notafiscalitens.setCnpj("NATIVE INSERT UPDATE");
+		notafiscalitens.setUfTerceiro(100);
+		notafiscalitens.setCodigoExportador(100);
+		notafiscalitens.setDescricao("NATIVE INSERT UPDATE");
+		// notafiscalitens.setProduto(10000);
+		// notafiscalitens.setCfop(10000);
+		notafiscalitens.setServicoList(insertServico(id, tabela, action));
+		notafiscalitens.setValorUnitario(new Double(10.00));
+		notafiscalitens.setValorTotalBruto(new Double(10.00));
+		notafiscalitens.setValorFrete(new Double(10.00));
+		notafiscalitens.setValorSeguro(new Double(10.00));
+		notafiscalitens.setValorDesconto(new Double(10.00));
+		notafiscalitens.setValorOutrasDespesasAcessorias(new Double(10.00));
+		notafiscalitens.setNumeroRECOPI(100);
+		notafiscalitens.setParentId(id);
+		notafiscalitens.setEmprId(1);
+		notafiscalitens.setModifyDateUTC(a.getTime());
+		notafiscalitens.setCreateDateUTC(a.getTime());
+		notafiscalitens.setCreateUser("system");
+		notafiscalitens.setModifyUser("system");
+		notafiscalitens.setProcessId(1);
+		notafiscalitens.setModelAction(action);
 
+		return notafiscalitens;
+	}
 
+	public static ServicoAndPlano insertServicoByPlano(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 
-public static ServicoAndPlano insertServicoByPlano(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+		ServicoAndPlano notafiscalitens = new ServicoAndPlano();
+		Date a = new Date();
+		notafiscalitens.setId(id);
 
-	ServicoAndPlano notafiscalitens = new ServicoAndPlano();
-	Date a = new Date();
-	notafiscalitens.setId(id);
+		notafiscalitens.setParentId(id);
+		notafiscalitens.setEmprId(1);
+		notafiscalitens.setValor(new Double(1.99));
+		notafiscalitens.setModifyDateUTC(a.getTime());
+		notafiscalitens.setCreateDateUTC(a.getTime());
+		notafiscalitens.setCreateUser("system");
+		notafiscalitens.setModifyUser("system");
+		notafiscalitens.setProcessId(1);
+		notafiscalitens.setModelAction(action);
 
-	notafiscalitens.setParentId(id);
-	notafiscalitens.setEmprId(1);
-	notafiscalitens.setModifyDateUTC(a.getTime());
-	notafiscalitens.setCreateDateUTC(a.getTime());
-	notafiscalitens.setCreateUser("system");
-	notafiscalitens.setModifyUser("system");
-	notafiscalitens.setProcessId(1);
-	notafiscalitens.setModelAction(action);
+		return notafiscalitens;
+	}
 
-	return notafiscalitens;
-}
-
-
-public static NFNota insertNFNota(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNota insertNFNota(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		NFNota nfnota = new NFNota();
 		Date a = new Date();
 		nfnota.setId(id);
 		nfnota.setIdentificadorLocal(a.getTime());
-		nfnota.setInfo(insertNFNotaInfo(id,tabela,action));
-		nfnota.setInfoSuplementar(insertNFNotaInfoSuplementar(id,tabela,action));
+		nfnota.setInfo(insertNFNotaInfo(id, tabela, action));
+		nfnota.setInfoSuplementar(insertNFNotaInfoSuplementar(id, tabela, action));
 		nfnota.setAssinatura(Objects.insertDoisValor(id, tabela, action));
 		nfnota.setParentId(id);
 		nfnota.setEmprId(1);
@@ -3559,9 +3419,7 @@ public static NFNota insertNFNota(Integer id,TabelaEnum tabela,PersistenceAction
 		return nfnota;
 	}
 
-
-public static NFNotaInfo insertNFNotaInfo(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfo insertNFNotaInfo(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		NFNotaInfo nfnotainfo = new NFNotaInfo();
 		Date a = new Date();
 		nfnotainfo.setId(id);
@@ -3576,7 +3434,7 @@ public static NFNotaInfo insertNFNotaInfo(Integer id,TabelaEnum tabela,Persisten
 		nfnotainfo.setPessoasautorizadasdownloadnfe(new ArrayList<NFPessoaAutorizadaDownloadNFe>());
 		nfnotainfo.getPessoasautorizadasdownloadnfe().add(insertNFPessoaAutorizadaDownloadNFe(null, tabela, action));
 		nfnotainfo.setItens(new ArrayList<NFNotaInfoItem>());
-		nfnotainfo.getItens().add(Objects.insertNFNotaInfoItem(id, tabela, action));
+		nfnotainfo.getItens().add(Objects.insertNFNotaInfoItem(null, tabela, action));
 		nfnotainfo.setTotal(insertNFNotaInfoTotal(null, tabela, action));
 		nfnotainfo.setTransporte(insertNFNotaInfoTransporte(null, tabela, action));
 		nfnotainfo.setCobranca(insertNFNotaInfoCobranca(null, tabela, action));
@@ -3598,16 +3456,16 @@ public static NFNotaInfo insertNFNotaInfo(Integer id,TabelaEnum tabela,Persisten
 		return nfnotainfo;
 	}
 
-
-public static NFNotaInfoIdentificacao insertNFNotaInfoIdentificacao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoIdentificacao insertNFNotaInfoIdentificacao(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoIdentificacao nfnotainfoidentificacao = new NFNotaInfoIdentificacao();
 		Date a = new Date();
 		nfnotainfoidentificacao.setId(id);
 		nfnotainfoidentificacao.setUf(Objects.insertEstado(null, tabela, action));
 		nfnotainfoidentificacao.setCodigoRandomico("NATIVE INSERT UPDATE");
 		nfnotainfoidentificacao.setNaturezaOperacao("NATIVE INSERT UPDATE");
-	//	nfnotainfoidentificacao.setFormaPagamento(Objects.insertDoisValor(id, tabela, action));
+		// nfnotainfoidentificacao.setFormaPagamento(Objects.insertDoisValor(id,
+		// tabela, action));
 		nfnotainfoidentificacao.setModelo(Objects.insertDoisValor(id, tabela, action));
 		nfnotainfoidentificacao.setSerie(Objects.insertDoisValor(id, tabela, action));
 		nfnotainfoidentificacao.setNumeroNota("NATIVE INSERT UPDATE");
@@ -3641,9 +3499,8 @@ public static NFNotaInfoIdentificacao insertNFNotaInfoIdentificacao(Integer id,T
 		return nfnotainfoidentificacao;
 	}
 
-
-public static NFInfoModelo1Por1AReferenciada insertNFInfoModelo1Por1AReferenciada(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFInfoModelo1Por1AReferenciada insertNFInfoModelo1Por1AReferenciada(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFInfoModelo1Por1AReferenciada nfinfomodelo1por1areferenciada = new NFInfoModelo1Por1AReferenciada();
 		Date a = new Date();
 		nfinfomodelo1por1areferenciada.setId(id);
@@ -3665,17 +3522,17 @@ public static NFInfoModelo1Por1AReferenciada insertNFInfoModelo1Por1AReferenciad
 		return nfinfomodelo1por1areferenciada;
 	}
 
-
-public static NFInfoReferenciada insertNFInfoReferenciada(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFInfoReferenciada insertNFInfoReferenciada(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFInfoReferenciada nfinforeferenciada = new NFInfoReferenciada();
 		Date a = new Date();
 		nfinforeferenciada.setId(id);
 		nfinforeferenciada.setChaveAcesso("NATIVE INSERT UPDATE");
 		nfinforeferenciada.setModelo1por1Referenciada(100);
-		nfinforeferenciada.setInfoNFProdutorRuralReferenciada(insertNFInfoProdutorRuralReferenciada(null, tabela, action));
+		nfinforeferenciada
+				.setInfoNFProdutorRuralReferenciada(insertNFInfoProdutorRuralReferenciada(null, tabela, action));
 		nfinforeferenciada.setChaveAcessoCTReferenciada("NATIVE INSERT UPDATE");
-		//nfinforeferenciada.setCupomFiscalReferenciado(insertnfinfof);
+		// nfinforeferenciada.setCupomFiscalReferenciado(insertnfinfof);
 		nfinforeferenciada.setParentId(id);
 		nfinforeferenciada.setEmprId(1);
 		nfinforeferenciada.setModifyDateUTC(a.getTime());
@@ -3688,9 +3545,8 @@ public static NFInfoReferenciada insertNFInfoReferenciada(Integer id,TabelaEnum 
 		return nfinforeferenciada;
 	}
 
-
-public static NFInfoProdutorRuralReferenciada insertNFInfoProdutorRuralReferenciada(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFInfoProdutorRuralReferenciada insertNFInfoProdutorRuralReferenciada(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFInfoProdutorRuralReferenciada nfinfoprodutorruralreferenciada = new NFInfoProdutorRuralReferenciada();
 		Date a = new Date();
 		nfinfoprodutorruralreferenciada.setId(id);
@@ -3714,9 +3570,8 @@ public static NFInfoProdutorRuralReferenciada insertNFInfoProdutorRuralReferenci
 		return nfinfoprodutorruralreferenciada;
 	}
 
-
-public static NFNotaInfoEmitente insertNFNotaInfoEmitente(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoEmitente insertNFNotaInfoEmitente(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoEmitente nfnotainfoemitente = new NFNotaInfoEmitente();
 		Date a = new Date();
 		nfnotainfoemitente.setId(id);
@@ -3742,9 +3597,7 @@ public static NFNotaInfoEmitente insertNFNotaInfoEmitente(Integer id,TabelaEnum 
 		return nfnotainfoemitente;
 	}
 
-
-public static NFNotaInfoAvulsa insertNFNotaInfoAvulsa(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoAvulsa insertNFNotaInfoAvulsa(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		NFNotaInfoAvulsa nfnotainfoavulsa = new NFNotaInfoAvulsa();
 		Date a = new Date();
 		nfnotainfoavulsa.setId(id);
@@ -3771,9 +3624,8 @@ public static NFNotaInfoAvulsa insertNFNotaInfoAvulsa(Integer id,TabelaEnum tabe
 		return nfnotainfoavulsa;
 	}
 
-
-public static NFNotaInfoDestinatario insertNFNotaInfoDestinatario(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoDestinatario insertNFNotaInfoDestinatario(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoDestinatario nfnotainfodestinatario = new NFNotaInfoDestinatario();
 		Date a = new Date();
 		nfnotainfodestinatario.setId(id);
@@ -3799,9 +3651,7 @@ public static NFNotaInfoDestinatario insertNFNotaInfoDestinatario(Integer id,Tab
 		return nfnotainfodestinatario;
 	}
 
-
-public static NFNotaInfoLocal insertNFNotaInfoLocal(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoLocal insertNFNotaInfoLocal(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		NFNotaInfoLocal nfnotainfolocal = new NFNotaInfoLocal();
 		Date a = new Date();
 		nfnotainfolocal.setId(id);
@@ -3826,9 +3676,8 @@ public static NFNotaInfoLocal insertNFNotaInfoLocal(Integer id,TabelaEnum tabela
 		return nfnotainfolocal;
 	}
 
-
-public static NFPessoaAutorizadaDownloadNFe insertNFPessoaAutorizadaDownloadNFe(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFPessoaAutorizadaDownloadNFe insertNFPessoaAutorizadaDownloadNFe(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFPessoaAutorizadaDownloadNFe nfpessoaautorizadadownloadnfe = new NFPessoaAutorizadaDownloadNFe();
 		Date a = new Date();
 		nfpessoaautorizadadownloadnfe.setId(id);
@@ -3846,9 +3695,7 @@ public static NFPessoaAutorizadaDownloadNFe insertNFPessoaAutorizadaDownloadNFe(
 		return nfpessoaautorizadadownloadnfe;
 	}
 
-
-public static NFNotaInfoTotal insertNFNotaInfoTotal(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoTotal insertNFNotaInfoTotal(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		NFNotaInfoTotal nfnotainfototal = new NFNotaInfoTotal();
 		Date a = new Date();
 		nfnotainfototal.setId(id);
@@ -3867,9 +3714,8 @@ public static NFNotaInfoTotal insertNFNotaInfoTotal(Integer id,TabelaEnum tabela
 		return nfnotainfototal;
 	}
 
-
-public static NFNotaInfoICMSTotal insertNFNotaInfoICMSTotal(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoICMSTotal insertNFNotaInfoICMSTotal(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoICMSTotal nfnotainfoicmstotal = new NFNotaInfoICMSTotal();
 		Date a = new Date();
 		nfnotainfoicmstotal.setId(id);
@@ -3904,9 +3750,8 @@ public static NFNotaInfoICMSTotal insertNFNotaInfoICMSTotal(Integer id,TabelaEnu
 		return nfnotainfoicmstotal;
 	}
 
-
-public static NFNotaInfoISSQNTotal insertNFNotaInfoISSQNTotal(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoISSQNTotal insertNFNotaInfoISSQNTotal(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoISSQNTotal nfnotainfoissqntotal = new NFNotaInfoISSQNTotal();
 		Date a = new Date();
 		nfnotainfoissqntotal.setId(id);
@@ -3934,9 +3779,8 @@ public static NFNotaInfoISSQNTotal insertNFNotaInfoISSQNTotal(Integer id,TabelaE
 		return nfnotainfoissqntotal;
 	}
 
-
-public static NFNotaInfoRetencoesTributos insertNFNotaInfoRetencoesTributos(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoRetencoesTributos insertNFNotaInfoRetencoesTributos(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoRetencoesTributos nfnotainforetencoestributos = new NFNotaInfoRetencoesTributos();
 		Date a = new Date();
 		nfnotainforetencoestributos.setId(id);
@@ -3959,9 +3803,8 @@ public static NFNotaInfoRetencoesTributos insertNFNotaInfoRetencoesTributos(Inte
 		return nfnotainforetencoestributos;
 	}
 
-
-public static NFNotaInfoTransporte insertNFNotaInfoTransporte(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoTransporte insertNFNotaInfoTransporte(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoTransporte nfnotainfotransporte = new NFNotaInfoTransporte();
 		Date a = new Date();
 		nfnotainfotransporte.setId(id);
@@ -3985,9 +3828,8 @@ public static NFNotaInfoTransporte insertNFNotaInfoTransporte(Integer id,TabelaE
 		return nfnotainfotransporte;
 	}
 
-
-public static NFNotaInfoRetencaoICMSTransporte insertNFNotaInfoRetencaoICMSTransporte(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoRetencaoICMSTransporte insertNFNotaInfoRetencaoICMSTransporte(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoRetencaoICMSTransporte nfnotainforetencaoicmstransporte = new NFNotaInfoRetencaoICMSTransporte();
 		Date a = new Date();
 		nfnotainforetencaoicmstransporte.setId(id);
@@ -4009,9 +3851,8 @@ public static NFNotaInfoRetencaoICMSTransporte insertNFNotaInfoRetencaoICMSTrans
 		return nfnotainforetencaoicmstransporte;
 	}
 
-
-public static NFNotaInfoTransportador insertNFNotaInfoTransportador(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoTransportador insertNFNotaInfoTransportador(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoTransportador nfnotainfotransportador = new NFNotaInfoTransportador();
 		Date a = new Date();
 		nfnotainfotransportador.setId(id);
@@ -4034,9 +3875,8 @@ public static NFNotaInfoTransportador insertNFNotaInfoTransportador(Integer id,T
 		return nfnotainfotransportador;
 	}
 
-
-public static NFNotaInfoVeiculo insertNFNotaInfoVeiculo(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoVeiculo insertNFNotaInfoVeiculo(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoVeiculo nfnotainfoveiculo = new NFNotaInfoVeiculo();
 		Date a = new Date();
 		nfnotainfoveiculo.setId(id);
@@ -4055,9 +3895,8 @@ public static NFNotaInfoVeiculo insertNFNotaInfoVeiculo(Integer id,TabelaEnum ta
 		return nfnotainfoveiculo;
 	}
 
-
-public static NFNotaInfoReboque insertNFNotaInfoReboque(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoReboque insertNFNotaInfoReboque(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoReboque nfnotainforeboque = new NFNotaInfoReboque();
 		Date a = new Date();
 		nfnotainforeboque.setId(id);
@@ -4076,9 +3915,8 @@ public static NFNotaInfoReboque insertNFNotaInfoReboque(Integer id,TabelaEnum ta
 		return nfnotainforeboque;
 	}
 
-
-public static NFNotaInfoCobranca insertNFNotaInfoCobranca(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoCobranca insertNFNotaInfoCobranca(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoCobranca nfnotainfocobranca = new NFNotaInfoCobranca();
 		Date a = new Date();
 		nfnotainfocobranca.setId(id);
@@ -4097,9 +3935,8 @@ public static NFNotaInfoCobranca insertNFNotaInfoCobranca(Integer id,TabelaEnum 
 		return nfnotainfocobranca;
 	}
 
-
-public static NFNotaInfoDuplicata insertNFNotaInfoDuplicata(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoDuplicata insertNFNotaInfoDuplicata(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoDuplicata nfnotainfoduplicata = new NFNotaInfoDuplicata();
 		Date a = new Date();
 		nfnotainfoduplicata.setId(id);
@@ -4118,9 +3955,7 @@ public static NFNotaInfoDuplicata insertNFNotaInfoDuplicata(Integer id,TabelaEnu
 		return nfnotainfoduplicata;
 	}
 
-
-public static NFNotaInfoFatura insertNFNotaInfoFatura(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoFatura insertNFNotaInfoFatura(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		NFNotaInfoFatura nfnotainfofatura = new NFNotaInfoFatura();
 		Date a = new Date();
 		nfnotainfofatura.setId(id);
@@ -4140,9 +3975,7 @@ public static NFNotaInfoFatura insertNFNotaInfoFatura(Integer id,TabelaEnum tabe
 		return nfnotainfofatura;
 	}
 
-
-public static NFNotaInfoCartao insertNFNotaInfoCartao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoCartao insertNFNotaInfoCartao(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		NFNotaInfoCartao nfnotainfocartao = new NFNotaInfoCartao();
 		Date a = new Date();
 		nfnotainfocartao.setId(id);
@@ -4162,9 +3995,8 @@ public static NFNotaInfoCartao insertNFNotaInfoCartao(Integer id,TabelaEnum tabe
 		return nfnotainfocartao;
 	}
 
-
-public static NFNotaInfoPagamento insertNFNotaInfoPagamento(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoPagamento insertNFNotaInfoPagamento(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoPagamento nfnotainfopagamento = new NFNotaInfoPagamento();
 		Date a = new Date();
 		nfnotainfopagamento.setId(id);
@@ -4183,20 +4015,21 @@ public static NFNotaInfoPagamento insertNFNotaInfoPagamento(Integer id,TabelaEnu
 		return nfnotainfopagamento;
 	}
 
-
-public static NFNotaInfoInformacoesAdicionais insertNFNotaInfoInformacoesAdicionais(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoInformacoesAdicionais insertNFNotaInfoInformacoesAdicionais(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoInformacoesAdicionais nfnotainfoinformacoesadicionais = new NFNotaInfoInformacoesAdicionais();
 		Date a = new Date();
 		nfnotainfoinformacoesadicionais.setId(id);
 		nfnotainfoinformacoesadicionais.setInformacoesadicionaisinteressefisco("NATIVE INSERT UPDATE");
 		nfnotainfoinformacoesadicionais.setInformacoescomplementaresinteressecontribuinte("NATIVE INSERT UPDATE");
 		nfnotainfoinformacoesadicionais.setObservacoescontribuinte(new ArrayList<NFNotaInfoObservacao>());
-		nfnotainfoinformacoesadicionais.getObservacoescontribuinte().add(insertNFNotaInfoObservacao(null, tabela, action));
+		nfnotainfoinformacoesadicionais.getObservacoescontribuinte()
+				.add(insertNFNotaInfoObservacao(null, tabela, action));
 		nfnotainfoinformacoesadicionais.setObservacoesfisco(new ArrayList<NFNotaInfoObservacao>());
 		nfnotainfoinformacoesadicionais.getObservacoesfisco().add(insertNFNotaInfoObservacao(null, tabela, action));
 		nfnotainfoinformacoesadicionais.setProcessosrefenciado(new ArrayList<NFNotaInfoProcessoReferenciado>());
-		nfnotainfoinformacoesadicionais.getProcessosrefenciado().add(insertNFNotaInfoProcessoReferenciado(null, tabela, action));
+		nfnotainfoinformacoesadicionais.getProcessosrefenciado()
+				.add(insertNFNotaInfoProcessoReferenciado(null, tabela, action));
 		nfnotainfoinformacoesadicionais.setParentId(id);
 		nfnotainfoinformacoesadicionais.setEmprId(1);
 		nfnotainfoinformacoesadicionais.setModifyDateUTC(a.getTime());
@@ -4209,9 +4042,8 @@ public static NFNotaInfoInformacoesAdicionais insertNFNotaInfoInformacoesAdicion
 		return nfnotainfoinformacoesadicionais;
 	}
 
-
-public static NFNotaInfoObservacao insertNFNotaInfoObservacao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoObservacao insertNFNotaInfoObservacao(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoObservacao nfnotainfoobservacao = new NFNotaInfoObservacao();
 		Date a = new Date();
 		nfnotainfoobservacao.setId(id);
@@ -4229,9 +4061,8 @@ public static NFNotaInfoObservacao insertNFNotaInfoObservacao(Integer id,TabelaE
 		return nfnotainfoobservacao;
 	}
 
-
-public static NFNotaInfoProcessoReferenciado insertNFNotaInfoProcessoReferenciado(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoProcessoReferenciado insertNFNotaInfoProcessoReferenciado(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoProcessoReferenciado nfnotainfoprocessoreferenciado = new NFNotaInfoProcessoReferenciado();
 		Date a = new Date();
 		nfnotainfoprocessoreferenciado.setId(id);
@@ -4249,9 +4080,8 @@ public static NFNotaInfoProcessoReferenciado insertNFNotaInfoProcessoReferenciad
 		return nfnotainfoprocessoreferenciado;
 	}
 
-
-public static NFNotaInfoExportacao insertNFNotaInfoExportacao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoExportacao insertNFNotaInfoExportacao(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoExportacao nfnotainfoexportacao = new NFNotaInfoExportacao();
 		Date a = new Date();
 		nfnotainfoexportacao.setId(id);
@@ -4270,9 +4100,7 @@ public static NFNotaInfoExportacao insertNFNotaInfoExportacao(Integer id,TabelaE
 		return nfnotainfoexportacao;
 	}
 
-
-public static NFNotaInfoCompra insertNFNotaInfoCompra(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoCompra insertNFNotaInfoCompra(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		NFNotaInfoCompra nfnotainfocompra = new NFNotaInfoCompra();
 		Date a = new Date();
 		nfnotainfocompra.setId(id);
@@ -4291,9 +4119,7 @@ public static NFNotaInfoCompra insertNFNotaInfoCompra(Integer id,TabelaEnum tabe
 		return nfnotainfocompra;
 	}
 
-
-public static NFNotaInfoCana insertNFNotaInfoCana(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoCana insertNFNotaInfoCana(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		NFNotaInfoCana nfnotainfocana = new NFNotaInfoCana();
 		Date a = new Date();
 		nfnotainfocana.setId(id);
@@ -4321,9 +4147,8 @@ public static NFNotaInfoCana insertNFNotaInfoCana(Integer id,TabelaEnum tabela,P
 		return nfnotainfocana;
 	}
 
-
-public static NFNotaInfoCanaFornecimentoDiario insertNFNotaInfoCanaFornecimentoDiario(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoCanaFornecimentoDiario insertNFNotaInfoCanaFornecimentoDiario(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoCanaFornecimentoDiario nfnotainfocanafornecimentodiario = new NFNotaInfoCanaFornecimentoDiario();
 		Date a = new Date();
 		nfnotainfocanafornecimentodiario.setId(id);
@@ -4341,9 +4166,8 @@ public static NFNotaInfoCanaFornecimentoDiario insertNFNotaInfoCanaFornecimentoD
 		return nfnotainfocanafornecimentodiario;
 	}
 
-
-public static NFNotaInfoCanaDeducao insertNFNotaInfoCanaDeducao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoCanaDeducao insertNFNotaInfoCanaDeducao(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoCanaDeducao nfnotainfocanadeducao = new NFNotaInfoCanaDeducao();
 		Date a = new Date();
 		nfnotainfocanadeducao.setId(id);
@@ -4361,9 +4185,8 @@ public static NFNotaInfoCanaDeducao insertNFNotaInfoCanaDeducao(Integer id,Tabel
 		return nfnotainfocanadeducao;
 	}
 
-
-public static NFNotaInfoSuplementar insertNFNotaInfoSuplementar(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public static NFNotaInfoSuplementar insertNFNotaInfoSuplementar(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
 		NFNotaInfoSuplementar nfnotainfosuplementar = new NFNotaInfoSuplementar();
 		Date a = new Date();
 		nfnotainfosuplementar.setId(id);
@@ -4380,1264 +4203,1668 @@ public static NFNotaInfoSuplementar insertNFNotaInfoSuplementar(Integer id,Tabel
 		return nfnotainfosuplementar;
 	}
 
-public static NFNotaInfoItem insertNFNotaInfoItem(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
-	NFNotaInfoItem nfnotainfoitem = new NFNotaInfoItem();
-	Date a = new Date();
-	nfnotainfoitem.setId(id);
-	nfnotainfoitem.setNumeroItem(100);
-	nfnotainfoitem.setProduto(insertNFNotaInfoItemProduto(id, tabela, action));
-	nfnotainfoitem.setImposto(insertNFNotaInfoItemImposto(id, tabela, action));
-	nfnotainfoitem.setImpostoDevolvido(insertNFImpostoDevolvido(id, tabela, action));
-	nfnotainfoitem.setInformacoesAdicionais("NATIVE INSERT UPDATE");
-	nfnotainfoitem.setParentId(id);
-	nfnotainfoitem.setEmprId(1);
-	nfnotainfoitem.setModifyDateUTC(a.getTime());
-	nfnotainfoitem.setCreateDateUTC(a.getTime());
-	nfnotainfoitem.setCreateUser("system");
-	nfnotainfoitem.setModifyUser("system");
-	nfnotainfoitem.setProcessId(1);
-	nfnotainfoitem.setModelAction(action);
+	public static NFNotaInfoItem insertNFNotaInfoItem(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+		NFNotaInfoItem nfnotainfoitem = new NFNotaInfoItem();
+		Date a = new Date();
+		nfnotainfoitem.setId(id);
+		nfnotainfoitem.setNumeroItem(100);
+		nfnotainfoitem.setProduto(insertNFNotaInfoItemProduto(id, tabela, action));
+		nfnotainfoitem.setImposto(insertNFNotaInfoItemImposto(id, tabela, action,10));
+		nfnotainfoitem.setImpostoDevolvido(insertNFImpostoDevolvido(id, tabela, action));
+		nfnotainfoitem.setInformacoesAdicionais("NATIVE INSERT UPDATE");
+		nfnotainfoitem.setParentId(id);
+		nfnotainfoitem.setEmprId(1);
+		nfnotainfoitem.setModifyDateUTC(a.getTime());
+		nfnotainfoitem.setCreateDateUTC(a.getTime());
+		nfnotainfoitem.setCreateUser("system");
+		nfnotainfoitem.setModifyUser("system");
+		nfnotainfoitem.setProcessId(1);
+		nfnotainfoitem.setModelAction(action);
 
-	return nfnotainfoitem;
+		return nfnotainfoitem;
+	}
+
+	public static NFNotaInfoItemProduto insertNFNotaInfoItemProduto(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemProduto nfnotainfoitemproduto = new NFNotaInfoItemProduto();
+		Date a = new Date();
+		nfnotainfoitemproduto.setId(id);
+		nfnotainfoitemproduto.setCodigo("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setCodigoDeBarras("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setDescricao("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setNcm("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setNomeclaturaValorAduaneiroEstatistica("ddddd,ddd,ffff,fff");
+		nfnotainfoitemproduto.setCodigoEspecificadorSituacaoTributaria("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setExtipi("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setCfop("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setUnidadeComercial("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setQuantidadeComercial("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setValorUnitario("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setValorTotalBruto("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setCodigoDeBarrasTributavel("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setUnidadeTributavel("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setQuantidadeTributavel("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setValorUnitarioTributavel("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setValorFrete("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setValorSeguro("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setValorDesconto("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setValorOutrasDespesasAcessorias("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setCompoeValorNota(insertDoisValor(id, tabela, action));
+		nfnotainfoitemproduto.setDeclaracoesImportacao(new ArrayList<NFNotaInfoItemProdutoDeclaracaoImportacao>());
+		nfnotainfoitemproduto.getDeclaracoesImportacao()
+				.add(insertNFNotaInfoItemProdutoDeclaracaoImportacao(id, tabela, action));
+		nfnotainfoitemproduto.setDetalhesExportacao(new ArrayList<NFNotaInfoItemDetalheExportacao>());
+		nfnotainfoitemproduto.getDetalhesExportacao().add(insertNFNotaInfoItemDetalheExportacao(id, tabela, action));
+		nfnotainfoitemproduto.setNumeroPedidoCliente("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setNumeroPedidoItemCliente(100);
+		nfnotainfoitemproduto.setNumeroControleFCI("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setVeiculo(insertNFNotaInfoItemProdutoVeiculo(id, tabela, action));
+		nfnotainfoitemproduto.setMedicamentos(new ArrayList<NFNotaInfoItemProdutoMedicamento>());
+		nfnotainfoitemproduto.getMedicamentos().add(insertNFNotaInfoItemProdutoMedicamento(id, tabela, action));
+		nfnotainfoitemproduto.setArmamentos(new ArrayList<NFNotaInfoItemProdutoArmamento>());
+		nfnotainfoitemproduto.getArmamentos().add(insertNFNotaInfoItemProdutoArmamento(id, tabela, action));
+		nfnotainfoitemproduto.setCombustivel(insertNFNotaInfoItemProdutoCombustivel(id, tabela, action));
+		nfnotainfoitemproduto.setNumeroRECOPI("NATIVE INSERT UPDATE");
+		nfnotainfoitemproduto.setParentId(id);
+		nfnotainfoitemproduto.setEmprId(1);
+		nfnotainfoitemproduto.setModifyDateUTC(a.getTime());
+		nfnotainfoitemproduto.setCreateDateUTC(a.getTime());
+		nfnotainfoitemproduto.setCreateUser("system");
+		nfnotainfoitemproduto.setModifyUser("system");
+		nfnotainfoitemproduto.setProcessId(1);
+		nfnotainfoitemproduto.setModelAction(action);
+
+		return nfnotainfoitemproduto;
+	}
+
+	public static NFNotaInfoItemProdutoDeclaracaoImportacao insertNFNotaInfoItemProdutoDeclaracaoImportacao(Integer id,
+			TabelaEnum tabela, PersistenceActionEnum action) {
+		NFNotaInfoItemProdutoDeclaracaoImportacao nfnotainfoitemprodutodeclaracaoimportacao = new NFNotaInfoItemProdutoDeclaracaoImportacao();
+		Date a = new Date();
+		nfnotainfoitemprodutodeclaracaoimportacao.setId(id);
+		nfnotainfoitemprodutodeclaracaoimportacao.setNumeroRegistro("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutodeclaracaoimportacao.setDataRegistro(a.getTime());
+		nfnotainfoitemprodutodeclaracaoimportacao.setLocalDesembaraco("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutodeclaracaoimportacao.setUfDesembaraco("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutodeclaracaoimportacao.setDataDesembaraco(a.getTime());
+		nfnotainfoitemprodutodeclaracaoimportacao.setTransporteInternacional(insertDoisValor(id, tabela, action));
+		nfnotainfoitemprodutodeclaracaoimportacao.setValorAFRMM("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutodeclaracaoimportacao.setFormaImportacaoIntermediacao(insertDoisValor(id, tabela, action));
+		nfnotainfoitemprodutodeclaracaoimportacao.setCnpj("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutodeclaracaoimportacao.setUfTerceiro("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutodeclaracaoimportacao.setCodigoExportador("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutodeclaracaoimportacao
+				.setAdicoes(new ArrayList<NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao>());
+		nfnotainfoitemprodutodeclaracaoimportacao.getAdicoes()
+				.add(insertNFNotaInfoItemProdutoDeclaracaoImportacaoAdicao(null, tabela, action));
+		nfnotainfoitemprodutodeclaracaoimportacao.setParentId(id);
+		nfnotainfoitemprodutodeclaracaoimportacao.setEmprId(1);
+		nfnotainfoitemprodutodeclaracaoimportacao.setModifyDateUTC(a.getTime());
+		nfnotainfoitemprodutodeclaracaoimportacao.setCreateDateUTC(a.getTime());
+		nfnotainfoitemprodutodeclaracaoimportacao.setCreateUser("system");
+		nfnotainfoitemprodutodeclaracaoimportacao.setModifyUser("system");
+		nfnotainfoitemprodutodeclaracaoimportacao.setProcessId(1);
+		nfnotainfoitemprodutodeclaracaoimportacao.setModelAction(action);
+
+		return nfnotainfoitemprodutodeclaracaoimportacao;
+	}
+
+	public static NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao insertNFNotaInfoItemProdutoDeclaracaoImportacaoAdicao(
+			Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+		NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao nfnotainfoitemprodutodeclaracaoimportacaoadicao = new NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao();
+		Date a = new Date();
+		nfnotainfoitemprodutodeclaracaoimportacaoadicao.setId(id);
+		nfnotainfoitemprodutodeclaracaoimportacaoadicao.setNumero(100);
+		nfnotainfoitemprodutodeclaracaoimportacaoadicao.setSequencial(100);
+		nfnotainfoitemprodutodeclaracaoimportacaoadicao.setCodigoFabricante("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutodeclaracaoimportacaoadicao.setDesconto("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutodeclaracaoimportacaoadicao.setNumeroAtoConcessorioDrawback(a.getTime());
+		nfnotainfoitemprodutodeclaracaoimportacaoadicao.setParentId(id);
+		nfnotainfoitemprodutodeclaracaoimportacaoadicao.setEmprId(1);
+		nfnotainfoitemprodutodeclaracaoimportacaoadicao.setModifyDateUTC(a.getTime());
+		nfnotainfoitemprodutodeclaracaoimportacaoadicao.setCreateDateUTC(a.getTime());
+		nfnotainfoitemprodutodeclaracaoimportacaoadicao.setCreateUser("system");
+		nfnotainfoitemprodutodeclaracaoimportacaoadicao.setModifyUser("system");
+		nfnotainfoitemprodutodeclaracaoimportacaoadicao.setProcessId(1);
+		nfnotainfoitemprodutodeclaracaoimportacaoadicao.setModelAction(action);
+
+		return nfnotainfoitemprodutodeclaracaoimportacaoadicao;
+	}
+
+	public static NFNotaInfoItemDetalheExportacao insertNFNotaInfoItemDetalheExportacao(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemDetalheExportacao nfnotainfoitemdetalheexportacao = new NFNotaInfoItemDetalheExportacao();
+		Date a = new Date();
+		nfnotainfoitemdetalheexportacao.setId(id);
+		nfnotainfoitemdetalheexportacao.setAtoConcessorioDrawback(a.getTime());
+		nfnotainfoitemdetalheexportacao
+				.setExportacaoIndireta(insertNFNotaInfoItemExportacaoIndireta(null, tabela, action));
+		nfnotainfoitemdetalheexportacao.setParentId(id);
+		nfnotainfoitemdetalheexportacao.setEmprId(1);
+		nfnotainfoitemdetalheexportacao.setModifyDateUTC(a.getTime());
+		nfnotainfoitemdetalheexportacao.setCreateDateUTC(a.getTime());
+		nfnotainfoitemdetalheexportacao.setCreateUser("system");
+		nfnotainfoitemdetalheexportacao.setModifyUser("system");
+		nfnotainfoitemdetalheexportacao.setProcessId(1);
+		nfnotainfoitemdetalheexportacao.setModelAction(action);
+
+		return nfnotainfoitemdetalheexportacao;
+	}
+
+	public static NFNotaInfoItemExportacaoIndireta insertNFNotaInfoItemExportacaoIndireta(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemExportacaoIndireta nfnotainfoitemexportacaoindireta = new NFNotaInfoItemExportacaoIndireta();
+		Date a = new Date();
+		nfnotainfoitemexportacaoindireta.setId(id);
+		nfnotainfoitemexportacaoindireta.setNumeroRegistroExportacao(a.getTime());
+		nfnotainfoitemexportacaoindireta.setChaveAcessoNFe("NATIVE INSERT UPDATE");
+		nfnotainfoitemexportacaoindireta.setQuantidadeItemEfetivamenteExportado("NATIVE INSERT UPDATE");
+		nfnotainfoitemexportacaoindireta.setParentId(id);
+		nfnotainfoitemexportacaoindireta.setEmprId(1);
+		nfnotainfoitemexportacaoindireta.setModifyDateUTC(a.getTime());
+		nfnotainfoitemexportacaoindireta.setCreateDateUTC(a.getTime());
+		nfnotainfoitemexportacaoindireta.setCreateUser("system");
+		nfnotainfoitemexportacaoindireta.setModifyUser("system");
+		nfnotainfoitemexportacaoindireta.setProcessId(1);
+		nfnotainfoitemexportacaoindireta.setModelAction(action);
+
+		return nfnotainfoitemexportacaoindireta;
+	}
+
+	public static NFNotaInfoItemProdutoVeiculo insertNFNotaInfoItemProdutoVeiculo(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemProdutoVeiculo nfnotainfoitemprodutoveiculo = new NFNotaInfoItemProdutoVeiculo();
+		Date a = new Date();
+		nfnotainfoitemprodutoveiculo.setId(id);
+		nfnotainfoitemprodutoveiculo.setTipoOperacao(insertDoisValor(id, tabela, action));
+		nfnotainfoitemprodutoveiculo.setChassi("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutoveiculo.setCodigoCor("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutoveiculo.setDescricaoCor("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutoveiculo.setPotencia("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutoveiculo.setCilindrada("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutoveiculo.setPesoLiquido("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutoveiculo.setPesoBruto("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutoveiculo.setNumeroSerie("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutoveiculo.setTipoCombustivel(insertDoisValor(id, tabela, action));
+		nfnotainfoitemprodutoveiculo.setNumeroMotor("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutoveiculo.setCapacidadeMaximaTracao("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutoveiculo.setDistanciaEntreEixos(100);
+		nfnotainfoitemprodutoveiculo.setAnoModeloFabricacao(100);
+		nfnotainfoitemprodutoveiculo.setAnoFabricacao(100);
+		nfnotainfoitemprodutoveiculo.setTipoPintura("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutoveiculo.setTipoVeiculo(insertDoisValor(id, tabela, action));
+		nfnotainfoitemprodutoveiculo.setEspecieVeiculo(insertDoisValor(id, tabela, action));
+		nfnotainfoitemprodutoveiculo.setCondicaoChassi(insertDoisValor(id, tabela, action));
+		nfnotainfoitemprodutoveiculo.setCondicao(insertDoisValor(id, tabela, action));
+		nfnotainfoitemprodutoveiculo.setCodigoMarcaModelo("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutoveiculo.setCorDENATRAN(insertDoisValor(id, tabela, action));
+		nfnotainfoitemprodutoveiculo.setLotacao(100);
+		nfnotainfoitemprodutoveiculo.setRestricao(insertDoisValor(id, tabela, action));
+		nfnotainfoitemprodutoveiculo.setParentId(id);
+		nfnotainfoitemprodutoveiculo.setEmprId(1);
+		nfnotainfoitemprodutoveiculo.setModifyDateUTC(a.getTime());
+		nfnotainfoitemprodutoveiculo.setCreateDateUTC(a.getTime());
+		nfnotainfoitemprodutoveiculo.setCreateUser("system");
+		nfnotainfoitemprodutoveiculo.setModifyUser("system");
+		nfnotainfoitemprodutoveiculo.setProcessId(1);
+		nfnotainfoitemprodutoveiculo.setModelAction(action);
+
+		return nfnotainfoitemprodutoveiculo;
+	}
+
+	public static NFNotaInfoItemProdutoMedicamento insertNFNotaInfoItemProdutoMedicamento(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemProdutoMedicamento nfnotainfoitemprodutomedicamento = new NFNotaInfoItemProdutoMedicamento();
+		Date a = new Date();
+		nfnotainfoitemprodutomedicamento.setId(id);
+		nfnotainfoitemprodutomedicamento.setLote("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutomedicamento.setQuantidade("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutomedicamento.setDataFabricacao(a.getTime());
+		nfnotainfoitemprodutomedicamento.setDataValidade(a.getTime());
+		nfnotainfoitemprodutomedicamento.setPrecoMaximoConsumidor("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutomedicamento.setParentId(id);
+		nfnotainfoitemprodutomedicamento.setEmprId(1);
+		nfnotainfoitemprodutomedicamento.setModifyDateUTC(a.getTime());
+		nfnotainfoitemprodutomedicamento.setCreateDateUTC(a.getTime());
+		nfnotainfoitemprodutomedicamento.setCreateUser("system");
+		nfnotainfoitemprodutomedicamento.setModifyUser("system");
+		nfnotainfoitemprodutomedicamento.setProcessId(1);
+		nfnotainfoitemprodutomedicamento.setModelAction(action);
+
+		return nfnotainfoitemprodutomedicamento;
+	}
+
+	public static NFNotaInfoItemProdutoArmamento insertNFNotaInfoItemProdutoArmamento(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemProdutoArmamento nfnotainfoitemprodutoarmamento = new NFNotaInfoItemProdutoArmamento();
+		Date a = new Date();
+		nfnotainfoitemprodutoarmamento.setId(id);
+		nfnotainfoitemprodutoarmamento.setTipo(insertDoisValor(id, tabela, action));
+		nfnotainfoitemprodutoarmamento.setNumeroSerieArma("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutoarmamento.setNumeroSerieCano("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutoarmamento.setDescricao("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutoarmamento.setParentId(id);
+		nfnotainfoitemprodutoarmamento.setEmprId(1);
+		nfnotainfoitemprodutoarmamento.setModifyDateUTC(a.getTime());
+		nfnotainfoitemprodutoarmamento.setCreateDateUTC(a.getTime());
+		nfnotainfoitemprodutoarmamento.setCreateUser("system");
+		nfnotainfoitemprodutoarmamento.setModifyUser("system");
+		nfnotainfoitemprodutoarmamento.setProcessId(1);
+		nfnotainfoitemprodutoarmamento.setModelAction(action);
+
+		return nfnotainfoitemprodutoarmamento;
+	}
+
+	public static NFNotaInfoItemProdutoCombustivel insertNFNotaInfoItemProdutoCombustivel(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemProdutoCombustivel nfnotainfoitemprodutocombustivel = new NFNotaInfoItemProdutoCombustivel();
+		Date a = new Date();
+		nfnotainfoitemprodutocombustivel.setId(id);
+		nfnotainfoitemprodutocombustivel.setCodigoProdutoANP("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutocombustivel.setPercentualGasNatural("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutocombustivel.setCodigoAutorizacaoCOFIF("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutocombustivel.setQuantidade("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutocombustivel.setUf("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutocombustivel.setCide(insertNFNotaInfoItemProdutoCombustivelCIDE(null, tabela, action));
+		nfnotainfoitemprodutocombustivel.setParentId(id);
+		nfnotainfoitemprodutocombustivel.setEmprId(1);
+		nfnotainfoitemprodutocombustivel.setModifyDateUTC(a.getTime());
+		nfnotainfoitemprodutocombustivel.setCreateDateUTC(a.getTime());
+		nfnotainfoitemprodutocombustivel.setCreateUser("system");
+		nfnotainfoitemprodutocombustivel.setModifyUser("system");
+		nfnotainfoitemprodutocombustivel.setProcessId(1);
+		nfnotainfoitemprodutocombustivel.setModelAction(action);
+
+		return nfnotainfoitemprodutocombustivel;
+	}
+
+	public static NFNotaInfoItemProdutoCombustivelCIDE insertNFNotaInfoItemProdutoCombustivelCIDE(Integer id,
+			TabelaEnum tabela, PersistenceActionEnum action) {
+		NFNotaInfoItemProdutoCombustivelCIDE nfnotainfoitemprodutocombustivelcide = new NFNotaInfoItemProdutoCombustivelCIDE();
+		Date a = new Date();
+		nfnotainfoitemprodutocombustivelcide.setId(id);
+		nfnotainfoitemprodutocombustivelcide.setQuantidadeBCCIDE("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutocombustivelcide.setValorAliquota("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutocombustivelcide.setValor("NATIVE INSERT UPDATE");
+		nfnotainfoitemprodutocombustivelcide.setParentId(id);
+		nfnotainfoitemprodutocombustivelcide.setEmprId(1);
+		nfnotainfoitemprodutocombustivelcide.setModifyDateUTC(a.getTime());
+		nfnotainfoitemprodutocombustivelcide.setCreateDateUTC(a.getTime());
+		nfnotainfoitemprodutocombustivelcide.setCreateUser("system");
+		nfnotainfoitemprodutocombustivelcide.setModifyUser("system");
+		nfnotainfoitemprodutocombustivelcide.setProcessId(1);
+		nfnotainfoitemprodutocombustivelcide.setModelAction(action);
+
+		return nfnotainfoitemprodutocombustivelcide;
+	}
+
+	public static NFImpostoDevolvido insertNFImpostoDevolvido2(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFImpostoDevolvido nfimpostodevolvido = new NFImpostoDevolvido();
+		Date a = new Date();
+		nfimpostodevolvido.setId(id);
+		nfimpostodevolvido.setPercentualDevolucao("NATIVE INSERT UPDATE");
+		nfimpostodevolvido.setInformacaoIPIDevolvido(insertNFInformacaoImpostoDevolvido(id, tabela, action));
+		nfimpostodevolvido.setParentId(id);
+		nfimpostodevolvido.setEmprId(1);
+		nfimpostodevolvido.setModifyDateUTC(a.getTime());
+		nfimpostodevolvido.setCreateDateUTC(a.getTime());
+		nfimpostodevolvido.setCreateUser("system");
+		nfimpostodevolvido.setModifyUser("system");
+		nfimpostodevolvido.setProcessId(1);
+		nfimpostodevolvido.setModelAction(action);
+
+		return nfimpostodevolvido;
+	}
+
+	public static NFInformacaoImpostoDevolvido insertNFInformacaoImpostoDevolvido2(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFInformacaoImpostoDevolvido nfinformacaoimpostodevolvido = new NFInformacaoImpostoDevolvido();
+		Date a = new Date();
+		nfinformacaoimpostodevolvido.setId(id);
+		nfinformacaoimpostodevolvido.setValorIPIDevolvido("NATIVE INSERT UPDATE");
+		nfinformacaoimpostodevolvido.setParentId(id);
+		nfinformacaoimpostodevolvido.setEmprId(1);
+		nfinformacaoimpostodevolvido.setModifyDateUTC(a.getTime());
+		nfinformacaoimpostodevolvido.setCreateDateUTC(a.getTime());
+		nfinformacaoimpostodevolvido.setCreateUser("system");
+		nfinformacaoimpostodevolvido.setModifyUser("system");
+		nfinformacaoimpostodevolvido.setProcessId(1);
+		nfinformacaoimpostodevolvido.setModelAction(action);
+
+		return nfinformacaoimpostodevolvido;
+	}
+
+	public static NFNotaInfoItemImposto insertNFNotaInfoItemImposto(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action,Integer csm) {
+		NFNotaInfoItemImposto nfnotainfoitemimposto = new NFNotaInfoItemImposto();
+		Date a = new Date();
+		nfnotainfoitemimposto.setId(id);
+		nfnotainfoitemimposto.setValorTotalTributos("NATIVE INSERT UPDATE");
+		nfnotainfoitemimposto.setIcms(insertNFNotaInfoItemImpostoICMS(null, tabela, action,csm));
+		nfnotainfoitemimposto.setIpi(insertNFNotaInfoItemImpostoIPI(null, tabela, action));
+		nfnotainfoitemimposto.setImpostoImportacao(insertNFNotaInfoItemImpostoImportacao(null, tabela, action));
+		nfnotainfoitemimposto.setIssqn(insertNFNotaInfoItemImpostoISSQN(null, tabela, action));
+		nfnotainfoitemimposto.setPis(insertNFNotaInfoItemImpostoPIS(null, tabela, action));
+		nfnotainfoitemimposto.setPisst(insertNFNotaInfoItemImpostoPISST(null, tabela, action));
+		nfnotainfoitemimposto.setCofins(insertNFNotaInfoItemImpostoCOFINS(null, tabela, action));
+		nfnotainfoitemimposto.setCofinsst(insertNFNotaInfoItemImpostoCOFINSST(null, tabela, action));
+		nfnotainfoitemimposto.setIcmsUfDestino(insertNFNotaInfoItemImpostoICMSUFDestino(null, tabela, action));
+		nfnotainfoitemimposto.setParentId(id);
+		nfnotainfoitemimposto.setEmprId(1);
+		nfnotainfoitemimposto.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimposto.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimposto.setCreateUser("system");
+		nfnotainfoitemimposto.setModifyUser("system");
+		nfnotainfoitemimposto.setProcessId(1);
+		nfnotainfoitemimposto.setModelAction(action);
+
+		return nfnotainfoitemimposto;
+	}
+
+	public static NFNotaInfoItemImpostoICMS insertNFNotaInfoItemImpostoICMS(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action, Integer icms) {
+		NFNotaInfoItemImpostoICMS nfnotainfoitemimpostoicms = new NFNotaInfoItemImpostoICMS();
+		Date a = new Date();
+		nfnotainfoitemimpostoicms.setId(id);
+		if (icms == 0)
+			nfnotainfoitemimpostoicms.setIcms00(insertNFNotaInfoItemImpostoICMS00(id, tabela, action));
+		if (icms == 10)
+			nfnotainfoitemimpostoicms.setIcms10(insertNFNotaInfoItemImpostoICMS10(id, tabela, action));
+		if (icms == 20)
+			nfnotainfoitemimpostoicms.setIcms20(insertNFNotaInfoItemImpostoICMS20(id, tabela, action));
+		if (icms == 30)
+			nfnotainfoitemimpostoicms.setIcms30(insertNFNotaInfoItemImpostoICMS30(id, tabela, action));
+		if (icms == 40)
+			nfnotainfoitemimpostoicms.setIcms40(insertNFNotaInfoItemImpostoICMS40(id, tabela, action));
+
+		nfnotainfoitemimpostoicms.setIcms51(null);// (insertNFNotaInfoItemImpostoICMS51(id,
+													// tabela, action));
+		nfnotainfoitemimpostoicms.setIcms60(null);// (insertNFNotaInfoItemImpostoICMS60(id,
+													// tabela, action));
+		nfnotainfoitemimpostoicms.setIcms70(null);// (insertNFNotaInfoItemImpostoICMS70(id,
+													// tabela, action));
+		nfnotainfoitemimpostoicms.setIcms90(null);// (insertNFNotaInfoItemImpostoICMS90(id,
+													// tabela, action));
+		nfnotainfoitemimpostoicms.setIcmsPartilhado(null);// (insertNFNotaInfoItemImpostoICMSPartilhado(id,
+															// tabela, action));
+		nfnotainfoitemimpostoicms.setIcmsst(null);// (insertNFNotaInfoItemImpostoICMSST(id,
+													// tabela, action));
+		nfnotainfoitemimpostoicms.setIcmssn101(null);// (insertNFNotaInfoItemImpostoICMSSN101(id,
+														// tabela, action));
+		nfnotainfoitemimpostoicms.setIcmssn102(null);// (insertNFNotaInfoItemImpostoICMSSN102(id,
+														// tabela, action));
+		nfnotainfoitemimpostoicms.setIcmssn201(null);// (insertNFNotaInfoItemImpostoICMSSN201(id,
+														// tabela, action));
+		nfnotainfoitemimpostoicms.setIcmssn202(null);// (insertNFNotaInfoItemImpostoICMSSN202(id,
+														// tabela, action));
+		nfnotainfoitemimpostoicms.setIcmssn500(null);// (insertNFNotaInfoItemImpostoICMSSN500(id,
+														// tabela, action));
+		nfnotainfoitemimpostoicms.setIcmssn900(null);// (insertNFNotaInfoItemImpostoICMSSN900(id,
+														// tabela, action));
+		nfnotainfoitemimpostoicms.setParentId(id);
+		nfnotainfoitemimpostoicms.setEmprId(1);
+		nfnotainfoitemimpostoicms.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoicms.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoicms.setCreateUser("system");
+		nfnotainfoitemimpostoicms.setModifyUser("system");
+		nfnotainfoitemimpostoicms.setProcessId(1);
+		nfnotainfoitemimpostoicms.setModelAction(action);
+
+		return nfnotainfoitemimpostoicms;
+	}
+
+	public static NFNotaInfoItemImpostoICMS00 insertNFNotaInfoItemImpostoICMS00(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoICMS00 nfnotainfoitemimpostoicms00 = new NFNotaInfoItemImpostoICMS00();
+		Date a = new Date();
+		nfnotainfoitemimpostoicms00.setId(id);
+		nfnotainfoitemimpostoicms00.setOrigem(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms00.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms00.setModalidadeBCICMS(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms00.setValorBaseCalculo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms00.setPercentualAliquota("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms00.setValorTributo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms00.setParentId(id);
+		nfnotainfoitemimpostoicms00.setEmprId(1);
+		nfnotainfoitemimpostoicms00.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoicms00.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoicms00.setCreateUser("system");
+		nfnotainfoitemimpostoicms00.setModifyUser("system");
+		nfnotainfoitemimpostoicms00.setProcessId(1);
+		nfnotainfoitemimpostoicms00.setModelAction(action);
+
+		return nfnotainfoitemimpostoicms00;
+	}
+
+	public static NFNotaInfoItemImpostoICMS10 insertNFNotaInfoItemImpostoICMS10(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoICMS10 nfnotainfoitemimpostoicms10 = new NFNotaInfoItemImpostoICMS10();
+		Date a = new Date();
+		nfnotainfoitemimpostoicms10.setId(id);
+		nfnotainfoitemimpostoicms10.setOrigem(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms10.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms10.setModalidadeBCICMS(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms10.setValorBaseCalculo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms10.setPercentualAliquota("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms10.setValorTributo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms10.setModalidadeBCICMSST(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms10.setPercentualMargemValorICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms10.setPercentualReducaoBCICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms10.setValorBCICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms10.setPercentualAliquotaImpostoICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms10.setValorICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms10.setParentId(id);
+		nfnotainfoitemimpostoicms10.setEmprId(1);
+		nfnotainfoitemimpostoicms10.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoicms10.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoicms10.setCreateUser("system");
+		nfnotainfoitemimpostoicms10.setModifyUser("system");
+		nfnotainfoitemimpostoicms10.setProcessId(1);
+		nfnotainfoitemimpostoicms10.setModelAction(action);
+
+		return nfnotainfoitemimpostoicms10;
+	}
+
+	public static NFNotaInfoItemImpostoICMS20 insertNFNotaInfoItemImpostoICMS20(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoICMS20 nfnotainfoitemimpostoicms20 = new NFNotaInfoItemImpostoICMS20();
+		Date a = new Date();
+		nfnotainfoitemimpostoicms20.setId(id);
+		nfnotainfoitemimpostoicms20.setOrigem(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms20.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms20.setModalidadeBCICMS(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms20.setPercentualReducaoBC("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms20.setValorBCICMS("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms20.setPercentualAliquota("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms20.setValorTributo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms20.setValorICMSDesoneracao("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms20.setDesoneracao(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms20.setParentId(id);
+		nfnotainfoitemimpostoicms20.setEmprId(1);
+		nfnotainfoitemimpostoicms20.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoicms20.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoicms20.setCreateUser("system");
+		nfnotainfoitemimpostoicms20.setModifyUser("system");
+		nfnotainfoitemimpostoicms20.setProcessId(1);
+		nfnotainfoitemimpostoicms20.setModelAction(action);
+
+		return nfnotainfoitemimpostoicms20;
+	}
+
+	public static NFNotaInfoItemImpostoICMS30 insertNFNotaInfoItemImpostoICMS30(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoICMS30 nfnotainfoitemimpostoicms30 = new NFNotaInfoItemImpostoICMS30();
+		Date a = new Date();
+		nfnotainfoitemimpostoicms30.setId(id);
+		nfnotainfoitemimpostoicms30.setOrigem(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms30.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms30.setModalidadeBCICMSST(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms30.setPercentualMargemValorAdicionadoICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms30.setPercentualReducaoBCICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms30.setValorBCICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms30.setPercentualAliquotaImpostoICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms30.setValorImpostoICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms30.setValorICMSDesoneracao("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms30.setDesoneracao(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms30.setParentId(id);
+		nfnotainfoitemimpostoicms30.setEmprId(1);
+		nfnotainfoitemimpostoicms30.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoicms30.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoicms30.setCreateUser("system");
+		nfnotainfoitemimpostoicms30.setModifyUser("system");
+		nfnotainfoitemimpostoicms30.setProcessId(1);
+		nfnotainfoitemimpostoicms30.setModelAction(action);
+
+		return nfnotainfoitemimpostoicms30;
+	}
+
+	public static NFNotaInfoItemImpostoICMS40 insertNFNotaInfoItemImpostoICMS40(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoICMS40 nfnotainfoitemimpostoicms40 = new NFNotaInfoItemImpostoICMS40();
+		Date a = new Date();
+		nfnotainfoitemimpostoicms40.setId(id);
+		nfnotainfoitemimpostoicms40.setOrigem(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms40.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms40.setValorICMSDesoneracao("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms40.setMotivoDesoneracaoICMS(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms40.setParentId(id);
+		nfnotainfoitemimpostoicms40.setEmprId(1);
+		nfnotainfoitemimpostoicms40.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoicms40.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoicms40.setCreateUser("system");
+		nfnotainfoitemimpostoicms40.setModifyUser("system");
+		nfnotainfoitemimpostoicms40.setProcessId(1);
+		nfnotainfoitemimpostoicms40.setModelAction(action);
+
+		return nfnotainfoitemimpostoicms40;
+	}
+
+	public static NFNotaInfoItemImpostoICMS51 insertNFNotaInfoItemImpostoICMS51(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoICMS51 nfnotainfoitemimpostoicms51 = new NFNotaInfoItemImpostoICMS51();
+		Date a = new Date();
+		nfnotainfoitemimpostoicms51.setId(id);
+		nfnotainfoitemimpostoicms51.setOrigem(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms51.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms51.setModalidadeBCICMS(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms51.setPercentualReducaoBC("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms51.setValorBCICMS("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms51.setPercentualICMS("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms51.setValorICMSOperacao("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms51.setPercentualDiferimento("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms51.setValorICMSDiferimento("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms51.setValorICMS("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms51.setParentId(id);
+		nfnotainfoitemimpostoicms51.setEmprId(1);
+		nfnotainfoitemimpostoicms51.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoicms51.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoicms51.setCreateUser("system");
+		nfnotainfoitemimpostoicms51.setModifyUser("system");
+		nfnotainfoitemimpostoicms51.setProcessId(1);
+		nfnotainfoitemimpostoicms51.setModelAction(action);
+
+		return nfnotainfoitemimpostoicms51;
+	}
+
+	public static NFNotaInfoItemImpostoICMS60 insertNFNotaInfoItemImpostoICMS60(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoICMS60 nfnotainfoitemimpostoicms60 = new NFNotaInfoItemImpostoICMS60();
+		Date a = new Date();
+		nfnotainfoitemimpostoicms60.setId(id);
+		nfnotainfoitemimpostoicms60.setOrigem(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms60.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms60.setValorBCICMSSTRetido("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms60.setValorICMSSTRetido("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms60.setParentId(id);
+		nfnotainfoitemimpostoicms60.setEmprId(1);
+		nfnotainfoitemimpostoicms60.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoicms60.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoicms60.setCreateUser("system");
+		nfnotainfoitemimpostoicms60.setModifyUser("system");
+		nfnotainfoitemimpostoicms60.setProcessId(1);
+		nfnotainfoitemimpostoicms60.setModelAction(action);
+
+		return nfnotainfoitemimpostoicms60;
+	}
+
+	public static NFNotaInfoItemImpostoICMS70 insertNFNotaInfoItemImpostoICMS70(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoICMS70 nfnotainfoitemimpostoicms70 = new NFNotaInfoItemImpostoICMS70();
+		Date a = new Date();
+		nfnotainfoitemimpostoicms70.setId(id);
+		nfnotainfoitemimpostoicms70.setOrigem(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms70.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms70.setModalidadeBCICMS(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms70.setPercentualReducaoBC("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms70.setValorBC("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms70.setPercentualAliquota("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms70.setValorTributo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms70.setModalidadeBCICMSST(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms70.setPercentualMargemValorAdicionadoICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms70.setPercentualReducaoBCICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms70.setValorBCST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms70.setPercentualAliquotaImpostoICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms70.setValorICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms70.setValorICMSDesoneracao("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms70.setDesoneracao(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms70.setParentId(id);
+		nfnotainfoitemimpostoicms70.setEmprId(1);
+		nfnotainfoitemimpostoicms70.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoicms70.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoicms70.setCreateUser("system");
+		nfnotainfoitemimpostoicms70.setModifyUser("system");
+		nfnotainfoitemimpostoicms70.setProcessId(1);
+		nfnotainfoitemimpostoicms70.setModelAction(action);
+
+		return nfnotainfoitemimpostoicms70;
+	}
+
+	public static NFNotaInfoItemImpostoICMS90 insertNFNotaInfoItemImpostoICMS90(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoICMS90 nfnotainfoitemimpostoicms90 = new NFNotaInfoItemImpostoICMS90();
+		Date a = new Date();
+		nfnotainfoitemimpostoicms90.setId(id);
+		nfnotainfoitemimpostoicms90.setOrigem(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms90.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms90.setModalidadeBCICMS(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms90.setValorBC("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms90.setPercentualReducaoBC("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms90.setPercentualAliquota("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms90.setValorTributo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms90.setModalidadeBCICMSST(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms90.setPercentualMargemValorAdicionadoICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms90.setPercentualReducaoBCICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms90.setValorBCST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms90.setPercentualAliquotaImpostoICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms90.setValorICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms90.setValorICMSDesoneracao("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicms90.setDesoneracao(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicms90.setParentId(id);
+		nfnotainfoitemimpostoicms90.setEmprId(1);
+		nfnotainfoitemimpostoicms90.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoicms90.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoicms90.setCreateUser("system");
+		nfnotainfoitemimpostoicms90.setModifyUser("system");
+		nfnotainfoitemimpostoicms90.setProcessId(1);
+		nfnotainfoitemimpostoicms90.setModelAction(action);
+
+		return nfnotainfoitemimpostoicms90;
+	}
+
+	public static NFNotaInfoItemImpostoICMSPartilhado insertNFNotaInfoItemImpostoICMSPartilhado(Integer id,
+			TabelaEnum tabela, PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoICMSPartilhado nfnotainfoitemimpostoicmspartilhado = new NFNotaInfoItemImpostoICMSPartilhado();
+		Date a = new Date();
+		nfnotainfoitemimpostoicmspartilhado.setId(id);
+		nfnotainfoitemimpostoicmspartilhado.setOrigem(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicmspartilhado.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicmspartilhado.setModalidadeBCICMS(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicmspartilhado.setValorBCICMS("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmspartilhado.setPercentualReducaoBC("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmspartilhado.setPercentualAliquotaImposto("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmspartilhado.setValorICMS("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmspartilhado.setModalidadeBCICMSST(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicmspartilhado.setPercentualMargemValorAdicionadoICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmspartilhado.setPercentualReducaoBCICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmspartilhado.setValorBCICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmspartilhado.setPercentualAliquotaImpostoICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmspartilhado.setValorICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmspartilhado.setPercentualBCOperacaoPropria("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmspartilhado.setUfICMSST(insertEstado(id, tabela, action));
+		nfnotainfoitemimpostoicmspartilhado.setParentId(id);
+		nfnotainfoitemimpostoicmspartilhado.setEmprId(1);
+		nfnotainfoitemimpostoicmspartilhado.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoicmspartilhado.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoicmspartilhado.setCreateUser("system");
+		nfnotainfoitemimpostoicmspartilhado.setModifyUser("system");
+		nfnotainfoitemimpostoicmspartilhado.setProcessId(1);
+		nfnotainfoitemimpostoicmspartilhado.setModelAction(action);
+
+		return nfnotainfoitemimpostoicmspartilhado;
+	}
+
+	public static NFNotaInfoItemImpostoICMSST insertNFNotaInfoItemImpostoICMSST(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoICMSST nfnotainfoitemimpostoicmsst = new NFNotaInfoItemImpostoICMSST();
+		Date a = new Date();
+		nfnotainfoitemimpostoicmsst.setId(id);
+		nfnotainfoitemimpostoicmsst.setOrigem(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicmsst.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicmsst.setValorBCICMSSTRetidoUFRemetente("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmsst.setValorICMSSTRetidoUFRemetente("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmsst.setValorBCICMSSTUFDestino("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmsst.setValorICMSSTUFDestino("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmsst.setParentId(id);
+		nfnotainfoitemimpostoicmsst.setEmprId(1);
+		nfnotainfoitemimpostoicmsst.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoicmsst.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoicmsst.setCreateUser("system");
+		nfnotainfoitemimpostoicmsst.setModifyUser("system");
+		nfnotainfoitemimpostoicmsst.setProcessId(1);
+		nfnotainfoitemimpostoicmsst.setModelAction(action);
+
+		return nfnotainfoitemimpostoicmsst;
+	}
+
+	public static NFNotaInfoItemImpostoICMSSN101 insertNFNotaInfoItemImpostoICMSSN101(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoICMSSN101 nfnotainfoitemimpostoicmssn101 = new NFNotaInfoItemImpostoICMSSN101();
+		Date a = new Date();
+		nfnotainfoitemimpostoicmssn101.setId(id);
+		nfnotainfoitemimpostoicmssn101.setOrigem(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicmssn101.setSituacaoOperacaoSN(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicmssn101.setPercentualAliquotaAplicavelCalculoCreditoSN("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn101.setValorCreditoICMSSN("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn101.setParentId(id);
+		nfnotainfoitemimpostoicmssn101.setEmprId(1);
+		nfnotainfoitemimpostoicmssn101.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoicmssn101.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoicmssn101.setCreateUser("system");
+		nfnotainfoitemimpostoicmssn101.setModifyUser("system");
+		nfnotainfoitemimpostoicmssn101.setProcessId(1);
+		nfnotainfoitemimpostoicmssn101.setModelAction(action);
+
+		return nfnotainfoitemimpostoicmssn101;
+	}
+
+	public static NFNotaInfoItemImpostoICMSSN102 insertNFNotaInfoItemImpostoICMSSN102(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoICMSSN102 nfnotainfoitemimpostoicmssn102 = new NFNotaInfoItemImpostoICMSSN102();
+		Date a = new Date();
+		nfnotainfoitemimpostoicmssn102.setId(id);
+		nfnotainfoitemimpostoicmssn102.setOrigem(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicmssn102.setSituacaoOperacaoSN(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicmssn102.setParentId(id);
+		nfnotainfoitemimpostoicmssn102.setEmprId(1);
+		nfnotainfoitemimpostoicmssn102.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoicmssn102.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoicmssn102.setCreateUser("system");
+		nfnotainfoitemimpostoicmssn102.setModifyUser("system");
+		nfnotainfoitemimpostoicmssn102.setProcessId(1);
+		nfnotainfoitemimpostoicmssn102.setModelAction(action);
+
+		return nfnotainfoitemimpostoicmssn102;
+	}
+
+	public static NFNotaInfoItemImpostoICMSSN201 insertNFNotaInfoItemImpostoICMSSN201(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoICMSSN201 nfnotainfoitemimpostoicmssn201 = new NFNotaInfoItemImpostoICMSSN201();
+		Date a = new Date();
+		nfnotainfoitemimpostoicmssn201.setId(id);
+		nfnotainfoitemimpostoicmssn201.setOrigem(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicmssn201.setSituacaoOperacaoSN(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicmssn201.setModalidadeBCICMSST(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicmssn201.setPercentualMargemValorAdicionadoICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn201.setPercentualReducaoBCICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn201.setValorBCICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn201.setPercentualAliquotaImpostoICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn201.setValorICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn201.setPercentualAliquotaAplicavelCalculoCreditoSN("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn201.setValorCreditoICMSSN("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn201.setParentId(id);
+		nfnotainfoitemimpostoicmssn201.setEmprId(1);
+		nfnotainfoitemimpostoicmssn201.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoicmssn201.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoicmssn201.setCreateUser("system");
+		nfnotainfoitemimpostoicmssn201.setModifyUser("system");
+		nfnotainfoitemimpostoicmssn201.setProcessId(1);
+		nfnotainfoitemimpostoicmssn201.setModelAction(action);
+
+		return nfnotainfoitemimpostoicmssn201;
+	}
+
+	public static NFNotaInfoItemImpostoICMSSN202 insertNFNotaInfoItemImpostoICMSSN202(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoICMSSN202 nfnotainfoitemimpostoicmssn202 = new NFNotaInfoItemImpostoICMSSN202();
+		Date a = new Date();
+		nfnotainfoitemimpostoicmssn202.setId(id);
+		nfnotainfoitemimpostoicmssn202.setOrigem(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicmssn202.setSituacaoOperacaoSN(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicmssn202.setModalidadeBCICMSST(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicmssn202.setPercentualMargemValorAdicionadoICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn202.setPercentualReducaoBCICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn202.setValorBCICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn202.setPercentualAliquotaImpostoICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn202.setValorICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn202.setParentId(id);
+		nfnotainfoitemimpostoicmssn202.setEmprId(1);
+		nfnotainfoitemimpostoicmssn202.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoicmssn202.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoicmssn202.setCreateUser("system");
+		nfnotainfoitemimpostoicmssn202.setModifyUser("system");
+		nfnotainfoitemimpostoicmssn202.setProcessId(1);
+		nfnotainfoitemimpostoicmssn202.setModelAction(action);
+
+		return nfnotainfoitemimpostoicmssn202;
+	}
+
+	public static NFNotaInfoItemImpostoICMSSN500 insertNFNotaInfoItemImpostoICMSSN500(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoICMSSN500 nfnotainfoitemimpostoicmssn500 = new NFNotaInfoItemImpostoICMSSN500();
+		Date a = new Date();
+		nfnotainfoitemimpostoicmssn500.setId(id);
+		nfnotainfoitemimpostoicmssn500.setOrigem(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicmssn500.setSituacaoOperacaoSN(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoicmssn500.setValorBCICMSSTRetido("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn500.setValorICMSSTRetido("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn500.setParentId(id);
+		nfnotainfoitemimpostoicmssn500.setEmprId(1);
+		nfnotainfoitemimpostoicmssn500.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoicmssn500.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoicmssn500.setCreateUser("system");
+		nfnotainfoitemimpostoicmssn500.setModifyUser("system");
+		nfnotainfoitemimpostoicmssn500.setProcessId(1);
+		nfnotainfoitemimpostoicmssn500.setModelAction(action);
+
+		return nfnotainfoitemimpostoicmssn500;
+	}
+
+	public static NFNotaInfoItemImpostoICMSSN900 insertNFNotaInfoItemImpostoICMSSN900(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoICMSSN900 nfnotainfoitemimpostoicmssn900 = new NFNotaInfoItemImpostoICMSSN900();
+		Date a = new Date();
+		nfnotainfoitemimpostoicmssn900.setId(id);
+		nfnotainfoitemimpostoicmssn900.setOrigem("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn900.setSituacaoOperacaoSN("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn900.setModalidadeBCICMS("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn900.setValorBCICMS("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn900.setPercentualReducaoBC("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn900.setPercentualAliquotaImposto("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn900.setValorICMS("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn900.setModalidadeBCICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn900.setPercentualMargemValorAdicionadoICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn900.setPercentualReducaoBCICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn900.setValorBCICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn900.setPercentualAliquotaImpostoICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn900.setValorICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn900.setPercentualAliquotaAplicavelCalculoCreditoSN("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmssn900.setParentId(id);
+		nfnotainfoitemimpostoicmssn900.setEmprId(1);
+		nfnotainfoitemimpostoicmssn900.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoicmssn900.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoicmssn900.setCreateUser("system");
+		nfnotainfoitemimpostoicmssn900.setModifyUser("system");
+		nfnotainfoitemimpostoicmssn900.setProcessId(1);
+		nfnotainfoitemimpostoicmssn900.setModelAction(action);
+
+		return nfnotainfoitemimpostoicmssn900;
+	}
+
+	public static NFNotaInfoItemImpostoIPI insertNFNotaInfoItemImpostoIPI(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoIPI nfnotainfoitemimpostoipi = new NFNotaInfoItemImpostoIPI();
+		Date a = new Date();
+		nfnotainfoitemimpostoipi.setId(id);
+		nfnotainfoitemimpostoipi.setClasseEnquadramento("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoipi.setCnpjProdutor("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoipi.setCodigoSelo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoipi.setQuantidadeSelo(new Integer("100"));
+		nfnotainfoitemimpostoipi.setCodigoEnquadramento("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoipi.setTributado(insertNFNotaInfoItemImpostoIPITributado(id, tabela, action));
+		nfnotainfoitemimpostoipi.setNaoTributado(insertNFNotaInfoItemImpostoIPINaoTributado(id, tabela, action));
+		nfnotainfoitemimpostoipi.setParentId(id);
+		nfnotainfoitemimpostoipi.setEmprId(1);
+		nfnotainfoitemimpostoipi.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoipi.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoipi.setCreateUser("system");
+		nfnotainfoitemimpostoipi.setModifyUser("system");
+		nfnotainfoitemimpostoipi.setProcessId(1);
+		nfnotainfoitemimpostoipi.setModelAction(action);
+
+		return nfnotainfoitemimpostoipi;
+	}
+
+	public static NFNotaInfoItemImpostoIPITributado insertNFNotaInfoItemImpostoIPITributado(Integer id,
+			TabelaEnum tabela, PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoIPITributado nfnotainfoitemimpostoipitributado = new NFNotaInfoItemImpostoIPITributado();
+		Date a = new Date();
+		nfnotainfoitemimpostoipitributado.setId(id);
+		nfnotainfoitemimpostoipitributado.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoipitributado.setValorBaseCalculo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoipitributado.setPercentualAliquota("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoipitributado.setQuantidade("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoipitributado.setValorUnidadeTributavel("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoipitributado.setValorTributo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoipitributado.setParentId(id);
+		nfnotainfoitemimpostoipitributado.setEmprId(1);
+		nfnotainfoitemimpostoipitributado.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoipitributado.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoipitributado.setCreateUser("system");
+		nfnotainfoitemimpostoipitributado.setModifyUser("system");
+		nfnotainfoitemimpostoipitributado.setProcessId(1);
+		nfnotainfoitemimpostoipitributado.setModelAction(action);
+
+		return nfnotainfoitemimpostoipitributado;
+	}
+
+	public static NFNotaInfoItemImpostoIPINaoTributado insertNFNotaInfoItemImpostoIPINaoTributado(Integer id,
+			TabelaEnum tabela, PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoIPINaoTributado nfnotainfoitemimpostoipinaotributado = new NFNotaInfoItemImpostoIPINaoTributado();
+		Date a = new Date();
+		nfnotainfoitemimpostoipinaotributado.setId(id);
+		nfnotainfoitemimpostoipinaotributado.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoipinaotributado.setParentId(id);
+		nfnotainfoitemimpostoipinaotributado.setEmprId(1);
+		nfnotainfoitemimpostoipinaotributado.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoipinaotributado.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoipinaotributado.setCreateUser("system");
+		nfnotainfoitemimpostoipinaotributado.setModifyUser("system");
+		nfnotainfoitemimpostoipinaotributado.setProcessId(1);
+		nfnotainfoitemimpostoipinaotributado.setModelAction(action);
+
+		return nfnotainfoitemimpostoipinaotributado;
+	}
+
+	public static NFNotaInfoItemImpostoImportacao insertNFNotaInfoItemImpostoImportacao(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoImportacao nfnotainfoitemimpostoimportacao = new NFNotaInfoItemImpostoImportacao();
+		Date a = new Date();
+		nfnotainfoitemimpostoimportacao.setId(id);
+		nfnotainfoitemimpostoimportacao.setValorBaseCalculo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoimportacao.setValorDespesaAduaneira("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoimportacao.setValorImpostoImportacao("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoimportacao.setValorIOF("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoimportacao.setParentId(id);
+		nfnotainfoitemimpostoimportacao.setEmprId(1);
+		nfnotainfoitemimpostoimportacao.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoimportacao.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoimportacao.setCreateUser("system");
+		nfnotainfoitemimpostoimportacao.setModifyUser("system");
+		nfnotainfoitemimpostoimportacao.setProcessId(1);
+		nfnotainfoitemimpostoimportacao.setModelAction(action);
+
+		return nfnotainfoitemimpostoimportacao;
+	}
+
+	public static NFNotaInfoItemImpostoISSQN insertNFNotaInfoItemImpostoISSQN(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoISSQN nfnotainfoitemimpostoissqn = new NFNotaInfoItemImpostoISSQN();
+		Date a = new Date();
+		nfnotainfoitemimpostoissqn.setId(id);
+		nfnotainfoitemimpostoissqn.setValorBaseCalculo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoissqn.setValorAliquota("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoissqn.setValor("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoissqn.setCodigoMunicipio(100);
+		nfnotainfoitemimpostoissqn.setItemListaServicos("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoissqn.setValorDeducao("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoissqn.setValorOutro("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoissqn.setValorDescontoIncondicionado("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoissqn.setValorDescontoCondicionado("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoissqn.setValorRetencaoISS("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoissqn.setIndicadorExigibilidadeISS(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostoissqn.setCodigoServico("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoissqn.setCodigoMunicipioIncidenciaImposto("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoissqn.setCodigoPais("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoissqn.setNumeroProcesso("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoissqn.setIndicadorIncentivoFiscal(1);
+		nfnotainfoitemimpostoissqn.setParentId(id);
+		nfnotainfoitemimpostoissqn.setEmprId(1);
+		nfnotainfoitemimpostoissqn.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoissqn.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoissqn.setCreateUser("system");
+		nfnotainfoitemimpostoissqn.setModifyUser("system");
+		nfnotainfoitemimpostoissqn.setProcessId(1);
+		nfnotainfoitemimpostoissqn.setModelAction(action);
+
+		return nfnotainfoitemimpostoissqn;
+	}
+
+	public static NFNotaInfoItemImpostoPIS insertNFNotaInfoItemImpostoPIS(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoPIS nfnotainfoitemimpostopis = new NFNotaInfoItemImpostoPIS();
+		Date a = new Date();
+		nfnotainfoitemimpostopis.setId(id);
+		nfnotainfoitemimpostopis.setAliquota(insertNFNotaInfoItemImpostoPISAliquota(id, tabela, action));
+		nfnotainfoitemimpostopis.setQuantidade(insertNFNotaInfoItemImpostoPISQuantidade(id, tabela, action));
+		nfnotainfoitemimpostopis.setNaoTributado(insertNFNotaInfoItemImpostoPISNaoTributado(id, tabela, action));
+		nfnotainfoitemimpostopis.setOutrasOperacoes(insertNFNotaInfoItemImpostoPISOutrasOperacoes(id, tabela, action));
+		nfnotainfoitemimpostopis.setParentId(id);
+		nfnotainfoitemimpostopis.setEmprId(1);
+		nfnotainfoitemimpostopis.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostopis.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostopis.setCreateUser("system");
+		nfnotainfoitemimpostopis.setModifyUser("system");
+		nfnotainfoitemimpostopis.setProcessId(1);
+		nfnotainfoitemimpostopis.setModelAction(action);
+
+		return nfnotainfoitemimpostopis;
+	}
+
+	public static NFNotaInfoItemImpostoPISAliquota insertNFNotaInfoItemImpostoPISAliquota(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoPISAliquota nfnotainfoitemimpostopisaliquota = new NFNotaInfoItemImpostoPISAliquota();
+		Date a = new Date();
+		nfnotainfoitemimpostopisaliquota.setId(id);
+		nfnotainfoitemimpostopisaliquota.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostopisaliquota.setValorBaseCalculo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostopisaliquota.setPercentualAliquota("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostopisaliquota.setValorTributo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostopisaliquota.setParentId(id);
+		nfnotainfoitemimpostopisaliquota.setEmprId(1);
+		nfnotainfoitemimpostopisaliquota.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostopisaliquota.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostopisaliquota.setCreateUser("system");
+		nfnotainfoitemimpostopisaliquota.setModifyUser("system");
+		nfnotainfoitemimpostopisaliquota.setProcessId(1);
+		nfnotainfoitemimpostopisaliquota.setModelAction(action);
+
+		return nfnotainfoitemimpostopisaliquota;
+	}
+
+	public static NFNotaInfoItemImpostoPISQuantidade insertNFNotaInfoItemImpostoPISQuantidade(Integer id,
+			TabelaEnum tabela, PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoPISQuantidade nfnotainfoitemimpostopisquantidade = new NFNotaInfoItemImpostoPISQuantidade();
+		Date a = new Date();
+		nfnotainfoitemimpostopisquantidade.setId(id);
+		nfnotainfoitemimpostopisquantidade.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostopisquantidade.setQuantidadeVendida("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostopisquantidade.setValorAliquota("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostopisquantidade.setValorTributo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostopisquantidade.setParentId(id);
+		nfnotainfoitemimpostopisquantidade.setEmprId(1);
+		nfnotainfoitemimpostopisquantidade.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostopisquantidade.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostopisquantidade.setCreateUser("system");
+		nfnotainfoitemimpostopisquantidade.setModifyUser("system");
+		nfnotainfoitemimpostopisquantidade.setProcessId(1);
+		nfnotainfoitemimpostopisquantidade.setModelAction(action);
+
+		return nfnotainfoitemimpostopisquantidade;
+	}
+
+	public static NFNotaInfoItemImpostoPISNaoTributado insertNFNotaInfoItemImpostoPISNaoTributado(Integer id,
+			TabelaEnum tabela, PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoPISNaoTributado nfnotainfoitemimpostopisnaotributado = new NFNotaInfoItemImpostoPISNaoTributado();
+		Date a = new Date();
+		nfnotainfoitemimpostopisnaotributado.setId(id);
+		nfnotainfoitemimpostopisnaotributado.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostopisnaotributado.setParentId(id);
+		nfnotainfoitemimpostopisnaotributado.setEmprId(1);
+		nfnotainfoitemimpostopisnaotributado.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostopisnaotributado.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostopisnaotributado.setCreateUser("system");
+		nfnotainfoitemimpostopisnaotributado.setModifyUser("system");
+		nfnotainfoitemimpostopisnaotributado.setProcessId(1);
+		nfnotainfoitemimpostopisnaotributado.setModelAction(action);
+
+		return nfnotainfoitemimpostopisnaotributado;
+	}
+
+	public static NFNotaInfoItemImpostoPISOutrasOperacoes insertNFNotaInfoItemImpostoPISOutrasOperacoes(Integer id,
+			TabelaEnum tabela, PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoPISOutrasOperacoes nfnotainfoitemimpostopisoutrasoperacoes = new NFNotaInfoItemImpostoPISOutrasOperacoes();
+		Date a = new Date();
+		nfnotainfoitemimpostopisoutrasoperacoes.setId(id);
+		nfnotainfoitemimpostopisoutrasoperacoes.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostopisoutrasoperacoes.setValorBaseCalculo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostopisoutrasoperacoes.setPercentualAliquota("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostopisoutrasoperacoes.setQuantidadeVendida("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostopisoutrasoperacoes.setValorAliquota("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostopisoutrasoperacoes.setValorTributo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostopisoutrasoperacoes.setParentId(id);
+		nfnotainfoitemimpostopisoutrasoperacoes.setEmprId(1);
+		nfnotainfoitemimpostopisoutrasoperacoes.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostopisoutrasoperacoes.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostopisoutrasoperacoes.setCreateUser("system");
+		nfnotainfoitemimpostopisoutrasoperacoes.setModifyUser("system");
+		nfnotainfoitemimpostopisoutrasoperacoes.setProcessId(1);
+		nfnotainfoitemimpostopisoutrasoperacoes.setModelAction(action);
+
+		return nfnotainfoitemimpostopisoutrasoperacoes;
+	}
+
+	public static NFNotaInfoItemImpostoPISST insertNFNotaInfoItemImpostoPISST(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoPISST nfnotainfoitemimpostopisst = new NFNotaInfoItemImpostoPISST();
+		Date a = new Date();
+		nfnotainfoitemimpostopisst.setId(id);
+		nfnotainfoitemimpostopisst.setValorBaseCalculo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostopisst.setPercentualAliquota("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostopisst.setQuantidadeVendida("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostopisst.setValorAliquota("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostopisst.setValorTributo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostopisst.setParentId(id);
+		nfnotainfoitemimpostopisst.setEmprId(1);
+		nfnotainfoitemimpostopisst.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostopisst.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostopisst.setCreateUser("system");
+		nfnotainfoitemimpostopisst.setModifyUser("system");
+		nfnotainfoitemimpostopisst.setProcessId(1);
+		nfnotainfoitemimpostopisst.setModelAction(action);
+
+		return nfnotainfoitemimpostopisst;
+	}
+
+	public static NFNotaInfoItemImpostoCOFINS insertNFNotaInfoItemImpostoCOFINS(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoCOFINS nfnotainfoitemimpostocofins = new NFNotaInfoItemImpostoCOFINS();
+		Date a = new Date();
+		nfnotainfoitemimpostocofins.setId(id);
+		nfnotainfoitemimpostocofins.setAliquota(insertNFNotaInfoItemImpostoCOFINSAliquota(null, tabela, action));
+		nfnotainfoitemimpostocofins.setQuantidade(insertNFNotaInfoItemImpostoCOFINSQuantidade(null, tabela, action));
+		nfnotainfoitemimpostocofins
+				.setNaoTributavel(insertNFNotaInfoItemImpostoCOFINSNaoTributavel(null, tabela, action));
+		nfnotainfoitemimpostocofins
+				.setOutrasOperacoes(insertNFNotaInfoItemImpostoCOFINSOutrasOperacoes(null, tabela, action));
+		nfnotainfoitemimpostocofins.setParentId(id);
+		nfnotainfoitemimpostocofins.setEmprId(1);
+		nfnotainfoitemimpostocofins.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostocofins.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostocofins.setCreateUser("system");
+		nfnotainfoitemimpostocofins.setModifyUser("system");
+		nfnotainfoitemimpostocofins.setProcessId(1);
+		nfnotainfoitemimpostocofins.setModelAction(action);
+
+		return nfnotainfoitemimpostocofins;
+	}
+
+	public static NFNotaInfoItemImpostoCOFINSAliquota insertNFNotaInfoItemImpostoCOFINSAliquota(Integer id,
+			TabelaEnum tabela, PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoCOFINSAliquota nfnotainfoitemimpostocofinsaliquota = new NFNotaInfoItemImpostoCOFINSAliquota();
+		Date a = new Date();
+		nfnotainfoitemimpostocofinsaliquota.setId(id);
+		nfnotainfoitemimpostocofinsaliquota.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostocofinsaliquota.setValorBaseCalulo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostocofinsaliquota.setPercentualAliquota("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostocofinsaliquota.setValor("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostocofinsaliquota.setParentId(id);
+		nfnotainfoitemimpostocofinsaliquota.setEmprId(1);
+		nfnotainfoitemimpostocofinsaliquota.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostocofinsaliquota.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostocofinsaliquota.setCreateUser("system");
+		nfnotainfoitemimpostocofinsaliquota.setModifyUser("system");
+		nfnotainfoitemimpostocofinsaliquota.setProcessId(1);
+		nfnotainfoitemimpostocofinsaliquota.setModelAction(action);
+
+		return nfnotainfoitemimpostocofinsaliquota;
+	}
+
+	public static NFNotaInfoItemImpostoCOFINSQuantidade insertNFNotaInfoItemImpostoCOFINSQuantidade(Integer id,
+			TabelaEnum tabela, PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoCOFINSQuantidade nfnotainfoitemimpostocofinsquantidade = new NFNotaInfoItemImpostoCOFINSQuantidade();
+		Date a = new Date();
+		nfnotainfoitemimpostocofinsquantidade.setId(id);
+		nfnotainfoitemimpostocofinsquantidade.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostocofinsquantidade.setQuantidadeVendida("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostocofinsquantidade.setValorAliquota("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostocofinsquantidade.setValorTributo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostocofinsquantidade.setParentId(id);
+		nfnotainfoitemimpostocofinsquantidade.setEmprId(1);
+		nfnotainfoitemimpostocofinsquantidade.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostocofinsquantidade.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostocofinsquantidade.setCreateUser("system");
+		nfnotainfoitemimpostocofinsquantidade.setModifyUser("system");
+		nfnotainfoitemimpostocofinsquantidade.setProcessId(1);
+		nfnotainfoitemimpostocofinsquantidade.setModelAction(action);
+
+		return nfnotainfoitemimpostocofinsquantidade;
+	}
+
+	public static NFNotaInfoItemImpostoCOFINSNaoTributavel insertNFNotaInfoItemImpostoCOFINSNaoTributavel(Integer id,
+			TabelaEnum tabela, PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoCOFINSNaoTributavel nfnotainfoitemimpostocofinsnaotributavel = new NFNotaInfoItemImpostoCOFINSNaoTributavel();
+		Date a = new Date();
+		nfnotainfoitemimpostocofinsnaotributavel.setId(id);
+		nfnotainfoitemimpostocofinsnaotributavel.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostocofinsnaotributavel.setParentId(id);
+		nfnotainfoitemimpostocofinsnaotributavel.setEmprId(1);
+		nfnotainfoitemimpostocofinsnaotributavel.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostocofinsnaotributavel.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostocofinsnaotributavel.setCreateUser("system");
+		nfnotainfoitemimpostocofinsnaotributavel.setModifyUser("system");
+		nfnotainfoitemimpostocofinsnaotributavel.setProcessId(1);
+		nfnotainfoitemimpostocofinsnaotributavel.setModelAction(action);
+
+		return nfnotainfoitemimpostocofinsnaotributavel;
+	}
+
+	public static NFNotaInfoItemImpostoCOFINSOutrasOperacoes insertNFNotaInfoItemImpostoCOFINSOutrasOperacoes(
+			Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoCOFINSOutrasOperacoes nfnotainfoitemimpostocofinsoutrasoperacoes = new NFNotaInfoItemImpostoCOFINSOutrasOperacoes();
+		Date a = new Date();
+		nfnotainfoitemimpostocofinsoutrasoperacoes.setId(id);
+		nfnotainfoitemimpostocofinsoutrasoperacoes.setSituacaoTributaria(insertDoisValor(id, tabela, action));
+		nfnotainfoitemimpostocofinsoutrasoperacoes.setValorBaseCalculo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostocofinsoutrasoperacoes.setPercentualCOFINS("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostocofinsoutrasoperacoes.setQuantidadeVendida("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostocofinsoutrasoperacoes.setValorAliquota("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostocofinsoutrasoperacoes.setValorCOFINS("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostocofinsoutrasoperacoes.setParentId(id);
+		nfnotainfoitemimpostocofinsoutrasoperacoes.setEmprId(1);
+		nfnotainfoitemimpostocofinsoutrasoperacoes.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostocofinsoutrasoperacoes.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostocofinsoutrasoperacoes.setCreateUser("system");
+		nfnotainfoitemimpostocofinsoutrasoperacoes.setModifyUser("system");
+		nfnotainfoitemimpostocofinsoutrasoperacoes.setProcessId(1);
+		nfnotainfoitemimpostocofinsoutrasoperacoes.setModelAction(action);
+
+		return nfnotainfoitemimpostocofinsoutrasoperacoes;
+	}
+
+	public static NFNotaInfoItemImpostoCOFINSST insertNFNotaInfoItemImpostoCOFINSST(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoCOFINSST nfnotainfoitemimpostocofinsst = new NFNotaInfoItemImpostoCOFINSST();
+		Date a = new Date();
+		nfnotainfoitemimpostocofinsst.setId(id);
+		nfnotainfoitemimpostocofinsst.setValorBaseCalculo("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostocofinsst.setPercentualAliquota("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostocofinsst.setQuantidadeVendida("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostocofinsst.setValorAliquotaCOFINS("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostocofinsst.setValorCOFINS("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostocofinsst.setParentId(id);
+		nfnotainfoitemimpostocofinsst.setEmprId(1);
+		nfnotainfoitemimpostocofinsst.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostocofinsst.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostocofinsst.setCreateUser("system");
+		nfnotainfoitemimpostocofinsst.setModifyUser("system");
+		nfnotainfoitemimpostocofinsst.setProcessId(1);
+		nfnotainfoitemimpostocofinsst.setModelAction(action);
+
+		return nfnotainfoitemimpostocofinsst;
+	}
+
+	public static NFNotaInfoItemImpostoICMSUFDestino insertNFNotaInfoItemImpostoICMSUFDestino(Integer id,
+			TabelaEnum tabela, PersistenceActionEnum action) {
+		NFNotaInfoItemImpostoICMSUFDestino nfnotainfoitemimpostoicmsufdestino = new NFNotaInfoItemImpostoICMSUFDestino();
+		Date a = new Date();
+		nfnotainfoitemimpostoicmsufdestino.setId(id);
+		nfnotainfoitemimpostoicmsufdestino.setValorBaseCalculoDestino("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmsufdestino.setPercentualRelativoFundoCombatePobrezaDestino("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmsufdestino.setPercentualAliquotaInternaDestino("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmsufdestino.setPercentualInterestadual("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmsufdestino.setPercentualProvisorioPartilha("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmsufdestino.setValorRelativoFundoCombatePobrezaDestino("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmsufdestino.setValorICMSInterestadualDestino("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmsufdestino.setValorICMSInterestadualRemetente("NATIVE INSERT UPDATE");
+		nfnotainfoitemimpostoicmsufdestino.setParentId(id);
+		nfnotainfoitemimpostoicmsufdestino.setEmprId(1);
+		nfnotainfoitemimpostoicmsufdestino.setModifyDateUTC(a.getTime());
+		nfnotainfoitemimpostoicmsufdestino.setCreateDateUTC(a.getTime());
+		nfnotainfoitemimpostoicmsufdestino.setCreateUser("system");
+		nfnotainfoitemimpostoicmsufdestino.setModifyUser("system");
+		nfnotainfoitemimpostoicmsufdestino.setProcessId(1);
+		nfnotainfoitemimpostoicmsufdestino.setModelAction(action);
+
+		return nfnotainfoitemimpostoicmsufdestino;
+	}
+
+	public static NFImpostoDevolvido insertNFImpostoDevolvido(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFImpostoDevolvido nfimpostodevolvido = new NFImpostoDevolvido();
+		Date a = new Date();
+		nfimpostodevolvido.setId(id);
+		nfimpostodevolvido.setPercentualDevolucao("NATIVE INSERT UPDATE");
+		nfimpostodevolvido.setInformacaoIPIDevolvido(insertNFInformacaoImpostoDevolvido(null, tabela, action));
+		nfimpostodevolvido.setParentId(id);
+		nfimpostodevolvido.setEmprId(1);
+		nfimpostodevolvido.setModifyDateUTC(a.getTime());
+		nfimpostodevolvido.setCreateDateUTC(a.getTime());
+		nfimpostodevolvido.setCreateUser("system");
+		nfimpostodevolvido.setModifyUser("system");
+		nfimpostodevolvido.setProcessId(1);
+		nfimpostodevolvido.setModelAction(action);
+
+		return nfimpostodevolvido;
+	}
+
+	public static NFInformacaoImpostoDevolvido insertNFInformacaoImpostoDevolvido(Integer id, TabelaEnum tabela,
+			PersistenceActionEnum action) {
+		NFInformacaoImpostoDevolvido nfinformacaoimpostodevolvido = new NFInformacaoImpostoDevolvido();
+		Date a = new Date();
+		nfinformacaoimpostodevolvido.setId(id);
+		nfinformacaoimpostodevolvido.setValorIPIDevolvido("NATIVE INSERT UPDATE");
+		nfinformacaoimpostodevolvido.setParentId(id);
+		nfinformacaoimpostodevolvido.setEmprId(1);
+		nfinformacaoimpostodevolvido.setModifyDateUTC(a.getTime());
+		nfinformacaoimpostodevolvido.setCreateDateUTC(a.getTime());
+		nfinformacaoimpostodevolvido.setCreateUser("system");
+		nfinformacaoimpostodevolvido.setModifyUser("system");
+		nfinformacaoimpostodevolvido.setProcessId(1);
+		nfinformacaoimpostodevolvido.setModelAction(action);
+
+		return nfinformacaoimpostodevolvido;
+	}
+
+	public static Conta insertConta(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+		Conta conta = new Conta();
+		Date a = new Date();
+		conta.setId(id);
+		conta.setDescricao("NATIVE INSERT UPDATE");
+		conta.setSaldo(new Double(1.99));
+		conta.setDataUltLanc(a.getTime());
+		// conta.setListBaixa(new ArrayList<BaixaTitulo>());
+		// conta.getListBaixa().add(insertBaixaTitulo(id, tabela, action));
+		conta.setTipoConta(insertDoisValor(id, tabela, action));
+		conta.setEmprId(1);
+		conta.setModifyDateUTC(a.getTime());
+		conta.setCreateDateUTC(a.getTime());
+		conta.setCreateUser("system");
+		conta.setModifyUser("system");
+		conta.setProcessId(1);
+		conta.setModelAction(action);
+
+		return conta;
+	}
+
+	public static Cnae cnae(int i, String string, PersistenceActionEnum action) {
+
+		Cnae cnae = new Cnae();
+		Date a = new Date();
+		cnae.setId(i);
+		cnae.setCodigo("5555");
+		cnae.setCnae("5555");
+		cnae.setDescricao("5555");
+		cnae.setAbreviado("5555");
+		cnae.setEmprId(1);
+		cnae.setModifyDateUTC(a.getTime());
+		cnae.setCreateDateUTC(a.getTime());
+		cnae.setCreateUser("system");
+		cnae.setModifyUser("system");
+		cnae.setProcessId(1);
+		cnae.setModelAction(action);
+
+		return cnae;
+	}
+
+
+	public static ProcessoStatus insertProcessoStatus(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			ProcessoStatus processostatus = new ProcessoStatus();
+			Date a = new Date();
+			processostatus.setId(id);
+			processostatus.setDataProcesso(a.getTime());
+			processostatus.setNote("NATIVE INSERT UPDATE");
+			processostatus.setParentId(id);
+			processostatus.setEmprId(1);
+			processostatus.setModifyDateUTC(a.getTime());
+			processostatus.setCreateDateUTC(a.getTime());
+			processostatus.setCreateUser("system");
+			processostatus.setModifyUser("system");
+			processostatus.setProcessId(1);
+			processostatus.setModelAction(action);
+
+			return processostatus;
+		}
+
+
+	public static DiasHoras insertDiasHoras(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			DiasHoras diashoras = new DiasHoras();
+			Date a = new Date();
+			diashoras.setId(id);
+			diashoras.setDiasSemanas(new ArrayList<>());
+			diashoras.getDiasSemanas().add(Objects.insertDoisValor(id, tabela, action));
+			diashoras.setHoraInicio(a.getTime());
+			diashoras.setHoraFinal(a.getTime());
+
+			diashoras.setParentId(id);
+			diashoras.setEmprId(1);
+			diashoras.setModifyDateUTC(a.getTime());
+			diashoras.setCreateDateUTC(a.getTime());
+			diashoras.setCreateUser("system");
+			diashoras.setModifyUser("system");
+			diashoras.setProcessId(1);
+			diashoras.setModelAction(action);
+
+			return diashoras;
+		}
+
+
+	public static Especialidade insertEspecialidade(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			Especialidade especialidade = new Especialidade();
+			Date a = new Date();
+			especialidade.setId(id);
+			especialidade.setNome("NATIVE INSERT UPDATE");
+			especialidade.setParentId(id);
+			especialidade.setEmprId(1);
+			especialidade.setModifyDateUTC(a.getTime());
+			especialidade.setCreateDateUTC(a.getTime());
+			especialidade.setCreateUser("system");
+			especialidade.setModifyUser("system");
+			especialidade.setProcessId(1);
+			especialidade.setModelAction(action);
+
+			return especialidade;
+		}
+
+	public static EspecialidadePessoa insertEspecialidadePessoa(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		EspecialidadePessoa especialidade = new EspecialidadePessoa();
+		Date a = new Date();
+		especialidade.setEspecialidade(insertEspecialidade(id, tabela, action));
+		especialidade.setParentId(id);
+		especialidade.setEmprId(1);
+		especialidade.setModifyDateUTC(a.getTime());
+		especialidade.setCreateDateUTC(a.getTime());
+		especialidade.setCreateUser("system");
+		especialidade.setModifyUser("system");
+		especialidade.setProcessId(1);
+		especialidade.setModelAction(action);
+
+		return especialidade;
+	}
+
+
+	public static Compromisso insertCompromisso(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			Compromisso compromisso = new Compromisso();
+			Date a = new Date();
+			compromisso.setId(id);
+			compromisso.setTitulo("NATIVE INSERT UPDATE");
+			compromisso.setTipoCompromisso(Objects.insertDoisValor(id, tabela, action));
+			compromisso.setVinculado(Objects.insertDoisValor(id, tabela, action));
+			compromisso.setHoraFinal(insertDiasHoras(id, tabela, action));
+			compromisso.setLocal("NATIVE INSERT UPDATE");
+			compromisso.setResponsavel(Objects.insertAdvogado(id, tabela, action));
+			compromisso.setEnviarEmail(100);
+			compromisso.setEnviarMdgTelefone(100);
+			compromisso.setQuando(Objects.insertDoisValor(id, tabela, action));
+	//		compromisso.setParticipante(Objects.insertDoisValor(id, tabela, action));
+//			compromisso.getundefined().add(insertundefined(id,TabelaEnum.COMPROMISSO,action));
+//			compromisso.setParticipanteExterno(10000);
+//			compromisso.getundefined().add(insertundefined(id,TabelaEnum.COMPROMISSO,action));
+//			compromisso.setDocumentos(10000);
+//			compromisso.getundefined().add(insertundefined(id,TabelaEnum.COMPROMISSO,action));
+			compromisso.setParentId(id);
+			compromisso.setEmprId(1);
+			compromisso.setModifyDateUTC(a.getTime());
+			compromisso.setCreateDateUTC(a.getTime());
+			compromisso.setCreateUser("system");
+			compromisso.setModifyUser("system");
+			compromisso.setProcessId(1);
+			compromisso.setModelAction(action);
+
+			return compromisso;
+		}
+
+
+	public static Advogados insertAdvogados(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			Advogados advogados = new Advogados();
+			Date a = new Date();
+			advogados.setId(id);
+			advogados.setAdvogado(Objects.insertAdvogado(id, tabela, action));
+			advogados.setAdvogadoPrincipal(100);
+			advogados.setParentId(id);
+			advogados.setEmprId(1);
+			advogados.setModifyDateUTC(a.getTime());
+			advogados.setCreateDateUTC(a.getTime());
+			advogados.setCreateUser("system");
+			advogados.setModifyUser("system");
+			advogados.setProcessId(1);
+			advogados.setModelAction(action);
+
+			return advogados;
+		}
+
+
+	public static Envolvidos insertEnvolvidos(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			Envolvidos envolvidos = new Envolvidos();
+			Date a = new Date();
+			envolvidos.setId(id);
+			envolvidos.setCliente(Objects.insertCliente(id, tabela, action));
+			envolvidos.setTipoEnvolvido(Objects.insertDoisValor(id, tabela, action));
+			envolvidos.setEnvolvimento(Objects.insertDoisValor(id, tabela, action));
+			envolvidos.setbCliente(1);
+			envolvidos.setParentId(id);
+			envolvidos.setEmprId(1);
+			envolvidos.setModifyDateUTC(a.getTime());
+			envolvidos.setCreateDateUTC(a.getTime());
+			envolvidos.setCreateUser("system");
+			envolvidos.setModifyUser("system");
+			envolvidos.setProcessId(1);
+			envolvidos.setModelAction(action);
+
+			return envolvidos;
+		}
+
+
+	public static ParticipanteExterno insertParticipanteExterno(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			ParticipanteExterno participanteexterno = new ParticipanteExterno();
+			Date a = new Date();
+			participanteexterno.setId(id);
+			participanteexterno.setNome("NATIVE INSERT UPDATE");
+			//participanteexterno.getEmail().add(Objects.insertEmail(id, tabela, action));
+			//participanteexterno.getundefined().add(insertundefined(id,TabelaEnum.PARTICIPANTEEXTERNO,action));
+			//participanteexterno.setTelefones(10000);
+			//participanteexterno.getundefined().add(insertundefined(id,TabelaEnum.PARTICIPANTEEXTERNO,action));
+			participanteexterno.setParentId(id);
+			participanteexterno.setEmprId(1);
+			participanteexterno.setModifyDateUTC(a.getTime());
+			participanteexterno.setCreateDateUTC(a.getTime());
+			participanteexterno.setCreateUser("system");
+			participanteexterno.setModifyUser("system");
+			participanteexterno.setProcessId(1);
+			participanteexterno.setModelAction(action);
+
+			return participanteexterno;
+		}
+
+
+	public static Processo insertProcesso(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			Processo processo = new Processo();
+			Date a = new Date();
+			processo.setId(id);
+			processo.setDataProcess(a.getTime());
+			processo.setDataFim(a.getTime());
+			processo.setValor(new Double(1.99));
+			processo.setAcao(Objects.insertDoisValor(id, tabela, action));
+			processo.setAssunto("NATIVE INSERT UPDATE");
+			processo.setStatusProc(Objects.insertDoisValor(id, tabela, action));
+			processo.setDescricaoProc("NATIVE INSERT UPDATE");
+			processo.setProcesso("2222");
+			processo.setSituacao(Objects.insertDoisValor(id, tabela, action));
+			processo.setInstancia(Objects.insertDoisValor(id, tabela, action));
+			processo.setOrgao(Objects.insertDoisValor(id, tabela, action));
+			processo.setNpadraocnj("NATIVE INSERT UPDATE");
+			processo.setNpadrao("NATIVE INSERT UPDATE");
+			processo.setAgendarCap(0);
+			processo.setDistribuido("NATIVE INSERT UPDATE");
+		//	processo.setPo("NATIVE INSERT UPDATE");
+			processo.setValorAcao(new Float(1.99));
+			processo.setObservacaoProc("NATIVE INSERT UPDATE");
+			processo.setJustica(Objects.insertDoisValor(id, tabela, action));
+			processo.setTribunal(Objects.insertDoisValor(id, tabela, action));
+			processo.setInstancia1(Objects.insertDoisValor(id, tabela, action));
+			processo.setLocalidade(Objects.insertDoisValor(id, tabela, action));
+			processo.setCapturpor(Objects.insertDoisValor(id, tabela, action));
+			processo.setNumeroprocesso("NATIVE INSERT UPDATE");
+			processo.setCapautomatica(1);
+			processo.setPasta("NATIVE INSERT UPDATE");
+			processo.setEnviarEmail(100);
+			processo.setEnviarMdgTelefone(100);
+			processo.setQuando(Objects.insertDoisValor(id, tabela, action));
+			processo.setFundamentacaoJuridica("NATIVE INSERT UPDATE");
+			processo.setFatos("NATIVE INSERT UPDATE");
+			processo.setPretensoesCliente("NATIVE INSERT UPDATE");
+			processo.setEstrategia("NATIVE INSERT UPDATE");
+			processo.setRetringirProcesso(100);
+//			processo.setUsuariosRestricaoProc(10000);
+//			processo.getundefined().add(insertundefined(id,TabelaEnum.PROCESSO,action));
+//			processo.setTituloList(10000);
+//			processo.getundefined().add(insertundefined(id,TabelaEnum.PROCESSO,action));
+//			processo.setAdvogadoList(10000);
+//			processo.getundefined().add(insertundefined(id,TabelaEnum.PROCESSO,action));
+//			processo.setAudienciaList(10000);
+//			processo.getundefined().add(insertundefined(id,TabelaEnum.PROCESSO,action));
+//			processo.setProcessoStatusList(10000);
+//			processo.getundefined().add(insertundefined(id,TabelaEnum.PROCESSO,action));
+//			processo.setEnvolvList(10000);
+//			processo.getundefined().add(insertundefined(id,TabelaEnum.PROCESSO,action));
+//			processo.setDocumentos(10000);
+//			processo.getundefined().add(insertundefined(id,TabelaEnum.PROCESSO,action));
+//			processo.setEnvolvidosExterno(10000);
+//			processo.getundefined().add(insertundefined(id,TabelaEnum.PROCESSO,action));
+			processo.setParentId(id);
+			processo.setEmprId(1);
+			processo.setModifyDateUTC(a.getTime());
+			processo.setCreateDateUTC(a.getTime());
+			processo.setCreateUser("system");
+			processo.setModifyUser("system");
+			processo.setProcessId(1);
+			processo.setModelAction(action);
+
+			return processo;
+		}
+
+
+	public static ProcessoUsuarios insertProcessoUsuarios(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			ProcessoUsuarios processousuarios = new ProcessoUsuarios();
+			Date a = new Date();
+			processousuarios.setId(id);
+			processousuarios.setUsuarioId(insertUsuario(id, tabela, action));
+			processousuarios.setProcesso(100);
+			processousuarios.setParentId(id);
+			processousuarios.setEmprId(1);
+			processousuarios.setModifyDateUTC(a.getTime());
+			processousuarios.setCreateDateUTC(a.getTime());
+			processousuarios.setCreateUser("system");
+			processousuarios.setModifyUser("system");
+			processousuarios.setProcessId(1);
+			processousuarios.setModelAction(action);
+
+			return processousuarios;
+		}
+
+
+	public static ProcessoCliente insertProcessoCliente(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			ProcessoCliente processocliente = new ProcessoCliente();
+			Date a = new Date();
+			processocliente.setId(id);
+			processocliente.setClienteId(insertCliente(id, tabela, action));
+			processocliente.setProcessoId(100);
+			processocliente.setParentId(id);
+			processocliente.setEmprId(1);
+			processocliente.setModifyDateUTC(a.getTime());
+			processocliente.setCreateDateUTC(a.getTime());
+			processocliente.setCreateUser("system");
+			processocliente.setModifyUser("system");
+			processocliente.setProcessId(1);
+			processocliente.setModelAction(action);
+
+			return processocliente;
+		}
+
+	public static ClienteCompromisso insertClienteCompromisso(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		ClienteCompromisso clientecompromisso = new ClienteCompromisso();
+		Date a = new Date();
+		clientecompromisso.setId(id);
+		clientecompromisso.setClienteId(100);
+		clientecompromisso.setCompromissoId(100);
+		clientecompromisso.setParentId(id);
+		clientecompromisso.setEmprId(1);
+		clientecompromisso.setModifyDateUTC(a.getTime());
+		clientecompromisso.setCreateDateUTC(a.getTime());
+		clientecompromisso.setCreateUser("system");
+		clientecompromisso.setModifyUser("system");
+		clientecompromisso.setProcessId(1);
+		clientecompromisso.setModelAction(action);
+
+		return clientecompromisso;
+	}
+
+
+	public static GrupoTrabalho insertGrupoTrabalho(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		GrupoTrabalho clientecompromisso = new GrupoTrabalho();
+		Date a = new Date();
+		clientecompromisso.setId(id);
+		clientecompromisso.setDoisValorId(10);
+		clientecompromisso.setParentId(id);
+		clientecompromisso.setEmprId(1);
+		clientecompromisso.setModifyDateUTC(a.getTime());
+		clientecompromisso.setCreateDateUTC(a.getTime());
+		clientecompromisso.setCreateUser("system");
+		clientecompromisso.setModifyUser("system");
+		clientecompromisso.setProcessId(1);
+		clientecompromisso.setModelAction(action);
+
+		return clientecompromisso;
+	}
+
+	public static DoisValoresParent insertDoisValoresParent(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		DoisValoresParent clientecompromisso = new DoisValoresParent();
+		Date a = new Date();
+		clientecompromisso.setDoisvalor(insertDoisValor(id, tabela, action));
+		clientecompromisso.setParentId(id);
+		clientecompromisso.setEmprId(1);
+		clientecompromisso.setModifyDateUTC(a.getTime());
+		clientecompromisso.setCreateDateUTC(a.getTime());
+		clientecompromisso.setCreateUser("system");
+		clientecompromisso.setModifyUser("system");
+		clientecompromisso.setProcessId(1);
+		clientecompromisso.setModelAction(action);
+
+		return clientecompromisso;
+	}
+
 }
-
-public static NFNotaInfoItemProduto insertNFNotaInfoItemProduto(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemProduto nfnotainfoitemproduto = new NFNotaInfoItemProduto();
-	Date a = new Date();
-	nfnotainfoitemproduto.setId(id);
-	nfnotainfoitemproduto.setCodigo("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setCodigoDeBarras("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setDescricao("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setNcm("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setNomeclaturaValorAduaneiroEstatistica("Test00,Test01,Test02");
-	nfnotainfoitemproduto.setCodigoEspecificadorSituacaoTributaria("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setExtipi("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setCfop("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setUnidadeComercial("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setQuantidadeComercial("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setValorUnitario("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setValorTotalBruto("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setCodigoDeBarrasTributavel("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setUnidadeTributavel("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setQuantidadeTributavel("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setValorUnitarioTributavel("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setValorFrete("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setValorSeguro("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setValorDesconto("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setValorOutrasDespesasAcessorias("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setCompoeValorNota(insertDoisValor(id, tabela, action));
-	nfnotainfoitemproduto.setDeclaracoesImportacao(new ArrayList<NFNotaInfoItemProdutoDeclaracaoImportacao>());
-	nfnotainfoitemproduto.getDeclaracoesImportacao().add(insertNFNotaInfoItemProdutoDeclaracaoImportacao(id, tabela, action));
-	nfnotainfoitemproduto.setDetalhesExportacao(new ArrayList<NFNotaInfoItemDetalheExportacao>());
-	nfnotainfoitemproduto.getDetalhesExportacao().add(insertNFNotaInfoItemDetalheExportacao(id, tabela, action));
-	nfnotainfoitemproduto.setNumeroPedidoCliente("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setNumeroPedidoItemCliente(100);
-	nfnotainfoitemproduto.setNumeroControleFCI("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setVeiculo(insertNFNotaInfoItemProdutoVeiculo(id, tabela, action));
-	nfnotainfoitemproduto.setMedicamentos(new ArrayList<NFNotaInfoItemProdutoMedicamento>());
-	nfnotainfoitemproduto.getMedicamentos().add(insertNFNotaInfoItemProdutoMedicamento(id, tabela, action));
-	nfnotainfoitemproduto.setArmamentos(new ArrayList<NFNotaInfoItemProdutoArmamento>());
-	nfnotainfoitemproduto.getArmamentos().add(insertNFNotaInfoItemProdutoArmamento(id, tabela, action));
-	nfnotainfoitemproduto.setCombustivel(insertNFNotaInfoItemProdutoCombustivel(id, tabela, action));
-	nfnotainfoitemproduto.setNumeroRECOPI("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setParentId(id);
-	nfnotainfoitemproduto.setEmprId(1);
-	nfnotainfoitemproduto.setModifyDateUTC(a.getTime());
-	nfnotainfoitemproduto.setCreateDateUTC(a.getTime());
-	nfnotainfoitemproduto.setCreateUser("system");
-	nfnotainfoitemproduto.setModifyUser("system");
-	nfnotainfoitemproduto.setProcessId(1);
-	nfnotainfoitemproduto.setModelAction(action);
-
-	return nfnotainfoitemproduto;
-}
-
-public static NFNotaInfoItemProdutoDeclaracaoImportacao insertNFNotaInfoItemProdutoDeclaracaoImportacao(Integer id,
-		TabelaEnum tabela, PersistenceActionEnum action) {
-	NFNotaInfoItemProdutoDeclaracaoImportacao nfnotainfoitemprodutodeclaracaoimportacao = new NFNotaInfoItemProdutoDeclaracaoImportacao();
-	Date a = new Date();
-	nfnotainfoitemprodutodeclaracaoimportacao.setId(id);
-	nfnotainfoitemprodutodeclaracaoimportacao.setNumeroRegistro("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutodeclaracaoimportacao.setDataRegistro(a.getTime());
-	nfnotainfoitemprodutodeclaracaoimportacao.setLocalDesembaraco("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutodeclaracaoimportacao.setUfDesembaraco("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutodeclaracaoimportacao.setDataDesembaraco(a.getTime());
-	nfnotainfoitemprodutodeclaracaoimportacao.setTransporteInternacional(insertDoisValor(id, tabela, action));
-	nfnotainfoitemprodutodeclaracaoimportacao.setValorAFRMM("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutodeclaracaoimportacao.setFormaImportacaoIntermediacao(insertDoisValor(id, tabela, action));
-	nfnotainfoitemprodutodeclaracaoimportacao.setCnpj("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutodeclaracaoimportacao.setUfTerceiro("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutodeclaracaoimportacao.setCodigoExportador("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutodeclaracaoimportacao.setAdicoes(new ArrayList<NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao>());
-	nfnotainfoitemprodutodeclaracaoimportacao.getAdicoes()
-			.add(insertNFNotaInfoItemProdutoDeclaracaoImportacaoAdicao(id, tabela, action));
-	nfnotainfoitemprodutodeclaracaoimportacao.setParentId(id);
-	nfnotainfoitemprodutodeclaracaoimportacao.setEmprId(1);
-	nfnotainfoitemprodutodeclaracaoimportacao.setModifyDateUTC(a.getTime());
-	nfnotainfoitemprodutodeclaracaoimportacao.setCreateDateUTC(a.getTime());
-	nfnotainfoitemprodutodeclaracaoimportacao.setCreateUser("system");
-	nfnotainfoitemprodutodeclaracaoimportacao.setModifyUser("system");
-	nfnotainfoitemprodutodeclaracaoimportacao.setProcessId(1);
-	nfnotainfoitemprodutodeclaracaoimportacao.setModelAction(action);
-
-	return nfnotainfoitemprodutodeclaracaoimportacao;
-}
-
-public static NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao insertNFNotaInfoItemProdutoDeclaracaoImportacaoAdicao(
-		Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
-	NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao nfnotainfoitemprodutodeclaracaoimportacaoadicao = new NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao();
-	Date a = new Date();
-	nfnotainfoitemprodutodeclaracaoimportacaoadicao.setId(id);
-	nfnotainfoitemprodutodeclaracaoimportacaoadicao.setNumero(100);
-	nfnotainfoitemprodutodeclaracaoimportacaoadicao.setSequencial(100);
-	nfnotainfoitemprodutodeclaracaoimportacaoadicao.setCodigoFabricante("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutodeclaracaoimportacaoadicao.setDesconto("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutodeclaracaoimportacaoadicao.setNumeroAtoConcessorioDrawback(a.getTime());
-	nfnotainfoitemprodutodeclaracaoimportacaoadicao.setParentId(id);
-	nfnotainfoitemprodutodeclaracaoimportacaoadicao.setEmprId(1);
-	nfnotainfoitemprodutodeclaracaoimportacaoadicao.setModifyDateUTC(a.getTime());
-	nfnotainfoitemprodutodeclaracaoimportacaoadicao.setCreateDateUTC(a.getTime());
-	nfnotainfoitemprodutodeclaracaoimportacaoadicao.setCreateUser("system");
-	nfnotainfoitemprodutodeclaracaoimportacaoadicao.setModifyUser("system");
-	nfnotainfoitemprodutodeclaracaoimportacaoadicao.setProcessId(1);
-	nfnotainfoitemprodutodeclaracaoimportacaoadicao.setModelAction(action);
-
-	return nfnotainfoitemprodutodeclaracaoimportacaoadicao;
-}
-
-public static NFNotaInfoItemDetalheExportacao insertNFNotaInfoItemDetalheExportacao(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemDetalheExportacao nfnotainfoitemdetalheexportacao = new NFNotaInfoItemDetalheExportacao();
-	Date a = new Date();
-	nfnotainfoitemdetalheexportacao.setId(id);
-	nfnotainfoitemdetalheexportacao.setAtoConcessorioDrawback(a.getTime());
-	nfnotainfoitemdetalheexportacao.setExportacaoIndireta(insertNFNotaInfoItemExportacaoIndireta(id, tabela, action));
-	nfnotainfoitemdetalheexportacao.setParentId(id);
-	nfnotainfoitemdetalheexportacao.setEmprId(1);
-	nfnotainfoitemdetalheexportacao.setModifyDateUTC(a.getTime());
-	nfnotainfoitemdetalheexportacao.setCreateDateUTC(a.getTime());
-	nfnotainfoitemdetalheexportacao.setCreateUser("system");
-	nfnotainfoitemdetalheexportacao.setModifyUser("system");
-	nfnotainfoitemdetalheexportacao.setProcessId(1);
-	nfnotainfoitemdetalheexportacao.setModelAction(action);
-
-	return nfnotainfoitemdetalheexportacao;
-}
-
-public static NFNotaInfoItemExportacaoIndireta insertNFNotaInfoItemExportacaoIndireta(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemExportacaoIndireta nfnotainfoitemexportacaoindireta = new NFNotaInfoItemExportacaoIndireta();
-	Date a = new Date();
-	nfnotainfoitemexportacaoindireta.setId(id);
-	nfnotainfoitemexportacaoindireta.setNumeroRegistroExportacao(a.getTime());
-	nfnotainfoitemexportacaoindireta.setChaveAcessoNFe("NATIVE INSERT UPDATE");
-	nfnotainfoitemexportacaoindireta.setQuantidadeItemEfetivamenteExportado("NATIVE INSERT UPDATE");
-	nfnotainfoitemexportacaoindireta.setParentId(id);
-	nfnotainfoitemexportacaoindireta.setEmprId(1);
-	nfnotainfoitemexportacaoindireta.setModifyDateUTC(a.getTime());
-	nfnotainfoitemexportacaoindireta.setCreateDateUTC(a.getTime());
-	nfnotainfoitemexportacaoindireta.setCreateUser("system");
-	nfnotainfoitemexportacaoindireta.setModifyUser("system");
-	nfnotainfoitemexportacaoindireta.setProcessId(1);
-	nfnotainfoitemexportacaoindireta.setModelAction(action);
-
-	return nfnotainfoitemexportacaoindireta;
-}
-
-public static NFNotaInfoItemProdutoVeiculo insertNFNotaInfoItemProdutoVeiculo(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemProdutoVeiculo nfnotainfoitemprodutoveiculo = new NFNotaInfoItemProdutoVeiculo();
-	Date a = new Date();
-	nfnotainfoitemprodutoveiculo.setId(id);
-	nfnotainfoitemprodutoveiculo.setTipoOperacao(insertDoisValor(id, tabela, action));
-	nfnotainfoitemprodutoveiculo.setChassi("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutoveiculo.setCodigoCor("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutoveiculo.setDescricaoCor("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutoveiculo.setPotencia("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutoveiculo.setCilindrada("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutoveiculo.setPesoLiquido("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutoveiculo.setPesoBruto("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutoveiculo.setNumeroSerie("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutoveiculo.setTipoCombustivel(insertDoisValor(id, tabela, action));
-	nfnotainfoitemprodutoveiculo.setNumeroMotor("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutoveiculo.setCapacidadeMaximaTracao("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutoveiculo.setDistanciaEntreEixos(100);
-	nfnotainfoitemprodutoveiculo.setAnoModeloFabricacao(100);
-	nfnotainfoitemprodutoveiculo.setAnoFabricacao(100);
-	nfnotainfoitemprodutoveiculo.setTipoPintura("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutoveiculo.setTipoVeiculo(insertDoisValor(id, tabela, action));
-	//nfnotainfoitemprodutoveiculo.setEspecieVeiculo(insertDoisValor(id, tabela, action));
-	nfnotainfoitemprodutoveiculo.setCondicaoChassi(insertDoisValor(id, tabela, action));
-	nfnotainfoitemprodutoveiculo.setCondicao(insertDoisValor(id, tabela, action));
-	nfnotainfoitemprodutoveiculo.setCodigoMarcaModelo("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutoveiculo.setCorDENATRAN(insertDoisValor(id, tabela, action));
-	nfnotainfoitemprodutoveiculo.setLotacao(100);
-	nfnotainfoitemprodutoveiculo.setRestricao(insertDoisValor(id, tabela, action));
-	nfnotainfoitemprodutoveiculo.setParentId(id);
-	nfnotainfoitemprodutoveiculo.setEmprId(1);
-	nfnotainfoitemprodutoveiculo.setModifyDateUTC(a.getTime());
-	nfnotainfoitemprodutoveiculo.setCreateDateUTC(a.getTime());
-	nfnotainfoitemprodutoveiculo.setCreateUser("system");
-	nfnotainfoitemprodutoveiculo.setModifyUser("system");
-	nfnotainfoitemprodutoveiculo.setProcessId(1);
-	nfnotainfoitemprodutoveiculo.setModelAction(action);
-
-	return nfnotainfoitemprodutoveiculo;
-}
-
-public static NFNotaInfoItemProdutoMedicamento insertNFNotaInfoItemProdutoMedicamento(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemProdutoMedicamento nfnotainfoitemprodutomedicamento = new NFNotaInfoItemProdutoMedicamento();
-	Date a = new Date();
-	nfnotainfoitemprodutomedicamento.setId(id);
-	nfnotainfoitemprodutomedicamento.setLote("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutomedicamento.setQuantidade("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutomedicamento.setDataFabricacao(a.getTime());
-	nfnotainfoitemprodutomedicamento.setDataValidade(a.getTime());
-	nfnotainfoitemprodutomedicamento.setPrecoMaximoConsumidor("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutomedicamento.setParentId(id);
-	nfnotainfoitemprodutomedicamento.setEmprId(1);
-	nfnotainfoitemprodutomedicamento.setModifyDateUTC(a.getTime());
-	nfnotainfoitemprodutomedicamento.setCreateDateUTC(a.getTime());
-	nfnotainfoitemprodutomedicamento.setCreateUser("system");
-	nfnotainfoitemprodutomedicamento.setModifyUser("system");
-	nfnotainfoitemprodutomedicamento.setProcessId(1);
-	nfnotainfoitemprodutomedicamento.setModelAction(action);
-
-	return nfnotainfoitemprodutomedicamento;
-}
-
-public static NFNotaInfoItemProdutoArmamento insertNFNotaInfoItemProdutoArmamento(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemProdutoArmamento nfnotainfoitemprodutoarmamento = new NFNotaInfoItemProdutoArmamento();
-	Date a = new Date();
-	nfnotainfoitemprodutoarmamento.setId(id);
-	nfnotainfoitemprodutoarmamento.setTipo(insertDoisValor(id, tabela, action));
-	nfnotainfoitemprodutoarmamento.setNumeroSerieArma("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutoarmamento.setNumeroSerieCano("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutoarmamento.setDescricao("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutoarmamento.setParentId(id);
-	nfnotainfoitemprodutoarmamento.setEmprId(1);
-	nfnotainfoitemprodutoarmamento.setModifyDateUTC(a.getTime());
-	nfnotainfoitemprodutoarmamento.setCreateDateUTC(a.getTime());
-	nfnotainfoitemprodutoarmamento.setCreateUser("system");
-	nfnotainfoitemprodutoarmamento.setModifyUser("system");
-	nfnotainfoitemprodutoarmamento.setProcessId(1);
-	nfnotainfoitemprodutoarmamento.setModelAction(action);
-
-	return nfnotainfoitemprodutoarmamento;
-}
-
-public static NFNotaInfoItemProdutoCombustivel insertNFNotaInfoItemProdutoCombustivel(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemProdutoCombustivel nfnotainfoitemprodutocombustivel = new NFNotaInfoItemProdutoCombustivel();
-	Date a = new Date();
-	nfnotainfoitemprodutocombustivel.setId(id);
-	nfnotainfoitemprodutocombustivel.setCodigoProdutoANP("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutocombustivel.setPercentualGasNatural("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutocombustivel.setCodigoAutorizacaoCOFIF("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutocombustivel.setQuantidade("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutocombustivel.setUf("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutocombustivel.setCide(insertNFNotaInfoItemProdutoCombustivelCIDE(id, tabela, action));
-	nfnotainfoitemprodutocombustivel.setParentId(id);
-	nfnotainfoitemprodutocombustivel.setEmprId(1);
-	nfnotainfoitemprodutocombustivel.setModifyDateUTC(a.getTime());
-	nfnotainfoitemprodutocombustivel.setCreateDateUTC(a.getTime());
-	nfnotainfoitemprodutocombustivel.setCreateUser("system");
-	nfnotainfoitemprodutocombustivel.setModifyUser("system");
-	nfnotainfoitemprodutocombustivel.setProcessId(1);
-	nfnotainfoitemprodutocombustivel.setModelAction(action);
-
-	return nfnotainfoitemprodutocombustivel;
-}
-
-public static NFNotaInfoItemProdutoCombustivelCIDE insertNFNotaInfoItemProdutoCombustivelCIDE(Integer id,
-		TabelaEnum tabela, PersistenceActionEnum action) {
-	NFNotaInfoItemProdutoCombustivelCIDE nfnotainfoitemprodutocombustivelcide = new NFNotaInfoItemProdutoCombustivelCIDE();
-	Date a = new Date();
-	nfnotainfoitemprodutocombustivelcide.setId(id);
-	nfnotainfoitemprodutocombustivelcide.setQuantidadeBCCIDE("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutocombustivelcide.setValorAliquota("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutocombustivelcide.setValor("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutocombustivelcide.setParentId(id);
-	nfnotainfoitemprodutocombustivelcide.setEmprId(1);
-	nfnotainfoitemprodutocombustivelcide.setModifyDateUTC(a.getTime());
-	nfnotainfoitemprodutocombustivelcide.setCreateDateUTC(a.getTime());
-	nfnotainfoitemprodutocombustivelcide.setCreateUser("system");
-	nfnotainfoitemprodutocombustivelcide.setModifyUser("system");
-	nfnotainfoitemprodutocombustivelcide.setProcessId(1);
-	nfnotainfoitemprodutocombustivelcide.setModelAction(action);
-
-	return nfnotainfoitemprodutocombustivelcide;
-}
-
-public static NFImpostoDevolvido insertNFImpostoDevolvido2(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
-	NFImpostoDevolvido nfimpostodevolvido = new NFImpostoDevolvido();
-	Date a = new Date();
-	nfimpostodevolvido.setId(id);
-	nfimpostodevolvido.setPercentualDevolucao("NATIVE INSERT UPDATE");
-	nfimpostodevolvido.setInformacaoIPIDevolvido(insertNFInformacaoImpostoDevolvido(id, tabela, action));
-	nfimpostodevolvido.setParentId(id);
-	nfimpostodevolvido.setEmprId(1);
-	nfimpostodevolvido.setModifyDateUTC(a.getTime());
-	nfimpostodevolvido.setCreateDateUTC(a.getTime());
-	nfimpostodevolvido.setCreateUser("system");
-	nfimpostodevolvido.setModifyUser("system");
-	nfimpostodevolvido.setProcessId(1);
-	nfimpostodevolvido.setModelAction(action);
-
-	return nfimpostodevolvido;
-}
-
-public static NFInformacaoImpostoDevolvido insertNFInformacaoImpostoDevolvido2(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFInformacaoImpostoDevolvido nfinformacaoimpostodevolvido = new NFInformacaoImpostoDevolvido();
-	Date a = new Date();
-	nfinformacaoimpostodevolvido.setId(id);
-	nfinformacaoimpostodevolvido.setValorIPIDevolvido("NATIVE INSERT UPDATE");
-	nfinformacaoimpostodevolvido.setParentId(id);
-	nfinformacaoimpostodevolvido.setEmprId(1);
-	nfinformacaoimpostodevolvido.setModifyDateUTC(a.getTime());
-	nfinformacaoimpostodevolvido.setCreateDateUTC(a.getTime());
-	nfinformacaoimpostodevolvido.setCreateUser("system");
-	nfinformacaoimpostodevolvido.setModifyUser("system");
-	nfinformacaoimpostodevolvido.setProcessId(1);
-	nfinformacaoimpostodevolvido.setModelAction(action);
-
-	return nfinformacaoimpostodevolvido;
-}
-
-public static NFNotaInfoItemImposto insertNFNotaInfoItemImposto(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImposto nfnotainfoitemimposto = new NFNotaInfoItemImposto();
-	Date a = new Date();
-	nfnotainfoitemimposto.setId(id);
-	nfnotainfoitemimposto.setValorTotalTributos("NATIVE INSERT UPDATE");
-	nfnotainfoitemimposto.setIcms(insertNFNotaInfoItemImpostoICMS(id, tabela, action));
-	nfnotainfoitemimposto.setIpi(insertNFNotaInfoItemImpostoIPI(id, tabela, action));
-	nfnotainfoitemimposto.setImpostoImportacao(insertNFNotaInfoItemImpostoImportacao(id, tabela, action));
-	nfnotainfoitemimposto.setIssqn(insertNFNotaInfoItemImpostoISSQN(id, tabela, action));
-	nfnotainfoitemimposto.setPis(insertNFNotaInfoItemImpostoPIS(id, tabela, action));
-	nfnotainfoitemimposto.setPisst(insertNFNotaInfoItemImpostoPISST(id, tabela, action));
-	nfnotainfoitemimposto.setCofins(insertNFNotaInfoItemImpostoCOFINS(id, tabela, action));
-	nfnotainfoitemimposto.setCofinsst(insertNFNotaInfoItemImpostoCOFINSST(id, tabela, action));
-	nfnotainfoitemimposto.setIcmsUfDestino(insertNFNotaInfoItemImpostoICMSUFDestino(id, tabela, action));
-	nfnotainfoitemimposto.setParentId(id);
-	nfnotainfoitemimposto.setEmprId(1);
-	nfnotainfoitemimposto.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimposto.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimposto.setCreateUser("system");
-	nfnotainfoitemimposto.setModifyUser("system");
-	nfnotainfoitemimposto.setProcessId(1);
-	nfnotainfoitemimposto.setModelAction(action);
-
-	return nfnotainfoitemimposto;
-}
-
-public static NFNotaInfoItemImpostoICMS insertNFNotaInfoItemImpostoICMS(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoICMS nfnotainfoitemimpostoicms = new NFNotaInfoItemImpostoICMS();
-	Date a = new Date();
-	nfnotainfoitemimpostoicms.setId(id);
-	nfnotainfoitemimpostoicms.setIcms00(insertNFNotaInfoItemImpostoICMS00(id, tabela, action));
-	nfnotainfoitemimpostoicms.setIcms10(insertNFNotaInfoItemImpostoICMS10(id, tabela, action));
-	nfnotainfoitemimpostoicms.setIcms20(insertNFNotaInfoItemImpostoICMS20(id, tabela, action));
-	nfnotainfoitemimpostoicms.setIcms30(insertNFNotaInfoItemImpostoICMS30(id, tabela, action));
-	nfnotainfoitemimpostoicms.setIcms40(insertNFNotaInfoItemImpostoICMS40(id, tabela, action));
-	nfnotainfoitemimpostoicms.setIcms51(insertNFNotaInfoItemImpostoICMS51(id, tabela, action));
-	nfnotainfoitemimpostoicms.setIcms60(insertNFNotaInfoItemImpostoICMS60(id, tabela, action));
-	nfnotainfoitemimpostoicms.setIcms70(insertNFNotaInfoItemImpostoICMS70(id, tabela, action));
-	nfnotainfoitemimpostoicms.setIcms90(insertNFNotaInfoItemImpostoICMS90(id, tabela, action));
-	nfnotainfoitemimpostoicms.setIcmsPartilhado(insertNFNotaInfoItemImpostoICMSPartilhado(id, tabela, action));
-	nfnotainfoitemimpostoicms.setIcmsst(insertNFNotaInfoItemImpostoICMSST(id, tabela, action));
-	nfnotainfoitemimpostoicms.setIcmssn101(insertNFNotaInfoItemImpostoICMSSN101(id, tabela, action));
-	nfnotainfoitemimpostoicms.setIcmssn102(insertNFNotaInfoItemImpostoICMSSN102(id, tabela, action));
-	nfnotainfoitemimpostoicms.setIcmssn201(insertNFNotaInfoItemImpostoICMSSN201(id, tabela, action));
-	nfnotainfoitemimpostoicms.setIcmssn202(insertNFNotaInfoItemImpostoICMSSN202(id, tabela, action));
-	nfnotainfoitemimpostoicms.setIcmssn500(insertNFNotaInfoItemImpostoICMSSN500(id, tabela, action));
-	nfnotainfoitemimpostoicms.setIcmssn900(insertNFNotaInfoItemImpostoICMSSN900(id, tabela, action));
-	nfnotainfoitemimpostoicms.setParentId(id);
-	nfnotainfoitemimpostoicms.setEmprId(1);
-	nfnotainfoitemimpostoicms.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoicms.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoicms.setCreateUser("system");
-	nfnotainfoitemimpostoicms.setModifyUser("system");
-	nfnotainfoitemimpostoicms.setProcessId(1);
-	nfnotainfoitemimpostoicms.setModelAction(action);
-
-	return nfnotainfoitemimpostoicms;
-}
-
-public static NFNotaInfoItemImpostoICMS00 insertNFNotaInfoItemImpostoICMS00(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoICMS00 nfnotainfoitemimpostoicms00 = new NFNotaInfoItemImpostoICMS00();
-	Date a = new Date();
-	nfnotainfoitemimpostoicms00.setId(id);
-	nfnotainfoitemimpostoicms00.setOrigem(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms00.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms00.setModalidadeBCICMS(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms00.setValorBaseCalculo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms00.setPercentualAliquota("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms00.setValorTributo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms00.setParentId(id);
-	nfnotainfoitemimpostoicms00.setEmprId(1);
-	nfnotainfoitemimpostoicms00.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoicms00.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoicms00.setCreateUser("system");
-	nfnotainfoitemimpostoicms00.setModifyUser("system");
-	nfnotainfoitemimpostoicms00.setProcessId(1);
-	nfnotainfoitemimpostoicms00.setModelAction(action);
-
-	return nfnotainfoitemimpostoicms00;
-}
-
-public static NFNotaInfoItemImpostoICMS10 insertNFNotaInfoItemImpostoICMS10(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoICMS10 nfnotainfoitemimpostoicms10 = new NFNotaInfoItemImpostoICMS10();
-	Date a = new Date();
-	nfnotainfoitemimpostoicms10.setId(id);
-	nfnotainfoitemimpostoicms10.setOrigem(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms10.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms10.setModalidadeBCICMS(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms10.setValorBaseCalculo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms10.setPercentualAliquota("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms10.setValorTributo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms10.setModalidadeBCICMSST(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms10.setPercentualMargemValorICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms10.setPercentualReducaoBCICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms10.setValorBCICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms10.setPercentualAliquotaImpostoICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms10.setValorICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms10.setParentId(id);
-	nfnotainfoitemimpostoicms10.setEmprId(1);
-	nfnotainfoitemimpostoicms10.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoicms10.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoicms10.setCreateUser("system");
-	nfnotainfoitemimpostoicms10.setModifyUser("system");
-	nfnotainfoitemimpostoicms10.setProcessId(1);
-	nfnotainfoitemimpostoicms10.setModelAction(action);
-
-	return nfnotainfoitemimpostoicms10;
-}
-
-public static NFNotaInfoItemImpostoICMS20 insertNFNotaInfoItemImpostoICMS20(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoICMS20 nfnotainfoitemimpostoicms20 = new NFNotaInfoItemImpostoICMS20();
-	Date a = new Date();
-	nfnotainfoitemimpostoicms20.setId(id);
-	nfnotainfoitemimpostoicms20.setOrigem(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms20.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms20.setModalidadeBCICMS(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms20.setPercentualReducaoBC("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms20.setValorBCICMS("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms20.setPercentualAliquota("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms20.setValorTributo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms20.setValorICMSDesoneracao("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms20.setDesoneracao(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms20.setParentId(id);
-	nfnotainfoitemimpostoicms20.setEmprId(1);
-	nfnotainfoitemimpostoicms20.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoicms20.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoicms20.setCreateUser("system");
-	nfnotainfoitemimpostoicms20.setModifyUser("system");
-	nfnotainfoitemimpostoicms20.setProcessId(1);
-	nfnotainfoitemimpostoicms20.setModelAction(action);
-
-	return nfnotainfoitemimpostoicms20;
-}
-
-public static NFNotaInfoItemImpostoICMS30 insertNFNotaInfoItemImpostoICMS30(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoICMS30 nfnotainfoitemimpostoicms30 = new NFNotaInfoItemImpostoICMS30();
-	Date a = new Date();
-	nfnotainfoitemimpostoicms30.setId(id);
-	nfnotainfoitemimpostoicms30.setOrigem(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms30.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms30.setModalidadeBCICMSST(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms30.setPercentualMargemValorAdicionadoICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms30.setPercentualReducaoBCICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms30.setValorBCICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms30.setPercentualAliquotaImpostoICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms30.setValorImpostoICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms30.setValorICMSDesoneracao("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms30.setDesoneracao(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms30.setParentId(id);
-	nfnotainfoitemimpostoicms30.setEmprId(1);
-	nfnotainfoitemimpostoicms30.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoicms30.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoicms30.setCreateUser("system");
-	nfnotainfoitemimpostoicms30.setModifyUser("system");
-	nfnotainfoitemimpostoicms30.setProcessId(1);
-	nfnotainfoitemimpostoicms30.setModelAction(action);
-
-	return nfnotainfoitemimpostoicms30;
-}
-
-public static NFNotaInfoItemImpostoICMS40 insertNFNotaInfoItemImpostoICMS40(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoICMS40 nfnotainfoitemimpostoicms40 = new NFNotaInfoItemImpostoICMS40();
-	Date a = new Date();
-	nfnotainfoitemimpostoicms40.setId(id);
-	nfnotainfoitemimpostoicms40.setOrigem(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms40.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms40.setValorICMSDesoneracao("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms40.setMotivoDesoneracaoICMS(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms40.setParentId(id);
-	nfnotainfoitemimpostoicms40.setEmprId(1);
-	nfnotainfoitemimpostoicms40.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoicms40.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoicms40.setCreateUser("system");
-	nfnotainfoitemimpostoicms40.setModifyUser("system");
-	nfnotainfoitemimpostoicms40.setProcessId(1);
-	nfnotainfoitemimpostoicms40.setModelAction(action);
-
-	return nfnotainfoitemimpostoicms40;
-}
-
-public static NFNotaInfoItemImpostoICMS51 insertNFNotaInfoItemImpostoICMS51(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoICMS51 nfnotainfoitemimpostoicms51 = new NFNotaInfoItemImpostoICMS51();
-	Date a = new Date();
-	nfnotainfoitemimpostoicms51.setId(id);
-	nfnotainfoitemimpostoicms51.setOrigem(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms51.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms51.setModalidadeBCICMS(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms51.setPercentualReducaoBC("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms51.setValorBCICMS("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms51.setPercentualICMS("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms51.setValorICMSOperacao("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms51.setPercentualDiferimento("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms51.setValorICMSDiferimento("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms51.setValorICMS("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms51.setParentId(id);
-	nfnotainfoitemimpostoicms51.setEmprId(1);
-	nfnotainfoitemimpostoicms51.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoicms51.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoicms51.setCreateUser("system");
-	nfnotainfoitemimpostoicms51.setModifyUser("system");
-	nfnotainfoitemimpostoicms51.setProcessId(1);
-	nfnotainfoitemimpostoicms51.setModelAction(action);
-
-	return nfnotainfoitemimpostoicms51;
-}
-
-public static NFNotaInfoItemImpostoICMS60 insertNFNotaInfoItemImpostoICMS60(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoICMS60 nfnotainfoitemimpostoicms60 = new NFNotaInfoItemImpostoICMS60();
-	Date a = new Date();
-	nfnotainfoitemimpostoicms60.setId(id);
-	nfnotainfoitemimpostoicms60.setOrigem(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms60.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms60.setValorBCICMSSTRetido("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms60.setValorICMSSTRetido("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms60.setParentId(id);
-	nfnotainfoitemimpostoicms60.setEmprId(1);
-	nfnotainfoitemimpostoicms60.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoicms60.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoicms60.setCreateUser("system");
-	nfnotainfoitemimpostoicms60.setModifyUser("system");
-	nfnotainfoitemimpostoicms60.setProcessId(1);
-	nfnotainfoitemimpostoicms60.setModelAction(action);
-
-	return nfnotainfoitemimpostoicms60;
-}
-
-public static NFNotaInfoItemImpostoICMS70 insertNFNotaInfoItemImpostoICMS70(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoICMS70 nfnotainfoitemimpostoicms70 = new NFNotaInfoItemImpostoICMS70();
-	Date a = new Date();
-	nfnotainfoitemimpostoicms70.setId(id);
-	nfnotainfoitemimpostoicms70.setOrigem(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms70.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms70.setModalidadeBCICMS(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms70.setPercentualReducaoBC("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms70.setValorBC("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms70.setPercentualAliquota("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms70.setValorTributo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms70.setModalidadeBCICMSST(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms70.setPercentualMargemValorAdicionadoICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms70.setPercentualReducaoBCICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms70.setValorBCST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms70.setPercentualAliquotaImpostoICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms70.setValorICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms70.setValorICMSDesoneracao("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms70.setDesoneracao(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms70.setParentId(id);
-	nfnotainfoitemimpostoicms70.setEmprId(1);
-	nfnotainfoitemimpostoicms70.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoicms70.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoicms70.setCreateUser("system");
-	nfnotainfoitemimpostoicms70.setModifyUser("system");
-	nfnotainfoitemimpostoicms70.setProcessId(1);
-	nfnotainfoitemimpostoicms70.setModelAction(action);
-
-	return nfnotainfoitemimpostoicms70;
-}
-
-public static NFNotaInfoItemImpostoICMS90 insertNFNotaInfoItemImpostoICMS90(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoICMS90 nfnotainfoitemimpostoicms90 = new NFNotaInfoItemImpostoICMS90();
-	Date a = new Date();
-	nfnotainfoitemimpostoicms90.setId(id);
-	nfnotainfoitemimpostoicms90.setOrigem(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms90.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms90.setModalidadeBCICMS(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms90.setValorBC("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms90.setPercentualReducaoBC("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms90.setPercentualAliquota("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms90.setValorTributo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms90.setModalidadeBCICMSST(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms90.setPercentualMargemValorAdicionadoICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms90.setPercentualReducaoBCICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms90.setValorBCST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms90.setPercentualAliquotaImpostoICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms90.setValorICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms90.setValorICMSDesoneracao("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms90.setDesoneracao(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicms90.setParentId(id);
-	nfnotainfoitemimpostoicms90.setEmprId(1);
-	nfnotainfoitemimpostoicms90.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoicms90.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoicms90.setCreateUser("system");
-	nfnotainfoitemimpostoicms90.setModifyUser("system");
-	nfnotainfoitemimpostoicms90.setProcessId(1);
-	nfnotainfoitemimpostoicms90.setModelAction(action);
-
-	return nfnotainfoitemimpostoicms90;
-}
-
-public static NFNotaInfoItemImpostoICMSPartilhado insertNFNotaInfoItemImpostoICMSPartilhado(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoICMSPartilhado nfnotainfoitemimpostoicmspartilhado = new NFNotaInfoItemImpostoICMSPartilhado();
-	Date a = new Date();
-	nfnotainfoitemimpostoicmspartilhado.setId(id);
-	nfnotainfoitemimpostoicmspartilhado.setOrigem(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicmspartilhado.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicmspartilhado.setModalidadeBCICMS(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicmspartilhado.setValorBCICMS("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmspartilhado.setPercentualReducaoBC("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmspartilhado.setPercentualAliquotaImposto("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmspartilhado.setValorICMS("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmspartilhado.setModalidadeBCICMSST(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicmspartilhado.setPercentualMargemValorAdicionadoICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmspartilhado.setPercentualReducaoBCICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmspartilhado.setValorBCICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmspartilhado.setPercentualAliquotaImpostoICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmspartilhado.setValorICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmspartilhado.setPercentualBCOperacaoPropria("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmspartilhado.setUfICMSST(insertEstado(id, tabela, action));
-	nfnotainfoitemimpostoicmspartilhado.setParentId(id);
-	nfnotainfoitemimpostoicmspartilhado.setEmprId(1);
-	nfnotainfoitemimpostoicmspartilhado.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoicmspartilhado.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoicmspartilhado.setCreateUser("system");
-	nfnotainfoitemimpostoicmspartilhado.setModifyUser("system");
-	nfnotainfoitemimpostoicmspartilhado.setProcessId(1);
-	nfnotainfoitemimpostoicmspartilhado.setModelAction(action);
-
-	return nfnotainfoitemimpostoicmspartilhado;
-}
-
-public static NFNotaInfoItemImpostoICMSST insertNFNotaInfoItemImpostoICMSST(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoICMSST nfnotainfoitemimpostoicmsst = new NFNotaInfoItemImpostoICMSST();
-	Date a = new Date();
-	nfnotainfoitemimpostoicmsst.setId(id);
-	nfnotainfoitemimpostoicmsst.setOrigem(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicmsst.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicmsst.setValorBCICMSSTRetidoUFRemetente("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmsst.setValorICMSSTRetidoUFRemetente("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmsst.setValorBCICMSSTUFDestino("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmsst.setValorICMSSTUFDestino("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmsst.setParentId(id);
-	nfnotainfoitemimpostoicmsst.setEmprId(1);
-	nfnotainfoitemimpostoicmsst.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoicmsst.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoicmsst.setCreateUser("system");
-	nfnotainfoitemimpostoicmsst.setModifyUser("system");
-	nfnotainfoitemimpostoicmsst.setProcessId(1);
-	nfnotainfoitemimpostoicmsst.setModelAction(action);
-
-	return nfnotainfoitemimpostoicmsst;
-}
-
-public static NFNotaInfoItemImpostoICMSSN101 insertNFNotaInfoItemImpostoICMSSN101(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoICMSSN101 nfnotainfoitemimpostoicmssn101 = new NFNotaInfoItemImpostoICMSSN101();
-	Date a = new Date();
-	nfnotainfoitemimpostoicmssn101.setId(id);
-	nfnotainfoitemimpostoicmssn101.setOrigem(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicmssn101.setSituacaoOperacaoSN(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicmssn101.setPercentualAliquotaAplicavelCalculoCreditoSN("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn101.setValorCreditoICMSSN("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn101.setParentId(id);
-	nfnotainfoitemimpostoicmssn101.setEmprId(1);
-	nfnotainfoitemimpostoicmssn101.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoicmssn101.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoicmssn101.setCreateUser("system");
-	nfnotainfoitemimpostoicmssn101.setModifyUser("system");
-	nfnotainfoitemimpostoicmssn101.setProcessId(1);
-	nfnotainfoitemimpostoicmssn101.setModelAction(action);
-
-	return nfnotainfoitemimpostoicmssn101;
-}
-
-public static NFNotaInfoItemImpostoICMSSN102 insertNFNotaInfoItemImpostoICMSSN102(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoICMSSN102 nfnotainfoitemimpostoicmssn102 = new NFNotaInfoItemImpostoICMSSN102();
-	Date a = new Date();
-	nfnotainfoitemimpostoicmssn102.setId(id);
-	nfnotainfoitemimpostoicmssn102.setOrigem(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicmssn102.setSituacaoOperacaoSN(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicmssn102.setParentId(id);
-	nfnotainfoitemimpostoicmssn102.setEmprId(1);
-	nfnotainfoitemimpostoicmssn102.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoicmssn102.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoicmssn102.setCreateUser("system");
-	nfnotainfoitemimpostoicmssn102.setModifyUser("system");
-	nfnotainfoitemimpostoicmssn102.setProcessId(1);
-	nfnotainfoitemimpostoicmssn102.setModelAction(action);
-
-	return nfnotainfoitemimpostoicmssn102;
-}
-
-public static NFNotaInfoItemImpostoICMSSN201 insertNFNotaInfoItemImpostoICMSSN201(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoICMSSN201 nfnotainfoitemimpostoicmssn201 = new NFNotaInfoItemImpostoICMSSN201();
-	Date a = new Date();
-	nfnotainfoitemimpostoicmssn201.setId(id);
-	nfnotainfoitemimpostoicmssn201.setOrigem(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicmssn201.setSituacaoOperacaoSN(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicmssn201.setModalidadeBCICMSST(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicmssn201.setPercentualMargemValorAdicionadoICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn201.setPercentualReducaoBCICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn201.setValorBCICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn201.setPercentualAliquotaImpostoICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn201.setValorICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn201.setPercentualAliquotaAplicavelCalculoCreditoSN("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn201.setValorCreditoICMSSN("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn201.setParentId(id);
-	nfnotainfoitemimpostoicmssn201.setEmprId(1);
-	nfnotainfoitemimpostoicmssn201.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoicmssn201.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoicmssn201.setCreateUser("system");
-	nfnotainfoitemimpostoicmssn201.setModifyUser("system");
-	nfnotainfoitemimpostoicmssn201.setProcessId(1);
-	nfnotainfoitemimpostoicmssn201.setModelAction(action);
-
-	return nfnotainfoitemimpostoicmssn201;
-}
-
-public static NFNotaInfoItemImpostoICMSSN202 insertNFNotaInfoItemImpostoICMSSN202(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoICMSSN202 nfnotainfoitemimpostoicmssn202 = new NFNotaInfoItemImpostoICMSSN202();
-	Date a = new Date();
-	nfnotainfoitemimpostoicmssn202.setId(id);
-	nfnotainfoitemimpostoicmssn202.setOrigem(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicmssn202.setSituacaoOperacaoSN(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicmssn202.setModalidadeBCICMSST(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicmssn202.setPercentualMargemValorAdicionadoICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn202.setPercentualReducaoBCICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn202.setValorBCICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn202.setPercentualAliquotaImpostoICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn202.setValorICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn202.setParentId(id);
-	nfnotainfoitemimpostoicmssn202.setEmprId(1);
-	nfnotainfoitemimpostoicmssn202.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoicmssn202.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoicmssn202.setCreateUser("system");
-	nfnotainfoitemimpostoicmssn202.setModifyUser("system");
-	nfnotainfoitemimpostoicmssn202.setProcessId(1);
-	nfnotainfoitemimpostoicmssn202.setModelAction(action);
-
-	return nfnotainfoitemimpostoicmssn202;
-}
-
-public static NFNotaInfoItemImpostoICMSSN500 insertNFNotaInfoItemImpostoICMSSN500(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoICMSSN500 nfnotainfoitemimpostoicmssn500 = new NFNotaInfoItemImpostoICMSSN500();
-	Date a = new Date();
-	nfnotainfoitemimpostoicmssn500.setId(id);
-	nfnotainfoitemimpostoicmssn500.setOrigem(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicmssn500.setSituacaoOperacaoSN(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoicmssn500.setValorBCICMSSTRetido("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn500.setValorICMSSTRetido("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn500.setParentId(id);
-	nfnotainfoitemimpostoicmssn500.setEmprId(1);
-	nfnotainfoitemimpostoicmssn500.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoicmssn500.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoicmssn500.setCreateUser("system");
-	nfnotainfoitemimpostoicmssn500.setModifyUser("system");
-	nfnotainfoitemimpostoicmssn500.setProcessId(1);
-	nfnotainfoitemimpostoicmssn500.setModelAction(action);
-
-	return nfnotainfoitemimpostoicmssn500;
-}
-
-public static NFNotaInfoItemImpostoICMSSN900 insertNFNotaInfoItemImpostoICMSSN900(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoICMSSN900 nfnotainfoitemimpostoicmssn900 = new NFNotaInfoItemImpostoICMSSN900();
-	Date a = new Date();
-	nfnotainfoitemimpostoicmssn900.setId(id);
-	nfnotainfoitemimpostoicmssn900.setOrigem("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn900.setSituacaoOperacaoSN("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn900.setModalidadeBCICMS("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn900.setValorBCICMS("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn900.setPercentualReducaoBC("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn900.setPercentualAliquotaImposto("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn900.setValorICMS("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn900.setModalidadeBCICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn900.setPercentualMargemValorAdicionadoICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn900.setPercentualReducaoBCICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn900.setValorBCICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn900.setPercentualAliquotaImpostoICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn900.setValorICMSST("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn900.setPercentualAliquotaAplicavelCalculoCreditoSN("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmssn900.setParentId(id);
-	nfnotainfoitemimpostoicmssn900.setEmprId(1);
-	nfnotainfoitemimpostoicmssn900.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoicmssn900.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoicmssn900.setCreateUser("system");
-	nfnotainfoitemimpostoicmssn900.setModifyUser("system");
-	nfnotainfoitemimpostoicmssn900.setProcessId(1);
-	nfnotainfoitemimpostoicmssn900.setModelAction(action);
-
-	return nfnotainfoitemimpostoicmssn900;
-}
-
-public static NFNotaInfoItemImpostoIPI insertNFNotaInfoItemImpostoIPI(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoIPI nfnotainfoitemimpostoipi = new NFNotaInfoItemImpostoIPI();
-	Date a = new Date();
-	nfnotainfoitemimpostoipi.setId(id);
-	nfnotainfoitemimpostoipi.setClasseEnquadramento("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoipi.setCnpjProdutor("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoipi.setCodigoSelo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoipi.setQuantidadeSelo(new Integer("100"));
-	nfnotainfoitemimpostoipi.setCodigoEnquadramento("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoipi.setTributado(insertNFNotaInfoItemImpostoIPITributado(id, tabela, action));
-	nfnotainfoitemimpostoipi.setNaoTributado(insertNFNotaInfoItemImpostoIPINaoTributado(id, tabela, action));
-	nfnotainfoitemimpostoipi.setParentId(id);
-	nfnotainfoitemimpostoipi.setEmprId(1);
-	nfnotainfoitemimpostoipi.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoipi.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoipi.setCreateUser("system");
-	nfnotainfoitemimpostoipi.setModifyUser("system");
-	nfnotainfoitemimpostoipi.setProcessId(1);
-	nfnotainfoitemimpostoipi.setModelAction(action);
-
-	return nfnotainfoitemimpostoipi;
-}
-
-public static NFNotaInfoItemImpostoIPITributado insertNFNotaInfoItemImpostoIPITributado(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoIPITributado nfnotainfoitemimpostoipitributado = new NFNotaInfoItemImpostoIPITributado();
-	Date a = new Date();
-	nfnotainfoitemimpostoipitributado.setId(id);
-	nfnotainfoitemimpostoipitributado.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoipitributado.setValorBaseCalculo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoipitributado.setPercentualAliquota("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoipitributado.setQuantidade("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoipitributado.setValorUnidadeTributavel("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoipitributado.setValorTributo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoipitributado.setParentId(id);
-	nfnotainfoitemimpostoipitributado.setEmprId(1);
-	nfnotainfoitemimpostoipitributado.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoipitributado.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoipitributado.setCreateUser("system");
-	nfnotainfoitemimpostoipitributado.setModifyUser("system");
-	nfnotainfoitemimpostoipitributado.setProcessId(1);
-	nfnotainfoitemimpostoipitributado.setModelAction(action);
-
-	return nfnotainfoitemimpostoipitributado;
-}
-
-public static NFNotaInfoItemImpostoIPINaoTributado insertNFNotaInfoItemImpostoIPINaoTributado(Integer id,
-		TabelaEnum tabela, PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoIPINaoTributado nfnotainfoitemimpostoipinaotributado = new NFNotaInfoItemImpostoIPINaoTributado();
-	Date a = new Date();
-	nfnotainfoitemimpostoipinaotributado.setId(id);
-	nfnotainfoitemimpostoipinaotributado.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoipinaotributado.setParentId(id);
-	nfnotainfoitemimpostoipinaotributado.setEmprId(1);
-	nfnotainfoitemimpostoipinaotributado.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoipinaotributado.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoipinaotributado.setCreateUser("system");
-	nfnotainfoitemimpostoipinaotributado.setModifyUser("system");
-	nfnotainfoitemimpostoipinaotributado.setProcessId(1);
-	nfnotainfoitemimpostoipinaotributado.setModelAction(action);
-
-	return nfnotainfoitemimpostoipinaotributado;
-}
-
-public static NFNotaInfoItemImpostoImportacao insertNFNotaInfoItemImpostoImportacao(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoImportacao nfnotainfoitemimpostoimportacao = new NFNotaInfoItemImpostoImportacao();
-	Date a = new Date();
-	nfnotainfoitemimpostoimportacao.setId(id);
-	nfnotainfoitemimpostoimportacao.setValorBaseCalculo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoimportacao.setValorDespesaAduaneira("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoimportacao.setValorImpostoImportacao("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoimportacao.setValorIOF("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoimportacao.setParentId(id);
-	nfnotainfoitemimpostoimportacao.setEmprId(1);
-	nfnotainfoitemimpostoimportacao.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoimportacao.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoimportacao.setCreateUser("system");
-	nfnotainfoitemimpostoimportacao.setModifyUser("system");
-	nfnotainfoitemimpostoimportacao.setProcessId(1);
-	nfnotainfoitemimpostoimportacao.setModelAction(action);
-
-	return nfnotainfoitemimpostoimportacao;
-}
-
-public static NFNotaInfoItemImpostoISSQN insertNFNotaInfoItemImpostoISSQN(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoISSQN nfnotainfoitemimpostoissqn = new NFNotaInfoItemImpostoISSQN();
-	Date a = new Date();
-	nfnotainfoitemimpostoissqn.setId(id);
-	nfnotainfoitemimpostoissqn.setValorBaseCalculo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoissqn.setValorAliquota("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoissqn.setValor("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoissqn.setCodigoMunicipio(100);
-	nfnotainfoitemimpostoissqn.setItemListaServicos("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoissqn.setValorDeducao("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoissqn.setValorOutro("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoissqn.setValorDescontoIncondicionado("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoissqn.setValorDescontoCondicionado("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoissqn.setValorRetencaoISS("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoissqn.setIndicadorExigibilidadeISS(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoissqn.setCodigoServico("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoissqn.setCodigoMunicipioIncidenciaImposto("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoissqn.setCodigoPais("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoissqn.setNumeroProcesso("NATIVE INSERT UPDATE");
-	//nfnotainfoitemimpostoissqn.setIndicadorIncentivoFiscal(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostoissqn.setParentId(id);
-	nfnotainfoitemimpostoissqn.setEmprId(1);
-	nfnotainfoitemimpostoissqn.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoissqn.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoissqn.setCreateUser("system");
-	nfnotainfoitemimpostoissqn.setModifyUser("system");
-	nfnotainfoitemimpostoissqn.setProcessId(1);
-	nfnotainfoitemimpostoissqn.setModelAction(action);
-
-	return nfnotainfoitemimpostoissqn;
-}
-
-public static NFNotaInfoItemImpostoPIS insertNFNotaInfoItemImpostoPIS(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoPIS nfnotainfoitemimpostopis = new NFNotaInfoItemImpostoPIS();
-	Date a = new Date();
-	nfnotainfoitemimpostopis.setId(id);
-	nfnotainfoitemimpostopis.setAliquota(insertNFNotaInfoItemImpostoPISAliquota(id, tabela, action));
-	nfnotainfoitemimpostopis.setQuantidade(insertNFNotaInfoItemImpostoPISQuantidade(id, tabela, action));
-	nfnotainfoitemimpostopis.setNaoTributado(insertNFNotaInfoItemImpostoPISNaoTributado(id, tabela, action));
-	nfnotainfoitemimpostopis.setOutrasOperacoes(insertNFNotaInfoItemImpostoPISOutrasOperacoes(id, tabela, action));
-	nfnotainfoitemimpostopis.setParentId(id);
-	nfnotainfoitemimpostopis.setEmprId(1);
-	nfnotainfoitemimpostopis.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostopis.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostopis.setCreateUser("system");
-	nfnotainfoitemimpostopis.setModifyUser("system");
-	nfnotainfoitemimpostopis.setProcessId(1);
-	nfnotainfoitemimpostopis.setModelAction(action);
-
-	return nfnotainfoitemimpostopis;
-}
-
-public static NFNotaInfoItemImpostoPISAliquota insertNFNotaInfoItemImpostoPISAliquota(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoPISAliquota nfnotainfoitemimpostopisaliquota = new NFNotaInfoItemImpostoPISAliquota();
-	Date a = new Date();
-	nfnotainfoitemimpostopisaliquota.setId(id);
-	nfnotainfoitemimpostopisaliquota.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostopisaliquota.setValorBaseCalculo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostopisaliquota.setPercentualAliquota("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostopisaliquota.setValorTributo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostopisaliquota.setParentId(id);
-	nfnotainfoitemimpostopisaliquota.setEmprId(1);
-	nfnotainfoitemimpostopisaliquota.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostopisaliquota.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostopisaliquota.setCreateUser("system");
-	nfnotainfoitemimpostopisaliquota.setModifyUser("system");
-	nfnotainfoitemimpostopisaliquota.setProcessId(1);
-	nfnotainfoitemimpostopisaliquota.setModelAction(action);
-
-	return nfnotainfoitemimpostopisaliquota;
-}
-
-public static NFNotaInfoItemImpostoPISQuantidade insertNFNotaInfoItemImpostoPISQuantidade(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoPISQuantidade nfnotainfoitemimpostopisquantidade = new NFNotaInfoItemImpostoPISQuantidade();
-	Date a = new Date();
-	nfnotainfoitemimpostopisquantidade.setId(id);
-	nfnotainfoitemimpostopisquantidade.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostopisquantidade.setQuantidadeVendida("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostopisquantidade.setValorAliquota("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostopisquantidade.setValorTributo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostopisquantidade.setParentId(id);
-	nfnotainfoitemimpostopisquantidade.setEmprId(1);
-	nfnotainfoitemimpostopisquantidade.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostopisquantidade.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostopisquantidade.setCreateUser("system");
-	nfnotainfoitemimpostopisquantidade.setModifyUser("system");
-	nfnotainfoitemimpostopisquantidade.setProcessId(1);
-	nfnotainfoitemimpostopisquantidade.setModelAction(action);
-
-	return nfnotainfoitemimpostopisquantidade;
-}
-
-public static NFNotaInfoItemImpostoPISNaoTributado insertNFNotaInfoItemImpostoPISNaoTributado(Integer id,
-		TabelaEnum tabela, PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoPISNaoTributado nfnotainfoitemimpostopisnaotributado = new NFNotaInfoItemImpostoPISNaoTributado();
-	Date a = new Date();
-	nfnotainfoitemimpostopisnaotributado.setId(id);
-	nfnotainfoitemimpostopisnaotributado.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostopisnaotributado.setParentId(id);
-	nfnotainfoitemimpostopisnaotributado.setEmprId(1);
-	nfnotainfoitemimpostopisnaotributado.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostopisnaotributado.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostopisnaotributado.setCreateUser("system");
-	nfnotainfoitemimpostopisnaotributado.setModifyUser("system");
-	nfnotainfoitemimpostopisnaotributado.setProcessId(1);
-	nfnotainfoitemimpostopisnaotributado.setModelAction(action);
-
-	return nfnotainfoitemimpostopisnaotributado;
-}
-
-public static NFNotaInfoItemImpostoPISOutrasOperacoes insertNFNotaInfoItemImpostoPISOutrasOperacoes(Integer id,
-		TabelaEnum tabela, PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoPISOutrasOperacoes nfnotainfoitemimpostopisoutrasoperacoes = new NFNotaInfoItemImpostoPISOutrasOperacoes();
-	Date a = new Date();
-	nfnotainfoitemimpostopisoutrasoperacoes.setId(id);
-	nfnotainfoitemimpostopisoutrasoperacoes.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostopisoutrasoperacoes.setValorBaseCalculo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostopisoutrasoperacoes.setPercentualAliquota("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostopisoutrasoperacoes.setQuantidadeVendida("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostopisoutrasoperacoes.setValorAliquota("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostopisoutrasoperacoes.setValorTributo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostopisoutrasoperacoes.setParentId(id);
-	nfnotainfoitemimpostopisoutrasoperacoes.setEmprId(1);
-	nfnotainfoitemimpostopisoutrasoperacoes.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostopisoutrasoperacoes.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostopisoutrasoperacoes.setCreateUser("system");
-	nfnotainfoitemimpostopisoutrasoperacoes.setModifyUser("system");
-	nfnotainfoitemimpostopisoutrasoperacoes.setProcessId(1);
-	nfnotainfoitemimpostopisoutrasoperacoes.setModelAction(action);
-
-	return nfnotainfoitemimpostopisoutrasoperacoes;
-}
-
-public static NFNotaInfoItemImpostoPISST insertNFNotaInfoItemImpostoPISST(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoPISST nfnotainfoitemimpostopisst = new NFNotaInfoItemImpostoPISST();
-	Date a = new Date();
-	nfnotainfoitemimpostopisst.setId(id);
-	nfnotainfoitemimpostopisst.setValorBaseCalculo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostopisst.setPercentualAliquota("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostopisst.setQuantidadeVendida("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostopisst.setValorAliquota("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostopisst.setValorTributo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostopisst.setParentId(id);
-	nfnotainfoitemimpostopisst.setEmprId(1);
-	nfnotainfoitemimpostopisst.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostopisst.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostopisst.setCreateUser("system");
-	nfnotainfoitemimpostopisst.setModifyUser("system");
-	nfnotainfoitemimpostopisst.setProcessId(1);
-	nfnotainfoitemimpostopisst.setModelAction(action);
-
-	return nfnotainfoitemimpostopisst;
-}
-
-public static NFNotaInfoItemImpostoCOFINS insertNFNotaInfoItemImpostoCOFINS(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoCOFINS nfnotainfoitemimpostocofins = new NFNotaInfoItemImpostoCOFINS();
-	Date a = new Date();
-	nfnotainfoitemimpostocofins.setId(id);
-	nfnotainfoitemimpostocofins.setAliquota(insertNFNotaInfoItemImpostoCOFINSAliquota(id, tabela, action));
-	nfnotainfoitemimpostocofins.setQuantidade(insertNFNotaInfoItemImpostoCOFINSQuantidade(id, tabela, action));
-	nfnotainfoitemimpostocofins.setNaoTributavel(insertNFNotaInfoItemImpostoCOFINSNaoTributavel(id, tabela, action));
-	nfnotainfoitemimpostocofins.setOutrasOperacoes(insertNFNotaInfoItemImpostoCOFINSOutrasOperacoes(id, tabela, action));
-	nfnotainfoitemimpostocofins.setParentId(id);
-	nfnotainfoitemimpostocofins.setEmprId(1);
-	nfnotainfoitemimpostocofins.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostocofins.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostocofins.setCreateUser("system");
-	nfnotainfoitemimpostocofins.setModifyUser("system");
-	nfnotainfoitemimpostocofins.setProcessId(1);
-	nfnotainfoitemimpostocofins.setModelAction(action);
-
-	return nfnotainfoitemimpostocofins;
-}
-
-public static NFNotaInfoItemImpostoCOFINSAliquota insertNFNotaInfoItemImpostoCOFINSAliquota(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoCOFINSAliquota nfnotainfoitemimpostocofinsaliquota = new NFNotaInfoItemImpostoCOFINSAliquota();
-	Date a = new Date();
-	nfnotainfoitemimpostocofinsaliquota.setId(id);
-	nfnotainfoitemimpostocofinsaliquota.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostocofinsaliquota.setValorBaseCalulo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostocofinsaliquota.setPercentualAliquota("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostocofinsaliquota.setValor("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostocofinsaliquota.setParentId(id);
-	nfnotainfoitemimpostocofinsaliquota.setEmprId(1);
-	nfnotainfoitemimpostocofinsaliquota.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostocofinsaliquota.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostocofinsaliquota.setCreateUser("system");
-	nfnotainfoitemimpostocofinsaliquota.setModifyUser("system");
-	nfnotainfoitemimpostocofinsaliquota.setProcessId(1);
-	nfnotainfoitemimpostocofinsaliquota.setModelAction(action);
-
-	return nfnotainfoitemimpostocofinsaliquota;
-}
-
-public static NFNotaInfoItemImpostoCOFINSQuantidade insertNFNotaInfoItemImpostoCOFINSQuantidade(Integer id,
-		TabelaEnum tabela, PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoCOFINSQuantidade nfnotainfoitemimpostocofinsquantidade = new NFNotaInfoItemImpostoCOFINSQuantidade();
-	Date a = new Date();
-	nfnotainfoitemimpostocofinsquantidade.setId(id);
-	nfnotainfoitemimpostocofinsquantidade.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostocofinsquantidade.setQuantidadeVendida("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostocofinsquantidade.setValorAliquota("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostocofinsquantidade.setValorTributo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostocofinsquantidade.setParentId(id);
-	nfnotainfoitemimpostocofinsquantidade.setEmprId(1);
-	nfnotainfoitemimpostocofinsquantidade.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostocofinsquantidade.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostocofinsquantidade.setCreateUser("system");
-	nfnotainfoitemimpostocofinsquantidade.setModifyUser("system");
-	nfnotainfoitemimpostocofinsquantidade.setProcessId(1);
-	nfnotainfoitemimpostocofinsquantidade.setModelAction(action);
-
-	return nfnotainfoitemimpostocofinsquantidade;
-}
-
-public static NFNotaInfoItemImpostoCOFINSNaoTributavel insertNFNotaInfoItemImpostoCOFINSNaoTributavel(Integer id,
-		TabelaEnum tabela, PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoCOFINSNaoTributavel nfnotainfoitemimpostocofinsnaotributavel = new NFNotaInfoItemImpostoCOFINSNaoTributavel();
-	Date a = new Date();
-	nfnotainfoitemimpostocofinsnaotributavel.setId(id);
-	nfnotainfoitemimpostocofinsnaotributavel.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostocofinsnaotributavel.setParentId(id);
-	nfnotainfoitemimpostocofinsnaotributavel.setEmprId(1);
-	nfnotainfoitemimpostocofinsnaotributavel.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostocofinsnaotributavel.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostocofinsnaotributavel.setCreateUser("system");
-	nfnotainfoitemimpostocofinsnaotributavel.setModifyUser("system");
-	nfnotainfoitemimpostocofinsnaotributavel.setProcessId(1);
-	nfnotainfoitemimpostocofinsnaotributavel.setModelAction(action);
-
-	return nfnotainfoitemimpostocofinsnaotributavel;
-}
-
-public static NFNotaInfoItemImpostoCOFINSOutrasOperacoes insertNFNotaInfoItemImpostoCOFINSOutrasOperacoes(Integer id,
-		TabelaEnum tabela, PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoCOFINSOutrasOperacoes nfnotainfoitemimpostocofinsoutrasoperacoes = new NFNotaInfoItemImpostoCOFINSOutrasOperacoes();
-	Date a = new Date();
-	nfnotainfoitemimpostocofinsoutrasoperacoes.setId(id);
-	nfnotainfoitemimpostocofinsoutrasoperacoes.setSituacaoTributaria(insertDoisValor(id, tabela, action));
-	nfnotainfoitemimpostocofinsoutrasoperacoes.setValorBaseCalculo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostocofinsoutrasoperacoes.setPercentualCOFINS("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostocofinsoutrasoperacoes.setQuantidadeVendida("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostocofinsoutrasoperacoes.setValorAliquota("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostocofinsoutrasoperacoes.setValorCOFINS("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostocofinsoutrasoperacoes.setParentId(id);
-	nfnotainfoitemimpostocofinsoutrasoperacoes.setEmprId(1);
-	nfnotainfoitemimpostocofinsoutrasoperacoes.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostocofinsoutrasoperacoes.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostocofinsoutrasoperacoes.setCreateUser("system");
-	nfnotainfoitemimpostocofinsoutrasoperacoes.setModifyUser("system");
-	nfnotainfoitemimpostocofinsoutrasoperacoes.setProcessId(1);
-	nfnotainfoitemimpostocofinsoutrasoperacoes.setModelAction(action);
-
-	return nfnotainfoitemimpostocofinsoutrasoperacoes;
-}
-
-public static NFNotaInfoItemImpostoCOFINSST insertNFNotaInfoItemImpostoCOFINSST(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoCOFINSST nfnotainfoitemimpostocofinsst = new NFNotaInfoItemImpostoCOFINSST();
-	Date a = new Date();
-	nfnotainfoitemimpostocofinsst.setId(id);
-	nfnotainfoitemimpostocofinsst.setValorBaseCalculo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostocofinsst.setPercentualAliquota("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostocofinsst.setQuantidadeVendida("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostocofinsst.setValorAliquotaCOFINS("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostocofinsst.setValorCOFINS("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostocofinsst.setParentId(id);
-	nfnotainfoitemimpostocofinsst.setEmprId(1);
-	nfnotainfoitemimpostocofinsst.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostocofinsst.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostocofinsst.setCreateUser("system");
-	nfnotainfoitemimpostocofinsst.setModifyUser("system");
-	nfnotainfoitemimpostocofinsst.setProcessId(1);
-	nfnotainfoitemimpostocofinsst.setModelAction(action);
-
-	return nfnotainfoitemimpostocofinsst;
-}
-
-public static NFNotaInfoItemImpostoICMSUFDestino insertNFNotaInfoItemImpostoICMSUFDestino(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFNotaInfoItemImpostoICMSUFDestino nfnotainfoitemimpostoicmsufdestino = new NFNotaInfoItemImpostoICMSUFDestino();
-	Date a = new Date();
-	nfnotainfoitemimpostoicmsufdestino.setId(id);
-	nfnotainfoitemimpostoicmsufdestino.setValorBaseCalculoDestino("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmsufdestino.setPercentualRelativoFundoCombatePobrezaDestino("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmsufdestino.setPercentualAliquotaInternaDestino("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmsufdestino.setPercentualInterestadual("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmsufdestino.setPercentualProvisorioPartilha("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmsufdestino.setValorRelativoFundoCombatePobrezaDestino("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmsufdestino.setValorICMSInterestadualDestino("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmsufdestino.setValorICMSInterestadualRemetente("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicmsufdestino.setParentId(id);
-	nfnotainfoitemimpostoicmsufdestino.setEmprId(1);
-	nfnotainfoitemimpostoicmsufdestino.setModifyDateUTC(a.getTime());
-	nfnotainfoitemimpostoicmsufdestino.setCreateDateUTC(a.getTime());
-	nfnotainfoitemimpostoicmsufdestino.setCreateUser("system");
-	nfnotainfoitemimpostoicmsufdestino.setModifyUser("system");
-	nfnotainfoitemimpostoicmsufdestino.setProcessId(1);
-	nfnotainfoitemimpostoicmsufdestino.setModelAction(action);
-
-	return nfnotainfoitemimpostoicmsufdestino;
-}
-
-public static NFImpostoDevolvido insertNFImpostoDevolvido(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
-	NFImpostoDevolvido nfimpostodevolvido = new NFImpostoDevolvido();
-	Date a = new Date();
-	nfimpostodevolvido.setId(id);
-	nfimpostodevolvido.setPercentualDevolucao("NATIVE INSERT UPDATE");
-	nfimpostodevolvido.setInformacaoIPIDevolvido(insertNFInformacaoImpostoDevolvido(id, tabela, action));
-	nfimpostodevolvido.setParentId(id);
-	nfimpostodevolvido.setEmprId(1);
-	nfimpostodevolvido.setModifyDateUTC(a.getTime());
-	nfimpostodevolvido.setCreateDateUTC(a.getTime());
-	nfimpostodevolvido.setCreateUser("system");
-	nfimpostodevolvido.setModifyUser("system");
-	nfimpostodevolvido.setProcessId(1);
-	nfimpostodevolvido.setModelAction(action);
-
-	return nfimpostodevolvido;
-}
-
-public static NFInformacaoImpostoDevolvido insertNFInformacaoImpostoDevolvido(Integer id, TabelaEnum tabela,
-		PersistenceActionEnum action) {
-	NFInformacaoImpostoDevolvido nfinformacaoimpostodevolvido = new NFInformacaoImpostoDevolvido();
-	Date a = new Date();
-	nfinformacaoimpostodevolvido.setId(id);
-	nfinformacaoimpostodevolvido.setValorIPIDevolvido("NATIVE INSERT UPDATE");
-	nfinformacaoimpostodevolvido.setParentId(id);
-	nfinformacaoimpostodevolvido.setEmprId(1);
-	nfinformacaoimpostodevolvido.setModifyDateUTC(a.getTime());
-	nfinformacaoimpostodevolvido.setCreateDateUTC(a.getTime());
-	nfinformacaoimpostodevolvido.setCreateUser("system");
-	nfinformacaoimpostodevolvido.setModifyUser("system");
-	nfinformacaoimpostodevolvido.setProcessId(1);
-	nfinformacaoimpostodevolvido.setModelAction(action);
-
-	return nfinformacaoimpostodevolvido;
-}
-
-
-}
-
