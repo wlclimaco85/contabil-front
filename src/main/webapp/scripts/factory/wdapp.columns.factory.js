@@ -545,11 +545,11 @@
 							return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)"/>';
 						}).withOption('width', '10px'),
                         DTColumnBuilder.newColumn('id').withTitle('ID').notVisible().withOption('width', '10px'),
-                        DTColumnBuilder.newColumn(null).withTitle('Nome ou Razão social').renderWith(function(data, type, full, meta)
+                        DTColumnBuilder.newColumn(null).withTitle('Nome ou Nome Fantasia').renderWith(function(data, type, full, meta)
 						{
-							return '<p>' + data.razao + '</p>';
+							return '<p>' + data.nome + '</p>';
 						}).withOption('width', '100px'),
-                        DTColumnBuilder.newColumn('nome').withTitle('Nome Fantasia').notVisible(),
+                        DTColumnBuilder.newColumn('razao').withTitle('Razão social').notVisible(),
                         DTColumnBuilder.newColumn(null).withTitle('Tipo').renderWith(function(data, type, full, meta)
 						{
 							if ((data) && (type == "display"))

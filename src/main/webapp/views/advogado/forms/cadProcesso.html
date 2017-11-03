@@ -1,431 +1,354 @@
-<div class="container1" ng-app ng-init="tabs=3">
-    <ul class="tabs-nav">
-        <li><a ng-click="tabs=3" ng-class="{'active' : tabs==3}">PRINCIPAL</a></li>
-        <li><a ng-click="tabs=4" ng-class="{'active' : tabs==4}">DADOS DO PROCESSO</a></li>
-        <li><a ng-click="tabs=5" ng-class="{'active' : tabs==5}">DADOS CAPTURA</a></li>
-        <li><a ng-click="tabs=6" ng-class="{'active' : tabs==6}">MONITORAMENTO DE PROCESSO</a></li>
-        <li><a ng-click="tabs=7" ng-class="{'active' : tabs==7}">PRIVACIDADE</a></li>
-    </ul>
-
-    <div class="tabs-container1">
-        <div class="tab-content1" ng-show="tabs == 3">
-
-            <div class="col-sm-12">
-                <div class="col-sm-2">
-                    <label for="exampleInputEmail1">N° Pasta</label>
-                    <input type="text" ng-model="processo.pasta" name="pasta" class="form-control" placeholder="N° Pasta">
+<div class="modal fade">
+    <div class="modal-dialog" style="width : 80%">
+        <div class="modal-content">
+            <form name="advogadoForm" ng-submit="saveAdvogado(advogadoForm.$valid,advogadoForm)" class="css-form" novalidate>
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Cadastro Advogado</h4>
                 </div>
-                <div class="col-sm-6">
-                    <label for="exampleInputEmail1">Assunto</label>
-                    <input type="text" ng-model="processo.assunto" name="assunto" class="form-control" placeholder="Assunto">
-                </div>
+                <div class="modal-body">
+                        <div class="container1" ng-app ng-init="tabs=3">
+                                <ul class="tabs-nav">
+                                    <li><a ng-click="tabs=3" ng-class="{'active' : tabs==3}">PRINCIPAL</a></li>
+                                    <li><a ng-click="tabs=4" ng-class="{'active' : tabs==4}">HORARIOS DE ATENDIMENTO</a></li>
+                                </ul>
 
-                <div class="col-sm-2">
-                    <label for="exampleInputtext1">Natureza</label>
-                    <div class="row">
-                        <ui-select class="wdapp-ui-select" ng-model="processo.natureza" theme="bootstrap">
-                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                            <ui-select-choices repeat="item in natureza | filter: $select.search">
-                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                <div class="tabs-container1">
+                                    <div class="tab-content1" ng-show="tabs == 3">
 
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <label for="exampleInputtext1">Status</label>
-                    <div class="row">
-                        <ui-select class="wdapp-ui-select" ng-model="processo.statusProc" theme="bootstrap">
-                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                            <ui-select-choices repeat="item in statusProc | filter: $select.search">
-                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                        <div class="row">
+                            <dl class="dl-horizontal">
+                                <dd>
+                                    <label class="ui-radio"><input name="radio5" type="radio"  ng-model="advogado.tipoPessoa" ng-value="1"><span>Pessoa Fisica </span></label>
+                                    <label class="ui-radio"><input name="radio6" type="radio"  ng-model="advogado.tipoPessoa" ng-value="2"><span>Pessoa Juridica </span></label>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-8">
+                                <label for="exampleInputEmail1" ng-show="advogado.tipoPessoa == 1" ng-hide="advogado.tipoPessoa == 2">Nome <SUP class="help-block5">(*)</SUP></label>
+                                <label for="exampleInputEmail1" ng-show="advogado.tipoPessoa == 2" ng-hide="advogado.tipoPessoa == 1">Razão social <SUP class="help-block5">(*)</SUP></label>
+                                <input type="text" required ng-model="advogado.nome" name="nome" class="form-control" placeholder="Nome">
+                                <p ng-show="advogadoForm.razao.$invalid" class="help-block">Campo de preenchimento Obrigatorio.</p>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label for="exampleInputEmail1">Código Interno</label>
+                                <div class="input-group">
+                                    <input type="text" ng-model="advogado.codigo" name="codigo" class="form-control" placeholder="Codigo">
+                                </div>
+                            </div>
+                        </div>
 
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Descrição</label>
-                    <textarea class="form-control" rows="7" ng-model="processo.descricao" id="descricao"></textarea>
-                </div>
-            </div>
-            <div class="row " style="margin-top : 10px"></div>
-            <a href="javascript:void(0)" ng-model="collapseds" ng-click="collapseds=!collapseds"><strong>Envolvidos</strong></a>
-            <div class="row " style="margin-top : 10px"></div>
-            <div ng-show="collapseds">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div ng-repeat="envolvList in processo.envolvList">
-                        <div class="col-sm-12">
-                            <div class="col-sm-4">
-                                <label for="exampleInputtext1">Cliente</label>
+                        <div ng-show="advogado.tipoPessoa == 1" ng-hide="advogado.tipoPessoa == 2">
+                            <div class="row">
+                                <div ng-repeat="documento in advogado.documentos">
+                                    <div ng-if="documento.documentoTypeEnumValue == 2">
+                                        <div class="form-group col-sm-4">
+
+                                            <label for="exampleInputEmail1">CPF <SUP class="help-block5">(*)</SUP></label>
+
+                                            <div class="input-group">
+                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas Números" class="fa fa-credit-card"></span></span>
+                                                <input type="text" ng-model="documento.numero" validcpf="cpf" tipoPessoa="{{advogado.tipoPessoa}}"  name="cpf" class="form-control" ui-mask="999.999.999-99" ui-mask-placeholder ui-mask-placeholder-char="_">
+                                                <input type="text" ng-model="documento.documentoTypeEnumValue" name="cnpjs" value="2" class="form-control hide" placeholder="N° Cart. Trab" ng-init="documento.documentoTypeEnumValue=2">
+                                            </div>
+                                            <p ng-show="advogadoForm.cpf.$invalid" class="help-block">CPF Inválido.</p>
+                                        </div>
+                                    </div>
+                                    <div ng-if="documento.documentoTypeEnumValue ==4">
+                                        <div class="form-group col-sm-4">
+
+                                            <label for="exampleInputEmail1">RG </label>
+                                            <div class="input-group">
+                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas Números" class="fa fa-credit-card"></span></span>
+                                                <input type="text" ng-model="documento.numero" name="IEST" class="form-control">
+                                                <input type="text" ng-model="documento.documentoTypeEnumValue" name="IEST2" value="4" class="form-control hide" placeholder="N° Cart. Trab" ng-init="documento.documentoTypeEnumValue=4">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail1">Data Nascimento</label>
+
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" ng-model="advogado.datanasc" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="false" close-text="Close" uib-datepicker-popup="{{format}}" />
+                                        <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="exampleInputtext1">Especialidade</label>
                                 <div class="row">
-                                    <ui-select ng-model="envolvList.cliente" theme="bootstrap">
-                                        <ui-select-match placeholder="...">{{$select.selected.nome}}</ui-select-match>
-                                        <ui-select-choices repeat="item in clienteList | filter: $select.search">
+                                    <ui-select multiple  ng-model="advogado.especialidades" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false" style="margin-left:10px">
+                                        <ui-select-match placeholder="...">{{$item.nome}} &lt;{{$item.nome}}&gt;</ui-select-match>
+                                        <ui-select-choices repeat="item in especialidades | filter: $select.search">
+                                            <div ng-bind-html="item.id | highlight: $select.search"></div>
                                             <div ng-bind-html="item.nome | highlight: $select.search"></div>
-
                                         </ui-select-choices>
                                     </ui-select>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
-                                <label for="exampleInputtext1">Tipo Envolvimento</label>
-                                <div class="row">
-                                    <ui-select style="margin-left:10px" ng-model="envolvList.tipoEnvolvido" theme="bootstrap">
-                                        <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                        <ui-select-choices repeat="item in tipoEnvolv | filter: $select.search">
-                                            <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-
-                                        </ui-select-choices>
-                                    </ui-select>
-                                </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <label for="exampleInputtext1">Envolvimento</label>
-                                <div class="row">
-                                    <ui-select style="margin-left:10px" ng-model="envolvList.envolvimento" theme="bootstrap">
-                                        <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                        <ui-select-choices repeat="item in envolv | filter: $select.search">
-                                            <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-
-                                        </ui-select-choices>
-                                    </ui-select>
-                                </div>
-                            </div>
-                            <div class="col-sm-1">
-                                <label for="exampleInputtext1">Cliente</label>
-                                <div class="row">
-                                    <toggle style="width:24px;margin-left:24px;margin-top:25px;" ng-model="envolvList.bCliente" ng-init="envolvList.bCliente = 1" style="android" on="Sim" off="Não" onstyle="btn-success"
-                                        offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'0'"></toggle>
-                                </div>
-                            </div>
-                            <div class="col-sm-1">
-                                <button type="button" class="btn btn-default addButton" style="margin-top:24px"><i class="fa fa-plus"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row " style="margin-top : 10px"></div>
-        <hr>
-        <a href="javascript:void(0)" ng-model="collapsedsd" ng-click="collapsedsd=!collapsedsd">Adicionar <strong>Advogados</strong></a>
-        <div class="row " style="margin-top : 10px"></div>
-        <div ng-show="collapsedsd">
-                <div class="col-sm-12">
-                    <label for="exampleInputtext1">Advogado</label>
-                    <div class="row">
-                        <ui-select multiple ng-model="processo.advogadoList" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false" title="Choose a person">
-                            <ui-select-match placeholder="...">{{$item.nome}} &lt;{{$item.nome}}&gt;</ui-select-match>
-                            <ui-select-choices repeat="item in advogadoList | filter: $select.search">
-                                <div ng-bind-html="item.nome | highlight: $select.search"></div>
-                                <div ng-bind-html="item.nome | highlight: $select.search"></div>
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
-                </div>
-        </div>
-        <hr/>
-
-            <div class="row " style="margin-top : 10px"></div>
-            <hr>
-            <a href="javascript:void(0)" ng-model="collapsed" ng-click="collapsed=!collapsed">Outras <strong>Informações</strong></a>
-            <div class="row " style="margin-top : 10px"></div>
-            <div ng-show="collapsed">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="col-sm-12">
-                        <div class="col-sm-12">
-                            <label for="exampleInputtext1">FUNDAMENTAÇÂO JURÚDICA</label>
-                            <textarea class="form-control" rows="5" ng-model="processo.fundamentacaoJuridica" id="observacao"></textarea>
-                        </div>
-                        <div class="col-sm-12">
-                            <label for="exampleInputtext1">FATOS</label>
-                            <textarea class="form-control" rows="5" ng-model="processo.fatos" id="observacao"></textarea>
-                        </div>
-                        <div class="col-sm-12">
-                            <label for="exampleInputtext1">PRETENSES DO CLIENTE</label>
-                            <textarea class="form-control" rows="5" ng-model="processo.pretensoesCliente" id="observacao"></textarea>
-                        </div>
-                        <div class="col-sm-12">
-                            <label for="exampleInputtext1">ESTRATÉGIA</label>
-                            <textarea class="form-control" rows="5" ng-model="processo.estrategia" id="observacao"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-            <hr />
-        </div>
-        <div class="tab-content1" ng-show="tabs == 4">
-            <div class="panel-group" id="accordion">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
-                            Dados do processo
-                            </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                        </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse in collapseFour">
-                        <div class="panel-body">
-                            <div class="col-sm-12">
-                                <div class="form-group col-sm-3">
-                                    <label for="exampleInputtext1">Processo</label>
+                            <div class="col-sm-6">
+                                    <label for="exampleInputtext1">Grupo de Trabalho</label>
                                     <div class="row">
-                                        <toggle ng-model="processo.tipoProcesso" ng-init="processo.tipoProcesso = false" style="android" on="Judicial" off="Extrajudial"
-                                            onstyle="btn-success" offstyle="btn-danger" ng-true-value="'true'" ng-false-value="'false'"></toggle>
-                                    </div>
-                                </div>
-                                <div class="form-group col-sm-4">
-                                    <label for="exampleInputEmail1">Justiça</label>
-                                    <div class="row">
-                                        <ui-select style="margin-left:10px" ng-model="processo.justica" theme="bootstrap">
-                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                            <ui-select-choices repeat="item in justica | filter: $select.search">
-                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-
+                                        <ui-select multiple ng-model="advogado.grupoTrabalho" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false" style="margin-left:10px">
+                                            <ui-select-match placeholder="...">{{$item.nome}} &lt;{{$item.nome}}&gt;</ui-select-match>
+                                            <ui-select-choices repeat="item in grupoTrabalho | filter: $select.search">
+                                                <div ng-bind-html="item.nome | highlight: $select.search"></div>
+                                                <div ng-bind-html="item.nome | highlight: $select.search"></div>
                                             </ui-select-choices>
                                         </ui-select>
                                     </div>
                                 </div>
-                                <div class="form-group col-sm-4">
-                                    <label for="exampleInputEmail1">Instáncia</label>
-                                    <div class="row">
-                                        <ui-select style="margin-left:10px" ng-model="processo.instancia" theme="bootstrap">
-                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                            <ui-select-choices repeat="item in instancia | filter: $select.search">
-                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-
-                                            </ui-select-choices>
-                                        </ui-select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group col-sm-6">
-                                    <label for="exampleInputEmail1">Órgão</label>
-                                    <div class="row">
-                                        <ui-select style="margin-left:10px" ng-model="processo.orgao" theme="bootstrap">
-                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                            <ui-select-choices repeat="item in orgao | filter: $select.search">
-                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-
-                                            </ui-select-choices>
-                                        </ui-select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <label for="exampleInputEmail1">Situação</label>
-                                    <div class="row">
-                                        <ui-select style="margin-left:10px" ng-model="processo.situacao" theme="bootstrap">
-                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                            <ui-select-choices repeat="item in situacao | filter: $select.search">
-                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-
-                                            </ui-select-choices>
-                                        </ui-select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group col-sm-3">
-                                    <label for="exampleInputtext1">Numeração Padrão CNJ</label>
-                                    <input type="text" class="form-control" ng-model="processo.npadraocnj" name="text" placeholder="0.00">
-                                </div>
-                                <div class="form-group col-sm-3">
-                                    <label for="exampleInputtext1">Numeração Outro Padrão</label>
-                                    <input type="text" class="form-control" ng-model="processo.npadrao" name="text" placeholder="0.00">
-                                </div>
-                                <div class="form-group col-sm-3">
-                                    <label for="exampleInputtext1">Agendar Captura</label>
-                                    <div class="row">
-                                        <toggle ng-model="processo.agendarCap" ng-init="processo.agendarCap = false" style="android" on="Sim" off="Não" onstyle="btn-success"
-                                            offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
-                                    </div>
-                                </div>
-                                <div class="form-group col-sm-3">
-                                    <label for="exampleInputtext1">Distribuido</label>
-                                    <input type="text" class="form-control" ng-model="processo.distribuido" name="text" placeholder="0.00">
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group col-sm-4">
-                                    <label for="exampleInputtext1">Valor da ação</label>
-                                    <input type="text" class="form-control" ng-model="processo.valorAcao" name="text" placeholder="0.00">
-                                </div>
-                                <div class="form-group col-sm-4">
-                                    <label for="exampleInputtext1">Valor provisionado</label>
-                                    <input type="text" class="form-control" ng-model="processo.valorProvisionado" name="text" placeholder="0.00">
-                                </div>
-                                <div class="form-group col-sm-4">
-                                    <label for="exampleInputtext1">Segredo Justiça</label>
-                                    <div class="row">
-                                        <toggle ng-model="processo.segJustica" ng-init="processo.segJustica = false" style="android" on="Sim" off="Não" onstyle="btn-success"
-                                            offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="tab-content1" ng-show="tabs == 5">
-            <div class="panel-group" id="accordion">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
-                            PARÁMETROS DA CAPTURA
-                            </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                        </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse in collapseFour">
-                        <div class="panel-body">
+                        <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail1">Nº OAB</label>
+                                    <div class="input-group">
+                                        <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas Números" class="fa fa-credit-card"></span></span>
+                                        <input type="text" ng-model="advogado.oab" name="IEST" class="form-control">
+
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                        <label for="exampleInputPassword1">Tipo OAB</label>
+                                        <div class="row">
+                                            <ui-select ng-model="advogado.tipoOab" theme="bootstrap" style="margin-left:10px">
+                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                <ui-select-choices repeat="item in tipoOab | filter: $select.search">
+                                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                        <label for="exampleInputPassword1">Estado OAB</label>
+                                        <div class="row">
+                                            <ui-select ng-model="advogado.estado" theme="bootstrap" style="margin-left:10px">
+                                                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                                                <ui-select-choices repeat="item in estadoList | filter: $select.search">
+                                                    <div ng-bind-html="item.nome | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                </div>
+                        </div>
+
+                        <!-- Documentos -->
+                        <div ng-show="advogado.tipoPessoa == 2" ng-hide="advogado.tipoPessoa == 1">
                             <div class="row">
-                                <div class="form-group col-sm-3">
-                                    <label for="exampleInputEmail1">Justiça</label>
-                                    <div class="row">
-                                        <ui-select style="margin-left:10px" ng-model="processo.justica" theme="bootstrap">
-                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                            <ui-select-choices repeat="item in justica | filter: $select.search">
-                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-
-                                            </ui-select-choices>
-                                        </ui-select>
-                                    </div>
+                                <div class="form-group col-sm-12">
+                                    <label for="exampleInputEmail1">Nome Fantasia</label>
+                                    <input type="text" ng-model="advogado.nome" name="fantasia" class="form-control" placeholder="Nome Fantasia">
                                 </div>
-                                <div class="form-group col-sm-3">
-                                    <label for="exampleInputEmail1">Tribunal</label>
-                                    <div class="row">
-                                        <ui-select style="margin-left:10px" ng-model="processo.tribunal" theme="bootstrap">
-                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                            <ui-select-choices repeat="item in tribunal | filter: $select.search">
-                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
 
-                                            </ui-select-choices>
-                                        </ui-select>
+                            </div>
+                            <div class="row">
+                                <div ng-repeat="documento in advogado.documentos">
+                                    <div ng-if="documento.documentoTypeEnumValue =='1'">
+                                        <div class="form-group col-sm-3">
+                                            <label for="exampleInputEmail1">CNPJ <SUP class="help-block5">(*)</SUP></label>
+                                            <div class="input-group">
+                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas Números" class="fa fa-credit-card"></span></span>
+                                                <input type="text" ng-model="documento.numero"  validcnpj="cnpj"   tipoPessoa="{{advogado.tipoPessoa}}" class="form-control" name="cnpj" ui-mask="99.999.999/9999-99" ui-mask-placeholder ui-mask-placeholder-char="_" ng-class="{ 'has-error' : !advogadoForm.cnpj.$invalid}">
+                                                <input type="text" ng-model="documento.documentoTypeEnumValue" name="cnpjs" value="1" class="form-control hide" placeholder="N° Cart. Trab" ng-init="documento.documentoTypeEnumValue=1">
+                                            </div>
+                                            <p ng-show="advogadoForm.cnpj.$invalid" class="help-block">CNPJ Inválido.</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group col-sm-3">
-                                    <label for="exampleInputEmail1">Instáncia</label>
-                                    <div class="row">
-                                        <ui-select style="margin-left:10px" ng-model="processo.instancia1" theme="bootstrap">
-                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                            <ui-select-choices repeat="item in instancia | filter: $select.search">
-                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-
-                                            </ui-select-choices>
-                                        </ui-select>
+                                    <div ng-if="documento.documentoTypeEnumValue =='12'">
+                                        <div class="form-group col-sm-3">
+                                            <label for="exampleInputEmail1">Inscr Est Subst Trib </label>
+                                            <div class="input-group">
+                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas Números" class="fa fa-credit-card"></span></span>
+                                                <input type="text" ng-model="documento.numero" name="IEST" class="form-control">
+                                                <input type="text" ng-model="documento.documentoTypeEnumValue" name="IEST2" value="12" class="form-control hide" placeholder="N° Cart. Trab" ng-init="documento.documentoTypeEnumValue=12">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group col-sm-3">
-                                    <label for="exampleInputEmail1">Localidade</label>
-                                    <div class="row">
-                                        <ui-select style="margin-left:10px" ng-model="processo.localidade" theme="bootstrap">
-                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                            <ui-select-choices repeat="item in localidade | filter: $select.search">
-                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                    <div ng-if="documento.documentoTypeEnumValue =='14'">
+                                        <div class="row col-sm-3">
+                                            <label for="exampleInputPassword1">Indicador de IE</label>
+                                            <div class="row">
+                                                <ui-select ng-model="documento" theme="bootstrap">
+                                                    <ui-select-match placeholder="Indicador de IE ...">{{$select.selected.descricao}}</ui-select-match>
+                                                    <ui-select-choices repeat="item in endereco.indicadorIE | filter: $select.search">
+                                                        <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                            </ui-select-choices>
-                                        </ui-select>
+                                    <div ng-if="documento.documentoTypeEnumValue =='10'">
+                                        <div class="form-group col-sm-3">
+                                            <label for="exampleInputEmail1">Inscrição Estadual <SUP class="help-block5">(*)</SUP></label>
+                                            <div class="input-group">
+                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas Números" class="fa fa-credit-card"></span></span>
+                                                <input type="text" ng-model="documento.numero" name="incrEst" class="form-control" ng-class="{ 'has-error' : !validationInsEst(advogado.tipoPessoa,documento.numero)}">
+                                                <input type="text" ng-model="documento.documentoTypeEnumValue" name="incrEst2" value="10" class="form-control hide" ng-init="documento.documentoTypeEnumValue=10">
+                                            </div>
+                                            <p ng-show="!validationInsEst(advogado.tipoPessoa,documento.numero)" class="help-block">Campo de preenchimento Obrigatorio.</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-sm-4">
-                                    <label for="exampleInputEmail1">Capturar por</label>
-                                    <div class="row">
-                                        <ui-select style="margin-left:10px" ng-model="processo.capturpor" theme="bootstrap">
-                                            <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
-                                            <ui-select-choices repeat="item in capiturPor | filter: $select.search">
-                                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                <div ng-repeat="documento in advogado.documentos">
+                                    <div ng-if="documento.documentoTypeEnumValue =='3'">
+                                        <div class="form-group col-sm-3">
+                                            <label for="exampleInputEmail1">Inscrição Municipal <SUP class="help-block5">(*)</SUP></label>
+                                            <div class="input-group">
+                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas Números" class="fa fa-credit-card"></span></span>
+                                                <input type="text" ng-model="documento.numero" name="incrMun" class="form-control" ng-class="{ 'has-error' : validationInsMun(advogado.tipoPessoa,documento.numero)}">
+                                                <input type="text" ng-model="documento.documentoTypeEnumValue" name="incrMun2" value="3" class="form-control hide" ng-init="documento.documentoTypeEnumValue=3">
+                                            </div>
+                                            <p ng-show="validationInsMun(advogado.tipoPessoa,documento.numero)" class="help-block">Campo de preenchimento Obrigatorio.</p>
+                                        </div>
 
-                                            </ui-select-choices>
-                                        </ui-select>
+                                    </div>
+                                    <div ng-if="documento.documentoTypeEnumValue =='11'">
+                                        <div class="form-group col-sm-3">
+                                            <label for="exampleInputEmail1">Inscrição Suframa</label>
+                                            <div class="input-group">
+                                                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas Números" class="fa fa-credit-card"></span></span>
+                                                <input type="text" ng-model="documento.numero" name="suframa" class="form-control">
+                                                <input type="text" ng-model="documento.documentoTypeEnumValue" name="suframa2" value="11" class="form-control hide" ng-init="documento.documentoTypeEnumValue=11">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row col-sm-4">
-                                    <div class="form-group">
-                                        <label for="exampleInputtext1">N° do Processo</label>
-                                        <input style="margin-left:10px" type="text" class="form-control" ng-model="processo.numeroprocesso" name="text" placeholder="N°mero do Processo">
+
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail1">Data Abertura</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" ng-model="advogado.dtAbertura" is-open="popup2.opened" datepicker-options="dateOptions" close-text="Close" uib-datepicker-popup="{{format}}" />
+                                        <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
                                     </div>
                                 </div>
-                                <div class="form-group col-sm-4">
-                                    <label for="exampleInputtext1">Captura automática de andamentos</label>
-                                    <div class="row">
-                                        <toggle style="margin-left:30px;width:100%"  ng-model="processo.capautomatica" ng-init="processo.capautomatica = 1" style="android" on="Sim" off="Não" onstyle="btn-success"
-                                            offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
-                                    </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="exampleInputEmail1">N° Funcionarios</label>
+                                    <input type="text" ng-model="advogado.numFunc" name="numFunc" class="form-control" placeholder="N° Func">
                                 </div>
                             </div>
+
+                        </div>
+
+
+                        <!-- Endereco -->
+                        <div ng-include="'views/util/apps/endereco.html'"></div>
+
+                        <!-- -------------------  TELEFONE ----------------- -->
+
+                        <div ng-include="'views/util/apps/telefone.html'"></div>
+
+                        <!-- -------------------  Email Empresa ----------------- -->
+
+                        <div ng-include="'views/util/apps/email.html'"></div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="tab-content1" ng-show="tabs == 6" style="height : 250px">
-            <div class="col-sm-12" >
-                <div class="col-sm-12">
-                    <label for="exampleInputtext1">Monitorar</label>
-                    <div class="row">
-                        <toggle ng-model="processo.agendarCap" ng-init="processo.agendarCap = false" style="android" on="Sim" off="Não" onstyle="btn-success"
-                            offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
-                    </div>
-                </div>
-                <div class="col-sm-12">
-                    <label for="exampleInputtext1">Enviar Movimentação EMAIL/SMS Cliente</label>
-                    <div class="row">
-                        <toggle ng-model="processo.enviarMdgTelefone" ng-init="processo.enviarMdgTelefone = false" style="android" on="Sim" off="Não" onstyle="btn-success"
-                            offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
-                    </div>
-                </div>
-                <div class="col-sm-12">
-                    <label for="exampleInputtext1">Sim, desejo receber todos as movimentações automáticos por e-mail.</label>
-                    <div class="row">
-                        <toggle ng-model="processo.enviarEmail" ng-init="processo.enviarEmail = false" style="android" on="Sim" off="Não" onstyle="btn-success"
-                            offstyle="btn-danger" ng-true-value="'1'" ng-false-value="'2'"></toggle>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="tab-content1" ng-show="tabs == 7">
-                <div class="col-sm-12">
-            <div class="col-sm-12">
-                <label for="exampleInputEmail1">Senha</label>
-                <input type="text" class="form-control" ng-model="processo.senha" name="descricao" placeholder="Descrição">
-            </div>
-            <div class="col-sm-12">
-                <label for="exampleInputtext1">Grupos de trabalho</label>
-                <div class="row">
-                    <ui-select multiple ng-model="processo.grupoTrabalho" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false" title="Choose a person">
+                    <div class="tab-content1" ng-show="tabs == 4">
+                            <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail1">Tempo Medio Atendimento </label>
+                                    <div class="input-group">
+                                        <input type="text" ng-model="advogado.mediaAtendimento" name="codigo" class="form-control" placeholder="Media Atendimento">
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail1">Maximo Atendimento Dia</label>
+                                    <div class="input-group">
+                                        <input type="text" ng-model="advogado.maxAtendimento" name="maxAtendimento" class="form-control" placeholder="Max Atendimento">
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="exampleInputEmail1">Maximo Encaixe Dia</label>
+                                    <div class="input-group">
+                                        <input type="text" ng-model="advogado.maxEncaixe" name="maxEncaixe" class="form-control" placeholder="Max Encaixe">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                    <div ng-repeat="horasTrabalho in advogado.horasTrabalhos">
+                                            <hr/>
+                                    <div class="form-group col-sm-2">
+                                        <label for="exampleInputEmail1">Entrada </label>
+                                        <div class="input-group">
+                                            <input type="text" ng-model="horasTrabalho.horaInicio" name="codigo" class="form-control" placeholder="Codigo">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <label for="exampleInputEmail1">Saida </label>
+                                        <div class="input-group">
+                                            <input type="text" ng-model="horasTrabalho.horaFinal" name="codigo" class="form-control" placeholder="Codigo">
+                                        </div>
+                                    </div>
 
-                            <ui-select-match placeholder="...">{{$item.descricao}}&gt;</ui-select-match>
-                            <ui-select-choices repeat="item in grupoTrabalhoList | filter: $select.search">
-                                <div ng-bind-html="item.descricao | highlight: $select.search"></div>
-                            </ui-select-choices>
+                                    <div class="form-group col-sm-7">
+                                        <div class="text-center advogado">
+                                                <label for="exampleInputEmail1">Repetir </label>
+                                                <div class="row">
+                                                        <div class="btn-group" data-toggle="buttons">
+                                                            <label class="btn btn-info">
+                                                                <input type="checkbox" ng-model="segunda" autocomplete="off" ng-true-value="'1'" ng-false-value="'2'">
+                                                                <span class="glyphicon glyphicon-ok"></span> Seg
+                                                            </label>
 
-                        </ui-select>
+                                                            <label class="btn btn-info">
+                                                                <input type="checkbox" ng-model="terca" autocomplete="off" ng-true-value="'1'" ng-false-value="'2'">
+                                                                <span class="glyphicon glyphicon-ok"></span> Ter
+                                                            </label>
+
+                                                            <label class="btn btn-info">
+                                                                <input type="checkbox" ng-model="quarta" autocomplete="off" ng-true-value="'1'" ng-false-value="'2'">
+                                                                <span class="glyphicon glyphicon-ok"></span> Qua
+                                                            </label>
+
+                                                            <label class="btn btn-info">
+                                                                <input type="checkbox" ng-model="quinta" autocomplete="off" ng-true-value="'1'" ng-false-value="'2'">
+                                                                <span class="glyphicon glyphicon-ok"></span> Qui
+                                                            </label>
+
+                                                            <label class="btn btn-info">
+                                                                <input type="checkbox" ng-model="sexta" autocomplete="off" ng-true-value="'1'" ng-false-value="'2'">
+                                                                <span class="glyphicon glyphicon-ok"></span> Sex
+                                                            </label>
+
+                                                            <label class="btn btn-danger">
+                                                                <input type="checkbox" ng-model="sabado" autocomplete="off" ng-true-value="'1'" ng-false-value="'2'">
+                                                                <span class="glyphicon glyphicon-ok"></span> Sab
+                                                            </label>
+
+                                                            <label class="btn btn-danger">
+                                                                <input type="checkbox" ng-model="domingo" autocomplete="off" ng-true-value="'1'" ng-false-value="'2'">
+                                                                <span class="glyphicon glyphicon-ok"></span> Dom
+                                                            </label>
+                                                       </div>
+                                                        </div>
+                                                </div>
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                            <button ng-show="$index == 0" ng-hide="$index > 0"  type="button" ng-click="createForm('OUTROS')" class="btn btn-default addButton" style="margin-top:24px"><i class="fa fa-plus"></i></button>
+                                                            <button ng-show="$index > 0"  ng-hide="$index == 0" type="button" ng-click="deleteForm(telefone)" class="btn btn-link removeButton" style="margin-top:24px">deletar</button>
+                                                        </div>
+                                </div>
+                            </div>
+                    </div>
+
+                    </div>
+
+                <div class="modal-footer">
+                    <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Gravar</button>
                 </div>
-            </div>
-            <div class="col-sm-12">
-                <label for="exampleInputtext1">Limitar Usuarios</label>
-                <div class="row">
-                        <ui-select multiple ng-model="processo.usuariosRestricaoProc" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false" title="Choose a person">
-                            <ui-select-match placeholder="...">{{$item.nome}} &lt;{{$item.email}}&gt;</ui-select-match>
-                            <ui-select-choices repeat="item in usuarioList | filter: $select.search">
-                                <div ng-bind-html="item.email | highlight: $select.search"></div>
-                                <div ng-bind-html="item.nome | highlight: $select.search"></div>
-                            </ui-select-choices>
-                        </ui-select>
-                </div>
-            </div>
-            </div>
-    </div>
+                </form>
+        </div>
     </div>
 </div>

@@ -167,17 +167,12 @@
       },
 
       advogado: function (scope) {
-        scope.statusProc = []
-        scope.tipoEnvolv = []
-        scope.envolv = []
-        scope.situacao = []
-        scope.instancia = []
-        scope.justica = []
-        scope.tribunal = []
-        scope.localidade = []
-        scope.capiturPor = []
-        scope.capiturAut = []
-        scope.natureza = []
+        scope.especialidades = [];
+        scope.grupoTrabalho = [];
+        scope.tipoOab = [];
+        scope.estadoLists = [];
+        scope.indicadorIE = [];
+        scope.regime = [];
 
         var planos = ''
         //  //debugger
@@ -188,43 +183,24 @@
           var planos = processos[x]
           if (planos.doisValorType != null) {
             switch (planos.doisValorType.tipo) {
-              case 'STATUS':
-                scope.statusProc.push(planos)
+              case 'GRUPO TRABALHO':
+                scope.grupoTrabalho.push(planos)
                 break
-              case 'TIPO ENVOLVIMENTO':
-                scope.tipoEnvolv.push(planos)
+              case 'TIPO OAB':
+                scope.tipoOab.push(planos)
                 break
-              case 'ENVOLVIMENTO':
-                scope.envolv.push(planos)
+              case 'ESPECIALIDADE':
+                scope.especialidades.push(planos)
                 break
-              case 'SITUACAO':
-                scope.situacao.push(planos)
+              case 'INDICADOR IE':
+                scope.indicadorIE.push(planos)
                 break
-              case 'INSTANCIA':
-                scope.instancia.push(planos)
-                break
-              case 'JUSTICA':
-                scope.justica.push(planos)
-                break
-              case 'TRIBUNAL':
-                scope.tribunal.push(planos)
-                break
-              case 'LOCALIDADE':
-                scope.localidade.push(planos)
-                break
-              case 'CAPITUR POR':
-                scope.capiturPor.push(planos)
-                break
-              case 'CAPTURA AUTOMATICA':
-                scope.capiturAut.push(planos)
-                break
-              case 'NATUREZA':
-                scope.natureza.push(planos)
-                break
-
             }
           }
         }
+        qat.model.select.anonimo("cadastros/api/estado/fetchPage", true, new qat.model.estadoInquiryRequest(100 / 20, true, null), function(res){scope.estadoLists = res.estadoList});
+
+        qat.model.select.anonimo("fiscal/api/regime/fetchPage", true, new qat.model.estadoInquiryRequest(100 / 20, true, null), function(res){scope.regime = res.regimeList});
 
         return scope
       },

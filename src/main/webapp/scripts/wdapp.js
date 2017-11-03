@@ -179,7 +179,7 @@ var WebDaptiveAppConfig = {
 
 		'wdApp.apps.processo.insert','wdApp.apps.processo.update','wdApp.apps.processo.delete'
 
-		,'wdApp.apps.advogado','wdApp.apps.advogado.insert','wdApp.apps.advogado.update','wdApp.apps.advogado.delete','wdApp.ajaxCall.advogado'
+		,'wdApp.apps.advogado','wdApp.apps.advogado.insert','wdApp.apps.advogado.update','wdApp.apps.advogado.delete','wdApp.apps.advogado.view','wdApp.ajaxCall.advogado'
 
 		,'wdApp.apps.orgao'
 

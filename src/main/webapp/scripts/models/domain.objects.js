@@ -95,7 +95,9 @@ qat.model.advogado = function(_oObjet, _modelAction, _user, $log)
      {
 
                   this.id = _oObjet.id;
-                  this.nome = _oObjet.nome,
+				  this.nome = _oObjet.nome,
+				  this.razao = _oObjet.razao,
+				  this.codigo = _oObjet.codigo,
                   this.nomePai = _oObjet.nomePai,
                   this.nomeMae = _oObjet.nomeMae,
                   this.nomeConjugue = _oObjet.nomeConjugue,
@@ -105,10 +107,6 @@ qat.model.advogado = function(_oObjet, _modelAction, _user, $log)
                   this.foto = _oObjet.foto,
                   this.pessoaTypeEnum = _oObjet.pessoaTypeEnum,
                   this.sexo = _oObjet.sexo,
-                  this.enderecos = _oObjet.enderecos,
-                  this.documentos = _oObjet.documentos,
-                  this.emails = _oObjet.emails,
-                  this.telefones = _oObjet.telefones,
                   this.bancos = _oObjet.bancos,
                   this.formaPagamentoList = _oObjet.formaPagamentoList,
                   this.condPagList = _oObjet.condPagList,
@@ -118,8 +116,8 @@ qat.model.advogado = function(_oObjet, _modelAction, _user, $log)
                   this.mediaAtendimento = _oObjet.mediaAtendimento,
                   this.maxAtendimento = _oObjet.maxAtendimento,
                   this.maxEncaixe = _oObjet.maxEncaixe,
-                  this.estado = _oObjet.estado,
-                  this.tipoOab = _oObjet.tipoOab,
+                  this.estado = { id : _oObjet.estado.id},
+                  this.tipoOab = { id : _oObjet.tipoOab.id},
 				  this.horasTrabalhos = _oObjet.horasTrabalhos,
 				  this.grupoTrabalho = _oObjet.grupoTrabalho,
                   this.especialidades = _oObjet.especialidades,
@@ -2058,20 +2056,20 @@ qat.model.fnDoisValor1 = function(_oObjet, _modelAction, _user)
 {
 
 	this.id = _oObjet ? _oObjet.id : null;
-	/*    this.value = _oObjet.value;
-	    this.descricao = _oObjet.descricao;
-	    this.nome = _oObjet.nome;
-	    this.doisValorType = _oObjet.doisValorType;
-	    this.pagina = _oObjet.pagina;
-	    this.parentId = _oObjet.parentId;
-	    this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
-	    this.processId = _oObjet.processId;
-	    this.tableEnumValue = _oObjet.tableEnumValue;
-	    this.modelAction = _modelAction;
-	    this.createUser = _user;
-	    this.createDateUTC = (new Date()).getTime();
-	    this.modifyUser = _user;
-	    this.modifyDateUTC = (new Date()).getTime();*/
+	this.value = _oObjet.value;
+	this.descricao = _oObjet.descricao;
+	this.nome = _oObjet.nome;
+	this.doisValorType = _oObjet.doisValorType;
+	this.pagina = _oObjet.pagina;
+	this.parentId = _oObjet.parentId;
+	this.emprId = JSON.parse(localStorage.getItem('empresa')).id;
+	this.processId = _oObjet.processId;
+	this.tableEnumValue = _oObjet.tableEnumValue;
+	this.modelAction = _modelAction;
+	this.createUser = _user;
+	this.createDateUTC = (new Date()).getTime();
+	this.modifyUser = _user;
+	this.modifyDateUTC = (new Date()).getTime();
 }
 
 qat.model.EmpresaProduto = function(_oObjet, _modelAction, _user,$log)

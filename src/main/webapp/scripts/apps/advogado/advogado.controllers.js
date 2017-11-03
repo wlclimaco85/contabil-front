@@ -199,7 +199,7 @@
   })()
   ;(function () {
     angular.module('wdApp.apps.advogado.view', ['datatables', 'angularModalService', 'datatables.buttons', 'datatables.light-columnfilter'])
-      .controller('AdvogadoViewController', function ($rootScope, $scope, fModels, SysMgmtData, fPessoa, $location, toastr) {
+      .controller('AdvogadoViewController', function ($rootScope, $scope, fModels, SysMgmtData, fAdvogado, $location, toastr,doisValorFactory) {
         var vm = this
 
         var searchObject = $location.search();
@@ -208,26 +208,33 @@
               {
                   _emprId = JSON.parse(localStorage.getItem('empresa')).id;
         }
-
+        debugger
         SysMgmtData.processPostPageData("main/api/request",
-              {
-                  url: "pessoa/api/advogado/fetchPage",
-                  token: $rootScope.authToken,
-                  request: new qat.model.empresaInquiryRequest(0, true, null, parseInt(searchObject.id, 10), null, null)
-              }, function(res)
-              {
-          $scope.advogado = {}
-          $scope.advogado = res.advogadoList[0];
-          console.log($scope.advogado);
+        {
+            url: "pessoa/api/advogado/fetchPage",
+            token: $rootScope.authToken,
+            request: new qat.model.empresaInquiryRequest(0, true, null, parseInt(searchObject.id, 10), null, null)
+        }, function(res)
+         {debugger
+            $scope.advogado = {}
+            $scope.advogado = res.advogadoList[0];
+            console.log($scope.advogado);
 
-          if($scope.advogado.emails.length === 0 )
-          {
-            $scope.advogado.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
-          }
-
-          $scope.status = $scope.advogado.statusList[$scope.advogado.statusList.length - 1];
-          console.log($scope.advogado);
+            if($scope.advogado.emails.length === 0 )
+            {
+              $scope.advogado.emails.push({email : "",emailTypeEnum : "PRINCIPAL"});
+            }
+            if($scope.advogado.statusList)
+                $scope.status = $scope.advogado.statusList[$scope.advogado.statusList.length - 1];
+            else
+            {
+              $scope.advogado.statusList = [];
+              $scope.status = $scope.advogado.statusList[$scope.advogado.statusList.length - 1];
+            }    
+            console.log($scope.advogado);
         });
+
+        doisValorFactory.advogado($scope);
         $scope.showEmailType = function() {
           var sReturn = 'Not set';
           if($scope.regime)
@@ -276,6 +283,20 @@
           }
           $scope.updateAdvogado();
         };
+
+        $scope.estadoCivil = [
+          {nome : '1',label : 'Solteiro'},
+          {nome : '2',label : 'Casado'},
+          {nome : '3',label : 'Separado'},
+          {nome : '4',label : 'Divorciado'},
+          {nome : '5',label : 'Viúvo'}
+        ];
+
+        $scope.sexo = [
+          {nome : '1',label : 'Masculino'},
+          {nome : '2',label : 'Feminino'}
+        ];
+
 
         $scope.emailType = [
           {nome : '1',label : 'Principal'},
@@ -333,6 +354,38 @@
                     if( value && $scope.telefoneType[x].nome == value)
                     {
                         sReturn =  $scope.telefoneType[x].label
+                    }
+                }
+          }
+          return sReturn;
+        };
+
+        $scope.showEstadoCivil = function(value) {
+          console.log(value)
+          var sReturn = 'Vazio';
+          if($scope.estadoCivil)
+          {
+                for(var x = 0;x < $scope.estadoCivil.length;x++)
+                {
+                    if( value && $scope.estadoCivil[x].nome == value)
+                    {
+                        sReturn =  $scope.estadoCivil[x].label
+                    }
+                }
+          }
+          return sReturn;
+        };
+
+        $scope.showSexo = function(value) {
+          console.log(value)
+          var sReturn = 'Vazio';
+          if($scope.sexo)
+          {
+                for(var x = 0;x < $scope.sexo.length;x++)
+                {
+                    if( value && $scope.sexo[x].nome == value)
+                    {
+                        sReturn =  $scope.sexo[x].label
                     }
                 }
           }
@@ -463,7 +516,22 @@
         }
         $scope.updateAdvogado = function () {
 
-          fPessoa.fnMontaObjeto($scope.advogado, $scope.advogado.enderecos, $scope.advogado.emails, $scope.advogado.telefones, 'UPDATE', 'pessoa/api/advogado/update', fnCallBack);
+          var fnCallBack = function (res) {
+            debugger
+            if (res.operationSuccess == true) {
+                
+                toastr.success('Deu Certo seu tanga.', 'Sucess')
+                for(var x = 0;x< res.advogadoList.length;x++)
+                {
+                  if($scope.advogado.id === res.advogadoList[x].id)
+                  {
+                    $scope.advogado = [];
+                    $scope.advogado = res.advogadoList[x];
+                  }
+                }
+            }
+        }
+          fAdvogado.fnMontaObjeto($scope.advogado.enderecos, $scope.advogado.telefones, $scope.advogado.emails, $scope.advogado, 'UPDATE', 'pessoa/api/advogado/update',fnCallBack);
         }
       })
   })()

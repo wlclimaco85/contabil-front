@@ -53,7 +53,7 @@
             <div class="form-group">
                 <label for="exampleInputPassword1">Estado</label>
                 <div class="row">
-                    <ui-select ng-model="enderecos[0].estado" theme="bootstrap" on-select="countrySelected($item, $model)">
+                    <ui-select ng-model="enderecos[0].estado" theme="bootstrap" on-select="countrySelected($item, $model)" style="margin-left:10px">
                         <ui-select-match placeholder="...">{{$select.selected.abreviacao}}</ui-select-match>
                         <ui-select-choices repeat="item in estados | filter: $select.search">
                             <div ng-bind-html="item.abreviacao | highlight: $select.search"></div>
@@ -67,7 +67,7 @@
             <div class="form-group">
                 <label for="exampleInputPassword1">Municipio</label>
                 <div class="row">
-                    <ui-select ng-model="enderecos[0].cidade" theme="bootstrap">
+                    <ui-select ng-model="enderecos[0].cidade" theme="bootstrap" style="margin-left:10px">
                         <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                         <ui-select-choices repeat="item in cidades | filter: $select.search">
                             <div ng-bind-html="item.nome | highlight: $select.search"></div>
@@ -85,7 +85,7 @@
             <div class="form-group">
                 <label for="exampleInputPassword1">Pais</label>
                 <div class="row">
-                    <ui-select ng-model="enderecos[0].pais" theme="bootstrap">
+                    <ui-select ng-model="enderecos[0].pais" theme="bootstrap" style="margin-left:10px">
                         <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
                         <ui-select-choices repeat="item in pais | filter: $select.search">
                             <div ng-bind-html="item.descricao | highlight: $select.search"></div>

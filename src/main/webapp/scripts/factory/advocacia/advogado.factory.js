@@ -11,7 +11,7 @@
 			factory.fnMontaObjeto = function(enderecos, telefones, emails, advogado, action, url, callBack) {
 
 				 //===============Documentos====================
-
+debugger
 				 var documentos = [];
 				 for(var x=0;x < advogado.documentos.length;x++)
 				 {
@@ -57,6 +57,7 @@
 				 //==================EMAIL==================================
 				 var emailsAux = [];
 				 var email = {};
+				 
 				 for(var x=0;x < emails.length;x++)
 				 {
 					email = emails[x];
@@ -76,15 +77,21 @@
 					}
 
 				}
-				debugger
+				
+				advogado.emails =[];
+				advogado.emails = emailsAux;
+
 				var dias = [];
 				for(var x = 0;x < advogado.horasTrabalhos.length;x++)
 				{
 					if(advogado.horasTrabalhos[x])
 					{
-						for(var y = 0;y < advogado.horasTrabalhos[x].dia.length;y++)
+						if(advogado.horasTrabalhos[x].dia)
 						{
-							dias.push({id : advogado.horasTrabalhos[x].dia[y]})
+							for(var y = 0;y < advogado.horasTrabalhos[x].dia.length;y++)
+							{
+								dias.push({id : advogado.horasTrabalhos[x].dia[y]})
+							}
 						}
 						advogado.horasTrabalhos[x].diasSemanas = dias;
 						dias = []
@@ -361,16 +368,6 @@
 
                 doisValorFactory.advogado(scope);
 
-                //Usuarios
-                qat.model.select.util('entidade/api/estado/fetchPage', true, new qat.model.empresaInquiryRequest(null, 100 / 20, true),
-                function(oResp){
-                    scope.usuarioList = oResp.usuarioList;
-                })
-                //Grupos
-                qat.model.select.util('entidade/api/doisValores/fetchPage', true, new qat.model.doisValoresInquiryRequest(null, 100 / 20, true, JSON.parse(localStorage.getItem('empresa')).id,152),
-                function(oResp){
-                    scope.grupoTrabalhoList = oResp.doisValoresList;
-                })
 
 			}
 

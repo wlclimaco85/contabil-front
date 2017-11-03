@@ -1,0 +1,289 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="row">
+    <dl class="dl-horizontal">
+        <dd>
+            <label class="ui-radio">
+                <input name="radio5" type="radio" ng-model="advogado.tipoPessoa" ng-value="1"><span>Pessoa Fisica </span></label>
+            <label class="ui-radio">
+                <input name="radio6" type="radio" ng-model="advogado.tipoPessoa" ng-value="2"><span>Pessoa Juridica </span></label>
+        </dd>
+    </dl>
+</div>
+<div class="row">
+    <div class="form-group col-sm-8">
+        <label for="exampleInputEmail1" ng-show="advogado.tipoPessoa == 1" ng-hide="advogado.tipoPessoa == 2">Nome
+            <SUP class="help-block5">(*)</SUP>
+        </label>
+        <label for="exampleInputEmail1" ng-show="advogado.tipoPessoa == 2" ng-hide="advogado.tipoPessoa == 1">Nome Fantasia
+            <SUP class="help-block5">(*)</SUP>
+        </label>
+        <input type="text" required ng-model="advogado.name" name="razao" class="form-control" placeholder="Nome">
+        <p ng-show="advogadoForm.razao.$invalid" class="help-block">Campo de preenchimento Obrigatorio.</p>
+    </div>
+    <div class="form-group col-sm-3">
+        <label for="exampleInputEmail1">Código Interno</label>
+        <div class="input-group">
+            <input type="text" ng-model="advogado.codigo" name="codigo" class="form-control" placeholder="Codigo">
+        </div>
+    </div>
+</div>
+<div ng-show="advogado.tipoPessoa == 2" ng-hide="advogado.tipoPessoa == 1">
+    <div class="row">
+        <div class="form-group col-sm-8">
+            <label for="exampleInputEmail1">Razão Social </label>
+            <input type="text" required ng-model="advogado.razao" name="razao" class="form-control" placeholder="Razao">
+            <p ng-show="advogadoForm.razao.$invalid" class="help-block">Campo de preenchimento Obrigatorio.</p>
+        </div>
+        <div class="form-group col-sm-3">
+            <label for="exampleInputPassword1">Regime</label>
+            <div class="row">
+                <ui-select ng-model="advogado.regime" theme="bootstrap" style="margin-left:10px">
+                    <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                    <ui-select-choices repeat="item in regime | filter: $select.search">
+                        <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-show="advogado.tipoPessoa == 1" ng-hide="advogado.tipoPessoa == 2">
+    <div class="row">
+        <div class="form-group col-sm-3">
+            <label for="exampleInputEmail1">Nome Pai</label>
+            <div class="input-group">
+                <input type="text" ng-model="advogado.nomePai" name="nomePai" class="form-control" placeholder="nomePai">
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label for="exampleInputEmail1">Nome Mae</label>
+            <div class="input-group">
+                <input type="text" ng-model="advogado.nomeMae" name="nomeMae" class="form-control" placeholder="nomeMae">
+            </div>
+        </div>
+        <div class="form-group col-sm-2">
+            <label for="exampleInputEmail1">Nome Conjugue</label>
+            <div class="input-group">
+                <input type="text" ng-model="advogado.nomeConjugue" name="nomeConjugue" class="form-control" placeholder="nomeConjugue">
+            </div>
+        </div>
+        <div class="form-group col-sm-2">
+            <dl class="">
+                <dd>
+                    <label class="ui-radio">
+                        <input name="radio59" type="radio" ng-model="advogado.estadoCivil" ng-value="1"><span>Solteiro</span></label>
+                    <label class="ui-radio">
+                        <input name="radio60" type="radio" ng-model="advogado.estadoCivil" ng-value="2"><span>Casado</span></label>
+                    <label class="ui-radio">
+                        <input name="radio61" type="radio" ng-model="advogado.estadoCivil" ng-value="3"><span>Separado</span></label>
+                    <label class="ui-radio">
+                        <input name="radio62" type="radio" ng-model="advogado.estadoCivil" ng-value="4"><span>Divorciado</span></label>
+                    <label class="ui-radio">
+                        <input name="radio63" type="radio" ng-model="advogado.estadoCivil" ng-value="5"><span>Viúvo</span></label>
+                </dd>
+            </dl>
+        </div>
+        <div class="form-group col-sm-2">
+            <dl class="">
+                <dd>
+                    <label class="ui-radio">
+                        <input name="radio64" type="radio" ng-model="advogado.sexo" ng-value="1"><span>Masculino</span></label>
+                    <label class="ui-radio">
+                        <input name="radio65" type="radio" ng-model="advogado.sexo" ng-value="2"><span>Feminino</span></label>
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+
+<div ng-show="advogado.tipoPessoa == 1" ng-hide="advogado.tipoPessoa == 2">
+    <div class="row">
+        <div class="form-group col-sm-4">
+            <label for="exampleInputEmail1">CPF
+                <SUP class="help-block5">(*)</SUP>
+            </label>
+            <div class="input-group">
+                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas Números" class="fa fa-credit-card"></span></span>
+                <input type="text" ng-model="advogado.documentos[0].numero" validcpf="cpf" tipoPessoa="{{advogado.tipoPessoa}}" name="cpf" class="form-control" ui-mask="999.999.999-99" ui-mask-placeholder ui-mask-placeholder-char="_">
+                <input type="text" ng-model="advogado.documentos[0].documentoTypeEnumValue=2" name="cnpjs" value="2" class="form-control hide" placeholder="N° Cart. Trab" ng-init="advogado.documentos[0].documentoTypeEnumValue=2">
+            </div>
+            <p ng-show="advogadoForm.cpf.$invalid" class="help-block">CPF Inválido.</p>
+        </div>
+        <div class="form-group col-sm-4">
+
+            <label for="exampleInputEmail1">RG </label>
+            <div class="input-group">
+                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas Números" class="fa fa-credit-card"></span></span>
+                <input type="text" ng-model="advogado.documentos[1].numero" name="IEST" class="form-control">
+                <input type="text" ng-model="advogado.documentos[1].documentoTypeEnumValue=4" name="IEST2" value="4" class="form-control hide" placeholder="N° Cart. Trab" ng-init="advogado.documentos[1].documentoTypeEnumValue=4">
+            </div>
+        </div>
+        <div class="form-group col-sm-4">
+            <label for="exampleInputEmail1">Data Nascimento</label>
+
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="advogado.datanasc" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="false" close-text="Close" uib-datepicker-popup="{{format}}" />
+                <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="fa fa-calendar"></i></button>
+                                    </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <label for="exampleInputtext1">Especialidade</label>
+        <div class="row">
+            <ui-select multiple ng-model="advogado.especialidades" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false" style="margin-left:10px">
+                <ui-select-match placeholder="...">{{$item.nome}} &lt;{{$item.nome}}&gt;</ui-select-match>
+                <ui-select-choices repeat="item in especialidades | filter: $select.search">
+                    <div ng-bind-html="item.id | highlight: $select.search"></div>
+                    <div ng-bind-html="item.nome | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <label for="exampleInputtext1">Grupo de Trabalho</label>
+        <div class="row">
+            <ui-select multiple ng-model="advogado.grupoTrabalho" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false" style="margin-left:20px;width: 93%">
+                <ui-select-match placeholder="...">{{$item.nome}} &lt;{{$item.nome}}&gt;</ui-select-match>
+                <ui-select-choices repeat="item in grupoTrabalho | filter: $select.search">
+                    <div ng-bind-html="item.nome | highlight: $select.search"></div>
+                    <div ng-bind-html="item.nome | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-sm-4">
+        <label for="exampleInputEmail1">Nº OAB</label>
+        <div class="input-group">
+            <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas Números" class="fa fa-credit-card"></span></span>
+            <input type="text" ng-model="advogado.oab" name="IEST" class="form-control">
+
+        </div>
+    </div>
+    <div class="form-group col-sm-4">
+        <label for="exampleInputPassword1">Tipo OAB</label>
+        <div class="row">
+            <ui-select ng-model="advogado.tipoOab" theme="bootstrap" style="margin-left:10px">
+                <ui-select-match placeholder="...">{{$select.selected.descricao}}</ui-select-match>
+                <ui-select-choices repeat="item in tipoOab | filter: $select.search">
+                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+    <div class="form-group col-sm-4">
+        <label for="exampleInputPassword1">Estado OAB</label>
+        <div class="row">
+            <ui-select ng-model="advogado.estado" theme="bootstrap" style="margin-left:10px">
+                <ui-select-match placeholder="...">{{$select.selected.abreviacao}}</ui-select-match>
+                <ui-select-choices repeat="item in estadoLists | filter: $select.search">
+                    <div ng-bind-html="item.abreviacao | highlight: $select.search"></div>
+                    <small ng-bind-html="item.nome | highlight: $select.search"></small>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+</div>
+
+<!-- Documentos -->
+<div ng-show="advogado.tipoPessoa == 2" ng-hide="advogado.tipoPessoa == 1">
+    <div class="row">
+        <div class="form-group col-sm-3">
+            <label for="exampleInputEmail1">CNPJ
+                <SUP class="help-block5">(*)</SUP>
+            </label>
+            <div class="input-group">
+                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas Números" class="fa fa-credit-card"></span></span>
+                <input type="text" ng-model="advogado.documentos[6].numero" validcnpj="cnpj" tipoPessoa="{{advogado.tipoPessoa}}" class="form-control" name="cnpj" ui-mask="99.999.999/9999-99" ui-mask-placeholder ui-mask-placeholder-char="_" ng-class="{ 'has-error' : !advogadoForm.cnpj.$invalid}">
+                <input type="text" ng-model="advogado.documentos[6].documentoTypeEnumValue=1" name="cnpjs" value="1" class="form-control hide" placeholder="N° Cart. Trab" ng-init="advogado.documentos[6].documentoTypeEnumValue=1">
+            </div>
+            <p ng-show="advogadoForm.cnpj.$invalid" class="help-block">CNPJ Inválido.</p>
+        </div>
+        <div class="form-group col-sm-3">
+            <label for="exampleInputEmail1">Inscr Est Subst Trib </label>
+            <div class="input-group">
+                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas Números" class="fa fa-credit-card"></span></span>
+                <input type="text" ng-model="advogado.documentos[7].numero" name="IEST" class="form-control">
+                <input type="text" ng-model="advogado.documentos[7].documentoTypeEnumValue=12" name="IEST2" value="12" class="form-control hide" placeholder="N° Cart. Trab" ng-init="advogado.documentos[7].documentoTypeEnumValue=12">
+            </div>
+        </div>
+        <div class="row col-sm-3">
+            <label for="exampleInputPassword1">Indicador de IE</label>
+            <div class="row">
+                <ui-select ng-model="advogado.documentos[2].numero" theme="bootstrap" ng-init="advogado.documentos[2].documentoTypeEnumValue=13" style="margin-left:10;width:82%">
+                    <ui-select-match placeholder="Indicador de IE ...">{{$select.selected.descricao}}</ui-select-match>
+                    <ui-select-choices repeat="item in indicadorIE | filter: $select.search">
+                        <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+                <input type="text" ng-model="advogado.documentos[2].documentoTypeEnumValue=14" name="IEST2" value="12" class="form-control hide" placeholder="N° Cart. Trab" ng-init="advogado.documentos[1].documentoTypeEnumValue=14">
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label for="exampleInputEmail1">Inscrição Estadual
+                <SUP class="help-block5">(*)</SUP>
+            </label>
+            <div class="input-group">
+                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas Números" class="fa fa-credit-card"></span></span>
+                <input type="text" ng-model="advogado.documentos[3].numero" name="incrEst" class="form-control" ng-class="{ 'has-error' : !validationInsEst(advogado.tipoPessoa,advogado.documentos[3].numero)}">
+                <input type="text" ng-model="advogado.documentos[3].documentoTypeEnumValue=10" name="incrEst2" value="10" class="form-control hide" ng-init="advogado.documentos[3].documentoTypeEnumValue=10">
+            </div>
+            <p ng-show="!validationInsEst(advogado.tipoPessoa,advogado.documentos[3].numero)" class="help-block">Campo de preenchimento Obrigatorio.</p>
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="form-group col-sm-3">
+            <label for="exampleInputEmail1">Inscrição Municipal
+                <SUP class="help-block5">(*)</SUP>
+            </label>
+            <div class="input-group">
+                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas Números" class="fa fa-credit-card"></span></span>
+                <input type="text" ng-model="advogado.documentos[4].numero" name="incrMun" class="form-control" ng-class="{ 'has-error' : validationInsMun(advogado.tipoPessoa,advogado.documentos[4].numero)}">
+                <input type="text" ng-model="advogado.documentos[4].documentoTypeEnumValue=3" name="incrMun2" value="3" class="form-control hide" ng-init="advogado.documentos[4].documentoTypeEnumValue=3">
+            </div>
+            <p ng-show="validationInsMun(advogado.tipoPessoa,advogado.documentos[4].numero)" class="help-block">Campo de preenchimento Obrigatorio.</p>
+        </div>
+
+        <div class="form-group col-sm-3">
+            <label for="exampleInputEmail1">Inscrição Suframa</label>
+            <div class="input-group">
+                <span class="InputSign input-group-addon" target="contatos_cpfcnpj"><span title="Apenas Números" class="fa fa-credit-card"></span></span>
+                <input type="text" ng-model="advogado.documentos[5].numero" name="suframa" class="form-control">
+                <input type="text" ng-model="advogado.documentos[5].documentoTypeEnumValue=11" name="suframa2" value="11" class="form-control hide" ng-init="advogado.documentos[5].documentoTypeEnumValue=11">
+            </div>
+        </div>
+
+        <div class="form-group col-sm-3">
+            <label for="exampleInputEmail1">Data Abertura</label>
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="advogado.dtAbertura" is-open="popup2.opened" datepicker-options="dateOptions" close-text="Close" uib-datepicker-popup="{{format}}" />
+                <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label for="exampleInputEmail1">N° Funcionarios</label>
+            <input type="text" ng-model="advogado.numFunc" name="numFunc" class="form-control" placeholder="N° Func">
+        </div>
+    </div>
+
+</div>
+
+<!-- Endereco -->
+<div ng-include="'views/util/apps/endereco.html'"></div>
+
+<!-- -------------------  TELEFONE ----------------- -->
+
+<div ng-include="'views/util/apps/telefone.html'"></div>
+
+<!-- -------------------  Email Empresa ----------------- -->
+
+<div ng-include="'views/util/apps/email.html'"></div>
